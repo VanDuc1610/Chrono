@@ -19,21 +19,19 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-### T-11 · Session regression CDP test suite (B1, B2, B3, B4, B6)
-- **Assignee:** Antigravity · **Status:** DONE
-- **Locks:** `scripts/test-session-regression.js`
-- Write `scripts/test-session-regression.js` testing B1 (Elder objective preserved after Escape), B2 (shard count does not inflate on Escape or repeated Continue), B3 (New Game after victory resets Shade & starter inventory), B4 (Key 1 Attack deals damage on 2nd encounter after Escape), and B6 (Key 3 Item with 0 shards does not heal), printing `PASS`/`FAIL` per scenario.
-
-### T-09 · GameSession refactor + combat rules (B1-B6, B8-B10, B13, B14)
-- **Assignee:** Claude · **Status:** IN PROGRESS
-- **Locks:** `src/scenes/*.ts`, `src/state/*` (new), `src/systems/combat/*`, `src/systems/save/*`, `src/systems/inventory/*`, `src/systems/quest/*`, `src/entities/Player.ts`, `public/assets/data/*.json`, `docs/PROJECT_CONTEXT.md`
-- Move inventory / quests / flags / player stats / playtime out of scene instances into one `GameSession`; New Game creates a fresh session, Continue hydrates it from the save. Reset all transient combat state in `CombatScene.init()`. Item command consumes inventory; heal, player stats and loot come from JSON. Implements T-10 decisions. Supersedes T-06. Details: [reviews/T-02_CODE_REVIEW.md](reviews/T-02_CODE_REVIEW.md).
-
 ### T-05 · Peter idle + walk candidate sheets
 - **Assignee:** Owner (manual, AUTOMATIC1111) · **Status:** TODO
 - Use `art-source/characters/peter/prompts/peter_idle.txt` and `peter_walk.txt`; drop PNGs into `art-source/characters/peter/generated/candidates/`. Claude validates afterwards.
 
 ## Backlog (scheduled after current locks are released)
+
+### T-12 · Use consumables from the Satchel in exploration
+- **Assignee:** unassigned · **Status:** TODO
+- HP now persists between battles, but shards can only be used in combat. Add a "use" action in the Satchel overlay (heal via `items.json` `effects.healAmount`, consume 1). Show Lv / EXP / HP in the exploration HUD.
+
+### T-13 · Stale quest HUD text
+- **Assignee:** unassigned · **Status:** TODO
+- `ExplorationScene.updateQuestHUD()` shows "✓ Awaiting Milestone 3 (Combat)" after the prologue quest completes — dev placeholder text visible to players. Needs owner-approved wording (or move to `quests.json`).
 
 ### T-07 · One-time repo-wide Prettier format
 - **Assignee:** Claude · **Status:** TODO — only when no task holds locks on `src/` (touches ~72 files)
@@ -43,6 +41,7 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Done
 
+- **T-09** `GameSession` (`src/state/`) now owns inventory, quests, flags, level/EXP/HP, playtime; New Game / Continue create or hydrate it. Speed initiative, probabilistic escape, item consumption, EXP + level-ups + loot tables, quest rewards (claimed once), all tuning in new `public/assets/data/player.json`. Fixes B1-B6, B8-B10, B13, B14 (supersedes T-06). `CombatSystem.setRandomSource()` added; `test-session-regression.js` switched to it — stubbing global `Math.random` crashed Phaser Text creation. Verified: 5/5 regression scenarios PASS (all 5 FAIL on pre-T-09 code), test-gameplay / test-combat / test-inventory-save PASS, 22 logic unit checks PASS — Claude
 - **T-11** Added `scripts/test-session-regression.js` CDP suite verifying B1, B2, B3, B4, and B6 with per-scenario `PASS`/`FAIL` output (confirmed all 5 reproduce pre-T-09) — Antigravity
 - **T-10** Owner decisions (2026-11-10): (a) combat uses speed-based initiative; Escape stays but can fail (probability from speed, a failed escape costs the turn); (b) EXP + levelling are in scope for the prologue — Owner
 - **T-08** Fixed B5 (defend stance never expired), B7 (ESC `JustDown` read twice → menu always false), B11 (save data validated + version-checked; CONTINUE only for loadable saves), B12 (`getLastFacing` on `IMovementSystem`, no down-cast) — Claude

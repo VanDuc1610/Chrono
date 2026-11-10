@@ -5,22 +5,31 @@ import { KeyboardPlayerController } from '../systems/input/KeyboardPlayerControl
 import { TopDownMovementSystem } from '../systems/movement/TopDownMovementSystem';
 import { InteractionSystem } from '../systems/interaction/InteractionSystem';
 import { DialogueSystem } from '../systems/dialogue/DialogueSystem';
-import { QuestSystem } from '../systems/quest/QuestSystem';
+import { QuestSystem, QuestEventListener } from '../systems/quest/QuestSystem';
 import { InventorySystem } from '../systems/inventory/InventorySystem';
 import { SaveSystem } from '../systems/save/SaveSystem';
 import { DialogueDatabase } from '../systems/dialogue/DialogueTypes';
-import { QuestDatabase } from '../systems/quest/QuestTypes';
-import { InventoryDatabase } from '../systems/inventory/InventoryTypes';
-import { ISaveData } from '../systems/save/SaveTypes';
 import { SoundSystem } from '../systems/audio/SoundSystem';
+import { DEFAULT_MAP_ID, FLAGS, GameSession, getSession } from '../state/GameSession';
+import type { CombatSceneData } from './CombatScene';
+
+const PROLOGUE_QUEST_ID = 'quest_prologue_awakening';
+const DEFAULT_SPAWN = { x: 12 * 32, y: 10 * 32 };
+
+export interface ExplorationSceneData {
+  /** Where to place Peter (e.g. after a battle). Defaults to the session position, then map spawn. */
+  returnPosition?: { x: number; y: number };
+  /** One-shot banner to show on arrival (e.g. battle rewards). */
+  notice?: { title: string; subtitle: string };
+}
 
 export class ExplorationScene extends Phaser.Scene {
   public player!: Player;
   public controller!: KeyboardPlayerController;
   public interactionSystem!: InteractionSystem;
   public dialogueSystem!: DialogueSystem;
-  public questSystem!: QuestSystem;
-  public inventorySystem = new InventorySystem();
+  /** Game state for this playthrough; outlives the scene (see GameSession). */
+  public session!: GameSession;
   public saveSystem = new SaveSystem();
   private soundSystem = SoundSystem.getInstance();
 
@@ -57,24 +66,30 @@ export class ExplorationScene extends Phaser.Scene {
   private fullTargetText = '';
   private typewriterTimer: Phaser.Time.TimerEvent | null = null;
 
-  // Story Trigger State
-  private hasTriggeredAwakening = false;
-  private isShadeDefeated = false;
+  // Scene-local state (reset in init on every entry)
   private shadeSprite: Phaser.Physics.Arcade.Sprite | null = null;
   private isTransitioningToBattle = false;
-  private spawnOrigin = new Phaser.Math.Vector2(12 * 32, 10 * 32);
-  private loadedSaveData: ISaveData | null = null;
+  private spawnOrigin = new Phaser.Math.Vector2(DEFAULT_SPAWN.x, DEFAULT_SPAWN.y);
+  private pendingNotice: ExplorationSceneData['notice'] | null = null;
 
   constructor() {
     super({ key: 'ExplorationScene' });
   }
 
-  public init(data?: {
-    returnedFromBattle?: boolean;
-    victory?: boolean;
-    returnPosition?: { x: number; y: number };
-    loadSaveData?: ISaveData;
-  }): void {
+  /** Compatibility accessors (used by CDP test scripts); state lives in the session. */
+  public get inventorySystem(): InventorySystem {
+    return this.session.inventory;
+  }
+
+  public get questSystem(): QuestSystem {
+    return this.session.quests;
+  }
+
+  public get isShadeDefeated(): boolean {
+    return this.session.getFlag(FLAGS.shadeDefeated);
+  }
+
+  public init(data?: ExplorationSceneData): void {
     this.isTransitioningToBattle = false;
     this.isTyping = false;
     this.isInventoryOpen = false;
@@ -83,36 +98,20 @@ export class ExplorationScene extends Phaser.Scene {
     this.notificationTween = null;
     this.questObjectiveTexts = [];
     this.choiceButtons = [];
-    this.loadedSaveData = null;
+    this.shadeSprite = null;
 
-    if (data?.loadSaveData) {
-      this.loadedSaveData = data.loadSaveData;
-      this.spawnOrigin.set(data.loadSaveData.player.position.x, data.loadSaveData.player.position.y);
-      if (data.loadSaveData.flags?.isShadeDefeated) {
-        this.isShadeDefeated = true;
-      }
-      if (data.loadSaveData.flags?.hasTriggeredAwakening) {
-        this.hasTriggeredAwakening = true;
-      }
-    } else if (data?.returnedFromBattle) {
-      if (data.victory) {
-        this.isShadeDefeated = true;
-      }
-      if (data.returnPosition) {
-        this.spawnOrigin.set(data.returnPosition.x, data.returnPosition.y);
-      }
-    }
+    this.session = getSession(this);
+    this.pendingNotice = data?.notice ?? null;
+
+    const spawn = data?.returnPosition ?? this.session.position ?? DEFAULT_SPAWN;
+    this.spawnOrigin.set(spawn.x, spawn.y);
   }
 
   public create(): void {
-    // 1. Initialize Dialogue & Quest Databases from external JSON
+    // 1. Dialogue database (dialogue progress is scene-local; quest/inventory state is in the session)
     const dialogueData = this.cache.json.get('data_dialogue') as DialogueDatabase;
     this.dialogueSystem = new DialogueSystem();
     this.dialogueSystem.loadDatabase(dialogueData);
-
-    const questData = this.cache.json.get('data_quests') as QuestDatabase;
-    this.questSystem = new QuestSystem();
-    this.questSystem.loadDatabase(questData);
 
     // 2. Initialize Map & Tileset
     this.map = this.make.tilemap({ key: 'prologue_map' });
@@ -163,30 +162,17 @@ export class ExplorationScene extends Phaser.Scene {
     // 9. Subscribe to Quest Events
     this.setupQuestListeners();
 
-    // 10. Start or Restore Prologue Quest
-    if (this.loadedSaveData) {
-      this.questSystem.loadFromState(this.loadedSaveData.quests);
-    } else {
-      this.questSystem.startQuest('quest_prologue_awakening');
+    // 10. Ensure the prologue quest is running (no-op if already started/completed)
+    if (this.questSystem.getQuestStage(PROLOGUE_QUEST_ID) === 'inactive') {
+      this.questSystem.startQuest(PROLOGUE_QUEST_ID);
     }
     this.updateQuestHUD();
 
-    // 11. Initialize Inventory
-    const itemsData = this.cache.json.get('data_items') as InventoryDatabase;
-    this.inventorySystem.loadDatabase(itemsData);
-
-    if (this.loadedSaveData) {
-      this.inventorySystem.loadFromState(this.loadedSaveData.inventory);
-    } else {
-      this.inventorySystem.addItem('chrono_shard_minor', 2);
-      this.inventorySystem.addItem('relic_chronometer', 1);
-    }
-
-    if (this.isShadeDefeated) {
-      this.inventorySystem.addItem('chrono_shard_minor', 1);
-      this.time.delayedCall(450, () => {
-        this.showNotification('VICTORY!', '★ Temporal Shade Banished (+50 EXP, Minor Chrono Shard)');
-      });
+    // 11. One-shot arrival banner (e.g. battle rewards). Inventory is never touched here (B2).
+    const notice = this.pendingNotice;
+    if (notice) {
+      this.pendingNotice = null;
+      this.time.delayedCall(450, () => this.showNotification(notice.title, notice.subtitle));
     }
 
     // Fade in from transition
@@ -246,7 +232,7 @@ export class ExplorationScene extends Phaser.Scene {
       () => {
         this.openDialogue('npc_elder_greeting');
         // Progress quest objective
-        this.questSystem.completeObjective('quest_prologue_awakening', 'obj_speak_elder');
+        this.questSystem.completeObjective(PROLOGUE_QUEST_ID, 'obj_speak_elder');
       }
     );
 
@@ -263,14 +249,14 @@ export class ExplorationScene extends Phaser.Scene {
       onInteract: () => {
         this.openDialogue('altar_inspection');
         // Progress quest objective
-        this.questSystem.completeObjective('quest_prologue_awakening', 'obj_inspect_altar');
+        this.questSystem.completeObjective(PROLOGUE_QUEST_ID, 'obj_inspect_altar');
       },
     };
     this.interactionSystem.register(altarInteractable);
   }
 
   private setupEnemies(): void {
-    if (this.isShadeDefeated) return;
+    if (this.session.getFlag(FLAGS.shadeDefeated)) return;
 
     this.shadeSprite = this.physics.add.sprite(16 * 32 + 16, 9 * 32 + 16, 'enemy_fracture');
     this.shadeSprite.setImmovable(true);
@@ -303,11 +289,16 @@ export class ExplorationScene extends Phaser.Scene {
     this.cameras.main.flash(350, 0, 200, 255);
     this.cameras.main.fadeOut(350, 0, 0, 0);
 
+    const returnPosition = { x: this.player.x - 24, y: this.player.y };
+    this.session.position = { mapId: DEFAULT_MAP_ID, ...returnPosition };
+
     this.time.delayedCall(350, () => {
-      this.scene.start('CombatScene', {
+      const data: CombatSceneData = {
         enemyId: 'enemy_temporal_shade',
-        returnPosition: { x: this.player.x - 24, y: this.player.y },
-      });
+        victoryFlag: FLAGS.shadeDefeated,
+        returnPosition,
+      };
+      this.scene.start('CombatScene', data);
     });
   }
 
@@ -522,21 +513,32 @@ export class ExplorationScene extends Phaser.Scene {
   }
 
   private setupQuestListeners(): void {
-    this.questSystem.addEventListener((event) => {
+    const listener: QuestEventListener = (event) => {
       this.updateQuestHUD();
 
       if (event.type === 'objective_completed' && event.objective) {
         this.showNotification('OBJECTIVE COMPLETED', `✓ ${event.objective.description}`);
       } else if (event.type === 'quest_completed') {
-        this.showNotification('QUEST COMPLETED!', `★ ${event.quest.title} (+50 EXP, Minor Chrono Shard)`);
+        const rewards = this.session.claimQuestRewards(event.quest.id);
+        const rewardText = rewards ? this.session.describeRewards(rewards) : '';
+        this.showNotification(
+          'QUEST COMPLETED!',
+          rewardText ? `★ ${event.quest.title} (${rewardText})` : `★ ${event.quest.title}`,
+        );
       }
+    };
+
+    // The QuestSystem outlives this scene, so the listener must not (it would call into destroyed UI).
+    this.questSystem.addEventListener(listener);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.questSystem.removeEventListener(listener);
     });
   }
 
   public updateQuestHUD(): void {
     const activeQuests = this.questSystem.getActiveQuests();
     if (activeQuests.length === 0) {
-      const completed = this.questSystem.isQuestCompleted('quest_prologue_awakening');
+      const completed = this.questSystem.isQuestCompleted(PROLOGUE_QUEST_ID);
       if (completed) {
         this.questTitleText.setText('Prologue Quest Complete');
         this.questObjectiveTexts[0]?.setText('✓ Sanctuary antechamber surveyed');
@@ -702,28 +704,11 @@ export class ExplorationScene extends Phaser.Scene {
   }
 
   public async quickSave(): Promise<void> {
-    const saveData: ISaveData = {
-      version: '0.1.0',
-      timestamp: Date.now(),
-      playtimeSeconds: Math.floor(this.time.now / 1000),
-      player: {
-        name: 'Peter',
-        level: 1,
-        hp: 50,
-        maxHp: 50,
-        position: {
-          mapId: 'prologue_sanctuary',
-          x: Math.round(this.player.x),
-          y: Math.round(this.player.y),
-        },
-      },
-      inventory: this.inventorySystem.getAllItems(),
-      quests: this.questSystem.getAllQuests(),
-      flags: {
-        isShadeDefeated: this.isShadeDefeated,
-        hasTriggeredAwakening: this.hasTriggeredAwakening,
-      },
-    };
+    const saveData = this.session.toSaveData({
+      mapId: DEFAULT_MAP_ID,
+      x: Math.round(this.player.x),
+      y: Math.round(this.player.y),
+    });
 
     const success = await this.saveSystem.save(1, saveData);
     if (success) {
@@ -731,14 +716,16 @@ export class ExplorationScene extends Phaser.Scene {
     }
   }
 
-  public update(): void {
+  public update(_time: number, delta: number): void {
+    this.session.tick(delta);
+
     // 0. If inventory is open, pause exploration movement
     if (this.isInventoryOpen) {
       return;
     }
 
     // 1. Check Awakening Trigger Zone
-    if (!this.hasTriggeredAwakening && this.player) {
+    if (!this.session.getFlag(FLAGS.awakeningTriggered) && this.player) {
       const distFromSpawn = Phaser.Math.Distance.Between(
         this.player.x,
         this.player.y,
@@ -746,7 +733,7 @@ export class ExplorationScene extends Phaser.Scene {
         this.spawnOrigin.y
       );
       if (distFromSpawn > 18) {
-        this.hasTriggeredAwakening = true;
+        this.session.setFlag(FLAGS.awakeningTriggered);
         this.time.delayedCall(300, () => {
           this.openDialogue('intro_awakening');
         });

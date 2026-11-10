@@ -65,6 +65,7 @@ flowchart TD
         D_Quests["quests.json"]
         D_Enemies["enemies.json"]
         D_Items["items.json"]
+        D_Player["player.json (stats, level curve, combat tuning)"]
         D_Map["prologue_map.json (Tiled JSON)"]
     end
 
@@ -89,9 +90,10 @@ flowchart TD
 ### Key Architectural Standards:
 1. **Strict TypeScript Typing:** `tsconfig.json` enforces `strict: true`, `noUnusedLocals: true`, and zero implicit `any`.
 2. **Decoupled System Boundaries:** All gameplay systems implement explicit interfaces (`IMovementSystem`, `IPlayerController`, `IInteractionSystem`, `IDialogueSystem`, `IQuestSystem`, `ICombatSystem`, `IInventorySystem`, `ISaveSystem`).
-3. **Data-Driven Logic:** Scene files do not hardcode quest objectives, enemy stats, items, or dialogue scripts. All data is read from external JSON files in `public/assets/data/`.
-4. **Phaser Lifecycle Hygiene:** In `ExplorationScene.init()` and `CombatScene.init()`, all transient text objects, choice buttons, and timer references are explicitly reset to prevent memory leaks or canvas context `TypeError` on scene re-entrance.
-5. **Procedural Web Audio Synthesis:** Sound effects are generated in `SoundSystem.ts` using the browser's native Web Audio API (`AudioContext`), avoiding copyrighted audio files.
+3. **Data-Driven Logic:** Scene files do not hardcode quest objectives, enemy or player stats, items, rewards, or dialogue scripts. All data is read from external JSON files in `public/assets/data/` (`player.json` holds Peter's base stats, per-level growth, EXP thresholds, starting items and combat formula tuning).
+4. **Game State Lives in `GameSession` (`src/state/GameSession.ts`):** Inventory, quest progress, story flags, level/EXP/HP and playtime belong to one session object stored in the Phaser registry — never in scene fields, because Phaser reuses scene instances on every `scene.start()`. New Game creates a fresh session; Continue hydrates one from the save; scenes only read/write it. Scene listeners on long-lived systems (e.g. `QuestSystem`) must be removed on `SHUTDOWN`.
+5. **Phaser Lifecycle Hygiene:** `ExplorationScene.init()` and `CombatScene.init()` reset all scene-local transient state (UI arrays, timers, turn locks) on every entry. Never stub the global `Math.random` in tests — Phaser uses it for texture UUIDs; use `CombatSystem.setRandomSource()` instead.
+6. **Procedural Web Audio Synthesis:** Sound effects are generated in `SoundSystem.ts` using the browser's native Web Audio API (`AudioContext`), avoiding copyrighted audio files.
 
 ---
 
@@ -104,8 +106,9 @@ flowchart TD
 - [x] **Collision Footprint:** $18 \times 14\text{ px}$ foot collider at center-bottom `(7, 16)` enabling natural 2.5D depth sorting against vertical wall tiles.
 - [x] **Dialogue Engine:** Typewriter text rendering, fast-forward skip on interact key, multi-choice branching (`dialogue.json`).
 - [x] **Quest State Machine:** Objective tracking, banner notifications, top-right HUD tracker (`quests.json`).
-- [x] **Turn-Based Combat:** Initiative queue based on speed, player command menu (Attack, Skill, Item, Defend, Escape), floating damage numbers, enemy counter-attack, defeat/victory resolution, EXP and item reward dispatch, dissolve tween, and seamless overworld return.
-- [x] **Inventory System:** `InventorySystem` backing, signature starter items (Broken Chronometer, 2x Minor Chrono Shards), in-game Satchel overlay (`I`/`B`), consumable item usage in exploration and combat.
+- [x] **Turn-Based Combat:** Speed-ordered initiative queue (the faster combatant acts first each round), player command menu (Attack, Skill, Item, Defend, Escape), Defend lasts until the defender's next action, Item consumes a Chrono Shard from the satchel, Escape succeeds with probability `0.5 + 0.05 × (speed difference)` clamped to 10–90% (a failed escape costs the turn), floating damage numbers, victory/defeat resolution, EXP + loot-table rewards, dissolve tween, and overworld return.
+- [x] **Progression:** EXP from enemies (`expReward`) and quest rewards; level thresholds and per-level stat growth in `player.json` (level cap 5 in the prologue); a level-up fully restores HP. HP persists between battles.
+- [x] **Inventory System:** `InventorySystem` backing, signature starter items (Broken Chronometer, 2x Minor Chrono Shards), in-game Satchel overlay (`I`/`B`), consumable item usage in combat (not yet usable from the satchel in exploration).
 - [x] **Save/Load Persistence:** Multi-slot `localStorage` persistence with in-memory fallback, Quick-Save (`K`), dynamic "CONTINUE" enablement on MainMenuScene, and 100% accurate coordinate/state restoration.
 - [x] **Audio Synthesis:** `SoundSystem` providing 16-bit cursor blips, selection chimes, blade slash bursts, heal chords, save chimes, and volume/mute toggle options.
 - [x] **Automated CDP Test Suites:** Three end-to-end headless browser test suites (`scripts/test-gameplay.js`, `scripts/test-combat.js`, `scripts/test-inventory-save.js`) and asset validation tool (`scripts/validate-candidate.js`).
@@ -297,7 +300,8 @@ node scripts/validate-candidate.js <path-to-png>
 | **Peter True Origin** | **UNRESOLVED (Intentional)** | Unwritten; delivered via environmental discovery. |
 | **Kuro, the Forgotten One** | **CONFIRMED** | Established as main opposing character. Visual design: *UNRESOLVED*. |
 | **Six Divine Authorities** | **CONFIRMED** | Origin, Continuum, Causality, Memory, Possibility, Finality established. |
-| **Combat Mechanics** | **CONFIRMED** | Turn-based loop, speed initiative, 5 commands, victory/defeat. |
+| **Combat Mechanics** | **CONFIRMED** | Turn-based loop, speed initiative, 5 commands, probabilistic escape, victory/defeat (owner decision 2026-11-10). |
+| **EXP & Levelling** | **CONFIRMED** | In scope for the prologue (owner decision 2026-11-10). Curve/growth tunable in `player.json`. |
 | **Audio Architecture** | **CONFIRMED** | Procedural Web Audio synthesis (`SoundSystem.ts`). No copyrighted audio. |
 | **Party System** | *PROPOSED (TBD)* | Solo protagonist in Prologue. Multi-party deferred to Chapter 1. |
 | **Git Repository** | **RESOLVED & CONNECTED** | Remote `origin` linked to `https://github.com/VanDuc1610/Chrono.git` on branch `main` at baseline `ffb72c3`. |

@@ -50,3 +50,14 @@ Game-wide state (inventory, quest progress, story flags, player HP) lives **insi
 - **T-08 (Claude, now — files not locked):** B5, B7, B11, B12 in `CombatSystem.ts`, `KeyboardPlayerController.ts`, `SaveSystem.ts`, `IMovementSystem.ts`, `Player.ts`.
 - **T-09 (Claude, after T-04 releases the scene locks):** `GameSession` refactor → B1, B2, B3, B4, B6, B8, B9 (loot table), B13, B14; correct `PROJECT_CONTEXT.md` §3.4.
 - **T-10 (open design question for the owner):** use the initiative queue and probabilistic escape (B10)? Is EXP/levelling in scope for the prologue (B9)?
+
+---
+
+## Resolution (2026-11-11)
+
+| Finding | Status |
+|---|---|
+| B5, B7, B11, B12 | Fixed in T-08 |
+| B1, B2, B3, B4, B6, B8, B9, B10, B13, B14 | Fixed in T-09 (`GameSession` refactor + owner decisions from T-10) |
+
+Verified with `scripts/test-session-regression.js`: all 5 scenarios FAIL on pre-T-09 code and PASS after. The three original CDP suites still pass.

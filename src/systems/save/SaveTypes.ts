@@ -4,6 +4,8 @@ import { IQuest } from '../quest/QuestTypes';
 export interface IPlayerSaveData {
   name: string;
   level: number;
+  /** Total experience. Optional for 0.1.x saves, which predate EXP (treated as 0). */
+  exp?: number;
   hp: number;
   maxHp: number;
   position: {

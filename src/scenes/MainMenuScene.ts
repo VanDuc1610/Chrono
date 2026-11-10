@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { SaveSystem } from '../systems/save/SaveSystem';
 import { SoundSystem } from '../systems/audio/SoundSystem';
+import { startNewSession, startSessionFromSave } from '../state/GameSession';
 
 interface MenuItem {
   text: string;
@@ -289,6 +290,8 @@ export class MainMenuScene extends Phaser.Scene {
   }
 
   private startNewGame(): void {
+    // A fresh session discards every trace of a previous playthrough (B3).
+    startNewSession(this);
     this.cameras.main.fadeOut(300, 0, 0, 0);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
       this.scene.start('ExplorationScene');
@@ -299,9 +302,10 @@ export class MainMenuScene extends Phaser.Scene {
     const saveData = await this.saveSystem.load(1);
     if (!saveData) return;
 
+    startSessionFromSave(this, saveData);
     this.cameras.main.fadeOut(300, 0, 0, 0);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-      this.scene.start('ExplorationScene', { loadSaveData: saveData });
+      this.scene.start('ExplorationScene');
     });
   }
 

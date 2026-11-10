@@ -115,6 +115,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.json('data_quests', 'assets/data/quests.json');
     this.load.json('data_enemies', 'assets/data/enemies.json');
     this.load.json('data_items', 'assets/data/items.json');
+    this.load.json('data_player', 'assets/data/player.json');
   }
 
   public create(): void {

@@ -1,15 +1,27 @@
 import Phaser from 'phaser';
 import { CombatSystem } from '../systems/combat/CombatSystem';
-import { ICombatAction, ICombatant } from '../systems/combat/CombatTypes';
+import { ICombatAction, ICombatant, IEnemyDefinition } from '../systems/combat/CombatTypes';
 import { SoundSystem } from '../systems/audio/SoundSystem';
+import { GameSession, getSession } from '../state/GameSession';
+import type { ExplorationSceneData } from './ExplorationScene';
 
 export interface CombatSceneData {
   enemyId: string;
+  /** Session flag set to true when this encounter is won (e.g. FLAGS.shadeDefeated). */
+  victoryFlag?: string;
   returnPosition?: { x: number; y: number };
 }
 
+type PlayerCommand = 'attack' | 'skill' | 'item' | 'defend' | 'escape';
+
+const PLAYER_TO_ENEMY_DELAY_MS = 1400;
+const ENEMY_TO_PLAYER_DELAY_MS = 1200;
+const BATTLE_END_DELAY_MS = 1200;
+const ENEMY_OPENING_DELAY_MS = 1200;
+
 export class CombatScene extends Phaser.Scene {
-  private combatSystem!: CombatSystem;
+  public combatSystem!: CombatSystem;
+  public session!: GameSession;
   private soundSystem = SoundSystem.getInstance();
 
   // Visual representations
@@ -21,6 +33,7 @@ export class CombatScene extends Phaser.Scene {
   private playerHpText!: Phaser.GameObjects.Text;
   private enemyHpBar!: Phaser.GameObjects.Graphics;
   private enemyHpText!: Phaser.GameObjects.Text;
+  private itemButton: Phaser.GameObjects.Text | null = null;
 
   private commandButtons: Phaser.GameObjects.Text[] = [];
   private logText!: Phaser.GameObjects.Text;
@@ -28,15 +41,22 @@ export class CombatScene extends Phaser.Scene {
 
   private player!: ICombatant;
   private enemy!: ICombatant;
-  private returnPosition?: { x: number; y: number };
-  private isProcessingTurn = false;
+  private enemyTemplate!: IEnemyDefinition;
+  private sceneData!: CombatSceneData;
+  /** True while an action resolves or the enemy acts; blocks player commands. */
+  private isProcessingTurn = true;
 
   constructor() {
     super({ key: 'CombatScene' });
   }
 
   public init(data: CombatSceneData): void {
-    this.returnPosition = data?.returnPosition;
+    // The scene instance is reused for every battle: reset all transient state here (B4).
+    this.sceneData = data;
+    this.isProcessingTurn = true;
+    this.commandButtons = [];
+    this.itemButton = null;
+    this.session = getSession(this);
   }
 
   public create(): void {
@@ -45,43 +65,35 @@ export class CombatScene extends Phaser.Scene {
     // 1. Arena Background (Cosmic Dark Fantasy Ruin Platform)
     this.createArenaBackground(width, height);
 
-    // 2. Initialize Combat Data from JSON
-    const enemyDb = this.cache.json.get('data_enemies') as { enemies: any[] };
-    const enemyTemplate = enemyDb.enemies.find((e: any) => e.id === 'enemy_temporal_shade') ?? enemyDb.enemies[0];
+    // 2. Combatants from session + JSON data
+    const template =
+      this.session.getEnemyDefinition(this.sceneData.enemyId) ??
+      this.session.database.enemies.enemies[0];
+    if (!template) {
+      throw new Error(`[CombatScene] No enemy definition for "${this.sceneData.enemyId}".`);
+    }
+    this.enemyTemplate = template;
 
-    this.player = {
-      id: 'player_peter',
-      name: 'Peter',
-      type: 'player',
-      stats: {
-        hp: 50,
-        maxHp: 50,
-        mp: 20,
-        maxMp: 20,
-        attack: 14,
-        defense: 6,
-        speed: 12,
-      },
-      isAlive: true,
-      spriteKey: 'peter_idle',
-    };
-
+    this.player = this.session.createPlayerCombatant();
     this.enemy = {
-      id: 'enemy_shade_1',
-      name: enemyTemplate.name,
+      id: `${template.id}_1`,
+      name: template.name,
       type: 'enemy',
       stats: {
-        hp: enemyTemplate.maxHp,
-        maxHp: enemyTemplate.maxHp,
-        attack: enemyTemplate.attack,
-        defense: enemyTemplate.defense,
-        speed: enemyTemplate.speed,
+        hp: template.maxHp,
+        maxHp: template.maxHp,
+        attack: template.attack,
+        defense: template.defense,
+        speed: template.speed,
       },
       isAlive: true,
-      spriteKey: 'enemy_fracture',
+      spriteKey: template.spriteKey,
     };
 
-    this.combatSystem = new CombatSystem();
+    this.combatSystem = new CombatSystem({
+      tuning: this.session.database.player.combat,
+      resolveItem: (itemId) => this.session.resolveCombatItem(itemId),
+    });
     this.combatSystem.startBattle([this.player], [this.enemy]);
 
     // 3. Render Combatants
@@ -90,7 +102,7 @@ export class CombatScene extends Phaser.Scene {
     // 4. Render UI Panels
     this.createCombatUI(width, height);
 
-    // 5. Input key shortcuts (1-5)
+    // 5. Input key shortcuts (1-5); KeyboardPlugin removes these listeners on shutdown
     this.setupInputs();
 
     // Fade in
@@ -103,6 +115,13 @@ export class CombatScene extends Phaser.Scene {
     });
 
     this.setBattleLog(`A hostile ${this.enemy.name} emerges from the fractured rift!`);
+
+    // 6. Whoever is faster acts first (give the intro line a moment if the enemy opens)
+    this.beginTurn(ENEMY_OPENING_DELAY_MS);
+  }
+
+  public update(_time: number, delta: number): void {
+    this.session.tick(delta);
   }
 
   private createArenaBackground(width: number, height: number): void {
@@ -125,7 +144,7 @@ export class CombatScene extends Phaser.Scene {
         2,
         2,
         Phaser.Math.RND.pick([0x00e1ff, 0x7c3aed, 0x38bdf8]),
-        0.5
+        0.5,
       );
       this.tweens.add({
         targets: p,
@@ -145,7 +164,7 @@ export class CombatScene extends Phaser.Scene {
     const playerX = width * 0.28;
     const playerY = height * 0.48;
 
-    this.playerSprite = this.add.sprite(playerX, playerY, 'peter_idle', 0).setScale(2.0);
+    this.playerSprite = this.add.sprite(playerX, playerY, this.player.spriteKey, 0).setScale(2.0);
     // Subtle breathing animation
     this.tweens.add({
       targets: this.playerSprite,
@@ -156,11 +175,11 @@ export class CombatScene extends Phaser.Scene {
       ease: 'Sine.easeInOut',
     });
 
-    // Enemy (Temporal Shade on the right platform)
+    // Enemy (on the right platform)
     const enemyX = width * 0.72;
     const enemyY = height * 0.42;
 
-    this.enemySprite = this.add.sprite(enemyX, enemyY, 'enemy_fracture').setScale(2.2);
+    this.enemySprite = this.add.sprite(enemyX, enemyY, this.enemy.spriteKey).setScale(2.2);
     // Floating hover animation
     this.tweens.add({
       targets: this.enemySprite,
@@ -173,7 +192,6 @@ export class CombatScene extends Phaser.Scene {
   }
 
   private createCombatUI(width: number, height: number): void {
-    // Top Bar: Player & Enemy Status
     // Player Status Card (Top Left)
     const pCard = this.add.graphics();
     pCard.fillStyle(0x0a0e1c, 0.85);
@@ -181,7 +199,7 @@ export class CombatScene extends Phaser.Scene {
     pCard.lineStyle(1, 0x243350, 1);
     pCard.strokeRect(20, 16, 180, 52);
 
-    this.add.text(30, 22, `${this.player.name}  Lv. 1`, {
+    this.add.text(30, 22, `${this.player.name}  Lv. ${this.session.level}`, {
       fontFamily: 'monospace',
       fontSize: '11px',
       color: '#00e1ff',
@@ -202,7 +220,7 @@ export class CombatScene extends Phaser.Scene {
     eCard.lineStyle(1, 0x243350, 1);
     eCard.strokeRect(width - 200, 16, 180, 52);
 
-    this.add.text(width - 190, 22, `${this.enemy.name}  Lv. 1`, {
+    this.add.text(width - 190, 22, `${this.enemy.name}  Lv. ${this.enemyTemplate.level}`, {
       fontFamily: 'monospace',
       fontSize: '11px',
       color: '#ff4d79',
@@ -230,19 +248,19 @@ export class CombatScene extends Phaser.Scene {
     cmdBg.lineStyle(2, 0x00c8ff, 1);
     cmdBg.strokeRect(cmdBoxX, cmdBoxY, cmdBoxWidth, cmdBoxHeight);
 
-    this.turnIndicatorText = this.add.text(cmdBoxX + 12, cmdBoxY + 8, 'YOUR TURN — CHOOSE ACTION', {
+    this.turnIndicatorText = this.add.text(cmdBoxX + 12, cmdBoxY + 8, '', {
       fontFamily: 'monospace',
       fontSize: '9px',
       color: '#00e1ff',
       fontStyle: 'bold',
     });
 
-    const commands = [
-      { text: '[1] ATTACK (Broken Blade)', action: () => this.handlePlayerAction('attack') },
-      { text: '[2] SKILL (Temporal Strike)', action: () => this.handlePlayerAction('skill') },
-      { text: '[3] ITEM (Chrono Shard)', action: () => this.handlePlayerAction('item') },
-      { text: '[4] DEFEND (Guard)', action: () => this.handlePlayerAction('defend') },
-      { text: '[5] ESCAPE', action: () => this.handlePlayerAction('escape') },
+    const commands: { text: string; type: PlayerCommand }[] = [
+      { text: '[1] ATTACK (Broken Blade)', type: 'attack' },
+      { text: '[2] SKILL (Temporal Strike)', type: 'skill' },
+      { text: this.itemButtonLabel(), type: 'item' },
+      { text: '[4] DEFEND (Guard)', type: 'defend' },
+      { text: '[5] ESCAPE', type: 'escape' },
     ];
 
     const colWidth = 120;
@@ -258,12 +276,14 @@ export class CombatScene extends Phaser.Scene {
           fontSize: '9px',
           color: '#e2e8f0',
         })
-        .setInteractive({ useHandCursor: true });
+        .setInteractive({ useHandCursor: true })
+        .setVisible(false);
 
-      btn.on('pointerdown', cmd.action);
+      btn.on('pointerdown', () => this.handlePlayerAction(cmd.type));
       btn.on('pointerover', () => btn.setColor('#00e1ff'));
       btn.on('pointerout', () => btn.setColor('#e2e8f0'));
 
+      if (cmd.type === 'item') this.itemButton = btn;
       this.commandButtons.push(btn);
     });
 
@@ -286,6 +306,11 @@ export class CombatScene extends Phaser.Scene {
       wordWrap: { width: logBoxWidth - 28 },
       lineSpacing: 4,
     });
+  }
+
+  private itemButtonLabel(): string {
+    const count = this.session.inventory.getItemCount(this.session.combatItemId);
+    return `[3] ITEM (Chrono Shard x${count})`;
   }
 
   private setupInputs(): void {
@@ -317,6 +342,8 @@ export class CombatScene extends Phaser.Scene {
     this.enemyHpBar.fillStyle(0xef4444, 1);
     this.enemyHpBar.fillRect(width - 190, 40, 100 * ePct, 8);
     this.enemyHpText.setText(`${this.enemy.stats.hp}/${this.enemy.stats.maxHp} HP`);
+
+    this.itemButton?.setText(this.itemButtonLabel());
   }
 
   private setBattleLog(msg: string): void {
@@ -346,24 +373,69 @@ export class CombatScene extends Phaser.Scene {
   }
 
   private setButtonsEnabled(enabled: boolean): void {
-    this.commandButtons.forEach((b) => {
-      b.setVisible(enabled);
-    });
+    this.commandButtons.forEach((b) => b.setVisible(enabled));
     this.turnIndicatorText.setText(enabled ? 'YOUR TURN — CHOOSE ACTION' : 'RESOLVING ACTIONS...');
   }
 
-  private handlePlayerAction(type: 'attack' | 'skill' | 'item' | 'defend' | 'escape'): void {
+  // ------------------------------------------------------------- turn flow
+
+  /**
+   * Hands control to whoever is next in the speed-ordered initiative queue. The pause between turns
+   * is applied once, in endTurn; `enemyDelayMs` only matters when the enemy opens the battle.
+   */
+  private beginTurn(enemyDelayMs = 0): void {
+    if (this.combatSystem.isBattleOver()) {
+      this.handleBattleEnd();
+      return;
+    }
+
+    if (this.combatSystem.getActiveCombatantId() === this.player.id) {
+      this.isProcessingTurn = false;
+      this.setButtonsEnabled(true);
+    } else {
+      this.isProcessingTurn = true;
+      this.setButtonsEnabled(false);
+      if (enemyDelayMs > 0) {
+        this.time.delayedCall(enemyDelayMs, () => this.executeEnemyTurn());
+      } else {
+        this.executeEnemyTurn();
+      }
+    }
+  }
+
+  /** Closes the current combatant's turn and schedules the next one. */
+  private endTurn(delayMs: number): void {
+    if (this.combatSystem.isBattleOver()) {
+      this.time.delayedCall(BATTLE_END_DELAY_MS, () => this.handleBattleEnd());
+      return;
+    }
+    this.combatSystem.advanceTurn();
+    this.time.delayedCall(delayMs, () => this.beginTurn());
+  }
+
+  public handlePlayerAction(type: PlayerCommand): void {
     if (this.isProcessingTurn || this.combatSystem.isBattleOver()) return;
+    if (this.combatSystem.getActiveCombatantId() !== this.player.id) return;
 
-    this.isProcessingTurn = true;
-    this.setButtonsEnabled(false);
-
-    // Execute Player Action
     const action: ICombatAction = {
       type,
       sourceId: this.player.id,
       targetId: type === 'item' ? this.player.id : this.enemy.id,
     };
+
+    // ITEM consumes a shard from the satchel; with none left the turn is not spent (B6).
+    if (type === 'item') {
+      const itemId = this.session.combatItemId;
+      if (!this.session.inventory.removeItem(itemId, 1)) {
+        const name = this.session.inventory.getItemDefinition(itemId)?.name ?? 'items';
+        this.setBattleLog(`No ${name}s left in the satchel!`);
+        return;
+      }
+      action.itemId = itemId;
+    }
+
+    this.isProcessingTurn = true;
+    this.setButtonsEnabled(false);
 
     // Animate Peter Lunge
     if (type === 'attack' || type === 'skill') {
@@ -375,7 +447,6 @@ export class CombatScene extends Phaser.Scene {
         yoyo: true,
         onYoyo: () => {
           this.cameras.main.shake(120, 0.005);
-          // Flash target
           this.enemySprite.setTint(0xff4d79);
           this.time.delayedCall(150, () => this.enemySprite.clearTint());
         },
@@ -387,25 +458,27 @@ export class CombatScene extends Phaser.Scene {
     this.setBattleLog(result.message);
 
     if (result.damageDealt > 0) {
-      this.showFloatingNumber(this.enemySprite.x, this.enemySprite.y - 20, `-${result.damageDealt}`, '#ff4d79');
+      this.showFloatingNumber(
+        this.enemySprite.x,
+        this.enemySprite.y - 20,
+        `-${result.damageDealt}`,
+        '#ff4d79',
+      );
     } else if (result.healingDone > 0) {
-      this.showFloatingNumber(this.playerSprite.x, this.playerSprite.y - 20, `+${result.healingDone}`, '#22c55e');
+      this.showFloatingNumber(
+        this.playerSprite.x,
+        this.playerSprite.y - 20,
+        `+${result.healingDone}`,
+        '#22c55e',
+      );
     }
 
-    // Check if enemy defeated or battle over
-    if (this.combatSystem.isBattleOver()) {
-      this.time.delayedCall(1200, () => this.handleBattleEnd());
-      return;
-    }
-
-    // Advance to Enemy Turn after delay
-    this.time.delayedCall(1400, () => this.executeEnemyTurn());
+    this.endTurn(PLAYER_TO_ENEMY_DELAY_MS);
   }
 
   private executeEnemyTurn(): void {
     if (this.combatSystem.isBattleOver()) return;
 
-    // Enemy AI: uses skill or attack
     const enemyAction: ICombatAction = {
       type: 'attack',
       sourceId: this.enemy.id,
@@ -431,25 +504,29 @@ export class CombatScene extends Phaser.Scene {
     this.setBattleLog(result.message);
 
     if (result.damageDealt > 0) {
-      this.showFloatingNumber(this.playerSprite.x, this.playerSprite.y - 20, `-${result.damageDealt}`, '#ff3355');
+      this.showFloatingNumber(
+        this.playerSprite.x,
+        this.playerSprite.y - 20,
+        `-${result.damageDealt}`,
+        '#ff3355',
+      );
     }
 
-    if (this.combatSystem.isBattleOver()) {
-      this.time.delayedCall(1200, () => this.handleBattleEnd());
-      return;
-    }
-
-    // Turn complete, re-enable player controls
-    this.time.delayedCall(1200, () => {
-      this.isProcessingTurn = false;
-      this.setButtonsEnabled(true);
-    });
+    this.endTurn(ENEMY_TO_PLAYER_DELAY_MS);
   }
 
   private handleBattleEnd(): void {
     const phase = this.combatSystem.getPhase();
+    this.session.applyBattleHp(this.player.stats.hp);
+    this.combatSystem.endBattle();
 
     if (phase === 'victory') {
+      if (this.sceneData.victoryFlag) {
+        this.session.setFlag(this.sceneData.victoryFlag);
+      }
+      const rewards = this.session.claimEnemyRewards(this.enemyTemplate);
+      const rewardText = this.session.describeRewards(rewards);
+
       // Dissolve enemy
       this.tweens.add({
         targets: this.enemySprite,
@@ -459,38 +536,28 @@ export class CombatScene extends Phaser.Scene {
         ease: 'Power2',
       });
 
-      this.setBattleLog('★ VICTORY! Temporal Shade banished. Received +50 EXP and Minor Chrono Shard!');
-
-      this.time.delayedCall(1600, () => {
-        this.cameras.main.fadeOut(300, 0, 0, 0);
-        this.time.delayedCall(350, () => {
-          this.scene.start('ExplorationScene', {
-            returnedFromBattle: true,
-            victory: true,
-            returnPosition: this.returnPosition,
-          });
-        });
+      this.setBattleLog(`★ VICTORY! ${this.enemy.name} banished. ${rewardText}`);
+      this.returnToExploration(1600, {
+        title: 'VICTORY!',
+        subtitle: `★ ${this.enemy.name} Banished (${rewardText})`,
       });
     } else if (phase === 'defeat') {
       this.setBattleLog('DEFEAT! Peter collapsed from temporal exhaustion...');
       this.time.delayedCall(1600, () => {
         this.cameras.main.fadeOut(300, 0, 0, 0);
-        this.time.delayedCall(350, () => {
-          this.scene.start('MainMenuScene');
-        });
+        this.time.delayedCall(350, () => this.scene.start('MainMenuScene'));
       });
     } else if (phase === 'escaped') {
       this.setBattleLog('ESCAPED! Fled from the combat encounter.');
-      this.time.delayedCall(1200, () => {
-        this.cameras.main.fadeOut(300, 0, 0, 0);
-        this.time.delayedCall(350, () => {
-          this.scene.start('ExplorationScene', {
-            returnedFromBattle: true,
-            victory: false,
-            returnPosition: this.returnPosition,
-          });
-        });
-      });
+      this.returnToExploration(1200);
     }
+  }
+
+  private returnToExploration(delayMs: number, notice?: ExplorationSceneData['notice']): void {
+    const data: ExplorationSceneData = { returnPosition: this.sceneData.returnPosition, notice };
+    this.time.delayedCall(delayMs, () => {
+      this.cameras.main.fadeOut(300, 0, 0, 0);
+      this.time.delayedCall(350, () => this.scene.start('ExplorationScene', data));
+    });
   }
 }

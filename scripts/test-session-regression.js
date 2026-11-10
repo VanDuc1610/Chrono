@@ -198,8 +198,6 @@ async function triggerFreshNewGame(client) {
 async function touchShadeToEnterCombat(client) {
   await client.eval(`
     (() => {
-      // Force probabilistic escape rolls to succeed reliably during deterministic regression tests
-      Math.random = () => 0.01;
       const exp = window.__GAME__.scene.getScene('ExplorationScene');
       if (exp.dialogueSystem && exp.dialogueSystem.isActive()) {
         exp.closeDialogue();
@@ -209,6 +207,16 @@ async function touchShadeToEnterCombat(client) {
   `);
   const entered = await waitForScene(client, 'CombatScene');
   await wait(450);
+  // Make escape rolls succeed deterministically. Only the combat RNG is stubbed: overriding the
+  // global Math.random breaks Phaser (constant texture UUIDs -> every new Text fails to create).
+  await client.eval(`
+    (() => {
+      const combat = window.__GAME__.scene.getScene('CombatScene');
+      if (combat.combatSystem && typeof combat.combatSystem.setRandomSource === 'function') {
+        combat.combatSystem.setRandomSource(() => 0.01);
+      }
+    })()
+  `);
   return entered;
 }
 

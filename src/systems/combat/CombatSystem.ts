@@ -1,11 +1,24 @@
 import {
   BattlePhase,
+  CombatItemEffect,
+  CombatTuning,
   IBattleState,
   ICombatAction,
   ICombatActionResult,
   ICombatant,
 } from './CombatTypes';
 import { ICombatSystem } from './ICombatSystem';
+
+export interface CombatSystemOptions {
+  tuning: CombatTuning;
+  /** Resolves an item id to its combat effect (from items.json). */
+  resolveItem: (itemId: string) => CombatItemEffect | undefined;
+  /**
+   * Random source in [0, 1). Defaults to a call-time lookup of Math.random so tests can stub it
+   * after construction.
+   */
+  rng?: () => number;
+}
 
 export class CombatSystem implements ICombatSystem {
   private state: IBattleState = {
@@ -17,13 +30,30 @@ export class CombatSystem implements ICombatSystem {
 
   private turnQueue: string[] = [];
   private defendedCombatants: Set<string> = new Set();
+  private readonly tuning: CombatTuning;
+  private readonly resolveItem: (itemId: string) => CombatItemEffect | undefined;
+  private rng: () => number;
+
+  constructor(options: CombatSystemOptions) {
+    this.tuning = options.tuning;
+    this.resolveItem = options.resolveItem;
+    this.rng = options.rng ?? (() => Math.random());
+  }
+
+  /**
+   * Replaces the combat random source (crits, variance, escape). For deterministic tests/replays —
+   * never stub the global Math.random instead: Phaser uses it for texture UUIDs, and a constant
+   * value makes every new Text collide and fail to create.
+   */
+  public setRandomSource(rng: () => number): void {
+    this.rng = rng;
+  }
 
   public startBattle(party: ICombatant[], enemies: ICombatant[]): void {
-    const all = [...party, ...enemies];
     this.state = {
       phase: 'turn_select',
       turnCount: 1,
-      combatants: all,
+      combatants: [...party, ...enemies],
       activeCombatantId: null,
     };
     this.defendedCombatants.clear();
@@ -38,8 +68,12 @@ export class CombatSystem implements ICombatSystem {
     return this.state.phase;
   }
 
+  public getActiveCombatantId(): string | null {
+    return this.isBattleOver() ? null : this.state.activeCombatantId;
+  }
+
+  /** Builds the round order: living combatants by speed, descending (stable for ties). */
   private refreshTurnQueue(): void {
-    // Sort living combatants by speed descending
     const living = this.state.combatants.filter((c) => c.isAlive);
     living.sort((a, b) => b.stats.speed - a.stats.speed);
     this.turnQueue = living.map((c) => c.id);
@@ -52,15 +86,27 @@ export class CombatSystem implements ICombatSystem {
     }
 
     this.turnQueue.shift();
+    // Skip anyone who died earlier in this round.
+    while (this.turnQueue.length > 0 && !this.getCombatant(this.turnQueue[0])?.isAlive) {
+      this.turnQueue.shift();
+    }
+
     if (this.turnQueue.length === 0) {
       this.state.turnCount++;
-      this.defendedCombatants.clear();
       this.refreshTurnQueue();
     } else {
-      this.state.activeCombatantId = this.turnQueue[0] ?? null;
+      this.state.activeCombatantId = this.turnQueue[0];
     }
 
     return this.state.activeCombatantId;
+  }
+
+  /** Chance in [0, 1] that `source` escapes from `target`. */
+  public getEscapeChance(source: ICombatant, target: ICombatant): number {
+    const t = this.tuning;
+    const chance =
+      t.escapeBaseChance + (source.stats.speed - target.stats.speed) * t.escapeSpeedFactor;
+    return Math.min(t.escapeMaxChance, Math.max(t.escapeMinChance, chance));
   }
 
   public executeAction(action: ICombatAction): ICombatActionResult {
@@ -68,13 +114,15 @@ export class CombatSystem implements ICombatSystem {
     const target = this.getCombatant(action.targetId);
 
     if (!source || !target) {
-      throw new Error(`Invalid combat action: source (${action.sourceId}) or target (${action.targetId}) not found.`);
+      throw new Error(
+        `Invalid combat action: source (${action.sourceId}) or target (${action.targetId}) not found.`,
+      );
     }
 
-    // A defensive stance lasts until the defender's next action. Clearing it here (rather than only
-    // in advanceTurn) keeps it correct even when the caller drives turns manually.
+    // A defensive stance lasts until the defender's next action.
     this.defendedCombatants.delete(source.id);
 
+    const t = this.tuning;
     let damage = 0;
     let healing = 0;
     let isCritical = false;
@@ -82,15 +130,14 @@ export class CombatSystem implements ICombatSystem {
 
     switch (action.type) {
       case 'attack': {
-        const rawDamage = source.stats.attack * 2 - target.stats.defense;
-        const variance = Math.floor(Math.random() * 5) - 2; // -2 to +2
-        isCritical = Math.random() < 0.15; // 15% crit chance
-        const multiplier = isCritical ? 1.5 : 1.0;
+        const rawDamage = source.stats.attack * t.attackMultiplier - target.stats.defense;
+        const variance = Math.floor(this.rng() * (t.attackVariance * 2 + 1)) - t.attackVariance;
+        isCritical = this.rng() < t.critChance;
+        const multiplier = isCritical ? t.critMultiplier : 1.0;
         damage = Math.max(1, Math.floor((rawDamage + variance) * multiplier));
 
-        // If target was defending, reduce damage by 50%
         if (this.defendedCombatants.has(target.id)) {
-          damage = Math.max(1, Math.floor(damage * 0.5));
+          damage = Math.max(1, Math.floor(damage * t.defendDamageFactor));
           message = `${target.name} guarded! `;
         }
 
@@ -101,19 +148,29 @@ export class CombatSystem implements ICombatSystem {
       }
 
       case 'skill': {
-        // Temporal Strike (1.75x damage)
-        const rawDamage = Math.floor(source.stats.attack * 2.8 - target.stats.defense);
-        damage = Math.max(5, rawDamage);
+        // Temporal Strike
+        const rawDamage = Math.floor(
+          source.stats.attack * t.skillMultiplier - target.stats.defense,
+        );
+        damage = Math.max(t.skillMinDamage, rawDamage);
+        if (this.defendedCombatants.has(target.id)) {
+          damage = Math.max(1, Math.floor(damage * t.defendDamageFactor));
+          message = `${target.name} guarded! `;
+        }
         target.stats.hp = Math.max(0, target.stats.hp - damage);
-        message = `${source.name} channels Temporal Strike! Strikes ${target.name} for ${damage} chronal damage!`;
+        message += `${source.name} channels Temporal Strike! Strikes ${target.name} for ${damage} chronal damage!`;
         break;
       }
 
       case 'item': {
-        // Minor Chrono Shard (+30 HP)
-        healing = 30;
-        target.stats.hp = Math.min(target.stats.maxHp, target.stats.hp + healing);
-        message = `${source.name} crushes a Chrono Shard, restoring ${healing} HP to ${target.name}!`;
+        const effect = action.itemId ? this.resolveItem(action.itemId) : undefined;
+        if (!effect) {
+          throw new Error(`Invalid combat action: unknown item "${action.itemId ?? ''}".`);
+        }
+        const before = target.stats.hp;
+        target.stats.hp = Math.min(target.stats.maxHp, target.stats.hp + effect.healAmount);
+        healing = target.stats.hp - before;
+        message = `${source.name} crushes a ${effect.name}, restoring ${healing} HP to ${target.name}!`;
         break;
       }
 
@@ -124,8 +181,7 @@ export class CombatSystem implements ICombatSystem {
       }
 
       case 'escape': {
-        const canEscape = source.stats.speed >= target.stats.speed;
-        if (canEscape) {
+        if (this.rng() < this.getEscapeChance(source, target)) {
           this.state.phase = 'escaped';
           message = `${source.name} fractured spacetime and escaped!`;
         } else {
@@ -135,19 +191,20 @@ export class CombatSystem implements ICombatSystem {
       }
     }
 
-    if (target.stats.hp <= 0) {
+    if (target.stats.hp <= 0 && target.isAlive) {
       target.isAlive = false;
       message += ` ${target.name} dissolves into temporal dust!`;
     }
 
-    // Check Win/Loss conditions
-    const livingParty = this.state.combatants.filter((c) => c.type === 'player' && c.isAlive);
-    const livingEnemies = this.state.combatants.filter((c) => c.type === 'enemy' && c.isAlive);
+    if (this.state.phase !== 'escaped') {
+      const livingParty = this.state.combatants.filter((c) => c.type !== 'enemy' && c.isAlive);
+      const livingEnemies = this.state.combatants.filter((c) => c.type === 'enemy' && c.isAlive);
 
-    if (livingEnemies.length === 0) {
-      this.state.phase = 'victory';
-    } else if (livingParty.length === 0) {
-      this.state.phase = 'defeat';
+      if (livingEnemies.length === 0) {
+        this.state.phase = 'victory';
+      } else if (livingParty.length === 0) {
+        this.state.phase = 'defeat';
+      }
     }
 
     return {
@@ -165,7 +222,11 @@ export class CombatSystem implements ICombatSystem {
   }
 
   public isBattleOver(): boolean {
-    return this.state.phase === 'victory' || this.state.phase === 'defeat' || this.state.phase === 'escaped';
+    return (
+      this.state.phase === 'victory' ||
+      this.state.phase === 'defeat' ||
+      this.state.phase === 'escaped'
+    );
   }
 
   public endBattle(): void {

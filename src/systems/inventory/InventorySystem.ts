@@ -73,10 +73,20 @@ export class InventorySystem implements IInventorySystem {
     this.items.clear();
   }
 
+  /** Restores saved stacks. Unknown item ids are dropped and quantities clamped to stack limits. */
   public loadFromState(stacks: IItemStack[]): void {
     this.clear();
     for (const stack of stacks) {
-      this.items.set(stack.itemId, stack.quantity);
+      const def = this.database.get(stack.itemId);
+      if (!def) {
+        console.warn(`[InventorySystem] Dropping unknown saved item ID: ${stack.itemId}`);
+        continue;
+      }
+      const maxStack = def.stackable ? (def.maxStack ?? 99) : 1;
+      const quantity = Math.min(Math.floor(stack.quantity), maxStack);
+      if (quantity > 0) {
+        this.items.set(stack.itemId, quantity);
+      }
     }
   }
 }
