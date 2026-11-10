@@ -9,7 +9,9 @@
  * Tile indices are FIXED by public/assets/maps/prologue_map.json (GID = index + 1):
  *   0 void · 1 slate floor · 2 engraved chronal pavement · 3 wall top / cornice
  *   4 wall face · 5 ruined pillar · 6 chrono crystal · 7 Altar of Moments
- *   8 cracked fracture floor · 9 slate floor variant · 10-15 empty (reserved)
+ *   8 cracked fracture floor · 9 slate floor variant · 10 stele · 11 frozen astrolabe
+ *   12 reliquary · 13 threshold gate (wall face) · 14 torn journal leaf (on engraved floor)
+ *   15 empty (reserved)
  * Ground tiles (0-2, 8-9) are opaque; props on the Walls layer (5-7) have transparent
  * backgrounds so the floor shows through.
  *
@@ -19,8 +21,9 @@
 import path from 'path';
 import fs from 'fs';
 import { hex, encodePng, writeFile } from './pixel-art/pixel.js';
+import { GROUND_PROPS, WALL_PROPS } from './map-props.js';
 
-const VERSION = 'v2';
+const VERSION = 'v3';
 const T = 32;
 
 /** ENVIRONMENT_GUIDE §4 swatches + dormant cyan (§3.1) + outline. */
@@ -36,6 +39,10 @@ const PALETTE = {
   c: hex('#00c8ff'), // Chronal Cyan Inlay
   a: hex('#88edff'), // Luminous Apex
   O: hex('#05060b'), // prop outline
+  w: hex('#8c96a8'), // aged silver (stele reliefs)
+  p: hex('#7a5cd6'), // violet-blue fracture light (threshold keystone, derived)
+  q: hex('#d9cba8'), // vellum page (derived)
+  Q: hex('#a8987a'), // vellum shadow / faded ink (derived)
 };
 
 /** Deterministic per-pixel hash in [0, 100). */
@@ -342,6 +349,244 @@ const altarTile = prop([
   '................................',
 ]);
 
+// ------------------------------------------------------- T-22 PROP TILES (10-14)
+// Points of interest from the approved content proposal (docs/narrative/PROLOGUE_CONTENT_PROPOSAL.md).
+
+const blankTile = () => tile('.');
+const rect = (t, x0, y0, x1, y1, ch) => {
+  for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) put(t, x, y, ch);
+};
+/** Pixels whose distance from (cx, cy) lies in [r0, r1). */
+const ring = (t, cx, cy, r0, r1, ch, pred = () => true) => {
+  for (let y = 0; y < T; y++)
+    for (let x = 0; x < T; x++) {
+      const r = Math.hypot(x - cx, y - cy);
+      if (r >= r0 && r < r1 && pred(x, y)) put(t, x, y, ch);
+    }
+};
+/** Stone plinth with a lit top lip, outline and contact shadow, spanning cols x0..x1. */
+function plinth(t, x0, x1, top) {
+  rect(t, x0, top, x1, top + 3, 'S');
+  rect(t, x0 + 1, top, x1 - 1, top, 'h');
+  rect(t, x0, top + 3, x1, top + 3, 'O');
+  for (let y = top; y <= top + 3; y++) {
+    put(t, x0, y, 'O');
+    put(t, x1, y, 'O');
+  }
+  rect(t, x0 + 1, top + 4, x1 - 1, top + 4, 'v');
+}
+
+/**
+ * 10 · Stele of the Six Authorities: basalt slab, six silver reliefs around a shattered dial,
+ * and a gouged crescent (the erased "seventh hour") chiselled beneath them.
+ */
+function steleTile() {
+  const t = blankTile();
+  plinth(t, 8, 23, 23);
+  // lighter weathered slate than the floor so the stele reads against it
+  rect(t, 10, 3, 21, 22, 's');
+  rect(t, 11, 3, 12, 22, 'h');
+  rect(t, 19, 3, 20, 22, 'S');
+  rect(t, 11, 2, 20, 2, 'O');
+  for (let y = 3; y <= 22; y++) {
+    put(t, 10, y, 'O');
+    put(t, 21, y, 'O');
+  }
+  put(t, 11, 3, 'O');
+  put(t, 20, 3, 'O');
+  rect(t, 12, 4, 19, 4, 'h');
+  // six silver reliefs around the dial (Origin ... Finality)
+  line(
+    t,
+    [
+      [13, 7],
+      [18, 7],
+      [12, 11],
+      [19, 11],
+      [13, 15],
+      [18, 15],
+    ],
+    'w',
+  );
+  // shattered dial with a faint chronal crack
+  ring(t, 15.5, 11, 2.4, 3.3, 'm');
+  line(
+    t,
+    [
+      [15, 10],
+      [16, 11],
+      [15, 12],
+    ],
+    'd',
+  );
+  put(t, 16, 10, 'c');
+  // gouged crescent with ash-grey edges
+  line(
+    t,
+    [
+      [13, 18],
+      [14, 19],
+      [15, 20],
+      [16, 20],
+      [17, 19],
+      [18, 18],
+    ],
+    'v',
+  );
+  put(t, 14, 18, 'h');
+  put(t, 17, 18, 'h');
+  return t;
+}
+
+/**
+ * 11 · Frozen Astrolabe: brass rings hanging in stagnant time above a plinth, oil drops
+ * suspended mid-air around the jammed escapement wheel.
+ */
+function frozenAstrolabeTile() {
+  const t = blankTile();
+  plinth(t, 10, 21, 22);
+  const cx = 15.5;
+  const cy = 10.5;
+  ring(t, cx, cy, 7.6, 8.4, 'O');
+  ring(t, cx, cy, 6.5, 7.6, 'b');
+  ring(t, cx, cy, 6.5, 7.6, 'B', (x, y) => x < cx && y < cy); // light from upper left
+  ring(t, cx, cy, 3.6, 4.4, 'b');
+  for (let k = -6; k <= 6; k++) {
+    put(t, Math.round(cx + k * 0.7), Math.round(cy + k * 0.7), 'b'); // tilted ecliptic bar
+  }
+  ring(t, cx, cy, 0, 1.6, 'B');
+  // jammed escapement wheel on the rim
+  ring(t, 22, 15, 0, 1.6, 'B');
+  put(t, 22, 15, 'O');
+  // oil drops frozen in the air
+  line(
+    t,
+    [
+      [8, 5],
+      [24, 8],
+      [7, 14],
+      [23, 19],
+    ],
+    'a',
+  );
+  put(t, 25, 12, 'c');
+  return t;
+}
+
+/**
+ * 12 · Cracked Reliquary: lead-lined monastic box with bronze straps; one surviving crystal
+ * pulses through the crack.
+ */
+function reliquaryTile() {
+  const t = blankTile();
+  rect(t, 6, 10, 25, 26, 'O');
+  rect(t, 7, 11, 24, 15, 's');
+  rect(t, 7, 11, 24, 11, 'h');
+  rect(t, 7, 15, 24, 15, 'b');
+  rect(t, 7, 16, 24, 25, 'S');
+  for (const x of [8, 9, 22, 23]) rect(t, x, 11, x, 25, x === 8 || x === 22 ? 'B' : 'b');
+  rect(t, 7, 25, 24, 25, 'm');
+  // the crack, leaking the last cerulean crystal's light
+  const crack = [
+    [12, 13],
+    [13, 14],
+    [13, 15],
+    [14, 16],
+    [15, 17],
+    [15, 18],
+    [16, 19],
+    [17, 20],
+    [17, 21],
+    [18, 22],
+    [19, 23],
+  ];
+  crack.forEach(([x, y], i) => put(t, x, y, i % 3 === 1 ? 'c' : 'v'));
+  put(t, 16, 18, 'a');
+  put(t, 16, 17, 'a');
+  rect(t, 7, 27, 24, 27, 'v');
+  return t;
+}
+
+/**
+ * 13 · Sealed Threshold Gates set into the north wall face: twin slate leaves under an arch,
+ * clockwork reliefs, violet-blue fractures across the keystone.
+ */
+function thresholdGateTile() {
+  const t = wallFaceTile();
+  const cx = 15.5;
+  const cy = 13;
+  for (let y = 3; y < 30; y++)
+    for (let x = 7; x <= 24; x++) {
+      const r = Math.hypot(x - cx, y - cy);
+      const inArch = y >= cy ? x >= 9 && x <= 22 : r < 6.6;
+      const frame = y >= cy ? x === 8 || x === 23 : r >= 6.6 && r < 7.6;
+      const outline = y >= cy ? x === 7 || x === 24 : r >= 7.6 && r < 8.4;
+      if (inArch) t[y][x] = 'm';
+      else if (frame) t[y][x] = 'h';
+      else if (outline) t[y][x] = 'O';
+    }
+  rect(t, 10, 9, 13, 28, 'S');
+  rect(t, 18, 9, 21, 28, 'S');
+  rect(t, 15, 7, 16, 29, 'v'); // seam between the two leaves
+  ring(t, 11.5, 19, 1.4, 2.3, 'b');
+  ring(t, 19.5, 19, 1.4, 2.3, 'b');
+  put(t, 11, 19, 'B');
+  put(t, 20, 19, 'B');
+  // keystone with violet-blue hairline fractures
+  rect(t, 14, 3, 17, 5, 'h');
+  line(
+    t,
+    [
+      [15, 3],
+      [16, 4],
+      [15, 5],
+      [16, 6],
+      [13, 6],
+      [18, 6],
+    ],
+    'p',
+  );
+  rect(t, 8, 29, 23, 29, 'v');
+  return t;
+}
+
+/** 14 · Torn Journal Leaf lying on the engraved pavement (Ground layer, no collision). */
+function tornPageTile() {
+  const t = engravedTile();
+  for (let y = 18; y <= 26; y++) {
+    const x0 = 17 + Math.floor((y - 18) / 3);
+    const x1 = 26 - ((y * 7) % 3); // ragged torn edge
+    for (let x = x0; x <= x1; x++) t[y][x] = 'q';
+    put(t, x1 + 1, y, 'v');
+  }
+  rect(t, 18, 27, 25, 27, 'v');
+  // handwritten equations and the twice-underlined warning
+  line(
+    t,
+    [
+      [19, 20],
+      [20, 20],
+      [22, 20],
+      [23, 20],
+      [24, 20],
+    ],
+    'm',
+  );
+  line(
+    t,
+    [
+      [20, 22],
+      [21, 22],
+      [22, 22],
+      [24, 22],
+    ],
+    'm',
+  );
+  rect(t, 19, 24, 23, 24, 'Q');
+  rect(t, 19, 25, 22, 25, 'Q');
+  return t;
+}
+
 // -------------------------------------------------------------------- SHEET
 
 const TILES = [
@@ -355,6 +600,11 @@ const TILES = [
   altarTile, // 7
   fractureTile(), // 8
   flagstones(17, FINE_CRACK_B), // 9
+  steleTile(), // 10
+  frozenAstrolabeTile(), // 11
+  reliquaryTile(), // 12
+  thresholdGateTile(), // 13
+  tornPageTile(), // 14
 ];
 
 function rasterTiles(tiles, cols, rowsN) {
@@ -395,9 +645,19 @@ function scaled(img, k, bg = [38, 42, 52, 255]) {
   return encodePng(W, H, out);
 }
 
-/** Renders the real map (Ground then Walls layer) with this tileset, for review. */
-function renderMap(sheet, mapPath) {
+/**
+ * Renders the real map (Ground then Walls layer) with this tileset, for review.
+ * `props` overlays planned prop placements (scripts/map-props.js) before they are approved.
+ */
+function renderMap(sheet, mapPath, props = { ground: [], walls: [] }) {
   const map = JSON.parse(fs.readFileSync(mapPath, 'utf8'));
+  for (const [name, list] of [
+    ['Ground', props.ground],
+    ['Walls', props.walls],
+  ]) {
+    const layer = map.layers.find((l) => l.name === name);
+    for (const p of list) layer.data[p.y * map.width + p.x] = p.gid;
+  }
   const w = map.width * T;
   const h = map.height * T;
   const buf = Buffer.alloc(w * h * 4);
@@ -431,6 +691,9 @@ const sheet = rasterTiles(TILES, 4, 4);
 const file = path.join(outDir, `sanctuary_tileset_${VERSION}.png`);
 writeFile(file, encodePng(sheet.w, sheet.h, sheet.buf));
 writeFile(path.join(previewDir, `sanctuary_tileset_${VERSION}_x4.png`), scaled(sheet, 4));
-const room = renderMap(sheet, path.resolve('public/assets/maps/prologue_map.json'));
+const room = renderMap(sheet, path.resolve('public/assets/maps/prologue_map.json'), {
+  ground: GROUND_PROPS,
+  walls: WALL_PROPS,
+});
 writeFile(path.join(previewDir, `sanctuary_room_${VERSION}.png`), scaled(room, 1));
 console.log(`✓ ${path.relative(process.cwd(), file)} (${sheet.w}x${sheet.h})`);
