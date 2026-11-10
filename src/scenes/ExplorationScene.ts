@@ -49,6 +49,10 @@ export class ExplorationScene extends Phaser.Scene {
   private inventoryContainer!: Phaser.GameObjects.Container;
   private isInventoryOpen = false;
   private inventoryItemContainer!: Phaser.GameObjects.Container;
+  private selectedInventoryIndex = 0;
+
+  // Player Status HUD
+  private playerStatsText!: Phaser.GameObjects.Text;
 
   // Quest HUD Elements
   private questTrackerContainer!: Phaser.GameObjects.Container;
@@ -93,6 +97,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.isTransitioningToBattle = false;
     this.isTyping = false;
     this.isInventoryOpen = false;
+    this.selectedInventoryIndex = 0;
     this.fullTargetText = '';
     this.typewriterTimer = null;
     this.notificationTween = null;
@@ -220,6 +225,24 @@ export class ExplorationScene extends Phaser.Scene {
       keyI.on('down', () => this.toggleInventory());
       keyB.on('down', () => this.toggleInventory());
 
+      // Satchel navigation & item use when Satchel is open
+      const keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+      const keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+      const keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+      const keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+      keyUp.on('down', () => {
+        if (this.isInventoryOpen) this.navigateInventory(-1);
+      });
+      keyDown.on('down', () => {
+        if (this.isInventoryOpen) this.navigateInventory(1);
+      });
+      keyE.on('down', () => {
+        if (this.isInventoryOpen) this.useSelectedInventoryItem();
+      });
+      keySpace.on('down', () => {
+        if (this.isInventoryOpen) this.useSelectedInventoryItem();
+      });
+
       // Quick save
       const keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
       keyK.on('down', () => this.quickSave());
@@ -336,12 +359,12 @@ export class ExplorationScene extends Phaser.Scene {
       .setDepth(100)
       .setVisible(false);
 
-    // 2. Exploration Header Banner (Location)
+    // 2. Exploration Header Banner (Location & Player Status HUD)
     const headerBg = this.add.graphics().setScrollFactor(0).setDepth(90);
     headerBg.fillStyle(0x0a0c16, 0.75);
-    headerBg.fillRect(10, 10, 240, 34);
+    headerBg.fillRect(10, 10, 240, 48);
     headerBg.lineStyle(1, 0x2e3852, 1);
-    headerBg.strokeRect(10, 10, 240, 34);
+    headerBg.strokeRect(10, 10, 240, 48);
 
     this.add
       .text(18, 14, 'LOCATION: Shattered Antechamber', {
@@ -361,6 +384,17 @@ export class ExplorationScene extends Phaser.Scene {
       })
       .setScrollFactor(0)
       .setDepth(95);
+
+    this.playerStatsText = this.add
+      .text(18, 41, '', {
+        fontFamily: 'monospace',
+        fontSize: '9px',
+        color: '#4ade80',
+        fontStyle: 'bold',
+      })
+      .setScrollFactor(0)
+      .setDepth(95);
+    this.updatePlayerStatusHUD();
 
     // 3. Quest Tracker Panel (Top-Right HUD)
     this.createQuestHUD(width);
@@ -550,6 +584,7 @@ export class ExplorationScene extends Phaser.Scene {
         this.showNotification('OBJECTIVE COMPLETED', `✓ ${event.objective.description}`);
       } else if (event.type === 'quest_completed') {
         const rewards = this.session.claimQuestRewards(event.quest.id);
+        this.updatePlayerStatusHUD();
         const rewardText = rewards ? this.session.describeRewards(rewards) : '';
         this.showNotification(
           'QUEST COMPLETED!',
@@ -669,11 +704,16 @@ export class ExplorationScene extends Phaser.Scene {
     this.inventoryItemContainer = this.add.container(18, 50);
 
     const footer = this.add
-      .text(panelWidth / 2, panelHeight - 16, '[I / B / ESC] Close Satchel  |  [K] Quick Save', {
-        fontFamily: 'monospace',
-        fontSize: '9px',
-        color: '#65789e',
-      })
+      .text(
+        panelWidth / 2,
+        panelHeight - 16,
+        '[Up / Down] Select  |  [E / Space] Use  |  [I / B / ESC] Close  |  [K] Save',
+        {
+          fontFamily: 'monospace',
+          fontSize: '9px',
+          color: '#65789e',
+        },
+      )
       .setOrigin(0.5);
 
     this.inventoryContainer.add([
@@ -686,11 +726,95 @@ export class ExplorationScene extends Phaser.Scene {
     ]);
   }
 
+  public updatePlayerStatusHUD(): void {
+    if (!this.playerStatsText) return;
+    const stats = this.session.getStats();
+    const expRemaining = this.session.expToNextLevel();
+    const expDisplay =
+      expRemaining === null
+        ? `${this.session.exp}/MAX`
+        : `${this.session.exp}/${this.session.exp + expRemaining}`;
+    this.playerStatsText.setText(
+      `Lv ${this.session.level} | EXP ${expDisplay} | HP ${this.session.hp}/${stats.maxHp}`,
+    );
+  }
+
+  public navigateInventory(direction: number): void {
+    const items = this.inventorySystem.getAllItems();
+    if (items.length === 0) {
+      this.selectedInventoryIndex = 0;
+      return;
+    }
+    this.selectedInventoryIndex =
+      (this.selectedInventoryIndex + direction + items.length) % items.length;
+    this.soundSystem.playCursorBlip();
+    this.refreshInventoryUI();
+  }
+
+  public useSelectedInventoryItem(): void {
+    const items = this.inventorySystem.getAllItems();
+    if (items.length === 0) {
+      this.showNotification('SATCHEL EMPTY', 'No consumables available to use.');
+      return;
+    }
+
+    if (this.selectedInventoryIndex >= items.length) {
+      this.selectedInventoryIndex = items.length - 1;
+    }
+
+    const selected = items[this.selectedInventoryIndex];
+    if (!selected || selected.quantity <= 0) {
+      this.showNotification('NO ITEM', 'None remaining in your Satchel.');
+      return;
+    }
+
+    const def = this.inventorySystem.getItemDefinition(selected.itemId);
+    const healAmount = def?.effects?.healAmount;
+    if (!def || def.type !== 'consumable' || healAmount === undefined) {
+      this.showNotification('CANNOT USE', `${def?.name ?? 'This item'} cannot be used directly.`);
+      return;
+    }
+
+    const maxHp = this.session.getStats().maxHp;
+    if (this.session.hp >= maxHp) {
+      this.showNotification(
+        'HP FULL',
+        `${this.session.playerName} is already at full health (${maxHp}/${maxHp} HP).`,
+      );
+      return;
+    }
+
+    const consumed = this.inventorySystem.removeItem(selected.itemId, 1);
+    if (!consumed) {
+      this.showNotification('NO ITEM', `No ${def.name} remaining.`);
+      return;
+    }
+
+    const prevHp = this.session.hp;
+    this.session.applyBattleHp(prevHp + healAmount);
+    const actualHealed = this.session.hp - prevHp;
+
+    this.soundSystem.playHeal();
+    this.updatePlayerStatusHUD();
+
+    const updatedItems = this.inventorySystem.getAllItems();
+    if (this.selectedInventoryIndex >= updatedItems.length) {
+      this.selectedInventoryIndex = Math.max(0, updatedItems.length - 1);
+    }
+    this.refreshInventoryUI();
+
+    this.showNotification(
+      'ITEM USED',
+      `Used ${def.name} (+${actualHealed} HP -> ${this.session.hp}/${maxHp} HP)`,
+    );
+  }
+
   private refreshInventoryUI(): void {
     this.inventoryItemContainer.removeAll(true);
     const items = this.inventorySystem.getAllItems();
 
     if (items.length === 0) {
+      this.selectedInventoryIndex = 0;
       const emptyText = this.add.text(10, 20, 'Satchel is empty.', {
         fontFamily: 'monospace',
         fontSize: '10px',
@@ -700,32 +824,49 @@ export class ExplorationScene extends Phaser.Scene {
       return;
     }
 
+    if (this.selectedInventoryIndex >= items.length) {
+      this.selectedInventoryIndex = items.length - 1;
+    }
+
     items.forEach((stack, idx) => {
       const def = this.inventorySystem.getItemDefinition(stack.itemId);
       if (!def) return;
 
+      const isSelected = idx === this.selectedInventoryIndex;
       const yOffset = idx * 46;
       const categoryColor =
         def.type === 'key_item' ? '#ffd700' : def.type === 'consumable' ? '#00e1ff' : '#99b0d1';
+
+      if (isSelected) {
+        const rowBg = this.add.graphics();
+        rowBg.fillStyle(0x16243d, 0.85);
+        rowBg.fillRect(-6, yOffset - 3, 412, 38);
+        rowBg.lineStyle(1, 0x00e1ff, 0.7);
+        rowBg.strokeRect(-6, yOffset - 3, 412, 38);
+        this.inventoryItemContainer.add(rowBg);
+      }
+
+      const prefix = isSelected ? '▶ ' : '  ';
+      const useHint = isSelected && def.type === 'consumable' ? '  [E/Space: Use]' : '';
 
       // Item category tag + name
       const headerText = this.add.text(
         0,
         yOffset,
-        `[${def.type.toUpperCase()}] ${def.name}  x${stack.quantity}`,
+        `${prefix}[${def.type.toUpperCase()}] ${def.name}  x${stack.quantity}${useHint}`,
         {
           fontFamily: 'monospace',
           fontSize: '10px',
-          color: categoryColor,
+          color: isSelected ? '#ffffff' : categoryColor,
           fontStyle: 'bold',
         },
       );
 
       // Item description
-      const descText = this.add.text(12, yOffset + 14, def.description, {
+      const descText = this.add.text(14, yOffset + 14, def.description, {
         fontFamily: 'monospace',
         fontSize: '9px',
-        color: '#b8c5de',
+        color: isSelected ? '#dce7f7' : '#b8c5de',
         wordWrap: { width: 390 },
       });
 
@@ -736,6 +877,11 @@ export class ExplorationScene extends Phaser.Scene {
   public toggleInventory(): void {
     this.isInventoryOpen = !this.isInventoryOpen;
     if (this.isInventoryOpen) {
+      const items = this.inventorySystem.getAllItems();
+      const firstConsumableIdx = items.findIndex(
+        (s) => this.inventorySystem.getItemDefinition(s.itemId)?.type === 'consumable',
+      );
+      this.selectedInventoryIndex = firstConsumableIdx >= 0 ? firstConsumableIdx : 0;
       this.refreshInventoryUI();
       this.inventoryContainer.setVisible(true);
       if (this.player) {

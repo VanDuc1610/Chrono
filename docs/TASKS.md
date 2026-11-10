@@ -26,11 +26,6 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Backlog (scheduled after current locks are released)
 
-### T-12 · Use consumables from the Satchel in exploration
-
-- **Assignee:** unassigned · **Status:** TODO
-- HP now persists between battles, but shards can only be used in combat. Add a "use" action in the Satchel overlay (heal via `items.json` `effects.healAmount`, consume 1). Show Lv / EXP / HP in the exploration HUD.
-
 ### T-13 · Stale quest HUD text
 
 - **Assignee:** unassigned · **Status:** TODO
@@ -40,6 +35,7 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Done
 
+- **T-12** Added consumable item selection (`Up`/`Down`) and usage (`E`/`Space`) in the Satchel overlay (heals via `items.json` `effects.healAmount`, clamps to `maxHp`, blocks when full/empty without consuming) plus `Lv X | EXP a/b | HP c/d` HUD in `ExplorationScene.ts` backed by `GameSession` — Antigravity
 - **T-07** One-time `prettier --write .` over the repo (69 files, formatting only — verified no wording/LaTeX changes in docs). From now on keep `npm run format:check` clean before committing — Claude
 - **T-09** `GameSession` (`src/state/`) now owns inventory, quests, flags, level/EXP/HP, playtime; New Game / Continue create or hydrate it. Speed initiative, probabilistic escape, item consumption, EXP + level-ups + loot tables, quest rewards (claimed once), all tuning in new `public/assets/data/player.json`. Fixes B1-B6, B8-B10, B13, B14 (supersedes T-06). `CombatSystem.setRandomSource()` added; `test-session-regression.js` switched to it — stubbing global `Math.random` crashed Phaser Text creation. Verified: 5/5 regression scenarios PASS (all 5 FAIL on pre-T-09 code), test-gameplay / test-combat / test-inventory-save PASS, 22 logic unit checks PASS — Claude
 - **T-11** Added `scripts/test-session-regression.js` CDP suite verifying B1, B2, B3, B4, and B6 with per-scenario `PASS`/`FAIL` output (confirmed all 5 reproduce pre-T-09) — Antigravity
