@@ -23,13 +23,8 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 - **Assignee:** Claude · **Status:** IN PROGRESS
 - **Locks:** none (read-only). Findings are written up as follow-up tasks; fixes are scheduled only after the files are free.
 
-### T-03 · Update agent roles in AGENTS.md
-- **Assignee:** Antigravity · **Status:** TODO
-- **Locks:** `AGENTS.md`
-- Replace the role lines in §1 so they match [CLAUDE.md](../CLAUDE.md) §1 (Claude = coordinator + implementer/reviewer; Antigravity = implementation agent) and link to this task board.
-
 ### T-04 · Procedural BGM (Milestone 6 audio)
-- **Assignee:** Antigravity · **Status:** TODO
+- **Assignee:** Antigravity · **Status:** IN PROGRESS
 - **Locks:** `src/systems/audio/SoundSystem.ts`, `src/scenes/ExplorationScene.ts`, `src/scenes/CombatScene.ts`, `src/scenes/MainMenuScene.ts`
 - Add Web Audio–synthesized looping music to `SoundSystem`: ambient ruin theme (exploration/menu) and battle theme (combat), with crossfade on scene change, respecting existing volume/mute. Stop all audio nodes on scene shutdown (no leaked oscillators on re-entry). No audio files, no copyrighted melodies.
 
@@ -51,6 +46,7 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Done
 
+- **T-03** Updated `AGENTS.md` §1 roles to match `CLAUDE.md` §1 (Claude Code = project coordinator + implementer/reviewer; Antigravity = implementation agent) and linked `docs/TASKS.md` while preserving all art/Peter rules — Antigravity
 - **T-01** ESLint 9 (flat config, typescript-eslint) + Prettier 3 (single quotes, width 100, LF); scripts `lint`, `lint:fix`, `format`, `format:check`. Fixed `validate-candidate.js`: rejects 16-bit/indexed/interlaced PNGs instead of mis-decoding them, and adds the missing horizontal frame-centering check — Claude
 
 - **T-00a** Git init, baseline commit, `.gitignore` / `.gitattributes`, push to origin — Claude (`ffb72c3`)

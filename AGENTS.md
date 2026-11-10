@@ -1,7 +1,8 @@
 # CHRONO – PROJECT AGENT RULES
 
 **Canonical Project Context:** [docs/PROJECT_CONTEXT.md](docs/PROJECT_CONTEXT.md)  
-**Claude Code Configuration:** [CLAUDE.md](CLAUDE.md)
+**Claude Code Configuration:** [CLAUDE.md](CLAUDE.md)  
+**Task Board:** [docs/TASKS.md](docs/TASKS.md)
 
 ---
 
@@ -10,10 +11,12 @@
 This project is **CHRONO – THE FRACTURED DIVINITY**.
 
 It is developed by two collaborating AI agents working within the same workspace:
-1. **Google Antigravity Agent:** Primary implementation agent (feature coding, asset pipeline management, scene composition, live test verification).
-2. **Claude Code Agent:** Default architecture, code quality, and security reviewer (read-only review by default).
+1. **Claude Code Agent:** Project **coordinator** (assigns tasks between agents, writes prompts for Antigravity, decides when to push to `origin/main`) and implementer / architecture & code reviewer.
+2. **Google Antigravity Agent:** Implementation agent (feature coding, asset pipeline management, scene composition, live test verification) working on tasks assigned in the task board.
 
 ### Operational Directives:
+- **Task Board:** [docs/TASKS.md](docs/TASKS.md) is the single list of who does what and which files are locked. Both agents read it before starting work.
+- **Art approval stays with the project owner.** The coordinator role never authorizes generating art or promoting assets.
 - Both agents reference `docs/PROJECT_CONTEXT.md` as the unified source of truth.
 - Both agents must not edit the same files concurrently.
 - Neither agent may print, commit, or leak private authentication tokens, API keys, or environment secrets.
