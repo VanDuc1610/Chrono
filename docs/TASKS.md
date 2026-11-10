@@ -29,18 +29,13 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 - **Assignee:** Claude · **Status:** TODO (after T-15)
 - Owner delegated these calls to Claude (2026-11-11): (a) integrate Peter v3 (owner approval by delegation); (b) strap direction follows the approved concept image — fix PETER_DESIGN text; (c) after "Silence the Fracture", talking to the Elder plays a closing dialogue, then a "Prologue Complete" screen returns to the title; (d) defeat = revive at the Altar of Moments with full HP, progress and items kept (GDD §9 option "checkpoint revival").
 
-### T-17 · Unit tests in repo + GitHub Actions CI
-
-- **Assignee:** Antigravity · **Status:** TODO
-- **Locks:** `tests/` (new), `.github/workflows/` (new), `package.json`, `package-lock.json`, `vitest.config.ts` (new)
-- See prompt from Claude (2026-11-11).
-
 ## Backlog (scheduled after current locks are released)
 
 ---
 
 ## Done
 
+- **T-17** Added Vitest (`vitest@3.2.4`) Node unit test suite (25 tests across `tests/game-session.test.ts` and `tests/combat-and-save.test.ts` using live JSON data), `.github/workflows/ci.yml` (Ubuntu, Node 24, `npm ci`, `typecheck`, `lint`, `format:check`, `test`, `build`), and updated `CLAUDE.md` / `README.md` — Antigravity (`e939159`)
 - **T-15** GDD alignment: prologue level cap 3 (`expThresholds` [0, 50, 120]; old saves above Lv3 clamp); MP added (`maxMp` 20, +4/level, refilled at each battle start); Temporal Strike costs 6 MP (3 casts per battle), short MP keeps the turn; MP bar + cost label in the combat HUD; fixed overlapping command labels. Verified: 3 logic suites (incl. 8 new MP/cap checks) and 4 CDP suites PASS — Claude
 - **T-13** Owner chose option 1: follow-up quest "Silence the Fracture" (defeat the Temporal Shade, +30 EXP + shard) in `quests.json`. Data-driven chaining: `followUpQuestId` on quests, `completeOnFlag` on objectives, applied by `GameSession.syncQuestProgress()` (idempotent; handles Shade beaten before the prologue ends and old saves). `QuestSystem.loadFromState` now restores only progress onto current definitions. Quest HUD text fully from data (stale "Awaiting Milestone 3" removed). Banner queue fixes banners being hidden early by the previous banner's timer. Verified: 9 logic checks, live-engine probe of the chain, 4 CDP suites PASS — Claude
 - **T-14** Art rules updated per owner (2026-11-11): new Pipeline B (code-authored pixel art) in AGENTS.md §5, `.agents/rules/chrono-art.md` §4, ASSET_POLICY, CLAUDE.md, PROJECT_CONTEXT §8. Still forbidden: AI image models/APIs, external references, integration without owner approval — Claude

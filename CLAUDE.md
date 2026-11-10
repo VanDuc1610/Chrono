@@ -70,6 +70,9 @@ npm run dev
 # Strict TypeScript typechecking
 npm run typecheck
 
+# Run Node unit tests (Vitest)
+npm test
+
 # Full production build (tsc + vite)
 npm run build
 

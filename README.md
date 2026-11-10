@@ -57,6 +57,14 @@ Run the TypeScript compiler without emitting files:
 npm run typecheck
 ```
 
+### Unit Tests
+
+Run the fast Node unit test suite (Vitest) covering `GameSession`, `CombatSystem`, `QuestSystem`, `InventorySystem`, and `SaveSystem`:
+
+```bash
+npm test
+```
+
 ### Production Build
 
 Compiles TypeScript and creates an optimized production bundle in `dist/`:
