@@ -9,11 +9,12 @@
 ## 1. Dual-Agent Roles & Boundaries
 
 This repository is actively developed by two AI agents:
-1. **Google Antigravity Agent:** Primary implementation agent (code writing, asset pipeline management, scene assembly, test execution).
-2. **Claude Code Agent:** Default architecture, code quality, and security reviewer.
+1. **Claude Code Agent:** Project **coordinator** (assigns tasks between agents, writes prompts for Antigravity, decides when to push to `origin/main`) and implementer / architecture & code reviewer. Role granted by the project owner on 2026-11-10.
+2. **Google Antigravity Agent:** Implementation agent (feature code, asset pipeline management, scene assembly, test execution) working on tasks assigned in the task board.
 
 ### Operational Protocols:
-- **Default Review Mode:** Claude Code defaults to **read-only architectural and code review** unless explicitly instructed by the user to modify or implement code.
+- **Task Board:** [docs/TASKS.md](docs/TASKS.md) is the single list of who does what and which files are locked. Both agents read it before starting work.
+- **Art approval stays with the project owner.** The coordinator role never authorizes generating art or promoting assets.
 - **Single-Writer Safety:** Both agents work on the same repository folder (`C:\Users\USER\.gemini\antigravity-ide\scratch\Chrono_workspace`). **Never edit the same file concurrently.** Always inspect file status before editing.
 - **Single Source of Truth:** Both agents must strictly align with `docs/PROJECT_CONTEXT.md`, `GDD.md`, `LORE.md`, `docs/art/ART_GUIDE.md`, and `docs/art/PETER_DESIGN.md`.
 - **Local Credentials:** Never output, copy, commit, or log credentials, API keys, auth tokens, or private environment variables.
