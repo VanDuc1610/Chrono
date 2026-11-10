@@ -9,7 +9,7 @@
 
 ## 1. Core Principle
 
-All original character, creature, environment, and item designs must originate strictly from written creative specifications established in the project's Game Design Document ([GDD.md](GDD.md)), Lore Bible ([LORE.md](LORE.md)), and Art Guide ([ART_GUIDE.md](ART_GUIDE.md)).
+All original character, creature, environment, and item designs must originate strictly from written creative specifications established in the project's Game Design Document ([GDD.md](GDD.md)), Lore Bible ([LORE.md](LORE.md)), and Art Guide ([ART_GUIDE.md](docs/art/ART_GUIDE.md)).
 
 No visual asset may enter production without a documented text-only specification.
 
@@ -63,7 +63,7 @@ flowchart TD
 ```
 
 ### Step 1: Read the Relevant Design Document
-Review [GDD.md](GDD.md), [LORE.md](LORE.md), and [ART_GUIDE.md](ART_GUIDE.md) to understand the entity's narrative role, faction, physical characteristics, silhouette requirements, and emotional tone.
+Review [GDD.md](GDD.md), [LORE.md](LORE.md), and [ART_GUIDE.md](docs/art/ART_GUIDE.md) to understand the entity's narrative role, faction, physical characteristics, silhouette requirements, and emotional tone.
 
 ### Step 2: Create a Text-Only Generation Specification
 Author an exhaustive, descriptive textual specification detailing:
@@ -78,7 +78,7 @@ Author an exhaustive, descriptive textual specification detailing:
 Produce the original visual concept utilizing only the text-only specification authored in Step 2.
 
 ### Step 4: Review Silhouette, Proportions, Colors, and Consistency
-Audit the output against the criteria in [ART_GUIDE.md](ART_GUIDE.md):
+Audit the output against the criteria in [ART_GUIDE.md](docs/art/ART_GUIDE.md):
 - **Silhouette Test:** Recognizable shape when blacked out against white.
 - **Proportions:** Bounding box adheres to dimensional limits (e.g., $32 \times 32\text{ px}$).
 - **Palette Integrity:** Colors conform to the Chronal Spectrum swatches without automatic gradients.

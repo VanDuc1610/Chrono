@@ -3,7 +3,7 @@
 
 **Ledger Version:** 1.0.0  
 **Governing Policy:** [ASSET_POLICY.md](ASSET_POLICY.md)  
-**Last Updated:** Phase 1 Initialization  
+**Last Updated:** 2026-11-10 (Peter runtime sprites reclassified as placeholders)  
 
 ---
 
@@ -14,7 +14,7 @@
 | `APPROVED_SOURCE` | 1 | Approved protagonist design source (`CHAR_PETER_001`) |
 | `CONCEPT_PENDING_APPROVAL` | 0 | Concept generated; awaiting formal review |
 | `SPEC_DRAFTED` | 2 | Text-only creative specifications prepared |
-| `PLACEHOLDER_TEMPORARY` | 7 | Procedural placeholder assets active in engine |
+| `PLACEHOLDER_TEMPORARY` | 9 | Procedural placeholder assets active in engine |
 
 ---
 
@@ -24,11 +24,14 @@
 - **Character Name:** Peter (Main Protagonist)
 - **Role:** Main Protagonist
 - **Design Document:** [`docs/art/PETER_DESIGN.md`](docs/art/PETER_DESIGN.md)
-- **Approved Concept Image:** [`art-source/characters/peter/concept/peter_concept_v1.png`](art-source/characters/peter/concept/peter_concept_v1.png)
+- **Approved Concept Images:**
+  - [`art-source/characters/peter/concept/peter_master_v1.png`](art-source/characters/peter/concept/peter_master_v1.png) (Master Concept)
+  - [`art-source/characters/peter/concept/peter_alt_pose_v1.png`](art-source/characters/peter/concept/peter_alt_pose_v1.png) (Alternate Pose)
+  - [`art-source/characters/peter/concept/peter_concept_v1.png`](art-source/characters/peter/concept/peter_concept_v1.png) (Turnaround Reference)
 - **Original Generation Prompt:** [`art-source/characters/peter/prompts/peter_concept_v1.txt`](art-source/characters/peter/prompts/peter_concept_v1.txt)
 - **Design Metadata:** [`art-source/characters/peter/metadata/peter_design.json`](art-source/characters/peter/metadata/peter_design.json)
-- **Runtime Sprite Assets:** `public/assets/characters/peter/` (`peter_idle.png`, `peter_walk.png`, `peter_run.png`, `peter_attack.png`)
-- **Status:** `APPROVED_SOURCE`
+- **Runtime Sprite Assets:** None approved yet. The sheets currently in `public/assets/characters/peter/` are procedural placeholders — see `CHAR_PETER_000_TMP` below.
+- **Status:** `APPROVED_SOURCE` (design source only — not runtime sprites)
 - **Non-Negotiable Identity Checklist:**
   - [x] Male adult appearance, approximately 26 years old
   - [x] Short, natural, compact curly dark-brown hair covering entire head
@@ -45,6 +48,24 @@
 ## 3. Active Placeholder Registry
 
 The following assets are currently integrated into the engine strictly as **temporary placeholders**. They are not approved final art:
+
+### `CHAR_PETER_000_TMP`
+- **Object Name:** Peter Runtime Spritesheets (Procedural Placeholder)
+- **File Path:** `public/assets/characters/peter/`
+- **Design Doc Ref:** [`docs/art/PETER_DESIGN.md`](docs/art/PETER_DESIGN.md)
+- **Status:** `PLACEHOLDER_TEMPORARY`
+- **Generator:** `scripts/generate-peter-sprites.js` (Procedural canvas-buffer synthesis — not AUTOMATIC1111 output, not user-approved art)
+- **Frame Size:** 32 × 32 px; rows = 4 directions (down, up, left, right)
+- **Sheets:**
+  | File | Frames / direction | Sheet size |
+  |---|---|---|
+  | `peter_idle.png` | 4 | 128 × 128 |
+  | `peter_walk.png` | 6 | 192 × 128 |
+  | `peter_run.png` | 6 | 192 × 128 |
+  | `peter_attack.png` | 6 | 192 × 128 |
+  | `peter_hurt.png` | 2 | 64 × 128 |
+  | `peter_temporal_sight.png` | 4 | 128 × 128 |
+- **Replacement Path:** Candidate sheets from AUTOMATIC1111 → `art-source/characters/peter/generated/candidates/` → validation → user approval → `generated/approved/` → replaces these files.
 
 ### `CHAR_VESSEL_000_TMP`
 - **Object Name:** The Vessel (Player Character Placeholder)

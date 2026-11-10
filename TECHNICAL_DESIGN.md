@@ -62,7 +62,7 @@ Chrono_workspace/
 ├── tsconfig.json
 ├── vite.config.ts
 ├── package.json
-├── ART_GUIDE.md
+├── docs/art/ART_GUIDE.md # Canonical art guide (root ART_GUIDE.md is a pointer)
 ├── GDD.md
 ├── LORE.md
 ├── TECHNICAL_DESIGN.md

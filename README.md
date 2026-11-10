@@ -101,7 +101,7 @@ The codebase enforces strict separation of concerns:
   - `effects/` – Particle textures and visual FX
   - `audio/` – BGM and SFX audio files
   - `data/` – Game data JSON files
-- For detailed dimensional rules, color palette ramps, and animation conventions, see [ART_GUIDE.md](ART_GUIDE.md).
+- For detailed dimensional rules, color palette ramps, and animation conventions, see [ART_GUIDE.md](docs/art/ART_GUIDE.md).
 
 ---
 
@@ -112,7 +112,7 @@ The codebase enforces strict separation of concerns:
 - [GDD.md](GDD.md) – Game Design Document (Pillars, mechanics, systems design)
 - [LORE.md](LORE.md) – Narrative foundations, canon rules, and world background
 - [TECHNICAL_DESIGN.md](TECHNICAL_DESIGN.md) – Architecture specifications, scene lifecycles, and class contracts
-- [ART_GUIDE.md](ART_GUIDE.md) – Pixel art specifications, dimensions, palette, and consistency rules
+- [ART_GUIDE.md](docs/art/ART_GUIDE.md) – Pixel art specifications, dimensions, palette, and consistency rules
 - [IMPLEMENTATION_ROADMAP.md](IMPLEMENTATION_ROADMAP.md) – Phased milestone delivery plan
 
 ---
