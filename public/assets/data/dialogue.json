@@ -52,7 +52,29 @@
       "lines": [
         "Examine the Altar of Moments at the center of the hall. It may resonate with your essence."
       ],
-      "responses": []
+      "responses": [
+        {
+          "text": "Tell me of the Six Authorities and this chamber.",
+          "nextDialogueId": "npc_elder_authorities_lore"
+        },
+        {
+          "text": "I will go.",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "npc_elder_authorities_lore": {
+      "id": "npc_elder_authorities_lore",
+      "speaker": "Elder Chronographer",
+      "lines": [
+        "Before the Great Fracture, our order kept vigil over the six dials of the Divine Chronometer.",
+        "Now the dials lie cracked, and something else walks the seams between them—an echo of the hours that were never meant to be.",
+        "Look to the steles and the broken pillars around this hall, traveler. Even defaced stone remembers more than a fractured mind."
+      ],
+      "responses": [],
+      "effects": {
+        "startQuest": "quest_prologue_remnants"
+      }
     },
     "altar_inspection": {
       "id": "altar_inspection",
@@ -71,6 +93,217 @@
         "A broken blade, a stopped watch... and still the hours bend around you, as if they remember you.",
         "The Sanctuary Spire lies beyond these walls. Whatever waits there has been waiting for you.",
         "Go, traveler. The divided hour will not mend itself."
+      ],
+      "responses": []
+    },
+    "stele_six_authorities": {
+      "id": "stele_six_authorities",
+      "speaker": "Weathered Basalt Stele",
+      "lines": [
+        "Six silver reliefs encircle a shattered dial, each carved with a tenet of the unbroken continuum:",
+        "ORIGIN kindles the first spark. CONTINUUM bears the river forward. CAUSALITY binds the seed to the harvest.",
+        "MEMORY preserves what has passed. POSSIBILITY branches into the unseen. FINALITY closes the last hour in quiet grace."
+      ],
+      "responses": [
+        {
+          "text": "Examine the gouged seventh mark at the bottom.",
+          "nextDialogueId": "stele_six_authorities_defaced"
+        },
+        {
+          "text": "Step back.",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["inspected_stele_authorities"],
+        "startQuest": "quest_prologue_remnants"
+      }
+    },
+    "stele_six_authorities_defaced": {
+      "id": "stele_six_authorities_defaced",
+      "speaker": "Weathered Basalt Stele",
+      "lines": [
+        "Beneath the six reliefs, someone has violently chiseled a hollow crescent into the stone—as if an erased seventh hour tried to carve its own name into the record.",
+        "Cold ash clings to the groove. Whatever hand left this mark did not belong to the remembered timeline."
+      ],
+      "responses": []
+    },
+    "pillar_memory_erasure": {
+      "id": "pillar_memory_erasure",
+      "speaker": "Defaced Sanctuary Pillar",
+      "lines": [
+        "Monastic chronicles once spiraled down this column, recording the names of travelers who passed through the Sanctuary before the Cataclysm.",
+        "Half the names have been scraped away—not by falling masonry, but by deliberate, methodical strokes that leave the stone humming with static."
+      ],
+      "responses": [
+        {
+          "text": "Hold your Stopped Watch near the erased names.",
+          "nextDialogueId": "pillar_watch_resonance"
+        },
+        {
+          "text": "Leave it be.",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["inspected_defaced_pillar"]
+      }
+    },
+    "pillar_watch_resonance": {
+      "id": "pillar_watch_resonance",
+      "speaker": "Peter's Thoughts",
+      "lines": [
+        "For a heartbeat, the frozen second hand of my watch trembles against the glass, pulled toward the blank stone.",
+        "A whisper echoes from the missing letters: 'What the continuum discards does not vanish. It waits in the dark between ticks.'"
+      ],
+      "responses": []
+    },
+    "notebook_loose_leaf": {
+      "id": "notebook_loose_leaf",
+      "speaker": "Torn Journal Leaf",
+      "lines": [
+        "A single vellum leaf lies caught against a cracked floor tile. The paper grain and ink match the Torn Notebook strapped to your hip.",
+        "The margin is filled with rapid temporal equations calculating the decay rate of a local rift—and a warning underlined twice:",
+        "'Do not trust the memory that returns first. When the hour divides, the anchor must hold even if the name is lost.'"
+      ],
+      "responses": [
+        {
+          "text": "Compare the handwriting with your notebook.",
+          "nextDialogueId": "notebook_handwriting_check"
+        },
+        {
+          "text": "Slip the page back between the leather covers.",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["inspected_torn_page"],
+        "startQuest": "quest_prologue_remnants"
+      }
+    },
+    "notebook_handwriting_check": {
+      "id": "notebook_handwriting_check",
+      "speaker": "Peter's Thoughts",
+      "lines": [
+        "The slant of the numerals is unmistakably mine. Yet I have no memory of standing in this hall to write them.",
+        "Was I charting this sanctuary before the Fracture—or is this a warning from a turn of the glass that has already been erased?"
+      ],
+      "responses": []
+    },
+    "astrolabe_inspection": {
+      "id": "astrolabe_inspection",
+      "speaker": "Frozen Brass Astrolabe",
+      "lines": [
+        "An intricate brass astrolabe hangs suspended half an inch above its stone plinth, locked in a pocket of stagnant time.",
+        "Drops of lamp oil float motionless in the air beside its jammed escapement wheel."
+      ],
+      "responses": [
+        {
+          "text": "Tap the jammed escapement with the Broken Blade's hilt.",
+          "nextDialogueId": "astrolabe_extricate_gear"
+        },
+        {
+          "text": "Step away without disturbing the stasis.",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["inspected_frozen_astrolabe"]
+      }
+    },
+    "astrolabe_extricate_gear": {
+      "id": "astrolabe_extricate_gear",
+      "speaker": "Frozen Brass Astrolabe",
+      "lines": [
+        "A cerulean spark leaps from the Broken Blade into the brass rings. The stasis shivers, and a single engraved cog drops free into your palm."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "ancient_gear",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "claimed_astrolabe_gear"
+      }
+    },
+    "reliquary_search": {
+      "id": "reliquary_search",
+      "speaker": "Cracked Stone Reliquary",
+      "lines": [
+        "A monastic reliquary box lined with lead and velvet, meant to insulate raw temporal minerals from the air.",
+        "Most of its contents have sublimated into white dust, but one cerulean crystal still pulses warmly at the bottom."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["inspected_north_reliquary"],
+        "grantItems": [
+          {
+            "itemId": "chrono_shard_minor",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "claimed_reliquary_shard"
+      }
+    },
+    "threshold_gates_inspection": {
+      "id": "threshold_gates_inspection",
+      "speaker": "The Threshold Gates",
+      "lines": [
+        "Massive twin arches of dark slate seal the ascending causeway toward the inner Sanctuary Spire.",
+        "Hairline fractures of violet-blue light trace the keystone. While the rift in this antechamber remains unstable, the counterweights refuse to budge."
+      ],
+      "responses": [
+        {
+          "text": "Listen at the seam of the stone.",
+          "nextDialogueId": "threshold_gates_echo"
+        },
+        {
+          "text": "Step back.",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["inspected_threshold_gates"]
+      }
+    },
+    "threshold_gates_echo": {
+      "id": "threshold_gates_echo",
+      "speaker": "The Threshold Gates",
+      "lines": [
+        "Beyond the sealed arch, a distant pendulum tolls—twelve beats, followed by a thirteenth hollow strike that rings backwards."
+      ],
+      "responses": []
+    },
+    "rift_echo_attune": {
+      "id": "rift_echo_attune",
+      "speaker": "Residual Rift Echo",
+      "lines": [
+        "A localized eddy of displaced time curls around the ruined brazier, replaying the final seconds before the Cataclysm.",
+        "Two spectral silhouettes flicker in the frost: an Elder Chronographer bolting the inner gate, and a tall shadow parrying a falling shard with an unbroken blade."
+      ],
+      "responses": [
+        {
+          "text": "Reach toward the memory with Temporal Sight.",
+          "nextDialogueId": "rift_echo_vision"
+        },
+        {
+          "text": "Break attunement.",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["inspected_rift_echo"],
+        "startQuest": "quest_prologue_remnants"
+      }
+    },
+    "rift_echo_vision": {
+      "id": "rift_echo_vision",
+      "speaker": "Residual Rift Echo",
+      "lines": [
+        "As your fingers near the frost, a third presence bleeds into the replay—a silhouette of ink-black static reaching out from an unwritten hour to sever the memory.",
+        "The vision snaps shut, leaving only the smell of ozone and cold iron."
       ],
       "responses": []
     }

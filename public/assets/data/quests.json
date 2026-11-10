@@ -40,6 +40,36 @@
         "experience": 30,
         "items": ["chrono_shard_minor"]
       }
+    },
+    {
+      "id": "quest_prologue_remnants",
+      "title": "Remnants of the Divided Hour",
+      "description": "Piece together the erased records and chronal remnants scattered across the Shattered Antechamber.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_read_stele",
+          "description": "Read the Stele of the Six Authorities",
+          "completed": false,
+          "completeOnFlag": "inspected_stele_authorities"
+        },
+        {
+          "id": "obj_recover_page",
+          "description": "Recover the loose leaf from your Torn Notebook",
+          "completed": false,
+          "completeOnFlag": "inspected_torn_page"
+        },
+        {
+          "id": "obj_attune_echo",
+          "description": "Attune to the Residual Rift Echo",
+          "completed": false,
+          "completeOnFlag": "inspected_rift_echo"
+        }
+      ],
+      "rewards": {
+        "experience": 40,
+        "items": ["ancient_gear"]
+      }
     }
   ]
 }
