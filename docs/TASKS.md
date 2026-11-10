@@ -26,7 +26,8 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ### T-16 · Prologue ending, defeat revival, Peter v3 integration
 
-- **Assignee:** Claude · **Status:** TODO (after T-15)
+- **Assignee:** Claude · **Status:** IN PROGRESS
+- **Locks:** `src/scenes/*`, `src/config.ts`, `public/assets/data/dialogue.json`, `public/assets/characters/peter/`, `art-source/characters/peter/`, `docs/art/*`, `docs/PROJECT_CONTEXT.md`, `ASSET_REGISTRY.md`
 - Owner delegated these calls to Claude (2026-11-11): (a) integrate Peter v3 (owner approval by delegation); (b) strap direction follows the approved concept image — fix PETER_DESIGN text; (c) after "Silence the Fracture", talking to the Elder plays a closing dialogue, then a "Prologue Complete" screen returns to the title; (d) defeat = revive at the Altar of Moments with full HP, progress and items kept (GDD §9 option "checkpoint revival").
 
 ## Backlog (scheduled after current locks are released)

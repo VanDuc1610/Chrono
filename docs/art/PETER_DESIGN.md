@@ -79,10 +79,10 @@ The concept images confirm:
    - Ornate silver pocket watch suspended by an aged silver chain from the waist belt / coat pocket.
    - Round white watch face with frozen filigree hands.
 3. **The Torn Notebook:**
-   - Thick, leather-bound journal mounted to the diagonal shoulder strap at the left hip.
+   - Thick, leather-bound journal mounted to the diagonal shoulder strap at the right hip.
    - Cream parchment page edges visible between weathered dark leather covers.
 4. **The Diagonal Shoulder Strap:**
-   - Weathered dark-brown oiled leather strap (`#453123`) crossing diagonally from the right shoulder down to the left hip.
+   - Weathered dark-brown oiled leather strap (`#453123`) crossing diagonally from the left shoulder down to the right hip (as drawn in `peter_master_v1.png`; clarified 2026-11-11 — the concept image is authoritative).
    - Secured with a square aged-silver buckle on the chest.
 
 ---

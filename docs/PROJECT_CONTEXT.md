@@ -200,13 +200,13 @@ Peter's hairstyle is a permanent character identity feature and **CANNOT** be mo
 ### 6.3 Costume & Equipment Features
 
 - **Coat:** Asymmetrical charcoal-blue travel duster (`#263248`) with high structured collar and 4 horizontal pairs of silver bar-and-toggle clasps. Restrained purple interior lining (`#281e36`) visible at cuffs and hem.
-- **Strap:** Diagonal dark-brown leather harness strap (`#453123`) from right shoulder to left hip with silver buckle.
+- **Strap:** Diagonal dark-brown leather harness strap (`#453123`) from left shoulder to right hip with silver buckle (per `peter_master_v1.png`).
 - **Tunic & Trousers:** Dark vertically ribbed tunic shirt (`#12151d`), dark traveler trousers (`#181c24`), and dark oiled leather field boots (`#2e2219`) with turnover cuffs.
 - **Face & Eyes:** Mature masculine facial proportions (~26 years old), light stubble along jawline, contemplative expression, muted gray-blue eyes (`#607d9c`).
 - **Signature Objects:**
   1. _Broken Blade:_ Ancient broadsword fractured midway, glowing with cerulean fracture energy (`#00c8ff`) along the jagged break.
   2. _Stopped Watch:_ Ornate antique silver timepiece suspended from waist belt by silver chain.
-  3. _Torn Notebook:_ Leather-bound field journal mounted to shoulder strap at left hip.
+  3. _Torn Notebook:_ Leather-bound field journal mounted to shoulder strap at right hip.
 
 ---
 

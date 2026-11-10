@@ -75,8 +75,8 @@ All candidate images placed in `art-source/characters/peter/generated/candidates
 - [ ] **Costume Details:**
   - High structured stand-up coat collar framing head.
   - Asymmetrical charcoal-blue coat with 4 pairs of horizontal silver toggle clasps.
-  - Diagonal leather shoulder strap running from right shoulder to left hip.
-  - Torn leather-bound notebook hanging on left hip.
+  - Diagonal leather shoulder strap running from left shoulder to right hip.
+  - Torn leather-bound notebook hanging on right hip.
   - Stopped watch suspended from waist belt.
   - Broken broadsword hilt in right hand with cerulean fracture glow (#00c8ff).
 - [ ] **Muted Gray-Blue Eyes:** Visible on all down-facing and profile frames.

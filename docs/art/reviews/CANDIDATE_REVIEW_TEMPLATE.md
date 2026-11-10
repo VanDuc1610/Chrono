@@ -29,8 +29,8 @@
 | **Hairstyle Lock**    | Short compact naturally curly dark-brown hair; springy coiled curls covering entire head, rounded silhouette |                  | [ ] PASS [ ] FAIL |
 | **Hair Prohibitions** | Zero straight hair, loose curls, bangs, fringe, undercut, shaved sides                                       |                  | [ ] PASS [ ] FAIL |
 | **Costume Coat**      | Charcoal-blue asymmetrical coat (#263248), 4 pairs silver toggle clasps                                      |                  | [ ] PASS [ ] FAIL |
-| **Shoulder Strap**    | Diagonal dark-brown leather harness from right shoulder to left hip                                          |                  | [ ] PASS [ ] FAIL |
-| **Torn Notebook**     | Mounted to strap at left hip with visible parchment edges                                                    |                  | [ ] PASS [ ] FAIL |
+| **Shoulder Strap**    | Diagonal dark-brown leather harness from left shoulder to right hip                                          |                  | [ ] PASS [ ] FAIL |
+| **Torn Notebook**     | Mounted to strap at right hip with visible parchment edges                                                   |                  | [ ] PASS [ ] FAIL |
 | **Broken Blade**      | Shattered steel hilt in right hand with cerulean glow (#00c8ff)                                              |                  | [ ] PASS [ ] FAIL |
 | **Stopped Watch**     | Pocket timepiece on silver chain suspended from waist                                                        |                  | [ ] PASS [ ] FAIL |
 | **Eyes & Face**       | Muted gray-blue eyes, mature masculine jawline                                                               |                  | [ ] PASS [ ] FAIL |
