@@ -234,7 +234,8 @@ const idlePng = createPng(128, 128, (x, y) => {
   const dirY = Math.floor(y / 32);
   return drawPeterFrame(x, y, dirY, 'idle', frameX);
 });
-fs.writeFileSync(path.join(dir, 'peter_idle.png'), idlePng);
+// peter_idle.png is approved art (CHAR_PETER_002) — never overwrite it with the placeholder.
+void idlePng;
 
 // 2. Walk Sheet (6 frames x 4 directions = 192x128)
 const walkPng = createPng(192, 128, (x, y) => {
@@ -242,7 +243,8 @@ const walkPng = createPng(192, 128, (x, y) => {
   const dirY = Math.floor(y / 32);
   return drawPeterFrame(x, y, dirY, 'walk', frameX);
 });
-fs.writeFileSync(path.join(dir, 'peter_walk.png'), walkPng);
+// peter_walk.png is approved art (CHAR_PETER_002) — never overwrite it with the placeholder.
+void walkPng;
 
 // 3. Run Sheet (6 frames x 4 directions = 192x128)
 const runPng = createPng(192, 128, (x, y) => {

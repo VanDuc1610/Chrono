@@ -10,13 +10,13 @@
 
 ## 1. Summary of Asset Status
 
-| Status Tier                | Count | Description                                           |
-| -------------------------- | ----- | ----------------------------------------------------- |
-| `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`) |
-| `INTEGRATED`               | 1     | Approved runtime sprites in engine (`CHAR_PETER_002`) |
-| `CONCEPT_PENDING_APPROVAL` | 3     | Concept generated; awaiting formal review             |
-| `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared            |
-| `PLACEHOLDER_TEMPORARY`    | 9     | Procedural placeholder assets active in engine        |
+| Status Tier                | Count | Description                                                                     |
+| -------------------------- | ----- | ------------------------------------------------------------------------------- |
+| `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`)                           |
+| `INTEGRATED`               | 3     | Approved art in engine (`CHAR_PETER_002`, `MOB_SHADE_001`, `ENV_SANCTUARY_001`) |
+| `CONCEPT_PENDING_APPROVAL` | 1     | Concept generated; awaiting formal review                                       |
+| `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared                                      |
+| `PLACEHOLDER_TEMPORARY`    | 7     | Procedural placeholder assets active in engine                                  |
 
 ---
 
@@ -61,31 +61,31 @@
 - **Approval:** 2026-11-11, project owner (delegated decision to Claude Code), recorded in `peter_design.json` → `runtimeSprites`
 - **Status:** `INTEGRATED`
 
-## 2c. Candidates Awaiting Owner Review (Pipeline B)
+## 2c. Pipeline B Art (integrated + awaiting review)
 
-### `MOB_SHADE_001_CAND` – Temporal Shade float loop (v2)
+### `MOB_SHADE_001` – Temporal Shade float loop (v2) — INTEGRATED
 
 - **Generator:** `scripts/author-shade-sprites.js` · **Spec:** [`docs/art/SHADE_DESIGN.md`](docs/art/SHADE_DESIGN.md) (written spec only; no concept image exists)
-- **File:** `art-source/enemies/temporal_shade/generated/candidates/shade_float_v2.png` (128 × 32, 4 frames, 6 FPS) · preview ×8 in `previews/`
+- **File:** `art-source/enemies/temporal_shade/generated/approved/shade_float_v2.png` → runtime `public/assets/enemies/shade_float.png` (texture `enemy_fracture`, anim `enemy_fracture_idle`) (128 × 32, 4 frames, 6 FPS) · preview ×8 in `previews/`
 - **Content:** hooded legless wraith, cerulean pinpoint eyes, jagged carmine/rose fracture core that pulses, elongated clawed arms, mist tail tapering 4 px above the ground (§4 levitation). 7 colours (§3 + one derived rim tone).
 - **Validation:** PASSED (ground-contact warning is expected — the Shade hovers).
-- **Status:** `CONCEPT_PENDING_APPROVAL` — replaces `MOB_SHADE_000_TMP` once approved.
+- **Status:** `INTEGRATED` — owner approved 2026-11-11. Replaced `MOB_SHADE_000_TMP` (placeholder file removed).
 
-### `NPC_ELDER_001_CAND` – Elder Chronographer idle (v2)
+### `NPC_ELDER_001_CAND` – Elder Chronographer idle (v3)
 
 - **Generator:** `scripts/author-elder-sprites.js` · **Spec:** [`docs/art/ELDER_DESIGN.md`](docs/art/ELDER_DESIGN.md) (written spec only)
-- **File:** `art-source/npcs/elder/generated/candidates/elder_idle_v2.png` (128 × 32, 4 frames facing down, 4 FPS) · preview ×8 in `previews/`
-- **Content:** midnight-indigo cowl, amber-gold eyes, snow-white hair and chest-length beard, gold-embroidered stole, slate cassock with leather girdle and bronze hem, scroll satchel at the right hip, astrolabe staff in the left hand with a pulsing amber shard; breathing on frames 3-4.
+- **File:** `art-source/npcs/elder/generated/candidates/elder_idle_v3.png` (128 × 32, 4 frames facing down, 4 FPS) · preview ×8 in `previews/`
+- **Content:** midnight-indigo cowl, amber-gold eyes, snow-white hair and chest-length beard, gold-embroidered stole, slate cassock with leather girdle and bronze hem, scroll satchel at the right hip, astrolabe staff in the left hand with a pulsing amber shard; breathing on frames 3-4. v3 = owner feedback on v2 "make him less heavy-set": shoulders, cassock and hem 2-3 px narrower per side.
 - **Validation:** PASSED.
 - **Status:** `CONCEPT_PENDING_APPROVAL` — replaces `NPC_ELDER_000_TMP` once approved.
 
-### `ENV_SANCTUARY_001_CAND` – Shattered Antechamber tileset (v2)
+### `ENV_SANCTUARY_001` – Shattered Antechamber tileset (v2) — INTEGRATED
 
 - **Generator:** `scripts/author-sanctuary-tileset.js` · **Spec:** [`docs/art/ENVIRONMENT_GUIDE.md`](docs/art/ENVIRONMENT_GUIDE.md)
-- **File:** `art-source/environment/sanctuary/generated/candidates/sanctuary_tileset_v2.png` (128 × 128, 4 × 4 tiles of 32 px) · previews: tileset ×4 and the real prologue map rendered with it (`sanctuary_room_v2.png`)
+- **File:** `art-source/environment/sanctuary/generated/approved/sanctuary_tileset_v2.png` → runtime `public/assets/tilesets/dungeon_tileset.png` (128 × 128, 4 × 4 tiles of 32 px) · previews: tileset ×4 and the real prologue map rendered with it (`sanctuary_room_v2.png`)
 - **Tile indices unchanged** (map-compatible): 0 void, 1 slate floor, 2 engraved chronal pavement, 3 wall top, 4 wall face (bronze cornice), 5 ruined pillar, 6 chrono crystal, 7 Altar of Moments; new 8 cracked fracture floor, 9 floor variant; 10-15 reserved. Props 5-7 have transparent backgrounds.
 - **Validation:** PASSED (corner/ground warnings are expected for opaque floor tiles).
-- **Status:** `CONCEPT_PENDING_APPROVAL` — replaces `ENV_SANCTUARY_000_TMP` once approved.
+- **Status:** `INTEGRATED` — owner approved 2026-11-11 ("rất tốt"). Map Ground layer now uses variant (GID 10) and fracture tiles (GID 9, clustered east of the Shade) via `scripts/generate-map.js`.
 
 ## 3. Active Placeholder Registry
 
@@ -131,28 +131,6 @@ The following assets are currently integrated into the engine strictly as **temp
 - **Footprint Hitbox:** 20 × 20 px, offset (6, 12)
 - **Generator:** `scripts/generate-assets.js`
 - **Notes:** Hooded scholar silhouette with golden gaze.
-
-### `MOB_SHADE_000_TMP`
-
-- **Object Name:** Temporal Shade (Enemy Placeholder)
-- **File Path:** `public/assets/enemies/enemy_fracture_placeholder.png`
-- **Asset Key:** `enemy_fracture`
-- **Design Doc Ref:** [GDD.md](GDD.md) v0.1.0, [LORE.md](LORE.md) v1.0.0
-- **Status:** `PLACEHOLDER_TEMPORARY`
-- **Dimensions:** 32 × 32 px
-- **Generator:** `scripts/generate-assets.js`
-- **Notes:** Dark violet apparition with pulsing crimson core.
-
-### `ENV_SANCTUARY_000_TMP`
-
-- **Object Name:** Shattered Antechamber Tileset (Placeholder Atlas)
-- **File Path:** `public/assets/tilesets/dungeon_tileset.png`
-- **Asset Key:** `dungeon_tileset`
-- **Design Doc Ref:** [GDD.md](GDD.md) v0.1.0
-- **Status:** `PLACEHOLDER_TEMPORARY`
-- **Dimensions:** 128 × 128 px (4 × 4 grid of 32 × 32 px tiles)
-- **Generator:** `scripts/generate-assets.js`
-- **Tile Contents:** Stone floor, engraved rune floor, wall top, wall face, broken pillar, chrono crystal, altar.
 
 ### `UI_FRAME_000_TMP`
 

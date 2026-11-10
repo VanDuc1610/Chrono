@@ -118,7 +118,11 @@ export class PreloadScene extends Phaser.Scene {
       { frameWidth: 32, frameHeight: 32 },
     );
     this.load.image('npc_elder', 'assets/npcs/npc_elder_placeholder.png');
-    this.load.image('enemy_fracture', 'assets/enemies/enemy_fracture_placeholder.png');
+    // Temporal Shade float loop (MOB_SHADE_001, approved Pipeline B art): 4 frames, 32x32.
+    this.load.spritesheet('enemy_fracture', 'assets/enemies/shade_float.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
 
     // 2. Environment & Tilesets
     this.load.image('dungeon_tileset', 'assets/tilesets/dungeon_tileset.png');
@@ -138,6 +142,16 @@ export class PreloadScene extends Phaser.Scene {
   }
 
   public create(): void {
+    // Global looping idle animations, keyed `<textureKey>_idle` (scenes play them if present).
+    if (!this.anims.exists('enemy_fracture_idle')) {
+      this.anims.create({
+        key: 'enemy_fracture_idle',
+        frames: this.anims.generateFrameNumbers('enemy_fracture', { start: 0, end: 3 }),
+        frameRate: 6, // SHADE_DESIGN §4: 4-frame float, 6 FPS
+        repeat: -1,
+      });
+    }
+
     // Brief transition delay for visual polish
     this.time.delayedCall(400, () => {
       this.scene.start('MainMenuScene');

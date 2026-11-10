@@ -316,6 +316,7 @@ export class ExplorationScene extends Phaser.Scene {
 
     this.shadeSprite = this.physics.add.sprite(16 * 32 + 16, 9 * 32 + 16, 'enemy_fracture');
     this.shadeSprite.setImmovable(true);
+    if (this.anims.exists('enemy_fracture_idle')) this.shadeSprite.play('enemy_fracture_idle');
     if (this.shadeSprite.body) {
       this.shadeSprite.body.setSize(22, 22);
     }

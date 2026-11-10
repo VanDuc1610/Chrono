@@ -207,7 +207,9 @@ const tilesetPng = createPng(128, 128, (x, y) => {
       return [20, 20, 30, 255];
   }
 });
-fs.writeFileSync('public/assets/tilesets/dungeon_tileset.png', tilesetPng);
+// dungeon_tileset.png is approved art (ENV_SANCTUARY_001, scripts/author-sanctuary-tileset.js) —
+// never overwrite it with this placeholder.
+void tilesetPng;
 
 // 5. UI Assets
 // Dialogue Frame (48x48 9-slice styled box)

@@ -123,8 +123,8 @@ flowchart TD
 
 - [ ] **Character Runtime Visuals:** Peter currently uses procedural $32 \times 32\text{ px}$ runtime spritesheets (`public/assets/characters/peter/`). Approved master concept art exists (`peter_master_v1.png`, `peter_alt_pose_v1.png`), but final AI sprite turnaround sheets are awaiting manual generation in AUTOMATIC1111.
 - [ ] **NPC Sprites:** Elder Chronographer uses a temporary visual placeholder (`npc_elder_placeholder.png`). Written specification is complete (`docs/art/ELDER_DESIGN.md`).
-- [ ] **Enemy Sprites:** Temporal Shade uses a temporary placeholder (`enemy_fracture_placeholder.png`).
-- [ ] **Tileset Art:** Ruined sanctuary uses procedural placeholder tileset (`dungeon_tileset.png`).
+- [x] **Enemy Sprites:** Temporal Shade uses approved code-authored art (`MOB_SHADE_001`, 4-frame float loop).
+- [x] **Tileset Art:** Shattered Antechamber uses the approved code-authored tileset (`ENV_SANCTUARY_001`), incl. floor variants and fracture tiles.
 
 ### 4.3 Proposed / Not Implemented in Prologue
 

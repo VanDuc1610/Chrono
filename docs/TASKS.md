@@ -25,11 +25,10 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 - **Locks:** `docs/narrative/PROLOGUE_CONTENT_PROPOSAL.md`
 - Wrote [narrative/PROLOGUE_CONTENT_PROPOSAL.md](narrative/PROLOGUE_CONTENT_PROPOSAL.md): 7 environmental interactables (`I-1..I-7`) mapped to exact tiles in the existing 24×18 Shattered Antechamber, draft branching dialogues, 1 optional side quest (`quest_prologue_remnants` using `completeOnFlag`/`rewards`), strict `CONFIRMED CANON` vs. `PROPOSED` separation (Peter's identity unwritten; Kuro foreshadowed only), and per-phase playtime estimates (11.5–16.0 min total).
 
-### T-18 / T-19 / T-20 · Shade, Elder and sanctuary tileset art (Pipeline B)
+### T-19 · Elder Chronographer sprite (Pipeline B)
 
-- **Assignee:** Claude · **Status:** BLOCKED — candidates ready, awaiting owner approval
-- **Locks:** `scripts/author-{shade,elder}-sprites.js`, `scripts/author-sanctuary-tileset.js`, `art-source/{enemies,npcs,environment}/`; on approval also `public/assets/{enemies,npcs,tilesets}/`, `public/assets/maps/prologue_map.json`, `src/scenes/PreloadScene.ts`, `src/scenes/ExplorationScene.ts`, `src/scenes/CombatScene.ts`
-- Candidates: see ASSET_REGISTRY §2c. Integration plan on approval: load Shade/Elder as 4-frame spritesheets with looping animations (exploration + combat), swap the tileset, and sprinkle floor variant / fracture tiles in the map Ground layer (fractures clustered around the Shade's rift to the east).
+- **Assignee:** Claude · **Status:** BLOCKED — v3 (slimmer, per owner feedback) awaiting owner approval
+- **Locks:** `scripts/author-elder-sprites.js`, `art-source/npcs/elder/`; on approval also `public/assets/npcs/`, `src/scenes/PreloadScene.ts`, `src/scenes/ExplorationScene.ts`
 
 ## Backlog (scheduled after current locks are released)
 
@@ -37,6 +36,7 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Done
 
+- **T-18 / T-20** Temporal Shade float loop and Shattered Antechamber tileset (Pipeline B) approved by owner and integrated: Shade is a 4-frame spritesheet with a global `enemy_fracture_idle` anim (exploration + combat); tileset swapped in place; `generate-map.js` adds floor variants and a fracture cluster east of the Shade. Placeholder generators no longer overwrite approved art. Verified: 25 unit tests, 4 CDP suites, in-game screenshots — Claude
 - **T-16** (owner delegated the calls to Claude) Peter v3 idle/walk approved and integrated (`CHAR_PETER_002`, approval recorded in `peter_design.json`); strap direction documented as left shoulder → right hip per the approved concept; Prologue ending: after "Silence the Fracture" the Elder gives a farewell (`npc_elder_farewell`), then `PrologueEndScene` (level, quests, playtime) returns to the title; defeat = checkpoint revival at the Altar of Moments with full HP, progress and items kept. Verified live (both flows) + 25 unit tests + 4 CDP suites — Claude
 - **T-05** Peter idle + walk sheets via Pipeline B (v2 → v3 after owner feedback), closed by the T-16 integration — Claude
 - **T-17** Added Vitest (`vitest@3.2.4`) Node unit test suite (25 tests across `tests/game-session.test.ts` and `tests/combat-and-save.test.ts` using live JSON data), `.github/workflows/ci.yml` (Ubuntu, Node 24, `npm ci`, `typecheck`, `lint`, `format:check`, `test`, `build`), and updated `CLAUDE.md` / `README.md` — Antigravity (`e939159`)

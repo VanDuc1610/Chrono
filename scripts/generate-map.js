@@ -13,6 +13,13 @@ const height = 18;
 // 6 = Pillar (tile 5)
 // 7 = Chrono Crystal (tile 6)
 // 8 = Altar (tile 7)
+// 9 = Cracked Fracture Floor (tile 8) — glowing fissures around the Shade's rift (east)
+// 10 = Slate Floor Variant (tile 9) — breaks up floor repetition
+
+/** Fracture tiles clustered just east of the Temporal Shade (tile 16,9): environmental storytelling. */
+const FRACTURE_TILES = new Set(['17,8', '18,9', '17,10', '19,10', '16,11']);
+/** Deterministic hash so the map is reproducible. */
+const hash = (x, y) => (((x * 73856093) ^ (y * 19349663)) >>> 0) % 100;
 
 const groundData = [];
 const wallData = [];
@@ -57,6 +64,12 @@ for (let y = 0; y < height; y++) {
       (x === 20 && y === 14)
     ) {
       wallTile = 7;
+    }
+
+    // Plain floor variety (only under open floor, never under walls/props)
+    if (groundTile === 2 && wallTile === 0) {
+      if (FRACTURE_TILES.has(`${x},${y}`)) groundTile = 9;
+      else if (hash(x, y) < 18) groundTile = 10;
     }
 
     groundData.push(groundTile);

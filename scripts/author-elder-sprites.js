@@ -24,7 +24,7 @@ import {
   writeFile,
 } from './pixel-art/pixel.js';
 
-const VERSION = 'v2';
+const VERSION = 'v3';
 const EMPTY = '.'.repeat(32);
 
 /** ELDER_DESIGN.md §2-4 swatches, plus outline and derived leather/oak tones. */
@@ -50,33 +50,33 @@ const PALETTE = {
 const baseHalf = [
   '................', // 0
   '................', // 1
-  '............OOOO', // 2  cowl
-  '..........OOiIII', // 3
-  '.........OiIIIII', // 4
-  '........OiIIOOOO', // 5  hood opening
-  '........OiIOwsss', // 6  silver hair at the temple, brow
-  '........OiIOwSes', // 7  amber eye
-  '........OiIOwsss', // 8
-  '........OiIOwwss', // 9  beard begins
-  '.......OiIIOwwww', // 10
-  '......OiIIIIOwww', // 11 mantle over stooped shoulders
-  '.....OiIBIIIIOWw', // 12 embroidered stole
-  '.....OiIBIIIgOWw', // 13
-  '.....OIIBIIIggOw', // 14 beard tip
-  '.....OIIBIIIgggg', // 15
-  '.....OIIBIIIgggg', // 16
-  '....OIIIBIIIllll', // 17 leather girdle
-  '....OIIIIIIIgggg', // 18
-  '....OIIIIIIIgggg', // 19
-  '....OIIIIIIIgggg', // 20
-  '....OIIIIIIIgggg', // 21
-  '....OiIIIIIIgggg', // 22
-  '....OIIIIIIIgggg', // 23
-  '....OIIIIIIIgggg', // 24
-  '....OIIIIIIIgggg', // 25
-  '....OIIIIIIIgggg', // 26
-  '....OBBBBBBBBBBB', // 27 bronze hem
-  '.....OOOOOOOOffO', // 28 slippers peek out
+  '.............OOO', // 2  cowl
+  '...........OOiII', // 3
+  '..........OiIIII', // 4
+  '.........OiIIOOO', // 5  hood opening
+  '.........OiIOwss', // 6  silver hair at the temple, brow
+  '.........OiIOwes', // 7  amber eye
+  '.........OiIOwss', // 8
+  '.........OiIOwws', // 9  beard begins
+  '........OiIIOwww', // 10
+  '.......OiIIIOwww', // 11 mantle over slightly stooped, narrow shoulders
+  '.......OiBIIIOWw', // 12 embroidered stole
+  '.......OiBIIgOWw', // 13
+  '.......OIBIIggOw', // 14 beard tip
+  '.......OIBIIgggg', // 15
+  '.......OIBIIgggg', // 16
+  '.......OIBIIllll', // 17 leather girdle
+  '.......OIIIIgggg', // 18
+  '.......OIIIIgggg', // 19
+  '.......OIIIIgggg', // 20
+  '.......OIIIIgggg', // 21
+  '......OiIIIIgggg', // 22 cassock falls straight, slight flare at the hem
+  '......OIIIIIgggg', // 23
+  '......OIIIIIgggg', // 24
+  '......OIIIIIgggg', // 25
+  '......OIIIIIgggg', // 26
+  '......OBBBBBBBBB', // 27 bronze hem
+  '.......OOOOOOffO', // 28 slippers peek out
   '.............OOO', // 29
   '................',
   '................',
@@ -88,21 +88,22 @@ const base = paint(mirrorHalf(baseHalf), [
   [15, 10, 'W'],
   [16, 10, 'W'],
   // right hand resting at the side (viewer-left) + scroll satchel at the right hip
-  [4, 16, 'O'],
-  [4, 15, 'O'],
-  [5, 16, 's'],
-  [5, 17, 'S'],
-  [6, 18, 'l'],
-  [7, 18, 'l'],
-  [6, 19, 'l'],
-  [7, 19, 'l'],
-  [5, 18, 'O'],
-  [5, 19, 'O'],
-  [6, 20, 'O'],
-  [7, 20, 'O'],
+  [5, 15, 'O'],
+  [5, 16, 'O'],
+  [6, 16, 's'],
+  [6, 17, 'S'],
+  [5, 17, 'O'],
+  [6, 18, 'O'],
+  [8, 18, 'l'],
+  [9, 18, 'l'],
+  [8, 19, 'l'],
+  [9, 19, 'l'],
+  [8, 20, 'O'],
+  [9, 20, 'O'],
   // left hand (viewer-right) gripping the astrolabe staff
-  [24, 16, 's'],
-  [25, 16, 'S'],
+  [25, 16, 's'],
+  [25, 15, 'O'],
+  [25, 17, 'O'],
   ...Array.from({ length: 21 }, (_, k) => [26, 8 + k, 'o']),
   ...Array.from({ length: 21 }, (_, k) => [27, 8 + k, 'O']),
   [26, 29, 'O'],
