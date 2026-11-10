@@ -202,6 +202,7 @@ export function validateCandidate(filePath) {
     { w: 128, h: 128, desc: 'Idle 4x4 Spritesheet' },
     { w: 192, h: 128, desc: 'Walk/Run/Attack 6x4 Spritesheet' },
     { w: 64, h: 128, desc: 'Hurt 2x4 Spritesheet' },
+    { w: 128, h: 32, desc: '4-frame single-row sheet (NPC / enemy idle)' },
     { w: 512, h: 512, desc: 'Raw SD Generation (Pending Downscale to 32x32)' },
     { w: 768, h: 512, desc: 'Raw SD Stride Sheet (Pending Downscale to 192x128)' },
   ];

@@ -19,7 +19,11 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-_No active tasks._
+### T-18 / T-19 / T-20 · Shade, Elder and sanctuary tileset art (Pipeline B)
+
+- **Assignee:** Claude · **Status:** BLOCKED — candidates ready, awaiting owner approval
+- **Locks:** `scripts/author-{shade,elder}-sprites.js`, `scripts/author-sanctuary-tileset.js`, `art-source/{enemies,npcs,environment}/`; on approval also `public/assets/{enemies,npcs,tilesets}/`, `public/assets/maps/prologue_map.json`, `src/scenes/PreloadScene.ts`, `src/scenes/ExplorationScene.ts`, `src/scenes/CombatScene.ts`
+- Candidates: see ASSET_REGISTRY §2c. Integration plan on approval: load Shade/Elder as 4-frame spritesheets with looping animations (exploration + combat), swap the tileset, and sprinkle floor variant / fracture tiles in the map Ground layer (fractures clustered around the Shade's rift to the east).
 
 ## Backlog (scheduled after current locks are released)
 
