@@ -22,6 +22,8 @@
 
 | Aspect | Specification | Confirmation Status |
 | :--- | :--- | :--- |
+| **Development Environment** | Google Antigravity IDE (Primary Workspace) | **CONFIRMED** |
+| **Remote Repository** | `https://github.com/VanDuc1610/Chrono.git` (branch `main`) | **CONFIRMED** |
 | **Genre** | 2D Single-Player Turn-Based RPG | **CONFIRMED** |
 | **Platform** | Modern Web Browsers (Desktop Chrome, Edge, Firefox, Safari) | **CONFIRMED** |
 | **Camera** | 2D Top-Down Orthographic (3/4 pitch, 640×360 native canvas scaled via `FIT`) | **CONFIRMED** |

@@ -19,14 +19,15 @@ It is developed by two collaborating AI agents working within the same workspace
 - Neither agent may print, commit, or leak private authentication tokens, API keys, or environment secrets.
 
 The game is a browser-based 2D single-player RPG built with:
-- Phaser 3 (v3.88.2)
-- TypeScript (v5.8.2)
-- Vite (v6.2.0)
-- Top-down camera (640x360 native canvas scaled via `FIT`)
-- 16-bit Pixel Art
-- Stylized character proportions
-- Dark Fantasy + Ethereal atmosphere
-- Turn-based combat system
+- **Primary IDE:** Google Antigravity IDE
+- **Remote Repository:** `https://github.com/VanDuc1610/Chrono.git` (branch `main`)
+- **Engine:** Phaser 3 (v3.88.2)
+- **Language:** TypeScript (v5.8.2)
+- **Build Tool:** Vite (v6.2.0)
+- **Camera:** Top-down camera (640x360 native canvas scaled via `FIT`)
+- **Visuals:** 16-bit Pixel Art
+- **Tone:** Dark Fantasy + Ethereal atmosphere
+- **Combat:** Turn-based combat system
 
 ---
 
