@@ -298,13 +298,13 @@ node scripts/validate-candidate.js <path-to-png>
 | **Combat Mechanics** | **CONFIRMED** | Turn-based loop, speed initiative, 5 commands, victory/defeat. |
 | **Audio Architecture** | **CONFIRMED** | Procedural Web Audio synthesis (`SoundSystem.ts`). No copyrighted audio. |
 | **Party System** | *PROPOSED (TBD)* | Solo protagonist in Prologue. Multi-party deferred to Chapter 1. |
-| **Git Repository** | **TECHNICAL DEBT** | Workspace is currently not a Git repository (no `.git` directory found). Initializing Git is required before team migration. |
+| **Git Repository** | **RESOLVED & CONNECTED** | Remote `origin` linked to `https://github.com/VanDuc1610/Chrono.git` on branch `main` at baseline `ffb72c3`. |
 
 ---
 
 ## 12. Next Recommended Implementation Tasks
 
-1. **Git Initialization:** Initialize local git repository, commit the verified vertical slice baseline, and configure branch protection.
+1. **Git Repository Remote:** Connected to `https://github.com/VanDuc1610/Chrono.git` on branch `main`. Stage and push new art guides and handoff docs.
 2. **VS Code Workspace Migration:** Complete the handoff checklist to open the exact project folder in Visual Studio Code.
 3. **Manual AI Sprite Generation for Peter:** User generates 4-direction idle and walk candidate sheets in AUTOMATIC1111 WebUI using `peter_idle.txt` and `peter_walk.txt`.
 4. **NPC Elder & Enemy Sprite Production:** User generates candidate art for Elder Chronographer and Temporal Shade using authored prompt templates.

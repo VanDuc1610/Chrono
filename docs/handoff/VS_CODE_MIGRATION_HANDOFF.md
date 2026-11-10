@@ -21,10 +21,12 @@ C:\Users\USER\.gemini\antigravity-ide\scratch\Chrono_workspace
 
 ## 2. Git Repository Status
 
-- **Git Repository Root:** Currently **NONE**. The directory `C:\Users\USER\.gemini\antigravity-ide\scratch\Chrono_workspace` does not contain a `.git` folder.
-- **Active Branch:** N/A (Untracked workspace directory).
-- **Working Tree Status:** All files currently exist as local disk files in the Antigravity scratch workspace.
-- **Recommended Action:** Upon opening in VS Code, execute `git init` and create an initial commit representing the validated Prologue Vertical Slice baseline.
+- **Git Repository Root:** `C:\Users\USER\.gemini\antigravity-ide\scratch\Chrono_workspace`
+- **Remote Origin:** `https://github.com/VanDuc1610/Chrono.git`
+- **Active Branch:** `main`
+- **Current Baseline Commit:** `ffb72c3` (*Baseline: Prologue vertical slice (Milestones 1-4)*)
+- **Remote Sync Status:** Verified and connected to `origin/main`.
+- **Working Tree:** Clean baseline; ready for continued development.
 
 ---
 
@@ -167,5 +169,7 @@ After opening `C:\Users\USER\.gemini\antigravity-ide\scratch\Chrono_workspace` i
 - [ ] Run `node scripts/test-combat.js` $\rightarrow$ turn-based combat test passes.
 - [ ] Run `node scripts/test-inventory-save.js` $\rightarrow$ inventory and save persistence test passes.
 - [ ] Verify both `AGENTS.md` and `CLAUDE.md` exist and reference `docs/PROJECT_CONTEXT.md`.
-- [ ] Execute `git init` and create initial commit.
+- [x] Git repository configured with remote `origin`: `https://github.com/VanDuc1610/Chrono.git`.
+- [x] Baseline commit `ffb72c3` synchronized with `origin/main`.
+- [ ] Open `C:\Users\USER\.gemini\antigravity-ide\scratch\Chrono_workspace` in Visual Studio Code.
 

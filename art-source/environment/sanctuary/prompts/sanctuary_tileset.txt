@@ -1,0 +1,46 @@
+# AUTOMATIC1111 PROMPT TEMPLATE: Shattered Sanctuary Tileset
+# Project: CHRONO – THE FRACTURED DIVINITY
+# Design Document: docs/art/ENVIRONMENT_GUIDE.md
+
+================================================================================
+GRID & TARGET FORMAT:
+================================================================================
+- Dimensions: 128x128 pixels total tileset sheet (4 columns x 4 rows)
+- Tile Size: 32x32 pixels per tile
+- Layout (16 Tiles):
+  - Row 0: Plain floor flagstones, cracked floor, engraved chronal floor, cyan fissure floor
+  - Row 1: Wall top cornice, wall center face, wall base edge, pillar base
+  - Row 2: Broken pillar mid, broken pillar cap, left wall corner, right wall corner
+  - Row 3: Altar top-left, altar top-right, altar bottom-left, altar bottom-right
+- Background: Solid dark or seamless tile textures (transparent for props)
+- Palette: Dark slate navy (#1b2234), weathered slate (#29344c), bronze trim (#8c6628), cyan rune glow (#00c8ff)
+
+================================================================================
+AUTOMATIC1111 WEBUI POSITIVE PROMPT:
+================================================================================
+masterpiece, best quality, 16-bit pixel art tileset, 4x4 grid of 32x32 pixel tiles, 
+top-down rpg dungeon sanctuary tileset, clean pixel clusters, crisp outline, 
+dark fantasy ancient mountain ruin, weathered dark blue-gray slate flagstone flooring, 
+engraved geometric clockwork celestial glyphs on stone tiles, 
+subtle luminous cerulean cyan cracks glowing with chronal energy (#00c8ff), 
+carved stone walls with aged bronze reliefs, ruined fluted stone pillars, 
+ornate monolithic altar of moments carved from dark obsidian stone, 
+authentic 16-bit pixel art aesthetic, seamless edges between floor tiles, sharp pixels, no blur
+
+================================================================================
+AUTOMATIC1111 WEBUI NEGATIVE PROMPT:
+================================================================================
+photorealistic, 3d render, blurry, smooth gradient, anti-aliased, 
+modern tiles, grass, trees, futuristic metal, sci-fi neon, 
+watermark, signature, text
+
+================================================================================
+RECOMMENDED AUTOMATIC1111 WEBUI SETTINGS:
+================================================================================
+- Checkpoint / Model: SD 1.5 Pixel Art model (or SDXL Pixel Art model downscaled)
+- Sampler: DPM++ 2M Karras or Euler a
+- Steps: 28
+- Total Canvas Width: 512 px (downscaled to 128 px) or native 128 px
+- Total Canvas Height: 512 px (downscaled to 128 px) or native 128 px
+- CFG Scale: 7.5
+

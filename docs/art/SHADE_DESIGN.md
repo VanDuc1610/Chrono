@@ -50,3 +50,4 @@ When the Cataclysm of the Divided Hour shattered continuous time, fragments of d
   - `attack`: 4-frame forward claw lunge with carmine distortion arc (10 FPS).
   - `hurt`: 2-frame hit recoil with white silhouette flash (10 FPS).
   - `dissolve`: 6-frame particle disintegration into temporal dust (8 FPS).
+

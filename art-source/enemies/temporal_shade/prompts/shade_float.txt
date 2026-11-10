@@ -1,0 +1,45 @@
+# AUTOMATIC1111 PROMPT TEMPLATE: Temporal Shade - Floating Animation Sheet
+# Project: CHRONO – THE FRACTURED DIVINITY
+# Design Document: docs/art/SHADE_DESIGN.md
+
+================================================================================
+GRID & TARGET FORMAT:
+================================================================================
+- Dimensions: 128x32 pixels total sprite sheet (4 frames horizontal, 1 row)
+- Frame Size: 32x32 pixels per frame
+- Frames: 4-frame vertical hovering bob cycle
+  - Frame 0: Neutral hover (hovering 4px above ground)
+  - Frame 1: Apex rise (+2px vertical displacement, chest core glows slightly brighter)
+  - Frame 2: Top hover peak, mist wisps trail downward
+  - Frame 3: Gentle settling descent back toward neutral
+- Background: 100% transparent (8-bit alpha channel)
+- Collision Hitbox: 22x22 pixels centered at (5, 5)
+- Animation Speed: 6 FPS loop
+
+================================================================================
+AUTOMATIC1111 WEBUI POSITIVE PROMPT:
+================================================================================
+masterpiece, best quality, 16-bit pixel art sprite sheet, 4 horizontal frames of 32x32 pixel sprites, 
+top-down rpg enemy floating idle cycle, clean pixel clusters, crisp outline, 
+ethereal temporal shade phantom hovering, dark obsidian-violet cowl, 
+pulsating crystalline carmine-rose core (#ff4d79), glowing cerulean pinpoint eyes, 
+subtle 4-frame floating bobbing cycle with undulating smoky trailing mist, 
+100% transparent background, alpha channel, sharp pixels, no anti-aliasing
+
+================================================================================
+AUTOMATIC1111 WEBUI NEGATIVE PROMPT:
+================================================================================
+photorealistic, 3d render, blurry, smooth gradient, anti-aliased, 
+legs, feet, human face, bright happy colors, modern clothing, 
+solid background, white background, black background
+
+================================================================================
+RECOMMENDED AUTOMATIC1111 WEBUI SETTINGS:
+================================================================================
+- Checkpoint / Model: SD 1.5 Pixel Art model (or SDXL Pixel Art model downscaled)
+- Sampler: DPM++ 2M Karras or Euler a
+- Steps: 28
+- Total Canvas Width: 512 px (or direct 128 px)
+- Total Canvas Height: 128 px (or direct 32 px)
+- CFG Scale: 7.5
+

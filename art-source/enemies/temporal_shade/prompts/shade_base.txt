@@ -1,0 +1,33 @@
+# AUTOMATIC1111 PROMPT TEMPLATE: Temporal Shade - Base Concept & Sprite
+# Project: CHRONO – THE FRACTURED DIVINITY
+# Design Document: docs/art/SHADE_DESIGN.md
+
+================================================================================
+AUTOMATIC1111 WEBUI POSITIVE PROMPT:
+================================================================================
+masterpiece, best quality, 16-bit pixel art, clean pixel clusters, crisp dark outline, 
+single creature sprite, top-down rpg enemy, front view, 
+levitating ethereal temporal shade apparition, floating incorporeal phantom, 
+shrouded dark obsidian-violet cowl and mantle, tapering into smoky mist without legs, 
+jagged crystalline carmine-rose glowing rift fracture in chest (#ff4d79, #b82352), 
+two glowing piercing cerulean pinpoint eyes (#00c8ff), 
+elongated sharp spectral claws with faint temporal distortion trailing particles, 
+dark fantasy cosmic horror aesthetic, centered in frame, 
+100% transparent background, alpha channel, sharp pixels, no blur, no anti-aliasing
+
+================================================================================
+AUTOMATIC1111 WEBUI NEGATIVE PROMPT:
+================================================================================
+photorealistic, 3d render, blurry, smooth gradient, anti-aliased, 
+human legs, human face, flesh, modern clothing, cute, cartoon, 
+solid background, white background, black background, watermark, signature
+
+================================================================================
+RECOMMENDED AUTOMATIC1111 WEBUI SETTINGS:
+================================================================================
+- Checkpoint / Model: SD 1.5 Pixel Art model (or SDXL Pixel Art model downscaled)
+- Sampler: DPM++ 2M Karras (or Euler a)
+- Steps: 28
+- Resolution: 512x512 px (downscaled to 32x32 px) or native 32x32 px
+- CFG Scale: 7.5
+
