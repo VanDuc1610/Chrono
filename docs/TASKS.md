@@ -19,14 +19,15 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-### T-09 · GameSession refactor — fixes P1 bugs B1-B4, B6, B8, B9, B13, B14
-- **Assignee:** Claude · **Status:** TODO (next)
-- **Will lock:** `src/scenes/*.ts`, new `src/state/GameSession.ts`, `docs/PROJECT_CONTEXT.md`
-- Move inventory / quests / flags / player HP / playtime out of scene instances into one `GameSession`; New Game creates a fresh session, Continue hydrates it from the save. Reset all transient combat state in `CombatScene.init()`. Item command consumes inventory; heal amount, player stats and loot come from JSON. Supersedes T-06. Details: [reviews/T-02_CODE_REVIEW.md](reviews/T-02_CODE_REVIEW.md).
+### T-11 · Session regression CDP test suite (B1, B2, B3, B4, B6)
+- **Assignee:** Antigravity · **Status:** IN PROGRESS
+- **Locks:** `scripts/test-session-regression.js`
+- Write `scripts/test-session-regression.js` testing B1 (Elder objective preserved after Escape), B2 (shard count does not inflate on Escape or repeated Continue), B3 (New Game after victory resets Shade & starter inventory), B4 (Key 1 Attack deals damage on 2nd encounter after Escape), and B6 (Key 3 Item with 0 shards does not heal), printing `PASS`/`FAIL` per scenario.
 
-### T-10 · Design decisions needed from owner
-- **Assignee:** Owner · **Status:** TODO
-- (a) Use the speed-based initiative queue (enemy may act first) and a probabilistic escape? (b) Is EXP / levelling in scope for the prologue, or should "+50 EXP" be removed from UI text?
+### T-09 · GameSession refactor + combat rules (B1-B6, B8-B10, B13, B14)
+- **Assignee:** Claude · **Status:** IN PROGRESS
+- **Locks:** `src/scenes/*.ts`, `src/state/*` (new), `src/systems/combat/*`, `src/systems/save/*`, `src/systems/inventory/*`, `src/systems/quest/*`, `src/entities/Player.ts`, `public/assets/data/*.json`, `docs/PROJECT_CONTEXT.md`
+- Move inventory / quests / flags / player stats / playtime out of scene instances into one `GameSession`; New Game creates a fresh session, Continue hydrates it from the save. Reset all transient combat state in `CombatScene.init()`. Item command consumes inventory; heal, player stats and loot come from JSON. Implements T-10 decisions. Supersedes T-06. Details: [reviews/T-02_CODE_REVIEW.md](reviews/T-02_CODE_REVIEW.md).
 
 ### T-05 · Peter idle + walk candidate sheets
 - **Assignee:** Owner (manual, AUTOMATIC1111) · **Status:** TODO
@@ -42,6 +43,7 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Done
 
+- **T-10** Owner decisions (2026-11-10): (a) combat uses speed-based initiative; Escape stays but can fail (probability from speed, a failed escape costs the turn); (b) EXP + levelling are in scope for the prologue — Owner
 - **T-08** Fixed B5 (defend stance never expired), B7 (ESC `JustDown` read twice → menu always false), B11 (save data validated + version-checked; CONTINUE only for loadable saves), B12 (`getLastFacing` on `IMovementSystem`, no down-cast) — Claude
 - **T-02** Code review of `src/`: 14 findings, 6 gameplay-breaking — [reviews/T-02_CODE_REVIEW.md](reviews/T-02_CODE_REVIEW.md) — Claude
 - **T-04** Added procedural Web Audio BGM loops (`ambient` ruin theme for `MainMenuScene`/`ExplorationScene`, `battle` theme for `CombatScene`) with crossfade, mute/volume sync, and full oscillator/node teardown on scene shutdown — Antigravity
