@@ -102,6 +102,16 @@ export class CombatSystem implements ICombatSystem {
   }
 
   /** Chance in [0, 1] that `source` escapes from `target`. */
+  /** True if the combatant can pay for Temporal Strike (combatants without an MP pool always can). */
+  public canUseSkill(combatantId: string): boolean {
+    const mp = this.getCombatant(combatantId)?.stats.mp;
+    return mp === undefined || mp >= this.tuning.skillMpCost;
+  }
+
+  public get skillMpCost(): number {
+    return this.tuning.skillMpCost;
+  }
+
   public getEscapeChance(source: ICombatant, target: ICombatant): number {
     const t = this.tuning;
     const chance =
@@ -148,7 +158,13 @@ export class CombatSystem implements ICombatSystem {
       }
 
       case 'skill': {
-        // Temporal Strike
+        // Temporal Strike — costs MP for combatants that have an MP pool.
+        if (!this.canUseSkill(source.id)) {
+          throw new Error(`Invalid combat action: ${source.name} lacks MP for Temporal Strike.`);
+        }
+        if (source.stats.mp !== undefined) {
+          source.stats.mp -= t.skillMpCost;
+        }
         const rawDamage = Math.floor(
           source.stats.attack * t.skillMultiplier - target.stats.defense,
         );

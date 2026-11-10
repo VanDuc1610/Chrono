@@ -5,20 +5,28 @@
     "spriteKey": "peter_idle",
     "baseStats": {
       "maxHp": 50,
+      "maxMp": 20,
       "attack": 14,
       "defense": 6,
       "speed": 12
     },
     "growthPerLevel": {
       "maxHp": 8,
+      "maxMp": 4,
       "attack": 2,
       "defense": 1,
       "speed": 1
     },
-    "expThresholds": [0, 50, 120, 220, 350],
+    "expThresholds": [0, 50, 120],
     "startingItems": [
-      { "itemId": "chrono_shard_minor", "quantity": 2 },
-      { "itemId": "relic_chronometer", "quantity": 1 }
+      {
+        "itemId": "chrono_shard_minor",
+        "quantity": 2
+      },
+      {
+        "itemId": "relic_chronometer",
+        "quantity": 1
+      }
     ],
     "combatItemId": "chrono_shard_minor"
   },
@@ -29,6 +37,7 @@
     "critMultiplier": 1.5,
     "skillMultiplier": 2.8,
     "skillMinDamage": 5,
+    "skillMpCost": 6,
     "defendDamageFactor": 0.5,
     "escapeBaseChance": 0.5,
     "escapeSpeedFactor": 0.05,

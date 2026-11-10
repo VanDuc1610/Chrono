@@ -102,6 +102,7 @@ export class GameSession {
     const n = level - 1;
     return {
       maxHp: baseStats.maxHp + growthPerLevel.maxHp * n,
+      maxMp: baseStats.maxMp + growthPerLevel.maxMp * n,
       attack: baseStats.attack + growthPerLevel.attack * n,
       defense: baseStats.defense + growthPerLevel.defense * n,
       speed: baseStats.speed + growthPerLevel.speed * n,
@@ -218,6 +219,7 @@ export class GameSession {
 
   // --------------------------------------------------------------- combat
 
+  /** Battle combatant for Peter. HP carries over between battles; MP refills at each battle start. */
   public createPlayerCombatant(): ICombatant {
     const def = this.db.player.player;
     const stats = this.getStats();
@@ -228,6 +230,8 @@ export class GameSession {
       stats: {
         hp: this.hp,
         maxHp: stats.maxHp,
+        mp: stats.maxMp,
+        maxMp: stats.maxMp,
         attack: stats.attack,
         defense: stats.defense,
         speed: stats.speed,

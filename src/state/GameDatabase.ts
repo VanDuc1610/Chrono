@@ -5,6 +5,8 @@ import { QuestDatabase } from '../systems/quest/QuestTypes';
 
 export interface PlayerStats {
   maxHp: number;
+  /** Chronal energy for Skills; refilled at the start of every battle. */
+  maxMp: number;
   attack: number;
   defense: number;
   speed: number;

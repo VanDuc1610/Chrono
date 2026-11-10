@@ -66,6 +66,8 @@ export interface CombatTuning {
   critMultiplier: number;
   skillMultiplier: number;
   skillMinDamage: number;
+  /** MP consumed by Temporal Strike (GDD §6: Skills consume MP / Chronal Energy). */
+  skillMpCost: number;
   defendDamageFactor: number;
   escapeBaseChance: number;
   escapeSpeedFactor: number;

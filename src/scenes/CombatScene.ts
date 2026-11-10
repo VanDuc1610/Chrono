@@ -31,6 +31,7 @@ export class CombatScene extends Phaser.Scene {
   // UI elements
   private playerHpBar!: Phaser.GameObjects.Graphics;
   private playerHpText!: Phaser.GameObjects.Text;
+  private playerMpText!: Phaser.GameObjects.Text;
   private enemyHpBar!: Phaser.GameObjects.Graphics;
   private enemyHpText!: Phaser.GameObjects.Text;
   private itemButton: Phaser.GameObjects.Text | null = null;
@@ -207,6 +208,11 @@ export class CombatScene extends Phaser.Scene {
     });
 
     this.playerHpBar = this.add.graphics();
+    this.playerMpText = this.add.text(125, 50, '', {
+      fontFamily: 'monospace',
+      fontSize: '9px',
+      color: '#93c5fd',
+    });
     this.playerHpText = this.add.text(125, 38, '', {
       fontFamily: 'monospace',
       fontSize: '9px',
@@ -256,14 +262,14 @@ export class CombatScene extends Phaser.Scene {
     });
 
     const commands: { text: string; type: PlayerCommand }[] = [
-      { text: '[1] ATTACK (Broken Blade)', type: 'attack' },
-      { text: '[2] SKILL (Temporal Strike)', type: 'skill' },
+      { text: '[1] ATTACK (Blade)', type: 'attack' },
+      { text: `[2] SKILL (${this.combatSystem.skillMpCost} MP)`, type: 'skill' },
       { text: this.itemButtonLabel(), type: 'item' },
       { text: '[4] DEFEND (Guard)', type: 'defend' },
       { text: '[5] ESCAPE', type: 'escape' },
     ];
 
-    const colWidth = 120;
+    const colWidth = 128;
     commands.forEach((cmd, idx) => {
       const col = idx < 3 ? 0 : 1;
       const row = idx < 3 ? idx : idx - 3;
@@ -332,6 +338,16 @@ export class CombatScene extends Phaser.Scene {
     this.playerHpBar.fillStyle(pPct > 0.3 ? 0x22c55e : 0xef4444, 1);
     this.playerHpBar.fillRect(30, 40, 90 * pPct, 8);
     this.playerHpText.setText(`${this.player.stats.hp}/${this.player.stats.maxHp} HP`);
+
+    // Player MP
+    const mp = this.player.stats.mp ?? 0;
+    const maxMp = this.player.stats.maxMp ?? 0;
+    const mPct = maxMp > 0 ? Math.max(0, mp / maxMp) : 0;
+    this.playerHpBar.fillStyle(0x1e293b, 1);
+    this.playerHpBar.fillRect(30, 53, 90, 5);
+    this.playerHpBar.fillStyle(0x3b82f6, 1);
+    this.playerHpBar.fillRect(30, 53, 90 * mPct, 5);
+    this.playerMpText.setText(`${mp}/${maxMp} MP`);
 
     // Enemy HP
     this.enemyHpBar.clear();
@@ -422,6 +438,14 @@ export class CombatScene extends Phaser.Scene {
       sourceId: this.player.id,
       targetId: type === 'item' ? this.player.id : this.enemy.id,
     };
+
+    // SKILL needs MP; when short, say so and keep the turn.
+    if (type === 'skill' && !this.combatSystem.canUseSkill(this.player.id)) {
+      this.setBattleLog(
+        `Not enough MP for Temporal Strike (needs ${this.combatSystem.skillMpCost} MP).`,
+      );
+      return;
+    }
 
     // ITEM consumes a shard from the satchel; with none left the turn is not spent (B6).
     if (type === 'item') {
