@@ -19,20 +19,20 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-### T-08 · Fix review findings in unlocked system files (B5, B7, B11, B12)
-- **Assignee:** Claude · **Status:** IN PROGRESS
-- **Locks:** `src/systems/combat/CombatSystem.ts`, `src/systems/input/KeyboardPlayerController.ts`, `src/systems/save/SaveSystem.ts`, `src/systems/movement/IMovementSystem.ts`, `src/systems/movement/TopDownMovementSystem.ts`, `src/entities/Player.ts`
-- See [reviews/T-02_CODE_REVIEW.md](reviews/T-02_CODE_REVIEW.md).
+### T-09 · GameSession refactor — fixes P1 bugs B1-B4, B6, B8, B9, B13, B14
+- **Assignee:** Claude · **Status:** TODO (next)
+- **Will lock:** `src/scenes/*.ts`, new `src/state/GameSession.ts`, `docs/PROJECT_CONTEXT.md`
+- Move inventory / quests / flags / player HP / playtime out of scene instances into one `GameSession`; New Game creates a fresh session, Continue hydrates it from the save. Reset all transient combat state in `CombatScene.init()`. Item command consumes inventory; heal amount, player stats and loot come from JSON. Supersedes T-06. Details: [reviews/T-02_CODE_REVIEW.md](reviews/T-02_CODE_REVIEW.md).
+
+### T-10 · Design decisions needed from owner
+- **Assignee:** Owner · **Status:** TODO
+- (a) Use the speed-based initiative queue (enemy may act first) and a probabilistic escape? (b) Is EXP / levelling in scope for the prologue, or should "+50 EXP" be removed from UI text?
 
 ### T-05 · Peter idle + walk candidate sheets
 - **Assignee:** Owner (manual, AUTOMATIC1111) · **Status:** TODO
 - Use `art-source/characters/peter/prompts/peter_idle.txt` and `peter_walk.txt`; drop PNGs into `art-source/characters/peter/generated/candidates/`. Claude validates afterwards.
 
 ## Backlog (scheduled after current locks are released)
-
-### T-06 · Remove `any` in CombatScene (lint errors)
-- **Assignee:** Claude · **Status:** TODO — blocked until T-04 releases `CombatScene.ts`
-- `npm run lint` reports 2× `no-explicit-any` at `src/scenes/CombatScene.ts:47-48`.
 
 ### T-07 · One-time repo-wide Prettier format
 - **Assignee:** Claude · **Status:** TODO — only when no task holds locks on `src/` (touches ~72 files)
@@ -42,6 +42,8 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Done
 
+- **T-08** Fixed B5 (defend stance never expired), B7 (ESC `JustDown` read twice → menu always false), B11 (save data validated + version-checked; CONTINUE only for loadable saves), B12 (`getLastFacing` on `IMovementSystem`, no down-cast) — Claude
+- **T-02** Code review of `src/`: 14 findings, 6 gameplay-breaking — [reviews/T-02_CODE_REVIEW.md](reviews/T-02_CODE_REVIEW.md) — Claude
 - **T-04** Added procedural Web Audio BGM loops (`ambient` ruin theme for `MainMenuScene`/`ExplorationScene`, `battle` theme for `CombatScene`) with crossfade, mute/volume sync, and full oscillator/node teardown on scene shutdown — Antigravity
 - **T-03** Updated `AGENTS.md` §1 roles to match `CLAUDE.md` §1 (Claude Code = project coordinator + implementer/reviewer; Antigravity = implementation agent) and linked `docs/TASKS.md` while preserving all art/Peter rules — Antigravity (`8368622`)
 - **T-01** ESLint 9 (flat config, typescript-eslint) + Prettier 3 (single quotes, width 100, LF); scripts `lint`, `lint:fix`, `format`, `format:check`. Fixed `validate-candidate.js`: rejects 16-bit/indexed/interlaced PNGs instead of mis-decoding them, and adds the missing horizontal frame-centering check — Claude

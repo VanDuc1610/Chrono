@@ -69,7 +69,7 @@ export class Player extends Entity {
     if (this.hasAnimations) {
       const isMoving = direction.x !== 0 || direction.y !== 0;
       const facing = this.movementSystem.getFacing(direction);
-      const activeFacing = facing !== 'idle' ? facing : (this.movementSystem as TopDownMovementSystem).getLastFacing();
+      const activeFacing = facing !== 'idle' ? facing : this.movementSystem.getLastFacing();
 
       if (isMoving) {
         const walkAnim = `peter_walk_${activeFacing}`;

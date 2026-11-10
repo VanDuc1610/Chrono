@@ -71,6 +71,10 @@ export class CombatSystem implements ICombatSystem {
       throw new Error(`Invalid combat action: source (${action.sourceId}) or target (${action.targetId}) not found.`);
     }
 
+    // A defensive stance lasts until the defender's next action. Clearing it here (rather than only
+    // in advanceTurn) keeps it correct even when the caller drives turns manually.
+    this.defendedCombatants.delete(source.id);
+
     let damage = 0;
     let healing = 0;
     let isCritical = false;

@@ -23,5 +23,10 @@ export interface IMovementSystem {
    * Facing direction of the entity.
    */
   getFacing(direction: MovementDirection): 'up' | 'down' | 'left' | 'right' | 'idle';
+
+  /**
+   * Last non-idle facing, used to pick the idle animation after the entity stops.
+   */
+  getLastFacing(): 'up' | 'down' | 'left' | 'right';
 }
 
