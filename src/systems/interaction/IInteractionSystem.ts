@@ -9,4 +9,3 @@ export interface IInteractionSystem {
   triggerInteraction(source: Phaser.GameObjects.GameObject): boolean;
   clear(): void;
 }
-

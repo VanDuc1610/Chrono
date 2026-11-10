@@ -1,9 +1,5 @@
 import { IDialogueSystem } from './IDialogueSystem';
-import {
-  DialogueDatabase,
-  DialogueNode,
-  DialogueResponseOption,
-} from './DialogueTypes';
+import { DialogueDatabase, DialogueNode, DialogueResponseOption } from './DialogueTypes';
 
 export type DialogueEventListener = (event: {
   type: 'node_changed' | 'line_changed' | 'choice_presented' | 'dialogue_ended';
@@ -153,4 +149,3 @@ export class DialogueSystem implements IDialogueSystem {
     });
   }
 }
-

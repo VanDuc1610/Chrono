@@ -11,10 +11,12 @@
 This project is **CHRONO – THE FRACTURED DIVINITY**.
 
 It is developed by two collaborating AI agents working within the same workspace:
+
 1. **Claude Code Agent:** Project **coordinator** (assigns tasks between agents, writes prompts for Antigravity, decides when to push to `origin/main`) and implementer / architecture & code reviewer.
 2. **Google Antigravity Agent:** Implementation agent (feature coding, asset pipeline management, scene composition, live test verification) working on tasks assigned in the task board.
 
 ### Operational Directives:
+
 - **Task Board:** [docs/TASKS.md](docs/TASKS.md) is the single list of who does what and which files are locked. Both agents read it before starting work.
 - **Art approval stays with the project owner.** The coordinator role never authorizes generating art or promoting assets.
 - Both agents reference `docs/PROJECT_CONTEXT.md` as the unified source of truth.
@@ -22,6 +24,7 @@ It is developed by two collaborating AI agents working within the same workspace
 - Neither agent may print, commit, or leak private authentication tokens, API keys, or environment secrets.
 
 The game is a browser-based 2D single-player RPG built with:
+
 - **Primary IDE:** Google Antigravity IDE
 - **Remote Repository:** `https://github.com/VanDuc1610/Chrono.git` (branch `main`)
 - **Engine:** Phaser 3 (v3.88.2)
@@ -50,12 +53,14 @@ All original game art must follow the project's approved design documents.
 Peter is the main protagonist.
 
 His approved design source is:
+
 - **Concept image:** `art-source/characters/peter/concept/peter_concept_v1.png`
 - **Design specification:** `docs/art/PETER_DESIGN.md`
 - **Original generation prompt:** `art-source/characters/peter/prompts/peter_concept_v1.txt`
 - **Design metadata:** `art-source/characters/peter/metadata/peter_design.json`
 
 Before creating, modifying, generating, or integrating any Peter visual asset:
+
 1. Read `docs/art/PETER_DESIGN.md`.
 2. Inspect the approved concept image.
 3. Understand Peter's silhouette, hairstyle, facial features, costume, colors, and accessories.
@@ -66,6 +71,7 @@ Before creating, modifying, generating, or integrating any Peter visual asset:
 ## 4. Non-Negotiable Peter Identity Lock
 
 Peter must retain:
+
 - **Appearance:** Male adult appearance, approximately 26 years old, mature masculine facial proportions.
 - **Hairstyle (Permanent Identity Lock):**
   - Short, compact, naturally curly men's haircut.
@@ -89,9 +95,9 @@ Peter must retain:
 - **Strap:** Diagonal brown leather shoulder strap across torso.
 - **Accents:** Aged silver details and restrained purple accents.
 - **Signature Objects:**
-  1. *Broken Blade* (Shattered chronal sword hilt and fragment glowing cerulean)
-  2. *Stopped Watch* (Ornate antique timepiece frozen at the moment of the Cataclysm on silver chain)
-  3. *Torn Notebook* (Leather-bound journal with handwritten temporal equations and observations)
+  1. _Broken Blade_ (Shattered chronal sword hilt and fragment glowing cerulean)
+  2. _Stopped Watch_ (Ornate antique timepiece frozen at the moment of the Cataclysm on silver chain)
+  3. _Torn Notebook_ (Leather-bound journal with handwritten temporal equations and observations)
 
 Hair silhouette, hairstyle, body proportions, and main costume colors must remain consistent across all assets. Never redesign these features without explicit user approval.
 
@@ -102,6 +108,7 @@ Hair silhouette, hairstyle, body proportions, and main costume colors must remai
 The image generation process is strictly manual using AUTOMATIC1111 Stable Diffusion WebUI.
 
 The Coding Agent must:
+
 - **Preserve approved character designs.**
 - **Use text-only generation prompts.**
 - **Never search for external character references.**
@@ -110,6 +117,7 @@ The Coding Agent must:
 - **Never promote candidate assets without user approval.**
 
 ### Operating Steps:
+
 1. Read the character design documents.
 2. Write a text-only generation prompt.
 3. Save the prompt to `art-source/characters/peter/prompts/`.
@@ -126,6 +134,7 @@ The Coding Agent must:
 ## 6. Asset Approval Stages
 
 Generated candidate images are not automatically approved. Use these standardized stages:
+
 1. **Candidate:** Newly generated image placed in `art-source/.../generated/candidates/`.
 2. **Under Review:** Inspected by Coding Agent against design documents and concept baselines.
 3. **Approved:** Formal user sign-off recorded in metadata and moved to `generated/approved/`.
@@ -141,12 +150,14 @@ Never overwrite the original concept or approved assets silently.
 The game uses a top-down camera.
 
 Peter's sprites must support 4 cardinal directions:
+
 - Down-facing (`down`)
 - Up-facing (`up`)
 - Left-facing (`left`)
 - Right-facing (`right`)
 
 Required consistent animation sets:
+
 - **Idle** (subtle breathing / alert stance)
 - **Walk** (deliberate, grounded stride)
 - **Run** (forward-leaning tactical sprint)
@@ -161,6 +172,7 @@ Maintain consistent sprite dimensions, frame alignment, scale, foot position, an
 ## 8. Agent Responsibilities
 
 The Coding Agent is responsible for:
+
 - Managing asset directories.
 - Documenting asset specifications and prompt files.
 - Validating image dimensions, format, and transparency.

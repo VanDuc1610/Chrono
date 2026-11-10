@@ -16,4 +16,3 @@ export interface DialogueDatabase {
 }
 
 export type DialogueCallback = (node: DialogueNode, currentLineIndex: number) => void;
-

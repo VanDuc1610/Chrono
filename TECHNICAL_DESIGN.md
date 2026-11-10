@@ -1,11 +1,12 @@
 # CHRONO – THE FRACTURED DIVINITY
+
 ## Technical Design Document (TDD)
 
 **Version:** 0.1.0-PROLOGUE  
 **Target Platform:** Modern Desktop & Mobile Browsers (WebGL 2.0 / Canvas fallback)  
 **Engine:** Phaser 3.88+  
 **Language:** TypeScript 5.8+ (Strict Mode)  
-**Bundler:** Vite 6+  
+**Bundler:** Vite 6+
 
 ---
 
@@ -95,39 +96,47 @@ flowchart TD
 ## 4. Modular Subsystem Specifications
 
 ### 4.1 Input & Controller Layer (`IPlayerController`)
+
 - **Interface:** `getMovementVector(): MovementDirection`, `getActions(): ControllerActions`, `setEnabled(flag: boolean)`.
 - **Implementation:** `KeyboardPlayerController` binds WASD and Arrow keys for directional intent, Space/E for interaction, and ESC for cancellation/menu.
 - **Decoupling:** Input intent returns a normalized vector `[-1..1, -1..1]` without directly modifying physics bodies.
 
 ### 4.2 Movement System (`IMovementSystem`)
+
 - **Interface:** `move(target, direction, speed)`, `stop(target)`, `getFacing(direction)`.
 - **Implementation:** `TopDownMovementSystem` normalizes diagonal movement vectors so diagonal velocity does not exceed straight-line speed ($\sqrt{dx^2 + dy^2}$). It manages 4-directional facing states (`up`, `down`, `left`, `right`).
 
 ### 4.3 Interaction System (`IInteractionSystem`)
+
 - **Interface:** `IInteractable` requires `id`, `interactPrompt`, `getInteractionPosition()`, `getInteractionRadius()`, `canInteract()`, `onInteract()`.
 - **Implementation:** `InteractionSystem` tracks all interactables in the current scene, performs spatial distance queries around the player, and returns closest candidates.
 
 ### 4.4 Dialogue System (`IDialogueSystem`)
+
 - **Data Model:** Directed dialogue graph stored in `assets/data/dialogue.json`.
 - **Interface:** `loadDatabase()`, `startDialogue(id)`, `advance()`, `selectOption(index)`, `getCurrentNode()`, `close()`.
 - **Scene Decoupling:** Dialogue data is retrieved via the Phaser Cache and consumed without hardcoding strings into scene files.
 
 ### 4.5 Quest System (`IQuestSystem`)
+
 - **Data Model:** Quests with stages (`inactive`, `started`, `completed`, `failed`), multi-objective trackers, and reward structures.
 - **Interface:** `startQuest(id)`, `completeObjective(questId, objId)`, `completeQuest(id)`, `getActiveQuests()`.
 - **Status:** Architecture interfaces and data models defined; state machine integration slated for Milestone 2.
 
 ### 4.6 Combat System (`ICombatSystem`)
+
 - **Data Model:** Turn-based state machine with `BattlePhase` (`intro`, `turn_select`, `turn_execute`, `victory`, `defeat`, `escaped`), initiative order derived from speed stats, action descriptors (`attack`, `skill`, `item`, `defend`).
 - **Interface:** `startBattle(party, enemies)`, `executeAction(action)`, `isBattleOver()`, `getState()`.
 - **Status:** Interfaces and types established; full Turn-Based Battle Scene slated for Milestone 3.
 
 ### 4.7 Inventory System (`IInventorySystem`)
+
 - **Data Model:** Items with categories (`consumable`, `equipment`, `material`, `key_item`), stack limits, and value fields.
 - **Interface:** `addItem()`, `removeItem()`, `hasItem()`, `getAllItems()`, `getItemDefinition()`.
 - **Status:** Interfaces and JSON schemas established.
 
 ### 4.8 Save System (`ISaveSystem`)
+
 - **Data Model:** Serialized player coordinates, active scene key, inventory snapshot, quest states, and game flags.
 - **Interface:** `save(slot, data)`, `load(slot)`, `delete(slot)`, `listSlots()`.
 - **Storage Provider:** Browser `localStorage` (default), extensible to IndexedDB or remote server.
@@ -145,6 +154,7 @@ flowchart TD
 ## 6. Verification & Automated Testing Harness
 
 Testing utilizes a headless Chromium/Edge instance over the Chrome DevTools Protocol (`scripts/test-gameplay.js`):
+
 1. **Scene Initialization:** Asserts that `PreloadScene` loads all assets and switches to `MainMenuScene`.
 2. **Transition Execution:** Dispatches menu input and confirms `ExplorationScene` mounts.
 3. **State Assertion:** Inspects player coordinates before and after simulated movement.
@@ -160,4 +170,3 @@ Testing utilizes a headless Chromium/Edge instance over the Chrome DevTools Prot
 - **Gamepad / Touch Controls:** On-screen virtual joystick and d-pad layout for mobile screens (TBD).
 - **Tilemap Streaming / Chunking:** Large world map chunk unloading for memory optimization in extended chapters (TBD).
 - **Save State Encryption:** Obfuscation of save payloads in `localStorage` to deter tampering (TBD).
-

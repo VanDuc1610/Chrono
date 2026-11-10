@@ -1,4 +1,5 @@
 # CHRONO – THE FRACTURED DIVINITY
+
 ## Original Asset Creation Policy & Pipeline Specification
 
 **Version:** 1.0.0  
@@ -31,6 +32,7 @@ To guarantee 100% original copyright integrity, the following actions are strict
 ## 3. Manual Stable Diffusion Pipeline & Approval Stages
 
 ### The Manual Workflow:
+
 1. **Coding Agent:** Reads character design documents ([PETER_DESIGN.md](docs/art/PETER_DESIGN.md), [ART_GUIDE.md](docs/art/ART_GUIDE.md)).
 2. **Coding Agent:** Writes a text-only generation prompt.
 3. **Coding Agent:** Saves the prompt to `art-source/characters/peter/prompts/`.
@@ -41,6 +43,7 @@ To guarantee 100% original copyright integrity, the following actions are strict
 8. **Coding Agent:** Prepares sprite atlases and integrates approved assets into `public/assets/characters/peter/` for Phaser.
 
 ### The 4 Approval Stages:
+
 - **Candidate:** Raw image placed in `generated/candidates/`.
 - **Under Review:** Being inspected for silhouette, curl definition, palette, and transparency.
 - **Approved:** Explicit user approval granted; archived in `generated/approved/`.
@@ -63,10 +66,13 @@ flowchart TD
 ```
 
 ### Step 1: Read the Relevant Design Document
+
 Review [GDD.md](GDD.md), [LORE.md](LORE.md), and [ART_GUIDE.md](docs/art/ART_GUIDE.md) to understand the entity's narrative role, faction, physical characteristics, silhouette requirements, and emotional tone.
 
 ### Step 2: Create a Text-Only Generation Specification
+
 Author an exhaustive, descriptive textual specification detailing:
+
 - Narrative identity and role.
 - Anatomy, head-to-body proportions (1:2.5 to 1:3 stylized realism).
 - Garments, materials, textures, and physical equipment.
@@ -75,29 +81,37 @@ Author an exhaustive, descriptive textual specification detailing:
 - Specific silhouette hallmarks (e.g., crystalline fracture core, visor shape).
 
 ### Step 3: Generate an Original Concept
+
 Produce the original visual concept utilizing only the text-only specification authored in Step 2.
 
 ### Step 4: Review Silhouette, Proportions, Colors, and Consistency
+
 Audit the output against the criteria in [ART_GUIDE.md](docs/art/ART_GUIDE.md):
+
 - **Silhouette Test:** Recognizable shape when blacked out against white.
 - **Proportions:** Bounding box adheres to dimensional limits (e.g., $32 \times 32\text{ px}$).
 - **Palette Integrity:** Colors conform to the Chronal Spectrum swatches without automatic gradients.
 - **No Stray Artifacts:** Pure pixel boundaries, no fuzzy anti-aliasing or stray half-opacity pixels.
 
 ### Step 5: Obtain Design Approval
+
 Present the concept alongside its text-only specification and review checklist. Record approval in [ASSET_REGISTRY.md](ASSET_REGISTRY.md).
 
 ### Step 6: Generate Sprite Sheets & Animation Variations
+
 Once the static concept is approved, derive the 4-directional poses and animation frames (idle, walk, action) adhering strictly to the approved design.
 
 ### Step 7: Technical Validation
+
 Verify that:
+
 - Background is 100% transparent (8-bit alpha channel).
 - Frame dimensions are uniform ($32 \times 32\text{ px}$ or designated grid).
 - Ground anchor point aligns with the physics bounding box ($18 \times 14\text{ px}$ foot collider).
 - Animation frame names follow `<category>_<entity_id>_<action>_<direction>_<frame>.png`.
 
 ### Step 8: Integrate into Phaser & Update Registry
+
 Add asset files into `public/assets/`, register them in `PreloadScene.ts`, and update their entry in [ASSET_REGISTRY.md](ASSET_REGISTRY.md) with full versioning metadata.
 
 ---
@@ -106,18 +120,18 @@ Add asset files into `public/assets/`, register them in `PreloadScene.ts`, and u
 
 Every asset in the project must be tracked in [ASSET_REGISTRY.md](ASSET_REGISTRY.md) with the following mandatory metadata schema:
 
-| Metadata Field | Description |
-|---|---|
-| **Asset ID** | Unique uppercase identifier (e.g. `CHAR_VESSEL_001`, `MOB_SHADE_001`) |
-| **Object Name** | Human-readable name of the character, environment piece, or object |
-| **Design Doc Version** | Version of [GDD.md](GDD.md) or [LORE.md](LORE.md) governing the design |
-| **Status** | `PLACEHOLDER_TEMPORARY` \| `SPEC_DRAFTED` \| `CONCEPT_PENDING_APPROVAL` \| `APPROVED` \| `DEPRECATED` |
-| **Text Specification** | Pointer or full text of the approved text-only prompt / creative brief |
-| **Model & Version** | Image generation model or procedural tool identifier (if applicable) |
-| **Seed / Params** | Random seed or generation parameters (if supported) |
-| **Output Dimensions** | Canvas size (e.g. $32 \times 32\text{ px}$) and frame count |
-| **Animation Frame Spec** | Breakdown of frames per direction and action loop |
-| **Approval Record** | Date, approver, and approval milestone |
+| Metadata Field           | Description                                                                                           |
+| ------------------------ | ----------------------------------------------------------------------------------------------------- |
+| **Asset ID**             | Unique uppercase identifier (e.g. `CHAR_VESSEL_001`, `MOB_SHADE_001`)                                 |
+| **Object Name**          | Human-readable name of the character, environment piece, or object                                    |
+| **Design Doc Version**   | Version of [GDD.md](GDD.md) or [LORE.md](LORE.md) governing the design                                |
+| **Status**               | `PLACEHOLDER_TEMPORARY` \| `SPEC_DRAFTED` \| `CONCEPT_PENDING_APPROVAL` \| `APPROVED` \| `DEPRECATED` |
+| **Text Specification**   | Pointer or full text of the approved text-only prompt / creative brief                                |
+| **Model & Version**      | Image generation model or procedural tool identifier (if applicable)                                  |
+| **Seed / Params**        | Random seed or generation parameters (if supported)                                                   |
+| **Output Dimensions**    | Canvas size (e.g. $32 \times 32\text{ px}$) and frame count                                           |
+| **Animation Frame Spec** | Breakdown of frames per direction and action loop                                                     |
+| **Approval Record**      | Date, approver, and approval milestone                                                                |
 
 ---
 
@@ -127,4 +141,3 @@ Every asset in the project must be tracked in [ASSET_REGISTRY.md](ASSET_REGISTRY
 2. File paths and asset keys for placeholders must clearly indicate temporary status (e.g., `player_placeholder.png`, `silence_placeholder.wav`) or be explicitly logged in the registry.
 3. Placeholder assets must never be mistaken for approved final art.
 4. The Coding Agent must never invent an unauthorized replacement for an approved design without an updated text specification and explicit user approval.
-

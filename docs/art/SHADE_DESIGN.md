@@ -4,7 +4,7 @@
 **Category:** Hostile Temporal Anomaly (Prologue Overworld Encounter & Combat Boss)  
 **Document Version:** 1.0.0  
 **Project:** CHRONO – THE FRACTURED DIVINITY  
-**Governing Rules:** [AGENTS.md](../../AGENTS.md) and [.agents/rules/chrono-art.md](../../.agents/rules/chrono-art.md)  
+**Governing Rules:** [AGENTS.md](../../AGENTS.md) and [.agents/rules/chrono-art.md](../../.agents/rules/chrono-art.md)
 
 ---
 
@@ -28,14 +28,14 @@ When the Cataclysm of the Divided Hour shattered continuous time, fragments of d
 
 ## 3. Official Color Palette
 
-| Swatch | Hex Code | Application |
-|---|---|---|
-| **Abyssal Void** | `#0e0614` | Deep shadows of spectral cowl and trailing mist |
-| **Null Violet** | `#260b1e` | Mid-tones of floating mantle |
-| **Abyssal Claret** | `#6b153e` | Outer glow of fracture core |
-| **Fracture Carmine** | `#b82352` | Inner core body, claw tips |
-| **Temporal Bleed Rose** | `#ff4d79` | Apex core highlight and attack flashes |
-| **Cerulean Eye Spark** | `#00c8ff` | Pinpoint eyes and unstable energy rifts |
+| Swatch                  | Hex Code  | Application                                     |
+| ----------------------- | --------- | ----------------------------------------------- |
+| **Abyssal Void**        | `#0e0614` | Deep shadows of spectral cowl and trailing mist |
+| **Null Violet**         | `#260b1e` | Mid-tones of floating mantle                    |
+| **Abyssal Claret**      | `#6b153e` | Outer glow of fracture core                     |
+| **Fracture Carmine**    | `#b82352` | Inner core body, claw tips                      |
+| **Temporal Bleed Rose** | `#ff4d79` | Apex core highlight and attack flashes          |
+| **Cerulean Eye Spark**  | `#00c8ff` | Pinpoint eyes and unstable energy rifts         |
 
 ---
 
@@ -50,4 +50,3 @@ When the Cataclysm of the Divided Hour shattered continuous time, fragments of d
   - `attack`: 4-frame forward claw lunge with carmine distortion arc (10 FPS).
   - `hurt`: 2-frame hit recoil with white silhouette flash (10 FPS).
   - `dissolve`: 6-frame particle disintegration into temporal dust (8 FPS).
-

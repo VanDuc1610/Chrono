@@ -14,6 +14,7 @@ A browser-based single-player 2D retro RPG initialized with **Phaser 3**, **Type
 **CHRONO – The Fractured Divinity** is a top-down single-player RPG set in an ethereal cosmic fantasy world where the celestial mechanisms of time have shattered.
 
 ### Scope: Prologue Vertical Slice
+
 - **Perspective:** Top-down 2D orthographic
 - **Art Direction:** Original Pixel Art (using compliant procedural placeholders during initial development)
 - **Combat:** Turn-based tactical system (architecture defined; scene integration in Milestone 3)
@@ -26,42 +27,56 @@ A browser-based single-player 2D retro RPG initialized with **Phaser 3**, **Type
 ## 2. Quick Start Guide
 
 ### Prerequisites
+
 - **Node.js:** v18.0.0 or higher (v24+ tested)
 - **npm:** v9.0.0 or higher
 
 ### Installation
+
 Clone or navigate to the project directory and install dependencies:
+
 ```bash
 npm install
 ```
 
 ### Running the Development Server
+
 Starts the Vite development server with Hot Module Replacement (HMR):
+
 ```bash
 npm run dev
 ```
+
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Type Checking
+
 Run the TypeScript compiler without emitting files:
+
 ```bash
 npm run typecheck
 ```
 
 ### Production Build
+
 Compiles TypeScript and creates an optimized production bundle in `dist/`:
+
 ```bash
 npm run build
 ```
 
 ### Preview Production Build
+
 Previews the production build locally:
+
 ```bash
 npm run preview
 ```
 
 ### Automated Live Gameplay Tests
+
 Executes the headless browser integration test suite against the live Phaser engine via Chrome DevTools Protocol:
+
 ```bash
 node scripts/test-gameplay.js
 ```
@@ -70,18 +85,19 @@ node scripts/test-gameplay.js
 
 ## 3. Controls
 
-| Key | Action |
-|---|---|
-| **W / A / S / D** or **Arrow Keys** | 4-Directional Movement (Normalized velocity) |
-| **E** or **Space** | Interact with NPCs, Altars, and advance dialogue |
-| **ESC** | Close active dialogue / Return to Main Menu |
-| **Enter / Mouse Click** | Select menu items in Main Menu |
+| Key                                 | Action                                           |
+| ----------------------------------- | ------------------------------------------------ |
+| **W / A / S / D** or **Arrow Keys** | 4-Directional Movement (Normalized velocity)     |
+| **E** or **Space**                  | Interact with NPCs, Altars, and advance dialogue |
+| **ESC**                             | Close active dialogue / Return to Main Menu      |
+| **Enter / Mouse Click**             | Select menu items in Main Menu                   |
 
 ---
 
 ## 4. Architecture & Design Principles
 
 The codebase enforces strict separation of concerns:
+
 - **No Hardcoded Content:** Dialogue lines, quest objectives, enemy stats, and item attributes are decoupled from scene logic and stored in external JSON schemas in `public/assets/data/`.
 - **Interface-Driven Systems:** Core systems implement strict TypeScript interfaces (`IPlayerController`, `IMovementSystem`, `IInteractionSystem`, `IDialogueSystem`, `IQuestSystem`, `ICombatSystem`, `IInventorySystem`, `ISaveSystem`).
 - **Normalized Top-Down Movement:** `TopDownMovementSystem` ensures consistent diagonal travel speed without speed boost anomalies.
@@ -121,4 +137,3 @@ The codebase enforces strict separation of concerns:
 
 - **Engine:** Phaser 3 (MIT License)
 - **Project Code & Design:** Original work for CHRONO – The Fractured Divinity. All assets created in accordance with text-only specifications without copyrighted references.
-

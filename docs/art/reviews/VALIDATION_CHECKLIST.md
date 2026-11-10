@@ -9,6 +9,7 @@ All candidate images placed in `art-source/characters/peter/generated/candidates
 ---
 
 ## 1. File Format Audit
+
 - [ ] **Lossless PNG:** File must be `.png` (Portable Network Graphics). JPEGs, WebPs, or BMPs are strictly rejected.
 - [ ] **Color Depth:** 32-bit RGBA (8 bits per channel: Red, Green, Blue, Alpha).
 - [ ] **Scanline Compression:** Standard non-interlaced scanlines.
@@ -17,6 +18,7 @@ All candidate images placed in `art-source/characters/peter/generated/candidates
 ---
 
 ## 2. Image Dimensions & Grid Layout Audit
+
 - [ ] **Frame Dimensions:** Exact integer multiple of $32 \times 32\text{ px}$ per animation cell.
   - Idle sheet: Exactly $128 \times 128\text{ px}$ ($4 \text{ columns} \times 4 \text{ rows}$).
   - Walk sheet: Exactly $192 \times 128\text{ px}$ ($6 \text{ columns} \times 4 \text{ rows}$).
@@ -31,6 +33,7 @@ All candidate images placed in `art-source/characters/peter/generated/candidates
 ---
 
 ## 3. Alpha Channel & Transparency Audit
+
 - [ ] **100% Transparent Background:** Background pixels outside character silhouette must have $A = 0$.
 - [ ] **Zero Halo / Fringe:** No bright halos, white outline artifacts, or background color matte bleed.
 - [ ] **Binary Alpha Edge:** Sprite perimeter pixels must have full opacity ($A = 255$ or intentional $1$-pixel anti-bleed alpha). No soft feathered transparency edges.
@@ -39,6 +42,7 @@ All candidate images placed in `art-source/characters/peter/generated/candidates
 ---
 
 ## 4. Sprite Alignment & Ground-Plane Anchor Audit
+
 - [ ] **Horizontal Centering:** Character center of mass must align to $X \approx 15\dots 16$ within each $32 \times 32\text{ px}$ cell.
 - [ ] **Vertical Anchor (Ground Plane):** Feet/boots must rest firmly on row $Y = 29\dots 30$.
 - [ ] **Collision Box Compliance:** The $18 \times 14\text{ px}$ foot collider at $(7, 16)$ must accurately encircle the contact area of the character's feet.
@@ -47,6 +51,7 @@ All candidate images placed in `art-source/characters/peter/generated/candidates
 ---
 
 ## 5. Pixel Sharpness & Art Style Audit
+
 - [ ] **Native 16-Bit Pixel Clusters:** Character features must be built from deliberate $1 \times 1$ or $2 \times 2$ pixel clusters.
 - [ ] **No AI Soft Blur:** Reject any outputs with Gaussian smoothing, airbrush gradient ramps, or procedural vector interpolation.
 - [ ] **Crisp Dark Outlines:** Silhouette edges must be defined by dark outline pixels (`#0e121e` or `#161e2e`).
@@ -59,6 +64,7 @@ All candidate images placed in `art-source/characters/peter/generated/candidates
 ---
 
 ## 6. Character Consistency & Silhouette Audit
+
 - [ ] **Peter Hairstyle (PERMANENT IDENTITY LOCK):**
   - [ ] Short, compact, naturally curly men's haircut.
   - [ ] Clearly distinguishable, tightly coiled, springy curls.
@@ -78,6 +84,7 @@ All candidate images placed in `art-source/characters/peter/generated/candidates
 ---
 
 ## 7. Camera Direction & Perspective Audit
+
 - [ ] **Top-Down Perspective:** Standard 3/4 top-down orthographic camera pitch ($45^\circ\dots 60^\circ$).
 - [ ] **Correct Directional Angles:**
   - Down frames face directly toward camera with chest details and eye contact.
@@ -89,6 +96,7 @@ All candidate images placed in `art-source/characters/peter/generated/candidates
 ---
 
 ## 8. Animation Frame Consistency Audit
+
 - [ ] **Loop Continuity:** The transition from the last frame back to Frame 0 must be seamless and without stutter.
 - [ ] **Volume Preservation:** Head, torso, coat, and hair volume must not balloon or shrink during motion.
 - [ ] **Secondary Motion:** Coat hem and torn notebook bounce in sync with stride cadence.
@@ -100,6 +108,7 @@ All candidate images placed in `art-source/characters/peter/generated/candidates
 ---
 
 ## Approval Workflow:
+
 1. Candidate image saved into `art-source/characters/peter/generated/candidates/`.
 2. Pipeline Engineer completes `docs/art/reviews/<candidate_name>_review.md`.
 3. If all 8 criteria pass, submit to Project Owner for formal sign-off.
@@ -107,4 +116,3 @@ All candidate images placed in `art-source/characters/peter/generated/candidates
    - Move master file to `art-source/characters/peter/generated/approved/`.
    - Update `art-source/characters/peter/metadata/peter_design.json`.
    - Deploy formatted spritesheet to `public/assets/characters/peter/`.
-

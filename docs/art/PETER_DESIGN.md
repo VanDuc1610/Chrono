@@ -5,13 +5,14 @@
 **Approved Design Version:** 1.0.0  
 **Canon Baseline Source:** `art-source/characters/peter/concept/peter_concept_v1.png`  
 **Governing Rules:** [AGENTS.md](../../AGENTS.md)  
-**Project:** CHRONO – THE FRACTURED DIVINITY  
+**Project:** CHRONO – THE FRACTURED DIVINITY
 
 ---
 
 ## 1. Approved Concept Image Verification
 
 The canonical baseline visual reference for Peter is established exclusively by:
+
 - **Master Concept Art (Front Standing):** `art-source/characters/peter/concept/peter_master_v1.png`
 - **Alternate Dynamic Pose (Three-Quarter):** `art-source/characters/peter/concept/peter_alt_pose_v1.png`
 - **Concept Turnaround Sheet (4-View Orthographic):** `art-source/characters/peter/concept/peter_concept_v1.png`
@@ -19,6 +20,7 @@ The canonical baseline visual reference for Peter is established exclusively by:
 - **Asset Metadata Record:** `art-source/characters/peter/metadata/peter_design.json`
 
 The concept images confirm:
+
 1. **Master Concept (`peter_master_v1.png`):** High stand-up coat collar, asymmetrical charcoal-blue travel duster, 4 pairs of silver toggle clasps, dark vertically ribbed tunic, diagonal brown leather strap with silver buckle from right shoulder to left hip, waist belt with buckle, dark trousers, and sturdy brown leather field boots with turnover cuffs.
 2. **Alternate Pose (`peter_alt_pose_v1.png`):** Confirms 3D depth of compact coiled curls, side coat lapel drape, restrained purple interior lining and turned cuffs, leather strap anchoring, and grounded stance.
 3. **Turnaround Reference (`peter_concept_v1.png`):** Complete 4-view orthographic reference (front, 3/4, profile, back) confirming full curly hair coverage down to the nape, center coat seam, and equipment mounting.
@@ -52,6 +54,7 @@ The concept images confirm:
 ## 3. Costume & Equipment Details (From Approved Concept)
 
 ### 3.1 The Charcoal-Blue Travel Coat
+
 - **Color:** Deep charcoal-blue / dark slate-navy (`#263248`, shadow `#161e2e`, highlight `#3d4f70`).
 - **Accents:** Restrained dark purple-slate interior lining and trim accents (`#281e36`, `#3a2a4f`).
 - **Length:** Mid-calf duster cut.
@@ -60,11 +63,13 @@ The concept images confirm:
 - **Belt:** Dark leather waist belt with a rectangular aged-silver buckle.
 
 ### 3.2 Undergarments & Practical Layering
+
 - **Tunic:** Dark charcoal vertically ribbed travel shirt (`#12151d`) visible at the throat.
 - **Trousers:** Durable slate-black traveler's trousers (`#181c24`).
 - **Boots:** Mid-calf dark leather field/riding boots (`#2e2219`) with reinforced turnover cuffs.
 
 ### 3.3 Signature Objects & Accessories
+
 1. **The Broken Blade (Primary Weapon):**
    - Held in the right hand in all baseline poses.
    - Hilt: Spherical aged-silver pommel, dark wire/leather wrapped grip, and straight cruciform silver crossguard.
@@ -84,23 +89,23 @@ The concept images confirm:
 
 ## 4. Official Palette Swatches (Extracted from Concept Image)
 
-| Swatch Name | Hex Code | Role in Asset Production |
-|---|---|---|
-| **Curly Hair Shadow** | `#22160f` | Deep recesses between curls |
-| **Curly Hair Base** | `#3b291d` | Dominant compact curl color |
-| **Curly Hair Highlight** | `#594132` | Top curl highlight |
-| **Eye Gray-Blue** | `#607d9c` | Muted iris color |
-| **Skin Base** | `#dab9a0` | Face and hand mid-tones |
-| **Skin Shadow** | `#b28e76` | Jawline, neck shadow, and stubble |
-| **Coat Charcoal-Blue** | `#263248` | Main coat body |
-| **Coat Dark Shadow** | `#161e2e` | Coat folds, lapel interior |
-| **Coat Highlight** | `#3d4f70` | Shoulder and rim highlights |
+| Swatch Name                  | Hex Code  | Role in Asset Production                         |
+| ---------------------------- | --------- | ------------------------------------------------ |
+| **Curly Hair Shadow**        | `#22160f` | Deep recesses between curls                      |
+| **Curly Hair Base**          | `#3b291d` | Dominant compact curl color                      |
+| **Curly Hair Highlight**     | `#594132` | Top curl highlight                               |
+| **Eye Gray-Blue**            | `#607d9c` | Muted iris color                                 |
+| **Skin Base**                | `#dab9a0` | Face and hand mid-tones                          |
+| **Skin Shadow**              | `#b28e76` | Jawline, neck shadow, and stubble                |
+| **Coat Charcoal-Blue**       | `#263248` | Main coat body                                   |
+| **Coat Dark Shadow**         | `#161e2e` | Coat folds, lapel interior                       |
+| **Coat Highlight**           | `#3d4f70` | Shoulder and rim highlights                      |
 | **Restrained Purple Accent** | `#281e36` | Coat interior lining and subtle dark violet trim |
-| **Leather Strap / Boots**| `#453123` | Diagonal strap, boots, notebook cover |
-| **Aged Silver** | `#8c96a8` | Clasps, buckles, pommel, watch chain |
-| **Broken Blade Steel** | `#8c96a5` | Intact longsword blade body |
-| **Chronal Fracture Glow**| `#00c8ff` | Cerulean energy aura along broken edge |
-| **Chronal Apex White** | `#e6f9ff` | Core energy specular highlight |
+| **Leather Strap / Boots**    | `#453123` | Diagonal strap, boots, notebook cover            |
+| **Aged Silver**              | `#8c96a8` | Clasps, buckles, pommel, watch chain             |
+| **Broken Blade Steel**       | `#8c96a5` | Intact longsword blade body                      |
+| **Chronal Fracture Glow**    | `#00c8ff` | Cerulean energy aura along broken edge           |
+| **Chronal Apex White**       | `#e6f9ff` | Core energy specular highlight                   |
 
 ---
 
@@ -109,6 +114,7 @@ The concept images confirm:
 The approved concept sheet is an **illustrative design turnaround (~7 heads tall)** and is **NOT a directly usable in-game sprite**.
 
 ### In-Game Top-Down Sprite Translation Rules:
+
 1. **Resolution & Canvas:** $32 \times 32\text{ px}$ per animation frame.
 2. **Stylized Proportion:** 1:2.8 to 1:3 head-to-body ratio (chibi-stylized realism standard for 16-bit top-down RPGs).
 3. **Footprint Collider:** $18 \times 14\text{ px}$ collision box at center bottom `(7, 16)`.
@@ -124,14 +130,14 @@ The approved concept sheet is an **illustrative design turnaround (~7 heads tall
 
 ## 6. Approved Animation Sets (For Runtime Assets)
 
-| Action | Direction | Frames | Target FPS | Notes |
-|---|---|---|---|---|
-| `idle` | Down, Up, Left, Right | 4 | 5 | Subtle breathing, blade chronal pulse |
-| `walk` | Down, Up, Left, Right | 6 | 9 | Grounded stride, coat hem motion |
-| `run` | Down, Up, Left, Right | 6 | 12 | Forward lean, dynamic coat tails |
-| `attack` | Down, Up, Left, Right | 6 | 12 | Blade strike with fracture energy arc |
-| `hurt` | Down, Up, Left, Right | 2 | 10 | Hit recoil, silhouette flash |
-| `temporal_sight`| Down, Up, Left, Right | 4 | 6 | Channeling stance, glowing eyes & blade |
+| Action           | Direction             | Frames | Target FPS | Notes                                   |
+| ---------------- | --------------------- | ------ | ---------- | --------------------------------------- |
+| `idle`           | Down, Up, Left, Right | 4      | 5          | Subtle breathing, blade chronal pulse   |
+| `walk`           | Down, Up, Left, Right | 6      | 9          | Grounded stride, coat hem motion        |
+| `run`            | Down, Up, Left, Right | 6      | 12         | Forward lean, dynamic coat tails        |
+| `attack`         | Down, Up, Left, Right | 6      | 12         | Blade strike with fracture energy arc   |
+| `hurt`           | Down, Up, Left, Right | 2      | 10         | Hit recoil, silhouette flash            |
+| `temporal_sight` | Down, Up, Left, Right | 4      | 6          | Channeling stance, glowing eyes & blade |
 
 ---
 

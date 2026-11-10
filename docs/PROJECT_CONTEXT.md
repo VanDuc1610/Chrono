@@ -1,10 +1,11 @@
 # CHRONO – THE FRACTURED DIVINITY
+
 ## Master Project Context & Architectural Source of Truth
 
 **Document Version:** 1.0.0  
 **Project Lead:** Lead Technical Architect & Project Documentation Engineer  
 **Canonical Status:** Authoritative Master Document for Antigravity & Claude Code  
-**Date of Audit:** November 10, 2026  
+**Date of Audit:** November 10, 2026
 
 ---
 
@@ -13,6 +14,7 @@
 **CHRONO – THE FRACTURED DIVINITY** is an original, single-player browser-based 2D RPG crafted with classic 16-bit pixel art aesthetic, deliberate top-down exploration, and tactical turn-based combat. The game takes place in the melancholy, celestial aftermath of the Cataclysm of the Divided Hour—a cosmic rupture that shattered the flow of continuous time into localized distortions, recursive loops, and crystalline chronal anomalies.
 
 ### Target Milestone:
+
 - **Scope:** Playable **Prologue Vertical Slice** (estimated 10–15 minutes of gameplay).
 - **Deliverable:** Fully functional browser experience demonstrating the complete gameplay loop: booting, title navigation, top-down exploration of an ancient sanctuary ruins, externalized dialogue with branching choices, quest tracking, satchel inventory management, persistent multi-slot save/load, and turn-based battle against a temporal anomaly with seamless overworld return.
 
@@ -20,18 +22,18 @@
 
 ## 2. Game Genre & Gameplay Direction
 
-| Aspect | Specification | Confirmation Status |
-| :--- | :--- | :--- |
-| **Development Environment** | Google Antigravity IDE (Primary Workspace) | **CONFIRMED** |
-| **Remote Repository** | `https://github.com/VanDuc1610/Chrono.git` (branch `main`) | **CONFIRMED** |
-| **Genre** | 2D Single-Player Turn-Based RPG | **CONFIRMED** |
-| **Platform** | Modern Web Browsers (Desktop Chrome, Edge, Firefox, Safari) | **CONFIRMED** |
-| **Camera** | 2D Top-Down Orthographic (3/4 pitch, 640×360 native canvas scaled via `FIT`) | **CONFIRMED** |
-| **Art Style** | Authentic 16-bit Pixel Art with stylized proportions | **CONFIRMED** |
-| **Atmosphere** | Cosmic Dark Fantasy + Ethereal | **CONFIRMED** |
-| **Combat** | Turn-based tactical battle arena with speed-based initiative queue | **CONFIRMED** |
-| **Control Scheme** | Keyboard (WASD / Arrows to move, Space/E to interact, 1-2 for choices, I/B for satchel, K for quick-save, ESC for menu) | **CONFIRMED** |
-| **Gamepad / Touch** | Virtual touch controls and Gamepad API support | *PROPOSED (Post-Prologue)* |
+| Aspect                      | Specification                                                                                                           | Confirmation Status        |
+| :-------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :------------------------- |
+| **Development Environment** | Google Antigravity IDE (Primary Workspace)                                                                              | **CONFIRMED**              |
+| **Remote Repository**       | `https://github.com/VanDuc1610/Chrono.git` (branch `main`)                                                              | **CONFIRMED**              |
+| **Genre**                   | 2D Single-Player Turn-Based RPG                                                                                         | **CONFIRMED**              |
+| **Platform**                | Modern Web Browsers (Desktop Chrome, Edge, Firefox, Safari)                                                             | **CONFIRMED**              |
+| **Camera**                  | 2D Top-Down Orthographic (3/4 pitch, 640×360 native canvas scaled via `FIT`)                                            | **CONFIRMED**              |
+| **Art Style**               | Authentic 16-bit Pixel Art with stylized proportions                                                                    | **CONFIRMED**              |
+| **Atmosphere**              | Cosmic Dark Fantasy + Ethereal                                                                                          | **CONFIRMED**              |
+| **Combat**                  | Turn-based tactical battle arena with speed-based initiative queue                                                      | **CONFIRMED**              |
+| **Control Scheme**          | Keyboard (WASD / Arrows to move, Space/E to interact, 1-2 for choices, I/B for satchel, K for quick-save, ESC for menu) | **CONFIRMED**              |
+| **Gamepad / Touch**         | Virtual touch controls and Gamepad API support                                                                          | _PROPOSED (Post-Prologue)_ |
 
 ---
 
@@ -88,6 +90,7 @@ flowchart TD
 ```
 
 ### Key Architectural Standards:
+
 1. **Strict TypeScript Typing:** `tsconfig.json` enforces `strict: true`, `noUnusedLocals: true`, and zero implicit `any`.
 2. **Decoupled System Boundaries:** All gameplay systems implement explicit interfaces (`IMovementSystem`, `IPlayerController`, `IInteractionSystem`, `IDialogueSystem`, `IQuestSystem`, `ICombatSystem`, `IInventorySystem`, `ISaveSystem`).
 3. **Data-Driven Logic:** Scene files do not hardcode quest objectives, enemy or player stats, items, rewards, or dialogue scripts. All data is read from external JSON files in `public/assets/data/` (`player.json` holds Peter's base stats, per-level growth, EXP thresholds, starting items and combat formula tuning).
@@ -100,6 +103,7 @@ flowchart TD
 ## 4. Current Implementation Status (Audited Findings)
 
 ### 4.1 Completed Features (Verified on Live Engine)
+
 - [x] **Project Foundation:** Phaser 3.88.2 + TypeScript 5.8 + Vite 6 build system (`npm run build` succeeds in <1s).
 - [x] **Scene Lifecycle:** `BootScene` $\rightarrow$ `PreloadScene` $\rightarrow$ `MainMenuScene` $\rightarrow$ `ExplorationScene` $\rightarrow$ `CombatScene`.
 - [x] **Exploration Mechanics:** 4-direction movement, Arcade Physics wall collision boundaries, smooth camera following with world constraints.
@@ -114,34 +118,38 @@ flowchart TD
 - [x] **Automated CDP Test Suites:** Three end-to-end headless browser test suites (`scripts/test-gameplay.js`, `scripts/test-combat.js`, `scripts/test-inventory-save.js`) and asset validation tool (`scripts/validate-candidate.js`).
 
 ### 4.2 Partially Implemented / Staged for Asset Replacement
+
 - [ ] **Character Runtime Visuals:** Peter currently uses procedural $32 \times 32\text{ px}$ runtime spritesheets (`public/assets/characters/peter/`). Approved master concept art exists (`peter_master_v1.png`, `peter_alt_pose_v1.png`), but final AI sprite turnaround sheets are awaiting manual generation in AUTOMATIC1111.
 - [ ] **NPC Sprites:** Elder Chronographer uses a temporary visual placeholder (`npc_elder_placeholder.png`). Written specification is complete (`docs/art/ELDER_DESIGN.md`).
 - [ ] **Enemy Sprites:** Temporal Shade uses a temporary placeholder (`enemy_fracture_placeholder.png`).
 - [ ] **Tileset Art:** Ruined sanctuary uses procedural placeholder tileset (`dungeon_tileset.png`).
 
 ### 4.3 Proposed / Not Implemented in Prologue
-- Full world overworld map (*Proposed for Chapter 1*).
-- Multi-character party switching (*Proposed for Chapter 1*).
-- Complex skill trees and job/class progression (*Proposed for Chapter 2*).
-- Equipment crafting and gear socketing (*Proposed for Chapter 2*).
+
+- Full world overworld map (_Proposed for Chapter 1_).
+- Multi-character party switching (_Proposed for Chapter 1_).
+- Complex skill trees and job/class progression (_Proposed for Chapter 2_).
+- Equipment crafting and gear socketing (_Proposed for Chapter 2_).
 
 ---
 
 ## 5. Confirmed Narrative & Lore Decisions
 
 ### 5.1 The Cataclysm of the Divided Hour
+
 Before memory, time flowed as an unbroken celestial continuum governed by the **Divine Chronometer** maintained by the primordial architect **Chronos**. Without warning, the Great Fracture occurred, shattering the celestial mechanisms into countless **Chrono Shards**. Localities became trapped in recursive loops or accelerating decay.
 
 ### 5.2 Confirmed Characters & Roles
-- **Peter (The Protagonist):** 
+
+- **Peter (The Protagonist):**
   - An adult traveler awaking in the Shattered Antechamber.
   - Possesses innate resonance with chronal fractures and carries signature relics.
-  - **Peter's True Identity:** Explicitly **UNWRITTEN** and left as an environmental mystery (*Confirmed Decision*).
+  - **Peter's True Identity:** Explicitly **UNWRITTEN** and left as an environmental mystery (_Confirmed Decision_).
 - **Kuro, the Forgotten One:**
-  - The main opposing antagonist across the overarching narrative (*Confirmed Decision*).
+  - The main opposing antagonist across the overarching narrative (_Confirmed Decision_).
   - Representative of the discarded timelines and erased possibilities seeking to unravel the surviving continuum.
 - **The Six Divine Authorities:**
-  - The governing cosmic facets of the Fractured Divinity (*Confirmed Decision*):
+  - The governing cosmic facets of the Fractured Divinity (_Confirmed Decision_):
     1. **Origin:** The spark of beginning and baseline genesis.
     2. **Continuum:** The unbroken forward progression of temporal flow.
     3. **Causality:** The inescapable law of cause, consequence, and paradox.
@@ -154,6 +162,7 @@ Before memory, time flowed as an unbroken celestial continuum governed by the **
   - Hostile apparitions coalescing from unspent, fractured moments.
 
 ### 5.3 Narrative Delivery Philosophy
+
 Narrative delivery strictly emphasizes **environmental storytelling**, exploration, handwritten journal entries, memory fragments, and architectural inscriptions rather than expository lore dumps.
 
 ---
@@ -161,6 +170,7 @@ Narrative delivery strictly emphasizes **environmental storytelling**, explorati
 ## 6. Peter Character Design Decisions
 
 ### 6.1 Approved Visual Baseline Assets
+
 - **Master Concept Art:** `art-source/characters/peter/concept/peter_master_v1.png`
 - **Alternate Pose Art:** `art-source/characters/peter/concept/peter_alt_pose_v1.png`
 - **Turnaround Reference:** `art-source/characters/peter/concept/peter_concept_v1.png`
@@ -169,7 +179,9 @@ Narrative delivery strictly emphasizes **environmental storytelling**, explorati
 - **Metadata Ledger:** `art-source/characters/peter/metadata/peter_design.json`
 
 ### 6.2 Non-Negotiable Hairstyle Permanent Identity Lock
+
 Peter's hairstyle is a permanent character identity feature and **CANNOT** be modified without explicit project owner approval:
+
 - **Style:** Short, compact, naturally curly men's haircut (`#3b291d`).
 - **Texture:** Clearly distinguishable, tightly coiled, springy curls.
 - **Silhouette:** Rounded, compact, and slightly elevated dome silhouette.
@@ -186,14 +198,15 @@ Peter's hairstyle is a permanent character identity feature and **CANNOT** be mo
   - Ponytail, bun, or long hair.
 
 ### 6.3 Costume & Equipment Features
+
 - **Coat:** Asymmetrical charcoal-blue travel duster (`#263248`) with high structured collar and 4 horizontal pairs of silver bar-and-toggle clasps. Restrained purple interior lining (`#281e36`) visible at cuffs and hem.
 - **Strap:** Diagonal dark-brown leather harness strap (`#453123`) from right shoulder to left hip with silver buckle.
 - **Tunic & Trousers:** Dark vertically ribbed tunic shirt (`#12151d`), dark traveler trousers (`#181c24`), and dark oiled leather field boots (`#2e2219`) with turnover cuffs.
 - **Face & Eyes:** Mature masculine facial proportions (~26 years old), light stubble along jawline, contemplative expression, muted gray-blue eyes (`#607d9c`).
 - **Signature Objects:**
-  1. *Broken Blade:* Ancient broadsword fractured midway, glowing with cerulean fracture energy (`#00c8ff`) along the jagged break.
-  2. *Stopped Watch:* Ornate antique silver timepiece suspended from waist belt by silver chain.
-  3. *Torn Notebook:* Leather-bound field journal mounted to shoulder strap at left hip.
+  1. _Broken Blade:_ Ancient broadsword fractured midway, glowing with cerulean fracture energy (`#00c8ff`) along the jagged break.
+  2. _Stopped Watch:_ Ornate antique silver timepiece suspended from waist belt by silver chain.
+  3. _Torn Notebook:_ Leather-bound field journal mounted to shoulder strap at left hip.
 
 ---
 
@@ -226,6 +239,7 @@ flowchart LR
 ```
 
 ### Governing Pipeline Rules:
+
 1. Preserve approved character designs without alteration.
 2. Prompts originate strictly from written text design documents.
 3. Never search for external character references or copyrighted artwork.
@@ -238,6 +252,7 @@ flowchart LR
 ## 9. Development Conventions & File Locations
 
 ### 9.1 Key Directories
+
 - `src/` – TypeScript application code (scenes, entities, systems).
 - `public/assets/` – Runtime assets loaded by Phaser (only user-approved assets enter here).
 - `public/assets/data/` – External game data JSONs (`dialogue.json`, `quests.json`, `enemies.json`, `items.json`).
@@ -250,6 +265,7 @@ flowchart LR
 - `scripts/` – Test suites and asset validation utilities.
 
 ### 9.2 Coding Standards
+
 - TypeScript 5.8 strict mode; ES2022 modules.
 - Explicit interfaces for all systems.
 - PascalCase for scene and class names (`ExplorationScene`, `PlayerController`).
@@ -294,17 +310,18 @@ node scripts/validate-candidate.js <path-to-png>
 ## 11. Known Problems, Technical Debt & Unresolved Decisions
 
 ### Confirmed Decisions vs. Unresolved Decisions Ledger:
-| Feature | Status | Notes |
-| :--- | :--- | :--- |
-| **Peter Character Design** | **CONFIRMED** | Master concept approved in `peter_master_v1.png`. Hairstyle locked. |
-| **Peter True Origin** | **UNRESOLVED (Intentional)** | Unwritten; delivered via environmental discovery. |
-| **Kuro, the Forgotten One** | **CONFIRMED** | Established as main opposing character. Visual design: *UNRESOLVED*. |
-| **Six Divine Authorities** | **CONFIRMED** | Origin, Continuum, Causality, Memory, Possibility, Finality established. |
-| **Combat Mechanics** | **CONFIRMED** | Turn-based loop, speed initiative, 5 commands, probabilistic escape, victory/defeat (owner decision 2026-11-10). |
-| **EXP & Levelling** | **CONFIRMED** | In scope for the prologue (owner decision 2026-11-10). Curve/growth tunable in `player.json`. |
-| **Audio Architecture** | **CONFIRMED** | Procedural Web Audio synthesis (`SoundSystem.ts`). No copyrighted audio. |
-| **Party System** | *PROPOSED (TBD)* | Solo protagonist in Prologue. Multi-party deferred to Chapter 1. |
-| **Git Repository** | **RESOLVED & CONNECTED** | Remote `origin` linked to `https://github.com/VanDuc1610/Chrono.git` on branch `main` at baseline `ffb72c3`. |
+
+| Feature                     | Status                       | Notes                                                                                                            |
+| :-------------------------- | :--------------------------- | :--------------------------------------------------------------------------------------------------------------- |
+| **Peter Character Design**  | **CONFIRMED**                | Master concept approved in `peter_master_v1.png`. Hairstyle locked.                                              |
+| **Peter True Origin**       | **UNRESOLVED (Intentional)** | Unwritten; delivered via environmental discovery.                                                                |
+| **Kuro, the Forgotten One** | **CONFIRMED**                | Established as main opposing character. Visual design: _UNRESOLVED_.                                             |
+| **Six Divine Authorities**  | **CONFIRMED**                | Origin, Continuum, Causality, Memory, Possibility, Finality established.                                         |
+| **Combat Mechanics**        | **CONFIRMED**                | Turn-based loop, speed initiative, 5 commands, probabilistic escape, victory/defeat (owner decision 2026-11-10). |
+| **EXP & Levelling**         | **CONFIRMED**                | In scope for the prologue (owner decision 2026-11-10). Curve/growth tunable in `player.json`.                    |
+| **Audio Architecture**      | **CONFIRMED**                | Procedural Web Audio synthesis (`SoundSystem.ts`). No copyrighted audio.                                         |
+| **Party System**            | _PROPOSED (TBD)_             | Solo protagonist in Prologue. Multi-party deferred to Chapter 1.                                                 |
+| **Git Repository**          | **RESOLVED & CONNECTED**     | Remote `origin` linked to `https://github.com/VanDuc1610/Chrono.git` on branch `main` at baseline `ffb72c3`.     |
 
 ---
 
@@ -315,4 +332,3 @@ node scripts/validate-candidate.js <path-to-png>
 3. **Manual AI Sprite Generation for Peter:** User generates 4-direction idle and walk candidate sheets in AUTOMATIC1111 WebUI using `peter_idle.txt` and `peter_walk.txt`.
 4. **NPC Elder & Enemy Sprite Production:** User generates candidate art for Elder Chronographer and Temporal Shade using authored prompt templates.
 5. **Tilemap Art Polish:** Replace procedural placeholder dungeon tiles with the approved dark slate sanctuary tileset.
-

@@ -6,7 +6,7 @@
 ## Protocol (both agents MUST follow)
 
 1. **Read this file before starting work.** Only work on tasks assigned to you.
-2. **File locks:** a task in `IN PROGRESS` owns the files listed under *Locks*. The other agent must not edit those files until the task is `DONE`.
+2. **File locks:** a task in `IN PROGRESS` owns the files listed under _Locks_. The other agent must not edit those files until the task is `DONE`.
 3. **Need a file that is locked?** Stop and report to the owner — do not edit it.
 4. **Commit only your own task's files**, one logical change per commit. Run `npm run typecheck` before committing code.
 5. **Git:** `git pull --rebase` before committing/pushing. Never force-push, never rewrite pushed history.
@@ -20,27 +20,27 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 ## Active
 
 ### T-05 · Peter idle + walk candidate sheets
+
 - **Assignee:** Owner (manual, AUTOMATIC1111) · **Status:** TODO
 - Use `art-source/characters/peter/prompts/peter_idle.txt` and `peter_walk.txt`; drop PNGs into `art-source/characters/peter/generated/candidates/`. Claude validates afterwards.
 
 ## Backlog (scheduled after current locks are released)
 
 ### T-12 · Use consumables from the Satchel in exploration
+
 - **Assignee:** unassigned · **Status:** TODO
 - HP now persists between battles, but shards can only be used in combat. Add a "use" action in the Satchel overlay (heal via `items.json` `effects.healAmount`, consume 1). Show Lv / EXP / HP in the exploration HUD.
 
 ### T-13 · Stale quest HUD text
+
 - **Assignee:** unassigned · **Status:** TODO
 - `ExplorationScene.updateQuestHUD()` shows "✓ Awaiting Milestone 3 (Combat)" after the prologue quest completes — dev placeholder text visible to players. Needs owner-approved wording (or move to `quests.json`).
-
-### T-07 · One-time repo-wide Prettier format
-- **Assignee:** Claude · **Status:** TODO — only when no task holds locks on `src/` (touches ~72 files)
-- Run `npm run format` in a single dedicated commit; afterwards both agents keep `npm run format:check` clean.
 
 ---
 
 ## Done
 
+- **T-07** One-time `prettier --write .` over the repo (69 files, formatting only — verified no wording/LaTeX changes in docs). From now on keep `npm run format:check` clean before committing — Claude
 - **T-09** `GameSession` (`src/state/`) now owns inventory, quests, flags, level/EXP/HP, playtime; New Game / Continue create or hydrate it. Speed initiative, probabilistic escape, item consumption, EXP + level-ups + loot tables, quest rewards (claimed once), all tuning in new `public/assets/data/player.json`. Fixes B1-B6, B8-B10, B13, B14 (supersedes T-06). `CombatSystem.setRandomSource()` added; `test-session-regression.js` switched to it — stubbing global `Math.random` crashed Phaser Text creation. Verified: 5/5 regression scenarios PASS (all 5 FAIL on pre-T-09 code), test-gameplay / test-combat / test-inventory-save PASS, 22 logic unit checks PASS — Claude
 - **T-11** Added `scripts/test-session-regression.js` CDP suite verifying B1, B2, B3, B4, and B6 with per-scenario `PASS`/`FAIL` output (confirmed all 5 reproduce pre-T-09) — Antigravity
 - **T-10** Owner decisions (2026-11-10): (a) combat uses speed-based initiative; Escape stays but can fail (probability from speed, a failed escape costs the turn); (b) EXP + levelling are in scope for the prologue — Owner

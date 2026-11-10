@@ -1,26 +1,28 @@
 # CHRONO – THE FRACTURED DIVINITY
+
 ## Asset Registry & Versioning Ledger
 
 **Ledger Version:** 1.0.0  
 **Governing Policy:** [ASSET_POLICY.md](ASSET_POLICY.md)  
-**Last Updated:** 2026-11-10 (Peter runtime sprites reclassified as placeholders)  
+**Last Updated:** 2026-11-10 (Peter runtime sprites reclassified as placeholders)
 
 ---
 
 ## 1. Summary of Asset Status
 
-| Status Tier | Count | Description |
-|---|---|---|
-| `APPROVED_SOURCE` | 1 | Approved protagonist design source (`CHAR_PETER_001`) |
-| `CONCEPT_PENDING_APPROVAL` | 0 | Concept generated; awaiting formal review |
-| `SPEC_DRAFTED` | 2 | Text-only creative specifications prepared |
-| `PLACEHOLDER_TEMPORARY` | 9 | Procedural placeholder assets active in engine |
+| Status Tier                | Count | Description                                           |
+| -------------------------- | ----- | ----------------------------------------------------- |
+| `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`) |
+| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review             |
+| `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared            |
+| `PLACEHOLDER_TEMPORARY`    | 9     | Procedural placeholder assets active in engine        |
 
 ---
 
 ## 2. Approved Character Design Source: Peter
 
 ### `CHAR_PETER_001`
+
 - **Character Name:** Peter (Main Protagonist)
 - **Role:** Main Protagonist
 - **Design Document:** [`docs/art/PETER_DESIGN.md`](docs/art/PETER_DESIGN.md)
@@ -50,6 +52,7 @@
 The following assets are currently integrated into the engine strictly as **temporary placeholders**. They are not approved final art:
 
 ### `CHAR_PETER_000_TMP`
+
 - **Object Name:** Peter Runtime Spritesheets (Procedural Placeholder)
 - **File Path:** `public/assets/characters/peter/`
 - **Design Doc Ref:** [`docs/art/PETER_DESIGN.md`](docs/art/PETER_DESIGN.md)
@@ -57,17 +60,18 @@ The following assets are currently integrated into the engine strictly as **temp
 - **Generator:** `scripts/generate-peter-sprites.js` (Procedural canvas-buffer synthesis — not AUTOMATIC1111 output, not user-approved art)
 - **Frame Size:** 32 × 32 px; rows = 4 directions (down, up, left, right)
 - **Sheets:**
-  | File | Frames / direction | Sheet size |
-  |---|---|---|
-  | `peter_idle.png` | 4 | 128 × 128 |
-  | `peter_walk.png` | 6 | 192 × 128 |
-  | `peter_run.png` | 6 | 192 × 128 |
-  | `peter_attack.png` | 6 | 192 × 128 |
-  | `peter_hurt.png` | 2 | 64 × 128 |
-  | `peter_temporal_sight.png` | 4 | 128 × 128 |
+  | File                       | Frames / direction | Sheet size |
+  | -------------------------- | ------------------ | ---------- |
+  | `peter_idle.png`           | 4                  | 128 × 128  |
+  | `peter_walk.png`           | 6                  | 192 × 128  |
+  | `peter_run.png`            | 6                  | 192 × 128  |
+  | `peter_attack.png`         | 6                  | 192 × 128  |
+  | `peter_hurt.png`           | 2                  | 64 × 128   |
+  | `peter_temporal_sight.png` | 4                  | 128 × 128  |
 - **Replacement Path:** Candidate sheets from AUTOMATIC1111 → `art-source/characters/peter/generated/candidates/` → validation → user approval → `generated/approved/` → replaces these files.
 
 ### `CHAR_VESSEL_000_TMP`
+
 - **Object Name:** The Vessel (Player Character Placeholder)
 - **File Path:** `public/assets/characters/player_placeholder.png`
 - **Asset Key:** `player_placeholder`
@@ -79,6 +83,7 @@ The following assets are currently integrated into the engine strictly as **temp
 - **Notes:** High-contrast placeholder with slate helm, midnight cloak, and cyan fracture core.
 
 ### `NPC_ELDER_000_TMP`
+
 - **Object Name:** Elder Chronographer (NPC Placeholder)
 - **File Path:** `public/assets/npcs/npc_elder_placeholder.png`
 - **Asset Key:** `npc_elder`
@@ -90,6 +95,7 @@ The following assets are currently integrated into the engine strictly as **temp
 - **Notes:** Hooded scholar silhouette with golden gaze.
 
 ### `MOB_SHADE_000_TMP`
+
 - **Object Name:** Temporal Shade (Enemy Placeholder)
 - **File Path:** `public/assets/enemies/enemy_fracture_placeholder.png`
 - **Asset Key:** `enemy_fracture`
@@ -100,6 +106,7 @@ The following assets are currently integrated into the engine strictly as **temp
 - **Notes:** Dark violet apparition with pulsing crimson core.
 
 ### `ENV_SANCTUARY_000_TMP`
+
 - **Object Name:** Shattered Antechamber Tileset (Placeholder Atlas)
 - **File Path:** `public/assets/tilesets/dungeon_tileset.png`
 - **Asset Key:** `dungeon_tileset`
@@ -110,6 +117,7 @@ The following assets are currently integrated into the engine strictly as **temp
 - **Tile Contents:** Stone floor, engraved rune floor, wall top, wall face, broken pillar, chrono crystal, altar.
 
 ### `UI_FRAME_000_TMP`
+
 - **Object Name:** Dialogue & HUD Frame (Placeholder)
 - **File Path:** `public/assets/ui/ui_frame.png`
 - **Asset Key:** `ui_frame`
@@ -117,6 +125,7 @@ The following assets are currently integrated into the engine strictly as **temp
 - **Dimensions:** 48 × 48 px
 
 ### `UI_CURSOR_000_TMP`
+
 - **Object Name:** Menu Cursor (Placeholder)
 - **File Path:** `public/assets/ui/ui_cursor.png`
 - **Asset Key:** `ui_cursor`
@@ -124,6 +133,7 @@ The following assets are currently integrated into the engine strictly as **temp
 - **Dimensions:** 16 × 16 px
 
 ### `FX_SPARK_000_TMP`
+
 - **Object Name:** Hit Spark / Chrono Particle (Placeholder)
 - **File Path:** `public/assets/effects/hit_spark.png`
 - **Asset Key:** `hit_spark`
@@ -131,6 +141,7 @@ The following assets are currently integrated into the engine strictly as **temp
 - **Dimensions:** 16 × 16 px
 
 ### `AUD_SILENCE_000_TMP`
+
 - **Object Name:** Minimal Silent RIFF WAV (Audio Loader Placeholder)
 - **File Path:** `public/assets/audio/silence_placeholder.wav`
 - **Status:** `PLACEHOLDER_TEMPORARY`
@@ -143,6 +154,7 @@ The following assets are currently integrated into the engine strictly as **temp
 The following specifications have been drafted in compliance with [ASSET_POLICY.md](ASSET_POLICY.md) Step 2 for upcoming asset production:
 
 ### SPEC-002: Elder Chronographer (NPC)
+
 - **Target Asset ID:** `NPC_ELDER_001`
 - **Design Doc Ref:** [GDD.md](GDD.md) v0.1.0, [LORE.md](LORE.md) §3
 - **Status:** `SPEC_DRAFTED`
@@ -154,6 +166,7 @@ The following specifications have been drafted in compliance with [ASSET_POLICY.
   > Proportions: 1:2.8 stylized retro ratio. Crisp pixel borders, no semi-transparent blur pixels.
 
 ### SPEC-003: Temporal Shade (Hostile Anomaly)
+
 - **Target Asset ID:** `MOB_SHADE_001`
 - **Design Doc Ref:** [GDD.md](GDD.md) v0.1.0, [LORE.md](LORE.md) §3
 - **Status:** `SPEC_DRAFTED`
@@ -163,4 +176,3 @@ The following specifications have been drafted in compliance with [ASSET_POLICY.
   > Form: A hovering, ethereal specter composed of frayed dark violet temporal mist (`#260b1e`, `#6b153e`) that trails downward into wisps.
   > Core: Suspended at the center of the dark mist is a jagged crimson-and-rose chronal shard (`#ff4d79`, `#b82352`) that pulses with fracture energy.
   > Floating Pose: Floats 4 pixels above the shadow base, conveying weightless unreality. Pure pixel art, 32x32 bounding box, transparent background.
-

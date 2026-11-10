@@ -28,6 +28,7 @@ Row 3 (Y = 96px to 127px) : Right-facing  [Frame 0 .. Frame N-1]
 ```
 
 Where:
+
 - Frame cell dimensions: $32 \times 32\text{ px}$
 - Total sheet height: $128\text{ px}$ (4 directions)
 - Total sheet width: $32\text{ px} \times N$ (where $N$ is the number of frames per direction)
@@ -36,14 +37,14 @@ Where:
 
 ## 3. Approved Animation Specification Ledger
 
-| Action | Texture Key | Frames/Dir | Total Width | FPS | Repeat | Phaser Key Pattern |
-|---|---|---|---|---|---|---|
-| **Idle** | `peter_idle` | 4 | $128\text{ px}$ | 5 | `-1` (loop) | `peter_idle_{down\|up\|left\|right}` |
-| **Walk** | `peter_walk` | 6 | $192\text{ px}$ | 9 | `-1` (loop) | `peter_walk_{down\|up\|left\|right}` |
-| **Run** | `peter_run` | 6 | $192\text{ px}$ | 12 | `-1` (loop) | `peter_run_{down\|up\|left\|right}` |
-| **Attack** | `peter_attack` | 6 | $192\text{ px}$ | 12 | `0` (once) | `peter_attack_{down\|up\|left\|right}` |
-| **Hurt** | `peter_hurt` | 2 | $64\text{ px}$ | 10 | `0` (once) | `peter_hurt_{down\|up\|left\|right}` |
-| **Temporal Sight**| `peter_temporal_sight` | 4 | $128\text{ px}$ | 6 | `-1` (loop) | `peter_temporal_sight_{down\|up\|left\|right}` |
+| Action             | Texture Key            | Frames/Dir | Total Width     | FPS | Repeat      | Phaser Key Pattern                             |
+| ------------------ | ---------------------- | ---------- | --------------- | --- | ----------- | ---------------------------------------------- |
+| **Idle**           | `peter_idle`           | 4          | $128\text{ px}$ | 5   | `-1` (loop) | `peter_idle_{down\|up\|left\|right}`           |
+| **Walk**           | `peter_walk`           | 6          | $192\text{ px}$ | 9   | `-1` (loop) | `peter_walk_{down\|up\|left\|right}`           |
+| **Run**            | `peter_run`            | 6          | $192\text{ px}$ | 12  | `-1` (loop) | `peter_run_{down\|up\|left\|right}`            |
+| **Attack**         | `peter_attack`         | 6          | $192\text{ px}$ | 12  | `0` (once)  | `peter_attack_{down\|up\|left\|right}`         |
+| **Hurt**           | `peter_hurt`           | 2          | $64\text{ px}$  | 10  | `0` (once)  | `peter_hurt_{down\|up\|left\|right}`           |
+| **Temporal Sight** | `peter_temporal_sight` | 4          | $128\text{ px}$ | 6   | `-1` (loop) | `peter_temporal_sight_{down\|up\|left\|right}` |
 
 ---
 
@@ -116,8 +117,8 @@ export class Player extends Entity {
 ---
 
 ## 6. Integration Checklist for Approved Candidates
+
 - [ ] User approval recorded in `art-source/characters/peter/metadata/peter_design.json`.
 - [ ] Master candidate file copied to `art-source/characters/peter/generated/approved/`.
 - [ ] Scaled / formatted PNG deployed into `public/assets/characters/peter/`.
 - [ ] Tested via `npm run build` and live engine CDP test.
-

@@ -11,4 +11,3 @@ export interface IDialogueSystem {
   isActive(): boolean;
   close(): void;
 }
-

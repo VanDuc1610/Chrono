@@ -32,4 +32,3 @@ export interface ISaveMetadata {
   mapId: string;
   playtimeSeconds: number;
 }
-

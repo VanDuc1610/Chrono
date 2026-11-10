@@ -12,4 +12,3 @@ export interface IQuestSystem {
   failQuest(questId: string): boolean;
   isQuestCompleted(questId: string): boolean;
 }
-

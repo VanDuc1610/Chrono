@@ -94,7 +94,9 @@ export class SaveSystem implements ISaveSystem {
       if (!raw) return null;
       const parsed: unknown = JSON.parse(raw);
       if (!isValidSaveData(parsed)) {
-        console.warn(`[SaveSystem] Save slot ${slot} is corrupt or from an incompatible version; ignoring.`);
+        console.warn(
+          `[SaveSystem] Save slot ${slot} is corrupt or from an incompatible version; ignoring.`,
+        );
         return null;
       }
       return parsed;
@@ -146,4 +148,3 @@ export class SaveSystem implements ISaveSystem {
     return this.readSlot(slot) !== null;
   }
 }
-

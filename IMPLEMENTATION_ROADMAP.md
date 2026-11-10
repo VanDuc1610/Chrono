@@ -1,8 +1,9 @@
 # CHRONO – THE FRACTURED DIVINITY
+
 ## Development & Implementation Roadmap
 
 **Project Scope:** Prologue Vertical Slice  
-**Target Engine:** Phaser 3 + TypeScript + Vite  
+**Target Engine:** Phaser 3 + TypeScript + Vite
 
 ---
 
@@ -48,6 +49,7 @@ flowchart LR
 **Objective:** Complete narrative flow and objective progression for the Prologue.
 
 ### Deliverables:
+
 - [x] **Interactive Dialogue System:**
   - Multi-choice branching with player responses (`src/systems/dialogue/DialogueSystem.ts`).
   - Typewriter text effect with fast-forward skip on space/interact key.
@@ -67,6 +69,7 @@ flowchart LR
 **Objective:** Implement the playable combat encounter against the Temporal Shade.
 
 ### Deliverables:
+
 - [x] **CombatScene:**
   - Dedicated battle arena with Peter on left and Temporal Shade on right (`src/scenes/CombatScene.ts`).
   - Atmospheric dark blue temporal grid background with particles and health/turn HUD.
@@ -88,6 +91,7 @@ flowchart LR
 **Objective:** Allow players to manage collected items and persist progress.
 
 ### Deliverables:
+
 - [x] **Inventory System & UI:**
   - `InventorySystem.ts` conforming to `IInventorySystem` with externalized database (`public/assets/data/items.json`).
   - Signature starter items: Broken Chronometer (`relic_chronometer`) and 2x Minor Chrono Shard (`chrono_shard_minor`).
@@ -106,6 +110,7 @@ flowchart LR
 **Objective:** Replace all procedural placeholder assets with approved original pixel art.
 
 ### Deliverables:
+
 1. **Character & NPC Sprites:**
    - The Vessel: 4-directional walk, idle, and combat action sheets (32×32 px).
    - Elder Chronographer: 4-directional idle and speaking animations.
@@ -123,6 +128,7 @@ flowchart LR
 **Objective:** Complete atmospheric sound design, cross-device testing, and final release.
 
 ### Deliverables:
+
 1. **Audio Integration:**
    - Ambient ruin background theme (BGM loop).
    - Turn-based battle theme.
@@ -132,4 +138,3 @@ flowchart LR
    - Responsive scaling tested on 16:9, 16:10, and ultrawide aspect ratios.
 3. **Prologue Release Packaging:**
    - Production bundle deployment with asset caching headers.
-

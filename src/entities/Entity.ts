@@ -28,4 +28,3 @@ export abstract class Entity {
 
   public abstract update(time: number, delta: number): void;
 }
-

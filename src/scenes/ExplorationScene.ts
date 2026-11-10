@@ -121,8 +121,18 @@ export class ExplorationScene extends Phaser.Scene {
       throw new Error('Failed to load tileset "dungeon_tileset".');
     }
 
-    const groundLayer = this.map.createLayer('Ground', tileset, 0, 0) as Phaser.Tilemaps.TilemapLayer | null;
-    const wallLayer = this.map.createLayer('Walls', tileset, 0, 0) as Phaser.Tilemaps.TilemapLayer | null;
+    const groundLayer = this.map.createLayer(
+      'Ground',
+      tileset,
+      0,
+      0,
+    ) as Phaser.Tilemaps.TilemapLayer | null;
+    const wallLayer = this.map.createLayer(
+      'Walls',
+      tileset,
+      0,
+      0,
+    ) as Phaser.Tilemaps.TilemapLayer | null;
 
     if (!groundLayer || !wallLayer) {
       throw new Error('Failed to create tilemap layers.');
@@ -143,7 +153,14 @@ export class ExplorationScene extends Phaser.Scene {
     // 5. Initialize Player
     this.controller = new KeyboardPlayerController(this);
     const movementSystem = new TopDownMovementSystem();
-    this.player = new Player(this, this.spawnOrigin.x, this.spawnOrigin.y, this.controller, movementSystem, { speed: 130 });
+    this.player = new Player(
+      this,
+      this.spawnOrigin.x,
+      this.spawnOrigin.y,
+      this.controller,
+      movementSystem,
+      { speed: 130 },
+    );
 
     this.physics.add.collider(this.player.sprite, this.wallLayer);
 
@@ -233,7 +250,7 @@ export class ExplorationScene extends Phaser.Scene {
         this.openDialogue('npc_elder_greeting');
         // Progress quest objective
         this.questSystem.completeObjective(PROLOGUE_QUEST_ID, 'obj_speak_elder');
-      }
+      },
     );
 
     this.physics.add.collider(this.player.sprite, elder.sprite);
@@ -353,13 +370,18 @@ export class ExplorationScene extends Phaser.Scene {
 
     // 5. Navigation Controls Hint (Bottom Left)
     this.add
-      .text(10, height - 16, '[WASD / Arrows] Move  |  [E / Space] Interact  |  [I / B] Satchel  |  [K] Save  |  [ESC] Menu', {
-        fontFamily: 'monospace',
-        fontSize: '9px',
-        color: '#5d6b8a',
-        backgroundColor: '#07080fcc',
-        padding: { left: 4, right: 4, top: 2, bottom: 2 },
-      })
+      .text(
+        10,
+        height - 16,
+        '[WASD / Arrows] Move  |  [E / Space] Interact  |  [I / B] Satchel  |  [K] Save  |  [ESC] Menu',
+        {
+          fontFamily: 'monospace',
+          fontSize: '9px',
+          color: '#5d6b8a',
+          backgroundColor: '#07080fcc',
+          padding: { left: 4, right: 4, top: 2, bottom: 2 },
+        },
+      )
       .setScrollFactor(0)
       .setDepth(90);
 
@@ -430,24 +452,32 @@ export class ExplorationScene extends Phaser.Scene {
     bg.lineStyle(1, 0x00e1ff, 1);
     bg.strokeRect(0, 0, bannerWidth, bannerHeight);
 
-    this.notificationTitle = this.add.text(bannerWidth / 2, 7, '', {
-      fontFamily: 'monospace',
-      fontSize: '10px',
-      color: '#00e1ff',
-      fontStyle: 'bold',
-    }).setOrigin(0.5, 0);
+    this.notificationTitle = this.add
+      .text(bannerWidth / 2, 7, '', {
+        fontFamily: 'monospace',
+        fontSize: '10px',
+        color: '#00e1ff',
+        fontStyle: 'bold',
+      })
+      .setOrigin(0.5, 0);
 
-    this.notificationSubtitle = this.add.text(bannerWidth / 2, 20, '', {
-      fontFamily: 'monospace',
-      fontSize: '9px',
-      color: '#cdd7eb',
-    }).setOrigin(0.5, 0);
+    this.notificationSubtitle = this.add
+      .text(bannerWidth / 2, 20, '', {
+        fontFamily: 'monospace',
+        fontSize: '9px',
+        color: '#cdd7eb',
+      })
+      .setOrigin(0.5, 0);
 
     this.notificationContainer.add([bg, this.notificationTitle, this.notificationSubtitle]);
   }
 
   private createDialogueHUD(width: number, height: number): void {
-    this.dialogueBoxContainer = this.add.container(0, 0).setScrollFactor(0).setDepth(200).setVisible(false);
+    this.dialogueBoxContainer = this.add
+      .container(0, 0)
+      .setScrollFactor(0)
+      .setDepth(200)
+      .setVisible(false);
 
     const boxWidth = width - 60;
     const boxHeight = 84;
@@ -646,7 +676,14 @@ export class ExplorationScene extends Phaser.Scene {
       })
       .setOrigin(0.5);
 
-    this.inventoryContainer.add([bg, title, subtitle, divider, this.inventoryItemContainer, footer]);
+    this.inventoryContainer.add([
+      bg,
+      title,
+      subtitle,
+      divider,
+      this.inventoryItemContainer,
+      footer,
+    ]);
   }
 
   private refreshInventoryUI(): void {
@@ -668,15 +705,21 @@ export class ExplorationScene extends Phaser.Scene {
       if (!def) return;
 
       const yOffset = idx * 46;
-      const categoryColor = def.type === 'key_item' ? '#ffd700' : def.type === 'consumable' ? '#00e1ff' : '#99b0d1';
+      const categoryColor =
+        def.type === 'key_item' ? '#ffd700' : def.type === 'consumable' ? '#00e1ff' : '#99b0d1';
 
       // Item category tag + name
-      const headerText = this.add.text(0, yOffset, `[${def.type.toUpperCase()}] ${def.name}  x${stack.quantity}`, {
-        fontFamily: 'monospace',
-        fontSize: '10px',
-        color: categoryColor,
-        fontStyle: 'bold',
-      });
+      const headerText = this.add.text(
+        0,
+        yOffset,
+        `[${def.type.toUpperCase()}] ${def.name}  x${stack.quantity}`,
+        {
+          fontFamily: 'monospace',
+          fontSize: '10px',
+          color: categoryColor,
+          fontStyle: 'bold',
+        },
+      );
 
       // Item description
       const descText = this.add.text(12, yOffset + 14, def.description, {
@@ -730,7 +773,7 @@ export class ExplorationScene extends Phaser.Scene {
         this.player.x,
         this.player.y,
         this.spawnOrigin.x,
-        this.spawnOrigin.y
+        this.spawnOrigin.y,
       );
       if (distFromSpawn > 18) {
         this.session.setFlag(FLAGS.awakeningTriggered);

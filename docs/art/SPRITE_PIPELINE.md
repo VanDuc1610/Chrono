@@ -60,6 +60,7 @@ CHRONO/
 ## 3. Technical Sprite Standards
 
 ### 3.1 Dimensions & Grid
+
 - **Frame Size:** $32 \times 32\text{ px}$ strictly uniform across all animation frames.
 - **Directional Rows (Standard 4 Cardinal Directions):**
   - **Row 0 ($Y = 0\dots 31$):** Down-facing (`down`) – Facing camera
@@ -68,11 +69,13 @@ CHRONO/
   - **Row 3 ($Y = 96\dots 127$):** Right-facing (`right`) – Profile right
 
 ### 3.2 Footprint Collision Hitbox
+
 - **Hitbox Dimensions:** $18 \times 14\text{ px}$.
 - **Hitbox Offset:** $(X = 7, Y = 16)$ inside the $32 \times 32\text{ px}$ bounding box.
 - **Visual Depth Principle:** Characters' feet are firmly grounded on rows $28\dots 29$. The head and upper torso naturally overlap vertical wall tiles to maintain 2.5D visual depth.
 
 ### 3.3 Transparency & Alpha Channel
+
 - **Alpha:** Pure 8-bit RGBA transparency ($A = 0$ for empty canvas).
 - **No Stray Pixels:** No partial-transparency fringe pixels, anti-aliased feathering, or background color bleed.
 
@@ -80,20 +83,21 @@ CHRONO/
 
 ## 4. Animation Specifications
 
-| Animation Set | Frames per Dir | Total Frames | Spritesheet Size | Target FPS | Description |
-|---|---|---|---|---|---|
-| **`peter_idle`** | 4 | 16 | $128 \times 128\text{ px}$ | 5 FPS | Subtle breathing, blade chronal fracture hum |
-| **`peter_walk`** | 6 | 24 | $192 \times 128\text{ px}$ | 9 FPS | Grounded stride, coat tail response, arm sway |
-| **`peter_run`** | 6 | 24 | $192 \times 128\text{ px}$ | 12 FPS | Forward lean, dynamic coat flutter |
-| **`peter_attack`** | 6 | 24 | $192 \times 128\text{ px}$ | 12 FPS | Blade arc with cerulean chronal trail |
-| **`peter_hurt`** | 2 | 8 | $64 \times 128\text{ px}$ | 10 FPS | Recoil frame, white silhouette flash |
-| **`peter_temporal_sight`** | 4 | 16 | $128 \times 128\text{ px}$ | 6 FPS | Channeled stance, eyes & blade intense glow |
+| Animation Set              | Frames per Dir | Total Frames | Spritesheet Size           | Target FPS | Description                                   |
+| -------------------------- | -------------- | ------------ | -------------------------- | ---------- | --------------------------------------------- |
+| **`peter_idle`**           | 4              | 16           | $128 \times 128\text{ px}$ | 5 FPS      | Subtle breathing, blade chronal fracture hum  |
+| **`peter_walk`**           | 6              | 24           | $192 \times 128\text{ px}$ | 9 FPS      | Grounded stride, coat tail response, arm sway |
+| **`peter_run`**            | 6              | 24           | $192 \times 128\text{ px}$ | 12 FPS     | Forward lean, dynamic coat flutter            |
+| **`peter_attack`**         | 6              | 24           | $192 \times 128\text{ px}$ | 12 FPS     | Blade arc with cerulean chronal trail         |
+| **`peter_hurt`**           | 2              | 8            | $64 \times 128\text{ px}$  | 10 FPS     | Recoil frame, white silhouette flash          |
+| **`peter_temporal_sight`** | 4              | 16           | $128 \times 128\text{ px}$ | 6 FPS      | Channeled stance, eyes & blade intense glow   |
 
 ---
 
 ## 5. Review & Approval Protocol
 
 Before any candidate sprite is promoted from `candidates/` to `approved/` and deployed to `public/assets/`:
+
 1. **Hairstyle Audit (Permanent Identity Lock):**
    - Confirm short, compact, naturally curly men's haircut with clearly distinguishable, tightly coiled, springy curls.
    - Overall silhouette must be rounded, compact, and slightly elevated, with curls growing upward and outward rather than hanging down.
@@ -103,4 +107,3 @@ Before any candidate sprite is promoted from `candidates/` to `approved/` and de
 3. **Accessories Audit:** Verify diagonal leather strap from right shoulder to left hip, left hip notebook, right-hand Broken Blade, and waist stopped watch.
 4. **Frame Alignment Audit:** Verify anchor position does not drift between animation frames.
 5. **Engine Verification:** Test in Phaser with Arcade physics collider and 4-way movement.
-

@@ -92,12 +92,31 @@ export class PreloadScene extends Phaser.Scene {
 
     // 1. Character & Entities
     this.load.image('player_placeholder', 'assets/characters/player_placeholder.png');
-    this.load.spritesheet('peter_idle', 'assets/characters/peter/peter_idle.png', { frameWidth: 32, frameHeight: 32 });
-    this.load.spritesheet('peter_walk', 'assets/characters/peter/peter_walk.png', { frameWidth: 32, frameHeight: 32 });
-    this.load.spritesheet('peter_run', 'assets/characters/peter/peter_run.png', { frameWidth: 32, frameHeight: 32 });
-    this.load.spritesheet('peter_attack', 'assets/characters/peter/peter_attack.png', { frameWidth: 32, frameHeight: 32 });
-    this.load.spritesheet('peter_hurt', 'assets/characters/peter/peter_hurt.png', { frameWidth: 32, frameHeight: 32 });
-    this.load.spritesheet('peter_temporal_sight', 'assets/characters/peter/peter_temporal_sight.png', { frameWidth: 32, frameHeight: 32 });
+    this.load.spritesheet('peter_idle', 'assets/characters/peter/peter_idle.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet('peter_walk', 'assets/characters/peter/peter_walk.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet('peter_run', 'assets/characters/peter/peter_run.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet('peter_attack', 'assets/characters/peter/peter_attack.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet('peter_hurt', 'assets/characters/peter/peter_hurt.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet(
+      'peter_temporal_sight',
+      'assets/characters/peter/peter_temporal_sight.png',
+      { frameWidth: 32, frameHeight: 32 },
+    );
     this.load.image('npc_elder', 'assets/npcs/npc_elder_placeholder.png');
     this.load.image('enemy_fracture', 'assets/enemies/enemy_fracture_placeholder.png');
 
@@ -125,4 +144,3 @@ export class PreloadScene extends Phaser.Scene {
     });
   }
 }
-

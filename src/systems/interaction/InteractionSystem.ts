@@ -64,4 +64,3 @@ export class InteractionSystem implements IInteractionSystem {
     this.interactables.clear();
   }
 }
-

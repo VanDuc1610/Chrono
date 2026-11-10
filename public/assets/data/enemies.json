@@ -10,10 +10,7 @@
       "defense": 4,
       "speed": 10,
       "spriteKey": "enemy_fracture",
-      "skills": [
-        "chrono_scratch",
-        "temporal_flux"
-      ],
+      "skills": ["chrono_scratch", "temporal_flux"],
       "expReward": 50,
       "lootTable": [
         {
@@ -32,9 +29,7 @@
       "defense": 8,
       "speed": 6,
       "spriteKey": "enemy_fracture",
-      "skills": [
-        "gear_crush"
-      ],
+      "skills": ["gear_crush"],
       "expReward": 90,
       "lootTable": [
         {

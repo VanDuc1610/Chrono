@@ -26,7 +26,7 @@ for (let y = 0; y < height; y++) {
     // Outer edge border: Wall
     if (x === 0 || x === width - 1 || y === 0 || y === height - 1) {
       groundTile = 1;
-      wallTile = (y === 0) ? 4 : (y === 1 ? 5 : 4);
+      wallTile = y === 0 ? 4 : y === 1 ? 5 : 4;
     } else if (y === 1) {
       // Upper wall facade
       wallTile = 5;
@@ -34,7 +34,7 @@ for (let y = 0; y < height; y++) {
 
     // Patterned engravings on floor in center chamber
     if (x >= 8 && x <= 15 && y >= 7 && y <= 12) {
-      if ((x === 8 || x === 15) || (y === 7 || y === 12)) {
+      if (x === 8 || x === 15 || y === 7 || y === 12) {
         groundTile = 3;
       }
     }
@@ -50,7 +50,12 @@ for (let y = 0; y < height; y++) {
     }
 
     // Fractured Chrono Crystals in corners
-    if ((x === 3 && y === 4) || (x === 20 && y === 4) || (x === 3 && y === 14) || (x === 20 && y === 14)) {
+    if (
+      (x === 3 && y === 4) ||
+      (x === 20 && y === 4) ||
+      (x === 3 && y === 14) ||
+      (x === 20 && y === 14)
+    ) {
       wallTile = 7;
     }
 
@@ -69,60 +74,59 @@ const map = {
       data: groundData,
       height,
       id: 1,
-      name: "Ground",
+      name: 'Ground',
       opacity: 1,
-      type: "tilelayer",
+      type: 'tilelayer',
       visible: true,
       width,
       x: 0,
-      y: 0
+      y: 0,
     },
     {
       data: wallData,
       height,
       id: 2,
-      name: "Walls",
+      name: 'Walls',
       opacity: 1,
-      type: "tilelayer",
+      type: 'tilelayer',
       visible: true,
       width,
       x: 0,
       y: 0,
       properties: [
         {
-          name: "collides",
-          type: "bool",
-          value: true
-        }
-      ]
-    }
+          name: 'collides',
+          type: 'bool',
+          value: true,
+        },
+      ],
+    },
   ],
   nextlayerid: 3,
   nextobjectid: 1,
-  orientation: "orthogonal",
-  renderorder: "right-down",
-  tiledversion: "1.10.2",
+  orientation: 'orthogonal',
+  renderorder: 'right-down',
+  tiledversion: '1.10.2',
   tileheight: 32,
   tilesets: [
     {
       columns: 4,
       firstgid: 1,
-      image: "../tilesets/dungeon_tileset.png",
+      image: '../tilesets/dungeon_tileset.png',
       imageheight: 128,
       imagewidth: 128,
       margin: 0,
-      name: "dungeon_tileset",
+      name: 'dungeon_tileset',
       spacing: 0,
       tilecount: 16,
       tileheight: 32,
-      tilewidth: 32
-    }
+      tilewidth: 32,
+    },
   ],
   tilewidth: 32,
-  type: "map",
-  version: "1.10"
+  type: 'map',
+  version: '1.10',
 };
 
 fs.writeFileSync('public/assets/maps/prologue_map.json', JSON.stringify(map, null, 2));
 console.log('Generated prologue_map.json');
-

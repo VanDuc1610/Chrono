@@ -55,6 +55,7 @@ This hairstyle is a permanent character identity feature and cannot be changed w
 The image generation process is strictly manual using AUTOMATIC1111 Stable Diffusion WebUI.
 
 The Coding Agent must:
+
 1. **Preserve approved character designs** without independent alterations.
 2. **Use text-only generation prompts** authored from written design specifications.
 3. **Never search for external character references** or copyrighted materials.
@@ -63,6 +64,7 @@ The Coding Agent must:
 6. **Never promote candidate assets without explicit user approval.**
 
 ### Standard Workflow:
+
 1. Read the character design documents.
 2. Write a text-only generation prompt.
 3. Save the prompt to `art-source/characters/peter/prompts/`.
@@ -92,6 +94,7 @@ Never overwrite the original concept or approved assets silently.
 The game uses a top-down camera.
 
 Peter must support:
+
 - Down
 - Up
 - Left

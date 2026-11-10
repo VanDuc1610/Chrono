@@ -9,10 +9,12 @@
 ## 1. Dual-Agent Roles & Boundaries
 
 This repository is actively developed by two AI agents:
+
 1. **Claude Code Agent:** Project **coordinator** (assigns tasks between agents, writes prompts for Antigravity, decides when to push to `origin/main`) and implementer / architecture & code reviewer. Role granted by the project owner on 2026-11-10.
 2. **Google Antigravity Agent:** Implementation agent (feature code, asset pipeline management, scene assembly, test execution) working on tasks assigned in the task board.
 
 ### Operational Protocols:
+
 - **Task Board:** [docs/TASKS.md](docs/TASKS.md) is the single list of who does what and which files are locked. Both agents read it before starting work.
 - **Art approval stays with the project owner.** The coordinator role never authorizes generating art or promoting assets.
 - **Single-Writer Safety:** Both agents work on the same repository folder (`C:\Users\USER\.gemini\antigravity-ide\scratch\Chrono_workspace`). **Never edit the same file concurrently.** Always inspect file status before editing.
@@ -24,6 +26,7 @@ This repository is actively developed by two AI agents:
 ## 2. Non-Negotiable Character & Art Directives
 
 Claude Code must strictly respect the project's **Original Art Policy** and character identity locks:
+
 - **Peter Hairstyle Permanent Identity Lock:**
   - Short, compact, naturally curly dark-brown hair (`#3b291d`).
   - Clearly distinguishable, tightly coiled, springy curls growing upward and outward.
@@ -90,8 +93,8 @@ node scripts/validate-candidate.js <path-to-png>
 ## 5. Review Guidelines for Claude Code
 
 When reviewing PRs, diffs, or architecture proposals:
+
 1. **Separation of Concerns:** Verify that gameplay systems, scene presentation, and data remain strictly decoupled. Scene files must not hardcode quest definitions, stats, or dialogue.
 2. **Type Safety:** Verify 100% strict TypeScript types without implicit `any` or loose casts.
 3. **Phaser Lifecycle Safety:** Ensure transient state, text objects, and timers are properly cleaned in `init()` when scenes re-enter.
 4. **Narrative Consistency:** Verify distinctions between confirmed canon, proposed ideas, and unresolved mysteries (`TBD`).
-

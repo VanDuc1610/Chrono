@@ -19,4 +19,3 @@ export interface IItemStack {
 export interface InventoryDatabase {
   items: IItemDefinition[];
 }
-

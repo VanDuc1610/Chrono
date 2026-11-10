@@ -10,16 +10,18 @@ async function getDebuggerUrl(port) {
   for (let i = 0; i < 20; i++) {
     try {
       const data = await new Promise((resolve, reject) => {
-        http.get(`http://127.0.0.1:${port}/json/list`, (res) => {
-          let body = '';
-          res.on('data', (c) => (body += c));
-          res.on('end', () => resolve(body));
-        }).on('error', reject);
+        http
+          .get(`http://127.0.0.1:${port}/json/list`, (res) => {
+            let body = '';
+            res.on('data', (c) => (body += c));
+            res.on('end', () => resolve(body));
+          })
+          .on('error', reject);
       });
       const list = JSON.parse(data);
       if (Array.isArray(list)) {
         const pageTarget = list.find(
-          (t) => (t.type === 'page' || t.url.includes('3000')) && t.webSocketDebuggerUrl
+          (t) => (t.type === 'page' || t.url.includes('3000')) && t.webSocketDebuggerUrl,
         );
         if (pageTarget) {
           return pageTarget.webSocketDebuggerUrl;
@@ -110,7 +112,11 @@ async function run() {
     client.ws.addEventListener('message', (event) => {
       const msg = JSON.parse(event.data);
       if (msg.method === 'Runtime.consoleAPICalled') {
-        console.log('[Browser Console]', msg.params.type, msg.params.args.map(a => a.value || a.description).join(' '));
+        console.log(
+          '[Browser Console]',
+          msg.params.type,
+          msg.params.args.map((a) => a.value || a.description).join(' '),
+        );
       } else if (msg.method === 'Runtime.exceptionThrown') {
         console.error('[Browser Exception]', msg.params.exceptionDetails);
       }
@@ -223,9 +229,13 @@ async function run() {
     console.log('State after moving right:', movedState);
 
     if (movedState.playerX <= initialState.playerX) {
-      throw new Error(`Player did not move right! x: ${movedState.playerX}, initial: ${initialState.playerX}`);
+      throw new Error(
+        `Player did not move right! x: ${movedState.playerX}, initial: ${initialState.playerX}`,
+      );
     }
-    console.log(`✓ Player movement confirmed: moved from ${initialState.playerX} to ${movedState.playerX}px`);
+    console.log(
+      `✓ Player movement confirmed: moved from ${initialState.playerX} to ${movedState.playerX}px`,
+    );
 
     console.log('[6/7] Testing Collision Boundaries against perimeter wall...');
     // Drive player towards left wall (x = 0)

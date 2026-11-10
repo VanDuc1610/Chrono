@@ -26,4 +26,3 @@ export interface IQuest {
 export interface QuestDatabase {
   quests: IQuest[];
 }
-

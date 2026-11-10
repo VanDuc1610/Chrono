@@ -7,15 +7,15 @@ function crc32(buf) {
   for (let n = 0; n < 256; n++) {
     let c = n;
     for (let k = 0; k < 8; k++) {
-      c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1);
+      c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
     }
     table[n] = c;
   }
-  let crc = 0 ^ (-1);
+  let crc = 0 ^ -1;
   for (let i = 0; i < buf.length; i++) {
     crc = (crc >>> 8) ^ table[(crc ^ buf[i]) & 0xff];
   }
-  return (crc ^ (-1)) >>> 0;
+  return (crc ^ -1) >>> 0;
 }
 
 function makeChunk(type, data) {
@@ -55,7 +55,7 @@ function createPng(width, height, pixelFn) {
     header,
     makeChunk('IHDR', ihdr),
     makeChunk('IDAT', idat),
-    makeChunk('IEND', end)
+    makeChunk('IEND', end),
   ]);
 }
 
@@ -64,22 +64,22 @@ fs.mkdirSync(dir, { recursive: true });
 
 // Palette colors for Peter
 const C_TRANSPARENT = [0, 0, 0, 0];
-const C_HAIR_DARK = [34, 22, 15, 255];      // Deep brown curl shadow
-const C_HAIR_MID = [59, 41, 29, 255];       // Compact curly dark-brown
-const C_HAIR_LGT = [89, 65, 50, 255];       // Curly clump highlight
-const C_SKIN_BASE = [218, 185, 160, 255];   // Neutral weathered skin
+const C_HAIR_DARK = [34, 22, 15, 255]; // Deep brown curl shadow
+const C_HAIR_MID = [59, 41, 29, 255]; // Compact curly dark-brown
+const C_HAIR_LGT = [89, 65, 50, 255]; // Curly clump highlight
+const C_SKIN_BASE = [218, 185, 160, 255]; // Neutral weathered skin
 const C_SKIN_SHADOW = [178, 142, 118, 255]; // Skin shadow
-const C_EYE = [96, 125, 156, 255];          // Muted gray-blue
-const C_COAT_DARK = [22, 30, 46, 255];      // Charcoal-blue shadow
-const C_COAT_MID = [38, 50, 72, 255];       // Asymmetrical charcoal-blue
-const C_COAT_LGT = [61, 79, 112, 255];      // Charcoal-blue highlight
-const C_COAT_LINING = [20, 25, 38, 255];    // Indigo-slate lining
-const C_STRAP = [69, 49, 35, 255];          // Oiled leather strap
-const C_SILVER = [156, 166, 186, 255];      // Aged silver buckles & details
-const C_TROUSERS = [24, 28, 36, 255];       // Dark trousers
-const C_BOOTS = [46, 34, 25, 255];          // Leather boots
-const C_BLADE = [140, 150, 165, 255];       // Steel blade
-const C_BLADE_GLOW = [0, 200, 255, 255];    // Cerulean chronal fracture glow
+const C_EYE = [96, 125, 156, 255]; // Muted gray-blue
+const C_COAT_DARK = [22, 30, 46, 255]; // Charcoal-blue shadow
+const C_COAT_MID = [38, 50, 72, 255]; // Asymmetrical charcoal-blue
+const C_COAT_LGT = [61, 79, 112, 255]; // Charcoal-blue highlight
+const C_COAT_LINING = [20, 25, 38, 255]; // Indigo-slate lining
+const C_STRAP = [69, 49, 35, 255]; // Oiled leather strap
+const C_SILVER = [156, 166, 186, 255]; // Aged silver buckles & details
+const C_TROUSERS = [24, 28, 36, 255]; // Dark trousers
+const C_BOOTS = [46, 34, 25, 255]; // Leather boots
+const C_BLADE = [140, 150, 165, 255]; // Steel blade
+const C_BLADE_GLOW = [0, 200, 255, 255]; // Cerulean chronal fracture glow
 
 /**
  * Renders a single 32x32 Peter sprite frame adhering to:
@@ -101,15 +101,15 @@ function drawPeterFrame(x, y, dir, animType, frameIdx) {
   let armOffset = 0;
 
   if (animType === 'walk') {
-    bobY = (frameIdx % 2 === 1) ? -1 : 0;
-    legOffset = (frameIdx % 4 === 1) ? 2 : ((frameIdx % 4 === 3) ? -2 : 0);
+    bobY = frameIdx % 2 === 1 ? -1 : 0;
+    legOffset = frameIdx % 4 === 1 ? 2 : frameIdx % 4 === 3 ? -2 : 0;
     armOffset = -legOffset;
   } else if (animType === 'run') {
-    bobY = (frameIdx % 2 === 1) ? -2 : 0;
-    legOffset = (frameIdx % 2 === 1) ? 3 : -3;
+    bobY = frameIdx % 2 === 1 ? -2 : 0;
+    legOffset = frameIdx % 2 === 1 ? 3 : -3;
     armOffset = -legOffset;
   } else if (animType === 'idle') {
-    bobY = (frameIdx === 1 || frameIdx === 2) ? -1 : 0;
+    bobY = frameIdx === 1 || frameIdx === 2 ? -1 : 0;
   } else if (animType === 'hurt') {
     bobY = frameIdx === 0 ? -2 : 0;
   } else if (animType === 'temporal_sight') {
@@ -130,10 +130,10 @@ function drawPeterFrame(x, y, dir, animType, frameIdx) {
     }
     if (dir === 1) {
       // Back view: hair covers down to neck (y=11)
-      if (adjY <= 11) return curlMod === 0 ? C_HAIR_DARK : (curlMod > 2 ? C_HAIR_LGT : C_HAIR_MID);
+      if (adjY <= 11) return curlMod === 0 ? C_HAIR_DARK : curlMod > 2 ? C_HAIR_LGT : C_HAIR_MID;
     } else {
       // Front & sides: hair frames upper forehead, no shaved sides
-      if (adjY <= 7) return curlMod === 0 ? C_HAIR_DARK : (curlMod > 2 ? C_HAIR_LGT : C_HAIR_MID);
+      if (adjY <= 7) return curlMod === 0 ? C_HAIR_DARK : curlMod > 2 ? C_HAIR_LGT : C_HAIR_MID;
       if (lx === 10 || lx === 21) return C_HAIR_MID; // Hair covers sides naturally (no fade/undercut)
     }
   }
@@ -166,7 +166,7 @@ function drawPeterFrame(x, y, dir, animType, frameIdx) {
 
     // Diagonal Leather Shoulder Strap (from right shoulder down to left hip)
     // Formula: lx + adjY approx line
-    const strapBand = (lx + adjY);
+    const strapBand = lx + adjY;
     if (strapBand >= 27 && strapBand <= 29 && adjY >= 13 && adjY <= 21) {
       if (adjY === 17 && lx === 11) return C_SILVER; // Aged silver buckle
       return C_STRAP;
@@ -189,7 +189,7 @@ function drawPeterFrame(x, y, dir, animType, frameIdx) {
       return C_COAT_DARK;
     }
 
-    return (lx % 2 === 0) ? C_COAT_MID : C_COAT_LGT;
+    return lx % 2 === 0 ? C_COAT_MID : C_COAT_LGT;
   }
 
   // 4. SIGNATURE OBJECT: BROKEN BLADE (Held at side or in front)
@@ -276,5 +276,6 @@ const sightPng = createPng(128, 128, (x, y) => {
 });
 fs.writeFileSync(path.join(dir, 'peter_temporal_sight.png'), sightPng);
 
-console.log('Successfully generated all Peter top-down sprite sheets in public/assets/characters/peter/');
-
+console.log(
+  'Successfully generated all Peter top-down sprite sheets in public/assets/characters/peter/',
+);

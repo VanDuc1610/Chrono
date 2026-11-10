@@ -4,7 +4,11 @@ import { IMovementSystem, MovementDirection } from './IMovementSystem';
 export class TopDownMovementSystem implements IMovementSystem {
   private lastFacing: 'up' | 'down' | 'left' | 'right' = 'down';
 
-  public move(target: Phaser.Physics.Arcade.Sprite, direction: MovementDirection, speed: number): void {
+  public move(
+    target: Phaser.Physics.Arcade.Sprite,
+    direction: MovementDirection,
+    speed: number,
+  ): void {
     if (!target || !target.body) return;
 
     if (direction.x === 0 && direction.y === 0) {
@@ -52,4 +56,3 @@ export class TopDownMovementSystem implements IMovementSystem {
     return this.lastFacing;
   }
 }
-

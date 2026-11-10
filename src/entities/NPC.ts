@@ -24,7 +24,7 @@ export class NPC extends Entity implements IInteractable {
     y: number,
     texture: string,
     config: NPCConfig,
-    onInteract?: (npc: NPC) => void
+    onInteract?: (npc: NPC) => void,
   ) {
     super(scene, x, y, texture);
 

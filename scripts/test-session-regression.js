@@ -20,7 +20,7 @@ async function getDebuggerUrl(port) {
       const list = JSON.parse(data);
       if (Array.isArray(list)) {
         const pageTarget = list.find(
-          (t) => (t.type === 'page' || t.url.includes('3000')) && t.webSocketDebuggerUrl
+          (t) => (t.type === 'page' || t.url.includes('3000')) && t.webSocketDebuggerUrl,
         );
         if (pageTarget) {
           return pageTarget.webSocketDebuggerUrl;
@@ -88,7 +88,7 @@ class CDPClient {
 async function waitForScene(client, sceneKey, maxRetries = 35) {
   for (let i = 0; i < maxRetries; i++) {
     const active = await client.eval(
-      `Boolean(window.__GAME__ && window.__GAME__.scene.isActive('${sceneKey}'))`
+      `Boolean(window.__GAME__ && window.__GAME__.scene.isActive('${sceneKey}'))`,
     );
     if (active) return true;
     await wait(200);
@@ -235,7 +235,7 @@ async function run() {
       '--window-size=1280,720',
       'http://localhost:3000/',
     ],
-    { stdio: 'ignore' }
+    { stdio: 'ignore' },
   );
 
   const results = [];
@@ -271,7 +271,9 @@ async function run() {
     `);
     await wait(200);
 
-    const beforeCombatObj = await client.eval(`window.__TEST_HELPERS__.isElderObjectiveCompleted()`);
+    const beforeCombatObj = await client.eval(
+      `window.__TEST_HELPERS__.isElderObjectiveCompleted()`,
+    );
     const shardsBeforeEscape = await client.eval(`window.__TEST_HELPERS__.getShardCount()`);
 
     // Touch Shade -> Enter Combat -> Press 5 (Escape)
@@ -290,7 +292,7 @@ async function run() {
       detail: `beforeCombat=${beforeCombatObj}, afterEscape=${afterEscapeObj}`,
     });
     console.log(
-      `  -> ${b1Pass ? 'PASS' : 'FAIL'} (obj_speak_elder completed: before=${beforeCombatObj}, afterEscape=${afterEscapeObj})\n`
+      `  -> ${b1Pass ? 'PASS' : 'FAIL'} (obj_speak_elder completed: before=${beforeCombatObj}, afterEscape=${afterEscapeObj})\n`,
     );
 
     // =========================================================================
@@ -299,7 +301,9 @@ async function run() {
     // =========================================================================
     const shardsAfterEscape = await client.eval(`window.__TEST_HELPERS__.getShardCount()`);
 
-    console.log('[Scenario 4 / B4] After Escape -> Touch Shade 2nd time -> Key 1 (Attack) deals damage...');
+    console.log(
+      '[Scenario 4 / B4] After Escape -> Touch Shade 2nd time -> Key 1 (Attack) deals damage...',
+    );
     await touchShadeToEnterCombat(client);
 
     const enemyHpBeforeKey1 = await client.eval(`
@@ -329,7 +333,7 @@ async function run() {
       detail: `enemyHpBefore=${enemyHpBeforeKey1}, enemyHpAfter=${enemyHpAfterKey1}`,
     });
     console.log(
-      `  -> ${b4Pass ? 'PASS' : 'FAIL'} (Enemy HP: ${enemyHpBeforeKey1} -> ${enemyHpAfterKey1})\n`
+      `  -> ${b4Pass ? 'PASS' : 'FAIL'} (Enemy HP: ${enemyHpBeforeKey1} -> ${enemyHpAfterKey1})\n`,
     );
 
     // =========================================================================
@@ -373,7 +377,7 @@ async function run() {
       detail: `hpWithZeroShards: before=${hpBeforeItem}, after=${hpAfterItem}`,
     });
     console.log(
-      `  -> ${b6Pass ? 'PASS' : 'FAIL'} (Player HP with 0 shards: ${hpBeforeItem} -> ${hpAfterItem})\n`
+      `  -> ${b6Pass ? 'PASS' : 'FAIL'} (Player HP with 0 shards: ${hpBeforeItem} -> ${hpAfterItem})\n`,
     );
 
     // =========================================================================
@@ -439,14 +443,16 @@ async function run() {
       detail: `escape(${shardsBeforeEscape}->${shardsAfterEscape}), continue(${shardsAtSave}->${shardsAfterContinue1}->${shardsAfterContinue2})`,
     });
     console.log(
-      `  -> ${b2Pass ? 'PASS' : 'FAIL'} (Escape shards: ${shardsBeforeEscape}->${shardsAfterEscape}; Continue shards: saved=${shardsAtSave}, c1=${shardsAfterContinue1}, c2=${shardsAfterContinue2})\n`
+      `  -> ${b2Pass ? 'PASS' : 'FAIL'} (Escape shards: ${shardsBeforeEscape}->${shardsAfterEscape}; Continue shards: saved=${shardsAtSave}, c1=${shardsAfterContinue1}, c2=${shardsAfterContinue2})\n`,
     );
 
     // =========================================================================
     // SCENARIO 3 (B3): Defeat Shade -> Return to MainMenu -> New Game:
     // Shade spawns again, and inventory is reset to starter kit (2 shards + relic).
     // =========================================================================
-    console.log('[Scenario 3 / B3] Defeat Shade -> MainMenu -> New Game resets Shade & starter kit...');
+    console.log(
+      '[Scenario 3 / B3] Defeat Shade -> MainMenu -> New Game resets Shade & starter kit...',
+    );
     await triggerFreshNewGame(client);
     await client.eval(BROWSER_HELPERS);
 
@@ -473,7 +479,7 @@ async function run() {
       detail: `hasShade=${newGameState.hasShade}, shards=${newGameState.shards}, hasRelic=${newGameState.hasRelic}`,
     });
     console.log(
-      `  -> ${b3Pass ? 'PASS' : 'FAIL'} (hasShade=${newGameState.hasShade}, shards=${newGameState.shards}, hasRelic=${newGameState.hasRelic})\n`
+      `  -> ${b3Pass ? 'PASS' : 'FAIL'} (hasShade=${newGameState.hasShade}, shards=${newGameState.shards}, hasRelic=${newGameState.hasRelic})\n`,
     );
 
     client.close();

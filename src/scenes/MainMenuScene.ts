@@ -165,10 +165,7 @@ export class MainMenuScene extends Phaser.Scene {
     const modalX = width / 2 - modalWidth / 2;
     const modalY = height / 2 - modalHeight / 2;
 
-    this.optionsContainer = this.add
-      .container(modalX, modalY)
-      .setDepth(200)
-      .setVisible(false);
+    this.optionsContainer = this.add.container(modalX, modalY).setDepth(200).setVisible(false);
 
     const bg = this.add.graphics();
     bg.fillStyle(0x0c111f, 0.96);
@@ -261,7 +258,7 @@ export class MainMenuScene extends Phaser.Scene {
             width / 2 - textHalfWidth - 20,
             itemY - 4,
             width / 2 - textHalfWidth - 20,
-            itemY + 4
+            itemY + 4,
           );
           // Right diamond
           this.cursorGraphic.fillTriangle(
@@ -270,7 +267,7 @@ export class MainMenuScene extends Phaser.Scene {
             width / 2 + textHalfWidth + 20,
             itemY - 4,
             width / 2 + textHalfWidth + 20,
-            itemY + 4
+            itemY + 4,
           );
         } else {
           item.gameObject.setColor(item.enabled ? '#abb7d6' : '#454e66');
@@ -336,4 +333,3 @@ export class MainMenuScene extends Phaser.Scene {
     }
   }
 }
-

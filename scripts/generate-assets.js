@@ -6,15 +6,15 @@ function crc32(buf) {
   for (let n = 0; n < 256; n++) {
     let c = n;
     for (let k = 0; k < 8; k++) {
-      c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1);
+      c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
     }
     table[n] = c;
   }
-  let crc = 0 ^ (-1);
+  let crc = 0 ^ -1;
   for (let i = 0; i < buf.length; i++) {
     crc = (crc >>> 8) ^ table[(crc ^ buf[i]) & 0xff];
   }
-  return (crc ^ (-1)) >>> 0;
+  return (crc ^ -1) >>> 0;
 }
 
 function makeChunk(type, data) {
@@ -54,7 +54,7 @@ function createPng(width, height, pixelFn) {
     header,
     makeChunk('IHDR', ihdr),
     makeChunk('IDAT', idat),
-    makeChunk('IEND', end)
+    makeChunk('IEND', end),
   ]);
 }
 
@@ -68,7 +68,7 @@ const dirs = [
   'public/assets/ui',
   'public/assets/effects',
   'public/assets/audio',
-  'public/assets/data'
+  'public/assets/data',
 ];
 
 for (const dir of dirs) {
@@ -164,7 +164,7 @@ const tilesetPng = createPng(128, 128, (x, y) => {
 
     case 2: // Engraved Floor / Ruin Tile
       if (lx === 0 || ly === 0 || lx === 31 || ly === 31) return [30, 35, 48, 255];
-      if (lx === ly || lx === (31 - ly)) return [65, 80, 110, 255]; // Cross engraving
+      if (lx === ly || lx === 31 - ly) return [65, 80, 110, 255]; // Cross engraving
       return [38, 44, 60, 255];
 
     case 3: // Wall Top (Solid obstacle)
@@ -175,7 +175,7 @@ const tilesetPng = createPng(128, 128, (x, y) => {
     case 4: // Wall Front / Face (Solid obstacle)
       if (ly < 2) return [80, 90, 115, 255];
       if (ly % 8 === 0) return [25, 28, 38, 255]; // Brick row line
-      if ((Math.floor(ly / 8) % 2 === 0 ? lx % 16 === 0 : (lx + 8) % 16 === 0)) {
+      if (Math.floor(ly / 8) % 2 === 0 ? lx % 16 === 0 : (lx + 8) % 16 === 0) {
         return [25, 28, 38, 255]; // Brick vertical seam
       }
       return [45, 52, 68, 255];
@@ -259,4 +259,3 @@ wavHeader.writeUInt32LE(0, 40); // Subchunk2Size (0 bytes of audio data)
 fs.writeFileSync('public/assets/audio/silence_placeholder.wav', wavHeader);
 
 console.log('Successfully generated placeholder assets in public/assets/');
-

@@ -26,4 +26,3 @@ export const GameConfig: Phaser.Types.Core.GameConfig = {
   backgroundColor: '#0c0e17',
   scene: [BootScene, PreloadScene, MainMenuScene, ExplorationScene, CombatScene],
 };
-

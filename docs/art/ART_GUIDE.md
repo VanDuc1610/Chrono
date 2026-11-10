@@ -1,4 +1,5 @@
 # CHRONO – THE FRACTURED DIVINITY
+
 ## Art Direction & Pixel Asset Production Guide
 
 **Version:** 1.0.0-PROLOGUE  
@@ -19,16 +20,17 @@
 
 ## 2. Dimensional Standards & Grid Conventions
 
-| Asset Type | Grid / Canvas Size | Sprite Bounding Box | Collision Body (Footprint) |
-|---|---|---|---|
-| **Base Environment Tiles** | 32 × 32 px | 32 × 32 px | 32 × 32 px (if solid) |
-| **Micro Tiles / Detail Decals** | 16 × 16 px | 16 × 16 px | Variable |
-| **Standard Humanoid Characters** | 32 × 32 px | 24 × 30 px | 18 × 14 px (ground footprint) |
-| **Large NPCs / Boss Entities** | 64 × 64 px | 56 × 60 px | 36 × 24 px |
-| **UI Icons** | 16 × 16 px / 24 × 24 px | Centered | N/A |
-| **Dialogue Portraits (TBD)** | 64 × 64 px | Centered | N/A |
+| Asset Type                       | Grid / Canvas Size      | Sprite Bounding Box | Collision Body (Footprint)    |
+| -------------------------------- | ----------------------- | ------------------- | ----------------------------- |
+| **Base Environment Tiles**       | 32 × 32 px              | 32 × 32 px          | 32 × 32 px (if solid)         |
+| **Micro Tiles / Detail Decals**  | 16 × 16 px              | 16 × 16 px          | Variable                      |
+| **Standard Humanoid Characters** | 32 × 32 px              | 24 × 30 px          | 18 × 14 px (ground footprint) |
+| **Large NPCs / Boss Entities**   | 64 × 64 px              | 56 × 60 px          | 36 × 24 px                    |
+| **UI Icons**                     | 16 × 16 px / 24 × 24 px | Centered            | N/A                           |
+| **Dialogue Portraits (TBD)**     | 64 × 64 px              | Centered            | N/A                           |
 
 ### Canvas & Framing Rules:
+
 - All character and NPC frames must be centered horizontally inside their designated grid bounding box.
 - Sprites must touch the bottom anchor row of the canvas (Y = 30 or 31 on 32×32 frames) to maintain consistent ground-plane alignment across all directions.
 
@@ -37,6 +39,7 @@
 ## 3. Sprite Conventions & Directions
 
 Characters and moving entities use a 4-directional standard:
+
 1. **Down (`down`):** Facing camera directly (front). Default idle direction.
 2. **Up (`up`):** Facing away from camera (back).
 3. **Left (`left`):** Profile / 3/4 left perspective.
@@ -53,6 +56,7 @@ All sprite sheets must follow uniform frame indexing and JSON manifest naming:
 ```
 
 ### Examples:
+
 - `char_player_idle_down_00.png`
 - `char_player_walk_down_01.png`
 - `char_player_walk_down_02.png`
@@ -61,6 +65,7 @@ All sprite sheets must follow uniform frame indexing and JSON manifest naming:
 - `enemy_shade_attack_left_02.png`
 
 ### Animation Frame Budgets:
+
 - **Idle:** 2 to 4 frames (4 to 6 FPS loop, subtle breathing/floating).
 - **Walk:** 4 to 6 frames (8 to 10 FPS loop, distinct contact, recoil, passing poses).
 - **Combat Attack / Cast:** 4 to 8 frames (12 FPS, strong anticipation, impact frame, recovery).
@@ -74,6 +79,7 @@ All sprite sheets must follow uniform frame indexing and JSON manifest naming:
 A cohesive 32-color palette ramp (The Chronal Spectrum) dictates all in-game assets:
 
 ### Swatches:
+
 1. **The Abyss (Environment & Shadows):**
    - `#07080f` (Deepest Obsidian)
    - `#0e121e` (Midnight Slate)
@@ -98,6 +104,7 @@ A cohesive 32-color palette ramp (The Chronal Spectrum) dictates all in-game ass
    - `#ff4d79` (Temporal Bleed Rose)
 
 ### Shading Guidelines:
+
 - Max **3 to 4 shades per material surface** (Shadow, Base Tone, Mid Highlight, Edge Rim).
 - No fuzzy anti-aliasing or automatic gradient ramps.
 - Hue shifting: Shadows must shift towards cool obsidian/indigo; highlights must shift towards warm cyan or amber.
@@ -120,4 +127,3 @@ A cohesive 32-color palette ramp (The Chronal Spectrum) dictates all in-game ass
 2. **Head-to-Body Ratio:** 1:2.5 to 1:3 stylized proportion (chibi-stylized realism, avoiding extreme chibi or ultra-realistic tall proportions).
 3. **Contrasting Values:** Light elements (e.g. glowing fracture cores, crystal visors) must always sit against dark armor or robes to guarantee readability against varying dungeon floor textures.
 4. **Placeholder Transition:** Any new artist replacing temporary assets must conform strictly to the collision bounding box `18 × 14 px` located at bottom-center `(7, 16)` to preserve existing movement and collision mechanics.
-

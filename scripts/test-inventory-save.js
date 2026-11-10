@@ -10,16 +10,18 @@ async function getDebuggerUrl(port) {
   for (let i = 0; i < 20; i++) {
     try {
       const data = await new Promise((resolve, reject) => {
-        http.get(`http://127.0.0.1:${port}/json/list`, (res) => {
-          let body = '';
-          res.on('data', (c) => (body += c));
-          res.on('end', () => resolve(body));
-        }).on('error', reject);
+        http
+          .get(`http://127.0.0.1:${port}/json/list`, (res) => {
+            let body = '';
+            res.on('data', (c) => (body += c));
+            res.on('end', () => resolve(body));
+          })
+          .on('error', reject);
       });
       const list = JSON.parse(data);
       if (Array.isArray(list)) {
         const pageTarget = list.find(
-          (t) => (t.type === 'page' || t.url.includes('3000')) && t.webSocketDebuggerUrl
+          (t) => (t.type === 'page' || t.url.includes('3000')) && t.webSocketDebuggerUrl,
         );
         if (pageTarget) {
           return pageTarget.webSocketDebuggerUrl;
@@ -111,7 +113,7 @@ async function run() {
       '--no-default-browser-check',
       'http://localhost:3000/',
     ],
-    { stdio: 'ignore' }
+    { stdio: 'ignore' },
   );
 
   try {
@@ -152,7 +154,7 @@ async function run() {
     }
     console.log('✓ ExplorationScene active!');
 
-    console.log('[3/7] Verifying Initial Inventory State (Peter\'s signature items)...');
+    console.log("[3/7] Verifying Initial Inventory State (Peter's signature items)...");
     const initialInventory = await client.eval(`
       (() => {
         const expl = window.__GAME__.scene.getScene('ExplorationScene');
@@ -165,7 +167,9 @@ async function run() {
     `);
     console.log('Initial Inventory:', initialInventory);
     if (!initialInventory.hasChronometer || initialInventory.shardCount !== 2) {
-      throw new Error('Initial inventory mismatch! Expected relic_chronometer and 2x chrono_shard_minor');
+      throw new Error(
+        'Initial inventory mismatch! Expected relic_chronometer and 2x chrono_shard_minor',
+      );
     }
     console.log('✓ Peter starts with Broken Chronometer and 2x Minor Chrono Shards!');
 
@@ -298,7 +302,9 @@ async function run() {
     `);
     console.log('Restored Exploration State:', restoredState);
     if (restoredState.playerX !== 410 || restoredState.playerY !== 335) {
-      throw new Error(`Player position was not restored accurately! Got (${restoredState.playerX}, ${restoredState.playerY})`);
+      throw new Error(
+        `Player position was not restored accurately! Got (${restoredState.playerX}, ${restoredState.playerY})`,
+      );
     }
     console.log('✓ Player position and inventory restored with 100% precision from Save Slot 1!');
 

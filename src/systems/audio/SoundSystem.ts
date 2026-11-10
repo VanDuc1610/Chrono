@@ -86,7 +86,7 @@ export class SoundSystem {
             bgmVolume: this.bgmVolume,
             masterVolume: this.masterVolume,
             isMuted: this.isMuted,
-          })
+          }),
         );
       }
     } catch {
@@ -153,11 +153,11 @@ export class SoundSystem {
       this.activeBgm.masterGain.gain.cancelScheduledValues(now);
       this.activeBgm.masterGain.gain.setValueAtTime(
         Math.max(0.0001, this.activeBgm.masterGain.gain.value),
-        now
+        now,
       );
       this.activeBgm.masterGain.gain.linearRampToValueAtTime(
         this.isMuted ? 0.0001 : targetGain,
-        now + 0.08
+        now + 0.08,
       );
     } catch {
       // ignore
@@ -262,10 +262,7 @@ export class SoundSystem {
     const fadeSec = Math.max(0.04, fadeMs / 1000);
     try {
       channel.masterGain.gain.cancelScheduledValues(now);
-      channel.masterGain.gain.setValueAtTime(
-        Math.max(0.0001, channel.masterGain.gain.value),
-        now
-      );
+      channel.masterGain.gain.setValueAtTime(Math.max(0.0001, channel.masterGain.gain.value), now);
       channel.masterGain.gain.linearRampToValueAtTime(0.0001, now + fadeSec);
     } catch {
       // ignore
@@ -343,16 +340,16 @@ export class SoundSystem {
     const motifNotes = [
       261.63, // C4
       311.13, // Eb4
-      392.0,  // G4
+      392.0, // G4
       349.23, // F4
       293.66, // D4
       311.13, // Eb4
-      415.3,  // Ab4
-      392.0,  // G4
+      415.3, // Ab4
+      392.0, // G4
       261.63, // C4
       246.94, // B3
       293.66, // D4
-      196.0,  // G3
+      196.0, // G3
     ];
 
     const triggerStep = () => {
@@ -361,27 +358,11 @@ export class SoundSystem {
       channel.stepIndex++;
 
       const freq = motifNotes[step];
-      this.scheduleTrackedNote(
-        this.ctx,
-        channel,
-        freq,
-        'sine',
-        0.13,
-        0.04,
-        0.52
-      );
+      this.scheduleTrackedNote(this.ctx, channel, freq, 'sine', 0.13, 0.04, 0.52);
 
       // Subtle ethereal fifth shimmer every 4th step
       if (step % 4 === 0) {
-        this.scheduleTrackedNote(
-          this.ctx,
-          channel,
-          freq * 1.5,
-          'triangle',
-          0.055,
-          0.08,
-          0.65
-        );
+        this.scheduleTrackedNote(this.ctx, channel, freq * 1.5, 'triangle', 0.055, 0.08, 0.65);
       }
     };
 
@@ -395,26 +376,26 @@ export class SoundSystem {
    */
   private setupBattleChannel(channel: ActiveBgmChannel): void {
     const bassOstinato = [
-      110.0,  // A2
-      110.0,  // A2
+      110.0, // A2
+      110.0, // A2
       130.81, // C3
-      110.0,  // A2
+      110.0, // A2
       116.54, // Bb2
-      110.0,  // A2
+      110.0, // A2
       146.83, // D3
       138.59, // C#3
     ];
 
     const leadMotif = [
-      220.0,  // A3
+      220.0, // A3
       0,
       261.63, // C4
       293.66, // D4
       311.13, // Eb4
       293.66, // D4
       233.08, // Bb3
-      196.0,  // G3
-      220.0,  // A3
+      196.0, // G3
+      220.0, // A3
       0,
       329.63, // E4
       311.13, // Eb4
@@ -430,27 +411,11 @@ export class SoundSystem {
       channel.stepIndex++;
 
       const bassFreq = bassOstinato[step % bassOstinato.length];
-      this.scheduleTrackedNote(
-        this.ctx,
-        channel,
-        bassFreq,
-        'sawtooth',
-        0.14,
-        0.01,
-        0.15
-      );
+      this.scheduleTrackedNote(this.ctx, channel, bassFreq, 'sawtooth', 0.14, 0.01, 0.15);
 
       const leadFreq = leadMotif[step % leadMotif.length];
       if (leadFreq > 0) {
-        this.scheduleTrackedNote(
-          this.ctx,
-          channel,
-          leadFreq,
-          'triangle',
-          0.12,
-          0.01,
-          0.17
-        );
+        this.scheduleTrackedNote(this.ctx, channel, leadFreq, 'triangle', 0.12, 0.01, 0.17);
       }
     };
 
@@ -465,7 +430,7 @@ export class SoundSystem {
     type: OscillatorType,
     peakGain: number,
     attackSec: number,
-    durationSec: number
+    durationSec: number,
   ): void {
     if (channel.disposed) return;
 

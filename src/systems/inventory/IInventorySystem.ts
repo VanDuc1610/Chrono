@@ -10,4 +10,3 @@ export interface IInventorySystem {
   getItemDefinition(itemId: string): IItemDefinition | undefined;
   clear(): void;
 }
-

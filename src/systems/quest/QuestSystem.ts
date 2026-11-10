@@ -2,10 +2,7 @@ import { IQuestSystem } from './IQuestSystem';
 import { IQuest, IQuestObjective, QuestDatabase, QuestStage } from './QuestTypes';
 
 export type QuestEventType =
-  | 'quest_started'
-  | 'objective_completed'
-  | 'quest_completed'
-  | 'quest_failed';
+  'quest_started' | 'objective_completed' | 'quest_completed' | 'quest_failed';
 
 export interface QuestEvent {
   type: QuestEventType;
@@ -153,4 +150,3 @@ export class QuestSystem implements IQuestSystem {
     return quest ? quest.stage === 'completed' : false;
   }
 }
-

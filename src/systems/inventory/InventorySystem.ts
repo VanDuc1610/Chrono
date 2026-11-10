@@ -90,4 +90,3 @@ export class InventorySystem implements IInventorySystem {
     }
   }
 }
-

@@ -22,9 +22,11 @@ export class Player extends Entity {
     y: number,
     controller: IPlayerController,
     movementSystem?: IMovementSystem,
-    config?: PlayerConfig
+    config?: PlayerConfig,
   ) {
-    const initialTexture = config?.textureKey ?? (scene.textures.exists('peter_idle') ? 'peter_idle' : 'player_placeholder');
+    const initialTexture =
+      config?.textureKey ??
+      (scene.textures.exists('peter_idle') ? 'peter_idle' : 'player_placeholder');
     super(scene, x, y, initialTexture);
 
     this.controller = controller;

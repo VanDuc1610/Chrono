@@ -10,16 +10,18 @@ async function getDebuggerUrl(port) {
   for (let i = 0; i < 20; i++) {
     try {
       const data = await new Promise((resolve, reject) => {
-        http.get(`http://127.0.0.1:${port}/json/list`, (res) => {
-          let body = '';
-          res.on('data', (c) => (body += c));
-          res.on('end', () => resolve(body));
-        }).on('error', reject);
+        http
+          .get(`http://127.0.0.1:${port}/json/list`, (res) => {
+            let body = '';
+            res.on('data', (c) => (body += c));
+            res.on('end', () => resolve(body));
+          })
+          .on('error', reject);
       });
       const list = JSON.parse(data);
       if (Array.isArray(list)) {
         const pageTarget = list.find(
-          (t) => (t.type === 'page' || t.url.includes('3000')) && t.webSocketDebuggerUrl
+          (t) => (t.type === 'page' || t.url.includes('3000')) && t.webSocketDebuggerUrl,
         );
         if (pageTarget) {
           return pageTarget.webSocketDebuggerUrl;
@@ -110,15 +112,23 @@ async function run() {
     client.ws.addEventListener('message', (event) => {
       const msg = JSON.parse(event.data);
       if (msg.method === 'Runtime.consoleAPICalled') {
-        console.log('[Browser Console]', msg.params.type, msg.params.args.map(a => a.value || a.description).join(' '));
+        console.log(
+          '[Browser Console]',
+          msg.params.type,
+          msg.params.args.map((a) => a.value || a.description).join(' '),
+        );
       } else if (msg.method === 'Runtime.exceptionThrown') {
         console.error('[Browser Exception]', msg.params.exceptionDetails);
       }
     });
 
-    console.log('[2/6] Waiting for game to load MainMenuScene and transitioning to ExplorationScene...');
+    console.log(
+      '[2/6] Waiting for game to load MainMenuScene and transitioning to ExplorationScene...',
+    );
     for (let i = 0; i < 30; i++) {
-      const isMenu = await client.eval(`window.__GAME__ && window.__GAME__.scene.isActive('MainMenuScene')`);
+      const isMenu = await client.eval(
+        `window.__GAME__ && window.__GAME__.scene.isActive('MainMenuScene')`,
+      );
       if (isMenu) break;
       await wait(250);
     }
@@ -217,7 +227,9 @@ async function run() {
     if (stateAfterRound1.enemyHp >= combatState.enemyHp) {
       throw new Error('Enemy HP did not decrease after player attack!');
     }
-    console.log(`✓ Damage confirmed: Enemy HP reduced from ${combatState.enemyHp} to ${stateAfterRound1.enemyHp}`);
+    console.log(
+      `✓ Damage confirmed: Enemy HP reduced from ${combatState.enemyHp} to ${stateAfterRound1.enemyHp}`,
+    );
 
     console.log('[6/6] Finishing battle using Temporal Strike...');
     // Execute second strike to defeat the shade
@@ -285,4 +297,3 @@ run().catch((err) => {
   console.error('Combat test run failed:', err);
   process.exit(1);
 });
-

@@ -14,4 +14,3 @@ export interface InteractionEvent {
   prompt: string;
   available: boolean;
 }
-

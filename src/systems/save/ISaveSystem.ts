@@ -8,4 +8,3 @@ export interface ISaveSystem {
   listSlots(): Promise<ISaveMetadata[]>;
   hasSave(slot: number): boolean;
 }
-

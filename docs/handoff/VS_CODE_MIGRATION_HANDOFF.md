@@ -3,7 +3,7 @@
 **Project:** CHRONO – THE FRACTURED DIVINITY  
 **Date:** November 10, 2026  
 **Auditor / Author:** Lead Technical Architect  
-**Target Environment:** Visual Studio Code (Multi-Agent Setup: Antigravity + Claude Code)  
+**Target Environment:** Visual Studio Code (Multi-Agent Setup: Antigravity + Claude Code)
 
 ---
 
@@ -24,7 +24,7 @@ C:\Users\USER\.gemini\antigravity-ide\scratch\Chrono_workspace
 - **Git Repository Root:** `C:\Users\USER\.gemini\antigravity-ide\scratch\Chrono_workspace`
 - **Remote Origin:** `https://github.com/VanDuc1610/Chrono.git`
 - **Active Branch:** `main`
-- **Current Baseline Commit:** `ffb72c3` (*Baseline: Prologue vertical slice (Milestones 1-4)*)
+- **Current Baseline Commit:** `ffb72c3` (_Baseline: Prologue vertical slice (Milestones 1-4)_)
 - **Remote Sync Status:** Verified and connected to `origin/main`.
 - **Working Tree:** Clean baseline; ready for continued development.
 
@@ -41,12 +41,15 @@ C:\Users\USER\.gemini\antigravity-ide\scratch\Chrono_workspace
 ## 4. Instructions to Open in Visual Studio Code
 
 ### Method A – Command Line (Fastest)
+
 From Windows PowerShell or Terminal:
+
 ```powershell
 code "C:\Users\USER\.gemini\antigravity-ide\scratch\Chrono_workspace"
 ```
 
 ### Method B – Visual Studio Code GUI
+
 1. Launch **Visual Studio Code**.
 2. Click **File** $\rightarrow$ **Open Folder...** (or press `Ctrl+K, Ctrl+O`).
 3. Navigate to: `C:\Users\USER\.gemini\antigravity-ide\scratch\Chrono_workspace`.
@@ -59,25 +62,25 @@ code "C:\Users\USER\.gemini\antigravity-ide\scratch\Chrono_workspace"
 
 The repository includes [`.vscode/extensions.json`](file:///c:/Users/USER/.gemini/antigravity-ide/scratch/Chrono_workspace/.vscode/extensions.json), which automatically prompts VS Code to suggest:
 
-| Extension | Extension ID | Purpose |
-| :--- | :--- | :--- |
-| **Vite** | `antfu.vite` | Fast Vite dev server controls within VS Code |
-| **ESLint** | `dbaeumer.vscode-eslint` | JavaScript/TypeScript linting |
-| **Prettier** | `esbenp.prettier-vscode` | Code formatting |
-| **Claude Code** | Official Claude Code CLI / Extension | Architecture & security reviewer agent |
+| Extension       | Extension ID                         | Purpose                                      |
+| :-------------- | :----------------------------------- | :------------------------------------------- |
+| **Vite**        | `antfu.vite`                         | Fast Vite dev server controls within VS Code |
+| **ESLint**      | `dbaeumer.vscode-eslint`             | JavaScript/TypeScript linting                |
+| **Prettier**    | `esbenp.prettier-vscode`             | Code formatting                              |
+| **Claude Code** | Official Claude Code CLI / Extension | Architecture & security reviewer agent       |
 
 ---
 
 ## 6. Required Runtimes & Dependencies
 
-| Tool / Runtime | Installed Version | Minimum Required | Status |
-| :--- | :--- | :--- | :--- |
-| **Node.js** | `v24.22.1` | `>= 20.0.0` | Verified |
-| **npm** | `11.19.1` | `>= 10.0.0` | Verified |
-| **VS Code CLI** | `1.145.2` (x64) | Any recent build | Verified |
-| **TypeScript** | `5.8.2` (devDependency) | `>= 5.0.0` | Verified in `node_modules` |
-| **Vite** | `6.2.0` (devDependency) | `>= 5.0.0` | Verified in `node_modules` |
-| **Phaser** | `3.88.2` (dependency) | `>= 3.80.0` | Verified in `node_modules` |
+| Tool / Runtime  | Installed Version       | Minimum Required | Status                     |
+| :-------------- | :---------------------- | :--------------- | :------------------------- |
+| **Node.js**     | `v24.22.1`              | `>= 20.0.0`      | Verified                   |
+| **npm**         | `11.19.1`               | `>= 10.0.0`      | Verified                   |
+| **VS Code CLI** | `1.145.2` (x64)         | Any recent build | Verified                   |
+| **TypeScript**  | `5.8.2` (devDependency) | `>= 5.0.0`       | Verified in `node_modules` |
+| **Vite**        | `6.2.0` (devDependency) | `>= 5.0.0`       | Verified in `node_modules` |
+| **Phaser**      | `3.88.2` (dependency)   | `>= 3.80.0`      | Verified in `node_modules` |
 
 ---
 
@@ -117,14 +120,14 @@ node scripts/validate-candidate.js <path-to-png>
 
 ## 8. Existing Workspace Configuration Files
 
-| File | Purpose |
-| :--- | :--- |
-| [`.vscode/settings.json`](file:///c:/Users/USER/.gemini/antigravity-ide/scratch/Chrono_workspace/.vscode/settings.json) | Workspace tab size (2), LF line endings, TypeScript SDK mapping |
-| [`.vscode/extensions.json`](file:///c:/Users/USER/.gemini/antigravity-ide/scratch/Chrono_workspace/.vscode/extensions.json) | Recommended extensions list |
-| [`.vscode/tasks.json`](file:///c:/Users/USER/.gemini/antigravity-ide/scratch/Chrono_workspace/.vscode/tasks.json) | Pre-configured build, dev, and test tasks for VS Code Run Task |
-| [`package.json`](file:///c:/Users/USER/.gemini/antigravity-ide/scratch/Chrono_workspace/package.json) | Dependency definitions and npm scripts |
-| [`tsconfig.json`](file:///c:/Users/USER/.gemini/antigravity-ide/scratch/Chrono_workspace/tsconfig.json) | Strict TypeScript compiler options |
-| [`vite.config.ts`](file:///c:/Users/USER/.gemini/antigravity-ide/scratch/Chrono_workspace/vite.config.ts) | Vite server port 3000, build asset inline limit |
+| File                                                                                                                        | Purpose                                                         |
+| :-------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------- |
+| [`.vscode/settings.json`](file:///c:/Users/USER/.gemini/antigravity-ide/scratch/Chrono_workspace/.vscode/settings.json)     | Workspace tab size (2), LF line endings, TypeScript SDK mapping |
+| [`.vscode/extensions.json`](file:///c:/Users/USER/.gemini/antigravity-ide/scratch/Chrono_workspace/.vscode/extensions.json) | Recommended extensions list                                     |
+| [`.vscode/tasks.json`](file:///c:/Users/USER/.gemini/antigravity-ide/scratch/Chrono_workspace/.vscode/tasks.json)           | Pre-configured build, dev, and test tasks for VS Code Run Task  |
+| [`package.json`](file:///c:/Users/USER/.gemini/antigravity-ide/scratch/Chrono_workspace/package.json)                       | Dependency definitions and npm scripts                          |
+| [`tsconfig.json`](file:///c:/Users/USER/.gemini/antigravity-ide/scratch/Chrono_workspace/tsconfig.json)                     | Strict TypeScript compiler options                              |
+| [`vite.config.ts`](file:///c:/Users/USER/.gemini/antigravity-ide/scratch/Chrono_workspace/vite.config.ts)                   | Vite server port 3000, build asset inline limit                 |
 
 ---
 
@@ -148,13 +151,13 @@ Both agents operate on the same folder using their native configuration mechanis
 
 ## 10. Known Migration Risks & Mitigations
 
-| Risk | Impact | Mitigation |
-| :--- | :--- | :--- |
-| **No Git Tracking** | Uncommitted changes could be lost if files are edited incorrectly | Initialize git (`git init`) immediately after opening in VS Code and make a baseline commit. |
-| **Concurrent File Edits** | Antigravity and Claude Code editing the same file simultaneously | Protocol enforced: Claude Code defaults to read-only review; Antigravity is primary implementer. |
-| **Port Collision (3000)** | Vite server failing to start if port 3000 is still bound by another process | Check active processes; kill previous instance or Vite will automatically increment to port 3001. |
-| **Line Ending Divergence** | Windows CRLF vs Linux/Mac LF Git checkout conflicts | `.vscode/settings.json` enforces `"files.eol": "\n"` across all files. |
-| **Credential Leakage** | Accidentally committing Claude or Google account tokens | Authentication credentials remain in application storage; no secrets in project files. |
+| Risk                       | Impact                                                                      | Mitigation                                                                                        |
+| :------------------------- | :-------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------ |
+| **No Git Tracking**        | Uncommitted changes could be lost if files are edited incorrectly           | Initialize git (`git init`) immediately after opening in VS Code and make a baseline commit.      |
+| **Concurrent File Edits**  | Antigravity and Claude Code editing the same file simultaneously            | Protocol enforced: Claude Code defaults to read-only review; Antigravity is primary implementer.  |
+| **Port Collision (3000)**  | Vite server failing to start if port 3000 is still bound by another process | Check active processes; kill previous instance or Vite will automatically increment to port 3001. |
+| **Line Ending Divergence** | Windows CRLF vs Linux/Mac LF Git checkout conflicts                         | `.vscode/settings.json` enforces `"files.eol": "\n"` across all files.                            |
+| **Credential Leakage**     | Accidentally committing Claude or Google account tokens                     | Authentication credentials remain in application storage; no secrets in project files.            |
 
 ---
 
@@ -172,4 +175,3 @@ After opening `C:\Users\USER\.gemini\antigravity-ide\scratch\Chrono_workspace` i
 - [x] Git repository configured with remote `origin`: `https://github.com/VanDuc1610/Chrono.git`.
 - [x] Baseline commit `ffb72c3` synchronized with `origin/main`.
 - [ ] Open `C:\Users\USER\.gemini\antigravity-ide\scratch\Chrono_workspace` in Visual Studio Code.
-

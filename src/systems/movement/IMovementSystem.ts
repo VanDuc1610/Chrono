@@ -29,4 +29,3 @@ export interface IMovementSystem {
    */
   getLastFacing(): 'up' | 'down' | 'left' | 'right';
 }
-

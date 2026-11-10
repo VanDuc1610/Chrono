@@ -67,8 +67,7 @@ export class KeyboardPlayerController implements IPlayerController {
     }
 
     const interactJustDown =
-      Phaser.Input.Keyboard.JustDown(this.keyE) ||
-      Phaser.Input.Keyboard.JustDown(this.keySpace);
+      Phaser.Input.Keyboard.JustDown(this.keyE) || Phaser.Input.Keyboard.JustDown(this.keySpace);
 
     // JustDown consumes the key's edge flag, so it must be read exactly once per frame.
     // ESC drives both cancel and menu; the caller decides which applies in context.

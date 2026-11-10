@@ -1,4 +1,5 @@
 # CHRONO – THE FRACTURED DIVINITY
+
 ## Game Design Document (GDD)
 
 **Version:** 0.1.0-PROLOGUE  
@@ -14,6 +15,7 @@
 **CHRONO – The Fractured Divinity** is a narrative-driven, single-player 2D retro RPG combining classic top-down exploration with tactical turn-based combat. Players take control of an enigmatic vessel awoken in the aftermath of a cosmic Cataclysm that fractured time itself into discrete temporal anomalies.
 
 The **Prologue Vertical Slice** demonstrates the complete core gameplay loop:
+
 1. Exploring an atmospheric ruined sanctuary.
 2. Interacting with NPCs and environmental lore objects via external dialogue data.
 3. Managing inventory and tracking quest objectives.
@@ -33,6 +35,7 @@ The **Prologue Vertical Slice** demonstrates the complete core gameplay loop:
 ## 3. Game Scope: Prologue Vertical Slice
 
 ### In Scope for Prologue:
+
 - **Playable Character:** The Vessel (Temporary placeholder sprite in Phase 1; original approved sprite in Phase 2).
 - **Environment:** The Shattered Antechamber (A ruined sanctuary featuring stone floors, engraved chronal runes, broken pillars, and the Altar of Moments).
 - **Core Loop:**
@@ -45,6 +48,7 @@ The **Prologue Vertical Slice** demonstrates the complete core gameplay loop:
 - **Target Playtime:** 10 – 15 minutes of narrative and tactical gameplay.
 
 ### Out of Scope for Prologue:
+
 - Full world overworld map (Reserved for Chapter 1).
 - Party member switching or multi-character party management (TBD).
 - Complex skill trees and job/class progression (TBD).
@@ -78,15 +82,15 @@ The **Prologue Vertical Slice** demonstrates the complete core gameplay loop:
 
 ## 6. Combat System (Turn-Based Specification)
 
-*Note: Architectural interfaces established in Milestone 1; Combat Scene implementation scheduled for Milestone 3.*
+_Note: Architectural interfaces established in Milestone 1; Combat Scene implementation scheduled for Milestone 3._
 
 - **Encounter Style:** Visible overworld encounter triggers or scripted map events (Random encounters: TBD).
 - **Battle Perspective:** Side-view or front-view 2D turn-based arena (TBD).
 - **Turn Order:** Determined by Combatant `speed` stat (Agility/Initiative).
 - **Core Actions:**
   1. **Attack:** Basic physical or chronal strike using equipped weapon.
-  2. **Skill:** Chrono abilities consuming MP/Chronal Energy (e.g. *Temporal Strike*, *Rewind*).
-  3. **Item:** Use restorative or tactical consumables from inventory (e.g. *Minor Chrono Shard*).
+  2. **Skill:** Chrono abilities consuming MP/Chronal Energy (e.g. _Temporal Strike_, _Rewind_).
+  3. **Item:** Use restorative or tactical consumables from inventory (e.g. _Minor Chrono Shard_).
   4. **Defend:** Halves incoming damage until next turn and increases evasion.
   5. **Escape:** Attempt to flee back to the overworld (chance based on relative speed).
 
@@ -95,9 +99,9 @@ The **Prologue Vertical Slice** demonstrates the complete core gameplay loop:
 ## 7. Inventory & Economy (Specification)
 
 - **Categories:**
-  - *Consumables:* Chrono Shards, Elixirs (Restore HP/MP).
-  - *Materials:* Ancient Gears, Rune fragments (Used for future progression - TBD).
-  - *Key Items:* Broken Chronometer, Sanctuary Emblems (Non-consumable quest items).
+  - _Consumables:_ Chrono Shards, Elixirs (Restore HP/MP).
+  - _Materials:_ Ancient Gears, Rune fragments (Used for future progression - TBD).
+  - _Key Items:_ Broken Chronometer, Sanctuary Emblems (Non-consumable quest items).
 - **Stacking:** Consumables stack to 99; materials stack to 50; key items do not stack.
 
 ---
@@ -119,4 +123,3 @@ The **Prologue Vertical Slice** demonstrates the complete core gameplay loop:
 - **Party Size:** Solo vessel for Prologue; maximum party size in full game (TBD).
 - **Level Cap:** Prologue cap = Level 3; Full game cap (TBD).
 - **Permadeath / Failure Penalties:** Checkpoint revival at Sanctuary Altar vs. Title reload (TBD).
-
