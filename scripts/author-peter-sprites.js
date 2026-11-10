@@ -28,13 +28,13 @@ import {
   writeFile,
 } from './pixel-art/pixel.js';
 
-const VERSION = 'v2';
+const VERSION = 'v3';
 const SIZE = 32;
 const EMPTY = '.'.repeat(SIZE);
 /** Rows 0..24 hold head + torso; rows 25..31 hold the legs layer. */
 const UPPER_END = 25;
 
-/** Palette = PETER_DESIGN.md §4 swatches, plus outline and two derived accents. */
+/** Palette = PETER_DESIGN.md §3-4 swatches, plus outline and two derived accents. */
 const PALETTE = {
   O: hex('#120f17'), // outline (near-black violet)
   h: hex('#22160f'), // curly hair shadow
@@ -51,10 +51,13 @@ const PALETTE = {
   t: hex('#12151d'), // ribbed tunic
   l: hex('#453123'), // leather strap / belt
   L: hex('#5e4532'), // leather highlight (derived)
-  m: hex('#8c96a8'), // aged silver
+  m: hex('#8c96a8'), // aged silver (pommel, crossguard, clasps, watch chain)
+  n: hex('#8c96a5'), // Broken Blade steel
+  g: hex('#00c8ff'), // chronal fracture glow
+  w: hex('#a6f0ff'), // chronal glow, light
+  W: hex('#e6f9ff'), // chronal apex white / Stopped Watch face
   r: hex('#181c24'), // trousers
   b: hex('#2e2219'), // boots
-  g: hex('#00c8ff'), // chronal fracture glow (Broken Blade)
 };
 
 /** 32-wide row from {startCol: 'pixels'} segments. */
@@ -70,21 +73,21 @@ const padTo32 = (list) => list.concat(Array(SIZE - list.length).fill(EMPTY));
 
 // ---------------------------------------------------------------- FRONT (down)
 // Left half only; mirrored for symmetry, then asymmetric details are painted on.
-// Hair: compact rounded dome of tight curls, curls rise up/out, full coverage at the
-// temples, forehead clear (no fringe/bangs) — PETER_DESIGN.md hairstyle lock.
+// Head ~9 rows of a ~28 px figure (≈1:3, PETER_DESIGN.md §5). Hair: compact rounded dome of
+// tight curls rising up/out, full coverage at temples, forehead clear (no fringe/bangs).
 const frontHalf = [
   '................',
-  '...........OO.OO',
-  '.........OOjHOjH',
-  '........OjHhjHHj',
-  '.......OHhjHhHjH',
-  '.......OhHjHHhHh',
-  '.......OHhjHssss',
-  '.......OhHjShhss',
-  '.......OHhSsSEss',
-  '........OhSssssS',
-  '........OHSsssss',
-  '.........OSSsssS',
+  '................',
+  '................',
+  '............O.OO',
+  '..........OOjHOj',
+  '.........OjHhjHH',
+  '........OHhjHhHj',
+  '........OhHjHsss',
+  '........OHhShhss',
+  '........OhSsSEss',
+  '.........OSsssss',
+  '..........OSSsss',
   '.........OkcOSSs',
   '.......OOkccCOtt',
   '......OkkcccCPtt',
@@ -99,8 +102,37 @@ const frontHalf = [
   '.........OccCpOr',
   '.........OcCpOOr',
 ];
+
+/**
+ * The Broken Blade, held point-down in Peter's RIGHT hand (viewer-left in the front view):
+ * silver pommel and crossguard, steel broken midway, cerulean glow on the edge, white-hot
+ * jagged fracture at the tip. Pixels relative to the hand pixel at (hx, hy).
+ */
+function brokenBlade(hx, hy, outward = -1) {
+  const o = outward; // -1 = blade edge glows on the viewer-left side, +1 = right
+  return [
+    [hx, hy - 1, 'm'], // pommel above the fist
+    [hx - 1, hy + 1, 'm'],
+    [hx, hy + 1, 'm'],
+    [hx + 1, hy + 1, 'm'], // crossguard
+    [hx, hy + 2, 'n'],
+    [hx + o, hy + 2, 'g'],
+    [hx, hy + 3, 'n'],
+    [hx + o, hy + 3, 'g'],
+    [hx, hy + 4, 'n'],
+    [hx + o, hy + 4, 'w'],
+    [hx + o, hy + 5, 'W'], // jagged broken point
+    [hx + 2 * o, hy + 3, 'O'],
+    [hx + 2 * o, hy + 4, 'O'],
+    [hx + 2 * o, hy + 2, 'O'],
+    [hx + o * 2, hy + 5, 'O'],
+    [hx + o, hy + 6, 'O'],
+    [hx, hy + 5, 'O'],
+  ];
+}
+
 const front = paint(padTo32(mirrorHalf(frontHalf)), [
-  [15, 9, 's'], // one-pixel nose shadow (light from upper left)
+  [15, 10, 's'], // one-pixel nose shadow (light from upper left)
   // diagonal strap, viewer-right shoulder -> viewer-left hip (as in the approved concept)
   [20, 13, 'l'],
   [19, 14, 'l'],
@@ -114,25 +146,26 @@ const front = paint(padTo32(mirrorHalf(frontHalf)), [
   [16, 19, 'm'], // belt buckle
   [20, 15, 'm'],
   [20, 17, 'm'], // silver toggle clasps
-  [11, 20, 'm'],
-  [11, 21, 'l'],
-  [10, 22, 'g'], // Broken Blade hilt + cerulean fracture glint at the hip
+  // Stopped Watch: silver chain from the belt to a white face
+  [18, 20, 'm'],
+  [18, 21, 'W'],
+  ...brokenBlade(7, 20, -1),
 ]);
 
 // ------------------------------------------------------------------ BACK (up)
 const backHalf = [
   '................',
-  '...........OO.OO',
-  '.........OOjHOjH',
-  '........OjHhjHHj',
-  '.......OHhjHhHjH',
-  '.......OhHjHHhHh',
-  '.......OHhHjHhHj',
-  '.......OhHjHhHjH',
-  '.......OHhHHjHhH',
+  '................',
+  '................',
+  '............O.OO',
+  '..........OOjHOj',
+  '.........OjHhjHH',
+  '........OHhjHhHj',
+  '........OhHjHHhH',
+  '........OHhHjHhH',
   '........OhHjHhHj',
-  '........OHhHhHjH',
-  '.........OhHHhHH',
+  '.........OHhHjHH',
+  '..........OhHHhH',
   '.........OkkCkkk',
   '.......OOkcccccc',
   '......OkkcccccCc',
@@ -156,24 +189,26 @@ const back = paint(padTo32(mirrorHalf(backHalf)), [
   [15, 17, 'l'],
   [16, 18, 'l'],
   [17, 18, 'l'],
+  // Peter's right hand is on the viewer-right from behind
+  ...brokenBlade(24, 20, 1),
 ]);
 
 // ---------------------------------------------------------- SIDE (left-facing)
 const left = padTo32(
   rows([
     {},
+    {},
+    {},
     { 13: 'OO', 16: 'OO' },
     { 11: 'OOjHOjHOO' },
-    { 10: 'OjHhjHHjHhO' },
-    { 9: 'OHhjHhHjHhHO' },
-    { 9: 'OhHjHHhHjHhO' },
-    { 9: 'OsssjHhHjHHO' },
-    { 9: 'OshhsHjHhHjO' },
-    { 8: 'OssEsSShHjHhO' },
-    { 7: 'OssssSSShjHhHO' },
-    { 8: 'OsssssShHjHO' },
-    { 9: 'OSsssShHhO' },
-    { 10: 'OSSSOhHO' },
+    { 10: 'OjHhjHHjHO' },
+    { 10: 'OHhjHhHjHhO' },
+    { 10: 'OssHhjHhHjO' },
+    { 9: 'OshhSHjHhHjO' },
+    { 9: 'OsEsSShHjHhO' },
+    { 8: 'OsssSSShjHhO' },
+    { 9: 'OSssShHhHO' },
+    { 10: 'OSSSOhO' },
     { 10: 'OkkcCccckkO' },
     { 10: 'OkccCcccccO' },
     { 10: 'OPcCccccccO' },
@@ -188,20 +223,26 @@ const left = padTo32(
     { 10: 'OOPpcccCCOO' },
   ]),
 );
-/** Near arm hanging in front of the torso (separate layer so it can swing). */
-const sideArm = padTo32(
-  rows([
-    ...Array(13).fill({}),
-    { 13: 'OkkO' },
-    { 13: 'OkcO' },
-    { 13: 'OccO' },
-    { 13: 'OccO' },
-    { 13: 'OcCO' },
-    { 13: 'OcCO' },
-    { 13: 'OpPO' },
-    { 13: 'OssO' },
-    { 14: 'OO' },
-  ]),
+/**
+ * Arm hanging in front of the torso holding the Broken Blade point-down and slightly forward
+ * (separate layer so it swings with the walk cycle).
+ */
+const sideArm = paint(
+  padTo32(
+    rows([
+      ...Array(13).fill({}),
+      { 13: 'OkkO' },
+      { 13: 'OkcO' },
+      { 13: 'OccO' },
+      { 13: 'OccO' },
+      { 13: 'OcCO' },
+      { 13: 'OcCO' },
+      { 13: 'OpPO' },
+      { 13: 'OssO' },
+      { 14: 'OO' },
+    ]),
+  ),
+  brokenBlade(14, 20, -1),
 );
 
 // ----------------------------------------------------------------- LEG POSES

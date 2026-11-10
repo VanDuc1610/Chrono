@@ -63,7 +63,8 @@ export class ExplorationScene extends Phaser.Scene {
   private notificationContainer!: Phaser.GameObjects.Container;
   private notificationTitle!: Phaser.GameObjects.Text;
   private notificationSubtitle!: Phaser.GameObjects.Text;
-  private notificationTween: Phaser.Tweens.Tween | null = null;
+  private notificationQueue: { title: string; subtitle: string }[] = [];
+  private isNotificationShowing = false;
 
   // Typewriter state
   private isTyping = false;
@@ -100,7 +101,8 @@ export class ExplorationScene extends Phaser.Scene {
     this.selectedInventoryIndex = 0;
     this.fullTargetText = '';
     this.typewriterTimer = null;
-    this.notificationTween = null;
+    this.notificationQueue = [];
+    this.isNotificationShowing = false;
     this.questObjectiveTexts = [];
     this.choiceButtons = [];
     this.shadeSprite = null;
@@ -188,14 +190,16 @@ export class ExplorationScene extends Phaser.Scene {
     if (this.questSystem.getQuestStage(PROLOGUE_QUEST_ID) === 'inactive') {
       this.questSystem.startQuest(PROLOGUE_QUEST_ID);
     }
-    this.updateQuestHUD();
-
-    // 11. One-shot arrival banner (e.g. battle rewards). Inventory is never touched here (B2).
-    const notice = this.pendingNotice;
-    if (notice) {
+    // 11. One-shot arrival banner (e.g. battle rewards) goes first in the banner queue, before
+    // any quest banners it causes. Inventory is never touched here (B2).
+    if (this.pendingNotice) {
+      this.showNotification(this.pendingNotice.title, this.pendingNotice.subtitle);
       this.pendingNotice = null;
-      this.time.delayedCall(450, () => this.showNotification(notice.title, notice.subtitle));
     }
+
+    // Apply follow-up quests / flag objectives (e.g. Shade defeated in the battle we just left).
+    this.session.syncQuestProgress();
+    this.updateQuestHUD();
 
     // Fade in from transition
     this.cameras.main.fadeIn(400, 0, 0, 0);
@@ -580,7 +584,9 @@ export class ExplorationScene extends Phaser.Scene {
     const listener: QuestEventListener = (event) => {
       this.updateQuestHUD();
 
-      if (event.type === 'objective_completed' && event.objective) {
+      if (event.type === 'quest_started') {
+        this.showNotification('NEW QUEST', `◆ ${event.quest.title}`);
+      } else if (event.type === 'objective_completed' && event.objective) {
         this.showNotification('OBJECTIVE COMPLETED', `✓ ${event.objective.description}`);
       } else if (event.type === 'quest_completed') {
         const rewards = this.session.claimQuestRewards(event.quest.id);
@@ -590,6 +596,8 @@ export class ExplorationScene extends Phaser.Scene {
           'QUEST COMPLETED!',
           rewardText ? `★ ${event.quest.title} (${rewardText})` : `★ ${event.quest.title}`,
         );
+        // Start any follow-up quest (and auto-complete flag objectives already satisfied).
+        this.session.syncQuestProgress();
       }
     };
 
@@ -601,24 +609,25 @@ export class ExplorationScene extends Phaser.Scene {
   }
 
   public updateQuestHUD(): void {
-    const activeQuests = this.questSystem.getActiveQuests();
-    if (activeQuests.length === 0) {
-      const completed = this.questSystem.isQuestCompleted(PROLOGUE_QUEST_ID);
-      if (completed) {
-        this.questTitleText.setText('Prologue Quest Complete');
-        this.questObjectiveTexts[0]?.setText('✓ Sanctuary antechamber surveyed');
-        this.questObjectiveTexts[1]?.setText('✓ Awaiting Milestone 3 (Combat)');
-      } else {
-        this.questTitleText.setText('No Active Quest');
-        this.questObjectiveTexts.forEach((t) => t.setText(''));
-      }
+    // Show the first active quest; with none active, the most recently completed one (all ✓).
+    // All text comes from quests.json.
+    const quest =
+      this.questSystem.getActiveQuests()[0] ??
+      this.questSystem
+        .getAllQuests()
+        .filter((q) => q.stage === 'completed')
+        .pop();
+
+    this.questObjectiveTexts.forEach((t) => t.setText(''));
+    if (!quest) {
+      this.questTitleText.setText('No Active Quest');
       return;
     }
 
-    const currentQuest = activeQuests[0];
-    this.questTitleText.setText(currentQuest.title);
+    const isDone = quest.stage === 'completed';
+    this.questTitleText.setText(isDone ? `✓ ${quest.title}` : quest.title);
 
-    currentQuest.objectives.forEach((obj, idx) => {
+    quest.objectives.forEach((obj, idx) => {
       if (this.questObjectiveTexts[idx]) {
         const check = obj.completed ? '✓' : '○';
         const color = obj.completed ? '#48bb78' : '#8b9bb4';
@@ -628,23 +637,40 @@ export class ExplorationScene extends Phaser.Scene {
     });
   }
 
+  /**
+   * Queues a banner. Banners play one after another so back-to-back events (e.g. QUEST COMPLETED
+   * followed by NEW QUEST) are all readable; previously a new banner was hidden early by the
+   * previous banner's pending hide timer.
+   */
   public showNotification(title: string, subtitle: string): void {
-    if (this.notificationTween) {
-      this.notificationTween.stop();
+    this.notificationQueue.push({ title, subtitle });
+    if (!this.isNotificationShowing) {
+      this.showNextNotification();
     }
+  }
 
-    this.notificationTitle.setText(title);
-    this.notificationSubtitle.setText(subtitle);
+  private showNextNotification(): void {
+    const next = this.notificationQueue.shift();
+    if (!next) {
+      this.isNotificationShowing = false;
+      return;
+    }
+    this.isNotificationShowing = true;
+
+    this.notificationTitle.setText(next.title);
+    this.notificationSubtitle.setText(next.subtitle);
     this.notificationContainer.setY(-50);
     this.notificationContainer.setVisible(true);
 
-    this.notificationTween = this.tweens.add({
+    this.tweens.add({
       targets: this.notificationContainer,
       y: 12,
       duration: 350,
       ease: 'Back.easeOut',
       onComplete: () => {
-        this.time.delayedCall(2400, () => {
+        // Shorter hold when more banners are waiting.
+        const holdMs = this.notificationQueue.length > 0 ? 1500 : 2400;
+        this.time.delayedCall(holdMs, () => {
           this.tweens.add({
             targets: this.notificationContainer,
             y: -50,
@@ -652,6 +678,7 @@ export class ExplorationScene extends Phaser.Scene {
             ease: 'Sine.easeIn',
             onComplete: () => {
               this.notificationContainer.setVisible(false);
+              this.showNextNotification();
             },
           });
         });

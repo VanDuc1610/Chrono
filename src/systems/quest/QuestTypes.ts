@@ -6,6 +6,8 @@ export interface IQuestObjective {
   completed: boolean;
   currentCount?: number;
   targetCount?: number;
+  /** Session flag that completes this objective automatically once it is true. */
+  completeOnFlag?: string;
 }
 
 export interface IQuestReward {
@@ -21,6 +23,8 @@ export interface IQuest {
   stage: QuestStage;
   objectives: IQuestObjective[];
   rewards?: IQuestReward;
+  /** Quest started automatically once this one is completed. */
+  followUpQuestId?: string;
 }
 
 export interface QuestDatabase {

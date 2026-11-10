@@ -20,6 +20,25 @@
       "rewards": {
         "experience": 50,
         "items": ["chrono_shard_minor"]
+      },
+      "followUpQuestId": "quest_prologue_silence"
+    },
+    {
+      "id": "quest_prologue_silence",
+      "title": "Silence the Fracture",
+      "description": "A temporal rift stirs to the east of the antechamber. Banish the anomaly it has birthed.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_defeat_shade",
+          "description": "Defeat the Temporal Shade",
+          "completed": false,
+          "completeOnFlag": "isShadeDefeated"
+        }
+      ],
+      "rewards": {
+        "experience": 30,
+        "items": ["chrono_shard_minor"]
       }
     }
   ]

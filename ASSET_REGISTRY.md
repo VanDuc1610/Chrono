@@ -49,11 +49,12 @@
 
 ## 2b. Candidates Awaiting Owner Review
 
-### `CHAR_PETER_002_CAND` – Peter idle + walk sheets (v2)
+### `CHAR_PETER_002_CAND` – Peter idle + walk sheets (v3)
 
 - **Pipeline:** B – code-authored pixel art (AGENTS.md §5), generator `scripts/author-peter-sprites.js`
-- **Files:** `art-source/characters/peter/generated/candidates/peter_idle_v2.png` (128 × 128, 4 frames × 4 dirs), `peter_walk_v2.png` (192 × 128, 6 frames × 4 dirs); review previews (×6) in `candidates/previews/`
-- **Sources:** `docs/art/PETER_DESIGN.md` palette (19 colours) + `peter_master_v1.png` as visual reference
+- **Files:** `art-source/characters/peter/generated/candidates/peter_idle_v3.png` (128 × 128, 4 frames × 4 dirs), `peter_walk_v3.png` (192 × 128, 6 frames × 4 dirs); review previews (×6) in `candidates/previews/`
+- **Sources:** `docs/art/PETER_DESIGN.md` palette (22 colours) + `peter_master_v1.png` as visual reference
+- **History:** v2 (2026-11-11) → owner feedback "head slightly too big; add a standout feature" → v3: head 2 px shorter and narrower (≈1:3), Broken Blade held point-down in the right hand (PETER_DESIGN §3.3) with cerulean edge glow and white-hot fracture, Stopped Watch on the belt. v2 files removed (in git history).
 - **Validation:** `validate-candidate.js` PASSED (RGBA, transparent background, frames centred, feet on rows 28-30)
 - **Status:** `CONCEPT_PENDING_APPROVAL` — not integrated; `public/assets/characters/peter/` still holds `CHAR_PETER_000_TMP`
 

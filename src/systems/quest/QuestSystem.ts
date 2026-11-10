@@ -50,9 +50,28 @@ export class QuestSystem implements IQuestSystem {
     return Array.from(this.quests.values());
   }
 
+  /**
+   * Restores saved progress (stage + objective completion) onto the loaded definitions. Only
+   * runtime state is taken from the save, so quest data added in later builds (new objectives,
+   * follow-up links, rewards) still applies to old saves. Unknown quest ids are ignored.
+   */
   public loadFromState(savedQuests: IQuest[]): void {
-    for (const sq of savedQuests) {
-      this.quests.set(sq.id, JSON.parse(JSON.stringify(sq)));
+    for (const saved of savedQuests) {
+      const quest = this.quests.get(saved.id);
+      if (!quest) {
+        console.warn(`[QuestSystem] Ignoring saved progress for unknown quest "${saved.id}".`);
+        continue;
+      }
+      quest.stage = saved.stage;
+      for (const objective of quest.objectives) {
+        const savedObjective = saved.objectives?.find((o) => o.id === objective.id);
+        if (savedObjective) {
+          objective.completed = savedObjective.completed;
+          if (savedObjective.currentCount !== undefined) {
+            objective.currentCount = savedObjective.currentCount;
+          }
+        }
+      }
     }
   }
 

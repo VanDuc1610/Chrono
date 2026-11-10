@@ -174,6 +174,33 @@ export class GameSession {
     return { exp, items, levelUps: this.addExp(exp) };
   }
 
+  /**
+   * Applies data-driven quest progression (quests.json), idempotently:
+   * - a completed quest starts its `followUpQuestId` if that quest is still inactive;
+   * - an objective with `completeOnFlag` completes once that session flag is true.
+   * Safe to call on every scene entry and from quest event listeners (re-entrant).
+   */
+  public syncQuestProgress(): void {
+    for (const quest of this.quests.getAllQuests()) {
+      const next = quest.followUpQuestId;
+      if (quest.stage === 'completed' && next && this.quests.getQuestStage(next) === 'inactive') {
+        this.quests.startQuest(next);
+      }
+    }
+    for (const quest of this.quests.getAllQuests()) {
+      if (quest.stage !== 'started') continue;
+      for (const objective of quest.objectives) {
+        if (
+          !objective.completed &&
+          objective.completeOnFlag &&
+          this.getFlag(objective.completeOnFlag)
+        ) {
+          this.quests.completeObjective(quest.id, objective.id);
+        }
+      }
+    }
+  }
+
   /** Human-readable reward line, e.g. "+50 EXP, Minor Chrono Shard — LEVEL UP! Lv. 2". */
   public describeRewards(summary: RewardSummary): string {
     const parts: string[] = [];
