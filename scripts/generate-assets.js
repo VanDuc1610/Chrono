@@ -1,5 +1,4 @@
 import fs from 'fs';
-import path from 'path';
 import zlib from 'zlib';
 
 function crc32(buf) {

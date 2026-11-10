@@ -19,13 +19,8 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-### T-01 · ESLint + Prettier setup
-- **Assignee:** Claude · **Status:** TODO
-- **Locks:** `package.json`, `package-lock.json`, `eslint.config.js`, `.prettierrc`, `.prettierignore`
-- Add flat-config ESLint (typescript-eslint) + Prettier matching `.vscode/settings.json` (2 spaces, LF). Add `lint` / `format` scripts. **No repo-wide reformat** in this task (would collide with other work).
-
 ### T-02 · Architecture & code review of `src/`
-- **Assignee:** Claude · **Status:** TODO
+- **Assignee:** Claude · **Status:** IN PROGRESS
 - **Locks:** none (read-only). Findings are written up as follow-up tasks; fixes are scheduled only after the files are free.
 
 ### T-03 · Update agent roles in AGENTS.md
@@ -42,9 +37,21 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 - **Assignee:** Owner (manual, AUTOMATIC1111) · **Status:** TODO
 - Use `art-source/characters/peter/prompts/peter_idle.txt` and `peter_walk.txt`; drop PNGs into `art-source/characters/peter/generated/candidates/`. Claude validates afterwards.
 
+## Backlog (scheduled after current locks are released)
+
+### T-06 · Remove `any` in CombatScene (lint errors)
+- **Assignee:** Claude · **Status:** TODO — blocked until T-04 releases `CombatScene.ts`
+- `npm run lint` reports 2× `no-explicit-any` at `src/scenes/CombatScene.ts:47-48`.
+
+### T-07 · One-time repo-wide Prettier format
+- **Assignee:** Claude · **Status:** TODO — only when no task holds locks on `src/` (touches ~72 files)
+- Run `npm run format` in a single dedicated commit; afterwards both agents keep `npm run format:check` clean.
+
 ---
 
 ## Done
+
+- **T-01** ESLint 9 (flat config, typescript-eslint) + Prettier 3 (single quotes, width 100, LF); scripts `lint`, `lint:fix`, `format`, `format:check`. Fixed `validate-candidate.js`: rejects 16-bit/indexed/interlaced PNGs instead of mis-decoding them, and adds the missing horizontal frame-centering check — Claude
 
 - **T-00a** Git init, baseline commit, `.gitignore` / `.gitattributes`, push to origin — Claude (`ffb72c3`)
 - **T-00b** Dedupe root art docs, reclassify Peter runtime sprites as placeholders in ASSET_REGISTRY — Claude (`6ed7c8d`)

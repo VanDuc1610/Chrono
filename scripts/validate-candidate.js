@@ -34,7 +34,8 @@ function unfilterScanline(filterType, currentLine, prevLine, bpp) {
       case 3: // Average
         result[i] = (raw + Math.floor((a + b) / 2)) & 0xff;
         break;
-      case 4: { // Paeth
+      case 4: {
+        // Paeth
         const p = a + b - c;
         const pa = Math.abs(p - a);
         const pb = Math.abs(p - b);
@@ -91,6 +92,20 @@ export function parsePNG(filePath) {
 
   if (!ihdr) throw new Error('Missing IHDR chunk in PNG.');
 
+  // The decoder below only understands 8-bit, non-interlaced RGB/RGBA. Anything else would be
+  // decoded as garbage and silently produce meaningless metrics, so reject it with a clear reason.
+  if (ihdr.colorType !== 6 && ihdr.colorType !== 2) {
+    throw new Error(
+      `Unsupported color type ${ihdr.colorType} (indexed/grayscale). Re-export as 8-bit RGBA (type 6).`,
+    );
+  }
+  if (ihdr.bitDepth !== 8) {
+    throw new Error(`Unsupported bit depth ${ihdr.bitDepth}. Re-export as 8-bit RGBA.`);
+  }
+  if (ihdr.interlace !== 0) {
+    throw new Error('Interlaced (Adam7) PNG is not supported. Re-export without interlacing.');
+  }
+
   const concatenatedIDAT = Buffer.concat(idatChunks);
   const decompressed = zlib.inflateSync(concatenatedIDAT);
 
@@ -110,13 +125,15 @@ export function parsePNG(filePath) {
 
     for (let x = 0; x < ihdr.width; x++) {
       const outIdx = (y * ihdr.width + x) * 4;
-      if (ihdr.colorType === 6) { // RGBA
+      if (ihdr.colorType === 6) {
+        // RGBA
         const inIdx = x * 4;
         rawPixels[outIdx] = unmasked[inIdx];
         rawPixels[outIdx + 1] = unmasked[inIdx + 1];
         rawPixels[outIdx + 2] = unmasked[inIdx + 2];
         rawPixels[outIdx + 3] = unmasked[inIdx + 3];
-      } else if (ihdr.colorType === 2) { // RGB
+      } else if (ihdr.colorType === 2) {
+        // RGB
         const inIdx = x * 3;
         rawPixels[outIdx] = unmasked[inIdx];
         rawPixels[outIdx + 1] = unmasked[inIdx + 1];
@@ -165,13 +182,17 @@ export function validateCandidate(filePath) {
 
   // 1. Format & Color Type Check
   if (ihdr.colorType !== 6) {
-    report.errors.push(`Image color type is ${ihdr.colorType}. Expected RGBA (type 6) with 8-bit alpha channel.`);
+    report.errors.push(
+      `Image color type is ${ihdr.colorType}. Expected RGBA (type 6) with 8-bit alpha channel.`,
+    );
   } else {
     console.log(`✓ Color format: 32-bit RGBA confirmed.`);
   }
 
   if (ihdr.interlace !== 0) {
-    report.warnings.push('Image is interlaced. Non-interlaced is preferred for sprite memory alignment.');
+    report.warnings.push(
+      'Image is interlaced. Non-interlaced is preferred for sprite memory alignment.',
+    );
   }
 
   // 2. Dimensions check
@@ -188,7 +209,7 @@ export function validateCandidate(filePath) {
   const matchedSize = allowedSizes.find((s) => s.w === ihdr.width && s.h === ihdr.height);
   if (!matchedSize) {
     report.warnings.push(
-      `Non-standard dimensions: ${ihdr.width}x${ihdr.height}. Standard sizes are 32x32, 128x128, 192x128, or 512x512.`
+      `Non-standard dimensions: ${ihdr.width}x${ihdr.height}. Standard sizes are 32x32, 128x128, 192x128, or 512x512.`,
     );
   } else {
     console.log(`✓ Dimensions: ${ihdr.width}x${ihdr.height} (${matchedSize.desc})`);
@@ -198,7 +219,6 @@ export function validateCandidate(filePath) {
   const totalPixels = ihdr.width * ihdr.height;
   let transparentCount = 0;
   let semiTransparentCount = 0;
-  let opaqueCount = 0;
   const uniqueColors = new Set();
 
   for (let i = 0; i < totalPixels; i++) {
@@ -209,34 +229,37 @@ export function validateCandidate(filePath) {
 
     if (a === 0) {
       transparentCount++;
-    } else if (a < 250) {
-      semiTransparentCount++;
-      uniqueColors.add(`${r},${g},${b}`);
     } else {
-      opaqueCount++;
+      if (a < 250) semiTransparentCount++;
       uniqueColors.add(`${r},${g},${b}`);
     }
   }
 
   const transparentPct = ((transparentCount / totalPixels) * 100).toFixed(1);
-  console.log(`✓ Background Transparency: ${transparentPct}% (${transparentCount} transparent pixels)`);
+  console.log(
+    `✓ Background Transparency: ${transparentPct}% (${transparentCount} transparent pixels)`,
+  );
 
   if (transparentCount === 0) {
-    report.errors.push('Image has zero transparent pixels. A transparent background (A=0) is strictly required.');
+    report.errors.push(
+      'Image has zero transparent pixels. A transparent background (A=0) is strictly required.',
+    );
   }
 
   // Check 4 corners for transparency
   const cornerIndices = [0, ihdr.width - 1, totalPixels - ihdr.width, totalPixels - 1];
   const cornersTransparent = cornerIndices.every((idx) => pixels[idx * 4 + 3] === 0);
   if (!cornersTransparent) {
-    report.warnings.push('Image corner pixels are not fully transparent. Ensure background matte is removed.');
+    report.warnings.push(
+      'Image corner pixels are not fully transparent. Ensure background matte is removed.',
+    );
   }
 
   // Check semi-transparent halo pixels
   const semiPct = ((semiTransparentCount / totalPixels) * 100).toFixed(2);
   if (semiTransparentCount > totalPixels * 0.05) {
     report.warnings.push(
-      `High semi-transparency detected (${semiPct}% pixels). AI feathering/blurring should be cleaned to sharp binary edges.`
+      `High semi-transparency detected (${semiPct}% pixels). AI feathering/blurring should be cleaned to sharp binary edges.`,
     );
   }
 
@@ -245,7 +268,7 @@ export function validateCandidate(filePath) {
   console.log(`✓ Unique Colors in Sprite: ${uniqueColors.size}`);
   if (uniqueColors.size > 256 && ihdr.width <= 192) {
     report.warnings.push(
-      `High color count (${uniqueColors.size}) for 16-bit sprite. Clean pixel art typically uses <= 64 colors.`
+      `High color count (${uniqueColors.size}) for 16-bit sprite. Clean pixel art typically uses <= 64 colors.`,
     );
   }
 
@@ -254,6 +277,11 @@ export function validateCandidate(filePath) {
     const cols = ihdr.width / 32;
     const rows = ihdr.height / 32;
     let anchorDriftDetected = false;
+    // Horizontal centering: body mass centroid should sit near the frame centre (x = 15.5) so the
+    // 18x14 foot collider at (7, 16) lines up with the feet. Attack frames may lean, hence a tolerance.
+    const CENTER_X = 15.5;
+    const CENTER_TOLERANCE_PX = 4;
+    const offCenterFrames = [];
 
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
@@ -277,11 +305,30 @@ export function validateCandidate(filePath) {
         if (lowestY !== -1 && (lowestY < 27 || lowestY > 31)) {
           anchorDriftDetected = true;
         }
+
+        if (nonTransCount > 0) {
+          const centroidX = sumX / nonTransCount;
+          if (Math.abs(centroidX - CENTER_X) > CENTER_TOLERANCE_PX) {
+            offCenterFrames.push(`row ${r} col ${c} (x≈${centroidX.toFixed(1)})`);
+          }
+        }
       }
     }
 
+    report.metrics.offCenterFrames = offCenterFrames.length;
+    if (offCenterFrames.length > 0) {
+      report.warnings.push(
+        `Horizontal alignment: ${offCenterFrames.length} frame(s) off-centre by more than ` +
+          `${CENTER_TOLERANCE_PX}px: ${offCenterFrames.join(', ')}. Sprite should be centred on x=15.5.`,
+      );
+    } else {
+      console.log('✓ Horizontal alignment: All frames centred within tolerance.');
+    }
+
     if (anchorDriftDetected) {
-      report.warnings.push('Ground contact variation detected across frames. Feet should anchor on rows 28-30.');
+      report.warnings.push(
+        'Ground contact variation detected across frames. Feet should anchor on rows 28-30.',
+      );
     } else {
       console.log('✓ Ground-plane anchor: Feet anchored consistently across frames.');
     }
@@ -301,7 +348,9 @@ export function validateCandidate(filePath) {
     report.warnings.forEach((w) => console.log(`   - [WARN] ${w}`));
   }
 
-  console.log(`\nREMINDER: Per AGENTS.md, candidates require formal user approval before promotion.`);
+  console.log(
+    `\nREMINDER: Per AGENTS.md, candidates require formal user approval before promotion.`,
+  );
   console.log(`==================================================\n`);
 
   return report;
@@ -312,4 +361,3 @@ if (process.argv[1] && process.argv[1].endsWith('validate-candidate.js')) {
   const targetFile = process.argv[2] || 'art-source/characters/peter/concept/peter_concept_v1.png';
   validateCandidate(targetFile);
 }
-
