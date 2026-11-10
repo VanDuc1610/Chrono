@@ -1,0 +1,29 @@
+Top-Down 16-Bit Sprite Specification: Peter - Temporal Sight Animation Sheet
+
+Target Format:
+- Grid: 32x32 pixels per frame, 4 frames per direction, 4 cardinal directions:
+  - Row 0: Down-facing (channeling towards camera)
+  - Row 1: Up-facing (channeling away from camera)
+  - Row 2: Left-facing (channeling profile left)
+  - Row 3: Right-facing (channeling profile right)
+- Total dimensions: 128x128 pixels (4x4 frames).
+- Background: 100% transparent (8-bit alpha channel).
+- Footprint collider: 18x14 pixels at bottom center (7, 16).
+
+Character Consistency Requirements (from approved concept peter_concept_v1.png):
+- Hair (Permanent Identity Lock): Short, compact, naturally curly dark-brown hair (#3b291d) with clearly distinguishable, tightly coiled, springy curls. Silhouette is rounded, compact, and slightly elevated; curls grow upward/outward rather than hanging down. Complete curly coverage across entire head, sides, and back. NO straight, wavy, loose curls, drooping bangs, shaggy hair, or undercut/shaved sides.
+- Eyes: Pulses with luminous cyan chronal light (#00c8ff, #e6f9ff) instead of muted gray-blue.
+- High structured coat collar framing the head.
+- Asymmetrical charcoal-blue travel coat (#263248) fluttering gently from chronal thermal updraft.
+- Diagonal dark-brown leather shoulder strap (#453123) and left hip torn notebook.
+- Both hands raise Broken Blade in front of chest:
+  - The fractured blade hums with brilliant cerulean chronal fracture energy (#00c8ff).
+  - Chronal glyph particles radiate outward from the broken edge.
+
+Motion:
+- 4-frame channeled casting loop per direction:
+  - Frame 0: Channel initiation — blade raised, faint glow appears.
+  - Frame 1: Pulse apex — eyes flash cyan, blade aura flares to maximum brightness.
+  - Frame 2: Sustained resonance — concentric chronal energy rings expand outward.
+  - Frame 3: Secondary pulse — energy condenses slightly before the next pulse cycle.
+- Frame rate: 6 FPS loop.

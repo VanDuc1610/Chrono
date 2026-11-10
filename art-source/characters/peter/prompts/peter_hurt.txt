@@ -1,0 +1,24 @@
+Top-Down 16-Bit Sprite Specification: Peter - Hurt Animation Sheet
+
+Target Format:
+- Grid: 32x32 pixels per frame, 2 frames per direction, 4 cardinal directions:
+  - Row 0: Down-facing (recoil backward)
+  - Row 1: Up-facing (recoil forward/away)
+  - Row 2: Left-facing (recoil right)
+  - Row 3: Right-facing (recoil left)
+- Total dimensions: 64x128 pixels (2x4 frames).
+- Background: 100% transparent (8-bit alpha channel).
+- Footprint collider: 18x14 pixels at bottom center (7, 16).
+
+Character Consistency Requirements (from approved concept peter_concept_v1.png):
+- Hair (Permanent Identity Lock): Short, compact, naturally curly dark-brown hair (#3b291d) with clearly distinguishable, tightly coiled, springy curls. Silhouette is rounded, compact, and slightly elevated; curls grow upward/outward rather than hanging down. Complete curly coverage across entire head, sides, and back. NO straight, wavy, loose curls, drooping bangs, shaggy hair, or undercut/shaved sides.
+- Eyes closed or squinted in pain.
+- Asymmetrical charcoal-blue travel coat (#263248) knocked backward by impact force.
+- Diagonal leather shoulder strap, stopped watch, and torn notebook firmly visible.
+- Broken Blade held defensively or pushed aside by the blow.
+
+Motion:
+- 2-frame hit recoil sequence per direction:
+  - Frame 0: Impact stun frame — torso shoved 2 pixels back, chin tucked, silhouette flashes with white/tinted specular highlight.
+  - Frame 1: Stagger recovery — bracing footing, head snapping forward to re-engage.
+- Frame rate: 10 FPS (one-shot reaction).

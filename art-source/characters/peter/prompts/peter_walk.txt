@@ -1,0 +1,68 @@
+# AUTOMATIC1111 PROMPT TEMPLATE: Peter - 4-Direction Walk Animation Sheet
+# Project: CHRONO – THE FRACTURED DIVINITY
+# Approved Design Source: art-source/characters/peter/concept/peter_concept_v1.png
+# Design Document: docs/art/PETER_DESIGN.md
+
+================================================================================
+GRID & TARGET FORMAT:
+================================================================================
+- Dimensions: 192x128 pixels total sprite sheet (6 columns x 4 rows)
+- Frame Size: 32x32 pixels per frame
+- Rows (4 Cardinal Directions):
+  - Row 0 (Y=0..31): Down-facing walk cycle (6 frames)
+  - Row 1 (Y=32..63): Up-facing walk cycle (6 frames)
+  - Row 2 (Y=64..95): Left-facing walk cycle (6 frames)
+  - Row 3 (Y=96..127): Right-facing walk cycle (6 frames)
+- Background: 100% transparent (8-bit alpha channel)
+- Collision Footprint: 18x14 pixels at center-bottom (7, 16)
+- Animation Speed: 9 FPS loop
+
+================================================================================
+AUTOMATIC1111 WEBUI POSITIVE PROMPT:
+================================================================================
+masterpiece, best quality, 16-bit pixel art sprite sheet, 6x4 grid of 32x32 pixel sprites, 
+top-down rpg character walking cycle animation sheet, clean pixel clusters, crisp black outline, 
+male adult traveler 26 years old, mature masculine proportions, 
+short compact naturally curly dark-brown hair, springy coiled curls covering entire head, 
+rounded compact elevated hair dome silhouette, curls growing upward and outward, 
+asymmetrical charcoal-blue travel coat, mid-calf duster cut, high structured collar, 
+silver clasps on chest, diagonal dark-brown leather harness strap across chest to left hip, 
+torn notebook at left hip, stopped watch on chain, 
+right hand holding broken chronal broadsword with cerulean cyan glow (#00c8ff), 
+deliberate grounded walking stride loop across 6 frames, coat hem and tails naturally swaying, 
+Row 0 walking down toward camera, Row 1 walking up away from camera, 
+Row 2 walking left profile, Row 3 walking right profile, 
+100% transparent background, alpha channel, sharp pixels, no anti-aliasing
+
+================================================================================
+AUTOMATIC1111 WEBUI NEGATIVE PROMPT (STRICT IDENTITY LOCK ENFORCEMENT):
+================================================================================
+photorealistic, 3d render, blurry, smooth gradient, anti-aliased, 
+straight hair, wavy hair, loose curls, long hair, ponytail, drooping bangs, 
+shaggy hair, undercut, shaved sides, bald, dreadlocks, afro puff, 
+floating feet, sliding stride, modern clothing, sneakers, 
+solid background, white background, black background
+
+================================================================================
+RECOMMENDED AUTOMATIC1111 WEBUI SETTINGS:
+================================================================================
+- Model / Checkpoint: SD 1.5 Pixel Art model (or SDXL Pixel Art model downscaled)
+- Sampling Method: DPM++ 2M Karras or Euler a
+- Sampling Steps: 28
+- Total Canvas Width: 768 px (or direct 192 px)
+- Total Canvas Height: 512 px (or direct 128 px)
+- CFG Scale: 7.5
+- Clip Skip: 1 or 2
+- Seed: -1 (keep consistent with idle seed if possible)
+
+================================================================================
+STRIDE CYCLE VERIFICATION (6 FRAMES PER ROW):
+================================================================================
+- Frame 0: Left foot contact / forward plant
+- Frame 1: Left foot passing / body rises 1px
+- Frame 2: Right foot reach / apex extension
+- Frame 3: Right foot contact / forward plant
+- Frame 4: Right foot passing / body rises 1px
+- Frame 5: Left foot reach / return to contact
+- Ground plane contact maintained consistently across all frames.
+- Hair silhouette volume and curl definition must not distort or flatten during walking.

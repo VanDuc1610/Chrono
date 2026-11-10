@@ -1,0 +1,29 @@
+export type QuestStage = 'inactive' | 'started' | 'completed' | 'failed';
+
+export interface IQuestObjective {
+  id: string;
+  description: string;
+  completed: boolean;
+  currentCount?: number;
+  targetCount?: number;
+}
+
+export interface IQuestReward {
+  experience?: number;
+  items?: string[];
+  gold?: number;
+}
+
+export interface IQuest {
+  id: string;
+  title: string;
+  description: string;
+  stage: QuestStage;
+  objectives: IQuestObjective[];
+  rewards?: IQuestReward;
+}
+
+export interface QuestDatabase {
+  quests: IQuest[];
+}
+

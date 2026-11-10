@@ -1,0 +1,46 @@
+# AUTOMATIC1111 PROMPT TEMPLATE: Elder Chronographer - 4-Direction Idle Sheet
+# Project: CHRONO – THE FRACTURED DIVINITY
+# Design Document: docs/art/ELDER_DESIGN.md
+
+================================================================================
+GRID & TARGET FORMAT:
+================================================================================
+- Dimensions: 128x128 pixels total sprite sheet (4 columns x 4 rows)
+- Frame Size: 32x32 pixels per frame
+- Rows (4 Cardinal Directions):
+  - Row 0 (Y=0..31): Down-facing idle (4 breathing frames)
+  - Row 1 (Y=32..63): Up-facing idle (4 breathing frames)
+  - Row 2 (Y=64..95): Left-facing idle (4 breathing frames)
+  - Row 3 (Y=96..127): Right-facing idle (4 breathing frames)
+- Background: 100% transparent (8-bit alpha channel)
+- Collision Footprint: 18x14 pixels at center-bottom (7, 16)
+- Animation Speed: 4 FPS loop
+
+================================================================================
+AUTOMATIC1111 WEBUI POSITIVE PROMPT:
+================================================================================
+masterpiece, best quality, 16-bit pixel art sprite sheet, 4x4 grid of 32x32 pixel sprites, 
+top-down rpg npc idle animation sheet, clean pixel clusters, crisp black outline, 
+elderly monastic scholar 70 years old, flowing long white beard, hooded midnight-indigo robe, 
+brass astrolabe staff with gentle amber chronal glow (#ffd666), 
+subtle 4-frame breathing cycle, gentle staff glow pulsation, 
+Row 0 facing down, Row 1 facing up, Row 2 facing left, Row 3 facing right, 
+100% transparent background, alpha channel, sharp pixels, no anti-aliasing
+
+================================================================================
+AUTOMATIC1111 WEBUI NEGATIVE PROMPT:
+================================================================================
+photorealistic, 3d render, blurry, smooth gradient, anti-aliased, 
+young man, female, warrior armor, weapon, sword, modern clothing, 
+solid background, white background, black background
+
+================================================================================
+RECOMMENDED AUTOMATIC1111 WEBUI SETTINGS:
+================================================================================
+- Model / Checkpoint: SD 1.5 Pixel Art model (or SDXL Pixel Art model downscaled)
+- Sampler: DPM++ 2M Karras or Euler a
+- Steps: 28
+- Total Canvas Width: 512 px (or direct 128 px)
+- Total Canvas Height: 512 px (or direct 128 px)
+- CFG Scale: 7.5
+

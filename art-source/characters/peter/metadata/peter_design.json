@@ -1,0 +1,128 @@
+{
+  "assetId": "CHAR_PETER_001",
+  "characterName": "Peter",
+  "role": "Main Protagonist",
+  "approvedDesignVersion": "1.0.0",
+  "designDocPath": "docs/art/PETER_DESIGN.md",
+  "governingRulesPath": "AGENTS.md",
+  "generationPromptPath": "art-source/characters/peter/prompts/peter_final_prompt_v1.txt",
+  "conceptImagePath": "art-source/characters/peter/concept/peter_master_v1.png",
+  "conceptImageStatus": "APPROVED",
+  "conceptImages": [
+    {
+      "file": "art-source/characters/peter/concept/peter_master_v1.png",
+      "type": "master_concept_front_facing",
+      "status": "APPROVED",
+      "resolution": "1024x1024"
+    },
+    {
+      "file": "art-source/characters/peter/concept/peter_alt_pose_v1.png",
+      "type": "master_concept_three_quarter",
+      "status": "APPROVED",
+      "resolution": "1024x1024"
+    },
+    {
+      "file": "art-source/characters/peter/concept/peter_concept_v1.png",
+      "type": "turnaround_reference",
+      "status": "APPROVED",
+      "resolution": "1024x1024"
+    }
+  ],
+  "conceptViews": ["front", "three_quarter", "profile", "back"],
+  "characterIdentity": {
+    "age": 26,
+    "gender": "male",
+    "hair": {
+      "style": "short, compact, naturally curly men's haircut",
+      "curlType": "clearly distinguishable, tightly coiled, springy curls growing upward and outward",
+      "silhouette": "rounded, compact, and slightly elevated; visible curly coverage across entire head including sides and back",
+      "permanentIdentityLock": true,
+      "strictProhibitions": [
+        "NO straight messy hair",
+        "NO wavy hair",
+        "NO loose flowing curls",
+        "NO long curly fringe",
+        "NO drooping bangs",
+        "NO shaggy or layered hair",
+        "NO undercut or shaved sides",
+        "NO long hair, shoulder-length hair, or ponytail"
+      ]
+    },
+    "eyes": "muted gray-blue (#607d9c)",
+    "facialFeatures": "restrained expression, light jawline stubble",
+    "costume": {
+      "coat": "asymmetrical charcoal-blue mid-calf travel coat (#263248) with high structured collar and 4 pairs of silver toggle clasps",
+      "shoulderStrap": "diagonal dark-brown leather harness (#453123) from right shoulder to left hip with square silver buckle",
+      "tunic": "dark charcoal vertically ribbed travel shirt (#12151d)",
+      "trousers": "durable slate-black traveler trousers (#181c24)",
+      "boots": "dark leather field boots (#2e2219) with turnover cuffs",
+      "hardware": "aged antique silver (#8c96a8)"
+    },
+    "signatureObjects": [
+      {
+        "name": "Broken Blade",
+        "description": "Ancient chronal longsword fractured midway, glowing with cerulean fracture energy (#00c8ff) along the jagged break",
+        "location": "Held in right hand"
+      },
+      {
+        "name": "Stopped Watch",
+        "description": "Ornate silver pocket watch frozen at the Cataclysm",
+        "location": "Suspended from waist belt by silver chain"
+      },
+      {
+        "name": "Torn Notebook",
+        "description": "Leather-bound field journal filled with temporal calculations and torn pages",
+        "location": "Mounted to shoulder strap at left hip"
+      }
+    ]
+  },
+  "spriteSpecifications": {
+    "frameDimensions": { "width": 32, "height": 32 },
+    "groundFootprintHitbox": { "width": 18, "height": 14, "offsetX": 7, "offsetY": 16 },
+    "directions": ["down", "up", "left", "right"],
+    "versions": {
+      "idle": {
+        "version": "1.0.0",
+        "file": "public/assets/characters/peter/peter_idle.png",
+        "framesPerDirection": 4,
+        "fps": 5,
+        "status": "INTEGRATED"
+      },
+      "walk": {
+        "version": "1.0.0",
+        "file": "public/assets/characters/peter/peter_walk.png",
+        "framesPerDirection": 6,
+        "fps": 9,
+        "status": "INTEGRATED"
+      },
+      "run": {
+        "version": "1.0.0",
+        "file": "public/assets/characters/peter/peter_run.png",
+        "framesPerDirection": 6,
+        "fps": 12,
+        "status": "INTEGRATED"
+      },
+      "attack": {
+        "version": "1.0.0",
+        "file": "public/assets/characters/peter/peter_attack.png",
+        "framesPerDirection": 6,
+        "fps": 12,
+        "status": "INTEGRATED"
+      },
+      "hurt": {
+        "version": "1.0.0",
+        "file": "public/assets/characters/peter/peter_hurt.png",
+        "framesPerDirection": 2,
+        "fps": 10,
+        "status": "PLANNED"
+      },
+      "temporal_sight": {
+        "version": "1.0.0",
+        "file": "public/assets/characters/peter/peter_temporal_sight.png",
+        "framesPerDirection": 4,
+        "fps": 6,
+        "status": "PLANNED"
+      }
+    }
+  }
+}

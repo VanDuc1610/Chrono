@@ -1,0 +1,52 @@
+# AUTOMATIC1111 PROMPT TEMPLATE: Peter - Down-Facing Base Sprite
+# Project: CHRONO – THE FRACTURED DIVINITY
+# Approved Design Source: art-source/characters/peter/concept/peter_concept_v1.png
+# Design Document: docs/art/PETER_DESIGN.md
+
+================================================================================
+AUTOMATIC1111 WEBUI POSITIVE PROMPT:
+================================================================================
+masterpiece, best quality, 16-bit pixel art, clean pixel clusters, crisp black outline, 
+single character sprite, top-down rpg perspective, front facing down view, 
+male adult traveler 26 years old, mature masculine facial proportions, muted gray-blue eyes, 
+short compact naturally curly dark-brown hair, springy coiled curls covering entire head, 
+rounded elevated hair dome silhouette, curls growing upward and outward, 
+asymmetrical charcoal-blue travel coat, mid-calf duster cut, high structured stand-up collar, 
+four horizontal pairs of aged-silver bar toggle clasps on chest, dark vertically ribbed tunic, 
+diagonal dark-brown leather harness strap across chest from right shoulder to left hip, 
+aged silver belt buckle, suspended ornate stopped watch on silver chain, 
+torn leather-bound notebook hanging on left hip, dark trousers, sturdy leather field boots, 
+right hand gripping broken chronal broadsword hilt glowing cerulean cyan fracture energy, 
+neutral grounded stance, full body in frame, 100% transparent background, alpha channel, 
+sharp pixels, no blur, no anti-aliasing
+
+================================================================================
+AUTOMATIC1111 WEBUI NEGATIVE PROMPT (STRICT IDENTITY LOCK ENFORCEMENT):
+================================================================================
+photorealistic, 3d render, smooth shading, airbrush, blurry, anti-aliased, 
+straight hair, wavy hair, loose flowing curls, long hair, shoulder length, ponytail, 
+drooping bangs, long fringe, shaggy hair, layered hair, undercut, shaved sides, 
+bald, buzzcut, dreadlocks, afro puff, modern clothing, sneakers, hoodie, 
+oversized anime eyes, female, child, glowing angelic wings, solid background, 
+white background, black background, watermark, text, signature
+
+================================================================================
+RECOMMENDED AUTOMATIC1111 WEBUI SETTINGS:
+================================================================================
+- Model / Checkpoint: SD 1.5 Pixel Art model (or SD 1.5 Base + Pixel Art LoRA weight 0.85)
+- Sampling Method: DPM++ 2M Karras (or Euler a)
+- Sampling Steps: 28
+- Width: 512 px (downscaled to 32x32 px) OR direct native 32x32 / 64x64 px
+- Height: 512 px (downscaled to 32x32 px) OR direct native 32x32 / 64x64 px
+- CFG Scale: 7.5
+- Clip Skip: 1 or 2
+- Seed: -1 (random)
+
+================================================================================
+SPECIFICATION & IDENTITY VERIFICATION:
+================================================================================
+- Camera: Down-facing (facing directly toward camera, 3/4 top-down pitch).
+- Hair Check: Must be short, compact, springy coiled curls covering entire head. No straight hair, no loose curls, no bangs, no undercut.
+- Signature Objects: Broken Blade in right hand (cerulean glow #00c8ff), Stopped Watch on chain, Torn Notebook on left hip.
+- Footprint Collider: Center-bottom 18x14 px at (7, 16) within 32x32 px frame.
+

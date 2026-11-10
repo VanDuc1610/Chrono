@@ -1,0 +1,52 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "dev",
+      "isBackground": true,
+      "problemMatcher": [],
+      "label": "npm: dev (Start Vite Server)",
+      "group": "none"
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$tsc"],
+      "label": "npm: build (TypeScript + Vite Bundle)"
+    },
+    {
+      "type": "npm",
+      "script": "typecheck",
+      "group": "test",
+      "problemMatcher": ["$tsc"],
+      "label": "npm: typecheck"
+    },
+    {
+      "type": "shell",
+      "command": "node scripts/test-gameplay.js",
+      "group": "test",
+      "problemMatcher": [],
+      "label": "test: live gameplay"
+    },
+    {
+      "type": "shell",
+      "command": "node scripts/test-combat.js",
+      "group": "test",
+      "problemMatcher": [],
+      "label": "test: turn-based combat"
+    },
+    {
+      "type": "shell",
+      "command": "node scripts/test-inventory-save.js",
+      "group": "test",
+      "problemMatcher": [],
+      "label": "test: inventory and save"
+    }
+  ]
+}
+

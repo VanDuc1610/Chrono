@@ -1,0 +1,49 @@
+# AUTOMATIC1111 PROMPT TEMPLATE: Peter - Left-Facing Base Sprite
+# Project: CHRONO – THE FRACTURED DIVINITY
+# Approved Design Source: art-source/characters/peter/concept/peter_concept_v1.png
+# Design Document: docs/art/PETER_DESIGN.md
+
+================================================================================
+AUTOMATIC1111 WEBUI POSITIVE PROMPT:
+================================================================================
+masterpiece, best quality, 16-bit pixel art, clean pixel clusters, crisp black outline, 
+single character sprite, top-down rpg perspective, side profile facing left, 
+male adult traveler 26 years old, side profile facial features, mature masculine jawline, 
+short compact naturally curly dark-brown hair, springy coiled curls covering side of head and temple, 
+rounded elevated hair dome silhouette, curls growing upward and outward, 
+no undercut, no shaved temples, full curly coverage on sides, 
+high structured coat collar framing jaw, asymmetrical charcoal-blue travel coat side view, 
+diagonal dark-brown leather harness strap running down toward left hip, 
+prominent torn leather-bound notebook hanging at left hip with visible parchment page edges, 
+dark traveler trousers, dark leather field boots in profile grounded at bottom, 
+broken chronal sword hilt held ready, subtle cerulean cyan glow (#00c8ff), 
+full body in frame, 100% transparent background, alpha channel, sharp pixels, no anti-aliasing
+
+================================================================================
+AUTOMATIC1111 WEBUI NEGATIVE PROMPT (STRICT IDENTITY LOCK ENFORCEMENT):
+================================================================================
+photorealistic, 3d render, smooth shading, blurry, anti-aliased, 
+straight hair, wavy hair, loose curls, long hair, ponytail, drooping bangs, 
+shaggy hair, undercut, shaved sides, shaved temple, bald, afro puff, dreadlocks, 
+modern clothing, sneakers, solid background, white background, black background, watermark
+
+================================================================================
+RECOMMENDED AUTOMATIC1111 WEBUI SETTINGS:
+================================================================================
+- Model / Checkpoint: SD 1.5 Pixel Art model (or SD 1.5 Base + Pixel Art LoRA weight 0.85)
+- Sampling Method: DPM++ 2M Karras (or Euler a)
+- Sampling Steps: 28
+- Width: 512 px (downscaled to 32x32 px) OR direct native 32x32 / 64x64 px
+- Height: 512 px (downscaled to 32x32 px) OR direct native 32x32 / 64x64 px
+- CFG Scale: 7.5
+- Clip Skip: 1 or 2
+- Seed: -1 (random)
+
+================================================================================
+SPECIFICATION & IDENTITY VERIFICATION:
+================================================================================
+- Camera: Left-facing (side profile looking left, 3/4 top-down pitch).
+- Hair Check: Visible curl coils on left temple, crown, and nape. No undercut or skin fade.
+- Prominent Feature: Torn Notebook hanging at left hip is prominently displayed in this perspective.
+- Footprint Collider: Center-bottom 18x14 px at (7, 16) within 32x32 px frame.
+

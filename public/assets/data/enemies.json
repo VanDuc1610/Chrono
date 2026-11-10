@@ -1,0 +1,41 @@
+{
+  "enemies": [
+    {
+      "id": "enemy_temporal_shade",
+      "name": "Temporal Shade",
+      "level": 1,
+      "maxHp": 35,
+      "hp": 35,
+      "attack": 8,
+      "defense": 4,
+      "speed": 10,
+      "spriteKey": "enemy_fracture",
+      "skills": ["chrono_scratch", "temporal_flux"],
+      "lootTable": [
+        {
+          "itemId": "chrono_shard_minor",
+          "chance": 0.75
+        }
+      ]
+    },
+    {
+      "id": "enemy_fractured_automaton",
+      "name": "Fractured Automaton",
+      "level": 2,
+      "maxHp": 60,
+      "hp": 60,
+      "attack": 12,
+      "defense": 8,
+      "speed": 6,
+      "spriteKey": "enemy_fracture",
+      "skills": ["gear_crush"],
+      "lootTable": [
+        {
+          "itemId": "ancient_gear",
+          "chance": 0.5
+        }
+      ]
+    }
+  ]
+}
+

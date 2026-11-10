@@ -1,0 +1,20 @@
+{
+  "name": "chrono-fractured-divinity",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "CHRONO – The Fractured Divinity: 2D Browser-based RPG (Prologue Vertical Slice)",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "phaser": "^3.88.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0"
+  }
+}

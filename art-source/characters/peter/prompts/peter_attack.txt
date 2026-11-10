@@ -1,0 +1,30 @@
+Top-Down 16-Bit Sprite Specification: Peter - Attack Animation Sheet
+
+Target Format:
+- Grid: 32x32 pixels per frame, 6 frames per direction, 4 cardinal directions:
+  - Row 0: Down-facing (slashing towards bottom)
+  - Row 1: Up-facing (slashing towards top)
+  - Row 2: Left-facing (slashing towards left)
+  - Row 3: Right-facing (slashing towards right)
+- Total dimensions: 192x128 pixels (6x4 frames).
+- Background: 100% transparent (8-bit alpha channel).
+- Footprint collider: 18x14 pixels at bottom center (7, 16).
+
+Character Consistency Requirements (from approved concept peter_concept_v1.png):
+- Hair (Permanent Identity Lock): Short, compact, naturally curly dark-brown hair (#3b291d) with clearly distinguishable, tightly coiled, springy curls. Silhouette is rounded, compact, and slightly elevated; curls grow upward/outward rather than hanging down. Complete curly coverage across entire head, sides, and back. NO straight, wavy, loose curls, drooping bangs, shaggy hair, or undercut/shaved sides.
+- Muted gray-blue eyes (#607d9c) focused intensely in the direction of the strike.
+- Asymmetrical charcoal-blue travel coat (#263248) twisting with the torso rotation.
+- Diagonal dark-brown leather shoulder strap (#453123) across chest.
+- Left hip torn notebook securely fastened.
+- Right hand gripping Broken Blade: hilt with cruciform silver guard (#8c96a8) and spherical pommel.
+- The fractured longsword blade leaves an arc of brilliant cerulean chronal light (#00c8ff, #e6f9ff) during the strike.
+
+Motion:
+- 6-frame sword strike sequence per direction:
+  - Frame 0: Anticipation / coil back, raising Broken Blade.
+  - Frame 1: Windup apex, blade begins to hum with bright cyan energy.
+  - Frame 2: Primary strike impact, wide crescent blade arc with fracture trails.
+  - Frame 3: Follow-through extension, energy dispersion.
+  - Frame 4: Recovery, step back onto balance.
+  - Frame 5: Return to alert stance.
+- Frame rate: 12 FPS (one-shot action).

@@ -1,0 +1,50 @@
+# AUTOMATIC1111 PROMPT TEMPLATE: Peter - Up-Facing Base Sprite
+# Project: CHRONO – THE FRACTURED DIVINITY
+# Approved Design Source: art-source/characters/peter/concept/peter_concept_v1.png
+# Design Document: docs/art/PETER_DESIGN.md
+
+================================================================================
+AUTOMATIC1111 WEBUI POSITIVE PROMPT:
+================================================================================
+masterpiece, best quality, 16-bit pixel art, clean pixel clusters, crisp black outline, 
+single character sprite, top-down rpg perspective, back view facing away up, 
+male adult traveler 26 years old, back of head view, 
+short compact naturally curly dark-brown hair covering entire back of head and nape, 
+springy coiled curls growing upward and outward, rounded compact hair dome silhouette, 
+no skin fade, no shaved nape, full curly hair coverage, 
+high structured stand-up coat collar visible framing lower back of head, 
+asymmetrical charcoal-blue travel coat back view, center vertical coat back seam, 
+mid-calf duster coat hem, diagonal dark-brown leather harness strap crossing back from right shoulder to left hip, 
+dark traveler trousers, heels of dark leather field boots grounded firmly, 
+torn leather-bound notebook hanging clearly visible at left hip, 
+right hand held slightly outward holding broken chronal broadsword hilt glowing cerulean cyan aura, 
+full body in frame, 100% transparent background, alpha channel, sharp pixels, no blur
+
+================================================================================
+AUTOMATIC1111 WEBUI NEGATIVE PROMPT (STRICT IDENTITY LOCK ENFORCEMENT):
+================================================================================
+photorealistic, 3d render, smooth gradient, airbrush, blurry, anti-aliased, 
+face visible, front view, straight hair, wavy hair, loose curls, long hair, ponytail, 
+undercut, shaved nape, bald, skin fade, dreadlocks, modern backpack, modern clothes, 
+solid background, white background, black background, watermark, signature
+
+================================================================================
+RECOMMENDED AUTOMATIC1111 WEBUI SETTINGS:
+================================================================================
+- Model / Checkpoint: SD 1.5 Pixel Art model (or SD 1.5 Base + Pixel Art LoRA weight 0.85)
+- Sampling Method: DPM++ 2M Karras (or Euler a)
+- Sampling Steps: 28
+- Width: 512 px (downscaled to 32x32 px) OR direct native 32x32 / 64x64 px
+- Height: 512 px (downscaled to 32x32 px) OR direct native 32x32 / 64x64 px
+- CFG Scale: 7.5
+- Clip Skip: 1 or 2
+- Seed: -1 (random)
+
+================================================================================
+SPECIFICATION & IDENTITY VERIFICATION:
+================================================================================
+- Camera: Up-facing (facing directly away from camera, 3/4 top-down pitch).
+- Hair Check: Must show full curly hair coverage down to collar nape. No shaved nape, no long hair.
+- Back Details: Diagonal strap from right shoulder to left hip, center coat seam, left hip notebook visible.
+- Footprint Collider: Center-bottom 18x14 px at (7, 16) within 32x32 px frame.
+

@@ -1,0 +1,63 @@
+# AUTOMATIC1111 PROMPT TEMPLATE: Peter - 4-Direction Idle Animation Sheet
+# Project: CHRONO – THE FRACTURED DIVINITY
+# Approved Design Source: art-source/characters/peter/concept/peter_concept_v1.png
+# Design Document: docs/art/PETER_DESIGN.md
+
+================================================================================
+GRID & TARGET FORMAT:
+================================================================================
+- Dimensions: 128x128 pixels total sprite sheet (4 columns x 4 rows)
+- Frame Size: 32x32 pixels per frame
+- Rows (4 Cardinal Directions):
+  - Row 0 (Y=0..31): Down-facing idle (4 breathing frames)
+  - Row 1 (Y=32..63): Up-facing idle (4 breathing frames)
+  - Row 2 (Y=64..95): Left-facing idle (4 breathing frames)
+  - Row 3 (Y=96..127): Right-facing idle (4 breathing frames)
+- Background: 100% transparent (8-bit alpha channel)
+- Collision Footprint: 18x14 pixels at center-bottom (7, 16)
+- Animation Speed: 5 FPS loop
+
+================================================================================
+AUTOMATIC1111 WEBUI POSITIVE PROMPT:
+================================================================================
+masterpiece, best quality, 16-bit pixel art sprite sheet, 4x4 grid of 32x32 pixel sprites, 
+top-down rpg character idle animation sheet, clean pixel clusters, crisp black outline, 
+male adult traveler 26 years old, mature masculine proportions, 
+short compact naturally curly dark-brown hair, springy coiled curls covering entire head, 
+rounded compact elevated hair dome silhouette, curls growing upward and outward, 
+asymmetrical charcoal-blue travel coat, high structured collar, silver clasps, 
+diagonal dark-brown leather harness strap across chest, 
+torn notebook on left hip, stopped watch on silver chain, 
+right hand holding broken chronal broadsword with cerulean cyan fracture glow (#00c8ff), 
+subtle breathing loop across 4 frames, gentle pulsing chronal blade aura, 
+Row 0 facing down, Row 1 facing up, Row 2 facing left, Row 3 facing right, 
+100% transparent background, alpha channel, sharp pixels, no anti-aliasing
+
+================================================================================
+AUTOMATIC1111 WEBUI NEGATIVE PROMPT (STRICT IDENTITY LOCK ENFORCEMENT):
+================================================================================
+photorealistic, 3d render, blurry, smooth gradient, anti-aliased, 
+straight hair, wavy hair, loose curls, long hair, ponytail, drooping bangs, 
+shaggy hair, undercut, shaved sides, bald, dreadlocks, afro puff, 
+modern clothing, sneakers, solid background, white background, black background
+
+================================================================================
+RECOMMENDED AUTOMATIC1111 WEBUI SETTINGS:
+================================================================================
+- Model / Checkpoint: SD 1.5 Pixel Art model (or SDXL Pixel Art model downscaled)
+- Sampling Method: DPM++ 2M Karras or Euler a
+- Sampling Steps: 28
+- Total Canvas Width: 512 px (or direct 128 px)
+- Total Canvas Height: 512 px (or direct 128 px)
+- CFG Scale: 7.5
+- Clip Skip: 1 or 2
+- Seed: -1 (record successful seed for future sheets)
+
+================================================================================
+MOTION & CONSISTENCY VERIFICATION:
+================================================================================
+- Frame 0: Neutral relaxed stance, sword held low.
+- Frame 1: 1-pixel subtle torso inhalation heave, blade glow intensifies slightly.
+- Frame 2: Peak breath hold, coat hem settles 1 pixel.
+- Frame 3: Gentle exhale settling back toward neutral.
+- Feet remain strictly anchored on ground plane (Y=29..30) across all 4 frames.

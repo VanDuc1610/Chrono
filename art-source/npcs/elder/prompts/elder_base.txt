@@ -1,0 +1,34 @@
+# AUTOMATIC1111 PROMPT TEMPLATE: Elder Chronographer - Base Sprite
+# Project: CHRONO – THE FRACTURED DIVINITY
+# Design Document: docs/art/ELDER_DESIGN.md
+
+================================================================================
+AUTOMATIC1111 WEBUI POSITIVE PROMPT:
+================================================================================
+masterpiece, best quality, 16-bit pixel art, clean pixel clusters, crisp black outline, 
+single character sprite, top-down rpg perspective, front facing down view, 
+elderly monastic scholar 70 years old, dignified weathered posture, 
+flowing snow-white beard reaching chest, long silver hair under deep cowl, 
+pale amber-gold eyes, deep midnight-indigo hooded mantle with aged bronze trim, 
+slate-gray monastic robe bound by leather girdle, 
+embroidered liturgical stole with faded golden chronal glyphs, 
+left hand holding slender oak staff tipped with rotating brass astrolabe and glowing amber shard, 
+leather scroll satchel on right hip, grounded stance, 
+100% transparent background, alpha channel, sharp pixels, no blur, no anti-aliasing
+
+================================================================================
+AUTOMATIC1111 WEBUI NEGATIVE PROMPT:
+================================================================================
+photorealistic, 3d render, blurry, smooth gradient, anti-aliased, 
+young, child, warrior armor, modern clothing, sneakers, high fantasy wings, 
+solid background, white background, black background, watermark, signature
+
+================================================================================
+RECOMMENDED AUTOMATIC1111 WEBUI SETTINGS:
+================================================================================
+- Checkpoint / Model: SD 1.5 Pixel Art model (or SDXL Pixel Art model downscaled)
+- Sampler: DPM++ 2M Karras (or Euler a)
+- Steps: 28
+- Resolution: 512x512 px (downscaled to 32x32 px) or native 32x32 px
+- CFG Scale: 7.5
+

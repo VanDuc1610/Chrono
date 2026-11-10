@@ -1,0 +1,27 @@
+{
+  "quests": [
+    {
+      "id": "quest_prologue_awakening",
+      "title": "Echoes in the Fracture",
+      "description": "Explore the Shattered Antechamber and speak with the Elder Chronographer.",
+      "stage": "started",
+      "objectives": [
+        {
+          "id": "obj_speak_elder",
+          "description": "Speak with the Elder Chronographer",
+          "completed": false
+        },
+        {
+          "id": "obj_inspect_altar",
+          "description": "Inspect the Altar of Moments",
+          "completed": false
+        }
+      ],
+      "rewards": {
+        "experience": 50,
+        "items": ["chrono_shard_minor"]
+      }
+    }
+  ]
+}
+

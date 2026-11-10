@@ -1,0 +1,15 @@
+Character Concept Specification: Peter, the 26-year-old male protagonist of the 16-bit dark fantasy retro RPG "CHRONO: The Fractured Divinity".
+
+Visual Characteristics:
+- Gender & Age: Adult male, 26 years old, slender-athletic build.
+- Hair (Permanent Identity Lock): Short, compact, naturally curly dark-brown men's haircut (#3b291d, #22160f, #594132) consisting of clearly distinguishable, tightly coiled, springy curls. The overall hair silhouette is rounded, compact, and slightly elevated, growing upward and outward rather than hanging down. Entire head retains visible curly coverage including sides and back. STRICT PROHIBITIONS: Never interpret as straight messy hair, wavy hair, loose flowing curls, long curly fringe, drooping bangs, shaggy/layered hair, undercut, or shaved sides.
+- Eyes: Muted gray-blue eyes (#607d9c), calm and focused expression, light stubble along the jawline.
+- Coat: Charcoal-blue (#263248) mid-calf travel coat with high structured standing collar, 4 pairs of horizontal aged-silver bar-and-toggle clasps across the chest, and dark leather waist belt with rectangular silver buckle.
+- Clothing: Dark charcoal ribbed tunic (#12151d), durable slate-black traveler trousers (#181c24), and dark leather field boots (#2e2219) with turnover cuffs.
+- Shoulder Strap: Dark-brown oiled leather strap (#453123) crossing diagonally from right shoulder to left hip with square silver buckle.
+- Signature Objects:
+  1. Broken Blade: Ancient longsword fractured in half, glowing with a soft cerulean chronal hum (#00c8ff) along the jagged fracture edge. Held in right hand.
+  2. Stopped Watch: Ornate silver pocket watch on chain suspended from waist belt.
+  3. Torn Notebook: Thick leather-bound journal with cream parchment pages mounted to the strap at the left hip.
+- Style: 16-bit pixel art aesthetic, clean pixel definition, cohesive dark fantasy palette, transparent background.
+

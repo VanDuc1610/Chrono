@@ -1,0 +1,35 @@
+{
+  "items": [
+    {
+      "id": "chrono_shard_minor",
+      "name": "Minor Chrono Shard",
+      "type": "consumable",
+      "description": "A crystallized fragment of displaced time. Restores 30 HP.",
+      "value": 15,
+      "stackable": true,
+      "maxStack": 99,
+      "effects": {
+        "healAmount": 30
+      }
+    },
+    {
+      "id": "ancient_gear",
+      "name": "Ancient Gear",
+      "type": "material",
+      "description": "A brass gear engraved with celestial glyphs. Used for crafting.",
+      "value": 30,
+      "stackable": true,
+      "maxStack": 50
+    },
+    {
+      "id": "relic_chronometer",
+      "name": "Broken Chronometer",
+      "type": "key_item",
+      "description": "An ornate pocket timepiece whose hands spin erratically.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    }
+  ]
+}
+

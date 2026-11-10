@@ -1,0 +1,53 @@
+# FINAL APPROVED PROMPT SPECIFICATION: Peter
+# Canon Art Reference: art-source/characters/peter/concept/peter_master_v1.png
+# Alternate Reference: art-source/characters/peter/concept/peter_alt_pose_v1.png
+# Design Document: docs/art/PETER_DESIGN.md
+# Metadata Ledger: art-source/characters/peter/metadata/peter_design.json
+
+================================================================================
+AUTOMATIC1111 WEBUI MASTER PROMPT (POSITIVE):
+================================================================================
+masterpiece, best quality, 16-bit pixel art character design sheet, clean pixel clusters, 
+crisp dark outline, full body character portrait, dark fantasy ethereal rpg style, 
+Peter protagonist, adult male 26 years old, slender athletic build, mature masculine facial proportions, 
+focused contemplative expression, defined jawline with subtle stubble, muted gray-blue eyes, 
+short compact naturally curly dark-brown hair, springy coiled curls covering entire head, 
+rounded elevated compact hair dome silhouette, curls growing upward and outward, 
+full curly coverage on crown, temples, sides, and nape, 
+asymmetrical charcoal-blue travel coat, mid-calf duster cut, high structured collar framing neck, 
+restrained dark purple-slate interior lining and turned cuffs, horizontal silver toggle clasps, 
+dark vertically ribbed travel tunic shirt with open collar, 
+diagonal dark-brown leather harness shoulder strap across chest from right shoulder to left hip, 
+dark traveler trousers, dark oiled leather field boots with reinforced turnover cuffs, 
+neutral studio presentation background, sharp pixel definition, zero anti-aliasing, authentic pixel art
+
+================================================================================
+AUTOMATIC1111 WEBUI MASTER NEGATIVE PROMPT (STRICT IDENTITY LOCK):
+================================================================================
+photorealistic, 3d render, vector, smooth airbrush gradient, blurry, anti-aliased, 
+straight hair, wavy hair, loose curls, long hair, shoulder length, ponytail, 
+drooping bangs, long fringe, shaggy hair, layered hair, undercut, shaved sides, 
+bald, buzzcut, dreadlocks, afro puff, modern sneakers, hoodie, modern clothes, 
+female, child, anime big eyes, glowing angelic wings, watermark, text, signature
+
+================================================================================
+AUTOMATIC1111 WEBUI ENGINE SETTINGS:
+================================================================================
+- Checkpoint / Model: SD 1.5 Base + Pixel Art LoRA (weight: 0.85 - 1.0) or RPG Pixel Art XL
+- Sampler: DPM++ 2M Karras (or Euler a)
+- Sampling Steps: 28
+- CFG Scale: 7.5
+- Clip Skip: 1 or 2
+- Base Resolution: 1024x1024 px (concept portrait) / 512x512 px (sprite downsampling)
+- Denoising Strength (for img2img variations): 0.35 - 0.45
+
+================================================================================
+CANONICAL IDENTITY FEATURES:
+================================================================================
+1. Hairstyle (Permanent Lock): Short, compact, springy coiled curls covering the entire head.
+2. Eyes: Muted gray-blue.
+3. Coat: Asymmetrical charcoal-blue travel duster with restrained purple lining and aged silver clasps.
+4. Strap: Diagonal dark-brown leather harness from right shoulder to left hip.
+5. Boots: Dark leather field boots with turnover cuffs.
+6. Signature Items (to be equipped in action sheets): Broken Blade (cerulean glow #00c8ff), Stopped Watch on chain, Torn Notebook on left hip.
+

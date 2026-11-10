@@ -1,0 +1,68 @@
+{
+  "dialogues": {
+    "intro_awakening": {
+      "id": "intro_awakening",
+      "speaker": "Echo of Chronos",
+      "lines": [
+        "Awaken, fractured vessel...",
+        "The celestial gears have shattered. The flow of time bleeds into eternity.",
+        "Seek the Sanctuary Spire to discover what remains of the divine order."
+      ],
+      "responses": [
+        {
+          "text": "Where am I?",
+          "nextDialogueId": "intro_location"
+        },
+        {
+          "text": "I will proceed.",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "intro_location": {
+      "id": "intro_location",
+      "speaker": "Echo of Chronos",
+      "lines": [
+        "This is the Shattered Antechamber, the boundary between remembered time and oblivion."
+      ],
+      "responses": []
+    },
+    "npc_elder_greeting": {
+      "id": "npc_elder_greeting",
+      "speaker": "Elder Chronographer",
+      "lines": [
+        "Greetings, wanderer. You stand upon sacred ground fractured by the Cataclysm.",
+        "The boundaries of this chamber hold firm for now, but temporal rifts stir beyond.",
+        "Take care not to wander into the fractured abyss."
+      ],
+      "responses": [
+        {
+          "text": "What must I do?",
+          "nextDialogueId": "npc_elder_quest_hint"
+        },
+        {
+          "text": "Farewell.",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "npc_elder_quest_hint": {
+      "id": "npc_elder_quest_hint",
+      "speaker": "Elder Chronographer",
+      "lines": [
+        "Examine the Altar of Moments at the center of the hall. It may resonate with your essence."
+      ],
+      "responses": []
+    },
+    "altar_inspection": {
+      "id": "altar_inspection",
+      "speaker": "Altar of Moments",
+      "lines": [
+        "A pulse of chronal light hums beneath the weathered stone.",
+        "Faint runes shift and rearrange themselves before your eyes."
+      ],
+      "responses": []
+    }
+  }
+}
+
