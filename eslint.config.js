@@ -7,9 +7,9 @@ import globals from 'globals';
 export default tseslint.config(
   { ignores: ['dist/', 'node_modules/'] },
 
-  // Game source (TypeScript, browser)
+  // Game source and unit tests (TypeScript)
   {
-    files: ['src/**/*.ts'],
+    files: ['src/**/*.ts', 'tests/**/*.ts'],
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     languageOptions: {
       globals: globals.browser,
