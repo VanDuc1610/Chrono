@@ -20,7 +20,7 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 ## Active
 
 ### T-11 · Session regression CDP test suite (B1, B2, B3, B4, B6)
-- **Assignee:** Antigravity · **Status:** IN PROGRESS
+- **Assignee:** Antigravity · **Status:** DONE
 - **Locks:** `scripts/test-session-regression.js`
 - Write `scripts/test-session-regression.js` testing B1 (Elder objective preserved after Escape), B2 (shard count does not inflate on Escape or repeated Continue), B3 (New Game after victory resets Shade & starter inventory), B4 (Key 1 Attack deals damage on 2nd encounter after Escape), and B6 (Key 3 Item with 0 shards does not heal), printing `PASS`/`FAIL` per scenario.
 
@@ -43,6 +43,7 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Done
 
+- **T-11** Added `scripts/test-session-regression.js` CDP suite verifying B1, B2, B3, B4, and B6 with per-scenario `PASS`/`FAIL` output (confirmed all 5 reproduce pre-T-09) — Antigravity
 - **T-10** Owner decisions (2026-11-10): (a) combat uses speed-based initiative; Escape stays but can fail (probability from speed, a failed escape costs the turn); (b) EXP + levelling are in scope for the prologue — Owner
 - **T-08** Fixed B5 (defend stance never expired), B7 (ESC `JustDown` read twice → menu always false), B11 (save data validated + version-checked; CONTINUE only for loadable saves), B12 (`getLastFacing` on `IMovementSystem`, no down-cast) — Claude
 - **T-02** Code review of `src/`: 14 findings, 6 gameplay-breaking — [reviews/T-02_CODE_REVIEW.md](reviews/T-02_CODE_REVIEW.md) — Claude
