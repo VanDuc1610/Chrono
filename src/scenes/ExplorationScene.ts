@@ -12,6 +12,7 @@ import { DialogueDatabase } from '../systems/dialogue/DialogueTypes';
 import { QuestDatabase } from '../systems/quest/QuestTypes';
 import { InventoryDatabase } from '../systems/inventory/InventoryTypes';
 import { ISaveData } from '../systems/save/SaveTypes';
+import { SoundSystem } from '../systems/audio/SoundSystem';
 
 export class ExplorationScene extends Phaser.Scene {
   public player!: Player;
@@ -21,6 +22,7 @@ export class ExplorationScene extends Phaser.Scene {
   public questSystem!: QuestSystem;
   public inventorySystem = new InventorySystem();
   public saveSystem = new SaveSystem();
+  private soundSystem = SoundSystem.getInstance();
 
   private map!: Phaser.Tilemaps.Tilemap;
   public groundLayer!: Phaser.Tilemaps.TilemapLayer;
@@ -189,6 +191,12 @@ export class ExplorationScene extends Phaser.Scene {
 
     // Fade in from transition
     this.cameras.main.fadeIn(400, 0, 0, 0);
+
+    // Start procedural ambient ruin BGM and stop all audio nodes on shutdown
+    this.soundSystem.startBgm('ambient');
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.soundSystem.stopBgm(true);
+    });
 
     // Global Key Listeners
     if (this.input.keyboard) {

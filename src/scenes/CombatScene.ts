@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { CombatSystem } from '../systems/combat/CombatSystem';
 import { ICombatAction, ICombatant } from '../systems/combat/CombatTypes';
+import { SoundSystem } from '../systems/audio/SoundSystem';
 
 export interface CombatSceneData {
   enemyId: string;
@@ -9,6 +10,7 @@ export interface CombatSceneData {
 
 export class CombatScene extends Phaser.Scene {
   private combatSystem!: CombatSystem;
+  private soundSystem = SoundSystem.getInstance();
 
   // Visual representations
   private playerSprite!: Phaser.GameObjects.Sprite;
@@ -93,6 +95,12 @@ export class CombatScene extends Phaser.Scene {
 
     // Fade in
     this.cameras.main.fadeIn(400, 0, 0, 0);
+
+    // Start procedural battle BGM and stop all audio nodes on shutdown
+    this.soundSystem.startBgm('battle');
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.soundSystem.stopBgm(true);
+    });
 
     this.setBattleLog(`A hostile ${this.enemy.name} emerges from the fractured rift!`);
   }

@@ -19,14 +19,10 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-### T-02 · Architecture & code review of `src/`
+### T-08 · Fix review findings in unlocked system files (B5, B7, B11, B12)
 - **Assignee:** Claude · **Status:** IN PROGRESS
-- **Locks:** none (read-only). Findings are written up as follow-up tasks; fixes are scheduled only after the files are free.
-
-### T-04 · Procedural BGM (Milestone 6 audio)
-- **Assignee:** Antigravity · **Status:** IN PROGRESS
-- **Locks:** `src/systems/audio/SoundSystem.ts`, `src/scenes/ExplorationScene.ts`, `src/scenes/CombatScene.ts`, `src/scenes/MainMenuScene.ts`
-- Add Web Audio–synthesized looping music to `SoundSystem`: ambient ruin theme (exploration/menu) and battle theme (combat), with crossfade on scene change, respecting existing volume/mute. Stop all audio nodes on scene shutdown (no leaked oscillators on re-entry). No audio files, no copyrighted melodies.
+- **Locks:** `src/systems/combat/CombatSystem.ts`, `src/systems/input/KeyboardPlayerController.ts`, `src/systems/save/SaveSystem.ts`, `src/systems/movement/IMovementSystem.ts`, `src/systems/movement/TopDownMovementSystem.ts`, `src/entities/Player.ts`
+- See [reviews/T-02_CODE_REVIEW.md](reviews/T-02_CODE_REVIEW.md).
 
 ### T-05 · Peter idle + walk candidate sheets
 - **Assignee:** Owner (manual, AUTOMATIC1111) · **Status:** TODO
@@ -46,7 +42,8 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Done
 
-- **T-03** Updated `AGENTS.md` §1 roles to match `CLAUDE.md` §1 (Claude Code = project coordinator + implementer/reviewer; Antigravity = implementation agent) and linked `docs/TASKS.md` while preserving all art/Peter rules — Antigravity
+- **T-04** Added procedural Web Audio BGM loops (`ambient` ruin theme for `MainMenuScene`/`ExplorationScene`, `battle` theme for `CombatScene`) with crossfade, mute/volume sync, and full oscillator/node teardown on scene shutdown — Antigravity
+- **T-03** Updated `AGENTS.md` §1 roles to match `CLAUDE.md` §1 (Claude Code = project coordinator + implementer/reviewer; Antigravity = implementation agent) and linked `docs/TASKS.md` while preserving all art/Peter rules — Antigravity (`8368622`)
 - **T-01** ESLint 9 (flat config, typescript-eslint) + Prettier 3 (single quotes, width 100, LF); scripts `lint`, `lint:fix`, `format`, `format:check`. Fixed `validate-candidate.js`: rejects 16-bit/indexed/interlaced PNGs instead of mis-decoding them, and adds the missing horizontal frame-centering check — Claude
 
 - **T-00a** Git init, baseline commit, `.gitignore` / `.gitattributes`, push to origin — Claude (`ffb72c3`)

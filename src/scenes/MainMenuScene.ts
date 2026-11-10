@@ -150,6 +150,12 @@ export class MainMenuScene extends Phaser.Scene {
 
     // Create Options Modal
     this.createOptionsModal(width, height);
+
+    // Start procedural ambient ruin BGM and clean up on shutdown
+    this.soundSystem.startBgm('ambient');
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.soundSystem.stopBgm(true);
+    });
   }
 
   private createOptionsModal(width: number, height: number): void {
