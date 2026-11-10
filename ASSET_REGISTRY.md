@@ -14,7 +14,7 @@
 | -------------------------- | ----- | ------------------------------------------------------------------------------- |
 | `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`)                           |
 | `INTEGRATED`               | 4     | Approved art in engine (`CHAR_PETER_002`, `MOB_SHADE_001`, `ENV_SANCTUARY_001`) |
-| `CONCEPT_PENDING_APPROVAL` | 1     | Concept generated; awaiting formal review                                       |
+| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review                                       |
 | `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared                                      |
 | `PLACEHOLDER_TEMPORARY`    | 6     | Procedural placeholder assets active in engine                                  |
 
@@ -87,12 +87,12 @@
 - **Validation:** PASSED (corner/ground warnings are expected for opaque floor tiles).
 - **Status:** `INTEGRATED` — owner approved 2026-11-11 ("rất tốt"). Map Ground layer now uses variant (GID 10) and fracture tiles (GID 9, clustered east of the Shade) via `scripts/generate-map.js`.
 
-### `ENV_SANCTUARY_002_CAND` – Tileset v3: prologue point-of-interest props
+### `ENV_SANCTUARY_002` – Tileset v3: prologue point-of-interest props — INTEGRATED
 
 - **Generator:** `scripts/author-sanctuary-tileset.js` (tiles 0-9 unchanged from the approved v2) · placements in `scripts/map-props.js`
-- **File:** `art-source/environment/sanctuary/generated/candidates/sanctuary_tileset_v3.png` · previews: `sanctuary_tileset_v3_x4.png`, `sanctuary_room_v3.png` (room with the props placed)
+- **File:** `art-source/environment/sanctuary/generated/approved/sanctuary_tileset_v3.png` → runtime `public/assets/tilesets/dungeon_tileset.png` · previews: `sanctuary_tileset_v3_x4.png`, `sanctuary_room_v3.png` (room with the props placed)
 - **New tiles:** 10 Stele of the Six Authorities (3,4) · 11 Frozen Astrolabe (20,4) · 12 Cracked Reliquary (7,2) · 13 Sealed Threshold Gates in the north wall (12,1) · 14 Torn Journal Leaf on the engraved floor (14,12). Stele and astrolabe replace the two northern crystals; the southern crystals stay (SE one is the Residual Rift Echo).
-- **Status:** `CONCEPT_PENDING_APPROVAL` — on approval: deploy over `dungeon_tileset.png` and apply `map-props.js` in `generate-map.js`.
+- **Status:** `INTEGRATED` — owner approved 2026-11-11; `generate-map.js` applies `map-props.js` (supersedes v2 at runtime; v2 kept in `approved/` for history).
 
 ## 3. Active Placeholder Registry
 

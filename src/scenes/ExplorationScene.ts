@@ -18,6 +18,7 @@ const PROLOGUE_QUEST_ID = 'quest_prologue_awakening';
 const SILENCE_QUEST_ID = 'quest_prologue_silence';
 const ELDER_FAREWELL_DIALOGUE_ID = 'npc_elder_farewell';
 /** Where Peter wakes after a defeat: just south of the Altar of Moments (GDD §9 checkpoint revival). */
+const QUEST_PANEL_WIDTH = 220;
 const ALTAR_REVIVE_POSITION = { x: 11 * 32 + 16, y: 6 * 32 + 24 };
 const DEFAULT_SPAWN = { x: 12 * 32, y: 10 * 32 };
 
@@ -70,6 +71,8 @@ export class ExplorationScene extends Phaser.Scene {
   private notificationSubtitle!: Phaser.GameObjects.Text;
   private notificationQueue: { title: string; subtitle: string }[] = [];
   private isNotificationShowing = false;
+  /** Index into the active quest list shown in the quest HUD ([Q] cycles). */
+  private trackedQuestIndex = 0;
 
   // Typewriter state
   private isTyping = false;
@@ -108,6 +111,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.typewriterTimer = null;
     this.notificationQueue = [];
     this.isNotificationShowing = false;
+    this.trackedQuestIndex = 0;
     this.questObjectiveTexts = [];
     this.choiceButtons = [];
     this.shadeSprite = null;
@@ -264,6 +268,16 @@ export class ExplorationScene extends Phaser.Scene {
       // Quick save
       const keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
       keyK.on('down', () => this.quickSave());
+
+      // Cycle the quest shown in the quest tracker
+      const keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+      keyQ.on('down', () => {
+        const count = this.questSystem.getActiveQuests().length;
+        if (count < 2) return;
+        this.trackedQuestIndex = (this.trackedQuestIndex + 1) % count;
+        this.soundSystem.playCursorBlip();
+        this.updateQuestHUD();
+      });
 
       // Quick numbers 1-2 for dialogue choice selection
       const key1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
@@ -444,7 +458,7 @@ export class ExplorationScene extends Phaser.Scene {
       .text(
         10,
         height - 16,
-        '[WASD / Arrows] Move  |  [E / Space] Interact  |  [I / B] Satchel  |  [K] Save  |  [ESC] Menu',
+        '[WASD / Arrows] Move  |  [E / Space] Interact  |  [I / B] Satchel  |  [Q] Quests  |  [K] Save  |  [ESC] Menu',
         {
           fontFamily: 'monospace',
           fontSize: '9px',
@@ -464,8 +478,8 @@ export class ExplorationScene extends Phaser.Scene {
   }
 
   private createQuestHUD(width: number): void {
-    const panelWidth = 220;
-    const panelHeight = 62;
+    const panelWidth = QUEST_PANEL_WIDTH;
+    const panelHeight = 75;
     const panelX = width - panelWidth - 10;
     const panelY = 10;
 
@@ -493,8 +507,8 @@ export class ExplorationScene extends Phaser.Scene {
 
     this.questTrackerContainer.add([bg, label, this.questTitleText]);
 
-    // Objective text rows
-    for (let i = 0; i < 2; i++) {
+    // Objective text rows (up to 3 objectives per quest)
+    for (let i = 0; i < 3; i++) {
       const objText = this.add.text(10, 32 + i * 13, '', {
         fontFamily: 'monospace',
         fontSize: '9px',
@@ -641,11 +655,24 @@ export class ExplorationScene extends Phaser.Scene {
     });
   }
 
+  /** Sets text, trimming with an ellipsis so it never overflows the quest panel. */
+  private fitText(text: Phaser.GameObjects.Text, value: string): void {
+    const maxWidth = QUEST_PANEL_WIDTH - 20;
+    text.setText(value);
+    let n = value.length;
+    while (text.width > maxWidth && n > 4) {
+      n--;
+      text.setText(`${value.slice(0, n).trimEnd()}…`);
+    }
+  }
+
   public updateQuestHUD(): void {
-    // Show the first active quest; with none active, the most recently completed one (all ✓).
-    // All text comes from quests.json.
+    // Show the tracked active quest ([Q] cycles); with none active, the most recently completed
+    // one (all ✓). All text comes from quests.json.
+    const active = this.questSystem.getActiveQuests();
+    if (this.trackedQuestIndex >= active.length) this.trackedQuestIndex = 0;
     const quest =
-      this.questSystem.getActiveQuests()[0] ??
+      active[this.trackedQuestIndex] ??
       this.questSystem
         .getAllQuests()
         .filter((q) => q.stage === 'completed')
@@ -658,13 +685,14 @@ export class ExplorationScene extends Phaser.Scene {
     }
 
     const isDone = quest.stage === 'completed';
-    this.questTitleText.setText(isDone ? `✓ ${quest.title}` : quest.title);
+    const others = active.length > 1 ? `  (+${active.length - 1})` : '';
+    this.fitText(this.questTitleText, isDone ? `✓ ${quest.title}` : `${quest.title}${others}`);
 
     quest.objectives.forEach((obj, idx) => {
       if (this.questObjectiveTexts[idx]) {
         const check = obj.completed ? '✓' : '○';
         const color = obj.completed ? '#48bb78' : '#8b9bb4';
-        this.questObjectiveTexts[idx].setText(`${check} ${obj.description}`);
+        this.fitText(this.questObjectiveTexts[idx], `${check} ${obj.description}`);
         this.questObjectiveTexts[idx].setColor(color);
       }
     });

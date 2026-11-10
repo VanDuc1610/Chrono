@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { GROUND_PROPS, WALL_PROPS } from './map-props.js';
 
 const width = 24;
 const height = 18;
@@ -71,6 +72,12 @@ for (let y = 0; y < height; y++) {
       if (FRACTURE_TILES.has(`${x},${y}`)) groundTile = 9;
       else if (hash(x, y) < 18) groundTile = 10;
     }
+
+    // Approved point-of-interest props (T-22, scripts/map-props.js) override the base layout.
+    const groundProp = GROUND_PROPS.find((p) => p.x === x && p.y === y);
+    if (groundProp) groundTile = groundProp.gid;
+    const wallProp = WALL_PROPS.find((p) => p.x === x && p.y === y);
+    if (wallProp) wallTile = wallProp.gid;
 
     groundData.push(groundTile);
     wallData.push(wallTile);

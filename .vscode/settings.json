@@ -3,6 +3,9 @@
   "editor.insertSpaces": true,
   "editor.detectIndentation": true,
   "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
