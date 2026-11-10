@@ -19,6 +19,12 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
+### T-21 · Prologue 10–15 min environmental narrative content proposal
+
+- **Assignee:** Antigravity · **Status:** BLOCKED — awaiting owner review
+- **Locks:** `docs/narrative/PROLOGUE_CONTENT_PROPOSAL.md`
+- Wrote [narrative/PROLOGUE_CONTENT_PROPOSAL.md](narrative/PROLOGUE_CONTENT_PROPOSAL.md): 7 environmental interactables (`I-1..I-7`) mapped to exact tiles in the existing 24×18 Shattered Antechamber, draft branching dialogues, 1 optional side quest (`quest_prologue_remnants` using `completeOnFlag`/`rewards`), strict `CONFIRMED CANON` vs. `PROPOSED` separation (Peter's identity unwritten; Kuro foreshadowed only), and per-phase playtime estimates (11.5–16.0 min total).
+
 ### T-18 / T-19 / T-20 · Shade, Elder and sanctuary tileset art (Pipeline B)
 
 - **Assignee:** Claude · **Status:** BLOCKED — candidates ready, awaiting owner approval
