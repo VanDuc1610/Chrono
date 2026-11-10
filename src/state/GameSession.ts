@@ -16,6 +16,7 @@ export const DEFAULT_MAP_ID = 'prologue_sanctuary';
 /** Story flag keys. Values are kept identical to 0.1.x saves for compatibility. */
 export const FLAGS = {
   shadeDefeated: 'isShadeDefeated',
+  prologueComplete: 'isPrologueComplete',
   awakeningTriggered: 'hasTriggeredAwakening',
 } as const;
 

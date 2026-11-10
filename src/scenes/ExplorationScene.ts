@@ -14,6 +14,10 @@ import { DEFAULT_MAP_ID, FLAGS, GameSession, getSession } from '../state/GameSes
 import type { CombatSceneData } from './CombatScene';
 
 const PROLOGUE_QUEST_ID = 'quest_prologue_awakening';
+const SILENCE_QUEST_ID = 'quest_prologue_silence';
+const ELDER_FAREWELL_DIALOGUE_ID = 'npc_elder_farewell';
+/** Where Peter wakes after a defeat: just south of the Altar of Moments (GDD §9 checkpoint revival). */
+const ALTAR_REVIVE_POSITION = { x: 11 * 32 + 16, y: 6 * 32 + 24 };
 const DEFAULT_SPAWN = { x: 12 * 32, y: 10 * 32 };
 
 export interface ExplorationSceneData {
@@ -119,6 +123,12 @@ export class ExplorationScene extends Phaser.Scene {
     const dialogueData = this.cache.json.get('data_dialogue') as DialogueDatabase;
     this.dialogueSystem = new DialogueSystem();
     this.dialogueSystem.loadDatabase(dialogueData);
+    // The Elder's farewell (offered only after "Silence the Fracture") closes the Prologue.
+    this.dialogueSystem.addEventListener((event) => {
+      if (event.type === 'dialogue_ended' && event.node?.id === ELDER_FAREWELL_DIALOGUE_ID) {
+        this.startPrologueEnding();
+      }
+    });
 
     // 2. Initialize Map & Tileset
     this.map = this.make.tilemap({ key: 'prologue_map' });
@@ -274,7 +284,9 @@ export class ExplorationScene extends Phaser.Scene {
         interactionRadius: 44,
       },
       () => {
-        this.openDialogue('npc_elder_greeting');
+        // Once the rift is silenced, the Elder gives the closing farewell that ends the Prologue.
+        const farewell = this.questSystem.isQuestCompleted(SILENCE_QUEST_ID);
+        this.openDialogue(farewell ? ELDER_FAREWELL_DIALOGUE_ID : 'npc_elder_greeting');
         // Progress quest objective
         this.questSystem.completeObjective(PROLOGUE_QUEST_ID, 'obj_speak_elder');
       },
@@ -341,6 +353,7 @@ export class ExplorationScene extends Phaser.Scene {
         enemyId: 'enemy_temporal_shade',
         victoryFlag: FLAGS.shadeDefeated,
         returnPosition,
+        revivePosition: ALTAR_REVIVE_POSITION,
       };
       this.scene.start('CombatScene', data);
     });
@@ -1139,6 +1152,19 @@ export class ExplorationScene extends Phaser.Scene {
     this.dialogueSystem.close();
     this.dialogueBoxContainer.setVisible(false);
     this.controller.setEnabled(true);
+  }
+
+  /** Fades out to the Prologue closing card. Guarded so it runs once per scene entry. */
+  public startPrologueEnding(): void {
+    if (this.isTransitioningToBattle) return;
+    this.isTransitioningToBattle = true; // reuses the scene-exit guard: no encounter can interrupt
+    this.session.setFlag(FLAGS.prologueComplete);
+    this.controller.setEnabled(false);
+    this.player.getMovementSystem().stop(this.player.sprite);
+    this.cameras.main.fadeOut(900, 0, 0, 0);
+    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+      this.scene.start('PrologueEndScene');
+    });
   }
 
   private returnToMenu(): void {

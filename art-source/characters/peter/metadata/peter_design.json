@@ -77,8 +77,16 @@
     ]
   },
   "spriteSpecifications": {
-    "frameDimensions": { "width": 32, "height": 32 },
-    "groundFootprintHitbox": { "width": 18, "height": 14, "offsetX": 7, "offsetY": 16 },
+    "frameDimensions": {
+      "width": 32,
+      "height": 32
+    },
+    "groundFootprintHitbox": {
+      "width": 18,
+      "height": 14,
+      "offsetX": 7,
+      "offsetY": 16
+    },
     "directions": ["down", "up", "left", "right"],
     "versions": {
       "idle": {
@@ -124,5 +132,31 @@
         "status": "PLANNED"
       }
     }
-  }
+  },
+  "runtimeSprites": [
+    {
+      "assetId": "CHAR_PETER_002",
+      "files": [
+        "art-source/characters/peter/generated/approved/peter_idle_v3.png",
+        "art-source/characters/peter/generated/approved/peter_walk_v3.png"
+      ],
+      "runtimeFiles": [
+        "public/assets/characters/peter/peter_idle.png",
+        "public/assets/characters/peter/peter_walk.png"
+      ],
+      "pipeline": "B (code-authored pixel art, scripts/author-peter-sprites.js)",
+      "version": "v3",
+      "status": "INTEGRATED",
+      "approval": {
+        "date": "2026-11-11",
+        "by": "Project owner (delegated decision to Claude Code: \"do what you recommend\")",
+        "feedbackApplied": [
+          "v2 -> v3: smaller head (~1:3)",
+          "v2 -> v3: Broken Blade held in right hand as signature feature",
+          "Stopped Watch on belt"
+        ]
+      },
+      "notes": "Run, attack, hurt and temporal_sight sheets are still procedural placeholders (CHAR_PETER_000_TMP)."
+    }
+  ]
 }

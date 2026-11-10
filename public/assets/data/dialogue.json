@@ -62,6 +62,17 @@
         "Faint runes shift and rearrange themselves before your eyes."
       ],
       "responses": []
+    },
+    "npc_elder_farewell": {
+      "id": "npc_elder_farewell",
+      "speaker": "Elder Chronographer",
+      "lines": [
+        "The rift has fallen quiet. I felt the Shade unravel from here.",
+        "A broken blade, a stopped watch... and still the hours bend around you, as if they remember you.",
+        "The Sanctuary Spire lies beyond these walls. Whatever waits there has been waiting for you.",
+        "Go, traveler. The divided hour will not mend itself."
+      ],
+      "responses": []
     }
   }
 }

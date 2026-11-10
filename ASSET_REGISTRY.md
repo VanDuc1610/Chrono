@@ -13,7 +13,8 @@
 | Status Tier                | Count | Description                                           |
 | -------------------------- | ----- | ----------------------------------------------------- |
 | `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`) |
-| `CONCEPT_PENDING_APPROVAL` | 1     | Concept generated; awaiting formal review             |
+| `INTEGRATED`               | 1     | Approved runtime sprites in engine (`CHAR_PETER_002`) |
+| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review             |
 | `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared            |
 | `PLACEHOLDER_TEMPORARY`    | 9     | Procedural placeholder assets active in engine        |
 
@@ -32,7 +33,7 @@
   - [`art-source/characters/peter/concept/peter_concept_v1.png`](art-source/characters/peter/concept/peter_concept_v1.png) (Turnaround Reference)
 - **Original Generation Prompt:** [`art-source/characters/peter/prompts/peter_concept_v1.txt`](art-source/characters/peter/prompts/peter_concept_v1.txt)
 - **Design Metadata:** [`art-source/characters/peter/metadata/peter_design.json`](art-source/characters/peter/metadata/peter_design.json)
-- **Runtime Sprite Assets:** None approved yet. The sheets currently in `public/assets/characters/peter/` are procedural placeholders — see `CHAR_PETER_000_TMP` below.
+- **Runtime Sprite Assets:** `peter_idle.png` + `peter_walk.png` are approved art (`CHAR_PETER_002`). The run / attack / hurt / temporal_sight sheets are still procedural placeholders (`CHAR_PETER_000_TMP`).
 - **Status:** `APPROVED_SOURCE` (design source only — not runtime sprites)
 - **Non-Negotiable Identity Checklist:**
   - [x] Male adult appearance, approximately 26 years old
@@ -47,16 +48,18 @@
 
 ---
 
-## 2b. Candidates Awaiting Owner Review
+## 2b. Integrated Runtime Sprites
 
-### `CHAR_PETER_002_CAND` – Peter idle + walk sheets (v3)
+### `CHAR_PETER_002` – Peter idle + walk sheets (v3)
 
 - **Pipeline:** B – code-authored pixel art (AGENTS.md §5), generator `scripts/author-peter-sprites.js`
-- **Files:** `art-source/characters/peter/generated/candidates/peter_idle_v3.png` (128 × 128, 4 frames × 4 dirs), `peter_walk_v3.png` (192 × 128, 6 frames × 4 dirs); review previews (×6) in `candidates/previews/`
+- **Approved files:** `art-source/characters/peter/generated/approved/peter_idle_v3.png` (128 × 128, 4 frames × 4 dirs), `peter_walk_v3.png` (192 × 128, 6 frames × 4 dirs); review previews in `generated/candidates/previews/`
+- **Runtime files:** `public/assets/characters/peter/peter_idle.png`, `peter_walk.png`
 - **Sources:** `docs/art/PETER_DESIGN.md` palette (22 colours) + `peter_master_v1.png` as visual reference
-- **History:** v2 (2026-11-11) → owner feedback "head slightly too big; add a standout feature" → v3: head 2 px shorter and narrower (≈1:3), Broken Blade held point-down in the right hand (PETER_DESIGN §3.3) with cerulean edge glow and white-hot fracture, Stopped Watch on the belt. v2 files removed (in git history).
+- **History:** v2 → owner feedback "head slightly too big; add a standout feature" → v3: head ≈1:3, Broken Blade held point-down in the right hand (PETER_DESIGN §3.3) with cerulean edge glow, Stopped Watch on the belt.
 - **Validation:** `validate-candidate.js` PASSED (RGBA, transparent background, frames centred, feet on rows 28-30)
-- **Status:** `CONCEPT_PENDING_APPROVAL` — not integrated; `public/assets/characters/peter/` still holds `CHAR_PETER_000_TMP`
+- **Approval:** 2026-11-11, project owner (delegated decision to Claude Code), recorded in `peter_design.json` → `runtimeSprites`
+- **Status:** `INTEGRATED`
 
 ## 3. Active Placeholder Registry
 
@@ -64,7 +67,7 @@ The following assets are currently integrated into the engine strictly as **temp
 
 ### `CHAR_PETER_000_TMP`
 
-- **Object Name:** Peter Runtime Spritesheets (Procedural Placeholder)
+- **Object Name:** Peter Runtime Spritesheets — run / attack / hurt / temporal_sight (Procedural Placeholder; idle + walk replaced by `CHAR_PETER_002`)
 - **File Path:** `public/assets/characters/peter/`
 - **Design Doc Ref:** [`docs/art/PETER_DESIGN.md`](docs/art/PETER_DESIGN.md)
 - **Status:** `PLACEHOLDER_TEMPORARY`
@@ -73,13 +76,11 @@ The following assets are currently integrated into the engine strictly as **temp
 - **Sheets:**
   | File                       | Frames / direction | Sheet size |
   | -------------------------- | ------------------ | ---------- |
-  | `peter_idle.png`           | 4                  | 128 × 128  |
-  | `peter_walk.png`           | 6                  | 192 × 128  |
   | `peter_run.png`            | 6                  | 192 × 128  |
   | `peter_attack.png`         | 6                  | 192 × 128  |
   | `peter_hurt.png`           | 2                  | 64 × 128   |
   | `peter_temporal_sight.png` | 4                  | 128 × 128  |
-- **Replacement Path:** Candidate sheets from AUTOMATIC1111 → `art-source/characters/peter/generated/candidates/` → validation → user approval → `generated/approved/` → replaces these files.
+- **Replacement Path:** Candidate sheets (Pipeline A or B) → `art-source/characters/peter/generated/candidates/` → validation → user approval → `generated/approved/` → replaces these files.
 
 ### `CHAR_VESSEL_000_TMP`
 

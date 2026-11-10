@@ -10,6 +10,11 @@ export interface CombatSceneData {
   /** Session flag set to true when this encounter is won (e.g. FLAGS.shadeDefeated). */
   victoryFlag?: string;
   returnPosition?: { x: number; y: number };
+  /**
+   * Checkpoint revival (GDD §9): on defeat Peter wakes here with full HP, keeping all progress
+   * and items. Without it, defeat returns to the title screen.
+   */
+  revivePosition?: { x: number; y: number };
 }
 
 type PlayerCommand = 'attack' | 'skill' | 'item' | 'defend' | 'escape';
@@ -567,10 +572,26 @@ export class CombatScene extends Phaser.Scene {
       });
     } else if (phase === 'defeat') {
       this.setBattleLog('DEFEAT! Peter collapsed from temporal exhaustion...');
-      this.time.delayedCall(1600, () => {
-        this.cameras.main.fadeOut(300, 0, 0, 0);
-        this.time.delayedCall(350, () => this.scene.start('MainMenuScene'));
-      });
+      const revive = this.sceneData.revivePosition;
+      if (revive) {
+        this.session.applyBattleHp(this.session.getStats().maxHp);
+        const data: ExplorationSceneData = {
+          returnPosition: revive,
+          notice: {
+            title: 'FALLEN',
+            subtitle: 'The Altar of Moments pulls you back from the brink.',
+          },
+        };
+        this.time.delayedCall(1600, () => {
+          this.cameras.main.fadeOut(300, 0, 0, 0);
+          this.time.delayedCall(350, () => this.scene.start('ExplorationScene', data));
+        });
+      } else {
+        this.time.delayedCall(1600, () => {
+          this.cameras.main.fadeOut(300, 0, 0, 0);
+          this.time.delayedCall(350, () => this.scene.start('MainMenuScene'));
+        });
+      }
     } else if (phase === 'escaped') {
       this.setBattleLog('ESCAPED! Fled from the combat encounter.');
       this.returnToExploration(1200);
