@@ -28,7 +28,6 @@ import {
   writeFile,
 } from './pixel-art/pixel.js';
 
-const VERSION = 'v3';
 const SIZE = 32;
 const EMPTY = '.'.repeat(SIZE);
 /** Rows 0..24 hold head + torso; rows 25..31 hold the legs layer. */
@@ -56,6 +55,7 @@ const PALETTE = {
   g: hex('#00c8ff'), // chronal fracture glow
   w: hex('#a6f0ff'), // chronal glow, light
   W: hex('#e6f9ff'), // chronal apex white / Stopped Watch face
+  d: hex('#008ab8'), // fading chronal trail (dormant cyan, ENVIRONMENT_GUIDE)
   r: hex('#181c24'), // trousers
   b: hex('#2e2219'), // boots
 };
@@ -149,8 +149,10 @@ const front = paint(padTo32(mirrorHalf(frontHalf)), [
   // Stopped Watch: silver chain from the belt to a white face
   [18, 20, 'm'],
   [18, 21, 'W'],
-  ...brokenBlade(7, 20, -1),
 ]);
+/** Front view without the resting blade (combat sheets draw the blade at other angles). */
+const frontBare = front;
+const frontWithBlade = paint(frontBare, brokenBlade(7, 20, -1));
 
 // ------------------------------------------------------------------ BACK (up)
 const backHalf = [
@@ -189,9 +191,10 @@ const back = paint(padTo32(mirrorHalf(backHalf)), [
   [15, 17, 'l'],
   [16, 18, 'l'],
   [17, 18, 'l'],
-  // Peter's right hand is on the viewer-right from behind
-  ...brokenBlade(24, 20, 1),
 ]);
+const backBare = back;
+// Peter's right hand is on the viewer-right from behind
+const backWithBlade = paint(backBare, brokenBlade(24, 20, 1));
 
 // ---------------------------------------------------------- SIDE (left-facing)
 const left = padTo32(
@@ -244,6 +247,8 @@ const sideArm = paint(
   ),
   brokenBlade(14, 20, -1),
 );
+/** Shoulder pivot of the near arm in the left-facing view (for posed arms in combat sheets). */
+const SIDE_SHOULDER = [14, 14];
 
 // ----------------------------------------------------------------- LEG POSES
 const FRONT_LEG = ['OrrrO', 'OrrrO', 'ObbbO', 'ObbbbO', 'OblllO', 'OOOOOO'];
@@ -316,9 +321,14 @@ function compose(legs, upper, overlays = []) {
 }
 
 const VIEWS = {
-  down: { upper: upperOnly(front), side: false },
-  up: { upper: upperOnly(back), side: false },
-  left: { upper: upperOnly(left), side: true },
+  down: {
+    upper: upperOnly(frontWithBlade),
+    bare: upperOnly(frontBare),
+    side: false,
+    hand: [7, 20],
+  },
+  up: { upper: upperOnly(backWithBlade), bare: upperOnly(backBare), side: false, hand: [24, 20] },
+  left: { upper: upperOnly(left), bare: upperOnly(left), side: true, hand: [14, 20] },
 };
 
 /** Idle: 4 frames; frames 2-3 lower head and shoulders by 1px (slow breath). */
@@ -358,6 +368,192 @@ function walkFrames(view) {
   return seq.map(([liftL, liftR, down]) => compose(frontLegs(liftL, liftR), down ? bob : v.upper));
 }
 
+// ------------------------------------------------------------- COMBAT SHEETS
+// Attack / hurt / Temporal Sight (AGENTS.md §7). The side view carries the full poses (combat
+// shows Peter in profile); front/back views animate the blade and effects around the resting arm.
+
+/** Paints only onto transparent pixels (auras and arcs must stay behind the character). */
+function under(layer, pixels) {
+  return paint(
+    layer,
+    pixels.filter(([x, y]) => x >= 0 && y >= 0 && x < SIZE && y < SIZE && layer[y][x] === '.'),
+  );
+}
+
+/**
+ * The Broken Blade at an arbitrary 45°-step angle from the hand (hx, hy) along (dx, dy):
+ * pommel behind the fist, crossguard, steel broken off after `len` px, cerulean glow on one edge
+ * and a white-hot jagged break at the tip.
+ */
+function bladeAt(hx, hy, dx, dy, len) {
+  const px = [[hx - dx, hy - dy, 'm']];
+  const [gx, gy] = [-dy || 1, dx || 0]; // glow side (perpendicular)
+  px.push(
+    [hx + dx + gx, hy + dy + gy, 'm'],
+    [hx + dx - gx, hy + dy - gy, 'm'],
+    [hx + dx, hy + dy, 'm'],
+  );
+  for (let k = 2; k < len; k++) {
+    px.push(
+      [hx + dx * k, hy + dy * k, 'n'],
+      [hx + dx * k + gx, hy + dy * k + gy, k % 2 ? 'g' : 'w'],
+    );
+  }
+  px.push([hx + dx * len, hy + dy * len, 'W']);
+  return px.filter(([x, y]) => x >= 0 && y >= 0 && x < SIZE && y < SIZE);
+}
+
+/** Near arm drawn from the shoulder to the hand: outlined coat sleeve, purple cuff, bare hand. */
+function armTo(hx, hy) {
+  const [sx, sy] = SIDE_SHOULDER;
+  const steps = Math.max(Math.abs(hx - sx), Math.abs(hy - sy), 1);
+  const outline = [];
+  const sleeve = [];
+  for (let i = 0; i <= steps; i++) {
+    const x = Math.round(sx + ((hx - sx) * i) / steps);
+    const y = Math.round(sy + ((hy - sy) * i) / steps);
+    for (let oy = -1; oy <= 2; oy++)
+      for (let ox = -1; ox <= 2; ox++) outline.push([x + ox, y + oy, 'O']);
+    sleeve.push([x, y, 'c'], [x + 1, y, 'k'], [x, y + 1, 'C'], [x + 1, y + 1, 'c']);
+  }
+  const clip = (p) => p.filter(([x, y]) => x >= 0 && y >= 0 && x < SIZE && y < SIZE);
+  let layer = paint(blank(SIZE), clip(outline));
+  layer = paint(layer, clip(sleeve));
+  return paint(
+    layer,
+    clip([
+      [hx, hy, 'P'],
+      [hx + 1, hy, 'P'],
+      [hx, hy + 1, 's'],
+      [hx + 1, hy + 1, 's'],
+    ]),
+  );
+}
+
+/** Crescent slash trail around (cx, cy) between angles a0..a1 (radians; 0 = facing direction). */
+function slashArc(cx, cy, r, a0, a1, facing, colors = ['w', 'g']) {
+  const px = [];
+  for (let a = a0; a <= a1; a += 0.08) {
+    px.push([
+      Math.round(cx + facing * r * Math.cos(a)),
+      Math.round(cy + r * Math.sin(a)),
+      colors[0],
+    ]);
+    px.push([
+      Math.round(cx + facing * (r - 1) * Math.cos(a)),
+      Math.round(cy + (r - 1) * Math.sin(a)),
+      colors[1],
+    ]);
+  }
+  return px;
+}
+
+/** Peter's gray-blue eyes kindled cerulean (Temporal Sight). */
+function glowingEyes(layer) {
+  return layer.map((r) => r.replace(/E/g, 'g'));
+}
+
+/** Whole-sprite hit flash: everything but the outline turns chronal white. */
+function flash(frame) {
+  return frame.map((r) => r.replace(/[^.O]/g, 'W'));
+}
+
+/** Attack: 6 frames — wind-up, raise, strike (+arc), follow-through (+fading arc), recover, rest. */
+function attackFrames(view) {
+  const v = VIEWS[view];
+  const legs = v.side ? sideLegs('stand') : frontLegs();
+  if (v.side) {
+    const poses = [
+      { hand: [17, 11], blade: [1, -1, 6], lean: 0 },
+      { hand: [14, 8], blade: [0, -1, 6], lean: 0 },
+      { hand: [9, 14], blade: [-1, 0, 7], lean: -1, arc: slashArc(14, 13, 12, -1.45, 0.35, -1) },
+      {
+        hand: [10, 19],
+        blade: [-1, 1, 6],
+        lean: -1,
+        arc: slashArc(14, 13, 12, 0.05, 1.05, -1, ['d', 'g']),
+      },
+      { hand: [12, 20], blade: [-1, 1, 4], lean: 0 },
+    ];
+    const posed = poses.map((p) => {
+      let f = compose(legs, v.bare, [{ layer: armTo(...p.hand) }]);
+      if (p.lean)
+        f = stamp(
+          stamp(blank(SIZE), legs),
+          stamp(
+            blank(SIZE),
+            f.map((r, y) => (y < UPPER_END ? r : EMPTY)),
+            p.lean,
+            0,
+          ),
+        );
+      f = paint(f, bladeAt(...p.hand, ...p.blade));
+      return p.arc ? under(f, p.arc) : f;
+    });
+    return [...posed, compose(legs, v.upper, [{ layer: sideArm }])];
+  }
+  // Front/back: the blade swings around the resting hand; a crescent flashes on the strike.
+  const [hx, hy] = v.hand;
+  const out = view === 'down' ? -1 : 1; // blade hand is viewer-left (down) / viewer-right (up)
+  const blades = [
+    [out, -1, 6],
+    [0, -1, 6],
+    [-out, 0, 7],
+    [-out, 1, 6],
+    [0, 1, 4],
+  ];
+  const posed = blades.map((b, i) => {
+    let f = compose(legs, v.bare);
+    f = paint(f, bladeAt(hx, hy, ...b));
+    // Facing the viewer the swing passes in front of the body; facing away it passes behind.
+    const draw = view === 'down' ? paint : under;
+    if (i === 2) f = draw(f, slashArc(15.5, 17, 11, 0.35, 2.8, 1));
+    if (i === 3) f = draw(f, slashArc(15.5, 17, 11, 1.4, 2.8, 1, ['d', 'g']));
+    return f;
+  });
+  return [...posed, compose(legs, v.upper)];
+}
+
+/** Hurt: 2 frames — recoil (knocked back 1px, eyes shut) and a white hit flash. */
+function hurtFrames(view) {
+  const v = VIEWS[view];
+  const legs = v.side ? sideLegs('stand') : frontLegs();
+  const arm = v.side ? [{ layer: sideArm, dx: 1 }] : [];
+  const pained = v.upper.map((r) => r.replace(/E/g, 'h'));
+  const recoil = stamp(
+    stamp(blank(SIZE), legs),
+    compose(blank(SIZE), stamp(blank(SIZE), pained, 1, 0), arm),
+  );
+  return [recoil, flash(recoil)];
+}
+
+/** Temporal Sight: 4 frames — blade raised point-up, eyes kindled, a rotating ring of chronal motes. */
+function temporalSightFrames(view) {
+  const v = VIEWS[view];
+  const legs = v.side ? sideLegs('stand') : frontLegs();
+  const [hx, hy] = v.side ? [10, 13] : v.hand;
+  const base = (() => {
+    let f = v.side
+      ? compose(legs, glowingEyes(v.bare), [{ layer: armTo(hx, hy) }])
+      : compose(legs, glowingEyes(v.bare));
+    return paint(f, bladeAt(hx, hy - (v.side ? 0 : 1), 0, -1, 7));
+  })();
+  return [0, 1, 2, 3].map((phase) => {
+    const motes = [];
+    for (let k = 0; k < 8; k++) {
+      const a = ((k + phase * 0.5) / 8) * Math.PI * 2;
+      motes.push([
+        Math.round(15.5 + 14 * Math.cos(a)),
+        Math.round(17 + 12 * Math.sin(a)),
+        k % 2 ? 'g' : 'w',
+      ]);
+    }
+    const tip = v.side ? [hx, hy - 7] : [hx, hy - 8];
+    const pulse = phase % 2 ? 'W' : 'w';
+    return under(paint(base, [[tip[0], tip[1], pulse]]), motes);
+  });
+}
+
 /** Rows in PeterAnimationConfig order: down, up, left, right (right = mirrored left). */
 function buildGrid(framesFor) {
   const leftFrames = framesFor('left');
@@ -367,17 +563,34 @@ function buildGrid(framesFor) {
 }
 
 // --------------------------------------------------------------------- OUTPUT
-const outDir = path.resolve(process.argv[2] ?? 'art-source/characters/peter/generated/candidates');
+/** Sheet name -> [version, frame builder]. idle/walk v3 are approved (CHAR_PETER_002). */
+const SHEETS = {
+  idle: ['v3', idleFrames],
+  walk: ['v3', walkFrames],
+  attack: ['v1', attackFrames],
+  hurt: ['v1', hurtFrames],
+  temporal_sight: ['v1', temporalSightFrames],
+};
+
+// Usage: node scripts/author-peter-sprites.js [outDir] [--sheets=attack,hurt,temporal_sight]
+// Default: only the sheets that are not approved yet, so approved art is never re-emitted.
+const args = process.argv.slice(2);
+const sheetArg = args.find((a) => a.startsWith('--sheets='));
+const wanted = sheetArg
+  ? sheetArg.slice('--sheets='.length).split(',')
+  : ['attack', 'hurt', 'temporal_sight'];
+const outDir = path.resolve(
+  args.find((a) => !a.startsWith('--')) ?? 'art-source/characters/peter/generated/candidates',
+);
 const previewDir = path.join(outDir, 'previews');
 fs.mkdirSync(previewDir, { recursive: true });
 
-for (const [name, framesFor] of [
-  ['idle', idleFrames],
-  ['walk', walkFrames],
-]) {
+for (const name of wanted) {
+  if (!SHEETS[name]) throw new Error(`Unknown sheet "${name}"`);
+  const [version, framesFor] = SHEETS[name];
   const sheet = renderSheet(buildGrid(framesFor), PALETTE);
-  const file = path.join(outDir, `peter_${name}_${VERSION}.png`);
+  const file = path.join(outDir, `peter_${name}_${version}.png`);
   writeFile(file, encodePng(sheet.w, sheet.h, sheet.buf));
-  writeFile(path.join(previewDir, `peter_${name}_${VERSION}_x6.png`), preview(sheet, 6));
+  writeFile(path.join(previewDir, `peter_${name}_${version}_x6.png`), preview(sheet, 6));
   console.log(`✓ ${path.relative(process.cwd(), file)} (${sheet.w}x${sheet.h})`);
 }

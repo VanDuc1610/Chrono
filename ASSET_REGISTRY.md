@@ -14,7 +14,7 @@
 | -------------------------- | ----- | ------------------------------------------------------------------------------- |
 | `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`)                           |
 | `INTEGRATED`               | 4     | Approved art in engine (`CHAR_PETER_002`, `MOB_SHADE_001`, `ENV_SANCTUARY_001`) |
-| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review                                       |
+| `CONCEPT_PENDING_APPROVAL` | 2     | Concept generated; awaiting formal review                                       |
 | `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared                                      |
 | `PLACEHOLDER_TEMPORARY`    | 6     | Procedural placeholder assets active in engine                                  |
 
@@ -93,6 +93,19 @@
 - **File:** `art-source/environment/sanctuary/generated/approved/sanctuary_tileset_v3.png` → runtime `public/assets/tilesets/dungeon_tileset.png` · previews: `sanctuary_tileset_v3_x4.png`, `sanctuary_room_v3.png` (room with the props placed)
 - **New tiles:** 10 Stele of the Six Authorities (3,4) · 11 Frozen Astrolabe (20,4) · 12 Cracked Reliquary (7,2) · 13 Sealed Threshold Gates in the north wall (12,1) · 14 Torn Journal Leaf on the engraved floor (14,12). Stele and astrolabe replace the two northern crystals; the southern crystals stay (SE one is the Residual Rift Echo).
 - **Status:** `INTEGRATED` — owner approved 2026-11-11; `generate-map.js` applies `map-props.js` (supersedes v2 at runtime; v2 kept in `approved/` for history).
+
+### `CHAR_PETER_003_CAND` – Peter combat sheets: attack / hurt / temporal_sight (v1)
+
+- **Generator:** `scripts/author-peter-sprites.js` (default run emits only these; approved idle/walk regenerate byte-identically via `--sheets=idle,walk`)
+- **Files:** `art-source/characters/peter/generated/candidates/peter_attack_v1.png` (192 × 128, 6 frames × 4 dirs), `peter_hurt_v1.png` (64 × 128, 2 × 4), `peter_temporal_sight_v1.png` (128 × 128, 4 × 4) · previews ×6 in `previews/`
+- **Content:** attack = wind-up, raise, strike with a cerulean slash crescent, follow-through, recover, rest (full arm poses in profile; blade + arc around the resting hand front/back). Hurt = recoil (eyes shut) + white hit flash. Temporal Sight = blade raised, eyes kindled cerulean, rotating ring of chronal motes.
+- **Validation:** PASSED (all three).
+- **Status:** `CONCEPT_PENDING_APPROVAL` — replaces the remaining `CHAR_PETER_000_TMP` sheets (run stays placeholder; there is no run mechanic yet).
+
+### `UI_SET_001_CAND` – Panel frame, menu cursor, hit spark (v1)
+
+- **Generator:** `scripts/author-ui-assets.js` · **Files:** `art-source/ui/generated/candidates/` — `ui_frame_v1.png` (48 × 48 nine-slice, 16 px corners), `ui_cursor_v1.png` (2 × 16 px pulse), `hit_spark_v1.png` (4 × 16 px burst, near-white for runtime tinting) · previews incl. the frame stretched to the 580 × 84 dialogue box
+- **Status:** `CONCEPT_PENDING_APPROVAL` — replaces `UI_FRAME_000_TMP`, `UI_CURSOR_000_TMP`, `FX_SPARK_000_TMP`. Note: the current placeholders are loaded but never used; integration means switching the Graphics-drawn panels/cursor to these assets.
 
 ## 3. Active Placeholder Registry
 

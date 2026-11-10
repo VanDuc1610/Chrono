@@ -19,7 +19,16 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-_No active tasks._
+### T-24 · Peter combat animations (Pipeline B + CombatScene)
+
+- **Assignee:** Claude · **Status:** BLOCKED — candidates awaiting owner approval (ASSET_REGISTRY `CHAR_PETER_003_CAND`)
+- **Locks:** `scripts/author-peter-sprites.js`, `art-source/characters/peter/`; on approval also `public/assets/characters/peter/`, `src/scenes/CombatScene.ts`
+- On approval: deploy sheets; CombatScene shows Peter in profile (`peter_idle_right`), plays attack on Attack, temporal_sight then attack on Skill, hurt on taking damage.
+
+### T-25 · UI art set (Pipeline B) + integration
+
+- **Assignee:** Claude (art) → Antigravity (integration, after T-24 releases CombatScene) · **Status:** BLOCKED — candidates awaiting owner approval (`UI_SET_001_CAND`)
+- **Locks (art):** `scripts/author-ui-assets.js`, `art-source/ui/`
 
 ## Backlog (scheduled after current locks are released)
 
