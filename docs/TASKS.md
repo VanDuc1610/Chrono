@@ -25,10 +25,17 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 - **Locks:** `docs/narrative/PROLOGUE_CONTENT_PROPOSAL.md`
 - Wrote [narrative/PROLOGUE_CONTENT_PROPOSAL.md](narrative/PROLOGUE_CONTENT_PROPOSAL.md): 7 environmental interactables (`I-1..I-7`) mapped to exact tiles in the existing 24×18 Shattered Antechamber, draft branching dialogues, 1 optional side quest (`quest_prologue_remnants` using `completeOnFlag`/`rewards`), strict `CONFIRMED CANON` vs. `PROPOSED` separation (Peter's identity unwritten; Kuro foreshadowed only), and per-phase playtime estimates (11.5–16.0 min total).
 
-### T-19 · Elder Chronographer sprite (Pipeline B)
+### T-22 · Prologue content — engine, interactables & prop art (Claude)
 
-- **Assignee:** Claude · **Status:** BLOCKED — v3 (slimmer, per owner feedback) awaiting owner approval
-- **Locks:** `scripts/author-elder-sprites.js`, `art-source/npcs/elder/`; on approval also `public/assets/npcs/`, `src/scenes/PreloadScene.ts`, `src/scenes/ExplorationScene.ts`
+- **Assignee:** Claude · **Status:** IN PROGRESS (engine done; prop art next)
+- **Locks:** `src/**`, `public/assets/data/interactables.json`, `public/assets/maps/`, `public/assets/tilesets/`, `scripts/author-*`, `scripts/generate-map.js`, `art-source/environment/`, `tests/dialogue-effects.test.ts`
+- Implements the approved T-21 proposal (owner approved 2026-11-11). Engine: dialogue node `effects` (setFlags / startQuest / grantItems + grantOnceFlag) applied via `GameSession.applyDialogueEffects`; 7 points of interest loaded from `interactables.json`. Next: Pipeline B prop tiles (stele, frozen astrolabe, reliquary, threshold gate, torn page) for owner approval, then map placement.
+
+### T-23 · Prologue content — dialogue & quest data (Antigravity)
+
+- **Assignee:** Antigravity · **Status:** TODO
+- **Locks:** `public/assets/data/dialogue.json`, `public/assets/data/quests.json`, `tests/content-data.test.ts` (new)
+- See prompt from Claude (2026-11-11).
 
 ## Backlog (scheduled after current locks are released)
 
@@ -36,6 +43,8 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Done
 
+- **T-19** Elder Chronographer v3 (slimmer, per owner feedback) approved and integrated: 4-frame spritesheet + global `npc_elder_idle` anim (4 FPS); placeholder removed — Claude
+- **T-21** Prologue content proposal (`docs/narrative/PROLOGUE_CONTENT_PROPOSAL.md`) — approved by owner 2026-11-11 — Antigravity
 - **T-18 / T-20** Temporal Shade float loop and Shattered Antechamber tileset (Pipeline B) approved by owner and integrated: Shade is a 4-frame spritesheet with a global `enemy_fracture_idle` anim (exploration + combat); tileset swapped in place; `generate-map.js` adds floor variants and a fracture cluster east of the Shade. Placeholder generators no longer overwrite approved art. Verified: 25 unit tests, 4 CDP suites, in-game screenshots — Claude
 - **T-16** (owner delegated the calls to Claude) Peter v3 idle/walk approved and integrated (`CHAR_PETER_002`, approval recorded in `peter_design.json`); strap direction documented as left shoulder → right hip per the approved concept; Prologue ending: after "Silence the Fracture" the Elder gives a farewell (`npc_elder_farewell`), then `PrologueEndScene` (level, quests, playtime) returns to the title; defeat = checkpoint revival at the Altar of Moments with full HP, progress and items kept. Verified live (both flows) + 25 unit tests + 4 CDP suites — Claude
 - **T-05** Peter idle + walk sheets via Pipeline B (v2 → v3 after owner feedback), closed by the T-16 integration — Claude

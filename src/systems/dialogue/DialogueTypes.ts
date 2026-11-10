@@ -4,11 +4,28 @@ export interface DialogueResponseOption {
   condition?: string;
 }
 
+/**
+ * Data-driven side effects applied when a dialogue node starts (dialogue.json `effects`).
+ * Applied by GameSession.applyDialogueEffects; all of them are idempotent.
+ */
+export interface DialogueEffects {
+  /** Session flags set to true (e.g. objective triggers via quests.json `completeOnFlag`). */
+  setFlags?: string[];
+  /** Quest started if it is still inactive. */
+  startQuest?: string;
+  /** Items granted — once per playthrough when `grantOnceFlag` is set. */
+  grantItems?: { itemId: string; quantity: number }[];
+  /** Session flag recording that `grantItems` were already given. Required with grantItems. */
+  grantOnceFlag?: string;
+}
+
 export interface DialogueNode {
   id: string;
   speaker: string;
   lines: string[];
+  /** At most 2 responses: the dialogue box shows two choice buttons (keys 1-2). */
   responses?: DialogueResponseOption[];
+  effects?: DialogueEffects;
 }
 
 export interface DialogueDatabase {

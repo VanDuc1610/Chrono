@@ -119,7 +119,8 @@ const npcPng = createPng(32, 32, (x, y) => {
   }
   return [0, 0, 0, 0];
 });
-fs.writeFileSync('public/assets/npcs/npc_elder_placeholder.png', npcPng);
+// Elder now uses approved art (NPC_ELDER_001); placeholder no longer written.
+void npcPng;
 
 // 3. Enemy Placeholder (32x32)
 // Fractured Shade / Temporal Anomaly with crimson energy
@@ -133,7 +134,8 @@ const enemyPng = createPng(32, 32, (x, y) => {
   }
   return [0, 0, 0, 0];
 });
-fs.writeFileSync('public/assets/enemies/enemy_fracture_placeholder.png', enemyPng);
+// Temporal Shade now uses approved art (MOB_SHADE_001); placeholder no longer written.
+void enemyPng;
 
 // 4. Tileset (128x128) - 4x4 grid of 32x32 tiles
 // Tile 0: Void / Black

@@ -13,10 +13,10 @@
 | Status Tier                | Count | Description                                                                     |
 | -------------------------- | ----- | ------------------------------------------------------------------------------- |
 | `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`)                           |
-| `INTEGRATED`               | 3     | Approved art in engine (`CHAR_PETER_002`, `MOB_SHADE_001`, `ENV_SANCTUARY_001`) |
-| `CONCEPT_PENDING_APPROVAL` | 1     | Concept generated; awaiting formal review                                       |
+| `INTEGRATED`               | 4     | Approved art in engine (`CHAR_PETER_002`, `MOB_SHADE_001`, `ENV_SANCTUARY_001`) |
+| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review                                       |
 | `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared                                      |
-| `PLACEHOLDER_TEMPORARY`    | 7     | Procedural placeholder assets active in engine                                  |
+| `PLACEHOLDER_TEMPORARY`    | 6     | Procedural placeholder assets active in engine                                  |
 
 ---
 
@@ -71,13 +71,13 @@
 - **Validation:** PASSED (ground-contact warning is expected — the Shade hovers).
 - **Status:** `INTEGRATED` — owner approved 2026-11-11. Replaced `MOB_SHADE_000_TMP` (placeholder file removed).
 
-### `NPC_ELDER_001_CAND` – Elder Chronographer idle (v3)
+### `NPC_ELDER_001` – Elder Chronographer idle (v3) — INTEGRATED
 
 - **Generator:** `scripts/author-elder-sprites.js` · **Spec:** [`docs/art/ELDER_DESIGN.md`](docs/art/ELDER_DESIGN.md) (written spec only)
-- **File:** `art-source/npcs/elder/generated/candidates/elder_idle_v3.png` (128 × 32, 4 frames facing down, 4 FPS) · preview ×8 in `previews/`
+- **File:** `art-source/npcs/elder/generated/approved/elder_idle_v3.png` → runtime `public/assets/npcs/elder_idle.png` (texture `npc_elder`, anim `npc_elder_idle`) (128 × 32, 4 frames facing down, 4 FPS) · preview ×8 in `previews/`
 - **Content:** midnight-indigo cowl, amber-gold eyes, snow-white hair and chest-length beard, gold-embroidered stole, slate cassock with leather girdle and bronze hem, scroll satchel at the right hip, astrolabe staff in the left hand with a pulsing amber shard; breathing on frames 3-4. v3 = owner feedback on v2 "make him less heavy-set": shoulders, cassock and hem 2-3 px narrower per side.
 - **Validation:** PASSED.
-- **Status:** `CONCEPT_PENDING_APPROVAL` — replaces `NPC_ELDER_000_TMP` once approved.
+- **Status:** `INTEGRATED` — owner approved v3 2026-11-11. Replaced `NPC_ELDER_000_TMP` (placeholder file removed).
 
 ### `ENV_SANCTUARY_001` – Shattered Antechamber tileset (v2) — INTEGRATED
 
@@ -119,18 +119,6 @@ The following assets are currently integrated into the engine strictly as **temp
 - **Footprint Hitbox:** 18 × 14 px, offset (7, 16)
 - **Generator:** `scripts/generate-assets.js` (Procedural canvas-buffer synthesis)
 - **Notes:** High-contrast placeholder with slate helm, midnight cloak, and cyan fracture core.
-
-### `NPC_ELDER_000_TMP`
-
-- **Object Name:** Elder Chronographer (NPC Placeholder)
-- **File Path:** `public/assets/npcs/npc_elder_placeholder.png`
-- **Asset Key:** `npc_elder`
-- **Design Doc Ref:** [GDD.md](GDD.md) v0.1.0, [LORE.md](LORE.md) v1.0.0
-- **Status:** `PLACEHOLDER_TEMPORARY`
-- **Dimensions:** 32 × 32 px
-- **Footprint Hitbox:** 20 × 20 px, offset (6, 12)
-- **Generator:** `scripts/generate-assets.js`
-- **Notes:** Hooded scholar silhouette with golden gaze.
 
 ### `UI_FRAME_000_TMP`
 

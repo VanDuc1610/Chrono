@@ -8,7 +8,8 @@ import { DialogueSystem } from '../systems/dialogue/DialogueSystem';
 import { QuestSystem, QuestEventListener } from '../systems/quest/QuestSystem';
 import { InventorySystem } from '../systems/inventory/InventorySystem';
 import { SaveSystem } from '../systems/save/SaveSystem';
-import { DialogueDatabase } from '../systems/dialogue/DialogueTypes';
+import { DialogueDatabase, DialogueEffects } from '../systems/dialogue/DialogueTypes';
+import { InteractableDatabase } from '../systems/interaction/InteractionTypes';
 import { SoundSystem } from '../systems/audio/SoundSystem';
 import { DEFAULT_MAP_ID, FLAGS, GameSession, getSession } from '../state/GameSession';
 import type { CombatSceneData } from './CombatScene';
@@ -125,6 +126,9 @@ export class ExplorationScene extends Phaser.Scene {
     this.dialogueSystem.loadDatabase(dialogueData);
     // The Elder's farewell (offered only after "Silence the Fracture") closes the Prologue.
     this.dialogueSystem.addEventListener((event) => {
+      if (event.type === 'node_changed' && event.node?.effects) {
+        this.applyDialogueEffects(event.node.effects);
+      }
       if (event.type === 'dialogue_ended' && event.node?.id === ELDER_FAREWELL_DIALOGUE_ID) {
         this.startPrologueEnding();
       }
@@ -292,6 +296,7 @@ export class ExplorationScene extends Phaser.Scene {
       },
     );
 
+    if (this.anims.exists('npc_elder_idle')) elder.sprite.play('npc_elder_idle');
     this.physics.add.collider(this.player.sprite, elder.sprite);
     this.interactionSystem.register(elder);
 
@@ -309,6 +314,20 @@ export class ExplorationScene extends Phaser.Scene {
       },
     };
     this.interactionSystem.register(altarInteractable);
+
+    // Environmental points of interest (data-driven; behaviour lives in dialogue.json `effects`)
+    const db = this.cache.json.get('data_interactables') as InteractableDatabase | undefined;
+    for (const def of db?.interactables ?? []) {
+      const pos = new Phaser.Math.Vector2(def.tile.x * 32 + 16, def.tile.y * 32 + 16);
+      this.interactionSystem.register({
+        id: def.id,
+        interactPrompt: def.prompt,
+        getInteractionPosition: () => pos,
+        getInteractionRadius: () => def.radius,
+        canInteract: () => true,
+        onInteract: () => this.openDialogue(def.dialogueId),
+      });
+    }
   }
 
   private setupEnemies(): void {
@@ -1153,6 +1172,22 @@ export class ExplorationScene extends Phaser.Scene {
     this.dialogueSystem.close();
     this.dialogueBoxContainer.setVisible(false);
     this.controller.setEnabled(true);
+  }
+
+  /** Applies a dialogue node's data-driven effects and announces any items received. */
+  private applyDialogueEffects(effects: DialogueEffects): void {
+    const granted = this.session.applyDialogueEffects(effects);
+    if (granted.length > 0) {
+      const names = granted
+        .map((s) => {
+          const name = this.inventorySystem.getItemDefinition(s.itemId)?.name ?? s.itemId;
+          return s.quantity > 1 ? `${name} x${s.quantity}` : name;
+        })
+        .join(', ');
+      this.showNotification('ITEM OBTAINED', `◆ ${names}`);
+    }
+    this.updatePlayerStatusHUD();
+    this.updateQuestHUD();
   }
 
   /** Fades out to the Prologue closing card. Guarded so it runs once per scene entry. */

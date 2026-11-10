@@ -117,7 +117,11 @@ export class PreloadScene extends Phaser.Scene {
       'assets/characters/peter/peter_temporal_sight.png',
       { frameWidth: 32, frameHeight: 32 },
     );
-    this.load.image('npc_elder', 'assets/npcs/npc_elder_placeholder.png');
+    // Elder Chronographer idle (NPC_ELDER_001, approved Pipeline B art): 4 frames, 32x32.
+    this.load.spritesheet('npc_elder', 'assets/npcs/elder_idle.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
     // Temporal Shade float loop (MOB_SHADE_001, approved Pipeline B art): 4 frames, 32x32.
     this.load.spritesheet('enemy_fracture', 'assets/enemies/shade_float.png', {
       frameWidth: 32,
@@ -139,6 +143,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.json('data_enemies', 'assets/data/enemies.json');
     this.load.json('data_items', 'assets/data/items.json');
     this.load.json('data_player', 'assets/data/player.json');
+    this.load.json('data_interactables', 'assets/data/interactables.json');
   }
 
   public create(): void {
@@ -148,6 +153,14 @@ export class PreloadScene extends Phaser.Scene {
         key: 'enemy_fracture_idle',
         frames: this.anims.generateFrameNumbers('enemy_fracture', { start: 0, end: 3 }),
         frameRate: 6, // SHADE_DESIGN §4: 4-frame float, 6 FPS
+        repeat: -1,
+      });
+    }
+    if (!this.anims.exists('npc_elder_idle')) {
+      this.anims.create({
+        key: 'npc_elder_idle',
+        frames: this.anims.generateFrameNumbers('npc_elder', { start: 0, end: 3 }),
+        frameRate: 4, // ELDER_DESIGN §5: 4-frame breathing cycle, 4 FPS
         repeat: -1,
       });
     }

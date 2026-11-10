@@ -4,6 +4,7 @@ import { IItemStack } from '../systems/inventory/InventoryTypes';
 import { QuestSystem } from '../systems/quest/QuestSystem';
 import { CombatItemEffect, ICombatant, IEnemyDefinition } from '../systems/combat/CombatTypes';
 import { ISaveData } from '../systems/save/SaveTypes';
+import type { DialogueEffects } from '../systems/dialogue/DialogueTypes';
 import { GameDatabase, PlayerStats, readGameDatabase } from './GameDatabase';
 
 // Pure logic: only Phaser *types* are imported so this module stays unit-testable outside a browser.
@@ -201,6 +202,31 @@ export class GameSession {
         }
       }
     }
+  }
+
+  /**
+   * Applies a dialogue node's `effects` (dialogue.json): flags, quest start, one-time item grants,
+   * then re-syncs quest progress so flag-driven objectives complete immediately.
+   * Returns the items actually granted (empty when already claimed or the satchel is full).
+   */
+  public applyDialogueEffects(effects: DialogueEffects): IItemStack[] {
+    for (const flag of effects.setFlags ?? []) this.setFlag(flag);
+
+    if (effects.startQuest && this.quests.getQuestStage(effects.startQuest) === 'inactive') {
+      this.quests.startQuest(effects.startQuest);
+    }
+
+    const granted: IItemStack[] = [];
+    const once = effects.grantOnceFlag;
+    if (effects.grantItems?.length && !(once && this.getFlag(once))) {
+      for (const stack of effects.grantItems) {
+        if (this.inventory.addItem(stack.itemId, stack.quantity)) granted.push({ ...stack });
+      }
+      if (once) this.setFlag(once);
+    }
+
+    this.syncQuestProgress();
+    return granted;
   }
 
   /** Human-readable reward line, e.g. "+50 EXP, Minor Chrono Shard — LEVEL UP! Lv. 2". */
