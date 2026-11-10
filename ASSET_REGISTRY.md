@@ -13,7 +13,7 @@
 | Status Tier                | Count | Description                                           |
 | -------------------------- | ----- | ----------------------------------------------------- |
 | `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`) |
-| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review             |
+| `CONCEPT_PENDING_APPROVAL` | 1     | Concept generated; awaiting formal review             |
 | `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared            |
 | `PLACEHOLDER_TEMPORARY`    | 9     | Procedural placeholder assets active in engine        |
 
@@ -46,6 +46,16 @@
   - [x] Broken Blade (glowing cerulean fracture), Stopped Watch, Torn Notebook
 
 ---
+
+## 2b. Candidates Awaiting Owner Review
+
+### `CHAR_PETER_002_CAND` – Peter idle + walk sheets (v2)
+
+- **Pipeline:** B – code-authored pixel art (AGENTS.md §5), generator `scripts/author-peter-sprites.js`
+- **Files:** `art-source/characters/peter/generated/candidates/peter_idle_v2.png` (128 × 128, 4 frames × 4 dirs), `peter_walk_v2.png` (192 × 128, 6 frames × 4 dirs); review previews (×6) in `candidates/previews/`
+- **Sources:** `docs/art/PETER_DESIGN.md` palette (19 colours) + `peter_master_v1.png` as visual reference
+- **Validation:** `validate-candidate.js` PASSED (RGBA, transparent background, frames centred, feet on rows 28-30)
+- **Status:** `CONCEPT_PENDING_APPROVAL` — not integrated; `public/assets/characters/peter/` still holds `CHAR_PETER_000_TMP`
 
 ## 3. Active Placeholder Registry
 

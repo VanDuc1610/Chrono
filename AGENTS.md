@@ -103,20 +103,22 @@ Hair silhouette, hairstyle, body proportions, and main costume colors must remai
 
 ---
 
-## 5. Manual Stable Diffusion Pipeline (AUTOMATIC1111)
+## 5. Art Production Pipelines
 
-The image generation process is strictly manual using AUTOMATIC1111 Stable Diffusion WebUI.
+There are exactly two approved ways to produce game art. Both feed the same approval stages (§6).
 
-The Coding Agent must:
+The Coding Agent must, in both pipelines:
 
 - **Preserve approved character designs.**
-- **Use text-only generation prompts.**
 - **Never search for external character references.**
-- **Never automatically generate artwork.**
-- **Never connect to AUTOMATIC1111 API.**
+- **Never use AI image models or image-generation APIs/services** (Stable Diffusion, AUTOMATIC1111 API, or any other).
 - **Never promote candidate assets without user approval.**
 
-### Operating Steps:
+### Pipeline A – Manual Stable Diffusion (AUTOMATIC1111)
+
+Image generation is done manually by the project owner in AUTOMATIC1111 Stable Diffusion WebUI. The agent only writes text-only prompts.
+
+#### Operating Steps:
 
 1. Read the character design documents.
 2. Write a text-only generation prompt.
@@ -128,6 +130,17 @@ The Coding Agent must:
 8. Only upon user approval, promote to `generated/approved/` and prepare for Phaser runtime integration.
 
 **Do not call Stable Diffusion APIs or attempt automatic image generation.**
+
+### Pipeline B – Code-Authored Pixel Art (approved by the project owner, 2026-11-11)
+
+The Coding Agent may hand-author pixel art **as source code**: every pixel is placed explicitly in a committed script (pixel maps + a palette taken from the design documents), so the artwork is fully reviewable in a diff and reproducible.
+
+- Allowed inputs: the written design documents (`docs/art/*.md`) and the approved concept images in `art-source/**/concept/` (viewed as a visual reference only).
+- Not allowed: AI image models, generation APIs/services, tracing or sampling pixels from any external image.
+- All identity locks (§4, especially the hairstyle) apply unchanged.
+- The script lives in `scripts/` (e.g. `scripts/author-peter-sprites.js`) and writes **only** to `art-source/.../generated/candidates/`, with upscaled review previews in `candidates/previews/`.
+- Output must pass `node scripts/validate-candidate.js` before it is presented for review.
+- Candidates then follow §6 unchanged: nothing enters `public/assets/` without explicit owner approval.
 
 ---
 

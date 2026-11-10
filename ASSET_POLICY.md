@@ -25,7 +25,8 @@ To guarantee 100% original copyright integrity, the following actions are strict
 - **NO Artist / Franchise Imitation Prompts:** Prompts must never request styles in the likeness of identifiable living artists, copyrighted franchises, studios, or specific IP characters (e.g., "in the style of Chrono Trigger", "looks like Link", etc.).
 - **NO Silent Replacements:** Never replace an approved asset with an unreviewed or unrelated asset.
 - **NO Unidentified Placeholders:** Temporary placeholder assets must never be passed off or treated as final approved artwork.
-- **NO Automated Generation Calls:** Do not call Stable Diffusion APIs or attempt automatic image generation. The image generation process is strictly manual: the Coding Agent writes text prompts and setting recommendations, and the user generates and selects the image.
+- **NO Automated Generation Calls:** Do not call Stable Diffusion or any other image-generation model/API. Image generation with Stable Diffusion is strictly manual: the Coding Agent writes text prompts and setting recommendations, and the user generates and selects the image.
+- **Exception – Code-Authored Pixel Art (Pipeline B, owner-approved 2026-11-11):** The Coding Agent may place pixels explicitly in a committed script (see AGENTS.md §5). Output is a candidate like any other and passes the same validation and approval stages below.
 
 ---
 

@@ -221,9 +221,12 @@ Peter's hairstyle is a permanent character identity feature and **CANNOT** be mo
 
 ---
 
-## 8. Manual AUTOMATIC1111 Art Pipeline
+## 8. Art Pipelines
 
-In accordance with `AGENTS.md` and `.agents/rules/chrono-art.md`, all image generation is strictly manual using AUTOMATIC1111 Stable Diffusion WebUI:
+In accordance with `AGENTS.md` §5 and `.agents/rules/chrono-art.md`, art is produced through one of two pipelines that share the same approval gate:
+
+- **Pipeline B – Code-Authored Pixel Art** (owner-approved 2026-11-11): the agent hand-places pixels in a committed script (e.g. `scripts/author-peter-sprites.js`, palette from `docs/art/PETER_DESIGN.md`), writes to `generated/candidates/` (+ `previews/`), validates, and the owner approves before integration. No image models or APIs.
+- **Pipeline A – Manual AUTOMATIC1111** (below): the owner generates images manually from agent-authored text prompts.
 
 ```mermaid
 flowchart LR
@@ -243,7 +246,7 @@ flowchart LR
 1. Preserve approved character designs without alteration.
 2. Prompts originate strictly from written text design documents.
 3. Never search for external character references or copyrighted artwork.
-4. Never automatically generate artwork or run generation loops.
+4. Never use AI image models or run generation loops (code-authored pixel art under Pipeline B is not image generation).
 5. Never connect to AUTOMATIC1111 API.
 6. Never promote candidate assets without explicit user sign-off.
 

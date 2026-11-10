@@ -50,20 +50,20 @@ Peter must retain:
 
 This hairstyle is a permanent character identity feature and cannot be changed without explicit approval from the project owner.
 
-## 4. Manual Stable Diffusion Pipeline (AUTOMATIC1111)
+## 4. Art Production Pipelines
 
-The image generation process is strictly manual using AUTOMATIC1111 Stable Diffusion WebUI.
-
-The Coding Agent must:
+Two approved pipelines (details in AGENTS.md §5). In both, the Coding Agent must:
 
 1. **Preserve approved character designs** without independent alterations.
-2. **Use text-only generation prompts** authored from written design specifications.
-3. **Never search for external character references** or copyrighted materials.
-4. **Never automatically generate artwork.**
-5. **Never connect to AUTOMATIC1111 API** or attempt automated image generation scripts.
-6. **Never promote candidate assets without explicit user approval.**
+2. **Never search for external character references** or copyrighted materials.
+3. **Never use AI image models or image-generation APIs/services** (including the AUTOMATIC1111 API).
+4. **Never promote candidate assets without explicit user approval.**
 
-### Standard Workflow:
+**Pipeline B – Code-Authored Pixel Art** (owner-approved 2026-11-11): the agent may place pixels explicitly in a committed script (palette from the design docs, approved concepts as visual reference only), writing only to `generated/candidates/`, validated with `scripts/validate-candidate.js`, then reviewed and approved by the owner like any other candidate.
+
+### Pipeline A – Manual Stable Diffusion (AUTOMATIC1111) Workflow:
+
+The owner generates images manually; the agent writes text-only prompts authored from written design specifications.
 
 1. Read the character design documents.
 2. Write a text-only generation prompt.

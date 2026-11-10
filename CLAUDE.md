@@ -32,8 +32,9 @@ Claude Code must strictly respect the project's **Original Art Policy** and char
   - Clearly distinguishable, tightly coiled, springy curls growing upward and outward.
   - Overall silhouette is rounded, compact, and slightly elevated; full coverage on crown, temples, sides, and back.
   - **STRICT PROHIBITIONS:** Never interpret as straight hair, wavy hair, loose curls, bangs, fringe, shaggy hair, undercut, shaved sides, or ponytail.
-- **Manual AUTOMATIC1111 Art Pipeline:**
-  - Never call Stable Diffusion APIs or generate artwork automatically.
+- **Art Pipelines (AGENTS.md §5):**
+  - Never call Stable Diffusion or any image-generation model/API.
+  - Pipeline B (owner-approved 2026-11-11): Claude may hand-author pixel art as code (`scripts/author-*-sprites.js`), output to `generated/candidates/` only, validated, then owner-approved like any candidate.
   - The pipeline is strictly manual text prompts stored in `art-source/.../prompts/`.
   - Only user-approved assets from `art-source/.../generated/approved/` may be integrated into `public/assets/`.
   - Never search the web for external character references or copyrighted artwork.
