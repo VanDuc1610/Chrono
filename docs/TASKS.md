@@ -19,12 +19,24 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-Goal (owner, 2026-11-11): rebuild the Prologue per `docs/story/STORY_PROLOGUE.md` (Khánh Hòa), all in-game text in Vietnamese.
+Goal (owner, 2026-11-11): rebuild the Prologue per `docs/story/PROLOGUE_V2_DESIGN.md` (approved), all in-game text in Vietnamese.
+
+### T-29 · Prologue v2 content in Vietnamese (data only)
+
+- **Assignee:** Antigravity · **Status:** TODO
+- **Locks:** `public/assets/data/dialogue.json`, `quests.json`, `items.json`, `enemies.json`, `tests/content-data.test.ts`
+- Vietnamese dialogue/quests/items for all Prologue v2 beats + translate the existing Antechamber content. Not `maps.json` / `strings.json` (Claude adds map entries when the art lands).
+
+### T-30 · Prologue v2 art: `coastal_tileset` (Pipeline B)
+
+- **Assignee:** Claude · **Status:** TODO
+- **Locks:** `scripts/author-coastal-tileset.js` (new), `art-source/environment/coastal/`
+- Town + Peter's room interior in one 32×32 tileset; candidates → owner approval. Then `wilds_tileset`, Cô Ba, Drowned Sentinel.
 
 ## Backlog (scheduled after current locks are released)
 
-- **Prologue v2 art** (Claude, Pipeline B) — from the approved T-27 asset list; owner approves each candidate.
-- **Prologue v2 content** (Antigravity) — Vietnamese dialogue/quest/item JSON per approved T-27, on the T-28 engine.
+- **Prologue v2 maps** (Claude) — tilemaps + `maps.json` entries for room, town, forest, lighthouse once each tileset is approved; switch `startMapId` to Peter's room.
+- **Drowned Sentinel combat mechanics** (Claude) — boss phases + environment actions (lens commands) in `CombatSystem` / `enemies.json`, after T-29.
 - **Vietnamese pass on remaining UI** (Combat, Main Menu, Prologue End) via `strings.json` once T-28 lands.
 - **GitHub Pages release + Playwright cross-browser tests.**
 
