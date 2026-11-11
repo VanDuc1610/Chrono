@@ -40,11 +40,11 @@
     },
     {
       "id": "boss_drowned_sentinel",
-      "name": "The Drowned Sentinel",
+      "name": "Vệ Binh Chìm Trong Sóng",
       "level": 3,
       "maxHp": 120,
       "hp": 120,
-      "attack": 14,
+      "attack": 12,
       "defense": 10,
       "speed": 8,
       "spriteKey": "boss_sentinel",
@@ -56,7 +56,34 @@
           "chance": 1
         }
       ],
-      "spriteScale": 1.6
+      "spriteScale": 1.6,
+      "mechanic": {
+        "damageReduction": 0.8,
+        "hpFloor": 1,
+        "recoverPct": 0.6,
+        "recoverMessage": "Thủy triều đóng băng tràn qua bộ giáp — Vệ Binh gượng dậy, vết thương khép lại!",
+        "unlockAfterTurns": 3,
+        "unlockOnSkill": true,
+        "unlockMessage": "Nhãn Thời Gian: luồng sóng đọng nuôi bộ giáp chảy về hai thấu kính của ngọn hải đăng!",
+        "actions": [
+          {
+            "id": "lens_left",
+            "label": "THẤU KÍNH TRÁI",
+            "stunTurns": 1,
+            "message": "Peter xoay thấu kính trái — ánh sáng chói lòa làm rạn lớp giáp nước! Vệ Binh bị choáng."
+          },
+          {
+            "id": "lens_right",
+            "label": "THẤU KÍNH PHẢI",
+            "requires": ["lens_left"],
+            "breakShield": true,
+            "setHpPct": 0.12,
+            "message": "Luồng sáng vàng ấm xuyên qua lồng ngực Vệ Binh — lớp sóng giam hãm vỡ tan!"
+          }
+        ],
+        "releasedFrame": 4,
+        "defeatMessage": "Vệ Binh buông kích, quỳ gối và cúi đầu như một lời tạ ơn."
+      }
     }
   ]
 }

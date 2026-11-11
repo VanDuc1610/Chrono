@@ -24,6 +24,11 @@ export function createTranslator(db: StringDatabase | undefined): Translate {
   return (key, vars) => formatString(table, key, vars);
 }
 
+/** The raw string table (e.g. to hand battle-log templates to CombatSystem). */
+export function getStringTable(scene: Phaser.Scene): Record<string, string> {
+  return (scene.cache.json.get('data_strings') as StringDatabase | undefined)?.strings ?? {};
+}
+
 /** Translator for a scene (strings.json is loaded in PreloadScene as `data_strings`). */
 export function getStrings(scene: Phaser.Scene): Translate {
   return createTranslator(scene.cache.json.get('data_strings') as StringDatabase | undefined);

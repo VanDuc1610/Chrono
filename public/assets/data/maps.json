@@ -573,7 +573,21 @@
           "requiresFlag": "sentinel_pacified"
         }
       ],
-      "encounters": [],
+      "encounters": [
+        {
+          "id": "enc_drowned_sentinel",
+          "enemyId": "boss_drowned_sentinel",
+          "texture": "boss_sentinel",
+          "anim": "boss_sentinel_idle",
+          "tile": {
+            "x": 12,
+            "y": 9
+          },
+          "defeatedFlag": "sentinel_pacified",
+          "hitbox": 30,
+          "victoryDialogueId": "boss_sentinel_pacified"
+        }
+      ],
       "exits": [
         {
           "id": "lighthouse_to_antechamber",
@@ -587,7 +601,20 @@
           "toSpawn": "from_lighthouse"
         }
       ],
-      "triggers": []
+      "triggers": [
+        {
+          "id": "trig_meet_sentinel",
+          "on": "zone",
+          "area": {
+            "x": 10,
+            "y": 11,
+            "w": 5,
+            "h": 1
+          },
+          "onceFlag": "met_drowned_sentinel",
+          "dialogueId": "boss_sentinel_encounter"
+        }
+      ]
     }
   }
 }

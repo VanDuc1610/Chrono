@@ -90,6 +90,7 @@ export function validateMapDatabase(db: MapDatabase, refs: MapReferenceSets): st
     for (const enc of map.encounters ?? []) {
       if (!refs.enemyIds.has(enc.enemyId))
         err(key, `encounter ${enc.id}: unknown enemy "${enc.enemyId}"`);
+      dialogue(enc.victoryDialogueId, `encounter ${enc.id}`);
     }
     for (const exit of map.exits ?? []) {
       const target = db.maps[exit.toMap];

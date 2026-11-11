@@ -67,6 +67,8 @@ export interface MapEncounterDefinition {
   defeatedFlag: string;
   /** Square overlap hitbox in px (default 22). */
   hitbox?: number;
+  /** Dialogue opened back on the map after winning (e.g. a released boss's last words). */
+  victoryDialogueId?: string;
 }
 
 export interface MapExitDefinition {

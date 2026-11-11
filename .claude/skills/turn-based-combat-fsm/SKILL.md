@@ -21,7 +21,24 @@ description: Use when changing combat rules, turn order, skills, items in battle
   escape (chance from speed, clamped 10–90 %, failure costs the turn).
 - Player combatant comes from `session.createPlayerCombatant()` (MP refilled each battle); HP is
   written back with `session.applyBattleHp()`; rewards via `session.claimEnemyRewards()`.
-- Defeat with `revivePosition` revives at the Altar of Moments; victory sets `victoryFlag`.
+- Defeat with `revivePosition` revives at the map's `revive` point; victory sets `victoryFlag` and
+  may open `victoryDialogueId` back on the map.
+
+## Bosses (data-driven, `enemies.json` → `mechanic`)
+
+- Shield: `damageReduction` + `hpFloor`; held at the floor the boss spends its turn recovering to
+  `recoverPct` (`beginEnemyTurn()` — call it before every enemy attack).
+- Environment actions (`actions[]`, ordered via `requires`) appear as command **[6]** once unlocked
+  (`unlockOnSkill` and/or after `unlockAfterTurns` rounds): `stunTurns`, `breakShield`, `setHpPct`.
+- `releasedFrame` shows a sheet frame on victory instead of the dissolve; `defeatMessage` replaces
+  the "dissolves" line. Large sprites set `spriteScale`. Example: The Drowned Sentinel.
+- Tests: `tests/boss-mechanic.test.ts` (runs on the real enemies.json).
+
+## Text
+
+Battle-log templates live in `DEFAULT_COMBAT_TEXT` (English fallback) and are overridden by
+`strings.json` `combat.log.*` (Vietnamese); UI labels are `combat.*`. A test fails if strings.json
+misses a log key. Player-facing boss text (labels, messages) is data in `enemies.json`.
 
 ## Rules
 
@@ -33,5 +50,5 @@ description: Use when changing combat rules, turn order, skills, items in battle
 
 ## Verify
 
-`npx vitest run tests/combat-and-save.test.ts` · `node scripts/test-combat.js` ·
+`npx vitest run tests/combat-and-save.test.ts tests/boss-mechanic.test.ts` · `node scripts/test-combat.js` ·
 `node scripts/test-session-regression.js`

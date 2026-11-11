@@ -232,7 +232,7 @@ export class GameSession {
     return granted;
   }
 
-  /** Human-readable reward line, e.g. "+50 EXP, Minor Chrono Shard — LEVEL UP! Lv. 2". */
+  /** Player-facing reward line, e.g. "+50 EXP, Mảnh Chrono Nhỏ — LÊN CẤP! Cấp 2". */
   public describeRewards(summary: RewardSummary): string {
     const parts: string[] = [];
     if (summary.exp > 0) parts.push(`+${summary.exp} EXP`);
@@ -242,7 +242,7 @@ export class GameSession {
     }
     let text = parts.join(', ');
     if (summary.levelUps.length > 0) {
-      text += `${text ? ' — ' : ''}LEVEL UP! Lv. ${summary.levelUps[summary.levelUps.length - 1]}`;
+      text += `${text ? ' — ' : ''}LÊN CẤP! Cấp ${summary.levelUps[summary.levelUps.length - 1]}`;
     }
     return text;
   }

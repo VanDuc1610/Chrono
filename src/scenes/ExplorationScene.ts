@@ -36,6 +36,8 @@ export interface ExplorationSceneData {
   returnPosition?: { x: number; y: number };
   /** One-shot banner to show on arrival (e.g. battle rewards). */
   notice?: { title: string; subtitle: string };
+  /** Dialogue opened shortly after arrival (e.g. a boss's last words after the battle). */
+  openDialogueId?: string;
 }
 
 const PLAYER_SPEED = 130;
@@ -73,6 +75,7 @@ export class ExplorationScene extends Phaser.Scene {
   private exitsArmed = false;
   private spawn = { x: 0, y: 0 };
   private pendingNotice: ExplorationSceneData['notice'] | null = null;
+  private pendingDialogueId: string | null = null;
 
   constructor() {
     super({ key: 'ExplorationScene' });
@@ -112,6 +115,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.encounterSprites = [];
     this.session = getSession(this);
     this.pendingNotice = data?.notice ?? null;
+    this.pendingDialogueId = data?.openDialogueId ?? null;
 
     const db = this.cache.json.get('data_maps') as MapDatabase;
     this.mapDef = resolveMap(db, data?.mapId ?? this.session.position?.mapId);
@@ -171,6 +175,11 @@ export class ExplorationScene extends Phaser.Scene {
     if (this.pendingNotice) {
       this.banner.show(this.pendingNotice.title, this.pendingNotice.subtitle);
       this.pendingNotice = null;
+    }
+    if (this.pendingDialogueId) {
+      const id = this.pendingDialogueId;
+      this.pendingDialogueId = null;
+      this.time.delayedCall(700, () => this.openDialogue(id));
     }
     this.session.syncQuestProgress();
     this.questTracker.refresh();
@@ -373,6 +382,7 @@ export class ExplorationScene extends Phaser.Scene {
         victoryFlag: def.defeatedFlag,
         returnPosition,
         revivePosition: revive,
+        victoryDialogueId: def.victoryDialogueId,
       };
       this.scene.start('CombatScene', data);
     });
