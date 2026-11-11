@@ -19,16 +19,11 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-### T-24 · Peter combat animations (Pipeline B + CombatScene)
+### T-26 · Integrate UI_SET_001 panel frame + menu cursor
 
-- **Assignee:** Claude · **Status:** BLOCKED — candidates awaiting owner approval (ASSET_REGISTRY `CHAR_PETER_003_CAND`)
-- **Locks:** `scripts/author-peter-sprites.js`, `art-source/characters/peter/`; on approval also `public/assets/characters/peter/`, `src/scenes/CombatScene.ts`
-- On approval: deploy sheets; CombatScene shows Peter in profile (`peter_idle_right`), plays attack on Attack, temporal_sight then attack on Skill, hurt on taking damage.
-
-### T-25 · UI art set (Pipeline B) + integration
-
-- **Assignee:** Claude (art) → Antigravity (integration, after T-24 releases CombatScene) · **Status:** BLOCKED — candidates awaiting owner approval (`UI_SET_001_CAND`)
-- **Locks (art):** `scripts/author-ui-assets.js`, `art-source/ui/`
+- **Assignee:** Antigravity · **Status:** TODO
+- **Locks:** `src/scenes/ExplorationScene.ts`, `src/scenes/CombatScene.ts`, `src/scenes/MainMenuScene.ts`, `src/scenes/PrologueEndScene.ts`, any new `src/ui/` helper
+- Replace Graphics-drawn panel backgrounds/borders with `ui_frame` NineSlice (16 px corners); replace the MainMenu cursor graphic with the `ui_cursor` sprite + `ui_cursor_pulse` anim. Art files are approved and already deployed — do not edit them.
 
 ## Backlog (scheduled after current locks are released)
 
@@ -36,6 +31,8 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Done
 
+- **T-24** Peter combat sheets (attack 6f, hurt 2f, temporal_sight 4f × 4 dirs) approved by owner and integrated (`CHAR_PETER_003`): CombatScene shows Peter in profile, Attack = slash + lunge, Skill = Temporal Sight wind-up then strike, enemy hits = hurt recoil/flash; damage numbers land on impact. Verified with a live-engine animation probe, 34 unit tests, 4 CDP suites — Claude
+- **T-25** UI art set (nine-slice frame, 2-frame cursor, 4-frame hit spark) approved and deployed (`UI_SET_001`); `ui_cursor`/`hit_spark` now load as spritesheets with global anims `ui_cursor_pulse` / `hit_spark_burst`; tinted hit sparks used in combat. Placeholder generators no longer overwrite these files. Frame + cursor integration → T-26 — Claude
 - **T-22** Prologue content integrated (owner approved proposal + prop art): data-driven `effects` on dialogue nodes (`GameSession.applyDialogueEffects`), 7 points of interest from `interactables.json`, tileset v3 prop tiles placed via `scripts/map-props.js`. Quest tracker: 3 objective rows, `[Q]` cycles active quests, "(+N)" count, overflow trimmed with "…". Verified live: all 7 POIs and branches, `quest_prologue_remnants` complete (+40 EXP), gear/shard granted once, Elder lore branch, prop collision; 34 unit tests + 4 CDP suites PASS — Claude
 - **T-23** Authored Prologue environmental dialogue nodes + `effects` in `public/assets/data/dialogue.json` (7 POIs + follow-ups + Elder lore branch), added optional side quest `quest_prologue_remnants` (+40 EXP, `ancient_gear`) in `public/assets/data/quests.json`, and added 5 data-integrity & end-to-end Vitest tests in `tests/content-data.test.ts` (34 total unit tests PASS) — Antigravity
 - **T-19** Elder Chronographer v3 (slimmer, per owner feedback) approved and integrated: 4-frame spritesheet + global `npc_elder_idle` anim (4 FPS); placeholder removed — Claude

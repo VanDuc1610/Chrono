@@ -220,7 +220,8 @@ const uiFramePng = createPng(48, 48, (x, y) => {
   if (x <= 4 || x >= 43 || y <= 4 || y >= 43) return [45, 55, 75, 255]; // Inner border
   return [18, 22, 34, 240]; // Dark translucent slate body
 });
-fs.writeFileSync('public/assets/ui/ui_frame.png', uiFramePng);
+// Approved art (UI_SET_001, owner 2026-11-11) now lives at this path; never overwrite it.
+void uiFramePng;
 
 // UI Cursor / Pointer (16x16)
 const cursorPng = createPng(16, 16, (x, y) => {
@@ -230,7 +231,8 @@ const cursorPng = createPng(16, 16, (x, y) => {
   }
   return [0, 0, 0, 0];
 });
-fs.writeFileSync('public/assets/ui/ui_cursor.png', cursorPng);
+// Approved art (UI_SET_001, owner 2026-11-11) now lives at this path; never overwrite it.
+void cursorPng;
 
 // 6. Effects Asset
 // Hit Spark / Fracture Particle (16x16)
@@ -243,7 +245,8 @@ const sparkPng = createPng(16, 16, (x, y) => {
   }
   return [0, 0, 0, 0];
 });
-fs.writeFileSync('public/assets/effects/hit_spark.png', sparkPng);
+// Approved art (UI_SET_001, owner 2026-11-11) now lives at this path; never overwrite it.
+void sparkPng;
 
 // 7. Minimal Silent Audio WAV placeholder (44 bytes valid standard RIFF WAV)
 const wavHeader = Buffer.alloc(44);

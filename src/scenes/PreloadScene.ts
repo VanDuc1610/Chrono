@@ -133,9 +133,17 @@ export class PreloadScene extends Phaser.Scene {
     this.load.tilemapTiledJSON('prologue_map', 'assets/maps/prologue_map.json');
 
     // 3. UI & FX
+    // UI_SET_001 (approved Pipeline B art): 48x48 nine-slice frame (16 px corners),
+    // 2-frame cursor pulse, 4-frame near-white hit spark (tint at runtime).
     this.load.image('ui_frame', 'assets/ui/ui_frame.png');
-    this.load.image('ui_cursor', 'assets/ui/ui_cursor.png');
-    this.load.image('hit_spark', 'assets/effects/hit_spark.png');
+    this.load.spritesheet('ui_cursor', 'assets/ui/ui_cursor.png', {
+      frameWidth: 16,
+      frameHeight: 16,
+    });
+    this.load.spritesheet('hit_spark', 'assets/effects/hit_spark.png', {
+      frameWidth: 16,
+      frameHeight: 16,
+    });
 
     // 4. External Data JSONs
     this.load.json('data_dialogue', 'assets/data/dialogue.json');
@@ -162,6 +170,23 @@ export class PreloadScene extends Phaser.Scene {
         frames: this.anims.generateFrameNumbers('npc_elder', { start: 0, end: 3 }),
         frameRate: 4, // ELDER_DESIGN §5: 4-frame breathing cycle, 4 FPS
         repeat: -1,
+      });
+    }
+    if (!this.anims.exists('ui_cursor_pulse')) {
+      this.anims.create({
+        key: 'ui_cursor_pulse',
+        frames: this.anims.generateFrameNumbers('ui_cursor', { start: 0, end: 1 }),
+        frameRate: 3,
+        repeat: -1,
+      });
+    }
+    if (!this.anims.exists('hit_spark_burst')) {
+      this.anims.create({
+        key: 'hit_spark_burst',
+        frames: this.anims.generateFrameNumbers('hit_spark', { start: 0, end: 3 }),
+        frameRate: 16,
+        repeat: 0,
+        hideOnComplete: true,
       });
     }
 

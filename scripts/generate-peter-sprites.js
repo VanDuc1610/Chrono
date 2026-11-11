@@ -260,7 +260,8 @@ const attackPng = createPng(192, 128, (x, y) => {
   const dirY = Math.floor(y / 32);
   return drawPeterFrame(x, y, dirY, 'attack', frameX);
 });
-fs.writeFileSync(path.join(dir, 'peter_attack.png'), attackPng);
+// Approved art (CHAR_PETER_003, owner 2026-11-11) now lives at this path; never overwrite it.
+void attackPng;
 
 // 5. Hurt Sheet (2 frames x 4 directions = 64x128)
 const hurtPng = createPng(64, 128, (x, y) => {
@@ -268,7 +269,8 @@ const hurtPng = createPng(64, 128, (x, y) => {
   const dirY = Math.floor(y / 32);
   return drawPeterFrame(x, y, dirY, 'hurt', frameX);
 });
-fs.writeFileSync(path.join(dir, 'peter_hurt.png'), hurtPng);
+// Approved art (CHAR_PETER_003, owner 2026-11-11) now lives at this path; never overwrite it.
+void hurtPng;
 
 // 6. Temporal Sight Sheet (4 frames x 4 directions = 128x128)
 const sightPng = createPng(128, 128, (x, y) => {
@@ -276,7 +278,8 @@ const sightPng = createPng(128, 128, (x, y) => {
   const dirY = Math.floor(y / 32);
   return drawPeterFrame(x, y, dirY, 'temporal_sight', frameX);
 });
-fs.writeFileSync(path.join(dir, 'peter_temporal_sight.png'), sightPng);
+// Approved art (CHAR_PETER_003, owner 2026-11-11) now lives at this path; never overwrite it.
+void sightPng;
 
 console.log(
   'Successfully generated all Peter top-down sprite sheets in public/assets/characters/peter/',

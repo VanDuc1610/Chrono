@@ -4,19 +4,19 @@
 
 **Ledger Version:** 1.0.0  
 **Governing Policy:** [ASSET_POLICY.md](ASSET_POLICY.md)  
-**Last Updated:** 2026-11-10 (Peter runtime sprites reclassified as placeholders)
+**Last Updated:** 2026-11-11 (Peter combat sheets + UI set approved and integrated)
 
 ---
 
 ## 1. Summary of Asset Status
 
-| Status Tier                | Count | Description                                                                     |
-| -------------------------- | ----- | ------------------------------------------------------------------------------- |
-| `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`)                           |
-| `INTEGRATED`               | 4     | Approved art in engine (`CHAR_PETER_002`, `MOB_SHADE_001`, `ENV_SANCTUARY_001`) |
-| `CONCEPT_PENDING_APPROVAL` | 2     | Concept generated; awaiting formal review                                       |
-| `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared                                      |
-| `PLACEHOLDER_TEMPORARY`    | 6     | Procedural placeholder assets active in engine                                  |
+| Status Tier                | Count | Description                                                         |
+| -------------------------- | ----- | ------------------------------------------------------------------- |
+| `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`)               |
+| `INTEGRATED`               | 7     | Approved art in engine (Peter ×2, Shade, Elder, tileset ×2, UI set) |
+| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review                           |
+| `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared                          |
+| `PLACEHOLDER_TEMPORARY`    | 3     | Procedural placeholder assets active in engine                      |
 
 ---
 
@@ -33,7 +33,7 @@
   - [`art-source/characters/peter/concept/peter_concept_v1.png`](art-source/characters/peter/concept/peter_concept_v1.png) (Turnaround Reference)
 - **Original Generation Prompt:** [`art-source/characters/peter/prompts/peter_concept_v1.txt`](art-source/characters/peter/prompts/peter_concept_v1.txt)
 - **Design Metadata:** [`art-source/characters/peter/metadata/peter_design.json`](art-source/characters/peter/metadata/peter_design.json)
-- **Runtime Sprite Assets:** `peter_idle.png` + `peter_walk.png` are approved art (`CHAR_PETER_002`). The run / attack / hurt / temporal_sight sheets are still procedural placeholders (`CHAR_PETER_000_TMP`).
+- **Runtime Sprite Assets:** `peter_idle.png` + `peter_walk.png` are approved art (`CHAR_PETER_002`). attack / hurt / temporal_sight are approved art (`CHAR_PETER_003`). Only the run sheet is still a procedural placeholder (`CHAR_PETER_000_TMP`).
 - **Status:** `APPROVED_SOURCE` (design source only — not runtime sprites)
 - **Non-Negotiable Identity Checklist:**
   - [x] Male adult appearance, approximately 26 years old
@@ -94,18 +94,21 @@
 - **New tiles:** 10 Stele of the Six Authorities (3,4) · 11 Frozen Astrolabe (20,4) · 12 Cracked Reliquary (7,2) · 13 Sealed Threshold Gates in the north wall (12,1) · 14 Torn Journal Leaf on the engraved floor (14,12). Stele and astrolabe replace the two northern crystals; the southern crystals stay (SE one is the Residual Rift Echo).
 - **Status:** `INTEGRATED` — owner approved 2026-11-11; `generate-map.js` applies `map-props.js` (supersedes v2 at runtime; v2 kept in `approved/` for history).
 
-### `CHAR_PETER_003_CAND` – Peter combat sheets: attack / hurt / temporal_sight (v1)
+### `CHAR_PETER_003` – Peter combat sheets: attack / hurt / temporal_sight (v1) — INTEGRATED
 
 - **Generator:** `scripts/author-peter-sprites.js` (default run emits only these; approved idle/walk regenerate byte-identically via `--sheets=idle,walk`)
-- **Files:** `art-source/characters/peter/generated/candidates/peter_attack_v1.png` (192 × 128, 6 frames × 4 dirs), `peter_hurt_v1.png` (64 × 128, 2 × 4), `peter_temporal_sight_v1.png` (128 × 128, 4 × 4) · previews ×6 in `previews/`
+- **Approved files:** `art-source/characters/peter/generated/approved/peter_attack_v1.png` (192 × 128, 6 frames × 4 dirs), `peter_hurt_v1.png` (64 × 128, 2 × 4), `peter_temporal_sight_v1.png` (128 × 128, 4 × 4) · previews ×6 in `generated/candidates/previews/`
+- **Runtime files:** `public/assets/characters/peter/peter_attack.png`, `peter_hurt.png`, `peter_temporal_sight.png`
 - **Content:** attack = wind-up, raise, strike with a cerulean slash crescent, follow-through, recover, rest (full arm poses in profile; blade + arc around the resting hand front/back). Hurt = recoil (eyes shut) + white hit flash. Temporal Sight = blade raised, eyes kindled cerulean, rotating ring of chronal motes.
-- **Validation:** PASSED (all three).
-- **Status:** `CONCEPT_PENDING_APPROVAL` — replaces the remaining `CHAR_PETER_000_TMP` sheets (run stays placeholder; there is no run mechanic yet).
+- **In engine:** `CombatScene` shows Peter in profile (`peter_idle_right`); Attack plays `peter_attack_right`, Skill plays `peter_temporal_sight_right` then the strike, enemy hits play `peter_hurt_right`.
+- **Status:** `INTEGRATED` — owner approved 2026-11-11. The run sheet stays `CHAR_PETER_000_TMP` (no run mechanic yet).
 
-### `UI_SET_001_CAND` – Panel frame, menu cursor, hit spark (v1)
+### `UI_SET_001` – Panel frame, menu cursor, hit spark (v1) — INTEGRATED
 
-- **Generator:** `scripts/author-ui-assets.js` · **Files:** `art-source/ui/generated/candidates/` — `ui_frame_v1.png` (48 × 48 nine-slice, 16 px corners), `ui_cursor_v1.png` (2 × 16 px pulse), `hit_spark_v1.png` (4 × 16 px burst, near-white for runtime tinting) · previews incl. the frame stretched to the 580 × 84 dialogue box
-- **Status:** `CONCEPT_PENDING_APPROVAL` — replaces `UI_FRAME_000_TMP`, `UI_CURSOR_000_TMP`, `FX_SPARK_000_TMP`. Note: the current placeholders are loaded but never used; integration means switching the Graphics-drawn panels/cursor to these assets.
+- **Generator:** `scripts/author-ui-assets.js` · **Approved files:** `art-source/ui/generated/approved/` — `ui_frame_v1.png` (48 × 48 nine-slice, 16 px corners), `ui_cursor_v1.png` (2 × 16 px pulse), `hit_spark_v1.png` (4 × 16 px burst, near-white for runtime tinting) · previews in `generated/candidates/previews/`
+- **Runtime files / keys:** `public/assets/ui/ui_frame.png` (image `ui_frame`), `public/assets/ui/ui_cursor.png` (spritesheet `ui_cursor`, anim `ui_cursor_pulse`), `public/assets/effects/hit_spark.png` (spritesheet `hit_spark`, anim `hit_spark_burst`)
+- **In engine:** hit spark used in `CombatScene` (cerulean on Peter's hits, carmine on enemy hits). Panel frame + cursor: integration pending (T-26).
+- **Status:** `INTEGRATED` — owner approved 2026-11-11. Replaced `UI_FRAME_000_TMP`, `UI_CURSOR_000_TMP`, `FX_SPARK_000_TMP`.
 
 ## 3. Active Placeholder Registry
 
@@ -113,19 +116,16 @@ The following assets are currently integrated into the engine strictly as **temp
 
 ### `CHAR_PETER_000_TMP`
 
-- **Object Name:** Peter Runtime Spritesheets — run / attack / hurt / temporal_sight (Procedural Placeholder; idle + walk replaced by `CHAR_PETER_002`)
+- **Object Name:** Peter Runtime Spritesheet — run (Procedural Placeholder; idle + walk replaced by `CHAR_PETER_002`, combat sheets by `CHAR_PETER_003`)
 - **File Path:** `public/assets/characters/peter/`
 - **Design Doc Ref:** [`docs/art/PETER_DESIGN.md`](docs/art/PETER_DESIGN.md)
 - **Status:** `PLACEHOLDER_TEMPORARY`
 - **Generator:** `scripts/generate-peter-sprites.js` (Procedural canvas-buffer synthesis — not AUTOMATIC1111 output, not user-approved art)
 - **Frame Size:** 32 × 32 px; rows = 4 directions (down, up, left, right)
 - **Sheets:**
-  | File                       | Frames / direction | Sheet size |
-  | -------------------------- | ------------------ | ---------- |
-  | `peter_run.png`            | 6                  | 192 × 128  |
-  | `peter_attack.png`         | 6                  | 192 × 128  |
-  | `peter_hurt.png`           | 2                  | 64 × 128   |
-  | `peter_temporal_sight.png` | 4                  | 128 × 128  |
+  | File            | Frames / direction | Sheet size |
+  | --------------- | ------------------ | ---------- |
+  | `peter_run.png` | 6                  | 192 × 128  |
 - **Replacement Path:** Candidate sheets (Pipeline A or B) → `art-source/characters/peter/generated/candidates/` → validation → user approval → `generated/approved/` → replaces these files.
 
 ### `CHAR_VESSEL_000_TMP`
@@ -139,30 +139,6 @@ The following assets are currently integrated into the engine strictly as **temp
 - **Footprint Hitbox:** 18 × 14 px, offset (7, 16)
 - **Generator:** `scripts/generate-assets.js` (Procedural canvas-buffer synthesis)
 - **Notes:** High-contrast placeholder with slate helm, midnight cloak, and cyan fracture core.
-
-### `UI_FRAME_000_TMP`
-
-- **Object Name:** Dialogue & HUD Frame (Placeholder)
-- **File Path:** `public/assets/ui/ui_frame.png`
-- **Asset Key:** `ui_frame`
-- **Status:** `PLACEHOLDER_TEMPORARY`
-- **Dimensions:** 48 × 48 px
-
-### `UI_CURSOR_000_TMP`
-
-- **Object Name:** Menu Cursor (Placeholder)
-- **File Path:** `public/assets/ui/ui_cursor.png`
-- **Asset Key:** `ui_cursor`
-- **Status:** `PLACEHOLDER_TEMPORARY`
-- **Dimensions:** 16 × 16 px
-
-### `FX_SPARK_000_TMP`
-
-- **Object Name:** Hit Spark / Chrono Particle (Placeholder)
-- **File Path:** `public/assets/effects/hit_spark.png`
-- **Asset Key:** `hit_spark`
-- **Status:** `PLACEHOLDER_TEMPORARY`
-- **Dimensions:** 16 × 16 px
 
 ### `AUD_SILENCE_000_TMP`
 

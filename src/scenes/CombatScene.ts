@@ -3,6 +3,7 @@ import { CombatSystem } from '../systems/combat/CombatSystem';
 import { ICombatAction, ICombatant, IEnemyDefinition } from '../systems/combat/CombatTypes';
 import { SoundSystem } from '../systems/audio/SoundSystem';
 import { GameSession, getSession } from '../state/GameSession';
+import { registerPeterAnimations } from '../systems/animation/PeterAnimationConfig';
 import type { ExplorationSceneData } from './ExplorationScene';
 
 export interface CombatSceneData {
@@ -23,6 +24,13 @@ const PLAYER_TO_ENEMY_DELAY_MS = 1400;
 const ENEMY_TO_PLAYER_DELAY_MS = 1200;
 const BATTLE_END_DELAY_MS = 1200;
 const ENEMY_OPENING_DELAY_MS = 1200;
+/** Temporal Sight wind-up before the skill strike lands (fits inside PLAYER_TO_ENEMY_DELAY_MS). */
+const SKILL_CHARGE_MS = 600;
+/** Spark tints: cerulean for Peter's hits, carmine for the enemy's (ART_GUIDE palette). */
+const PLAYER_HIT_TINT = 0x00c8ff;
+const ENEMY_HIT_TINT = 0xff3355;
+
+type PeterCombatAnim = 'idle' | 'attack' | 'hurt' | 'temporal_sight';
 
 export class CombatScene extends Phaser.Scene {
   public combatSystem!: CombatSystem;
@@ -170,7 +178,10 @@ export class CombatScene extends Phaser.Scene {
     const playerX = width * 0.28;
     const playerY = height * 0.48;
 
+    // Peter stands in profile facing the enemy (CHAR_PETER_002/003 sheets, row "right").
+    registerPeterAnimations(this);
     this.playerSprite = this.add.sprite(playerX, playerY, this.player.spriteKey, 0).setScale(2.0);
+    this.playPeterAnim('idle');
     // Subtle breathing animation
     this.tweens.add({
       targets: this.playerSprite,
@@ -468,33 +479,26 @@ export class CombatScene extends Phaser.Scene {
     this.isProcessingTurn = true;
     this.setButtonsEnabled(false);
 
-    // Animate Peter Lunge
-    if (type === 'attack' || type === 'skill') {
-      const origX = this.playerSprite.x;
-      this.tweens.add({
-        targets: this.playerSprite,
-        x: origX + 35,
-        duration: 140,
-        yoyo: true,
-        onYoyo: () => {
-          this.cameras.main.shake(120, 0.005);
-          this.enemySprite.setTint(0xff4d79);
-          this.time.delayedCall(150, () => this.enemySprite.clearTint());
-        },
-      });
-    }
-
     const result = this.combatSystem.executeAction(action);
     this.updateStatusBars();
     this.setBattleLog(result.message);
 
-    if (result.damageDealt > 0) {
+    // Attack: slash + lunge. Skill: Temporal Sight wind-up, then the same strike.
+    const onImpact = (): void => {
+      if (result.damageDealt <= 0) return;
+      this.showHitSpark(this.enemySprite, PLAYER_HIT_TINT);
       this.showFloatingNumber(
         this.enemySprite.x,
         this.enemySprite.y - 20,
         `-${result.damageDealt}`,
         '#ff4d79',
       );
+    };
+    if (type === 'attack') {
+      this.animatePeterStrike(onImpact);
+    } else if (type === 'skill') {
+      this.playPeterAnim('temporal_sight');
+      this.time.delayedCall(SKILL_CHARGE_MS, () => this.animatePeterStrike(onImpact));
     } else if (result.healingDone > 0) {
       this.showFloatingNumber(
         this.playerSprite.x,
@@ -505,6 +509,65 @@ export class CombatScene extends Phaser.Scene {
     }
 
     this.endTurn(PLAYER_TO_ENEMY_DELAY_MS);
+  }
+
+  // ------------------------------------------------------------- animation
+
+  /**
+   * Plays one of Peter's profile animations (row "right"). One-shot animations return to the
+   * idle loop when they finish; missing animations are ignored so placeholder art never crashes.
+   */
+  private playPeterAnim(anim: PeterCombatAnim): void {
+    const key = `peter_${anim}_right`;
+    if (!this.anims.exists(key)) return;
+    if (anim === 'idle') {
+      // Idle lives on its own texture; switch back explicitly.
+      this.playerSprite.play(key);
+      return;
+    }
+    this.playerSprite.off(Phaser.Animations.Events.ANIMATION_COMPLETE);
+    this.playerSprite.play(key);
+    if (anim !== 'temporal_sight') {
+      this.playerSprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () =>
+        this.playPeterAnim('idle'),
+      );
+    }
+  }
+
+  /** Slash animation + lunge; `onImpact` fires when the blade connects. */
+  private animatePeterStrike(onImpact: () => void): void {
+    this.playPeterAnim('attack');
+    const origX = this.playerSprite.x;
+    this.tweens.add({
+      targets: this.playerSprite,
+      x: origX + 35,
+      duration: 140,
+      yoyo: true,
+      onYoyo: () => {
+        this.cameras.main.shake(120, 0.005);
+        this.enemySprite.setTint(0xff4d79);
+        this.time.delayedCall(150, () => this.enemySprite.clearTint());
+        onImpact();
+      },
+    });
+  }
+
+  /** Near-white 4-frame spark (UI_SET_001) tinted per attacker; destroyed when it finishes. */
+  private showHitSpark(target: Phaser.GameObjects.Sprite, tint: number): void {
+    if (!this.anims.exists('hit_spark_burst')) return;
+    const spark = this.add
+      .sprite(
+        target.x + Phaser.Math.Between(-6, 6),
+        target.y + Phaser.Math.Between(-8, 4),
+        'hit_spark',
+        0,
+      )
+      .setScale(2.5)
+      .setTint(tint)
+      .setBlendMode(Phaser.BlendModes.ADD)
+      .setDepth(target.depth + 1);
+    spark.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => spark.destroy());
+    spark.play('hit_spark_burst');
   }
 
   private executeEnemyTurn(): void {
@@ -525,8 +588,10 @@ export class CombatScene extends Phaser.Scene {
       yoyo: true,
       onYoyo: () => {
         this.cameras.main.shake(150, 0.008);
-        this.playerSprite.setTint(0xff3355);
-        this.time.delayedCall(150, () => this.playerSprite.clearTint());
+        if (result.damageDealt > 0) {
+          this.playPeterAnim('hurt');
+          this.showHitSpark(this.playerSprite, ENEMY_HIT_TINT);
+        }
       },
     });
 

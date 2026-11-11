@@ -113,7 +113,7 @@ flowchart TD
 - [x] **Turn-Based Combat:** Speed-ordered initiative queue, Temporal Strike costs MP (refilled each battle) (the faster combatant acts first each round), player command menu (Attack, Skill, Item, Defend, Escape), Defend lasts until the defender's next action, Item consumes a Chrono Shard from the satchel, Escape succeeds with probability `0.5 + 0.05 × (speed difference)` clamped to 10–90% (a failed escape costs the turn), floating damage numbers, victory/defeat resolution, EXP + loot-table rewards, dissolve tween, and overworld return.
 - [x] **Environmental Storytelling (T-21/22/23):** 7 points of interest (Stele of the Six Authorities, Defaced Pillar, Torn Journal Leaf, Frozen Astrolabe, Cracked Reliquary, Sealed Threshold Gates, Residual Rift Echo) with optional quest "Remnants of the Divided Hour" (+40 EXP, Ancient Gear); estimated prologue playtime 11–16 min (`docs/narrative/PROLOGUE_CONTENT_PROPOSAL.md`). Behaviour is data-driven: `interactables.json` + dialogue node `effects`.
 - [x] **Prologue Arc & Ending:** "Echoes in the Fracture" → follow-up "Silence the Fracture" (defeat the Temporal Shade) → Elder farewell → `PrologueEndScene` closing card → title. Defeat revives Peter at the Altar of Moments with full HP (GDD §9 checkpoint revival).
-- [x] **Peter Runtime Sprites:** idle + walk are approved code-authored art (`CHAR_PETER_002`); run / attack / hurt / temporal_sight remain placeholders.
+- [x] **Peter Runtime Sprites:** idle + walk (`CHAR_PETER_002`) and attack / hurt / temporal_sight (`CHAR_PETER_003`) are approved code-authored art. Combat shows Peter in profile with slash, Temporal Sight and hurt animations plus tinted hit sparks (`UI_SET_001`). Only the run sheet is still a placeholder (no run mechanic yet).
 - [x] **Progression:** EXP from enemies (`expReward`) and quest rewards; level thresholds and per-level stat growth in `player.json` (level cap 3 in the prologue, GDD §9); a level-up fully restores HP. HP persists between battles.
 - [x] **Inventory System:** `InventorySystem` backing, signature starter items (Broken Chronometer, 2x Minor Chrono Shards), in-game Satchel overlay (`I`/`B`), consumable item usage in combat (not yet usable from the satchel in exploration).
 - [x] **Save/Load Persistence:** Multi-slot `localStorage` persistence with in-memory fallback, Quick-Save (`K`), dynamic "CONTINUE" enablement on MainMenuScene, and 100% accurate coordinate/state restoration.
@@ -122,7 +122,7 @@ flowchart TD
 
 ### 4.2 Partially Implemented / Staged for Asset Replacement
 
-- [ ] **Character Runtime Visuals:** Peter currently uses procedural $32 \times 32\text{ px}$ runtime spritesheets (`public/assets/characters/peter/`). Approved master concept art exists (`peter_master_v1.png`, `peter_alt_pose_v1.png`), but final AI sprite turnaround sheets are awaiting manual generation in AUTOMATIC1111.
+- [ ] **UI Art Integration:** the approved panel frame (nine-slice) and menu cursor (`UI_SET_001`) are loaded, but panels and the menu cursor are still drawn with Graphics/Text (T-26).
 - [x] **NPC Sprites:** Elder Chronographer uses approved code-authored art (`NPC_ELDER_001`, 4-frame breathing idle).
 - [x] **Enemy Sprites:** Temporal Shade uses approved code-authored art (`MOB_SHADE_001`, 4-frame float loop).
 - [x] **Tileset Art:** Shattered Antechamber uses the approved code-authored tileset (`ENV_SANCTUARY_001`), incl. floor variants and fracture tiles.
