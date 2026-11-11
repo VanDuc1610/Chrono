@@ -39,6 +39,8 @@ Prologue ending when that dialogue closes.
 - Coastal maps (`map_peters_room`, `map_coastal_town`) are **generated** from
   `scripts/coastal-layout.js` by `node scripts/generate-coastal-maps.js` (tileset `coastal_tileset`,
   walls collide on GIDs 17-40; tile index table in the layout file). Edit the layout, regenerate.
+- Forest + lighthouse (`map_forgotten_forest`, `map_old_lighthouse`): same pattern with
+  `scripts/wilds-layout.js` → `node scripts/generate-wilds-maps.js` (tileset `wilds_tileset`, GIDs 17-40).
 - New maps: Tiled JSON with the same two layers (`Ground`, `Walls`), 32 px tiles, ≤ 30×20.
 - Movement is free 4-way Arcade Physics, not grid movement.
 

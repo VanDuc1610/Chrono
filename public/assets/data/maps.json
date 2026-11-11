@@ -116,8 +116,8 @@
             "w": 2,
             "h": 1
           },
-          "toMap": "map_shattered_antechamber",
-          "toSpawn": "from_forest"
+          "toMap": "map_forgotten_forest",
+          "toSpawn": "from_town"
         }
       ],
       "triggers": []
@@ -151,7 +151,11 @@
         },
         "from_forest": {
           "x": 12,
-          "y": 10
+          "y": 15
+        },
+        "from_lighthouse": {
+          "x": 12,
+          "y": 3
         }
       },
       "revive": {
@@ -283,7 +287,31 @@
           "hitbox": 22
         }
       ],
-      "exits": [],
+      "exits": [
+        {
+          "id": "antechamber_to_forest",
+          "area": {
+            "x": 12,
+            "y": 17,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_forgotten_forest",
+          "toSpawn": "from_antechamber"
+        },
+        {
+          "id": "antechamber_to_lighthouse",
+          "area": {
+            "x": 12,
+            "y": 2,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_old_lighthouse",
+          "toSpawn": "base",
+          "requiresFlag": "elder_granted_beacon"
+        }
+      ],
       "triggers": [
         {
           "id": "trig_antechamber_quest",
@@ -295,6 +323,140 @@
           }
         }
       ]
+    },
+    "map_forgotten_forest": {
+      "id": "map_forgotten_forest",
+      "name": "Rừng Quên Lãng",
+      "tilemap": {
+        "key": "map_forgotten_forest",
+        "path": "assets/maps/map_forgotten_forest.json"
+      },
+      "tileset": {
+        "name": "wilds_tileset",
+        "key": "wilds_tileset",
+        "path": "assets/tilesets/wilds_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 40
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 15
+        },
+        "from_town": {
+          "x": 2,
+          "y": 15
+        },
+        "from_antechamber": {
+          "x": 22,
+          "y": 3
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 15
+      },
+      "npcs": [],
+      "interactables": [],
+      "encounters": [
+        {
+          "id": "enc_forest_shade",
+          "enemyId": "enemy_temporal_shade",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 17,
+            "y": 7
+          },
+          "defeatedFlag": "defeated_forest_shade",
+          "hitbox": 22
+        }
+      ],
+      "exits": [
+        {
+          "id": "forest_to_town",
+          "area": {
+            "x": 0,
+            "y": 14,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_coastal_town",
+          "toSpawn": "from_forest"
+        },
+        {
+          "id": "forest_to_antechamber",
+          "area": {
+            "x": 24,
+            "y": 3,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_shattered_antechamber",
+          "toSpawn": "from_forest"
+        }
+      ],
+      "triggers": []
+    },
+    "map_old_lighthouse": {
+      "id": "map_old_lighthouse",
+      "name": "Mỏm đá hải đăng",
+      "tilemap": {
+        "key": "map_old_lighthouse",
+        "path": "assets/maps/map_old_lighthouse.json"
+      },
+      "tileset": {
+        "name": "wilds_tileset",
+        "key": "wilds_tileset",
+        "path": "assets/tilesets/wilds_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 40
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 12,
+          "y": 15
+        },
+        "base": {
+          "x": 12,
+          "y": 15
+        }
+      },
+      "revive": {
+        "x": 12,
+        "y": 15
+      },
+      "npcs": [],
+      "interactables": [],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "lighthouse_to_antechamber",
+          "area": {
+            "x": 12,
+            "y": 17,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_shattered_antechamber",
+          "toSpawn": "from_lighthouse"
+        }
+      ],
+      "triggers": []
     }
   }
 }

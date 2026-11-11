@@ -40,6 +40,12 @@ for (let y = 0; y < height; y++) {
       wallTile = 5;
     }
 
+    // Prologue v2: stair opening in the south wall down to the Forgotten Forest (maps.json exit).
+    if (x === 12 && y === height - 1) {
+      groundTile = 3;
+      wallTile = 0;
+    }
+
     // Patterned engravings on floor in center chamber
     if (x >= 8 && x <= 15 && y >= 7 && y <= 12) {
       if (x === 8 || x === 15 || y === 7 || y === 12) {
