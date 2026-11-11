@@ -1028,7 +1028,9 @@ export class ExplorationScene extends Phaser.Scene {
     const started = this.dialogueSystem.startDialogue(dialogueId);
     if (!started) return;
 
-    this.controller.setEnabled(false);
+    // Movement is already frozen while dialogue is active (update() returns before
+    // player.update()). Do NOT disable the controller here: a disabled controller reports no
+    // actions, so E / Space could never skip or advance the dialogue.
     this.player.getMovementSystem().stop(this.player.sprite);
     this.dialogueBoxContainer.setVisible(true);
 
@@ -1176,7 +1178,8 @@ export class ExplorationScene extends Phaser.Scene {
     this.choiceButtons.forEach((btn) => btn.setVisible(false));
     this.dialogueSystem.close();
     this.dialogueBoxContainer.setVisible(false);
-    this.controller.setEnabled(true);
+    // A dialogue can end into a scene exit (Elder farewell -> Prologue ending); keep input off then.
+    if (!this.isTransitioningToBattle) this.controller.setEnabled(true);
   }
 
   /** Applies a dialogue node's data-driven effects and announces any items received. */

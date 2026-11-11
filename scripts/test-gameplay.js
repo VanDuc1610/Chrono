@@ -294,6 +294,70 @@ async function run() {
     console.log(`✓ Dialogue verified: "${dialogueTest.speaker}": "${dialogueTest.targetLine}"`);
     console.log(`✓ Active Quest Stage: ${dialogueTest.questStage}`);
 
+    // Real keyboard input (regression: dialogue disabled the controller, so E / Space did nothing).
+    console.log('[7b/7] Driving dialogue with real E / Space key presses...');
+    const pressKey = async (key, code, keyCode) => {
+      for (const type of ['keyDown', 'keyUp']) {
+        await client.send('Input.dispatchKeyEvent', {
+          type,
+          key,
+          code,
+          windowsVirtualKeyCode: keyCode,
+          nativeVirtualKeyCode: keyCode,
+        });
+        await wait(60);
+      }
+    };
+    const dialogueState = () =>
+      client.eval(`
+        (() => {
+          const exp = window.__GAME__.scene.getScene('ExplorationScene');
+          return {
+            active: exp.dialogueSystem.isActive(),
+            typing: exp.isTyping,
+            body: exp.dialogueBodyText.text,
+            line: exp.dialogueSystem.getCurrentLine(),
+            choices: exp.dialogueSystem.isLastLineOfNode() &&
+              exp.dialogueSystem.getAvailableResponses().length > 0,
+          };
+        })()
+      `);
+
+    await client.eval(`
+      (() => {
+        const exp = window.__GAME__.scene.getScene('ExplorationScene');
+        if (exp.dialogueSystem.isActive()) exp.closeDialogue();
+        exp.player.setPosition(9 * 32 + 16, 9 * 32 + 16);
+      })()
+    `);
+    await wait(200);
+    await pressKey('e', 'KeyE', 69);
+    await wait(80);
+    const opened = await dialogueState();
+    if (!opened.active) throw new Error('Pressing E next to the Elder did not open dialogue!');
+    console.log('✓ E opened the Elder dialogue');
+
+    if (opened.typing) {
+      await pressKey(' ', 'Space', 32);
+      await wait(80);
+      const skipped = await dialogueState();
+      if (skipped.typing || skipped.body !== skipped.line) {
+        throw new Error('Space did not skip the typewriter!');
+      }
+      console.log('✓ Space skipped the typewriter');
+    }
+
+    const before = await dialogueState();
+    if (!before.choices) {
+      await pressKey('e', 'KeyE', 69);
+      await wait(120);
+      const after = await dialogueState();
+      if (after.active && after.line === before.line && !after.typing) {
+        throw new Error('E did not advance the dialogue!');
+      }
+      console.log('✓ E advanced the dialogue');
+    }
+
     client.close();
     console.log('\n========================================');
     console.log('ALL ACCEPTANCE CRITERIA VERIFIED ON LIVE ENGINE!');
