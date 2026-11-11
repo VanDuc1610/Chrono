@@ -21,6 +21,18 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 Goal (owner, 2026-11-11): rebuild the Prologue per `docs/story/PROLOGUE_V2_DESIGN.md` (approved), all in-game text in Vietnamese.
 
+### T-35 · Vietnamese Main Menu + Prologue End
+
+- **Assignee:** Antigravity · **Status:** TODO
+- **Locks:** `src/scenes/MainMenuScene.ts`, `src/scenes/PrologueEndScene.ts`, `public/assets/data/strings.json`, `scripts/test-inventory-save.js`, `scripts/test-session-regression.js`
+- All player-facing text of both scenes from `strings.json` (`menu.*`, `ending.*`) via `getStrings(this)`.
+
+### T-36 · Sprites: Ông Sáu + the forgotten child (Pipeline B)
+
+- **Assignee:** Claude · **Status:** IN PROGRESS
+- **Locks:** `scripts/author-npc-sprites.js`, `art-source/npcs/`
+- Ông Sáu sitting and mending a net (4-frame idle); the forgotten child as a half-erased silhouette (2-frame flicker). Owner approval.
+
 ## Backlog (scheduled after current locks are released)
 
 - **Vietnamese pass on remaining UI** (Combat, Main Menu, Prologue End) via `strings.json` once T-28 lands.
