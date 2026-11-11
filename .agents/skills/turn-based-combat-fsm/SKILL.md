@@ -3,152 +3,52 @@ name: turn-based-combat-fsm
 description: Use when implementing or modifying turn-based combat rules, battle state machines, action queues, timeline/initiative calculation, status effects, or enemy AI in src/core/combat/ and BattleScene. Do NOT use for overworld movement or asset packing.
 ---
 
-# Turn-Based Combat FSM & Architecture
+# Turn-Based Combat Architecture (FSM + Command Pattern)
 
-## 1. When to Use / Routing Rules
+## 1. Strict Separation of Concerns
 
-- **TRIGGER:** Implementing or modifying turn-based combat rules, battle state machines, action queues, timeline/initiative calculations, status effects, or enemy AI in `src/core/combat/` and `BattleScene` / `CombatScene`.
-- **DO NOT USE FOR:** Overworld movement, tilemaps, or asset packing.
+- **`src/core/combat/` (Pure TypeScript):** Contains `BattleEngine`, `TurnManager`, `CombatAction`, damage formulas, and status tick resolvers. **ZERO Phaser imports allowed.**
+- **`src/scenes/BattleScene.ts` (Phaser View):** Subscribes to `BattleState` changes, plays animations/tweens, and resolves a `Promise<void>` when visual effects finish so the FSM can advance.
 
----
+## 2. Battle Finite State Machine States
 
-## 2. Combat State Machine Flow
-
-The combat lifecycle operates as a finite state machine:
-
-```
-[BATTLE_INIT] ──► Sort initiative queue by speed
-      │
-      ▼
-[TURN_START] ──► Check active combatant (Player vs Enemy)
-      │
-      ├───────────────────────────────┐
-      ▼ (Player)                      ▼ (Enemy)
-[PLAYER_INPUT]                 [ENEMY_DECISION] (AI heuristic)
-      │                               │
-      └──────────────┬────────────────┘
-                     ▼
-             [EXECUTE_COMMAND] ──► Validate cost (MP/items), compute damage/healing
-                     │
-                     ▼
-             [RESOLVE_EFFECTS] ──► Async visual queue: animations, sparks, floats
-                     │
-                     ▼
-          [CHECK_WIN_CONDITION]
-                     │
-         ┌───────────┴───────────┐
-         ▼ (Battle continues)    ▼ (Victory / Defeat / Escaped)
-   [ADVANCE_TURN]          [BATTLE_END] ──► Rewards / check-point revive
-         │
-         └────────► Loop to [TURN_START]
+```text
+[INIT] -> [TURN_START] -> [SELECT_ACTION] -> [EXECUTE_ACTION] -> [TURN_END] -> [CHECK_OUTCOME]
+               ^                                                                     |
+               +----------------------- (Next Combatant) ----------------------------+
 ```
 
----
+- **INIT:** Build initiative timeline based on AGI (Agility) + Chrono/Fracture modifiers.
+- **TURN_START:** Trigger start-of-turn status effects (DOTs, stun checks). If stunned, skip to `TURN_END`.
+- **SELECT_ACTION:** Wait for Player UI Command OR execute deterministic Enemy AI selector.
+- **EXECUTE_ACTION:** Calculate pure state mutation in `src/core/combat/`, emit `CombatEvent[]` log (e.g., `DAMAGE_DEALT`, `STATUS_APPLIED`, `FRACTURE_TRIGGERED`), and await visual playback in `BattleScene`.
+- **TURN_END:** Decrement buff/debuff durations and update action timeline cost.
+- **CHECK_OUTCOME:** Check all-enemies-dead (VICTORY) or all-party-dead (DEFEAT).
 
-## 3. Command Pattern: Logic vs Visual Decoupling
+## 3. Command Pattern & Event Log Contract
 
-Pure combat math resides in `src/core/combat/` with **ZERO Phaser imports**. The Scene only consumes the resulting data contract:
+Every combat skill/item execution returns an immutable list of events rather than mutating UI directly:
 
 ```typescript
-// src/core/combat/CombatTypes.ts
-export type CombatActionType = 'attack' | 'skill' | 'item' | 'defend' | 'escape';
+export type CombatEvent =
+  | { type: 'ANIMATION'; actorId: string; animKey: string; targetId?: string }
+  | { type: 'HP_CHANGE'; targetId: string; delta: number; isCrit: boolean }
+  | { type: 'STATUS_ADDED'; targetId: string; statusId: string; turns: number }
+  | { type: 'CHRONO_SHIFT'; targetId: string; timelineDelta: number };
 
-export interface ICombatAction {
-  type: CombatActionType;
-  sourceId: string;
-  targetId: string;
-  itemId?: string;
-}
-
-export interface IActionResult {
-  success: boolean;
-  message: string;
-  damageDealt: number;
-  healingDone: number;
-  isCritical?: boolean;
-}
-```
-
----
-
-## 4. Async Animation Queue in Scene Presentation
-
-The Scene wraps Phaser tweens, sprite animations, and audio into Promises so that the FSM only advances after animations visually finish:
-
-```typescript
-// Inside BattleScene.ts
-public async handlePlayerAction(type: CombatActionType): Promise<void> {
-  if (this.isProcessingTurn || this.combatSystem.isBattleOver()) return;
-  this.isProcessingTurn = true;
-  this.setCommandButtonsVisible(false);
-
-  // 1. Calculate deterministic logic outcome
-  const result = this.combatSystem.executeAction({
-    type,
-    sourceId: this.player.id,
-    targetId: this.enemy.id,
-  });
-
-  // 2. Play animations and wait for completion
-  if (type === 'attack') {
-    await this.playAttackSequence(result);
-  } else if (type === 'skill') {
-    await this.playSkillSequence(result);
-  }
-
-  // 3. Update HUD text and status bars
-  this.updateStatusBars();
-
-  // 4. Advance FSM to next turn
-  if (this.combatSystem.isBattleOver()) {
-    this.handleBattleEnd();
-  } else {
-    this.combatSystem.advanceTurn();
-    this.beginNextTurn();
-  }
-}
-
-private playAttackSequence(result: IActionResult): Promise<void> {
-  return new Promise((resolve) => {
-    this.playerSprite.play('peter_attack_right');
-    this.tweens.add({
-      targets: this.playerSprite,
-      x: this.playerSprite.x + 35,
-      duration: 140,
-      yoyo: true,
-      onYoyo: () => {
-        this.cameras.main.shake(120, 0.005);
-        this.showHitSpark(this.enemySprite, 0x00c8ff);
-        this.showFloatingDamage(this.enemySprite, result.damageDealt);
-      },
-      onComplete: () => {
-        this.playerSprite.play('peter_idle_right');
-        resolve();
-      },
-    });
-  });
+export interface CombatCommand {
+  actorId: string;
+  execute(
+    state: BattleState,
+    rng: () => number,
+  ): {
+    nextState: BattleState;
+    events: CombatEvent[];
+  };
 }
 ```
 
----
+## 4. Deterministic RNG Rule
 
-## 5. Deterministic Initiative & RNG Injection
-
-Never call global `Math.random()` inside `CombatSystem`. Inject a deterministic random source:
-
-```typescript
-export class CombatSystem {
-  private randomSource: () => number = Math.random;
-
-  public setRandomSource(fn: () => number): void {
-    this.randomSource = fn;
-  }
-
-  public calculateEscapeProbability(playerSpeed: number, enemySpeed: number): boolean {
-    const chance = Math.min(0.95, Math.max(0.1, 0.3 + (playerSpeed - enemySpeed) / 100));
-    return this.randomSource() < chance;
-  }
-}
-```
-
-This enables 100% deterministic Vitest unit tests without browser or canvas mocks.
+- Never call `Math.random()` directly inside combat formulas.
+- Always inject a seeded PRNG function `rng: () => number` so every battle turn can be reproduced and unit-tested deterministically in Vitest.

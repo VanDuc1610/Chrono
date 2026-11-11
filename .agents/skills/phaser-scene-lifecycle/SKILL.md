@@ -3,117 +3,72 @@ name: phaser-scene-lifecycle
 description: Use when creating, modifying, or transitioning between Phaser 3 Scenes, managing scene events, or building parallel UI overlays in src/scenes/. Do NOT use for pure combat math, Tiled map exporting, or sprite packing.
 ---
 
-# Phaser Scene Lifecycle & Memory Hygiene
+# Phaser 3 Scene Lifecycle & Memory Hygiene
 
-## 1. When to Use / Routing Rules
+## 1. Core Principles
 
-- **TRIGGER:** Creating, modifying, or transitioning between Phaser 3 Scenes (`src/scenes/`), registering scene events, or managing parallel UI overlays.
-- **DO NOT USE FOR:** Pure combat math or formulas (`src/core/`), Tiled map JSON parsing, or asset sprite packing.
+- **Orchestration Only:** Scenes in `src/scenes/` only bind `src/core/` logic to Phaser GameObjects, handle input, and manage cameras/transitions.
+- **Typed Initialization:** Always define a strict TypeScript interface for data passed into `init(data: T)` and `scene.start(key, data)`.
+- **Zero Listener Leaks:** Every event registered on `this.events`, `this.game.events`, `this.input.keyboard`, or external EventEmitters MUST be removed when the scene shuts down.
 
----
-
-## 2. Typed Scene Transitions & `init(data: SceneData)`
-
-Phaser scene instances are reused when restarted with `this.scene.start()`. Transient state must be reset inside `init(data)` on every scene entry:
+## 2. Standard Scene Template
 
 ```typescript
+import Phaser from 'phaser';
+import { SceneKeys } from '../data/AssetKeys';
+
 export interface BattleSceneData {
-  enemyId: string;
-  victoryFlag?: string;
-  returnPosition?: { x: number; y: number };
-  revivePosition?: { x: number; y: number };
+  enemyGroupId: string;
+  returnMapKey: string;
+  playerGridPos: { x: number; y: number };
 }
 
 export class BattleScene extends Phaser.Scene {
   private sceneData!: BattleSceneData;
-  private isTransitioning = false;
+
+  constructor() {
+    super({ key: SceneKeys.Battle });
+  }
 
   public init(data: BattleSceneData): void {
-    // 1. Store strongly-typed scene payload
     this.sceneData = data;
+  }
 
-    // 2. Reset transient state on every entry
-    this.isTransitioning = false;
-    this.commandButtons = [];
+  public create(): void {
+    // 1. Launch parallel UI overlay if needed
+    this.scene.launch(SceneKeys.BattleUI, { battleScene: this });
+
+    // 2. Register listeners
+    this.events.on('TURN_CHANGED', this.handleTurnChanged, this);
+
+    // 3. Mandatory cleanup hook
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, this.cleanup, this);
+  }
+
+  private handleTurnChanged(actorId: string): void {
+    // Render updates only
+  }
+
+  private cleanup(): void {
+    this.events.off('TURN_CHANGED', this.handleTurnChanged, this);
+    this.input.keyboard?.removeAllListeners();
+    this.tweens.killAll();
+    this.time.removeAllEvents();
+    if (this.scene.isActive(SceneKeys.BattleUI)) {
+      this.scene.stop(SceneKeys.BattleUI);
+    }
   }
 }
 ```
 
----
+## 3. Scene Transition & Parallel UI Rules
 
-## 3. Parallel UI Overlays (`scene.launch`)
+- **World to Battle:** Prefer `this.scene.switch()` or `this.scene.pause(SceneKeys.World)` + `this.scene.launch(SceneKeys.Battle, data)` if preserving exact overworld state in memory, OR serialize world state to GameStateManager and use `this.scene.start(SceneKeys.Battle, data)`.
+- **UI Communication:** Never let WorldScene or BattleScene directly manipulate HUD text objects inside UIScene. Emit typed events via a shared EventBus or scene event emitter.
+- **Camera Integer Alignment:** In `create()`, always configure the main camera with `this.cameras.main.setRoundPixels(true)` to prevent sub-pixel shimmering on pixel art.
 
-For HUDs, Satchel/inventory overlays, and battle menus, run a separate `UIScene` concurrently above the active world or battle scene:
+## 4. Verification Checklist
 
-```typescript
-// Inside WorldScene or BattleScene create():
-this.scene.launch('UIScene', { parentSceneKey: this.scene.key });
-this.scene.bringToTop('UIScene');
-
-// Communicating between scenes via scene manager or game events:
-this.events.emit('player-hp-changed', { hp: 45, maxHp: 50 });
-
-// Inside UIScene:
-const parent = this.scene.get(this.parentSceneKey);
-parent.events.on('player-hp-changed', this.updateHpBar, this);
-```
-
-When stopping or restarting the primary scene, always cleanly stop or sleep the parallel overlay:
-
-```typescript
-this.scene.stop('UIScene');
-```
-
----
-
-## 4. Mandatory SHUTDOWN Cleanup Protocol
-
-Every `Phaser.Scene` that registers event listeners, timers, tweens, or Web Audio nodes MUST destroy them in `SHUTDOWN`:
-
-```typescript
-public create(): void {
-  // Register cleanup handler once at scene creation
-  this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
-    this.teardownScene();
-  });
-}
-
-private teardownScene(): void {
-  // 1. Remove keyboard listeners
-  this.input.keyboard?.removeAllListeners();
-
-  // 2. Kill all active tweens & timers
-  this.tweens.killAll();
-  this.time.removeAllEvents();
-
-  // 3. Unsubscribe from cross-scene / external event emitters
-  this.events.off('player-hp-changed');
-  if (this.questSystem && this.questListener) {
-    this.questSystem.removeEventListener(this.questListener);
-  }
-
-  // 4. Disconnect procedural audio nodes / stop BGM
-  SoundSystem.getInstance().stopBgm(true);
-}
-```
-
----
-
-## 5. Camera Transitions & Input Guarding
-
-Always guard transition triggers with an `isTransitioning` boolean flag to prevent double-invocations caused by rapid input presses:
-
-```typescript
-public transitionToScene(targetKey: string, payload?: unknown): void {
-  if (this.isTransitioning) return;
-  this.isTransitioning = true;
-
-  // Disable player input controller immediately
-  this.controller.setEnabled(false);
-
-  this.cameras.main.fadeOut(300, 0, 0, 0);
-  this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-    this.scene.start(targetKey, payload);
-  });
-}
-```
+- [ ] Does the scene clean up all custom listeners inside `Phaser.Scenes.Events.SHUTDOWN`?
+- [ ] Are all scene keys imported from `src/data/AssetKeys.ts`?
+- [ ] Does `npm run typecheck` pass with zero implicit any in `init(data)`?

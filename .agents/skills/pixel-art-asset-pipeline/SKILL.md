@@ -3,100 +3,51 @@ name: pixel-art-asset-pipeline
 description: Use when adding new spritesheets, animations, tilesets, or audio files, fixing tile bleeding/jitter artifacts, or updating AssetKeys.ts and build scripts. Do NOT use for gameplay logic or state machines.
 ---
 
-# Pixel Art Asset Pipeline & Integrity
+# Pixel Art & Sprite Asset Pipeline
 
-## 1. When to Use / Routing Rules
+## 1. Pixel Art Rendering Constraints
 
-- **TRIGGER:** Adding new spritesheets, animations, tilesets, or audio files, fixing tile bleeding/jitter artifacts, running `tile-extruder`, or updating `AssetKeys.ts`.
-- **DO NOT USE FOR:** Gameplay logic, state machines, or dialogue writing.
+- **Base Resolution:** Maintain a fixed integer virtual resolution (e.g., `320x180` or `480x270` 16:9) scaled with `Phaser.Scale.FIT` and `zoom: Integer`.
+- **Sprite Origins:**
+  - Top-down characters & tall props: `sprite.setOrigin(0.5, 1.0)` (bottom-center aligned to tile floor).
+  - UI icons & projectiles: `sprite.setOrigin(0.5, 0.5)`.
+  - UI panels / NineSlice containers: `sprite.setOrigin(0, 0)`.
+- **No Sub-Pixel Positioning:** When tweening UI or camera targets, use `Math.round()` on target coordinates.
 
----
+## 2. Tileset Extrusion Standard
 
-## 2. Tile Extrusion to Prevent Seam Bleeding
+Raw tilesets (`16x16` or `32x32`) must never be loaded directly into WebGL if the camera scrolls or zooms.
 
-When creating or modifying tilesets, extrude 1px duplicate borders around every tile using `tile-extruder`:
+- Put raw tilesets in `raw-assets/tilesets/`.
+- Output extruded tilesets to `public/assets/tilesets/` using `tile-extruder`:
 
 ```bash
-# Standard CLI command for 32x32 tileset extrusion:
-npx tile-extruder --tileWidth 32 --tileHeight 32 --margin 0 --spacing 0 --input public/assets/tilesets/dungeon_tileset.png --output public/assets/tilesets/dungeon_tileset_extruded.png
+npx tile-extruder --tileWidth 16 --tileHeight 16 \
+  --input ./raw-assets/tilesets/world.png \
+  --output ./public/assets/tilesets/world_extruded.png
 ```
 
-Load in Phaser using `margin: 1, spacing: 2`:
+## 3. Texture Atlas & Animation Naming
+
+- Pack character and VFX frames into Phaser 3 JSON Hash/Array atlases (`public/assets/atlases/`).
+- Frame naming convention inside atlases: `<entity>_<action>_<direction>_<index:02d>` (e.g., `chrono_walk_down_01`, `chrono_attack_left_03`).
+- Register global animations once in `PreloadScene.ts`—never re-create `this.anims.create()` inside `WorldScene` or `BattleScene` every time an entity spawns.
+
+## 4. Strict Asset Registry (`src/data/AssetKeys.ts`)
+
+Whenever any asset is added or renamed, update `src/data/AssetKeys.ts` immediately:
 
 ```typescript
-this.load.image('dungeon_tileset_extruded', 'assets/tilesets/dungeon_tileset_extruded.png');
-// map.addTilesetImage('dungeon_tileset', 'dungeon_tileset_extruded', 32, 32, 1, 2);
-```
-
----
-
-## 3. Top-Down Character Origin & Hitbox Anchoring
-
-For top-down RPG characters:
-
-- **Origin / Pivot:** Always anchor to bottom-center of the footprint:
-  ```typescript
-  sprite.setOrigin(0.5, 1.0);
-  ```
-- **Physics Footprint:**
-  ```typescript
-  // 32x32 character frame with 18x14 foot collider
-  sprite.body.setSize(18, 14);
-  sprite.body.setOffset(7, 18);
-  ```
-- **Pixel Art Integrity:** Never use fractional floating-point positions for resting sprites. Always keep `roundPixels: true` in Phaser configuration.
-
----
-
-## 4. Animation Frame Naming Standards
-
-Standard format: `<entity>_<action>_<direction>_<frame>`:
-
-- `peter_idle_down` (4 frames)
-- `peter_walk_up` (6 frames)
-- `peter_attack_right` (6 frames)
-- `peter_hurt_right` (2 frames)
-- `enemy_shade_idle` (4 frames)
-- `ui_cursor_pulse` (2 frames)
-
----
-
-## 5. Strict Asset Typing (`src/data/AssetKeys.ts`)
-
-Never hardcode asset strings or magic strings in Scenes. Centralize in `AssetKeys.ts`:
-
-```typescript
-// src/data/AssetKeys.ts
-export const TEXTURES = {
-  PLAYER_IDLE: 'peter_idle',
-  PLAYER_WALK: 'peter_walk',
-  PLAYER_ATTACK: 'peter_attack',
-  PLAYER_HURT: 'peter_hurt',
-  NPC_ELDER: 'npc_elder',
-  ENEMY_SHADE: 'enemy_fracture',
-  TILES_DUNGEON: 'dungeon_tileset',
-  UI_FRAME: 'ui_frame',
-  UI_CURSOR: 'ui_cursor',
-  FX_HIT_SPARK: 'hit_spark',
+export const TextureKeys = {
+  HeroAtlas: 'atlas_hero',
+  TownTileset: 'tiles_town_extruded',
 } as const;
 
-export const MAPS = {
-  PROLOGUE: 'prologue_map',
+export const MapKeys = {
+  PrologueTown: 'map_prologue_town',
 } as const;
 
-export const AUDIO = {
-  BGM_AMBIENT: 'bgm_ambient',
-  BGM_BATTLE: 'bgm_battle',
+export const AudioKeys = {
+  BgmBattle: 'bgm_battle_fracture',
 } as const;
 ```
-
----
-
-## 6. Art Directives & Approval Gate
-
-- **Peter Hairstyle Lock (AGENTS.md §4):** Short, compact, natural curls covering the entire head. Never straight, wavy, drooping bangs, or undercut.
-- **Pipeline B Workflow (Code-Authored Pixel Art):**
-  1. Author pixel placement in a committed script (`scripts/author-*-sprites.js`).
-  2. Output candidate images ONLY to `art-source/.../generated/candidates/`.
-  3. Validate with `node scripts/validate-candidate.js <file>`.
-  4. Obtain project owner sign-off before promoting to `public/assets/`.

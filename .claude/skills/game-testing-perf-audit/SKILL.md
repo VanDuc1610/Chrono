@@ -1,22 +1,30 @@
 ---
 name: game-testing-perf-audit
-description: Protocols for running Vitest unit tests, headless CDP browser automation, visual inspection, and performance checks.
+description: Use when writing Vitest unit tests for game logic, debugging memory leaks, fixing frame drops, or auditing Phaser DisplayList and WebGL draw calls. Do NOT use for initial feature scaffolding unless testing is requested.
 ---
 
-# Game Testing & Performance Audit
+# Game Testing & Phaser Performance Audit
 
-## 1. When to Load
+## 1. Unit Testing Pure Core Logic (Vitest)
 
-- Running regression test suites before committing.
-- Writing new unit tests in `tests/` or CDP test scripts in `scripts/`.
-- Verifying frame rate, scene transitions, and audio teardown under live browser conditions.
+All files in `src/core/` must be testable in Node.js without DOM or WebGL canvas initialization.
 
-## 2. Core Constraints
+- Place tests alongside source files (`src/core/combat/__tests__/BattleEngine.test.ts`).
+- Always inject a deterministic stub RNG (`const fixedRng = () => 0.5;`) to test damage variance, critical hit thresholds, and status application rates.
+- Run targeted tests to save time and tokens:
+  `npx vitest run src/core/combat/__tests__/BattleEngine.test.ts`
 
-- **Test Hierarchy:**
-  1. _Typecheck:_ `npm run typecheck` (`tsc --noEmit`) – 0 errors required.
-  2. _Code Quality:_ `npm run lint` & `npx prettier --check .`.
-  3. _Unit Tests:_ `npm test` (`vitest run`) – Runs in Node without browser overhead.
-  4. _Live CDP Suites:_ `node scripts/test-*.js` (gameplay, combat, inventory save, session regression) running against `npx vite --port 3000 --strictPort`.
-- **Global Math.random Prohibition in CDP Tests:** Never stub global `Math.random` in browser tests because Phaser relies on it for internal texture UUID generation. Use `combat.combatSystem.setRandomSource(...)` instead.
-- **Visual Proof:** Capture and inspect screenshots (`screenshot_*.png`) for text clipping and alignment before deleting them.
+## 2. Phaser Runtime Performance Rules
+
+- **Zero Allocations in `update(time, delta)`:** Never instantiate `new Phaser.Math.Vector2()`, arrays, closures, or DOM elements inside a Scene's `update()` loop. Reuse pre-allocated class properties.
+- **Object Pooling:** Damage numbers, hit sparks, and projectile sprites in `BattleScene` must use `Phaser.GameObjects.Group` with `maxSize` and `getFirstDead(false)` / `setActive(false).setVisible(false)` instead of `destroy()`.
+- **Texture Atlas Batching:** Keep UI sprites and Battle VFX packed into shared Texture Atlases so WebGL can batch draw calls instead of flushing the pipeline on individual PNG textures.
+- **Text Rendering:** Prefer `Phaser.GameObjects.BitmapText` for pixel art fonts and rapidly changing combat numbers. Standard `Phaser.GameObjects.Text` triggers expensive HTML5 Canvas re-rasterization on every string update.
+
+## 3. Memory Leak Audit Checklist
+
+When diagnosing slowdown after multiple `WorldScene` <-> `BattleScene` transitions:
+
+1. Check `scene.events.listenerCount()` and custom `EventBus` listeners—verify every `.on()` has a matching `.off()` in `SHUTDOWN`.
+2. Inspect `this.children.list.length`—ensure pooled groups are reset properly.
+3. Verify custom shaders/postFX pipelines are cleared on scene shutdown.

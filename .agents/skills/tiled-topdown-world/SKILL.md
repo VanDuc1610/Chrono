@@ -3,87 +3,57 @@ name: tiled-topdown-world
 description: Use when working with Tiled JSON maps, tileset layers, grid-based movement, collision flags, NPC spawn objects, or map triggers in WorldScene. Do NOT use for turn-based battle calculations or UI menus.
 ---
 
-# Tiled Top-Down World & Movement Standards
+# Tiled Top-Down World & Grid Movement
 
-## 1. When to Use / Routing Rules
+## 1. Layer Naming Conventions (Tiled Map Editor)
 
-- **TRIGGER:** Working with Tiled JSON maps, tileset layers, grid-based movement, collision flags, NPC spawn objects, or map triggers in `WorldScene` / `ExplorationScene`.
-- **DO NOT USE FOR:** Turn-based battle calculations or UI menus.
+All `.tmj` / `.json` maps in `public/assets/maps/` must follow this exact layer hierarchy:
 
----
+1. `Ground` (Tile Layer) - Base terrain, walkable by default.
+2. `Decor` (Tile Layer) - Rugs, grass, paths (no collision).
+3. `Obstacles` (Tile Layer) - Walls, trees, water (custom boolean property `collides: true` or handled via GridEngine collision layer).
+4. `Overhead` (Tile Layer) - Tree canopies, roofs rendered above characters (`setDepth(100)`).
+5. `Objects` (Object Layer) - Point/Rectangle objects for `SpawnPoint`, `NPC`, `Portal`, `Trigger`, and `Chest`.
 
-## 2. Layer Naming Conventions in Tiled
+## 2. Loading Extruded Tilesets
 
-All Tiled map exports must adhere to standardized layer names and stacking order:
-
-1. `Ground` (Tile Layer): Floor tiles, paths, grass, carpets (Rendered below entities, no physics).
-2. `Obstacles` or `Walls` (Tile Layer): Solid walls, pillars, water, chasms (Collides with entities).
-3. `Objects` (Object Layer): Vector spawn points, NPC anchors, triggers, interactable POIs.
-4. `Overhead` (Tile Layer, optional): Canopy, archways, roofs (Rendered above entities with higher depth).
-
----
-
-## 3. Extruded Tileset Integration (`margin: 1, spacing: 2`)
-
-To eliminate tile bleeding / 1px seam tearing during camera panning, tilesets extruded with `tile-extruder` must be loaded with explicit margin and spacing offsets:
+To prevent WebGL tile bleeding, all tilesets are extruded by `1px` margin and `2px` spacing. Always pass `margin = 1` and `spacing = 2` when binding tilesets:
 
 ```typescript
-// Extruded tileset: 32x32 tiles with 1px extruded border per tile
+const map = this.make.tilemap({ key: MapKeys.PrologueTown });
 const tileset = map.addTilesetImage(
-  'dungeon_tileset', // Name of the tileset inside Tiled JSON
-  'dungeon_tileset_extruded', // Phaser texture cache key
-  32, // Tile width
-  32, // Tile height
-  1, // Margin (1 px border on texture edge)
-  2, // Spacing (2 px between adjacent tiles)
+  'town_tileset', // Exact name inside Tiled JSON
+  TextureKeys.TownTileset, // Key in AssetKeys.ts
+  16,
+  16, // Tile width, height
+  1,
+  2, // Margin = 1px, Spacing = 2px (MANDATORY for extruded tilesets)
 );
+
+if (!tileset) throw new Error('Failed to load tileset: town_tileset');
+
+const groundLayer = map.createLayer('Ground', tileset, 0, 0);
+const overheadLayer = map.createLayer('Overhead', tileset, 0, 0);
+overheadLayer?.setDepth(100);
 ```
 
----
+## 3. Safe Tiled Object Property Parsing
 
-## 4. Type-Safe Tiled Custom Properties Helper
-
-Tiled exports custom properties as an array `[{ name: string, type: string, value: unknown }]`. Never cast with `any`. Use this type-safe helper:
+Never access `obj.properties` as an untyped array directly in scene code. Use this helper pattern in `src/systems/TiledParser.ts`:
 
 ```typescript
-export interface TiledRawProperty {
-  name: string;
-  type: string;
-  value: unknown;
-}
-
 export function getTiledProperty<T>(
-  object: Phaser.Types.Tilemaps.TiledObject,
-  propertyName: string,
+  obj: Phaser.Types.Tilemaps.TiledObject,
+  propName: string,
   defaultValue: T,
 ): T {
-  const props = object.properties as TiledRawProperty[] | undefined;
-  if (!props || !Array.isArray(props)) return defaultValue;
-  const entry = props.find((p) => p.name === propertyName);
-  return entry !== undefined ? (entry.value as T) : defaultValue;
+  const props = obj.properties as Array<{ name: string; value: unknown }> | undefined;
+  const found = props?.find((p) => p.name === propName);
+  return (found?.value as T) ?? defaultValue;
 }
-
-// Usage Example:
-const dialogueId = getTiledProperty<string>(tiledObj, 'dialogueId', 'default_greeting');
-const isLocked = getTiledProperty<boolean>(tiledObj, 'isLocked', false);
 ```
 
----
+## 4. Grid Movement & Depth Sorting
 
-## 5. Grid Coordinates & Hitbox Standards
-
-- **Base Tile Size:** $32 \times 32\text{ px}$.
-- **Tile-to-World Center Formula:**
-  $$\text{pixelX} = \text{tileX} \times 32 + 16, \quad \text{pixelY} = \text{tileY} \times 32 + 16$$
-- **Peter's Foot Collider Standard:**
-  Characters use top-down perspective with depth sorting. Collision hitboxes MUST be constrained to the feet to allow heads to overlap back walls:
-  ```typescript
-  // Peter sprite: 32x32 frame
-  playerSprite.body.setSize(18, 14); // 18 px wide, 14 px tall footprint
-  playerSprite.body.setOffset(7, 16); // Centered horizontally, anchored to ground
-  ```
-- **Depth Sorting (Y-Sorting):**
-  Entities must dynamically set depth based on their bottom edge:
-  ```typescript
-  sprite.setDepth(sprite.y);
-  ```
+- **Grid Coordinates:** All logic checks (triggers, encounters, NPC interaction distances) must use discrete tile coordinates (`tileX`, `tileY`), never raw pixel (`x`, `y`).
+- **Y-Sorting:** Dynamic entities (Player, NPC) on the ground plane must update their depth when changing Y tile or use `sprite.setDepth(sprite.y)` in `update()`.

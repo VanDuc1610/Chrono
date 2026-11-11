@@ -1,27 +1,74 @@
 ---
 name: phaser-scene-lifecycle
-description: Guidelines for managing Phaser 3 scene lifecycles, resource cleanup, event listeners, and preventing memory leaks across scene transitions.
+description: Use when creating, modifying, or transitioning between Phaser 3 Scenes, managing scene events, or building parallel UI overlays in src/scenes/. Do NOT use for pure combat math, Tiled map exporting, or sprite packing.
 ---
 
-# Phaser Scene Lifecycle & Memory Hygiene
+# Phaser 3 Scene Lifecycle & Memory Hygiene
 
-## 1. When to Load
+## 1. Core Principles
 
-- Modifying or creating any `Phaser.Scene` class (`src/scenes/`).
-- Adding keyboard listeners, timer events, or tweens.
-- Debugging scene transition glitches or audio/node leaks.
+- **Orchestration Only:** Scenes in `src/scenes/` only bind `src/core/` logic to Phaser GameObjects, handle input, and manage cameras/transitions.
+- **Typed Initialization:** Always define a strict TypeScript interface for data passed into `init(data: T)` and `scene.start(key, data)`.
+- **Zero Listener Leaks:** Every event registered on `this.events`, `this.game.events`, `this.input.keyboard`, or external EventEmitters MUST be removed when the scene shuts down.
 
-## 2. Core Constraints
+## 2. Standard Scene Template
 
-- **Event Teardown:** Never leave active listeners on `this.events`, `this.input.keyboard`, or global event emitters. Clean them up on `SHUTDOWN`:
-  ```typescript
-  this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
-    // Teardown timers, tweens, keyboard listeners, audio oscillators
-  });
-  ```
-- **Transient State Reset:** Always reset scene-local variables in `init(data)`. Remember that Phaser scene instances are reused when restarted with `scene.start()`.
-- **Camera Fades:** Guard transitions with an `isTransitioning` boolean flag so rapid input cannot trigger double scene starts.
+```typescript
+import Phaser from 'phaser';
+import { SceneKeys } from '../data/AssetKeys';
 
-## 3. References
+export interface BattleSceneData {
+  enemyGroupId: string;
+  returnMapKey: string;
+  playerGridPos: { x: number; y: number };
+}
 
-- See `references/SceneLifecycleTemplate.ts` for a full boilerplate implementation.
+export class BattleScene extends Phaser.Scene {
+  private sceneData!: BattleSceneData;
+
+  constructor() {
+    super({ key: SceneKeys.Battle });
+  }
+
+  public init(data: BattleSceneData): void {
+    this.sceneData = data;
+  }
+
+  public create(): void {
+    // 1. Launch parallel UI overlay if needed
+    this.scene.launch(SceneKeys.BattleUI, { battleScene: this });
+
+    // 2. Register listeners
+    this.events.on('TURN_CHANGED', this.handleTurnChanged, this);
+
+    // 3. Mandatory cleanup hook
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, this.cleanup, this);
+  }
+
+  private handleTurnChanged(actorId: string): void {
+    // Render updates only
+  }
+
+  private cleanup(): void {
+    this.events.off('TURN_CHANGED', this.handleTurnChanged, this);
+    this.input.keyboard?.removeAllListeners();
+    this.tweens.killAll();
+    this.time.removeAllEvents();
+    if (this.scene.isActive(SceneKeys.BattleUI)) {
+      this.scene.stop(SceneKeys.BattleUI);
+    }
+  }
+}
+```
+
+## 3. Scene Transition & Parallel UI Rules
+
+- **World to Battle:** Prefer `this.scene.switch()` or `this.scene.pause(SceneKeys.World)` + `this.scene.launch(SceneKeys.Battle, data)` if preserving exact overworld state in memory, OR serialize world state to GameStateManager and use `this.scene.start(SceneKeys.Battle, data)`.
+- **UI Communication:** Never let WorldScene or BattleScene directly manipulate HUD text objects inside UIScene. Emit typed events via a shared EventBus or scene event emitter.
+- **Camera Integer Alignment:** In `create()`, always configure the main camera with `this.cameras.main.setRoundPixels(true)` to prevent sub-pixel shimmering on pixel art.
+
+## 4. Verification Checklist
+
+- [ ] Does the scene clean up all custom listeners inside `Phaser.Scenes.Events.SHUTDOWN`?
+- [ ] Are all scene keys imported from `src/data/AssetKeys.ts`?
+- [ ] Does `npm run typecheck` pass with zero implicit any in `init(data)`?

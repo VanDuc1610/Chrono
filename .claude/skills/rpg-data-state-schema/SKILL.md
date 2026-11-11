@@ -1,19 +1,46 @@
 ---
 name: rpg-data-state-schema
-description: Directives for external JSON databases, GameSession state hydration, save slot migrations, and declarative effects.
+description: Use when designing or updating JSON schemas for items, skills, dialogue trees, character stats, inventory management, or Save/Load serialization in src/core/state/ and src/data/. Do NOT use for Phaser rendering or camera effects.
 ---
 
-# RPG Data & State Schema
+# RPG Data Tables & Save State Schema
 
-## 1. When to Load
+## 1. Static Database vs. Runtime State
 
-- Editing or creating files in `public/assets/data/` (`dialogue.json`, `quests.json`, `items.json`, `enemies.json`, `player.json`, `interactables.json`).
-- Modifying `GameSession.ts` or save/load serialization in `SaveSystem.ts`.
-- Implementing quest stage listeners or dialogue side effects.
+- **Static Databases (`src/data/db/`):** Read-only definitions for Skills, Items, Enemies, and Dialogues. Indexed by string ID (`Record<string, SkillDef>`). Never mutate static DB objects at runtime.
+- **Runtime State (`src/core/state/`):** Serializable player progress (Party stats, Inventory quantities, Quest flags, Fracture alignment, Active Map/Coords).
 
-## 2. Core Constraints
+## 2. Save Data Versioning & Validation
 
-- **Decoupled Data:** Scene code must never hardcode item names, stats, dialogue lines, or quest objective text. Load everything from JSON.
-- **Session Authority:** All persistent game progress (inventory, HP, level, EXP, flags, quests) must reside in `GameSession`. Scenes only read and mutate via `this.session`.
-- **Declarative Effects:** Use `applyDialogueEffects({ setFlags, startQuest, grantItems, grantOnceFlag })`. Always guard one-shot rewards with a flag.
-- **Save Versioning:** Maintain `version: "0.1.0"`. Old saves with missing fields (e.g., missing EXP) must be hydrated with safe fallback defaults without throwing errors.
+All save files stored in `localStorage` or external storage must include a `version` field and be validated before loading into the game state:
+
+```typescript
+export interface SaveSlotData {
+  version: number; // Increment on breaking schema changes
+  timestamp: number;
+  location: {
+    mapKey: string;
+    gridX: number;
+    gridY: number;
+  };
+  party: Array<{
+    characterId: string;
+    level: number;
+    currentHp: number;
+    currentMp: number;
+    equippedIds: { weapon?: string; armor?: string; relic?: string };
+  }>;
+  inventory: Record<string, number>; // itemId -> count
+  storyFlags: Record<string, boolean | number | string>;
+}
+```
+
+## 3. Dialogue & Story Flag Rules
+
+- Store dialogue trees in `public/assets/data/dialogues/*.json`.
+- Dialogue nodes reference conditions and mutations exclusively via `storyFlags` keys (e.g., `flag_met_oracle`, `fracture_meter`).
+- Never embed raw JavaScript code or `eval()` strings inside JSON data files. Use declarative condition objects: `{ "flag": "fracture_meter", "op": ">=", "value": 3 }`.
+
+## 4. Immutability in State Reducers
+
+Functions that modify inventory, equipment, or party stats in `src/core/state/` must validate invariants (e.g., `count >= 0`, `hp <= maxHp`) and return clean state updates with accompanying unit tests.
