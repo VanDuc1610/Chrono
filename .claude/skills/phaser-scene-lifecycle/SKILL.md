@@ -1,74 +1,35 @@
 ---
 name: phaser-scene-lifecycle
-description: Use when creating, modifying, or transitioning between Phaser 3 Scenes, managing scene events, or building parallel UI overlays in src/scenes/. Do NOT use for pure combat math, Tiled map exporting, or sprite packing.
+description: Use when creating or changing a Phaser scene in src/scenes/, passing data between scenes, or adding listeners, timers, HUD or overlays. Not for combat math, JSON data or art.
 ---
 
-# Phaser 3 Scene Lifecycle & Memory Hygiene
+# Scene lifecycle (CHRONO)
 
-## 1. Core Principles
+Scenes: `PreloadScene` → `MainMenuScene` → `ExplorationScene` ⇄ `CombatScene` → `PrologueEndScene`
+(registered in `src/config.ts`). Playthrough state lives in `GameSession` (`src/state/`), read with
+`getSession(this)`; scenes never own progress.
 
-- **Orchestration Only:** Scenes in `src/scenes/` only bind `src/core/` logic to Phaser GameObjects, handle input, and manage cameras/transitions.
-- **Typed Initialization:** Always define a strict TypeScript interface for data passed into `init(data: T)` and `scene.start(key, data)`.
-- **Zero Listener Leaks:** Every event registered on `this.events`, `this.game.events`, `this.input.keyboard`, or external EventEmitters MUST be removed when the scene shuts down.
+## Rules
 
-## 2. Standard Scene Template
+1. **Scene instances are reused.** Reset every transient field in `init(data)` (flags, arrays of
+   buttons, nullable refs). See `CombatScene.init()`.
+2. **Typed scene data.** Export an interface (`CombatSceneData`, `ExplorationSceneData`) and use it
+   in both `init()` and `scene.start()`.
+3. **Clean up listeners.** Anything on `this.events`, `this.game.events`, a system emitter (e.g.
+   `QuestSystem`) or the registry must be removed in
+   `this.events.once(Phaser.Scenes.Events.SHUTDOWN, …)`. Keyboard keys added with
+   `this.input.keyboard.addKey` and `this.time` / `this.tweens` are cleaned by Phaser.
+4. **Disabled controller = no input.** `KeyboardPlayerController.getActions()` returns nothing while
+   disabled. Freeze movement by skipping `player.update()`, not by disabling the controller, if the
+   scene still needs E / Space (dialogue).
+5. **Global animations** are created once in `PreloadScene` (`enemy_fracture_idle`, `npc_elder_idle`,
+   `ui_cursor_pulse`, `hit_spark_burst`) or via `registerPeterAnimations(scene)` (idempotent).
+6. **Panels** use `createPanel()` from `src/ui/Panel.ts` (nine-slice `ui_frame`, origin 0,0, pad
+   text ≥ 8 px). HUD objects use `setScrollFactor(0)` and an explicit depth.
+7. No quest, dialogue or stat values in scene code — read them from `GameSession` / JSON.
 
-```typescript
-import Phaser from 'phaser';
-import { SceneKeys } from '../data/AssetKeys';
+## Verify
 
-export interface BattleSceneData {
-  enemyGroupId: string;
-  returnMapKey: string;
-  playerGridPos: { x: number; y: number };
-}
-
-export class BattleScene extends Phaser.Scene {
-  private sceneData!: BattleSceneData;
-
-  constructor() {
-    super({ key: SceneKeys.Battle });
-  }
-
-  public init(data: BattleSceneData): void {
-    this.sceneData = data;
-  }
-
-  public create(): void {
-    // 1. Launch parallel UI overlay if needed
-    this.scene.launch(SceneKeys.BattleUI, { battleScene: this });
-
-    // 2. Register listeners
-    this.events.on('TURN_CHANGED', this.handleTurnChanged, this);
-
-    // 3. Mandatory cleanup hook
-    this.events.once(Phaser.Scenes.Events.SHUTDOWN, this.cleanup, this);
-  }
-
-  private handleTurnChanged(actorId: string): void {
-    // Render updates only
-  }
-
-  private cleanup(): void {
-    this.events.off('TURN_CHANGED', this.handleTurnChanged, this);
-    this.input.keyboard?.removeAllListeners();
-    this.tweens.killAll();
-    this.time.removeAllEvents();
-    if (this.scene.isActive(SceneKeys.BattleUI)) {
-      this.scene.stop(SceneKeys.BattleUI);
-    }
-  }
-}
-```
-
-## 3. Scene Transition & Parallel UI Rules
-
-- **World to Battle:** Prefer `this.scene.switch()` or `this.scene.pause(SceneKeys.World)` + `this.scene.launch(SceneKeys.Battle, data)` if preserving exact overworld state in memory, OR serialize world state to GameStateManager and use `this.scene.start(SceneKeys.Battle, data)`.
-- **UI Communication:** Never let WorldScene or BattleScene directly manipulate HUD text objects inside UIScene. Emit typed events via a shared EventBus or scene event emitter.
-- **Camera Integer Alignment:** In `create()`, always configure the main camera with `this.cameras.main.setRoundPixels(true)` to prevent sub-pixel shimmering on pixel art.
-
-## 4. Verification Checklist
-
-- [ ] Does the scene clean up all custom listeners inside `Phaser.Scenes.Events.SHUTDOWN`?
-- [ ] Are all scene keys imported from `src/data/AssetKeys.ts`?
-- [ ] Does `npm run typecheck` pass with zero implicit any in `init(data)`?
+`npm run typecheck` · `npm test` · the CDP suite that covers the scene (see
+`game-testing-perf-audit`). A scene change that re-enters (combat → exploration) must pass
+`node scripts/test-session-regression.js`.

@@ -1,46 +1,36 @@
 ---
 name: rpg-data-state-schema
-description: Use when designing or updating JSON schemas for items, skills, dialogue trees, character stats, inventory management, or Save/Load serialization in src/core/state/ and src/data/. Do NOT use for Phaser rendering or camera effects.
+description: Use when editing game JSON (dialogue, quests, items, enemies, player, interactables), story flags, GameSession state, or save/load. Not for rendering or art.
 ---
 
-# RPG Data Tables & Save State Schema
+# Game data & state (CHRONO)
 
-## 1. Static Database vs. Runtime State
+## Where things live
 
-- **Static Databases (`src/data/db/`):** Read-only definitions for Skills, Items, Enemies, and Dialogues. Indexed by string ID (`Record<string, SkillDef>`). Never mutate static DB objects at runtime.
-- **Runtime State (`src/core/state/`):** Serializable player progress (Party stats, Inventory quantities, Quest flags, Fracture alignment, Active Map/Coords).
+| What                       | File                                                      |
+| -------------------------- | --------------------------------------------------------- |
+| Static data (read-only)    | `public/assets/data/*.json`, loaded in `PreloadScene`     |
+| Types                      | `src/systems/<system>/*Types.ts`                          |
+| Runtime state + save shape | `src/state/GameSession.ts` (`toSaveData`, `fromSave`)     |
+| Save storage + validation  | `src/systems/save/SaveSystem.ts` (`isValidSaveData`)      |
+| Story flags                | `FLAGS` in `GameSession.ts`; set with `session.setFlag()` |
 
-## 2. Save Data Versioning & Validation
+## Rules
 
-All save files stored in `localStorage` or external storage must include a `version` field and be validated before loading into the game state:
+- **Dialogue nodes:** max 2 responses (UI shows 2 choices). Side effects only through the node's
+  `effects` (`setFlags`, `startQuest`, `grantItems` + `grantOnceFlag`), applied by
+  `GameSession.applyDialogueEffects()`. No code in JSON.
+- **Quests:** chain with `followUpQuestId`; flag-driven objectives use `completeOnFlag`;
+  `syncQuestProgress()` must stay idempotent. Rewards are claimed once.
+- **Interactables:** `interactables.json` → `{ id, tile:{x,y}, radius, prompt, dialogueId }`.
+- **Save format change:** bump `SAVE_VERSION`, keep `fromSave` able to read the previous version
+  (or reject it cleanly), and add a test.
+- Every id referenced across files must exist — `tests/content-data.test.ts` checks this; extend it
+  when you add a new reference type.
+- Story content must match `docs/story/` (canon vs PROPOSAL vs OPEN). Read only the chapter file
+  you need, not the whole Story Bible.
 
-```typescript
-export interface SaveSlotData {
-  version: number; // Increment on breaking schema changes
-  timestamp: number;
-  location: {
-    mapKey: string;
-    gridX: number;
-    gridY: number;
-  };
-  party: Array<{
-    characterId: string;
-    level: number;
-    currentHp: number;
-    currentMp: number;
-    equippedIds: { weapon?: string; armor?: string; relic?: string };
-  }>;
-  inventory: Record<string, number>; // itemId -> count
-  storyFlags: Record<string, boolean | number | string>;
-}
-```
+## Verify
 
-## 3. Dialogue & Story Flag Rules
-
-- Store dialogue trees in `public/assets/data/dialogues/*.json`.
-- Dialogue nodes reference conditions and mutations exclusively via `storyFlags` keys (e.g., `flag_met_oracle`, `fracture_meter`).
-- Never embed raw JavaScript code or `eval()` strings inside JSON data files. Use declarative condition objects: `{ "flag": "fracture_meter", "op": ">=", "value": 3 }`.
-
-## 4. Immutability in State Reducers
-
-Functions that modify inventory, equipment, or party stats in `src/core/state/` must validate invariants (e.g., `count >= 0`, `hp <= maxHp`) and return clean state updates with accompanying unit tests.
+`npx vitest run tests/content-data.test.ts tests/dialogue-effects.test.ts tests/game-session.test.ts`
+· `node scripts/test-inventory-save.js` for save changes.

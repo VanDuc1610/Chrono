@@ -1,5 +1,8 @@
 import { spawn } from 'child_process';
+import { installQuietConsole } from './lib/test-output.js';
 import http from 'http';
+
+installQuietConsole();
 
 function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));

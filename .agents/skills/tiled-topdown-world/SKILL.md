@@ -1,59 +1,35 @@
 ---
 name: tiled-topdown-world
-description: Use when working with Tiled JSON maps, tileset layers, grid-based movement, collision flags, NPC spawn objects, or map triggers in WorldScene. Do NOT use for turn-based battle calculations or UI menus.
+description: Use when changing the exploration map, tiles, collision, props, spawn points, NPC placement or map triggers in ExplorationScene. Not for combat or UI menus.
 ---
 
-# Tiled Top-Down World & Grid Movement
+# Exploration world (CHRONO)
 
-## 1. Layer Naming Conventions (Tiled Map Editor)
+## Current map
 
-All `.tmj` / `.json` maps in `public/assets/maps/` must follow this exact layer hierarchy:
+- `public/assets/maps/prologue_map.json` — Tiled JSON, 24×18 tiles of 32 px, layers `Ground` and
+  `Walls`, tileset `dungeon_tileset` (no margin/spacing — **do not** add extrusion offsets).
+- The map is **generated**: edit `scripts/generate-map.js` (layout, floor variants) and
+  `scripts/map-props.js` (prop tiles), then run `node scripts/generate-map.js`. Do not hand-edit
+  the JSON.
+- Tileset indices (GID = index + 1): 0 void, 1 floor, 2 engraved, 3 wall top, 4 wall face,
+  5 pillar, 6 crystal, 7 altar, 8 fracture floor, 9 floor variant, 10 stele, 11 astrolabe,
+  12 reliquary, 13 threshold gate, 14 torn page. `Walls` collides on GIDs 4–16
+  (`setCollisionBetween(4, 16)` in `ExplorationScene`).
 
-1. `Ground` (Tile Layer) - Base terrain, walkable by default.
-2. `Decor` (Tile Layer) - Rugs, grass, paths (no collision).
-3. `Obstacles` (Tile Layer) - Walls, trees, water (custom boolean property `collides: true` or handled via GridEngine collision layer).
-4. `Overhead` (Tile Layer) - Tree canopies, roofs rendered above characters (`setDepth(100)`).
-5. `Objects` (Object Layer) - Point/Rectangle objects for `SpawnPoint`, `NPC`, `Portal`, `Trigger`, and `Chest`.
+## Movement & interaction
 
-## 2. Loading Extruded Tilesets
+- Free 4-way Arcade Physics movement (`TopDownMovementSystem`), not grid movement. Player foot
+  collider 18×14 at (7, 16).
+- Points of interest come from `public/assets/data/interactables.json` (tile coords + radius) and
+  are registered with `InteractionSystem`; NPCs are `src/entities/NPC.ts`.
+- Pixel coordinates of a tile centre: `tile * 32 + 16`.
 
-To prevent WebGL tile bleeding, all tilesets are extruded by `1px` margin and `2px` spacing. Always pass `margin = 1` and `spacing = 2` when binding tilesets:
+## Planned (not built yet)
 
-```typescript
-const map = this.make.tilemap({ key: MapKeys.PrologueTown });
-const tileset = map.addTilesetImage(
-  'town_tileset', // Exact name inside Tiled JSON
-  TextureKeys.TownTileset, // Key in AssetKeys.ts
-  16,
-  16, // Tile width, height
-  1,
-  2, // Margin = 1px, Spacing = 2px (MANDATORY for extruded tilesets)
-);
+Multiple maps, map transitions and Tiled-authored object layers are Phase 2 work. Check
+`docs/TASKS.md` before building them and keep the existing map loading working.
 
-if (!tileset) throw new Error('Failed to load tileset: town_tileset');
+## Verify
 
-const groundLayer = map.createLayer('Ground', tileset, 0, 0);
-const overheadLayer = map.createLayer('Overhead', tileset, 0, 0);
-overheadLayer?.setDepth(100);
-```
-
-## 3. Safe Tiled Object Property Parsing
-
-Never access `obj.properties` as an untyped array directly in scene code. Use this helper pattern in `src/systems/TiledParser.ts`:
-
-```typescript
-export function getTiledProperty<T>(
-  obj: Phaser.Types.Tilemaps.TiledObject,
-  propName: string,
-  defaultValue: T,
-): T {
-  const props = obj.properties as Array<{ name: string; value: unknown }> | undefined;
-  const found = props?.find((p) => p.name === propName);
-  return (found?.value as T) ?? defaultValue;
-}
-```
-
-## 4. Grid Movement & Depth Sorting
-
-- **Grid Coordinates:** All logic checks (triggers, encounters, NPC interaction distances) must use discrete tile coordinates (`tileX`, `tileY`), never raw pixel (`x`, `y`).
-- **Y-Sorting:** Dynamic entities (Player, NPC) on the ground plane must update their depth when changing Y tile or use `sprite.setDepth(sprite.y)` in `update()`.
+`node scripts/test-gameplay.js` (movement, collision, dialogue by real key presses).
