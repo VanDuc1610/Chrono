@@ -422,7 +422,7 @@
           },
           "toMap": "map_old_lighthouse",
           "toSpawn": "base",
-          "requiresFlag": "elder_granted_beacon"
+          "requiresFlag": "isShadeDefeated"
         }
       ],
       "triggers": [
