@@ -14,7 +14,7 @@
 | -------------------------- | ----- | ------------------------------------------------------------------- |
 | `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`)               |
 | `INTEGRATED`               | 13    | Approved art in engine (Peter ×2, Shade, Elder, tileset ×2, UI set) |
-| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review                           |
+| `CONCEPT_PENDING_APPROVAL` | 1     | Concept generated; awaiting formal review                           |
 | `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared                          |
 | `PLACEHOLDER_TEMPORARY`    | 3     | Procedural placeholder assets active in engine                      |
 
@@ -150,6 +150,14 @@
 - **Generator:** `scripts/author-npc-sprites.js` (`--sheets=forgotten_child`) · **File:** `art-source/npcs/forgotten_child/generated/approved/forgotten_child_idle_v1.png` → `public/assets/npcs/forgotten_child_idle.png` (key `npc_forgotten_child`, anim `npc_forgotten_child_flicker`; shown as a map `vision`) (64 × 32, 2 frames) · preview ×8
 - **Content:** small barefoot child, faceless and semi-transparent, ~16 % of pixels missing (different per frame, so the figure flickers) with cold chronal motes — Residual Existence, not a ghost story.
 - **Validation:** PASSED. **Status:** `INTEGRATED` — owner approved 2026-11-12 (T-36).
+
+### `CHAR_PETER_004_CAND` – Peter idle + walk, empty-handed (v1)
+
+- **Generator:** `scripts/author-peter-sprites.js` (`--sheets=idle_unarmed,walk_unarmed`, the default) — same poses as the approved v3 idle/walk with the Broken Blade removed (front/back use the existing bare views; the side arm is the same arm without the blade).
+- **Files:** `art-source/characters/peter/generated/candidates/peter_idle_unarmed_v1.png` (128 × 128), `peter_walk_unarmed_v1.png` (192 × 128) · previews ×6
+- **Why:** Prologue v3 — Peter is an ordinary watch repairer until the Elder throws him the blade mid-battle.
+- **Validation:** PASSED; approved idle/walk/attack/hurt/temporal_sight regenerate byte-identically.
+- **Status:** `CONCEPT_PENDING_APPROVAL` (T-37).
 
 ## 3. Active Placeholder Registry
 

@@ -230,23 +230,22 @@ const left = padTo32(
  * Arm hanging in front of the torso holding the Broken Blade point-down and slightly forward
  * (separate layer so it swings with the walk cycle).
  */
-const sideArm = paint(
-  padTo32(
-    rows([
-      ...Array(13).fill({}),
-      { 13: 'OkkO' },
-      { 13: 'OkcO' },
-      { 13: 'OccO' },
-      { 13: 'OccO' },
-      { 13: 'OcCO' },
-      { 13: 'OcCO' },
-      { 13: 'OpPO' },
-      { 13: 'OssO' },
-      { 14: 'OO' },
-    ]),
-  ),
-  brokenBlade(14, 20, -1),
+/** The same arm, empty-handed (Prologue v3: before the Elder gives Peter the blade). */
+const sideArmBare = padTo32(
+  rows([
+    ...Array(13).fill({}),
+    { 13: 'OkkO' },
+    { 13: 'OkcO' },
+    { 13: 'OccO' },
+    { 13: 'OccO' },
+    { 13: 'OcCO' },
+    { 13: 'OcCO' },
+    { 13: 'OpPO' },
+    { 13: 'OssO' },
+    { 14: 'OO' },
+  ]),
 );
+const sideArm = paint(sideArmBare, brokenBlade(14, 20, -1));
 /** Shoulder pivot of the near arm in the left-facing view (for posed arms in combat sheets). */
 const SIDE_SHOULDER = [14, 14];
 
@@ -331,18 +330,36 @@ const VIEWS = {
   left: { upper: upperOnly(left), bare: upperOnly(left), side: true, hand: [14, 20] },
 };
 
+/** Views/arm used by idle and walk; swapped by `unarmed()` for the empty-handed sheets. */
+let ACTIVE_VIEWS = VIEWS;
+let ACTIVE_ARM = sideArm;
+const UNARMED_VIEWS = Object.fromEntries(
+  Object.entries(VIEWS).map(([k, v]) => [k, { ...v, upper: v.bare }]),
+);
+/** Builds a sheet with Peter empty-handed (no Broken Blade), same poses otherwise. */
+const unarmed = (builder) => (view) => {
+  ACTIVE_VIEWS = UNARMED_VIEWS;
+  ACTIVE_ARM = sideArmBare;
+  try {
+    return builder(view);
+  } finally {
+    ACTIVE_VIEWS = VIEWS;
+    ACTIVE_ARM = sideArm;
+  }
+};
+
 /** Idle: 4 frames; frames 2-3 lower head and shoulders by 1px (slow breath). */
 function idleFrames(view) {
-  const v = VIEWS[view];
+  const v = ACTIVE_VIEWS[view];
   const legs = v.side ? sideLegs('stand') : frontLegs();
   const breath = shiftDown(v.upper, 0, 13);
-  const arm = v.side ? [{ layer: sideArm }] : [];
+  const arm = v.side ? [{ layer: ACTIVE_ARM }] : [];
   return [v.upper, v.upper, breath, breath].map((upper) => compose(legs, upper, arm));
 }
 
 /** Walk: 6 frames — contact, down (bob), pass, opposite contact, down, pass. */
 function walkFrames(view) {
-  const v = VIEWS[view];
+  const v = ACTIVE_VIEWS[view];
   const bob = shiftDown(v.upper, 0, UPPER_END - 1);
   if (v.side) {
     const seq = [
@@ -354,7 +371,7 @@ function walkFrames(view) {
       ['pass', 0, 0],
     ];
     return seq.map(([pose, down, swing]) =>
-      compose(sideLegs(pose), down ? bob : v.upper, [{ layer: sideArm, dx: swing, dy: down }]),
+      compose(sideLegs(pose), down ? bob : v.upper, [{ layer: ACTIVE_ARM, dx: swing, dy: down }]),
     );
   }
   const seq = [
@@ -570,6 +587,9 @@ const SHEETS = {
   attack: ['v1', attackFrames],
   hurt: ['v1', hurtFrames],
   temporal_sight: ['v1', temporalSightFrames],
+  // Prologue v3: Peter before he receives the Broken Blade.
+  idle_unarmed: ['v1', unarmed(idleFrames)],
+  walk_unarmed: ['v1', unarmed(walkFrames)],
 };
 
 // Usage: node scripts/author-peter-sprites.js [outDir] [--sheets=attack,hurt,temporal_sight]
@@ -578,7 +598,7 @@ const args = process.argv.slice(2);
 const sheetArg = args.find((a) => a.startsWith('--sheets='));
 const wanted = sheetArg
   ? sheetArg.slice('--sheets='.length).split(',')
-  : ['attack', 'hurt', 'temporal_sight'];
+  : ['idle_unarmed', 'walk_unarmed'];
 const outDir = path.resolve(
   args.find((a) => !a.startsWith('--')) ?? 'art-source/characters/peter/generated/candidates',
 );
