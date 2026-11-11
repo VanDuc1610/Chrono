@@ -42,3 +42,12 @@ All changes to narrative canon, documentation architecture, and story files are 
 - **Game language: Vietnamese** for all in-game text (dialogue, quests, items, UI). Internal ids stay English.
 - **Peter's hair:** "short curly hair" — Story Bible §3.1 corrected to match the identity lock (no "short-medium").
 - **Opening line** "Awaken, fractured vessel…" replaced: "the vessel" contradicts the Unwritten canon. New line hints at it without revealing it: "Wake... The world has no name for you, and yet you remain."
+
+---
+
+## [1.2.0] – 2026-11-12 · Prologue v3 (owner)
+
+- Peter lives an ordinary life as a **watch repairer** in his grandfather's shop; room objects are mundane.
+- A sudden **stop of time** at noon forces the first fight; Peter cannot attack until the **Elder** (his guide) throws him the **Broken Blade** mid-battle; **Temporal Sight** awakens through his grandfather's stopped watch running backwards.
+- Ending stays **mysterious**: nobody visibly forgotten; reveal saved for later chapters.
+- Details and data contract: `docs/story/PROLOGUE_V3_PROPOSAL.md`.

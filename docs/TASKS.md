@@ -21,6 +21,18 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 Goal (owner, 2026-11-11): rebuild the Prologue per `docs/story/PROLOGUE_V2_DESIGN.md` (approved), all in-game text in Vietnamese.
 
+### T-37 · Prologue v3 engine: gated commands, mid-battle event, frozen town
+
+- **Assignee:** Claude · **Status:** TODO
+- **Locks:** `src/`, `public/assets/data/maps.json`, `public/assets/data/enemies.json`, `public/assets/data/strings.json`, `scripts/author-peter-sprites.js`, `art-source/characters/peter/`
+- Per `docs/story/PROLOGUE_V3_PROPOSAL.md` §4/§6: commands locked by flags, battle `script` events, flag-based dialogue for interactables, frozen-town state, Peter sprites without the blade (owner approval).
+
+### T-38 · Prologue v3 dialogue + quests (data only)
+
+- **Assignee:** Antigravity · **Status:** TODO
+- **Locks:** `public/assets/data/dialogue.json`, `public/assets/data/quests.json`, `public/assets/data/items.json`, `tests/content-data.test.ts`
+- Rewrite acts 1-3 and the Elder per §2 and the data contract in §6 (flags and dialogue ids).
+
 ## Backlog (scheduled after current locks are released)
 
 - **Vietnamese pass on remaining UI** (Combat, Main Menu, Prologue End) via `strings.json` once T-28 lands.

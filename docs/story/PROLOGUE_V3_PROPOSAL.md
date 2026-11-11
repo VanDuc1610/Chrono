@@ -1,6 +1,6 @@
 # PROLOGUE V3 — "MỘT NGÀY BÌNH THƯỜNG" (ĐỀ XUẤT)
 
-**Trạng thái:** `[PROPOSAL]` — chờ Project Owner duyệt. Thay cho phần mở đầu của `PROLOGUE_V2_DESIGN.md`; giữ nguyên bản đồ, NPC, boss và art đã duyệt.
+**Trạng thái:** `[APPROVED]` — Owner duyệt 2026-11-12 với các quyết định ở §5. Thay cho phần mở đầu của `PROLOGUE_V2_DESIGN.md`; giữ nguyên bản đồ, NPC, boss và art đã duyệt.
 **Yêu cầu của Owner (2026-11-12):** Peter sống một cuộc đời bình thường; đồ vật trong phòng phải đời thường, không "cao siêu"; một biến cố đột ngột buộc anh phải chiến đấu; vũ khí và kỹ năng có nguồn gốc rõ ràng; có người dẫn lối.
 **Canon giữ nguyên:** không giải thích vì sao Peter là Unwritten (OQ-01) — chỉ gợi ý; Kuro không xuất hiện (chỉ còn "khuôn mặt mờ" trong ảnh); Conceptual Erasure diễn ra từ từ.
 
@@ -10,7 +10,7 @@
 
 Peter, 26 tuổi, **thợ sửa đồng hồ** ở thị trấn ven biển Khánh Hòa, sống trên căn gác của tiệm đồng hồ cũ ông nội để lại. Nghề này đời thường nhưng gắn sẵn với chủ đề thời gian, nên khi thời gian vỡ, chính đôi mắt quen nhìn từng bánh răng của anh là thứ nhận ra trước tiên.
 
-Động lực của Peter **mang tính cá nhân**, không phải sứ mệnh vũ trụ: sau biến cố, một người trong thị trấn đã bị quên hẳn, và chỉ mình Peter còn nhớ. Sáu Quyền Năng là sứ mệnh của người dẫn lối; Peter đi theo vì muốn hiểu chuyện gì đã cướp mất người đó.
+Động lực của Peter **mang tính cá nhân**, không phải sứ mệnh vũ trụ: anh bảo vệ những người quen (Cô Ba, Ông Sáu) và muốn hiểu điều gì đã xảy ra với chính mình — vì sao chỉ mình anh không bị đóng băng. Sáu Quyền Năng là sứ mệnh của người dẫn lối; Peter đi theo vì muốn hiểu chuyện gì đã cướp mất người đó.
 
 ---
 
@@ -50,7 +50,7 @@ Peter, 26 tuổi, **thợ sửa đồng hồ** ở thị trấn ven biển Khán
 
 - **Vệ Binh Chìm Trong Sóng** giữ "giây phút ngưng đọng" của thị trấn. Trận boss giữ nguyên cơ chế thấu kính.
 - Giải thoát Vệ Binh → **thời gian ở thị trấn chạy lại**.
-- **Cái giá:** quay về thị trấn, Cô Ba chỉ dọn **một** đĩa bánh căn, không còn nhớ thói quen hai đĩa; chiếc ghế nhựa thứ hai biến mất. **Chỉ Peter còn nhớ.** (Conceptual Erasure, từ từ.)
+- **Dư âm (giữ bí ẩn — Owner):** thời gian chạy lại, mọi người sinh hoạt như cũ, không ai nhớ giây phút ngưng đọng. Không cho thấy ai bị quên; chỉ còn một cảm giác lạ ở Peter (ví dụ: chiếc đồng hồ của ông nội vẫn chạy ngược khi không ai nhìn). Việc tiết lộ để dành cho các chương sau.
 - Bia đá UNWRITTEN trên hải đăng: _ĐỐI TƯỢNG: UNWRITTEN — NHẬN DIỆN: KHÔNG HOÀN CHỈNH — PHÂN LOẠI: BẤT KHẢ THI._ Elder nhìn Peter, không giải thích.
 - Peter quyết định đi cùng Elder để tìm hiểu ai đã bị quên — **lựa chọn cá nhân** dẫn sang Chapter 1.
 
@@ -81,9 +81,33 @@ Không cần bản đồ mới. Không đổi trận Vệ Binh.
 
 ---
 
-## 5. Câu hỏi cho Owner
+## 5. Quyết định của Owner (2026-11-12)
 
-1. **Người dẫn lối:** Elder (khuyến nghị — đã có sprite, gắn sẵn với điện thờ) hay một nhân vật mới?
-2. **Nghề của Peter:** thợ sửa đồng hồ (khuyến nghị) hay nghề khác?
-3. **Trận đầu không vũ khí:** trận đấu có sự kiện giữa trận (khuyến nghị, kịch tính hơn) hay chỉ là đoạn thoại rồi mới vào trận (rẻ hơn)?
-4. **Cái giá cuối Prologue:** Cô Ba quên thói quen hai đĩa (khuyến nghị) — hay giữ bí ẩn hơn?
+1. **Người dẫn lối:** Elder (Người Ghi Chép Thời Gian).
+2. **Nghề của Peter:** thợ sửa đồng hồ, tiệm của ông nội.
+3. **Trận đầu:** trận đấu có **sự kiện giữa trận** (Peter chỉ né/phòng thủ được; Elder chen vào ném kiếm; trận tiếp tục).
+4. **Kết:** **giữ bí ẩn** — không cho thấy ai bị quên (xem Hồi 5).
+
+---
+
+## 6. Hợp đồng dữ liệu (để Claude và Antigravity làm song song)
+
+**Cờ (snake_case):**
+
+| Cờ                                                                | Bật khi                                                          |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `inspected_room_watch`, `has_room_key`, `inspected_room_notebook` | (giữ như cũ)                                                     |
+| `elder_visited_shop`                                              | Elder ghé tiệm nhờ sửa la bàn (Hồi 1)                            |
+| `delivered_repaired_watch`                                        | Peter giao đồng hồ cho khách — **kích hoạt biến cố**             |
+| `time_frozen`                                                     | Thời gian ngừng (Hồi 2) — thị trấn đổi sang trạng thái đóng băng |
+| `has_broken_blade`                                                | Elder ném kiếm giữa trận đầu — mở lệnh **[1] TẤN CÔNG**          |
+| `defeated_first_shade`                                            | Thắng trận đầu                                                   |
+| `learned_temporal_sight`                                          | Đồng hồ ông nội chạy ngược (Hồi 3) — mở lệnh **[2] KỸ NĂNG**     |
+| `elder_joined`                                                    | Peter đồng ý đi cùng Elder                                       |
+| `time_restored`                                                   | Vệ Binh được giải thoát — thị trấn chạy lại                      |
+
+**Trận đầu (`enemies.json`, Claude):** quái `enemy_rift_shade_first` với `script`: khóa [1]/[2]; ở lượt thứ 2 hiện thoại `battle_elder_intervenes` (từng dòng trong khung nhật ký trận), bật `has_broken_blade`, mở [1].
+
+**Thoại cần có (`dialogue.json`, Antigravity):** `room_*` (đời thường), `elder_shop_visit`, `town_time_stops`, `battle_elder_intervenes` (2–4 dòng ngắn, mỗi dòng ≤ 90 ký tự), `elder_after_first_battle`, `grandfather_watch_awakens`, `elder_explains_frozen_town`, các thoại `*_frozen` cho NPC/điểm tương tác khi `time_frozen`, `town_time_restored`; Elder ở điện thờ chuyển sang giọng người thầy.
+
+**Theo cờ (Claude, engine + maps.json):** NPC và điểm tương tác chọn thoại theo cờ (`dialogueRules` với `ifFlag`), NPC đứng yên + ám xanh xám khi `time_frozen` chưa `time_restored`.
