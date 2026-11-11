@@ -1,7 +1,7 @@
 # THIẾT KẾ CHI TIẾT PROLOGUE V2: "THE LAST MEMORY" (KÝ ỨC CUỐI CÙNG)
 
 **Mã tài liệu:** `docs/story/PROLOGUE_V2_DESIGN.md`  
-**Trạng thái:** `[PROPOSAL]` – Chờ duyệt từ Project Owner  
+**Trạng thái:** `[APPROVED]` – Owner duyệt 2026-11-11 kèm các chỉnh sửa của Coordinator (xem §9). Chi tiết gắn `[PROPOSAL]` bên dưới được coi là đã duyệt cho Prologue.  
 **Tham chiếu Canon:** `STORY_PROLOGUE.md`, `CANON_AND_OPEN_QUESTIONS.md`, `CHARACTER_BIBLE.md` (§Peter), `CHANGELOG.md` [1.1.0]
 
 ---
@@ -103,7 +103,7 @@ Mỗi map sử dụng ô tile 32×32 px, kích thước tối đa ≤ 30×20 til
 ## 3. Danh Sách Nhân Vật (NPCs)
 
 1. **Peter (Nhân vật chính):**
-   - _Tạo hình:_ Nam giới trưởng thành (~26 tuổi), dáng người thực tế; tóc xoăn tít bồng bềnh tự nhiên thành khối tròn gọn gàng bao phủ cả đầu (Curly Hair Lock); áo khoác xanh than vạt xéo, đai da chéo vai, mắt xám xanh tĩnh lặng.
+   - _Tạo hình:_ Nam giới trưởng thành (~26 tuổi), dáng người thực tế; tóc xoăn ngắn, gọn (short curly hair), lọn xoăn tự nhiên phủ đều cả đầu (Curly Hair Lock); áo khoác xanh than vạt xéo, đai da chéo vai, mắt xám xanh tĩnh lặng.
 2. **Cô Ba Bánh Căn (`npc_vendor_ba_ba`):**
    - _Mô tả cho họa sĩ:_ Phụ nữ Nam Trung Bộ ~45 tuổi, áo bà ba nâu nhạt, quàng khăn rằn, nét mặt hiền hậu đượm chút âu lo, tay cầm muôi đổ bột bánh căn trên lò than đất nung.
    - _Bản đồ:_ `map_coastal_town`.
@@ -123,14 +123,14 @@ Mỗi map sử dụng ô tile 32×32 px, kích thước tối đa ≤ 30×20 til
 
 ### Bảng Nhiệm Vụ
 
-| Quest ID                     | Tên Nhiệm Vụ                | Mục Tiêu Chính                                                        | Phần Thưởng                                             | Follow-up Quest              |
-| :--------------------------- | :-------------------------- | :-------------------------------------------------------------------- | :------------------------------------------------------ | :--------------------------- |
-| `quest_prologue_awaken`      | Ký Ức Trong Căn Gác         | Nhặt Sổ tay, Đồng hồ, tìm Chìa khóa đồng và mở cửa phòng              | `relic_chronometer`, +10 EXP                            | `quest_prologue_town`        |
-| `quest_prologue_town`        | Lời Thì Thầm Của Biển       | Nói chuyện với Cô Ba, khảo sát Mảnh Đất Trống, nghe Ông Sáu chỉ đường | Bánh Căn Ấm Nóng (hồi 35 HP), +20 EXP                   | `quest_prologue_forest`      |
-| `quest_prologue_forest`      | Lối Mòn Tro Bụi             | Vượt qua mê cung sương mù, trấn áp Dị thể Bóng Đen, tìm thấy cửa đền  | `chrono_shard_minor`, +25 EXP                           | `quest_prologue_antechamber` |
-| `quest_prologue_antechamber` | Điện Thờ Rạn Nứt            | Tiếp kiến Elder, kết nối Altar of Moments, làm quen 7 POI cổ          | `ancient_gear`, Mở khóa skill `temporal_sight`, +40 EXP | `quest_prologue_sentinel`    |
-| `quest_prologue_sentinel`    | Người Gác Biển Bị Lãng Quên | Kích hoạt 2 đòn bẩy thấu kính hải đăng, hóa giải The Drowned Sentinel | `sentinel_core_relic`, +60 EXP (Level Up 3)             | `quest_prologue_unwritten`   |
-| `quest_prologue_unwritten`   | Kẻ Không Được Ghi Tên       | Đọc Bia Đá Cổ, thấu hiểu vị thế UNWRITTEN, tiến vào Cổng Ngưỡng       | Chuyển cảnh Prologue End Scene                          | Handoff Chapter 1            |
+| Quest ID                     | Tên Nhiệm Vụ                | Mục Tiêu Chính                                                        | Phần Thưởng                                 | Follow-up Quest              |
+| :--------------------------- | :-------------------------- | :-------------------------------------------------------------------- | :------------------------------------------ | :--------------------------- |
+| `quest_prologue_awaken`      | Ký Ức Trong Căn Gác         | Nhặt Sổ tay, Đồng hồ, tìm Chìa khóa đồng và mở cửa phòng              | `relic_chronometer`, +10 EXP                | `quest_prologue_town`        |
+| `quest_prologue_town`        | Lời Thì Thầm Của Biển       | Nói chuyện với Cô Ba, khảo sát Mảnh Đất Trống, nghe Ông Sáu chỉ đường | Bánh Căn Ấm Nóng (hồi 35 HP), +20 EXP       | `quest_prologue_forest`      |
+| `quest_prologue_forest`      | Lối Mòn Tro Bụi             | Vượt qua mê cung sương mù, trấn áp Dị thể Bóng Đen, tìm thấy cửa đền  | `chrono_shard_minor`, +25 EXP               | `quest_prologue_antechamber` |
+| `quest_prologue_antechamber` | Điện Thờ Rạn Nứt            | Tiếp kiến Elder, kết nối Altar of Moments, làm quen 7 POI cổ          | `ancient_gear`, +40 EXP                     | `quest_prologue_sentinel`    |
+| `quest_prologue_sentinel`    | Người Gác Biển Bị Lãng Quên | Kích hoạt 2 đòn bẩy thấu kính hải đăng, hóa giải The Drowned Sentinel | `sentinel_core_relic`, +60 EXP (Level Up 3) | `quest_prologue_unwritten`   |
+| `quest_prologue_unwritten`   | Kẻ Không Được Ghi Tên       | Đọc Bia Đá Cổ, thấu hiểu vị thế UNWRITTEN, tiến vào Cổng Ngưỡng       | Chuyển cảnh Prologue End Scene              | Handoff Chapter 1            |
 
 ### Danh Sách Cờ Cốt Truyện (`storyFlags` - snake_case)
 
@@ -207,10 +207,10 @@ Mỗi nút hội thoại tuân thủ nghiêm ngặt tối đa ≤ 2 lựa chọn
 ### 6.3. Điện Thờ Đổ Nát (Elder Chronographer thích ứng)
 
 - **Elder Chronographer (`npc_elder`):**
-  - Node 1: _"Ngươi đã tới, kẻ mang dòng dõi không tên. Sóng thời gian ngoài kia đang xô lệch trật tự của sáu Đấng Quyền Năng."_
+  - Node 1: _"Ngươi đã tới. Ta đã đợi một người nhìn thấy được những gì thế giới bỏ quên. Sóng thời gian ngoài kia đang xô lệch trật tự của sáu Quyền Năng."_
   - Lựa chọn 1: [Tôi là ai?] -> Node 2A
   - Lựa chọn 2: [Thị trấn đang bị gì?] -> Node 2B
-  - Node 2A: _"Ngay cả bia đá Thần thánh cũng không ghi chép bản mệnh của ngươi. Ngươi là sự bất khả thi còn sót lại."_
+  - Node 2A: _"Câu hỏi ấy ta không trả lời được. Có những điều chỉ ngọn hải đăng còn giữ. Hãy tự mình đọc lấy."_
   - Node 2B: _"Sự Xóa Bỏ Khái Niệm. Khi một nhánh thực tại rạn nứt, những gì gắn liền với nó sẽ tan biến như bọt sóng."_
   - Node 3 (Tiễn biệt): _"Hãy tới Ngọn Hải Đăng Cổ. Thắp sáng ngọn đèn và đối diện với kẻ canh gác bị lãng quên."_
 
@@ -228,28 +228,39 @@ Mỗi nút hội thoại tuân thủ nghiêm ngặt tối đa ≤ 2 lựa chọn
 
 ## 7. Danh Mục Tài Nguyên Đồ Họa Cần Thiết (Asset List Table)
 
-Tối đa hóa việc tái sử dụng tài nguyên hiện hữu để tiết kiệm công sức vẽ tay (Pipeline B).
+Thông số theo engine hiện tại: tile 32×32 px, không extrude; nhân vật/NPC/quái thường 32×32 px/frame. Vẽ mới bằng Pipeline B, owner duyệt từng candidate.
 
-| Asset Key                 | Loại Tài Nguyên      | Kích Thước / Quy Cách  | Mức Độ Ưu Tiên                 | Ghi Chú & Tái Sử Dụng                                       |
-| :------------------------ | :------------------- | :--------------------- | :----------------------------- | :---------------------------------------------------------- |
-| `tileset_dungeon`         | Tileset              | 32×32 tiles (extruded) | **Đã có**                      | Tái sử dụng trọn vẹn cho `map_shattered_antechamber`.       |
-| `tileset_coastal_town`    | Tileset              | 32×32 tiles (extruded) | **Bắt buộc (Must)** [PROPOSAL] | Nhà cửa làng chài, cát biển, bến thuyền miền Trung.         |
-| `tileset_lighthouse_rock` | Tileset              | 32×32 tiles (extruded) | **Bắt buộc (Must)** [PROPOSAL] | Mỏm đá đen, vách đá bazan, cầu thang đá ngọn hải đăng.      |
-| `char_peter_sheets`       | Sprite / Sheets      | 32×48 px / 4 hướng     | **Đã có**                      | Đã duyệt: `CHAR_PETER_001` (di chuyển) & `003` (chiến đấu). |
-| `npc_elder`               | Sprite NPC           | 32×48 px / tĩnh        | **Đã có**                      | Tái sử dụng nguyên vẹn sprite Elder trong Antechamber.      |
-| `npc_coastal_vendor`      | Sprite NPC           | 32×48 px / 2 frames    | **Bắt buộc (Must)** [PROPOSAL] | Cô Ba bán bánh căn quàng khăn rằn (Pipeline B vẽ tay).      |
-| `npc_coastal_fisherman`   | Sprite NPC           | 32×48 px / 2 frames    | **Nên có (Nice)** [PROPOSAL]   | Ông Sáu ngư dân ngồi vá lưới.                               |
-| `mob_temporal_shade`      | Enemy Combat         | 48×48 px / 4 frames    | **Đã có**                      | Tái sử dụng `enemy_fracture` / `MOB_SHADE_001`.             |
-| `boss_drowned_sentinel`   | Boss Combat          | 64×64 px / 4 frames    | **Bắt buộc (Must)** [PROPOSAL] | Giáp đồng cổ bám rêu biển và hào quang sóng nước.           |
-| `prop_interactables_v3`   | Props Atlas          | Đa kích thước 32–64 px | **Đã có**                      | Bàn thờ, bia đá, đồng hồ hỗn thiên nghi, hòm di vật.        |
-| `prop_coastal_props`      | Props Atlas          | 32×32 / 32×64 px       | **Nên có (Nice)** [PROPOSAL]   | Thúng chai, đòn bẩy thấu kính, lò bánh căn.                 |
-| `ui_set_001`              | UI NineSlice / Frame | 48×48 px (16px corner) | **Đã có**                      | Tái sử dụng khung thoại, hộp nhiệm vụ, menu chiến đấu.      |
+| Asset                     | Loại               | Quy cách                                  | Ưu tiên  | Ghi chú                                                                                                     |
+| :------------------------ | :----------------- | :---------------------------------------- | :------- | :---------------------------------------------------------------------------------------------------------- |
+| `dungeon_tileset`         | Tileset            | 32×32, có sẵn (`ENV_SANCTUARY_002`)       | Đã có    | `map_shattered_antechamber` (bố cục chỉnh lại cho lối vào/ra).                                              |
+| `coastal_tileset`         | Tileset            | 32×32                                     | **Must** | Thị trấn (cát, dừa, nhà ngói vách vôi, bến thuyền) **+ nội thất phòng Peter** (sàn gỗ, giường, bàn, kệ).    |
+| `wilds_tileset`           | Tileset            | 32×32                                     | **Must** | Rừng Quên Lãng (rễ cây, sương, vết nứt tím tro) **+ mỏm đá hải đăng** (bazan, tháp đá đen, thấu kính, bia). |
+| Peter idle/walk/combat    | Spritesheet        | 32×32, có sẵn (`CHAR_PETER_002/003`)      | Đã có    |                                                                                                             |
+| `npc_elder`               | Spritesheet        | 32×32 × 4 frame, có sẵn (`NPC_ELDER_001`) | Đã có    |                                                                                                             |
+| `npc_vendor_ba`           | Spritesheet        | 32×32 × 4 frame idle                      | **Must** | Cô Ba bánh căn.                                                                                             |
+| `npc_fisherman_sau`       | Spritesheet        | 32×32 × 4 frame idle                      | Nice     | Ông Sáu vá lưới (ngồi).                                                                                     |
+| `npc_forgotten_child`     | Spritesheet        | 32×32 × 2 frame, mờ/nhòe                  | Nice     | Quest phụ đứa trẻ bị lãng quên (§9).                                                                        |
+| `enemy_fracture`          | Spritesheet        | 32×32 × 4 frame, có sẵn (`MOB_SHADE_001`) | Đã có    | Quái thường ở rừng.                                                                                         |
+| `boss_drowned_sentinel`   | Spritesheet        | 64×64 × 4 frame (+ 1 frame "quỳ gối")     | **Must** | Hiển thị ở combat; ở bản đồ dùng cùng sheet.                                                                |
+| Đạo cụ ven biển           | Tile trong tileset | 32×32 / 32×64                             | Nice     | Lò bánh căn, thúng chai, đòn bẩy thấu kính (nằm trong 2 tileset trên).                                      |
+| `ui_frame`, cursor, spark | UI                 | có sẵn (`UI_SET_001`)                     | Đã có    |                                                                                                             |
 
 ---
 
-## 8. Các Câu Hỏi Mở Cần Project Owner Phê Duyệt (Open Questions)
+## 8. Quyết Định Của Owner (thay cho Open Questions, 2026-11-11)
 
-1. **[OQ-PROLOGUE-01] Mức độ xuất hiện của manh mối Kuro:** Khung ảnh trong phòng Peter có nên cho phép Peter lờ mờ nhớ ra một cái tên bắt đầu bằng chữ "K..." hay chỉ dừng lại ở cảm giác "một người bạn thiếu niên vô cùng quan trọng" để giữ trọn vẹn sự xuất hiện ở Chapter 4?
-2. **[OQ-PROLOGUE-02] Tương tác xoay thấu kính trong Combat:** Cơ chế đòn bẩy xoay thấu kính ngọn hải đăng nên được thực hiện trực tiếp bên trong `CombatScene` qua danh mục lệnh đặc biệt (`CommandPanel`), hay người chơi phải giải đố môi trường trên bản đồ trước khi bước vào chạm trán Sentinel?
-3. **[OQ-PROLOGUE-03] Ưu tiên sản xuất Tileset:** Trong 2 tileset mới (`tileset_coastal_town` và `tileset_lighthouse_rock`), Owner có muốn gộp chung thành một tileset bờ biển tổng hợp 32×32 px để tối ưu hóa Texture Atlas không?
-4. **[OQ-PROLOGUE-04] Thời điểm gia nhập của đồng hành đầu tiên:** Prologue hoàn toàn là hành trình độc hành của Peter để khắc họa rõ nét sự cô độc của kẻ Unwritten, điều này đã hoàn toàn khớp với ý đồ của Owner chưa?
+1. **Manh mối Kuro:** chỉ dừng ở cảm giác "một người bạn rất quan trọng"; **không** để lộ chữ cái tên. Câu "đứa nhỏ tóc đen" của Cô Ba được giữ (gợi ý gián tiếp).
+2. **Thấu kính:** là **lệnh môi trường trong combat** (`CombatScene`), xây dạng dữ liệu (boss phases + environment actions trong `enemies.json`) để tái dùng cho boss các chương sau.
+3. **Tileset:** gộp thành 2 bộ `coastal_tileset` và `wilds_tileset` (§7).
+4. **Đồng hành:** Prologue Peter đi một mình. Đồng hành đầu tiên theo Story Bible (Lyra, Chapter 2).
+
+---
+
+## 9. Chỉnh Sửa Của Coordinator (đã được owner duyệt)
+
+- **Nhãn Thời Gian là năng lực bẩm sinh** của Peter (khớp canon: Peter nhận ra Residual Existence), dùng được từ đầu game cả ngoài bản đồ lẫn trong combat; bỏ phần "mở khóa" ở Antechamber.
+- **Elder không tiết lộ trước bia UNWRITTEN:** né câu hỏi "Tôi là ai?" và hướng Peter tới hải đăng (đã sửa thoại §6.3).
+- **The Empty Seat:** gộp vào cảnh Cô Ba dọn hai đĩa bánh căn và một chiếc ghế nhựa luôn để trống cạnh bàn Peter.
+- **Đứa trẻ bị lãng quên** `[Nice]`: quest phụ nhỏ ở thị trấn — đôi dép trẻ con trước một hiên nhà không ai nhận; Peter thấy một bóng trẻ nhòe mờ, giúp nó "được nhớ" bằng cách đặt đôi dép lại chỗ cũ (`quest_prologue_forgotten_child`, cờ `returned_child_sandals`).
+- **Người gác hải đăng:** không cần sprite riêng — khi Sentinel tan biến, ký ức của người gác đèn hiện lên qua một đoạn thoại. _[PROPOSAL, chờ owner]: Sentinel có phải chính là người gác đèn bị thời gian nhấn chìm hay không._
+- **Tông thoại:** Elder và Sentinel xưng "ta / ngươi"; người thị trấn xưng hô đời thường miền Trung ("cậu", "tui", "con").
