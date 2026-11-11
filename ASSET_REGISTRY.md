@@ -14,7 +14,7 @@
 | -------------------------- | ----- | ------------------------------------------------------------------- |
 | `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`)               |
 | `INTEGRATED`               | 11    | Approved art in engine (Peter ×2, Shade, Elder, tileset ×2, UI set) |
-| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review                           |
+| `CONCEPT_PENDING_APPROVAL` | 2     | Concept generated; awaiting formal review                           |
 | `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared                          |
 | `PLACEHOLDER_TEMPORARY`    | 3     | Procedural placeholder assets active in engine                      |
 
@@ -138,6 +138,18 @@
 - **Content:** verdigris bronze armour, barnacles, kelp, fin crest, cold cyan eyes in the visor, broken halberd, a shell of frozen sea-water around him. Frames 0-3 idle (film shimmer, kelp sway, 1 px bob); frame 4 released (kneeling, head bowed, film shattered into rising motes).
 - **Validation:** PASSED (the validator's centring warning assumes 32 px frames and does not apply to 64 px).
 - **Status:** `INTEGRATED` — owner approved 2026-11-12 (encounter placed with the boss mechanic, T-34).
+
+### `NPC_FISHERMAN_SAU_001_CAND` – Ông Sáu, old fisherman (v1)
+
+- **Generator:** `scripts/author-npc-sprites.js` (`--sheets=fisherman_sau`) · **File:** `art-source/npcs/fisherman_sau/generated/candidates/fisherman_sau_idle_v1.png` (128 × 32, 4 frames) · preview ×8
+- **Content:** nón lá, grey stubble, faded blue shirt, sitting cross-legged mending a green net with orange floats; the wooden shuttle moves through the mesh, slight breathing.
+- **Validation:** PASSED. **Status:** `CONCEPT_PENDING_APPROVAL` (T-36).
+
+### `NPC_FORGOTTEN_CHILD_001_CAND` – The forgotten child (v1)
+
+- **Generator:** `scripts/author-npc-sprites.js` (`--sheets=forgotten_child`) · **File:** `art-source/npcs/forgotten_child/generated/candidates/forgotten_child_idle_v1.png` (64 × 32, 2 frames) · preview ×8
+- **Content:** small barefoot child, faceless and semi-transparent, ~16 % of pixels missing (different per frame, so the figure flickers) with cold chronal motes — Residual Existence, not a ghost story.
+- **Validation:** PASSED. **Status:** `CONCEPT_PENDING_APPROVAL` (T-36).
 
 ## 3. Active Placeholder Registry
 

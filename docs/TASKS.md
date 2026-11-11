@@ -29,7 +29,7 @@ Goal (owner, 2026-11-11): rebuild the Prologue per `docs/story/PROLOGUE_V2_DESIG
 
 ### T-36 · Sprites: Ông Sáu + the forgotten child (Pipeline B)
 
-- **Assignee:** Claude · **Status:** IN PROGRESS
+- **Assignee:** Claude · **Status:** BLOCKED — `NPC_FISHERMAN_SAU_001_CAND`, `NPC_FORGOTTEN_CHILD_001_CAND` awaiting owner approval
 - **Locks:** `scripts/author-npc-sprites.js`, `art-source/npcs/`
 - Ông Sáu sitting and mending a net (4-frame idle); the forgotten child as a half-erased silhouette (2-frame flicker). Owner approval.
 
