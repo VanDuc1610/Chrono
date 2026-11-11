@@ -25,6 +25,9 @@ Per map (`maps[id]`):
 | `exits`               | tile area → `toMap` + `toSpawn`; `requiresFlag` + `lockedDialogueId` to gate     |
 | `triggers`            | `arrive` or `zone`; fire once (`onceFlag`); `effects` and/or `dialogueId`        |
 
+`visions` (texture, tile, `dialogueId`) fade in while that dialogue node plays and dissolve when
+it ends — for fleeting apparitions (Residual Existence), e.g. the forgotten child.
+
 `aliases` lets old save ids resolve (`prologue_sanctuary` → `map_shattered_antechamber`).
 `startMapId` is where a new game begins. A dialogue node with `effects.endPrologue` plays the
 Prologue ending when that dialogue closes.

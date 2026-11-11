@@ -69,6 +69,7 @@ export class ExplorationScene extends Phaser.Scene {
 
   // Scene-local state (reset in init on every entry)
   private encounterSprites: Phaser.Physics.Arcade.Sprite[] = [];
+  private visionSprites: Phaser.GameObjects.Sprite[] = [];
   private isTransitioning = false;
   private pendingEnding = false;
   private lockedExitShown: string | null = null;
@@ -113,6 +114,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.lockedExitShown = null;
     this.exitsArmed = false;
     this.encounterSprites = [];
+    this.visionSprites = [];
     this.session = getSession(this);
     this.pendingNotice = data?.notice ?? null;
     this.pendingDialogueId = data?.openDialogueId ?? null;
@@ -140,7 +142,11 @@ export class ExplorationScene extends Phaser.Scene {
         this.applyEffects(event.node.effects);
         if (event.node.effects.endPrologue) this.pendingEnding = true;
       }
-      if (event.type === 'dialogue_ended' && this.pendingEnding) this.startPrologueEnding();
+      if (event.type === 'node_changed' && event.node) this.summonVisions(event.node.id);
+      if (event.type === 'dialogue_ended') {
+        this.dismissVisions();
+        if (this.pendingEnding) this.startPrologueEnding();
+      }
     });
 
     this.buildMap();
@@ -261,6 +267,33 @@ export class ExplorationScene extends Phaser.Scene {
       this.physics.add.collider(this.player.sprite, npc.sprite);
       this.interactionSystem.register(npc);
     }
+  }
+
+  /** Fades in the map's visions tied to this dialogue node (Residual Existence). */
+  private summonVisions(dialogueId: string): void {
+    for (const def of this.mapDef.visions ?? []) {
+      if (def.dialogueId !== dialogueId) continue;
+      const pos = tileCenter(def.tile);
+      const sprite = this.add.sprite(pos.x, pos.y, def.texture, 0).setAlpha(0).setDepth(5);
+      if (def.anim && this.anims.exists(def.anim)) sprite.play(def.anim);
+      this.tweens.add({ targets: sprite, alpha: 1, duration: 900, ease: 'Sine.easeOut' });
+      this.visionSprites.push(sprite);
+    }
+  }
+
+  /** Visions dissolve, drifting up a little, when the dialogue closes. */
+  private dismissVisions(): void {
+    for (const sprite of this.visionSprites) {
+      this.tweens.add({
+        targets: sprite,
+        alpha: 0,
+        y: sprite.y - 6,
+        duration: 1200,
+        ease: 'Sine.easeIn',
+        onComplete: () => sprite.destroy(),
+      });
+    }
+    this.visionSprites = [];
   }
 
   private spawnInteractables(): void {

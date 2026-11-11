@@ -149,19 +149,22 @@
           "prompt": "[E] Nói chuyện với Cô Ba",
           "radius": 72,
           "dialogueId": "npc_vendor_ba_ba"
-        }
-      ],
-      "interactables": [
+        },
         {
           "id": "npc_fisherman_sau",
+          "texture": "npc_fisherman_sau",
+          "anim": "npc_fisherman_sau_idle",
           "tile": {
             "x": 16,
             "y": 13
           },
-          "radius": 44,
+          "name": "Ông Sáu",
           "prompt": "[E] Nói chuyện với Ông Sáu",
+          "radius": 48,
           "dialogueId": "npc_fisherman_sau"
-        },
+        }
+      ],
+      "interactables": [
         {
           "id": "poi_empty_lot",
           "tile": {
@@ -218,7 +221,19 @@
           "toSpawn": "from_town"
         }
       ],
-      "triggers": []
+      "triggers": [],
+      "visions": [
+        {
+          "id": "vision_forgotten_child",
+          "texture": "npc_forgotten_child",
+          "anim": "npc_forgotten_child_flicker",
+          "tile": {
+            "x": 13,
+            "y": 4
+          },
+          "dialogueId": "poi_child_sandals_return"
+        }
+      ]
     },
     "map_shattered_antechamber": {
       "id": "map_shattered_antechamber",

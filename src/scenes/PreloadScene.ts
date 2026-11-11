@@ -133,6 +133,16 @@ export class PreloadScene extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32,
     });
+    // Ông Sáu (NPC_FISHERMAN_SAU_001): 4-frame idle; the forgotten child (NPC_FORGOTTEN_CHILD_001):
+    // 2-frame flicker, semi-transparent.
+    this.load.spritesheet('npc_fisherman_sau', 'assets/npcs/fisherman_sau_idle.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet('npc_forgotten_child', 'assets/npcs/forgotten_child_idle.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
     // The Drowned Sentinel (BOSS_SENTINEL_001): frames 0-3 idle, 4 released (kneeling), 64x64.
     this.load.spritesheet('boss_sentinel', 'assets/enemies/sentinel.png', {
       frameWidth: 64,
@@ -194,6 +204,22 @@ export class PreloadScene extends Phaser.Scene {
       this.anims.create({
         key: 'npc_vendor_ba_idle',
         frames: this.anims.generateFrameNumbers('npc_vendor_ba', { start: 0, end: 3 }),
+        frameRate: 4,
+        repeat: -1,
+      });
+    }
+    if (!this.anims.exists('npc_fisherman_sau_idle')) {
+      this.anims.create({
+        key: 'npc_fisherman_sau_idle',
+        frames: this.anims.generateFrameNumbers('npc_fisherman_sau', { start: 0, end: 3 }),
+        frameRate: 3,
+        repeat: -1,
+      });
+    }
+    if (!this.anims.exists('npc_forgotten_child_flicker')) {
+      this.anims.create({
+        key: 'npc_forgotten_child_flicker',
+        frames: this.anims.generateFrameNumbers('npc_forgotten_child', { start: 0, end: 1 }),
         frameRate: 4,
         repeat: -1,
       });

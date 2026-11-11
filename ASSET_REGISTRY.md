@@ -13,8 +13,8 @@
 | Status Tier                | Count | Description                                                         |
 | -------------------------- | ----- | ------------------------------------------------------------------- |
 | `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`)               |
-| `INTEGRATED`               | 11    | Approved art in engine (Peter ×2, Shade, Elder, tileset ×2, UI set) |
-| `CONCEPT_PENDING_APPROVAL` | 2     | Concept generated; awaiting formal review                           |
+| `INTEGRATED`               | 13    | Approved art in engine (Peter ×2, Shade, Elder, tileset ×2, UI set) |
+| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review                           |
 | `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared                          |
 | `PLACEHOLDER_TEMPORARY`    | 3     | Procedural placeholder assets active in engine                      |
 
@@ -139,17 +139,17 @@
 - **Validation:** PASSED (the validator's centring warning assumes 32 px frames and does not apply to 64 px).
 - **Status:** `INTEGRATED` — owner approved 2026-11-12 (encounter placed with the boss mechanic, T-34).
 
-### `NPC_FISHERMAN_SAU_001_CAND` – Ông Sáu, old fisherman (v1)
+### `NPC_FISHERMAN_SAU_001` – Ông Sáu, old fisherman (v1) — INTEGRATED
 
-- **Generator:** `scripts/author-npc-sprites.js` (`--sheets=fisherman_sau`) · **File:** `art-source/npcs/fisherman_sau/generated/candidates/fisherman_sau_idle_v1.png` (128 × 32, 4 frames) · preview ×8
+- **Generator:** `scripts/author-npc-sprites.js` (`--sheets=fisherman_sau`) · **File:** `art-source/npcs/fisherman_sau/generated/approved/fisherman_sau_idle_v1.png` → `public/assets/npcs/fisherman_sau_idle.png` (key `npc_fisherman_sau`, anim `npc_fisherman_sau_idle`) (128 × 32, 4 frames) · preview ×8
 - **Content:** nón lá, grey stubble, faded blue shirt, sitting cross-legged mending a green net with orange floats; the wooden shuttle moves through the mesh, slight breathing.
-- **Validation:** PASSED. **Status:** `CONCEPT_PENDING_APPROVAL` (T-36).
+- **Validation:** PASSED. **Status:** `INTEGRATED` — owner approved 2026-11-12 (T-36).
 
-### `NPC_FORGOTTEN_CHILD_001_CAND` – The forgotten child (v1)
+### `NPC_FORGOTTEN_CHILD_001` – The forgotten child (v1) — INTEGRATED
 
-- **Generator:** `scripts/author-npc-sprites.js` (`--sheets=forgotten_child`) · **File:** `art-source/npcs/forgotten_child/generated/candidates/forgotten_child_idle_v1.png` (64 × 32, 2 frames) · preview ×8
+- **Generator:** `scripts/author-npc-sprites.js` (`--sheets=forgotten_child`) · **File:** `art-source/npcs/forgotten_child/generated/approved/forgotten_child_idle_v1.png` → `public/assets/npcs/forgotten_child_idle.png` (key `npc_forgotten_child`, anim `npc_forgotten_child_flicker`; shown as a map `vision`) (64 × 32, 2 frames) · preview ×8
 - **Content:** small barefoot child, faceless and semi-transparent, ~16 % of pixels missing (different per frame, so the figure flickers) with cold chronal motes — Residual Existence, not a ghost story.
-- **Validation:** PASSED. **Status:** `CONCEPT_PENDING_APPROVAL` (T-36).
+- **Validation:** PASSED. **Status:** `INTEGRATED` — owner approved 2026-11-12 (T-36).
 
 ## 3. Active Placeholder Registry
 

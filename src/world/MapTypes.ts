@@ -95,6 +95,19 @@ export interface MapTriggerDefinition {
   dialogueId?: string;
 }
 
+/**
+ * A fleeting apparition (Residual Existence): fades in while a given dialogue plays and dissolves
+ * when it ends — e.g. the forgotten child nodding once its sandals are put back.
+ */
+export interface MapVisionDefinition {
+  id: string;
+  texture: string;
+  anim?: string;
+  tile: TilePoint;
+  /** Dialogue node that summons it. */
+  dialogueId: string;
+}
+
 export interface MapDefinition {
   id: string;
   /** Display name shown in the HUD. */
@@ -115,6 +128,7 @@ export interface MapDefinition {
   encounters?: MapEncounterDefinition[];
   exits?: MapExitDefinition[];
   triggers?: MapTriggerDefinition[];
+  visions?: MapVisionDefinition[];
 }
 
 export interface MapDatabase {
