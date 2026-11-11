@@ -64,6 +64,25 @@
     "combat.log.defeated": " {target} tan thành bụi thời gian!",
     "combat.log.shielded": " Lớp thủy triều đóng băng hấp thụ phần lớn đòn đánh.",
     "combat.log.stunned": "{target} bị choáng, không thể hành động!",
-    "combat.nameLevel": "{name}  Cấp {level}"
+    "combat.nameLevel": "{name}  Cấp {level}",
+    "menu.tagline": "— CHƯƠNG MỞ ĐẦU —",
+    "menu.newGame": "Trò chơi mới",
+    "menu.continue": "Tiếp tục",
+    "menu.continueNoSave": "Tiếp tục (chưa có bản lưu)",
+    "menu.options": "Tuỳ chọn",
+    "menu.version": "Phiên bản 0.1.0-alpha | Phaser 3 + TypeScript",
+    "menu.footerHint": "[Enter / Nhấp chuột để chọn]",
+    "menu.optionsTitle": "CÀI ĐẶT & ÂM THANH",
+    "menu.soundStatus": "Âm thanh: {state}",
+    "menu.soundMuted": "[ĐÃ TẮT]",
+    "menu.soundEnabled": "[ĐANG BẬT]",
+    "menu.soundHint": "Nhấp vào nút trên để bật / tắt âm thanh",
+    "menu.optionsClose": "[Quay lại màn hình chính / ESC]",
+    "ending.title": "HOÀN THÀNH CHƯƠNG MỞ ĐẦU",
+    "ending.statsPlayer": "{name}  ·  Cấp {level}",
+    "ending.statsQuests": "Nhiệm vụ đã hoàn thành: {completed}/{total}",
+    "ending.statsPlaytime": "Thời gian chơi: {playtime}",
+    "ending.thanks": "Cảm ơn bạn đã trải nghiệm.",
+    "ending.prompt": "[E / Space / Enter] Quay về màn hình chính"
   }
 }

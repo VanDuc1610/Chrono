@@ -3,8 +3,12 @@ import { SaveSystem } from '../systems/save/SaveSystem';
 import { SoundSystem } from '../systems/audio/SoundSystem';
 import { startNewSession, startSessionFromSave } from '../state/GameSession';
 import { createPanel } from '../ui/Panel';
+import { getStrings, type Translate } from '../ui/Strings';
+
+type MenuItemId = 'newGame' | 'continue' | 'options';
 
 interface MenuItem {
+  id: MenuItemId;
   text: string;
   action: () => void;
   enabled: boolean;
@@ -21,13 +25,21 @@ export class MainMenuScene extends Phaser.Scene {
   private optionsContainer!: Phaser.GameObjects.Container;
   private isOptionsOpen = false;
   private soundStatusText!: Phaser.GameObjects.Text;
+  private t!: Translate;
 
   constructor() {
     super({ key: 'MainMenuScene' });
   }
 
+  public init(): void {
+    this.selectedIndex = 0;
+    this.isOptionsOpen = false;
+    this.menuItems = [];
+  }
+
   public create(): void {
     const { width, height } = this.scale;
+    this.t = getStrings(this);
 
     // Atmospheric Dark Sky background with starry gradient
     this.createBackground(width, height);
@@ -54,7 +66,7 @@ export class MainMenuScene extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.add
-      .text(width / 2, height * 0.39, '— PROLOGUE VERTICAL SLICE —', {
+      .text(width / 2, height * 0.39, this.t('menu.tagline'), {
         fontFamily: 'monospace',
         fontSize: '9px',
         color: '#657499',
@@ -67,17 +79,20 @@ export class MainMenuScene extends Phaser.Scene {
     // Menu Options
     this.menuItems = [
       {
-        text: 'NEW GAME',
+        id: 'newGame',
+        text: this.t('menu.newGame'),
         enabled: true,
         action: () => this.startNewGame(),
       },
       {
-        text: hasSavedGame ? 'CONTINUE' : 'CONTINUE (NO SAVE)',
+        id: 'continue',
+        text: hasSavedGame ? this.t('menu.continue') : this.t('menu.continueNoSave'),
         enabled: hasSavedGame,
         action: () => this.continueGame(),
       },
       {
-        text: 'OPTIONS',
+        id: 'options',
+        text: this.t('menu.options'),
         enabled: true,
         action: () => this.toggleOptionsModal(),
       },
@@ -138,7 +153,7 @@ export class MainMenuScene extends Phaser.Scene {
 
     // Version & Footer
     this.add
-      .text(12, height - 18, 'v0.1.0-alpha | Phaser 3 + TypeScript', {
+      .text(12, height - 18, this.t('menu.version'), {
         fontFamily: 'monospace',
         fontSize: '9px',
         color: '#434d66',
@@ -146,7 +161,7 @@ export class MainMenuScene extends Phaser.Scene {
       .setOrigin(0, 0);
 
     this.add
-      .text(width - 12, height - 18, '[Enter / Click to Select]', {
+      .text(width - 12, height - 18, this.t('menu.footerHint'), {
         fontFamily: 'monospace',
         fontSize: '9px',
         color: '#434d66',
@@ -163,6 +178,12 @@ export class MainMenuScene extends Phaser.Scene {
     });
   }
 
+  private formatSoundStatus(muted: boolean): string {
+    return this.t('menu.soundStatus', {
+      state: muted ? this.t('menu.soundMuted') : this.t('menu.soundEnabled'),
+    });
+  }
+
   private createOptionsModal(width: number, height: number): void {
     const modalWidth = 320;
     const modalHeight = 160;
@@ -174,7 +195,7 @@ export class MainMenuScene extends Phaser.Scene {
     const bg = createPanel(this, 0, 0, modalWidth, modalHeight);
 
     const header = this.add
-      .text(modalWidth / 2, 18, 'SETTINGS & AUDIO', {
+      .text(modalWidth / 2, 22, this.t('menu.optionsTitle'), {
         fontFamily: 'monospace',
         fontSize: '12px',
         color: '#00e1ff',
@@ -184,7 +205,7 @@ export class MainMenuScene extends Phaser.Scene {
 
     const isMuted = this.soundSystem.isSoundMuted();
     this.soundStatusText = this.add
-      .text(modalWidth / 2, 60, `Sound FX: ${isMuted ? '[MUTED]' : '[ENABLED]'}`, {
+      .text(modalWidth / 2, 60, this.formatSoundStatus(isMuted), {
         fontFamily: 'monospace',
         fontSize: '11px',
         color: isMuted ? '#f87171' : '#4ade80',
@@ -196,15 +217,23 @@ export class MainMenuScene extends Phaser.Scene {
 
     this.soundStatusText.on('pointerdown', () => {
       const nowMuted = this.soundSystem.toggleMute();
-      this.soundStatusText.setText(`Sound FX: ${nowMuted ? '[MUTED]' : '[ENABLED]'}`);
+      this.soundStatusText.setText(this.formatSoundStatus(nowMuted));
       this.soundStatusText.setColor(nowMuted ? '#f87171' : '#4ade80');
       if (!nowMuted) {
         this.soundSystem.playSelect();
       }
     });
 
+    const soundHint = this.add
+      .text(modalWidth / 2, 86, this.t('menu.soundHint'), {
+        fontFamily: 'monospace',
+        fontSize: '9px',
+        color: '#657499',
+      })
+      .setOrigin(0.5);
+
     const closeBtn = this.add
-      .text(modalWidth / 2, 115, '[Back to Title / ESC]', {
+      .text(modalWidth / 2, 122, this.t('menu.optionsClose'), {
         fontFamily: 'monospace',
         fontSize: '10px',
         color: '#94a3b8',
@@ -214,7 +243,7 @@ export class MainMenuScene extends Phaser.Scene {
 
     closeBtn.on('pointerdown', () => this.toggleOptionsModal());
 
-    this.optionsContainer.add([bg, header, this.soundStatusText, closeBtn]);
+    this.optionsContainer.add([bg, header, this.soundStatusText, soundHint, closeBtn]);
   }
 
   public toggleOptionsModal(): void {

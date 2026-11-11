@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { SoundSystem } from '../systems/audio/SoundSystem';
 import { getSession } from '../state/GameSession';
 import { createPanel } from '../ui/Panel';
+import { getStrings } from '../ui/Strings';
 
 /**
  * Closing card of the Prologue vertical slice. Reached after the Elder's farewell once
@@ -22,6 +23,7 @@ export class PrologueEndScene extends Phaser.Scene {
   public create(): void {
     const { width, height } = this.scale;
     const session = getSession(this);
+    const t = getStrings(this);
 
     const bg = this.add.graphics();
     bg.fillGradientStyle(0x05060c, 0x05060c, 0x0d1424, 0x0d1424, 1);
@@ -58,9 +60,9 @@ export class PrologueEndScene extends Phaser.Scene {
     ).setAlpha(0);
 
     const title = this.add
-      .text(width / 2, height * 0.28, 'PROLOGUE COMPLETE', {
+      .text(width / 2, height * 0.28, t('ending.title'), {
         fontFamily: 'monospace',
-        fontSize: '26px',
+        fontSize: '20px',
         color: '#cde9ff',
         fontStyle: 'bold',
         stroke: '#081427',
@@ -89,9 +91,9 @@ export class PrologueEndScene extends Phaser.Scene {
         width / 2,
         height * 0.52,
         [
-          `${session.playerName}  ·  Lv. ${session.level}`,
-          `Quests completed  ${completed}/${quests.length}`,
-          `Playtime  ${playtime}`,
+          t('ending.statsPlayer', { name: session.playerName, level: session.level }),
+          t('ending.statsQuests', { completed, total: quests.length }),
+          t('ending.statsPlaytime', { playtime }),
         ],
         {
           fontFamily: 'monospace',
@@ -105,7 +107,7 @@ export class PrologueEndScene extends Phaser.Scene {
       .setAlpha(0);
 
     const thanks = this.add
-      .text(width / 2, height * 0.71, 'Thank you for playing.', {
+      .text(width / 2, height * 0.71, t('ending.thanks'), {
         fontFamily: 'monospace',
         fontSize: '11px',
         color: '#ffd666',
@@ -114,7 +116,7 @@ export class PrologueEndScene extends Phaser.Scene {
       .setAlpha(0);
 
     const prompt = this.add
-      .text(width / 2, height - 22, '[E / Space / Enter] Return to Title', {
+      .text(width / 2, height - 22, t('ending.prompt'), {
         fontFamily: 'monospace',
         fontSize: '9px',
         color: '#65789e',

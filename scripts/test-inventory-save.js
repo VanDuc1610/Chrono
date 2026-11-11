@@ -242,7 +242,7 @@ async function run() {
     }
     console.log('✓ Quick Save recorded to Slot 1 successfully!');
 
-    console.log('[6/7] Returning to MainMenuScene to verify "CONTINUE" button...');
+    console.log('[6/7] Returning to MainMenuScene to verify Continue button...');
     await client.eval(`
       (() => {
         const expl = window.__GAME__.scene.getScene('ExplorationScene');
@@ -262,21 +262,30 @@ async function run() {
     const menuContinueState = await client.eval(`
       (() => {
         const menu = window.__GAME__.scene.getScene('MainMenuScene');
-        const continueOption = menu.menuItems.find(m => m.text.includes('CONTINUE'));
+        const continueOption = menu.menuItems.find(m => m.id === 'continue') || menu.menuItems[1];
+        const expectedText = menu.cache.json.get('data_strings')?.strings?.['menu.continue'];
         return {
-          text: continueOption.text,
-          enabled: continueOption.enabled
+          id: continueOption?.id,
+          text: continueOption?.text,
+          expectedText,
+          enabled: Boolean(continueOption?.enabled)
         };
       })()
     `);
     console.log('MainMenu Continue Option State:', menuContinueState);
-    if (!menuContinueState.enabled || menuContinueState.text !== 'CONTINUE') {
-      throw new Error('"CONTINUE" button was not enabled on MainMenuScene!');
+    if (
+      !menuContinueState.enabled ||
+      !menuContinueState.expectedText ||
+      menuContinueState.text !== menuContinueState.expectedText
+    ) {
+      throw new Error(
+        `Continue button was not enabled/localized on MainMenuScene: ${JSON.stringify(menuContinueState)}`,
+      );
     }
     await client.captureScreenshot('screenshot_main_menu_continue.png');
-    console.log('✓ MainMenu correctly reflects active save slot with enabled "CONTINUE" option!');
+    console.log('✓ MainMenu correctly reflects active save slot with enabled Continue option!');
 
-    console.log('[7/7] Clicking "CONTINUE" and verifying restored state...');
+    console.log('[7/7] Triggering Continue and verifying restored state...');
     await client.eval(`
       (async () => {
         const menu = window.__GAME__.scene.getScene('MainMenuScene');
