@@ -3,7 +3,7 @@
   "maps": {
     "map_peters_room": {
       "id": "map_peters_room",
-      "name": "Căn gác của Peter",
+      "name": "Căn gác tiệm đồng hồ",
       "tilemap": {
         "key": "map_peters_room",
         "path": "assets/maps/map_peters_room.json"
@@ -32,7 +32,36 @@
           "y": 8
         }
       },
-      "npcs": [],
+      "npcs": [
+        {
+          "id": "npc_elder_room",
+          "texture": "npc_elder",
+          "anim": "npc_elder_idle",
+          "tile": {
+            "x": 8,
+            "y": 5
+          },
+          "name": "Trưởng Lão",
+          "prompt": "[E] Nói chuyện với ông lão",
+          "radius": 48,
+          "dialogueId": "elder_explains_frozen_town",
+          "dialogueRules": [
+            {
+              "ifFlag": "elder_joined",
+              "dialogueId": "elder_explains_frozen_town_accept"
+            },
+            {
+              "unlessFlag": "learned_temporal_sight",
+              "dialogueId": "elder_after_first_battle"
+            }
+          ],
+          "visibleWhen": {
+            "flag": "defeated_first_shade",
+            "unlessFlag": "time_restored"
+          },
+          "resistsFreeze": true
+        }
+      ],
       "interactables": [
         {
           "id": "prop_room_key",
@@ -72,7 +101,14 @@
           },
           "radius": 44,
           "prompt": "[E] Xem chiếc đồng hồ ngừng chạy",
-          "dialogueId": "room_watch"
+          "dialogueId": "room_watch",
+          "dialogueRules": [
+            {
+              "ifFlag": "defeated_first_shade",
+              "unlessFlag": "learned_temporal_sight",
+              "dialogueId": "grandfather_watch_awakens"
+            }
+          ]
         }
       ],
       "encounters": [],
@@ -99,7 +135,11 @@
           "delayMs": 600,
           "dialogueId": "intro_awakening"
         }
-      ]
+      ],
+      "frozenWhen": {
+        "flag": "time_frozen",
+        "unlessFlag": "time_restored"
+      }
     },
     "map_coastal_town": {
       "id": "map_coastal_town",
@@ -148,7 +188,14 @@
           "name": "Cô Ba",
           "prompt": "[E] Nói chuyện với Cô Ba",
           "radius": 72,
-          "dialogueId": "npc_vendor_ba_ba"
+          "dialogueId": "npc_vendor_ba_ba",
+          "dialogueRules": [
+            {
+              "ifFlag": "time_frozen",
+              "unlessFlag": "time_restored",
+              "dialogueId": "npc_vendor_ba_ba_frozen"
+            }
+          ]
         },
         {
           "id": "npc_fisherman_sau",
@@ -161,7 +208,14 @@
           "name": "Ông Sáu",
           "prompt": "[E] Nói chuyện với Ông Sáu",
           "radius": 48,
-          "dialogueId": "npc_fisherman_sau"
+          "dialogueId": "npc_fisherman_sau",
+          "dialogueRules": [
+            {
+              "ifFlag": "time_frozen",
+              "unlessFlag": "time_restored",
+              "dialogueId": "npc_fisherman_sau_frozen"
+            }
+          ]
         }
       ],
       "interactables": [
@@ -173,7 +227,14 @@
           },
           "radius": 44,
           "prompt": "[E] Xem khoảng đất trống",
-          "dialogueId": "poi_empty_lot"
+          "dialogueId": "poi_empty_lot",
+          "dialogueRules": [
+            {
+              "ifFlag": "time_frozen",
+              "unlessFlag": "time_restored",
+              "dialogueId": "poi_empty_lot_frozen"
+            }
+          ]
         },
         {
           "id": "poi_child_sandals",
@@ -183,7 +244,14 @@
           },
           "radius": 44,
           "prompt": "[E] Nhìn đôi dép nhỏ",
-          "dialogueId": "poi_child_sandals"
+          "dialogueId": "poi_child_sandals",
+          "dialogueRules": [
+            {
+              "ifFlag": "time_frozen",
+              "unlessFlag": "time_restored",
+              "dialogueId": "poi_child_sandals_frozen"
+            }
+          ]
         },
         {
           "id": "poi_ancient_well",
@@ -193,10 +261,44 @@
           },
           "radius": 44,
           "prompt": "[E] Nhìn xuống giếng cổ",
-          "dialogueId": "poi_ancient_well"
+          "dialogueId": "poi_ancient_well",
+          "dialogueRules": [
+            {
+              "ifFlag": "time_frozen",
+              "unlessFlag": "time_restored",
+              "dialogueId": "poi_ancient_well_frozen"
+            }
+          ]
+        },
+        {
+          "id": "customer_door",
+          "tile": {
+            "x": 19,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Gõ cửa nhà khách",
+          "dialogueId": "watch_delivery",
+          "visibleWhen": {
+            "unlessFlag": "time_frozen"
+          }
         }
       ],
-      "encounters": [],
+      "encounters": [
+        {
+          "id": "enc_first_shade",
+          "enemyId": "enemy_rift_shade_first",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 21,
+            "y": 7
+          },
+          "defeatedFlag": "defeated_first_shade",
+          "hidden": true,
+          "victoryDialogueId": "elder_after_first_battle"
+        }
+      ],
       "exits": [
         {
           "id": "town_to_room",
@@ -218,10 +320,33 @@
             "h": 1
           },
           "toMap": "map_forgotten_forest",
-          "toSpawn": "from_town"
+          "toSpawn": "from_town",
+          "requiresFlag": "elder_joined"
         }
       ],
-      "triggers": [],
+      "triggers": [
+        {
+          "id": "trig_elder_shop_visit",
+          "on": "arrive",
+          "onceFlag": "trig_elder_shop_visit",
+          "delayMs": 700,
+          "dialogueId": "elder_shop_visit"
+        },
+        {
+          "id": "trig_time_stops",
+          "on": "zone",
+          "area": {
+            "x": 0,
+            "y": 0,
+            "w": 28,
+            "h": 18
+          },
+          "requiresFlag": "delivered_repaired_watch",
+          "onceFlag": "trig_time_stops",
+          "dialogueId": "town_time_stops",
+          "encounterId": "enc_first_shade"
+        }
+      ],
       "visions": [
         {
           "id": "vision_forgotten_child",
@@ -232,8 +357,32 @@
             "y": 4
           },
           "dialogueId": "poi_child_sandals_return"
+        },
+        {
+          "id": "vision_elder_shop",
+          "texture": "npc_elder",
+          "anim": "npc_elder_idle",
+          "tile": {
+            "x": 6,
+            "y": 5
+          },
+          "dialogueId": "elder_shop_visit"
+        },
+        {
+          "id": "vision_elder_shop_2",
+          "texture": "npc_elder",
+          "anim": "npc_elder_idle",
+          "tile": {
+            "x": 6,
+            "y": 5
+          },
+          "dialogueId": "elder_shop_visit_examine"
         }
-      ]
+      ],
+      "frozenWhen": {
+        "flag": "time_frozen",
+        "unlessFlag": "time_restored"
+      }
     },
     "map_shattered_antechamber": {
       "id": "map_shattered_antechamber",
@@ -628,6 +777,19 @@
           },
           "onceFlag": "met_drowned_sentinel",
           "dialogueId": "boss_sentinel_encounter"
+        },
+        {
+          "id": "trig_time_restored",
+          "on": "zone",
+          "area": {
+            "x": 9,
+            "y": 3,
+            "w": 7,
+            "h": 6
+          },
+          "requiresFlag": "sentinel_pacified",
+          "onceFlag": "trig_time_restored",
+          "dialogueId": "town_time_restored"
         }
       ]
     }

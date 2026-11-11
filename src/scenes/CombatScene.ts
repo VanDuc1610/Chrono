@@ -615,7 +615,8 @@ export class CombatScene extends Phaser.Scene {
 
     const db = this.cache.json.get('data_dialogue') as DialogueDatabase | undefined;
     const node = event.dialogueId ? db?.dialogues[event.dialogueId] : undefined;
-    const lines = node ? node.lines.map((l) => `${node.speaker}: ${l}`) : [];
+    // Lines are self-contained (narration or "Speaker: …"), shown as written.
+    const lines = node ? [...node.lines] : [];
     const LINE_MS = 2000;
     lines.forEach((line, i) => this.time.delayedCall(i * LINE_MS, () => this.setBattleLog(line)));
 

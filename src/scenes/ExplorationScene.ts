@@ -290,7 +290,7 @@ export class ExplorationScene extends Phaser.Scene {
         },
       );
       if (def.anim && this.anims.exists(def.anim)) npc.sprite.play(def.anim);
-      this.npcSprites.push(npc.sprite);
+      if (!def.resistsFreeze) this.npcSprites.push(npc.sprite);
       this.physics.add.collider(this.player.sprite, npc.sprite);
       this.interactionSystem.register(npc);
     }

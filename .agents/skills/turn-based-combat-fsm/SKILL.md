@@ -34,6 +34,14 @@ description: Use when changing combat rules, turn order, skills, items in battle
   the "dissolves" line. Large sprites set `spriteScale`. Example: The Drowned Sentinel.
 - Tests: `tests/boss-mechanic.test.ts` (runs on the real enemies.json).
 
+## Story-gated commands & scripted battles
+
+- `player.json` `commandFlags`: a command appears only once its flag is set (Attack ←
+  `has_broken_blade`, Skill ← `learned_temporal_sight`); `GameSession.isCommandUnlocked()`.
+- `enemies.json` `script`: `lockedCommands` for the whole battle; `events[]` fire at the start of
+  the player's turn in round `atTurn` — dialogue lines in the log (as written), optional `ally`
+  sprite, then `setFlags`. Example: `enemy_rift_shade_first`.
+
 ## Text
 
 Battle-log templates live in `DEFAULT_COMBAT_TEXT` (English fallback) and are overridden by

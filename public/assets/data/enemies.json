@@ -84,6 +84,34 @@
         "releasedFrame": 4,
         "defeatMessage": "Vệ Binh buông kích, quỳ gối và cúi đầu như một lời tạ ơn."
       }
+    },
+    {
+      "id": "enemy_rift_shade_first",
+      "name": "Bóng Đen Thời Gian",
+      "level": 1,
+      "maxHp": 30,
+      "hp": 30,
+      "attack": 8,
+      "defense": 4,
+      "speed": 10,
+      "spriteKey": "enemy_fracture",
+      "skills": ["chrono_scratch", "temporal_flux"],
+      "expReward": 20,
+      "lootTable": [],
+      "script": {
+        "lockedCommands": ["escape"],
+        "events": [
+          {
+            "atTurn": 2,
+            "dialogueId": "battle_elder_intervenes",
+            "setFlags": ["has_broken_blade"],
+            "ally": {
+              "texture": "npc_elder",
+              "anim": "npc_elder_idle"
+            }
+          }
+        ]
+      }
     }
   ]
 }

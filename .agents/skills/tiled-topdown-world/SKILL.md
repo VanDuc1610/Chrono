@@ -28,6 +28,11 @@ Per map (`maps[id]`):
 `visions` (texture, tile, `dialogueId`) fade in while that dialogue node plays and dissolve when
 it ends — for fleeting apparitions (Residual Existence), e.g. the forgotten child.
 
+Story state: `visibleWhen` ({flag, unlessFlag}) on NPCs / interactables / encounters;
+`dialogueRules` (ifFlag / unlessFlag / ifQuestCompleted) on NPCs and interactables; `hidden`
+encounters started by a trigger's `encounterId` once its dialogue closes; `frozenWhen` freezes
+the map (NPCs still and tinted unless `resistsFreeze`, veil, no music).
+
 `aliases` lets old save ids resolve (`prologue_sanctuary` → `map_shattered_antechamber`).
 `startMapId` is where a new game begins. A dialogue node with `effects.endPrologue` plays the
 Prologue ending when that dialogue closes.

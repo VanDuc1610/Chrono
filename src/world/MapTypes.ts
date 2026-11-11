@@ -53,6 +53,8 @@ export interface MapNpcDefinition {
   completeObjective?: QuestObjectiveRef;
   /** Spawned only when the condition holds on entering the map. */
   visibleWhen?: FlagCondition;
+  /** Keeps moving while the map is frozen (e.g. the Elder). */
+  resistsFreeze?: boolean;
 }
 
 export interface MapInteractableDefinition {
