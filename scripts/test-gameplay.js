@@ -162,7 +162,7 @@ async function run() {
       (() => {
         const sceneManager = window.__GAME__.scene;
         sceneManager.stop('MainMenuScene');
-        sceneManager.start('ExplorationScene');
+        sceneManager.start('ExplorationScene', { mapId: 'map_shattered_antechamber' });
       })()
     `);
 

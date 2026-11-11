@@ -13,8 +13,8 @@
 | Status Tier                | Count | Description                                                         |
 | -------------------------- | ----- | ------------------------------------------------------------------- |
 | `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`)               |
-| `INTEGRATED`               | 7     | Approved art in engine (Peter ×2, Shade, Elder, tileset ×2, UI set) |
-| `CONCEPT_PENDING_APPROVAL` | 1     | Concept generated; awaiting formal review                           |
+| `INTEGRATED`               | 8     | Approved art in engine (Peter ×2, Shade, Elder, tileset ×2, UI set) |
+| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review                           |
 | `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared                          |
 | `PLACEHOLDER_TEMPORARY`    | 3     | Procedural placeholder assets active in engine                      |
 
@@ -110,13 +110,13 @@
 - **In engine:** hit spark used in `CombatScene` (cerulean on Peter's hits, carmine on enemy hits). Panel frame + cursor: integration pending (T-26).
 - **Status:** `INTEGRATED` — owner approved 2026-11-11. Replaced `UI_FRAME_000_TMP`, `UI_CURSOR_000_TMP`, `FX_SPARK_000_TMP`.
 
-### `ENV_COASTAL_001_CAND` – Coastal tileset v1 (Prologue v2: Khánh Hòa town + Peter's room)
+### `ENV_COASTAL_001` – Coastal tileset v1 (Prologue v2: Khánh Hòa town + Peter's room) — INTEGRATED
 
 - **Generator:** `scripts/author-coastal-tileset.js` · layouts shared with the map generator: `scripts/coastal-layout.js`
-- **File:** `art-source/environment/coastal/generated/candidates/coastal_tileset_v1.png` (256 × 160, 8 × 5 tiles of 32 px) · previews: `coastal_tileset_v1_x4.png`, `coastal_town_v1.png` (planned 28×18 town), `coastal_room_v1_x2.png` (planned 14×10 room)
+- **File:** `art-source/environment/coastal/generated/approved/coastal_tileset_v1.png` → runtime `public/assets/tilesets/coastal_tileset.png`; maps `map_peters_room.json`, `map_coastal_town.json` from `scripts/generate-coastal-maps.js` (256 × 160, 8 × 5 tiles of 32 px) · previews: `coastal_tileset_v1_x4.png`, `coastal_town_v1.png` (planned 28×18 town), `coastal_room_v1_x2.png` (planned 14×10 room)
 - **Tiles:** 0-15 walkable ground (sand, shells, path, grass, gạch tàu brick, wood floors, pier, wet shore, child's sandals, rug, empty-lot foundation, threshold, footprints, pebbles); 16-39 walls layer (sea, lime wall, shuttered window, door, roof, eave, room wall/beam, palm trunk/crown, thúng chai, bánh căn stall, red plastic stool, net pile, frozen-star well, stone fence, bed ×2, desk with equations + torn notebook, bookshelf, brass-key table, photo with a scraped-away figure, sea window, Stopped Watch nightstand). Collision range GID 17-40.
 - **Validation:** PASSED.
-- **Status:** `CONCEPT_PENDING_APPROVAL` (T-30).
+- **Status:** `INTEGRATED` — owner approved 2026-11-11 (T-30).
 
 ## 3. Active Placeholder Registry
 

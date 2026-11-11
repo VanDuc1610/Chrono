@@ -70,6 +70,7 @@ export class ExplorationScene extends Phaser.Scene {
   private isTransitioning = false;
   private pendingEnding = false;
   private lockedExitShown: string | null = null;
+  private exitsArmed = false;
   private spawn = { x: 0, y: 0 };
   private pendingNotice: ExplorationSceneData['notice'] | null = null;
 
@@ -107,6 +108,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.isTransitioning = false;
     this.pendingEnding = false;
     this.lockedExitShown = null;
+    this.exitsArmed = false;
     this.encounterSprites = [];
     this.session = getSession(this);
     this.pendingNotice = data?.notice ?? null;
@@ -151,7 +153,12 @@ export class ExplorationScene extends Phaser.Scene {
     );
     this.physics.add.collider(this.player.sprite, this.wallLayer);
     this.cameras.main.startFollow(this.player.sprite, true, 0.09, 0.09);
-    this.cameras.main.setBounds(0, 0, this.wallLayer.width, this.wallLayer.height);
+    // Maps smaller than the view (e.g. Peter's room) are centred instead of pinned top-left.
+    const mapW = this.wallLayer.width;
+    const mapH = this.wallLayer.height;
+    const boundW = Math.max(mapW, this.scale.width);
+    const boundH = Math.max(mapH, this.scale.height);
+    this.cameras.main.setBounds((mapW - boundW) / 2, (mapH - boundH) / 2, boundW, boundH);
 
     this.createUI();
     this.spawnNpcs();
@@ -320,8 +327,11 @@ export class ExplorationScene extends Phaser.Scene {
     const exit = (this.mapDef.exits ?? []).find((e) => pointInRect(x, y, e.area));
     if (!exit) {
       this.lockedExitShown = null;
+      this.exitsArmed = true;
       return false;
     }
+    // Arriving inside an exit area (e.g. a spawn placed on a doorway) must not bounce Peter back.
+    if (!this.exitsArmed) return false;
     if (exit.requiresFlag && !this.session.getFlag(exit.requiresFlag)) {
       if (this.lockedExitShown !== exit.id && exit.lockedDialogueId) {
         this.lockedExitShown = exit.id;

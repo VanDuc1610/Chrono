@@ -1,6 +1,127 @@
 {
-  "startMapId": "map_shattered_antechamber",
+  "startMapId": "map_peters_room",
   "maps": {
+    "map_peters_room": {
+      "id": "map_peters_room",
+      "name": "Căn gác của Peter",
+      "tilemap": {
+        "key": "map_peters_room",
+        "path": "assets/maps/map_peters_room.json"
+      },
+      "tileset": {
+        "name": "coastal_tileset",
+        "key": "coastal_tileset",
+        "path": "assets/tilesets/coastal_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 40
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 3,
+          "y": 4
+        },
+        "from_town": {
+          "x": 7,
+          "y": 8
+        }
+      },
+      "npcs": [],
+      "interactables": [],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "room_to_town",
+          "area": {
+            "x": 7,
+            "y": 9,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_coastal_town",
+          "toSpawn": "from_house"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_opening",
+          "on": "arrive",
+          "onceFlag": "hasTriggeredAwakening",
+          "delayMs": 600,
+          "dialogueId": "intro_awakening"
+        }
+      ]
+    },
+    "map_coastal_town": {
+      "id": "map_coastal_town",
+      "name": "Thị trấn ven biển",
+      "tilemap": {
+        "key": "map_coastal_town",
+        "path": "assets/maps/map_coastal_town.json"
+      },
+      "tileset": {
+        "name": "coastal_tileset",
+        "key": "coastal_tileset",
+        "path": "assets/tilesets/coastal_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 40
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 5,
+          "y": 6
+        },
+        "from_house": {
+          "x": 5,
+          "y": 5
+        },
+        "from_forest": {
+          "x": 25,
+          "y": 1
+        }
+      },
+      "npcs": [],
+      "interactables": [],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "town_to_room",
+          "area": {
+            "x": 5,
+            "y": 4,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_peters_room",
+          "toSpawn": "from_town"
+        },
+        {
+          "id": "town_to_forest",
+          "area": {
+            "x": 25,
+            "y": 0,
+            "w": 2,
+            "h": 1
+          },
+          "toMap": "map_shattered_antechamber",
+          "toSpawn": "from_forest"
+        }
+      ],
+      "triggers": []
+    },
     "map_shattered_antechamber": {
       "id": "map_shattered_antechamber",
       "name": "Shattered Antechamber",
@@ -25,6 +146,10 @@
       "bgm": "ambient",
       "spawns": {
         "default": {
+          "x": 12,
+          "y": 10
+        },
+        "from_forest": {
           "x": 12,
           "y": 10
         }
@@ -161,14 +286,13 @@
       "exits": [],
       "triggers": [
         {
-          "id": "trig_awakening",
+          "id": "trig_antechamber_quest",
           "on": "arrive",
-          "onceFlag": "hasTriggeredAwakening",
+          "onceFlag": "started_antechamber_quest",
           "delayMs": 300,
           "effects": {
             "startQuest": "quest_prologue_awakening"
-          },
-          "dialogueId": "intro_awakening"
+          }
         }
       ]
     }

@@ -189,6 +189,8 @@ async function triggerFreshNewGame(client) {
       const menu = window.__GAME__.scene.getScene('MainMenuScene');
       if (menu && typeof menu.startNewGame === 'function') {
         menu.startNewGame();
+        // Regression scenarios run in the Antechamber (Shade, Elder); a new game starts in Peter's room.
+        window.__GAME__.registry.get('chrono.gameSession').position = { mapId: 'map_shattered_antechamber', x: 400, y: 336 };
       } else {
         window.__GAME__.scene.start('ExplorationScene');
       }

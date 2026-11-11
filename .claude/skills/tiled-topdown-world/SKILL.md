@@ -36,6 +36,9 @@ Prologue ending when that dialogue closes.
   Tileset `dungeon_tileset`, no margin/spacing (no extrusion). GIDs: index + 1; 0 void, 1 floor,
   2 engraved, 3 wall top, 4 wall face, 5 pillar, 6 crystal, 7 altar, 8 fracture, 9 floor variant,
   10 stele, 11 astrolabe, 12 reliquary, 13 threshold gate, 14 torn page.
+- Coastal maps (`map_peters_room`, `map_coastal_town`) are **generated** from
+  `scripts/coastal-layout.js` by `node scripts/generate-coastal-maps.js` (tileset `coastal_tileset`,
+  walls collide on GIDs 17-40; tile index table in the layout file). Edit the layout, regenerate.
 - New maps: Tiled JSON with the same two layers (`Ground`, `Walls`), 32 px tiles, ≤ 30×20.
 - Movement is free 4-way Arcade Physics, not grid movement.
 

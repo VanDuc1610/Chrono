@@ -140,7 +140,7 @@ async function run() {
       (() => {
         const sm = window.__GAME__.scene;
         sm.stop('MainMenuScene');
-        sm.start('ExplorationScene');
+        sm.start('ExplorationScene', { mapId: 'map_shattered_antechamber' });
       })()
     `);
 
