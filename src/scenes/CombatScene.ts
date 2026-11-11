@@ -198,7 +198,9 @@ export class CombatScene extends Phaser.Scene {
     const enemyX = width * 0.72;
     const enemyY = height * 0.42;
 
-    this.enemySprite = this.add.sprite(enemyX, enemyY, this.enemy.spriteKey).setScale(2.2);
+    this.enemySprite = this.add
+      .sprite(enemyX, enemyY, this.enemy.spriteKey, 0)
+      .setScale(this.enemyTemplate.spriteScale ?? 2.2);
     const enemyIdle = `${this.enemy.spriteKey}_idle`;
     if (this.anims.exists(enemyIdle)) this.enemySprite.play(enemyIdle);
     // Floating hover animation

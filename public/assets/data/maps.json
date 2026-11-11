@@ -136,18 +136,22 @@
           "y": 1
         }
       },
-      "npcs": [],
-      "interactables": [
+      "npcs": [
         {
-          "id": "npc_vendor_ba_ba",
+          "id": "npc_vendor_ba",
+          "texture": "npc_vendor_ba",
+          "anim": "npc_vendor_ba_idle",
           "tile": {
             "x": 11,
-            "y": 8
+            "y": 6
           },
-          "radius": 44,
+          "name": "Cô Ba",
           "prompt": "[E] Nói chuyện với Cô Ba",
+          "radius": 72,
           "dialogueId": "npc_vendor_ba_ba"
-        },
+        }
+      ],
+      "interactables": [
         {
           "id": "npc_fisherman_sau",
           "tile": {

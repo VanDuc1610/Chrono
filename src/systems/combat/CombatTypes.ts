@@ -49,6 +49,8 @@ export interface IEnemyDefinition {
   defense: number;
   speed: number;
   spriteKey: string;
+  /** Combat display scale (default 2.2 for 32 px sprites; large bosses use less). */
+  spriteScale?: number;
   skills: string[];
   expReward: number;
   lootTable: { itemId: string; chance: number }[];

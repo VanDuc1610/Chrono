@@ -128,6 +128,16 @@ export class PreloadScene extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32,
     });
+    // Cô Ba (NPC_VENDOR_BA_001): 4-frame idle, 32x32.
+    this.load.spritesheet('npc_vendor_ba', 'assets/npcs/vendor_ba_idle.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    // The Drowned Sentinel (BOSS_SENTINEL_001): frames 0-3 idle, 4 released (kneeling), 64x64.
+    this.load.spritesheet('boss_sentinel', 'assets/enemies/sentinel.png', {
+      frameWidth: 64,
+      frameHeight: 64,
+    });
 
     // 2. Maps & tilesets: every map listed in maps.json is queued once that file has loaded.
     this.load.once('filecomplete-json-data_maps', (_key: string, _type: string, data: unknown) => {
@@ -177,6 +187,22 @@ export class PreloadScene extends Phaser.Scene {
         key: 'npc_elder_idle',
         frames: this.anims.generateFrameNumbers('npc_elder', { start: 0, end: 3 }),
         frameRate: 4, // ELDER_DESIGN §5: 4-frame breathing cycle, 4 FPS
+        repeat: -1,
+      });
+    }
+    if (!this.anims.exists('npc_vendor_ba_idle')) {
+      this.anims.create({
+        key: 'npc_vendor_ba_idle',
+        frames: this.anims.generateFrameNumbers('npc_vendor_ba', { start: 0, end: 3 }),
+        frameRate: 4,
+        repeat: -1,
+      });
+    }
+    if (!this.anims.exists('boss_sentinel_idle')) {
+      this.anims.create({
+        key: 'boss_sentinel_idle',
+        frames: this.anims.generateFrameNumbers('boss_sentinel', { start: 0, end: 3 }),
+        frameRate: 5,
         repeat: -1,
       });
     }

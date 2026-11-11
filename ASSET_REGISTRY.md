@@ -13,8 +13,8 @@
 | Status Tier                | Count | Description                                                         |
 | -------------------------- | ----- | ------------------------------------------------------------------- |
 | `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`)               |
-| `INTEGRATED`               | 9     | Approved art in engine (Peter ×2, Shade, Elder, tileset ×2, UI set) |
-| `CONCEPT_PENDING_APPROVAL` | 2     | Concept generated; awaiting formal review                           |
+| `INTEGRATED`               | 11    | Approved art in engine (Peter ×2, Shade, Elder, tileset ×2, UI set) |
+| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review                           |
 | `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared                          |
 | `PLACEHOLDER_TEMPORARY`    | 3     | Procedural placeholder assets active in engine                      |
 
@@ -126,18 +126,18 @@
 - **Validation:** PASSED.
 - **Status:** `INTEGRATED` — owner approved 2026-11-11 (T-31).
 
-### `NPC_VENDOR_BA_001_CAND` – Cô Ba, bánh căn vendor (v1)
+### `NPC_VENDOR_BA_001` – Cô Ba, bánh căn vendor (v1) — INTEGRATED
 
-- **Generator:** `scripts/author-npc-sprites.js` · **File:** `art-source/npcs/vendor_ba/generated/candidates/vendor_ba_idle_v1.png` (128 × 32, 4 frames × 32 px, facing down) · preview ×8
+- **Generator:** `scripts/author-npc-sprites.js` · **File:** `art-source/npcs/vendor_ba/generated/approved/vendor_ba_idle_v1.png` → `public/assets/npcs/vendor_ba_idle.png` (key `npc_vendor_ba`, anim `npc_vendor_ba_idle`) (128 × 32, 4 frames × 32 px, facing down) · preview ×8
 - **Content:** low bun, khăn rằn, light-brown áo bà ba with buttons, black trousers, ladle; idle = breathing + stirring (a drip of batter on frame 3). Slender build by design.
-- **Validation:** PASSED. **Status:** `CONCEPT_PENDING_APPROVAL` (T-32).
+- **Validation:** PASSED. **Status:** `INTEGRATED` — owner approved 2026-11-12; NPC behind her stall in `map_coastal_town`.
 
-### `BOSS_SENTINEL_001_CAND` – The Drowned Sentinel (v1)
+### `BOSS_SENTINEL_001` – The Drowned Sentinel (v1) — INTEGRATED
 
-- **Generator:** `scripts/author-sentinel-sprites.js` · **File:** `art-source/enemies/sentinel/generated/candidates/sentinel_v1.png` (320 × 64, 5 frames × 64 px) · preview ×4
+- **Generator:** `scripts/author-sentinel-sprites.js` · **File:** `art-source/enemies/sentinel/generated/approved/sentinel_v1.png` → `public/assets/enemies/sentinel.png` (key `boss_sentinel`, 64×64, anim `boss_sentinel_idle`; combat `spriteScale` 1.6) (320 × 64, 5 frames × 64 px) · preview ×4
 - **Content:** verdigris bronze armour, barnacles, kelp, fin crest, cold cyan eyes in the visor, broken halberd, a shell of frozen sea-water around him. Frames 0-3 idle (film shimmer, kelp sway, 1 px bob); frame 4 released (kneeling, head bowed, film shattered into rising motes).
 - **Validation:** PASSED (the validator's centring warning assumes 32 px frames and does not apply to 64 px).
-- **Status:** `CONCEPT_PENDING_APPROVAL` (T-32).
+- **Status:** `INTEGRATED` — owner approved 2026-11-12 (encounter placed with the boss mechanic, T-34).
 
 ## 3. Active Placeholder Registry
 

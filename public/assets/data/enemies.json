@@ -47,15 +47,16 @@
       "attack": 14,
       "defense": 10,
       "speed": 8,
-      "spriteKey": "enemy_fracture",
+      "spriteKey": "boss_sentinel",
       "skills": ["tidal_crush", "stasis_wave"],
       "expReward": 100,
       "lootTable": [
         {
           "itemId": "sentinel_core_relic",
-          "chance": 1.0
+          "chance": 1
         }
-      ]
+      ],
+      "spriteScale": 1.6
     }
   ]
 }
