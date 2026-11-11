@@ -2,19 +2,19 @@
   "quests": [
     {
       "id": "quest_prologue_awaken",
-      "title": "Ký Ức Trong Căn Gác",
-      "description": "Tìm chiếc chìa khóa đồng thau và kiểm tra các vật dụng sót lại trước khi rời phòng.",
+      "title": "Buổi Sáng Ở Tiệm Đồng Hồ",
+      "description": "Xem lại sổ ghi đơn hàng trên bàn và lấy chiếc chìa khóa đồng thau trước khi xuống mở tiệm.",
       "stage": "started",
       "objectives": [
         {
           "id": "obj_find_room_key",
-          "description": "Tìm chìa khóa đồng thau trong phòng",
+          "description": "Lấy chìa khóa tiệm bằng đồng thau",
           "completed": false,
           "completeOnFlag": "has_room_key"
         },
         {
           "id": "obj_inspect_notebook",
-          "description": "Kiểm tra cuốn sổ tay rách trang",
+          "description": "Xem sổ ghi đơn hàng hôm nay",
           "completed": false,
           "completeOnFlag": "inspected_room_notebook"
         }
@@ -27,8 +27,8 @@
     },
     {
       "id": "quest_prologue_town",
-      "title": "Lời Thì Thầm Của Biển",
-      "description": "Khảo sát thị trấn ven biển Khánh Hòa và tìm đường tới Rừng Quên Lãng.",
+      "title": "Buổi Sáng Ngoài Thị Trấn",
+      "description": "Ghé thăm Cô Ba, đón vị khách lạ tại tiệm và giao chiếc đồng hồ đã sửa cho khách.",
       "stage": "inactive",
       "objectives": [
         {
@@ -38,27 +38,83 @@
           "completeOnFlag": "talked_vendor_ba"
         },
         {
-          "id": "obj_inspect_empty_lot",
-          "description": "Khảo sát mảnh đất trống kỳ lạ",
+          "id": "obj_elder_shop_visit",
+          "description": "Xem chiếc la bàn hỏng của vị khách lạ",
           "completed": false,
-          "completeOnFlag": "inspected_empty_lot"
+          "completeOnFlag": "elder_visited_shop"
+        },
+        {
+          "id": "obj_deliver_watch",
+          "description": "Giao chiếc đồng hồ đã sửa cho khách",
+          "completed": false,
+          "completeOnFlag": "delivered_repaired_watch"
         }
       ],
       "rewards": {
         "experience": 20,
         "items": ["coastal_pancake"]
       },
+      "followUpQuestId": "quest_prologue_timestop"
+    },
+    {
+      "id": "quest_prologue_timestop",
+      "title": "Giây Phút Thời Gian Ngừng",
+      "description": "Cả thị trấn bỗng đứng im giữa tiếng sóng đóng băng. Hãy đón lấy thanh kiếm gãy và đánh lui Bóng Đen.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_witness_timestop",
+          "description": "Chứng kiến khoảnh khắc thời gian ngừng lại",
+          "completed": false,
+          "completeOnFlag": "time_frozen"
+        },
+        {
+          "id": "obj_defeat_first_shade",
+          "description": "Đánh lui Bóng Đen giữa thị trấn đóng băng",
+          "completed": false,
+          "completeOnFlag": "defeated_first_shade"
+        }
+      ],
+      "rewards": {
+        "experience": 25,
+        "items": ["chrono_shard_minor"]
+      },
+      "followUpQuestId": "quest_prologue_watch"
+    },
+    {
+      "id": "quest_prologue_watch",
+      "title": "Đồng Hồ Của Ông Nội",
+      "description": "Quay về tiệm kiểm tra chiếc đồng hồ quả quýt vừa tự chạy ngược và lắng nghe Trưởng Lão.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_awaken_watch",
+          "description": "Kiểm tra chiếc đồng hồ của ông nội trong tiệm",
+          "completed": false,
+          "completeOnFlag": "learned_temporal_sight"
+        },
+        {
+          "id": "obj_elder_join",
+          "description": "Đồng ý lên đường cùng Trưởng Lão",
+          "completed": false,
+          "completeOnFlag": "elder_joined"
+        }
+      ],
+      "rewards": {
+        "experience": 25,
+        "items": []
+      },
       "followUpQuestId": "quest_prologue_forest"
     },
     {
       "id": "quest_prologue_forest",
-      "title": "Lối Mòn Tro Bụi",
-      "description": "Vượt qua Rừng Quên Lãng và đánh bại dị thể bóng đen chắn đường.",
+      "title": "Học Việc Trong Rừng",
+      "description": "Theo chân Trưởng Lão qua Rừng Quên Lãng, thực hành Nhãn Thời Gian và đánh bại Bóng Đen chắn lối.",
       "stage": "inactive",
       "objectives": [
         {
           "id": "obj_defeat_forest_shade",
-          "description": "Đánh bại Dị thể Bóng Đen trong rừng",
+          "description": "Đánh bại Bóng Đen trong Rừng Quên Lãng",
           "completed": false,
           "completeOnFlag": "defeated_forest_shade"
         }
@@ -71,18 +127,18 @@
     },
     {
       "id": "quest_prologue_awakening",
-      "title": "Tiếng Vọng Trong Vết Nứt",
-      "description": "Khám phá Điện Thờ Đổ Nát và diện kiến Trưởng Lão Thời Gian.",
+      "title": "Điện Thờ Của Trưởng Lão",
+      "description": "Làm quen với Bàn Thờ Khoảnh Khắc và lắng nghe Trưởng Lão giảng dạy tại Điện Thờ Đổ Nát.",
       "stage": "inactive",
       "objectives": [
         {
           "id": "obj_speak_elder",
-          "description": "Trò chuyện với Trưởng Lão Thời Gian",
+          "description": "Nghe Trưởng Lão chỉ dẫn tại đại sảnh",
           "completed": false
         },
         {
           "id": "obj_inspect_altar",
-          "description": "Khảo sát Bàn Thờ Khoảnh Khắc",
+          "description": "Kết nối với Bàn Thờ Khoảnh Khắc",
           "completed": false
         }
       ],
@@ -94,8 +150,8 @@
     },
     {
       "id": "quest_prologue_silence",
-      "title": "Trấn Áp Vết Nứt",
-      "description": "Một khe nứt thời gian đang khuấy đảo phía đông điện thờ. Hãy trục xuất dị thể sinh ra từ đó.",
+      "title": "Bài Kiểm Tra Ở Sảnh Đông",
+      "description": "Đánh bại Bóng Đen Thời Gian ở sảnh đông điện thờ theo thử thách của Trưởng Lão trước khi mở Cổng Ngưỡng.",
       "stage": "inactive",
       "objectives": [
         {
@@ -113,13 +169,13 @@
     },
     {
       "id": "quest_prologue_sentinel",
-      "title": "Người Gác Biển Bị Lãng Quên",
-      "description": "Tiến tới Ngọn Hải Đăng Cổ và giải thoát The Drowned Sentinel khỏi lớp sóng giam hãm.",
+      "title": "Người Gác Biển",
+      "description": "Lên Ngọn Hải Đăng Cổ cùng Trưởng Lão, giải thoát Vệ Binh Chìm Trong Sóng để trả lại dòng chảy cho thị trấn.",
       "stage": "inactive",
       "objectives": [
         {
           "id": "obj_pacify_sentinel",
-          "description": "Thanh tẩy và giải thoát The Drowned Sentinel",
+          "description": "Giải thoát Vệ Binh Chìm Trong Sóng",
           "completed": false,
           "completeOnFlag": "sentinel_pacified"
         }
@@ -132,8 +188,8 @@
     },
     {
       "id": "quest_prologue_unwritten",
-      "title": "Kẻ Không Được Ghi Tên",
-      "description": "Đọc bản ghi cổ trên đỉnh hải đăng và bước qua Cổng Ngưỡng.",
+      "title": "Bản Ghi Không Tên",
+      "description": "Thị trấn đã chạy lại bình thường. Đọc bia đá trên đỉnh hải đăng và bước qua Cổng Ngưỡng cùng Trưởng Lão.",
       "stage": "inactive",
       "objectives": [
         {
@@ -150,25 +206,25 @@
     },
     {
       "id": "quest_prologue_remnants",
-      "title": "Tàn Tích Của Giờ Khắc Phân Chia",
-      "description": "Ghép nối các ghi chép bị xóa và tàn dư thời gian nằm rải rác khắp Điện Thờ Đổ Nát.",
+      "title": "Những Bài Học Về Sáu Quyền Năng",
+      "description": "Cùng Trưởng Lão tìm hiểu các bia đá, bản vẽ cổ và dư chấn nằm rải rác trong Điện Thờ Đổ Nát.",
       "stage": "inactive",
       "objectives": [
         {
           "id": "obj_read_stele",
-          "description": "Đọc Bia Khắc Sáu Đấng Quyền Năng",
+          "description": "Học về Bia Khắc Sáu Đấng Quyền Năng",
           "completed": false,
           "completeOnFlag": "inspected_stele_authorities"
         },
         {
           "id": "obj_recover_page",
-          "description": "Thu hồi trang thất lạc từ Cuốn Sổ Tay Rách",
+          "description": "Xem bản vẽ bánh răng và Nhân Quả trên sàn đá",
           "completed": false,
           "completeOnFlag": "inspected_torn_page"
         },
         {
           "id": "obj_attune_echo",
-          "description": "Cộng hưởng với Dư Chấn Vết Nứt",
+          "description": "Thực hành Nhãn Thời Gian với Dư Chấn Vết Nứt",
           "completed": false,
           "completeOnFlag": "inspected_rift_echo"
         }
@@ -181,7 +237,7 @@
     {
       "id": "quest_prologue_forgotten_child",
       "title": "Đôi Dép Nhỏ Trước Hiên",
-      "description": "Đôi dép trẻ con nằm lẻ loi trước hiên một ngôi nhà không ai nhận ở thị trấn ven biển.",
+      "description": "Đôi dép trẻ con nằm lẻ loi trước hiên một ngôi nhà không ai nhận trong thị trấn đóng băng.",
       "stage": "inactive",
       "objectives": [
         {

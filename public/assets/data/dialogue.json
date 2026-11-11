@@ -2,37 +2,11 @@
   "dialogues": {
     "intro_awakening": {
       "id": "intro_awakening",
-      "speaker": "Tiếng Vọng Hư Không",
+      "speaker": "Peter",
       "lines": [
-        "Thức dậy đi... Thế giới không có tên cho ngươi, nhưng ngươi vẫn tồn tại.",
-        "Tiếng sóng biển Khánh Hòa rì rào bên ngoài khung cửa sổ gỗ mộc.",
-        "Những bánh răng thiên thể đã vỡ vụn. Hãy thu nhặt những gì còn sót lại và bước ra ngoài."
-      ],
-      "responses": [
-        {
-          "text": "Tôi... là ai?",
-          "nextDialogueId": "intro_who_am_i"
-        },
-        {
-          "text": "Mình phải kiểm tra căn phòng này.",
-          "nextDialogueId": null
-        }
-      ]
-    },
-    "intro_who_am_i": {
-      "id": "intro_who_am_i",
-      "speaker": "Tiếng Vọng Hư Không",
-      "lines": [
-        "Biên niên sử của sáu Đấng Quyền Năng không ghi chép bản mệnh của ngươi.",
-        "Hãy đi tìm câu trả lời tại ngọn hải đăng cổ nơi mỏm đá ven biển."
-      ],
-      "responses": []
-    },
-    "intro_location": {
-      "id": "intro_location",
-      "speaker": "Tiếng Vọng Hư Không",
-      "lines": [
-        "Căn gác nhỏ ven biển Khánh Hòa, nơi dòng thời gian rạn nứt đang dần xói mòn thực tại."
+        "Ánh nắng sớm hắt qua khung cửa sổ gỗ, tiếng sóng biển Khánh Hòa vỗ đều ngoài bến.",
+        "Thêm một buổi sáng bình thường ở căn gác trên tiệm đồng hồ cũ của ông nội.",
+        "Hôm nay còn chiếc đồng hồ hẹn giao cho khách ngoài phố. Lấy chìa khóa cửa tiệm rồi xem lại sổ đơn hàng thôi."
       ],
       "responses": []
     },
@@ -40,8 +14,8 @@
       "id": "room_door_locked",
       "speaker": "Peter",
       "lines": [
-        "Cánh cửa gỗ đã bị khóa chặt.",
-        "Mình cần tìm chiếc chìa khóa đồng thau trong phòng trước khi ra ngoài."
+        "Cửa xuống tiệm vẫn đang khóa chốt.",
+        "Mình cần lấy chiếc chìa khóa đồng thau trên móc tường trước khi ra ngoài."
       ],
       "responses": []
     },
@@ -49,8 +23,8 @@
       "id": "room_key",
       "speaker": "Peter",
       "lines": [
-        "Một chiếc chìa khóa bằng đồng thau cũ kỹ nằm trên kệ gỗ.",
-        "Nó vừa vặn với ổ khóa cửa phòng."
+        "Chiếc chìa khóa tiệm bằng đồng thau vẫn treo ngay ngắn ở chiếc móc cạnh cửa.",
+        "Tối nào cũng nhắc mình khóa kỹ cửa mà sáng dậy vẫn phải quờ tay tìm."
       ],
       "responses": [],
       "effects": {
@@ -68,8 +42,9 @@
       "id": "room_notebook",
       "speaker": "Peter",
       "lines": [
-        "Cuốn sổ tay bìa da sờn rách của mình.",
-        "Nhiều trang giấy đã bị xé vụn, chỉ còn lại vài phương trình thời gian dở dang."
+        "Cuốn sổ tay bìa da sờn mép mình dùng ghi chép việc tiệm hàng ngày.",
+        "Nửa trên ghi mẹo căn lại dây tóc đồng hồ lên cót tay. Bên lề có dòng nhắc mua thêm hành lá, hai ổ bánh mì.",
+        "Cuối trang khoanh tròn đơn hẹn sáng nay: 'Giao lại chiếc đồng hồ đã sửa cho khách ngoài thị trấn'."
       ],
       "responses": [],
       "effects": {
@@ -80,16 +55,16 @@
       "id": "room_photo",
       "speaker": "Peter",
       "lines": [
-        "Một bức ảnh chụp thời thơ ấu ố vàng trên bàn làm việc.",
-        "Bên cạnh mình rõ ràng có một bóng người nữa, nhưng khuôn mặt đã bị nhòe mờ như thể chưa từng tồn tại."
+        "Tấm ảnh cũ chụp thời còn đi học đặt bên góc bàn, hai đứa đứng cười trước hiên tiệm.",
+        "Mép ảnh bị nước mưa thấm vào dạo trước làm mặt người đứng cạnh nhòe hẳn đi."
       ],
       "responses": [
         {
-          "text": "Chạm vào vết nhòe mờ",
+          "text": "Nhìn kỹ lại khuôn mặt bị nhòe",
           "nextDialogueId": "room_photo_trace"
         },
         {
-          "text": "Cất vào túi áo",
+          "text": "Đặt lại lên bàn",
           "nextDialogueId": null
         }
       ],
@@ -101,7 +76,8 @@
       "id": "room_photo_trace",
       "speaker": "Peter",
       "lines": [
-        "Một cảm giác buốt lạnh chạy dọc sống lưng... như thể ký ức về người bạn ấy đang bị ai đó xóa sạch."
+        "Ảnh bị ẩm, tiếc thật... Mà người này là ai nhỉ?",
+        "Sao nhìn dáng đứng thấy quen lắm mà nghĩ mãi chẳng nhớ nổi tên."
       ],
       "responses": []
     },
@@ -109,28 +85,75 @@
       "id": "room_watch",
       "speaker": "Peter",
       "lines": [
-        "Chiếc đồng hồ quả quýt trên sợi dây chuyền bạc.",
-        "Các kim đồng hồ đứng yên bất động, dính chặt vào thời khắc Đại Thảm Họa."
+        "Chiếc đồng hồ quả quýt cũ trên dây bạc của ông nội, đặt cạnh hộp đồ nghề.",
+        "Chết máy từ hồi ông mất. Mình định sửa mãi mà cứ bận việc khách khứa nên chưa có thời gian."
       ],
       "responses": [],
       "effects": {
         "setFlags": ["inspected_room_watch"]
       }
     },
+    "elder_shop_visit": {
+      "id": "elder_shop_visit",
+      "speaker": "Ông Lão Lạ Mặt",
+      "lines": [
+        "Chào cậu thợ trẻ. Tiệm nhà cậu vẫn mở cửa sớm nhỉ.",
+        "Lão có chiếc la bàn thiên văn bằng đồng cũ này bị kẹt trục xoay... Cậu xem giúp xem có sửa lại được không?"
+      ],
+      "responses": [
+        {
+          "text": "Để cháu xem thử bánh răng bên trong.",
+          "nextDialogueId": "elder_shop_visit_examine"
+        },
+        {
+          "text": "Kiểu máy lạ quá, nhưng cháu nhận sửa.",
+          "nextDialogueId": "elder_shop_visit_examine"
+        }
+      ],
+      "effects": {
+        "setFlags": ["elder_visited_shop"]
+      }
+    },
+    "elder_shop_visit_examine": {
+      "id": "elder_shop_visit_examine",
+      "speaker": "Ông Lão Lạ Mặt",
+      "lines": [
+        "(Ông lão đứng nhìn Peter thử vặn nhẹ trục đồng hồi lâu, ánh mắt bỗng dừng lại rất lâu trên mặt cậu.)",
+        "...Không vội đâu. Cứ giữ ở đây, khi nào có dịp lão ghé lấy. Bảo trọng nhé, cậu thợ trẻ."
+      ],
+      "responses": []
+    },
+    "watch_delivery": {
+      "id": "watch_delivery",
+      "speaker": "Khách Đặt Sửa Đồng Hồ",
+      "lines": [
+        "Ôi, cậu Peter! Chiếc đồng hồ đeo tay của tôi chạy lại êm chưa?",
+        "Đúng giờ quá, cảm ơn cậu nhiều lắm — tay nghề tiệm ông nội cậu đúng là không chê vào đâu được."
+      ],
+      "responses": [
+        {
+          "text": "Dạ không có gì, chú dùng cẩn thận ạ.",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["delivered_repaired_watch"]
+      }
+    },
     "npc_vendor_ba_ba": {
       "id": "npc_vendor_ba_ba",
       "speaker": "Cô Ba Bánh Căn",
       "lines": [
-        "Cậu Peter dậy sớm thế? Ngồi xuống làm đĩa bánh căn mỡ hành còn nóng hổi nào.",
-        "Lạ thật... tui cứ quen tay múc sẵn hai đĩa, lại kéo thêm chiếc ghế nhựa để trống bên cạnh, dù chỉ thấy mỗi cậu bước tới."
+        "Sáng nay mở tiệm sớm thế Peter? Ngồi xuống làm đĩa bánh căn mỡ hành còn nóng cho ấm bụng đã nào.",
+        "Ấy chết, cô lại quen tay dọn sẵn hai đĩa với kéo thêm chiếc ghế trống bên cạnh nữa rồi. Thói quen thôi mà, già rồi hay lẫn thế đấy."
       ],
       "responses": [
         {
-          "text": "Cháu chỉ đi một mình thôi.",
+          "text": "Cháu ăn một đĩa thôi cô ạ.",
           "nextDialogueId": "vendor_ba_ba_alone"
         },
         {
-          "text": "Cô chờ ai khác sao?",
+          "text": "Hôm nay hàng quán thế nào cô?",
           "nextDialogueId": "vendor_ba_ba_who"
         }
       ],
@@ -142,7 +165,7 @@
       "id": "vendor_ba_ba_alone",
       "speaker": "Cô Ba Bánh Căn",
       "lines": [
-        "Ủa... vậy hả? Tui cứ đinh ninh có một đứa nữa hay đi cùng cậu... mắt sáng, nhanh nhẹn lắm... mà sao tui không nhớ nổi tên nó ta?"
+        "Ừ nhỉ, cháu đi một mình mà tay cô cứ quen múc thêm một phần. Chắc dạo này nhóm bếp sớm quá nên lẩm cẩm rồi!"
       ],
       "responses": []
     },
@@ -150,7 +173,7 @@
       "id": "vendor_ba_ba_who",
       "speaker": "Cô Ba Bánh Căn",
       "lines": [
-        "Tui cũng chẳng rõ nữa. Cứ như thể vừa có ai đó phai khỏi tâm trí tui vậy. Cầm lấy chiếc bánh căn này lót dạ đi cậu."
+        "Cũng lai rai bà con xóm chài ghé sớm thôi. Cầm thêm cái bánh căn bọc lá chuối này mang về tiệm ăn lót dạ nhé!"
       ],
       "responses": [],
       "effects": {
@@ -163,20 +186,191 @@
         "grantOnceFlag": "granted_vendor_pancake"
       }
     },
+    "npc_fisherman_sau": {
+      "id": "npc_fisherman_sau",
+      "speaker": "Ông Sáu Ngư Phủ",
+      "lines": [
+        "Biển sáng nay lặng gió quá cậu Peter à. Trời nồm ẩm mà ngồi vá lưới rít cả tay.",
+        "À, sáng sớm đi ngang mép rừng đằng kia tôi thấy có làn sương tim tím lơ lửng lạ lắm. Chắc sắp trở trời hay áp thấp gì đấy, cậu đi giao hàng cẩn thận kẻo mưa."
+      ],
+      "responses": [
+        {
+          "text": "Vâng, cháu để ý ạ.",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["talked_fisherman_sau"]
+      }
+    },
     "poi_empty_lot": {
       "id": "poi_empty_lot",
       "speaker": "Peter",
       "lines": [
-        "Một mảnh đất trống đầy cỏ dại bên bờ biển.",
-        "Nền gạch đỏ vẫn còn vết than bếp, nhưng dân làng khẳng định nơi này chưa từng có căn nhà nào."
+        "Một bãi đất trống cỏ mọc um tùm gần bờ biển.",
+        "Lần nào đi ngang mình cũng thấy mấy viên gạch vỡ lẫn dưới cỏ, chắc khu đất hoang lâu năm chưa ai xây lại."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["inspected_empty_lot"]
+      }
+    },
+    "poi_ancient_well": {
+      "id": "poi_ancient_well",
+      "speaker": "Peter",
+      "lines": [
+        "Giếng đá cũ của xóm chài. Dạo này ít nhà ra gánh nước hơn trước.",
+        "Hôm nay trời đứng gió nên mặt nước dưới đáy lặng tờ chẳng gợn sóng."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["inspected_ancient_well"]
+      }
+    },
+    "poi_child_sandals": {
+      "id": "poi_child_sandals",
+      "speaker": "Peter",
+      "lines": [
+        "Đôi dép trẻ con nhỏ xíu, quai sờn nắng nằm lệch bên bậc thềm một căn nhà đóng kín cửa.",
+        "Chắc tụi nhỏ nhà hàng xóm chạy chơi rồi để quên ngoài sân."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["inspected_child_sandals"]
+      }
+    },
+    "town_time_stops": {
+      "id": "town_time_stops",
+      "speaker": "Peter",
+      "lines": [
+        "Khoan đã... Tiếng sóng biển vừa tắt ngấm?!",
+        "Mọi chiếc đồng hồ trên phố đồng loạt đứng im tại một giây! Sóng biển ngoài kia đông cứng giữa không trung, gió ngừng thổi hoàn toàn!",
+        "Cô Ba khựng lại với chiếc muôi còn nghiêng, Ông Sáu cũng bất động giữa nhịp vá lưới... Tất cả mọi người đều đóng băng — chỉ mình mình còn cử động được?",
+        "Phía bãi đất trống bỗng rách toạc ra một khe sáng tím sẫm! Có thứ gì đó đang bò ra về phía mình!"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["time_frozen"]
+      }
+    },
+    "battle_elder_intervenes": {
+      "id": "battle_elder_intervenes",
+      "speaker": "Ông Lão",
+      "lines": [
+        "Ông lão áo xanh bước ra, giơ trượng gạt phăng đòn của Bóng Đen!",
+        "Ông Lão: 'Ngay cả ta cũng đang bị khoảnh khắc này kìm chậm lại...'",
+        "Ông ném thanh kiếm gãy: 'Nó không chịu ta nữa. Xem nó có chịu cậu không!'",
+        "Lưỡi kiếm gãy bừng sáng lam — Peter đã có thể tung đòn phản công!"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["has_broken_blade"]
+      }
+    },
+    "elder_after_first_battle": {
+      "id": "elder_after_first_battle",
+      "speaker": "Ông Lão",
+      "lines": [
+        "Cậu không sao chứ? Ta không ngờ khe sáng lại mở ra tận giữa phố nhanh như vậy.",
+        "(Ông lão nhìn thanh kiếm gãy vẫn sáng dịu trong tay Peter, rồi nhìn ra mặt biển bất động phía sau.)",
+        "Cả thị trấn bị khóa cứng rồi... Ngay cả ta cũng phải gồng mình hết sức mới không bị đứng im.",
+        "Thế mà cậu vẫn cử động được giữa giây phút này... Lạ thật.",
+        "Hãy quay về tiệm đồng hồ của cậu đi, có thứ vừa tỉnh dậy theo rồi đấy. Ta đợi cậu ở đó."
       ],
       "responses": [
         {
-          "text": "Tập trung cảm thức thời gian",
+          "text": "Về tiệm xem sao.",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["has_broken_blade"],
+        "grantItems": [
+          {
+            "itemId": "broken_blade",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_broken_blade"
+      }
+    },
+    "grandfather_watch_awakens": {
+      "id": "grandfather_watch_awakens",
+      "speaker": "Peter",
+      "lines": [
+        "Không thể nào... Chiếc đồng hồ quả quýt chết máy của ông nội... đang tự chạy?!",
+        "Kim đồng hồ quay ngược chiều từng nhịp rõ mồn một giữa căn phòng lặng như tờ.",
+        "Khi tay mình vừa chạm vào mặt đồng hồ, một luồng ánh sáng lam bùng qua mắt — ngoài cửa sổ, ngôi nhà từng biến mất ở bãi đất trống chợt hiện ra trong tích tắc rồi tan biến!",
+        "(Ánh lam dịu lắng lại nơi khóe mắt: đôi mắt thợ đồng hồ vừa mở ra khả năng nhìn thấu khoảnh khắc đã vỡ — Nhãn Thời Gian đã thức tỉnh!)"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["learned_temporal_sight"]
+      }
+    },
+    "elder_explains_frozen_town": {
+      "id": "elder_explains_frozen_town",
+      "speaker": "Trưởng Lão Thời Gian",
+      "lines": [
+        "Quả nhiên chiếc đồng hồ cũ ấy vẫn giữ được nhịp riêng của nó. Từ giờ cậu có thể gọi ta là Trưởng Lão Thời Gian.",
+        "Một vết nứt ngoài rìa khu rừng đang ghim chặt cả thị trấn này vào một giây ngưng đọng. Nếu không tháo nút thắt đó, Cô Ba, Ông Sáu và tất cả mọi người sẽ kẹt mãi ở tích tắc này.",
+        "Ta cần dẫn cậu đi qua Rừng Quên Lãng để tới điện thờ cổ tìm nguồn rạn nứt. Với thanh kiếm đó và đôi mắt vừa mở, cậu có đi cùng ta không?"
+      ],
+      "responses": [
+        {
+          "text": "Vì Cô Ba và Ông Sáu, cháu sẽ đi.",
+          "nextDialogueId": "elder_explains_frozen_town_accept"
+        },
+        {
+          "text": "Cháu cũng muốn biết chuyện gì xảy ra với mình.",
+          "nextDialogueId": "elder_explains_frozen_town_accept"
+        }
+      ]
+    },
+    "elder_explains_frozen_town_accept": {
+      "id": "elder_explains_frozen_town_accept",
+      "speaker": "Trưởng Lão Thời Gian",
+      "lines": [
+        "Được lắm. Lối vào Rừng Quên Lãng nằm ở góc đông bắc thị trấn.",
+        "Trước khi rời phố, nếu muốn cậu hãy nhìn lại thị trấn bằng đôi mắt mới — những thứ cậu từng lướt qua hồi sáng giờ có thể không còn giống như trước đâu."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["elder_joined"]
+      }
+    },
+    "npc_vendor_ba_ba_frozen": {
+      "id": "npc_vendor_ba_ba_frozen",
+      "speaker": "Peter",
+      "lines": [
+        "(Cô Ba đứng bất động như tượng giữa làn khói bếp đóng băng giữa không trung, tay vẫn nghiêng chiếc muôi đổ bột.)",
+        "Ngay cả chiếc ghế nhựa đặt trống bên cạnh cũng lặng im như tờ... Cháu nhất định sẽ đưa mọi người trở lại bình thường, cô Ba ạ."
+      ],
+      "responses": []
+    },
+    "npc_fisherman_sau_frozen": {
+      "id": "npc_fisherman_sau_frozen",
+      "speaker": "Peter",
+      "lines": [
+        "(Ông Sáu khựng lại giữa động tác gỡ lưới bên chiếc thúng chai. Giọt mồ hôi trên trán ông treo lơ lửng không rơi xuống nổi.)",
+        "Đám sương tím ngoài bìa rừng mà ông nhắc hồi sáng hóa ra là điềm báo của chuyện này..."
+      ],
+      "responses": []
+    },
+    "poi_empty_lot_frozen": {
+      "id": "poi_empty_lot_frozen",
+      "speaker": "Peter",
+      "lines": [
+        "Hồi sáng mình cứ nghĩ đây chỉ là bãi đất hoang bình thường.",
+        "Nhưng nhìn kỹ lại bây giờ: dưới lớp cỏ có cả nền gạch đỏ còn vết than bếp, như thể từng có một căn nhà ấm áp đứng ngay tại đây."
+      ],
+      "responses": [
+        {
+          "text": "Dùng Nhãn Thời Gian quan sát kỹ",
           "nextDialogueId": "poi_empty_lot_sight"
         },
         {
-          "text": "Bỏ qua",
+          "text": "Rời đi",
           "nextDialogueId": null
         }
       ],
@@ -188,34 +382,47 @@
       "id": "poi_empty_lot_sight",
       "speaker": "Peter",
       "lines": [
-        "Ánh sáng cerulean le lói: bóng dáng một mái nhà ấm cúng hiện lên trong thoáng chốc rồi tan biến.",
-        "Đây chính là Dấu Tích Tồn Tại Sót Lại... Sự Xóa Bỏ Khái Niệm đang ăn mòn thị trấn này."
+        "Ánh sáng lam gợn lên: bóng dáng một mái nhà từng sáng đèn hiện ra trong thoáng chốc rồi tan biến.",
+        "Thế mà không một ai trong thị trấn nhớ từng có ngôi nhà này... Thứ khiến thời gian ngừng lại cũng đang xóa đi từng mảnh ký ức sao?"
       ],
       "responses": []
     },
-    "npc_fisherman_sau": {
-      "id": "npc_fisherman_sau",
-      "speaker": "Ông Sáu Ngư Phủ",
+    "poi_ancient_well_frozen": {
+      "id": "poi_ancient_well_frozen",
+      "speaker": "Peter",
       "lines": [
-        "Gió biển hôm nay đổi chiều rồi, cậu Peter à. Sương mù màu tím tro đang tràn từ Rừng Quên Lãng ra vách đá.",
-        "Đừng dại mà lại gần Ngọn Hải Đăng Cổ lúc này, sóng ở đó không chảy xuôi theo chiều gió đâu."
+        "Lúc sáng mình còn tưởng giếng nước chỉ lặng gió...",
+        "Bây giờ nhìn xuống dưới đáy giếng mới rùng mình: mặt nước đóng cứng phẳng lỳ như gương và đang phản chiếu một bầu trời đêm đầy sao giữa ban trưa!"
       ],
       "responses": [
         {
-          "text": "Cháu phải đi tìm hiểu chuyện này.",
+          "text": "Soi sâu qua Nhãn Thời Gian",
+          "nextDialogueId": "poi_ancient_well_sight"
+        },
+        {
+          "text": "Rời khỏi giếng",
           "nextDialogueId": null
         }
       ],
       "effects": {
-        "setFlags": ["talked_fisherman_sau"]
+        "setFlags": ["inspected_ancient_well"]
       }
     },
-    "poi_child_sandals": {
-      "id": "poi_child_sandals",
+    "poi_ancient_well_sight": {
+      "id": "poi_ancient_well_sight",
       "speaker": "Peter",
       "lines": [
-        "Một đôi dép trẻ con nhỏ xíu, quai sờn nắng nằm lệch bên bậc hiên căn nhà đóng kín cửa.",
-        "Hàng xóm ai cũng khẳng định ngôi nhà này chưa từng có trẻ nhỏ ở, nhưng lớp bụi mỏng quanh thềm vẫn giữ nguyên dấu chân nhỏ."
+        "Mặt nước không hề phản chiếu bầu trời hôm nay, mà giữ chặt bóng hình của một đêm nào đó đã bị cắt lìa khỏi dòng chảy.",
+        "Ngay cả mặt nước và đá giếng cũng giữ lại những mảnh thời gian bị rơi rớt."
+      ],
+      "responses": []
+    },
+    "poi_child_sandals_frozen": {
+      "id": "poi_child_sandals_frozen",
+      "speaker": "Peter",
+      "lines": [
+        "Đôi dép trẻ con nhỏ xíu trước hiên căn nhà đóng kín cửa. Lúc sáng mình vội đi giao hàng nên chẳng để tâm.",
+        "Giờ nhìn thật kỹ, lớp bụi mỏng quanh thềm vẫn giữ nguyên những dấu chân nhỏ — dù hàng xóm ai cũng khẳng định ngôi nhà này chưa từng có trẻ nhỏ ở."
       ],
       "responses": [
         {
@@ -236,51 +443,21 @@
       "id": "poi_child_sandals_return",
       "speaker": "Peter",
       "lines": [
-        "Mình cúi xuống xếp đôi dép ngay ngắn lại đúng chỗ cũ trên bậc thềm đầy nắng gió.",
-        "Trong tích tắc, ánh lam nhạt khẽ gợn lên: bóng dáng nhòe mờ của một đứa trẻ đứng trước hiên nhà, khẽ gật đầu rồi tan vào gió biển.",
-        "Không hề đáng sợ hay dữ tợn... chỉ như một dấu vết tồn tại sót lại vừa được nhớ tới trước khi phai mờ hẳn."
+        "Mình cúi xuống xếp đôi dép ngay ngắn lại đúng chỗ cũ trên bậc thềm.",
+        "Trong tích tắc, ánh lam nhạt khẽ gợn lên: bóng dáng nhòe mờ của một đứa trẻ đứng trước hiên nhà, khẽ gật đầu rồi tan vào không khí.",
+        "Không hề đáng sợ hay dữ tợn... chỉ như một dấu tích tồn tại sót lại vừa được nhớ tới lần cuối trước khi phai mờ hẳn."
       ],
       "responses": [],
       "effects": {
         "setFlags": ["returned_child_sandals"]
       }
     },
-    "poi_ancient_well": {
-      "id": "poi_ancient_well",
-      "speaker": "Peter",
-      "lines": [
-        "Giếng đá cổ của làng chài nằm lặng lẽ giữa nắng trưa chói chang.",
-        "Thế nhưng mặt nước dưới đáy giếng lại đông cứng phẳng lỳ như tấm gương, phản chiếu một bầu trời đêm đầy sao lạ lẫm."
-      ],
-      "responses": [
-        {
-          "text": "Nhìn sâu qua Nhãn Thời Gian",
-          "nextDialogueId": "poi_ancient_well_sight"
-        },
-        {
-          "text": "Rời khỏi giếng",
-          "nextDialogueId": null
-        }
-      ],
-      "effects": {
-        "setFlags": ["inspected_ancient_well"]
-      }
-    },
-    "poi_ancient_well_sight": {
-      "id": "poi_ancient_well_sight",
-      "speaker": "Peter",
-      "lines": [
-        "Mặt nước không hề phản chiếu bầu trời hiện tại, mà giữ chặt bóng hình của một đêm đã bị cắt lìa khỏi dòng thời gian.",
-        "Ngay cả những ký ức của đất đá cũng đang rạn vỡ từng chút một."
-      ],
-      "responses": []
-    },
     "poi_forest_monolith": {
       "id": "poi_forest_monolith",
       "speaker": "Peter",
       "lines": [
-        "Trụ đá phong ấn rêu phong đứng giữa ranh giới cây rừng ngập mặn.",
-        "Những vết nứt không gian lơ lửng xung quanh đang dẫn lối xuống một ngôi đền cổ dưới lòng đất."
+        "Trụ đá rêu phong đứng ở ranh giới khu rừng ngập mặn, bề mặt khắc ký tự đồng dạng với chiếc la bàn hỏng ông lão mang tới tiệm sáng nay.",
+        "Lối bậc thang khuất sau trụ đá dẫn xuống một ngôi đền cổ dưới lòng đất."
       ],
       "responses": []
     },
@@ -288,8 +465,8 @@
       "id": "poi_chrono_crevice",
       "speaker": "Peter",
       "lines": [
-        "Một khe nứt hẹp trên tảng đá rêu phong phát ra ánh sáng lam dịu giữa tán rừng ngập mặn.",
-        "Bên trong vách đá ánh lên một mảnh tinh thể thời gian mát lạnh."
+        "Nhờ Nhãn Thời Gian vừa thức tỉnh, mình nhìn thấy một khe sáng lam dịu ẩn sau lớp rêu trên tảng đá.",
+        "Đúng như lời Trưởng Lão chỉ dẫn trên đường, bên trong vách đá ánh lên một mảnh tinh thể mát lạnh dùng để hồi sức."
       ],
       "responses": [],
       "effects": {
@@ -307,7 +484,7 @@
       "id": "poi_forest_shade_remains",
       "speaker": "Peter",
       "lines": [
-        "Dị thể bóng đen trong rừng đã tan rã, để lại tàn dư sóng thời gian lắng xuống đất."
+        "Bóng Đen trong rừng đã tan biến sau khi lĩnh trọn Nhãn Thời Gian và nhát chém của thanh kiếm gãy."
       ],
       "responses": [],
       "effects": {
@@ -318,17 +495,17 @@
       "id": "npc_elder_greeting",
       "speaker": "Trưởng Lão Thời Gian",
       "lines": [
-        "Chào người lữ khách. Ngươi đang đứng trên thánh địa đã bị rạn nứt bởi Đại Thảm Họa.",
-        "Ranh giới của điện thờ này tạm thời còn giữ được, nhưng những khe nứt thời gian đang cuộn trào phía trước.",
-        "Hãy cẩn trọng, đừng để bị cuốn vào vực sâu phân rã."
+        "Chào mừng cậu tới thánh địa của ta, Peter. Đây là Điện Thờ Đổ Nát — nơi còn giữ được một góc thời gian chưa bị đóng băng.",
+        "Bảy dấu tích quanh đại sảnh này là bài học đầu tiên về cách thế giới vận hành... và vì sao thị trấn của cậu bị dừng lại.",
+        "Hãy thử kết nối với Bàn Thờ Khoảnh Khắc ở chính giữa đại sảnh trước, rồi ta sẽ cho cậu làm quen với bài kiểm tra thực chiến."
       ],
       "responses": [
         {
-          "text": "Tôi phải làm gì?",
+          "text": "Cháu nên tìm hiểu những gì ở đây ạ?",
           "nextDialogueId": "npc_elder_quest_hint"
         },
         {
-          "text": "Bảo trọng.",
+          "text": "Vâng, để cháu đi xem qua.",
           "nextDialogueId": null
         }
       ]
@@ -337,16 +514,16 @@
       "id": "npc_elder_quest_hint",
       "speaker": "Trưởng Lão Thời Gian",
       "lines": [
-        "Hãy tiến về trung tâm đại sảnh và kết nối với Bàn Thờ Khoảnh Khắc (Altar of Moments).",
-        "Ta cảm nhận thấy một dị thể đang trỗi dậy ở khe nứt phía đông. Sau khi hoàn thành, hãy quay lại gặp ta."
+        "Trước hết hãy chạm vào Bàn Thờ Khoảnh Khắc ở giữa sảnh để thanh kiếm gãy quen với nhịp của nơi này.",
+        "Ở sảnh đông còn một con Bóng Đen bị giam lại — đánh thắng nó coi như bài kiểm tra tốt nghiệp trước khi ta mở Cổng Ngưỡng dẫn ra ngọn hải đăng."
       ],
       "responses": [
         {
-          "text": "Về sáu Đấng Quyền Năng?",
+          "text": "Sáu Quyền Năng trên các bia đá là gì vậy ạ?",
           "nextDialogueId": "npc_elder_authorities_lore"
         },
         {
-          "text": "Tôi hiểu rồi.",
+          "text": "Cháu hiểu rồi.",
           "nextDialogueId": null
         }
       ]
@@ -355,8 +532,9 @@
       "id": "npc_elder_authorities_lore",
       "speaker": "Trưởng Lão Thời Gian",
       "lines": [
-        "Origin, Continuum, Causality, Memory, Possibility, Finality. Sáu trụ cột nâng đỡ cấu trúc thực tại.",
-        "Khi Chronos phân tách chúng, thế giới đã mất đi dòng chảy vĩnh cửu. Giờ đây, chỉ còn lại sự phân rã."
+        "Thế giới này vốn được sáu Đấng Quyền Năng chống đỡ: Origin (Khởi Nguyên), Continuum (Liên Tục), Causality (Nhân Quả), Memory (Ký Ức), Possibility (Khả Thể) và Finality (Chung Cuộc).",
+        "Hãy cứ coi chúng như sáu bánh răng chủ lực của một chiếc đồng hồ khổng lồ: Continuum giữ kim trôi đều, Memory giữ lại dấu vết quá khứ.",
+        "Khi sáu Quyền Năng ấy bị chia tách, từng mảnh thời gian và ký ức bắt đầu rơi rụng — giống hệt bãi đất trống hay đôi dép nhỏ trong thị trấn cậu vậy."
       ],
       "responses": []
     },
@@ -364,8 +542,8 @@
       "id": "altar_inspection",
       "speaker": "Peter",
       "lines": [
-        "Bàn Thờ Khoảnh Khắc tỏa ra ánh sáng cerulean dịu nhẹ.",
-        "Khi chạm tay vào phiến đá, chiếc đồng hồ ngừng chạy trong túi áo khẽ rung lên đồng điệu."
+        "Bàn Thờ Khoảnh Khắc tỏa ra ánh sáng lam dịu giống hệt sắc sáng trên thanh kiếm gãy.",
+        "Khi đặt tay lên phiến đá, cả thanh kiếm lẫn chiếc đồng hồ quả quýt của ông nội đều khẽ rung lên cùng một nhịp."
       ],
       "responses": [],
       "effects": {
@@ -377,12 +555,13 @@
       "id": "npc_elder_farewell",
       "speaker": "Trưởng Lão Thời Gian",
       "lines": [
-        "Dị thể bóng đen đã bị phong ấn. Nhưng những rạn nứt ngoài bờ biển vẫn chưa lắng xuống.",
-        "Đường lên Ngọn Hải Đăng Cổ đã mở. Hãy tiến về phía mỏm đá và tự mình đọc lấy những gì ngọn đèn còn giữ."
+        "Khá lắm, Peter. Cậu không còn chỉ vung kiếm theo bản năng nữa mà đã biết nương theo nhịp chuyển động của trận đấu.",
+        "Cổng Ngưỡng phía bắc đã mở. Phía sau nó là mỏm đá Ngọn Hải Đăng Cổ — nơi một người gác biển đang vô tình giữ chặt giây phút ngưng đọng của thị trấn cậu.",
+        "Ta sẽ mở đường tới đó. Hãy giải thoát cho ông ấy để trả lại buổi sáng bình thường cho Cô Ba và Ông Sáu."
       ],
       "responses": [
         {
-          "text": "Tôi sẽ đi ngay.",
+          "text": "Cháu sẽ đi ngay.",
           "nextDialogueId": null
         }
       ],
@@ -394,16 +573,16 @@
       "id": "stele_six_authorities",
       "speaker": "Peter",
       "lines": [
-        "Tấm bia đá cổ khắc sâu biểu tượng của Sáu Đấng Quyền Năng.",
-        "Phần khắc của Memory và Finality đã bị mài mòn một cách có chủ đích."
+        "Tấm bia đá khắc sáu biểu tượng xoay quanh một vòng tròn lớn — trông thoáng qua gần giống mặt số đồng hồ cổ chia sáu cung.",
+        "Trưởng Lão đứng bên chỉ từng hình khắc: 'Origin khởi sinh, Continuum giữ dòng chảy, Causality nối nhân quả, Possibility mở ra ngã rẽ...'"
       ],
       "responses": [
         {
-          "text": "Quan sát các vết đục",
+          "text": "Hỏi về hai cung bị mài mòn",
           "nextDialogueId": "stele_six_authorities_defaced"
         },
         {
-          "text": "Rời đi",
+          "text": "Ghi nhớ rồi đi tiếp",
           "nextDialogueId": null
         }
       ],
@@ -414,9 +593,10 @@
     },
     "stele_six_authorities_defaced": {
       "id": "stele_six_authorities_defaced",
-      "speaker": "Peter",
+      "speaker": "Trưởng Lão Thời Gian",
       "lines": [
-        "Vết cạo không phải do thời gian phong hóa, mà là dấu tích của Sự Xóa Bỏ Khái Niệm."
+        "'Hai cung bị đục mờ này từng là Memory và Finality. Không phải đá tự mòn đâu — khi một khái niệm bị xóa đi, dấu tích của nó trên thế gian cũng phai theo.'",
+        "(Peter khẽ sững lại: 'Vậy vết nhòe trong tấm ảnh cũ ở phòng cháu... cũng là chuyện tương tự sao?')"
       ],
       "responses": []
     },
@@ -424,16 +604,16 @@
       "id": "pillar_memory_erasure",
       "speaker": "Peter",
       "lines": [
-        "Cột đá sừng sững nhưng hoa văn bề mặt như bị xóa mờ bởi một lực vô hình.",
-        "Không gian quanh cột đá có sự dao động kỳ lạ."
+        "Cột đá sừng sững nhưng hoa văn trên thân cột cứ nhòe đi mỗi lần mình chớp mắt, đọc chưa hết dòng đã quên chữ đầu.",
+        "Đây là bài học về Quyền Năng Ký Ức (Memory) sao?"
       ],
       "responses": [
         {
-          "text": "Cộng hưởng với đồng hồ",
+          "text": "Đưa đồng hồ ông nội lại gần thử xem",
           "nextDialogueId": "pillar_watch_resonance"
         },
         {
-          "text": "Rời đi",
+          "text": "Lùi lại",
           "nextDialogueId": null
         }
       ],
@@ -443,9 +623,9 @@
     },
     "pillar_watch_resonance": {
       "id": "pillar_watch_resonance",
-      "speaker": "Peter",
+      "speaker": "Trưởng Lão Thời Gian",
       "lines": [
-        "Chiếc đồng hồ ngừng chạy phát ra tiếng tích tắc nghẹn ngào. Cột đá từng ghi lại ký ức về một vị thần đã bị quên lãng."
+        "(Chiếc đồng hồ quả quýt khẽ gõ một tiếng tích tắc.) 'Đúng vậy. Ngay cả khi Memory bị tổn thương, những vật mang thời gian vẫn chạm được vào Dấu Tích Tồn Tại Sót Lại của nó.'"
       ],
       "responses": []
     },
@@ -453,16 +633,16 @@
       "id": "notebook_loose_leaf",
       "speaker": "Peter",
       "lines": [
-        "Một trang giấy rách rơi trên sàn đá hoa cương.",
-        "Nét mực ghi lại phương trình tính toán sai số giữa các dòng thời gian."
+        "Một trang giấy cũ rơi trên sàn đá, vẽ đầy sơ đồ bánh răng lồng vào vòng xoay quỹ đạo — trông giống bản vẽ máy đồng hồ nhưng phức tạp gấp trăm lần.",
+        "Chú thích bên lề nhắc tới Quyền Năng Nhân Quả (Causality): mọi chuyển động đều cần nguyên nhân đứng trước."
       ],
       "responses": [
         {
-          "text": "Kiểm tra nét chữ",
+          "text": "Hỏi Trưởng Lão về bản vẽ này",
           "nextDialogueId": "notebook_handwriting_check"
         },
         {
-          "text": "Cất trang giấy",
+          "text": "Kẹp gọn lại",
           "nextDialogueId": null
         }
       ],
@@ -472,9 +652,9 @@
     },
     "notebook_handwriting_check": {
       "id": "notebook_handwriting_check",
-      "speaker": "Peter",
+      "speaker": "Trưởng Lão Thời Gian",
       "lines": [
-        "Nét chữ cứng cáp và quen thuộc đến lạnh người. Đây chính là chữ viết tay của chính mình."
+        "'Đây là ghi chép cổ về cách Causality và Continuum đan vào nhau như một cỗ máy lớn. Cậu là thợ sửa đồng hồ nên nhìn ra ngay — chỉ gãy một bánh răng là cả bộ kim trật nhịp.'"
       ],
       "responses": []
     },
@@ -482,12 +662,12 @@
       "id": "astrolabe_inspection",
       "speaker": "Peter",
       "lines": [
-        "Hỗn thiên nghi bằng đồng thau khổng lồ, các vòng tròn quỹ đạo đã đóng băng hoàn toàn.",
-        "Bên trong khe kẹt có một chiếc bánh răng cổ đang phát sáng."
+        "Giữa góc sảnh đặt một hỗn thiên nghi đồng thau khổng lồ — y hệt phiên bản phóng to của chiếc la bàn hỏng ông lão mang tới tiệm mình hồi sáng!",
+        "Các vòng quỹ đạo của Continuum đã đóng băng cứng, nhưng trong kẽ khớp còn kẹt một chiếc bánh răng đang ấm sáng."
       ],
       "responses": [
         {
-          "text": "Gỡ bánh răng ra",
+          "text": "Gỡ bánh răng kẹt ra",
           "nextDialogueId": "astrolabe_extricate_gear"
         },
         {
@@ -503,7 +683,8 @@
       "id": "astrolabe_extricate_gear",
       "speaker": "Peter",
       "lines": [
-        "Chiếc bánh răng đồng thau rơi vào lòng bàn tay, ấm áp và còn vương năng lượng thiên thể."
+        "Mình dùng thói quen quen tay của người sửa đồng hồ nạy nhẹ là nhấc được chiếc bánh răng đồng thau ra ngoài.",
+        "Nó ấm áp trong lòng bàn tay — chắc hẳn là vật mẫu liên kết với Quyền Năng Liên Tục (Continuum)."
       ],
       "responses": [],
       "effects": {
@@ -521,8 +702,8 @@
       "id": "reliquary_search",
       "speaker": "Peter",
       "lines": [
-        "Chiếc hòm di vật bằng đá rạn nứt.",
-        "Bên trong là một mảnh tinh thể kết tinh từ dòng thời gian phân rã."
+        "Chiếc hòm đá nhỏ khắc chữ cổ về Khởi Nguyên (Origin) và Khả Thể (Possibility) — hai Quyền Năng sinh ra mọi biến cố mới.",
+        "Trưởng Lão bảo bên trong có cất mảnh tinh thể hồi sức dành cho những người học việc bước vào khu rạn nứt."
       ],
       "responses": [],
       "effects": {
@@ -540,12 +721,12 @@
       "id": "threshold_gates_inspection",
       "speaker": "Peter",
       "lines": [
-        "Cổng Ngưỡng khổng lồ khóa chặt bởi các ký tự niêm phong phát sáng.",
-        "Cánh cổng này dường như dẫn lối vượt ra khỏi thánh địa, hướng về phía ngọn hải đăng."
+        "Cổng Ngưỡng đá khổng lồ mang dấu ấn của Chung Cuộc (Finality) — ngưỡng chuyển giao cuối cùng, dẫn thẳng ra Ngọn Hải Đăng Cổ.",
+        "Hiện trên cánh cổng vẫn còn niêm phong sáng dịu chưa mở."
       ],
       "responses": [
         {
-          "text": "Chạm vào niêm ấn",
+          "text": "Chạm thử vào niêm phong",
           "nextDialogueId": "threshold_gates_echo"
         },
         {
@@ -559,19 +740,21 @@
     },
     "threshold_gates_echo": {
       "id": "threshold_gates_echo",
-      "speaker": "Peter",
+      "speaker": "Trưởng Lão Thời Gian",
       "lines": [
-        "Tiếng vọng thì thầm từ bên kia cổng: 'Chỉ kẻ thức tỉnh trước ngọn đèn hải đăng mới có thể bước qua.'"
+        "'Đó là cửa nối liền hai đầu hành trình — Finality đóng một chương để mở ra chương kế tiếp. Hãy vượt qua bài kiểm tra Bóng Đen ở sảnh đông rồi ta sẽ mở cổng cho cậu.'"
       ],
       "responses": []
     },
     "rift_echo_attune": {
       "id": "rift_echo_attune",
       "speaker": "Peter",
-      "lines": ["Vết nứt không gian lơ lửng, tỏa ra những xung nhịp thời gian chập chờn."],
+      "lines": [
+        "Một dải ánh sáng rung nhẹ lơ lửng giữa không trung — phần dư chấn còn sót lại khi ranh giới các Quyền Năng bị xé rách."
+      ],
       "responses": [
         {
-          "text": "Tập trung cộng hưởng",
+          "text": "Thử dùng Nhãn Thời Gian điều hòa",
           "nextDialogueId": "rift_echo_vision"
         },
         {
@@ -587,7 +770,7 @@
       "id": "rift_echo_vision",
       "speaker": "Peter",
       "lines": [
-        "Một làn sóng thời gian thanh khiết truyền qua cơ thể, giúp tâm trí thêm vững vàng (+15 EXP)."
+        "Luồng sáng dịu hòa nhịp cùng thanh kiếm gãy và đôi mắt mới: mình cảm thấy điều khiển Nhãn Thời Gian thuần thục hơn hẳn (+15 EXP)."
       ],
       "responses": [],
       "effects": {
@@ -597,42 +780,56 @@
     },
     "boss_sentinel_encounter": {
       "id": "boss_sentinel_encounter",
-      "speaker": "The Drowned Sentinel",
+      "speaker": "Vệ Binh Chìm Trong Sóng",
       "lines": [
-        "Sóng... thời gian... không bao giờ ngừng lại...",
-        "Kẻ nào dám bước lên ngọn hải đăng của những kẻ bị lãng quên?"
+        "Sóng... khoảnh khắc này... không được phép trôi đi...",
+        "Kẻ nào dám bước lên ngọn hải đăng đang giữ mặt biển lặng yên?"
       ],
       "responses": [
         {
-          "text": "Hãy để tôi giúp bạn.",
+          "text": "Tôi sẽ giải thoát cho ông, để thị trấn được chạy lại.",
           "nextDialogueId": null
         }
       ]
     },
     "boss_sentinel_pacified": {
       "id": "boss_sentinel_pacified",
-      "speaker": "The Drowned Sentinel",
+      "speaker": "Vệ Binh Chìm Trong Sóng",
       "lines": [
-        "...Ánh sáng... Đã bao kỷ nguyên ta chìm trong vực sâu vô tận này...",
-        "Cảm tạ ngươi... Hỡi lữ khách phương xa... Hãy bước tiếp về phía đỉnh tháp...",
-        "(Trong khoảnh khắc tan biến, một ký ức lóe lên: bóng người gác đèn còng lưng châm ngọn bấc giữa đêm bão cho những con thuyền không bao giờ cập bến.)"
+        "...Ánh sáng... Đã bao lâu rồi ta kẹt lại giữa cơn sóng bất động này...",
+        "Cảm ơn cậu... người thợ trẻ từ thị trấn bên dưới. Hãy bước tiếp về phía bia đá trên đỉnh tháp...",
+        "(Trong khoảnh khắc thanh thản tan biến, một ký ức thoáng qua: bóng người gác đèn còng lưng châm ngọn bấc giữa đêm bão cho những con thuyền ngoài khơi. Dưới chân mỏm đá, tiếng sóng biển bỗng rì rào chảy lại.)"
       ],
       "responses": [],
       "effects": {
         "setFlags": ["sentinel_pacified"]
       }
     },
+    "town_time_restored": {
+      "id": "town_time_restored",
+      "speaker": "Peter",
+      "lines": [
+        "Ngoài khơi, những con sóng bạc đầu ùa vào bờ rì rào như thường lệ. Gió biển thổi qua mái ngói, khói bếp quán Cô Ba lại bay lên nghi ngút.",
+        "Mọi chiếc đồng hồ trong thị trấn đồng loạt chạy tiếp từ chính giây phút vừa đứng. Cô Ba mỉm cười đảo bột, Ông Sáu kéo lại mẻ lưới — chẳng ai hay biết cả thị trấn vừa trải qua một giây đóng băng.",
+        "Mọi thứ trông hoàn toàn bình yên... Không có bất kỳ ai biến mất hay bị quên trước mắt mình cả.",
+        "Chỉ có một điều lạ: khi không ai để ý, chiếc đồng hồ quả quýt của ông nội trong túi áo mình vẫn khẽ chạy ngược từng nhịp."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["time_restored"]
+      }
+    },
     "poi_unwritten_tablet": {
       "id": "poi_unwritten_tablet",
       "speaker": "Bia Đá Cổ",
       "lines": [
-        "ĐỐI TƯỢNG: UNWRITTEN (KẺ KHÔNG ĐƯỢC GHI TÊN)",
-        "NHẬN DIỆN: KHÔNG HOÀN CHỈNH | PHÂN LOẠI: BẤT KHẢ THI",
-        "Ngươi đứng ngoài cấu trúc của sáu Quyền Năng. Hãy bước qua Cổng Ngưỡng."
+        "ĐỐI TƯỢNG: UNWRITTEN — NHẬN DIỆN: KHÔNG HOÀN CHỈNH — PHÂN LOẠI: BẤT KHẢ THI.",
+        "(Trưởng Lão đứng lặng bên cạnh, chăm chú đọc từng chữ phát sáng rồi quay sang nhìn Peter rất lâu mà không nói lời nào.)",
+        "'Ngươi đứng ngoài sổ sách của Sáu Quyền Năng. Cổng Ngưỡng phía trước đang chờ.'"
       ],
       "responses": [
         {
-          "text": "Chạm tay vào Cổng Ngưỡng",
+          "text": "Đi cùng Trưởng Lão, tìm lời giải phía trước",
           "nextDialogueId": "prologue_farewell_step"
         }
       ],
@@ -644,8 +841,8 @@
       "id": "prologue_farewell_step",
       "speaker": "Peter",
       "lines": [
-        "Biển Khánh Hòa lùi dần sau màn sương ánh sáng.",
-        "Hành trình tìm lại những gì đã mất chính thức bắt đầu."
+        "Cô Ba và Ông Sáu đã an toàn, thị trấn ven biển Khánh Hòa lùi dần sau làn sương sáng bình yên.",
+        "Chiếc đồng hồ chạy ngược trong túi áo vẫn không ngừng gõ nhịp. Mình bước qua Cổng Ngưỡng cùng Trưởng Lão — để tự mình tìm xem điều gì, hoặc ai, đã bị thời gian xóa đi."
       ],
       "responses": [],
       "effects": {

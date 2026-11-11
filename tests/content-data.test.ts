@@ -143,22 +143,33 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
     }
   });
 
-  it('ensures every quest objective completeOnFlag (except isShadeDefeated) is set by at least one dialogue node setFlags', () => {
-    const allDialogueFlags = new Set<string>();
+  it('ensures every quest objective completeOnFlag is set by a dialogue node or combat encounter', () => {
+    const knownFlags = new Set<string>([
+      FLAGS.shadeDefeated,
+      // Set on winning the Act 2 first-shade encounter added by T-37 (maps.json + enemies.json).
+      'defeated_first_shade',
+    ]);
     for (const node of Object.values(dialogueDb.dialogues)) {
       for (const flag of node.effects?.setFlags ?? []) {
-        allDialogueFlags.add(flag);
+        knownFlags.add(flag);
+      }
+    }
+    for (const map of Object.values(mapDb.maps)) {
+      for (const enc of map.encounters ?? []) {
+        if (enc.defeatedFlag) {
+          knownFlags.add(enc.defeatedFlag);
+        }
       }
     }
 
     for (const quest of questDb.quests) {
       for (const obj of quest.objectives) {
-        if (!obj.completeOnFlag || obj.completeOnFlag === FLAGS.shadeDefeated) {
+        if (!obj.completeOnFlag) {
           continue;
         }
         expect(
-          allDialogueFlags.has(obj.completeOnFlag),
-          `Objective "${obj.id}" in quest "${quest.id}" waits on completeOnFlag "${obj.completeOnFlag}" which no dialogue node sets`,
+          knownFlags.has(obj.completeOnFlag),
+          `Objective "${obj.id}" in quest "${quest.id}" waits on completeOnFlag "${obj.completeOnFlag}" which nothing sets`,
         ).toBe(true);
       }
     }
@@ -247,10 +258,179 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
     expect(duplicateKeyGrant).toEqual([]);
     expect(session.inventory.getItemCount('brass_key')).toBe(1);
 
-    // Both objectives complete -> quest completes
+    // Both objectives complete -> quest completes and chains to quest_prologue_town on next sync
     expect(session.quests.getQuestStage('quest_prologue_awaken')).toBe('completed');
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_prologue_town')).toBe('started');
     const claim = session.claimQuestRewards('quest_prologue_awaken');
     expect(claim?.exp).toBe(10);
     expect(session.exp).toBe(10);
+  });
+
+  it('satisfies the Prologue v3 §6 dialogue, battle-log length, Act 1 mundane tone, and 5-act quest chain', () => {
+    const requiredIds = [
+      'intro_awakening',
+      'room_door_locked',
+      'room_key',
+      'room_notebook',
+      'room_photo',
+      'room_watch',
+      'elder_shop_visit',
+      'watch_delivery',
+      'town_time_stops',
+      'battle_elder_intervenes',
+      'elder_after_first_battle',
+      'grandfather_watch_awakens',
+      'elder_explains_frozen_town',
+      'npc_vendor_ba_ba_frozen',
+      'npc_fisherman_sau_frozen',
+      'poi_empty_lot_frozen',
+      'poi_ancient_well_frozen',
+      'poi_child_sandals_frozen',
+      'town_time_restored',
+    ];
+    for (const id of requiredIds) {
+      expect(dialogueDb.dialogues[id], `Missing §6 dialogue "${id}"`).toBeDefined();
+    }
+
+    // battle_elder_intervenes: 2-4 short lines, each <= 90 characters
+    const intervene = dialogueDb.dialogues.battle_elder_intervenes;
+    expect(intervene.lines.length).toBeGreaterThanOrEqual(2);
+    expect(intervene.lines.length).toBeLessThanOrEqual(4);
+    for (const line of intervene.lines) {
+      expect(
+        line.length,
+        `Line too long in battle_elder_intervenes: "${line}"`,
+      ).toBeLessThanOrEqual(90);
+    }
+
+    // No cosmic / Act 2+ spoilers before time stops, and zero Kuro mentions anywhere
+    const forbiddenAct1Terms = [
+      'Đại Thảm Họa',
+      'Đấng Quyền Năng',
+      'Quyền Năng',
+      'Nhãn Thời Gian',
+      'Xóa Bỏ Khái Niệm',
+      'Dấu Tích Tồn Tại',
+      'Kẻ Không Được Ghi Tên',
+      'Unwritten',
+      'dị thể',
+      'vết nứt thời gian',
+      'Rừng Quên Lãng',
+      'thanh kiếm gãy',
+    ];
+    const act1Nodes = [
+      'intro_awakening',
+      'room_door_locked',
+      'room_key',
+      'room_notebook',
+      'room_photo',
+      'room_photo_trace',
+      'room_watch',
+      'elder_shop_visit',
+      'elder_shop_visit_examine',
+      'watch_delivery',
+      'npc_vendor_ba_ba',
+      'vendor_ba_ba_alone',
+      'vendor_ba_ba_who',
+      'npc_fisherman_sau',
+      'poi_empty_lot',
+      'poi_ancient_well',
+      'poi_child_sandals',
+    ];
+    for (const id of act1Nodes) {
+      const text = dialogueDb.dialogues[id].lines.join(' ');
+      for (const term of forbiddenAct1Terms) {
+        expect(text.toLowerCase(), `Act 1 dialogue "${id}" leaked "${term}"`).not.toContain(
+          term.toLowerCase(),
+        );
+      }
+    }
+    const starterWatch = itemDb.items.find((i) => i.id === 'relic_chronometer');
+    expect(starterWatch?.description).not.toContain('Đại Thảm Họa');
+    expect(JSON.stringify({ dialogueDb, questDb, itemDb })).not.toMatch(/kuro/i);
+
+    // End-to-end 5-Act quest progression through GameSession + real effects
+    const session = GameSession.newGame(createRealDatabase());
+
+    // Act 1: Room -> Town
+    session.applyDialogueEffects(dialogueDb.dialogues.room_notebook.effects!);
+    session.applyDialogueEffects(dialogueDb.dialogues.room_key.effects!);
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_prologue_town')).toBe('started');
+
+    session.applyDialogueEffects(dialogueDb.dialogues.npc_vendor_ba_ba.effects!);
+    session.applyDialogueEffects(dialogueDb.dialogues.elder_shop_visit.effects!);
+    session.applyDialogueEffects(dialogueDb.dialogues.watch_delivery.effects!);
+    expect(session.getFlag('elder_visited_shop')).toBe(true);
+    expect(session.getFlag('delivered_repaired_watch')).toBe(true);
+    expect(session.quests.getQuestStage('quest_prologue_town')).toBe('completed');
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_prologue_timestop')).toBe('started');
+
+    // Act 2: Time stops -> Elder throws blade mid-battle -> win first fight
+    session.applyDialogueEffects(dialogueDb.dialogues.town_time_stops.effects!);
+    expect(session.getFlag('time_frozen')).toBe(true);
+    session.applyDialogueEffects(dialogueDb.dialogues.battle_elder_intervenes.effects!);
+    expect(session.getFlag('has_broken_blade')).toBe(true);
+    session.setFlag('defeated_first_shade', true);
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_prologue_timestop')).toBe('completed');
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_prologue_watch')).toBe('started');
+
+    // Grants broken_blade once on post-battle dialogue
+    expect(
+      session.applyDialogueEffects(dialogueDb.dialogues.elder_after_first_battle.effects!),
+    ).toEqual([{ itemId: 'broken_blade', quantity: 1 }]);
+    expect(
+      session.applyDialogueEffects(dialogueDb.dialogues.elder_after_first_battle.effects!),
+    ).toEqual([]);
+
+    // Act 3: Grandfather watch awakens -> Elder explains & joins -> Town frozen side quest
+    session.applyDialogueEffects(dialogueDb.dialogues.grandfather_watch_awakens.effects!);
+    expect(session.getFlag('learned_temporal_sight')).toBe(true);
+    session.applyDialogueEffects(dialogueDb.dialogues.elder_explains_frozen_town_accept.effects!);
+    expect(session.getFlag('elder_joined')).toBe(true);
+    expect(session.quests.getQuestStage('quest_prologue_watch')).toBe('completed');
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_prologue_forest')).toBe('started');
+
+    session.applyDialogueEffects(dialogueDb.dialogues.poi_child_sandals_frozen.effects!);
+    expect(session.quests.getQuestStage('quest_prologue_forgotten_child')).toBe('started');
+    session.applyDialogueEffects(dialogueDb.dialogues.poi_child_sandals_return.effects!);
+    expect(session.quests.getQuestStage('quest_prologue_forgotten_child')).toBe('completed');
+
+    // Act 4: Forest -> Antechamber -> Silence the Fracture
+    session.setFlag('defeated_forest_shade', true);
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_prologue_forest')).toBe('completed');
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_prologue_awakening')).toBe('started');
+
+    session.quests.completeObjective('quest_prologue_awakening', 'obj_speak_elder');
+    session.applyDialogueEffects(dialogueDb.dialogues.altar_inspection.effects!);
+    session.quests.completeObjective('quest_prologue_awakening', 'obj_inspect_altar');
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_prologue_awakening')).toBe('completed');
+    expect(session.quests.getQuestStage('quest_prologue_silence')).toBe('started');
+
+    session.setFlag(FLAGS.shadeDefeated, true);
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_prologue_silence')).toBe('completed');
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_prologue_sentinel')).toBe('started');
+
+    // Act 5: Sentinel pacified -> Town restored -> UNWRITTEN record
+    session.applyDialogueEffects(dialogueDb.dialogues.boss_sentinel_pacified.effects!);
+    expect(session.quests.getQuestStage('quest_prologue_sentinel')).toBe('completed');
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_prologue_unwritten')).toBe('started');
+
+    session.applyDialogueEffects(dialogueDb.dialogues.town_time_restored.effects!);
+    expect(session.getFlag('time_restored')).toBe(true);
+    session.applyDialogueEffects(dialogueDb.dialogues.poi_unwritten_tablet.effects!);
+    expect(session.quests.getQuestStage('quest_prologue_unwritten')).toBe('completed');
+    expect(dialogueDb.dialogues.prologue_farewell_step.effects?.endPrologue).toBe(true);
   });
 });
