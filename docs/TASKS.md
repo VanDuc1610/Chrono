@@ -23,7 +23,7 @@ Goal (owner, 2026-11-11): rebuild the Prologue per `docs/story/STORY_PROLOGUE.md
 
 ### T-27 · Prologue v2 design document (Vietnamese)
 
-- **Assignee:** Antigravity · **Status:** TODO
+- **Assignee:** Antigravity · **Status:** BLOCKED — awaiting owner approval
 - **Locks:** `docs/story/PROLOGUE_V2_DESIGN.md` (new)
 - Beat-by-beat design for owner approval: maps, NPCs, quests/flags, Drowned Sentinel mechanic, draft dialogue, asset list. Design only — no code, no JSON, no art.
 
