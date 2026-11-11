@@ -21,15 +21,14 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 Goal (owner, 2026-11-11): rebuild the Prologue per `docs/story/PROLOGUE_V2_DESIGN.md` (approved), all in-game text in Vietnamese.
 
-### T-32 · Prologue v2 sprites: Cô Ba + The Drowned Sentinel (Pipeline B)
+### T-34 · Drowned Sentinel boss mechanic + Vietnamese combat UI
 
-- **Assignee:** Claude · **Status:** BLOCKED — `NPC_VENDOR_BA_001_CAND`, `BOSS_SENTINEL_001_CAND` awaiting owner approval
-- **Locks:** `scripts/author-npc-sprites.js` (new), `scripts/author-sentinel-sprites.js` (new), `art-source/npcs/`, `art-source/enemies/sentinel/`
-- Cô Ba 32×32 idle (4 frames); Drowned Sentinel 64×64 (4-frame idle + kneel); owner approval.
+- **Assignee:** Claude · **Status:** IN PROGRESS
+- **Locks:** `src/systems/combat/`, `src/scenes/CombatScene.ts`, `public/assets/data/enemies.json`, `public/assets/data/strings.json`, `public/assets/data/maps.json`
+- Data-driven boss phases (HP floor + recovery until the mechanic is solved), environment actions (lens commands) in the command menu, released frame on victory; encounter at the lighthouse neck; combat text from `strings.json`.
 
 ## Backlog (scheduled after current locks are released)
 
-- **Drowned Sentinel combat mechanics** (Claude) — boss phases + environment actions (lens commands) in `CombatSystem` / `enemies.json`, after T-29.
 - **Vietnamese pass on remaining UI** (Combat, Main Menu, Prologue End) via `strings.json` once T-28 lands.
 - **GitHub Pages release + Playwright cross-browser tests.**
 
@@ -37,8 +36,8 @@ Goal (owner, 2026-11-11): rebuild the Prologue per `docs/story/PROLOGUE_V2_DESIG
 
 ## Done (latest 5 — older entries in [TASKS_ARCHIVE.md](TASKS_ARCHIVE.md))
 
+- **T-32** Cô Ba and The Drowned Sentinel approved and integrated (`NPC_VENDOR_BA_001`, `BOSS_SENTINEL_001`): Cô Ba is an NPC behind her stall (talk from between the two stools); enemies get an optional `spriteScale` so the 64 px Sentinel renders at boss size. T-29/T-33 content wired into the maps (sandals, well, crevice). T-29 review: unsupported `completeQuest` removed, `grantExp` now an engine effect, test rejects unknown effect keys; room/town/forest/tablet interactables wired. Verified live + 44 unit tests + 4 CDP suites — Claude
 - **T-33** Added remaining Prologue v2 Vietnamese data (`dialogue.json`, `quests.json`): forgotten-child side quest `quest_prologue_forgotten_child` (+15 EXP, `returned_child_sandals`) started by `poi_child_sandals` (2 choices, blurred silhouette), `poi_ancient_well` (frozen water reflecting night sky), `poi_chrono_crevice` (grants `chrono_shard_minor` once via `granted_forest_crevice_shard`), plus §9 tone/keeper/seat polish without pre-empting UNWRITTEN; verified with `typecheck`, `lint`, `prettier --check .`, and 44 unit tests — Antigravity
 - **T-29** Authored full Prologue v2 Vietnamese data: rewrote `intro_awakening` for Peter's room (no "Where am I? -> Antechamber" branch), added `room_door_locked`, room interactables & key flow (`has_room_key` gates exit), coastal town, forest, and lighthouse dialogues; `quests.json` updated with `quest_prologue_awaken` ("started") and `quest_prologue_awakening` ("inactive", started by antechamber arrival); `items.json` and `enemies.json` translated to Vietnamese; verified with `typecheck`, 43 unit tests (including room quest end-to-end), and CDP browser suites — Antigravity
 - **T-31** `wilds_tileset` approved (`ENV_WILDS_001`) and integrated: Forgotten Forest (26×18, stray Shade with its own `defeated_forest_shade` flag) and Old Lighthouse headland (24×18) generated from `scripts/wilds-layout.js`; Antechamber gets a south stair to the forest and its Threshold Gates lead to the lighthouse once `elder_granted_beacon` is set. Full route verified live: room → town → forest → Antechamber → (gate) → lighthouse and back; 42 unit tests, 4 CDP suites — Claude
 - **T-30** `coastal_tileset` approved (`ENV_COASTAL_001`) and integrated: Peter's room (14×10) and the coastal town (28×18) generated from `scripts/coastal-layout.js` → `scripts/generate-coastal-maps.js`; new games start in the room (opening line there), door → town → forest path (temporarily straight to the Antechamber). Small maps are centred by the camera; exits ignore a spawn placed inside them until Peter steps out. Browser suites now enter the Antechamber explicitly. Verified: 42 unit tests, 4 CDP suites, live journey room → town → Antechamber — Claude
-- **T-28** Multi-map world engine: everything placed in the world comes from `maps.json` (NPCs with state-based dialogue rules, POIs, encounters, exits with flag gates, arrive/zone triggers, revive point, aliases for old save ids); PreloadScene loads every listed map; `mapId` saved; Prologue ending via `effects.endPrologue`. `interactables.json` merged into `maps.json`. ExplorationScene 1220 → ~520 lines, UI split into `src/ui/` modules; HUD/dialogue/satchel text Vietnamese from `strings.json`. Verified: 42 unit tests (map validation, aliases, strings), 4 CDP suites, live probe of an exit, the data-driven ending and Vietnamese rendering — Claude

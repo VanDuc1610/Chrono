@@ -171,6 +171,26 @@
           "radius": 44,
           "prompt": "[E] Xem khoảng đất trống",
           "dialogueId": "poi_empty_lot"
+        },
+        {
+          "id": "poi_child_sandals",
+          "tile": {
+            "x": 12,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Nhìn đôi dép nhỏ",
+          "dialogueId": "poi_child_sandals"
+        },
+        {
+          "id": "poi_ancient_well",
+          "tile": {
+            "x": 6,
+            "y": 12
+          },
+          "radius": 44,
+          "prompt": "[E] Nhìn xuống giếng cổ",
+          "dialogueId": "poi_ancient_well"
         }
       ],
       "encounters": [],
@@ -452,6 +472,16 @@
           "radius": 44,
           "prompt": "[E] Xem trụ đá chỉ đường",
           "dialogueId": "poi_forest_monolith"
+        },
+        {
+          "id": "poi_chrono_crevice",
+          "tile": {
+            "x": 7,
+            "y": 6
+          },
+          "radius": 44,
+          "prompt": "[E] Xem khe đá phát sáng",
+          "dialogueId": "poi_chrono_crevice"
         }
       ],
       "encounters": [
