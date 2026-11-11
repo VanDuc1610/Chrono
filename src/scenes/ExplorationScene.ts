@@ -9,27 +9,41 @@ import { QuestSystem, QuestEventListener } from '../systems/quest/QuestSystem';
 import { InventorySystem } from '../systems/inventory/InventorySystem';
 import { SaveSystem } from '../systems/save/SaveSystem';
 import { DialogueDatabase, DialogueEffects } from '../systems/dialogue/DialogueTypes';
-import { InteractableDatabase } from '../systems/interaction/InteractionTypes';
 import { SoundSystem } from '../systems/audio/SoundSystem';
-import { DEFAULT_MAP_ID, FLAGS, GameSession, getSession } from '../state/GameSession';
-import { createPanel } from '../ui/Panel';
+import { FLAGS, GameSession, getSession } from '../state/GameSession';
+import { DialogueBox } from '../ui/DialogueBox';
+import { NotificationBanner } from '../ui/NotificationBanner';
+import { QuestTracker } from '../ui/QuestTracker';
+import { SatchelPanel } from '../ui/SatchelPanel';
+import { StatusHud } from '../ui/StatusHud';
+import { getStrings, Translate } from '../ui/Strings';
+import { pickDialogue, pointInRect, resolveMap, tileCenter } from '../world/MapRegistry';
+import type {
+  MapDatabase,
+  MapDefinition,
+  MapEncounterDefinition,
+  MapExitDefinition,
+  MapTriggerDefinition,
+} from '../world/MapTypes';
 import type { CombatSceneData } from './CombatScene';
 
-const PROLOGUE_QUEST_ID = 'quest_prologue_awakening';
-const SILENCE_QUEST_ID = 'quest_prologue_silence';
-const ELDER_FAREWELL_DIALOGUE_ID = 'npc_elder_farewell';
-/** Where Peter wakes after a defeat: just south of the Altar of Moments (GDD §9 checkpoint revival). */
-const QUEST_PANEL_WIDTH = 220;
-const ALTAR_REVIVE_POSITION = { x: 11 * 32 + 16, y: 6 * 32 + 24 };
-const DEFAULT_SPAWN = { x: 12 * 32, y: 10 * 32 };
-
 export interface ExplorationSceneData {
-  /** Where to place Peter (e.g. after a battle). Defaults to the session position, then map spawn. */
+  /** Map to load (id or alias). Defaults to the saved map, then maps.json `startMapId`. */
+  mapId?: string;
+  /** Named spawn in the map (used by exits). */
+  spawnId?: string;
+  /** Exact position (e.g. after a battle). Wins over `spawnId`. */
   returnPosition?: { x: number; y: number };
   /** One-shot banner to show on arrival (e.g. battle rewards). */
   notice?: { title: string; subtitle: string };
 }
 
+const PLAYER_SPEED = 130;
+
+/**
+ * Overworld scene. Everything placed in the world comes from public/assets/data/maps.json; this
+ * scene wires it to the systems. UI lives in src/ui/.
+ */
 export class ExplorationScene extends Phaser.Scene {
   public player!: Player;
   public controller!: KeyboardPlayerController;
@@ -38,366 +52,334 @@ export class ExplorationScene extends Phaser.Scene {
   /** Game state for this playthrough; outlives the scene (see GameSession). */
   public session!: GameSession;
   public saveSystem = new SaveSystem();
-  private soundSystem = SoundSystem.getInstance();
-
-  private map!: Phaser.Tilemaps.Tilemap;
   public groundLayer!: Phaser.Tilemaps.TilemapLayer;
   public wallLayer!: Phaser.Tilemaps.TilemapLayer;
+  private soundSystem = SoundSystem.getInstance();
 
-  // UI Elements
+  private t!: Translate;
+  private mapDef!: MapDefinition;
+  private dialogueBox!: DialogueBox;
+  private banner!: NotificationBanner;
+  private questTracker!: QuestTracker;
+  private satchel!: SatchelPanel;
+  private statusHud!: StatusHud;
   private promptText!: Phaser.GameObjects.Text;
-  private dialogueBoxContainer!: Phaser.GameObjects.Container;
-  private dialogueSpeakerText!: Phaser.GameObjects.Text;
-  private dialogueBodyText!: Phaser.GameObjects.Text;
-  private dialogueContinueHint!: Phaser.GameObjects.Text;
-  private choiceButtons: Phaser.GameObjects.Text[] = [];
-
-  // Inventory UI
-  private inventoryContainer!: Phaser.GameObjects.Container;
-  private isInventoryOpen = false;
-  private inventoryItemContainer!: Phaser.GameObjects.Container;
-  private selectedInventoryIndex = 0;
-
-  // Player Status HUD
-  private playerStatsText!: Phaser.GameObjects.Text;
-
-  // Quest HUD Elements
-  private questTrackerContainer!: Phaser.GameObjects.Container;
-  private questTitleText!: Phaser.GameObjects.Text;
-  private questObjectiveTexts: Phaser.GameObjects.Text[] = [];
-
-  // Notification Banner
-  private notificationContainer!: Phaser.GameObjects.Container;
-  private notificationTitle!: Phaser.GameObjects.Text;
-  private notificationSubtitle!: Phaser.GameObjects.Text;
-  private notificationQueue: { title: string; subtitle: string }[] = [];
-  private isNotificationShowing = false;
-  /** Index into the active quest list shown in the quest HUD ([Q] cycles). */
-  private trackedQuestIndex = 0;
-
-  // Typewriter state
-  private isTyping = false;
-  private fullTargetText = '';
-  private typewriterTimer: Phaser.Time.TimerEvent | null = null;
 
   // Scene-local state (reset in init on every entry)
-  private shadeSprite: Phaser.Physics.Arcade.Sprite | null = null;
-  private isTransitioningToBattle = false;
-  private spawnOrigin = new Phaser.Math.Vector2(DEFAULT_SPAWN.x, DEFAULT_SPAWN.y);
+  private encounterSprites: Phaser.Physics.Arcade.Sprite[] = [];
+  private isTransitioning = false;
+  private pendingEnding = false;
+  private lockedExitShown: string | null = null;
+  private spawn = { x: 0, y: 0 };
   private pendingNotice: ExplorationSceneData['notice'] | null = null;
 
   constructor() {
     super({ key: 'ExplorationScene' });
   }
 
-  /** Compatibility accessors (used by CDP test scripts); state lives in the session. */
+  // ---- Compatibility accessors (used by the CDP test scripts); state lives in the session ----
   public get inventorySystem(): InventorySystem {
     return this.session.inventory;
   }
-
   public get questSystem(): QuestSystem {
     return this.session.quests;
   }
-
   public get isShadeDefeated(): boolean {
     return this.session.getFlag(FLAGS.shadeDefeated);
   }
+  public get shadeSprite(): Phaser.Physics.Arcade.Sprite | null {
+    return this.encounterSprites[0] ?? null;
+  }
+  public get isTyping(): boolean {
+    return this.dialogueBox.isTyping;
+  }
+  public get dialogueBodyText(): Phaser.GameObjects.Text {
+    return this.dialogueBox.bodyText;
+  }
+  public get dialogueSpeakerText(): Phaser.GameObjects.Text {
+    return this.dialogueBox.speakerText;
+  }
+  public get currentMapId(): string {
+    return this.mapDef.id;
+  }
 
   public init(data?: ExplorationSceneData): void {
-    this.isTransitioningToBattle = false;
-    this.isTyping = false;
-    this.isInventoryOpen = false;
-    this.selectedInventoryIndex = 0;
-    this.fullTargetText = '';
-    this.typewriterTimer = null;
-    this.notificationQueue = [];
-    this.isNotificationShowing = false;
-    this.trackedQuestIndex = 0;
-    this.questObjectiveTexts = [];
-    this.choiceButtons = [];
-    this.shadeSprite = null;
-
+    this.isTransitioning = false;
+    this.pendingEnding = false;
+    this.lockedExitShown = null;
+    this.encounterSprites = [];
     this.session = getSession(this);
     this.pendingNotice = data?.notice ?? null;
 
-    const spawn = data?.returnPosition ?? this.session.position ?? DEFAULT_SPAWN;
-    this.spawnOrigin.set(spawn.x, spawn.y);
+    const db = this.cache.json.get('data_maps') as MapDatabase;
+    this.mapDef = resolveMap(db, data?.mapId ?? this.session.position?.mapId);
+
+    const saved = this.session.position;
+    const savedHere = saved && resolveMap(db, saved.mapId).id === this.mapDef.id ? saved : null;
+    const named = data?.spawnId ? this.mapDef.spawns[data.spawnId] : undefined;
+    this.spawn =
+      data?.returnPosition ??
+      (named ? tileCenter(named) : null) ??
+      (savedHere ? { x: savedHere.x, y: savedHere.y } : null) ??
+      tileCenter(this.mapDef.spawns.default);
   }
 
   public create(): void {
-    // 1. Dialogue database (dialogue progress is scene-local; quest/inventory state is in the session)
-    const dialogueData = this.cache.json.get('data_dialogue') as DialogueDatabase;
+    this.t = getStrings(this);
+
     this.dialogueSystem = new DialogueSystem();
-    this.dialogueSystem.loadDatabase(dialogueData);
-    // The Elder's farewell (offered only after "Silence the Fracture") closes the Prologue.
+    this.dialogueSystem.loadDatabase(this.cache.json.get('data_dialogue') as DialogueDatabase);
     this.dialogueSystem.addEventListener((event) => {
       if (event.type === 'node_changed' && event.node?.effects) {
-        this.applyDialogueEffects(event.node.effects);
+        this.applyEffects(event.node.effects);
+        if (event.node.effects.endPrologue) this.pendingEnding = true;
       }
-      if (event.type === 'dialogue_ended' && event.node?.id === ELDER_FAREWELL_DIALOGUE_ID) {
-        this.startPrologueEnding();
-      }
+      if (event.type === 'dialogue_ended' && this.pendingEnding) this.startPrologueEnding();
     });
 
-    // 2. Initialize Map & Tileset
-    this.map = this.make.tilemap({ key: 'prologue_map' });
-    const tileset = this.map.addTilesetImage('dungeon_tileset', 'dungeon_tileset');
-
-    if (!tileset) {
-      throw new Error('Failed to load tileset "dungeon_tileset".');
-    }
-
-    const groundLayer = this.map.createLayer(
-      'Ground',
-      tileset,
-      0,
-      0,
-    ) as Phaser.Tilemaps.TilemapLayer | null;
-    const wallLayer = this.map.createLayer(
-      'Walls',
-      tileset,
-      0,
-      0,
-    ) as Phaser.Tilemaps.TilemapLayer | null;
-
-    if (!groundLayer || !wallLayer) {
-      throw new Error('Failed to create tilemap layers.');
-    }
-
-    this.groundLayer = groundLayer;
-    this.wallLayer = wallLayer;
-
-    // 3. Collision Boundaries setup
-    this.wallLayer.setCollisionBetween(4, 16, true);
-    const mapWidthPx = this.map.widthInPixels;
-    const mapHeightPx = this.map.heightInPixels;
-    this.physics.world.setBounds(0, 0, mapWidthPx, mapHeightPx);
-
-    // 4. Initialize Interaction System
+    this.buildMap();
     this.interactionSystem = new InteractionSystem();
 
-    // 5. Initialize Player
     this.controller = new KeyboardPlayerController(this);
-    const movementSystem = new TopDownMovementSystem();
     this.player = new Player(
       this,
-      this.spawnOrigin.x,
-      this.spawnOrigin.y,
+      this.spawn.x,
+      this.spawn.y,
       this.controller,
-      movementSystem,
-      { speed: 130 },
+      new TopDownMovementSystem(),
+      { speed: PLAYER_SPEED },
     );
-
     this.physics.add.collider(this.player.sprite, this.wallLayer);
-
-    // 6. Camera Follow Configuration
     this.cameras.main.startFollow(this.player.sprite, true, 0.09, 0.09);
-    this.cameras.main.setBounds(0, 0, mapWidthPx, mapHeightPx);
-    this.cameras.main.setZoom(1.0);
+    this.cameras.main.setBounds(0, 0, this.wallLayer.width, this.wallLayer.height);
 
-    // 7. Initialize NPCs / Interactables
-    this.setupInteractables();
-    this.setupEnemies();
-
-    // 8. Create HUD, Dialogue Overlay, and Quest Tracker UI
     this.createUI();
-
-    // 9. Subscribe to Quest Events
+    this.spawnNpcs();
+    this.spawnInteractables();
+    this.spawnEncounters();
     this.setupQuestListeners();
+    this.setupKeys();
 
-    // 10. Ensure the prologue quest is running (no-op if already started/completed)
-    if (this.questSystem.getQuestStage(PROLOGUE_QUEST_ID) === 'inactive') {
-      this.questSystem.startQuest(PROLOGUE_QUEST_ID);
-    }
-    // 11. One-shot arrival banner (e.g. battle rewards) goes first in the banner queue, before
-    // any quest banners it causes. Inventory is never touched here (B2).
+    // Arrival banner first, then any quest banners it causes (B2: inventory is not touched here).
     if (this.pendingNotice) {
-      this.showNotification(this.pendingNotice.title, this.pendingNotice.subtitle);
+      this.banner.show(this.pendingNotice.title, this.pendingNotice.subtitle);
       this.pendingNotice = null;
     }
-
-    // Apply follow-up quests / flag objectives (e.g. Shade defeated in the battle we just left).
     this.session.syncQuestProgress();
-    this.updateQuestHUD();
+    this.questTracker.refresh();
 
-    // Fade in from transition
+    for (const trig of this.mapDef.triggers ?? []) {
+      if (trig.on === 'arrive' && this.canFire(trig)) {
+        this.time.delayedCall(trig.delayMs ?? 0, () => this.fireTrigger(trig));
+      }
+    }
+
     this.cameras.main.fadeIn(400, 0, 0, 0);
+    this.soundSystem.startBgm(this.mapDef.bgm);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.soundSystem.stopBgm(true));
+  }
 
-    // Start procedural ambient ruin BGM and stop all audio nodes on shutdown
-    this.soundSystem.startBgm('ambient');
-    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
-      this.soundSystem.stopBgm(true);
-    });
+  public update(_time: number, delta: number): void {
+    this.session.tick(delta);
+    if (this.satchel.isOpen || this.isTransitioning) return;
 
-    // Global Key Listeners
-    if (this.input.keyboard) {
-      const escKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
-      escKey.on('down', () => {
-        if (this.isInventoryOpen) {
-          this.toggleInventory();
-        } else if (this.dialogueSystem.isActive()) {
-          this.closeDialogue();
-        } else {
-          this.returnToMenu();
-        }
-      });
+    if (this.dialogueBox.isOpen()) {
+      if (this.controller.getActions().interact) this.dialogueBox.interact();
+      return;
+    }
 
-      // Satchel / Inventory toggle
-      const keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
-      const keyB = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B);
-      keyI.on('down', () => this.toggleInventory());
-      keyB.on('down', () => this.toggleInventory());
+    this.player.update();
+    const { x, y } = this.player;
+    if (this.checkTriggers(x, y) || this.checkExits(x, y)) return;
 
-      // Satchel navigation & item use when Satchel is open
-      const keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
-      const keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-      const keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-      const keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-      keyUp.on('down', () => {
-        if (this.isInventoryOpen) this.navigateInventory(-1);
-      });
-      keyDown.on('down', () => {
-        if (this.isInventoryOpen) this.navigateInventory(1);
-      });
-      keyE.on('down', () => {
-        if (this.isInventoryOpen) this.useSelectedInventoryItem();
-      });
-      keySpace.on('down', () => {
-        if (this.isInventoryOpen) this.useSelectedInventoryItem();
-      });
-
-      // Quick save
-      const keyK = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
-      keyK.on('down', () => this.quickSave());
-
-      // Cycle the quest shown in the quest tracker
-      const keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
-      keyQ.on('down', () => {
-        const count = this.questSystem.getActiveQuests().length;
-        if (count < 2) return;
-        this.trackedQuestIndex = (this.trackedQuestIndex + 1) % count;
-        this.soundSystem.playCursorBlip();
-        this.updateQuestHUD();
-      });
-
-      // Quick numbers 1-2 for dialogue choice selection
-      const key1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
-      const key2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
-      key1.on('down', () => this.handleChoiceKey(0));
-      key2.on('down', () => this.handleChoiceKey(1));
+    const nearby = this.interactionSystem.getClosestInteractable(new Phaser.Math.Vector2(x, y));
+    this.promptText.setVisible(!!nearby);
+    if (nearby) {
+      this.promptText.setText(nearby.interactPrompt);
+      if (this.controller.getActions().interact) nearby.onInteract(this.player.sprite);
     }
   }
 
-  private setupInteractables(): void {
-    // NPC: Elder Chronographer
-    const elder = new NPC(
-      this,
-      9 * 32 + 16,
-      8 * 32 + 16,
-      'npc_elder',
-      {
-        id: 'npc_elder',
-        name: 'Elder Chronographer',
-        dialogueId: 'npc_elder_greeting',
-        prompt: '[E] Talk with Elder Chronographer',
-        interactionRadius: 44,
-      },
-      () => {
-        // Once the rift is silenced, the Elder gives the closing farewell that ends the Prologue.
-        const farewell = this.questSystem.isQuestCompleted(SILENCE_QUEST_ID);
-        this.openDialogue(farewell ? ELDER_FAREWELL_DIALOGUE_ID : 'npc_elder_greeting');
-        // Progress quest objective
-        this.questSystem.completeObjective(PROLOGUE_QUEST_ID, 'obj_speak_elder');
-      },
-    );
+  // ------------------------------------------------------------------ world building
 
-    if (this.anims.exists('npc_elder_idle')) elder.sprite.play('npc_elder_idle');
-    this.physics.add.collider(this.player.sprite, elder.sprite);
-    this.interactionSystem.register(elder);
+  private buildMap(): void {
+    const def = this.mapDef;
+    const map = this.make.tilemap({ key: def.tilemap.key });
+    const tileset = map.addTilesetImage(def.tileset.name, def.tileset.key);
+    if (!tileset) throw new Error(`[${def.id}] tileset "${def.tileset.name}" failed to load.`);
+    const ground = map.createLayer(def.layers.ground, tileset, 0, 0);
+    const walls = map.createLayer(def.layers.walls, tileset, 0, 0);
+    if (!ground || !walls) throw new Error(`[${def.id}] tilemap layers missing.`);
+    this.groundLayer = ground;
+    this.wallLayer = walls;
+    walls.setCollisionBetween(def.collision.fromGid, def.collision.toGid, true);
+    this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+  }
 
-    // Altar Interactable
-    const altarInteractable = {
-      id: 'altar_of_moments',
-      interactPrompt: '[E] Inspect Altar of Moments',
-      getInteractionPosition: () => new Phaser.Math.Vector2(11 * 32 + 16, 5 * 32 + 16),
-      getInteractionRadius: () => 48,
-      canInteract: () => true,
-      onInteract: () => {
-        this.openDialogue('altar_inspection');
-        // Progress quest objective
-        this.questSystem.completeObjective(PROLOGUE_QUEST_ID, 'obj_inspect_altar');
-      },
-    };
-    this.interactionSystem.register(altarInteractable);
+  private spawnNpcs(): void {
+    for (const def of this.mapDef.npcs ?? []) {
+      const pos = tileCenter(def.tile);
+      const npc = new NPC(
+        this,
+        pos.x,
+        pos.y,
+        def.texture,
+        {
+          id: def.id,
+          name: def.name,
+          dialogueId: def.dialogueId,
+          prompt: def.prompt,
+          interactionRadius: def.radius,
+        },
+        () => {
+          this.openDialogue(pickDialogue(def.dialogueId, def.dialogueRules, this.stateView()));
+          if (def.completeObjective) {
+            this.questSystem.completeObjective(
+              def.completeObjective.questId,
+              def.completeObjective.objectiveId,
+            );
+          }
+        },
+      );
+      if (def.anim && this.anims.exists(def.anim)) npc.sprite.play(def.anim);
+      this.physics.add.collider(this.player.sprite, npc.sprite);
+      this.interactionSystem.register(npc);
+    }
+  }
 
-    // Environmental points of interest (data-driven; behaviour lives in dialogue.json `effects`)
-    const db = this.cache.json.get('data_interactables') as InteractableDatabase | undefined;
-    for (const def of db?.interactables ?? []) {
-      const pos = new Phaser.Math.Vector2(def.tile.x * 32 + 16, def.tile.y * 32 + 16);
+  private spawnInteractables(): void {
+    for (const def of this.mapDef.interactables ?? []) {
+      const pos = new Phaser.Math.Vector2(tileCenter(def.tile).x, tileCenter(def.tile).y);
       this.interactionSystem.register({
         id: def.id,
         interactPrompt: def.prompt,
         getInteractionPosition: () => pos,
         getInteractionRadius: () => def.radius,
-        canInteract: () => true,
-        onInteract: () => this.openDialogue(def.dialogueId),
+        canInteract: () => !def.requiresFlag || this.session.getFlag(def.requiresFlag),
+        onInteract: () => {
+          this.openDialogue(def.dialogueId);
+          if (def.completeObjective) {
+            this.questSystem.completeObjective(
+              def.completeObjective.questId,
+              def.completeObjective.objectiveId,
+            );
+          }
+        },
       });
     }
   }
 
-  private setupEnemies(): void {
-    if (this.session.getFlag(FLAGS.shadeDefeated)) return;
-
-    this.shadeSprite = this.physics.add.sprite(16 * 32 + 16, 9 * 32 + 16, 'enemy_fracture');
-    this.shadeSprite.setImmovable(true);
-    if (this.anims.exists('enemy_fracture_idle')) this.shadeSprite.play('enemy_fracture_idle');
-    if (this.shadeSprite.body) {
-      this.shadeSprite.body.setSize(22, 22);
+  private spawnEncounters(): void {
+    for (const def of this.mapDef.encounters ?? []) {
+      if (this.session.getFlag(def.defeatedFlag)) continue;
+      const pos = tileCenter(def.tile);
+      const sprite = this.physics.add.sprite(pos.x, pos.y, def.texture).setImmovable(true);
+      if (def.anim && this.anims.exists(def.anim)) sprite.play(def.anim);
+      const size = def.hitbox ?? 22;
+      sprite.body?.setSize(size, size);
+      this.tweens.add({
+        targets: sprite,
+        y: sprite.y - 6,
+        duration: 1400,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.easeInOut',
+      });
+      this.physics.add.overlap(this.player.sprite, sprite, () => this.startEncounter(def));
+      this.encounterSprites.push(sprite);
     }
+  }
 
-    this.tweens.add({
-      targets: this.shadeSprite,
-      y: this.shadeSprite.y - 6,
-      duration: 1400,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut',
-    });
+  // ------------------------------------------------------------------ triggers & exits
 
-    this.physics.add.overlap(this.player.sprite, this.shadeSprite, () => {
-      this.triggerCombatEncounter();
+  private canFire(trig: MapTriggerDefinition): boolean {
+    if (this.session.getFlag(trig.onceFlag)) return false;
+    return !trig.requiresFlag || this.session.getFlag(trig.requiresFlag);
+  }
+
+  private fireTrigger(trig: MapTriggerDefinition): void {
+    if (!this.canFire(trig) || this.isTransitioning) return;
+    this.session.setFlag(trig.onceFlag);
+    if (trig.effects) this.applyEffects(trig.effects);
+    if (trig.dialogueId) this.openDialogue(trig.dialogueId);
+  }
+
+  /** Zone triggers; returns true when one fired this frame. */
+  private checkTriggers(x: number, y: number): boolean {
+    for (const trig of this.mapDef.triggers ?? []) {
+      if (trig.on !== 'zone' || !trig.area || !pointInRect(x, y, trig.area)) continue;
+      if (!this.canFire(trig)) continue;
+      this.fireTrigger(trig);
+      return true;
+    }
+    return false;
+  }
+
+  /** Map exits; returns true when Peter is leaving or a locked-exit message opened. */
+  private checkExits(x: number, y: number): boolean {
+    const exit = (this.mapDef.exits ?? []).find((e) => pointInRect(x, y, e.area));
+    if (!exit) {
+      this.lockedExitShown = null;
+      return false;
+    }
+    if (exit.requiresFlag && !this.session.getFlag(exit.requiresFlag)) {
+      if (this.lockedExitShown !== exit.id && exit.lockedDialogueId) {
+        this.lockedExitShown = exit.id;
+        this.openDialogue(exit.lockedDialogueId);
+        return true;
+      }
+      return false;
+    }
+    this.travel(exit);
+    return true;
+  }
+
+  private travel(exit: MapExitDefinition): void {
+    this.beginSceneExit();
+    const db = this.cache.json.get('data_maps') as MapDatabase;
+    const target = resolveMap(db, exit.toMap);
+    const spawnTile = target.spawns[exit.toSpawn] ?? target.spawns.default;
+    this.session.position = { mapId: target.id, ...tileCenter(spawnTile) };
+    this.cameras.main.fadeOut(300, 0, 0, 0);
+    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+      const data: ExplorationSceneData = { mapId: target.id, spawnId: exit.toSpawn };
+      this.scene.restart(data);
     });
   }
 
-  private triggerCombatEncounter(): void {
-    if (this.isTransitioningToBattle) return;
-
-    this.isTransitioningToBattle = true;
-    this.controller.setEnabled(false);
-    this.player.getMovementSystem().stop(this.player.sprite);
-
-    // Visual encounter flash transition
+  private startEncounter(def: MapEncounterDefinition): void {
+    if (this.isTransitioning) return;
+    this.beginSceneExit();
     this.cameras.main.flash(350, 0, 200, 255);
     this.cameras.main.fadeOut(350, 0, 0, 0);
 
     const returnPosition = { x: this.player.x - 24, y: this.player.y };
-    this.session.position = { mapId: DEFAULT_MAP_ID, ...returnPosition };
+    this.session.position = { mapId: this.mapDef.id, ...returnPosition };
+    const revive = tileCenter(this.mapDef.revive ?? this.mapDef.spawns.default);
 
     this.time.delayedCall(350, () => {
       const data: CombatSceneData = {
-        enemyId: 'enemy_temporal_shade',
-        victoryFlag: FLAGS.shadeDefeated,
+        enemyId: def.enemyId,
+        victoryFlag: def.defeatedFlag,
         returnPosition,
-        revivePosition: ALTAR_REVIVE_POSITION,
+        revivePosition: revive,
       };
       this.scene.start('CombatScene', data);
     });
   }
 
+  /** Freezes input for a fade-out (map change, battle, ending). */
+  private beginSceneExit(): void {
+    this.isTransitioning = true;
+    this.controller.setEnabled(false);
+    this.player.getMovementSystem().stop(this.player.sprite);
+    this.promptText.setVisible(false);
+  }
+
+  // ------------------------------------------------------------------ UI & dialogue
+
   private createUI(): void {
     const { width, height } = this.scale;
-
-    // 1. Interaction Prompt Text
     this.promptText = this.add
       .text(width / 2, height - 36, '', {
         fontFamily: 'monospace',
@@ -411,779 +393,85 @@ export class ExplorationScene extends Phaser.Scene {
       .setDepth(100)
       .setVisible(false);
 
-    // 2. Exploration Header Banner (Location & Player Status HUD)
-    createPanel(this, 10, 10, 240, 56).setScrollFactor(0).setDepth(90);
-
-    this.add
-      .text(20, 18, 'LOCATION: Shattered Antechamber', {
-        fontFamily: 'monospace',
-        fontSize: '10px',
-        color: '#65d5ff',
-        fontStyle: 'bold',
-      })
-      .setScrollFactor(0)
-      .setDepth(95);
-
-    this.add
-      .text(20, 31, 'PHASE: Prologue (Vertical Slice)', {
-        fontFamily: 'monospace',
-        fontSize: '9px',
-        color: '#8b97b8',
-      })
-      .setScrollFactor(0)
-      .setDepth(95);
-
-    this.playerStatsText = this.add
-      .text(20, 44, '', {
-        fontFamily: 'monospace',
-        fontSize: '9px',
-        color: '#4ade80',
-        fontStyle: 'bold',
-      })
-      .setScrollFactor(0)
-      .setDepth(95);
-    this.updatePlayerStatusHUD();
-
-    // 3. Quest Tracker Panel (Top-Right HUD)
-    this.createQuestHUD(width);
-
-    // 4. Notification Banner (Top-Center)
-    this.createNotificationHUD(width);
-
-    // 5. Navigation Controls Hint (Bottom Left)
-    this.add
-      .text(
-        10,
-        height - 16,
-        '[WASD / Arrows] Move  |  [E / Space] Interact  |  [I / B] Satchel  |  [Q] Quests  |  [K] Save  |  [ESC] Menu',
-        {
-          fontFamily: 'monospace',
-          fontSize: '9px',
-          color: '#5d6b8a',
-          backgroundColor: '#07080fcc',
-          padding: { left: 4, right: 4, top: 2, bottom: 2 },
-        },
-      )
-      .setScrollFactor(0)
-      .setDepth(90);
-
-    // 6. Dialogue Box Container (HUD overlay)
-    this.createDialogueHUD(width, height);
-
-    // 7. Inventory Satchel HUD Overlay
-    this.createInventoryHUD(width, height);
+    this.statusHud = new StatusHud(this, this.session, this.t, this.mapDef.name);
+    this.questTracker = new QuestTracker(this, this.questSystem, this.t);
+    this.banner = new NotificationBanner(this);
+    this.dialogueBox = new DialogueBox(this, this.dialogueSystem, this.t, () => {
+      // A dialogue can end into a scene exit (Elder farewell -> Prologue ending): keep input off.
+      if (!this.isTransitioning) this.controller.setEnabled(true);
+    });
+    this.satchel = new SatchelPanel(
+      this,
+      this.session,
+      this.soundSystem,
+      this.t,
+      (title, subtitle) => this.showNotification(title, subtitle),
+      () => this.statusHud.refresh(),
+    );
   }
 
-  private createQuestHUD(width: number): void {
-    const panelWidth = QUEST_PANEL_WIDTH;
-    const panelHeight = 76;
-    const panelX = width - panelWidth - 10;
-    const panelY = 10;
+  private setupKeys(): void {
+    const kb = this.input.keyboard;
+    if (!kb) return;
+    const K = Phaser.Input.Keyboard.KeyCodes;
+    const on = (code: number, fn: () => void): void => {
+      kb.addKey(code).on('down', fn);
+    };
 
-    this.questTrackerContainer = this.add.container(panelX, panelY).setScrollFactor(0).setDepth(90);
-
-    const bg = createPanel(this, 0, 0, panelWidth, panelHeight);
-
-    const label = this.add.text(10, 8, 'CURRENT QUEST', {
-      fontFamily: 'monospace',
-      fontSize: '8px',
-      color: '#00d2ff',
-      letterSpacing: 1,
+    on(K.ESC, () => {
+      if (this.satchel.isOpen) this.toggleInventory();
+      else if (this.dialogueBox.isOpen()) this.closeDialogue();
+      else this.returnToMenu();
     });
-
-    this.questTitleText = this.add.text(10, 20, 'Echoes in the Fracture', {
-      fontFamily: 'monospace',
-      fontSize: '10px',
-      color: '#e4ebf5',
-      fontStyle: 'bold',
+    on(K.I, () => this.toggleInventory());
+    on(K.B, () => this.toggleInventory());
+    on(K.UP, () => this.satchel.isOpen && this.satchel.navigate(-1));
+    on(K.DOWN, () => this.satchel.isOpen && this.satchel.navigate(1));
+    on(K.E, () => this.satchel.isOpen && this.satchel.useSelected());
+    on(K.SPACE, () => this.satchel.isOpen && this.satchel.useSelected());
+    on(K.K, () => void this.quickSave());
+    on(K.Q, () => {
+      if (this.questTracker.cycle()) this.soundSystem.playCursorBlip();
     });
-
-    this.questTrackerContainer.add([bg, label, this.questTitleText]);
-
-    // Objective text rows (up to 3 objectives per quest)
-    for (let i = 0; i < 3; i++) {
-      const objText = this.add.text(10, 34 + i * 12, '', {
-        fontFamily: 'monospace',
-        fontSize: '9px',
-        color: '#8b9bb4',
-      });
-      this.questObjectiveTexts.push(objText);
-      this.questTrackerContainer.add(objText);
-    }
-  }
-
-  private createNotificationHUD(width: number): void {
-    const bannerWidth = 320;
-    const bannerHeight = 44;
-    const bannerX = width / 2 - bannerWidth / 2;
-    const bannerY = -54; // Initially hidden off-screen
-
-    this.notificationContainer = this.add
-      .container(bannerX, bannerY)
-      .setScrollFactor(0)
-      .setDepth(300)
-      .setVisible(false);
-
-    const bg = createPanel(this, 0, 0, bannerWidth, bannerHeight);
-
-    this.notificationTitle = this.add
-      .text(bannerWidth / 2, 9, '', {
-        fontFamily: 'monospace',
-        fontSize: '10px',
-        color: '#00e1ff',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5, 0);
-
-    this.notificationSubtitle = this.add
-      .text(bannerWidth / 2, 23, '', {
-        fontFamily: 'monospace',
-        fontSize: '9px',
-        color: '#cdd7eb',
-      })
-      .setOrigin(0.5, 0);
-
-    this.notificationContainer.add([bg, this.notificationTitle, this.notificationSubtitle]);
-  }
-
-  private createDialogueHUD(width: number, height: number): void {
-    this.dialogueBoxContainer = this.add
-      .container(0, 0)
-      .setScrollFactor(0)
-      .setDepth(200)
-      .setVisible(false);
-
-    const boxWidth = width - 60;
-    const boxHeight = 84;
-    const boxX = 30;
-    const boxY = height - boxHeight - 16;
-
-    const bg = createPanel(this, boxX, boxY, boxWidth, boxHeight);
-
-    this.dialogueSpeakerText = this.add.text(boxX + 16, boxY + 9, '', {
-      fontFamily: 'monospace',
-      fontSize: '12px',
-      color: '#00e1ff',
-      fontStyle: 'bold',
-    });
-
-    this.dialogueBodyText = this.add.text(boxX + 16, boxY + 28, '', {
-      fontFamily: 'monospace',
-      fontSize: '11px',
-      color: '#e4ebf5',
-      wordWrap: { width: boxWidth - 32 },
-    });
-
-    this.dialogueContinueHint = this.add
-      .text(boxX + boxWidth - 14, boxY + boxHeight - 12, '[E / Space to continue]', {
-        fontFamily: 'monospace',
-        fontSize: '9px',
-        color: '#7f90b3',
-      })
-      .setOrigin(1, 1);
-
-    this.dialogueBoxContainer.add([
-      bg,
-      this.dialogueSpeakerText,
-      this.dialogueBodyText,
-      this.dialogueContinueHint,
-    ]);
-
-    // Create 2 choice buttons for branching
-    for (let i = 0; i < 2; i++) {
-      const btn = this.add
-        .text(boxX + 24 + i * 220, boxY + 54, '', {
-          fontFamily: 'monospace',
-          fontSize: '10px',
-          color: '#ffd666',
-          backgroundColor: '#161d30',
-          padding: { left: 6, right: 6, top: 3, bottom: 3 },
-        })
-        .setInteractive({ useHandCursor: true })
-        .setVisible(false);
-
-      const choiceIdx = i;
-      btn.on('pointerdown', () => this.handleChoiceSelect(choiceIdx));
-      btn.on('pointerover', () => btn.setColor('#ffffff'));
-      btn.on('pointerout', () => btn.setColor('#ffd666'));
-
-      this.choiceButtons.push(btn);
-      this.dialogueBoxContainer.add(btn);
-    }
+    on(K.ONE, () => this.dialogueBox.choose(0));
+    on(K.TWO, () => this.dialogueBox.choose(1));
   }
 
   private setupQuestListeners(): void {
     const listener: QuestEventListener = (event) => {
-      this.updateQuestHUD();
-
+      this.questTracker.refresh();
       if (event.type === 'quest_started') {
-        this.showNotification('NEW QUEST', `◆ ${event.quest.title}`);
+        this.showNotification(this.t('notify.newQuest'), `◆ ${event.quest.title}`);
       } else if (event.type === 'objective_completed' && event.objective) {
-        this.showNotification('OBJECTIVE COMPLETED', `✓ ${event.objective.description}`);
+        this.showNotification(this.t('notify.objectiveDone'), `✓ ${event.objective.description}`);
       } else if (event.type === 'quest_completed') {
         const rewards = this.session.claimQuestRewards(event.quest.id);
-        this.updatePlayerStatusHUD();
+        this.statusHud.refresh();
         const rewardText = rewards ? this.session.describeRewards(rewards) : '';
         this.showNotification(
-          'QUEST COMPLETED!',
+          this.t('notify.questDone'),
           rewardText ? `★ ${event.quest.title} (${rewardText})` : `★ ${event.quest.title}`,
         );
         // Start any follow-up quest (and auto-complete flag objectives already satisfied).
         this.session.syncQuestProgress();
       }
     };
-
     // The QuestSystem outlives this scene, so the listener must not (it would call into destroyed UI).
     this.questSystem.addEventListener(listener);
-    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
-      this.questSystem.removeEventListener(listener);
-    });
-  }
-
-  /** Sets text, trimming with an ellipsis so it never overflows the quest panel. */
-  private fitText(text: Phaser.GameObjects.Text, value: string): void {
-    const maxWidth = QUEST_PANEL_WIDTH - 20;
-    text.setText(value);
-    let n = value.length;
-    while (text.width > maxWidth && n > 4) {
-      n--;
-      text.setText(`${value.slice(0, n).trimEnd()}…`);
-    }
-  }
-
-  public updateQuestHUD(): void {
-    // Show the tracked active quest ([Q] cycles); with none active, the most recently completed
-    // one (all ✓). All text comes from quests.json.
-    const active = this.questSystem.getActiveQuests();
-    if (this.trackedQuestIndex >= active.length) this.trackedQuestIndex = 0;
-    const quest =
-      active[this.trackedQuestIndex] ??
-      this.questSystem
-        .getAllQuests()
-        .filter((q) => q.stage === 'completed')
-        .pop();
-
-    this.questObjectiveTexts.forEach((t) => t.setText(''));
-    if (!quest) {
-      this.questTitleText.setText('No Active Quest');
-      return;
-    }
-
-    const isDone = quest.stage === 'completed';
-    const others = active.length > 1 ? `  (+${active.length - 1})` : '';
-    this.fitText(this.questTitleText, isDone ? `✓ ${quest.title}` : `${quest.title}${others}`);
-
-    quest.objectives.forEach((obj, idx) => {
-      if (this.questObjectiveTexts[idx]) {
-        const check = obj.completed ? '✓' : '○';
-        const color = obj.completed ? '#48bb78' : '#8b9bb4';
-        this.fitText(this.questObjectiveTexts[idx], `${check} ${obj.description}`);
-        this.questObjectiveTexts[idx].setColor(color);
-      }
-    });
-  }
-
-  /**
-   * Queues a banner. Banners play one after another so back-to-back events (e.g. QUEST COMPLETED
-   * followed by NEW QUEST) are all readable; previously a new banner was hidden early by the
-   * previous banner's pending hide timer.
-   */
-  public showNotification(title: string, subtitle: string): void {
-    this.notificationQueue.push({ title, subtitle });
-    if (!this.isNotificationShowing) {
-      this.showNextNotification();
-    }
-  }
-
-  private showNextNotification(): void {
-    const next = this.notificationQueue.shift();
-    if (!next) {
-      this.isNotificationShowing = false;
-      return;
-    }
-    this.isNotificationShowing = true;
-
-    this.notificationTitle.setText(next.title);
-    this.notificationSubtitle.setText(next.subtitle);
-    this.notificationContainer.setY(-50);
-    this.notificationContainer.setVisible(true);
-
-    this.tweens.add({
-      targets: this.notificationContainer,
-      y: 12,
-      duration: 350,
-      ease: 'Back.easeOut',
-      onComplete: () => {
-        // Shorter hold when more banners are waiting.
-        const holdMs = this.notificationQueue.length > 0 ? 1500 : 2400;
-        this.time.delayedCall(holdMs, () => {
-          this.tweens.add({
-            targets: this.notificationContainer,
-            y: -50,
-            duration: 300,
-            ease: 'Sine.easeIn',
-            onComplete: () => {
-              this.notificationContainer.setVisible(false);
-              this.showNextNotification();
-            },
-          });
-        });
-      },
-    });
-  }
-
-  private createInventoryHUD(width: number, height: number): void {
-    const panelWidth = 440;
-    const panelHeight = 220;
-    const panelX = width / 2 - panelWidth / 2;
-    const panelY = height / 2 - panelHeight / 2;
-
-    this.inventoryContainer = this.add
-      .container(panelX, panelY)
-      .setScrollFactor(0)
-      .setDepth(250)
-      .setVisible(false);
-
-    const bg = createPanel(this, 0, 0, panelWidth, panelHeight);
-
-    // Title
-    const title = this.add.text(18, 14, "PETER'S SATCHEL — INVENTORY & CHRONAL RELICS", {
-      fontFamily: 'monospace',
-      fontSize: '11px',
-      color: '#00e1ff',
-      fontStyle: 'bold',
-      letterSpacing: 1,
-    });
-
-    // Subtitle / Capacity
-    const subtitle = this.add.text(18, 28, 'Capacity: 16 Slots | Category: All Items', {
-      fontFamily: 'monospace',
-      fontSize: '8px',
-      color: '#6e80a3',
-    });
-
-    const divider = this.add.graphics();
-    divider.lineStyle(1, 0x1f2b45, 1);
-    divider.lineBetween(18, 42, panelWidth - 18, 42);
-
-    this.inventoryItemContainer = this.add.container(18, 50);
-
-    const footer = this.add
-      .text(
-        panelWidth / 2,
-        panelHeight - 16,
-        '[Up / Down] Select  |  [E / Space] Use  |  [I / B / ESC] Close  |  [K] Save',
-        {
-          fontFamily: 'monospace',
-          fontSize: '9px',
-          color: '#65789e',
-        },
-      )
-      .setOrigin(0.5);
-
-    this.inventoryContainer.add([
-      bg,
-      title,
-      subtitle,
-      divider,
-      this.inventoryItemContainer,
-      footer,
-    ]);
-  }
-
-  public updatePlayerStatusHUD(): void {
-    if (!this.playerStatsText) return;
-    const stats = this.session.getStats();
-    const expRemaining = this.session.expToNextLevel();
-    const expDisplay =
-      expRemaining === null
-        ? `${this.session.exp}/MAX`
-        : `${this.session.exp}/${this.session.exp + expRemaining}`;
-    this.playerStatsText.setText(
-      `Lv ${this.session.level} | EXP ${expDisplay} | HP ${this.session.hp}/${stats.maxHp}`,
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
+      this.questSystem.removeEventListener(listener),
     );
   }
 
-  public navigateInventory(direction: number): void {
-    const items = this.inventorySystem.getAllItems();
-    if (items.length === 0) {
-      this.selectedInventoryIndex = 0;
-      return;
-    }
-    this.selectedInventoryIndex =
-      (this.selectedInventoryIndex + direction + items.length) % items.length;
-    this.soundSystem.playCursorBlip();
-    this.refreshInventoryUI();
+  private stateView() {
+    return {
+      isQuestCompleted: (id: string) => this.questSystem.isQuestCompleted(id),
+      getFlag: (flag: string) => this.session.getFlag(flag),
+    };
   }
 
-  public useSelectedInventoryItem(): void {
-    const items = this.inventorySystem.getAllItems();
-    if (items.length === 0) {
-      this.showNotification('SATCHEL EMPTY', 'No consumables available to use.');
-      return;
-    }
-
-    if (this.selectedInventoryIndex >= items.length) {
-      this.selectedInventoryIndex = items.length - 1;
-    }
-
-    const selected = items[this.selectedInventoryIndex];
-    if (!selected || selected.quantity <= 0) {
-      this.showNotification('NO ITEM', 'None remaining in your Satchel.');
-      return;
-    }
-
-    const def = this.inventorySystem.getItemDefinition(selected.itemId);
-    const healAmount = def?.effects?.healAmount;
-    if (!def || def.type !== 'consumable' || healAmount === undefined) {
-      this.showNotification('CANNOT USE', `${def?.name ?? 'This item'} cannot be used directly.`);
-      return;
-    }
-
-    const maxHp = this.session.getStats().maxHp;
-    if (this.session.hp >= maxHp) {
-      this.showNotification(
-        'HP FULL',
-        `${this.session.playerName} is already at full health (${maxHp}/${maxHp} HP).`,
-      );
-      return;
-    }
-
-    const consumed = this.inventorySystem.removeItem(selected.itemId, 1);
-    if (!consumed) {
-      this.showNotification('NO ITEM', `No ${def.name} remaining.`);
-      return;
-    }
-
-    const prevHp = this.session.hp;
-    this.session.applyBattleHp(prevHp + healAmount);
-    const actualHealed = this.session.hp - prevHp;
-
-    this.soundSystem.playHeal();
-    this.updatePlayerStatusHUD();
-
-    const updatedItems = this.inventorySystem.getAllItems();
-    if (this.selectedInventoryIndex >= updatedItems.length) {
-      this.selectedInventoryIndex = Math.max(0, updatedItems.length - 1);
-    }
-    this.refreshInventoryUI();
-
-    this.showNotification(
-      'ITEM USED',
-      `Used ${def.name} (+${actualHealed} HP -> ${this.session.hp}/${maxHp} HP)`,
-    );
-  }
-
-  private refreshInventoryUI(): void {
-    this.inventoryItemContainer.removeAll(true);
-    const items = this.inventorySystem.getAllItems();
-
-    if (items.length === 0) {
-      this.selectedInventoryIndex = 0;
-      const emptyText = this.add.text(10, 20, 'Satchel is empty.', {
-        fontFamily: 'monospace',
-        fontSize: '10px',
-        color: '#677594',
-      });
-      this.inventoryItemContainer.add(emptyText);
-      return;
-    }
-
-    if (this.selectedInventoryIndex >= items.length) {
-      this.selectedInventoryIndex = items.length - 1;
-    }
-
-    items.forEach((stack, idx) => {
-      const def = this.inventorySystem.getItemDefinition(stack.itemId);
-      if (!def) return;
-
-      const isSelected = idx === this.selectedInventoryIndex;
-      const yOffset = idx * 46;
-      const categoryColor =
-        def.type === 'key_item' ? '#ffd700' : def.type === 'consumable' ? '#00e1ff' : '#99b0d1';
-
-      if (isSelected) {
-        const rowBg = this.add.graphics();
-        rowBg.fillStyle(0x16243d, 0.85);
-        rowBg.fillRect(-6, yOffset - 3, 412, 38);
-        rowBg.lineStyle(1, 0x00e1ff, 0.7);
-        rowBg.strokeRect(-6, yOffset - 3, 412, 38);
-        this.inventoryItemContainer.add(rowBg);
-      }
-
-      const prefix = isSelected ? '▶ ' : '  ';
-      const useHint = isSelected && def.type === 'consumable' ? '  [E/Space: Use]' : '';
-
-      // Item category tag + name
-      const headerText = this.add.text(
-        0,
-        yOffset,
-        `${prefix}[${def.type.toUpperCase()}] ${def.name}  x${stack.quantity}${useHint}`,
-        {
-          fontFamily: 'monospace',
-          fontSize: '10px',
-          color: isSelected ? '#ffffff' : categoryColor,
-          fontStyle: 'bold',
-        },
-      );
-
-      // Item description
-      const descText = this.add.text(14, yOffset + 14, def.description, {
-        fontFamily: 'monospace',
-        fontSize: '9px',
-        color: isSelected ? '#dce7f7' : '#b8c5de',
-        wordWrap: { width: 390 },
-      });
-
-      this.inventoryItemContainer.add([headerText, descText]);
-    });
-  }
-
-  public toggleInventory(): void {
-    this.isInventoryOpen = !this.isInventoryOpen;
-    if (this.isInventoryOpen) {
-      const items = this.inventorySystem.getAllItems();
-      const firstConsumableIdx = items.findIndex(
-        (s) => this.inventorySystem.getItemDefinition(s.itemId)?.type === 'consumable',
-      );
-      this.selectedInventoryIndex = firstConsumableIdx >= 0 ? firstConsumableIdx : 0;
-      this.refreshInventoryUI();
-      this.inventoryContainer.setVisible(true);
-      if (this.player) {
-        this.player.sprite.setVelocity(0, 0);
-      }
-    } else {
-      this.inventoryContainer.setVisible(false);
-    }
-  }
-
-  public async quickSave(): Promise<void> {
-    const saveData = this.session.toSaveData({
-      mapId: DEFAULT_MAP_ID,
-      x: Math.round(this.player.x),
-      y: Math.round(this.player.y),
-    });
-
-    const success = await this.saveSystem.save(1, saveData);
-    if (success) {
-      this.showNotification('GAME SAVED', 'Progress recorded to Chrono Slot 1');
-    }
-  }
-
-  public update(_time: number, delta: number): void {
-    this.session.tick(delta);
-
-    // 0. If inventory is open, pause exploration movement
-    if (this.isInventoryOpen) {
-      return;
-    }
-
-    // 1. Check Awakening Trigger Zone
-    if (!this.session.getFlag(FLAGS.awakeningTriggered) && this.player) {
-      const distFromSpawn = Phaser.Math.Distance.Between(
-        this.player.x,
-        this.player.y,
-        this.spawnOrigin.x,
-        this.spawnOrigin.y,
-      );
-      if (distFromSpawn > 18) {
-        this.session.setFlag(FLAGS.awakeningTriggered);
-        this.time.delayedCall(300, () => {
-          this.openDialogue('intro_awakening');
-        });
-        return;
-      }
-    }
-
-    // 2. If dialogue is active, handle dialogue progression
-    if (this.dialogueSystem.isActive()) {
-      const actions = this.controller.getActions();
-      if (actions.interact) {
-        this.handleDialogueInteract();
-      }
-      return;
-    }
-
-    // 3. Normal Exploration Update
-    this.player.update();
-
-    // 4. Interaction Check
-    const origin = new Phaser.Math.Vector2(this.player.x, this.player.y);
-    const nearby = this.interactionSystem.getClosestInteractable(origin);
-
-    if (nearby) {
-      this.promptText.setText(nearby.interactPrompt);
-      this.promptText.setVisible(true);
-
-      const actions = this.controller.getActions();
-      if (actions.interact) {
-        nearby.onInteract(this.player.sprite);
-      }
-    } else {
-      this.promptText.setVisible(false);
-    }
-  }
-
-  public openDialogue(dialogueId: string): void {
-    const started = this.dialogueSystem.startDialogue(dialogueId);
-    if (!started) return;
-
-    // Movement is already frozen while dialogue is active (update() returns before
-    // player.update()). Do NOT disable the controller here: a disabled controller reports no
-    // actions, so E / Space could never skip or advance the dialogue.
-    this.player.getMovementSystem().stop(this.player.sprite);
-    this.dialogueBoxContainer.setVisible(true);
-
-    this.renderCurrentDialogue();
-  }
-
-  private renderCurrentDialogue(): void {
-    const node = this.dialogueSystem.getCurrentNode();
-    const line = this.dialogueSystem.getCurrentLine();
-    if (!node || !line) return;
-
-    this.dialogueSpeakerText.setText(node.speaker);
-
-    // Hide choices while typing
-    this.choiceButtons.forEach((btn) => btn.setVisible(false));
-
-    // Start Typewriter
-    this.startTypewriter(line);
-
-    this.updateDialogueHints();
-  }
-
-  private startTypewriter(text: string): void {
-    if (this.typewriterTimer) {
-      this.typewriterTimer.destroy();
-    }
-
-    this.fullTargetText = text;
-    this.isTyping = true;
-    let charIndex = 0;
-    this.dialogueBodyText.setText('');
-
-    this.typewriterTimer = this.time.addEvent({
-      delay: 18,
-      repeat: text.length - 1,
-      callback: () => {
-        charIndex++;
-        this.dialogueBodyText.setText(text.substring(0, charIndex));
-        if (charIndex >= text.length) {
-          this.isTyping = false;
-          this.onTypewriterComplete();
-        }
-      },
-    });
-  }
-
-  private completeTypewriterImmediately(): void {
-    if (this.typewriterTimer) {
-      this.typewriterTimer.destroy();
-      this.typewriterTimer = null;
-    }
-    this.isTyping = false;
-    this.dialogueBodyText.setText(this.fullTargetText);
-    this.onTypewriterComplete();
-  }
-
-  private onTypewriterComplete(): void {
-    this.updateDialogueHints();
-
-    // If at last line and has choices, display choice buttons
-    if (this.dialogueSystem.isLastLineOfNode()) {
-      const responses = this.dialogueSystem.getAvailableResponses();
-      if (responses.length > 0) {
-        responses.forEach((resp, idx) => {
-          if (this.choiceButtons[idx]) {
-            this.choiceButtons[idx].setText(`[${idx + 1}] ${resp.text}`);
-            this.choiceButtons[idx].setVisible(true);
-          }
-        });
-      }
-    }
-  }
-
-  private updateDialogueHints(): void {
-    const node = this.dialogueSystem.getCurrentNode();
-    if (!node) return;
-
-    if (this.isTyping) {
-      this.dialogueContinueHint.setText('[E / Space to skip]');
-      return;
-    }
-
-    const isLast = this.dialogueSystem.isLastLineOfNode();
-    const hasChoices = this.dialogueSystem.getAvailableResponses().length > 0;
-
-    if (isLast) {
-      if (hasChoices) {
-        this.dialogueContinueHint.setText('[Press 1 or 2 to choose]');
-      } else {
-        this.dialogueContinueHint.setText('[E / Space / ESC to close]');
-      }
-    } else {
-      this.dialogueContinueHint.setText('[E / Space to continue]');
-    }
-  }
-
-  private handleDialogueInteract(): void {
-    // If typing, immediately complete line
-    if (this.isTyping) {
-      this.completeTypewriterImmediately();
-      return;
-    }
-
-    // If choices are presented, wait for choice selection
-    const isLast = this.dialogueSystem.isLastLineOfNode();
-    const hasChoices = this.dialogueSystem.getAvailableResponses().length > 0;
-    if (isLast && hasChoices) {
-      return;
-    }
-
-    // Advance dialogue
-    const hasMore = this.dialogueSystem.advance();
-    if (hasMore) {
-      this.renderCurrentDialogue();
-    } else {
-      this.closeDialogue();
-    }
-  }
-
-  private handleChoiceKey(choiceIndex: number): void {
-    if (!this.dialogueSystem.isActive() || this.isTyping) return;
-    if (!this.dialogueSystem.isLastLineOfNode()) return;
-
-    this.handleChoiceSelect(choiceIndex);
-  }
-
-  private handleChoiceSelect(index: number): void {
-    const responses = this.dialogueSystem.getAvailableResponses();
-    if (index >= 0 && index < responses.length) {
-      const selected = responses[index];
-      if (selected.nextDialogueId) {
-        this.openDialogue(selected.nextDialogueId);
-      } else {
-        this.closeDialogue();
-      }
-    }
-  }
-
-  public closeDialogue(): void {
-    if (this.typewriterTimer) {
-      this.typewriterTimer.destroy();
-      this.typewriterTimer = null;
-    }
-    this.isTyping = false;
-    this.choiceButtons.forEach((btn) => btn.setVisible(false));
-    this.dialogueSystem.close();
-    this.dialogueBoxContainer.setVisible(false);
-    // A dialogue can end into a scene exit (Elder farewell -> Prologue ending); keep input off then.
-    if (!this.isTransitioningToBattle) this.controller.setEnabled(true);
-  }
-
-  /** Applies a dialogue node's data-driven effects and announces any items received. */
-  private applyDialogueEffects(effects: DialogueEffects): void {
+  /** Applies data-driven effects and announces any items received. */
+  private applyEffects(effects: DialogueEffects): void {
     const granted = this.session.applyDialogueEffects(effects);
     if (granted.length > 0) {
       const names = granted
@@ -1192,19 +480,67 @@ export class ExplorationScene extends Phaser.Scene {
           return s.quantity > 1 ? `${name} x${s.quantity}` : name;
         })
         .join(', ');
-      this.showNotification('ITEM OBTAINED', `◆ ${names}`);
+      this.showNotification(this.t('notify.itemObtained'), `◆ ${names}`);
     }
-    this.updatePlayerStatusHUD();
-    this.updateQuestHUD();
+    this.statusHud.refresh();
+    this.questTracker.refresh();
+  }
+
+  // ------------------------------------------------------------------ public API (tests, systems)
+
+  public openDialogue(dialogueId: string): void {
+    if (!this.dialogueBox.open(dialogueId)) return;
+    // Movement is frozen while dialogue is open (update() skips player.update()). The controller
+    // stays enabled: a disabled controller reports no actions, so E / Space could not advance.
+    this.player.getMovementSystem().stop(this.player.sprite);
+    this.promptText.setVisible(false);
+  }
+
+  public closeDialogue(): void {
+    this.dialogueBox.close();
+  }
+
+  public showNotification(title: string, subtitle: string): void {
+    this.banner.show(title, subtitle);
+  }
+
+  public updateQuestHUD(): void {
+    this.questTracker.refresh();
+  }
+
+  public updatePlayerStatusHUD(): void {
+    this.statusHud.refresh();
+  }
+
+  public toggleInventory(): void {
+    this.satchel.toggle();
+    if (this.satchel.isOpen) this.player.sprite.setVelocity(0, 0);
+  }
+
+  public navigateInventory(direction: number): void {
+    this.satchel.navigate(direction);
+  }
+
+  public useSelectedInventoryItem(): void {
+    this.satchel.useSelected();
+  }
+
+  public async quickSave(): Promise<void> {
+    const saveData = this.session.toSaveData({
+      mapId: this.mapDef.id,
+      x: Math.round(this.player.x),
+      y: Math.round(this.player.y),
+    });
+    if (await this.saveSystem.save(1, saveData)) {
+      this.showNotification(this.t('notify.saved'), this.t('notify.savedDetail'));
+    }
   }
 
   /** Fades out to the Prologue closing card. Guarded so it runs once per scene entry. */
   public startPrologueEnding(): void {
-    if (this.isTransitioningToBattle) return;
-    this.isTransitioningToBattle = true; // reuses the scene-exit guard: no encounter can interrupt
+    if (this.isTransitioning) return;
+    this.beginSceneExit();
     this.session.setFlag(FLAGS.prologueComplete);
-    this.controller.setEnabled(false);
-    this.player.getMovementSystem().stop(this.player.sprite);
     this.cameras.main.fadeOut(900, 0, 0, 0);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
       this.scene.start('PrologueEndScene');

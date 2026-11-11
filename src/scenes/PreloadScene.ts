@@ -1,3 +1,4 @@
+import type { MapDatabase } from '../world/MapTypes';
 import Phaser from 'phaser';
 
 export class PreloadScene extends Phaser.Scene {
@@ -128,9 +129,16 @@ export class PreloadScene extends Phaser.Scene {
       frameHeight: 32,
     });
 
-    // 2. Environment & Tilesets
-    this.load.image('dungeon_tileset', 'assets/tilesets/dungeon_tileset.png');
-    this.load.tilemapTiledJSON('prologue_map', 'assets/maps/prologue_map.json');
+    // 2. Maps & tilesets: every map listed in maps.json is queued once that file has loaded.
+    this.load.once('filecomplete-json-data_maps', (_key: string, _type: string, data: unknown) => {
+      for (const map of Object.values((data as MapDatabase).maps)) {
+        if (!this.textures.exists(map.tileset.key)) {
+          this.load.image(map.tileset.key, map.tileset.path);
+        }
+        this.load.tilemapTiledJSON(map.tilemap.key, map.tilemap.path);
+      }
+    });
+    this.load.json('data_maps', 'assets/data/maps.json');
 
     // 3. UI & FX
     // UI_SET_001 (approved Pipeline B art): 48x48 nine-slice frame (16 px corners),
@@ -151,7 +159,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.json('data_enemies', 'assets/data/enemies.json');
     this.load.json('data_items', 'assets/data/items.json');
     this.load.json('data_player', 'assets/data/player.json');
-    this.load.json('data_interactables', 'assets/data/interactables.json');
+    this.load.json('data_strings', 'assets/data/strings.json');
   }
 
   public create(): void {

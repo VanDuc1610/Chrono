@@ -94,7 +94,10 @@
         "The Sanctuary Spire lies beyond these walls. Whatever waits there has been waiting for you.",
         "Go, traveler. The divided hour will not mend itself."
       ],
-      "responses": []
+      "responses": [],
+      "effects": {
+        "endPrologue": true
+      }
     },
     "stele_six_authorities": {
       "id": "stele_six_authorities",

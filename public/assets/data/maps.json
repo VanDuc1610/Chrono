@@ -1,0 +1,176 @@
+{
+  "startMapId": "map_shattered_antechamber",
+  "maps": {
+    "map_shattered_antechamber": {
+      "id": "map_shattered_antechamber",
+      "name": "Shattered Antechamber",
+      "aliases": ["prologue_sanctuary"],
+      "tilemap": {
+        "key": "prologue_map",
+        "path": "assets/maps/prologue_map.json"
+      },
+      "tileset": {
+        "name": "dungeon_tileset",
+        "key": "dungeon_tileset",
+        "path": "assets/tilesets/dungeon_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 16
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 12,
+          "y": 10
+        }
+      },
+      "revive": {
+        "x": 11,
+        "y": 6
+      },
+      "npcs": [
+        {
+          "id": "npc_elder",
+          "texture": "npc_elder",
+          "anim": "npc_elder_idle",
+          "tile": {
+            "x": 9,
+            "y": 8
+          },
+          "name": "Elder Chronographer",
+          "prompt": "[E] Talk with Elder Chronographer",
+          "radius": 44,
+          "dialogueId": "npc_elder_greeting",
+          "dialogueRules": [
+            {
+              "ifQuestCompleted": "quest_prologue_silence",
+              "dialogueId": "npc_elder_farewell"
+            }
+          ],
+          "completeObjective": {
+            "questId": "quest_prologue_awakening",
+            "objectiveId": "obj_speak_elder"
+          }
+        }
+      ],
+      "interactables": [
+        {
+          "id": "altar_of_moments",
+          "tile": {
+            "x": 11,
+            "y": 5
+          },
+          "radius": 48,
+          "prompt": "[E] Inspect Altar of Moments",
+          "dialogueId": "altar_inspection",
+          "completeObjective": {
+            "questId": "quest_prologue_awakening",
+            "objectiveId": "obj_inspect_altar"
+          }
+        },
+        {
+          "id": "stele_six_authorities",
+          "tile": {
+            "x": 3,
+            "y": 4
+          },
+          "radius": 48,
+          "prompt": "[E] Read Stele of the Six Authorities",
+          "dialogueId": "stele_six_authorities"
+        },
+        {
+          "id": "defaced_pillar",
+          "tile": {
+            "x": 5,
+            "y": 10
+          },
+          "radius": 48,
+          "prompt": "[E] Inspect Defaced Fluted Pillar",
+          "dialogueId": "pillar_memory_erasure"
+        },
+        {
+          "id": "torn_journal_leaf",
+          "tile": {
+            "x": 14,
+            "y": 12
+          },
+          "radius": 44,
+          "prompt": "[E] Pick up Torn Journal Leaf",
+          "dialogueId": "notebook_loose_leaf"
+        },
+        {
+          "id": "frozen_astrolabe",
+          "tile": {
+            "x": 20,
+            "y": 4
+          },
+          "radius": 48,
+          "prompt": "[E] Examine Frozen Astrolabe",
+          "dialogueId": "astrolabe_inspection"
+        },
+        {
+          "id": "cracked_reliquary",
+          "tile": {
+            "x": 7,
+            "y": 2
+          },
+          "radius": 44,
+          "prompt": "[E] Search Cracked Reliquary",
+          "dialogueId": "reliquary_search"
+        },
+        {
+          "id": "threshold_gates",
+          "tile": {
+            "x": 12,
+            "y": 2
+          },
+          "radius": 48,
+          "prompt": "[E] Inspect Sealed Threshold Gates",
+          "dialogueId": "threshold_gates_inspection"
+        },
+        {
+          "id": "residual_rift_echo",
+          "tile": {
+            "x": 20,
+            "y": 14
+          },
+          "radius": 48,
+          "prompt": "[E] Attune to Residual Rift Echo",
+          "dialogueId": "rift_echo_attune"
+        }
+      ],
+      "encounters": [
+        {
+          "id": "enc_antechamber_shade",
+          "enemyId": "enemy_temporal_shade",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 16,
+            "y": 9
+          },
+          "defeatedFlag": "isShadeDefeated",
+          "hitbox": 22
+        }
+      ],
+      "exits": [],
+      "triggers": [
+        {
+          "id": "trig_awakening",
+          "on": "arrive",
+          "onceFlag": "hasTriggeredAwakening",
+          "delayMs": 300,
+          "effects": {
+            "startQuest": "quest_prologue_awakening"
+          },
+          "dialogueId": "intro_awakening"
+        }
+      ]
+    }
+  }
+}

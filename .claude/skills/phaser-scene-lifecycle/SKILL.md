@@ -24,7 +24,9 @@ Scenes: `PreloadScene` → `MainMenuScene` → `ExplorationScene` ⇄ `CombatSce
    scene still needs E / Space (dialogue).
 5. **Global animations** are created once in `PreloadScene` (`enemy_fracture_idle`, `npc_elder_idle`,
    `ui_cursor_pulse`, `hit_spark_burst`) or via `registerPeterAnimations(scene)` (idempotent).
-6. **Panels** use `createPanel()` from `src/ui/Panel.ts` (nine-slice `ui_frame`, origin 0,0, pad
+6. **UI modules** live in `src/ui/` (`DialogueBox`, `QuestTracker`, `NotificationBanner`,
+   `SatchelPanel`, `StatusHud`); scenes compose them. Text comes from `strings.json` via
+   `getStrings(this)`. **Panels** use `createPanel()` from `src/ui/Panel.ts` (nine-slice `ui_frame`, origin 0,0, pad
    text ≥ 8 px). HUD objects use `setScrollFactor(0)` and an explicit depth.
 7. No quest, dialogue or stat values in scene code — read them from `GameSession` / JSON.
 

@@ -17,6 +17,8 @@ export interface DialogueEffects {
   grantItems?: { itemId: string; quantity: number }[];
   /** Session flag recording that `grantItems` were already given. Required with grantItems. */
   grantOnceFlag?: string;
+  /** When this dialogue ends, the Prologue ending plays (handled by ExplorationScene). */
+  endPrologue?: boolean;
 }
 
 export interface DialogueNode {

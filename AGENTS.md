@@ -13,8 +13,8 @@
 - `src/scenes/`: Phaser scenes (`PreloadScene`, `MainMenuScene`, `ExplorationScene`, `CombatScene`, `PrologueEndScene`). Orchestration and rendering only.
 - `src/state/`: `GameSession` – playthrough state (stats, inventory, quests, flags, save shape). No Phaser runtime imports.
 - `src/systems/`: `combat/`, `dialogue/`, `quest/`, `inventory/`, `save/` are pure TypeScript (no Phaser import); `movement/`, `interaction/`, `input/`, `audio/`, `animation/` integrate with Phaser.
-- `src/entities/`: Sprite wrappers (`Player.ts`, `NPC.ts`). `src/ui/`: UI helpers (`Panel.ts`).
-- `public/assets/data/`: game data JSON (`dialogue`, `quests`, `items`, `enemies`, `player`, `interactables`).
+- `src/entities/`: Sprite wrappers (`Player.ts`, `NPC.ts`). `src/ui/`: UI modules + `Strings.ts`. `src/world/`: map types and validation (no Phaser).
+- `public/assets/data/`: game data JSON (`dialogue`, `quests`, `items`, `enemies`, `player`, `maps`, `strings`).
 - `docs/context/`: short summaries. `docs/story/`: narrative canon (read only the chapter you need).
 
 ## 3. Architecture Rules

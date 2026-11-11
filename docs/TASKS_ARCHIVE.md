@@ -2,6 +2,7 @@
 
 Completed tasks moved out of [TASKS.md](TASKS.md) to keep the board short. Newest first. Read only when you need history.
 
+- **T-22** Prologue content integrated (owner approved proposal + prop art): data-driven `effects` on dialogue nodes (`GameSession.applyDialogueEffects`), 7 points of interest from `interactables.json`, tileset v3 prop tiles placed via `scripts/map-props.js`. Quest tracker: 3 objective rows, `[Q]` cycles active quests, "(+N)" count, overflow trimmed with "…". Verified live: all 7 POIs and branches, `quest_prologue_remnants` complete (+40 EXP), gear/shard granted once, Elder lore branch, prop collision; 34 unit tests + 4 CDP suites PASS — Claude
 - **T-23** Authored Prologue environmental dialogue nodes + `effects` in `public/assets/data/dialogue.json` (7 POIs + follow-ups + Elder lore branch), added optional side quest `quest_prologue_remnants` (+40 EXP, `ancient_gear`) in `public/assets/data/quests.json`, and added 5 data-integrity & end-to-end Vitest tests in `tests/content-data.test.ts` (34 total unit tests PASS) — Antigravity
 - **T-19** Elder Chronographer v3 (slimmer, per owner feedback) approved and integrated: 4-frame spritesheet + global `npc_elder_idle` anim (4 FPS); placeholder removed — Claude
 - **T-21** Prologue content proposal (`docs/narrative/PROLOGUE_CONTENT_PROPOSAL.md`) — approved by owner 2026-11-11 — Antigravity

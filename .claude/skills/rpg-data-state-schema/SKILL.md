@@ -1,6 +1,6 @@
 ---
 name: rpg-data-state-schema
-description: Use when editing game JSON (dialogue, quests, items, enemies, player, interactables), story flags, GameSession state, or save/load. Not for rendering or art.
+description: Use when editing game JSON (dialogue, quests, items, enemies, player, maps, strings), story flags, GameSession state, or save/load. Not for rendering or art.
 ---
 
 # Game data & state (CHRONO)
@@ -22,7 +22,10 @@ description: Use when editing game JSON (dialogue, quests, items, enemies, playe
   `GameSession.applyDialogueEffects()`. No code in JSON.
 - **Quests:** chain with `followUpQuestId`; flag-driven objectives use `completeOnFlag`;
   `syncQuestProgress()` must stay idempotent. Rewards are claimed once.
-- **Interactables:** `interactables.json` → `{ id, tile:{x,y}, radius, prompt, dialogueId }`.
+- **World placement** (NPCs, points of interest, encounters, exits, triggers): `maps.json` — see the
+  `tiled-topdown-world` skill.
+- **UI text** (HUD, hints, notifications): `strings.json`, read with `getStrings(scene)` /
+  `t(key, { vars })`. In-game text is Vietnamese; ids stay English.
 - **Save format change:** bump `SAVE_VERSION`, keep `fromSave` able to read the previous version
   (or reject it cleanly), and add a test.
 - Every id referenced across files must exist — `tests/content-data.test.ts` checks this; extend it

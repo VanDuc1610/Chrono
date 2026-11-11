@@ -1,0 +1,43 @@
+{
+  "strings": {
+    "hud.location": "VỊ TRÍ: {name}",
+    "hud.phase": "CHƯƠNG: Mở đầu",
+    "hud.stats": "Cấp {level} | EXP {exp} | HP {hp}/{maxHp}",
+    "hud.expMax": "TỐI ĐA",
+    "hud.controls": "[WASD/Mũi tên] Di chuyển | [E/Space] Tương tác | [I/B] Túi đồ | [Q] Nhiệm vụ | [K] Lưu | [ESC] Menu",
+
+    "quest.label": "NHIỆM VỤ HIỆN TẠI",
+    "quest.none": "Không có nhiệm vụ",
+
+    "notify.newQuest": "NHIỆM VỤ MỚI",
+    "notify.objectiveDone": "HOÀN THÀNH MỤC TIÊU",
+    "notify.questDone": "HOÀN THÀNH NHIỆM VỤ!",
+    "notify.itemObtained": "NHẬN VẬT PHẨM",
+    "notify.saved": "ĐÃ LƯU",
+    "notify.savedDetail": "Tiến trình đã được ghi vào Ô lưu 1",
+
+    "dialogue.skip": "[E / Space: bỏ qua]",
+    "dialogue.continue": "[E / Space: tiếp]",
+    "dialogue.close": "[E / Space / ESC: đóng]",
+    "dialogue.choose": "[Chọn 1 hoặc 2]",
+
+    "satchel.title": "TÚI ĐỒ CỦA PETER",
+    "satchel.subtitle": "Sức chứa: 16 ô | Loại: Tất cả",
+    "satchel.footer": "[Lên/Xuống] Chọn | [E/Space] Dùng | [I/B/ESC] Đóng | [K] Lưu",
+    "satchel.empty": "Túi đồ trống.",
+    "satchel.useHint": "[E/Space: Dùng]",
+    "satchel.type.consumable": "TIÊU HAO",
+    "satchel.type.material": "NGUYÊN LIỆU",
+    "satchel.type.key_item": "VẬT PHẨM CHÍNH",
+    "satchel.emptyTitle": "TÚI TRỐNG",
+    "satchel.emptyDetail": "Không có vật phẩm để dùng.",
+    "satchel.noItemTitle": "HẾT VẬT PHẨM",
+    "satchel.noItemDetail": "Không còn {name} trong túi.",
+    "satchel.cannotUseTitle": "KHÔNG THỂ DÙNG",
+    "satchel.cannotUseDetail": "{name} không thể dùng trực tiếp.",
+    "satchel.hpFullTitle": "HP ĐÃ ĐẦY",
+    "satchel.hpFullDetail": "{name} đã đầy máu ({hp}/{maxHp} HP).",
+    "satchel.usedTitle": "ĐÃ DÙNG VẬT PHẨM",
+    "satchel.usedDetail": "{name} (+{healed} HP → {hp}/{maxHp} HP)"
+  }
+}

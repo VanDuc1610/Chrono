@@ -1,35 +1,45 @@
 ---
 name: tiled-topdown-world
-description: Use when changing the exploration map, tiles, collision, props, spawn points, NPC placement or map triggers in ExplorationScene. Not for combat or UI menus.
+description: Use when adding or changing maps, exits between maps, spawn points, NPCs, points of interest, encounters, map triggers, tiles or collision. Not for combat rules or UI menus.
 ---
 
 # Exploration world (CHRONO)
 
-## Current map
+## Everything placed in the world is data: `public/assets/data/maps.json`
 
-- `public/assets/maps/prologue_map.json` — Tiled JSON, 24×18 tiles of 32 px, layers `Ground` and
-  `Walls`, tileset `dungeon_tileset` (no margin/spacing — **do not** add extrusion offsets).
-- The map is **generated**: edit `scripts/generate-map.js` (layout, floor variants) and
-  `scripts/map-props.js` (prop tiles), then run `node scripts/generate-map.js`. Do not hand-edit
-  the JSON.
-- Tileset indices (GID = index + 1): 0 void, 1 floor, 2 engraved, 3 wall top, 4 wall face,
-  5 pillar, 6 crystal, 7 altar, 8 fracture floor, 9 floor variant, 10 stele, 11 astrolabe,
-  12 reliquary, 13 threshold gate, 14 torn page. `Walls` collides on GIDs 4–16
-  (`setCollisionBetween(4, 16)` in `ExplorationScene`).
+Types: `src/world/MapTypes.ts`. Helpers + validation: `src/world/MapRegistry.ts`. All coordinates
+are **tiles** (32 px); a point means the tile centre (`tileCenter`). `ExplorationScene` only wires
+the data to the systems — do not hard-code NPCs, POIs or encounters in the scene.
 
-## Movement & interaction
+Per map (`maps[id]`):
 
-- Free 4-way Arcade Physics movement (`TopDownMovementSystem`), not grid movement. Player foot
-  collider 18×14 at (7, 16).
-- Points of interest come from `public/assets/data/interactables.json` (tile coords + radius) and
-  are registered with `InteractionSystem`; NPCs are `src/entities/NPC.ts`.
-- Pixel coordinates of a tile centre: `tile * 32 + 16`.
+| Field                 | Meaning                                                                          |
+| --------------------- | -------------------------------------------------------------------------------- |
+| `tilemap`, `tileset`  | key + path; PreloadScene loads every map listed (no extra code needed)           |
+| `layers`, `collision` | layer names; `walls` collides on GIDs `fromGid..toGid`                           |
+| `spawns`              | named spawn points, `default` required                                           |
+| `revive`              | where Peter wakes after a defeat on this map                                     |
+| `npcs`                | sprite, prompt, `dialogueId`, `dialogueRules` (state-based), `completeObjective` |
+| `interactables`       | points of interest → dialogue; optional `requiresFlag`, `completeObjective`      |
+| `encounters`          | overworld enemy → `CombatScene`; `defeatedFlag` hides it after victory           |
+| `exits`               | tile area → `toMap` + `toSpawn`; `requiresFlag` + `lockedDialogueId` to gate     |
+| `triggers`            | `arrive` or `zone`; fire once (`onceFlag`); `effects` and/or `dialogueId`        |
 
-## Planned (not built yet)
+`aliases` lets old save ids resolve (`prologue_sanctuary` → `map_shattered_antechamber`).
+`startMapId` is where a new game begins. A dialogue node with `effects.endPrologue` plays the
+Prologue ending when that dialogue closes.
 
-Multiple maps, map transitions and Tiled-authored object layers are Phase 2 work. Check
-`docs/TASKS.md` before building them and keep the existing map loading working.
+## Tilemaps
+
+- `public/assets/maps/prologue_map.json` (Antechamber) is **generated**: edit
+  `scripts/generate-map.js` / `scripts/map-props.js`, run `node scripts/generate-map.js`.
+  Tileset `dungeon_tileset`, no margin/spacing (no extrusion). GIDs: index + 1; 0 void, 1 floor,
+  2 engraved, 3 wall top, 4 wall face, 5 pillar, 6 crystal, 7 altar, 8 fracture, 9 floor variant,
+  10 stele, 11 astrolabe, 12 reliquary, 13 threshold gate, 14 torn page.
+- New maps: Tiled JSON with the same two layers (`Ground`, `Walls`), 32 px tiles, ≤ 30×20.
+- Movement is free 4-way Arcade Physics, not grid movement.
 
 ## Verify
 
-`node scripts/test-gameplay.js` (movement, collision, dialogue by real key presses).
+`npx vitest run tests/content-data.test.ts tests/world-maps.test.ts` (validates every reference in
+maps.json) · `node scripts/test-gameplay.js`.

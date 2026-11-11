@@ -16,25 +16,27 @@
   - `audio/`: Procedural Web Audio loops (`ambient` and `battle` BGM) and SFX synthesis.
   - `animation/`: Peter and entity animation rigs.
 - `src/entities/`: Sprite wrappers (`Player.ts`, `NPC.ts`).
-- `src/ui/`: UI components (`Panel.ts` for NineSlice `ui_frame`).
-- `public/assets/data/`: Game databases (`dialogue.json`, `quests.json`, `items.json`, `enemies.json`, `player.json`, `interactables.json`).
+- `src/ui/`: UI modules (`DialogueBox`, `QuestTracker`, `NotificationBanner`, `SatchelPanel`, `StatusHud`, `Panel`) and `Strings.ts` (`strings.json` lookup).
+- `src/world/`: data-driven maps (`MapTypes.ts`, `MapRegistry.ts`: resolve, validate, tile helpers).
+- `public/assets/data/`: Game databases (`dialogue.json`, `quests.json`, `items.json`, `enemies.json`, `player.json`, `maps.json` (world placement per map), `strings.json` (Vietnamese UI text)).
 - `docs/story/`: Canonical narrative bible, 6 chapter specifications, character bible.
 - `docs/context/`: Scoped summaries (`PROJECT_MAP.md`, `COMBAT_SPEC.md`).
 
 ## 2. Core Feature Status
 
-| Feature                          | Location                                          | Status   |
-| -------------------------------- | ------------------------------------------------- | -------- |
-| Top-down Exploration & Collision | `ExplorationScene.ts`, `TopDownMovementSystem.ts` | Complete |
-| Turn-based Combat (Speed/Skills) | `CombatScene.ts`, `CombatSystem.ts`               | Complete |
-| Quest & Dialogue Graph           | `QuestSystem.ts`, `DialogueSystem.ts`             | Complete |
-| Inventory & Consumable Usage     | `InventorySystem.ts`, `ExplorationScene.ts`       | Complete |
-| Save / Load Persistence          | `SaveSystem.ts`, `GameSession.ts`                 | Complete |
-| Procedural Web Audio BGM & SFX   | `SoundSystem.ts`                                  | Complete |
-| UI Frame (NineSlice) & Cursor    | `Panel.ts`, `UI_SET_001`                          | Complete |
-| Prologue Environmental Content   | 7 POIs in `dialogue.json`, `interactables.json`   | Complete |
-| Unit Tests (Vitest)              | `tests/*.test.ts` (34 tests passing)              | Complete |
-| CI Workflow                      | `.github/workflows/ci.yml` (Ubuntu Node 24)       | Complete |
+| Feature                           | Location                                          | Status   |
+| --------------------------------- | ------------------------------------------------- | -------- |
+| Top-down Exploration & Collision  | `ExplorationScene.ts`, `TopDownMovementSystem.ts` | Complete |
+| Turn-based Combat (Speed/Skills)  | `CombatScene.ts`, `CombatSystem.ts`               | Complete |
+| Quest & Dialogue Graph            | `QuestSystem.ts`, `DialogueSystem.ts`             | Complete |
+| Inventory & Consumable Usage      | `InventorySystem.ts`, `ExplorationScene.ts`       | Complete |
+| Save / Load Persistence           | `SaveSystem.ts`, `GameSession.ts`                 | Complete |
+| Procedural Web Audio BGM & SFX    | `SoundSystem.ts`                                  | Complete |
+| UI Frame (NineSlice) & Cursor     | `Panel.ts`, `UI_SET_001`                          | Complete |
+| Prologue Environmental Content    | 7 POIs in `dialogue.json`, `maps.json`            | Complete |
+| Multi-map world (exits, triggers) | `maps.json`, `src/world/`, `ExplorationScene.ts`  | Complete |
+| Unit Tests (Vitest)               | `tests/*.test.ts` (34 tests passing)              | Complete |
+| CI Workflow                       | `.github/workflows/ci.yml` (Ubuntu Node 24)       | Complete |
 
 ## 3. Essential Dev Commands
 

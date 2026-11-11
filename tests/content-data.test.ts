@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import dialogueJson from '../public/assets/data/dialogue.json';
 import questsJson from '../public/assets/data/quests.json';
 import itemsJson from '../public/assets/data/items.json';
-import interactablesJson from '../public/assets/data/interactables.json';
+import mapsJson from '../public/assets/data/maps.json';
+import stringsJson from '../public/assets/data/strings.json';
 import enemiesJson from '../public/assets/data/enemies.json';
 import playerJson from '../public/assets/data/player.json';
 import { DialogueDatabase } from '../src/systems/dialogue/DialogueTypes';
@@ -11,8 +12,12 @@ import { InventoryDatabase } from '../src/systems/inventory/InventoryTypes';
 import { EnemyDatabase } from '../src/systems/combat/CombatTypes';
 import { GameDatabase, PlayerDatabase } from '../src/state/GameDatabase';
 import { FLAGS, GameSession } from '../src/state/GameSession';
+import { MapDatabase } from '../src/world/MapTypes';
+import { resolveMap, validateMapDatabase } from '../src/world/MapRegistry';
+import { formatString } from '../src/ui/Strings';
 
 const dialogueDb = dialogueJson as unknown as DialogueDatabase;
+const mapDb = mapsJson as unknown as MapDatabase;
 const questDb = questsJson as unknown as QuestDatabase;
 const itemDb = itemsJson as unknown as InventoryDatabase;
 
@@ -25,7 +30,22 @@ function createRealDatabase(): GameDatabase {
   };
 }
 
-describe('Prologue Content Data Integrity (dialogue.json, quests.json, interactables.json)', () => {
+describe('UI strings (strings.json)', () => {
+  it('fills placeholders and falls back to the key for unknown entries', () => {
+    const table = stringsJson.strings as Record<string, string>;
+    expect(formatString(table, 'hud.location', { name: 'X' })).toBe('VỊ TRÍ: X');
+    expect(formatString(table, 'no.such.key')).toBe('no.such.key');
+  });
+
+  it('defines a label for every item type used in items.json', () => {
+    const table = stringsJson.strings as Record<string, string>;
+    for (const item of itemDb.items) {
+      expect(table[`satchel.type.${item.type}`], `missing satchel.type.${item.type}`).toBeTruthy();
+    }
+  });
+});
+
+describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json)', () => {
   it('ensures every nextDialogueId exists and every dialogue node has at most 2 responses', () => {
     const nodes = Object.values(dialogueDb.dialogues);
     expect(nodes.length).toBeGreaterThan(0);
@@ -48,14 +68,26 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, interacta
     }
   });
 
-  it('ensures every dialogueId referenced in interactables.json exists in dialogue.json', () => {
-    expect(interactablesJson.interactables.length).toBe(7);
-    for (const entry of interactablesJson.interactables) {
-      expect(
-        dialogueDb.dialogues[entry.dialogueId],
-        `Interactable "${entry.id}" references missing dialogueId "${entry.dialogueId}"`,
-      ).toBeDefined();
-    }
+  it('maps.json references only existing dialogues, quests, objectives, enemies, maps and spawns', () => {
+    const errors = validateMapDatabase(mapDb, {
+      dialogueIds: new Set(Object.keys(dialogueDb.dialogues)),
+      questIds: new Set(questDb.quests.map((q) => q.id)),
+      enemyIds: new Set(
+        (enemiesJson as unknown as EnemyDatabase).enemies.map((e: { id: string }) => e.id),
+      ),
+      objectives: new Map(
+        questDb.quests.map((q) => [q.id, new Set(q.objectives.map((o) => o.id))]),
+      ),
+    });
+    expect(errors).toEqual([]);
+    // The Antechamber keeps its 7 points of interest + the Altar.
+    expect(mapDb.maps.map_shattered_antechamber?.interactables?.length).toBe(8);
+  });
+
+  it('resolves old save map ids through aliases and falls back to the start map', () => {
+    expect(resolveMap(mapDb, 'prologue_sanctuary').id).toBe('map_shattered_antechamber');
+    expect(resolveMap(mapDb, 'no_such_map').id).toBe(mapDb.startMapId);
+    expect(resolveMap(mapDb, undefined).id).toBe(mapDb.startMapId);
   });
 
   it('ensures every startQuest points to a valid quest and every grantItems entry exists in items.json with a grantOnceFlag', () => {
