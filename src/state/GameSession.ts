@@ -11,7 +11,8 @@ import { GameDatabase, PlayerStats, readGameDatabase } from './GameDatabase';
 const clamp = (value: number, min: number, max: number): number =>
   Math.min(max, Math.max(min, value));
 
-export const SAVE_VERSION = '0.2.0';
+/** 0.3.0: Prologue v3 — attack/skill unlock by story flags (older saves are migrated). */
+export const SAVE_VERSION = '0.3.0';
 export const DEFAULT_MAP_ID = 'prologue_sanctuary';
 
 /** Story flag keys. Values are kept identical to 0.1.x saves for compatibility. */
@@ -19,6 +20,10 @@ export const FLAGS = {
   shadeDefeated: 'isShadeDefeated',
   prologueComplete: 'isPrologueComplete',
   awakeningTriggered: 'hasTriggeredAwakening',
+  hasBlade: 'has_broken_blade',
+  temporalSight: 'learned_temporal_sight',
+  timeFrozen: 'time_frozen',
+  timeRestored: 'time_restored',
 } as const;
 
 export interface MapPosition {
@@ -74,9 +79,21 @@ export class GameSession {
     session.position = { ...save.player.position };
     session.playtimeMs = Math.max(0, save.playtimeSeconds) * 1000;
     Object.assign(session.flags, save.flags);
+    // Saves from before Prologue v3 (< 0.3) already fought with the blade and Temporal Strike.
+    const [major, minor] = save.version.split('.').map((n) => Number(n));
+    if (major === 0 && minor < 3) {
+      session.setFlag(FLAGS.hasBlade);
+      session.setFlag(FLAGS.temporalSight);
+    }
     session.inventory.loadFromState(save.inventory);
     session.quests.loadFromState(save.quests);
     return session;
+  }
+
+  /** True if a combat command is available (player.json `commandFlags`). */
+  public isCommandUnlocked(command: string): boolean {
+    const flag = this.db.player.commandFlags?.[command];
+    return !flag || this.getFlag(flag);
   }
 
   public get playerName(): string {

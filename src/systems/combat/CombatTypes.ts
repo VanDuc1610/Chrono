@@ -50,6 +50,24 @@ export interface BossEnvironmentAction {
   message: string;
 }
 
+/** Something that happens at the start of the player's turn in a scripted battle. */
+export interface BattleEvent {
+  /** Round number (1-based) at which it fires, once. */
+  atTurn: number;
+  /** Lines of this dialogue.json node are shown one by one in the battle log. */
+  dialogueId?: string;
+  /** Story flags set when the event ends (e.g. `has_broken_blade` unlocks Attack). */
+  setFlags?: string[];
+  /** A helper who appears beside Peter (e.g. the Elder). */
+  ally?: { texture: string; anim?: string };
+}
+
+export interface BattleScript {
+  /** Commands unavailable for this whole battle (e.g. `escape` in a forced fight). */
+  lockedCommands?: string[];
+  events?: BattleEvent[];
+}
+
 /**
  * Boss rules (enemies.json `mechanic`): a shield that reduces damage and keeps the boss from
  * falling until the environment actions are solved; it recovers when held at the floor.
@@ -99,6 +117,8 @@ export interface IEnemyDefinition {
   skills: string[];
   /** Boss rules; absent for ordinary enemies. */
   mechanic?: BossMechanic;
+  /** Scripted battle (story fights): locked commands and mid-battle events. */
+  script?: BattleScript;
   expReward: number;
   lootTable: { itemId: string; chance: number }[];
 }

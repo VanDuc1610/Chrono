@@ -191,6 +191,8 @@ async function triggerFreshNewGame(client) {
         menu.startNewGame();
         // Regression scenarios run in the Antechamber (Shade, Elder); a new game starts in Peter's room.
         window.__GAME__.registry.get('chrono.gameSession').position = { mapId: 'map_shattered_antechamber', x: 400, y: 336 };
+        window.__GAME__.registry.get('chrono.gameSession').setFlag('has_broken_blade');
+        window.__GAME__.registry.get('chrono.gameSession').setFlag('learned_temporal_sight');
       } else {
         window.__GAME__.scene.start('ExplorationScene');
       }

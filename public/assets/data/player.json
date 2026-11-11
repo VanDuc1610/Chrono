@@ -43,5 +43,9 @@
     "escapeSpeedFactor": 0.05,
     "escapeMinChance": 0.1,
     "escapeMaxChance": 0.9
+  },
+  "commandFlags": {
+    "attack": "has_broken_blade",
+    "skill": "learned_temporal_sight"
   }
 }

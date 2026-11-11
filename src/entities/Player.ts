@@ -15,6 +15,7 @@ export class Player extends Entity {
   private controller: IPlayerController;
   private speed: number;
   private hasAnimations = false;
+  private animSuffix = '';
 
   constructor(
     scene: Phaser.Scene,
@@ -64,6 +65,16 @@ export class Player extends Entity {
     return this.speed;
   }
 
+  /**
+   * Empty-handed (Prologue v3, before the Broken Blade) uses the `peter_*_unarmed` animations when
+   * they are loaded; otherwise it falls back to the regular ones.
+   */
+  public setArmed(armed: boolean): void {
+    const unarmedReady = this.sprite.scene.anims.exists('peter_idle_unarmed_down');
+    this.animSuffix = armed || !unarmedReady ? '' : '_unarmed';
+    if (this.hasAnimations) this.sprite.play(`peter_idle${this.animSuffix}_down`, true);
+  }
+
   public update(): void {
     const direction = this.controller.getMovementVector();
     this.movementSystem.move(this.sprite, direction, this.speed);
@@ -74,12 +85,12 @@ export class Player extends Entity {
       const activeFacing = facing !== 'idle' ? facing : this.movementSystem.getLastFacing();
 
       if (isMoving) {
-        const walkAnim = `peter_walk_${activeFacing}`;
+        const walkAnim = `peter_walk${this.animSuffix}_${activeFacing}`;
         if (this.sprite.anims.currentAnim?.key !== walkAnim) {
           this.sprite.play(walkAnim, true);
         }
       } else {
-        const idleAnim = `peter_idle_${activeFacing}`;
+        const idleAnim = `peter_idle${this.animSuffix}_${activeFacing}`;
         if (this.sprite.anims.currentAnim?.key !== idleAnim) {
           this.sprite.play(idleAnim, true);
         }

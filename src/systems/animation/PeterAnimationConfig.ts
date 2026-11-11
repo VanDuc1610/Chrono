@@ -25,6 +25,21 @@ export const PETER_ANIMATION_SPECS: Record<string, IAnimationSpec> = {
     frameRate: 9,
     repeat: -1,
   },
+  // Prologue v3: Peter before he receives the Broken Blade (registered only if loaded).
+  idle_unarmed: {
+    keyPrefix: 'peter_idle_unarmed',
+    textureKey: 'peter_idle_unarmed',
+    framesPerDirection: 4,
+    frameRate: 5,
+    repeat: -1,
+  },
+  walk_unarmed: {
+    keyPrefix: 'peter_walk_unarmed',
+    textureKey: 'peter_walk_unarmed',
+    framesPerDirection: 6,
+    frameRate: 9,
+    repeat: -1,
+  },
   run: {
     keyPrefix: 'peter_run',
     textureKey: 'peter_run',

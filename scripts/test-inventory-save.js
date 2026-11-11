@@ -156,6 +156,10 @@ async function run() {
       await wait(200);
     }
     console.log('✓ ExplorationScene active!');
+    // Prologue v3: these suites start mid-story, after Peter has the blade and Temporal Sight.
+    await client.eval(
+      `(() => { const s = window.__GAME__.scene.getScene('ExplorationScene').session; s.setFlag('has_broken_blade'); s.setFlag('learned_temporal_sight'); })()`,
+    );
 
     console.log("[3/7] Verifying Initial Inventory State (Peter's signature items)...");
     const initialInventory = await client.eval(`

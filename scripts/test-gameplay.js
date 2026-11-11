@@ -181,6 +181,10 @@ async function run() {
       throw new Error('ExplorationScene failed to become active.');
     }
     console.log('✓ ExplorationScene is active!');
+    // Prologue v3: these suites start mid-story, after Peter has the blade and Temporal Sight.
+    await client.eval(
+      `(() => { const s = window.__GAME__.scene.getScene('ExplorationScene').session; s.setFlag('has_broken_blade'); s.setFlag('learned_temporal_sight'); })()`,
+    );
 
     // Wait 400ms for entities to spawn and physics to settle
     await wait(400);

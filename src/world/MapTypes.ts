@@ -26,7 +26,15 @@ export interface QuestObjectiveRef {
 export interface DialogueRule {
   ifQuestCompleted?: string;
   ifFlag?: string;
+  /** The rule applies only while this flag is NOT set. */
+  unlessFlag?: string;
   dialogueId: string;
+}
+
+/** Present only while `flag` is set (if given) and `unlessFlag` is not (if given). */
+export interface FlagCondition {
+  flag?: string;
+  unlessFlag?: string;
 }
 
 export interface MapNpcDefinition {
@@ -43,6 +51,8 @@ export interface MapNpcDefinition {
   dialogueRules?: DialogueRule[];
   /** Objective completed on every talk (idempotent). */
   completeObjective?: QuestObjectiveRef;
+  /** Spawned only when the condition holds on entering the map. */
+  visibleWhen?: FlagCondition;
 }
 
 export interface MapInteractableDefinition {
@@ -51,9 +61,12 @@ export interface MapInteractableDefinition {
   radius: number;
   prompt: string;
   dialogueId: string;
+  dialogueRules?: DialogueRule[];
   completeObjective?: QuestObjectiveRef;
   /** Only interactable once this flag is set. */
   requiresFlag?: string;
+  /** Registered only when the condition holds on entering the map. */
+  visibleWhen?: FlagCondition;
 }
 
 export interface MapEncounterDefinition {
@@ -69,6 +82,10 @@ export interface MapEncounterDefinition {
   hitbox?: number;
   /** Dialogue opened back on the map after winning (e.g. a released boss's last words). */
   victoryDialogueId?: string;
+  /** Not placed on the map: started only by a trigger's `encounterId` (scripted battles). */
+  hidden?: boolean;
+  /** Spawned only when the condition holds on entering the map. */
+  visibleWhen?: FlagCondition;
 }
 
 export interface MapExitDefinition {
@@ -93,6 +110,8 @@ export interface MapTriggerDefinition {
   delayMs?: number;
   effects?: DialogueEffects;
   dialogueId?: string;
+  /** Encounter (by id, in this map) started when the trigger's dialogue closes. */
+  encounterId?: string;
 }
 
 /**
@@ -129,6 +148,11 @@ export interface MapDefinition {
   exits?: MapExitDefinition[];
   triggers?: MapTriggerDefinition[];
   visions?: MapVisionDefinition[];
+  /**
+   * "Time has stopped" state: while the condition holds, NPCs stand still, tinted cold, the music
+   * stops and a cold veil covers the map.
+   */
+  frozenWhen?: FlagCondition;
 }
 
 export interface MapDatabase {

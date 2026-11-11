@@ -1,4 +1,11 @@
-import type { DialogueRule, MapDatabase, MapDefinition, TilePoint, TileRect } from './MapTypes';
+import type {
+  DialogueRule,
+  FlagCondition,
+  MapDatabase,
+  MapDefinition,
+  TilePoint,
+  TileRect,
+} from './MapTypes';
 
 export const TILE_SIZE = 32;
 
@@ -39,9 +46,21 @@ export function pickDialogue(
   for (const rule of rules ?? []) {
     if (rule.ifQuestCompleted && !state.isQuestCompleted(rule.ifQuestCompleted)) continue;
     if (rule.ifFlag && !state.getFlag(rule.ifFlag)) continue;
+    if (rule.unlessFlag && state.getFlag(rule.unlessFlag)) continue;
     return rule.dialogueId;
   }
   return defaultId;
+}
+
+/** True when `cond` is absent or holds for the current flags. */
+export function conditionHolds(
+  cond: FlagCondition | undefined,
+  getFlag: (flag: string) => boolean,
+): boolean {
+  if (!cond) return true;
+  if (cond.flag && !getFlag(cond.flag)) return false;
+  if (cond.unlessFlag && getFlag(cond.unlessFlag)) return false;
+  return true;
 }
 
 export interface MapReferenceSets {
@@ -85,6 +104,8 @@ export function validateMapDatabase(db: MapDatabase, refs: MapReferenceSets): st
     }
     for (const it of map.interactables ?? []) {
       dialogue(it.dialogueId, `interactable ${it.id}`);
+      for (const rule of it.dialogueRules ?? [])
+        dialogue(rule.dialogueId, `interactable ${it.id} rule`);
       objective(it.completeObjective, `interactable ${it.id}`);
     }
     for (const enc of map.encounters ?? []) {
@@ -104,6 +125,8 @@ export function validateMapDatabase(db: MapDatabase, refs: MapReferenceSets): st
       if (trig.on === 'zone' && !trig.area)
         err(key, `trigger ${trig.id}: zone trigger needs an area`);
       dialogue(trig.dialogueId, `trigger ${trig.id}`);
+      if (trig.encounterId && !(map.encounters ?? []).some((e) => e.id === trig.encounterId))
+        err(key, `trigger ${trig.id}: unknown encounter "${trig.encounterId}"`);
       if (trig.effects?.startQuest && !refs.questIds.has(trig.effects.startQuest))
         err(key, `trigger ${trig.id}: unknown quest "${trig.effects.startQuest}"`);
     }

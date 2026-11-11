@@ -17,7 +17,13 @@ import { QuestTracker } from '../ui/QuestTracker';
 import { SatchelPanel } from '../ui/SatchelPanel';
 import { StatusHud } from '../ui/StatusHud';
 import { getStrings, Translate } from '../ui/Strings';
-import { pickDialogue, pointInRect, resolveMap, tileCenter } from '../world/MapRegistry';
+import {
+  conditionHolds,
+  pickDialogue,
+  pointInRect,
+  resolveMap,
+  tileCenter,
+} from '../world/MapRegistry';
 import type {
   MapDatabase,
   MapDefinition,
@@ -70,6 +76,11 @@ export class ExplorationScene extends Phaser.Scene {
   // Scene-local state (reset in init on every entry)
   private encounterSprites: Phaser.Physics.Arcade.Sprite[] = [];
   private visionSprites: Phaser.GameObjects.Sprite[] = [];
+  private npcSprites: Phaser.GameObjects.Sprite[] = [];
+  private frozenVeil: Phaser.GameObjects.Rectangle | null = null;
+  private isFrozen = false;
+  /** Encounter started as soon as the current dialogue closes (scripted battles). */
+  private pendingEncounter: MapEncounterDefinition | null = null;
   private isTransitioning = false;
   private pendingEnding = false;
   private lockedExitShown: string | null = null;
@@ -115,6 +126,10 @@ export class ExplorationScene extends Phaser.Scene {
     this.exitsArmed = false;
     this.encounterSprites = [];
     this.visionSprites = [];
+    this.npcSprites = [];
+    this.frozenVeil = null;
+    this.isFrozen = false;
+    this.pendingEncounter = null;
     this.session = getSession(this);
     this.pendingNotice = data?.notice ?? null;
     this.pendingDialogueId = data?.openDialogueId ?? null;
@@ -146,6 +161,11 @@ export class ExplorationScene extends Phaser.Scene {
       if (event.type === 'dialogue_ended') {
         this.dismissVisions();
         if (this.pendingEnding) this.startPrologueEnding();
+        else if (this.pendingEncounter) {
+          const enc = this.pendingEncounter;
+          this.pendingEncounter = null;
+          this.time.delayedCall(250, () => this.startEncounter(enc));
+        }
       }
     });
 
@@ -161,6 +181,8 @@ export class ExplorationScene extends Phaser.Scene {
       new TopDownMovementSystem(),
       { speed: PLAYER_SPEED },
     );
+    // Prologue v3: empty-handed until the Elder throws Peter the Broken Blade.
+    this.player.setArmed(this.session.getFlag(FLAGS.hasBlade));
     this.physics.add.collider(this.player.sprite, this.wallLayer);
     this.cameras.main.startFollow(this.player.sprite, true, 0.09, 0.09);
     // Maps smaller than the view (e.g. Peter's room) are centred instead of pinned top-left.
@@ -197,7 +219,8 @@ export class ExplorationScene extends Phaser.Scene {
     }
 
     this.cameras.main.fadeIn(400, 0, 0, 0);
-    this.soundSystem.startBgm(this.mapDef.bgm);
+    this.refreshFrozen();
+    if (!this.isFrozen) this.soundSystem.startBgm(this.mapDef.bgm);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.soundSystem.stopBgm(true));
   }
 
@@ -238,8 +261,11 @@ export class ExplorationScene extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
   }
 
+  private flagOn = (flag: string): boolean => this.session.getFlag(flag);
+
   private spawnNpcs(): void {
     for (const def of this.mapDef.npcs ?? []) {
+      if (!conditionHolds(def.visibleWhen, this.flagOn)) continue;
       const pos = tileCenter(def.tile);
       const npc = new NPC(
         this,
@@ -264,6 +290,7 @@ export class ExplorationScene extends Phaser.Scene {
         },
       );
       if (def.anim && this.anims.exists(def.anim)) npc.sprite.play(def.anim);
+      this.npcSprites.push(npc.sprite);
       this.physics.add.collider(this.player.sprite, npc.sprite);
       this.interactionSystem.register(npc);
     }
@@ -298,6 +325,7 @@ export class ExplorationScene extends Phaser.Scene {
 
   private spawnInteractables(): void {
     for (const def of this.mapDef.interactables ?? []) {
+      if (!conditionHolds(def.visibleWhen, this.flagOn)) continue;
       const pos = new Phaser.Math.Vector2(tileCenter(def.tile).x, tileCenter(def.tile).y);
       this.interactionSystem.register({
         id: def.id,
@@ -306,7 +334,7 @@ export class ExplorationScene extends Phaser.Scene {
         getInteractionRadius: () => def.radius,
         canInteract: () => !def.requiresFlag || this.session.getFlag(def.requiresFlag),
         onInteract: () => {
-          this.openDialogue(def.dialogueId);
+          this.openDialogue(pickDialogue(def.dialogueId, def.dialogueRules, this.stateView()));
           if (def.completeObjective) {
             this.questSystem.completeObjective(
               def.completeObjective.questId,
@@ -321,6 +349,7 @@ export class ExplorationScene extends Phaser.Scene {
   private spawnEncounters(): void {
     for (const def of this.mapDef.encounters ?? []) {
       if (this.session.getFlag(def.defeatedFlag)) continue;
+      if (def.hidden || !conditionHolds(def.visibleWhen, this.flagOn)) continue;
       const pos = tileCenter(def.tile);
       const sprite = this.physics.add.sprite(pos.x, pos.y, def.texture).setImmovable(true);
       if (def.anim && this.anims.exists(def.anim)) sprite.play(def.anim);
@@ -350,7 +379,48 @@ export class ExplorationScene extends Phaser.Scene {
     if (!this.canFire(trig) || this.isTransitioning) return;
     this.session.setFlag(trig.onceFlag);
     if (trig.effects) this.applyEffects(trig.effects);
-    if (trig.dialogueId) this.openDialogue(trig.dialogueId);
+    this.refreshFrozen();
+    const encounter = trig.encounterId
+      ? (this.mapDef.encounters ?? []).find((e) => e.id === trig.encounterId)
+      : undefined;
+    if (trig.dialogueId) {
+      this.pendingEncounter = encounter ?? null;
+      this.openDialogue(trig.dialogueId);
+    } else if (encounter) {
+      this.startEncounter(encounter);
+    }
+  }
+
+  /**
+   * "Time has stopped" (map `frozenWhen`): NPCs stand still and turn cold, a veil covers the map,
+   * the music stops. Re-evaluated whenever flags may have changed.
+   */
+  private refreshFrozen(): void {
+    const frozen = !!this.mapDef.frozenWhen && conditionHolds(this.mapDef.frozenWhen, this.flagOn);
+    if (frozen === this.isFrozen) return;
+    this.isFrozen = frozen;
+    for (const sprite of this.npcSprites) {
+      if (frozen) {
+        sprite.anims.pause();
+        sprite.setTint(0x9fb4d0);
+      } else {
+        sprite.anims.resume();
+        sprite.clearTint();
+      }
+    }
+    if (frozen) {
+      const { width, height } = this.scale;
+      this.frozenVeil = this.add
+        .rectangle(0, 0, width, height, 0x2a4a7a, 0.18)
+        .setOrigin(0)
+        .setScrollFactor(0)
+        .setDepth(80);
+      this.soundSystem.stopBgm(true);
+    } else {
+      this.frozenVeil?.destroy();
+      this.frozenVeil = null;
+      this.soundSystem.startBgm(this.mapDef.bgm);
+    }
   }
 
   /** Zone triggers; returns true when one fired this frame. */
@@ -526,6 +596,8 @@ export class ExplorationScene extends Phaser.Scene {
   /** Applies data-driven effects and announces any items received. */
   private applyEffects(effects: DialogueEffects): void {
     const granted = this.session.applyDialogueEffects(effects);
+    this.refreshFrozen();
+    this.player.setArmed(this.session.getFlag(FLAGS.hasBlade));
     if (granted.length > 0) {
       const names = granted
         .map((s) => {

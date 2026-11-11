@@ -1,6 +1,13 @@
 import Phaser from 'phaser';
 import { CombatSystem } from '../systems/combat/CombatSystem';
-import { ICombatAction, ICombatant, IEnemyDefinition } from '../systems/combat/CombatTypes';
+import {
+  BattleEvent,
+  ICombatAction,
+  ICombatant,
+  IEnemyDefinition,
+} from '../systems/combat/CombatTypes';
+import type { DialogueDatabase } from '../systems/dialogue/DialogueTypes';
+import { FLAGS } from '../state/GameSession';
 import { SoundSystem } from '../systems/audio/SoundSystem';
 import { GameSession, getSession } from '../state/GameSession';
 import { registerPeterAnimations } from '../systems/animation/PeterAnimationConfig';
@@ -65,6 +72,9 @@ export class CombatScene extends Phaser.Scene {
   private t!: Translate;
   /** Command [6]: the boss's next environment action (hidden when none is available). */
   private environmentButton: Phaser.GameObjects.Text | null = null;
+  /** Command type of each entry in commandButtons (same order). */
+  private commandTypes: PlayerCommand[] = [];
+  private firedEvents = new Set<BattleEvent>();
   /** True while an action resolves or the enemy acts; blocks player commands. */
   private isProcessingTurn = true;
 
@@ -79,6 +89,8 @@ export class CombatScene extends Phaser.Scene {
     this.commandButtons = [];
     this.itemButton = null;
     this.environmentButton = null;
+    this.commandTypes = [];
+    this.firedEvents = new Set();
     this.session = getSession(this);
     this.t = getStrings(this);
   }
@@ -323,6 +335,7 @@ export class CombatScene extends Phaser.Scene {
         return;
       }
       this.commandButtons.push(btn);
+      this.commandTypes.push(cmd.type);
     });
 
     // Battle Log Box (Bottom Right)
@@ -429,7 +442,9 @@ export class CombatScene extends Phaser.Scene {
   }
 
   private setButtonsEnabled(enabled: boolean): void {
-    this.commandButtons.forEach((b) => b.setVisible(enabled));
+    this.commandButtons.forEach((b, i) =>
+      b.setVisible(enabled && this.isCommandAvailable(this.commandTypes[i])),
+    );
     const env = enabled ? this.combatSystem.getAvailableEnvironmentAction(this.enemy.id) : null;
     this.environmentButton
       ?.setText(env ? this.t('combat.cmd.environment', { label: env.label }) : '')
@@ -455,6 +470,15 @@ export class CombatScene extends Phaser.Scene {
     }
 
     if (this.combatSystem.getActiveCombatantId() === this.player.id) {
+      // Scripted battles: an event due this round plays before the player chooses.
+      const turn = this.combatSystem.getState().turnCount;
+      const event = this.enemyTemplate.script?.events?.find(
+        (e) => !this.firedEvents.has(e) && e.atTurn <= turn,
+      );
+      if (event) {
+        this.runBattleEvent(event, () => this.beginTurn());
+        return;
+      }
       this.isProcessingTurn = false;
       this.setButtonsEnabled(true);
     } else {
@@ -480,6 +504,7 @@ export class CombatScene extends Phaser.Scene {
 
   public handlePlayerAction(type: PlayerCommand): void {
     if (this.isProcessingTurn || this.combatSystem.isBattleOver()) return;
+    if (type !== 'environment' && !this.isCommandAvailable(type)) return;
     if (this.combatSystem.getActiveCombatantId() !== this.player.id) return;
 
     const action: ICombatAction = {
@@ -564,8 +589,53 @@ export class CombatScene extends Phaser.Scene {
    * Plays one of Peter's profile animations (row "right"). One-shot animations return to the
    * idle loop when they finish; missing animations are ignored so placeholder art never crashes.
    */
+  /** Unlocked by story flags (player.json commandFlags) and not locked by the battle script. */
+  private isCommandAvailable(type: PlayerCommand): boolean {
+    if (this.enemyTemplate.script?.lockedCommands?.includes(type)) return false;
+    return this.session.isCommandUnlocked(type);
+  }
+
+  /**
+   * Plays a scripted event: its dialogue lines one by one in the battle log (and an ally fading in
+   * beside Peter), then sets its flags — e.g. the Elder throwing Peter the Broken Blade.
+   */
+  private runBattleEvent(event: BattleEvent, done: () => void): void {
+    this.firedEvents.add(event);
+    this.isProcessingTurn = true;
+    this.setButtonsEnabled(false);
+
+    if (event.ally && this.textures.exists(event.ally.texture)) {
+      const ally = this.add
+        .sprite(this.playerSprite.x - 70, this.playerSprite.y - 6, event.ally.texture, 0)
+        .setScale(2)
+        .setAlpha(0);
+      if (event.ally.anim && this.anims.exists(event.ally.anim)) ally.play(event.ally.anim);
+      this.tweens.add({ targets: ally, alpha: 1, duration: 600 });
+    }
+
+    const db = this.cache.json.get('data_dialogue') as DialogueDatabase | undefined;
+    const node = event.dialogueId ? db?.dialogues[event.dialogueId] : undefined;
+    const lines = node ? node.lines.map((l) => `${node.speaker}: ${l}`) : [];
+    const LINE_MS = 2000;
+    lines.forEach((line, i) => this.time.delayedCall(i * LINE_MS, () => this.setBattleLog(line)));
+
+    this.time.delayedCall(lines.length * LINE_MS, () => {
+      for (const flag of event.setFlags ?? []) this.session.setFlag(flag);
+      if (event.setFlags?.includes(FLAGS.hasBlade)) {
+        this.cameras.main.flash(400, 136, 237, 255);
+        this.playPeterAnim('idle');
+      }
+      done();
+    });
+  }
+
   private playPeterAnim(anim: PeterCombatAnim): void {
-    const key = `peter_${anim}_right`;
+    // Before the Broken Blade, Peter stands empty-handed (if that sheet is loaded).
+    const unarmed =
+      anim === 'idle' &&
+      !this.session.getFlag(FLAGS.hasBlade) &&
+      this.anims.exists('peter_idle_unarmed_right');
+    const key = unarmed ? 'peter_idle_unarmed_right' : `peter_${anim}_right`;
     if (!this.anims.exists(key)) return;
     if (anim === 'idle') {
       // Idle lives on its own texture; switch back explicitly.

@@ -29,6 +29,11 @@ export interface PlayerDefinition {
 export interface PlayerDatabase {
   player: PlayerDefinition;
   combat: CombatTuning;
+  /**
+   * Combat commands that need a story flag before they appear (Prologue v3: no Attack until the
+   * Elder hands Peter the Broken Blade, no Skill until Temporal Sight awakens).
+   */
+  commandFlags?: Partial<Record<string, string>>;
 }
 
 /** All static game data, loaded once by PreloadScene into the JSON cache. */
