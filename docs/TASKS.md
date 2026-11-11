@@ -23,7 +23,7 @@ Goal (owner, 2026-11-11): rebuild the Prologue per `docs/story/PROLOGUE_V2_DESIG
 
 ### T-32 · Prologue v2 sprites: Cô Ba + The Drowned Sentinel (Pipeline B)
 
-- **Assignee:** Claude · **Status:** IN PROGRESS
+- **Assignee:** Claude · **Status:** BLOCKED — `NPC_VENDOR_BA_001_CAND`, `BOSS_SENTINEL_001_CAND` awaiting owner approval
 - **Locks:** `scripts/author-npc-sprites.js` (new), `scripts/author-sentinel-sprites.js` (new), `art-source/npcs/`, `art-source/enemies/sentinel/`
 - Cô Ba 32×32 idle (4 frames); Drowned Sentinel 64×64 (4-frame idle + kneel); owner approval.
 

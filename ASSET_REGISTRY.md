@@ -14,7 +14,7 @@
 | -------------------------- | ----- | ------------------------------------------------------------------- |
 | `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`)               |
 | `INTEGRATED`               | 9     | Approved art in engine (Peter ×2, Shade, Elder, tileset ×2, UI set) |
-| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review                           |
+| `CONCEPT_PENDING_APPROVAL` | 2     | Concept generated; awaiting formal review                           |
 | `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared                          |
 | `PLACEHOLDER_TEMPORARY`    | 3     | Procedural placeholder assets active in engine                      |
 
@@ -125,6 +125,19 @@
 - **Tiles:** 0-15 ground (loam, moss, trail, mud, fog, violet-ash fracture, roots, basalt column tops, lichen, salt grass, steps, flagstone, tide pool, foam rock, six-rune stone hatch, light floor); 16-39 walls (night sea, cliff, basalt columns, canopy, mangrove, elder tree, fallen log, thicket, ferns, monolith with a scraped-away mark, chrono crevice, ash crystals, half-erased tree, lighthouse 2×3, brass lens with lever, UNWRITTEN tablet, gate of light, frozen wave, broken railing). Collision range GID 17-40.
 - **Validation:** PASSED.
 - **Status:** `INTEGRATED` — owner approved 2026-11-11 (T-31).
+
+### `NPC_VENDOR_BA_001_CAND` – Cô Ba, bánh căn vendor (v1)
+
+- **Generator:** `scripts/author-npc-sprites.js` · **File:** `art-source/npcs/vendor_ba/generated/candidates/vendor_ba_idle_v1.png` (128 × 32, 4 frames × 32 px, facing down) · preview ×8
+- **Content:** low bun, khăn rằn, light-brown áo bà ba with buttons, black trousers, ladle; idle = breathing + stirring (a drip of batter on frame 3). Slender build by design.
+- **Validation:** PASSED. **Status:** `CONCEPT_PENDING_APPROVAL` (T-32).
+
+### `BOSS_SENTINEL_001_CAND` – The Drowned Sentinel (v1)
+
+- **Generator:** `scripts/author-sentinel-sprites.js` · **File:** `art-source/enemies/sentinel/generated/candidates/sentinel_v1.png` (320 × 64, 5 frames × 64 px) · preview ×4
+- **Content:** verdigris bronze armour, barnacles, kelp, fin crest, cold cyan eyes in the visor, broken halberd, a shell of frozen sea-water around him. Frames 0-3 idle (film shimmer, kelp sway, 1 px bob); frame 4 released (kneeling, head bowed, film shattered into rising motes).
+- **Validation:** PASSED (the validator's centring warning assumes 32 px frames and does not apply to 64 px).
+- **Status:** `CONCEPT_PENDING_APPROVAL` (T-32).
 
 ## 3. Active Placeholder Registry
 
