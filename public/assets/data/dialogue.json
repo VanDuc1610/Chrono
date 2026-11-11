@@ -122,7 +122,7 @@
       "speaker": "Cô Ba Bánh Căn",
       "lines": [
         "Cậu Peter dậy sớm thế? Ngồi xuống làm đĩa bánh căn mỡ hành còn nóng hổi nào.",
-        "Lạ thật... tôi cứ quen tay múc sẵn hai đĩa, dù chỉ thấy mỗi cậu bước tới."
+        "Lạ thật... tui cứ quen tay múc sẵn hai đĩa, lại kéo thêm chiếc ghế nhựa để trống bên cạnh, dù chỉ thấy mỗi cậu bước tới."
       ],
       "responses": [
         {
@@ -142,7 +142,7 @@
       "id": "vendor_ba_ba_alone",
       "speaker": "Cô Ba Bánh Căn",
       "lines": [
-        "Ủa... vậy hả? Tôi cứ đinh ninh có một đứa nữa hay đi cùng cậu... mắt sáng, nhanh nhẹn lắm... mà sao tôi không nhớ nổi tên nó ta?"
+        "Ủa... vậy hả? Tui cứ đinh ninh có một đứa nữa hay đi cùng cậu... mắt sáng, nhanh nhẹn lắm... mà sao tui không nhớ nổi tên nó ta?"
       ],
       "responses": []
     },
@@ -150,7 +150,7 @@
       "id": "vendor_ba_ba_who",
       "speaker": "Cô Ba Bánh Căn",
       "lines": [
-        "Tôi cũng chẳng rõ nữa. Cứ như thể vừa có một người vừa biến mất khỏi tâm trí tôi vậy. Cầm lấy chiếc bánh căn này lót dạ đi cậu."
+        "Tui cũng chẳng rõ nữa. Cứ như thể vừa có ai đó phai khỏi tâm trí tui vậy. Cầm lấy chiếc bánh căn này lót dạ đi cậu."
       ],
       "responses": [],
       "effects": {
@@ -210,6 +210,71 @@
         "setFlags": ["talked_fisherman_sau"]
       }
     },
+    "poi_child_sandals": {
+      "id": "poi_child_sandals",
+      "speaker": "Peter",
+      "lines": [
+        "Một đôi dép trẻ con nhỏ xíu, quai sờn nắng nằm lệch bên bậc hiên căn nhà đóng kín cửa.",
+        "Hàng xóm ai cũng khẳng định ngôi nhà này chưa từng có trẻ nhỏ ở, nhưng lớp bụi mỏng quanh thềm vẫn giữ nguyên dấu chân nhỏ."
+      ],
+      "responses": [
+        {
+          "text": "Đặt lại đôi dép ngay ngắn trước hiên",
+          "nextDialogueId": "poi_child_sandals_return"
+        },
+        {
+          "text": "Để nguyên và rời đi",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "startQuest": "quest_prologue_forgotten_child",
+        "setFlags": ["inspected_child_sandals"]
+      }
+    },
+    "poi_child_sandals_return": {
+      "id": "poi_child_sandals_return",
+      "speaker": "Peter",
+      "lines": [
+        "Mình cúi xuống xếp đôi dép ngay ngắn lại đúng chỗ cũ trên bậc thềm đầy nắng gió.",
+        "Trong tích tắc, ánh lam nhạt khẽ gợn lên: bóng dáng nhòe mờ của một đứa trẻ đứng trước hiên nhà, khẽ gật đầu rồi tan vào gió biển.",
+        "Không hề đáng sợ hay dữ tợn... chỉ như một dấu vết tồn tại sót lại vừa được nhớ tới trước khi phai mờ hẳn."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["returned_child_sandals"]
+      }
+    },
+    "poi_ancient_well": {
+      "id": "poi_ancient_well",
+      "speaker": "Peter",
+      "lines": [
+        "Giếng đá cổ của làng chài nằm lặng lẽ giữa nắng trưa chói chang.",
+        "Thế nhưng mặt nước dưới đáy giếng lại đông cứng phẳng lỳ như tấm gương, phản chiếu một bầu trời đêm đầy sao lạ lẫm."
+      ],
+      "responses": [
+        {
+          "text": "Nhìn sâu qua Nhãn Thời Gian",
+          "nextDialogueId": "poi_ancient_well_sight"
+        },
+        {
+          "text": "Rời khỏi giếng",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["inspected_ancient_well"]
+      }
+    },
+    "poi_ancient_well_sight": {
+      "id": "poi_ancient_well_sight",
+      "speaker": "Peter",
+      "lines": [
+        "Mặt nước không hề phản chiếu bầu trời hiện tại, mà giữ chặt bóng hình của một đêm đã bị cắt lìa khỏi dòng thời gian.",
+        "Ngay cả những ký ức của đất đá cũng đang rạn vỡ từng chút một."
+      ],
+      "responses": []
+    },
     "poi_forest_monolith": {
       "id": "poi_forest_monolith",
       "speaker": "Peter",
@@ -218,6 +283,25 @@
         "Những vết nứt không gian lơ lửng xung quanh đang dẫn lối xuống một ngôi đền cổ dưới lòng đất."
       ],
       "responses": []
+    },
+    "poi_chrono_crevice": {
+      "id": "poi_chrono_crevice",
+      "speaker": "Peter",
+      "lines": [
+        "Một khe nứt hẹp trên tảng đá rêu phong phát ra ánh sáng lam dịu giữa tán rừng ngập mặn.",
+        "Bên trong vách đá ánh lên một mảnh tinh thể thời gian mát lạnh."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["inspected_chrono_crevice"],
+        "grantItems": [
+          {
+            "itemId": "chrono_shard_minor",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_forest_crevice_shard"
+      }
     },
     "poi_forest_shade_remains": {
       "id": "poi_forest_shade_remains",
@@ -293,8 +377,8 @@
       "id": "npc_elder_farewell",
       "speaker": "Trưởng Lão Thời Gian",
       "lines": [
-        "Dị thể bóng đen đã bị phong ấn. Ngươi sở hữu một khả năng mà biên niên sử chưa từng ghi nhận.",
-        "Đường lên Ngọn Hải Đăng Cổ đã mở. Hãy tiến về phía mỏm đá và đối diện với kẻ canh gác bị lãng quên."
+        "Dị thể bóng đen đã bị phong ấn. Nhưng những rạn nứt ngoài bờ biển vẫn chưa lắng xuống.",
+        "Đường lên Ngọn Hải Đăng Cổ đã mở. Hãy tiến về phía mỏm đá và tự mình đọc lấy những gì ngọn đèn còn giữ."
       ],
       "responses": [
         {
@@ -530,7 +614,8 @@
       "speaker": "The Drowned Sentinel",
       "lines": [
         "...Ánh sáng... Đã bao kỷ nguyên ta chìm trong vực sâu vô tận này...",
-        "Cảm tạ ngươi... Hỡi kẻ chưa từng bị viết tên... Hãy bước tiếp..."
+        "Cảm tạ ngươi... Hỡi lữ khách phương xa... Hãy bước tiếp về phía đỉnh tháp...",
+        "(Trong khoảnh khắc tan biến, một ký ức lóe lên: bóng người gác đèn còng lưng châm ngọn bấc giữa đêm bão cho những con thuyền không bao giờ cập bến.)"
       ],
       "responses": [],
       "effects": {

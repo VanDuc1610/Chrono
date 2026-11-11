@@ -177,6 +177,24 @@
         "experience": 40,
         "items": ["ancient_gear"]
       }
+    },
+    {
+      "id": "quest_prologue_forgotten_child",
+      "title": "Đôi Dép Nhỏ Trước Hiên",
+      "description": "Đôi dép trẻ con nằm lẻ loi trước hiên một ngôi nhà không ai nhận ở thị trấn ven biển.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_return_sandals",
+          "description": "Đặt lại đôi dép nhỏ đúng chỗ trước hiên nhà",
+          "completed": false,
+          "completeOnFlag": "returned_child_sandals"
+        }
+      ],
+      "rewards": {
+        "experience": 15,
+        "items": []
+      }
     }
   ]
 }
