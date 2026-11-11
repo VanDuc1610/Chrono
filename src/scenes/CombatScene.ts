@@ -4,6 +4,7 @@ import { ICombatAction, ICombatant, IEnemyDefinition } from '../systems/combat/C
 import { SoundSystem } from '../systems/audio/SoundSystem';
 import { GameSession, getSession } from '../state/GameSession';
 import { registerPeterAnimations } from '../systems/animation/PeterAnimationConfig';
+import { createPanel } from '../ui/Panel';
 import type { ExplorationSceneData } from './ExplorationScene';
 
 export interface CombatSceneData {
@@ -49,6 +50,7 @@ export class CombatScene extends Phaser.Scene {
   private enemyHpText!: Phaser.GameObjects.Text;
   private itemButton: Phaser.GameObjects.Text | null = null;
 
+  private commandPanel!: Phaser.GameObjects.NineSlice;
   private commandButtons: Phaser.GameObjects.Text[] = [];
   private logText!: Phaser.GameObjects.Text;
   private turnIndicatorText!: Phaser.GameObjects.Text;
@@ -212,13 +214,9 @@ export class CombatScene extends Phaser.Scene {
 
   private createCombatUI(width: number, height: number): void {
     // Player Status Card (Top Left)
-    const pCard = this.add.graphics();
-    pCard.fillStyle(0x0a0e1c, 0.85);
-    pCard.fillRect(20, 16, 180, 52);
-    pCard.lineStyle(1, 0x243350, 1);
-    pCard.strokeRect(20, 16, 180, 52);
+    createPanel(this, 20, 16, 180, 56);
 
-    this.add.text(30, 22, `${this.player.name}  Lv. ${this.session.level}`, {
+    this.add.text(30, 24, `${this.player.name}  Lv. ${this.session.level}`, {
       fontFamily: 'monospace',
       fontSize: '11px',
       color: '#00e1ff',
@@ -226,25 +224,21 @@ export class CombatScene extends Phaser.Scene {
     });
 
     this.playerHpBar = this.add.graphics();
-    this.playerMpText = this.add.text(125, 50, '', {
+    this.playerMpText = this.add.text(124, 52, '', {
       fontFamily: 'monospace',
       fontSize: '9px',
       color: '#93c5fd',
     });
-    this.playerHpText = this.add.text(125, 38, '', {
+    this.playerHpText = this.add.text(124, 40, '', {
       fontFamily: 'monospace',
       fontSize: '9px',
       color: '#cbd5e1',
     });
 
     // Enemy Status Card (Top Right)
-    const eCard = this.add.graphics();
-    eCard.fillStyle(0x0a0e1c, 0.85);
-    eCard.fillRect(width - 200, 16, 180, 52);
-    eCard.lineStyle(1, 0x243350, 1);
-    eCard.strokeRect(width - 200, 16, 180, 52);
+    createPanel(this, width - 200, 16, 180, 56);
 
-    this.add.text(width - 190, 22, `${this.enemy.name}  Lv. ${this.enemyTemplate.level}`, {
+    this.add.text(width - 190, 24, `${this.enemy.name}  Lv. ${this.enemyTemplate.level}`, {
       fontFamily: 'monospace',
       fontSize: '11px',
       color: '#ff4d79',
@@ -252,7 +246,7 @@ export class CombatScene extends Phaser.Scene {
     });
 
     this.enemyHpBar = this.add.graphics();
-    this.enemyHpText = this.add.text(width - 85, 38, '', {
+    this.enemyHpText = this.add.text(width - 88, 40, '', {
       fontFamily: 'monospace',
       fontSize: '9px',
       color: '#cbd5e1',
@@ -266,13 +260,9 @@ export class CombatScene extends Phaser.Scene {
     const cmdBoxX = 20;
     const cmdBoxY = height - cmdBoxHeight - 14;
 
-    const cmdBg = this.add.graphics();
-    cmdBg.fillStyle(0x0a0d18, 0.95);
-    cmdBg.fillRect(cmdBoxX, cmdBoxY, cmdBoxWidth, cmdBoxHeight);
-    cmdBg.lineStyle(2, 0x00c8ff, 1);
-    cmdBg.strokeRect(cmdBoxX, cmdBoxY, cmdBoxWidth, cmdBoxHeight);
+    this.commandPanel = createPanel(this, cmdBoxX, cmdBoxY, cmdBoxWidth, cmdBoxHeight);
 
-    this.turnIndicatorText = this.add.text(cmdBoxX + 12, cmdBoxY + 8, '', {
+    this.turnIndicatorText = this.add.text(cmdBoxX + 12, cmdBoxY + 9, '', {
       fontFamily: 'monospace',
       fontSize: '9px',
       color: '#00e1ff',
@@ -292,7 +282,7 @@ export class CombatScene extends Phaser.Scene {
       const col = idx < 3 ? 0 : 1;
       const row = idx < 3 ? idx : idx - 3;
       const x = cmdBoxX + 12 + col * colWidth;
-      const y = cmdBoxY + 24 + row * 20;
+      const y = cmdBoxY + 25 + row * 19;
 
       const btn = this.add
         .text(x, y, cmd.text, {
@@ -317,11 +307,7 @@ export class CombatScene extends Phaser.Scene {
     const logBoxX = cmdBoxX + cmdBoxWidth + 20;
     const logBoxY = cmdBoxY;
 
-    const logBg = this.add.graphics();
-    logBg.fillStyle(0x0a0d18, 0.95);
-    logBg.fillRect(logBoxX, logBoxY, logBoxWidth, logBoxHeight);
-    logBg.lineStyle(1, 0x243350, 1);
-    logBg.strokeRect(logBoxX, logBoxY, logBoxWidth, logBoxHeight);
+    createPanel(this, logBoxX, logBoxY, logBoxWidth, logBoxHeight);
 
     this.logText = this.add.text(logBoxX + 14, logBoxY + 12, '', {
       fontFamily: 'monospace',
@@ -352,9 +338,9 @@ export class CombatScene extends Phaser.Scene {
     this.playerHpBar.clear();
     const pPct = Math.max(0, this.player.stats.hp / this.player.stats.maxHp);
     this.playerHpBar.fillStyle(0x1e293b, 1);
-    this.playerHpBar.fillRect(30, 40, 90, 8);
+    this.playerHpBar.fillRect(30, 41, 88, 8);
     this.playerHpBar.fillStyle(pPct > 0.3 ? 0x22c55e : 0xef4444, 1);
-    this.playerHpBar.fillRect(30, 40, 90 * pPct, 8);
+    this.playerHpBar.fillRect(30, 41, 88 * pPct, 8);
     this.playerHpText.setText(`${this.player.stats.hp}/${this.player.stats.maxHp} HP`);
 
     // Player MP
@@ -362,9 +348,9 @@ export class CombatScene extends Phaser.Scene {
     const maxMp = this.player.stats.maxMp ?? 0;
     const mPct = maxMp > 0 ? Math.max(0, mp / maxMp) : 0;
     this.playerHpBar.fillStyle(0x1e293b, 1);
-    this.playerHpBar.fillRect(30, 53, 90, 5);
+    this.playerHpBar.fillRect(30, 54, 88, 5);
     this.playerHpBar.fillStyle(0x3b82f6, 1);
-    this.playerHpBar.fillRect(30, 53, 90 * mPct, 5);
+    this.playerHpBar.fillRect(30, 54, 88 * mPct, 5);
     this.playerMpText.setText(`${mp}/${maxMp} MP`);
 
     // Enemy HP
@@ -372,9 +358,9 @@ export class CombatScene extends Phaser.Scene {
     const ePct = Math.max(0, this.enemy.stats.hp / this.enemy.stats.maxHp);
     const { width } = this.scale;
     this.enemyHpBar.fillStyle(0x1e293b, 1);
-    this.enemyHpBar.fillRect(width - 190, 40, 100, 8);
+    this.enemyHpBar.fillRect(width - 190, 41, 96, 8);
     this.enemyHpBar.fillStyle(0xef4444, 1);
-    this.enemyHpBar.fillRect(width - 190, 40, 100 * ePct, 8);
+    this.enemyHpBar.fillRect(width - 190, 41, 96 * ePct, 8);
     this.enemyHpText.setText(`${this.enemy.stats.hp}/${this.enemy.stats.maxHp} HP`);
 
     this.itemButton?.setText(this.itemButtonLabel());
@@ -409,6 +395,11 @@ export class CombatScene extends Phaser.Scene {
   private setButtonsEnabled(enabled: boolean): void {
     this.commandButtons.forEach((b) => b.setVisible(enabled));
     this.turnIndicatorText.setText(enabled ? 'YOUR TURN — CHOOSE ACTION' : 'RESOLVING ACTIONS...');
+    if (enabled) {
+      this.commandPanel.clearTint();
+    } else {
+      this.commandPanel.setTint(0x7a8ca8);
+    }
   }
 
   // ------------------------------------------------------------- turn flow

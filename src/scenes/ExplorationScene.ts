@@ -12,6 +12,7 @@ import { DialogueDatabase, DialogueEffects } from '../systems/dialogue/DialogueT
 import { InteractableDatabase } from '../systems/interaction/InteractionTypes';
 import { SoundSystem } from '../systems/audio/SoundSystem';
 import { DEFAULT_MAP_ID, FLAGS, GameSession, getSession } from '../state/GameSession';
+import { createPanel } from '../ui/Panel';
 import type { CombatSceneData } from './CombatScene';
 
 const PROLOGUE_QUEST_ID = 'quest_prologue_awakening';
@@ -411,14 +412,10 @@ export class ExplorationScene extends Phaser.Scene {
       .setVisible(false);
 
     // 2. Exploration Header Banner (Location & Player Status HUD)
-    const headerBg = this.add.graphics().setScrollFactor(0).setDepth(90);
-    headerBg.fillStyle(0x0a0c16, 0.75);
-    headerBg.fillRect(10, 10, 240, 48);
-    headerBg.lineStyle(1, 0x2e3852, 1);
-    headerBg.strokeRect(10, 10, 240, 48);
+    createPanel(this, 10, 10, 240, 56).setScrollFactor(0).setDepth(90);
 
     this.add
-      .text(18, 14, 'LOCATION: Shattered Antechamber', {
+      .text(20, 18, 'LOCATION: Shattered Antechamber', {
         fontFamily: 'monospace',
         fontSize: '10px',
         color: '#65d5ff',
@@ -428,7 +425,7 @@ export class ExplorationScene extends Phaser.Scene {
       .setDepth(95);
 
     this.add
-      .text(18, 27, 'PHASE: Prologue (Vertical Slice)', {
+      .text(20, 31, 'PHASE: Prologue (Vertical Slice)', {
         fontFamily: 'monospace',
         fontSize: '9px',
         color: '#8b97b8',
@@ -437,7 +434,7 @@ export class ExplorationScene extends Phaser.Scene {
       .setDepth(95);
 
     this.playerStatsText = this.add
-      .text(18, 41, '', {
+      .text(20, 44, '', {
         fontFamily: 'monospace',
         fontSize: '9px',
         color: '#4ade80',
@@ -479,26 +476,22 @@ export class ExplorationScene extends Phaser.Scene {
 
   private createQuestHUD(width: number): void {
     const panelWidth = QUEST_PANEL_WIDTH;
-    const panelHeight = 75;
+    const panelHeight = 76;
     const panelX = width - panelWidth - 10;
     const panelY = 10;
 
     this.questTrackerContainer = this.add.container(panelX, panelY).setScrollFactor(0).setDepth(90);
 
-    const bg = this.add.graphics();
-    bg.fillStyle(0x090b14, 0.85);
-    bg.fillRect(0, 0, panelWidth, panelHeight);
-    bg.lineStyle(1, 0x243048, 1);
-    bg.strokeRect(0, 0, panelWidth, panelHeight);
+    const bg = createPanel(this, 0, 0, panelWidth, panelHeight);
 
-    const label = this.add.text(10, 6, 'CURRENT QUEST', {
+    const label = this.add.text(10, 8, 'CURRENT QUEST', {
       fontFamily: 'monospace',
       fontSize: '8px',
       color: '#00d2ff',
       letterSpacing: 1,
     });
 
-    this.questTitleText = this.add.text(10, 18, 'Echoes in the Fracture', {
+    this.questTitleText = this.add.text(10, 20, 'Echoes in the Fracture', {
       fontFamily: 'monospace',
       fontSize: '10px',
       color: '#e4ebf5',
@@ -509,7 +502,7 @@ export class ExplorationScene extends Phaser.Scene {
 
     // Objective text rows (up to 3 objectives per quest)
     for (let i = 0; i < 3; i++) {
-      const objText = this.add.text(10, 32 + i * 13, '', {
+      const objText = this.add.text(10, 34 + i * 12, '', {
         fontFamily: 'monospace',
         fontSize: '9px',
         color: '#8b9bb4',
@@ -521,9 +514,9 @@ export class ExplorationScene extends Phaser.Scene {
 
   private createNotificationHUD(width: number): void {
     const bannerWidth = 320;
-    const bannerHeight = 38;
+    const bannerHeight = 44;
     const bannerX = width / 2 - bannerWidth / 2;
-    const bannerY = -50; // Initially hidden off-screen
+    const bannerY = -54; // Initially hidden off-screen
 
     this.notificationContainer = this.add
       .container(bannerX, bannerY)
@@ -531,14 +524,10 @@ export class ExplorationScene extends Phaser.Scene {
       .setDepth(300)
       .setVisible(false);
 
-    const bg = this.add.graphics();
-    bg.fillStyle(0x0d1424, 0.95);
-    bg.fillRect(0, 0, bannerWidth, bannerHeight);
-    bg.lineStyle(1, 0x00e1ff, 1);
-    bg.strokeRect(0, 0, bannerWidth, bannerHeight);
+    const bg = createPanel(this, 0, 0, bannerWidth, bannerHeight);
 
     this.notificationTitle = this.add
-      .text(bannerWidth / 2, 7, '', {
+      .text(bannerWidth / 2, 9, '', {
         fontFamily: 'monospace',
         fontSize: '10px',
         color: '#00e1ff',
@@ -547,7 +536,7 @@ export class ExplorationScene extends Phaser.Scene {
       .setOrigin(0.5, 0);
 
     this.notificationSubtitle = this.add
-      .text(bannerWidth / 2, 20, '', {
+      .text(bannerWidth / 2, 23, '', {
         fontFamily: 'monospace',
         fontSize: '9px',
         color: '#cdd7eb',
@@ -569,11 +558,7 @@ export class ExplorationScene extends Phaser.Scene {
     const boxX = 30;
     const boxY = height - boxHeight - 16;
 
-    const bg = this.add.graphics();
-    bg.fillStyle(0x0e1322, 0.95);
-    bg.fillRect(boxX, boxY, boxWidth, boxHeight);
-    bg.lineStyle(2, 0x00d2ff, 1);
-    bg.strokeRect(boxX, boxY, boxWidth, boxHeight);
+    const bg = createPanel(this, boxX, boxY, boxWidth, boxHeight);
 
     this.dialogueSpeakerText = this.add.text(boxX + 16, boxY + 9, '', {
       fontFamily: 'monospace',
@@ -759,15 +744,7 @@ export class ExplorationScene extends Phaser.Scene {
       .setDepth(250)
       .setVisible(false);
 
-    const bg = this.add.graphics();
-    bg.fillStyle(0x0a0d18, 0.96);
-    bg.fillRect(0, 0, panelWidth, panelHeight);
-    bg.lineStyle(2, 0x00c8ff, 1);
-    bg.strokeRect(0, 0, panelWidth, panelHeight);
-
-    // Decorative inner border
-    bg.lineStyle(1, 0x22324f, 0.8);
-    bg.strokeRect(6, 6, panelWidth - 12, panelHeight - 12);
+    const bg = createPanel(this, 0, 0, panelWidth, panelHeight);
 
     // Title
     const title = this.add.text(18, 14, "PETER'S SATCHEL — INVENTORY & CHRONAL RELICS", {

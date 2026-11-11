@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { SaveSystem } from '../systems/save/SaveSystem';
 import { SoundSystem } from '../systems/audio/SoundSystem';
 import { startNewSession, startSessionFromSave } from '../state/GameSession';
+import { createPanel } from '../ui/Panel';
 
 interface MenuItem {
   text: string;
@@ -13,7 +14,7 @@ interface MenuItem {
 export class MainMenuScene extends Phaser.Scene {
   private selectedIndex = 0;
   private menuItems: MenuItem[] = [];
-  private cursorGraphic!: Phaser.GameObjects.Graphics;
+  private cursorSprite!: Phaser.GameObjects.Sprite;
   private saveSystem = new SaveSystem();
   private soundSystem = SoundSystem.getInstance();
 
@@ -113,8 +114,11 @@ export class MainMenuScene extends Phaser.Scene {
       item.gameObject = textObj;
     });
 
-    // Retro selection cursor
-    this.cursorGraphic = this.add.graphics();
+    // Retro selection cursor (UI_SET_001 sprite + pulse anim)
+    this.cursorSprite = this.add.sprite(0, 0, 'ui_cursor', 0).setOrigin(0.5);
+    if (this.anims.exists('ui_cursor_pulse')) {
+      this.cursorSprite.play('ui_cursor_pulse');
+    }
     this.updateMenuVisuals();
 
     // Input handlers (Keyboard navigation)
@@ -167,11 +171,7 @@ export class MainMenuScene extends Phaser.Scene {
 
     this.optionsContainer = this.add.container(modalX, modalY).setDepth(200).setVisible(false);
 
-    const bg = this.add.graphics();
-    bg.fillStyle(0x0c111f, 0.96);
-    bg.fillRect(0, 0, modalWidth, modalHeight);
-    bg.lineStyle(2, 0x00c8ff, 1);
-    bg.strokeRect(0, 0, modalWidth, modalHeight);
+    const bg = createPanel(this, 0, 0, modalWidth, modalHeight);
 
     const header = this.add
       .text(modalWidth / 2, 18, 'SETTINGS & AUDIO', {
@@ -238,7 +238,6 @@ export class MainMenuScene extends Phaser.Scene {
 
   private updateMenuVisuals(): void {
     const { width } = this.scale;
-    this.cursorGraphic.clear();
 
     this.menuItems.forEach((item, index) => {
       const isSelected = index === this.selectedIndex;
@@ -247,28 +246,9 @@ export class MainMenuScene extends Phaser.Scene {
           item.gameObject.setColor(item.enabled ? '#00e1ff' : '#6f7994');
           item.gameObject.setScale(1.08);
 
-          // Render diamond indicator
           const itemY = item.gameObject.y;
           const textHalfWidth = (item.gameObject.width * 1.08) / 2;
-          this.cursorGraphic.fillStyle(0x00e1ff, 1);
-          // Left diamond
-          this.cursorGraphic.fillTriangle(
-            width / 2 - textHalfWidth - 14,
-            itemY,
-            width / 2 - textHalfWidth - 20,
-            itemY - 4,
-            width / 2 - textHalfWidth - 20,
-            itemY + 4,
-          );
-          // Right diamond
-          this.cursorGraphic.fillTriangle(
-            width / 2 + textHalfWidth + 14,
-            itemY,
-            width / 2 + textHalfWidth + 20,
-            itemY - 4,
-            width / 2 + textHalfWidth + 20,
-            itemY + 4,
-          );
+          this.cursorSprite.setPosition(width / 2 - textHalfWidth - 16, itemY);
         } else {
           item.gameObject.setColor(item.enabled ? '#abb7d6' : '#454e66');
           item.gameObject.setScale(1.0);

@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { SoundSystem } from '../systems/audio/SoundSystem';
 import { getSession } from '../state/GameSession';
+import { createPanel } from '../ui/Panel';
 
 /**
  * Closing card of the Prologue vertical slice. Reached after the Elder's farewell once
@@ -46,8 +47,18 @@ export class PrologueEndScene extends Phaser.Scene {
       });
     }
 
+    const cardWidth = 380;
+    const cardHeight = 220;
+    const card = createPanel(
+      this,
+      width / 2 - cardWidth / 2,
+      height * 0.17,
+      cardWidth,
+      cardHeight,
+    ).setAlpha(0);
+
     const title = this.add
-      .text(width / 2, height * 0.3, 'PROLOGUE COMPLETE', {
+      .text(width / 2, height * 0.28, 'PROLOGUE COMPLETE', {
         fontFamily: 'monospace',
         fontSize: '26px',
         color: '#cde9ff',
@@ -59,7 +70,7 @@ export class PrologueEndScene extends Phaser.Scene {
       .setAlpha(0);
 
     const subtitle = this.add
-      .text(width / 2, height * 0.3 + 30, 'CHRONO — THE FRACTURED DIVINITY', {
+      .text(width / 2, height * 0.28 + 28, 'CHRONO — THE FRACTURED DIVINITY', {
         fontFamily: 'monospace',
         fontSize: '10px',
         color: '#00d2ff',
@@ -76,7 +87,7 @@ export class PrologueEndScene extends Phaser.Scene {
     const stats = this.add
       .text(
         width / 2,
-        height * 0.56,
+        height * 0.52,
         [
           `${session.playerName}  ·  Lv. ${session.level}`,
           `Quests completed  ${completed}/${quests.length}`,
@@ -94,7 +105,7 @@ export class PrologueEndScene extends Phaser.Scene {
       .setAlpha(0);
 
     const thanks = this.add
-      .text(width / 2, height * 0.78, 'Thank you for playing.', {
+      .text(width / 2, height * 0.71, 'Thank you for playing.', {
         fontFamily: 'monospace',
         fontSize: '11px',
         color: '#ffd666',
@@ -113,10 +124,10 @@ export class PrologueEndScene extends Phaser.Scene {
 
     this.cameras.main.fadeIn(800, 0, 0, 0);
     this.tweens.add({
-      targets: [title, subtitle, stats, thanks, prompt],
+      targets: [card, title, subtitle, stats, thanks, prompt],
       alpha: 1,
       duration: 900,
-      delay: this.tweens.stagger(350, {}),
+      delay: this.tweens.stagger(300, {}),
     });
 
     this.soundSystem.startBgm('ambient');
