@@ -29,8 +29,8 @@ Goal (owner, 2026-11-11): rebuild the Prologue per `docs/story/PROLOGUE_V2_DESIG
 
 ### T-31 · Prologue v2 art: `wilds_tileset` (Pipeline B)
 
-- **Assignee:** Claude · **Status:** IN PROGRESS
-- **Locks:** `scripts/author-wilds-tileset.js` (new), `scripts/wilds-layout.js` (new), `art-source/environment/wilds/`
+- **Assignee:** Claude · **Status:** BLOCKED — `ENV_WILDS_001_CAND` awaiting owner approval
+- **Locks:** `scripts/author-wilds-tileset.js`, `scripts/wilds-layout.js`, `scripts/pixel-art/tile-kit.js`, `art-source/environment/wilds/`
 - Forgotten Forest + lighthouse headland in one 32×32 tileset; previews of both planned maps; owner approval.
 
 ## Backlog (scheduled after current locks are released)

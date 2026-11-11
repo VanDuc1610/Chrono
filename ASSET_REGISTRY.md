@@ -14,7 +14,7 @@
 | -------------------------- | ----- | ------------------------------------------------------------------- |
 | `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`)               |
 | `INTEGRATED`               | 8     | Approved art in engine (Peter ×2, Shade, Elder, tileset ×2, UI set) |
-| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review                           |
+| `CONCEPT_PENDING_APPROVAL` | 1     | Concept generated; awaiting formal review                           |
 | `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared                          |
 | `PLACEHOLDER_TEMPORARY`    | 3     | Procedural placeholder assets active in engine                      |
 
@@ -117,6 +117,14 @@
 - **Tiles:** 0-15 walkable ground (sand, shells, path, grass, gạch tàu brick, wood floors, pier, wet shore, child's sandals, rug, empty-lot foundation, threshold, footprints, pebbles); 16-39 walls layer (sea, lime wall, shuttered window, door, roof, eave, room wall/beam, palm trunk/crown, thúng chai, bánh căn stall, red plastic stool, net pile, frozen-star well, stone fence, bed ×2, desk with equations + torn notebook, bookshelf, brass-key table, photo with a scraped-away figure, sea window, Stopped Watch nightstand). Collision range GID 17-40.
 - **Validation:** PASSED.
 - **Status:** `INTEGRATED` — owner approved 2026-11-11 (T-30).
+
+### `ENV_WILDS_001_CAND` – Wilds tileset v1 (Prologue v2: Forgotten Forest + Old Lighthouse headland)
+
+- **Generator:** `scripts/author-wilds-tileset.js` (helpers `scripts/pixel-art/tile-kit.js`) · layouts: `scripts/wilds-layout.js`
+- **File:** `art-source/environment/wilds/generated/candidates/wilds_tileset_v1.png` (256 × 160, 8 × 5 tiles) · previews: `wilds_tileset_v1_x4.png`, `wilds_forest_v1.png` (planned 26×18 forest), `wilds_lighthouse_v1.png` (planned 24×18 headland)
+- **Tiles:** 0-15 ground (loam, moss, trail, mud, fog, violet-ash fracture, roots, basalt column tops, lichen, salt grass, steps, flagstone, tide pool, foam rock, six-rune stone hatch, light floor); 16-39 walls (night sea, cliff, basalt columns, canopy, mangrove, elder tree, fallen log, thicket, ferns, monolith with a scraped-away mark, chrono crevice, ash crystals, half-erased tree, lighthouse 2×3, brass lens with lever, UNWRITTEN tablet, gate of light, frozen wave, broken railing). Collision range GID 17-40.
+- **Validation:** PASSED.
+- **Status:** `CONCEPT_PENDING_APPROVAL` (T-31).
 
 ## 3. Active Placeholder Registry
 
