@@ -29,8 +29,8 @@ Goal (owner, 2026-11-11): rebuild the Prologue per `docs/story/PROLOGUE_V2_DESIG
 
 ### T-30 · Prologue v2 art: `coastal_tileset` (Pipeline B)
 
-- **Assignee:** Claude · **Status:** TODO
-- **Locks:** `scripts/author-coastal-tileset.js` (new), `art-source/environment/coastal/`
+- **Assignee:** Claude · **Status:** BLOCKED — `ENV_COASTAL_001_CAND` awaiting owner approval
+- **Locks:** `scripts/author-coastal-tileset.js`, `scripts/coastal-layout.js`, `art-source/environment/coastal/`
 - Town + Peter's room interior in one 32×32 tileset; candidates → owner approval. Then `wilds_tileset`, Cô Ba, Drowned Sentinel.
 
 ## Backlog (scheduled after current locks are released)
