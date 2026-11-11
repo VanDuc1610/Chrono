@@ -1,19 +1,88 @@
 {
   "quests": [
     {
-      "id": "quest_prologue_awakening",
-      "title": "Echoes in the Fracture",
-      "description": "Explore the Shattered Antechamber and speak with the Elder Chronographer.",
+      "id": "quest_prologue_awaken",
+      "title": "Ký Ức Trong Căn Gác",
+      "description": "Tìm chiếc chìa khóa đồng thau và kiểm tra các vật dụng sót lại trước khi rời phòng.",
       "stage": "started",
       "objectives": [
         {
+          "id": "obj_find_room_key",
+          "description": "Tìm chìa khóa đồng thau trong phòng",
+          "completed": false,
+          "completeOnFlag": "has_room_key"
+        },
+        {
+          "id": "obj_inspect_notebook",
+          "description": "Kiểm tra cuốn sổ tay rách trang",
+          "completed": false,
+          "completeOnFlag": "inspected_room_notebook"
+        }
+      ],
+      "rewards": {
+        "experience": 10,
+        "items": []
+      },
+      "followUpQuestId": "quest_prologue_town"
+    },
+    {
+      "id": "quest_prologue_town",
+      "title": "Lời Thì Thầm Của Biển",
+      "description": "Khảo sát thị trấn ven biển Khánh Hòa và tìm đường tới Rừng Quên Lãng.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_talk_vendor_ba",
+          "description": "Trò chuyện với Cô Ba quán bánh căn",
+          "completed": false,
+          "completeOnFlag": "talked_vendor_ba"
+        },
+        {
+          "id": "obj_inspect_empty_lot",
+          "description": "Khảo sát mảnh đất trống kỳ lạ",
+          "completed": false,
+          "completeOnFlag": "inspected_empty_lot"
+        }
+      ],
+      "rewards": {
+        "experience": 20,
+        "items": ["coastal_pancake"]
+      },
+      "followUpQuestId": "quest_prologue_forest"
+    },
+    {
+      "id": "quest_prologue_forest",
+      "title": "Lối Mòn Tro Bụi",
+      "description": "Vượt qua Rừng Quên Lãng và đánh bại dị thể bóng đen chắn đường.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_defeat_forest_shade",
+          "description": "Đánh bại Dị thể Bóng Đen trong rừng",
+          "completed": false,
+          "completeOnFlag": "defeated_forest_shade"
+        }
+      ],
+      "rewards": {
+        "experience": 25,
+        "items": ["chrono_shard_minor"]
+      },
+      "followUpQuestId": "quest_prologue_awakening"
+    },
+    {
+      "id": "quest_prologue_awakening",
+      "title": "Tiếng Vọng Trong Vết Nứt",
+      "description": "Khám phá Điện Thờ Đổ Nát và diện kiến Trưởng Lão Thời Gian.",
+      "stage": "inactive",
+      "objectives": [
+        {
           "id": "obj_speak_elder",
-          "description": "Speak with the Elder Chronographer",
+          "description": "Trò chuyện với Trưởng Lão Thời Gian",
           "completed": false
         },
         {
           "id": "obj_inspect_altar",
-          "description": "Inspect the Altar of Moments",
+          "description": "Khảo sát Bàn Thờ Khoảnh Khắc",
           "completed": false
         }
       ],
@@ -25,13 +94,13 @@
     },
     {
       "id": "quest_prologue_silence",
-      "title": "Silence the Fracture",
-      "description": "A temporal rift stirs to the east of the antechamber. Banish the anomaly it has birthed.",
+      "title": "Trấn Áp Vết Nứt",
+      "description": "Một khe nứt thời gian đang khuấy đảo phía đông điện thờ. Hãy trục xuất dị thể sinh ra từ đó.",
       "stage": "inactive",
       "objectives": [
         {
           "id": "obj_defeat_shade",
-          "description": "Defeat the Temporal Shade",
+          "description": "Đánh bại Bóng Đen Thời Gian",
           "completed": false,
           "completeOnFlag": "isShadeDefeated"
         }
@@ -39,29 +108,67 @@
       "rewards": {
         "experience": 30,
         "items": ["chrono_shard_minor"]
+      },
+      "followUpQuestId": "quest_prologue_sentinel"
+    },
+    {
+      "id": "quest_prologue_sentinel",
+      "title": "Người Gác Biển Bị Lãng Quên",
+      "description": "Tiến tới Ngọn Hải Đăng Cổ và giải thoát The Drowned Sentinel khỏi lớp sóng giam hãm.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_pacify_sentinel",
+          "description": "Thanh tẩy và giải thoát The Drowned Sentinel",
+          "completed": false,
+          "completeOnFlag": "sentinel_pacified"
+        }
+      ],
+      "rewards": {
+        "experience": 60,
+        "items": ["sentinel_core_relic"]
+      },
+      "followUpQuestId": "quest_prologue_unwritten"
+    },
+    {
+      "id": "quest_prologue_unwritten",
+      "title": "Kẻ Không Được Ghi Tên",
+      "description": "Đọc bản ghi cổ trên đỉnh hải đăng và bước qua Cổng Ngưỡng.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_read_unwritten_tablet",
+          "description": "Đọc bia đá khắc bản ghi UNWRITTEN",
+          "completed": false,
+          "completeOnFlag": "read_unwritten_tablet"
+        }
+      ],
+      "rewards": {
+        "experience": 50,
+        "items": []
       }
     },
     {
       "id": "quest_prologue_remnants",
-      "title": "Remnants of the Divided Hour",
-      "description": "Piece together the erased records and chronal remnants scattered across the Shattered Antechamber.",
+      "title": "Tàn Tích Của Giờ Khắc Phân Chia",
+      "description": "Ghép nối các ghi chép bị xóa và tàn dư thời gian nằm rải rác khắp Điện Thờ Đổ Nát.",
       "stage": "inactive",
       "objectives": [
         {
           "id": "obj_read_stele",
-          "description": "Read the Stele of the Six Authorities",
+          "description": "Đọc Bia Khắc Sáu Đấng Quyền Năng",
           "completed": false,
           "completeOnFlag": "inspected_stele_authorities"
         },
         {
           "id": "obj_recover_page",
-          "description": "Recover the loose leaf from your Torn Notebook",
+          "description": "Thu hồi trang thất lạc từ Cuốn Sổ Tay Rách",
           "completed": false,
           "completeOnFlag": "inspected_torn_page"
         },
         {
           "id": "obj_attune_echo",
-          "description": "Attune to the Residual Rift Echo",
+          "description": "Cộng hưởng với Dư Chấn Vết Nứt",
           "completed": false,
           "completeOnFlag": "inspected_rift_echo"
         }

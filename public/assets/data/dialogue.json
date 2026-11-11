@@ -2,118 +2,325 @@
   "dialogues": {
     "intro_awakening": {
       "id": "intro_awakening",
-      "speaker": "Echo of Chronos",
+      "speaker": "Tiếng Vọng Hư Không",
       "lines": [
-        "Wake... The world has no name for you, and yet you remain.",
-        "The celestial gears have shattered. The flow of time bleeds into eternity.",
-        "Seek the Sanctuary Spire to discover what remains of the divine order."
+        "Thức dậy đi... Thế giới không có tên cho ngươi, nhưng ngươi vẫn tồn tại.",
+        "Tiếng sóng biển Khánh Hòa rì rào bên ngoài khung cửa sổ gỗ mộc.",
+        "Những bánh răng thiên thể đã vỡ vụn. Hãy thu nhặt những gì còn sót lại và bước ra ngoài."
       ],
       "responses": [
         {
-          "text": "Where am I?",
-          "nextDialogueId": "intro_location"
+          "text": "Tôi... là ai?",
+          "nextDialogueId": "intro_who_am_i"
         },
         {
-          "text": "I will proceed.",
+          "text": "Mình phải kiểm tra căn phòng này.",
           "nextDialogueId": null
         }
       ]
     },
-    "intro_location": {
-      "id": "intro_location",
-      "speaker": "Echo of Chronos",
+    "intro_who_am_i": {
+      "id": "intro_who_am_i",
+      "speaker": "Tiếng Vọng Hư Không",
       "lines": [
-        "This is the Shattered Antechamber, the boundary between remembered time and oblivion."
+        "Biên niên sử của sáu Đấng Quyền Năng không ghi chép bản mệnh của ngươi.",
+        "Hãy đi tìm câu trả lời tại ngọn hải đăng cổ nơi mỏm đá ven biển."
       ],
       "responses": []
     },
-    "npc_elder_greeting": {
-      "id": "npc_elder_greeting",
-      "speaker": "Elder Chronographer",
+    "intro_location": {
+      "id": "intro_location",
+      "speaker": "Tiếng Vọng Hư Không",
       "lines": [
-        "Greetings, wanderer. You stand upon sacred ground fractured by the Cataclysm.",
-        "The boundaries of this chamber hold firm for now, but temporal rifts stir beyond.",
-        "Take care not to wander into the fractured abyss."
+        "Căn gác nhỏ ven biển Khánh Hòa, nơi dòng thời gian rạn nứt đang dần xói mòn thực tại."
+      ],
+      "responses": []
+    },
+    "room_door_locked": {
+      "id": "room_door_locked",
+      "speaker": "Peter",
+      "lines": [
+        "Cánh cửa gỗ đã bị khóa chặt.",
+        "Mình cần tìm chiếc chìa khóa đồng thau trong phòng trước khi ra ngoài."
+      ],
+      "responses": []
+    },
+    "room_key": {
+      "id": "room_key",
+      "speaker": "Peter",
+      "lines": [
+        "Một chiếc chìa khóa bằng đồng thau cũ kỹ nằm trên kệ gỗ.",
+        "Nó vừa vặn với ổ khóa cửa phòng."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["has_room_key"],
+        "grantItems": [
+          {
+            "itemId": "brass_key",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_room_key"
+      }
+    },
+    "room_notebook": {
+      "id": "room_notebook",
+      "speaker": "Peter",
+      "lines": [
+        "Cuốn sổ tay bìa da sờn rách của mình.",
+        "Nhiều trang giấy đã bị xé vụn, chỉ còn lại vài phương trình thời gian dở dang."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["inspected_room_notebook"]
+      }
+    },
+    "room_photo": {
+      "id": "room_photo",
+      "speaker": "Peter",
+      "lines": [
+        "Một bức ảnh chụp thời thơ ấu ố vàng trên bàn làm việc.",
+        "Bên cạnh mình rõ ràng có một bóng người nữa, nhưng khuôn mặt đã bị nhòe mờ như thể chưa từng tồn tại."
       ],
       "responses": [
         {
-          "text": "What must I do?",
+          "text": "Chạm vào vết nhòe mờ",
+          "nextDialogueId": "room_photo_trace"
+        },
+        {
+          "text": "Cất vào túi áo",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["inspected_room_photo"]
+      }
+    },
+    "room_photo_trace": {
+      "id": "room_photo_trace",
+      "speaker": "Peter",
+      "lines": [
+        "Một cảm giác buốt lạnh chạy dọc sống lưng... như thể ký ức về người bạn ấy đang bị ai đó xóa sạch."
+      ],
+      "responses": []
+    },
+    "room_watch": {
+      "id": "room_watch",
+      "speaker": "Peter",
+      "lines": [
+        "Chiếc đồng hồ quả quýt trên sợi dây chuyền bạc.",
+        "Các kim đồng hồ đứng yên bất động, dính chặt vào thời khắc Đại Thảm Họa."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["inspected_room_watch"]
+      }
+    },
+    "npc_vendor_ba_ba": {
+      "id": "npc_vendor_ba_ba",
+      "speaker": "Cô Ba Bánh Căn",
+      "lines": [
+        "Cậu Peter dậy sớm thế? Ngồi xuống làm đĩa bánh căn mỡ hành còn nóng hổi nào.",
+        "Lạ thật... tôi cứ quen tay múc sẵn hai đĩa, dù chỉ thấy mỗi cậu bước tới."
+      ],
+      "responses": [
+        {
+          "text": "Cháu chỉ đi một mình thôi.",
+          "nextDialogueId": "vendor_ba_ba_alone"
+        },
+        {
+          "text": "Cô chờ ai khác sao?",
+          "nextDialogueId": "vendor_ba_ba_who"
+        }
+      ],
+      "effects": {
+        "setFlags": ["talked_vendor_ba"]
+      }
+    },
+    "vendor_ba_ba_alone": {
+      "id": "vendor_ba_ba_alone",
+      "speaker": "Cô Ba Bánh Căn",
+      "lines": [
+        "Ủa... vậy hả? Tôi cứ đinh ninh có một đứa nữa hay đi cùng cậu... mắt sáng, nhanh nhẹn lắm... mà sao tôi không nhớ nổi tên nó ta?"
+      ],
+      "responses": []
+    },
+    "vendor_ba_ba_who": {
+      "id": "vendor_ba_ba_who",
+      "speaker": "Cô Ba Bánh Căn",
+      "lines": [
+        "Tôi cũng chẳng rõ nữa. Cứ như thể vừa có một người vừa biến mất khỏi tâm trí tôi vậy. Cầm lấy chiếc bánh căn này lót dạ đi cậu."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "coastal_pancake",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_vendor_pancake"
+      }
+    },
+    "poi_empty_lot": {
+      "id": "poi_empty_lot",
+      "speaker": "Peter",
+      "lines": [
+        "Một mảnh đất trống đầy cỏ dại bên bờ biển.",
+        "Nền gạch đỏ vẫn còn vết than bếp, nhưng dân làng khẳng định nơi này chưa từng có căn nhà nào."
+      ],
+      "responses": [
+        {
+          "text": "Tập trung cảm thức thời gian",
+          "nextDialogueId": "poi_empty_lot_sight"
+        },
+        {
+          "text": "Bỏ qua",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["inspected_empty_lot"]
+      }
+    },
+    "poi_empty_lot_sight": {
+      "id": "poi_empty_lot_sight",
+      "speaker": "Peter",
+      "lines": [
+        "Ánh sáng cerulean le lói: bóng dáng một mái nhà ấm cúng hiện lên trong thoáng chốc rồi tan biến.",
+        "Đây chính là Dấu Tích Tồn Tại Sót Lại... Sự Xóa Bỏ Khái Niệm đang ăn mòn thị trấn này."
+      ],
+      "responses": []
+    },
+    "npc_fisherman_sau": {
+      "id": "npc_fisherman_sau",
+      "speaker": "Ông Sáu Ngư Phủ",
+      "lines": [
+        "Gió biển hôm nay đổi chiều rồi, cậu Peter à. Sương mù màu tím tro đang tràn từ Rừng Quên Lãng ra vách đá.",
+        "Đừng dại mà lại gần Ngọn Hải Đăng Cổ lúc này, sóng ở đó không chảy xuôi theo chiều gió đâu."
+      ],
+      "responses": [
+        {
+          "text": "Cháu phải đi tìm hiểu chuyện này.",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["talked_fisherman_sau"]
+      }
+    },
+    "poi_forest_monolith": {
+      "id": "poi_forest_monolith",
+      "speaker": "Peter",
+      "lines": [
+        "Trụ đá phong ấn rêu phong đứng giữa ranh giới cây rừng ngập mặn.",
+        "Những vết nứt không gian lơ lửng xung quanh đang dẫn lối xuống một ngôi đền cổ dưới lòng đất."
+      ],
+      "responses": []
+    },
+    "poi_forest_shade_remains": {
+      "id": "poi_forest_shade_remains",
+      "speaker": "Peter",
+      "lines": [
+        "Dị thể bóng đen trong rừng đã tan rã, để lại tàn dư sóng thời gian lắng xuống đất."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["defeated_forest_shade"]
+      }
+    },
+    "npc_elder_greeting": {
+      "id": "npc_elder_greeting",
+      "speaker": "Trưởng Lão Thời Gian",
+      "lines": [
+        "Chào người lữ khách. Ngươi đang đứng trên thánh địa đã bị rạn nứt bởi Đại Thảm Họa.",
+        "Ranh giới của điện thờ này tạm thời còn giữ được, nhưng những khe nứt thời gian đang cuộn trào phía trước.",
+        "Hãy cẩn trọng, đừng để bị cuốn vào vực sâu phân rã."
+      ],
+      "responses": [
+        {
+          "text": "Tôi phải làm gì?",
           "nextDialogueId": "npc_elder_quest_hint"
         },
         {
-          "text": "Farewell.",
+          "text": "Bảo trọng.",
           "nextDialogueId": null
         }
       ]
     },
     "npc_elder_quest_hint": {
       "id": "npc_elder_quest_hint",
-      "speaker": "Elder Chronographer",
+      "speaker": "Trưởng Lão Thời Gian",
       "lines": [
-        "Examine the Altar of Moments at the center of the hall. It may resonate with your essence."
+        "Hãy tiến về trung tâm đại sảnh và kết nối với Bàn Thờ Khoảnh Khắc (Altar of Moments).",
+        "Ta cảm nhận thấy một dị thể đang trỗi dậy ở khe nứt phía đông. Sau khi hoàn thành, hãy quay lại gặp ta."
       ],
       "responses": [
         {
-          "text": "Tell me of the Six Authorities and this chamber.",
+          "text": "Về sáu Đấng Quyền Năng?",
           "nextDialogueId": "npc_elder_authorities_lore"
         },
         {
-          "text": "I will go.",
+          "text": "Tôi hiểu rồi.",
           "nextDialogueId": null
         }
       ]
     },
     "npc_elder_authorities_lore": {
       "id": "npc_elder_authorities_lore",
-      "speaker": "Elder Chronographer",
+      "speaker": "Trưởng Lão Thời Gian",
       "lines": [
-        "Before the Great Fracture, our order kept vigil over the six dials of the Divine Chronometer.",
-        "Now the dials lie cracked, and something else walks the seams between them—an echo of the hours that were never meant to be.",
-        "Look to the steles and the broken pillars around this hall, traveler. Even defaced stone remembers more than a fractured mind."
-      ],
-      "responses": [],
-      "effects": {
-        "startQuest": "quest_prologue_remnants"
-      }
-    },
-    "altar_inspection": {
-      "id": "altar_inspection",
-      "speaker": "Altar of Moments",
-      "lines": [
-        "A pulse of chronal light hums beneath the weathered stone.",
-        "Faint runes shift and rearrange themselves before your eyes."
+        "Origin, Continuum, Causality, Memory, Possibility, Finality. Sáu trụ cột nâng đỡ cấu trúc thực tại.",
+        "Khi Chronos phân tách chúng, thế giới đã mất đi dòng chảy vĩnh cửu. Giờ đây, chỉ còn lại sự phân rã."
       ],
       "responses": []
     },
-    "npc_elder_farewell": {
-      "id": "npc_elder_farewell",
-      "speaker": "Elder Chronographer",
+    "altar_inspection": {
+      "id": "altar_inspection",
+      "speaker": "Peter",
       "lines": [
-        "The rift has fallen quiet. I felt the Shade unravel from here.",
-        "A broken blade, a stopped watch... and still the hours bend around you, as if they remember you.",
-        "The Sanctuary Spire lies beyond these walls. Whatever waits there has been waiting for you.",
-        "Go, traveler. The divided hour will not mend itself."
+        "Bàn Thờ Khoảnh Khắc tỏa ra ánh sáng cerulean dịu nhẹ.",
+        "Khi chạm tay vào phiến đá, chiếc đồng hồ ngừng chạy trong túi áo khẽ rung lên đồng điệu."
       ],
       "responses": [],
       "effects": {
-        "endPrologue": true
+        "completeQuest": "quest_prologue_awakening",
+        "startQuest": "quest_prologue_silence",
+        "setFlags": ["hasInspectedAltar"]
+      }
+    },
+    "npc_elder_farewell": {
+      "id": "npc_elder_farewell",
+      "speaker": "Trưởng Lão Thời Gian",
+      "lines": [
+        "Dị thể bóng đen đã bị phong ấn. Ngươi sở hữu một khả năng mà biên niên sử chưa từng ghi nhận.",
+        "Đường lên Ngọn Hải Đăng Cổ đã mở. Hãy tiến về phía mỏm đá và đối diện với kẻ canh gác bị lãng quên."
+      ],
+      "responses": [
+        {
+          "text": "Tôi sẽ đi ngay.",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["elder_granted_beacon"]
       }
     },
     "stele_six_authorities": {
       "id": "stele_six_authorities",
-      "speaker": "Weathered Basalt Stele",
+      "speaker": "Peter",
       "lines": [
-        "Six silver reliefs encircle a shattered dial, each carved with a tenet of the unbroken continuum:",
-        "ORIGIN kindles the first spark. CONTINUUM bears the river forward. CAUSALITY binds the seed to the harvest.",
-        "MEMORY preserves what has passed. POSSIBILITY branches into the unseen. FINALITY closes the last hour in quiet grace."
+        "Tấm bia đá cổ khắc sâu biểu tượng của Sáu Đấng Quyền Năng.",
+        "Phần khắc của Memory và Finality đã bị mài mòn một cách có chủ đích."
       ],
       "responses": [
         {
-          "text": "Examine the gouged seventh mark at the bottom.",
+          "text": "Quan sát các vết đục",
           "nextDialogueId": "stele_six_authorities_defaced"
         },
         {
-          "text": "Step back.",
+          "text": "Rời đi",
           "nextDialogueId": null
         }
       ],
@@ -124,27 +331,26 @@
     },
     "stele_six_authorities_defaced": {
       "id": "stele_six_authorities_defaced",
-      "speaker": "Weathered Basalt Stele",
+      "speaker": "Peter",
       "lines": [
-        "Beneath the six reliefs, someone has violently chiseled a hollow crescent into the stone—as if an erased seventh hour tried to carve its own name into the record.",
-        "Cold ash clings to the groove. Whatever hand left this mark did not belong to the remembered timeline."
+        "Vết cạo không phải do thời gian phong hóa, mà là dấu tích của Sự Xóa Bỏ Khái Niệm."
       ],
       "responses": []
     },
     "pillar_memory_erasure": {
       "id": "pillar_memory_erasure",
-      "speaker": "Defaced Sanctuary Pillar",
+      "speaker": "Peter",
       "lines": [
-        "Monastic chronicles once spiraled down this column, recording the names of travelers who passed through the Sanctuary before the Cataclysm.",
-        "Half the names have been scraped away—not by falling masonry, but by deliberate, methodical strokes that leave the stone humming with static."
+        "Cột đá sừng sững nhưng hoa văn bề mặt như bị xóa mờ bởi một lực vô hình.",
+        "Không gian quanh cột đá có sự dao động kỳ lạ."
       ],
       "responses": [
         {
-          "text": "Hold your Stopped Watch near the erased names.",
+          "text": "Cộng hưởng với đồng hồ",
           "nextDialogueId": "pillar_watch_resonance"
         },
         {
-          "text": "Leave it be.",
+          "text": "Rời đi",
           "nextDialogueId": null
         }
       ],
@@ -154,116 +360,113 @@
     },
     "pillar_watch_resonance": {
       "id": "pillar_watch_resonance",
-      "speaker": "Peter's Thoughts",
+      "speaker": "Peter",
       "lines": [
-        "For a heartbeat, the frozen second hand of my watch trembles against the glass, pulled toward the blank stone.",
-        "A whisper echoes from the missing letters: 'What the continuum discards does not vanish. It waits in the dark between ticks.'"
+        "Chiếc đồng hồ ngừng chạy phát ra tiếng tích tắc nghẹn ngào. Cột đá từng ghi lại ký ức về một vị thần đã bị quên lãng."
       ],
       "responses": []
     },
     "notebook_loose_leaf": {
       "id": "notebook_loose_leaf",
-      "speaker": "Torn Journal Leaf",
+      "speaker": "Peter",
       "lines": [
-        "A single vellum leaf lies caught against a cracked floor tile. The paper grain and ink match the Torn Notebook strapped to your hip.",
-        "The margin is filled with rapid temporal equations calculating the decay rate of a local rift—and a warning underlined twice:",
-        "'Do not trust the memory that returns first. When the hour divides, the anchor must hold even if the name is lost.'"
+        "Một trang giấy rách rơi trên sàn đá hoa cương.",
+        "Nét mực ghi lại phương trình tính toán sai số giữa các dòng thời gian."
       ],
       "responses": [
         {
-          "text": "Compare the handwriting with your notebook.",
+          "text": "Kiểm tra nét chữ",
           "nextDialogueId": "notebook_handwriting_check"
         },
         {
-          "text": "Slip the page back between the leather covers.",
+          "text": "Cất trang giấy",
           "nextDialogueId": null
         }
       ],
       "effects": {
-        "setFlags": ["inspected_torn_page"],
-        "startQuest": "quest_prologue_remnants"
+        "setFlags": ["inspected_torn_page"]
       }
     },
     "notebook_handwriting_check": {
       "id": "notebook_handwriting_check",
-      "speaker": "Peter's Thoughts",
+      "speaker": "Peter",
       "lines": [
-        "The slant of the numerals is unmistakably mine. Yet I have no memory of standing in this hall to write them.",
-        "Was I charting this sanctuary before the Fracture—or is this a warning from a turn of the glass that has already been erased?"
+        "Nét chữ cứng cáp và quen thuộc đến lạnh người. Đây chính là chữ viết tay của chính mình."
       ],
       "responses": []
     },
     "astrolabe_inspection": {
       "id": "astrolabe_inspection",
-      "speaker": "Frozen Brass Astrolabe",
+      "speaker": "Peter",
       "lines": [
-        "An intricate brass astrolabe hangs suspended half an inch above its stone plinth, locked in a pocket of stagnant time.",
-        "Drops of lamp oil float motionless in the air beside its jammed escapement wheel."
+        "Hỗn thiên nghi bằng đồng thau khổng lồ, các vòng tròn quỹ đạo đã đóng băng hoàn toàn.",
+        "Bên trong khe kẹt có một chiếc bánh răng cổ đang phát sáng."
       ],
       "responses": [
         {
-          "text": "Tap the jammed escapement with the Broken Blade's hilt.",
+          "text": "Gỡ bánh răng ra",
           "nextDialogueId": "astrolabe_extricate_gear"
         },
         {
-          "text": "Step away without disturbing the stasis.",
+          "text": "Để nguyên",
           "nextDialogueId": null
         }
       ],
       "effects": {
-        "setFlags": ["inspected_frozen_astrolabe"]
+        "setFlags": ["inspected_astrolabe"]
       }
     },
     "astrolabe_extricate_gear": {
       "id": "astrolabe_extricate_gear",
-      "speaker": "Frozen Brass Astrolabe",
+      "speaker": "Peter",
       "lines": [
-        "A cerulean spark leaps from the Broken Blade into the brass rings. The stasis shivers, and a single engraved cog drops free into your palm."
+        "Chiếc bánh răng đồng thau rơi vào lòng bàn tay, ấm áp và còn vương năng lượng thiên thể."
       ],
       "responses": [],
       "effects": {
+        "setFlags": ["extracted_astrolabe_gear"],
         "grantItems": [
           {
             "itemId": "ancient_gear",
             "quantity": 1
           }
         ],
-        "grantOnceFlag": "claimed_astrolabe_gear"
+        "grantOnceFlag": "granted_astrolabe_gear"
       }
     },
     "reliquary_search": {
       "id": "reliquary_search",
-      "speaker": "Cracked Stone Reliquary",
+      "speaker": "Peter",
       "lines": [
-        "A monastic reliquary box lined with lead and velvet, meant to insulate raw temporal minerals from the air.",
-        "Most of its contents have sublimated into white dust, but one cerulean crystal still pulses warmly at the bottom."
+        "Chiếc hòm di vật bằng đá rạn nứt.",
+        "Bên trong là một mảnh tinh thể kết tinh từ dòng thời gian phân rã."
       ],
       "responses": [],
       "effects": {
-        "setFlags": ["inspected_north_reliquary"],
+        "setFlags": ["inspected_reliquary"],
         "grantItems": [
           {
             "itemId": "chrono_shard_minor",
             "quantity": 1
           }
         ],
-        "grantOnceFlag": "claimed_reliquary_shard"
+        "grantOnceFlag": "granted_reliquary_shard"
       }
     },
     "threshold_gates_inspection": {
       "id": "threshold_gates_inspection",
-      "speaker": "The Threshold Gates",
+      "speaker": "Peter",
       "lines": [
-        "Massive twin arches of dark slate seal the ascending causeway toward the inner Sanctuary Spire.",
-        "Hairline fractures of violet-blue light trace the keystone. While the rift in this antechamber remains unstable, the counterweights refuse to budge."
+        "Cổng Ngưỡng khổng lồ khóa chặt bởi các ký tự niêm phong phát sáng.",
+        "Cánh cổng này dường như dẫn lối vượt ra khỏi thánh địa, hướng về phía ngọn hải đăng."
       ],
       "responses": [
         {
-          "text": "Listen at the seam of the stone.",
+          "text": "Chạm vào niêm ấn",
           "nextDialogueId": "threshold_gates_echo"
         },
         {
-          "text": "Step back.",
+          "text": "Lùi lại",
           "nextDialogueId": null
         }
       ],
@@ -273,42 +476,97 @@
     },
     "threshold_gates_echo": {
       "id": "threshold_gates_echo",
-      "speaker": "The Threshold Gates",
+      "speaker": "Peter",
       "lines": [
-        "Beyond the sealed arch, a distant pendulum tolls—twelve beats, followed by a thirteenth hollow strike that rings backwards."
+        "Tiếng vọng thì thầm từ bên kia cổng: 'Chỉ kẻ thức tỉnh trước ngọn đèn hải đăng mới có thể bước qua.'"
       ],
       "responses": []
     },
     "rift_echo_attune": {
       "id": "rift_echo_attune",
-      "speaker": "Residual Rift Echo",
-      "lines": [
-        "A localized eddy of displaced time curls around the ruined brazier, replaying the final seconds before the Cataclysm.",
-        "Two spectral silhouettes flicker in the frost: an Elder Chronographer bolting the inner gate, and a tall shadow parrying a falling shard with an unbroken blade."
-      ],
+      "speaker": "Peter",
+      "lines": ["Vết nứt không gian lơ lửng, tỏa ra những xung nhịp thời gian chập chờn."],
       "responses": [
         {
-          "text": "Reach toward the memory with Temporal Sight.",
+          "text": "Tập trung cộng hưởng",
           "nextDialogueId": "rift_echo_vision"
         },
         {
-          "text": "Break attunement.",
+          "text": "Tránh xa",
           "nextDialogueId": null
         }
       ],
       "effects": {
-        "setFlags": ["inspected_rift_echo"],
-        "startQuest": "quest_prologue_remnants"
+        "setFlags": ["inspected_rift_echo"]
       }
     },
     "rift_echo_vision": {
       "id": "rift_echo_vision",
-      "speaker": "Residual Rift Echo",
+      "speaker": "Peter",
       "lines": [
-        "As your fingers near the frost, a third presence bleeds into the replay—a silhouette of ink-black static reaching out from an unwritten hour to sever the memory.",
-        "The vision snaps shut, leaving only the smell of ozone and cold iron."
+        "Một làn sóng thời gian thanh khiết truyền qua cơ thể, giúp tâm trí thêm vững vàng (+15 EXP)."
       ],
-      "responses": []
+      "responses": [],
+      "effects": {
+        "grantExp": 15,
+        "grantOnceFlag": "granted_rift_echo_exp"
+      }
+    },
+    "boss_sentinel_encounter": {
+      "id": "boss_sentinel_encounter",
+      "speaker": "The Drowned Sentinel",
+      "lines": [
+        "Sóng... thời gian... không bao giờ ngừng lại...",
+        "Kẻ nào dám bước lên ngọn hải đăng của những kẻ bị lãng quên?"
+      ],
+      "responses": [
+        {
+          "text": "Hãy để tôi giúp bạn.",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "boss_sentinel_pacified": {
+      "id": "boss_sentinel_pacified",
+      "speaker": "The Drowned Sentinel",
+      "lines": [
+        "...Ánh sáng... Đã bao kỷ nguyên ta chìm trong vực sâu vô tận này...",
+        "Cảm tạ ngươi... Hỡi kẻ chưa từng bị viết tên... Hãy bước tiếp..."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["sentinel_pacified"]
+      }
+    },
+    "poi_unwritten_tablet": {
+      "id": "poi_unwritten_tablet",
+      "speaker": "Bia Đá Cổ",
+      "lines": [
+        "ĐỐI TƯỢNG: UNWRITTEN (KẺ KHÔNG ĐƯỢC GHI TÊN)",
+        "NHẬN DIỆN: KHÔNG HOÀN CHỈNH | PHÂN LOẠI: BẤT KHẢ THI",
+        "Ngươi đứng ngoài cấu trúc của sáu Quyền Năng. Hãy bước qua Cổng Ngưỡng."
+      ],
+      "responses": [
+        {
+          "text": "Chạm tay vào Cổng Ngưỡng",
+          "nextDialogueId": "prologue_farewell_step"
+        }
+      ],
+      "effects": {
+        "setFlags": ["read_unwritten_tablet"]
+      }
+    },
+    "prologue_farewell_step": {
+      "id": "prologue_farewell_step",
+      "speaker": "Peter",
+      "lines": [
+        "Biển Khánh Hòa lùi dần sau màn sương ánh sáng.",
+        "Hành trình tìm lại những gì đã mất chính thức bắt đầu."
+      ],
+      "responses": [],
+      "effects": {
+        "endPrologue": true
+      }
     }
   }
 }

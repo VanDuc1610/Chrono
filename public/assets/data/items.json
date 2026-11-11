@@ -2,9 +2,9 @@
   "items": [
     {
       "id": "chrono_shard_minor",
-      "name": "Minor Chrono Shard",
+      "name": "Mảnh Chrono Nhỏ",
       "type": "consumable",
-      "description": "A crystallized fragment of displaced time. Restores 30 HP.",
+      "description": "Mảnh tinh thể kết tinh từ dòng thời gian phân rã. Hồi 30 HP.",
       "value": 15,
       "stackable": true,
       "maxStack": 99,
@@ -14,18 +14,48 @@
     },
     {
       "id": "ancient_gear",
-      "name": "Ancient Gear",
+      "name": "Bánh Răng Cổ Đại",
       "type": "material",
-      "description": "A brass gear engraved with celestial glyphs. Used for crafting.",
+      "description": "Bánh răng đồng thau khắc ký tự thiên thể cổ xưa. Dùng để chế tác.",
       "value": 30,
       "stackable": true,
       "maxStack": 50
     },
     {
       "id": "relic_chronometer",
-      "name": "Broken Chronometer",
+      "name": "Đồng Hồ Ngừng Chạy",
       "type": "key_item",
-      "description": "An ornate pocket timepiece whose hands spin erratically.",
+      "description": "Chiếc đồng hồ quả quýt cổ trên dây bạc, kim đồng hồ đứng yên tại thời khắc Đại Thảm Họa.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "brass_key",
+      "name": "Chìa Khóa Đồng Thau",
+      "type": "key_item",
+      "description": "Chiếc chìa khóa mộc mạc mở cánh cửa căn gác của Peter.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "coastal_pancake",
+      "name": "Bánh Căn Ấm Nóng",
+      "type": "consumable",
+      "description": "Món bánh căn thơm lừng mỡ hành từ quán Cô Ba ven biển. Hồi phục 35 HP.",
+      "value": 10,
+      "stackable": true,
+      "maxStack": 20,
+      "effects": {
+        "healAmount": 35
+      }
+    },
+    {
+      "id": "sentinel_core_relic",
+      "name": "Lõi Vệ Binh Biển Sâu",
+      "type": "key_item",
+      "description": "Lõi di vật cổ sót lại sau khi The Drowned Sentinel được thanh tẩy.",
       "value": 0,
       "stackable": false,
       "maxStack": 1

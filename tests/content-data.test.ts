@@ -180,4 +180,55 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
     expect(session.inventory.getItemCount('ancient_gear')).toBe(2);
     expect(session.claimQuestRewards('quest_prologue_remnants')).toBeNull();
   });
+
+  it('verifies Prologue v2 initial room flow (T-29 addendum)', () => {
+    // 1. Quests initial stages
+    expect(questDb.quests.find((q) => q.id === 'quest_prologue_awaken')?.stage).toBe('started');
+    expect(questDb.quests.find((q) => q.id === 'quest_prologue_awakening')?.stage).toBe('inactive');
+
+    // 2. intro_awakening does not contain "Where am I?" / "Antechamber"
+    const intro = dialogueDb.dialogues.intro_awakening;
+    expect(intro).toBeDefined();
+    for (const r of intro.responses ?? []) {
+      expect(r.text).not.toContain('Where am I');
+      expect(r.nextDialogueId).not.toBe('intro_location');
+    }
+
+    // 3. room_door_locked dialogue exists for locked door gating
+    const doorLocked = dialogueDb.dialogues.room_door_locked;
+    expect(doorLocked).toBeDefined();
+    expect(doorLocked.speaker).toBe('Peter');
+    expect(doorLocked.lines.length).toBeGreaterThan(0);
+
+    // 4. End-to-end room quest flow
+    const session = GameSession.newGame(createRealDatabase());
+    expect(session.quests.getQuestStage('quest_prologue_awaken')).toBe('started');
+    expect(session.getFlag('has_room_key')).toBe(false);
+
+    // Inspect notebook -> completes obj_inspect_notebook
+    session.applyDialogueEffects(dialogueDb.dialogues.room_notebook.effects!);
+    expect(session.getFlag('inspected_room_notebook')).toBe(true);
+    expect(
+      session.quests
+        .getQuest('quest_prologue_awaken')
+        ?.objectives.find((o) => o.id === 'obj_inspect_notebook')?.completed,
+    ).toBe(true);
+
+    // Pick up key -> grants brass_key and sets has_room_key
+    const keyGrant = session.applyDialogueEffects(dialogueDb.dialogues.room_key.effects!);
+    expect(keyGrant).toEqual([{ itemId: 'brass_key', quantity: 1 }]);
+    expect(session.getFlag('has_room_key')).toBe(true);
+    expect(session.inventory.getItemCount('brass_key')).toBe(1);
+
+    // Pick up key second time -> grantOnceFlag prevents duplicate item
+    const duplicateKeyGrant = session.applyDialogueEffects(dialogueDb.dialogues.room_key.effects!);
+    expect(duplicateKeyGrant).toEqual([]);
+    expect(session.inventory.getItemCount('brass_key')).toBe(1);
+
+    // Both objectives complete -> quest completes
+    expect(session.quests.getQuestStage('quest_prologue_awaken')).toBe('completed');
+    const claim = session.claimQuestRewards('quest_prologue_awaken');
+    expect(claim?.exp).toBe(10);
+    expect(session.exp).toBe(10);
+  });
 });

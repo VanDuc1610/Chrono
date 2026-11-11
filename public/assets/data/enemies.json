@@ -2,7 +2,7 @@
   "enemies": [
     {
       "id": "enemy_temporal_shade",
-      "name": "Temporal Shade",
+      "name": "Bóng Đen Thời Gian",
       "level": 1,
       "maxHp": 35,
       "hp": 35,
@@ -21,7 +21,7 @@
     },
     {
       "id": "enemy_fractured_automaton",
-      "name": "Fractured Automaton",
+      "name": "Người Máy Rạn Nứt",
       "level": 2,
       "maxHp": 60,
       "hp": 60,
@@ -35,6 +35,25 @@
         {
           "itemId": "ancient_gear",
           "chance": 0.5
+        }
+      ]
+    },
+    {
+      "id": "boss_drowned_sentinel",
+      "name": "The Drowned Sentinel",
+      "level": 3,
+      "maxHp": 120,
+      "hp": 120,
+      "attack": 14,
+      "defense": 10,
+      "speed": 8,
+      "spriteKey": "enemy_fracture",
+      "skills": ["tidal_crush", "stasis_wave"],
+      "expReward": 100,
+      "lootTable": [
+        {
+          "itemId": "sentinel_core_relic",
+          "chance": 1.0
         }
       ]
     }

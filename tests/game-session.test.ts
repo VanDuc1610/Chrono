@@ -47,6 +47,7 @@ describe('GameSession, Progression & Quest Chaining', () => {
     const db = createRealDatabase();
     const session = GameSession.newGame(db);
 
+    session.quests.startQuest('quest_prologue_awakening');
     session.quests.completeObjective('quest_prologue_awakening', 'obj_speak_elder');
     const quest = session.quests.getQuest('quest_prologue_awakening');
     const elderObj = quest?.objectives.find((o) => o.id === 'obj_speak_elder');
@@ -92,7 +93,8 @@ describe('GameSession, Progression & Quest Chaining', () => {
     expect(freshSession.hp).toBe(50);
     expect(freshSession.inventory.getItemCount('chrono_shard_minor')).toBe(2);
     expect(freshSession.inventory.hasItem('relic_chronometer', 1)).toBe(true);
-    expect(freshSession.quests.getQuestStage('quest_prologue_awakening')).toBe('started');
+    expect(freshSession.quests.getQuestStage('quest_prologue_awaken')).toBe('started');
+    expect(freshSession.quests.getQuestStage('quest_prologue_awakening')).toBe('inactive');
     expect(freshSession.quests.getQuestStage('quest_prologue_silence')).toBe('inactive');
   });
 
@@ -202,6 +204,7 @@ describe('GameSession, Progression & Quest Chaining', () => {
     const db = createRealDatabase();
     const session = GameSession.newGame(db);
 
+    session.quests.startQuest('quest_prologue_awakening');
     expect(session.quests.getQuestStage('quest_prologue_awakening')).toBe('started');
     expect(session.quests.getQuestStage('quest_prologue_silence')).toBe('inactive');
 
@@ -229,6 +232,7 @@ describe('GameSession, Progression & Quest Chaining', () => {
     expect(session.quests.getQuestStage('quest_prologue_silence')).toBe('inactive');
 
     // Later finishes prologue awakening
+    session.quests.startQuest('quest_prologue_awakening');
     session.quests.completeObjective('quest_prologue_awakening', 'obj_speak_elder');
     session.quests.completeObjective('quest_prologue_awakening', 'obj_inspect_altar');
     session.syncQuestProgress();
@@ -241,6 +245,7 @@ describe('GameSession, Progression & Quest Chaining', () => {
     const db = createRealDatabase();
     const session = GameSession.newGame(db);
 
+    session.quests.startQuest('quest_prologue_awakening');
     session.quests.completeObjective('quest_prologue_awakening', 'obj_speak_elder');
     session.quests.completeObjective('quest_prologue_awakening', 'obj_inspect_altar');
 
