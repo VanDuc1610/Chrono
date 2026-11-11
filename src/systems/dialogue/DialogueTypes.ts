@@ -15,7 +15,9 @@ export interface DialogueEffects {
   startQuest?: string;
   /** Items granted — once per playthrough when `grantOnceFlag` is set. */
   grantItems?: { itemId: string; quantity: number }[];
-  /** Session flag recording that `grantItems` were already given. Required with grantItems. */
+  /** EXP granted (once, with `grantOnceFlag`). */
+  grantExp?: number;
+  /** Session flag recording that the rewards were already given. Required with grantItems/grantExp. */
   grantOnceFlag?: string;
   /** When this dialogue ends, the Prologue ending plays (handled by ExplorationScene). */
   endPrologue?: boolean;

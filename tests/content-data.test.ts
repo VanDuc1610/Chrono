@@ -46,6 +46,28 @@ describe('UI strings (strings.json)', () => {
 });
 
 describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json)', () => {
+  it('uses only effect keys the engine understands (unknown keys would be silently ignored)', () => {
+    const known = new Set([
+      'setFlags',
+      'startQuest',
+      'grantItems',
+      'grantExp',
+      'grantOnceFlag',
+      'endPrologue',
+    ]);
+    for (const node of Object.values(dialogueDb.dialogues)) {
+      for (const key of Object.keys(node.effects ?? {})) {
+        expect(known.has(key), `Node "${node.id}" uses unsupported effect "${key}"`).toBe(true);
+      }
+      if (node.effects?.grantExp) {
+        expect(
+          node.effects.grantOnceFlag,
+          `Node "${node.id}" grantExp needs grantOnceFlag`,
+        ).toBeTruthy();
+      }
+    }
+  });
+
   it('ensures every nextDialogueId exists and every dialogue node has at most 2 responses', () => {
     const nodes = Object.values(dialogueDb.dialogues);
     expect(nodes.length).toBeGreaterThan(0);

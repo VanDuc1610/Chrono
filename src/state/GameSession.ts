@@ -216,12 +216,15 @@ export class GameSession {
       this.quests.startQuest(effects.startQuest);
     }
 
+    // Rewards (items and EXP) are given once per playthrough when `grantOnceFlag` is set.
     const granted: IItemStack[] = [];
     const once = effects.grantOnceFlag;
-    if (effects.grantItems?.length && !(once && this.getFlag(once))) {
-      for (const stack of effects.grantItems) {
+    const hasReward = !!effects.grantItems?.length || (effects.grantExp ?? 0) > 0;
+    if (hasReward && !(once && this.getFlag(once))) {
+      for (const stack of effects.grantItems ?? []) {
         if (this.inventory.addItem(stack.itemId, stack.quantity)) granted.push({ ...stack });
       }
+      if (effects.grantExp && effects.grantExp > 0) this.addExp(effects.grantExp);
       if (once) this.setFlag(once);
     }
 

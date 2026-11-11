@@ -23,9 +23,15 @@ Goal (owner, 2026-11-11): rebuild the Prologue per `docs/story/PROLOGUE_V2_DESIG
 
 ### T-32 · Prologue v2 sprites: Cô Ba + The Drowned Sentinel (Pipeline B)
 
-- **Assignee:** Claude · **Status:** TODO
+- **Assignee:** Claude · **Status:** IN PROGRESS
 - **Locks:** `scripts/author-npc-sprites.js` (new), `scripts/author-sentinel-sprites.js` (new), `art-source/npcs/`, `art-source/enemies/sentinel/`
 - Cô Ba 32×32 idle (4 frames); Drowned Sentinel 64×64 (4-frame idle + kneel); owner approval.
+
+### T-33 · Prologue v2 content gaps (data only)
+
+- **Assignee:** Antigravity · **Status:** TODO
+- **Locks:** `public/assets/data/dialogue.json`, `quests.json`, `items.json`
+- Missing from T-29 vs the approved design: forgotten-child side quest (`quest_prologue_forgotten_child`, flag `returned_child_sandals`; sandals at town tile 12,4), ancient well (`poi_ancient_well`, tile 6,13), chrono crevice (`poi_chrono_crevice`, forest tile 7,5 — grants `chrono_shard_minor` once). Claude wires the ids into `maps.json` afterwards.
 
 ## Backlog (scheduled after current locks are released)
 

@@ -285,7 +285,6 @@
       ],
       "responses": [],
       "effects": {
-        "completeQuest": "quest_prologue_awakening",
         "startQuest": "quest_prologue_silence",
         "setFlags": ["hasInspectedAltar"]
       }

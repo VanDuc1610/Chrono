@@ -33,7 +33,48 @@
         }
       },
       "npcs": [],
-      "interactables": [],
+      "interactables": [
+        {
+          "id": "prop_room_key",
+          "tile": {
+            "x": 11,
+            "y": 6
+          },
+          "radius": 44,
+          "prompt": "[E] Xem chiếc chìa khóa đồng",
+          "dialogueId": "room_key"
+        },
+        {
+          "id": "prop_desk_notebook",
+          "tile": {
+            "x": 5,
+            "y": 2
+          },
+          "radius": 44,
+          "prompt": "[E] Xem cuốn sổ tay rách",
+          "dialogueId": "room_notebook"
+        },
+        {
+          "id": "prop_photo_frame",
+          "tile": {
+            "x": 5,
+            "y": 1
+          },
+          "radius": 44,
+          "prompt": "[E] Nhìn bức ảnh cũ",
+          "dialogueId": "room_photo"
+        },
+        {
+          "id": "prop_stopped_watch",
+          "tile": {
+            "x": 3,
+            "y": 2
+          },
+          "radius": 44,
+          "prompt": "[E] Xem chiếc đồng hồ ngừng chạy",
+          "dialogueId": "room_watch"
+        }
+      ],
       "encounters": [],
       "exits": [
         {
@@ -45,7 +86,9 @@
             "h": 1
           },
           "toMap": "map_coastal_town",
-          "toSpawn": "from_house"
+          "toSpawn": "from_house",
+          "requiresFlag": "has_room_key",
+          "lockedDialogueId": "room_door_locked"
         }
       ],
       "triggers": [
@@ -94,7 +137,38 @@
         }
       },
       "npcs": [],
-      "interactables": [],
+      "interactables": [
+        {
+          "id": "npc_vendor_ba_ba",
+          "tile": {
+            "x": 11,
+            "y": 8
+          },
+          "radius": 44,
+          "prompt": "[E] Nói chuyện với Cô Ba",
+          "dialogueId": "npc_vendor_ba_ba"
+        },
+        {
+          "id": "npc_fisherman_sau",
+          "tile": {
+            "x": 16,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Nói chuyện với Ông Sáu",
+          "dialogueId": "npc_fisherman_sau"
+        },
+        {
+          "id": "poi_empty_lot",
+          "tile": {
+            "x": 21,
+            "y": 7
+          },
+          "radius": 44,
+          "prompt": "[E] Xem khoảng đất trống",
+          "dialogueId": "poi_empty_lot"
+        }
+      ],
       "encounters": [],
       "exits": [
         {
@@ -364,7 +438,18 @@
         "y": 15
       },
       "npcs": [],
-      "interactables": [],
+      "interactables": [
+        {
+          "id": "poi_forest_monolith",
+          "tile": {
+            "x": 12,
+            "y": 10
+          },
+          "radius": 44,
+          "prompt": "[E] Xem trụ đá chỉ đường",
+          "dialogueId": "poi_forest_monolith"
+        }
+      ],
       "encounters": [
         {
           "id": "enc_forest_shade",
@@ -441,7 +526,19 @@
         "y": 15
       },
       "npcs": [],
-      "interactables": [],
+      "interactables": [
+        {
+          "id": "poi_unwritten_tablet",
+          "tile": {
+            "x": 12,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia đá cổ",
+          "dialogueId": "poi_unwritten_tablet",
+          "requiresFlag": "sentinel_pacified"
+        }
+      ],
       "encounters": [],
       "exits": [
         {
