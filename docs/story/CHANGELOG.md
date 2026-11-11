@@ -33,3 +33,12 @@ All changes to narrative canon, documentation architecture, and story files are 
   - `DOCUMENTATION_MAP.md`: Precise task-to-document routing table with "Do Not Load" rules.
   - `AGENT_CONTEXT_PROTOCOL.md`: Operating procedures and token-efficiency rules for coding agents.
 - Linked and mirrored `docs/implementation/IMPLEMENTATION_ROADMAP.md`.
+
+---
+
+## [1.1.0] – 2026-11-11 · Owner decisions
+
+- **Prologue follows the Story Bible** (`STORY_PROLOGUE.md`): Peter's room in Khánh Hòa → coastal town → Forgotten Forest → Shattered Antechamber → Old Lighthouse / The Drowned Sentinel → UNWRITTEN record. The current playable Antechamber slice is kept and reused as one segment.
+- **Game language: Vietnamese** for all in-game text (dialogue, quests, items, UI). Internal ids stay English.
+- **Peter's hair:** "short curly hair" — Story Bible §3.1 corrected to match the identity lock (no "short-medium").
+- **Opening line** "Awaken, fractured vessel…" replaced: "the vessel" contradicts the Unwritten canon. New line hints at it without revealing it: "Wake... The world has no name for you, and yet you remain."

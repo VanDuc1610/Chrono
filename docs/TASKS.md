@@ -19,7 +19,25 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
+Goal (owner, 2026-11-11): rebuild the Prologue per (Khánh Hòa), all in-game text in Vietnamese.
+
+### T-27 · Prologue v2 design document (Vietnamese)
+
+- **Assignee:** Antigravity · **Status:** TODO
+- **Locks:** (new)
+- Beat-by-beat design for owner approval: maps, NPCs, quests/flags, Drowned Sentinel mechanic, draft dialogue, asset list. Design only — no code, no JSON, no art.
+
+### T-28 · Multi-map world engine + UI strings table
+
+- **Assignee:** Claude · **Status:** IN PROGRESS
+- **Locks:** , , , , (new), , , (new), (new), , - Data-driven maps (exits, spawn points, NPCs, interactables, encounters, enter-triggers per map), fade transitions, in saves, UI text from (Vietnamese-ready), split ExplorationScene HUD/dialogue/satchel into .
+
 ## Backlog (scheduled after current locks are released)
+
+- **Prologue v2 art** (Claude, Pipeline B) — from the approved T-27 asset list; owner approves each candidate.
+- **Prologue v2 content** (Antigravity) — Vietnamese dialogue/quest/item JSON per approved T-27, on the T-28 engine.
+- **Vietnamese pass on remaining UI** (Combat, Main Menu, Prologue End) via once T-28 lands.
+- **GitHub Pages release + Playwright cross-browser tests.**
 
 ---
 

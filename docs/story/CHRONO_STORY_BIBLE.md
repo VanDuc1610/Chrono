@@ -152,7 +152,7 @@ Biến cố tương lai có thể khiến các dòng thời gian mất ranh gi�
 
 - Nam, người trưởng thành; tuổi đề xuất khoảng 26.
 - Có nguồn gốc gắn với Khánh Hòa, Việt Nam trong phần mở đầu.
-- Tóc xoăn curly ngắn-vừa tự nhiên có độ phồng, che phủ đều, không thẳng, không uốn lượn lỏng lẻo, không rũ dài che mặt, không undercut/cạo sát.
+- Tóc: **short curly hair** — tóc xoăn ngắn, gọn, lọn xoăn tự nhiên mọc hướng lên và ra ngoài, phủ đều đỉnh đầu, thái dương, hai bên và gáy (theo khoá nhận diện trong `docs/art/PETER_DESIGN.md`). Không tóc thẳng, không gợn sóng, không xoăn lỏng rũ xuống, không mái che trán, không undercut/cạo hai bên, không buộc đuôi ngựa.
 - Ngoại hình: 16-bit Pixel Art, stylized.
 - Bản chất tồn tại: **Unwritten**.
 
