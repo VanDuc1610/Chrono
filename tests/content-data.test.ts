@@ -13,6 +13,7 @@ import { EnemyDatabase } from '../src/systems/combat/CombatTypes';
 import { GameDatabase, PlayerDatabase } from '../src/state/GameDatabase';
 import { FLAGS, GameSession } from '../src/state/GameSession';
 import { MapDatabase } from '../src/world/MapTypes';
+import { pickDialogue } from '../src/world/MapRegistry';
 import { resolveMap, validateMapDatabase } from '../src/world/MapRegistry';
 import { formatString } from '../src/ui/Strings';
 
@@ -738,6 +739,30 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       expect(session.inventory.hasItem('tide_mirror_lens', 1)).toBe(false);
       expect(session.getFlag('ch1_mirror_1_lens_set')).toBe(true);
       expect(session.getFlag('ch1_mirror_1_aligned')).toBe(true);
+    });
+
+    it('routes the dawn pillar and mirror 1 by puzzle item (maps.json rules)', () => {
+      const ruins = (mapsJson as unknown as MapDatabase).maps.map_ch1_sunken_corridors;
+      const poi = (id: string) => ruins.interactables!.find((i) => i.id === id)!;
+      const pick = (id: string, flags: string[], items: string[]): string =>
+        pickDialogue(poi(id).dialogueId, poi(id).dialogueRules, {
+          isQuestCompleted: () => false,
+          getFlag: (f) => flags.includes(f),
+          hasItem: (i) => items.includes(i),
+        });
+      expect(pick('poi_chime_pillar_1', [], [])).toBe('ch1_bell_p1_needs_clapper');
+      expect(pick('poi_chime_pillar_1', [], ['bronze_bell_clapper'])).toBe('ch1_bell_p1_install');
+      expect(pick('poi_chime_pillar_1', ['ch1_bell_clapper_set'], [])).toBe('ch1_bell_p1_ready');
+      expect(pick('poi_mirror_1', [], [])).toBe('ch1_mirror_1_missing_lens');
+      expect(pick('poi_mirror_1', [], ['tide_mirror_lens'])).toBe('ch1_mirror_1_fit_lens');
+      expect(pick('poi_mirror_1', ['ch1_mirror_1_lens_set'], [])).toBe('ch1_mirror_1_ready');
+      // Saves that opened the cache before the clapper existed can still get it.
+      expect(pick('poi_sunken_cache', ['granted_sunken_cache'], [])).toBe(
+        'ch1_sunken_cache_clapper',
+      );
+      expect(pick('poi_sunken_cache', ['granted_sunken_cache', 'ch1_bell_clapper_set'], [])).toBe(
+        'ch1_sunken_cache_empty',
+      );
     });
   });
 });

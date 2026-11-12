@@ -1635,6 +1635,15 @@
             {
               "ifFlag": "ch1_bell_step_1",
               "dialogueId": "ch1_bell_p1_already_rung"
+            },
+            {
+              "unlessFlag": "ch1_bell_clapper_set",
+              "ifItem": "bronze_bell_clapper",
+              "dialogueId": "ch1_bell_p1_install"
+            },
+            {
+              "unlessFlag": "ch1_bell_clapper_set",
+              "dialogueId": "ch1_bell_p1_needs_clapper"
             }
           ]
         },
@@ -1690,7 +1699,15 @@
           },
           "radius": 44,
           "prompt": "[E] Nhặt vật sáng dưới cát",
-          "dialogueId": "ch1_unnamed_watch_case"
+          "dialogueId": "ch1_unnamed_watch_case",
+          "dialogueRules": [
+            {
+              "ifFlag": "granted_watch_case_exp",
+              "unlessFlag": "ch1_mirror_1_lens_set",
+              "unlessItem": "tide_mirror_lens",
+              "dialogueId": "ch1_watch_case_lens"
+            }
+          ]
         },
         {
           "id": "poi_sunken_cache",
@@ -1702,6 +1719,12 @@
           "prompt": "[E] Mở hòm đá",
           "dialogueId": "ch1_sunken_cache",
           "dialogueRules": [
+            {
+              "ifFlag": "granted_sunken_cache",
+              "unlessFlag": "ch1_bell_clapper_set",
+              "unlessItem": "bronze_bell_clapper",
+              "dialogueId": "ch1_sunken_cache_clapper"
+            },
             {
               "ifFlag": "granted_sunken_cache",
               "dialogueId": "ch1_sunken_cache_empty"
@@ -1721,6 +1744,15 @@
             {
               "ifFlag": "ch1_mirror_1_aligned",
               "dialogueId": "ch1_mirror_1_already"
+            },
+            {
+              "unlessFlag": "ch1_mirror_1_lens_set",
+              "ifItem": "tide_mirror_lens",
+              "dialogueId": "ch1_mirror_1_fit_lens"
+            },
+            {
+              "unlessFlag": "ch1_mirror_1_lens_set",
+              "dialogueId": "ch1_mirror_1_missing_lens"
             }
           ]
         },

@@ -2150,6 +2150,40 @@
       "speaker": "Peter",
       "lines": ["Chiếc rương đồng trong ngách đá dưới luồng sáng gương giờ đã trống không."],
       "responses": []
+    },
+    "ch1_sunken_cache_clapper": {
+      "id": "ch1_sunken_cache_clapper",
+      "speaker": "Peter",
+      "lines": [
+        "Hòm đá đã trống, nhưng dưới lớp sáp ong vụn còn kẹt một quả lắc chuông bằng đồng thau chạm sóng biển. Lần trước mình bỏ sót nó."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "bronze_bell_clapper",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_cache_clapper_late"
+      }
+    },
+    "ch1_watch_case_lens": {
+      "id": "ch1_watch_case_lens",
+      "speaker": "Peter",
+      "lines": [
+        "Mình mở lại chiếc vỏ đồng hồ rỗng. Trong kẽ nắp còn cài một thấu kính pha lê mài vát — mình cẩn thận lấy ra cất vào túi."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "tide_mirror_lens",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_watch_lens_late"
+      }
     }
   }
 }
