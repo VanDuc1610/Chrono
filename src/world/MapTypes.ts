@@ -106,9 +106,15 @@ export interface MapTriggerDefinition {
   /** `arrive`: on entering the map. `zone`: when Peter steps into `area`. */
   on: 'arrive' | 'zone';
   area?: TileRect;
-  /** Set when the trigger fires; a trigger never fires twice in a playthrough. */
-  onceFlag: string;
+  /** Set when the trigger fires; a trigger never fires twice (required unless `repeat`). */
+  onceFlag?: string;
+  /** Fires every time Peter enters the area (e.g. a Continuum loop), no once-flag. */
+  repeat?: boolean;
   requiresFlag?: string;
+  /** Does not fire while this flag is set (e.g. the loop is broken). */
+  unlessFlag?: string;
+  /** Sends Peter back to this spawn of the same map (short fade) — the path "loops". */
+  teleportTo?: string;
   delayMs?: number;
   effects?: DialogueEffects;
   dialogueId?: string;
@@ -155,6 +161,11 @@ export interface MapDefinition {
    * stops and a cold veil covers the map.
    */
   frozenWhen?: FlagCondition;
+  /**
+   * Alternative tile layers by state, first match wins — e.g. a low-tide Walls layer once
+   * `tide_lowered` is set. Layer names must exist in the tilemap.
+   */
+  layerVariants?: { when: FlagCondition; ground?: string; walls?: string }[];
 }
 
 export interface MapDatabase {

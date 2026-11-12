@@ -33,6 +33,11 @@ Story state: `visibleWhen` ({flag, unlessFlag}) on NPCs / interactables / encoun
 encounters started by a trigger's `encounterId` once its dialogue closes; `frozenWhen` freezes
 the map (NPCs still and tinted unless `resistsFreeze`, veil, no music).
 
+Chapter 1 additions: triggers with `repeat: true` (no onceFlag), `unlessFlag` and `teleportTo:
+"<spawnId>"` make Continuum loops; `layerVariants: [{ when, ground?, walls? }]` swap tile layers
+by state (each variant layer must be a distinct layer in the tilemap); a dialogue effect
+`refreshMap: true` rebuilds the map in place when the dialogue closes.
+
 `aliases` lets old save ids resolve (`prologue_sanctuary` → `map_shattered_antechamber`).
 `startMapId` is where a new game begins. A dialogue node with `effects.endPrologue` plays the
 Prologue ending when that dialogue closes.

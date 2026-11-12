@@ -18,7 +18,8 @@ description: Use when editing game JSON (dialogue, quests, items, enemies, playe
 ## Rules
 
 - **Dialogue nodes:** max 2 responses (UI shows 2 choices). Side effects only through the node's
-  `effects` (`setFlags`, `startQuest`, `grantItems` + `grantOnceFlag`), applied by
+  `effects` (`setFlags`, `clearFlags`, `startQuest`, `grantItems`/`grantExp` + `grantOnceFlag`,
+  `endPrologue`, `refreshMap`), applied by
   `GameSession.applyDialogueEffects()`. No code in JSON.
 - **Quests:** chain with `followUpQuestId`; flag-driven objectives use `completeOnFlag`;
   `syncQuestProgress()` must stay idempotent. Rewards are claimed once.

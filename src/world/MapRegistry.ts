@@ -125,6 +125,10 @@ export function validateMapDatabase(db: MapDatabase, refs: MapReferenceSets): st
       if (trig.on === 'zone' && !trig.area)
         err(key, `trigger ${trig.id}: zone trigger needs an area`);
       dialogue(trig.dialogueId, `trigger ${trig.id}`);
+      if (!trig.repeat && !trig.onceFlag)
+        err(key, `trigger ${trig.id}: needs onceFlag (or repeat: true)`);
+      if (trig.teleportTo && !map.spawns[trig.teleportTo])
+        err(key, `trigger ${trig.id}: unknown spawn "${trig.teleportTo}"`);
       if (trig.encounterId && !(map.encounters ?? []).some((e) => e.id === trig.encounterId))
         err(key, `trigger ${trig.id}: unknown encounter "${trig.encounterId}"`);
       if (trig.effects?.startQuest && !refs.questIds.has(trig.effects.startQuest))

@@ -81,6 +81,8 @@ export class ExplorationScene extends Phaser.Scene {
   private isFrozen = false;
   /** Encounter started as soon as the current dialogue closes (scripted battles). */
   private pendingEncounter: MapEncounterDefinition | null = null;
+  /** Rebuild the map in place when the current dialogue closes (effects.refreshMap). */
+  private pendingRefresh = false;
   private isTransitioning = false;
   private pendingEnding = false;
   private lockedExitShown: string | null = null;
@@ -130,6 +132,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.frozenVeil = null;
     this.isFrozen = false;
     this.pendingEncounter = null;
+    this.pendingRefresh = false;
     this.session = getSession(this);
     this.pendingNotice = data?.notice ?? null;
     this.pendingDialogueId = data?.openDialogueId ?? null;
@@ -156,12 +159,16 @@ export class ExplorationScene extends Phaser.Scene {
       if (event.type === 'node_changed' && event.node?.effects) {
         this.applyEffects(event.node.effects);
         if (event.node.effects.endPrologue) this.pendingEnding = true;
+        if (event.node.effects.refreshMap) this.pendingRefresh = true;
       }
       if (event.type === 'node_changed' && event.node) this.summonVisions(event.node.id);
       if (event.type === 'dialogue_ended') {
         this.dismissVisions();
         if (this.pendingEnding) this.startPrologueEnding();
-        else if (this.pendingEncounter) {
+        else if (this.pendingRefresh) {
+          this.pendingRefresh = false;
+          this.time.delayedCall(150, () => this.rebuildInPlace());
+        } else if (this.pendingEncounter) {
           const enc = this.pendingEncounter;
           this.pendingEncounter = null;
           this.time.delayedCall(250, () => this.startEncounter(enc));
@@ -252,9 +259,17 @@ export class ExplorationScene extends Phaser.Scene {
     const map = this.make.tilemap({ key: def.tilemap.key });
     const tileset = map.addTilesetImage(def.tileset.name, def.tileset.key);
     if (!tileset) throw new Error(`[${def.id}] tileset "${def.tileset.name}" failed to load.`);
-    const ground = map.createLayer(def.layers.ground, tileset, 0, 0);
-    const walls = map.createLayer(def.layers.walls, tileset, 0, 0);
-    if (!ground || !walls) throw new Error(`[${def.id}] tilemap layers missing.`);
+    // A layer variant (e.g. low tide) may replace the default layers while its condition holds.
+    const variant = (def.layerVariants ?? []).find((v) =>
+      conditionHolds(v.when, (flag) => this.session.getFlag(flag)),
+    );
+    const ground = map.createLayer(variant?.ground ?? def.layers.ground, tileset, 0, 0);
+    const walls = map.createLayer(variant?.walls ?? def.layers.walls, tileset, 0, 0);
+    if (!ground || !walls) {
+      throw new Error(
+        `[${def.id}] tilemap layers missing or reused: ground="${variant?.ground ?? def.layers.ground}", walls="${variant?.walls ?? def.layers.walls}".`,
+      );
+    }
     this.groundLayer = ground;
     this.wallLayer = walls;
     walls.setCollisionBetween(def.collision.fromGid, def.collision.toGid, true);
@@ -371,15 +386,17 @@ export class ExplorationScene extends Phaser.Scene {
   // ------------------------------------------------------------------ triggers & exits
 
   private canFire(trig: MapTriggerDefinition): boolean {
-    if (this.session.getFlag(trig.onceFlag)) return false;
+    if (!trig.repeat && trig.onceFlag && this.session.getFlag(trig.onceFlag)) return false;
+    if (trig.unlessFlag && this.session.getFlag(trig.unlessFlag)) return false;
     return !trig.requiresFlag || this.session.getFlag(trig.requiresFlag);
   }
 
   private fireTrigger(trig: MapTriggerDefinition): void {
     if (!this.canFire(trig) || this.isTransitioning) return;
-    this.session.setFlag(trig.onceFlag);
+    if (trig.onceFlag) this.session.setFlag(trig.onceFlag);
     if (trig.effects) this.applyEffects(trig.effects);
     this.refreshFrozen();
+    if (trig.teleportTo) this.loopBack(trig.teleportTo);
     const encounter = trig.encounterId
       ? (this.mapDef.encounters ?? []).find((e) => e.id === trig.encounterId)
       : undefined;
@@ -389,6 +406,34 @@ export class ExplorationScene extends Phaser.Scene {
     } else if (encounter) {
       this.startEncounter(encounter);
     }
+  }
+
+  /** Continuum loop: a quick fade and Peter finds himself back at the start of the path. */
+  private loopBack(spawnId: string): void {
+    const tile = this.mapDef.spawns[spawnId];
+    if (!tile) return;
+    this.isTransitioning = true;
+    this.player.getMovementSystem().stop(this.player.sprite);
+    this.cameras.main.fadeOut(180, 0, 0, 0);
+    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+      const pos = tileCenter(tile);
+      this.player.sprite.setPosition(pos.x, pos.y);
+      this.cameras.main.fadeIn(260, 0, 0, 0);
+      this.isTransitioning = false;
+    });
+  }
+
+  /** Rebuilds the map in place (same spot) so flag-driven state is re-evaluated. */
+  private rebuildInPlace(): void {
+    if (this.isTransitioning) return;
+    this.beginSceneExit();
+    const here = { x: Math.round(this.player.x), y: Math.round(this.player.y) };
+    this.session.position = { mapId: this.mapDef.id, ...here };
+    this.cameras.main.fadeOut(220, 255, 255, 255);
+    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+      const data: ExplorationSceneData = { mapId: this.mapDef.id, returnPosition: here };
+      this.scene.restart(data);
+    });
   }
 
   /**

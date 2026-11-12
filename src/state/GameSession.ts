@@ -228,6 +228,7 @@ export class GameSession {
    */
   public applyDialogueEffects(effects: DialogueEffects): IItemStack[] {
     for (const flag of effects.setFlags ?? []) this.setFlag(flag);
+    for (const flag of effects.clearFlags ?? []) this.setFlag(flag, false);
 
     if (effects.startQuest && this.quests.getQuestStage(effects.startQuest) === 'inactive') {
       this.quests.startQuest(effects.startQuest);

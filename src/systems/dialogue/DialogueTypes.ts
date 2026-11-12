@@ -21,6 +21,13 @@ export interface DialogueEffects {
   grantOnceFlag?: string;
   /** When this dialogue ends, the Prologue ending plays (handled by ExplorationScene). */
   endPrologue?: boolean;
+  /** Session flags reset to false (e.g. a puzzle sequence entered in the wrong order). */
+  clearFlags?: string[];
+  /**
+   * When the dialogue closes, the map is rebuilt in place (Peter keeps his position) so that
+   * visibleWhen / frozenWhen / layerVariants reflect the new flags — e.g. switching time layers.
+   */
+  refreshMap?: boolean;
 }
 
 export interface DialogueNode {
