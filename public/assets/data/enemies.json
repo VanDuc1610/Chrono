@@ -214,6 +214,104 @@
           }
         }
       }
+    },
+    {
+      "id": "enemy_imperial_automaton",
+      "name": "Búp Bê Cơ Khí",
+      "level": 8,
+      "maxHp": 70,
+      "hp": 70,
+      "attack": 16,
+      "defense": 10,
+      "speed": 8,
+      "spriteKey": "enemy_imperial_automaton",
+      "skills": [],
+      "expReward": 40,
+      "lootTable": [
+        {
+          "itemId": "chrono_shard_minor",
+          "chance": 0.25
+        }
+      ],
+      "field": {
+        "frontShieldDeg": 140
+      }
+    },
+    {
+      "id": "enemy_causality_enforcer",
+      "name": "Lính Chấp Pháp",
+      "level": 9,
+      "maxHp": 55,
+      "hp": 55,
+      "attack": 18,
+      "defense": 8,
+      "speed": 12,
+      "spriteKey": "enemy_causality_enforcer",
+      "skills": [],
+      "expReward": 45,
+      "lootTable": [
+        {
+          "itemId": "chrono_shard_minor",
+          "chance": 0.3
+        }
+      ],
+      "field": {
+        "reflect": {
+          "pct": 0.5,
+          "everyMs": 3200,
+          "glowMs": 1000
+        }
+      }
+    },
+    {
+      "id": "boss_imperial_verdict",
+      "name": "Bản Án Đế Chế",
+      "level": 10,
+      "maxHp": 220,
+      "hp": 220,
+      "attack": 15,
+      "defense": 14,
+      "speed": 10,
+      "spriteKey": "boss_imperial_verdict",
+      "spriteScale": 1.6,
+      "skills": [],
+      "expReward": 150,
+      "lootTable": [],
+      "mechanic": {
+        "damageReduction": 0.8,
+        "hpFloor": 1,
+        "recoverPct": 0.6,
+        "recoverMessage": "Cán cân nghiêng về phía Bản Án — kết quả được viết lại, vết thương của nó biến mất như chưa từng có!",
+        "unlockAfterTurns": 99,
+        "unlockMessage": "",
+        "actions": [],
+        "releasedFrame": 4,
+        "defeatMessage": "Bản Án Đế Chế buông gươm, quỳ xuống giữa hai đĩa cân gãy.",
+        "sentences": {
+          "cracksToBreak": 3,
+          "breakMessage": "Cán cân vỡ toang! Lớp vỏ định mệnh của Bản Án nứt rời — giờ đòn đánh của Peter sẽ chạm tới nó!",
+          "list": [
+            {
+              "id": "blade",
+              "announce": "BẢN ÁN TUYÊN: \"Kẻ vung gươm sẽ phải đổ máu!\" (Đánh lúc này sẽ bị phạt — hãy nghĩ cách khác.)",
+              "forbidden": ["attack", "skill"],
+              "defiedBy": ["defend"],
+              "punishPct": 0.25,
+              "punishMessage": "Bản án ứng nghiệm — Peter đổ máu, mất {damage} HP!",
+              "crackMessage": "Peter không vung gươm — bản án mất nguyên nhân, cán cân nứt một vết!"
+            },
+            {
+              "id": "hesitate",
+              "announce": "BẢN ÁN TUYÊN: \"Kẻ chần chừ sẽ bị nghiền nát!\" (Đỡ hay dùng đồ lúc này sẽ bị phạt.)",
+              "forbidden": ["defend", "item"],
+              "defiedBy": ["attack", "skill"],
+              "punishPct": 0.25,
+              "punishMessage": "Bản án ứng nghiệm — sấm sét giáng xuống, Peter mất {damage} HP!",
+              "crackMessage": "Peter không chần chừ — bản án mất nguyên nhân, cán cân nứt một vết!"
+            }
+          ]
+        }
+      }
     }
   ]
 }
