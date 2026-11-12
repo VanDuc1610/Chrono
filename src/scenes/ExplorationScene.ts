@@ -741,6 +741,7 @@ export class ExplorationScene extends Phaser.Scene {
   private applyEffects(effects: DialogueEffects): void {
     const granted = this.session.applyDialogueEffects(effects);
     this.refreshFrozen();
+    this.action?.syncSpawns();
     this.player.setArmed(this.session.getFlag(FLAGS.hasBlade));
     if (granted.length > 0) {
       const names = granted

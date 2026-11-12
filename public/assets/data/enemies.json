@@ -193,6 +193,25 @@
         "releasedFrame": 4,
         "defeatMessage": "Người Giữ Chuông đặt quả chuông xuống thật nhẹ, rồi quỳ gối."
       }
+    },
+    {
+      "id": "enemy_stray_shade",
+      "name": "Bóng Đen Lảng Vảng",
+      "level": 1,
+      "maxHp": 24,
+      "hp": 24,
+      "attack": 5,
+      "defense": 2,
+      "speed": 10,
+      "spriteKey": "enemy_fracture",
+      "skills": ["chrono_scratch", "temporal_flux"],
+      "expReward": 20,
+      "lootTable": [
+        {
+          "itemId": "chrono_shard_minor",
+          "chance": 0.25
+        }
+      ]
     }
   ]
 }

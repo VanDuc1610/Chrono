@@ -59,6 +59,7 @@ export class ActionCombat {
   private readonly group: Phaser.Physics.Arcade.Group;
   private readonly sound = SoundSystem.getInstance();
   private elder: Phaser.Physics.Arcade.Sprite | null = null;
+  private readonly defs: MapRoamerDefinition[];
   private nextSwing = 0;
   private nextDash = 0;
   private nextSkill = 0;
@@ -81,6 +82,7 @@ export class ActionCombat {
     this.tuning = resolveActionTuning(session.database.player.action);
     this.combat = session.database.player.combat;
     this.group = scene.physics.add.group();
+    this.defs = defs;
     for (const def of defs) this.spawn(def);
     scene.physics.add.collider(this.group, walls);
     scene.physics.add.collider(this.group, this.group);
@@ -104,6 +106,31 @@ export class ActionCombat {
   // ------------------------------------------------------------------ setup
 
   private flag = (f: string): boolean => this.session.getFlag(f);
+
+  /**
+   * Story flags changed (dialogue effects): roamers whose condition now holds appear (e.g. the
+   * ambush the moment time stops), those whose condition no longer holds fade away.
+   */
+  public syncSpawns(): void {
+    for (const def of this.defs) {
+      const live = this.roamers.find((r) => r.def.id === def.id);
+      const visible = conditionHolds(def.visibleWhen, this.flag);
+      if (!live && visible) this.spawn(def);
+      else if (live?.alive && !visible) this.fadeOut(live);
+    }
+    if (!this.elder && this.elderActive) this.spawnElder();
+  }
+
+  private fadeOut(r: Roamer): void {
+    r.alive = false;
+    r.sprite.setVelocity(0, 0);
+    this.scene.tweens.add({
+      targets: r.sprite,
+      alpha: 0,
+      duration: 600,
+      onComplete: () => r.sprite.destroy(),
+    });
+  }
 
   private spawn(def: MapRoamerDefinition): void {
     if (!conditionHolds(def.visibleWhen, this.flag)) return;

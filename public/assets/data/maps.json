@@ -30,6 +30,10 @@
         "from_town": {
           "x": 7,
           "y": 8
+        },
+        "rest": {
+          "x": 4,
+          "y": 5
         }
       },
       "npcs": [
@@ -44,19 +48,20 @@
           "name": "Trưởng Lão",
           "prompt": "[E] Nói chuyện với ông lão",
           "radius": 48,
-          "dialogueId": "elder_explains_frozen_town",
+          "dialogueId": "elder_rest_explain",
           "dialogueRules": [
+            {
+              "ifFlag": "learned_temporal_sight",
+              "unlessFlag": "taught_temporal_strike",
+              "dialogueId": "elder_teach_skill"
+            },
             {
               "ifFlag": "elder_joined",
               "dialogueId": "elder_explains_frozen_town_accept"
-            },
-            {
-              "unlessFlag": "learned_temporal_sight",
-              "dialogueId": "elder_after_first_battle"
             }
           ],
           "visibleWhen": {
-            "flag": "defeated_first_shade",
+            "flag": "rescued_by_elder",
             "unlessFlag": "time_restored"
           },
           "resistsFreeze": true
@@ -104,7 +109,7 @@
           "dialogueId": "room_watch",
           "dialogueRules": [
             {
-              "ifFlag": "defeated_first_shade",
+              "ifFlag": "cleared_town_shades",
               "unlessFlag": "learned_temporal_sight",
               "dialogueId": "grandfather_watch_awakens"
             }
@@ -134,6 +139,28 @@
           "onceFlag": "hasTriggeredAwakening",
           "delayMs": 600,
           "dialogueId": "intro_awakening"
+        },
+        {
+          "id": "trig_rest_explain",
+          "on": "arrive",
+          "requiresFlag": "rescued_by_elder",
+          "onceFlag": "trig_rest_explain",
+          "delayMs": 900,
+          "dialogueId": "elder_rest_explain"
+        },
+        {
+          "id": "trig_teach_skill",
+          "on": "zone",
+          "area": {
+            "x": 0,
+            "y": 0,
+            "w": 30,
+            "h": 30
+          },
+          "requiresFlag": "learned_temporal_sight",
+          "unlessFlag": "taught_temporal_strike",
+          "onceFlag": "trig_teach_skill",
+          "dialogueId": "elder_teach_skill"
         }
       ],
       "frozenWhen": {
@@ -284,21 +311,7 @@
           }
         }
       ],
-      "encounters": [
-        {
-          "id": "enc_first_shade",
-          "enemyId": "enemy_rift_shade_first",
-          "texture": "enemy_fracture",
-          "anim": "enemy_fracture_idle",
-          "tile": {
-            "x": 21,
-            "y": 7
-          },
-          "defeatedFlag": "defeated_first_shade",
-          "hidden": true,
-          "victoryDialogueId": "elder_after_first_battle"
-        }
-      ],
+      "encounters": [],
       "exits": [
         {
           "id": "town_to_room",
@@ -343,8 +356,21 @@
           },
           "requiresFlag": "delivered_repaired_watch",
           "onceFlag": "trig_time_stops",
-          "dialogueId": "town_time_stops",
-          "encounterId": "enc_first_shade"
+          "dialogueId": "town_time_stops"
+        },
+        {
+          "id": "trig_after_hunt",
+          "on": "zone",
+          "area": {
+            "x": 0,
+            "y": 0,
+            "w": 28,
+            "h": 18
+          },
+          "requiresFlag": "cleared_town_shades",
+          "onceFlag": "trig_after_hunt",
+          "delayMs": 500,
+          "dialogueId": "elder_after_hunt"
         }
       ],
       "visions": [
@@ -382,7 +408,80 @@
       "frozenWhen": {
         "flag": "time_frozen",
         "unlessFlag": "time_restored"
-      }
+      },
+      "roamers": [
+        {
+          "id": "roam_ambush_shade",
+          "enemyId": "enemy_temporal_shade",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 22,
+            "y": 7
+          },
+          "visibleWhen": {
+            "flag": "time_frozen",
+            "unlessFlag": "rescued_by_elder"
+          },
+          "sight": 640,
+          "leash": 2000,
+          "speed": 78,
+          "ambush": {
+            "rescueDialogueId": "battle_elder_rescue"
+          }
+        },
+        {
+          "id": "roam_town_shade_a",
+          "enemyId": "enemy_stray_shade",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 13,
+            "y": 9
+          },
+          "group": "town_shades",
+          "respawn": false,
+          "defeatedFlag": "defeated_roam_town_shade_a",
+          "visibleWhen": {
+            "flag": "rescued_by_elder",
+            "unlessFlag": "time_restored"
+          }
+        },
+        {
+          "id": "roam_town_shade_b",
+          "enemyId": "enemy_stray_shade",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 20,
+            "y": 11
+          },
+          "group": "town_shades",
+          "respawn": false,
+          "defeatedFlag": "defeated_roam_town_shade_b",
+          "visibleWhen": {
+            "flag": "rescued_by_elder",
+            "unlessFlag": "time_restored"
+          }
+        },
+        {
+          "id": "roam_town_shade_c",
+          "enemyId": "enemy_stray_shade",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 7,
+            "y": 12
+          },
+          "group": "town_shades",
+          "respawn": false,
+          "defeatedFlag": "defeated_roam_town_shade_c",
+          "visibleWhen": {
+            "flag": "rescued_by_elder",
+            "unlessFlag": "time_restored"
+          }
+        }
+      ]
     },
     "map_shattered_antechamber": {
       "id": "map_shattered_antechamber",
