@@ -5,6 +5,11 @@
  */
 import fs from 'fs';
 import { CH1_MAPS } from './ch1-layout.js';
+import { CH2_MAPS } from './ch2-layout.js';
+
+/** `node <script> ch2` builds Chapter 2 instead of Chapter 1. */
+const CH2 = process.argv[2] === 'ch2';
+const MAPS = CH2 ? CH2_MAPS : CH1_MAPS;
 
 const TILESETS = {
   wilds: {
@@ -92,7 +97,7 @@ function toTiled(layout, ts) {
   };
 }
 
-for (const def of CH1_MAPS) {
+for (const def of MAPS) {
   const layout = def.build();
   const file = `public/assets/maps/${def.id}.json`;
   fs.writeFileSync(file, JSON.stringify(toTiled(layout, TILESETS[def.tileset])) + '\n');
