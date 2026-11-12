@@ -17,7 +17,8 @@ import fs from 'fs';
 import { hex, encodePng, writeFile } from './pixel-art/pixel.js';
 import { roomLayout, townLayout } from './coastal-layout.js';
 
-const VERSION = 'v1';
+// v2 = v1 (approved ENV_COASTAL_001, tiles 0-39 unchanged) + Chapter 1 village props (40-43).
+const VERSION = 'v2';
 const T = 32;
 const COLS = 8;
 
@@ -652,6 +653,78 @@ function nightstandWatch() {
   return outline(t);
 }
 
+// ------------------------------------------------------------------ Chapter 1 props 40-43
+/** Small ancestral shrine: incense pot, two candles and a framed photo with an empty place. */
+function shrine() {
+  const t = tile();
+  rect(t, 4, 16, 27, 22, 'd');
+  rect(t, 4, 16, 27, 16, 'y');
+  rect(t, 6, 23, 7, 30, 'D');
+  rect(t, 24, 23, 25, 30, 'D');
+  rect(t, 11, 4, 20, 14, 'D'); // frame
+  rect(t, 12, 5, 19, 13, '8');
+  ellipse(t, 14, 8, 1.5, 1.5, '9'); // one figure remains…
+  rect(t, 13, 10, 15, 13, '9');
+  for (let y = 7; y <= 12; y++) put(t, 17 + (y % 2), y, '+'); // …the other is only a smudge
+  ellipse(t, 15.5, 17, 3, 1.5, 'c'); // incense pot
+  for (const [x, y] of [
+    [15, 12],
+    [16, 11],
+    [15, 10],
+  ])
+    put(t, x, y, '+');
+  rect(t, 6, 13, 6, 15, 'L'); // candles
+  rect(t, 25, 13, 25, 15, 'L');
+  put(t, 6, 12, 'F');
+  put(t, 25, 12, 'F');
+  return outline(t);
+}
+/** Rotten wooden letter box on a post. */
+function letterBox() {
+  const t = tile();
+  rect(t, 15, 18, 16, 31, 'D');
+  rect(t, 8, 6, 23, 18, 'd');
+  rect(t, 8, 6, 23, 7, 'y');
+  rect(t, 11, 10, 20, 11, 'O'); // slot
+  for (let x = 8; x <= 23; x += 5) rect(t, x, 8, x, 18, 'D');
+  put(t, 21, 15, '$');
+  for (const [x, y] of [
+    [9, 17],
+    [22, 9],
+  ])
+    put(t, x, y, 'W'); // rot
+  return outline(t);
+}
+/** A wooden post with a small bronze bell — it rings the same evening over and over. */
+function bellPost() {
+  const t = tile();
+  rect(t, 8, 4, 9, 31, 'D');
+  rect(t, 8, 4, 24, 5, 'd');
+  rect(t, 20, 6, 20, 8, '9'); // rope
+  for (let y = 9; y < 20; y++) {
+    const half = Math.round(2 + (y - 9) * 0.4);
+    rect(t, 20 - half, y, 20 + half, y, y > 17 ? '$' : 'c');
+  }
+  put(t, 20, 21, 'K'); // clapper
+  rect(t, 6, 29, 11, 31, 'D');
+  return outline(t);
+}
+/** A low tray: two bowls of rice, a plate of braised fish, chopsticks — dinner for two. */
+function dinnerTray() {
+  const t = tile();
+  ellipse(t, 16, 20, 13, 7, 'd');
+  ellipse(t, 16, 19, 11, 5.5, 'y');
+  for (const cx of [10, 22]) {
+    ellipse(t, cx, 17, 3.5, 2.5, 'L');
+    ellipse(t, cx, 16.5, 2.5, 1.5, '2');
+  }
+  ellipse(t, 16, 21, 3, 1.8, 'L');
+  rect(t, 14, 21, 18, 21, 'C'); // cá kho
+  rect(t, 5, 23, 12, 23, 'D'); // chopsticks
+  rect(t, 6, 24, 13, 24, 'D');
+  return outline(t);
+}
+
 const TILES = [
   sand(1),
   sandShells(),
@@ -693,6 +766,10 @@ const TILES = [
   wallPhoto(),
   wallWindowSea(),
   nightstandWatch(),
+  shrine(),
+  letterBox(),
+  bellPost(),
+  dinnerTray(),
 ];
 
 // ------------------------------------------------------------------ output

@@ -10,6 +10,10 @@
 import { C } from './coastal-layout.js';
 import { Wd } from './wilds-layout.js';
 
+/** Chapter 1 props appended to the v2 tilesets (tiles 0-39 are the approved v1 tiles). */
+const C2 = { SHRINE: 40, LETTER_BOX: 41, BELL_POST: 42, DINNER: 43 };
+const W2 = { SUNDIAL: 40, TIDE_MARKER: 41, TIDE_WHEEL: 42 };
+
 /** dungeon_tileset (ENV_SANCTUARY_002) indices. */
 export const D = {
   VOID: 0,
@@ -93,11 +97,11 @@ export function shoreLayout() {
   for (let x = 1; x < W; x++) ground[8][x] = Wd.TRAIL; // the coastal path
   for (const y of [7, 8, 9]) walls[y][W - 1] = -1; // the way east, looping until fixed
   walls[8][1] = Wd.GATE; // where Peter and the Elder step out of the Threshold
-  walls[5][10] = Wd.MONOLITH; // STAND-IN: broken sundial
+  walls[5][10] = W2.SUNDIAL;
   walls[13][12] = Wd.FROZEN_WAVE; // the tide stopped at one height
   walls[14][6] = Wd.FROZEN_WAVE;
   walls[13][17] = Wd.FROZEN_WAVE;
-  walls[11][12] = Wd.RAILING; // STAND-IN: tide marker post
+  walls[11][12] = W2.TIDE_MARKER;
   return {
     width: W,
     height: H,
@@ -154,11 +158,11 @@ export function villageLayout() {
   for (const y of [3, 4, 5]) ground[y][29] = C.PATH;
   // Bà Tư's courtyard with the dinner for two; the shrine; the Time Anchor; the bell post.
   fill(ground, 8, 5, 13, 7, C.BRICK);
-  walls[6][11] = C.KEY_TABLE; // STAND-IN: dinner tray with two bowls
+  walls[6][11] = C2.DINNER;
   fill(ground, 19, 5, 21, 7, C.BRICK);
-  walls[6][20] = C.NIGHTSTAND_WATCH; // STAND-IN: small shrine with the empty photograph
+  walls[6][20] = C2.SHRINE;
   walls[8][15] = C.WELL; // the Time Anchor well
-  walls[8][24] = C.STONE_FENCE; // STAND-IN: bell post blocking the slope
+  walls[8][24] = C2.BELL_POST;
   // Shore, letter box, dock and the fisherman's spirit.
   for (let x = 0; x < W; x++) {
     ground[14][x] = hash(x, 14, 3) < 25 ? C.FOOTPRINTS : C.SAND;
@@ -173,7 +177,7 @@ export function villageLayout() {
       ground[y][x] = C.PIER;
       walls[y][x] = -1;
     }
-  walls[14][12] = C.NIGHTSTAND_WATCH; // STAND-IN: rotten wooden letter box
+  walls[14][12] = C2.LETTER_BOX;
   walls[17][9] = C.BASKET_BOAT;
   walls[14][3] = C.BASKET_BOAT;
   walls[14][8] = C.NET_PILE;
@@ -237,8 +241,8 @@ export function beaconLayout() {
   walls[3][12] = Wd.LH_MID_R;
   walls[4][11] = Wd.LH_BASE_L;
   walls[4][12] = Wd.LH_BASE_R;
-  walls[5][13] = Wd.LENS; // STAND-IN: tide wheel
-  walls[9][9] = Wd.TABLET; // STAND-IN: keeper's logbook lectern
+  walls[5][13] = W2.TIDE_WHEEL;
+  walls[9][9] = Wd.TABLET; // the keeper's logbook lectern
   // The flooded stairs to the ruins (east): steps on the ground layer, covered by sea at high tide.
   for (let y = 13; y < H; y++)
     for (const x of [19, 20, 21, 22]) {

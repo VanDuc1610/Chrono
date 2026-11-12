@@ -10,8 +10,15 @@ import { writeFile } from './pixel-art/pixel.js';
 import { CH1_MAPS } from './ch1-layout.js';
 
 const SHEETS = {
-  wilds: 'public/assets/tilesets/wilds_tileset.png',
-  coastal: 'public/assets/tilesets/coastal_tileset.png',
+  // v2 candidates (Chapter 1 props) until approved, then the deployed files.
+  wilds: fs.existsSync('art-source/environment/wilds/generated/candidates/wilds_tileset_v2.png')
+    ? 'art-source/environment/wilds/generated/candidates/wilds_tileset_v2.png'
+    : 'public/assets/tilesets/wilds_tileset.png',
+  coastal: fs.existsSync(
+    'art-source/environment/coastal/generated/candidates/coastal_tileset_v2.png',
+  )
+    ? 'art-source/environment/coastal/generated/candidates/coastal_tileset_v2.png'
+    : 'public/assets/tilesets/coastal_tileset.png',
   dungeon: 'public/assets/tilesets/dungeon_tileset.png',
   // Candidate until approved (ENV_SUNKEN_001).
   sunken: fs.existsSync('public/assets/tilesets/sunken_tileset.png')

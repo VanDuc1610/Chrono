@@ -30,7 +30,8 @@ import {
 } from './pixel-art/tile-kit.js';
 import { forestLayout, lighthouseLayout } from './wilds-layout.js';
 
-const VERSION = 'v1';
+// v2 = v1 (approved ENV_WILDS_001, tiles 0-39 unchanged) + Chapter 1 props (40-42).
+const VERSION = 'v2';
 const COLS = 8;
 
 /** Cold, desaturated wilds: dusk forest greens, violet-ash fracture, basalt and a night sea. */
@@ -602,6 +603,57 @@ function railing() {
   return outline(t);
 }
 
+// ------------------------------------------------------------------ Chapter 1 props 40-42
+/** A broken stone sundial: the gnomon's shadow is stuck on one mark. */
+function sundial() {
+  const t = tile();
+  ellipse(t, 16, 26, 11, 4, 'B'); // plinth
+  rect(t, 11, 14, 21, 25, 'b');
+  rect(t, 11, 14, 12, 25, 'h');
+  ellipse(t, 16, 13, 11, 5, 'b'); // dial face
+  ellipse(t, 16, 12.5, 9.5, 4, 'h');
+  for (let k = 0; k < 12; k++) {
+    const a = (k / 12) * Math.PI * 2;
+    put(t, Math.round(16 + Math.cos(a) * 8), Math.round(12.5 + Math.sin(a) * 3.3), 'B');
+  }
+  for (let k = 0; k < 7; k++) put(t, 16 + Math.floor(k / 2), 12 - k, 'o'); // bronze gnomon, snapped
+  for (let k = 0; k < 6; k++) put(t, 15 - k, 13 + Math.floor(k / 2), 'B'); // the frozen shadow
+  put(t, 9, 11, 'c');
+  rect(t, 20, 16, 22, 16, 'B'); // crack
+  return outline(t);
+}
+/** A wooden tide marker post with painted rings; the water line is frozen on it. */
+function tideMarker() {
+  const t = tile();
+  rect(t, 14, 2, 17, 31, 'r');
+  rect(t, 14, 2, 14, 31, 'L');
+  for (let y = 5; y < 30; y += 5) rect(t, 14, y, 17, y, y % 10 === 0 ? 'z' : 'W');
+  rect(t, 10, 19, 21, 21, 'i'); // the stopped waterline, a ring of ice
+  rect(t, 10, 19, 21, 19, 'I');
+  put(t, 9, 20, 'i');
+  put(t, 22, 20, 'i');
+  return outline(t);
+}
+/** The bronze tide wheel that opens the sluices below the beacon. */
+function tideWheel() {
+  const t = tile();
+  rect(t, 9, 24, 22, 30, 'B'); // stone base
+  rect(t, 9, 24, 22, 24, 'h');
+  rect(t, 15, 15, 16, 24, 'z'); // axle
+  for (let k = 0; k < 48; k++) {
+    const a = (k / 48) * Math.PI * 2;
+    put(t, Math.round(16 + Math.cos(a) * 10), Math.round(13 + Math.sin(a) * 10), k % 6 ? 'o' : '$');
+  }
+  for (let k = 0; k < 6; k++) {
+    const a = (k / 6) * Math.PI * 2;
+    for (let r = 2; r < 10; r++)
+      put(t, Math.round(16 + Math.cos(a) * r), Math.round(13 + Math.sin(a) * r), 'o');
+  }
+  ellipse(t, 16, 13, 2.2, 2.2, '$');
+  put(t, 16, 13, 'c');
+  return outline(t);
+}
+
 const TILES = [
   loam(),
   moss(),
@@ -643,6 +695,9 @@ const TILES = [
   gate(),
   frozenWave(),
   railing(),
+  sundial(),
+  tideMarker(),
+  tideWheel(),
 ];
 
 const outDir = path.resolve(process.argv[2] ?? 'art-source/environment/wilds/generated/candidates');
