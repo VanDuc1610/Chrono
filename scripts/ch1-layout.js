@@ -43,6 +43,45 @@ export const S = {
   SAND: 21,
   WATCH: 22,
   SEAL: 23,
+  // ENV_SUNKEN_002: the hidden mirror cache
+  MIRROR: 24,
+  MIRROR_LIT: 25,
+  BEAM_H: 26,
+  BEAM_V: 27,
+  CACHE: 28,
+  CACHE_OPEN: 29,
+};
+
+/**
+ * Chapter 1 hidden mirror cache in the sunken corridors: light falls through a crack at (8,1)
+ * onto mirror 1; aligned mirrors pass it on (1 → 2 → 3) until it reaches the light cache.
+ * maps.json `tileSwaps` lights mirrors and beams by flag.
+ */
+export const MIRROR_PUZZLE = {
+  mirrors: [
+    { x: 8, y: 4 },
+    { x: 12, y: 4 },
+    { x: 12, y: 6 },
+  ],
+  cache: { x: 10, y: 6 },
+  /** Beam always lit (from the crack down to mirror 1). */
+  source: [
+    { x: 8, y: 2 },
+    { x: 8, y: 3 },
+  ],
+  /** Beam segments lit by mirror 1, 2, 3 (each with its direction). */
+  beams: [
+    {
+      dir: 'h',
+      tiles: [
+        { x: 9, y: 4 },
+        { x: 10, y: 4 },
+        { x: 11, y: 4 },
+      ],
+    },
+    { dir: 'v', tiles: [{ x: 12, y: 5 }] },
+    { dir: 'h', tiles: [{ x: 11, y: 6 }] },
+  ],
 };
 
 /** Seabed dressing: sand and shallow pools on the floor, coral and kelp against the walls. */
@@ -333,6 +372,14 @@ export function ruinsLayout() {
     [6, 5],
   ])
     if (walls[p[1]][p[0]] === S.CORAL || walls[p[1]][p[0]] === S.KELP) walls[p[1]][p[0]] = -1; // keep paths clear
+  // Hidden mirror cache: dim mirrors, sealed cache, the light falling on mirror 1.
+  for (const seg of MIRROR_PUZZLE.beams) for (const t of seg.tiles) walls[t.y][t.x] = -1;
+  for (const t of MIRROR_PUZZLE.source) {
+    walls[t.y][t.x] = -1;
+    ground[t.y][t.x] = S.BEAM_V;
+  }
+  for (const m of MIRROR_PUZZLE.mirrors) walls[m.y][m.x] = S.MIRROR;
+  walls[MIRROR_PUZZLE.cache.y][MIRROR_PUZZLE.cache.x] = S.CACHE;
   return {
     width: W,
     height: H,

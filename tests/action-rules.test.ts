@@ -3,6 +3,7 @@ import {
   facingFromAngle,
   inSlash,
   newBrain,
+  nextStep,
   resolveActionTuning,
   rollHit,
   thinkRoamer,
@@ -82,6 +83,25 @@ describe('Action combat rules', () => {
     // Peter out of sight while patrolling: no chase.
     const calm = thinkRoamer(newBrain({ x: 0, y: 0 }), senses({ player: { x: 500, y: 0 } }));
     expect(calm.brain.state).not.toBe('chase');
+  });
+
+  it('finds the way around a wall (tile BFS)', () => {
+    // A wall column at x = 2 from y = 0 to 3; the gap is at y = 4.
+    const blocked = (x: number, y: number): boolean =>
+      x < 0 || y < 0 || x > 5 || y > 5 || (x === 2 && y <= 3);
+    // Following the steps reaches the target through the gap, never stepping into the wall.
+    let at = { x: 0, y: 0 };
+    let steps = 0;
+    while (!(at.x === 4 && at.y === 0) && steps < 20) {
+      const next = nextStep(blocked, at, { x: 4, y: 0 });
+      expect(next).not.toBeNull();
+      at = next as { x: number; y: number };
+      expect(blocked(at.x, at.y)).toBe(false);
+      steps++;
+    }
+    expect(steps).toBe(12);
+    expect(nextStep(blocked, { x: 1, y: 4 }, { x: 2, y: 4 })).toEqual({ x: 2, y: 4 });
+    expect(nextStep(() => true, { x: 0, y: 0 }, { x: 3, y: 3 })).toBeNull();
   });
 
   it('fills missing tuning from defaults', () => {

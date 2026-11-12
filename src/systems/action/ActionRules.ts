@@ -242,3 +242,48 @@ export function thinkRoamer(prev: RoamerBrain, s: RoamerSenses): RoamerIntent {
     }
   }
 }
+
+// ------------------------------------------------------------------ path finding
+
+/**
+ * Breadth-first search on the tile grid (4 directions): the first tile to step onto to walk from
+ * `from` to `to` around walls. Returns `to` when they are neighbours, null if unreachable or
+ * already there. `maxNodes` bounds the work on big maps.
+ */
+export function nextStep(
+  blocked: (x: number, y: number) => boolean,
+  from: Point,
+  to: Point,
+  maxNodes = 900,
+): Point | null {
+  if (from.x === to.x && from.y === to.y) return null;
+  const key = (p: Point): string => `${p.x},${p.y}`;
+  const cameFrom = new Map<string, Point | null>([[key(from), null]]);
+  const queue: Point[] = [from];
+  const dirs = [
+    { x: 1, y: 0 },
+    { x: -1, y: 0 },
+    { x: 0, y: 1 },
+    { x: 0, y: -1 },
+  ];
+  while (queue.length > 0 && cameFrom.size < maxNodes) {
+    const cur = queue.shift() as Point;
+    if (cur.x === to.x && cur.y === to.y) {
+      let step = cur;
+      for (let prev = cameFrom.get(key(step)); prev && key(prev) !== key(from);) {
+        step = prev;
+        prev = cameFrom.get(key(step));
+      }
+      return step;
+    }
+    for (const d of dirs) {
+      const n = { x: cur.x + d.x, y: cur.y + d.y };
+      const k = key(n);
+      if (cameFrom.has(k)) continue;
+      if (blocked(n.x, n.y) && !(n.x === to.x && n.y === to.y)) continue;
+      cameFrom.set(k, cur);
+      queue.push(n);
+    }
+  }
+  return null;
+}

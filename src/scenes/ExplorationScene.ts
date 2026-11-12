@@ -135,6 +135,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.lockedExitShown = null;
     this.exitsArmed = false;
     this.encounterSprites = [];
+    this.swapOriginals = new Map();
     this.visionSprites = [];
     this.npcSprites = [];
     this.frozenVeil = null;
@@ -240,6 +241,8 @@ export class ExplorationScene extends Phaser.Scene {
         },
         notify: (title, subtitle) => this.showNotification(title, subtitle),
         refreshHud: () => this.statusHud.refresh(),
+        onHunted: () =>
+          this.showNotification(this.t('action.huntedTitle'), this.t('action.hunted')),
       },
       this.t,
     );
@@ -323,11 +326,41 @@ export class ExplorationScene extends Phaser.Scene {
     }
     this.groundLayer = ground;
     this.wallLayer = walls;
+    this.applyTileSwaps();
     walls.setCollisionBetween(def.collision.fromGid, def.collision.toGid, true);
     this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
   }
 
   private flagOn = (flag: string): boolean => this.session.getFlag(flag);
+
+  /** Original tile (gid) under each swapped position, so a swap can be undone. */
+  private swapOriginals = new Map<string, number>();
+
+  /** Applies map `tileSwaps` for the current flags (mirror lit, beam on, cache open…). */
+  private applyTileSwaps(): void {
+    const swaps = this.mapDef.tileSwaps ?? [];
+    if (swaps.length === 0) return;
+    const layerOf = (name: 'ground' | 'walls') =>
+      name === 'ground' ? this.groundLayer : this.wallLayer;
+    const key = (name: string, x: number, y: number): string => `${name}:${x},${y}`;
+    for (const swap of swaps)
+      for (const t of swap.tiles) {
+        const k = key(swap.layer, t.x, t.y);
+        if (!this.swapOriginals.has(k)) {
+          this.swapOriginals.set(k, layerOf(swap.layer).getTileAt(t.x, t.y, true)?.index ?? -1);
+        }
+      }
+    for (const [k, gid] of this.swapOriginals) {
+      const [name, xy] = k.split(':') as ['ground' | 'walls', string];
+      const [x, y] = xy.split(',').map(Number);
+      if (gid < 0) layerOf(name).removeTileAt(x, y);
+      else layerOf(name).putTileAt(gid, x, y);
+    }
+    for (const swap of swaps) {
+      if (!conditionHolds(swap.when, this.flagOn)) continue;
+      for (const t of swap.tiles) layerOf(swap.layer).putTileAt(swap.index + 1, t.x, t.y);
+    }
+  }
 
   private spawnNpcs(): void {
     for (const def of this.mapDef.npcs ?? []) {
@@ -711,6 +744,7 @@ export class ExplorationScene extends Phaser.Scene {
   private setupQuestListeners(): void {
     const listener: QuestEventListener = (event) => {
       this.questTracker.refresh();
+      this.action?.syncSpawns();
       if (event.type === 'quest_started') {
         this.showNotification(this.t('notify.newQuest'), `◆ ${event.quest.title}`);
       } else if (event.type === 'objective_completed' && event.objective) {
@@ -746,6 +780,7 @@ export class ExplorationScene extends Phaser.Scene {
   private applyEffects(effects: DialogueEffects): void {
     const granted = this.session.applyDialogueEffects(effects);
     this.refreshFrozen();
+    this.applyTileSwaps();
     this.action?.syncSpawns();
     this.player.setArmed(this.session.getFlag(FLAGS.hasBlade));
     if (granted.length > 0) {

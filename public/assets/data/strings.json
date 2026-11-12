@@ -122,6 +122,8 @@
     "satchel.readHint": "[E: Đọc]",
     "satchel.readerFooter": "Trang {page}/{pages} | [←/→] Lật trang | [E/ESC] Gấp lại",
     "satchel.clueTitle": "MANH MỐI",
-    "satchel.clueDetail": "Mang {name} đến đúng nơi rồi nhấn [E] ở đó."
+    "satchel.clueDetail": "Mang {name} đến đúng nơi rồi nhấn [E] ở đó.",
+    "action.huntedTitle": "CÓ THỨ GÌ ĐÓ ĐANG BÁM THEO",
+    "action.hunted": "Chúng muốn ngăn cậu — chạy thoát, hoặc quay lại đối mặt."
   }
 }

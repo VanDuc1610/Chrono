@@ -806,6 +806,32 @@
             "x": 18,
             "y": 13
           }
+        },
+        {
+          "id": "hunt_forest_a",
+          "enemyId": "enemy_temporal_shade",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 24,
+            "y": 3
+          },
+          "duringQuest": "quest_prologue_forest",
+          "hunter": true,
+          "speed": 70
+        },
+        {
+          "id": "hunt_forest_b",
+          "enemyId": "enemy_temporal_shade",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 18,
+            "y": 14
+          },
+          "duringQuest": "quest_prologue_forest",
+          "hunter": true,
+          "speed": 66
         }
       ]
     },
@@ -1343,6 +1369,34 @@
           "unlessFlag": "broke_village_loop",
           "teleportTo": "loop_alley"
         }
+      ],
+      "roamers": [
+        {
+          "id": "hunt_village_a",
+          "enemyId": "enemy_drowned_drifter",
+          "texture": "enemy_drifter",
+          "anim": "enemy_drifter_idle",
+          "tile": {
+            "x": 27,
+            "y": 15
+          },
+          "duringQuest": "quest_ch1_abandoned_village",
+          "hunter": true,
+          "speed": 68
+        },
+        {
+          "id": "hunt_village_b",
+          "enemyId": "enemy_drowned_drifter",
+          "texture": "enemy_drifter",
+          "anim": "enemy_drifter_idle",
+          "tile": {
+            "x": 4,
+            "y": 4
+          },
+          "duringQuest": "quest_ch1_abandoned_village",
+          "hunter": true,
+          "speed": 64
+        }
       ]
     },
     "map_ch1_sunset_beacon": {
@@ -1502,6 +1556,19 @@
             "x": 16,
             "y": 12
           }
+        },
+        {
+          "id": "hunt_beacon_a",
+          "enemyId": "enemy_drowned_drifter",
+          "texture": "enemy_drifter",
+          "anim": "enemy_drifter_idle",
+          "tile": {
+            "x": 21,
+            "y": 3
+          },
+          "duringQuest": "quest_ch1_fog_beacon",
+          "hunter": true,
+          "speed": 70
         }
       ]
     },
@@ -1525,7 +1592,7 @@
       "bgm": "ambient",
       "collision": {
         "fromGid": 4,
-        "toGid": 24
+        "toGid": 30
       },
       "ambient": {
         "color": "#1fa08a",
@@ -1640,6 +1707,82 @@
               "dialogueId": "ch1_sunken_cache_empty"
             }
           ]
+        },
+        {
+          "id": "poi_mirror_1",
+          "tile": {
+            "x": 8,
+            "y": 4
+          },
+          "radius": 46,
+          "prompt": "[E] Xoay tấm gương đồng",
+          "dialogueId": "ch1_mirror_1_ready",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch1_mirror_1_aligned",
+              "dialogueId": "ch1_mirror_1_already"
+            }
+          ]
+        },
+        {
+          "id": "poi_mirror_2",
+          "tile": {
+            "x": 12,
+            "y": 4
+          },
+          "radius": 46,
+          "prompt": "[E] Xoay tấm gương đồng",
+          "dialogueId": "ch1_mirror_2_ready_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch1_mirror_2_aligned",
+              "dialogueId": "ch1_mirror_2_already"
+            },
+            {
+              "ifFlag": "ch1_mirror_1_aligned",
+              "dialogueId": "ch1_mirror_2_ready_ok"
+            }
+          ]
+        },
+        {
+          "id": "poi_mirror_3",
+          "tile": {
+            "x": 12,
+            "y": 6
+          },
+          "radius": 46,
+          "prompt": "[E] Xoay tấm gương đồng",
+          "dialogueId": "ch1_mirror_3_ready_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch1_mirror_3_aligned",
+              "dialogueId": "ch1_mirror_all_aligned"
+            },
+            {
+              "ifFlag": "ch1_mirror_2_aligned",
+              "dialogueId": "ch1_mirror_3_ready_ok"
+            }
+          ]
+        },
+        {
+          "id": "poi_mirror_cache",
+          "tile": {
+            "x": 10,
+            "y": 6
+          },
+          "radius": 46,
+          "prompt": "[E] Xem rương đá có mắt kính",
+          "dialogueId": "ch1_mirror_cache_locked",
+          "dialogueRules": [
+            {
+              "ifFlag": "granted_mirror_cache",
+              "dialogueId": "ch1_mirror_cache_empty"
+            },
+            {
+              "ifFlag": "ch1_mirror_3_aligned",
+              "dialogueId": "ch1_mirror_cache_open"
+            }
+          ]
         }
       ],
       "encounters": [],
@@ -1707,9 +1850,123 @@
           "texture": "enemy_fracture",
           "anim": "enemy_fracture_idle",
           "tile": {
-            "x": 8,
-            "y": 5
+            "x": 11,
+            "y": 7
           }
+        },
+        {
+          "id": "hunt_ruins_a",
+          "enemyId": "enemy_drowned_drifter",
+          "texture": "enemy_drifter",
+          "anim": "enemy_drifter_idle",
+          "tile": {
+            "x": 22,
+            "y": 15
+          },
+          "duringQuest": "quest_ch1_sunken_ruins",
+          "hunter": true,
+          "speed": 70
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "ch1_mirror_1_aligned"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 8,
+              "y": 4
+            }
+          ],
+          "index": 25
+        },
+        {
+          "when": {
+            "flag": "ch1_mirror_2_aligned"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 12,
+              "y": 4
+            }
+          ],
+          "index": 25
+        },
+        {
+          "when": {
+            "flag": "ch1_mirror_3_aligned"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 12,
+              "y": 6
+            }
+          ],
+          "index": 25
+        },
+        {
+          "when": {
+            "flag": "ch1_mirror_1_aligned"
+          },
+          "layer": "ground",
+          "tiles": [
+            {
+              "x": 9,
+              "y": 4
+            },
+            {
+              "x": 10,
+              "y": 4
+            },
+            {
+              "x": 11,
+              "y": 4
+            }
+          ],
+          "index": 26
+        },
+        {
+          "when": {
+            "flag": "ch1_mirror_2_aligned"
+          },
+          "layer": "ground",
+          "tiles": [
+            {
+              "x": 12,
+              "y": 5
+            }
+          ],
+          "index": 27
+        },
+        {
+          "when": {
+            "flag": "ch1_mirror_3_aligned"
+          },
+          "layer": "ground",
+          "tiles": [
+            {
+              "x": 11,
+              "y": 6
+            }
+          ],
+          "index": 26
+        },
+        {
+          "when": {
+            "flag": "granted_mirror_cache"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 10,
+              "y": 6
+            }
+          ],
+          "index": 29
         }
       ]
     },
@@ -1733,7 +1990,7 @@
       "bgm": "ambient",
       "collision": {
         "fromGid": 4,
-        "toGid": 24
+        "toGid": 30
       },
       "ambient": {
         "color": "#1fa08a",

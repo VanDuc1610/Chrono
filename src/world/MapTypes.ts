@@ -121,6 +121,10 @@ export interface MapRoamerDefinition {
   leash?: number;
   patrolRadius?: number;
   speed?: number;
+  /** Present only while this quest is active (it fades when the quest ends). */
+  duringQuest?: string;
+  /** Hunts Peter across the whole map (no sight / leash limit) — a quest harasser. */
+  hunter?: boolean;
   /** Scripted ambush: cannot be hurt, cannot defeat Peter; at 1 HP this dialogue opens. */
   ambush?: { rescueDialogueId: string };
 }
@@ -189,6 +193,16 @@ export interface MapDefinition {
   interactables?: MapInteractableDefinition[];
   encounters?: MapEncounterDefinition[];
   roamers?: MapRoamerDefinition[];
+  /**
+   * Tiles that change with story flags, live (no reload): e.g. a mirror lighting up when aligned.
+   * `index` is the 0-based tileset index; later entries win; tiles go back when the flag clears.
+   */
+  tileSwaps?: {
+    when: FlagCondition;
+    layer: 'ground' | 'walls';
+    tiles: TilePoint[];
+    index: number;
+  }[];
   exits?: MapExitDefinition[];
   triggers?: MapTriggerDefinition[];
   visions?: MapVisionDefinition[];

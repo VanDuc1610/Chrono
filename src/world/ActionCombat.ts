@@ -6,6 +6,7 @@ import {
   facingFromAngle,
   inSlash,
   newBrain,
+  nextStep,
   resolveActionTuning,
   rollHit,
   thinkRoamer,
@@ -28,6 +29,8 @@ export interface ActionHost {
   onAmbushRescue(dialogueId: string): void;
   notify(title: string, subtitle: string): void;
   refreshHud(): void;
+  /** Quest harassers appeared (once per batch). */
+  onHunted?(): void;
 }
 
 interface Roamer {
@@ -39,6 +42,9 @@ interface Roamer {
   alive: boolean;
   /** Knockback in progress until this time (AI paused). */
   stunUntil: number;
+  /** Path finding: next tile centre to walk to, and when to recompute it. */
+  waypoint: Point | null;
+  pathAt: number;
   speed: number;
   sight: number;
   leash: number;
@@ -73,7 +79,7 @@ export class ActionCombat {
     private readonly scene: Phaser.Scene,
     private readonly session: GameSession,
     private readonly player: Player,
-    walls: Phaser.Tilemaps.TilemapLayer,
+    private readonly walls: Phaser.Tilemaps.TilemapLayer,
     defs: MapRoamerDefinition[],
     private readonly host: ActionHost,
     private readonly t: Translate,
@@ -84,6 +90,7 @@ export class ActionCombat {
     this.group = scene.physics.add.group();
     this.defs = defs;
     for (const def of defs) this.spawn(def);
+    if (this.roamers.some((r) => r.def.hunter)) this.announceHunters();
     scene.physics.add.collider(this.group, walls);
     scene.physics.add.collider(this.group, this.group);
     this.spawnElder();
@@ -114,9 +121,11 @@ export class ActionCombat {
   public syncSpawns(): void {
     for (const def of this.defs) {
       const live = this.roamers.find((r) => r.def.id === def.id);
-      const visible = conditionHolds(def.visibleWhen, this.flag);
-      if (!live && visible) this.spawn(def);
-      else if (live?.alive && !visible) this.fadeOut(live);
+      const visible = this.isVisible(def);
+      if (!live && visible) {
+        this.spawn(def);
+        if (def.hunter) this.announceHunters();
+      } else if (live?.alive && !visible) this.fadeOut(live);
     }
     if (!this.elder && this.elderActive) this.spawnElder();
   }
@@ -132,8 +141,21 @@ export class ActionCombat {
     });
   }
 
+  private isVisible(def: MapRoamerDefinition): boolean {
+    if (!conditionHolds(def.visibleWhen, this.flag)) return false;
+    return !def.duringQuest || this.session.quests.getQuestStage(def.duringQuest) === 'started';
+  }
+
+  private huntedAnnounced = false;
+
+  private announceHunters(): void {
+    if (this.huntedAnnounced) return;
+    this.huntedAnnounced = true;
+    this.scene.time.delayedCall(900, () => this.host.onHunted?.());
+  }
+
   private spawn(def: MapRoamerDefinition): void {
-    if (!conditionHolds(def.visibleWhen, this.flag)) return;
+    if (!this.isVisible(def)) return;
     if (def.respawn === false && def.defeatedFlag && this.flag(def.defeatedFlag)) return;
     const enemy = this.session.getEnemyDefinition(def.enemyId);
     if (!enemy) return;
@@ -150,9 +172,11 @@ export class ActionCombat {
       brain: newBrain(pos),
       alive: true,
       stunUntil: 0,
+      waypoint: null,
+      pathAt: 0,
       speed: def.speed ?? e.speed,
-      sight: def.sight ?? e.sight,
-      leash: def.leash ?? e.leash,
+      sight: def.sight ?? (def.hunter ? 100000 : e.sight),
+      leash: def.leash ?? (def.hunter ? 100000 : e.leash),
       patrolRadius: def.patrolRadius ?? e.patrolRadius,
     });
   }
@@ -209,8 +233,10 @@ export class ActionCombat {
       });
       r.brain = out.brain;
       if (out.moveTo) {
-        const dx = out.moveTo.x - r.sprite.x;
-        const dy = out.moveTo.y - r.sprite.y;
+        // Chasing or heading home goes around walls; patrol steps are short and direct.
+        const goal = out.pace >= 0.8 ? this.routeTo(r, out.moveTo, now) : out.moveTo;
+        const dx = goal.x - r.sprite.x;
+        const dy = goal.y - r.sprite.y;
         const len = Math.hypot(dx, dy) || 1;
         const v = r.speed * out.pace;
         r.sprite.setVelocity((dx / len) * v, (dy / len) * v);
@@ -225,6 +251,31 @@ export class ActionCombat {
       }
     }
     this.updateElder(now);
+  }
+
+  /** Next point toward `target` around walls (tile BFS, recomputed every 350 ms). */
+  private routeTo(r: Roamer, target: Point, now: number): Point {
+    const tile = (p: Point): Point => ({ x: Math.floor(p.x / 32), y: Math.floor(p.y / 32) });
+    const from = tile(r.sprite);
+    const to = tile(target);
+    if (from.x === to.x && from.y === to.y) return target;
+    if (now >= r.pathAt || !r.waypoint) {
+      r.pathAt = now + 350;
+      const layer = this.walls;
+      const blocked = (x: number, y: number): boolean => {
+        if (x < 0 || y < 0 || x >= layer.layer.width || y >= layer.layer.height) return true;
+        return layer.getTileAt(x, y)?.collides ?? false;
+      };
+      const step = nextStep(blocked, from, to);
+      r.waypoint = step ? { x: step.x * 32 + 16, y: step.y * 32 + 16 } : null;
+    }
+    const w = r.waypoint;
+    if (!w) return target;
+    if (distance(r.sprite, w) < 4) {
+      r.pathAt = 0;
+      return target;
+    }
+    return w;
   }
 
   // ------------------------------------------------------------------ Peter

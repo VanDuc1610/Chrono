@@ -311,7 +311,7 @@ const sheet = { w: 128, h: base.h + extra.h, buf: Buffer.alloc(128 * (base.h + e
 base.buf.copy(sheet.buf, 0);
 extra.buf.copy(sheet.buf, base.buf.length);
 
-const outDir = path.resolve('art-source/environment/sunken/generated/candidates');
+const outDir = path.resolve('art-source/environment/sunken/generated/candidates'); // approved copies live in ../approved
 const previewDir = path.join(outDir, 'previews');
 fs.mkdirSync(previewDir, { recursive: true });
 const file = path.join(outDir, `sunken_tileset_${VERSION}.png`);
