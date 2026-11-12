@@ -172,6 +172,18 @@ export class PreloadScene extends Phaser.Scene {
       frameHeight: 64,
     });
 
+    // Chapter 2 (T-53, owner approved 2026-11-13): Lyra, the Exiled Praetor, Imperial Automaton,
+    // Causality Enforcer (32x32 x4) and The Imperial Verdict (64x64, frame 4 = released).
+    for (const [key, file, size] of [
+      ['npc_lyra', 'assets/npcs/lyra_idle.png', 32],
+      ['npc_exiled_praetor', 'assets/npcs/exiled_praetor_idle.png', 32],
+      ['enemy_imperial_automaton', 'assets/enemies/imperial_automaton.png', 32],
+      ['enemy_causality_enforcer', 'assets/enemies/causality_enforcer.png', 32],
+      ['boss_imperial_verdict', 'assets/enemies/imperial_verdict.png', 64],
+    ] as const) {
+      this.load.spritesheet(key, file, { frameWidth: size, frameHeight: size });
+    }
+
     // 2. Maps & tilesets: every map listed in maps.json is queued once that file has loaded.
     this.load.once('filecomplete-json-data_maps', (_key: string, _type: string, data: unknown) => {
       for (const map of Object.values((data as MapDatabase).maps)) {
@@ -251,6 +263,11 @@ export class PreloadScene extends Phaser.Scene {
       ['npc_old_keeper_idle', 'npc_old_keeper', 3, 4],
       ['enemy_drifter_idle', 'enemy_drifter', 3, 5],
       ['boss_bellkeeper_idle', 'boss_bellkeeper', 3, 4],
+      ['npc_lyra_idle', 'npc_lyra', 3, 4],
+      ['npc_exiled_praetor_idle', 'npc_exiled_praetor', 3, 3],
+      ['enemy_imperial_automaton_idle', 'enemy_imperial_automaton', 3, 6],
+      ['enemy_causality_enforcer_idle', 'enemy_causality_enforcer', 3, 5],
+      ['boss_imperial_verdict_idle', 'boss_imperial_verdict', 3, 4],
     ] as const) {
       if (!this.anims.exists(key)) {
         this.anims.create({
