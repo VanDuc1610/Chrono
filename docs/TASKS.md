@@ -19,9 +19,27 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-Goal (owner, 2026-11-12): Chapter 1 "The Last Sunset" per `docs/story/CHAPTER_01_DESIGN.md` (approved, §10 contract).
+Goal (owner, 2026-11-12, playtest feedback): small enemies are fought **in real time on the map**
+(left click slash toward the cursor, Shift dodge, right click Temporal Strike 6 MP once learned,
+keys 1-4 quick items); bosses stay turn-based. Peter is ambushed unarmed, the Elder rescues him,
+lets him rest and explains, then fights beside him; the Elder teaches the skill later. Equipment:
+weapon + charm. Defeated → revive at the map's safe point, full HP, no loss. Roaming enemies respawn
+when the map is re-entered (story/quest enemies do not).
 
-_No active task — next: owner playtest of Chapter 1, then Chapter 2 design._
+### T-45 · Real-time map combat, Elder follower, ambush
+
+- **Assignee:** Claude · **Status:** IN PROGRESS
+- **Locks:** `src/`, `public/assets/data/maps.json`, `public/assets/data/enemies.json`, `public/assets/data/player.json`, `public/assets/data/strings.json`, `scripts/`, `tests/` (except `tests/content-data.test.ts`)
+
+### T-46 · Equipment (weapon + charm) and quick-item slots
+
+- **Assignee:** Claude · **Status:** TODO (after T-45) · **Locks:** same as T-45
+
+### T-47 · Prologue v3.1 ambush/rescue/teaching + Chapter 1 hidden mirror cache (content)
+
+- **Assignee:** Antigravity · **Status:** TODO
+- **Locks:** `public/assets/data/dialogue.json`, `public/assets/data/quests.json`, `public/assets/data/items.json`, `tests/content-data.test.ts`, `docs/story/PROLOGUE_V3_PROPOSAL.md`, `docs/story/CHAPTER_01_DESIGN.md`
+- **Engine contract:** [docs/implementation/ACTION_COMBAT_CONTRACT.md](implementation/ACTION_COMBAT_CONTRACT.md)
 
 ## Backlog (scheduled after current locks are released)
 
