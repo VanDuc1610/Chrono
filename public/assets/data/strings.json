@@ -4,7 +4,7 @@
     "hud.phase": "CHƯƠNG: Mở đầu",
     "hud.chapter": "CHƯƠNG {n}: {title}",
     "chapter.1.title": "Hoàng Hôn Cuối Cùng",
-    "hud.stats": "Cấp {level} | EXP {exp} | HP {hp}/{maxHp}",
+    "hud.stats": "Cấp {level} | EXP {exp} | HP {hp}/{maxHp} | MP {mp}/{maxMp}",
     "hud.expMax": "TỐI ĐA",
     "hud.controls": "[WASD/Mũi tên] Di chuyển | [E/Space] Tương tác | [I/B] Túi đồ | [Q] Nhiệm vụ | [K] Lưu | [ESC] Menu",
     "quest.label": "NHIỆM VỤ HIỆN TẠI",
@@ -87,6 +87,11 @@
     "ending.thanks": "Cảm ơn bạn đã trải nghiệm.",
     "ending.prompt": "[E / Space / Enter] Quay về màn hình chính",
     "ending.titleChapter": "HOÀN THÀNH CHƯƠNG {n}",
-    "ending.promptContinue": "[E / Space / Enter] Tiếp tục sang Chương 1"
+    "ending.promptContinue": "[E / Space / Enter] Tiếp tục sang Chương 1",
+    "hud.controlsArmed": "[Chuột trái] Chém | [Shift] Né | [Chuột phải] Kỹ năng | [E] Tương tác | [I] Túi | [Q] Nhiệm vụ | [K] Lưu",
+    "action.defeated": "{name} tan biến",
+    "action.noMp": "Không đủ MP",
+    "action.knockedOut": "Peter gục ngã...",
+    "action.revived": "Cậu tỉnh lại ở nơi an toàn."
   }
 }

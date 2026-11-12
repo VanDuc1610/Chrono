@@ -6,6 +6,7 @@ import type { Translate } from './Strings';
 /** Top-left header (location, chapter, level/EXP/HP) and the bottom controls hint. */
 export class StatusHud {
   private readonly stats: Phaser.GameObjects.Text;
+  private readonly controls: Phaser.GameObjects.Text;
 
   constructor(
     scene: Phaser.Scene,
@@ -15,7 +16,7 @@ export class StatusHud {
     /** 0 = Prologue. */
     chapter = 0,
   ) {
-    createPanel(scene, 10, 10, 240, 56).setScrollFactor(0).setDepth(90);
+    createPanel(scene, 10, 10, 290, 56).setScrollFactor(0).setDepth(90);
     const text = (y: number, value: string, size: string, color: string, bold = false) =>
       scene.add
         .text(20, y, value, {
@@ -37,8 +38,8 @@ export class StatusHud {
     );
     this.stats = text(44, '', '10px', '#4ade80', true);
 
-    scene.add
-      .text(10, scene.scale.height - 16, t('hud.controls'), {
+    this.controls = scene.add
+      .text(10, scene.scale.height - 16, '', {
         fontFamily: 'monospace',
         fontSize: '10px',
         color: '#5d6b8a',
@@ -55,8 +56,19 @@ export class StatusHud {
     const remaining = s.expToNextLevel();
     const exp =
       remaining === null ? `${s.exp}/${this.t('hud.expMax')}` : `${s.exp}/${s.exp + remaining}`;
+    const max = s.getStats();
     this.stats.setText(
-      this.t('hud.stats', { level: s.level, exp, hp: s.hp, maxHp: s.getStats().maxHp }),
+      this.t('hud.stats', {
+        level: s.level,
+        exp,
+        hp: s.hp,
+        maxHp: max.maxHp,
+        mp: Math.floor(s.mp),
+        maxMp: max.maxMp,
+      }),
+    );
+    this.controls.setText(
+      this.t(s.getFlag('has_broken_blade') ? 'hud.controlsArmed' : 'hud.controls'),
     );
   }
 }

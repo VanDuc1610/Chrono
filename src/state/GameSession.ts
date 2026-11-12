@@ -52,6 +52,8 @@ export class GameSession {
   public level = 1;
   public exp = 0;
   public hp: number;
+  /** MP on the map (Temporal Strike); battles still start with full MP. Not saved: full on load. */
+  public mp: number;
   public position: MapPosition | null = null;
   public playtimeMs = 0;
 
@@ -59,6 +61,7 @@ export class GameSession {
     this.inventory.loadDatabase(db.items);
     this.quests.loadDatabase(db.quests);
     this.hp = this.getStats().maxHp;
+    this.mp = this.getStats().maxMp;
   }
 
   public static newGame(db: GameDatabase): GameSession {
@@ -241,6 +244,10 @@ export class GameSession {
   public applyDialogueEffects(effects: DialogueEffects): IItemStack[] {
     for (const flag of effects.setFlags ?? []) this.setFlag(flag);
     for (const flag of effects.clearFlags ?? []) this.setFlag(flag, false);
+    if (effects.healFull) {
+      this.hp = this.getStats().maxHp;
+      this.mp = this.getStats().maxMp;
+    }
 
     if (effects.startQuest && this.quests.getQuestStage(effects.startQuest) === 'inactive') {
       this.quests.startQuest(effects.startQuest);

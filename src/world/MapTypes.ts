@@ -94,6 +94,33 @@ export interface MapEncounterDefinition {
   visibleWhen?: FlagCondition;
 }
 
+/**
+ * A small enemy fought in real time on the map (bosses stay turn-based encounters). It patrols near
+ * its tile, chases Peter on sight and gives up past its leash. Respawns when the map is re-entered
+ * unless `respawn: false` (then `defeatedFlag` keeps it gone).
+ */
+export interface MapRoamerDefinition {
+  id: string;
+  /** Id in enemies.json (HP, attack, defense, EXP, loot). */
+  enemyId: string;
+  texture: string;
+  anim?: string;
+  tile: TilePoint;
+  /** All roamers of a group defeated → flag `cleared_<group>` (quest objectives). */
+  group?: string;
+  respawn?: boolean;
+  defeatedFlag?: string;
+  /** Spawned only when the condition holds on entering the map. */
+  visibleWhen?: FlagCondition;
+  /** Overrides of player.json `action.enemy`. */
+  sight?: number;
+  leash?: number;
+  patrolRadius?: number;
+  speed?: number;
+  /** Scripted ambush: cannot be hurt, cannot defeat Peter; at 1 HP this dialogue opens. */
+  ambush?: { rescueDialogueId: string };
+}
+
 export interface MapExitDefinition {
   id: string;
   area: TileRect;
@@ -157,6 +184,7 @@ export interface MapDefinition {
   npcs?: MapNpcDefinition[];
   interactables?: MapInteractableDefinition[];
   encounters?: MapEncounterDefinition[];
+  roamers?: MapRoamerDefinition[];
   exits?: MapExitDefinition[];
   triggers?: MapTriggerDefinition[];
   visions?: MapVisionDefinition[];

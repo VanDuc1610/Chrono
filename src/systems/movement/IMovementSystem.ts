@@ -28,4 +28,7 @@ export interface IMovementSystem {
    * Last non-idle facing, used to pick the idle animation after the entity stops.
    */
   getLastFacing(): 'up' | 'down' | 'left' | 'right';
+
+  /** Turns the idle facing (e.g. toward a slash aimed with the mouse). */
+  setLastFacing(facing: 'up' | 'down' | 'left' | 'right'): void;
 }

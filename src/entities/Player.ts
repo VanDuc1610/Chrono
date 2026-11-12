@@ -16,6 +16,11 @@ export class Player extends Entity {
   private speed: number;
   private hasAnimations = false;
   private animSuffix = '';
+  /** Dash / knockback: velocity forced until `forcedUntil` (scene time, ms). */
+  private forcedVelocity = { x: 0, y: 0 };
+  private forcedUntil = 0;
+  /** An action animation (slash, hurt) plays to the end before walk/idle take over. */
+  private actionAnimUntil = 0;
 
   constructor(
     scene: Phaser.Scene,
@@ -75,11 +80,34 @@ export class Player extends Entity {
     if (this.hasAnimations) this.sprite.play(`peter_idle${this.animSuffix}_down`, true);
   }
 
+  /** Forces a velocity for `ms` (dodge dash, knockback); input movement resumes after. */
+  public forceVelocity(vx: number, vy: number, ms: number): void {
+    this.forcedVelocity = { x: vx, y: vy };
+    this.forcedUntil = this.sprite.scene.time.now + ms;
+  }
+
+  public get isForced(): boolean {
+    return this.sprite.scene.time.now < this.forcedUntil;
+  }
+
+  /** Plays a one-shot action animation (`peter_attack`, `peter_hurt`) facing `facing`. */
+  public playAction(prefix: string, facing: 'up' | 'down' | 'left' | 'right', ms: number): void {
+    this.movementSystem.setLastFacing(facing);
+    this.actionAnimUntil = this.sprite.scene.time.now + ms;
+    const key = `${prefix}_${facing}`;
+    if (this.hasAnimations && this.sprite.scene.anims.exists(key)) this.sprite.play(key, true);
+  }
+
   public update(): void {
     const direction = this.controller.getMovementVector();
-    this.movementSystem.move(this.sprite, direction, this.speed);
+    const now = this.sprite.scene.time.now;
+    if (now < this.forcedUntil) {
+      this.sprite.setVelocity(this.forcedVelocity.x, this.forcedVelocity.y);
+    } else {
+      this.movementSystem.move(this.sprite, direction, this.speed);
+    }
 
-    if (this.hasAnimations) {
+    if (this.hasAnimations && now >= this.actionAnimUntil) {
       const isMoving = direction.x !== 0 || direction.y !== 0;
       const facing = this.movementSystem.getFacing(direction);
       const activeFacing = facing !== 'idle' ? facing : this.movementSystem.getLastFacing();

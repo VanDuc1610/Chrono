@@ -113,6 +113,12 @@ export function validateMapDatabase(db: MapDatabase, refs: MapReferenceSets): st
         err(key, `encounter ${enc.id}: unknown enemy "${enc.enemyId}"`);
       dialogue(enc.victoryDialogueId, `encounter ${enc.id}`);
     }
+    for (const r of map.roamers ?? []) {
+      if (!refs.enemyIds.has(r.enemyId)) err(key, `roamer ${r.id}: unknown enemy "${r.enemyId}"`);
+      if (r.respawn === false && !r.defeatedFlag)
+        err(key, `roamer ${r.id}: respawn false needs a defeatedFlag`);
+      dialogue(r.ambush?.rescueDialogueId, `roamer ${r.id}`);
+    }
     for (const vision of map.visions ?? []) dialogue(vision.dialogueId, `vision ${vision.id}`);
     for (const exit of map.exits ?? []) {
       const target = db.maps[exit.toMap];

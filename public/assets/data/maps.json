@@ -535,20 +535,7 @@
           "dialogueId": "rift_echo_attune"
         }
       ],
-      "encounters": [
-        {
-          "id": "enc_antechamber_shade",
-          "enemyId": "enemy_temporal_shade",
-          "texture": "enemy_fracture",
-          "anim": "enemy_fracture_idle",
-          "tile": {
-            "x": 16,
-            "y": 9
-          },
-          "defeatedFlag": "isShadeDefeated",
-          "hitbox": 22
-        }
-      ],
+      "encounters": [],
       "exits": [
         {
           "id": "antechamber_to_forest",
@@ -583,6 +570,20 @@
           "effects": {
             "startQuest": "quest_prologue_awakening"
           }
+        }
+      ],
+      "roamers": [
+        {
+          "id": "roam_antechamber_shade",
+          "enemyId": "enemy_temporal_shade",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 16,
+            "y": 9
+          },
+          "respawn": false,
+          "defeatedFlag": "isShadeDefeated"
         }
       ]
     },
@@ -648,20 +649,7 @@
           "dialogueId": "poi_chrono_crevice"
         }
       ],
-      "encounters": [
-        {
-          "id": "enc_forest_shade",
-          "enemyId": "enemy_temporal_shade",
-          "texture": "enemy_fracture",
-          "anim": "enemy_fracture_idle",
-          "tile": {
-            "x": 17,
-            "y": 7
-          },
-          "defeatedFlag": "defeated_forest_shade",
-          "hitbox": 22
-        }
-      ],
+      "encounters": [],
       "exits": [
         {
           "id": "forest_to_town",
@@ -686,7 +674,41 @@
           "toSpawn": "from_forest"
         }
       ],
-      "triggers": []
+      "triggers": [],
+      "roamers": [
+        {
+          "id": "roam_forest_shade",
+          "enemyId": "enemy_temporal_shade",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 17,
+            "y": 7
+          },
+          "respawn": false,
+          "defeatedFlag": "defeated_forest_shade"
+        },
+        {
+          "id": "roam_forest_stray_a",
+          "enemyId": "enemy_temporal_shade",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "id": "roam_forest_stray_b",
+          "enemyId": "enemy_temporal_shade",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 18,
+            "y": 13
+          }
+        }
+      ]
     },
     "map_old_lighthouse": {
       "id": "map_old_lighthouse",
@@ -939,6 +961,21 @@
           "repeat": true,
           "unlessFlag": "broke_shore_loop",
           "teleportTo": "loop_reset"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "roam_shore_drifter",
+          "enemyId": "enemy_drowned_drifter",
+          "texture": "enemy_drifter",
+          "anim": "enemy_drifter_idle",
+          "tile": {
+            "x": 14,
+            "y": 9
+          },
+          "visibleWhen": {
+            "flag": "broke_shore_loop"
+          }
         }
       ]
     },
@@ -1345,6 +1382,28 @@
           "delayMs": 600,
           "dialogueId": "ch1_beacon_arrival"
         }
+      ],
+      "roamers": [
+        {
+          "id": "roam_beacon_drifter_a",
+          "enemyId": "enemy_drowned_drifter",
+          "texture": "enemy_drifter",
+          "anim": "enemy_drifter_idle",
+          "tile": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "id": "roam_beacon_drifter_b",
+          "enemyId": "enemy_drowned_drifter",
+          "texture": "enemy_drifter",
+          "anim": "enemy_drifter_idle",
+          "tile": {
+            "x": 16,
+            "y": 12
+          }
+        }
       ]
     },
     "map_ch1_sunken_corridors": {
@@ -1484,44 +1543,7 @@
           ]
         }
       ],
-      "encounters": [
-        {
-          "id": "enc_ch1_drifter_a",
-          "enemyId": "enemy_drowned_drifter",
-          "texture": "enemy_drifter",
-          "anim": "enemy_drifter_idle",
-          "tile": {
-            "x": 12,
-            "y": 13
-          },
-          "defeatedFlag": "defeated_ch1_drifter_a",
-          "hitbox": 22
-        },
-        {
-          "id": "enc_ch1_drifter_b",
-          "enemyId": "enemy_drowned_drifter",
-          "texture": "enemy_drifter",
-          "anim": "enemy_drifter_idle",
-          "tile": {
-            "x": 20,
-            "y": 8
-          },
-          "defeatedFlag": "defeated_ch1_drifter_b",
-          "hitbox": 22
-        },
-        {
-          "id": "enc_ch1_chorister",
-          "enemyId": "enemy_echo_chorister",
-          "texture": "enemy_fracture",
-          "anim": "enemy_fracture_idle",
-          "tile": {
-            "x": 8,
-            "y": 5
-          },
-          "defeatedFlag": "defeated_ch1_chorister",
-          "hitbox": 22
-        }
-      ],
+      "encounters": [],
       "exits": [
         {
           "id": "ruins_to_beacon",
@@ -1548,7 +1570,49 @@
           "lockedDialogueId": "ch1_sanctum_seal_locked"
         }
       ],
-      "triggers": []
+      "triggers": [],
+      "roamers": [
+        {
+          "id": "roam_ch1_drifter_a",
+          "enemyId": "enemy_drowned_drifter",
+          "texture": "enemy_drifter",
+          "anim": "enemy_drifter_idle",
+          "tile": {
+            "x": 12,
+            "y": 13
+          }
+        },
+        {
+          "id": "roam_ch1_drifter_b",
+          "enemyId": "enemy_drowned_drifter",
+          "texture": "enemy_drifter",
+          "anim": "enemy_drifter_idle",
+          "tile": {
+            "x": 20,
+            "y": 8
+          }
+        },
+        {
+          "id": "roam_ch1_drifter_c",
+          "enemyId": "enemy_drowned_drifter",
+          "texture": "enemy_drifter",
+          "anim": "enemy_drifter_idle",
+          "tile": {
+            "x": 5,
+            "y": 10
+          }
+        },
+        {
+          "id": "roam_ch1_chorister",
+          "enemyId": "enemy_echo_chorister",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      ]
     },
     "map_ch1_bell_sanctum": {
       "id": "map_ch1_bell_sanctum",

@@ -55,4 +55,8 @@ export class TopDownMovementSystem implements IMovementSystem {
   public getLastFacing(): 'up' | 'down' | 'left' | 'right' {
     return this.lastFacing;
   }
+
+  public setLastFacing(facing: 'up' | 'down' | 'left' | 'right'): void {
+    this.lastFacing = facing;
+  }
 }

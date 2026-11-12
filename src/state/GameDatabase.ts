@@ -1,4 +1,5 @@
 import type Phaser from 'phaser';
+import type { ActionTuningInput } from '../systems/action/ActionRules';
 import { CombatTuning, EnemyDatabase } from '../systems/combat/CombatTypes';
 import { InventoryDatabase, IItemStack } from '../systems/inventory/InventoryTypes';
 import { QuestDatabase } from '../systems/quest/QuestTypes';
@@ -31,6 +32,8 @@ export interface PlayerDefinition {
 export interface PlayerDatabase {
   player: PlayerDefinition;
   combat: CombatTuning;
+  /** Real-time map combat tuning (defaults in ActionRules). */
+  action?: ActionTuningInput;
   /**
    * Combat commands that need a story flag before they appear (Prologue v3: no Attack until the
    * Elder hands Peter the Broken Blade, no Skill until Temporal Sight awakens).

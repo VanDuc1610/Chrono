@@ -138,6 +138,12 @@ async function run() {
 
     await client.eval(`
       (() => {
+        // Small enemies are fought in real time now; this suite checks the turn-based battle scene, so it
+        // puts back a touch-to-battle Shade in the Antechamber (test data only, in memory).
+        const maps = window.__GAME__.cache.json.get('data_maps').maps;
+        const ante = maps.map_shattered_antechamber;
+        ante.roamers = [];
+        ante.encounters = [{ id: 'enc_test_shade', enemyId: 'enemy_temporal_shade', texture: 'enemy_fracture', anim: 'enemy_fracture_idle', tile: { x: 16, y: 9 }, defeatedFlag: 'isShadeDefeated' }];
         const sm = window.__GAME__.scene;
         sm.stop('MainMenuScene');
         sm.start('ExplorationScene', { mapId: 'map_shattered_antechamber' });

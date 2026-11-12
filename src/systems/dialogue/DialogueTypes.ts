@@ -30,6 +30,10 @@ export interface DialogueEffects {
    * visibleWhen / frozenWhen / layerVariants reflect the new flags — e.g. switching time layers.
    */
   refreshMap?: boolean;
+  /** After the dialogue closes, Peter is carried to this map / spawn (fade). */
+  warpTo?: { mapId: string; spawnId: string };
+  /** HP and MP refilled. */
+  healFull?: boolean;
 }
 
 export interface DialogueNode {

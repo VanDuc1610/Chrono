@@ -16,6 +16,7 @@ import { NotificationBanner } from '../ui/NotificationBanner';
 import { QuestTracker } from '../ui/QuestTracker';
 import { SatchelPanel } from '../ui/SatchelPanel';
 import { StatusHud } from '../ui/StatusHud';
+import { ActionCombat } from '../world/ActionCombat';
 import { getStrings, Translate } from '../ui/Strings';
 import {
   conditionHolds,
@@ -92,6 +93,10 @@ export class ExplorationScene extends Phaser.Scene {
   private spawn = { x: 0, y: 0 };
   private pendingNotice: ExplorationSceneData['notice'] | null = null;
   private pendingDialogueId: string | null = null;
+  /** Real-time combat with the map's roaming enemies (null until create). */
+  public action: ActionCombat | null = null;
+  /** Map / spawn Peter is carried to when the current dialogue closes (effects.warpTo). */
+  private pendingWarp: { mapId: string; spawnId: string } | null = null;
 
   constructor() {
     super({ key: 'ExplorationScene' });
@@ -136,6 +141,8 @@ export class ExplorationScene extends Phaser.Scene {
     this.isFrozen = false;
     this.pendingEncounter = null;
     this.pendingRefresh = false;
+    this.pendingWarp = null;
+    this.action = null;
     this.session = getSession(this);
     this.pendingNotice = data?.notice ?? null;
     this.pendingDialogueId = data?.openDialogueId ?? null;
@@ -170,12 +177,17 @@ export class ExplorationScene extends Phaser.Scene {
           this.pendingChapter = event.node.effects.endChapter;
         }
         if (event.node.effects.refreshMap) this.pendingRefresh = true;
+        if (event.node.effects.warpTo) this.pendingWarp = event.node.effects.warpTo;
       }
       if (event.type === 'node_changed' && event.node) this.summonVisions(event.node.id);
       if (event.type === 'dialogue_ended') {
         this.dismissVisions();
         if (this.pendingEnding) this.startPrologueEnding(this.pendingChapter);
-        else if (this.pendingRefresh) {
+        else if (this.pendingWarp) {
+          const warp = this.pendingWarp;
+          this.pendingWarp = null;
+          this.time.delayedCall(150, () => this.warp(warp.mapId, warp.spawnId));
+        } else if (this.pendingRefresh) {
           this.pendingRefresh = false;
           this.time.delayedCall(150, () => this.rebuildInPlace());
         } else if (this.pendingEncounter) {
@@ -213,6 +225,24 @@ export class ExplorationScene extends Phaser.Scene {
     this.spawnNpcs();
     this.spawnInteractables();
     this.spawnEncounters();
+    this.action = new ActionCombat(
+      this,
+      this.session,
+      this.player,
+      this.wallLayer,
+      this.mapDef.roamers ?? [],
+      {
+        isPaused: () => this.isTransitioning || this.satchel.isOpen || this.dialogueBox.isOpen(),
+        onPlayerDefeated: () => this.knockedOut(),
+        onAmbushRescue: (id) => {
+          this.action?.dismissAmbushers();
+          this.openDialogue(id);
+        },
+        notify: (title, subtitle) => this.showNotification(title, subtitle),
+        refreshHud: () => this.statusHud.refresh(),
+      },
+      this.t,
+    );
     this.setupQuestListeners();
     this.setupKeys();
 
@@ -253,6 +283,7 @@ export class ExplorationScene extends Phaser.Scene {
 
   public update(_time: number, delta: number): void {
     this.session.tick(delta);
+    this.action?.update(delta);
     if (this.satchel.isOpen || this.isTransitioning) return;
 
     if (this.dialogueBox.isOpen()) {
@@ -532,6 +563,40 @@ export class ExplorationScene extends Phaser.Scene {
     this.cameras.main.fadeOut(300, 0, 0, 0);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
       const data: ExplorationSceneData = { mapId: target.id, spawnId: exit.toSpawn };
+      this.scene.restart(data);
+    });
+  }
+
+  /** Carried to another map by a dialogue (effects.warpTo), e.g. the Elder taking Peter home. */
+  private warp(mapId: string, spawnId: string): void {
+    if (this.isTransitioning) return;
+    this.beginSceneExit();
+    const db = this.cache.json.get('data_maps') as MapDatabase;
+    const target = resolveMap(db, mapId);
+    const tile = target.spawns[spawnId] ?? target.spawns.default;
+    this.session.position = { mapId: target.id, ...tileCenter(tile) };
+    this.cameras.main.fadeOut(900, 0, 0, 0);
+    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+      const data: ExplorationSceneData = { mapId: target.id, spawnId };
+      this.scene.restart(data);
+    });
+  }
+
+  /** Peter falls on the map: he wakes at the map's safe point with full HP; nothing is lost. */
+  private knockedOut(): void {
+    if (this.isTransitioning) return;
+    this.beginSceneExit();
+    const revive = tileCenter(this.mapDef.revive ?? this.mapDef.spawns.default);
+    this.session.hp = this.session.getStats().maxHp;
+    this.session.mp = this.session.getStats().maxMp;
+    this.session.position = { mapId: this.mapDef.id, ...revive };
+    this.cameras.main.fadeOut(900, 40, 0, 0);
+    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+      const data: ExplorationSceneData = {
+        mapId: this.mapDef.id,
+        returnPosition: revive,
+        notice: { title: this.t('action.knockedOut'), subtitle: this.t('action.revived') },
+      };
       this.scene.restart(data);
     });
   }
