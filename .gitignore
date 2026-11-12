@@ -22,3 +22,7 @@ Thumbs.db
 
 # Local junction to .agents/skills (Antigravity reads .agent/); the source of truth is .agents/skills
 .agent/skills/
+
+# Playwright
+test-results/
+playwright-report/
