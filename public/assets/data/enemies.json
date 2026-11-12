@@ -86,34 +86,6 @@
       }
     },
     {
-      "id": "enemy_rift_shade_first",
-      "name": "Bóng Đen Thời Gian",
-      "level": 1,
-      "maxHp": 30,
-      "hp": 30,
-      "attack": 8,
-      "defense": 4,
-      "speed": 10,
-      "spriteKey": "enemy_fracture",
-      "skills": ["chrono_scratch", "temporal_flux"],
-      "expReward": 20,
-      "lootTable": [],
-      "script": {
-        "lockedCommands": ["escape"],
-        "events": [
-          {
-            "atTurn": 2,
-            "dialogueId": "battle_elder_intervenes",
-            "setFlags": ["has_broken_blade"],
-            "ally": {
-              "texture": "npc_elder",
-              "anim": "npc_elder_idle"
-            }
-          }
-        ]
-      }
-    },
-    {
       "id": "enemy_drowned_drifter",
       "name": "Thực Thể Trôi Dạt",
       "level": 4,
@@ -212,6 +184,36 @@
           "chance": 0.25
         }
       ]
+    },
+    {
+      "id": "boss_time_wraith",
+      "name": "Bóng Ma Thời Gian",
+      "level": 4,
+      "maxHp": 160,
+      "hp": 160,
+      "attack": 9,
+      "defense": 9,
+      "speed": 14,
+      "spriteKey": "enemy_fracture",
+      "spriteScale": 2.8,
+      "skills": ["chrono_scratch", "temporal_flux"],
+      "expReward": 0,
+      "lootTable": [],
+      "script": {
+        "lockedCommands": ["escape", "skill"],
+        "unlockedCommands": ["attack"],
+        "rescue": {
+          "belowHpPct": 0.2,
+          "dialogueId": "battle_elder_rescue",
+          "event": {
+            "dialogueId": "battle_wraith_rescue_flash",
+            "ally": {
+              "texture": "npc_elder",
+              "anim": "npc_elder_idle"
+            }
+          }
+        }
+      }
     }
   ]
 }

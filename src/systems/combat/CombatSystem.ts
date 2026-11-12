@@ -73,6 +73,8 @@ export class CombatSystem implements ICombatSystem {
   private readonly resolveItem: (itemId: string) => CombatItemEffect | undefined;
   private readonly text: Record<string, string>;
   private rng: () => number;
+  /** Party HP cannot drop below this (scripted fights Peter must survive); 0 = off. */
+  public partyHpFloor = 0;
 
   constructor(options: CombatSystemOptions) {
     this.tuning = options.tuning;
@@ -223,6 +225,11 @@ export class CombatSystem implements ICombatSystem {
       const dealt = Math.max(0, Math.min(reduced, target.stats.hp - m.hpFloor));
       target.stats.hp -= dealt;
       return { dealt, shielded: true };
+    }
+    if (target.type !== 'enemy' && this.partyHpFloor > 0) {
+      const dealt = Math.max(0, Math.min(damage, target.stats.hp - this.partyHpFloor));
+      target.stats.hp -= dealt;
+      return { dealt, shielded: false };
     }
     target.stats.hp = Math.max(0, target.stats.hp - damage);
     return { dealt: damage, shielded: false };

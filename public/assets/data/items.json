@@ -123,7 +123,8 @@
       "maxStack": 1,
       "pages": [
         "Sổ trực hải đăng — Quy tắc chuông:\nHành lang ngầm khóa bởi ba nhịp triều. Thứ tự mở phong ấn: bắt đầu từ [Bình Minh] hứng tia sáng sớm, tiếp nối [Hoàng Hôn] khi nắng ngả bóng, và khép lại ở [Đêm Tĩnh].",
-        "Bí mật hốc gương đáy biển:\nDẫn luồng sáng qua ba gương: Gương 1 hướng thẳng vào khe nứt giữa hang; Gương 2 bẻ góc về phía hốc đá rêu; Gương 3 đón sáng rọi thẳng vào rương đồng cổ ẩn sau rạn san hô."
+        "Bí mật hốc gương đáy biển:\nDẫn luồng sáng qua ba gương: Gương 1 hướng thẳng vào khe nứt giữa hang; Gương 2 bẻ góc về phía hốc đá rêu; Gương 3 đón sáng rọi thẳng vào rương đồng cổ ẩn sau rạn san hô.",
+        "Ghi chú cuối, nét mực vội:\nĐêm bão, kim giờ dự phòng của đèn rơi xuống chân tảng đá đơn độc phía tây nam. Nước còn đầy thì đừng mò — đợi bánh xe triều hạ hẳn rồi hãy xuống."
       ]
     },
     {
@@ -217,6 +218,33 @@
         "maxMp": 4,
         "defense": 1,
         "speed": 1
+      }
+    },
+    {
+      "id": "beacon_hour_hand",
+      "name": "Kim Giờ Hải Đăng",
+      "type": "weapon",
+      "description": "Chiếc kim giờ dự phòng bằng đồng của ngọn hải đăng, dài gần bằng cánh tay. Nặng và vung chậm hơn, nhưng với tới xa và đánh rất đau.",
+      "value": 70,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 7,
+        "reach": 40,
+        "swingMs": 480
+      }
+    },
+    {
+      "id": "singing_shell_charm",
+      "name": "Vỏ Ốc Biết Hát",
+      "type": "charm",
+      "description": "Chiếc vỏ ốc người cha hứa mang về cho con. Áp vào tai nghe tiếng sóng ngân như hát ru — tâm trí lắng lại, sức bền cũng vững hơn.",
+      "value": 50,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxMp": 8,
+        "defense": 2
       }
     }
   ]

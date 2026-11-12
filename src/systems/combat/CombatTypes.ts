@@ -65,7 +65,15 @@ export interface BattleEvent {
 export interface BattleScript {
   /** Commands unavailable for this whole battle (e.g. `escape` in a forced fight). */
   lockedCommands?: string[];
+  /** Commands available in this battle even without their story flag (e.g. bare-handed attack). */
+  unlockedCommands?: string[];
   events?: BattleEvent[];
+  /**
+   * A fight Peter cannot lose or win: his HP never drops below 1, and once it falls to
+   * `belowHpPct` of max the event plays (e.g. the Elder steps in) and the battle ends; the map
+   * reopens with `dialogueId`.
+   */
+  rescue?: { belowHpPct: number; dialogueId: string; event: Omit<BattleEvent, 'atTurn'> };
 }
 
 /**

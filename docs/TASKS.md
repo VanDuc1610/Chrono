@@ -26,11 +26,16 @@ lets him rest and explains, then fights beside him; the Elder teaches the skill 
 weapon + charm. Defeated → revive at the map's safe point, full HP, no loss. Roaming enemies respawn
 when the map is re-entered (story/quest enemies do not).
 
-### T-48 · Notes and puzzle items (content)
+### T-49 · Chapter 2 design document
 
-- **Assignee:** Antigravity · **Status:** DONE
-- **Locks:** (none)
-- **Contract:** [ACTION_COMBAT_CONTRACT.md §5](implementation/ACTION_COMBAT_CONTRACT.md)
+- **Assignee:** Antigravity · **Status:** TODO
+- **Locks:** `docs/story/CHAPTER_02_DESIGN.md` (new file only — no game data, no code)
+- **Brief:** turn [STORY_CHAPTER_02.md](story/STORY_CHAPTER_02.md) into a buildable design in the
+  same shape as [CHAPTER_01_DESIGN.md](story/CHAPTER_01_DESIGN.md) §1-§10: maps, NPCs, quests,
+  flags, draft Vietnamese dialogue, enemies (real-time small enemies + one turn-based boss with a
+  mechanic), hidden gear, art list (reuse first), open questions for the owner. Puzzles must use
+  mechanics not used before (no rotating anchor, no mirror order, no bell order). The Elder no longer
+  follows Peter: at most one short guiding appearance.
 
 ## Backlog (scheduled after current locks are released)
 
@@ -41,8 +46,8 @@ when the map is re-entered (story/quest enemies do not).
 
 ## Done (latest 5 — older entries in [TASKS_ARCHIVE.md](TASKS_ARCHIVE.md))
 
+- **T-50** Owner feedback pass: the moment time stops, the Time Wraith (Bóng Ma Thời Gian) attacks in a turn-based boss fight Peter cannot win or lose (bare-handed attack; battle script `unlockedCommands`, `rescue` with a party HP floor) — at 20 % HP the Elder steps in and the rescue continues as before. The Elder now walks with Peter only as far as the shrine (`elder_parted` on arrival, parting line in his farewell). Small enemies ~18 % faster (default speed 84). Hidden gear in Chapter 1: Kim Giờ Hải Đăng (weapon, beacon lone rock at low tide, clue on logbook page 3) and Vỏ Ốc Biết Hát (charm, village east rock nook, needs the child's drawing; clue in the fisherman's letter). Verified: 80 unit tests, 4 CDP suites, live probe of the ambush → rescue → rest — Claude
 - **T-48** Notes and puzzle items content (`dialogue.json`, `items.json`, `tests/content-data.test.ts`): converted `unsent_fisherman_letter` to `document` with 2 pages; added 5 new `document` items (1–2 pages each, ≤ 220 chars/page, granted once via `grantOnceFlag`) for Peter's repair ledger, torn journal leaf, lighthouse keeper's logbook (hiding mirror cache order 1 → 2 → 3), child's village drawing, sundial bronze rubbing; added 2 `puzzle` items (`bronze_bell_clapper` from sunken cache, `tide_mirror_lens` from unnamed watch case) consumed via `takeItems` at Dawn chime pillar and mirror 1; verified with `typecheck`, `lint`, `prettier --check .`, and 77 unit tests — Antigravity; wired into maps.json (dawn pillar needs the clapper, mirror 1 needs the lens, fallbacks for older saves; 78 unit tests) — Claude
 - **T-46** Equipment and bag: weapon + charm slots (stats, reach, swing speed; auto-equip into an empty slot), quick keys 1-4, bag in four tabs (Trang bị / Vật phẩm / Ghi chép with a page reader / Manh mối), item types document and puzzle, dialogue rules ifItem / unlessItem and effect takeItems, save 0.4.0. Chapter 1 hidden mirror cache placed (ENV_SUNKEN_002 approved): mirrors light up and beams appear live via map tileSwaps. Verified: 73 unit tests, 4 CDP suites, live probes — Claude
 - **T-45** Real-time map combat: roaming enemies (patrol, chase on sight, wind-up, leash; path finding around walls), slash toward the cursor, Shift dodge, right-click Temporal Strike, the Elder fighting beside Peter, revive at the safe point, respawn on re-entry; quest harassers (duringQuest + hunter); Prologue v3.1 wired (ambush → rescue → rest → first hunt → watch → Temporal Strike). Verified: live playthroughs — Claude
 - **T-47** Prologue v3.1 ambush/rescue/teaching + Ch.1 hidden mirror cache (`dialogue.json`, `quests.json`, `items.json`, `tests/content-data.test.ts`, `PROLOGUE_V3_PROPOSAL.md`, `CHAPTER_01_DESIGN.md`): replaced retired `battle_elder_intervenes` & `elder_after_first_battle` with `battle_elder_rescue` (`warpTo` room `rest`, `healFull`), `elder_rest_explain` (grants `broken_blade`, starts `quest_prologue_first_hunt`, teaches left-click/Shift/I), `elder_after_hunt`, `elder_teach_skill` (right-click Temporal Strike, 6 MP); converted `broken_blade` to `weapon`, added `tide_brass_blade` (`weapon` from `poi_mirror_cache`) and `sea_glass_charm` (`charm` reward on `quest_ch1_empty_photo`), added `poi_mirror_1..3` + `poi_mirror_cache` + logbook hint; `typecheck` & `lint` pass, 66/67 Vitest pass (only `maps.json` still referencing `elder_after_first_battle` awaits Claude wiring) — Antigravity
-- **T-44** Chapter 1 playable: 5 maps (Bờ Biển Hoàng Hôn → Làng Chài → Hải Đăng → Hành Lang Đáy Biển → Thánh Điện) with time loops, Time Anchor 3 layers (cataclysm freezes the village), low-tide layer, bell sequence, Drowned Drifters + Echo Chorister, boss The Sunken Bellkeeper (3-step bell mechanic), Continuum Seal → "HOÀN THÀNH CHƯƠNG 1". Prologue end card continues into Chapter 1; level cap 3 in the Prologue, 7 after; map ambient light, NPC tint/alpha, HUD chapter name. Art batch approved and integrated (ENV_COASTAL_002, ENV_WILDS_002, ENV_SUNKEN_001, NPC_OLD_KEEPER_001, MOB_DRIFTER_001, BOSS_BELLKEEPER_001). Verified: 62 unit tests, 4 CDP suites (combat suite now waits for Peter's turn), full live playthrough (Lv 6 at the boss, Lv 7 at the end) — Claude

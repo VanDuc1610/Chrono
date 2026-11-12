@@ -57,7 +57,7 @@ export const DEFAULT_ACTION_TUNING: ActionTuning = {
     sight: 130,
     leash: 260,
     patrolRadius: 48,
-    speed: 72,
+    speed: 84,
     attackRange: 24,
     windupMs: 450,
     recoverMs: 900,

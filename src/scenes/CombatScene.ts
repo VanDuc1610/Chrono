@@ -133,6 +133,7 @@ export class CombatScene extends Phaser.Scene {
       text: getStringTable(this),
     });
     this.combatSystem.startBattle([this.player], [this.enemy]);
+    if (template.script?.rescue) this.combatSystem.partyHpFloor = 1;
 
     // 3. Render Combatants
     this.createCombatants();
@@ -591,7 +592,9 @@ export class CombatScene extends Phaser.Scene {
    */
   /** Unlocked by story flags (player.json commandFlags) and not locked by the battle script. */
   private isCommandAvailable(type: PlayerCommand): boolean {
-    if (this.enemyTemplate.script?.lockedCommands?.includes(type)) return false;
+    const script = this.enemyTemplate.script;
+    if (script?.lockedCommands?.includes(type)) return false;
+    if (script?.unlockedCommands?.includes(type)) return true;
     return this.session.isCommandUnlocked(type);
   }
 
@@ -743,7 +746,31 @@ export class CombatScene extends Phaser.Scene {
       );
     }
 
+    // Scripted rescue: Peter is about to fall — someone steps in and the fight ends here.
+    const rescue = this.enemyTemplate.script?.rescue;
+    if (rescue && this.player.stats.hp <= Math.ceil(this.player.stats.maxHp * rescue.belowHpPct)) {
+      this.time.delayedCall(ENEMY_TO_PLAYER_DELAY_MS, () =>
+        this.runBattleEvent({ atTurn: 0, ...rescue.event }, () => this.endWithRescue()),
+      );
+      return;
+    }
+
     this.endTurn(ENEMY_TO_PLAYER_DELAY_MS);
+  }
+
+  /** Ends a scripted fight after the rescue: back to the map, which opens the rescue dialogue. */
+  private endWithRescue(): void {
+    const rescue = this.enemyTemplate.script?.rescue;
+    this.session.applyBattleHp(this.player.stats.hp);
+    this.combatSystem.endBattle();
+    const data: ExplorationSceneData = {
+      returnPosition: this.sceneData.returnPosition,
+      openDialogueId: rescue?.dialogueId,
+    };
+    this.time.delayedCall(600, () => {
+      this.cameras.main.fadeOut(300, 0, 0, 0);
+      this.time.delayedCall(350, () => this.scene.start('ExplorationScene', data));
+    });
   }
 
   private handleBattleEnd(): void {

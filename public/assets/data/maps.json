@@ -311,7 +311,20 @@
           }
         }
       ],
-      "encounters": [],
+      "encounters": [
+        {
+          "id": "enc_time_wraith",
+          "enemyId": "boss_time_wraith",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 22,
+            "y": 7
+          },
+          "defeatedFlag": "rescued_by_elder",
+          "hidden": true
+        }
+      ],
       "exits": [
         {
           "id": "town_to_room",
@@ -356,7 +369,8 @@
           },
           "requiresFlag": "delivered_repaired_watch",
           "onceFlag": "trig_time_stops",
-          "dialogueId": "town_time_stops"
+          "dialogueId": "town_time_stops",
+          "encounterId": "enc_time_wraith"
         },
         {
           "id": "trig_after_hunt",
@@ -410,26 +424,6 @@
         "unlessFlag": "time_restored"
       },
       "roamers": [
-        {
-          "id": "roam_ambush_shade",
-          "enemyId": "enemy_temporal_shade",
-          "texture": "enemy_fracture",
-          "anim": "enemy_fracture_idle",
-          "tile": {
-            "x": 22,
-            "y": 7
-          },
-          "visibleWhen": {
-            "flag": "time_frozen",
-            "unlessFlag": "rescued_by_elder"
-          },
-          "sight": 640,
-          "leash": 2000,
-          "speed": 78,
-          "ambush": {
-            "rescueDialogueId": "battle_elder_rescue"
-          }
-        },
         {
           "id": "roam_town_shade_a",
           "enemyId": "enemy_stray_shade",
@@ -669,6 +663,14 @@
           "effects": {
             "startQuest": "quest_prologue_awakening"
           }
+        },
+        {
+          "id": "trig_elder_stays",
+          "on": "arrive",
+          "onceFlag": "elder_parted",
+          "effects": {
+            "setFlags": ["elder_parted"]
+          }
         }
       ],
       "roamers": [
@@ -818,7 +820,7 @@
           },
           "duringQuest": "quest_prologue_forest",
           "hunter": true,
-          "speed": 70
+          "speed": 83
         },
         {
           "id": "hunt_forest_b",
@@ -831,7 +833,7 @@
           },
           "duringQuest": "quest_prologue_forest",
           "hunter": true,
-          "speed": 66
+          "speed": 78
         }
       ]
     },
@@ -1319,6 +1321,26 @@
               "dialogueId": "ch1_village_bell_post_ready"
             }
           ]
+        },
+        {
+          "id": "poi_east_rock_nook",
+          "tile": {
+            "x": 25,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Xem hốc đá",
+          "dialogueId": "ch1_east_nook_plain",
+          "dialogueRules": [
+            {
+              "ifFlag": "granted_singing_shell",
+              "dialogueId": "ch1_east_nook_empty"
+            },
+            {
+              "ifItem": "child_village_drawing",
+              "dialogueId": "ch1_east_nook_shell"
+            }
+          ]
         }
       ],
       "encounters": [],
@@ -1382,7 +1404,7 @@
           },
           "duringQuest": "quest_ch1_abandoned_village",
           "hunter": true,
-          "speed": 68
+          "speed": 80
         },
         {
           "id": "hunt_village_b",
@@ -1395,7 +1417,7 @@
           },
           "duringQuest": "quest_ch1_abandoned_village",
           "hunter": true,
-          "speed": 64
+          "speed": 76
         }
       ]
     },
@@ -1498,6 +1520,26 @@
           "radius": 44,
           "prompt": "[E] Đọc sổ trực đèn",
           "dialogueId": "ch1_keeper_logbook"
+        },
+        {
+          "id": "poi_beacon_lone_rock",
+          "tile": {
+            "x": 6,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Xem tảng đá đơn độc",
+          "dialogueId": "ch1_beacon_rock_flooded",
+          "dialogueRules": [
+            {
+              "ifFlag": "granted_beacon_hour_hand",
+              "dialogueId": "ch1_beacon_rock_empty"
+            },
+            {
+              "ifFlag": "tide_lowered",
+              "dialogueId": "ch1_beacon_rock_hour_hand"
+            }
+          ]
         }
       ],
       "encounters": [],
@@ -1568,7 +1610,7 @@
           },
           "duringQuest": "quest_ch1_fog_beacon",
           "hunter": true,
-          "speed": 70
+          "speed": 83
         }
       ]
     },
@@ -1897,7 +1939,7 @@
           },
           "duringQuest": "quest_ch1_sunken_ruins",
           "hunter": true,
-          "speed": 70
+          "speed": 83
         }
       ],
       "tileSwaps": [

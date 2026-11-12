@@ -253,7 +253,7 @@
         "Khoan đã... Tiếng sóng biển vừa tắt ngấm?!",
         "Mọi chiếc đồng hồ trên phố đồng loạt đứng im tại một giây! Sóng biển ngoài kia đông cứng giữa không trung, gió ngừng thổi hoàn toàn!",
         "Cô Ba khựng lại với chiếc muôi còn nghiêng, Ông Sáu cũng bất động giữa nhịp vá lưới... Tất cả mọi người đều đóng băng — chỉ mình mình còn cử động được?",
-        "Phía bãi đất trống bỗng rách toạc ra một khe sáng tím sẫm! Có bóng đen vừa trườn ra ngoài phố và đang lao thẳng về phía mình — trong tay mình chẳng có lấy một món đồ tự vệ nào!"
+        "Phía bãi đất trống bỗng rách toạc ra một khe sáng tím sẫm! Một Bóng Ma Thời Gian khổng lồ trườn ra và lao thẳng vào mình — trong tay mình chẳng có lấy một món đồ tự vệ nào!"
       ],
       "responses": [],
       "effects": {
@@ -585,7 +585,8 @@
       "lines": [
         "Khá lắm, Peter. Cậu không còn chỉ vung kiếm theo bản năng nữa mà đã biết nương theo nhịp chuyển động của trận đấu.",
         "Cổng Ngưỡng phía bắc đã mở. Phía sau nó là mỏm đá Ngọn Hải Đăng Cổ — nơi một người gác biển đang vô tình giữ chặt giây phút ngưng đọng của thị trấn cậu.",
-        "Ta sẽ mở đường tới đó. Hãy giải thoát cho ông ấy để trả lại buổi sáng bình thường cho Cô Ba và Ông Sáu."
+        "Ta sẽ mở đường tới đó. Hãy giải thoát cho ông ấy để trả lại buổi sáng bình thường cho Cô Ba và Ông Sáu.",
+        "Từ đây cậu phải tự bước tiếp, Peter. Ta ở lại giữ ngôi điện này — nhưng đừng lo, khi cậu lạc lối, ta sẽ tìm đến."
       ],
       "responses": [
         {
@@ -2184,6 +2185,82 @@
         ],
         "grantOnceFlag": "granted_watch_lens_late"
       }
+    },
+    "battle_wraith_rescue_flash": {
+      "id": "battle_wraith_rescue_flash",
+      "speaker": "Ông Lão",
+      "lines": [
+        "Peter khuỵu xuống, Bóng Ma Thời Gian giương vuốt định kết liễu...",
+        "Một luồng sáng xanh lam xé ngang con phố — ông lão áo choàng xanh chắn trước mặt Peter!"
+      ],
+      "responses": []
+    },
+    "ch1_beacon_rock_flooded": {
+      "id": "ch1_beacon_rock_flooded",
+      "speaker": "Peter",
+      "lines": [
+        "Tảng đá đơn độc đứng chơ vơ giữa nước. Dưới chân đá có thứ gì bằng kim loại lấp lánh qua làn sóng, nhưng nước sâu quá, mình không với tới."
+      ],
+      "responses": []
+    },
+    "ch1_beacon_rock_hour_hand": {
+      "id": "ch1_beacon_rock_hour_hand",
+      "speaker": "Peter",
+      "lines": [
+        "Triều đã rút. Chân tảng đá lộ ra, và mắc trong khe đá là một chiếc kim đồng hồ bằng đồng dài gần bằng cánh tay mình!",
+        "Đây là kim giờ dự phòng của hải đăng mà sổ trực đèn nhắc tới. Cầm lên khá nặng tay — nhưng dùng làm vũ khí thì với tới xa hơn hẳn."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "beacon_hour_hand",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_beacon_hour_hand"
+      }
+    },
+    "ch1_beacon_rock_empty": {
+      "id": "ch1_beacon_rock_empty",
+      "speaker": "Peter",
+      "lines": ["Chân tảng đá giờ chỉ còn rêu và nước đọng."],
+      "responses": []
+    },
+    "ch1_east_nook_plain": {
+      "id": "ch1_east_nook_plain",
+      "speaker": "Peter",
+      "lines": [
+        "Một hốc đá ẩm phía đông làng. Trên mỏm đá còn hằn vết dây neo thuyền cũ, dưới chân toàn vỏ ốc vỡ.",
+        "Có ai đó từng buộc thuyền ở đây rất lâu... nhưng mình không biết mình đang tìm gì."
+      ],
+      "responses": []
+    },
+    "ch1_east_nook_shell": {
+      "id": "ch1_east_nook_shell",
+      "speaker": "Peter",
+      "lines": [
+        "Hốc đá phía đông — đúng chỗ người cha trong thư neo thuyền. Mình nhớ dòng chữ trong bức vẽ: \"Bố hứa sẽ mang về cho con một vỏ ốc biết hát.\"",
+        "Lục giữa đống vỏ vỡ, mình tìm thấy một chiếc vỏ ốc còn nguyên, buộc sợi dây gai đã mục. Áp vào tai — tiếng sóng ngân lên như một lời hát ru."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "singing_shell_charm",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_singing_shell"
+      }
+    },
+    "ch1_east_nook_empty": {
+      "id": "ch1_east_nook_empty",
+      "speaker": "Peter",
+      "lines": [
+        "Hốc đá phía đông. Chiếc vỏ ốc giờ đã ở bên mình — mong lời hứa năm xưa cũng đã tìm được đường về."
+      ],
+      "responses": []
     }
   }
 }
