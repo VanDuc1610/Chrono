@@ -66,3 +66,16 @@ reaches the chest only when all three are aligned in order (1 → 2 → 3; a mir
 resets the others with `clearFlags`). The chest grants the new weapon once (`grantOnceFlag:
 "granted_mirror_cache"`). A hint hides in an existing text (e.g. the keeper's logbook). Name the
 weapon and one charm in `items.json`; Claude adds mirror tiles (owner approval) and places them.
+
+## 5. Bag tabs, notes and puzzle items (engine, owner request 2026-11-13)
+
+The bag has four tabs (Left / Right): **Trang bị** (`weapon`, `charm`), **Vật phẩm**
+(`consumable`, `material`), **Ghi chép** (`document`), **Manh mối** (`key_item`, `puzzle`).
+
+- `"type": "document"` with `"pages": ["...", "..."]` — E opens a reader, Left / Right turns
+  pages. Use notes to hide puzzle clues and lore (letters, journal pages, logbooks).
+- `"type": "puzzle"` — an object Peter carries to the right place (a gear, a lens, a bell clapper).
+- Dialogue rules (NPCs and interactables) accept `ifItem` / `unlessItem`: e.g. the broken
+  pedestal shows "place the lens" only while Peter carries the lens.
+- Dialogue effect `takeItems: [{ "itemId": "...", "quantity": 1 }]` hands an item over / uses it up
+  (a placed puzzle object, a delivered letter).

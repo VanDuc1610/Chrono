@@ -56,6 +56,7 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       'grantOnceFlag',
       'endPrologue',
       'endChapter',
+      'takeItems',
       'refreshMap',
       'warpTo',
       'healFull',

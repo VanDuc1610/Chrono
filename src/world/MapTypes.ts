@@ -28,6 +28,10 @@ export interface DialogueRule {
   ifFlag?: string;
   /** The rule applies only while this flag is NOT set. */
   unlessFlag?: string;
+  /** The rule applies only while Peter carries this item (puzzle objects, letters to deliver). */
+  ifItem?: string;
+  /** The rule applies only while Peter does NOT carry this item. */
+  unlessItem?: string;
   dialogueId: string;
 }
 

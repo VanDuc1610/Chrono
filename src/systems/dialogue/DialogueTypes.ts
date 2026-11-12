@@ -34,6 +34,8 @@ export interface DialogueEffects {
   warpTo?: { mapId: string; spawnId: string };
   /** HP and MP refilled. */
   healFull?: boolean;
+  /** Items handed over / used up (e.g. a puzzle object placed, a letter delivered). */
+  takeItems?: { itemId: string; quantity: number }[];
 }
 
 export interface DialogueNode {

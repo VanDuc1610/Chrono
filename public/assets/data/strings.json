@@ -21,7 +21,7 @@
     "dialogue.choose": "[Chọn 1 hoặc 2]",
     "satchel.title": "TÚI ĐỒ CỦA PETER",
     "satchel.subtitle": "Sức chứa: 16 ô | Loại: Tất cả",
-    "satchel.footer": "[Lên/Xuống] Chọn | [E] Dùng / Trang bị | [1-4] Gắn ô nhanh | [I/ESC] Đóng",
+    "satchel.footer": "[←/→] Mục | [↑/↓] Chọn | [E] Dùng / Đọc | [1-4] Ô nhanh | [ESC] Đóng",
     "satchel.empty": "Túi đồ trống.",
     "satchel.useHint": "[E: Dùng · 1-4: Gắn ô]",
     "satchel.type.consumable": "TIÊU HAO",
@@ -108,6 +108,20 @@
     "satchel.quickOnlyDetail": "Chỉ vật phẩm tiêu hao mới gắn vào ô nhanh được.",
     "satchel.usedDetailMp": "{name} (+{mp} MP)",
     "quick.full": "Đã đầy",
-    "quick.none": "Hết {name}"
+    "quick.none": "Hết {name}",
+    "satchel.tab.gear": "TRANG BỊ",
+    "satchel.tab.items": "VẬT PHẨM",
+    "satchel.tab.notes": "GHI CHÉP",
+    "satchel.tab.clues": "MANH MỐI",
+    "satchel.tabHint.notes": "Thư từ, nhật ký, trang giấy nhặt được — đọc kỹ, bí ẩn nằm trong chữ.",
+    "satchel.tabHint.clues": "Đồ vật đặc biệt — mang đến đúng nơi để giải câu đố.",
+    "satchel.emptyTab.gear": "Chưa có vũ khí hay bùa hộ thân.",
+    "satchel.emptyTab.items": "Chưa có vật phẩm.",
+    "satchel.emptyTab.notes": "Chưa nhặt được trang giấy nào.",
+    "satchel.emptyTab.clues": "Chưa có manh mối nào.",
+    "satchel.readHint": "[E: Đọc]",
+    "satchel.readerFooter": "Trang {page}/{pages} | [←/→] Lật trang | [E/ESC] Gấp lại",
+    "satchel.clueTitle": "MANH MỐI",
+    "satchel.clueDetail": "Mang {name} đến đúng nơi rồi nhấn [E] ở đó."
   }
 }

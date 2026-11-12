@@ -271,6 +271,14 @@ export class GameSession {
   public applyDialogueEffects(effects: DialogueEffects): IItemStack[] {
     for (const flag of effects.setFlags ?? []) this.setFlag(flag);
     for (const flag of effects.clearFlags ?? []) this.setFlag(flag, false);
+    for (const stack of effects.takeItems ?? []) {
+      this.inventory.removeItem(stack.itemId, stack.quantity);
+      for (const slot of ['weapon', 'charm'] as const) {
+        if (this.equipment[slot] === stack.itemId && !this.inventory.hasItem(stack.itemId, 1)) {
+          this.equipment[slot] = null;
+        }
+      }
+    }
     if (effects.healFull) {
       this.hp = this.getStats().maxHp;
       this.mp = this.getStats().maxMp;

@@ -680,12 +680,16 @@ export class ExplorationScene extends Phaser.Scene {
     };
 
     on(K.ESC, () => {
-      if (this.satchel.isOpen) this.toggleInventory();
-      else if (this.dialogueBox.isOpen()) this.closeDialogue();
+      if (this.satchel.isOpen) {
+        if (!this.satchel.back()) this.toggleInventory();
+      } else if (this.dialogueBox.isOpen()) this.closeDialogue();
       else this.returnToMenu();
     });
     on(K.I, () => this.toggleInventory());
     on(K.B, () => this.toggleInventory());
+    on(K.LEFT, () => this.satchel.isOpen && this.satchel.left());
+    on(K.RIGHT, () => this.satchel.isOpen && this.satchel.right());
+    on(K.TAB, () => this.satchel.isOpen && this.satchel.right());
     on(K.UP, () => this.satchel.isOpen && this.satchel.navigate(-1));
     on(K.DOWN, () => this.satchel.isOpen && this.satchel.navigate(1));
     on(K.E, () => this.satchel.isOpen && this.satchel.useSelected());
@@ -734,6 +738,7 @@ export class ExplorationScene extends Phaser.Scene {
     return {
       isQuestCompleted: (id: string) => this.questSystem.isQuestCompleted(id),
       getFlag: (flag: string) => this.session.getFlag(flag),
+      hasItem: (itemId: string) => this.session.inventory.hasItem(itemId, 1),
     };
   }
 

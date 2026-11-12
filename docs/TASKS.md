@@ -35,6 +35,12 @@ when the map is re-entered (story/quest enemies do not).
 
 - **Assignee:** Claude · **Status:** TODO (after T-45) · **Locks:** same as T-45
 
+### T-48 · Notes and puzzle items (content)
+
+- **Assignee:** Antigravity · **Status:** TODO
+- **Locks:** `public/assets/data/dialogue.json`, `public/assets/data/quests.json`, `public/assets/data/items.json`, `tests/content-data.test.ts`
+- **Contract:** [ACTION_COMBAT_CONTRACT.md §5](implementation/ACTION_COMBAT_CONTRACT.md)
+
 ## Backlog (scheduled after current locks are released)
 
 - **Vietnamese pass on remaining UI** (Combat, Main Menu, Prologue End) via `strings.json` once T-28 lands.

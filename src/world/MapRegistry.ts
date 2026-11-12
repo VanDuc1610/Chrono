@@ -41,12 +41,19 @@ export function resolveMap(db: MapDatabase, id: string | null | undefined): MapD
 export function pickDialogue(
   defaultId: string,
   rules: DialogueRule[] | undefined,
-  state: { isQuestCompleted(id: string): boolean; getFlag(flag: string): boolean },
+  state: {
+    isQuestCompleted(id: string): boolean;
+    getFlag(flag: string): boolean;
+    hasItem?(itemId: string): boolean;
+  },
 ): string {
+  const has = (id: string): boolean => state.hasItem?.(id) ?? false;
   for (const rule of rules ?? []) {
     if (rule.ifQuestCompleted && !state.isQuestCompleted(rule.ifQuestCompleted)) continue;
     if (rule.ifFlag && !state.getFlag(rule.ifFlag)) continue;
     if (rule.unlessFlag && state.getFlag(rule.unlessFlag)) continue;
+    if (rule.ifItem && !has(rule.ifItem)) continue;
+    if (rule.unlessItem && has(rule.unlessItem)) continue;
     return rule.dialogueId;
   }
   return defaultId;
