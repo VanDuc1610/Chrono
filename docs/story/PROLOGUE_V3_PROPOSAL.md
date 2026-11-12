@@ -111,3 +111,17 @@ Không cần bản đồ mới. Không đổi trận Vệ Binh.
 **Thoại cần có (`dialogue.json`, Antigravity):** `room_*` (đời thường), `elder_shop_visit`, `town_time_stops`, `battle_elder_intervenes` (2–4 dòng ngắn, mỗi dòng ≤ 90 ký tự), `elder_after_first_battle`, `grandfather_watch_awakens`, `elder_explains_frozen_town`, các thoại `*_frozen` cho NPC/điểm tương tác khi `time_frozen`, `town_time_restored`; Elder ở điện thờ chuyển sang giọng người thầy.
 
 **Theo cờ (Claude, engine + maps.json):** NPC và điểm tương tác chọn thoại theo cờ (`dialogueRules` với `ifFlag`), NPC đứng yên + ám xanh xám khi `time_frozen` chưa `time_restored`.
+
+---
+
+## 7. Bản cập nhật v3.1 — Chiến đấu thời gian thực trên bản đồ (T-45 / T-46 / T-47)
+
+Theo góp ý playtest của Owner (2026-11-12), các kẻ địch nhỏ chuyển sang **chiến đấu thời gian thực ngay trên bản đồ**, trong khi các trận boss (Vệ Binh Chìm Trong Sóng) vẫn giữ chế độ theo lượt. Chi tiết hợp đồng nằm ở [ACTION_COMBAT_CONTRACT.md](../implementation/ACTION_COMBAT_CONTRACT.md).
+
+- **Nhịp Hồi 2–3 mới:**
+  1. `town_time_stops` (`setFlags: ["time_frozen"]`) không còn mở trận đánh theo lượt nữa; một Bóng Đen phục kích rượt đuổi Peter giữa phố khi cậu chưa có vũ khí.
+  2. Khi Bóng Đen đánh Peter còn `1 HP`, `battle_elder_rescue` kích hoạt: ông lão xuất hiện đẩy lùi nó, hồi đầy HP/MP (`healFull: true`), bật `rescued_by_elder` và đưa cậu về phòng nghỉ (`warpTo: { mapId: "map_peters_room", spawnId: "rest" }`).
+  3. Tỉnh dậy ở căn gác (`elder_rest_explain`), Trưởng Lão giải thích chuyện đang xảy ra (vẫn giữ bí ẩn lý do Peter cử động được), trao `broken_blade` (loại `weapon`), bật `has_broken_blade`, `elder_joined`, mở quest `quest_prologue_first_hunt` và dạy thao tác cơ bản (`Chuột trái` chém, `Shift` lướt né, `I` mở túi đồ để trang bị).
+  4. `quest_prologue_first_hunt` (`completeOnFlag: "cleared_town_shades"`): Peter sát cánh cùng Trưởng Lão dọn sạch Bóng Đen ngoài phố bằng đòn chém thường → `elder_after_hunt` dẫn cậu quay lại xem đồng hồ ông nội.
+  5. `grandfather_watch_awakens` (`learned_temporal_sight`) → `elder_teach_skill` (`taught_temporal_strike`): Trưởng Lão dạy nhấn `Chuột phải` tung **Đòn Thời Gian** (6 MP), sau đó chuỗi quest nối tiếp sang `quest_prologue_forest` như cũ.
+- **Loại bỏ:** `battle_elder_intervenes` và `elder_after_first_battle` được gỡ bỏ khỏi `dialogue.json`.

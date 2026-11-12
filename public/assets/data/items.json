@@ -42,11 +42,16 @@
     {
       "id": "broken_blade",
       "name": "Thanh Kiếm Gãy",
-      "type": "key_item",
-      "description": "Thanh kiếm gãy phát sáng sắc lam mà Trưởng Lão ném cho Peter giữa trận chiến đầu tiên. Nó khước từ ông nhưng lại cộng hưởng trong tay cậu.",
+      "type": "weapon",
+      "description": "Thanh kiếm gãy phát sáng sắc lam mà Trưởng Lão trao lại cho Peter sau khi cứu cậu. Nó khước từ ông nhưng lại cộng hưởng vừa vặn trong tay người thợ trẻ.",
       "value": 0,
       "stackable": false,
-      "maxStack": 1
+      "maxStack": 1,
+      "equip": {
+        "attack": 2,
+        "reach": 28,
+        "swingMs": 420
+      }
     },
     {
       "id": "coastal_pancake",
@@ -98,6 +103,35 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1
+    },
+    {
+      "id": "tide_brass_blade",
+      "name": "Đoản Kiếm Đồng Thủy Triều",
+      "type": "weapon",
+      "description": "Thanh đoản kiếm đồng thau giấu trong rương ánh sáng ở Hành Lang Đáy Biển. Lưỡi kiếm nhẹ tay, vươn xa và giữ nhịp chém nhanh hơn.",
+      "value": 60,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 5,
+        "reach": 34,
+        "swingMs": 360
+      }
+    },
+    {
+      "id": "sea_glass_charm",
+      "name": "Bùa Thủy Tinh Hoàng Hôn",
+      "type": "charm",
+      "description": "Mảnh thủy tinh biển mài nhẵn buộc dây bạc giữ lại hơi ấm buổi chiều muộn bên bàn thờ cũ. Đeo lên giúp tăng thể lực và độ bền.",
+      "value": 45,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 12,
+        "maxMp": 4,
+        "defense": 1,
+        "speed": 1
+      }
     }
   ]
 }

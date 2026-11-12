@@ -57,6 +57,8 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       'endPrologue',
       'endChapter',
       'refreshMap',
+      'warpTo',
+      'healFull',
     ]);
     for (const node of Object.values(dialogueDb.dialogues)) {
       for (const key of Object.keys(node.effects ?? {})) {
@@ -151,6 +153,8 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       FLAGS.shadeDefeated,
       // Set on winning the Act 2 first-shade encounter added by T-37 (maps.json + enemies.json).
       'defeated_first_shade',
+      // Set by ActionCombat when all roamers in group "town_shades" are defeated (T-45/T-47).
+      'cleared_town_shades',
     ]);
     for (const node of Object.values(dialogueDb.dialogues)) {
       for (const flag of node.effects?.setFlags ?? []) {
@@ -270,7 +274,7 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
     expect(session.exp).toBe(10);
   });
 
-  it('satisfies the Prologue v3 §6 dialogue, battle-log length, Act 1 mundane tone, and 5-act quest chain', () => {
+  it('satisfies the Prologue v3.1 ambush/rescue/teaching dialogue, Act 1 mundane tone, and quest chain', () => {
     const requiredIds = [
       'intro_awakening',
       'room_door_locked',
@@ -281,9 +285,11 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       'elder_shop_visit',
       'watch_delivery',
       'town_time_stops',
-      'battle_elder_intervenes',
-      'elder_after_first_battle',
+      'battle_elder_rescue',
+      'elder_rest_explain',
+      'elder_after_hunt',
       'grandfather_watch_awakens',
+      'elder_teach_skill',
       'elder_explains_frozen_town',
       'npc_vendor_ba_ba_frozen',
       'npc_fisherman_sau_frozen',
@@ -293,19 +299,25 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       'town_time_restored',
     ];
     for (const id of requiredIds) {
-      expect(dialogueDb.dialogues[id], `Missing §6 dialogue "${id}"`).toBeDefined();
+      expect(dialogueDb.dialogues[id], `Missing v3.1 dialogue "${id}"`).toBeDefined();
     }
+    expect(dialogueDb.dialogues.battle_elder_intervenes).toBeUndefined();
+    expect(dialogueDb.dialogues.elder_after_first_battle).toBeUndefined();
 
-    // battle_elder_intervenes: 2-4 short lines, each <= 90 characters
-    const intervene = dialogueDb.dialogues.battle_elder_intervenes;
-    expect(intervene.lines.length).toBeGreaterThanOrEqual(2);
-    expect(intervene.lines.length).toBeLessThanOrEqual(4);
-    for (const line of intervene.lines) {
-      expect(
-        line.length,
-        `Line too long in battle_elder_intervenes: "${line}"`,
-      ).toBeLessThanOrEqual(90);
-    }
+    // Verify rescue warp/heal and control instructions in rest & skill lessons
+    expect(dialogueDb.dialogues.battle_elder_rescue.effects).toEqual({
+      setFlags: ['rescued_by_elder'],
+      healFull: true,
+      warpTo: { mapId: 'map_peters_room', spawnId: 'rest' },
+    });
+    const restText = dialogueDb.dialogues.elder_rest_explain.lines.join(' ').toLowerCase();
+    expect(restText).toContain('chuột trái');
+    expect(restText).toContain('shift');
+    expect(restText).toContain('[i]');
+
+    const skillText = dialogueDb.dialogues.elder_teach_skill.lines.join(' ').toLowerCase();
+    expect(skillText).toContain('chuột phải');
+    expect(skillText).toContain('6 mp');
 
     // No cosmic / Act 2+ spoilers before time stops, and zero Kuro mentions anywhere
     const forbiddenAct1Terms = [
@@ -371,30 +383,36 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
     session.syncQuestProgress();
     expect(session.quests.getQuestStage('quest_prologue_timestop')).toBe('started');
 
-    // Act 2: Time stops -> Elder throws blade mid-battle -> win first fight
+    // Act 2: Time stops -> unarmed ambush rescue -> rest & receive broken_blade once -> hunt town Shades
     session.applyDialogueEffects(dialogueDb.dialogues.town_time_stops.effects!);
     expect(session.getFlag('time_frozen')).toBe(true);
-    session.applyDialogueEffects(dialogueDb.dialogues.battle_elder_intervenes.effects!);
-    expect(session.getFlag('has_broken_blade')).toBe(true);
-    session.setFlag('defeated_first_shade', true);
-    session.syncQuestProgress();
+    session.applyDialogueEffects(dialogueDb.dialogues.battle_elder_rescue.effects!);
+    expect(session.getFlag('rescued_by_elder')).toBe(true);
     expect(session.quests.getQuestStage('quest_prologue_timestop')).toBe('completed');
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_prologue_first_hunt')).toBe('started');
+
+    expect(session.applyDialogueEffects(dialogueDb.dialogues.elder_rest_explain.effects!)).toEqual([
+      { itemId: 'broken_blade', quantity: 1 },
+    ]);
+    expect(session.applyDialogueEffects(dialogueDb.dialogues.elder_rest_explain.effects!)).toEqual(
+      [],
+    );
+    expect(session.getFlag('has_broken_blade')).toBe(true);
+    expect(session.getFlag('elder_joined')).toBe(true);
+
+    // Clear town Shades -> triggers grandfather watch chain
+    session.setFlag('cleared_town_shades', true);
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_prologue_first_hunt')).toBe('completed');
     session.syncQuestProgress();
     expect(session.quests.getQuestStage('quest_prologue_watch')).toBe('started');
 
-    // Grants broken_blade once on post-battle dialogue
-    expect(
-      session.applyDialogueEffects(dialogueDb.dialogues.elder_after_first_battle.effects!),
-    ).toEqual([{ itemId: 'broken_blade', quantity: 1 }]);
-    expect(
-      session.applyDialogueEffects(dialogueDb.dialogues.elder_after_first_battle.effects!),
-    ).toEqual([]);
-
-    // Act 3: Grandfather watch awakens -> Elder explains & joins -> Town frozen side quest
+    // Act 3: Grandfather watch awakens -> Elder teaches Temporal Strike (6 MP) -> Town frozen side quest
     session.applyDialogueEffects(dialogueDb.dialogues.grandfather_watch_awakens.effects!);
     expect(session.getFlag('learned_temporal_sight')).toBe(true);
-    session.applyDialogueEffects(dialogueDb.dialogues.elder_explains_frozen_town_accept.effects!);
-    expect(session.getFlag('elder_joined')).toBe(true);
+    session.applyDialogueEffects(dialogueDb.dialogues.elder_teach_skill.effects!);
+    expect(session.getFlag('taught_temporal_strike')).toBe(true);
     expect(session.quests.getQuestStage('quest_prologue_watch')).toBe('completed');
     session.syncQuestProgress();
     expect(session.quests.getQuestStage('quest_prologue_forest')).toBe('started');
@@ -452,10 +470,53 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
     for (const qId of ch1QuestIds) {
       expect(questDb.quests.find((q) => q.id === qId)?.stage, `Quest "${qId}"`).toBe('inactive');
     }
-    expect(itemDb.items.some((i) => i.type === 'equipment')).toBe(false);
+    const itemsRaw = itemsJson.items as Array<{
+      id: string;
+      type: string;
+      equip?: Record<string, number>;
+      effects?: Record<string, number>;
+    }>;
+    const brokenBlade = itemsRaw.find((i) => i.id === 'broken_blade');
+    expect(brokenBlade?.type).toBe('weapon');
+    expect(brokenBlade?.equip).toEqual({ attack: 2, reach: 28, swingMs: 420 });
+
+    const ch1Weapon = itemsRaw.find((i) => i.id === 'tide_brass_blade');
+    expect(ch1Weapon?.type).toBe('weapon');
+    expect(ch1Weapon?.equip?.attack).toBeGreaterThan(2);
+
+    const ch1Charm = itemsRaw.find((i) => i.id === 'sea_glass_charm');
+    expect(ch1Charm?.type).toBe('charm');
+    expect(ch1Charm?.equip?.maxHp).toBeGreaterThan(0);
+
+    expect(questDb.quests.find((q) => q.id === 'quest_ch1_empty_photo')?.rewards?.items).toContain(
+      'sea_glass_charm',
+    );
     expect(itemDb.items.find((i) => i.id === 'sunset_dried_fish')?.effects?.healAmount).toBe(45);
     expect(itemDb.items.find((i) => i.id === 'continuum_seal_shard')?.type).toBe('key_item');
     expect(itemDb.items.find((i) => i.id === 'unsent_fisherman_letter')?.type).toBe('key_item');
+
+    // Hidden mirror cache dialogues + hint line
+    const mirrorIds = [
+      'ch1_mirror_1_ready',
+      'ch1_mirror_1_align',
+      'ch1_mirror_1_already',
+      'ch1_mirror_2_ready_ok',
+      'ch1_mirror_2_align_ok',
+      'ch1_mirror_2_already',
+      'ch1_mirror_2_ready_wrong',
+      'ch1_mirror_3_ready_ok',
+      'ch1_mirror_3_align_ok',
+      'ch1_mirror_3_ready_wrong',
+      'ch1_mirror_wrong_reset',
+      'ch1_mirror_all_aligned',
+      'ch1_mirror_cache_locked',
+      'ch1_mirror_cache_open',
+      'ch1_mirror_cache_empty',
+    ];
+    for (const id of mirrorIds) {
+      expect(dialogueDb.dialogues[id], `Missing mirror dialogue "${id}"`).toBeDefined();
+    }
+    expect(dialogueDb.dialogues.ch1_keeper_logbook_note.lines.join(' ')).toContain('gương đồng');
 
     // 2. Bà Tư is distinct from Cô Ba and unnamed watch case hides any "K..." or Kuro trace
     expect(dialogueDb.dialogues.ch1_second_dinner.lines.join(' ')).not.toContain('Cô Ba');
@@ -547,6 +608,25 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
     expect(session.quests.getQuestStage('quest_ch1_sunken_ruins')).toBe('completed');
     session.syncQuestProgress();
     expect(session.quests.getQuestStage('quest_ch1_bellkeeper')).toBe('started');
+
+    // Hidden mirror cache in sunken corridors: 1 -> out of order reset -> 1 -> 2 -> 3 -> chest
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_mirror_1_align.effects!);
+    expect(session.getFlag('ch1_mirror_1_aligned')).toBe(true);
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_mirror_wrong_reset.effects!);
+    expect(session.getFlag('ch1_mirror_1_aligned')).toBe(false);
+    expect(session.getFlag('ch1_mirror_2_aligned')).toBe(false);
+    expect(session.getFlag('ch1_mirror_3_aligned')).toBe(false);
+
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_mirror_1_align.effects!);
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_mirror_2_align_ok.effects!);
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_mirror_3_align_ok.effects!);
+    expect(session.getFlag('ch1_mirror_3_aligned')).toBe(true);
+    expect(
+      session.applyDialogueEffects(dialogueDb.dialogues.ch1_mirror_cache_open.effects!),
+    ).toEqual([{ itemId: 'tide_brass_blade', quantity: 1 }]);
+    expect(
+      session.applyDialogueEffects(dialogueDb.dialogues.ch1_mirror_cache_open.effects!),
+    ).toEqual([]);
 
     // Bell Sanctum -> Release Bellkeeper -> Restore Continuum Seal
     session.applyDialogueEffects(dialogueDb.dialogues.ch1_bellkeeper_released.effects!);

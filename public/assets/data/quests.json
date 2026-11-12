@@ -59,7 +59,7 @@
     {
       "id": "quest_prologue_timestop",
       "title": "Giây Phút Thời Gian Ngừng",
-      "description": "Cả thị trấn bỗng đứng im giữa tiếng sóng đóng băng. Hãy đón lấy thanh kiếm gãy và đánh lui Bóng Đen.",
+      "description": "Cả thị trấn bỗng đứng im giữa tiếng sóng đóng băng và một Bóng Đen lao ra phục kích khi cậu không có vũ khí. Hãy sống sót qua giây phút này.",
       "stage": "inactive",
       "objectives": [
         {
@@ -69,22 +69,41 @@
           "completeOnFlag": "time_frozen"
         },
         {
-          "id": "obj_defeat_first_shade",
-          "description": "Đánh lui Bóng Đen giữa thị trấn đóng băng",
+          "id": "obj_elder_rescue",
+          "description": "Được ông lão giải cứu và đưa về phòng nghỉ ngơi",
           "completed": false,
-          "completeOnFlag": "defeated_first_shade"
+          "completeOnFlag": "rescued_by_elder"
         }
       ],
       "rewards": {
-        "experience": 25,
+        "experience": 15,
         "items": ["chrono_shard_minor"]
+      },
+      "followUpQuestId": "quest_prologue_first_hunt"
+    },
+    {
+      "id": "quest_prologue_first_hunt",
+      "title": "Xua Tan Bóng Đen Ngoài Phố",
+      "description": "Trang bị Thanh Kiếm Gãy trong túi đồ ([I]) và sát cánh cùng Trưởng Lão dọn sạch lũ Bóng Đen ngoài thị trấn đóng băng.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_clear_town_shades",
+          "description": "Đánh bại toàn bộ Bóng Đen trên phố thị trấn",
+          "completed": false,
+          "completeOnFlag": "cleared_town_shades"
+        }
+      ],
+      "rewards": {
+        "experience": 20,
+        "items": []
       },
       "followUpQuestId": "quest_prologue_watch"
     },
     {
       "id": "quest_prologue_watch",
       "title": "Đồng Hồ Của Ông Nội",
-      "description": "Quay về tiệm kiểm tra chiếc đồng hồ quả quýt vừa tự chạy ngược và lắng nghe Trưởng Lão.",
+      "description": "Quay về tiệm kiểm tra chiếc đồng hồ quả quýt vừa tự chạy ngược và học Đòn Thời Gian từ Trưởng Lão.",
       "stage": "inactive",
       "objectives": [
         {
@@ -94,10 +113,10 @@
           "completeOnFlag": "learned_temporal_sight"
         },
         {
-          "id": "obj_elder_join",
-          "description": "Đồng ý lên đường cùng Trưởng Lão",
+          "id": "obj_learn_temporal_strike",
+          "description": "Học cách tung Đòn Thời Gian từ Trưởng Lão",
           "completed": false,
-          "completeOnFlag": "elder_joined"
+          "completeOnFlag": "taught_temporal_strike"
         }
       ],
       "rewards": {
@@ -409,7 +428,7 @@
       ],
       "rewards": {
         "experience": 50,
-        "items": []
+        "items": ["sea_glass_charm"]
       }
     },
     {

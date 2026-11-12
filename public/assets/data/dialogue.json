@@ -246,53 +246,61 @@
         "Khoan đã... Tiếng sóng biển vừa tắt ngấm?!",
         "Mọi chiếc đồng hồ trên phố đồng loạt đứng im tại một giây! Sóng biển ngoài kia đông cứng giữa không trung, gió ngừng thổi hoàn toàn!",
         "Cô Ba khựng lại với chiếc muôi còn nghiêng, Ông Sáu cũng bất động giữa nhịp vá lưới... Tất cả mọi người đều đóng băng — chỉ mình mình còn cử động được?",
-        "Phía bãi đất trống bỗng rách toạc ra một khe sáng tím sẫm! Có thứ gì đó đang bò ra về phía mình!"
+        "Phía bãi đất trống bỗng rách toạc ra một khe sáng tím sẫm! Có bóng đen vừa trườn ra ngoài phố và đang lao thẳng về phía mình — trong tay mình chẳng có lấy một món đồ tự vệ nào!"
       ],
       "responses": [],
       "effects": {
         "setFlags": ["time_frozen"]
       }
     },
-    "battle_elder_intervenes": {
-      "id": "battle_elder_intervenes",
+    "battle_elder_rescue": {
+      "id": "battle_elder_rescue",
       "speaker": "Ông Lão",
       "lines": [
-        "Ông lão áo xanh bước ra, giơ trượng gạt phăng đòn của Bóng Đen!",
-        "Ông Lão: 'Ngay cả ta cũng đang bị khoảnh khắc này kìm chậm lại...'",
-        "Ông ném thanh kiếm gãy: 'Nó không chịu ta nữa. Xem nó có chịu cậu không!'",
-        "Lưỡi kiếm gãy bừng sáng lam — Peter đã có thể tung đòn phản công!"
+        "(Lực va chạm hất Peter ngã khuỵu xuống mặt đường đá, hơi thở đứt quãng. Đúng lúc cái bóng tím sẫm chồm tới, ông lão áo choàng xanh bước ra từ làn sương và vung quyền trượng gạt phăng nó lùi lại!)",
+        "Ông Lão: 'Đủ rồi! Ta không ngờ khe nứt lại tràn ra tận giữa phố nhanh như vậy... Chịu khó chút nhé chàng trai, ta đưa cậu về căn gác trên tiệm nghỉ lấy sức trước đã!'"
       ],
       "responses": [],
       "effects": {
-        "setFlags": ["has_broken_blade"]
+        "setFlags": ["rescued_by_elder"],
+        "healFull": true,
+        "warpTo": {
+          "mapId": "map_peters_room",
+          "spawnId": "rest"
+        }
       }
     },
-    "elder_after_first_battle": {
-      "id": "elder_after_first_battle",
-      "speaker": "Ông Lão",
+    "elder_rest_explain": {
+      "id": "elder_rest_explain",
+      "speaker": "Trưởng Lão Thời Gian",
       "lines": [
-        "Cậu không sao chứ? Ta không ngờ khe sáng lại mở ra tận giữa phố nhanh như vậy.",
-        "(Ông lão nhìn thanh kiếm gãy vẫn sáng dịu trong tay Peter, rồi nhìn ra mặt biển bất động phía sau.)",
-        "Cả thị trấn bị khóa cứng rồi... Ngay cả ta cũng phải gồng mình hết sức mới không bị đứng im.",
-        "Thế mà cậu vẫn cử động được giữa giây phút này... Lạ thật.",
-        "Hãy quay về tiệm đồng hồ của cậu đi, có thứ vừa tỉnh dậy theo rồi đấy. Ta đợi cậu ở đó."
+        "Cậu tỉnh rồi à, Peter? Vết thương ngoài phố đã ổn rồi. Ta là Người Ghi Chép Thời Gian — cứ gọi ta là Trưởng Lão.",
+        "Một vết nứt ngoài bìa rừng đang ghim cứng cả thị trấn vào một giây đứng im. Ngay cả ta cũng bị kéo chậm lại, thế mà cậu vẫn tự di chuyển được giữa khoảnh khắc này... Lạ thật, nhưng chuyện đó để sau hẵng tính.",
+        "Ngoài phố vẫn còn mấy Bóng Đen đang lảng vảng quanh Cô Ba và Ông Sáu. Thanh kiếm gãy này từ chối ta nhưng lại chịu cộng hưởng với cậu — ta sẽ sát cánh chiến đấu ngay bên cạnh cậu!",
+        "(Hướng dẫn: Nhấn [I] mở túi đồ trang bị Thanh Kiếm Gãy; ra phố nhấn [Chuột trái] để chém về phía con trỏ và [Shift] để lướt né đòn.)"
       ],
-      "responses": [
-        {
-          "text": "Về tiệm xem sao.",
-          "nextDialogueId": null
-        }
-      ],
+      "responses": [],
       "effects": {
-        "setFlags": ["has_broken_blade"],
+        "setFlags": ["has_broken_blade", "elder_joined"],
         "grantItems": [
           {
             "itemId": "broken_blade",
             "quantity": 1
           }
         ],
-        "grantOnceFlag": "granted_broken_blade"
+        "grantOnceFlag": "granted_broken_blade",
+        "startQuest": "quest_prologue_first_hunt"
       }
+    },
+    "elder_after_hunt": {
+      "id": "elder_after_hunt",
+      "speaker": "Trưởng Lão Thời Gian",
+      "lines": [
+        "Đám Bóng Đen ngoài phố tan hết rồi! Đôi tay thợ đồng hồ của cậu bắt nhịp kiếm rất nhanh đấy.",
+        "Nhưng chừng này vẫn chưa tháo được giây phút đóng băng cho Cô Ba và Ông Sáu. Khoan đã... cậu có nghe tiếng tích tắc lạ vọng ra từ căn gác tiệm đồng hồ không?",
+        "Mau quay về phòng kiểm tra chiếc đồng hồ quả quýt của ông nội đi — hình như có thứ gì đó trên người cậu vừa tỉnh dậy theo rồi."
+      ],
+      "responses": []
     },
     "grandfather_watch_awakens": {
       "id": "grandfather_watch_awakens",
@@ -306,6 +314,19 @@
       "responses": [],
       "effects": {
         "setFlags": ["learned_temporal_sight"]
+      }
+    },
+    "elder_teach_skill": {
+      "id": "elder_teach_skill",
+      "speaker": "Trưởng Lão Thời Gian",
+      "lines": [
+        "Quả nhiên chiếc đồng hồ cũ ấy vẫn giữ được nhịp riêng và vừa mở Nhãn Thời Gian cho cậu.",
+        "Hãy dồn ánh nhìn lam đó vào lưỡi kiếm gãy — từ giờ cậu có thể nhấn [Chuột phải] để tung Đòn Thời Gian quét quanh mình (tốn 6 MP, MP sẽ tự hồi chậm lại trên đường đi).",
+        "Lối vào Rừng Quên Lãng nằm ở góc đông bắc thị trấn. Cùng ta đi tháo nút thắt cho Cô Ba, Ông Sáu và cả thị trấn này thôi!"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["taught_temporal_strike"]
       }
     },
     "elder_explains_frozen_town": {
@@ -1527,7 +1548,8 @@
       "id": "ch1_keeper_logbook_note",
       "speaker": "Peter",
       "lines": [
-        "Bên lề có dòng nét mực run run: 'Lưỡi gà trên bánh xe đồng trật răng về hướng ngược chiều kim đồng hồ. Muốn hạ mực triều phải gài lại chốt cóc rồi mới vặn hết vòng.'"
+        "Bên lề có dòng nét mực run run: 'Lưỡi gà trên bánh xe đồng trật răng về hướng ngược chiều kim đồng hồ. Muốn hạ mực triều phải gài lại chốt cóc rồi mới vặn hết vòng.'",
+        "Cuối trang còn ghi nhỏ bằng mực mờ: 'Trong khe hành lang ngầm còn giấu ba tấm gương đồng đón tia sáng chiều: phải chỉnh lần lượt từ gương đầu ở cửa hang vào trong thì luồng sáng mới chạm được chiếc rương kín.'"
       ],
       "responses": []
     },
@@ -1842,6 +1864,191 @@
       "lines": [
         "Lối đi phía trước vẫn bị màn sóng Continuum khép kín. Cần hoàn tất việc khôi phục Lõi Continuum Seal giữa thánh điện trước."
       ],
+      "responses": []
+    },
+    "ch1_mirror_1_ready": {
+      "id": "ch1_mirror_1_ready",
+      "speaker": "Peter",
+      "lines": [
+        "Một tấm gương đồng cổ dựng gần cửa hành lang ngầm, mặt gương mờ muối nhưng vừa vặn hứng một tia nắng hoàng hôn lọt qua kẽ trần đá."
+      ],
+      "responses": [
+        {
+          "text": "Xoay gương dẫn tia sáng vào sâu trong hành lang",
+          "nextDialogueId": "ch1_mirror_1_align"
+        },
+        {
+          "text": "Để nguyên đó",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_mirror_1_align": {
+      "id": "ch1_mirror_1_align",
+      "speaker": "Peter",
+      "lines": [
+        "Khớp xoay đồng thau kêu khẽ một tiếng cạch. Tia sáng hắt thành một vệt mảnh kéo dài về phía tấm gương thứ hai sâu hơn trong hành lang."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch1_mirror_1_aligned"]
+      }
+    },
+    "ch1_mirror_1_already": {
+      "id": "ch1_mirror_1_already",
+      "speaker": "Peter",
+      "lines": [
+        "Tấm gương thứ nhất đã khớp góc chuẩn xác, giữ vệt sáng rọi thẳng về phía tấm gương kế tiếp."
+      ],
+      "responses": []
+    },
+    "ch1_mirror_2_ready_ok": {
+      "id": "ch1_mirror_2_ready_ok",
+      "speaker": "Peter",
+      "lines": [
+        "Vệt sáng hắt từ tấm gương đầu tiên vừa chạm đúng mép khung đồng của tấm gương thứ hai giữa ngã rẽ."
+      ],
+      "responses": [
+        {
+          "text": "Chỉnh góc gương nối tiếp luồng sáng đi sâu hơn",
+          "nextDialogueId": "ch1_mirror_2_align_ok"
+        },
+        {
+          "text": "Chưa xoay vội",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_mirror_2_align_ok": {
+      "id": "ch1_mirror_2_align_ok",
+      "speaker": "Peter",
+      "lines": [
+        "Mặt gương nghiêng nhẹ, dẫn gọn tia sáng xuyên qua màn hơi ẩm hướng về phía ngách đá có tấm gương thứ ba."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch1_mirror_2_aligned"]
+      }
+    },
+    "ch1_mirror_2_already": {
+      "id": "ch1_mirror_2_already",
+      "speaker": "Peter",
+      "lines": [
+        "Tấm gương thứ hai đang nối thẳng luồng sáng từ cửa hang vào tới gần hốc đá sâu bên trong."
+      ],
+      "responses": []
+    },
+    "ch1_mirror_2_ready_wrong": {
+      "id": "ch1_mirror_2_ready_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Tấm gương đồng thứ hai tối om giữa bóng đá ẩm, hoàn toàn chưa có tia sáng nào chiếu tới mặt gương cả."
+      ],
+      "responses": [
+        {
+          "text": "Thử xoay khung gương xem sao",
+          "nextDialogueId": "ch1_mirror_wrong_reset"
+        },
+        {
+          "text": "Đi kiểm tra tấm gương đầu tiên trước",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_mirror_3_ready_ok": {
+      "id": "ch1_mirror_3_ready_ok",
+      "speaker": "Peter",
+      "lines": [
+        "Tia sáng gom từ hai tấm gương trước đang dừng ngay trước mặt tấm gương thứ ba, đối diện một hốc rương niêm phong trong vách đá."
+      ],
+      "responses": [
+        {
+          "text": "Xoay gương rọi thẳng tia sáng vào khóa rương ẩn",
+          "nextDialogueId": "ch1_mirror_3_align_ok"
+        },
+        {
+          "text": "Chưa chỉnh vội",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_mirror_3_align_ok": {
+      "id": "ch1_mirror_3_align_ok",
+      "speaker": "Peter",
+      "lines": [
+        "Tách! Vệt sáng vàng nhạt hắt thẳng vào khe khóa mặt trời trên chiếc rương ẩn trong ngách đá, đánh thức ánh đồng ấm dịu."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch1_mirror_3_aligned"]
+      }
+    },
+    "ch1_mirror_3_ready_wrong": {
+      "id": "ch1_mirror_3_ready_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Tấm gương thứ ba đặt ngay trước một chiếc rương giấu kín trong hốc đá, nhưng mặt gương vẫn lạnh tối vì chưa đón được tia sáng nào truyền tới."
+      ],
+      "responses": [
+        {
+          "text": "Thử xoay khung gương thứ ba",
+          "nextDialogueId": "ch1_mirror_wrong_reset"
+        },
+        {
+          "text": "Lùi lại chỉnh các gương trước theo thứ tự",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_mirror_wrong_reset": {
+      "id": "ch1_mirror_wrong_reset",
+      "speaker": "Peter",
+      "lines": [
+        "Cạch—! Bánh răng liên kết bên dưới sàn đá trượt ngược lại vì chưa có luồng sáng dẫn nối tiếp. Cả ba tấm gương đồng đều bật trả về góc tối ban đầu."
+      ],
+      "responses": [],
+      "effects": {
+        "clearFlags": ["ch1_mirror_1_aligned", "ch1_mirror_2_aligned", "ch1_mirror_3_aligned"]
+      }
+    },
+    "ch1_mirror_all_aligned": {
+      "id": "ch1_mirror_all_aligned",
+      "speaker": "Peter",
+      "lines": [
+        "Cả ba tấm gương đồng đã thẳng hàng, giữ một sợi sáng xuyên suốt hắt thẳng vào chiếc rương trong hốc đá."
+      ],
+      "responses": []
+    },
+    "ch1_mirror_cache_locked": {
+      "id": "ch1_mirror_cache_locked",
+      "speaker": "Peter",
+      "lines": [
+        "Một chiếc rương cổ giấu kín trong ngách đá hành lang. Nắp rương gắn khóa đồng hình mặt trời nhưng chốt vẫn ngậm chặt vì thiếu ánh sáng rọi thẳng tới."
+      ],
+      "responses": []
+    },
+    "ch1_mirror_cache_open": {
+      "id": "ch1_mirror_cache_open",
+      "speaker": "Peter",
+      "lines": [
+        "Luồng sáng từ ba tấm gương hội tụ vừa khít ổ khóa mặt trời, bật mở nắp rương không một tiếng động lớn!",
+        "Bên trong bọc vải dầu là một thanh đoản kiếm đồng thau giữ nhịp thủy triều rất đầm tay — mở túi đồ ([I]) là có thể trang bị ngay."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "tide_brass_blade",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_mirror_cache"
+      }
+    },
+    "ch1_mirror_cache_empty": {
+      "id": "ch1_mirror_cache_empty",
+      "speaker": "Peter",
+      "lines": ["Chiếc rương đồng trong ngách đá dưới luồng sáng gương giờ đã trống không."],
       "responses": []
     }
   }

@@ -247,3 +247,16 @@ Mỗi bản đồ giữ kích thước tối đa **≤ 30×20 tiles** (32×32 px
 **Nội dung (Antigravity, T-43):** thoại, quest, vật phẩm theo §7, dùng đúng id/cờ ở §3 và §7 cùng các khóa hiệu ứng mới `clearFlags`, `refreshMap`. Chuỗi 3 trụ chuông: mỗi trụ có `dialogueRules` theo cờ bước (`ch1_bell_step_1/2`); gõ sai → `clearFlags`. Mỏ Neo: 3 node theo lớp hiện tại (`dialogueRules` với `ifFlag`/`unlessFlag`).
 
 **Bản đồ, quái, boss, art (Claude, T-44):** 5 tilemap, `maps.json`, `enemies.json` (Bellkeeper `mechanic`, Drifter, Chorister), sprite Người Gác Hải Đăng, Bellkeeper 64×64, Drifter — mỗi art chờ Owner duyệt.
+
+---
+
+## 11. Bổ sung T-47: Kho báu gương ẩn & Trang bị Chương 1
+
+Theo [ACTION_COMBAT_CONTRACT.md](../implementation/ACTION_COMBAT_CONTRACT.md) §3–§4:
+
+- **Kho báu gương ẩn (không đưa vào Quest Log, đặt tại `map_ch1_sunken_corridors`):**
+  - Ba tấm gương (`poi_mirror_1..3`) và một rương niêm phong (`poi_mirror_cache`).
+  - Thứ tự căn chỉnh bắt buộc **1 → 2 → 3** qua cờ `ch1_mirror_1_aligned`, `ch1_mirror_2_aligned`, `ch1_mirror_3_aligned`; xoay sai thứ tự gọi `clearFlags` reset cả ba cờ về đầu (`ch1_mirror_wrong_reset`).
+  - Khi cả ba gương thẳng hàng (`ch1_mirror_3_aligned`), `poi_mirror_cache` mở ra (`ch1_mirror_cache_open`) trao vũ khí `tide_brass_blade` (_Đoản Kiếm Đồng Thủy Triều_, `weapon`) một lần duy nhất (`grantOnceFlag: "granted_mirror_cache"`).
+  - Gợi ý ẩn được cài khéo trong ghi chú sổ trực đèn hải đăng (`ch1_keeper_logbook_note`).
+- **Trang bị bùa (Charm):** `sea_glass_charm` (_Bùa Thủy Tinh Hoàng Hôn_, `charm`) được gán làm phần thưởng hoàn thành quest phụ `quest_ch1_empty_photo`.
