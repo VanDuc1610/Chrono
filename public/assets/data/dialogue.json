@@ -44,11 +44,18 @@
       "lines": [
         "Cuốn sổ tay bìa da sờn mép mình dùng ghi chép việc tiệm hàng ngày.",
         "Nửa trên ghi mẹo căn lại dây tóc đồng hồ lên cót tay. Bên lề có dòng nhắc mua thêm hành lá, hai ổ bánh mì.",
-        "Cuối trang khoanh tròn đơn hẹn sáng nay: 'Giao lại chiếc đồng hồ đã sửa cho khách ngoài thị trấn'."
+        "Cuối trang khoanh tròn đơn hẹn sáng nay: 'Giao lại chiếc đồng hồ đã sửa cho khách ngoài thị trấn'. Mình xé trang ghi chép kẹp vào túi áo để tiện xem lại."
       ],
       "responses": [],
       "effects": {
-        "setFlags": ["inspected_room_notebook"]
+        "setFlags": ["inspected_room_notebook"],
+        "grantItems": [
+          {
+            "itemId": "peter_repair_ledger",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_repair_ledger"
       }
     },
     "room_photo": {
@@ -668,7 +675,14 @@
         }
       ],
       "effects": {
-        "setFlags": ["inspected_torn_page"]
+        "setFlags": ["inspected_torn_page"],
+        "grantItems": [
+          {
+            "itemId": "torn_journal_leaf",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_torn_leaf"
       }
     },
     "notebook_handwriting_check": {
@@ -986,12 +1000,19 @@
       "speaker": "Peter",
       "lines": [
         "Mình dùng thanh nẹp nhỏ trong túi đồ và tay nghề quen thuộc nắn thẳng khớp kim gãy, đưa bóng nắng trượt qua khấc bị mẻ.",
-        "Một tiếng tách khẽ vang lên. Bóng nắng kéo dài thêm vài phân trên mặt đá, và màn sương dày ở lối đông bỗng tan bớt — vòng lặp bờ biển đã mở."
+        "Một tiếng tách khẽ vang lên. Bóng nắng kéo dài thêm vài phân trên mặt đá, và màn sương dày ở lối đông bỗng tan bớt — vòng lặp bờ biển đã mở. Nhân tiện, mình miết giấy dầu lấy bản dập cổ tự trên bệ đá."
       ],
       "responses": [],
       "effects": {
         "setFlags": ["broke_shore_loop"],
-        "refreshMap": true
+        "refreshMap": true,
+        "grantItems": [
+          {
+            "itemId": "sundial_bronze_rubbing",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_sundial_rubbing"
       }
     },
     "ch1_broken_sundial_fixed": {
@@ -1423,12 +1444,19 @@
       "speaker": "Peter",
       "lines": [
         "Mình đưa chiếc đồng hồ quả quýt của ông nội lại gần khung ảnh trống. Một vệt sáng ấm thoáng lướt qua mặt kính: hiện lên bóng dáng mờ của người đàn ông đứng cười hiền cạnh mẻ lưới mới.",
-        "Không có cái tên nào hiện ra cả, thế nhưng sự ấm áp còn sót lại trên bàn thờ bỗng trở nên rõ ràng lạ thường — như thể một sự tồn tại chưa bị lãng quên hoàn toàn."
+        "Không có cái tên nào hiện ra cả, thế nhưng sự ấm áp còn sót lại trên bàn thờ bỗng trở nên rõ ràng lạ thường — phía sau bát nhang, một mẩu tranh sáp màu gấp bốn khẽ rơi ra."
       ],
       "responses": [],
       "effects": {
         "setFlags": ["restored_shrine_photo"],
-        "startQuest": "quest_ch1_empty_photo"
+        "startQuest": "quest_ch1_empty_photo",
+        "grantItems": [
+          {
+            "itemId": "child_village_drawing",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_child_drawing"
       }
     },
     "ch1_shrine_photo_done": {
@@ -1528,7 +1556,8 @@
       "speaker": "Peter",
       "lines": [
         "Cuốn sổ trực đèn bìa vải ố muối biển đặt trên kệ đá. Trang đầu chép lại quy ước gõ ba trụ chuông mở phong ấn dưới hành lang đáy biển:",
-        "'Nhịp dẫn thủy triều luôn đi trọn một vòng ngày-đêm theo đúng ba hồi: đầu tiên là [Bình Minh], tiếp nối bằng [Hoàng Hôn], và khép lại ở [Đêm Tĩnh].'"
+        "'Nhịp dẫn thủy triều luôn đi trọn một vòng ngày-đêm theo đúng ba hồi: đầu tiên là [Bình Minh], tiếp nối bằng [Hoàng Hôn], và khép lại ở [Đêm Tĩnh].'",
+        "Mình chép lại các trang hướng dẫn quan trọng vào tập ghi chép mang theo bên người."
       ],
       "responses": [
         {
@@ -1541,7 +1570,14 @@
         }
       ],
       "effects": {
-        "setFlags": ["read_keeper_logbook"]
+        "setFlags": ["read_keeper_logbook"],
+        "grantItems": [
+          {
+            "itemId": "keeper_logbook_notes",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_keeper_logbook"
       }
     },
     "ch1_keeper_logbook_note": {
@@ -1598,6 +1634,33 @@
         "Cánh cửa đá dẫn vào Thánh Điện Chuông Chìm bị khóa bằng ba vòng ký tự đồng tâm còn tối sẫm. Phải gõ đúng thứ tự ba trụ chuông quanh hành lang thì phong ấn mới mở."
       ],
       "responses": []
+    },
+    "ch1_bell_p1_needs_clapper": {
+      "id": "ch1_bell_p1_needs_clapper",
+      "speaker": "Peter",
+      "lines": [
+        "Trụ đá chạm rêu khắc chữ [BÌNH MINH], nhưng quả chuông trên đỉnh trụ đã bị tháo mất quả lắc bên trong.",
+        "Không có quả lắc đồng, việc gõ vào thân chuông chỉ tạo ra tiếng đục câm lặng. Có lẽ quả lắc bị rơi lại trong một chiếc hộp đồng đâu đó quanh hành lang ngầm này."
+      ],
+      "responses": []
+    },
+    "ch1_bell_p1_install": {
+      "id": "ch1_bell_p1_install",
+      "speaker": "Peter",
+      "lines": [
+        "Quả chuông nhỏ treo trên đỉnh trụ Bình Minh đang bị khuyết mất quả lắc bên trong, không thể ngân vang.",
+        "Mình cẩn thận móc quả lắc chuông bằng đồng thau vừa tìm được vào khớp treo. Khớp nối vừa khít, quả chuông ngân lên một hồi trong trẻo khởi đầu ngày mới!"
+      ],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "bronze_bell_clapper",
+            "quantity": 1
+          }
+        ],
+        "setFlags": ["ch1_bell_clapper_set", "ch1_bell_step_1"]
+      }
     },
     "ch1_bell_p1_ready": {
       "id": "ch1_bell_p1_ready",
@@ -1758,12 +1821,18 @@
       "lines": [
         "Trên mỏm đá khô ráo nơi đáng lẽ chưa từng có người sống sót nào đặt chân tới, nằm gọn một chiếc vỏ đồng hồ quả quýt rỗng bằng đồng thau cũ.",
         "Bên trong nắp không khắc tên hay chữ cái nào cả — chỉ có vết dũa mòn nhỏ xíu ở khớp khóa rất giống thói quen chỉnh vỏ của người quen đồng hồ, khiến mình bất giác nhớ tới gương mặt nhòe nước mưa trong tấm ảnh ở căn gác cũ.",
-        "Đã có ai đó từng đi qua đây từ rất lâu trước bọn mình... rồi bước tiếp mà chẳng để lại dòng ghi chép nào."
+        "Đã có ai đó từng đi qua đây từ rất lâu trước bọn mình... Bên trong kẽ nắp rỗng cài một thấu kính pha lê mài vát tinh xảo, mình cẩn thận lấy ra cất vào túi."
       ],
       "responses": [],
       "effects": {
         "setFlags": ["found_ch1_interval_trace"],
         "grantExp": 15,
+        "grantItems": [
+          {
+            "itemId": "tide_mirror_lens",
+            "quantity": 1
+          }
+        ],
         "grantOnceFlag": "granted_watch_case_exp"
       }
     },
@@ -1771,13 +1840,17 @@
       "id": "ch1_sunken_cache",
       "speaker": "Peter",
       "lines": [
-        "Giữa khe san hô khô lộ ra một hộp đồng nhỏ đậy kín sáp ong. Bên trong còn sót lại một mảnh tinh thể hồi sức mát lạnh."
+        "Giữa khe san hô khô lộ ra một hộp đồng nhỏ đậy kín sáp ong. Bên trong có một mảnh tinh thể hồi sức và một quả lắc chuông bằng đồng thau chạm sóng biển."
       ],
       "responses": [],
       "effects": {
         "grantItems": [
           {
             "itemId": "chrono_shard_minor",
+            "quantity": 1
+          },
+          {
+            "itemId": "bronze_bell_clapper",
             "quantity": 1
           }
         ],
@@ -1865,6 +1938,33 @@
         "Lối đi phía trước vẫn bị màn sóng Continuum khép kín. Cần hoàn tất việc khôi phục Lõi Continuum Seal giữa thánh điện trước."
       ],
       "responses": []
+    },
+    "ch1_mirror_1_missing_lens": {
+      "id": "ch1_mirror_1_missing_lens",
+      "speaker": "Peter",
+      "lines": [
+        "Một tấm gương đồng dựng gần cửa hang, nhưng hốc tròn giữa tâm khung đang khuyết mất thấu kính hội tụ.",
+        "Tia nắng hoàng hôn chiếu vào chỉ tản mác trên mặt đồng mờ, không gom tụ thành luồng sáng đủ mạnh để rọi sâu vào trong hành lang."
+      ],
+      "responses": []
+    },
+    "ch1_mirror_1_fit_lens": {
+      "id": "ch1_mirror_1_fit_lens",
+      "speaker": "Peter",
+      "lines": [
+        "Hốc tròn giữa khung gương đồng vừa vặn với chiếc thấu kính pha lê tìm thấy trong vỏ đồng hồ quả quýt rỗng.",
+        "Mình nhẹ nhàng cài thấu kính vào tâm gương. Khớp xoay kêu một tiếng cạch trong trẻo — tia nắng hoàng hôn lập tức gom lại thành luồng sáng rực rỡ chiếu thẳng tới tấm gương thứ hai!"
+      ],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "tide_mirror_lens",
+            "quantity": 1
+          }
+        ],
+        "setFlags": ["ch1_mirror_1_lens_set", "ch1_mirror_1_aligned"]
+      }
     },
     "ch1_mirror_1_ready": {
       "id": "ch1_mirror_1_ready",

@@ -40,7 +40,13 @@ describe('UI strings (strings.json)', () => {
   it('defines a label for every item type used in items.json', () => {
     const table = stringsJson.strings as Record<string, string>;
     for (const item of itemDb.items) {
-      expect(table[`satchel.type.${item.type}`], `missing satchel.type.${item.type}`).toBeTruthy();
+      const key =
+        item.type === 'document'
+          ? 'satchel.tab.notes'
+          : item.type === 'puzzle'
+            ? 'satchel.tab.clues'
+            : `satchel.type.${item.type}`;
+      expect(table[key], `missing satchel string for item type ${item.type}`).toBeTruthy();
     }
   });
 });
@@ -494,7 +500,7 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
     );
     expect(itemDb.items.find((i) => i.id === 'sunset_dried_fish')?.effects?.healAmount).toBe(45);
     expect(itemDb.items.find((i) => i.id === 'continuum_seal_shard')?.type).toBe('key_item');
-    expect(itemDb.items.find((i) => i.id === 'unsent_fisherman_letter')?.type).toBe('key_item');
+    expect(itemDb.items.find((i) => i.id === 'unsent_fisherman_letter')?.type).toBe('document');
 
     // Hidden mirror cache dialogues + hint line
     const mirrorIds = [
@@ -636,5 +642,102 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
     expect(session.quests.getQuestStage('quest_ch1_bellkeeper')).toBe('completed');
     const sealReward = session.claimQuestRewards('quest_ch1_bellkeeper');
     expect(sealReward?.items).toEqual([{ itemId: 'continuum_seal_shard', quantity: 1 }]);
+  });
+
+  describe('T-48 Document & Puzzle items contract', () => {
+    it('ensures every document item has 1-3 pages of <= 220 characters each', () => {
+      const documents = itemDb.items.filter((i) => i.type === 'document');
+      expect(documents.length).toBeGreaterThanOrEqual(5);
+
+      for (const doc of documents) {
+        expect(doc.pages, `Document ${doc.id} must have pages array`).toBeDefined();
+        expect(doc.pages!.length, `Document ${doc.id} pages count`).toBeGreaterThanOrEqual(1);
+        expect(doc.pages!.length, `Document ${doc.id} pages count`).toBeLessThanOrEqual(3);
+        for (let idx = 0; idx < doc.pages!.length; idx++) {
+          const page = doc.pages![idx];
+          expect(
+            page.length,
+            `Document ${doc.id} page ${idx + 1} exceeds 220 chars (${page.length})`,
+          ).toBeLessThanOrEqual(220);
+          expect(page.length, `Document ${doc.id} page ${idx + 1} is empty`).toBeGreaterThan(0);
+        }
+      }
+    });
+
+    it('ensures unsent_fisherman_letter is a document with 2 pages', () => {
+      const letter = itemDb.items.find((i) => i.id === 'unsent_fisherman_letter');
+      expect(letter).toBeDefined();
+      expect(letter?.type).toBe('document');
+      expect(letter?.pages?.length).toBe(2);
+    });
+
+    it('ensures all new documents are granted once via dialogue nodes', () => {
+      const docIds = [
+        'peter_repair_ledger',
+        'torn_journal_leaf',
+        'keeper_logbook_notes',
+        'child_village_drawing',
+        'sundial_bronze_rubbing',
+      ];
+      for (const id of docIds) {
+        const item = itemDb.items.find((i) => i.id === id);
+        expect(item, `Item ${id} must exist in items.json`).toBeDefined();
+        expect(item?.type).toBe('document');
+
+        // Check that at least one dialogue node grants it with a grantOnceFlag
+        const granter = Object.values(dialogueDb.dialogues).find((n) =>
+          n.effects?.grantItems?.some((g) => g.itemId === id),
+        );
+        expect(granter, `Document ${id} must be granted by a dialogue node`).toBeDefined();
+        expect(
+          granter?.effects?.grantOnceFlag,
+          `Node ${granter?.id} granting ${id} must use grantOnceFlag`,
+        ).toBeTruthy();
+      }
+    });
+
+    it('handles bronze_bell_clapper and tide_mirror_lens puzzle flow with takeItems', () => {
+      const session = GameSession.newGame(createRealDatabase());
+
+      // 1. Bell clapper puzzle
+      expect(session.inventory.hasItem('bronze_bell_clapper', 1)).toBe(false);
+      const cacheGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch1_sunken_cache.effects!,
+      );
+      expect(cacheGrant.some((g) => g.itemId === 'bronze_bell_clapper')).toBe(true);
+      expect(session.inventory.hasItem('bronze_bell_clapper', 1)).toBe(true);
+
+      // Duplicate grant is blocked by grantOnceFlag
+      const secondCacheGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch1_sunken_cache.effects!,
+      );
+      expect(secondCacheGrant).toEqual([]);
+
+      // Install clapper at dawn pillar
+      session.applyDialogueEffects(dialogueDb.dialogues.ch1_bell_p1_install.effects!);
+      expect(session.inventory.hasItem('bronze_bell_clapper', 1)).toBe(false);
+      expect(session.getFlag('ch1_bell_clapper_set')).toBe(true);
+      expect(session.getFlag('ch1_bell_step_1')).toBe(true);
+
+      // 2. Tide mirror lens puzzle
+      expect(session.inventory.hasItem('tide_mirror_lens', 1)).toBe(false);
+      const watchCaseGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch1_unnamed_watch_case.effects!,
+      );
+      expect(watchCaseGrant.some((g) => g.itemId === 'tide_mirror_lens')).toBe(true);
+      expect(session.inventory.hasItem('tide_mirror_lens', 1)).toBe(true);
+
+      // Duplicate grant blocked
+      const secondWatchCaseGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch1_unnamed_watch_case.effects!,
+      );
+      expect(secondWatchCaseGrant).toEqual([]);
+
+      // Fit lens onto mirror 1
+      session.applyDialogueEffects(dialogueDb.dialogues.ch1_mirror_1_fit_lens.effects!);
+      expect(session.inventory.hasItem('tide_mirror_lens', 1)).toBe(false);
+      expect(session.getFlag('ch1_mirror_1_lens_set')).toBe(true);
+      expect(session.getFlag('ch1_mirror_1_aligned')).toBe(true);
+    });
   });
 });

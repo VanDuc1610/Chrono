@@ -77,8 +77,94 @@
     {
       "id": "unsent_fisherman_letter",
       "name": "Lá Thư Ngư Dân Chưa Gửi",
-      "type": "key_item",
+      "type": "document",
       "description": "Bức thư gấp gọn trong giấy dầu, mực còn vương mùi khói đèn trước cơn bão năm xưa ở làng chài hoàng hôn.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Gửi mình và con,\nTrăng tối nay quầng đỏ gắt, gió chướng giật từng cơn lạnh buốt. Mấy anh em bạn chài bảo sắp có triều dữ chưa từng thấy. Mình chằng lại mép lưới rồi neo thuyền vào hốc đá phía đông.",
+        "Nhớ đóng kín then cửa, đừng ra bến đợi khuya. Nếu đèn hải đăng tắt, cứ ôm con lên gác cao. Mình cất một hộp khô cá dưới bệ thờ làm dự trữ. Bình minh lên bão tan mình sẽ về với hai mẹ con."
+      ]
+    },
+    {
+      "id": "peter_repair_ledger",
+      "name": "Trang Sổ Tiệm Đồng Hồ",
+      "type": "document",
+      "description": "Trang sổ bìa da ghi chép kỹ thuật căn dây tóc và danh sách công việc giao hàng sáng nay của Peter.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Trích sổ tiệm — Peter ghi:\nCăn lại dây tóc đồng hồ lên cót tay: lực căng vừa đủ chạm khấc nhả, không siết quá nửa ren. Chú ý tiếng gõ phải đều nhịp như hơi thở, nếu giật khựng là trục thứ ba đã mòn.",
+        "Nhắc việc sáng nay:\n1. Giao lại chiếc đồng hồ quả quýt cho khách ngoài thị trấn.\n2. Mua thêm hai ổ bánh mì và hành lá cho bữa trưa.\n3. Tìm lại ảnh cũ trong ngăn kéo... hình như lại nhạt thêm một chút."
+      ]
+    },
+    {
+      "id": "torn_journal_leaf",
+      "name": "Mảnh Nhật Ký Rách",
+      "type": "document",
+      "description": "Tờ giấy ố vàng rơi tại Tiền Điện Vụn Vỡ vẽ sơ đồ bánh răng quỹ đạo và ghi chú về Quyền Năng Nhân Quả.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Trang giấy ố vàng rơi tại Tiền Điện:\n...Sơ đồ quỹ đạo bánh răng lồng vào nhau. Chú thích bên lề run rẩy: 'Mọi dòng chảy đều cần nguyên nhân đứng trước. Nếu ngắt nguyên nhân, kết quả sẽ lơ lửng giữa hư vô...'",
+        "'Quyền Năng Nhân Quả (Causality) không phải là bức tường ngăn cản, mà là sợi xích neo giữ thực tại. Khi xích đứt, những kẻ không tên sẽ chìm vào quên lãng đầu tiên.'"
+      ]
+    },
+    {
+      "id": "keeper_logbook_notes",
+      "name": "Sổ Ghi Chép Người Trực Đèn",
+      "type": "document",
+      "description": "Hai trang ghi chép của người gác đèn hải đăng cổ về quy tắc ba nhịp chuông và góc xoay ba tấm gương đáy biển.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Sổ trực hải đăng — Quy tắc chuông:\nHành lang ngầm khóa bởi ba nhịp triều. Thứ tự mở phong ấn: bắt đầu từ [Bình Minh] hứng tia sáng sớm, tiếp nối [Hoàng Hôn] khi nắng ngả bóng, và khép lại ở [Đêm Tĩnh].",
+        "Bí mật hốc gương đáy biển:\nDẫn luồng sáng qua ba gương: Gương 1 hướng thẳng vào khe nứt giữa hang; Gương 2 bẻ góc về phía hốc đá rêu; Gương 3 đón sáng rọi thẳng vào rương đồng cổ ẩn sau rạn san hô."
+      ]
+    },
+    {
+      "id": "child_village_drawing",
+      "name": "Bức Vẽ Của Đứa Trẻ",
+      "type": "document",
+      "description": "Bức tranh sáp màu gấp bốn giấu sau bát nhang bàn thờ cũ, vẽ ngọn hải đăng và bóng dáng người cha đi biển.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Nét sáp màu nguệch ngoạc trên mảnh bìa gấp:\nNgôi nhà nhỏ ven biển, chiếc thuyền buồm căng gió, và bóng người cha dang tay đón nắng. Phía trên có hình ngọn hải đăng tỏa tia sáng màu cam ấm áp.",
+        "Góc dưới bức vẽ có dòng chữ trẻ con nắn nót:\n'Bố hứa bão tan sẽ mang về cho con một vỏ ốc biết hát.'\nNhưng tên đứa trẻ ở góc giấy đã phai mờ hoàn toàn, chỉ còn vệt sáp tím nhạt nhạt."
+      ]
+    },
+    {
+      "id": "sundial_bronze_rubbing",
+      "name": "Bản Dập Đồng Hồ Mặt Trời",
+      "type": "document",
+      "description": "Bản dập giấy dầu chép lại cổ tự khắc trên bệ đá đồng hồ mặt trời ở mỏm đá ven biển.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Bản dập giấy dầu chép từ bệ đá cổ ven biển:\n'Khi bóng nắng ngừng trôi, thời khắc sẽ cuộn tròn thành vòng lặp. Chỉ khi trục kim chỉ đúng hướng dòng chảy tự nhiên, lối mòn qua vách đá mới chịu mở ra.'"
+      ]
+    },
+    {
+      "id": "bronze_bell_clapper",
+      "name": "Quả Lắc Chuông Đồng",
+      "type": "puzzle",
+      "description": "Quả lắc bằng đồng thau chạm sóng biển, dùng để gắn vào trụ chuông Bình Minh bị mất tiếng gõ dưới hành lang ngầm.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "tide_mirror_lens",
+      "name": "Thấu Kính Gương Triều",
+      "type": "puzzle",
+      "description": "Thấu kính pha lê mài vát cạnh tìm thấy trong chiếc vỏ đồng hồ rỗng, dùng để hội tụ luồng sáng trên khung gương thứ nhất.",
       "value": 0,
       "stackable": false,
       "maxStack": 1

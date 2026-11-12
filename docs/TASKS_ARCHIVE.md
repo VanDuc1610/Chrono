@@ -2,6 +2,8 @@
 
 Completed tasks moved out of [TASKS.md](TASKS.md) to keep the board short. Newest first. Read only when you need history.
 
+- **T-43** Chapter 1 "The Last Sunset" content (`dialogue.json`, `quests.json`, `items.json`, `tests/content-data.test.ts`): Vietnamese dialogue across all 5 maps, 8 quests (5 main chain + 3 side quests), 3 items (no equipment), Time Anchor 3-layer rotation (`clearFlags` + `refreshMap`), 3-pillar bell sequence (`ch1_bell_step_1/2` + wrong-strike reset), unnamed watch case without Kuro/"K...", Bà Tư distinct from Cô Ba; verified with `typecheck`, `lint`, `prettier --check .`, and 62 unit tests — Antigravity
+
 - **T-42** Chapter 1 engine: dialogue effects `clearFlags` and `refreshMap` (map rebuilt in place after the dialogue, Peter keeps his spot), repeating loop triggers (`repeat`, `unlessFlag`, `teleportTo` spawn with a short fade), `layerVariants` (tile layers by flag, e.g. low tide), validation for loops/spawns, clearer layer errors. Verified: 61 unit tests (4 new), 4 CDP suites, live probe (loop twice → broken loop passes; refresh keeps position and swaps layers) — Claude
 - **T-41** Chapter 1 design (`docs/story/CHAPTER_01_DESIGN.md`) approved by owner 2026-11-12 with all 5 coordinator recommendations; engine/content/art contract in §10 — Antigravity (design), Claude (review)
 - **T-40** Release pipeline: CI now builds once, runs a Playwright smoke test of the production build in Chromium, Firefox and WebKit (boot, new game, real keys, movement, quick-save + reload → Continue), then deploys dist/ to GitHub Pages from main (needs Pages source = GitHub Actions). `npm run e2e` runs it locally; all 3 browsers pass — Claude
