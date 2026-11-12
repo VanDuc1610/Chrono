@@ -247,3 +247,13 @@ The following specifications have been drafted in compliance with [ASSET_POLICY.
   > Form: A hovering, ethereal specter composed of frayed dark violet temporal mist (`#260b1e`, `#6b153e`) that trails downward into wisps.
   > Core: Suspended at the center of the dark mist is a jagged crimson-and-rose chronal shard (`#ff4d79`, `#b82352`) that pulses with fracture energy.
   > Floating Pose: Floats 4 pixels above the shadow base, conveying weightless unreality. Pure pixel art, 32x32 bounding box, transparent background.
+
+### Chapter 2 characters (T-53) – candidates
+
+- **Generator:** `scripts/author-ch2-characters.js` (Pipeline B, deterministic pixel rules, no image model).
+- `NPC_LYRA_001_CAND` — Lyra, rebel vanguard, 32 × 32 × 4 idle (breath, scarf in the wind): chin-length black hair, leather armour with brass straps, red scarf, short sword → `art-source/npcs/lyra/generated/candidates/lyra_idle_v1.png`.
+- `NPC_PRAETOR_001_CAND` — The Exiled Praetor, 32 × 32 × 4 idle (stylus tapping): white hair and beard, golden blindfold pushed up, torn toga with a purple stripe → `art-source/npcs/exiled_praetor/generated/candidates/exiled_praetor_idle_v1.png`.
+- `MOB_AUTOMATON_001_CAND` — Imperial Automaton, 32 × 32 × 4 walk: brass body, one red eye slit, tall red scutum held in front → `art-source/enemies/imperial_automaton/generated/candidates/imperial_automaton_walk_v1.png`.
+- `MOB_ENFORCER_001_CAND` — Causality Enforcer, 32 × 32 × 4 stance (frame 2 lunges): violet light armour, plumed steel helmet, rapier, cape → `art-source/enemies/causality_enforcer/generated/candidates/causality_enforcer_v1.png`.
+- `BOSS_VERDICT_001_CAND` — The Imperial Verdict, 64 × 64 × 5 (0-3 idle: scales sway, sword flames, amber core; 4 kneeling, scales broken, sword lowered) → `art-source/enemies/imperial_verdict/generated/candidates/imperial_verdict_v1.png`.
+- Previews ×8 (×4 for the boss) in each `previews/` folder. **Validation:** all PASSED. **Status:** `CONCEPT_PENDING_APPROVAL`.
