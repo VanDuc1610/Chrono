@@ -5,6 +5,8 @@ import {
   distance,
   facingFromAngle,
   inSlash,
+  isGlowing,
+  shieldBlocks,
   newBrain,
   nextStep,
   resolveActionTuning,
@@ -49,6 +51,11 @@ interface Roamer {
   sight: number;
   leash: number;
   patrolRadius: number;
+  /** Direction it faces (radians): where it walks, or toward Peter when winding up. */
+  facing: number;
+  /** Phase shift of the reflect glow, so a group does not glow in sync. */
+  glowOffset: number;
+  glowShown: boolean;
 }
 
 const ELDER_FLAG = 'elder_joined';
@@ -178,6 +185,9 @@ export class ActionCombat {
       sight: def.sight ?? (def.hunter ? 100000 : e.sight),
       leash: def.leash ?? (def.hunter ? 100000 : e.leash),
       patrolRadius: def.patrolRadius ?? e.patrolRadius,
+      facing: Math.PI / 2,
+      glowOffset: Math.floor(this.rng() * 4000),
+      glowShown: false,
     });
   }
 
@@ -241,11 +251,22 @@ export class ActionCombat {
         const v = r.speed * out.pace;
         r.sprite.setVelocity((dx / len) * v, (dy / len) * v);
         if (Math.abs(dx) > 2) r.sprite.setFlipX(dx < 0);
+        if (len > 2) r.facing = Math.atan2(dy, dx);
       } else {
         r.sprite.setVelocity(0, 0);
       }
+      if (r.brain.state === 'windup') {
+        r.facing = Math.atan2(target.y - r.sprite.y, target.x - r.sprite.x);
+      }
       if (r.brain.state === 'windup' && before !== 'windup') r.sprite.setTint(0xff7070);
       if (r.brain.state !== 'windup' && before === 'windup') r.sprite.clearTint();
+      const reflect = r.enemy.field?.reflect;
+      if (reflect) {
+        const glow = isGlowing(now, r.glowOffset, reflect.everyMs, reflect.glowMs);
+        if (glow && !r.glowShown) r.sprite.setTint(0xff2a2a);
+        if (!glow && r.glowShown && r.brain.state !== 'windup') r.sprite.clearTint();
+        r.glowShown = glow;
+      }
       if (out.strike && distance(r.sprite, target) <= this.tuning.enemy.attackRange + 10) {
         this.hitPlayer(r);
       }
@@ -301,6 +322,7 @@ export class ActionCombat {
       if (!r.alive) continue;
       if (!inSlash(origin, aim, r.sprite, reach, this.tuning.slashArcDeg)) continue;
       const hit = rollHit(attack, r.enemy.defense, this.combat, this.rng);
+      if (this.defended(r, hit.damage)) continue;
       this.damageRoamer(r, hit.damage, hit.critical);
     }
   }
@@ -365,6 +387,38 @@ export class ActionCombat {
     this.nextDash = now + this.tuning.dashCooldownMs;
     this.player.sprite.setAlpha(0.55);
     this.scene.time.delayedCall(this.tuning.dashMs + 40, () => this.player.sprite.setAlpha(1));
+  }
+
+  /**
+   * Enemy defences against a slash (Temporal Strike goes through): a front shield blocks it, a
+   * red glow sends part of it back to Peter. True when the hit did not land.
+   */
+  private defended(r: Roamer, damage: number): boolean {
+    const field = r.enemy.field;
+    if (!field) return false;
+    const now = this.scene.time.now;
+    if (
+      field.frontShieldDeg &&
+      shieldBlocks(r.facing, r.sprite, this.player, field.frontShieldDeg, r.brain.state)
+    ) {
+      this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.blocked'), '#9fd3ff');
+      this.sound.playSlash();
+      const away = Math.atan2(this.player.y - r.sprite.y, this.player.x - r.sprite.x);
+      this.player.forceVelocity(Math.cos(away) * 120, Math.sin(away) * 120, 90);
+      return true;
+    }
+    const reflect = field.reflect;
+    if (reflect && isGlowing(now, r.glowOffset, reflect.everyMs, reflect.glowMs)) {
+      const back = Math.max(1, Math.ceil(damage * reflect.pct));
+      this.session.hp = Math.max(1, this.session.hp - back);
+      this.player.sprite.setTint(0xff5050);
+      this.scene.time.delayedCall(160, () => this.player.sprite.clearTint());
+      this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.reflected'), '#ff8080');
+      this.floatText(this.player.x, this.player.y - 20, `-${back}`, '#ff6b6b');
+      this.host.refreshHud();
+      return true;
+    }
+    return false;
   }
 
   private hitPlayer(r: Roamer): void {

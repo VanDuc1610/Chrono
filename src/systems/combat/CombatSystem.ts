@@ -1,6 +1,8 @@
 import {
   BattlePhase,
   BossEnvironmentAction,
+  BossSentence,
+  CombatActionType,
   CombatItemEffect,
   CombatTuning,
   IBattleState,
@@ -56,6 +58,9 @@ interface BossState {
   unlocked: boolean;
   done: Set<string>;
   stunTurns: number;
+  /** Verdict in force for Peter's next action (sentence bosses). */
+  sentence: BossSentence | null;
+  cracks: number;
 }
 
 export class CombatSystem implements ICombatSystem {
@@ -107,7 +112,14 @@ export class CombatSystem implements ICombatSystem {
     this.bosses.clear();
     for (const e of enemies) {
       if (e.mechanic)
-        this.bosses.set(e.id, { shield: true, unlocked: false, done: new Set(), stunTurns: 0 });
+        this.bosses.set(e.id, {
+          shield: true,
+          unlocked: false,
+          done: new Set(),
+          stunTurns: 0,
+          sentence: null,
+          cracks: 0,
+        });
     }
     this.refreshTurnQueue();
   }
@@ -214,6 +226,52 @@ export class CombatSystem implements ICombatSystem {
       return { skip: true, message: m.recoverMessage, healingDone: enemy.stats.hp - before };
     }
     return { skip: false };
+  }
+
+  /**
+   * Sentence bosses: after the boss's turn, pick the verdict on Peter's next move. Returns the
+   * announcement for the battle log, or null (no sentences, shield already broken, boss down).
+   */
+  public announceSentence(enemyId: string): string | null {
+    const boss = this.bosses.get(enemyId);
+    const enemy = this.getCombatant(enemyId);
+    const s = enemy?.mechanic?.sentences;
+    if (!boss || !s || !enemy?.isAlive || !boss.shield || s.list.length === 0) return null;
+    boss.sentence = s.list[Math.floor(this.rng() * s.list.length) % s.list.length];
+    return boss.sentence.announce;
+  }
+
+  /** The verdict currently in force against Peter, if any. */
+  public getSentence(enemyId: string): BossSentence | null {
+    return this.bosses.get(enemyId)?.sentence ?? null;
+  }
+
+  /** Judges Peter's action against the verdicts in force; returns extra battle-log text. */
+  private judgeSentences(peter: ICombatant, type: CombatActionType): string {
+    let text = '';
+    for (const [id, boss] of this.bosses) {
+      const s = boss.sentence;
+      const enemy = this.getCombatant(id);
+      if (!s || !enemy) continue;
+      boss.sentence = null;
+      if (s.forbidden.includes(type)) {
+        const hit = this.applyDamage(
+          peter,
+          Math.max(1, Math.ceil(peter.stats.maxHp * s.punishPct)),
+        );
+        text += ` ${formatString({ m: s.punishMessage }, 'm', { damage: hit.dealt })}`;
+        if (peter.stats.hp <= 0) peter.isAlive = false;
+      } else if (s.defiedBy.includes(type) && boss.shield) {
+        boss.cracks++;
+        text += ` ${s.crackMessage}`;
+        const rule = enemy.mechanic?.sentences;
+        if (rule && boss.cracks >= rule.cracksToBreak) {
+          boss.shield = false;
+          text += ` ${rule.breakMessage}`;
+        }
+      }
+    }
+    return text;
   }
 
   /** Applies shield reduction and the HP floor to damage dealt to `target`. */
@@ -355,6 +413,8 @@ export class CombatSystem implements ICombatSystem {
         break;
       }
     }
+
+    if (source.type === 'player') message += this.judgeSentences(source, action.type);
 
     if (target.stats.hp <= 0 && target.isAlive) {
       target.isAlive = false;

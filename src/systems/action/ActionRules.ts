@@ -287,3 +287,27 @@ export function nextStep(
   }
   return null;
 }
+
+// ------------------------------------------------------------------ enemy defences
+
+/**
+ * Front shield: a hit from inside the arc in front of the enemy is blocked, unless the enemy is
+ * recovering from its own strike (its guard is down).
+ */
+export function shieldBlocks(
+  facing: number,
+  enemy: Point,
+  attacker: Point,
+  arcDeg: number,
+  state: RoamerState,
+): boolean {
+  if (state === 'recover') return false;
+  const toAttacker = Math.atan2(attacker.y - enemy.y, attacker.x - enemy.x);
+  return angleDiff(facing, toAttacker) <= ((arcDeg / 2) * Math.PI) / 180;
+}
+
+/** Reflect glow: true during the first `glowMs` of every `everyMs` cycle (shifted by `offset`). */
+export function isGlowing(now: number, offset: number, everyMs: number, glowMs: number): boolean {
+  if (everyMs <= 0) return false;
+  return (((now + offset) % everyMs) + everyMs) % everyMs < glowMs;
+}

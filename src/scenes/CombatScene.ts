@@ -707,6 +707,7 @@ export class CombatScene extends Phaser.Scene {
           '#88edff',
         );
       }
+      this.announceSentence();
       this.endTurn(ENEMY_TO_PLAYER_DELAY_MS);
       return;
     }
@@ -755,7 +756,18 @@ export class CombatScene extends Phaser.Scene {
       return;
     }
 
+    this.announceSentence();
     this.endTurn(ENEMY_TO_PLAYER_DELAY_MS);
+  }
+
+  /** Sentence bosses: shows the verdict on Peter's next move, with a red flash. */
+  private announceSentence(): void {
+    const line = this.combatSystem.announceSentence(this.enemy.id);
+    if (!line) return;
+    this.time.delayedCall(700, () => {
+      this.setBattleLog(line);
+      this.cameras.main.flash(200, 255, 80, 60);
+    });
   }
 
   /** Ends a scripted fight after the rescue: back to the map, which opens the rescue dialogue. */

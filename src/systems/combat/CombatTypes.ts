@@ -98,6 +98,8 @@ export interface BossMechanic {
   releasedFrame?: number;
   /** Replaces the "dissolves" line when the boss falls. */
   defeatMessage?: string;
+  /** Verdicts the boss announces; `cracksToBreak` defied verdicts break the shield. */
+  sentences?: { cracksToBreak: number; list: BossSentence[]; breakMessage: string };
 }
 
 export interface ICombatActionResult {
@@ -107,6 +109,33 @@ export interface ICombatActionResult {
   isCritical: boolean;
   message: string;
   targetDefeated: boolean;
+}
+
+/** How a small enemy defends itself when fought on the map. */
+export interface FieldTraits {
+  /** Blocks slashes from the front inside this arc (degrees), except while recovering. */
+  frontShieldDeg?: number;
+  /** Glows red for `glowMs` every `everyMs`; a hit while glowing hurts Peter for `pct` of it. */
+  reflect?: { pct: number; everyMs: number; glowMs: number };
+}
+
+/**
+ * Boss "sentence" rule: after each of its turns the boss announces a verdict on Peter's next
+ * move. Doing what the verdict forbids is punished; defying it the right way cracks the boss's
+ * scales, and enough cracks break the shield.
+ */
+export interface BossSentence {
+  id: string;
+  /** Battle-log line announcing it. */
+  announce: string;
+  /** Peter's commands that are punished. */
+  forbidden: CombatActionType[];
+  /** Peter's commands that crack the scales. */
+  defiedBy: CombatActionType[];
+  /** Damage to Peter when punished, as a fraction of his max HP. */
+  punishPct: number;
+  punishMessage: string;
+  crackMessage: string;
 }
 
 /** Enemy template as stored in public/assets/data/enemies.json. */
@@ -127,6 +156,8 @@ export interface IEnemyDefinition {
   mechanic?: BossMechanic;
   /** Scripted battle (story fights): locked commands and mid-battle events. */
   script?: BattleScript;
+  /** Real-time behaviour on the map (small enemies). */
+  field?: FieldTraits;
   expReward: number;
   lootTable: { itemId: string; chance: number }[];
 }
