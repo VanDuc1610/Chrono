@@ -51,3 +51,9 @@ All changes to narrative canon, documentation architecture, and story files are 
 - A sudden **stop of time** at noon forces the first fight; Peter cannot attack until the **Elder** (his guide) throws him the **Broken Blade** mid-battle; **Temporal Sight** awakens through his grandfather's stopped watch running backwards.
 - Ending stays **mysterious**: nobody visibly forgotten; reveal saved for later chapters.
 - Details and data contract: `docs/story/PROLOGUE_V3_PROPOSAL.md`.
+
+---
+
+## [1.3.0] – 2026-11-12 · Chapter 1 approved (owner)
+
+- Chapter 1 "The Last Sunset" design approved (`docs/story/CHAPTER_01_DESIGN.md`): boss The Sunken Bellkeeper; three freely switchable time layers in the village; level 6–7 by the end; an unnamed indirect Kuro trace; equipment deferred to Chapter 2.

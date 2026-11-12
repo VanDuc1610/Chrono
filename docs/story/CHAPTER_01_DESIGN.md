@@ -1,7 +1,7 @@
 # THIẾT KẾ CHI TIẾT CHAPTER 1: "THE LAST SUNSET" (HOÀNG HÔN CUỐI CÙNG)
 
 **Mã tài liệu:** `docs/story/CHAPTER_01_DESIGN.md`  
-**Trạng thái:** `[DRAFT / PROPOSAL]` – Chờ Owner phê duyệt  
+**Trạng thái:** `[APPROVED]` – Owner duyệt 2026-11-12, kèm quyết định ở §10  
 **Quyền năng (Authority):** **Continuum** (Liên Tục / Dòng chảy)  
 **Tham chiếu Canon:** `STORY_CHAPTER_01.md`, `CANON_AND_OPEN_QUESTIONS.md`, `PROLOGUE_V3_PROPOSAL.md` (§1–2, §5), `CHANGELOG.md` [1.2.0], `PROGRESSION_DESIGN.md`
 
@@ -221,3 +221,29 @@ Mỗi bản đồ giữ kích thước tối đa **≤ 30×20 tiles** (32×32 px
 3. **Nhịp cấp độ Chương 1 `[PROPOSAL]`:** Từ cấp 3 (cuối Prologue) lên **cấp 6–7** khi hết Chương 1 (tổng ~450 EXP từ quest + quái trên trần Lv 30 toàn game) có hợp với nhịp 6 chương dự kiến không?
 4. **Manh mối gián tiếp Kuro (`poi_kuro_indirect_trace`):** Có đồng ý đặt một kỷ vật mờ không tên (chỉ gợi sự tương đồng trong thói quen với tấm ảnh cũ của Peter, tuyệt đối không có tên hay chữ cái `"K..."`) tại Hành Lang Đáy Biển không?
 5. **Trang bị & Sprite phụ:** Chương 1 đã cần kích hoạt hạng mục `equipment` (như bùa đồng hồ / phụ kiện tăng tốc độ) trong Túi Đồ chưa, hay giữ nguyên 3 loại vật phẩm như Prologue? Bà Tư dùng chung sprite `npc_vendor_ba` (đổi tint) hay cần vẽ riêng?
+
+---
+
+## 10. Quyết Định Của Owner (2026-11-12) & Hợp Đồng Dữ Liệu
+
+**Quyết định (theo khuyến nghị của Coordinator):**
+
+1. Boss Chương 1: **The Sunken Bellkeeper** (Sentinel đã thuộc Prologue).
+2. **Xoay tự do** giữa 3 lớp thời gian (Present → Past → Cataclysm → Present) tại Mỏ Neo — dùng lại cho các chương sau.
+3. Nhịp cấp độ: hết Chương 1 ở **cấp 6–7**.
+4. Đồng ý manh mối gián tiếp `poi_kuro_indirect_trace` (không tên, không chữ cái).
+5. **Trang bị để sang Chương 2.** Bà Tư dùng lại sprite Cô Ba với tóc bạc (tint), Hồn Ngư Dân dùng lại Ông Sáu với tint xanh mờ.
+
+**Hợp đồng dữ liệu (engine — Claude, T-42):**
+
+| Tính năng                 | Dữ liệu                                                                            | Ghi chú                                                                                                                 |
+| ------------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Vòng lặp đường đi         | trigger `on: "zone"`, `repeat: true`, `unlessFlag`, `teleportTo: "<spawnId>"`      | Không cần `onceFlag` khi `repeat`; thoại (nếu có) chỉ hiện lần đầu qua `onceFlag` riêng                                 |
+| Đổi lớp thời gian tại chỗ | hiệu ứng thoại `refreshMap: true`                                                  | Bản đồ dựng lại tại chỗ (giữ vị trí Peter) sau khi thoại đóng: `visibleWhen`, `frozenWhen`, layer đều được đánh giá lại |
+| Lớp thời gian             | cờ `ch1_layer_past`, `ch1_layer_cataclysm` (Present = không cờ nào)                | Mỏ Neo xoay vòng: mỗi node bật cờ lớp mới + `clearFlags` cờ lớp cũ + `refreshMap`                                       |
+| Xóa cờ                    | hiệu ứng thoại `clearFlags: [...]`                                                 | Reset chuỗi chuông khi gõ sai                                                                                           |
+| Thủy triều                | bản đồ `layerVariants: [{ when: {flag: "tide_lowered"}, walls: "Walls_LowTide" }]` | Tilemap có thêm layer; Claude làm                                                                                       |
+
+**Nội dung (Antigravity, T-43):** thoại, quest, vật phẩm theo §7, dùng đúng id/cờ ở §3 và §7 cùng các khóa hiệu ứng mới `clearFlags`, `refreshMap`. Chuỗi 3 trụ chuông: mỗi trụ có `dialogueRules` theo cờ bước (`ch1_bell_step_1/2`); gõ sai → `clearFlags`. Mỏ Neo: 3 node theo lớp hiện tại (`dialogueRules` với `ifFlag`/`unlessFlag`).
+
+**Bản đồ, quái, boss, art (Claude, T-44):** 5 tilemap, `maps.json`, `enemies.json` (Bellkeeper `mechanic`, Drifter, Chorister), sprite Người Gác Hải Đăng, Bellkeeper 64×64, Drifter — mỗi art chờ Owner duyệt.
