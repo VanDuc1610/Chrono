@@ -23,6 +23,10 @@ export interface ISaveData {
   inventory: IItemStack[];
   quests: IQuest[];
   flags: Record<string, boolean | number | string>;
+  /** 0.4.0+: equipped item ids. */
+  equipment?: { weapon: string | null; charm: string | null };
+  /** 0.4.0+: item ids on the 1-4 quick keys. */
+  quickSlots?: (string | null)[];
 }
 
 export interface ISaveMetadata {

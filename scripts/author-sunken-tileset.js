@@ -10,6 +10,9 @@
  * 4 × 6 tiles of 32 px (128 × 192). New indices:
  *   16 chime pillar · 17 cracked Time Bell · 18 coral cluster · 19 kelp · 20 shallow water (ground)
  *   21 seabed sand (ground) · 22 unnamed watch case · 23 Continuum Seal
+ * v2 (Chapter 1 hidden mirror cache): 24 mirror (dim) · 25 mirror (aligned, lit) · 26 light beam
+ *   east-west · 27 light beam north-south · 28 light cache (sealed) · 29 light cache (open).
+ *   v2 is 4 × 8 tiles (128 × 256); tiles 0-23 are identical to v1.
  *
  * Usage: node scripts/author-sunken-tileset.js
  */
@@ -33,9 +36,9 @@ import {
 } from './pixel-art/tile-kit.js';
 import { ruinsLayout, sanctumLayout } from './ch1-layout.js';
 
-const VERSION = 'v1';
+const VERSION = 'v2';
 const SOURCE = 'art-source/environment/sanctuary/generated/approved/sanctuary_tileset_v3.png';
-// Approved output: art-source/environment/sunken/generated/approved/sunken_tileset_v1.png (ENV_SUNKEN_001).
+// Approved: sunken_tileset_v1.png (ENV_SUNKEN_001). v2 = candidate with the mirror cache tiles.
 
 /** Sanctuary palette (author-sanctuary-tileset.js) -> sunken palette. */
 const RECOLOR = [
@@ -227,6 +230,62 @@ function continuumSeal() {
   return outline(t, 'v');
 }
 
+// ------------------------------------------------------------------ v2: mirror cache 24-29
+/** A standing bronze mirror on a coral-stone foot; `lit` = aligned, glass full of light. */
+function mirror(lit) {
+  const t = tile();
+  rect(t, 9, 27, 22, 30, 'S'); // foot
+  rect(t, 11, 25, 20, 26, 'h');
+  rect(t, 15, 21, 16, 25, 'k'); // stem
+  ellipse(t, 15.5, 12, 7.5, 9.5, 'k'); // bronze frame
+  ellipse(t, 15.5, 12, 6, 8, lit ? 'c' : 'w');
+  // glass sheen: a diagonal streak; lit glass has a bright core
+  for (let k = 0; k < 6; k++) put(t, 12 + k, 7 + k, lit ? 'a' : 'W');
+  if (lit) ellipse(t, 15.5, 12, 2.5, 3.5, 'a');
+  for (const [x, y] of [
+    [9, 9],
+    [22, 14],
+    [15, 2],
+  ])
+    put(t, x, y, 'K');
+  return outline(t);
+}
+/** Light running across the floor (horizontal or vertical) — drawn over seabed sand. */
+function beam(vertical) {
+  const t = seabedSand();
+  for (let a = 0; a < T; a++)
+    for (let w = -3; w <= 3; w++) {
+      const [x, y] = vertical ? [16 + w, a] : [a, 16 + w];
+      const ab = Math.abs(w);
+      t[y][x] = ab === 0 ? 'a' : ab === 1 ? 'c' : ab === 2 ? 'd' : t[y][x] === 'n' ? 'd' : t[y][x];
+    }
+  return t;
+}
+/** The light cache: a stone coffer with a glass eye; open = lid lifted, glow inside. */
+function lightCache(open) {
+  const t = tile();
+  rect(t, 5, 16, 26, 29, 's');
+  rect(t, 5, 16, 6, 29, 'h');
+  rect(t, 25, 16, 26, 29, 'S');
+  rect(t, 5, 22, 26, 22, 'b'); // verdigris band
+  if (open) {
+    rect(t, 7, 6, 24, 9, 'h'); // lid propped up behind
+    rect(t, 8, 13, 23, 16, 'c'); // glow spilling out
+    rect(t, 11, 14, 20, 15, 'a');
+    for (const [x, y] of [
+      [10, 10],
+      [16, 8],
+      [21, 11],
+    ])
+      put(t, x, y, 'a');
+  } else {
+    rect(t, 4, 12, 27, 16, 'h'); // closed lid
+    rect(t, 4, 12, 27, 12, 'B');
+    ellipse(t, 15.5, 19, 2.5, 2.5, 'd'); // dark glass eye
+  }
+  return outline(t);
+}
+
 const NEW_TILES = [
   chimePillar(),
   crackedBell(),
@@ -236,12 +295,18 @@ const NEW_TILES = [
   seabedSand(),
   watchCase(),
   continuumSeal(),
+  mirror(false),
+  mirror(true),
+  beam(false),
+  beam(true),
+  lightCache(false),
+  lightCache(true),
 ];
 void rnd;
 
 // ------------------------------------------------------------------ assemble + previews
 const base = recolouredBase(); // 128 × 128
-const extra = rasterTiles(NEW_TILES, P, 4); // 128 × 64
+const extra = rasterTiles(NEW_TILES, P, 4); // 128 × 128 (16 tiles, 14 drawn)
 const sheet = { w: 128, h: base.h + extra.h, buf: Buffer.alloc(128 * (base.h + extra.h) * 4) };
 base.buf.copy(sheet.buf, 0);
 extra.buf.copy(sheet.buf, base.buf.length);

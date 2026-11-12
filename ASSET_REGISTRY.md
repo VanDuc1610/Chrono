@@ -175,6 +175,12 @@
 - `BOSS_BELLKEEPER_001` — The Sunken Bellkeeper, 64 × 64 × 5 (frames 0-3 idle with light through the bell's crack; 4 kneeling, bell set down, motes rising) → `public/assets/enemies/bellkeeper.png` (key `boss_bellkeeper`).
 - Files in `art-source/{environment,npcs,enemies}/…/generated/approved/`. **Validation:** all PASSED. **Status:** `INTEGRATED` — owner approved 2026-11-12 (T-44).
 
+### `ENV_SUNKEN_002_CAND` – Sunken tileset v2 candidate (Chapter 1 hidden mirror cache)
+
+- **Generator:** `scripts/author-sunken-tileset.js` (VERSION v2) — tiles 0-23 byte-identical to the approved v1; new 24 bronze mirror (dim), 25 mirror aligned (glass full of light), 26 / 27 light beam east-west / north-south, 28 light cache sealed, 29 light cache open.
+- **File:** `art-source/environment/sunken/generated/candidates/sunken_tileset_v2.png` (128 × 256) · previews: tileset ×4, `mirror_cache_mock_v2.png`.
+- **Validation:** PASSED. **Status:** `CONCEPT_PENDING_APPROVAL` (T-46).
+
 ## 3. Active Placeholder Registry
 
 The following assets are currently integrated into the engine strictly as **temporary placeholders**. They are not approved final art:

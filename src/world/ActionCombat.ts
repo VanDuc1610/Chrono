@@ -209,17 +209,19 @@ export class ActionCombat {
   /** Left click: slash toward the cursor (needs the blade). */
   public slash(worldX: number, worldY: number): void {
     const now = this.scene.time.now;
-    if (!this.canAct || !this.flag(FLAGS.hasBlade) || now < this.nextSwing) return;
-    this.nextSwing = now + this.tuning.swingMs;
+    if (!this.canAct || !this.session.canSlash || now < this.nextSwing) return;
+    const weapon = this.session.weaponStats;
+    const reach = weapon?.reach ?? this.tuning.reach;
+    this.nextSwing = now + (weapon?.swingMs ?? this.tuning.swingMs);
     const origin = { x: this.player.x, y: this.player.y };
     const aim = Math.atan2(worldY - origin.y, worldX - origin.x);
     this.player.playAction('peter_attack', facingFromAngle(aim), 380);
     this.sound.playSlash();
-    this.drawSlash(origin, aim);
+    this.drawSlash(origin, aim, reach);
     const attack = this.session.getStats().attack;
     for (const r of this.roamers) {
       if (!r.alive) continue;
-      if (!inSlash(origin, aim, r.sprite, this.tuning.reach, this.tuning.slashArcDeg)) continue;
+      if (!inSlash(origin, aim, r.sprite, reach, this.tuning.slashArcDeg)) continue;
       const hit = rollHit(attack, r.enemy.defense, this.combat, this.rng);
       this.damageRoamer(r, hit.damage, hit.critical);
     }
@@ -457,17 +459,17 @@ export class ActionCombat {
 
   // ------------------------------------------------------------------ effects
 
-  private drawSlash(origin: Point, aim: number): void {
+  private drawSlash(origin: Point, aim: number, reach: number): void {
     const g = this.scene.add.graphics().setDepth(42);
     const half = (this.tuning.slashArcDeg * Math.PI) / 360;
     g.lineStyle(3, 0xbfefff, 0.9);
     g.beginPath();
-    g.arc(origin.x, origin.y, this.tuning.reach - 4, aim - half, aim + half);
+    g.arc(origin.x, origin.y, reach - 4, aim - half, aim + half);
     g.strokePath();
     this.scene.tweens.add({ targets: g, alpha: 0, duration: 160, onComplete: () => g.destroy() });
   }
 
-  private floatText(x: number, y: number, text: string, color: string): void {
+  public floatText(x: number, y: number, text: string, color: string): void {
     const label = this.scene.add
       .text(x, y, text, {
         fontFamily: 'monospace',

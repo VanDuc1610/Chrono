@@ -1,6 +1,6 @@
 import type Phaser from 'phaser';
 import { InventorySystem } from '../systems/inventory/InventorySystem';
-import { IItemStack } from '../systems/inventory/InventoryTypes';
+import type { EquipSlot, EquipStats, IItemStack } from '../systems/inventory/InventoryTypes';
 import { QuestSystem } from '../systems/quest/QuestSystem';
 import { CombatItemEffect, ICombatant, IEnemyDefinition } from '../systems/combat/CombatTypes';
 import { ISaveData } from '../systems/save/SaveTypes';
@@ -11,8 +11,17 @@ import { GameDatabase, PlayerStats, readGameDatabase } from './GameDatabase';
 const clamp = (value: number, min: number, max: number): number =>
   Math.min(max, Math.max(min, value));
 
-/** 0.3.0: Prologue v3 — attack/skill unlock by story flags (older saves are migrated). */
-export const SAVE_VERSION = '0.3.0';
+/**
+ * 0.3.0: Prologue v3 — attack/skill unlock by story flags (older saves are migrated).
+ * 0.4.0: equipment (weapon + charm) and quick slots; older saves get the Broken Blade equipped.
+ */
+export const SAVE_VERSION = '0.4.0';
+export const QUICK_SLOT_COUNT = 4;
+
+/** Result of using a consumable (bag or quick key). */
+export type UseItemResult =
+  | { ok: true; name: string; healed: number; restoredMp: number }
+  | { ok: false; reason: 'none' | 'notUsable' | 'full'; name: string };
 export const DEFAULT_MAP_ID = 'prologue_sanctuary';
 
 /** Story flag keys. Values are kept identical to 0.1.x saves for compatibility. */
@@ -56,6 +65,8 @@ export class GameSession {
   public mp: number;
   public position: MapPosition | null = null;
   public playtimeMs = 0;
+  public equipment: Record<EquipSlot, string | null> = { weapon: null, charm: null };
+  public quickSlots: (string | null)[] = Array<string | null>(QUICK_SLOT_COUNT).fill(null);
 
   private constructor(private readonly db: GameDatabase) {
     this.inventory.loadDatabase(db.items);
@@ -89,6 +100,19 @@ export class GameSession {
     }
     session.inventory.loadFromState(save.inventory);
     session.quests.loadFromState(save.quests);
+    if (save.equipment) {
+      for (const slot of ['weapon', 'charm'] as const) {
+        const id = save.equipment[slot];
+        if (id && session.inventory.hasItem(id, 1)) session.equipment[slot] = id;
+      }
+    } else if (session.getFlag(FLAGS.hasBlade)) {
+      // Saves before equipment (< 0.4): Peter already fights with the Broken Blade.
+      session.equip('broken_blade');
+    }
+    (save.quickSlots ?? []).slice(0, QUICK_SLOT_COUNT).forEach((id, i) => {
+      session.quickSlots[i] = id ?? null;
+    });
+    session.hp = clamp(session.hp, 1, session.getStats().maxHp);
     return session;
   }
 
@@ -118,15 +142,17 @@ export class GameSession {
 
   // ---------------------------------------------------------- progression
 
+  /** Level stats plus the equipped weapon and charm. */
   public getStats(level = this.level): PlayerStats {
     const { baseStats, growthPerLevel } = this.db.player.player;
     const n = level - 1;
+    const bonus = this.equipBonus();
     return {
-      maxHp: baseStats.maxHp + growthPerLevel.maxHp * n,
-      maxMp: baseStats.maxMp + growthPerLevel.maxMp * n,
-      attack: baseStats.attack + growthPerLevel.attack * n,
-      defense: baseStats.defense + growthPerLevel.defense * n,
-      speed: baseStats.speed + growthPerLevel.speed * n,
+      maxHp: baseStats.maxHp + growthPerLevel.maxHp * n + (bonus.maxHp ?? 0),
+      maxMp: baseStats.maxMp + growthPerLevel.maxMp * n + (bonus.maxMp ?? 0),
+      attack: baseStats.attack + growthPerLevel.attack * n + (bonus.attack ?? 0),
+      defense: baseStats.defense + growthPerLevel.defense * n + (bonus.defense ?? 0),
+      speed: baseStats.speed + growthPerLevel.speed * n + (bonus.speed ?? 0),
     };
   }
 
@@ -184,6 +210,7 @@ export class GameSession {
     for (const drop of enemy.lootTable) {
       if (rng() < drop.chance && this.inventory.addItem(drop.itemId, 1)) {
         items.push({ itemId: drop.itemId, quantity: 1 });
+        this.onItemReceived(drop.itemId);
       }
     }
     const levelUps = this.addExp(enemy.expReward);
@@ -259,7 +286,10 @@ export class GameSession {
     const hasReward = !!effects.grantItems?.length || (effects.grantExp ?? 0) > 0;
     if (hasReward && !(once && this.getFlag(once))) {
       for (const stack of effects.grantItems ?? []) {
-        if (this.inventory.addItem(stack.itemId, stack.quantity)) granted.push({ ...stack });
+        if (this.inventory.addItem(stack.itemId, stack.quantity)) {
+          granted.push({ ...stack });
+          this.onItemReceived(stack.itemId);
+        }
       }
       if (effects.grantExp && effects.grantExp > 0) this.addExp(effects.grantExp);
       if (once) this.setFlag(once);
@@ -328,6 +358,107 @@ export class GameSession {
     return { name: def.name, healAmount };
   }
 
+  // ------------------------------------------------------------ equipment
+
+  private equipBonus(): EquipStats {
+    const sum: EquipStats = {};
+    for (const id of Object.values(this.equipment)) {
+      const equip = id ? this.inventory.getItemDefinition(id)?.equip : undefined;
+      for (const [k, v] of Object.entries(equip ?? {}) as [keyof EquipStats, number][]) {
+        if (k === 'reach' || k === 'swingMs') continue;
+        sum[k] = (sum[k] ?? 0) + v;
+      }
+    }
+    return sum;
+  }
+
+  /** The equipped weapon's `equip` block (reach, swing speed), if any. */
+  public get weaponStats(): EquipStats | undefined {
+    const id = this.equipment.weapon;
+    return id ? (this.inventory.getItemDefinition(id)?.equip ?? {}) : undefined;
+  }
+
+  /** Peter can slash: a weapon is equipped (or, before any weapon item exists, he has the blade). */
+  public get canSlash(): boolean {
+    if (this.equipment.weapon) return true;
+    const ownsWeapon = this.inventory
+      .getAllItems()
+      .some((s) => this.inventory.getItemDefinition(s.itemId)?.type === 'weapon');
+    return !ownsWeapon && this.getFlag(FLAGS.hasBlade);
+  }
+
+  public slotOf(itemId: string): EquipSlot | null {
+    const type = this.inventory.getItemDefinition(itemId)?.type;
+    return type === 'weapon' || type === 'charm' ? type : null;
+  }
+
+  /** Equips an owned weapon / charm (replacing the previous one). Returns the slot, or null. */
+  public equip(itemId: string): EquipSlot | null {
+    const slot = this.slotOf(itemId);
+    if (!slot || !this.inventory.hasItem(itemId, 1)) return null;
+    this.equipment[slot] = itemId;
+    this.clampToStats();
+    return slot;
+  }
+
+  public unequip(slot: EquipSlot): void {
+    this.equipment[slot] = null;
+    this.clampToStats();
+  }
+
+  private clampToStats(): void {
+    const s = this.getStats();
+    this.hp = clamp(this.hp, 1, s.maxHp);
+    this.mp = clamp(this.mp, 0, s.maxMp);
+  }
+
+  /** New items: a weapon / charm goes on if its slot is empty; a consumable takes a free quick slot. */
+  private onItemReceived(itemId: string): void {
+    const slot = this.slotOf(itemId);
+    if (slot && !this.equipment[slot]) this.equip(itemId);
+    const def = this.inventory.getItemDefinition(itemId);
+    if (def?.type === 'consumable' && !this.quickSlots.includes(itemId)) {
+      const free = this.quickSlots.indexOf(null);
+      if (free >= 0) this.quickSlots[free] = itemId;
+    }
+  }
+
+  /** Puts a consumable on quick key `index` (0-3); it leaves any other key. */
+  public assignQuickSlot(index: number, itemId: string): boolean {
+    if (index < 0 || index >= QUICK_SLOT_COUNT) return false;
+    if (this.inventory.getItemDefinition(itemId)?.type !== 'consumable') return false;
+    this.quickSlots = this.quickSlots.map((id) => (id === itemId ? null : id));
+    this.quickSlots[index] = itemId;
+    return true;
+  }
+
+  /** Uses one consumable: `healAmount` HP and / or `mpAmount` MP. */
+  public useConsumable(itemId: string): UseItemResult {
+    const def = this.inventory.getItemDefinition(itemId);
+    const name = def?.name ?? itemId;
+    if (!def || !this.inventory.hasItem(itemId, 1)) return { ok: false, reason: 'none', name };
+    const heal = def.effects?.healAmount ?? 0;
+    const mp = def.effects?.mpAmount ?? 0;
+    if (def.type !== 'consumable' || (heal <= 0 && mp <= 0)) {
+      return { ok: false, reason: 'notUsable', name };
+    }
+    const s = this.getStats();
+    if ((heal <= 0 || this.hp >= s.maxHp) && (mp <= 0 || this.mp >= s.maxMp)) {
+      return { ok: false, reason: 'full', name };
+    }
+    this.inventory.removeItem(itemId, 1);
+    const hpBefore = this.hp;
+    const mpBefore = this.mp;
+    this.hp = clamp(this.hp + heal, 0, s.maxHp);
+    this.mp = clamp(this.mp + mp, 0, s.maxMp);
+    return {
+      ok: true,
+      name,
+      healed: this.hp - hpBefore,
+      restoredMp: Math.floor(this.mp - mpBefore),
+    };
+  }
+
   // ----------------------------------------------------------- persistence
 
   public tick(deltaMs: number): void {
@@ -351,6 +482,8 @@ export class GameSession {
       inventory: this.inventory.getAllItems(),
       quests: this.quests.getAllQuests(),
       flags: { ...this.flags },
+      equipment: { ...this.equipment },
+      quickSlots: [...this.quickSlots],
     };
   }
 }

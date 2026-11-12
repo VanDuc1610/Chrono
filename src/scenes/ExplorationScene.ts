@@ -694,8 +694,14 @@ export class ExplorationScene extends Phaser.Scene {
     on(K.Q, () => {
       if (this.questTracker.cycle()) this.soundSystem.playCursorBlip();
     });
-    on(K.ONE, () => this.dialogueBox.choose(0));
-    on(K.TWO, () => this.dialogueBox.choose(1));
+    // 1-4: dialogue choice, else (bag open) put the selected item on that key, else use it.
+    [K.ONE, K.TWO, K.THREE, K.FOUR].forEach((code, i) =>
+      on(code, () => {
+        if (this.dialogueBox.isOpen()) this.dialogueBox.choose(i);
+        else if (this.satchel.isOpen) this.satchel.assignQuick(i);
+        else this.useQuickSlot(i);
+      }),
+    );
   }
 
   private setupQuestListeners(): void {
@@ -772,6 +778,24 @@ export class ExplorationScene extends Phaser.Scene {
   }
 
   public updatePlayerStatusHUD(): void {
+    this.statusHud.refresh();
+  }
+
+  /** Quick key 1-4 on the map: use the consumable on that key. */
+  public useQuickSlot(index: number): void {
+    if (this.isTransitioning) return;
+    const id = this.session.quickSlots[index];
+    if (!id) return;
+    const result = this.session.useConsumable(id);
+    const { x, y } = this.player;
+    if (!result.ok) {
+      const key = result.reason === 'full' ? 'quick.full' : 'quick.none';
+      this.action?.floatText(x, y - 22, this.t(key, { name: result.name }), '#8fb8ff');
+      return;
+    }
+    this.soundSystem.playHeal();
+    const gain = result.healed > 0 ? `+${result.healed} HP` : `+${result.restoredMp} MP`;
+    this.action?.floatText(x, y - 22, gain, '#4ade80');
     this.statusHud.refresh();
   }
 

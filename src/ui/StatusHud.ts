@@ -7,6 +7,7 @@ import type { Translate } from './Strings';
 export class StatusHud {
   private readonly stats: Phaser.GameObjects.Text;
   private readonly controls: Phaser.GameObjects.Text;
+  private readonly quick: Phaser.GameObjects.Text;
 
   constructor(
     scene: Phaser.Scene,
@@ -48,6 +49,17 @@ export class StatusHud {
       })
       .setScrollFactor(0)
       .setDepth(90);
+    this.quick = scene.add
+      .text(scene.scale.width - 10, scene.scale.height - 34, '', {
+        fontFamily: 'monospace',
+        fontSize: '10px',
+        color: '#8fb8ff',
+        backgroundColor: '#07080fcc',
+        padding: { left: 4, right: 4, top: 2, bottom: 2 },
+      })
+      .setOrigin(1, 0)
+      .setScrollFactor(0)
+      .setDepth(90);
     this.refresh();
   }
 
@@ -67,6 +79,14 @@ export class StatusHud {
         maxMp: max.maxMp,
       }),
     );
+    const inv = s.inventory;
+    const slots = s.quickSlots.map((id, i) => {
+      if (!id) return `[${i + 1}] —`;
+      const name = inv.getItemDefinition(id)?.name ?? id;
+      return `[${i + 1}] ${name} x${inv.getItemCount(id)}`;
+    });
+    const anyQuick = s.quickSlots.some((id) => id !== null);
+    this.quick.setText(slots.join('  ')).setVisible(anyQuick);
     this.controls.setText(
       this.t(s.getFlag('has_broken_blade') ? 'hud.controlsArmed' : 'hud.controls'),
     );
