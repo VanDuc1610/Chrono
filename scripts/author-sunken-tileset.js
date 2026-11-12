@@ -35,6 +35,7 @@ import { ruinsLayout, sanctumLayout } from './ch1-layout.js';
 
 const VERSION = 'v1';
 const SOURCE = 'art-source/environment/sanctuary/generated/approved/sanctuary_tileset_v3.png';
+// Approved output: art-source/environment/sunken/generated/approved/sunken_tileset_v1.png (ENV_SUNKEN_001).
 
 /** Sanctuary palette (author-sanctuary-tileset.js) -> sunken palette. */
 const RECOLOR = [

@@ -13,8 +13,8 @@
 | Status Tier                | Count | Description                                                         |
 | -------------------------- | ----- | ------------------------------------------------------------------- |
 | `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`)               |
-| `INTEGRATED`               | 14    | Approved art in engine (Peter ×2, Shade, Elder, tileset ×2, UI set) |
-| `CONCEPT_PENDING_APPROVAL` | 1     | Concept generated; awaiting formal review                           |
+| `INTEGRATED`               | 15    | Approved art in engine (Peter ×2, Shade, Elder, tileset ×2, UI set) |
+| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review                           |
 | `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared                          |
 | `PLACEHOLDER_TEMPORARY`    | 3     | Procedural placeholder assets active in engine                      |
 
@@ -159,12 +159,12 @@
 - **Validation:** PASSED; approved idle/walk/attack/hurt/temporal_sight regenerate byte-identically.
 - **Status:** `INTEGRATED` — owner approved 2026-11-12 (T-39); used until `has_broken_blade`.
 
-### `ENV_SUNKEN_001_CAND` – Sunken tileset v1 (Chapter 1 underwater ruins + Bell Sanctum)
+### `ENV_SUNKEN_001` – Sunken tileset v1 (Chapter 1 underwater ruins + Bell Sanctum)
 
 - **Generator:** `scripts/author-sunken-tileset.js` — tiles 0-15 are the approved sanctuary tiles (`ENV_SANCTUARY_002`) recoloured colour-by-colour into a deep-sea palette (mossy teal stone, verdigris, green-cyan phosphor, coral instead of violet); tiles 16-23 are new: chime pillar, cracked Time Bell, coral, kelp, shallow pool, seabed silt, unnamed watch case, Continuum Seal.
-- **File:** `art-source/environment/sunken/generated/candidates/sunken_tileset_v1.png` (128 × 192, 4 × 6 tiles) · previews: tileset ×4, `sunken_corridors_v1.png`, `bell_sanctum_v1.png`
+- **File:** `art-source/environment/sunken/generated/approved/sunken_tileset_v1.png` → `public/assets/tilesets/sunken_tileset.png` (128 × 192, 4 × 6 tiles) · previews: tileset ×4, `sunken_corridors_v1.png`, `bell_sanctum_v1.png`
 - **Why:** owner asked for a different tone for the two underwater maps (they shared the Prologue sanctuary look).
-- **Validation:** PASSED. **Status:** `CONCEPT_PENDING_APPROVAL` (T-44).
+- **Validation:** PASSED. **Status:** `INTEGRATED` — owner approved 2026-11-12 (T-44).
 
 ## 3. Active Placeholder Registry
 
