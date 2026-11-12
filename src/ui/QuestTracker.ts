@@ -25,13 +25,13 @@ export class QuestTracker {
     const bg = createPanel(scene, 0, 0, WIDTH, HEIGHT);
     const label = scene.add.text(10, 8, t('quest.label'), {
       fontFamily: 'monospace',
-      fontSize: '8px',
+      fontSize: '9px',
       color: '#00d2ff',
       letterSpacing: 1,
     });
     this.title = scene.add.text(10, 20, '', {
       fontFamily: 'monospace',
-      fontSize: '10px',
+      fontSize: '11px',
       color: '#e4ebf5',
       fontStyle: 'bold',
     });
@@ -39,7 +39,7 @@ export class QuestTracker {
     for (let i = 0; i < ROWS; i++) {
       const row = scene.add.text(10, 34 + i * 12, '', {
         fontFamily: 'monospace',
-        fontSize: '9px',
+        fontSize: '10px',
         color: '#8b9bb4',
       });
       this.rows.push(row);

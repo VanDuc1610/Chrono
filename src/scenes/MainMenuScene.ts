@@ -68,7 +68,7 @@ export class MainMenuScene extends Phaser.Scene {
     this.add
       .text(width / 2, height * 0.39, this.t('menu.tagline'), {
         fontFamily: 'monospace',
-        fontSize: '9px',
+        fontSize: '10px',
         color: '#657499',
         letterSpacing: 3,
       })
@@ -155,7 +155,7 @@ export class MainMenuScene extends Phaser.Scene {
     this.add
       .text(12, height - 18, this.t('menu.version'), {
         fontFamily: 'monospace',
-        fontSize: '9px',
+        fontSize: '10px',
         color: '#434d66',
       })
       .setOrigin(0, 0);
@@ -163,7 +163,7 @@ export class MainMenuScene extends Phaser.Scene {
     this.add
       .text(width - 12, height - 18, this.t('menu.footerHint'), {
         fontFamily: 'monospace',
-        fontSize: '9px',
+        fontSize: '10px',
         color: '#434d66',
       })
       .setOrigin(1, 0);
@@ -207,7 +207,7 @@ export class MainMenuScene extends Phaser.Scene {
     this.soundStatusText = this.add
       .text(modalWidth / 2, 60, this.formatSoundStatus(isMuted), {
         fontFamily: 'monospace',
-        fontSize: '11px',
+        fontSize: '12px',
         color: isMuted ? '#f87171' : '#4ade80',
         backgroundColor: '#161f36',
         padding: { left: 8, right: 8, top: 4, bottom: 4 },
@@ -227,7 +227,7 @@ export class MainMenuScene extends Phaser.Scene {
     const soundHint = this.add
       .text(modalWidth / 2, 86, this.t('menu.soundHint'), {
         fontFamily: 'monospace',
-        fontSize: '9px',
+        fontSize: '10px',
         color: '#657499',
       })
       .setOrigin(0.5);
@@ -235,7 +235,7 @@ export class MainMenuScene extends Phaser.Scene {
     const closeBtn = this.add
       .text(modalWidth / 2, 122, this.t('menu.optionsClose'), {
         fontFamily: 'monospace',
-        fontSize: '10px',
+        fontSize: '11px',
         color: '#94a3b8',
       })
       .setOrigin(0.5)

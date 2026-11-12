@@ -26,7 +26,7 @@ export class StatusHud {
         })
         .setScrollFactor(0)
         .setDepth(95);
-    text(18, t('hud.location', { name: locationName }), '10px', '#65d5ff', true);
+    text(18, t('hud.location', { name: locationName }), '11px', '#65d5ff', true);
     text(
       31,
       chapter > 0
@@ -35,12 +35,12 @@ export class StatusHud {
       '9px',
       '#8b97b8',
     );
-    this.stats = text(44, '', '9px', '#4ade80', true);
+    this.stats = text(44, '', '10px', '#4ade80', true);
 
     scene.add
       .text(10, scene.scale.height - 16, t('hud.controls'), {
         fontFamily: 'monospace',
-        fontSize: '9px',
+        fontSize: '10px',
         color: '#5d6b8a',
         backgroundColor: '#07080fcc',
         padding: { left: 4, right: 4, top: 2, bottom: 2 },

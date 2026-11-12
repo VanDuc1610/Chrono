@@ -245,19 +245,19 @@ export class CombatScene extends Phaser.Scene {
         30,
         24,
         this.t('combat.nameLevel', { name: this.player.name, level: this.session.level }),
-        { fontFamily: 'monospace', fontSize: '11px', color: '#00e1ff', fontStyle: 'bold' },
+        { fontFamily: 'monospace', fontSize: '12px', color: '#00e1ff', fontStyle: 'bold' },
       ),
     );
 
     this.playerHpBar = this.add.graphics();
     this.playerMpText = this.add.text(124, 52, '', {
       fontFamily: 'monospace',
-      fontSize: '9px',
+      fontSize: '10px',
       color: '#93c5fd',
     });
     this.playerHpText = this.add.text(124, 40, '', {
       fontFamily: 'monospace',
-      fontSize: '9px',
+      fontSize: '10px',
       color: '#cbd5e1',
     });
 
@@ -269,14 +269,14 @@ export class CombatScene extends Phaser.Scene {
         width - 190,
         24,
         this.t('combat.nameLevel', { name: this.enemy.name, level: this.enemyTemplate.level }),
-        { fontFamily: 'monospace', fontSize: '11px', color: '#ff4d79', fontStyle: 'bold' },
+        { fontFamily: 'monospace', fontSize: '12px', color: '#ff4d79', fontStyle: 'bold' },
       ),
     );
 
     this.enemyHpBar = this.add.graphics();
     this.enemyHpText = this.add.text(width - 88, 40, '', {
       fontFamily: 'monospace',
-      fontSize: '9px',
+      fontSize: '10px',
       color: '#cbd5e1',
     });
 
@@ -292,7 +292,7 @@ export class CombatScene extends Phaser.Scene {
 
     this.turnIndicatorText = this.add.text(cmdBoxX + 12, cmdBoxY + 9, '', {
       fontFamily: 'monospace',
-      fontSize: '9px',
+      fontSize: '10px',
       color: '#00e1ff',
       fontStyle: 'bold',
     });
@@ -316,7 +316,7 @@ export class CombatScene extends Phaser.Scene {
       const btn = this.add
         .text(x, y, cmd.text, {
           fontFamily: 'monospace',
-          fontSize: '9px',
+          fontSize: '10px',
           color: '#e2e8f0',
         })
         .setInteractive({ useHandCursor: true })
@@ -348,7 +348,7 @@ export class CombatScene extends Phaser.Scene {
 
     this.logText = this.add.text(logBoxX + 14, logBoxY + 12, '', {
       fontFamily: 'monospace',
-      fontSize: '10px',
+      fontSize: '11px',
       color: '#cbd5e1',
       wordWrap: { width: logBoxWidth - 28 },
       lineSpacing: 4,

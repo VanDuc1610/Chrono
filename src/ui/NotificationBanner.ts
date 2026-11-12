@@ -27,13 +27,13 @@ export class NotificationBanner {
     this.title = scene.add
       .text(WIDTH / 2, 9, '', {
         fontFamily: 'monospace',
-        fontSize: '10px',
+        fontSize: '11px',
         color: '#00e1ff',
         fontStyle: 'bold',
       })
       .setOrigin(0.5, 0);
     this.subtitle = scene.add
-      .text(WIDTH / 2, 23, '', { fontFamily: 'monospace', fontSize: '9px', color: '#cdd7eb' })
+      .text(WIDTH / 2, 23, '', { fontFamily: 'monospace', fontSize: '10px', color: '#cdd7eb' })
       .setOrigin(0.5, 0);
     this.container.add([bg, this.title, this.subtitle]);
   }

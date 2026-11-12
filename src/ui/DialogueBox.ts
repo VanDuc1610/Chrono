@@ -41,14 +41,14 @@ export class DialogueBox {
     });
     this.bodyText = scene.add.text(boxX + 16, boxY + 28, '', {
       fontFamily: 'monospace',
-      fontSize: '11px',
+      fontSize: '12px',
       color: '#e4ebf5',
       wordWrap: { width: boxW - 32 },
     });
     this.hint = scene.add
       .text(boxX + boxW - 14, boxY + boxH - 12, '', {
         fontFamily: 'monospace',
-        fontSize: '9px',
+        fontSize: '10px',
         color: '#7f90b3',
       })
       .setOrigin(1, 1);
@@ -58,7 +58,7 @@ export class DialogueBox {
       const btn = scene.add
         .text(boxX + 24 + i * 220, boxY + 54, '', {
           fontFamily: 'monospace',
-          fontSize: '10px',
+          fontSize: '11px',
           color: '#ffd666',
           backgroundColor: '#161d30',
           padding: { left: 6, right: 6, top: 3, bottom: 3 },

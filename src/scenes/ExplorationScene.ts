@@ -573,7 +573,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.promptText = this.add
       .text(width / 2, height - 36, '', {
         fontFamily: 'monospace',
-        fontSize: '11px',
+        fontSize: '12px',
         color: '#ffea79',
         backgroundColor: '#0c101cd0',
         padding: { left: 8, right: 8, top: 4, bottom: 4 },

@@ -31,14 +31,14 @@ export class SatchelPanel {
     const bg = createPanel(scene, 0, 0, WIDTH, HEIGHT);
     const title = scene.add.text(18, 14, t('satchel.title'), {
       fontFamily: 'monospace',
-      fontSize: '11px',
+      fontSize: '12px',
       color: '#00e1ff',
       fontStyle: 'bold',
       letterSpacing: 1,
     });
     const subtitle = scene.add.text(18, 28, t('satchel.subtitle'), {
       fontFamily: 'monospace',
-      fontSize: '8px',
+      fontSize: '9px',
       color: '#6e80a3',
     });
     const divider = scene.add.graphics();
@@ -48,7 +48,7 @@ export class SatchelPanel {
     const footer = scene.add
       .text(WIDTH / 2, HEIGHT - 16, t('satchel.footer'), {
         fontFamily: 'monospace',
-        fontSize: '9px',
+        fontSize: '10px',
         color: '#65789e',
       })
       .setOrigin(0.5);
@@ -150,7 +150,7 @@ export class SatchelPanel {
 
     if (items.length === 0) {
       this.selected = 0;
-      this.list.add(text(10, 20, this.t('satchel.empty'), { fontSize: '10px', color: '#677594' }));
+      this.list.add(text(10, 20, this.t('satchel.empty'), { fontSize: '11px', color: '#677594' }));
       return;
     }
     this.selected = Math.min(this.selected, items.length - 1);
@@ -174,12 +174,12 @@ export class SatchelPanel {
       const hint = isSel && def.type === 'consumable' ? `  ${this.t('satchel.useHint')}` : '';
       this.list.add([
         text(0, y, `${isSel ? '▶ ' : '  '}[${typeLabel}] ${def.name}  x${stack.quantity}${hint}`, {
-          fontSize: '10px',
+          fontSize: '11px',
           color: isSel ? '#ffffff' : color,
           fontStyle: 'bold',
         }),
         text(14, y + 14, def.description, {
-          fontSize: '9px',
+          fontSize: '10px',
           color: isSel ? '#dce7f7' : '#b8c5de',
           wordWrap: { width: 390 },
         }),

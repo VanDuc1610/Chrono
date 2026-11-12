@@ -85,7 +85,7 @@ export class PrologueEndScene extends Phaser.Scene {
     const subtitle = this.add
       .text(width / 2, height * 0.28 + 28, 'CHRONO — THE FRACTURED DIVINITY', {
         fontFamily: 'monospace',
-        fontSize: '10px',
+        fontSize: '11px',
         color: '#00d2ff',
         letterSpacing: 4,
       })
@@ -108,7 +108,7 @@ export class PrologueEndScene extends Phaser.Scene {
         ],
         {
           fontFamily: 'monospace',
-          fontSize: '11px',
+          fontSize: '12px',
           color: '#b8c5de',
           align: 'center',
           lineSpacing: 6,
@@ -120,7 +120,7 @@ export class PrologueEndScene extends Phaser.Scene {
     const thanks = this.add
       .text(width / 2, height * 0.71, t('ending.thanks'), {
         fontFamily: 'monospace',
-        fontSize: '11px',
+        fontSize: '12px',
         color: '#ffd666',
       })
       .setOrigin(0.5)
@@ -133,7 +133,7 @@ export class PrologueEndScene extends Phaser.Scene {
         this.chapter === 0 ? t('ending.promptContinue') : t('ending.prompt'),
         {
           fontFamily: 'monospace',
-          fontSize: '9px',
+          fontSize: '10px',
           color: '#65789e',
         },
       )

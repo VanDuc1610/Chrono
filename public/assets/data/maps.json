@@ -386,7 +386,7 @@
     },
     "map_shattered_antechamber": {
       "id": "map_shattered_antechamber",
-      "name": "Shattered Antechamber",
+      "name": "Điện Thờ Đổ Nát",
       "aliases": ["prologue_sanctuary"],
       "tilemap": {
         "key": "prologue_map",
@@ -433,8 +433,8 @@
             "x": 9,
             "y": 8
           },
-          "name": "Elder Chronographer",
-          "prompt": "[E] Talk with Elder Chronographer",
+          "name": "Trưởng Lão Thời Gian",
+          "prompt": "[E] Nói chuyện với Trưởng Lão",
           "radius": 44,
           "dialogueId": "npc_elder_greeting",
           "dialogueRules": [
@@ -457,7 +457,7 @@
             "y": 5
           },
           "radius": 48,
-          "prompt": "[E] Inspect Altar of Moments",
+          "prompt": "[E] Xem Bàn Thờ Khoảnh Khắc",
           "dialogueId": "altar_inspection",
           "completeObjective": {
             "questId": "quest_prologue_awakening",
@@ -471,7 +471,7 @@
             "y": 4
           },
           "radius": 48,
-          "prompt": "[E] Read Stele of the Six Authorities",
+          "prompt": "[E] Đọc tấm bia sáu biểu tượng",
           "dialogueId": "stele_six_authorities"
         },
         {
@@ -481,7 +481,7 @@
             "y": 10
           },
           "radius": 48,
-          "prompt": "[E] Inspect Defaced Fluted Pillar",
+          "prompt": "[E] Xem cột đá nhòe hoa văn",
           "dialogueId": "pillar_memory_erasure"
         },
         {
@@ -491,7 +491,7 @@
             "y": 12
           },
           "radius": 44,
-          "prompt": "[E] Pick up Torn Journal Leaf",
+          "prompt": "[E] Nhặt trang nhật ký rách",
           "dialogueId": "notebook_loose_leaf"
         },
         {
@@ -501,7 +501,7 @@
             "y": 4
           },
           "radius": 48,
-          "prompt": "[E] Examine Frozen Astrolabe",
+          "prompt": "[E] Xem hỗn thiên nghi đồng thau",
           "dialogueId": "astrolabe_inspection"
         },
         {
@@ -511,7 +511,7 @@
             "y": 2
           },
           "radius": 44,
-          "prompt": "[E] Search Cracked Reliquary",
+          "prompt": "[E] Lục hòm đá nứt",
           "dialogueId": "reliquary_search"
         },
         {
@@ -521,7 +521,7 @@
             "y": 2
           },
           "radius": 48,
-          "prompt": "[E] Inspect Sealed Threshold Gates",
+          "prompt": "[E] Xem Cổng Ngưỡng bị phong ấn",
           "dialogueId": "threshold_gates_inspection"
         },
         {
@@ -531,7 +531,7 @@
             "y": 14
           },
           "radius": 48,
-          "prompt": "[E] Attune to Residual Rift Echo",
+          "prompt": "[E] Chạm vào dải sáng dư chấn",
           "dialogueId": "rift_echo_attune"
         }
       ],

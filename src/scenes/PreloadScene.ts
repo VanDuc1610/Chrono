@@ -31,7 +31,7 @@ export class PreloadScene extends Phaser.Scene {
     this.add
       .text(width / 2, height / 2 - 38, 'THE FRACTURED DIVINITY', {
         fontFamily: 'monospace',
-        fontSize: '11px',
+        fontSize: '12px',
         color: '#a0a8c2',
         letterSpacing: 2,
       })
@@ -54,7 +54,7 @@ export class PreloadScene extends Phaser.Scene {
     this.loadingText = this.add
       .text(width / 2, barY - 14, 'Initializing Chronal Stream...', {
         fontFamily: 'monospace',
-        fontSize: '10px',
+        fontSize: '11px',
         color: '#8b97b8',
       })
       .setOrigin(0.5);
@@ -62,7 +62,7 @@ export class PreloadScene extends Phaser.Scene {
     this.percentText = this.add
       .text(width / 2, barY + barHeight + 12, '0%', {
         fontFamily: 'monospace',
-        fontSize: '10px',
+        fontSize: '11px',
         color: '#67d1ff',
       })
       .setOrigin(0.5);
@@ -70,7 +70,7 @@ export class PreloadScene extends Phaser.Scene {
     this.assetLoadedText = this.add
       .text(width / 2, barY + barHeight + 26, '', {
         fontFamily: 'monospace',
-        fontSize: '9px',
+        fontSize: '10px',
         color: '#556080',
       })
       .setOrigin(0.5);
