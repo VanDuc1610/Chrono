@@ -28,7 +28,7 @@ Goal (owner, 2026-11-11): rebuild the Prologue per `docs/story/PROLOGUE_V2_DESIG
 
 ### T-41 · Chapter 1 "The Last Sunset" design document (Vietnamese)
 
-- **Assignee:** Antigravity · **Status:** TODO
+- **Assignee:** Antigravity · **Status:** BLOCKED — awaiting owner approval
 - **Locks:** `docs/story/CHAPTER_01_DESIGN.md` (new)
 - Design only, for owner approval (same structure as the Prologue v2/v3 docs).
 
