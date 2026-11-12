@@ -848,6 +848,1000 @@
       "effects": {
         "endPrologue": true
       }
+    },
+    "ch1_shore_arrival": {
+      "id": "ch1_shore_arrival",
+      "speaker": "Trưởng Lão Thời Gian",
+      "lines": [
+        "Mặt trời ở vùng biển này đã ngừng lặn từ lâu. Quyền Năng Continuum đang gãy một mắt xích."
+      ],
+      "responses": [
+        {
+          "text": "Hỏi vì sao đường đi lặp lại",
+          "nextDialogueId": "ch1_shore_arrival_ask"
+        },
+        {
+          "text": "Đi dò xem quanh bờ biển",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["ch1_arrived_shore"],
+        "startQuest": "quest_ch1_sunset_gate"
+      }
+    },
+    "ch1_shore_arrival_ask": {
+      "id": "ch1_shore_arrival_ask",
+      "speaker": "Peter",
+      "lines": [
+        "(Chiếc đồng hồ của ông nội trong túi áo vẫn đang chạy ngược từng nhịp...) Trời hoàng hôn đứng im thật, mà đường ven vách đá phía trước cứ như dài mãi không hết.",
+        "Trưởng Lão khẽ gõ trượng: 'Một vòng lặp vụng về. Hãy dùng mắt thợ sửa đồng hồ của cậu tìm thứ đang lệch nhịp trên bãi đá.'"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch1_talked_elder_shore"]
+      }
+    },
+    "ch1_elder_shore_default": {
+      "id": "ch1_elder_shore_default",
+      "speaker": "Trưởng Lão Thời Gian",
+      "lines": [
+        "Không khí ở đây không giống vùng đất bị đóng băng ở Khánh Hòa. Con sóng vẫn dâng, chỉ là nó lặp đi lặp lại mãi một nửa nhịp trước khi mặt trời lặn.",
+        "Hãy kiểm tra cọc đo triều và chiếc đồng hồ mặt trời gãy trên ghềnh đá xem thứ gì đang kéo bóng nắng giật lùi."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch1_talked_elder_shore"]
+      }
+    },
+    "ch1_elder_shore_after_loop": {
+      "id": "ch1_elder_shore_after_loop",
+      "speaker": "Trưởng Lão Thời Gian",
+      "lines": [
+        "Nhịp trên bãi đá đã thông. Con đường phía đông dẫn thẳng vào một ngôi làng chài bỏ hoang — nơi vết gãy của Continuum còn chồng lên cả ký ức cư dân cũ."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch1_talked_elder_shore"]
+      }
+    },
+    "ch1_shore_loop_blocked": {
+      "id": "ch1_shore_loop_blocked",
+      "speaker": "Peter",
+      "lines": [
+        "Khoan đã... Mình rõ ràng vừa đi qua khúc ngoặt vách đá này rồi mà? Sao quay đầu lại vẫn thấy vòm Cổng Ngưỡng ngay phía sau lưng?",
+        "Đoạn đường ven biển đang bị gập vào một vòng lặp. Chắc chắn có vật neo nào đó quanh bãi đá đang lệch nhịp."
+      ],
+      "responses": []
+    },
+    "ch1_frozen_tide_marker": {
+      "id": "ch1_frozen_tide_marker",
+      "speaker": "Peter",
+      "lines": [
+        "Cọc gỗ đo mực thủy triều cắm nửa chìm nửa nổi dưới ghềnh đá. Bọt sóng trắng cứ dâng lên đúng vạch khắc thứ ba rồi tụt nhẹ xuống đúng nửa gang, lặp lại y hệt nhau."
+      ],
+      "responses": [
+        {
+          "text": "Dùng Nhãn Thời Gian soi mạch chảy quanh cọc",
+          "nextDialogueId": "ch1_frozen_tide_marker_hint"
+        },
+        {
+          "text": "Rời đi",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["inspected_frozen_tide_marker"]
+      }
+    },
+    "ch1_frozen_tide_marker_hint": {
+      "id": "ch1_frozen_tide_marker_hint",
+      "speaker": "Peter",
+      "lines": [
+        "Không phải cọc đo triều tự đóng băng nước biển — từng vệt bóng của nó đều hướng về phía chiếc đồng hồ mặt trời gãy trên mỏm đá cao hơn."
+      ],
+      "responses": []
+    },
+    "ch1_broken_sundial": {
+      "id": "ch1_broken_sundial",
+      "speaker": "Peter",
+      "lines": [
+        "Một chiếc đồng hồ mặt trời bằng đồng xỉn màu đặt trên bệ đá. Kim đo bóng nắng đã gãy ngang khớp trục, cứ giật lùi một vạch rồi bật lại tại đúng mốc hoàng hôn.",
+        "Nhìn kỹ khe trục bằng Nhãn Thời Gian, cả con đường ven vách đá phía đông đang bị kéo căng theo đúng nhịp giật lùi của chiếc kim này."
+      ],
+      "responses": [
+        {
+          "text": "Nắn lại trục đồng hồ mặt trời cho xuôi nhịp",
+          "nextDialogueId": "ch1_broken_sundial_fix"
+        },
+        {
+          "text": "Để nguyên đó",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_broken_sundial_fix": {
+      "id": "ch1_broken_sundial_fix",
+      "speaker": "Peter",
+      "lines": [
+        "Mình dùng thanh nẹp nhỏ trong túi đồ và tay nghề quen thuộc nắn thẳng khớp kim gãy, đưa bóng nắng trượt qua khấc bị mẻ.",
+        "Một tiếng tách khẽ vang lên. Bóng nắng kéo dài thêm vài phân trên mặt đá, và màn sương dày ở lối đông bỗng tan bớt — vòng lặp bờ biển đã mở."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["broke_shore_loop"],
+        "refreshMap": true
+      }
+    },
+    "ch1_broken_sundial_fixed": {
+      "id": "ch1_broken_sundial_fixed",
+      "speaker": "Peter",
+      "lines": [
+        "Kim đồng hồ mặt trời đã đứng yên đúng khớp, không còn giật lùi nữa. Lối dẫn sang làng chài phía đông đang rộng mở."
+      ],
+      "responses": []
+    },
+    "ch1_village_intro": {
+      "id": "ch1_village_intro",
+      "speaker": "Peter",
+      "lines": [
+        "Trước mắt là một ngôi làng chài vắng lặng dưới thứ ánh cam không tắt. Mái ngói mục, cầu cảng bỏ không — thế nhưng giữa sân đình lại đứng một giếng đá gắn đầy bánh răng đồng thau.",
+        "Trưởng Lão khẽ gật đầu: 'Đây là Mỏ Neo Thời Gian. Vùng làng này không mất hết cùng một lúc; quá khứ, khoảnh khắc báo bão và hiện tại đang đè lên nhau.'"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch1_entered_village"]
+      }
+    },
+    "ch1_village_loop_blocked": {
+      "id": "ch1_village_loop_blocked",
+      "speaker": "Peter",
+      "lines": [
+        "Con dốc hướng đông bắc dẫn lên ngọn hải đăng lại uốn vòng đưa mình quay trở về đúng giữa sân làng.",
+        "Cột chuông ở ngã ba lối lên đang rung âm ỉ lệch nhịp — hẳn phải kiểm tra Mỏ Neo Thời Gian trước rồi xử lý cột chuông đó."
+      ],
+      "responses": []
+    },
+    "ch1_anchor_present": {
+      "id": "ch1_anchor_present",
+      "speaker": "Peter",
+      "lines": [
+        "Mỏ Neo Thời Gian giữa giếng làng đang dừng ở lớp [Hiện Tại Hoang Tàn]: ván thuyền mục, bàn thờ lạnh khói và dấu tích mờ của những người không còn trọn vẹn trong ký ức.",
+        "Các bánh răng đồng bên trong vẫn còn xoay được theo một vòng tròn ba nấc."
+      ],
+      "responses": [
+        {
+          "text": "Xoay Mỏ Neo sang lớp Quá Khứ (Past)",
+          "nextDialogueId": "ch1_anchor_to_past"
+        },
+        {
+          "text": "Giữ nguyên lớp Hiện Tại",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_anchor_to_past": {
+      "id": "ch1_anchor_to_past",
+      "speaker": "Peter",
+      "lines": [
+        "Bánh răng lớn ăn khớp êm ru. Ánh nắng chiều bỗng ấm lên, mùi cá kho và khói bếp cũ lan ra từ mái hiên — cả ngôi làng trượt về lớp [Quá Khứ Trù Phú] trước cơn bão."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch1_used_anchor", "ch1_layer_past"],
+        "clearFlags": ["ch1_layer_cataclysm"],
+        "refreshMap": true
+      }
+    },
+    "ch1_anchor_past": {
+      "id": "ch1_anchor_past",
+      "speaker": "Peter",
+      "lines": [
+        "Mỏ Neo Thời Gian đang giữ làng chài ở lớp [Quá Khứ Trù Phú]: hòm thư gỗ còn lành lặn, bếp lửa vẫn ấm và những chuyến tàu vừa chuẩn bị ra khơi."
+      ],
+      "responses": [
+        {
+          "text": "Xoay Mỏ Neo sang khoảnh khắc Báo Bão (Cataclysm)",
+          "nextDialogueId": "ch1_anchor_to_cataclysm"
+        },
+        {
+          "text": "Ở lại lớp Quá Khứ thêm lúc nữa",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_anchor_to_cataclysm": {
+      "id": "ch1_anchor_to_cataclysm",
+      "speaker": "Peter",
+      "lines": [
+        "Chiếc chốt đồng giật mạnh một nấc lạnh buốt. Gió biển đóng cứng giữa tiếng chuông báo bão dở dang — ngôi làng dừng lại ở lớp [Khoảnh Khắc Báo Bão]."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch1_used_anchor", "ch1_layer_cataclysm"],
+        "clearFlags": ["ch1_layer_past"],
+        "refreshMap": true
+      }
+    },
+    "ch1_anchor_cataclysm": {
+      "id": "ch1_anchor_cataclysm",
+      "speaker": "Peter",
+      "lines": [
+        "Mỏ Neo Thời Gian đang kẹt tại lớp [Khoảnh Khắc Báo Bão]: từng giọt nước mưa treo lơ lửng, mọi người đều đông cứng giữa bước chạy tìm nơi trú ẩn."
+      ],
+      "responses": [
+        {
+          "text": "Xoay Mỏ Neo trở về lớp Hiện Tại (Present)",
+          "nextDialogueId": "ch1_anchor_to_present"
+        },
+        {
+          "text": "Ở lại khoảnh khắc Báo Bão",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_anchor_to_present": {
+      "id": "ch1_anchor_to_present",
+      "speaker": "Peter",
+      "lines": [
+        "Bánh răng khẽ trôi về vị trí ban đầu. Hơi lạnh tan đi, nhường chỗ cho sự tĩnh lặng mặn chát của lớp [Hiện Tại Hoang Tàn]."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch1_used_anchor"],
+        "clearFlags": ["ch1_layer_past", "ch1_layer_cataclysm"],
+        "refreshMap": true
+      }
+    },
+    "ch1_village_bell_post": {
+      "id": "ch1_village_bell_post",
+      "speaker": "Peter",
+      "lines": [
+        "Cột chuông đồng đứng ngay ngã ba dốc lên hải đăng. Quả lắc bên trong cứ giật lùi một nhịp yếu ớt rồi lặp lại, khiến con đường phía trước tự uốn vòng.",
+        "Nhìn vết kẹt quá mờ để đoán trong lớp hiện tại — có lẽ mình cần xoay Mỏ Neo Thời Gian giữa làng để xem khoảnh khắc cái chốt bị gãy."
+      ],
+      "responses": []
+    },
+    "ch1_village_bell_post_past": {
+      "id": "ch1_village_bell_post_past",
+      "speaker": "Peter",
+      "lines": [
+        "Ở lớp Quá Khứ, cột chuông ngã ba vẫn nguyên vẹn, dây thừng bện mới và chốt đồng sáng bóng. Chưa có sự cố nào xảy ra ở đây cả."
+      ],
+      "responses": []
+    },
+    "ch1_village_bell_post_cataclysm": {
+      "id": "ch1_village_bell_post_cataclysm",
+      "speaker": "Peter",
+      "lines": [
+        "Trong khoảnh khắc Báo Bão bị đóng băng, mọi thứ lộ rõ mồn một: lưỡi chuông vừa đập vào thành đồng được nửa tiếng thì chốt giữ bung ra, kẹt cứng vòng hồi lại tại chỗ!"
+      ],
+      "responses": [
+        {
+          "text": "Nắn lại chốt đồng để giải phóng nhịp chuông",
+          "nextDialogueId": "ch1_village_bell_post_fix"
+        },
+        {
+          "text": "Chưa sửa vội",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_village_bell_post_ready": {
+      "id": "ch1_village_bell_post_ready",
+      "speaker": "Peter",
+      "lines": [
+        "Sau khi đối chiếu các lớp thời gian từ Mỏ Neo, mình nhìn ra đúng vệt mòn trên khớp đồng giữ lưỡi chuông ngã ba."
+      ],
+      "responses": [
+        {
+          "text": "Chỉnh lại khớp chốt đồng và đồng bộ cột chuông",
+          "nextDialogueId": "ch1_village_bell_post_fix"
+        },
+        {
+          "text": "Để sau",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_village_bell_post_fix": {
+      "id": "ch1_village_bell_post_fix",
+      "speaker": "Peter",
+      "lines": [
+        "Mình gạt phần chốt đồng bị trượt trở lại rãnh cũ. Một hồi chuông trầm ngân nốt nửa nhịp còn dang dở rồi tan vào gió biển.",
+        "Lớp sương mù quẩn quanh ở ngã ba đông bắc giãn ra hẳn — con dốc dẫn lên Ngọn Hải Đăng Sương Mù đã thông."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["broke_village_loop"],
+        "refreshMap": true
+      }
+    },
+    "ch1_village_bell_post_broken": {
+      "id": "ch1_village_bell_post_broken",
+      "speaker": "Peter",
+      "lines": [
+        "Cột chuông ngã ba đã đứng yên, không còn phát ra tiếng rung lệch pha nào nữa. Lối lên hải đăng phía đông bắc hoàn toàn thông suốt."
+      ],
+      "responses": []
+    },
+    "ch1_second_dinner": {
+      "id": "ch1_second_dinner",
+      "speaker": "Bà Tư",
+      "lines": [
+        "Cậu khách lạ đi ngang ghé vào đây đừng cười bà già nhé... Chiều nào tôi cũng dọn sẵn mâm cơm hai chén với niêu cá kho, mà hễ ngồi xuống lại không nhớ nổi mình đang đợi ai về ăn cùng.",
+        "Chỗ ngồi đối diện cứ trống hoác mãi, mà tay tôi vẫn quen xới đầy hai bát như có ai sắp bước qua ngưỡng cửa."
+      ],
+      "responses": [
+        {
+          "text": "Thử xem lại ký ức cũ giúp bà",
+          "nextDialogueId": "ch1_second_dinner_accept"
+        },
+        {
+          "text": "Ngồi nói chuyện thêm cho bà đỡ trống",
+          "nextDialogueId": "ch1_second_dinner_comfort"
+        }
+      ],
+      "effects": {
+        "startQuest": "quest_ch1_second_dinner"
+      }
+    },
+    "ch1_second_dinner_accept": {
+      "id": "ch1_second_dinner_accept",
+      "speaker": "Peter",
+      "lines": [
+        "Bà Tư cứ ngồi nghỉ đi ạ. Cháu sẽ thử xoay Mỏ Neo Thời Gian về lớp Quá Khứ xem ngày trước bà dọn mâm cơm này cho ai."
+      ],
+      "responses": []
+    },
+    "ch1_second_dinner_comfort": {
+      "id": "ch1_second_dinner_comfort",
+      "speaker": "Bà Tư",
+      "lines": [
+        "Cảm ơn cậu trẻ... Có người ngồi cạnh chút thấy gian nhà cũng đỡ lạnh hơn. Chỉ mong trước khi đầu óc quên sạch, tôi còn nhớ được tên người ấy một lần nữa."
+      ],
+      "responses": []
+    },
+    "ch1_second_dinner_past": {
+      "id": "ch1_second_dinner_past",
+      "speaker": "Bà Tư",
+      "lines": [
+        "Cơm chín rồi, tôi mới bắc nồi cá bống kho tiêu xuống đây. Mùa này gió nồm trở chiều, thuyền của ông Tư nhà tôi bao giờ cũng cập bến muộn hơn tụi nhỏ một chút.",
+        "Ô hay, cậu trẻ nào lạc vào hiên vậy? Ngồi uống ngụm nước chè đi, chén kia tôi dọn cho ông Tư — ổng đi biển về mà thấy cơm nguội là cằn nhằn suốt tối."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["checked_past_dinner"],
+        "startQuest": "quest_ch1_second_dinner"
+      }
+    },
+    "ch1_second_dinner_cataclysm": {
+      "id": "ch1_second_dinner_cataclysm",
+      "speaker": "Peter",
+      "lines": [
+        "Giữa cơn chấn động đóng băng khi chuông bão nổi lên, Bà Tư khựng lại ngay cạnh mép bàn — một tay bà giữ chặt bát cơm thứ hai cho khỏi rơi vỡ, ánh mắt nhìn trân ra phía bến thuyền."
+      ],
+      "responses": []
+    },
+    "ch1_second_dinner_remember": {
+      "id": "ch1_second_dinner_remember",
+      "speaker": "Bà Tư",
+      "lines": [
+        "...Ông Tư? Phải rồi... ông Tư nhà tôi chiều nào cũng chèo chiếc ghe nan về bến muộn nhất làng.",
+        "(Khoé mắt bà lão tóc bạc khẽ ươn ướt, nếp nhăn giãn ra nhẹ nhõm.) Bến giờ trống lâu lắm rồi phải không cậu... Vậy mà tôi cứ quên dần từng chút, chỉ còn sót lại thói quen xới dư một bát cơm chiều. Cảm ơn cậu đã nhắc cho tôi nhớ lại người thương."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["identified_second_dinner"]
+      }
+    },
+    "ch1_second_dinner_done": {
+      "id": "ch1_second_dinner_done",
+      "speaker": "Bà Tư",
+      "lines": [
+        "Nay tôi chỉ dọn một bát cho mình thôi, nhưng lòng nhẹ hơn trước nhiều lắm. Cậu cầm ít cá khô nắng chiều mang theo đi đường nhé."
+      ],
+      "responses": []
+    },
+    "ch1_fisherman_spirit": {
+      "id": "ch1_fisherman_spirit",
+      "speaker": "Hồn Ngư Dân",
+      "lines": [
+        "Tàu sắp nhổ neo ra khơi trước bão... Tôi đã viết vội mảnh giấy dặn bà nhà đóng chặt cửa nẻo và đem bỏ vào hòm thư gỗ đầu bến.",
+        "Thế mà tìm quanh mãi chỉ thấy cọc gỗ mục nát, không sao nhớ hòm thư biến đi đâu mất..."
+      ],
+      "responses": [
+        {
+          "text": "Cháu sẽ tìm lại lá thư ấy giúp chú",
+          "nextDialogueId": "ch1_fisherman_spirit_accept"
+        },
+        {
+          "text": "Hỏi vị trí hòm thư cũ",
+          "nextDialogueId": "ch1_fisherman_spirit_hint"
+        }
+      ],
+      "effects": {
+        "startQuest": "quest_ch1_fisherman_letter"
+      }
+    },
+    "ch1_fisherman_spirit_accept": {
+      "id": "ch1_fisherman_spirit_accept",
+      "speaker": "Peter",
+      "lines": [
+        "Ở hiện tại hòm thư đã mục nát rồi, nhưng nếu quay Mỏ Neo về lớp Quá Khứ, lá thư hẳn vẫn còn nằm nguyên trong đó."
+      ],
+      "responses": []
+    },
+    "ch1_fisherman_spirit_hint": {
+      "id": "ch1_fisherman_spirit_hint",
+      "speaker": "Hồn Ngư Dân",
+      "lines": [
+        "Nó đóng ngay cột gỗ bên lối xuống bến thuyền phía nam ấy... Hôm đó vội quá, tôi chỉ kịp kẹp bức thư giấy dầu vào khe nắp rồi chạy ra ghe luôn."
+      ],
+      "responses": []
+    },
+    "ch1_fisherman_spirit_past": {
+      "id": "ch1_fisherman_spirit_past",
+      "speaker": "Ngư Dân",
+      "lines": [
+        "Chân trời chuyển tím nhanh quá! Phải bỏ vội lá thư vào hòm gỗ đầu bến dặn nhà chằng lại mái tranh rồi mới ra ghe kịp kéo lưới trước cơn dông!"
+      ],
+      "responses": []
+    },
+    "ch1_fisherman_spirit_cataclysm": {
+      "id": "ch1_fisherman_spirit_cataclysm",
+      "speaker": "Peter",
+      "lines": [
+        "Dưới làn gió bão đóng cứng thành không khí đặc quánh, dáng người ngư dân đứng khựng ở đầu cầu cảng, tay giữ chặt chiếc nón lá sờn rách đang ngửa về phía hòm thư."
+      ],
+      "responses": []
+    },
+    "ch1_fisherman_spirit_deliver": {
+      "id": "ch1_fisherman_spirit_deliver",
+      "speaker": "Hồn Ngư Dân",
+      "lines": [
+        "À... hóa ra bức thư chưa bao giờ kịp tới tay bà ấy. Cơn bão ập xuống nhanh hơn cả người chạy bộ trên bến...",
+        "Cảm ơn cậu đã đưa nó thoát khỏi buổi chiều hôm đó. (Trong ánh hoàng hôn, một bóng người mờ ảo bên ngọn đèn dầu thoáng hiện lên như vừa đọc xong tờ giấy dầu, trước khi thân ảnh chú ngư dân nhẹ nhõm phai đi.)"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["delivered_unsent_letter"]
+      }
+    },
+    "ch1_fisherman_spirit_done": {
+      "id": "ch1_fisherman_spirit_done",
+      "speaker": "Hồn Ngư Dân",
+      "lines": [
+        "Gió ngoài bến giờ dịu lại rồi... Cậu cứ giữ lấy vỏ giấy dầu làm kỷ niệm trên đường, tôi không còn vướng bận điều gì nữa."
+      ],
+      "responses": []
+    },
+    "ch1_letter_box": {
+      "id": "ch1_letter_box",
+      "speaker": "Peter",
+      "lines": [
+        "Phần chân cọc của một hòm thư gỗ cổ chỉ còn lại vài mẩu ván mục nát phủ muối biển, trống không hoàn toàn."
+      ],
+      "responses": []
+    },
+    "ch1_letter_box_past": {
+      "id": "ch1_letter_box_past",
+      "speaker": "Peter",
+      "lines": [
+        "Trong lớp Quá Khứ, chiếc hòm thư gỗ tuyết tùng còn nguyên vẹn và khô ráo. Hé nắp gỗ lên, bên trong có một bức thư gấp bằng giấy dầu đề gửi người nhà."
+      ],
+      "responses": [
+        {
+          "text": "Lấy lá thư chưa kịp gửi",
+          "nextDialogueId": "ch1_letter_box_take"
+        },
+        {
+          "text": "Để nguyên trong hòm",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_letter_box_take": {
+      "id": "ch1_letter_box_take",
+      "speaker": "Peter",
+      "lines": [
+        "Mình cẩn thận rút bức thư bọc giấy dầu ra. Nét mực viết vội vẫn còn rõ, dặn gia đình chằng cửa trước gió bão và đừng ra bến đợi khuya."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["found_unsent_letter"],
+        "startQuest": "quest_ch1_fisherman_letter",
+        "grantItems": [
+          {
+            "itemId": "unsent_fisherman_letter",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_unsent_letter"
+      }
+    },
+    "ch1_letter_box_past_empty": {
+      "id": "ch1_letter_box_past_empty",
+      "speaker": "Peter",
+      "lines": [
+        "Chiếc hòm thư gỗ tuyết tùng giờ đã trống. Lá thư đang nằm gọn trong túi đồ của mình."
+      ],
+      "responses": []
+    },
+    "ch1_letter_box_cataclysm": {
+      "id": "ch1_letter_box_cataclysm",
+      "speaker": "Peter",
+      "lines": [
+        "Nắp hòm thư gỗ bật nửa chừng bởi một cơn gió bão đã đóng băng, bên trong chỉ toàn hạt cát bay lơ lửng giữa không trung."
+      ],
+      "responses": []
+    },
+    "ch1_shrine_photo": {
+      "id": "ch1_shrine_photo",
+      "speaker": "Peter",
+      "lines": [
+        "Một bàn thờ nhỏ đặt giữa gian nhà trống, bát hương lạnh ngắt. Trên mặt kính bầu dục là khung ảnh thờ... nhưng tờ giấy ảnh bên trong lại trắng bệch trống trơn.",
+        "Không có vết xé, không có vết cháy — gương mặt trong ảnh như bị ai nhẹ nhàng lau phai đi từng lớp, giống hệt vết nhòe trên tấm ảnh ở căn gác nhà mình."
+      ],
+      "responses": [
+        {
+          "text": "Dùng Nhãn Thời Gian soi lại bóng dáng còn sót",
+          "nextDialogueId": "ch1_shrine_photo_attune"
+        },
+        {
+          "text": "Kính cẩn cúi đầu rồi lùi lại",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "startQuest": "quest_ch1_empty_photo"
+      }
+    },
+    "ch1_shrine_photo_attune": {
+      "id": "ch1_shrine_photo_attune",
+      "speaker": "Peter",
+      "lines": [
+        "Mình đưa chiếc đồng hồ quả quýt của ông nội lại gần khung ảnh trống. Một vệt sáng ấm thoáng lướt qua mặt kính: hiện lên bóng dáng mờ của người đàn ông đứng cười hiền cạnh mẻ lưới mới.",
+        "Không có cái tên nào hiện ra cả, thế nhưng sự ấm áp còn sót lại trên bàn thờ bỗng trở nên rõ ràng lạ thường — như thể một sự tồn tại chưa bị lãng quên hoàn toàn."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["restored_shrine_photo"],
+        "startQuest": "quest_ch1_empty_photo"
+      }
+    },
+    "ch1_shrine_photo_done": {
+      "id": "ch1_shrine_photo_done",
+      "speaker": "Peter",
+      "lines": [
+        "Khung ảnh thờ vẫn phai trắng trên bề mặt, nhưng hơi ấm nhẹ quanh bát hương giữ lại dư âm bình yên của người từng sống ở ngôi nhà này."
+      ],
+      "responses": []
+    },
+    "ch1_shrine_photo_past": {
+      "id": "ch1_shrine_photo_past",
+      "speaker": "Peter",
+      "lines": [
+        "Ở lớp Quá Khứ, bàn thờ chỉ thắp nhang cúc vàng cầu bình an cho người đi biển — chưa hề có khung ảnh thờ nào đặt ở đây cả."
+      ],
+      "responses": []
+    },
+    "ch1_shrine_photo_cataclysm": {
+      "id": "ch1_shrine_photo_cataclysm",
+      "speaker": "Peter",
+      "lines": [
+        "Trên bàn thờ rung nhẹ giữa tiếng chuông báo bão, một sợi khói nhang mỏng đứng thẳng bất động như sợi chỉ bạc trong không khí."
+      ],
+      "responses": []
+    },
+    "ch1_beacon_arrival": {
+      "id": "ch1_beacon_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Sương mù đặc quánh bao quanh tháp hải đăng bằng đồng xỉn màu — trông hoàn toàn xa lạ với ngọn hải đăng đá trắng ngoài quê nhà Khánh Hòa.",
+        "Phía đông có cầu thang đá cổ nhưng nửa dưới đang chìm sâu dưới mực nước biển bất động. Ông lão mặc áo tơi đứng bên bậc thềm hẳn là người coi đèn ở đây."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch1_met_beacon_mist"]
+      }
+    },
+    "ch1_tide_blocks_stairs": {
+      "id": "ch1_tide_blocks_stairs",
+      "speaker": "Peter",
+      "lines": [
+        "Mặt nước biển đặc quánh dâng sát tới bậc đá trên cùng, chặn hoàn toàn lối xuống khu di tích bên dưới. Cần mở cống thủy triều bằng bánh xe đồng gần tháp đèn."
+      ],
+      "responses": []
+    },
+    "ch1_old_keeper_talk": {
+      "id": "ch1_old_keeper_talk",
+      "speaker": "Người Gác Hải Đăng Già",
+      "lines": [
+        "Ba giờ... hay năm giờ chiều rồi? Đèn vừa thắp sao biển lại sắp bão... Bánh răng dưới giếng triều kẹt rồi cậu trẻ ạ, tay tôi run quá vặn chẳng nổi..."
+      ],
+      "responses": [
+        {
+          "text": "Để cháu xem giúp bánh xe đồng",
+          "nextDialogueId": "ch1_old_keeper_wheel_hint"
+        },
+        {
+          "text": "Hỏi về tiếng chuông dưới đáy biển",
+          "nextDialogueId": "ch1_old_keeper_bell_hint"
+        }
+      ],
+      "effects": {
+        "setFlags": ["talked_old_keeper_ch1"]
+      }
+    },
+    "ch1_old_keeper_wheel_hint": {
+      "id": "ch1_old_keeper_wheel_hint",
+      "speaker": "Người Gác Hải Đăng Già",
+      "lines": [
+        "Bánh xe cống đặt ở phía bắc sân đá ấy... Chốt hãm của nó bị trẹo ngược từ hồi cơn bão cũ. Sổ trực đèn bên cửa tháp còn ghi đủ giờ chuông báo, cậu cứ xem qua kẻo lạc dưới kia."
+      ],
+      "responses": []
+    },
+    "ch1_old_keeper_bell_hint": {
+      "id": "ch1_old_keeper_bell_hint",
+      "speaker": "Người Gác Hải Đăng Già",
+      "lines": [
+        "Ông ấy ôm quả chuông không chịu buông... sợ hễ đánh hết một hồi là mất sạch tất cả...",
+        "Ông ấy không phải kẻ xấu đâu cậu trẻ. Chỉ là quá sợ mặt trời lặn xuống rồi thì chẳng còn ai quay về bến nữa thôi."
+      ],
+      "responses": []
+    },
+    "ch1_old_keeper_after_tide": {
+      "id": "ch1_old_keeper_after_tide",
+      "speaker": "Người Gác Hải Đăng Già",
+      "lines": [
+        "À... nghe thấy tiếng nước rút qua cống đá rồi. Đã bao lâu rồi mặt biển mới chịu hạ xuống một nhịp như thế... Cậu xuống dưới đó nhẹ tay với người giữ chuông nhé."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["talked_old_keeper_ch1"]
+      }
+    },
+    "ch1_keeper_logbook": {
+      "id": "ch1_keeper_logbook",
+      "speaker": "Peter",
+      "lines": [
+        "Cuốn sổ trực đèn bìa vải ố muối biển đặt trên kệ đá. Trang đầu chép lại quy ước gõ ba trụ chuông mở phong ấn dưới hành lang đáy biển:",
+        "'Nhịp dẫn thủy triều luôn đi trọn một vòng ngày-đêm theo đúng ba hồi: đầu tiên là [Bình Minh], tiếp nối bằng [Hoàng Hôn], và khép lại ở [Đêm Tĩnh].'"
+      ],
+      "responses": [
+        {
+          "text": "Đọc thêm trang ghi chú về bánh xe thủy triều",
+          "nextDialogueId": "ch1_keeper_logbook_note"
+        },
+        {
+          "text": "Gấp sổ lại",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["read_keeper_logbook"]
+      }
+    },
+    "ch1_keeper_logbook_note": {
+      "id": "ch1_keeper_logbook_note",
+      "speaker": "Peter",
+      "lines": [
+        "Bên lề có dòng nét mực run run: 'Lưỡi gà trên bánh xe đồng trật răng về hướng ngược chiều kim đồng hồ. Muốn hạ mực triều phải gài lại chốt cóc rồi mới vặn hết vòng.'"
+      ],
+      "responses": []
+    },
+    "ch1_tide_wheel": {
+      "id": "ch1_tide_wheel",
+      "speaker": "Peter",
+      "lines": [
+        "Bánh xe đồng cỡ lớn điều tiết cửa cống thủy triều đang bám đầy hà biển. Phần chốt cóc giữ bánh răng trượt chệch ra ngoài, hệt như cơ cấu cót bị tuột trong đồng hồ bàn cũ."
+      ],
+      "responses": [
+        {
+          "text": "Gài lại chốt cóc và xoay bánh xe hạ thủy triều",
+          "nextDialogueId": "ch1_tide_wheel_turn"
+        },
+        {
+          "text": "Để lại kiểm tra sau",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_tide_wheel_turn": {
+      "id": "ch1_tide_wheel_turn",
+      "speaker": "Peter",
+      "lines": [
+        "Mình dùng thanh nẹp đẩy chốt cóc khớp khít trở lại rãnh đồng rồi dồn sức xoay mạnh bánh xe thuận chiều.",
+        "Tiếng xích sắt kéo ầm ầm dưới lòng đá. Mực nước ngoài bờ đông rút nhanh xuống hàng mét, để lộ toàn bộ bậc cầu thang dẫn xuống Hành Lang Đáy Biển!"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["tide_lowered"],
+        "refreshMap": true
+      }
+    },
+    "ch1_tide_wheel_lowered": {
+      "id": "ch1_tide_wheel_lowered",
+      "speaker": "Peter",
+      "lines": [
+        "Bánh xe thủy triều đã khóa chặt ở nấc xả cống. Cầu thang đá bên đông dẫn xuống hành lang ngầm đã hoàn toàn khô ráo."
+      ],
+      "responses": []
+    },
+    "ch1_sanctum_seal_locked": {
+      "id": "ch1_sanctum_seal_locked",
+      "speaker": "Peter",
+      "lines": [
+        "Cánh cửa đá dẫn vào Thánh Điện Chuông Chìm bị khóa bằng ba vòng ký tự đồng tâm còn tối sẫm. Phải gõ đúng thứ tự ba trụ chuông quanh hành lang thì phong ấn mới mở."
+      ],
+      "responses": []
+    },
+    "ch1_bell_p1_ready": {
+      "id": "ch1_bell_p1_ready",
+      "speaker": "Peter",
+      "lines": [
+        "Trụ đá chạm rêu phát sáng lân tinh, mặt đồng phía trước khắc hai chữ cổ: [BÌNH MINH]. Quả chuông nhỏ treo trên đỉnh trụ im lìm chờ một nhịp gõ đầu."
+      ],
+      "responses": [
+        {
+          "text": "Gõ Trụ Chuông Bình Minh",
+          "nextDialogueId": "ch1_bell_p1_strike"
+        },
+        {
+          "text": "Chỉ ghi nhớ tên trụ rồi lùi lại",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_bell_p1_strike": {
+      "id": "ch1_bell_p1_strike",
+      "speaker": "Peter",
+      "lines": [
+        "Keng—! Tiếng chuông đầu tiên vang trong trẻo xuyên qua vòm đá ẩm, để lại một vòng sáng lam nhạt nối về phía hành lang giữa."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch1_bell_step_1"]
+      }
+    },
+    "ch1_bell_p1_already_rung": {
+      "id": "ch1_bell_p1_already_rung",
+      "speaker": "Peter",
+      "lines": [
+        "Trụ Chuông [BÌNH MINH] vẫn đang ngân dư âm nhịp thứ nhất rất đều. Theo sổ trực đèn trên hải đăng, nhịp kế tiếp là Hoàng Hôn."
+      ],
+      "responses": []
+    },
+    "ch1_bell_p2_right_entry": {
+      "id": "ch1_bell_p2_right_entry",
+      "speaker": "Peter",
+      "lines": [
+        "Trụ đá ở sảnh giữa khắc chữ [HOÀNG HÔN]. Dư âm của chuông Bình Minh vừa truyền tới khiến mặt đồng trên trụ này rung khẽ theo nhịp."
+      ],
+      "responses": [
+        {
+          "text": "Gõ Trụ Chuông Hoàng Hôn",
+          "nextDialogueId": "ch1_bell_p2_strike_ok"
+        },
+        {
+          "text": "Chưa gõ vội",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_bell_p2_strike_ok": {
+      "id": "ch1_bell_p2_strike_ok",
+      "speaker": "Peter",
+      "lines": [
+        "Boong—! Âm sắc ấm hơn hẳn hòa quyện nhịp nhàng với hồi chuông thứ nhất. Bây giờ chỉ còn nhịp cuối cùng để khép tròn một ngày."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch1_bell_step_2"]
+      }
+    },
+    "ch1_bell_p2_already_rung": {
+      "id": "ch1_bell_p2_already_rung",
+      "speaker": "Peter",
+      "lines": [
+        "Trụ Chuông [HOÀNG HÔN] đang cộng hưởng đều đặn với trụ Bình Minh. Hãy tìm đến trụ Đêm Tĩnh để gõ nốt hồi cuối."
+      ],
+      "responses": []
+    },
+    "ch1_bell_p2_wrong_entry": {
+      "id": "ch1_bell_p2_wrong_entry",
+      "speaker": "Peter",
+      "lines": [
+        "Trụ đá khắc chữ [HOÀNG HÔN]. Mặt đồng lạnh ngắt, hoàn toàn chưa có dư âm nào từ trụ trước truyền sang cả."
+      ],
+      "responses": [
+        {
+          "text": "Thử gõ Trụ Chuông Hoàng Hôn",
+          "nextDialogueId": "ch1_bell_strike_wrong"
+        },
+        {
+          "text": "Chưa gõ vội",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_bell_p3_right_entry": {
+      "id": "ch1_bell_p3_right_entry",
+      "speaker": "Peter",
+      "lines": [
+        "Trụ đá sâu bên trong khắc chữ [ĐÊM TĨNH]. Cả hai hồi âm Bình Minh và Hoàng Hôn đều đang hội tụ quanh quả chuông cuối cùng này."
+      ],
+      "responses": [
+        {
+          "text": "Gõ Trụ Chuông Đêm Tĩnh",
+          "nextDialogueId": "ch1_bell_p3_strike_ok"
+        },
+        {
+          "text": "Chưa gõ vội",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_bell_p3_strike_ok": {
+      "id": "ch1_bell_p3_strike_ok",
+      "speaker": "Peter",
+      "lines": [
+        "Ngân vang—! Ba hồi chuông Bình Minh, Hoàng Hôn và Đêm Tĩnh nối liền thành một hợp âm trọn vẹn. Cánh cửa đá phía bắc rẽ đôi màn sáng, mở lối vào Thánh Điện Chuông Chìm!"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["solved_bell_sequence"]
+      }
+    },
+    "ch1_bell_p3_wrong_entry": {
+      "id": "ch1_bell_p3_wrong_entry",
+      "speaker": "Peter",
+      "lines": [
+        "Trụ đá khắc chữ [ĐÊM TĨNH], nhưng chuỗi vang từ các trụ trước vẫn chưa nối tới đây."
+      ],
+      "responses": [
+        {
+          "text": "Thử gõ Trụ Chuông Đêm Tĩnh",
+          "nextDialogueId": "ch1_bell_strike_wrong"
+        },
+        {
+          "text": "Lùi lại kiểm tra lại thứ tự",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_bell_strike_wrong": {
+      "id": "ch1_bell_strike_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Rè—! Một âm thanh chói tai gãy gập ngay giữa vòm đá. Ánh sáng trên tất cả các trụ chuông đồng loạt tắt phụt — chuỗi chuông đã bị đặt lại từ đầu."
+      ],
+      "responses": [],
+      "effects": {
+        "clearFlags": ["ch1_bell_step_1", "ch1_bell_step_2"]
+      }
+    },
+    "ch1_bell_already_solved": {
+      "id": "ch1_bell_already_solved",
+      "speaker": "Peter",
+      "lines": [
+        "Cả ba trụ chuông đang ngân nhẹ hòa hợp với nhau. Phong ấn vào Thánh Điện Chuông Chìm phía bắc đã mở hoàn toàn."
+      ],
+      "responses": []
+    },
+    "ch1_unnamed_watch_case": {
+      "id": "ch1_unnamed_watch_case",
+      "speaker": "Peter",
+      "lines": [
+        "Trên mỏm đá khô ráo nơi đáng lẽ chưa từng có người sống sót nào đặt chân tới, nằm gọn một chiếc vỏ đồng hồ quả quýt rỗng bằng đồng thau cũ.",
+        "Bên trong nắp không khắc tên hay chữ cái nào cả — chỉ có vết dũa mòn nhỏ xíu ở khớp khóa rất giống thói quen chỉnh vỏ của người quen đồng hồ, khiến mình bất giác nhớ tới gương mặt nhòe nước mưa trong tấm ảnh ở căn gác cũ.",
+        "Đã có ai đó từng đi qua đây từ rất lâu trước bọn mình... rồi bước tiếp mà chẳng để lại dòng ghi chép nào."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["found_ch1_interval_trace"],
+        "grantExp": 15,
+        "grantOnceFlag": "granted_watch_case_exp"
+      }
+    },
+    "ch1_sunken_cache": {
+      "id": "ch1_sunken_cache",
+      "speaker": "Peter",
+      "lines": [
+        "Giữa khe san hô khô lộ ra một hộp đồng nhỏ đậy kín sáp ong. Bên trong còn sót lại một mảnh tinh thể hồi sức mát lạnh."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "chrono_shard_minor",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_sunken_cache"
+      }
+    },
+    "ch1_sunken_cache_empty": {
+      "id": "ch1_sunken_cache_empty",
+      "speaker": "Peter",
+      "lines": ["Chiếc hộp đồng giữa khe san hô giờ đã trống không."],
+      "responses": []
+    },
+    "ch1_bellkeeper_before": {
+      "id": "ch1_bellkeeper_before",
+      "speaker": "The Sunken Bellkeeper",
+      "lines": [
+        "Đừng đánh hết hồi chuông... Nếu mặt trời lặn xuống, cơn bão sẽ nuốt chửng mọi mái nhà còn sót lại trên bến...",
+        "Ta thà kéo kim đồng hồ lùi lại mãi ở khắc hoàng hôn này còn hơn để tiếng chuông cuối cùng cướp mất bọn họ!"
+      ],
+      "responses": [
+        {
+          "text": "Giữ mãi một hoàng hôn không cứu được ai đâu — để tôi giúp ông buông dây chuông.",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["ch1_met_bellkeeper"]
+      }
+    },
+    "ch1_bellkeeper_released": {
+      "id": "ch1_bellkeeper_released",
+      "speaker": "The Sunken Bellkeeper",
+      "lines": [
+        "...Tiếng chuông ngân trọn rồi sao? Mặt trời... cuối cùng cũng chịu xuống núi rồi...",
+        "(Giáp đồng rỉ khẽ rạn ra, người vệ binh quỳ xuống đặt quả chuông nứt yên vị bên mặt nước lặng. Một thoáng ký ức tan vào sương: ông từng ghì chặt sợi dây thừng suốt đêm bão với hy vọng níu thêm một phút cho những chiếc thuyền chưa kịp về bến.)"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["sunken_bellkeeper_released"]
+      }
+    },
+    "ch1_continuum_seal": {
+      "id": "ch1_continuum_seal",
+      "speaker": "Trưởng Lão Thời Gian",
+      "lines": [
+        "Bên dưới quả chuông đã ngừng reo, Lõi Continuum Seal đang phát sáng lấp lánh trở lại như bánh răng lớn nhất vừa khớp đúng nấc.",
+        "Vòng lặp của vùng biển này chỉ là mảnh vá vụng về giữ lại chút quá khứ trước khi sụp đổ. Tiếp nhận Continuum Resonance đi, Peter — còn nhiều nơi đã bị đóng chặt hơn thế nữa."
+      ],
+      "responses": [
+        {
+          "text": "Đặt tay tiếp nhận Continuum Resonance",
+          "nextDialogueId": "ch1_continuum_seal_accept"
+        },
+        {
+          "text": "Nhìn lại thánh điện thêm một lát",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch1_continuum_seal_accept": {
+      "id": "ch1_continuum_seal_accept",
+      "speaker": "Peter",
+      "lines": [
+        "Hơi ấm của dòng thủy triều thuận lan từ lòng bàn tay lên tới vai. Trên cao qua kẽ đá mở ra ngoài khơi, vầng mặt trời treo lơ lửng bấy lâu nay từ từ chìm hẳn xuống đường chân trời, nhường chỗ cho bầu trời sao thật sự đầu tiên.",
+        "Thanh kiếm gãy và mảnh ấn vừa nhận rung cùng một tần số tĩnh lặng. Còn sâu trong túi áo, chiếc đồng hồ quả quýt của ông nội im lặng được đúng hai giây... rồi lại khẽ tích tắc ngược một nửa nhịp."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["continuum_seal_restored", "learned_continuum_resonance"]
+      }
+    },
+    "ch1_continuum_seal_restored": {
+      "id": "ch1_continuum_seal_restored",
+      "speaker": "Peter",
+      "lines": [
+        "Lõi Continuum Seal đã ổn định dưới ánh sao đêm dịu nhẹ. Lối mở về vùng đất kế tiếp đang chờ phía trước."
+      ],
+      "responses": []
+    },
+    "ch1_chapter2_exit_locked": {
+      "id": "ch1_chapter2_exit_locked",
+      "speaker": "Peter",
+      "lines": [
+        "Lối đi phía trước vẫn bị màn sóng Continuum khép kín. Cần hoàn tất việc khôi phục Lõi Continuum Seal giữa thánh điện trước."
+      ],
+      "responses": []
     }
   }
 }

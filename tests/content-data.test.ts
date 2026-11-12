@@ -49,11 +49,13 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
   it('uses only effect keys the engine understands (unknown keys would be silently ignored)', () => {
     const known = new Set([
       'setFlags',
+      'clearFlags',
       'startQuest',
       'grantItems',
       'grantExp',
       'grantOnceFlag',
       'endPrologue',
+      'refreshMap',
     ]);
     for (const node of Object.values(dialogueDb.dialogues)) {
       for (const key of Object.keys(node.effects ?? {})) {
@@ -432,5 +434,125 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
     session.applyDialogueEffects(dialogueDb.dialogues.poi_unwritten_tablet.effects!);
     expect(session.quests.getQuestStage('quest_prologue_unwritten')).toBe('completed');
     expect(dialogueDb.dialogues.prologue_farewell_step.effects?.endPrologue).toBe(true);
+  });
+
+  it('satisfies Chapter 1 quests, items, Time Anchor rotation, Bell Pillar sequence, and canon rules', () => {
+    // 1. All 8 Chapter 1 quests start inactive and no equipment category items are added yet
+    const ch1QuestIds = [
+      'quest_ch1_sunset_gate',
+      'quest_ch1_abandoned_village',
+      'quest_ch1_fog_beacon',
+      'quest_ch1_sunken_ruins',
+      'quest_ch1_bellkeeper',
+      'quest_ch1_fisherman_letter',
+      'quest_ch1_empty_photo',
+      'quest_ch1_second_dinner',
+    ];
+    for (const qId of ch1QuestIds) {
+      expect(questDb.quests.find((q) => q.id === qId)?.stage, `Quest "${qId}"`).toBe('inactive');
+    }
+    expect(itemDb.items.some((i) => i.type === 'equipment')).toBe(false);
+    expect(itemDb.items.find((i) => i.id === 'sunset_dried_fish')?.effects?.healAmount).toBe(45);
+    expect(itemDb.items.find((i) => i.id === 'continuum_seal_shard')?.type).toBe('key_item');
+    expect(itemDb.items.find((i) => i.id === 'unsent_fisherman_letter')?.type).toBe('key_item');
+
+    // 2. Bà Tư is distinct from Cô Ba and unnamed watch case hides any "K..." or Kuro trace
+    expect(dialogueDb.dialogues.ch1_second_dinner.lines.join(' ')).not.toContain('Cô Ba');
+    const watchCaseText = dialogueDb.dialogues.ch1_unnamed_watch_case.lines.join(' ');
+    expect(watchCaseText).not.toMatch(/kuro/i);
+    expect(watchCaseText).not.toMatch(/\bK\.\.\./);
+
+    // 3. End-to-end Chapter 1 main chain, Time Anchor cycle, Bell Pillars, and side quests
+    const session = GameSession.newGame(createRealDatabase());
+
+    // Shore Gate
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_shore_arrival.effects!);
+    expect(session.quests.getQuestStage('quest_ch1_sunset_gate')).toBe('started');
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_shore_arrival_ask.effects!);
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_broken_sundial_fix.effects!);
+    expect(session.getFlag('broke_shore_loop')).toBe(true);
+    expect(dialogueDb.dialogues.ch1_broken_sundial_fix.effects?.refreshMap).toBe(true);
+    expect(session.quests.getQuestStage('quest_ch1_sunset_gate')).toBe('completed');
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_ch1_abandoned_village')).toBe('started');
+
+    // Abandoned Village: Time Anchor free rotation Present -> Past -> Cataclysm -> Present
+    expect(session.getFlag('ch1_layer_past')).toBe(false);
+    expect(session.getFlag('ch1_layer_cataclysm')).toBe(false);
+
+    expect(dialogueDb.dialogues.ch1_anchor_to_past.effects?.refreshMap).toBe(true);
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_anchor_to_past.effects!);
+    expect(session.getFlag('ch1_used_anchor')).toBe(true);
+    expect(session.getFlag('ch1_layer_past')).toBe(true);
+    expect(session.getFlag('ch1_layer_cataclysm')).toBe(false);
+
+    // Side quests in Past: take letter once + Bà Tư dinner memory step 1
+    expect(session.applyDialogueEffects(dialogueDb.dialogues.ch1_letter_box_take.effects!)).toEqual(
+      [{ itemId: 'unsent_fisherman_letter', quantity: 1 }],
+    );
+    expect(session.applyDialogueEffects(dialogueDb.dialogues.ch1_letter_box_take.effects!)).toEqual(
+      [],
+    );
+    expect(session.quests.getQuestStage('quest_ch1_fisherman_letter')).toBe('started');
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_second_dinner_past.effects!);
+    expect(session.getFlag('checked_past_dinner')).toBe(true);
+
+    // Rotate Past -> Cataclysm
+    expect(dialogueDb.dialogues.ch1_anchor_to_cataclysm.effects?.refreshMap).toBe(true);
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_anchor_to_cataclysm.effects!);
+    expect(session.getFlag('ch1_layer_past')).toBe(false);
+    expect(session.getFlag('ch1_layer_cataclysm')).toBe(true);
+
+    // Rotate Cataclysm -> Present
+    expect(dialogueDb.dialogues.ch1_anchor_to_present.effects?.refreshMap).toBe(true);
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_anchor_to_present.effects!);
+    expect(session.getFlag('ch1_layer_past')).toBe(false);
+    expect(session.getFlag('ch1_layer_cataclysm')).toBe(false);
+
+    // Complete village side quests in Present + break village loop
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_fisherman_spirit_deliver.effects!);
+    expect(session.quests.getQuestStage('quest_ch1_fisherman_letter')).toBe('completed');
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_second_dinner_remember.effects!);
+    expect(session.quests.getQuestStage('quest_ch1_second_dinner')).toBe('completed');
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_shrine_photo_attune.effects!);
+    expect(session.quests.getQuestStage('quest_ch1_empty_photo')).toBe('completed');
+
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_village_bell_post_fix.effects!);
+    expect(session.quests.getQuestStage('quest_ch1_abandoned_village')).toBe('completed');
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_ch1_fog_beacon')).toBe('started');
+
+    // Fog Beacon -> Tide Lowered
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_old_keeper_talk.effects!);
+    expect(dialogueDb.dialogues.ch1_tide_wheel_turn.effects?.refreshMap).toBe(true);
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_tide_wheel_turn.effects!);
+    expect(session.getFlag('tide_lowered')).toBe(true);
+    expect(session.quests.getQuestStage('quest_ch1_fog_beacon')).toBe('completed');
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_ch1_sunken_ruins')).toBe('started');
+
+    // Sunken Causes: Pillar 1 -> wrong strike resets -> Pillar 1 -> Pillar 2 -> Pillar 3
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_bell_p1_strike.effects!);
+    expect(session.getFlag('ch1_bell_step_1')).toBe(true);
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_bell_strike_wrong.effects!);
+    expect(session.getFlag('ch1_bell_step_1')).toBe(false);
+    expect(session.getFlag('ch1_bell_step_2')).toBe(false);
+
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_bell_p1_strike.effects!);
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_bell_p2_strike_ok.effects!);
+    expect(session.getFlag('ch1_bell_step_2')).toBe(true);
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_bell_p3_strike_ok.effects!);
+    expect(session.getFlag('solved_bell_sequence')).toBe(true);
+    expect(session.quests.getQuestStage('quest_ch1_sunken_ruins')).toBe('completed');
+    session.syncQuestProgress();
+    expect(session.quests.getQuestStage('quest_ch1_bellkeeper')).toBe('started');
+
+    // Bell Sanctum -> Release Bellkeeper -> Restore Continuum Seal
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_bellkeeper_released.effects!);
+    session.applyDialogueEffects(dialogueDb.dialogues.ch1_continuum_seal_accept.effects!);
+    expect(session.getFlag('learned_continuum_resonance')).toBe(true);
+    expect(session.quests.getQuestStage('quest_ch1_bellkeeper')).toBe('completed');
+    const sealReward = session.claimQuestRewards('quest_ch1_bellkeeper');
+    expect(sealReward?.items).toEqual([{ itemId: 'continuum_seal_shard', quantity: 1 }]);
   });
 });

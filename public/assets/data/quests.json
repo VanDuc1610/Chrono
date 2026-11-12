@@ -251,6 +251,190 @@
         "experience": 15,
         "items": []
       }
+    },
+    {
+      "id": "quest_ch1_sunset_gate",
+      "title": "Bờ Biển Hoàng Hôn",
+      "description": "Bước ra khỏi Cổng Ngưỡng tới bờ biển chìm trong hoàng hôn đứng im. Nghe Trưởng Lão chỉ dẫn và tìm vật lệch nhịp để phá vòng lặp đường đi.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch1_talk_elder_shore",
+          "description": "Nghe Trưởng Lão giải thích về vùng biển hoàng hôn",
+          "completed": false,
+          "completeOnFlag": "ch1_talked_elder_shore"
+        },
+        {
+          "id": "obj_ch1_break_shore_loop",
+          "description": "Chỉnh lại đồng hồ mặt trời gãy để phá vòng lặp bờ biển",
+          "completed": false,
+          "completeOnFlag": "broke_shore_loop"
+        }
+      ],
+      "rewards": {
+        "experience": 40,
+        "items": []
+      },
+      "followUpQuestId": "quest_ch1_abandoned_village"
+    },
+    {
+      "id": "quest_ch1_abandoned_village",
+      "title": "Ngôi Làng Trong Hoàng Hôn",
+      "description": "Làng chài bỏ hoang bị chia làm ba lớp thời gian chồng lấn. Kích hoạt Mỏ Neo Thời Gian giữa làng và đồng bộ cột chuông ngã ba để mở đường lên hải đăng.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch1_use_anchor",
+          "description": "Kích hoạt Mỏ Neo Thời Gian tại giếng làng",
+          "completed": false,
+          "completeOnFlag": "ch1_used_anchor"
+        },
+        {
+          "id": "obj_ch1_break_village_loop",
+          "description": "Sửa cột chuông ngã ba để phá vòng lặp sương mù",
+          "completed": false,
+          "completeOnFlag": "broke_village_loop"
+        }
+      ],
+      "rewards": {
+        "experience": 60,
+        "items": ["coastal_pancake"]
+      },
+      "followUpQuestId": "quest_ch1_fog_beacon"
+    },
+    {
+      "id": "quest_ch1_fog_beacon",
+      "title": "Ngọn Đèn Trong Sương",
+      "description": "Nói chuyện với Người Gác Hải Đăng Già trên đỉnh dốc và sửa bánh xe thủy triều để rút nước mở lối xuống di tích đáy biển.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch1_talk_old_keeper",
+          "description": "Trò chuyện với Người Gác Hải Đăng Già",
+          "completed": false,
+          "completeOnFlag": "talked_old_keeper_ch1"
+        },
+        {
+          "id": "obj_ch1_lower_tide",
+          "description": "Sửa bánh xe đồng và hạ mực thủy triều",
+          "completed": false,
+          "completeOnFlag": "tide_lowered"
+        }
+      ],
+      "rewards": {
+        "experience": 70,
+        "items": []
+      },
+      "followUpQuestId": "quest_ch1_sunken_ruins"
+    },
+    {
+      "id": "quest_ch1_sunken_ruins",
+      "title": "Nhịp Chuông Đáy Biển",
+      "description": "Đi theo sổ trực đèn hải đăng và gõ đúng thứ tự ba trụ chuông trong Hành Lang Đáy Biển để mở phong ấn vào thánh điện.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch1_solve_bells",
+          "description": "Gõ đúng chuỗi 3 trụ chuông (Bình Minh → Hoàng Hôn → Đêm Tĩnh)",
+          "completed": false,
+          "completeOnFlag": "solved_bell_sequence"
+        }
+      ],
+      "rewards": {
+        "experience": 80,
+        "items": ["chrono_shard_minor"]
+      },
+      "followUpQuestId": "quest_ch1_bellkeeper"
+    },
+    {
+      "id": "quest_ch1_bellkeeper",
+      "title": "Tiếng Chuông Hoàng Hôn Cuối",
+      "description": "Đối diện The Sunken Bellkeeper dưới Thánh Điện Chuông Chìm, giải thoát cho ông và khôi phục Lõi Continuum Seal.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch1_release_bellkeeper",
+          "description": "Giải thoát The Sunken Bellkeeper khỏi hồi chuông lặp",
+          "completed": false,
+          "completeOnFlag": "sunken_bellkeeper_released"
+        },
+        {
+          "id": "obj_ch1_restore_continuum_seal",
+          "description": "Khôi phục Lõi Continuum Seal và nhận Continuum Resonance",
+          "completed": false,
+          "completeOnFlag": "continuum_seal_restored"
+        }
+      ],
+      "rewards": {
+        "experience": 150,
+        "items": ["continuum_seal_shard"]
+      }
+    },
+    {
+      "id": "quest_ch1_fisherman_letter",
+      "title": "Lá Thư Người Đánh Cá",
+      "description": "Hồn ngư dân bên bến thuyền vẫn day dứt vì mảnh giấy dặn nhà chưa kịp gửi trước cơn bão. Hãy quay về lớp Quá Khứ tìm lá thư và đưa tin lại cho chú.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch1_find_letter",
+          "description": "Tìm lá thư chưa gửi trong hòm thư ở lớp Quá Khứ",
+          "completed": false,
+          "completeOnFlag": "found_unsent_letter"
+        },
+        {
+          "id": "obj_ch1_deliver_letter",
+          "description": "Trao lại lá thư cho Hồn Ngư Dân bên bến thuyền",
+          "completed": false,
+          "completeOnFlag": "delivered_unsent_letter"
+        }
+      ],
+      "rewards": {
+        "experience": 50,
+        "items": ["chrono_shard_minor"]
+      }
+    },
+    {
+      "id": "quest_ch1_empty_photo",
+      "title": "Bức Ảnh Thờ Trống",
+      "description": "Trên bàn thờ nhỏ trong làng có khung ảnh thờ đã phai trắng khuôn mặt. Dùng Nhãn Thời Gian để chạm vào dấu tích ký ức còn sót lại.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch1_restore_photo",
+          "description": "Soi lại bóng dáng trong khung ảnh thờ bằng Nhãn Thời Gian",
+          "completed": false,
+          "completeOnFlag": "restored_shrine_photo"
+        }
+      ],
+      "rewards": {
+        "experience": 50,
+        "items": []
+      }
+    },
+    {
+      "id": "quest_ch1_second_dinner",
+      "title": "Bữa Tối Thứ Hai",
+      "description": "Bà Tư chiều nào cũng dọn mâm cơm hai chén mà không nhớ nổi mình đang đợi ai. Hãy xem lớp Quá Khứ rồi quay về nhắc lại giúp bà.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch1_check_past_dinner",
+          "description": "Gặp Bà Tư ở lớp Quá Khứ để biết bà đang đợi ai",
+          "completed": false,
+          "completeOnFlag": "checked_past_dinner"
+        },
+        {
+          "id": "obj_ch1_tell_ba_tu",
+          "description": "Quay về lớp Hiện Tại giúp Bà Tư nhớ ra người bạn ăn tối",
+          "completed": false,
+          "completeOnFlag": "identified_second_dinner"
+        }
+      ],
+      "rewards": {
+        "experience": 50,
+        "items": ["sunset_dried_fish"]
+      }
     }
   ]
 }

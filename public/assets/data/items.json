@@ -68,6 +68,36 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1
+    },
+    {
+      "id": "unsent_fisherman_letter",
+      "name": "Lá Thư Ngư Dân Chưa Gửi",
+      "type": "key_item",
+      "description": "Bức thư gấp gọn trong giấy dầu, mực còn vương mùi khói đèn trước cơn bão năm xưa ở làng chài hoàng hôn.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "sunset_dried_fish",
+      "name": "Cá Khô Hoàng Hôn",
+      "type": "consumable",
+      "description": "Mẻ cá phơi nắng gió chiều được Bà Tư gói ghém cẩn thận bằng lá chuối khô. Hồi phục 45 HP.",
+      "value": 20,
+      "stackable": true,
+      "maxStack": 20,
+      "effects": {
+        "healAmount": 45
+      }
+    },
+    {
+      "id": "continuum_seal_shard",
+      "name": "Mảnh Ấn Continuum",
+      "type": "key_item",
+      "description": "Mảnh tinh thể đồng thau đọng nhịp thủy triều thuận từ Thánh Điện Chuông Chìm, đánh dấu bước cộng hưởng đầu tiên với Quyền Năng Continuum.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
     }
   ]
 }
