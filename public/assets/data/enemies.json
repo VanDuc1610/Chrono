@@ -112,6 +112,87 @@
           }
         ]
       }
+    },
+    {
+      "id": "enemy_drowned_drifter",
+      "name": "Thực Thể Trôi Dạt",
+      "level": 4,
+      "maxHp": 60,
+      "hp": 60,
+      "attack": 12,
+      "defense": 7,
+      "speed": 8,
+      "spriteKey": "enemy_drifter",
+      "skills": [],
+      "expReward": 35,
+      "lootTable": [
+        {
+          "itemId": "chrono_shard_minor",
+          "chance": 0.3
+        }
+      ]
+    },
+    {
+      "id": "enemy_echo_chorister",
+      "name": "Vang Chuông Vỡ",
+      "level": 5,
+      "maxHp": 65,
+      "hp": 65,
+      "attack": 11,
+      "defense": 9,
+      "speed": 10,
+      "spriteKey": "enemy_fracture",
+      "skills": [],
+      "expReward": 40,
+      "lootTable": []
+    },
+    {
+      "id": "boss_sunken_bellkeeper",
+      "name": "Người Giữ Chuông Chìm",
+      "level": 6,
+      "maxHp": 180,
+      "hp": 180,
+      "attack": 14,
+      "defense": 11,
+      "speed": 9,
+      "spriteKey": "boss_bellkeeper",
+      "spriteScale": 1.6,
+      "skills": [],
+      "expReward": 150,
+      "lootTable": [],
+      "mechanic": {
+        "damageReduction": 0.8,
+        "hpFloor": 1,
+        "recoverPct": 0.65,
+        "recoverMessage": "Quả chuông rung giật lùi — thời khắc quay lại trước khi tiếng chuông kịp ngân, vết thương khép lại!",
+        "unlockAfterTurns": 3,
+        "unlockOnSkill": true,
+        "unlockMessage": "Nhãn Thời Gian: ba khóa cơ khí nối Quả Chuông với mặt nước — dây chuông, bánh răng thủy triều, nhịp hoàng hôn!",
+        "actions": [
+          {
+            "id": "bell_cord",
+            "label": "GIỮ DÂY CHUÔNG",
+            "stunTurns": 1,
+            "message": "Peter giữ chặt sợi dây chuông cũ — Người Giữ Chuông khựng lại, bị choáng!"
+          },
+          {
+            "id": "tide_gear",
+            "label": "ĐẢO BÁNH RĂNG",
+            "requires": ["bell_cord"],
+            "message": "Bánh răng thủy triều quay thuận chiều — nhịp chuông bắt đầu đồng bộ với sóng."
+          },
+          {
+            "id": "last_chime",
+            "label": "GÕ NHỊP CUỐI",
+            "requires": ["tide_gear"],
+            "breakShield": true,
+            "setHpPct": 0.15,
+            "message": "Tiếng chuông hoàng hôn cuối cùng ngân trọn — lớp giáp đảo ngược vỡ tan!"
+          }
+        ],
+        "releasedFrame": 4,
+        "defeatMessage": "Người Giữ Chuông đặt quả chuông xuống thật nhẹ, rồi quỳ gối."
+      }
     }
   ]
 }

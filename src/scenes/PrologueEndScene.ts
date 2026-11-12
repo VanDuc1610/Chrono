@@ -1,6 +1,8 @@
 import Phaser from 'phaser';
 import { SoundSystem } from '../systems/audio/SoundSystem';
 import { getSession } from '../state/GameSession';
+
+const CHAPTER_1_START = 'map_ch1_shore_gate';
 import { createPanel } from '../ui/Panel';
 import { getStrings } from '../ui/Strings';
 
@@ -16,8 +18,12 @@ export class PrologueEndScene extends Phaser.Scene {
     super({ key: 'PrologueEndScene' });
   }
 
-  public init(): void {
+  /** 0 = Prologue (continues into Chapter 1), n = end of chapter n (back to the title). */
+  private chapter = 0;
+
+  public init(data?: { chapter?: number }): void {
     this.isLeaving = false;
+    this.chapter = data?.chapter ?? 0;
   }
 
   public create(): void {
@@ -60,14 +66,19 @@ export class PrologueEndScene extends Phaser.Scene {
     ).setAlpha(0);
 
     const title = this.add
-      .text(width / 2, height * 0.28, t('ending.title'), {
-        fontFamily: 'monospace',
-        fontSize: '20px',
-        color: '#cde9ff',
-        fontStyle: 'bold',
-        stroke: '#081427',
-        strokeThickness: 5,
-      })
+      .text(
+        width / 2,
+        height * 0.28,
+        this.chapter === 0 ? t('ending.title') : t('ending.titleChapter', { n: this.chapter }),
+        {
+          fontFamily: 'monospace',
+          fontSize: '20px',
+          color: '#cde9ff',
+          fontStyle: 'bold',
+          stroke: '#081427',
+          strokeThickness: 5,
+        },
+      )
       .setOrigin(0.5)
       .setAlpha(0);
 
@@ -116,11 +127,16 @@ export class PrologueEndScene extends Phaser.Scene {
       .setAlpha(0);
 
     const prompt = this.add
-      .text(width / 2, height - 22, t('ending.prompt'), {
-        fontFamily: 'monospace',
-        fontSize: '9px',
-        color: '#65789e',
-      })
+      .text(
+        width / 2,
+        height - 22,
+        this.chapter === 0 ? t('ending.promptContinue') : t('ending.prompt'),
+        {
+          fontFamily: 'monospace',
+          fontSize: '9px',
+          color: '#65789e',
+        },
+      )
       .setOrigin(0.5)
       .setAlpha(0);
 
@@ -150,7 +166,15 @@ export class PrologueEndScene extends Phaser.Scene {
     this.soundSystem.playSelect();
     this.cameras.main.fadeOut(500, 0, 0, 0);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-      this.scene.start('MainMenuScene');
+      if (this.chapter === 0) {
+        // The journey goes on: Chapter 1 starts where the Threshold opens onto the sunset shore.
+        const session = getSession(this);
+        session.applyPendingLevels();
+        session.position = null;
+        this.scene.start('ExplorationScene', { mapId: CHAPTER_1_START, spawnId: 'from_prologue' });
+      } else {
+        this.scene.start('MainMenuScene');
+      }
     });
   }
 }

@@ -148,6 +148,20 @@ export class PreloadScene extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32,
     });
+    // Chapter 1: old lighthouse keeper (NPC_OLD_KEEPER_001), Drowned Drifter (MOB_DRIFTER_001),
+    // The Sunken Bellkeeper (BOSS_BELLKEEPER_001, 64x64, frame 4 = released).
+    this.load.spritesheet('npc_old_keeper', 'assets/npcs/old_keeper_idle.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet('enemy_drifter', 'assets/enemies/drifter_float.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet('boss_bellkeeper', 'assets/enemies/bellkeeper.png', {
+      frameWidth: 64,
+      frameHeight: 64,
+    });
     this.load.spritesheet('npc_forgotten_child', 'assets/npcs/forgotten_child_idle.png', {
       frameWidth: 32,
       frameHeight: 32,
@@ -232,6 +246,20 @@ export class PreloadScene extends Phaser.Scene {
         frameRate: 4,
         repeat: -1,
       });
+    }
+    for (const [key, texture, end, rate] of [
+      ['npc_old_keeper_idle', 'npc_old_keeper', 3, 4],
+      ['enemy_drifter_idle', 'enemy_drifter', 3, 5],
+      ['boss_bellkeeper_idle', 'boss_bellkeeper', 3, 4],
+    ] as const) {
+      if (!this.anims.exists(key)) {
+        this.anims.create({
+          key,
+          frames: this.anims.generateFrameNumbers(texture, { start: 0, end }),
+          frameRate: rate,
+          repeat: -1,
+        });
+      }
     }
     if (!this.anims.exists('boss_sentinel_idle')) {
       this.anims.create({

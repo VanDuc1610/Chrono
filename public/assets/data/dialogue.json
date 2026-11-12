@@ -1824,7 +1824,8 @@
       ],
       "responses": [],
       "effects": {
-        "setFlags": ["continuum_seal_restored", "learned_continuum_resonance"]
+        "setFlags": ["continuum_seal_restored", "learned_continuum_resonance"],
+        "endChapter": 1
       }
     },
     "ch1_continuum_seal_restored": {

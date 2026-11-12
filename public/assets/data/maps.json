@@ -19,7 +19,7 @@
       },
       "collision": {
         "fromGid": 17,
-        "toGid": 40
+        "toGid": 44
       },
       "bgm": "ambient",
       "spawns": {
@@ -159,7 +159,7 @@
       },
       "collision": {
         "fromGid": 17,
-        "toGid": 40
+        "toGid": 44
       },
       "bgm": "ambient",
       "spawns": {
@@ -604,7 +604,7 @@
       },
       "collision": {
         "fromGid": 17,
-        "toGid": 40
+        "toGid": 43
       },
       "bgm": "ambient",
       "spawns": {
@@ -706,7 +706,7 @@
       },
       "collision": {
         "fromGid": 17,
-        "toGid": 40
+        "toGid": 43
       },
       "bgm": "ambient",
       "spawns": {
@@ -790,6 +790,883 @@
           "requiresFlag": "sentinel_pacified",
           "onceFlag": "trig_time_restored",
           "dialogueId": "town_time_restored"
+        }
+      ]
+    },
+    "map_ch1_shore_gate": {
+      "id": "map_ch1_shore_gate",
+      "name": "Bờ Biển Hoàng Hôn",
+      "chapter": 1,
+      "tilemap": {
+        "key": "map_ch1_shore_gate",
+        "path": "assets/maps/map_ch1_shore_gate.json"
+      },
+      "tileset": {
+        "name": "wilds_tileset",
+        "key": "wilds_tileset",
+        "path": "assets/tilesets/wilds_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 17,
+        "toGid": 43
+      },
+      "ambient": {
+        "color": "#ff8a3c",
+        "alpha": 0.12
+      },
+      "spawns": {
+        "default": {
+          "x": 3,
+          "y": 8
+        },
+        "from_prologue": {
+          "x": 3,
+          "y": 8
+        },
+        "from_village": {
+          "x": 19,
+          "y": 8
+        },
+        "loop_reset": {
+          "x": 5,
+          "y": 8
+        }
+      },
+      "revive": {
+        "x": 3,
+        "y": 8
+      },
+      "npcs": [
+        {
+          "id": "npc_elder_ch1",
+          "texture": "npc_elder",
+          "anim": "npc_elder_idle",
+          "tile": {
+            "x": 5,
+            "y": 7
+          },
+          "name": "Trưởng Lão",
+          "prompt": "[E] Nói chuyện với Trưởng Lão",
+          "radius": 48,
+          "dialogueId": "ch1_elder_shore_default",
+          "dialogueRules": [
+            {
+              "ifFlag": "broke_shore_loop",
+              "dialogueId": "ch1_elder_shore_after_loop"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_broken_sundial",
+          "tile": {
+            "x": 10,
+            "y": 6
+          },
+          "radius": 44,
+          "prompt": "[E] Xem đồng hồ mặt trời gãy",
+          "dialogueId": "ch1_broken_sundial",
+          "dialogueRules": [
+            {
+              "ifFlag": "broke_shore_loop",
+              "dialogueId": "ch1_broken_sundial_fixed"
+            }
+          ]
+        },
+        {
+          "id": "poi_frozen_tide_marker",
+          "tile": {
+            "x": 12,
+            "y": 10
+          },
+          "radius": 44,
+          "prompt": "[E] Xem cọc đo triều",
+          "dialogueId": "ch1_frozen_tide_marker"
+        }
+      ],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "shore_to_village",
+          "area": {
+            "x": 21,
+            "y": 7,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_ch1_abandoned_village",
+          "toSpawn": "from_shore",
+          "requiresFlag": "broke_shore_loop",
+          "lockedDialogueId": "ch1_shore_loop_blocked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_ch1_arrival",
+          "on": "arrive",
+          "onceFlag": "trig_ch1_arrival",
+          "delayMs": 700,
+          "dialogueId": "ch1_shore_arrival"
+        },
+        {
+          "id": "trig_shore_loop_first",
+          "on": "zone",
+          "area": {
+            "x": 18,
+            "y": 6,
+            "w": 2,
+            "h": 5
+          },
+          "onceFlag": "trig_shore_loop_first",
+          "unlessFlag": "broke_shore_loop",
+          "dialogueId": "ch1_shore_loop_blocked"
+        },
+        {
+          "id": "trig_shore_loop",
+          "on": "zone",
+          "area": {
+            "x": 18,
+            "y": 6,
+            "w": 2,
+            "h": 5
+          },
+          "repeat": true,
+          "unlessFlag": "broke_shore_loop",
+          "teleportTo": "loop_reset"
+        }
+      ]
+    },
+    "map_ch1_abandoned_village": {
+      "id": "map_ch1_abandoned_village",
+      "name": "Làng Chài Hoàng Hôn",
+      "chapter": 1,
+      "tilemap": {
+        "key": "map_ch1_abandoned_village",
+        "path": "assets/maps/map_ch1_abandoned_village.json"
+      },
+      "tileset": {
+        "name": "coastal_tileset",
+        "key": "coastal_tileset",
+        "path": "assets/tilesets/coastal_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 17,
+        "toGid": 44
+      },
+      "ambient": {
+        "color": "#ff8a3c",
+        "alpha": 0.12
+      },
+      "frozenWhen": {
+        "flag": "ch1_layer_cataclysm"
+      },
+      "spawns": {
+        "default": {
+          "x": 1,
+          "y": 10
+        },
+        "from_shore": {
+          "x": 1,
+          "y": 10
+        },
+        "from_beacon": {
+          "x": 27,
+          "y": 4
+        },
+        "loop_alley": {
+          "x": 15,
+          "y": 11
+        }
+      },
+      "revive": {
+        "x": 1,
+        "y": 10
+      },
+      "npcs": [
+        {
+          "id": "npc_ba_tu",
+          "texture": "npc_vendor_ba",
+          "anim": "npc_vendor_ba_idle",
+          "tile": {
+            "x": 10,
+            "y": 6
+          },
+          "name": "Bà Tư",
+          "prompt": "[E] Nói chuyện với Bà Tư",
+          "radius": 52,
+          "tint": "#c8c8d8",
+          "dialogueId": "ch1_second_dinner",
+          "dialogueRules": [
+            {
+              "ifFlag": "identified_second_dinner",
+              "dialogueId": "ch1_second_dinner_done"
+            },
+            {
+              "ifFlag": "ch1_layer_past",
+              "dialogueId": "ch1_second_dinner_past"
+            },
+            {
+              "ifFlag": "ch1_layer_cataclysm",
+              "dialogueId": "ch1_second_dinner_cataclysm"
+            },
+            {
+              "ifFlag": "checked_past_dinner",
+              "dialogueId": "ch1_second_dinner_remember"
+            }
+          ]
+        },
+        {
+          "id": "npc_fisherman_spirit",
+          "texture": "npc_fisherman_sau",
+          "anim": "npc_fisherman_sau_idle",
+          "tile": {
+            "x": 6,
+            "y": 16
+          },
+          "name": "Hồn Ngư Dân",
+          "prompt": "[E] Nói chuyện với hồn ngư dân",
+          "radius": 48,
+          "tint": "#9fd0e8",
+          "alpha": 0.7,
+          "dialogueId": "ch1_fisherman_spirit",
+          "dialogueRules": [
+            {
+              "ifFlag": "delivered_unsent_letter",
+              "dialogueId": "ch1_fisherman_spirit_done"
+            },
+            {
+              "ifFlag": "ch1_layer_past",
+              "dialogueId": "ch1_fisherman_spirit_past"
+            },
+            {
+              "ifFlag": "ch1_layer_cataclysm",
+              "dialogueId": "ch1_fisherman_spirit_cataclysm"
+            },
+            {
+              "ifFlag": "found_unsent_letter",
+              "dialogueId": "ch1_fisherman_spirit_deliver"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_temporal_anchor_well",
+          "tile": {
+            "x": 15,
+            "y": 9
+          },
+          "radius": 48,
+          "prompt": "[E] Xoay Mỏ Neo Thời Gian",
+          "dialogueId": "ch1_anchor_present",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch1_layer_past",
+              "dialogueId": "ch1_anchor_past"
+            },
+            {
+              "ifFlag": "ch1_layer_cataclysm",
+              "dialogueId": "ch1_anchor_cataclysm"
+            }
+          ]
+        },
+        {
+          "id": "poi_coastal_shrine_photo",
+          "tile": {
+            "x": 20,
+            "y": 7
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bàn thờ",
+          "dialogueId": "ch1_shrine_photo",
+          "dialogueRules": [
+            {
+              "ifFlag": "restored_shrine_photo",
+              "dialogueId": "ch1_shrine_photo_done"
+            },
+            {
+              "ifFlag": "ch1_layer_past",
+              "dialogueId": "ch1_shrine_photo_past"
+            },
+            {
+              "ifFlag": "ch1_layer_cataclysm",
+              "dialogueId": "ch1_shrine_photo_cataclysm"
+            }
+          ]
+        },
+        {
+          "id": "poi_unsent_letter_box",
+          "tile": {
+            "x": 12,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Xem hòm thư",
+          "dialogueId": "ch1_letter_box",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch1_layer_past",
+              "unlessFlag": "found_unsent_letter",
+              "dialogueId": "ch1_letter_box_past"
+            },
+            {
+              "ifFlag": "ch1_layer_past",
+              "dialogueId": "ch1_letter_box_past_empty"
+            },
+            {
+              "ifFlag": "ch1_layer_cataclysm",
+              "dialogueId": "ch1_letter_box_cataclysm"
+            }
+          ]
+        },
+        {
+          "id": "poi_village_bell_post",
+          "tile": {
+            "x": 24,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Xem cột chuông",
+          "dialogueId": "ch1_village_bell_post",
+          "dialogueRules": [
+            {
+              "ifFlag": "broke_village_loop",
+              "dialogueId": "ch1_village_bell_post_broken"
+            },
+            {
+              "ifFlag": "ch1_layer_past",
+              "dialogueId": "ch1_village_bell_post_past"
+            },
+            {
+              "ifFlag": "ch1_layer_cataclysm",
+              "dialogueId": "ch1_village_bell_post_cataclysm"
+            },
+            {
+              "ifFlag": "ch1_used_anchor",
+              "dialogueId": "ch1_village_bell_post_ready"
+            }
+          ]
+        }
+      ],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "village_to_shore",
+          "area": {
+            "x": 0,
+            "y": 9,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_ch1_shore_gate",
+          "toSpawn": "from_village"
+        },
+        {
+          "id": "village_to_beacon",
+          "area": {
+            "x": 29,
+            "y": 3,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_ch1_sunset_beacon",
+          "toSpawn": "from_village",
+          "requiresFlag": "broke_village_loop",
+          "lockedDialogueId": "ch1_village_loop_blocked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_village_intro",
+          "on": "arrive",
+          "onceFlag": "trig_village_intro",
+          "delayMs": 600,
+          "dialogueId": "ch1_village_intro"
+        },
+        {
+          "id": "trig_village_loop",
+          "on": "zone",
+          "area": {
+            "x": 27,
+            "y": 2,
+            "w": 2,
+            "h": 3
+          },
+          "repeat": true,
+          "unlessFlag": "broke_village_loop",
+          "teleportTo": "loop_alley"
+        }
+      ]
+    },
+    "map_ch1_sunset_beacon": {
+      "id": "map_ch1_sunset_beacon",
+      "name": "Hải Đăng Sương Mù",
+      "chapter": 1,
+      "tilemap": {
+        "key": "map_ch1_sunset_beacon",
+        "path": "assets/maps/map_ch1_sunset_beacon.json"
+      },
+      "tileset": {
+        "name": "wilds_tileset",
+        "key": "wilds_tileset",
+        "path": "assets/tilesets/wilds_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 17,
+        "toGid": 43
+      },
+      "ambient": {
+        "color": "#d98a6a",
+        "alpha": 0.14
+      },
+      "layerVariants": [
+        {
+          "when": {
+            "flag": "tide_lowered"
+          },
+          "walls": "Walls_LowTide"
+        }
+      ],
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 14
+        },
+        "from_village": {
+          "x": 2,
+          "y": 14
+        },
+        "from_ruins": {
+          "x": 19,
+          "y": 13
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 14
+      },
+      "npcs": [
+        {
+          "id": "npc_old_keeper",
+          "texture": "npc_old_keeper",
+          "anim": "npc_old_keeper_idle",
+          "tile": {
+            "x": 11,
+            "y": 8
+          },
+          "name": "Người Gác Hải Đăng",
+          "prompt": "[E] Nói chuyện với người gác đèn",
+          "radius": 48,
+          "dialogueId": "ch1_old_keeper_talk",
+          "dialogueRules": [
+            {
+              "ifFlag": "tide_lowered",
+              "dialogueId": "ch1_old_keeper_after_tide"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_tide_wheel",
+          "tile": {
+            "x": 13,
+            "y": 6
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bánh xe thủy triều",
+          "dialogueId": "ch1_tide_wheel",
+          "dialogueRules": [
+            {
+              "ifFlag": "tide_lowered",
+              "dialogueId": "ch1_tide_wheel_lowered"
+            }
+          ]
+        },
+        {
+          "id": "poi_keeper_logbook",
+          "tile": {
+            "x": 9,
+            "y": 10
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc sổ trực đèn",
+          "dialogueId": "ch1_keeper_logbook"
+        }
+      ],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "beacon_to_village",
+          "area": {
+            "x": 0,
+            "y": 12,
+            "w": 1,
+            "h": 4
+          },
+          "toMap": "map_ch1_abandoned_village",
+          "toSpawn": "from_beacon"
+        },
+        {
+          "id": "beacon_to_ruins",
+          "area": {
+            "x": 19,
+            "y": 16,
+            "w": 2,
+            "h": 1
+          },
+          "toMap": "map_ch1_sunken_corridors",
+          "toSpawn": "from_beacon",
+          "requiresFlag": "tide_lowered",
+          "lockedDialogueId": "ch1_tide_blocks_stairs"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_beacon_arrival",
+          "on": "arrive",
+          "onceFlag": "trig_beacon_arrival",
+          "delayMs": 600,
+          "dialogueId": "ch1_beacon_arrival"
+        }
+      ]
+    },
+    "map_ch1_sunken_corridors": {
+      "id": "map_ch1_sunken_corridors",
+      "name": "Hành Lang Đáy Biển",
+      "chapter": 1,
+      "tilemap": {
+        "key": "map_ch1_sunken_corridors",
+        "path": "assets/maps/map_ch1_sunken_corridors.json"
+      },
+      "tileset": {
+        "name": "sunken_tileset",
+        "key": "sunken_tileset",
+        "path": "assets/tilesets/sunken_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 4,
+        "toGid": 24
+      },
+      "ambient": {
+        "color": "#1fa08a",
+        "alpha": 0.1
+      },
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 15
+        },
+        "from_beacon": {
+          "x": 2,
+          "y": 15
+        },
+        "from_sanctum": {
+          "x": 23,
+          "y": 3
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 15
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_chime_pillar_1",
+          "tile": {
+            "x": 8,
+            "y": 12
+          },
+          "radius": 44,
+          "prompt": "[E] Gõ trụ chuông",
+          "dialogueId": "ch1_bell_p1_ready",
+          "dialogueRules": [
+            {
+              "ifFlag": "solved_bell_sequence",
+              "dialogueId": "ch1_bell_already_solved"
+            },
+            {
+              "ifFlag": "ch1_bell_step_1",
+              "dialogueId": "ch1_bell_p1_already_rung"
+            }
+          ]
+        },
+        {
+          "id": "poi_chime_pillar_2",
+          "tile": {
+            "x": 14,
+            "y": 8
+          },
+          "radius": 44,
+          "prompt": "[E] Gõ trụ chuông",
+          "dialogueId": "ch1_bell_p2_wrong_entry",
+          "dialogueRules": [
+            {
+              "ifFlag": "solved_bell_sequence",
+              "dialogueId": "ch1_bell_already_solved"
+            },
+            {
+              "ifFlag": "ch1_bell_step_2",
+              "dialogueId": "ch1_bell_p2_already_rung"
+            },
+            {
+              "ifFlag": "ch1_bell_step_1",
+              "dialogueId": "ch1_bell_p2_right_entry"
+            }
+          ]
+        },
+        {
+          "id": "poi_chime_pillar_3",
+          "tile": {
+            "x": 19,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Gõ trụ chuông",
+          "dialogueId": "ch1_bell_p3_wrong_entry",
+          "dialogueRules": [
+            {
+              "ifFlag": "solved_bell_sequence",
+              "dialogueId": "ch1_bell_already_solved"
+            },
+            {
+              "ifFlag": "ch1_bell_step_2",
+              "dialogueId": "ch1_bell_p3_right_entry"
+            }
+          ]
+        },
+        {
+          "id": "poi_kuro_indirect_trace",
+          "tile": {
+            "x": 6,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt vật sáng dưới cát",
+          "dialogueId": "ch1_unnamed_watch_case"
+        },
+        {
+          "id": "poi_sunken_cache",
+          "tile": {
+            "x": 17,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Mở hòm đá",
+          "dialogueId": "ch1_sunken_cache",
+          "dialogueRules": [
+            {
+              "ifFlag": "granted_sunken_cache",
+              "dialogueId": "ch1_sunken_cache_empty"
+            }
+          ]
+        }
+      ],
+      "encounters": [
+        {
+          "id": "enc_ch1_drifter_a",
+          "enemyId": "enemy_drowned_drifter",
+          "texture": "enemy_drifter",
+          "anim": "enemy_drifter_idle",
+          "tile": {
+            "x": 12,
+            "y": 13
+          },
+          "defeatedFlag": "defeated_ch1_drifter_a",
+          "hitbox": 22
+        },
+        {
+          "id": "enc_ch1_drifter_b",
+          "enemyId": "enemy_drowned_drifter",
+          "texture": "enemy_drifter",
+          "anim": "enemy_drifter_idle",
+          "tile": {
+            "x": 20,
+            "y": 8
+          },
+          "defeatedFlag": "defeated_ch1_drifter_b",
+          "hitbox": 22
+        },
+        {
+          "id": "enc_ch1_chorister",
+          "enemyId": "enemy_echo_chorister",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 8,
+            "y": 5
+          },
+          "defeatedFlag": "defeated_ch1_chorister",
+          "hitbox": 22
+        }
+      ],
+      "exits": [
+        {
+          "id": "ruins_to_beacon",
+          "area": {
+            "x": 2,
+            "y": 17,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch1_sunset_beacon",
+          "toSpawn": "from_ruins"
+        },
+        {
+          "id": "ruins_to_sanctum",
+          "area": {
+            "x": 24,
+            "y": 1,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch1_bell_sanctum",
+          "toSpawn": "from_ruins",
+          "requiresFlag": "solved_bell_sequence",
+          "lockedDialogueId": "ch1_sanctum_seal_locked"
+        }
+      ],
+      "triggers": []
+    },
+    "map_ch1_bell_sanctum": {
+      "id": "map_ch1_bell_sanctum",
+      "name": "Thánh Điện Chuông Chìm",
+      "chapter": 1,
+      "tilemap": {
+        "key": "map_ch1_bell_sanctum",
+        "path": "assets/maps/map_ch1_bell_sanctum.json"
+      },
+      "tileset": {
+        "name": "sunken_tileset",
+        "key": "sunken_tileset",
+        "path": "assets/tilesets/sunken_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 4,
+        "toGid": 24
+      },
+      "ambient": {
+        "color": "#1fa08a",
+        "alpha": 0.1
+      },
+      "spawns": {
+        "default": {
+          "x": 10,
+          "y": 13
+        },
+        "from_ruins": {
+          "x": 10,
+          "y": 13
+        },
+        "revive": {
+          "x": 10,
+          "y": 12
+        }
+      },
+      "revive": {
+        "x": 10,
+        "y": 12
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_continuum_seal",
+          "tile": {
+            "x": 10,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm vào Phong Ấn Continuum",
+          "dialogueId": "ch1_continuum_seal",
+          "requiresFlag": "sunken_bellkeeper_released",
+          "dialogueRules": [
+            {
+              "ifFlag": "continuum_seal_restored",
+              "dialogueId": "ch1_continuum_seal_restored"
+            }
+          ]
+        }
+      ],
+      "encounters": [
+        {
+          "id": "enc_sunken_bellkeeper",
+          "enemyId": "boss_sunken_bellkeeper",
+          "texture": "boss_bellkeeper",
+          "anim": "boss_bellkeeper_idle",
+          "tile": {
+            "x": 10,
+            "y": 8
+          },
+          "defeatedFlag": "sunken_bellkeeper_released",
+          "hitbox": 30,
+          "victoryDialogueId": "ch1_bellkeeper_released"
+        }
+      ],
+      "exits": [
+        {
+          "id": "sanctum_to_ruins",
+          "area": {
+            "x": 10,
+            "y": 15,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch1_sunken_corridors",
+          "toSpawn": "from_sanctum"
+        },
+        {
+          "id": "sanctum_to_chapter2",
+          "area": {
+            "x": 10,
+            "y": 1,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch1_bell_sanctum",
+          "toSpawn": "default",
+          "requiresFlag": "chapter2_open",
+          "lockedDialogueId": "ch1_chapter2_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_bell_sanctum_meet",
+          "on": "zone",
+          "area": {
+            "x": 8,
+            "y": 10,
+            "w": 5,
+            "h": 1
+          },
+          "onceFlag": "trig_bell_sanctum_meet",
+          "dialogueId": "ch1_bellkeeper_before"
         }
       ]
     }

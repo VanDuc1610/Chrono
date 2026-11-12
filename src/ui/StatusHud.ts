@@ -12,6 +12,8 @@ export class StatusHud {
     private readonly session: GameSession,
     private readonly t: Translate,
     locationName: string,
+    /** 0 = Prologue. */
+    chapter = 0,
   ) {
     createPanel(scene, 10, 10, 240, 56).setScrollFactor(0).setDepth(90);
     const text = (y: number, value: string, size: string, color: string, bold = false) =>
@@ -25,7 +27,14 @@ export class StatusHud {
         .setScrollFactor(0)
         .setDepth(95);
     text(18, t('hud.location', { name: locationName }), '10px', '#65d5ff', true);
-    text(31, t('hud.phase'), '9px', '#8b97b8');
+    text(
+      31,
+      chapter > 0
+        ? t('hud.chapter', { n: chapter, title: t(`chapter.${chapter}.title`) })
+        : t('hud.phase'),
+      '9px',
+      '#8b97b8',
+    );
     this.stats = text(44, '', '9px', '#4ade80', true);
 
     scene.add

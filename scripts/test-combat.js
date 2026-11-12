@@ -239,6 +239,14 @@ async function run() {
     );
 
     console.log('[6/6] Finishing battle using Temporal Strike...');
+    // The enemy turn plays animations; commands sent before Peter's turn are ignored.
+    for (let i = 0; i < 40; i++) {
+      const ready = await client.eval(
+        `(() => { const c = window.__GAME__.scene.getScene('CombatScene'); return !c.isProcessingTurn && c.combatSystem.getActiveCombatantId() === c.player.id; })()`,
+      );
+      if (ready) break;
+      await wait(150);
+    }
     // Execute second strike to defeat the shade
     await client.eval(`
       (() => {

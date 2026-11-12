@@ -71,14 +71,13 @@ export class GameSession {
 
   public static fromSave(db: GameDatabase, save: ISaveData): GameSession {
     const session = new GameSession(db);
-    const maxLevel = db.player.player.expThresholds.length;
-
-    session.level = clamp(Math.floor(save.player.level), 1, maxLevel);
+    // Flags first: the level cap depends on story progress (Prologue cap).
+    Object.assign(session.flags, save.flags);
+    session.level = clamp(Math.floor(save.player.level), 1, session.maxLevel);
     session.exp = Math.max(save.player.exp ?? session.thresholdFor(session.level), 0);
     session.hp = clamp(Math.floor(save.player.hp), 1, session.getStats().maxHp);
     session.position = { ...save.player.position };
     session.playtimeMs = Math.max(0, save.playtimeSeconds) * 1000;
-    Object.assign(session.flags, save.flags);
     // Saves from before Prologue v3 (< 0.3) already fought with the blade and Temporal Strike.
     const [major, minor] = save.version.split('.').map((n) => Number(n));
     if (major === 0 && minor < 3) {
@@ -129,7 +128,20 @@ export class GameSession {
   }
 
   public get maxLevel(): number {
-    return this.db.player.player.expThresholds.length;
+    const all = this.db.player.player.expThresholds.length;
+    const cap = this.db.player.player.prologueLevelCap;
+    return cap && !this.getFlag(FLAGS.prologueComplete) ? Math.min(cap, all) : all;
+  }
+
+  /** Applies level-ups held back by a cap that has since been lifted (e.g. leaving the Prologue). */
+  public applyPendingLevels(): number[] {
+    const reached: number[] = [];
+    while (this.level < this.maxLevel && this.exp >= this.thresholdFor(this.level + 1)) {
+      this.level++;
+      reached.push(this.level);
+    }
+    if (reached.length > 0) this.hp = this.getStats().maxHp;
+    return reached;
   }
 
   private thresholdFor(level: number): number {

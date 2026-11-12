@@ -85,6 +85,8 @@ export class ExplorationScene extends Phaser.Scene {
   private pendingRefresh = false;
   private isTransitioning = false;
   private pendingEnding = false;
+  /** Chapter whose end card plays (0 = Prologue). */
+  private pendingChapter = 0;
   private lockedExitShown: string | null = null;
   private exitsArmed = false;
   private spawn = { x: 0, y: 0 };
@@ -124,6 +126,7 @@ export class ExplorationScene extends Phaser.Scene {
   public init(data?: ExplorationSceneData): void {
     this.isTransitioning = false;
     this.pendingEnding = false;
+    this.pendingChapter = 0;
     this.lockedExitShown = null;
     this.exitsArmed = false;
     this.encounterSprites = [];
@@ -158,13 +161,20 @@ export class ExplorationScene extends Phaser.Scene {
     this.dialogueSystem.addEventListener((event) => {
       if (event.type === 'node_changed' && event.node?.effects) {
         this.applyEffects(event.node.effects);
-        if (event.node.effects.endPrologue) this.pendingEnding = true;
+        if (event.node.effects.endPrologue) {
+          this.pendingEnding = true;
+          this.pendingChapter = 0;
+        }
+        if (event.node.effects.endChapter !== undefined) {
+          this.pendingEnding = true;
+          this.pendingChapter = event.node.effects.endChapter;
+        }
         if (event.node.effects.refreshMap) this.pendingRefresh = true;
       }
       if (event.type === 'node_changed' && event.node) this.summonVisions(event.node.id);
       if (event.type === 'dialogue_ended') {
         this.dismissVisions();
-        if (this.pendingEnding) this.startPrologueEnding();
+        if (this.pendingEnding) this.startPrologueEnding(this.pendingChapter);
         else if (this.pendingRefresh) {
           this.pendingRefresh = false;
           this.time.delayedCall(150, () => this.rebuildInPlace());
@@ -228,6 +238,16 @@ export class ExplorationScene extends Phaser.Scene {
     this.cameras.main.fadeIn(400, 0, 0, 0);
     this.refreshFrozen();
     if (!this.isFrozen) this.soundSystem.startBgm(this.mapDef.bgm);
+    // Map light (e.g. Chapter 1's endless sunset), under the HUD.
+    if (this.mapDef.ambient) {
+      const { width, height } = this.scale;
+      const color = Number.parseInt(this.mapDef.ambient.color.slice(1), 16);
+      this.add
+        .rectangle(0, 0, width, height, color, this.mapDef.ambient.alpha)
+        .setOrigin(0)
+        .setScrollFactor(0)
+        .setDepth(79);
+    }
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.soundSystem.stopBgm(true));
   }
 
@@ -305,6 +325,8 @@ export class ExplorationScene extends Phaser.Scene {
         },
       );
       if (def.anim && this.anims.exists(def.anim)) npc.sprite.play(def.anim);
+      if (def.tint) npc.sprite.setTint(Number.parseInt(def.tint.slice(1), 16));
+      if (def.alpha !== undefined) npc.sprite.setAlpha(def.alpha);
       if (!def.resistsFreeze) this.npcSprites.push(npc.sprite);
       this.physics.add.collider(this.player.sprite, npc.sprite);
       this.interactionSystem.register(npc);
@@ -561,7 +583,13 @@ export class ExplorationScene extends Phaser.Scene {
       .setDepth(100)
       .setVisible(false);
 
-    this.statusHud = new StatusHud(this, this.session, this.t, this.mapDef.name);
+    this.statusHud = new StatusHud(
+      this,
+      this.session,
+      this.t,
+      this.mapDef.name,
+      this.mapDef.chapter,
+    );
     this.questTracker = new QuestTracker(this, this.questSystem, this.t);
     this.banner = new NotificationBanner(this);
     this.dialogueBox = new DialogueBox(this, this.dialogueSystem, this.t, () => {
@@ -706,14 +734,16 @@ export class ExplorationScene extends Phaser.Scene {
     }
   }
 
-  /** Fades out to the Prologue closing card. Guarded so it runs once per scene entry. */
-  public startPrologueEnding(): void {
+  /**
+   * Fades out to a chapter's closing card (0 = Prologue). Guarded so it runs once per scene entry.
+   */
+  public startPrologueEnding(chapter = 0): void {
     if (this.isTransitioning) return;
     this.beginSceneExit();
-    this.session.setFlag(FLAGS.prologueComplete);
+    this.session.setFlag(chapter === 0 ? FLAGS.prologueComplete : `chapter${chapter}_complete`);
     this.cameras.main.fadeOut(900, 0, 0, 0);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-      this.scene.start('PrologueEndScene');
+      this.scene.start('PrologueEndScene', { chapter });
     });
   }
 

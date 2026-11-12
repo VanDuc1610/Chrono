@@ -2,6 +2,8 @@
   "strings": {
     "hud.location": "VỊ TRÍ: {name}",
     "hud.phase": "CHƯƠNG: Mở đầu",
+    "hud.chapter": "CHƯƠNG {n}: {title}",
+    "chapter.1.title": "Hoàng Hôn Cuối Cùng",
     "hud.stats": "Cấp {level} | EXP {exp} | HP {hp}/{maxHp}",
     "hud.expMax": "TỐI ĐA",
     "hud.controls": "[WASD/Mũi tên] Di chuyển | [E/Space] Tương tác | [I/B] Túi đồ | [Q] Nhiệm vụ | [K] Lưu | [ESC] Menu",
@@ -83,6 +85,8 @@
     "ending.statsQuests": "Nhiệm vụ đã hoàn thành: {completed}/{total}",
     "ending.statsPlaytime": "Thời gian chơi: {playtime}",
     "ending.thanks": "Cảm ơn bạn đã trải nghiệm.",
-    "ending.prompt": "[E / Space / Enter] Quay về màn hình chính"
+    "ending.prompt": "[E / Space / Enter] Quay về màn hình chính",
+    "ending.titleChapter": "HOÀN THÀNH CHƯƠNG {n}",
+    "ending.promptContinue": "[E / Space / Enter] Tiếp tục sang Chương 1"
   }
 }

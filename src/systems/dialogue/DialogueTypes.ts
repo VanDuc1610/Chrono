@@ -21,6 +21,8 @@ export interface DialogueEffects {
   grantOnceFlag?: string;
   /** When this dialogue ends, the Prologue ending plays (handled by ExplorationScene). */
   endPrologue?: boolean;
+  /** When this dialogue ends, the end card of this chapter plays (1, 2, …). */
+  endChapter?: number;
   /** Session flags reset to false (e.g. a puzzle sequence entered in the wrong order). */
   clearFlags?: string[];
   /**

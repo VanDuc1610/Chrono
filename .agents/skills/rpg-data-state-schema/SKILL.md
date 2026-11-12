@@ -19,10 +19,12 @@ description: Use when editing game JSON (dialogue, quests, items, enemies, playe
 
 - **Dialogue nodes:** max 2 responses (UI shows 2 choices). Side effects only through the node's
   `effects` (`setFlags`, `clearFlags`, `startQuest`, `grantItems`/`grantExp` + `grantOnceFlag`,
-  `endPrologue`, `refreshMap`), applied by
+  `endPrologue`, `endChapter: n`, `refreshMap`), applied by
   `GameSession.applyDialogueEffects()`. No code in JSON.
 - **Quests:** chain with `followUpQuestId`; flag-driven objectives use `completeOnFlag`;
   `syncQuestProgress()` must stay idempotent. Rewards are claimed once.
+- **Levels:** `player.json` `expThresholds` length is the cap; `prologueLevelCap` (3) applies until
+  `isPrologueComplete` (saves are clamped too); the Prologue end card applies held-back levels.
 - **World placement** (NPCs, points of interest, encounters, exits, triggers): `maps.json` — see the
   `tiled-topdown-world` skill.
 - **UI text** (HUD, hints, notifications): `strings.json`, read with `getStrings(scene)` /

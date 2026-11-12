@@ -55,6 +55,10 @@ export interface MapNpcDefinition {
   visibleWhen?: FlagCondition;
   /** Keeps moving while the map is frozen (e.g. the Elder). */
   resistsFreeze?: boolean;
+  /** Recolours a reused sprite, e.g. "#c8c8d0" (silver hair) or a spirit's cold blue. */
+  tint?: string;
+  /** 0-1, e.g. 0.6 for a fading spirit. */
+  alpha?: number;
 }
 
 export interface MapInteractableDefinition {
@@ -166,6 +170,10 @@ export interface MapDefinition {
    * `tide_lowered` is set. Layer names must exist in the tilemap.
    */
   layerVariants?: { when: FlagCondition; ground?: string; walls?: string }[];
+  /** Light over the whole map, e.g. an endless sunset: { color: "#ff8a3c", alpha: 0.12 }. */
+  ambient?: { color: string; alpha: number };
+  /** Chapter this map belongs to (0 = Prologue) — chooses the end card. */
+  chapter?: number;
 }
 
 export interface MapDatabase {

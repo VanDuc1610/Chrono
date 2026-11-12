@@ -21,6 +21,8 @@ export interface PlayerDefinition {
   growthPerLevel: PlayerStats;
   /** Total EXP required to reach level (index + 1). Its length is the level cap. */
   expThresholds: number[];
+  /** Level cap while the Prologue is not complete (GDD: 3); afterwards the thresholds decide. */
+  prologueLevelCap?: number;
   startingItems: IItemStack[];
   /** Item consumed by the combat ITEM command. */
   combatItemId: string;

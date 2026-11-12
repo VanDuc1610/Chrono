@@ -36,7 +36,9 @@ the map (NPCs still and tinted unless `resistsFreeze`, veil, no music).
 Chapter 1 additions: triggers with `repeat: true` (no onceFlag), `unlessFlag` and `teleportTo:
 "<spawnId>"` make Continuum loops; `layerVariants: [{ when, ground?, walls? }]` swap tile layers
 by state (each variant layer must be a distinct layer in the tilemap); a dialogue effect
-`refreshMap: true` rebuilds the map in place when the dialogue closes.
+`refreshMap: true` rebuilds the map in place when the dialogue closes. Map `chapter` (HUD shows
+`chapter.<n>.title`) and `ambient: { color, alpha }` (screen light, e.g. sunset); NPC `tint`
+("#rrggbb") and `alpha` reuse a sprite as another character or a spirit.
 
 `aliases` lets old save ids resolve (`prologue_sanctuary` → `map_shattered_antechamber`).
 `startMapId` is where a new game begins. A dialogue node with `effects.endPrologue` plays the

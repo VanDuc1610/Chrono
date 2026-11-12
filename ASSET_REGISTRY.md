@@ -166,14 +166,14 @@
 - **Why:** owner asked for a different tone for the two underwater maps (they shared the Prologue sanctuary look).
 - **Validation:** PASSED. **Status:** `INTEGRATED` — owner approved 2026-11-12 (T-44).
 
-### Chapter 1 art batch (T-44) — candidates
+### Chapter 1 art batch (T-44)
 
-- `ENV_COASTAL_002_CAND` — `coastal_tileset_v2` (256 × 192): tiles 0-39 byte-identical to the approved v1; new 40 shrine with a smudged photo, 41 rotten letter box, 42 bell post, 43 dinner tray for two. `scripts/author-coastal-tileset.js`.
-- `ENV_WILDS_002_CAND` — `wilds_tileset_v2` (256 × 192): tiles 0-39 byte-identical to v1; new 40 broken sundial, 41 tide marker post with a frozen waterline, 42 bronze tide wheel. `scripts/author-wilds-tileset.js`.
-- `NPC_OLD_KEEPER_001_CAND` — old lighthouse keeper, 32 × 32 × 4 (hooded faded raincoat, storm lantern flickering). `scripts/author-ch1-characters.js`.
-- `MOB_DRIFTER_001_CAND` — The Drowned Drifter, 32 × 32 × 4 float (translucent seawater figure, kelp, glowing core).
-- `BOSS_BELLKEEPER_001_CAND` — The Sunken Bellkeeper, 64 × 64 × 5 (frames 0-3 idle with light through the bell's crack; 4 kneeling, bell set down, motes rising).
-- **Validation:** all PASSED. **Status:** `CONCEPT_PENDING_APPROVAL`.
+- `ENV_COASTAL_002` — `coastal_tileset_v2` (256 × 192): tiles 0-39 byte-identical to the approved v1; new 40 shrine with a smudged photo, 41 rotten letter box, 42 bell post, 43 dinner tray for two. `scripts/author-coastal-tileset.js` → `public/assets/tilesets/coastal_tileset.png`.
+- `ENV_WILDS_002` — `wilds_tileset_v2` (256 × 192): tiles 0-39 byte-identical to v1; new 40 broken sundial, 41 tide marker post with a frozen waterline, 42 bronze tide wheel. `scripts/author-wilds-tileset.js` → `public/assets/tilesets/wilds_tileset.png`.
+- `NPC_OLD_KEEPER_001` — old lighthouse keeper, 32 × 32 × 4 (hooded faded raincoat, storm lantern flickering). `scripts/author-ch1-characters.js` → `public/assets/npcs/old_keeper_idle.png` (key `npc_old_keeper`).
+- `MOB_DRIFTER_001` — The Drowned Drifter, 32 × 32 × 4 float (translucent seawater figure, kelp, glowing core) → `public/assets/enemies/drifter_float.png` (key `enemy_drifter`).
+- `BOSS_BELLKEEPER_001` — The Sunken Bellkeeper, 64 × 64 × 5 (frames 0-3 idle with light through the bell's crack; 4 kneeling, bell set down, motes rising) → `public/assets/enemies/bellkeeper.png` (key `boss_bellkeeper`).
+- Files in `art-source/{environment,npcs,enemies}/…/generated/approved/`. **Validation:** all PASSED. **Status:** `INTEGRATED` — owner approved 2026-11-12 (T-44).
 
 ## 3. Active Placeholder Registry
 

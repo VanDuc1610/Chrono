@@ -55,6 +55,7 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       'grantExp',
       'grantOnceFlag',
       'endPrologue',
+      'endChapter',
       'refreshMap',
     ]);
     for (const node of Object.values(dialogueDb.dialogues)) {
