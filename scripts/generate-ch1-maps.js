@@ -23,6 +23,14 @@ const TILESETS = {
     h: 160,
     count: 40,
   },
+  sunken: {
+    name: 'sunken_tileset',
+    image: '../tilesets/sunken_tileset.png',
+    columns: 4,
+    w: 128,
+    h: 192,
+    count: 24,
+  },
   dungeon: {
     name: 'dungeon_tileset',
     image: '../tilesets/dungeon_tileset.png',

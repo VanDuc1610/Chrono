@@ -13,6 +13,10 @@ const SHEETS = {
   wilds: 'public/assets/tilesets/wilds_tileset.png',
   coastal: 'public/assets/tilesets/coastal_tileset.png',
   dungeon: 'public/assets/tilesets/dungeon_tileset.png',
+  // Candidate until approved (ENV_SUNKEN_001).
+  sunken: fs.existsSync('public/assets/tilesets/sunken_tileset.png')
+    ? 'public/assets/tilesets/sunken_tileset.png'
+    : 'art-source/environment/sunken/generated/candidates/sunken_tileset_v1.png',
 };
 
 function loadSheet(file) {

@@ -28,6 +28,39 @@ export const D = {
   GATE: 13,
 };
 
+/** sunken_tileset: the dungeon tiles recoloured for the seabed + underwater props (16-23). */
+export const S = {
+  ...D,
+  CHIME: 16,
+  BELL: 17,
+  CORAL: 18,
+  KELP: 19,
+  WATER: 20,
+  SAND: 21,
+  WATCH: 22,
+  SEAL: 23,
+};
+
+/** Seabed dressing: sand and shallow pools on the floor, coral and kelp against the walls. */
+function seabed(ground, walls, seed) {
+  const H = ground.length;
+  const W = ground[0].length;
+  for (let y = 2; y < H - 1; y++)
+    for (let x = 1; x < W - 1; x++) {
+      if (walls[y][x] !== -1) continue;
+      const r = hash(x, y, seed);
+      if (ground[y][x] === D.FLOOR || ground[y][x] === D.FLOOR_ALT) {
+        if (r < 12) ground[y][x] = S.SAND;
+        else if (r < 17) ground[y][x] = S.WATER;
+      }
+      const nearWall =
+        walls[y - 1][x] === D.WALL_FACE ||
+        walls[y][x - 1] === D.WALL_FACE ||
+        walls[y][x + 1] === D.WALL_FACE;
+      if (nearWall && r > 90) walls[y][x] = r > 95 ? S.CORAL : S.KELP;
+    }
+}
+
 const hash = (x, y, s) => (((x * 73856093) ^ (y * 19349663) ^ (s * 83492791)) >>> 0) % 100;
 const grid = (w, h, fill) => Array.from({ length: h }, () => Array(w).fill(fill));
 const fill = (g, x0, y0, x1, y1, v) => {
@@ -271,7 +304,7 @@ export function ruinsLayout() {
     [19, 12],
   ]) {
     fill(ground, x - 1, y - 1, x + 1, y + 1, D.ENGRAVED);
-    walls[y][x] = D.PILLAR; // STAND-IN: chime pillar
+    walls[y][x] = S.CHIME;
   }
   for (const [x, y] of [
     [3, 7],
@@ -279,10 +312,23 @@ export function ruinsLayout() {
     [22, 14],
   ])
     ground[y][x] = D.FRACTURE;
-  walls[4][6] = D.ASTROLABE; // STAND-IN: the unnamed watch case (indirect trace)
+  ground[4][6] = S.WATCH; // the unnamed watch case (indirect trace), lying on the seabed
   walls[3][17] = D.RELIQUARY; // sunken cache
   walls[13][23] = D.CRYSTAL;
   walls[6][2] = D.CRYSTAL;
+  seabed(ground, walls, 57);
+  for (const p of [
+    [2, 16],
+    [2, 15],
+    [23, 3],
+    [24, 2],
+    [12, 13],
+    [20, 8],
+    [8, 5],
+    [17, 4],
+    [6, 5],
+  ])
+    if (walls[p[1]][p[0]] === S.CORAL || walls[p[1]][p[0]] === S.KELP) walls[p[1]][p[0]] = -1; // keep paths clear
   return {
     width: W,
     height: H,
@@ -319,8 +365,8 @@ export function sanctumLayout() {
       if (d > 8.2) walls[y][x] = D.WALL_FACE;
       else if (Math.abs(d - 5) < 0.6) ground[y][x] = D.ENGRAVED;
     }
-  walls[6][10] = D.ALTAR; // STAND-IN: the cracked Time Bell
-  walls[4][10] = D.CRYSTAL; // the Continuum Seal
+  walls[6][10] = S.BELL; // the cracked Time Bell
+  walls[4][10] = S.SEAL; // the Continuum Seal
   for (const [x, y] of [
     [6, 5],
     [14, 5],
@@ -329,7 +375,11 @@ export function sanctumLayout() {
   ])
     walls[y][x] = D.PILLAR;
   for (const y of [13, 14, 15]) walls[y][10] = -1; // way back down
-  for (const y of [0, 1, 2, 3]) walls[y][10] = walls[y][10] === D.CRYSTAL ? D.CRYSTAL : -1; // way on to Chapter 2
+  for (const y of [0, 1, 2, 3]) walls[y][10] = -1; // way on to Chapter 2
+  seabed(ground, walls, 59);
+  for (let y = 3; y < 15; y++)
+    for (let x = 7; x <= 13; x++)
+      if (walls[y][x] === S.CORAL || walls[y][x] === S.KELP) walls[y][x] = -1;
   ground[15][10] = D.ENGRAVED;
   return {
     width: W,
@@ -346,6 +396,6 @@ export const CH1_MAPS = [
   { id: 'map_ch1_shore_gate', tileset: 'wilds', build: shoreLayout },
   { id: 'map_ch1_abandoned_village', tileset: 'coastal', build: villageLayout },
   { id: 'map_ch1_sunset_beacon', tileset: 'wilds', build: beaconLayout },
-  { id: 'map_ch1_sunken_corridors', tileset: 'dungeon', build: ruinsLayout },
-  { id: 'map_ch1_bell_sanctum', tileset: 'dungeon', build: sanctumLayout },
+  { id: 'map_ch1_sunken_corridors', tileset: 'sunken', build: ruinsLayout },
+  { id: 'map_ch1_bell_sanctum', tileset: 'sunken', build: sanctumLayout },
 ];
