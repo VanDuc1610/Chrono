@@ -101,6 +101,15 @@ export class PreloadScene extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32,
     });
+    // CHAR_PETER_004: empty-handed idle/walk (Prologue v3, before the Broken Blade).
+    this.load.spritesheet('peter_idle_unarmed', 'assets/characters/peter/peter_idle_unarmed.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+    this.load.spritesheet('peter_walk_unarmed', 'assets/characters/peter/peter_walk_unarmed.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
     this.load.spritesheet('peter_run', 'assets/characters/peter/peter_run.png', {
       frameWidth: 32,
       frameHeight: 32,

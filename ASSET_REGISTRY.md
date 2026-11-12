@@ -13,8 +13,8 @@
 | Status Tier                | Count | Description                                                         |
 | -------------------------- | ----- | ------------------------------------------------------------------- |
 | `APPROVED_SOURCE`          | 1     | Approved protagonist design source (`CHAR_PETER_001`)               |
-| `INTEGRATED`               | 13    | Approved art in engine (Peter ×2, Shade, Elder, tileset ×2, UI set) |
-| `CONCEPT_PENDING_APPROVAL` | 1     | Concept generated; awaiting formal review                           |
+| `INTEGRATED`               | 14    | Approved art in engine (Peter ×2, Shade, Elder, tileset ×2, UI set) |
+| `CONCEPT_PENDING_APPROVAL` | 0     | Concept generated; awaiting formal review                           |
 | `SPEC_DRAFTED`             | 2     | Text-only creative specifications prepared                          |
 | `PLACEHOLDER_TEMPORARY`    | 3     | Procedural placeholder assets active in engine                      |
 
@@ -151,13 +151,13 @@
 - **Content:** small barefoot child, faceless and semi-transparent, ~16 % of pixels missing (different per frame, so the figure flickers) with cold chronal motes — Residual Existence, not a ghost story.
 - **Validation:** PASSED. **Status:** `INTEGRATED` — owner approved 2026-11-12 (T-36).
 
-### `CHAR_PETER_004_CAND` – Peter idle + walk, empty-handed (v1)
+### `CHAR_PETER_004` – Peter idle + walk, empty-handed (v1) — INTEGRATED
 
 - **Generator:** `scripts/author-peter-sprites.js` (`--sheets=idle_unarmed,walk_unarmed`, the default) — same poses as the approved v3 idle/walk with the Broken Blade removed (front/back use the existing bare views; the side arm is the same arm without the blade).
-- **Files:** `art-source/characters/peter/generated/candidates/peter_idle_unarmed_v1.png` (128 × 128), `peter_walk_unarmed_v1.png` (192 × 128) · previews ×6
+- **Files:** `art-source/characters/peter/generated/approved/peter_idle_unarmed_v1.png` (128 × 128), `peter_walk_unarmed_v1.png` (192 × 128) → `public/assets/characters/peter/peter_idle_unarmed.png`, `peter_walk_unarmed.png` (keys `peter_idle_unarmed`, `peter_walk_unarmed`)
 - **Why:** Prologue v3 — Peter is an ordinary watch repairer until the Elder throws him the blade mid-battle.
 - **Validation:** PASSED; approved idle/walk/attack/hurt/temporal_sight regenerate byte-identically.
-- **Status:** `CONCEPT_PENDING_APPROVAL` (T-37).
+- **Status:** `INTEGRATED` — owner approved 2026-11-12 (T-39); used until `has_broken_blade`.
 
 ## 3. Active Placeholder Registry
 
