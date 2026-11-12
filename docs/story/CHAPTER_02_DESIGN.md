@@ -284,3 +284,56 @@ Chương 2 bố trí đúng 2 trang bị ẩn quý giá, mỗi món nằm sau m�
    - _Đề xuất (Recommended):_ Nếu họa sĩ chưa kịp vẽ mới cả 2 quái thường, ưu tiên vẽ `enemy_imperial_automaton` (Búp Bê Cơ Khí); quái thứ hai tạm thời dùng lại sprite chiến binh đổi màu áo giáp sang tím sẫm.
 5. **Tiến trình cấp độ cuối Chapter 2:**
    - _Đề xuất (Recommended):_ Peter kết thúc Chapter 2 ở mức **cấp 10–11** (nhận tổng ~650 EXP qua chuỗi quest và quái vật), chuẩn bị tiến vào Chapter 3 với trần cấp độ tầm trung.
+
+---
+
+## 11. Quyết Định Của Owner (2026-11-13) & Hợp Đồng Dữ Liệu
+
+Owner duyệt toàn bộ thiết kế cùng 5 đề xuất ở §10, kèm các chỉnh sửa của coordinator dưới đây. Phần này **thay thế** các chỗ mâu thuẫn ở §5, §6, §8.
+
+### 11.1. Chỉnh sửa đã duyệt
+
+1. **Xóa bản án (thay §5.2) — phải suy luận.** Phiến Đá Bản Án ghi 3 dòng: (1) _Tên:_ Peter, Kẻ Không Tên; (2) _Tội:_ can thiệp dòng thời gian; (3) _Nguyên nhân:_ đã bước qua Cổng Ngưỡng không giấy phép sinh ra. Sắc Lệnh 404 nói một bản án chỉ đứng vững khi **nguyên nhân** của nó còn đó. Gọt dòng 3 → màn chắn sụp. Gọt dòng 1 → đá liền lại ("tên không phải là tội"). Gọt dòng 2 → chữ tự khắc lại ("nguyên nhân còn thì tội sẽ mọc lại"). Mỗi lần sai chỉ mất lượt thử, không phạt.
+2. **Vũ khí ẩn (thay §8.1) — Mộ Kẻ Bị Kết Án Trước Khi Sinh.** Trong Hầm Mộ có 3 bia mộ, mỗi bia ghi ngày sinh và ngày tuyên án. Manh mối nằm trong _Trang Nhật Ký Pháp Quan_ trang 2: "Ta chôn thanh kiếm của mình cùng người duy nhất bị kết án trước cả khi chào đời." Mở đúng bia (ngày tuyên án sớm hơn ngày sinh) → `praetor_iron_rapier`. Mở sai → "Ngôi mộ này yên nghỉ đúng thứ tự nhân quả."
+3. **Trang bị chỉ có chỉ số**, không có hiệu ứng phụ. Kiếm: `attack 8, reach 36, swingMs 340`. Bùa: `maxHp 16, maxMp 8, defense 2, speed 2`.
+4. **Boss gọn lại (thay §6.2).** Đầu mỗi lượt của mình, boss tuyên một bản án cho lượt kế của Peter:
+   - _"Kẻ vung gươm sẽ đổ máu!"_ → Tấn công hoặc Kỹ năng thì Peter chịu phản đòn; Phòng thủ thì bản án mất nguyên nhân → **cán cân nứt** (1 vết).
+   - _"Kẻ chần chừ sẽ bị nghiền nát!"_ → Phòng thủ hoặc Vật phẩm thì Peter chịu đòn nặng; Tấn công thì cán cân nứt.
+   - Đủ **3 vết nứt** → khiên vỡ (`breakShield`), từ đó đánh thường được. Không có lệnh [6] riêng, không cần "soi trước".
+5. **Cấp độ:** nới `expThresholds` để Peter kết thúc chương ở cấp 10–11 (trần sau Prologue nâng lên 11).
+6. **Lời thoại:** "đếch thèm" → "chẳng thèm".
+7. **Lính Chấp Pháp có hình riêng** (không dùng tạm hình cũ): owner muốn đa dạng.
+
+### 11.2. Chia việc
+
+- **Antigravity — T-51 (nội dung):** `dialogue.json`, `quests.json`, `items.json`, `tests/content-data.test.ts`.
+- **Claude — T-52 (engine + bản đồ):** 5 map, cơ chế boss bản án, khiên của Búp Bê Cơ Khí, phản đòn của Lính Chấp Pháp, vùng đẩy lùi, mốc cấp, gắn nội dung vào `maps.json`.
+- **Claude — T-53 (hình):** `npc_lyra`, `npc_exiled_praetor`, `enemy_imperial_automaton`, `enemy_causality_enforcer`, `boss_imperial_verdict` — ứng viên Pipeline B, chờ owner duyệt.
+
+### 11.3. Hợp đồng ID (cả hai bên dùng đúng tên này)
+
+**Quest:** như bảng §7.1. **Cờ:** như §7.2, thêm `ch2_tablet_wrong_name`, `ch2_tablet_wrong_crime` (không bắt buộc dùng).
+
+**Vật phẩm mới (`items.json`):**
+
+| id                          | type                                                               | nguồn                     |
+| --------------------------- | ------------------------------------------------------------------ | ------------------------- |
+| `praetor_diary_page`        | document (2 trang; trang 1 = manh mối khóa, trang 2 = manh mối mộ) | `ch2_praetor_diary_found` |
+| `edict_law_404`             | document (1 trang)                                                 | `ch2_edict_stele_read`    |
+| `bronze_key_blank`          | puzzle                                                             | `ch2_locksmith_box`       |
+| `praetor_chisel_stylus`     | puzzle                                                             | `ch2_praetor_meet`        |
+| `blank_unwritten_parchment` | puzzle                                                             | `ch2_praetor_desk`        |
+| `praetor_iron_rapier`       | weapon                                                             | `ch2_tomb_correct`        |
+| `scales_of_truth_charm`     | charm                                                              | `ch2_scales_balanced`     |
+| `imperial_honey_bread`      | consumable (hồi máu)                                               | thưởng quest              |
+| `causality_seal_shard`      | key_item                                                           | thưởng quest boss         |
+
+**Dialogue node mà bản đồ sẽ trỏ tới** (mỗi node ≤ 2 lựa chọn; nhánh dài thì nối node):
+
+- Ngoại Ô: `ch2_outskirts_arrival` (trigger vào map), `ch2_elder_echo_farewell` (đặt `elder_echo_faded`), `ch2_edict_stele_read`, `ch2_hatch_locked`, `ch2_hatch_open` (đặt `entered_catacombs_hatch`).
+- Hầm Mộ: `ch2_lyra_cornered` (trước khi dọn quái), `ch2_lyra_rescued` (đặt `saved_lyra`), `ch2_locksmith_box`, `ch2_praetor_diary_found`, `ch2_alcove_empty` / `ch2_alcove_place_blank` (cần `bronze_key_blank`, đặt `placed_retroactive_key`), `ch2_gate_ancient_locked` / `ch2_gate_blank_too_new` (có phôi nhưng chưa đặt vào hốc) / `ch2_gate_opens` (đặt `unlocked_catacomb_gate`), `ch2_tomb_1`, `ch2_tomb_2`, `ch2_tomb_3` (đọc bia) + `ch2_tomb_wrong`, `ch2_tomb_correct`, `ch2_tomb_empty`.
+- Quảng Trường: `ch2_plaza_arrival`, `ch2_praetor_meet` (đặt `met_exiled_praetor`, `has_praetor_stylus`, `has_praetor_pass`), `ch2_praetor_after`, `ch2_praetor_desk`, `ch2_baker_*`, `ch2_automaton_*`, `ch2_scales_inspect` / `ch2_scales_heavy` / `ch2_scales_balanced` / `ch2_scales_done`, `ch2_execution_platform`, `ch2_archives_gate_locked`.
+- Thư Viện: `ch2_archives_arrival`, `ch2_peter_record` (đặt `read_peter_unwritten_record`), `ch2_rebellion_records`, `ch2_tablet_inspect` → chuỗi chọn dòng `ch2_tablet_choose_a` / `ch2_tablet_choose_b`, `ch2_tablet_wrong_name`, `ch2_tablet_wrong_crime`, `ch2_tablet_expunged` (đặt `expunged_peter_verdict`), `ch2_barrier_guilt_repel`.
+- Điện: `ch2_verdict_boss_confront` (đặt `met_imperial_verdict`), `ch2_verdict_released` (sau boss), `ch2_seal_restored` (đặt `causality_seal_restored`, `learned_causality_resonance`, `endChapter: 2`).
+
+Thoại trong trận boss (dòng tuyên án, nứt cán cân) nằm trong `enemies.json` do Claude viết.
