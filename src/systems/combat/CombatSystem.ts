@@ -68,6 +68,10 @@ interface BossState {
   staggered: boolean;
   /** Verse currently sung (songs). */
   song: { id: string; coreId: string; crackMessage: string } | null;
+  /** Blood wall standing (cuts landed so far). */
+  wall: { cuts: number } | null;
+  /** Finality ritual: open once the boss first rises again, pillars lit in order. */
+  ritual: { open: boolean; progress: number; done: boolean };
 }
 
 export class CombatSystem implements ICombatSystem {
@@ -130,6 +134,8 @@ export class CombatSystem implements ICombatSystem {
           lock: null,
           staggered: false,
           song: null,
+          wall: null,
+          ritual: { open: false, progress: 0, done: false },
         });
       if (e.mechanic?.startsUnshielded) this.bosses.get(e.id)!.shield = false;
     }
@@ -277,6 +283,11 @@ export class CombatSystem implements ICombatSystem {
         out.push(o.announce);
       }
     }
+    const bw = m.bloodWall;
+    if (bw && !boss.wall && boss.turns % bw.everyTurns === 0) {
+      boss.wall = { cuts: 0 };
+      out.push(bw.raiseMessage);
+    }
     const sg = m.songs;
     if (sg && boss.shield && sg.list.length > 0) {
       const s = sg.list[Math.floor(this.rng() * sg.list.length) % sg.list.length];
@@ -297,6 +308,64 @@ export class CombatSystem implements ICombatSystem {
     const boss = this.bosses.get(enemyId);
     if (!enemy?.mechanic?.songs || !boss?.shield || !enemy.isAlive) return [];
     return enemy.mechanic.actions;
+  }
+
+  /**
+   * Everything keys 6-8 can do against this boss right now: song cores, cutting the blood wall's
+   * tethers, or the ritual pillars.
+   */
+  public getEnvironmentOptions(enemyId: string): BossEnvironmentAction[] {
+    const cores = this.getSongCores(enemyId);
+    if (cores.length > 0) return cores;
+    const enemy = this.getCombatant(enemyId);
+    const boss = this.bosses.get(enemyId);
+    const m = enemy?.mechanic;
+    if (!m || !boss || !enemy?.isAlive) return [];
+    if (m.bloodWall && boss.wall) return [m.bloodWall.cutAction];
+    if (m.ritual && boss.ritual.open && !boss.ritual.done) return m.ritual.pillars;
+    return [];
+  }
+
+  /** True while the boss's blood wall stands. */
+  public hasBloodWall(enemyId: string): boolean {
+    return !!this.bosses.get(enemyId)?.wall;
+  }
+
+  /** Ritual state for the HUD / tests. */
+  public getRitual(enemyId: string): { open: boolean; progress: number; done: boolean } | null {
+    return this.bosses.get(enemyId)?.ritual ?? null;
+  }
+
+  private cutTether(enemy: ICombatant): string {
+    const boss = this.bosses.get(enemy.id);
+    const bw = enemy.mechanic?.bloodWall;
+    if (!boss?.wall || !bw) return '';
+    boss.wall.cuts++;
+    if (boss.wall.cuts >= bw.cutsToBreak) {
+      boss.wall = null;
+      return `${bw.cutMessage} ${bw.breakMessage}`;
+    }
+    return bw.cutMessage;
+  }
+
+  private lightPillar(peter: ICombatant, enemy: ICombatant, pillarId: string): string {
+    const boss = this.bosses.get(enemy.id);
+    const r = enemy.mechanic?.ritual;
+    if (!boss || !r || !boss.ritual.open || boss.ritual.done) return '';
+    const pillar = r.pillars.find((x) => x.id === pillarId);
+    if (r.order[boss.ritual.progress] === pillarId) {
+      boss.ritual.progress++;
+      let msg = pillar?.message ?? '';
+      if (boss.ritual.progress >= r.order.length) {
+        boss.ritual.done = true;
+        msg += ` ${r.completeMessage}`;
+      }
+      return msg;
+    }
+    boss.ritual.progress = 0;
+    const hit = this.applyDamage(peter, Math.max(1, Math.ceil(peter.stats.maxHp * r.wrongPct)));
+    if (peter.stats.hp <= 0) peter.isAlive = false;
+    return formatString({ m: r.wrongMessage }, 'm', { damage: hit.dealt });
   }
 
   /** Answers the sung verse by striking a core. */
@@ -381,6 +450,8 @@ export class CombatSystem implements ICombatSystem {
       damage = Math.ceil(damage * (1 + (target.mechanic?.memoryLock?.staggerBonus ?? 0)));
     }
     const m = target.mechanic;
+    if (boss?.wall && m?.bloodWall)
+      damage = Math.max(1, Math.floor(damage * (1 - m.bloodWall.reducePct)));
     if (boss?.shield && m) {
       const reduced = Math.max(1, Math.floor(damage * (1 - m.damageReduction)));
       const dealt = Math.max(0, Math.min(reduced, target.stats.hp - m.hpFloor));
@@ -425,6 +496,9 @@ export class CombatSystem implements ICombatSystem {
         isCritical = this.rng() < t.critChance;
         const multiplier = isCritical ? t.critMultiplier : 1.0;
         damage = Math.max(1, Math.floor((rawDamage + variance) * multiplier));
+        if (action.damageFactor !== undefined) {
+          damage = Math.max(1, Math.floor(damage * action.damageFactor));
+        }
 
         if (this.defendedCombatants.has(target.id)) {
           damage = Math.max(1, Math.floor(damage * t.defendDamageFactor));
@@ -497,6 +571,14 @@ export class CombatSystem implements ICombatSystem {
       }
 
       case 'environment': {
+        if (target.mechanic?.bloodWall && this.bosses.get(target.id)?.wall) {
+          message = this.cutTether(target);
+          break;
+        }
+        if (target.mechanic?.ritual && this.bosses.get(target.id)?.ritual.open) {
+          message = this.lightPillar(source, target, action.environmentId ?? '');
+          break;
+        }
         if (target.mechanic?.songs) {
           const r = this.strikeCore(source, target, action.environmentId ?? '');
           damage = r.damage;
@@ -526,6 +608,20 @@ export class CombatSystem implements ICombatSystem {
     if (source.type === 'player') {
       message += this.judgeSentences(source, action.type);
       message += this.judgeLock(action.type, damage);
+    }
+
+    // The Last War: after the ritual, any landed hit is the final one; before it, it rises again.
+    const ritual = target.mechanic?.ritual;
+    const rb = this.bosses.get(target.id);
+    if (ritual && rb && source.type === 'player') {
+      if (rb.ritual.done && damage > 0 && (action.type === 'attack' || action.type === 'skill')) {
+        target.stats.hp = 0;
+        message += ` ${ritual.finishMessage}`;
+      } else if (target.stats.hp <= 0 && !rb.ritual.done) {
+        target.stats.hp = Math.ceil(target.stats.maxHp * ritual.revivePct);
+        rb.ritual = { open: true, progress: 0, done: false };
+        message += ` ${ritual.openMessage}`;
+      }
     }
 
     if (target.stats.hp <= 0 && target.isAlive) {

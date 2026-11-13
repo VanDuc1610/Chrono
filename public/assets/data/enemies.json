@@ -625,6 +625,109 @@
           "cooldownMs": 2500
         }
       }
+    },
+    {
+      "id": "boss_crimson_standard",
+      "name": "Lá Cờ Huyết Sắc",
+      "level": 16,
+      "maxHp": 460,
+      "hp": 460,
+      "attack": 26,
+      "defense": 20,
+      "speed": 10,
+      "spriteKey": "boss_crimson_standard",
+      "spriteScale": 1.5,
+      "skills": [],
+      "expReward": 280,
+      "lootTable": [],
+      "timedBlock": {
+        "ringMs": 900,
+        "windowMs": 220,
+        "factor": 0.5
+      },
+      "mechanic": {
+        "damageReduction": 0,
+        "hpFloor": 0,
+        "recoverPct": 0,
+        "recoverMessage": "",
+        "unlockAfterTurns": 99,
+        "unlockMessage": "",
+        "actions": [],
+        "startsUnshielded": true,
+        "defeatMessage": "Cán cờ gãy đôi. Lá đại kỳ rách rơi xuống, không còn ai đứng lên dưới nó nữa.",
+        "bloodWall": {
+          "everyTurns": 3,
+          "cutsToBreak": 2,
+          "reducePct": 0.75,
+          "cutAction": {
+            "id": "cut_tether",
+            "label": "CHÉM DÂY LINH HỒN",
+            "message": ""
+          },
+          "raiseMessage": "CHIÊU MỘ OAN HỒN! Lá cờ cắm phập xuống sàn — Tường Khí Máu dựng lên, hai sợi dây linh hồn đỏ rực nối về phía nó. [6] Chém dây!",
+          "cutMessage": "Một sợi dây linh hồn đứt phựt!",
+          "breakMessage": "Tường Khí Máu sụp đổ — lá cờ trơ trọi giữa sàn đấu!"
+        }
+      }
+    },
+    {
+      "id": "boss_the_last_war",
+      "name": "Chiến Tranh Vĩnh Cửu",
+      "level": 18,
+      "maxHp": 720,
+      "hp": 720,
+      "attack": 30,
+      "defense": 22,
+      "speed": 11,
+      "spriteKey": "boss_the_last_war",
+      "spriteScale": 1.6,
+      "skills": [],
+      "expReward": 450,
+      "lootTable": [],
+      "timedBlock": {
+        "ringMs": 950,
+        "windowMs": 200,
+        "factor": 0.5,
+        "feintChance": 0.45
+      },
+      "mechanic": {
+        "damageReduction": 0,
+        "hpFloor": 0,
+        "recoverPct": 0,
+        "recoverMessage": "",
+        "unlockAfterTurns": 99,
+        "unlockMessage": "",
+        "actions": [],
+        "startsUnshielded": true,
+        "releasedFrame": 4,
+        "defeatMessage": "Khối cự giáp quỳ xuống. Ngàn vạn lưỡi gươm rời nhau ra, rơi lặng lẽ như lá cuối thu.",
+        "ritual": {
+          "revivePct": 0.4,
+          "pillars": [
+            {
+              "id": "pillar_candle",
+              "label": "TRỤ NGỌN NẾN",
+              "message": "Trụ Ngọn Nến bừng sáng ngọn lửa vàng — những cái tên đã ngã xuống được nhớ tới."
+            },
+            {
+              "id": "pillar_hand",
+              "label": "TRỤ BÀN TAY MỞ",
+              "message": "Trụ Bàn Tay Mở bừng sáng ngọn lửa trắng — sự tha thứ cho kẻ đã gục ngã vì sợ hãi."
+            },
+            {
+              "id": "pillar_letter",
+              "label": "TRỤ LÁ THƯ",
+              "message": "Trụ Lá Thư bừng sáng ngọn lửa lam — sự thật của người cha được đón nhận."
+            }
+          ],
+          "order": ["pillar_hand", "pillar_letter", "pillar_candle"],
+          "openMessage": "Chiến Tranh Vĩnh Cửu đổ gục... rồi gượng dậy! \"CHIẾN TRANH KHÔNG BAO GIỜ CHẾT!\" Ba trụ nghi thức quanh sàn đấu le lói sáng.",
+          "wrongPct": 0.12,
+          "wrongMessage": "Ba trụ tắt ngấm! Khối cự giáp vung kiếm phản đòn — Peter mất {damage} HP.",
+          "completeMessage": "Ba trụ cùng rực sáng! Nhát chém kế tiếp sẽ là nhát chém Finality.",
+          "finishMessage": "NHÁT CHÉM FINALITY!"
+        }
+      }
     }
   ]
 }

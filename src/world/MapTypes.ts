@@ -245,6 +245,52 @@ export interface MapDefinition {
   ambient?: { color: string; alpha: number };
   /** Chapter this map belongs to (0 = Prologue) — chooses the end card. */
   chapter?: number;
+  /** Dials turned with [E] (one value at a time); see src/world/PuzzleRules.ts. */
+  dials?: MapDial[];
+  /** Two-pan scales fed with sacks by the dialogue effect scalePut. */
+  scales?: MapScale[];
+  /** Arrow volleys falling on an area, telegraphed by shadows; cover tiles are safe. */
+  volleys?: MapVolley[];
+}
+
+export interface MapDial {
+  id: string;
+  tile: TilePoint;
+  radius?: number;
+  /** Prompt shown near the dial, e.g. "[E] Xoay vòng Hướng". */
+  prompt: string;
+  values: { key: string; label: string }[];
+  /** Only turnable once this flag is set / while the condition holds. */
+  requiresFlag?: string;
+  visibleWhen?: FlagCondition;
+  /** Every one of these items must be carried to turn it (e.g. the four relics). */
+  requiresItems?: string[];
+}
+
+export interface MapScale {
+  id: string;
+  weights: Record<string, number>;
+  balanceAt: number;
+  breakAbove: number;
+  /** Opened after the sack that balances / overloads it; the sacks on it are used up. */
+  balancedDialogueId: string;
+  overloadDialogueId: string;
+}
+
+export interface MapVolley {
+  /** Tile area the arrows fall on. */
+  area: { x: number; y: number; w: number; h: number };
+  everyMs: number;
+  /** Shadow shown this long before the arrows land. */
+  warnMs: number;
+  /** Shots per volley (the first aims at Peter) and their radius in px. */
+  shots: number;
+  radius: number;
+  damage: number;
+  /** Tiles where Peter is sheltered (behind cover rocks). */
+  cover: TilePoint[];
+  /** The volleys stop for good once this flag is set. */
+  untilFlag?: string;
 }
 
 export interface MapDatabase {

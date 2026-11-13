@@ -134,9 +134,18 @@
     "action.bannerWard": "KHIÊN CỜ!",
     "action.risen": "ĐỨNG DẬY!",
     "action.stunned": "CHOÁNG!",
+    "field.noSack": "Không còn bao này trong túi",
+    "combat.blockHint": "[SPACE] ĐỠ khi vòng chạm viền",
+    "combat.blocked": "ĐỠ!",
+    "combat.blockMiss": "Hụt nhịp",
+    "field.scale.left": "Đĩa trái trĩu xuống…",
+    "field.scale.right": "Đĩa phải trĩu xuống…",
+    "field.scale.even": "Hai đĩa ngang nhau… nhưng chốt chưa nhả",
+    "field.scale.empty": "Hai đĩa trống trơn",
     "action.reflected": "PHẢN ĐÒN!",
     "chapter.2.title": "Đế Chế Nhân Quả Giả",
     "action.strikeHum": "Ngân lên… rồi tắt",
-    "chapter.3.title": "Vương Quốc Linh Hồn Bị Quên Lãng"
+    "chapter.3.title": "Vương Quốc Linh Hồn Bị Quên Lãng",
+    "chapter.4.title": "Cuộc Chiến Bất Tận"
   }
 }

@@ -689,6 +689,29 @@ export class ActionCombat {
     }
   }
 
+  /**
+   * Map hazard (arrow volleys): `damage` minus half Peter's defence, through the same
+   * invulnerability as enemy hits (a dodge avoids it). False when it did not land.
+   */
+  public hazardHit(damage: number): boolean {
+    const now = this.scene.time.now;
+    if (now < this.invulnUntil || this.defeated) return false;
+    const dealt = Math.max(1, damage - Math.floor(this.session.getStats().defense / 2));
+    this.session.hp = Math.max(0, this.session.hp - dealt);
+    this.invulnUntil = now + this.tuning.hurtInvulnMs;
+    this.player.playAction('peter_hurt', this.player.getMovementSystem().getLastFacing(), 260);
+    this.player.sprite.setTint(0xff5050);
+    this.scene.time.delayedCall(160, () => this.player.sprite.clearTint());
+    this.scene.cameras.main.shake(100, 0.003);
+    this.floatText(this.player.x, this.player.y - 20, `-${dealt}`, '#ff6b6b');
+    this.host.refreshHud();
+    if (this.session.hp <= 0) {
+      this.defeated = true;
+      this.host.onPlayerDefeated();
+    }
+    return true;
+  }
+
   // ------------------------------------------------------------------ enemies
 
   private damageRoamer(r: Roamer, damage: number, critical: boolean): void {

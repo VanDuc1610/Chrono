@@ -8,6 +8,7 @@ import { DialogueSystem } from '../systems/dialogue/DialogueSystem';
 import { QuestSystem, QuestEventListener } from '../systems/quest/QuestSystem';
 import { InventorySystem } from '../systems/inventory/InventorySystem';
 import { SaveSystem } from '../systems/save/SaveSystem';
+import { Chapter4Field } from '../world/Chapter4Field';
 import { DialogueDatabase, DialogueEffects } from '../systems/dialogue/DialogueTypes';
 import { SoundSystem } from '../systems/audio/SoundSystem';
 import { FLAGS, GameSession, getSession } from '../state/GameSession';
@@ -144,6 +145,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.pendingRefresh = false;
     this.pendingWarp = null;
     this.action = null;
+    this.field = null;
     this.session = getSession(this);
     this.pendingNotice = data?.notice ?? null;
     this.pendingDialogueId = data?.openDialogueId ?? null;
@@ -180,9 +182,19 @@ export class ExplorationScene extends Phaser.Scene {
         if (event.node.effects.refreshMap) this.pendingRefresh = true;
         if (event.node.effects.warpTo) this.pendingWarp = event.node.effects.warpTo;
       }
-      if (event.type === 'node_changed' && event.node) this.summonVisions(event.node.id);
+      if (event.type === 'node_changed' && event.node) {
+        this.summonVisions(event.node.id);
+        this.setFlashback(!!event.node.flashback);
+      }
       if (event.type === 'dialogue_ended') {
         this.dismissVisions();
+        this.setFlashback(false);
+        // A scale balanced or burst: its result follows once this dialogue closes.
+        const follow = this.field?.pendingDialogue;
+        if (follow && this.field) {
+          this.field.pendingDialogue = null;
+          this.time.delayedCall(250, () => this.openDialogue(follow));
+        }
         // A timed bridge starts counting once the player has finished reading, not mid-dialogue.
         if (this.pendingTimer) {
           const timer = this.pendingTimer;
@@ -259,6 +271,20 @@ export class ExplorationScene extends Phaser.Scene {
       this.questTracker.refresh();
       if (def.dialogueId) this.time.delayedCall(500, () => this.openDialogue(def.dialogueId!));
     });
+    this.field = new Chapter4Field(
+      this,
+      this.session,
+      this.player.sprite,
+      this.mapDef,
+      {
+        openDialogue: (id) => this.openDialogue(id),
+        hurt: (damage) => this.action?.hazardHit(damage) ?? false,
+        refreshHud: () => this.statusHud.refresh(),
+        isPaused: () => this.isTransitioning || this.satchel.isOpen || this.dialogueBox.isOpen(),
+      },
+      this.t,
+    );
+    this.field.registerDials(this.interactionSystem);
     this.setupQuestListeners();
     this.setupKeys();
 
@@ -296,6 +322,10 @@ export class ExplorationScene extends Phaser.Scene {
     }
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       this.soundSystem.stopBgm(true);
+      // Sacks left on a scale go back to the satchel.
+      this.field?.destroy();
+      this.field = null;
+      this.flashbackFx = null;
       // A running startTimer does not outlive the map (no bridge left hanging in a save).
       this.pendingTimer = null;
       for (const f of this.timedFlags) this.session.setFlag(f, false);
@@ -307,6 +337,7 @@ export class ExplorationScene extends Phaser.Scene {
   public update(_time: number, delta: number): void {
     this.session.tick(delta);
     this.action?.update(delta);
+    this.field?.update();
     if (this.satchel.isOpen || this.isTransitioning) return;
 
     if (this.dialogueBox.isOpen()) {
@@ -839,7 +870,39 @@ export class ExplorationScene extends Phaser.Scene {
     });
   }
 
+  /** Chapter 4 map mechanics (dials, scale, arrow volleys). */
+  public field: Chapter4Field | null = null;
+  private flashbackFx: Phaser.GameObjects.Rectangle | null = null;
+
+  /** Hazy memory: the world greys out and the edges darken while a flashback node is shown. */
+  private setFlashback(on: boolean): void {
+    const cam = this.cameras.main;
+    if (on === !!this.flashbackFx) return;
+    if (on) {
+      const { width, height } = this.scale;
+      this.flashbackFx = this.add
+        .rectangle(0, 0, width, height, 0xd8dce8, 0.18)
+        .setOrigin(0)
+        .setScrollFactor(0)
+        .setDepth(85);
+      if (this.game.renderer.type === Phaser.WEBGL) {
+        cam.postFX.clear();
+        cam.postFX.addColorMatrix().grayscale(0.85);
+        cam.postFX.addVignette(0.5, 0.5, 0.75, 0.45);
+      }
+    } else {
+      this.flashbackFx?.destroy();
+      this.flashbackFx = null;
+      if (this.game.renderer.type === Phaser.WEBGL) cam.postFX.clear();
+    }
+  }
+
   private applyEffects(effects: DialogueEffects): void {
+    if (effects.scalePut) {
+      const { scaleId, pan, itemId } = effects.scalePut;
+      this.field?.put(scaleId, pan, itemId);
+    }
+    if (effects.scaleReset) this.field?.reset(effects.scaleReset);
     if (effects.startTimer) {
       if (this.dialogueSystem.isActive()) this.pendingTimer = { ...effects.startTimer };
       else this.startTimer(effects.startTimer.flag, effects.startTimer.ms);
@@ -920,6 +983,8 @@ export class ExplorationScene extends Phaser.Scene {
   }
 
   public async quickSave(): Promise<void> {
+    // Sacks on a scale are not saved: they go back to the satchel first.
+    this.field?.reset();
     const saveData = this.session.toSaveData({
       mapId: this.mapDef.id,
       x: Math.round(this.player.x),

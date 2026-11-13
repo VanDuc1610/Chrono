@@ -31,6 +31,8 @@ export interface ICombatAction {
   itemId?: string;
   /** For `environment`: id of a BossEnvironmentAction of the target. */
   environmentId?: string;
+  /** Multiplies the attack's damage (a timed block halves an enemy's hit). */
+  damageFactor?: number;
 }
 
 /** A battlefield action offered while fighting a boss (e.g. turning a lighthouse lens). */
@@ -80,6 +82,36 @@ export interface BattleScript {
  * Boss rules (enemies.json `mechanic`): a shield that reduces damage and keeps the boss from
  * falling until the environment actions are solved; it recovers when held at the floor.
  */
+/**
+ * Blood wall (The Crimson Standard): every `everyTurns` boss turns a wall rises that absorbs
+ * `reducePct` of the damage; `cutsToBreak` uses of `cutAction` (keys 6-8) cut its tethers.
+ */
+export interface BossBloodWall {
+  everyTurns: number;
+  cutsToBreak: number;
+  reducePct: number;
+  cutAction: BossEnvironmentAction;
+  raiseMessage: string;
+  cutMessage: string;
+  breakMessage: string;
+}
+
+/**
+ * Finality ritual (The Last War): at 0 HP the boss rises again at `revivePct`, and pillars open
+ * (keys 6-8). Lighting all of them in `order` makes Peter's next hit final; a wrong pillar resets
+ * the order and hurts Peter for `wrongPct` of his max HP.
+ */
+export interface BossRitual {
+  revivePct: number;
+  pillars: BossEnvironmentAction[];
+  order: string[];
+  openMessage: string;
+  wrongPct: number;
+  wrongMessage: string;
+  completeMessage: string;
+  finishMessage: string;
+}
+
 export interface BossMechanic {
   /** Fraction of damage absorbed while the shield holds (0.8 = 80 %). */
   damageReduction: number;
@@ -102,6 +134,8 @@ export interface BossMechanic {
   sentences?: { cracksToBreak: number; list: BossSentence[]; breakMessage: string };
   /** The fight starts without the shield (a boss beaten by its own rule, not by breaking it). */
   startsUnshielded?: boolean;
+  bloodWall?: BossBloodWall;
+  ritual?: BossRitual;
   /** At the start, the boss copies part of Peter's attack (`pct`). */
   mirrorGear?: { pct: number; message: string };
   /**
@@ -233,6 +267,12 @@ export interface IEnemyDefinition {
   mechanic?: BossMechanic;
   /** Scripted battle (story fights): locked commands and mid-battle events. */
   script?: BattleScript;
+  /**
+   * Timed block (Chapter 4 bosses): before each attack a ring closes on Peter in `ringMs`; Space
+   * within `windowMs` of it touching his outline multiplies the hit by `factor`. With
+   * `feintChance`, the ring may lunge in and flash halfway, then draw back (a fake cue).
+   */
+  timedBlock?: { ringMs: number; windowMs: number; factor: number; feintChance?: number };
   /** Real-time behaviour on the map (small enemies). */
   field?: FieldTraits;
   expReward: number;

@@ -38,6 +38,10 @@ export interface DialogueEffects {
   takeItems?: { itemId: string; quantity: number }[];
   /** Sets `flag` now and clears it after `ms` (e.g. a bridge that holds for 8 seconds). */
   startTimer?: { flag: string; ms: number };
+  /** Puts one sack from the satchel on a pan of a map scale (MapScale). */
+  scalePut?: { scaleId: string; pan: 'left' | 'right'; itemId: string };
+  /** Gives back every sack on that scale. */
+  scaleReset?: string;
 }
 
 export interface DialogueNode {
@@ -47,6 +51,8 @@ export interface DialogueNode {
   /** At most 2 responses: the dialogue box shows two choice buttons (keys 1-2). */
   responses?: DialogueResponseOption[];
   effects?: DialogueEffects;
+  /** A hazy memory: the screen greys and blurs at the edges while it is shown. */
+  flashback?: boolean;
 }
 
 export interface DialogueDatabase {

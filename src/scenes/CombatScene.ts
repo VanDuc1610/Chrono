@@ -388,6 +388,70 @@ export class CombatScene extends Phaser.Scene {
     this.input.keyboard.on('keydown-SIX', () => this.handlePlayerAction('environment', 0));
     this.input.keyboard.on('keydown-SEVEN', () => this.handlePlayerAction('environment', 1));
     this.input.keyboard.on('keydown-EIGHT', () => this.handlePlayerAction('environment', 2));
+    // Timed block: only the first press while the ring closes counts.
+    this.input.keyboard.on('keydown-SPACE', () => {
+      if (this.blockArmed && this.blockPressedAt === null) this.blockPressedAt = this.time.now;
+    });
+  }
+
+  private blockArmed = false;
+  private blockPressedAt: number | null = null;
+
+  /**
+   * A ring closes on Peter; Space as it touches his outline blocks. A feint lunges the ring in and
+   * flashes halfway, then draws it back before the real close.
+   */
+  private runBlockRing(
+    tb: NonNullable<IEnemyDefinition['timedBlock']>,
+    done: (blocked: boolean, pressed: boolean) => void,
+  ): void {
+    const cx = this.playerSprite.x;
+    const cy = this.playerSprite.y;
+    const inner = 22;
+    const outline = this.add.circle(cx, cy, inner).setStrokeStyle(2, 0xffffff, 0.85).setDepth(50);
+    const ring = this.add.circle(cx, cy, 72).setStrokeStyle(3, 0xffc04a, 1).setDepth(51);
+    const hint = this.add
+      .text(cx, cy - 56, this.t('combat.blockHint'), {
+        fontFamily: 'monospace',
+        fontSize: '10px',
+        color: '#ffd88a',
+        stroke: '#0a0a0a',
+        strokeThickness: 3,
+      })
+      .setOrigin(0.5)
+      .setDepth(52);
+    this.blockArmed = true;
+    this.blockPressedAt = null;
+    const feint = (tb.feintChance ?? 0) > 0 && Math.random() < (tb.feintChance ?? 0);
+    const end = this.time.now + tb.ringMs;
+    if (feint) {
+      this.tweens.chain({
+        targets: ring,
+        tweens: [
+          { radius: inner + 3, duration: tb.ringMs * 0.35, ease: 'Quad.easeIn' },
+          {
+            radius: 52,
+            duration: tb.ringMs * 0.15,
+            onStart: () => {
+              ring.setStrokeStyle(3, 0xffffff, 1);
+              this.time.delayedCall(90, () => ring.setStrokeStyle(3, 0xffc04a, 1));
+            },
+          },
+          { radius: inner, duration: tb.ringMs * 0.5, ease: 'Linear' },
+        ],
+      });
+    } else {
+      this.tweens.add({ targets: ring, radius: inner, duration: tb.ringMs, ease: 'Linear' });
+    }
+    this.time.delayedCall(tb.ringMs, () => {
+      this.blockArmed = false;
+      const pressed = this.blockPressedAt !== null;
+      const blocked = pressed && Math.abs((this.blockPressedAt ?? 0) - end) <= tb.windowMs / 2;
+      ring.destroy();
+      outline.destroy();
+      hint.destroy();
+      done(blocked, pressed);
+    });
   }
 
   private updateStatusBars(): void {
@@ -453,7 +517,7 @@ export class CombatScene extends Phaser.Scene {
     this.commandButtons.forEach((b, i) =>
       b.setVisible(enabled && this.isCommandAvailable(this.commandTypes[i])),
     );
-    const cores = enabled ? this.combatSystem.getSongCores(this.enemy.id) : [];
+    const cores = enabled ? this.combatSystem.getEnvironmentOptions(this.enemy.id) : [];
     const env =
       enabled && cores.length === 0
         ? this.combatSystem.getAvailableEnvironmentAction(this.enemy.id)
@@ -548,7 +612,7 @@ export class CombatScene extends Phaser.Scene {
 
     // ENVIRONMENT: only when the boss currently offers one (key 6 is ignored otherwise).
     if (type === 'environment') {
-      const cores = this.combatSystem.getSongCores(this.enemy.id);
+      const cores = this.combatSystem.getEnvironmentOptions(this.enemy.id);
       const env =
         cores.length > 0
           ? cores[choice]
@@ -732,10 +796,40 @@ export class CombatScene extends Phaser.Scene {
       return;
     }
 
+    const tb = this.enemyTemplate.timedBlock;
+    if (tb) {
+      this.runBlockRing(tb, (blocked, pressed) => {
+        if (blocked) {
+          this.showFloatingNumber(
+            this.playerSprite.x,
+            this.playerSprite.y - 34,
+            this.t('combat.blocked'),
+            '#9fe8ff',
+          );
+          this.cameras.main.flash(120, 160, 230, 255);
+        } else if (pressed) {
+          this.showFloatingNumber(
+            this.playerSprite.x,
+            this.playerSprite.y - 34,
+            this.t('combat.blockMiss'),
+            '#c8c0b0',
+          );
+        }
+        this.performEnemyAttack(blocked ? tb.factor : undefined);
+      });
+      return;
+    }
+    this.performEnemyAttack();
+  }
+
+  /** The enemy's attack on Peter (`damageFactor` from a timed block). */
+  private performEnemyAttack(damageFactor?: number): void {
+    if (this.combatSystem.isBattleOver()) return;
     const enemyAction: ICombatAction = {
       type: 'attack',
       sourceId: this.enemy.id,
       targetId: this.player.id,
+      damageFactor,
     };
 
     // Animate enemy lunge

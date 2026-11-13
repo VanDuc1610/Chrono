@@ -40,6 +40,7 @@ const CHAPTER_SEAL_FLAGS = [
   'continuum_seal_restored',
   'causality_seal_restored',
   'memory_seal_restored',
+  'finality_seal_restored',
 ] as const;
 
 export interface MapPosition {
