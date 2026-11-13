@@ -19,15 +19,26 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-Goal (owner, 2026-11-14): design Chapter 4 "The War Without End" — long, tense, strong characters
-with backstories, hazy flashbacks, rounds of puzzles and story choices that lead to different
-rewards. Design first; build starts only after the owner approves the document.
+Goal (owner, 2026-11-14): build Chapter 4 "The War Without End" from
+[CHAPTER_04_DESIGN.md](story/CHAPTER_04_DESIGN.md) — owner approved §1–§12 with the changes in
+**§13** (§13 wins where they differ).
 
-### T-61 · Chapter 4 design
+### T-62 · Chapter 4 content
 
-- **Assignee:** Antigravity · **Status:** DONE
-- **Locks:** `docs/story/CHAPTER_04_DESIGN.md` (new)
-- **Contract:** structure of CHAPTER_03_DESIGN.md §1–§11 + §12 lessons; canon in STORY_CHAPTER_04.md and CHRONO_STORY_BIBLE.md (Kuro's first direct meeting happens here)
+- **Assignee:** Antigravity · **Status:** TODO
+- **Locks:** `public/assets/data/dialogue.json`, `public/assets/data/quests.json`, `public/assets/data/items.json`, `tests/content-data.test.ts`
+- **Contract:** CHAPTER_04_DESIGN.md §12 + §13 (exact ids)
+
+### T-63 · Chapter 4 engine and maps
+
+- **Assignee:** Claude · **Status:** IN PROGRESS
+- **Locks:** `src/**`, `public/assets/data/maps.json`, `enemies.json`, `player.json`, `strings.json`, `scripts/ch4-layout.js`, `tests/chapter4-*.test.ts`
+- **Scope:** dials, scales, arrow volleys + cover, sniper aim line, phalanx guard break, banner revive aura, flashback presentation, Crimson Standard blood wall, Last War ritual pillars, level cap 18, 12 maps
+
+### T-64 · Chapter 4 art
+
+- **Assignee:** Claude · **Status:** TODO (owner approves every image)
+- **Scope:** warfield tileset, Aldric, Kaelen, Bran, Elion, Renard, Kuro, 3 enemies, Crimson Standard 48×48, The Last War 64×64
 
 ## Backlog (scheduled after current locks are released)
 
