@@ -3199,6 +3199,1299 @@
         "Họ không phải tội phạm, họ chỉ là những người muốn tự tay quyết định ngày mai của chính mình."
       ],
       "responses": []
+    },
+    "ch3_gate_arrival": {
+      "id": "ch3_gate_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Không khí ở đây lạnh ngắt và tĩnh mịch đến rợn người. Bụi tinh thể màu tím lơ lửng giữa không trung như những mảnh vỡ thời gian đông cứng.",
+        "Dường như mỗi tấc đất dưới chân đều chôn vùi ký ức của hàng ngàn linh hồn bị lãng quên."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch3_arrived_gate"]
+      }
+    },
+    "ch3_elder_echo_farewell": {
+      "id": "ch3_elder_echo_farewell",
+      "speaker": "Trưởng Lão",
+      "lines": [
+        "Peter... bước chân cậu đã đưa cậu tới ranh giới của Ký Ức. Nơi đây, sự lãng quên là căn bệnh lây lan, và những linh hồn không tên đang khóc đòi lại cuộc đời mình.",
+        "Hãy cẩn thận với chính tâm trí cậu. Khi dòng ký ức rò rỉ, những gì cậu nhớ rõ nhất chưa chắc đã là những gì cậu từng trải qua."
+      ],
+      "responses": [
+        {
+          "text": "Cháu sẽ giữ vững tên mình.",
+          "nextDialogueId": "ch3_elder_farewell_reply"
+        }
+      ],
+      "effects": {
+        "setFlags": ["ch3_elder_echo_faded"]
+      }
+    },
+    "ch3_elder_farewell_reply": {
+      "id": "ch3_elder_farewell_reply",
+      "speaker": "Peter",
+      "lines": [
+        "Cháu chỉ mang chiếc đồng hồ của ông nội và thanh kiếm gãy. Cháu sẽ không để ai lấy mất tên của mình.",
+        "(Dư ảnh của Trưởng Lão khẽ mỉm cười rồi dần tan biến vào màn sương lam nhạt...)"
+      ],
+      "responses": []
+    },
+    "ch3_sepulcher_gate_locked": {
+      "id": "ch3_sepulcher_gate_locked",
+      "speaker": "Peter",
+      "lines": [
+        "Cánh cổng đá Tiền Đình sừng sững khép chặt. Phía trước có một cơ cấu bánh răng đá cổ xưa bám đầy bụi tinh thể.",
+        "Chỉ cần gạt chốt cơ cấu này, cổng lăng mộ sẽ mở ra lối vào Nghĩa Địa Trầm Lặng."
+      ],
+      "responses": [
+        {
+          "text": "Gạt chốt mở cổng",
+          "nextDialogueId": "ch3_sepulcher_gate_open"
+        },
+        {
+          "text": "Để lát nữa",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch3_sepulcher_gate_open": {
+      "id": "ch3_sepulcher_gate_open",
+      "speaker": "Peter",
+      "lines": [
+        "Rắc... Rầm! Khối đá nặng nề từ từ hạ xuống, mở toang lối vào tăm tối của Nghĩa Địa Trầm Lặng."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["opened_sepulcher_gate"],
+        "startQuest": "quest_ch3_sepulcher_gate"
+      }
+    },
+    "ch3_memory_crystal_whisper": {
+      "id": "ch3_memory_crystal_whisper",
+      "speaker": "Peter",
+      "lines": [
+        "Cụm tinh thể tím này khẽ rung lên khi mình bước lại gần. Có những thanh âm thì thầm mơ hồ phát ra từ bên trong...",
+        "'...Mẹ ơi, hôm nay con đã nhớ được hết các chữ cái rồi... Nhưng sao mẹ không nhìn con?...'",
+        "Âm thanh tan đi, chỉ còn lại sự buốt giá thấm sâu vào đầu ngón tay."
+      ],
+      "responses": []
+    },
+    "ch3_neris_cornered": {
+      "id": "ch3_neris_cornered",
+      "speaker": "Neris",
+      "lines": [
+        "Có ai ở đó không?! Làm ơn cứu tôi với! Đám bóng ma này... chúng muốn nuốt chửng cuốn sổ của tôi!"
+      ],
+      "responses": []
+    },
+    "ch3_neris_rescued": {
+      "id": "ch3_neris_rescued",
+      "speaker": "Neris",
+      "lines": [
+        "Cảm ơn anh... Những bóng ma ký ức suýt chút nữa đã cắn nát cuốn sổ tra cứu của tôi. Tôi có thể đọc được lịch sử ngàn năm... nhưng khi nhìn vào gương, tôi lại chẳng nhớ nổi mẹ đã gọi tôi bằng cái tên nào."
+      ],
+      "responses": [
+        {
+          "text": "Tôi sẽ giúp cô tìm lại tên mình.",
+          "nextDialogueId": "ch3_neris_rescued_name"
+        },
+        {
+          "text": "Làm sao để mở cánh cổng phía trước?",
+          "nextDialogueId": "ch3_neris_rescued_door"
+        }
+      ],
+      "effects": {
+        "setFlags": ["saved_neris"],
+        "startQuest": "quest_ch3_nameless_archivist"
+      }
+    },
+    "ch3_neris_rescued_name": {
+      "id": "ch3_neris_rescued_name",
+      "speaker": "Neris",
+      "lines": [
+        "Neris khẽ mỉm cười cay đắng: 'Tạm thời anh cứ gọi tôi là Neris nhé... đó là mật danh thủ thư của tôi.'",
+        "Ngôi mộ của vị điêu khắc gia nắm giữ chìa khóa mở cổng, nhưng cần đối chiếu manh mối cẩn thận kẻo chạm phải bẫy sương mù."
+      ],
+      "responses": []
+    },
+    "ch3_neris_rescued_door": {
+      "id": "ch3_neris_rescued_door",
+      "speaker": "Neris",
+      "lines": [
+        "Ngôi mộ của vị điêu khắc gia nắm giữ chìa khóa mở cổng, nhưng cần đối chiếu manh mối cẩn thận kẻo chạm phải bẫy sương mù.",
+        "Nghệ nhân điêu khắc triều đình được chôn cất ở đây, nhưng bia mộ không ghi tên thật mà chỉ khắc biểu tượng quê nhà và số lô."
+      ],
+      "responses": []
+    },
+    "ch3_neris_necropolis_hint": {
+      "id": "ch3_neris_necropolis_hint",
+      "speaker": "Neris",
+      "lines": [
+        "Hãy tìm kiếm quanh các hũ tro và bệ thờ. Nhật ký học trò và hóa đơn đóng thuế sinh phần sẽ cho biết quê quán và số lô mộ của người thợ.",
+        "Bia đá vùng miền ở góc phía bắc cũng ghi rõ biểu tượng cây cối của từng làng quê đấy."
+      ],
+      "responses": []
+    },
+    "ch3_urn_clue_read": {
+      "id": "ch3_urn_clue_read",
+      "speaker": "Peter",
+      "lines": [
+        "Bên trong chiếc bình đồng cũ có một cuộn giấy da nhỏ. Đây là trang nhật ký của người học trò điêu khắc."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "sculptor_apprentice_diary",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "found_sculptor_diary"
+      }
+    },
+    "ch3_tax_receipt_read": {
+      "id": "ch3_tax_receipt_read",
+      "speaker": "Peter",
+      "lines": [
+        "Dưới khe nứt bệ thờ kẹp một tờ giấy thuế sinh phần cũ nát. Mực son vẫn còn đọc được vài dòng chữ quan trọng."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "sculptor_tax_receipt",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "found_sculptor_tax_receipt"
+      }
+    },
+    "ch3_regions_stele_read": {
+      "id": "ch3_regions_stele_read",
+      "speaker": "Peter",
+      "lines": [
+        "Bia đá phong tục vùng miền:\n'Người Bến Sông Mờ khắc bóng Liễu rủ; Đồi Gió khắc cây Bàng; Đầm Lặng khắc hoa Sen; Rừng Cao khắc Chim Cú; Miền Cát khắc Rùa Biển.'"
+      ],
+      "responses": []
+    },
+    "ch3_tomb_owl_inspect": {
+      "id": "ch3_tomb_owl_inspect",
+      "speaker": "Peter",
+      "lines": ["Bia mộ số Lô I khắc hình Chim Cú vỗ cánh. Nắp mộ phủ đầy bụi rêu."],
+      "responses": [
+        {
+          "text": "Mở mộ",
+          "nextDialogueId": "ch3_tomb_wrong_fog"
+        },
+        {
+          "text": "Lùi lại",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch3_tomb_willow_ii_inspect": {
+      "id": "ch3_tomb_willow_ii_inspect",
+      "speaker": "Peter",
+      "lines": ["Bia mộ số Lô II khắc hình Cây Liễu rủ lá. Nắp mộ phủ đầy hoa khô mục nát."],
+      "responses": [
+        {
+          "text": "Mở mộ",
+          "nextDialogueId": "ch3_tomb_wrong_fog"
+        },
+        {
+          "text": "Lùi lại",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch3_tomb_willow_inspect": {
+      "id": "ch3_tomb_willow_inspect",
+      "speaker": "Peter",
+      "lines": [
+        "Bia mộ số Lô III khắc hình Cây Liễu rủ lá soi bóng nước. Quanh bệ mộ có rãnh khóa khớp với nét đục."
+      ],
+      "responses": [
+        {
+          "text": "Mở mộ",
+          "nextDialogueId": "ch3_tomb_willow_open"
+        },
+        {
+          "text": "Lùi lại",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch3_tomb_almond_inspect": {
+      "id": "ch3_tomb_almond_inspect",
+      "speaker": "Peter",
+      "lines": ["Bia mộ số Lô IV khắc hình Cây Bàng vươn tán rộng. Đất xung quanh nứt nẻ."],
+      "responses": [
+        {
+          "text": "Mở mộ",
+          "nextDialogueId": "ch3_tomb_wrong_fog"
+        },
+        {
+          "text": "Lùi lại",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch3_tomb_turtle_inspect": {
+      "id": "ch3_tomb_turtle_inspect",
+      "speaker": "Peter",
+      "lines": ["Bia mộ số Lô V khắc hình Rùa Biển bơi lội. Viền đá chạm sò biển."],
+      "responses": [
+        {
+          "text": "Mở mộ",
+          "nextDialogueId": "ch3_tomb_wrong_fog"
+        },
+        {
+          "text": "Lùi lại",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch3_tomb_wrong_fog": {
+      "id": "ch3_tomb_wrong_fog",
+      "speaker": "Peter",
+      "lines": [
+        "Xì... Một làn sương tím lạnh buốt phụt ra từ khe mộ làm mắt cay xè! Bên trong chỉ có tro bụi rỗng không.",
+        "Ngôi mộ này không phải của vị nghệ nhân. Mình nên đối chiếu lại quê quán trên hóa đơn thuế và số lô sinh phần."
+      ],
+      "responses": []
+    },
+    "ch3_tomb_willow_open": {
+      "id": "ch3_tomb_willow_open",
+      "speaker": "Peter",
+      "lines": [
+        "Cạch! Nắp đá Lô III trượt sang một bên mà không có bẫy sương. Bên trong đặt một chiếc hộp nhung chứa chiếc đục thép xanh sáng bóng.",
+        "Đây chính là Đục Chạm Khắc Cổ của vị nghệ nhân. Mũi đục vừa khít với then khóa cổng lớn!"
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "ancient_carving_chisel",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "opened_willow_tomb",
+        "setFlags": ["solved_sculptor_tomb"]
+      }
+    },
+    "ch3_hall_gate_locked": {
+      "id": "ch3_hall_gate_locked",
+      "speaker": "Peter",
+      "lines": [
+        "Cổng vào Hành Lang Vang Vọng bị khóa bằng một ổ khóa đá có rãnh hình lưỡi đục điêu khắc.",
+        "Nếu không có Đục Chạm Khắc Cổ của người nghệ nhân, cổng sẽ không lay chuyển."
+      ],
+      "responses": []
+    },
+    "ch3_hall_gate_opens": {
+      "id": "ch3_hall_gate_opens",
+      "speaker": "Peter",
+      "lines": [
+        "Mình cắm mũi đục thép xanh vào ổ khóa đá và xoay nhẹ nửa vòng. Một tiếng 'cạch' dứt khoát vang lên!",
+        "Cánh cổng đá nặng nề trượt mở, luồng gió từ Hành Lang Vang Vọng thổi ùa ra mát rượi."
+      ],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "ancient_carving_chisel",
+            "quantity": 1
+          }
+        ],
+        "setFlags": ["opened_hall_gate"],
+        "startQuest": "quest_ch3_echoing_vaults"
+      }
+    },
+    "ch3_secret_vault_locked": {
+      "id": "ch3_secret_vault_locked",
+      "speaker": "Peter",
+      "lines": [
+        "Sau bức tường rêu có một cánh cửa sắt đen chìm sâu dưới lòng đất, khóa bằng ổ khóa rỗng hình hoa văn cổ.",
+        "Cần có Chìa Khóa Mật Thất Quên Lãng mới có thể mở được cánh cửa này."
+      ],
+      "responses": []
+    },
+    "ch3_secret_vault_opens": {
+      "id": "ch3_secret_vault_opens",
+      "speaker": "Peter",
+      "lines": [
+        "Chiếc chìa khóa của hồn kỵ sĩ tra vào ổ khóa rỗng xoay mượt mà. Cánh cửa sắt đen khẽ rên rỉ rồi hé mở lối ngầm!"
+      ],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "forgotten_vault_key",
+            "quantity": 1
+          }
+        ],
+        "setFlags": ["opened_forgotten_vault"]
+      }
+    },
+    "ch3_pigment_yellow_take": {
+      "id": "ch3_pigment_yellow_take",
+      "speaker": "Peter",
+      "lines": [
+        "Trong góc bệ hoa khô có một hũ sành đựng bột khoáng vàng đất mịn màng. Đây là sắc tố màu tự nhiên dùng vẽ tranh thời cổ."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "pigment_ochre_yellow",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "found_pigment_yellow"
+      }
+    },
+    "ch3_echoes_arrival": {
+      "id": "ch3_echoes_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Tiếng bước chân của mình dội lại từ trần vòm cao vút. Không gian nơi đây dường như có khả năng khuếch đại và lưu giữ mọi rung động."
+      ],
+      "responses": []
+    },
+    "ch3_acoustic_manual_read": {
+      "id": "ch3_acoustic_manual_read",
+      "speaker": "Peter",
+      "lines": [
+        "Trên giá sách đá có một trang sổ tay của kiến trúc sư ghi chép về cơ chế âm học của các thạch trụ."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "acoustic_manual_page",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "found_acoustic_manual"
+      }
+    },
+    "ch3_pillar_left_inspect": {
+      "id": "ch3_pillar_left_inspect",
+      "speaker": "Peter",
+      "lines": [
+        "Thạch trụ bên trái được đẽo từ đá bazan xanh, chạm các rãnh dẫn âm. Trụ im lìm chờ một chấn động kích hoạt."
+      ],
+      "responses": []
+    },
+    "ch3_pillar_right_inspect": {
+      "id": "ch3_pillar_right_inspect",
+      "speaker": "Peter",
+      "lines": [
+        "Thạch trụ bên phải đối xứng qua đại sảnh. Hai trụ cách nhau 5 bước chân, là một cặp âm thoa cộng hưởng."
+      ],
+      "responses": []
+    },
+    "ch3_pillar_resonance_success": {
+      "id": "ch3_pillar_resonance_success",
+      "speaker": "Peter",
+      "lines": [
+        "U u u... Tiếng ngân của hai thạch trụ hòa làm một giai điệu trầm bổng! Màn đá chắn cầu thang ngầm rung chuyển rồi sụp đổ hoàn toàn!",
+        "Lối xuống Hầm Ngầm Tinh Thể đã mở ra."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["solved_pillar_resonance"]
+      }
+    },
+    "ch3_vault_stairs_locked": {
+      "id": "ch3_vault_stairs_locked",
+      "speaker": "Peter",
+      "lines": [
+        "Một bức tường đá dày chắn ngang cầu thang dẫn xuống hầm ngầm. Phải kích hoạt sự cộng hưởng của cặp thạch trụ để hạ bức tường này."
+      ],
+      "responses": []
+    },
+    "ch3_vaults_arrival": {
+      "id": "ch3_vaults_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Trước mắt là một vực thẳm mênh mông bốc lên bụi tinh thể màu tím ma mị. Không có cầu đá nào bắc qua bờ bên kia."
+      ],
+      "responses": [],
+      "effects": {
+        "startQuest": "quest_ch3_faceless_trial"
+      }
+    },
+    "ch3_hymn_scrap_read": {
+      "id": "ch3_hymn_scrap_read",
+      "speaker": "Peter",
+      "lines": ["Gần mép vực có một mảnh giấy da cháy xém rơi cạnh xác một chiếc đèn thợ mỏ."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "miner_hymn_scrap",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "found_miner_hymn"
+      }
+    },
+    "ch3_geological_chart_read": {
+      "id": "ch3_geological_chart_read",
+      "speaker": "Peter",
+      "lines": [
+        "Trên vách đá có dán một biểu đồ địa chất chỉ dẫn màu sắc của các vỉa quặng kim loại trong hang động."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "miner_geological_chart",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "found_geological_chart"
+      }
+    },
+    "ch3_echo_bell_iron": {
+      "id": "ch3_echo_bell_iron",
+      "speaker": "Peter",
+      "lines": [
+        "Boong... Tiếng chuông màu xám tro đục ngầu vang lên làm vách đá rung chuyển dữ dội! Đất đá rơi rào rào xuống vực sâu.",
+        "Tiếng chuông này gọi đá lở chứ không hề tạo ra lối đi nào cả!"
+      ],
+      "responses": []
+    },
+    "ch3_echo_bell_silver": {
+      "id": "ch3_echo_bell_silver",
+      "speaker": "Peter",
+      "lines": [
+        "Keng... Tiếng chuông màu trắng ngân dài thanh thoát. Một chiếc cầu ánh sáng lung linh hiện lên rồi vụt tắt ngay khi vừa chạm chân!",
+        "Đó chỉ là cầu ảo ảnh của hư vô. Cần tìm chiếc chuông làm đông kết bụi tinh thể thật sự."
+      ],
+      "responses": []
+    },
+    "ch3_echo_bell_copper": {
+      "id": "ch3_echo_bell_copper",
+      "speaker": "Peter",
+      "lines": [
+        "Coong! Tiếng chuông màu đỏ gạch trầm hùng vang vọng khắp hầm ngầm! Bụi tinh thể tím lập tức đông kết thành một nhịp cầu đá vững chắc!",
+        "Nhịp cầu này chỉ giữ được trong 8 giây! Phải lướt nhanh qua bờ bên kia!"
+      ],
+      "responses": [],
+      "effects": {
+        "startTimer": {
+          "flag": "ch3_bridge_up",
+          "ms": 8000
+        },
+        "setFlags": ["crossed_memory_abyss"]
+      }
+    },
+    "ch3_abyss_fall": {
+      "id": "ch3_abyss_fall",
+      "speaker": "Peter",
+      "lines": [
+        "A! Hụt chân rồi! Luồng gió bụi tinh thể xoáy tròn nâng mình lên và thả rơi lại ngay bờ vực...",
+        "May mà luồng khí giữ mình lại không bị rơi thẳng xuống đáy vực sâu. Phải canh thật chuẩn thời gian của cầu đá!"
+      ],
+      "responses": []
+    },
+    "ch3_faceless_keeper_confront": {
+      "id": "ch3_faceless_keeper_confront",
+      "speaker": "Người Canh Ngục Không Mặt",
+      "lines": [
+        "Khuôn mặt của gã là một tấm gương kim loại phẳng lì phản chiếu bóng dáng Peter...",
+        "'Ngươi đến để cướp lại ký ức ư? Ký ức là gánh nặng... Không có tên, ngươi mới có thể thanh thản bước vào bóng tối!'"
+      ],
+      "responses": []
+    },
+    "ch3_faceless_keeper_defeated": {
+      "id": "ch3_faceless_keeper_defeated",
+      "speaker": "Peter",
+      "lines": [
+        "Tấm gương trên mặt kẻ canh ngục rạn nứt rồi vỡ vụn thành trăm mảnh sương mù!",
+        "Cánh cửa dẫn lên Đại Thư Viện Ký Ức đã mở toang."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["defeated_faceless_keeper"]
+      }
+    },
+    "ch3_archive_ascent_locked": {
+      "id": "ch3_archive_ascent_locked",
+      "speaker": "Peter",
+      "lines": [
+        "Cầu thang đá dẫn lên Đại Thư Viện bị phong tỏa bởi bức rèm gương phản chiếu. Phải đánh bại Người Canh Ngục Không Mặt để giải trừ nó."
+      ],
+      "responses": []
+    },
+    "ch3_lullaby_crystal_listen": {
+      "id": "ch3_lullaby_crystal_listen",
+      "speaker": "Peter",
+      "lines": [
+        "Áp tai vào khối tinh thể trong suốt, một giai điệu hát ru dịu êm vẳng ra... từng nhịp ngắn dài đong đưa như tiếng sóng vỗ bờ.",
+        "Giai điệu này thật ấm áp... chắc hẳn nữ thủ thư già ở thư viện sẽ rất muốn nghe lại."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["heard_lost_lullaby"]
+      }
+    },
+    "ch3_ember_take": {
+      "id": "ch3_ember_take",
+      "speaker": "Peter",
+      "lines": [
+        "Giữa khe đá có một tia lửa lam nhạt bập bùng không tắt, tỏa hơi ấm ký ức kỳ diệu. Mình cẩn thận thu lại tàn lửa này."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "memory_ember",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "found_memory_ember"
+      }
+    },
+    "ch3_forge_cold": {
+      "id": "ch3_forge_cold",
+      "speaker": "Peter",
+      "lines": [
+        "Một lò rèn ngầm cổ xưa đứng im lìm, than đá đã nguội ngắt từ nhiều thế kỷ. Cần có một ngọn lửa ký ức vĩnh cửu để thắp sáng lại lò."
+      ],
+      "responses": []
+    },
+    "ch3_forge_rekindled": {
+      "id": "ch3_forge_rekindled",
+      "speaker": "Peter",
+      "lines": [
+        "Mình thả Tàn Lửa Ký Ức vào bầu lò. Bùng! Ngọn lửa lam bốc cao, hơi nóng cuồn cuộn làm bừng sáng cả gian hầm rèn cổ!"
+      ],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "memory_ember",
+            "quantity": 1
+          }
+        ],
+        "setFlags": ["rekindled_memory_forge"]
+      }
+    },
+    "ch3_archives_arrival": {
+      "id": "ch3_archives_arrival",
+      "speaker": "Neris",
+      "lines": [
+        "Đây là Đại Thư Viện Ký Ức... Nơi lưu giữ toàn bộ biên niên sử của vương quốc trước khi thảm họa xảy ra.",
+        "Cổng vào Hoàng Lăng ở ngay phía trước, nhưng nó bị khóa bởi Bàn Điều Khiển Kiểm Duyệt."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["met_neris_archive"],
+        "startQuest": "quest_ch3_archive_censorship"
+      }
+    },
+    "ch3_neris_archive_talk": {
+      "id": "ch3_neris_archive_talk",
+      "speaker": "Neris",
+      "lines": [
+        "Đại Loạn nổ ra vào Tháng Ba Năm 312. Triều đình đã hạ lệnh: bất cứ ai vắng mặt khỏi kinh đô trong Tháng Ba đều vô tội.",
+        "Hãy đối chiếu niên biểu hành tung với sổ đen. Kẻ duy nhất ở lại kinh thành vào Tháng Ba chính là kẻ phản nghịch thật sự!"
+      ],
+      "responses": []
+    },
+    "ch3_blacklist_scroll_read": {
+      "id": "ch3_blacklist_scroll_read",
+      "speaker": "Peter",
+      "lines": [
+        "Cuộn giấy da này niêm phong bằng triện đen của Ty Kiểm Duyệt. Đây là Sổ Đen ghi danh bốn mật danh tướng lĩnh."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "censor_blacklist_doc",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "found_censor_blacklist"
+      }
+    },
+    "ch3_court_timeline_read": {
+      "id": "ch3_court_timeline_read",
+      "speaker": "Peter",
+      "lines": [
+        "Cuốn biên niên sử trên bệ đọc chép rõ niên biểu di chuyển và điều binh của bốn danh tướng trong năm 312."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "court_timeline_doc",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "found_court_timeline"
+      }
+    },
+    "ch3_censorship_console_inspect": {
+      "id": "ch3_censorship_console_inspect",
+      "speaker": "Peter",
+      "lines": [
+        "Bàn điều khiển bằng đá chạm nổi bốn ấn linh thú: Huyết Ưng, Dạ Lang (Sói), Bạch Lộc (Hươu), Xích Xà (Rắn).",
+        "Chỉ một linh thú đại diện cho kẻ phản nghịch thật sự có mặt tại kinh đô Tháng Ba Năm 312."
+      ],
+      "responses": [
+        {
+          "text": "Xem xét các ấn linh thú",
+          "nextDialogueId": "ch3_console_choose_a"
+        },
+        {
+          "text": "Lùi lại tra cứu thêm",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch3_console_choose_a": {
+      "id": "ch3_console_choose_a",
+      "speaker": "Peter",
+      "lines": ["Khắc ấn phản nghịch lên linh thú nào?"],
+      "responses": [
+        {
+          "text": "Chọn Huyết Ưng",
+          "nextDialogueId": "ch3_censorship_wrong"
+        },
+        {
+          "text": "Xem các linh thú khác",
+          "nextDialogueId": "ch3_console_choose_b"
+        }
+      ]
+    },
+    "ch3_console_choose_b": {
+      "id": "ch3_console_choose_b",
+      "speaker": "Peter",
+      "lines": ["Khắc ấn phản nghịch lên linh thú nào?"],
+      "responses": [
+        {
+          "text": "Chọn Dạ Lang (Sói)",
+          "nextDialogueId": "ch3_censorship_success"
+        },
+        {
+          "text": "Xem các linh thú khác",
+          "nextDialogueId": "ch3_console_choose_c"
+        }
+      ]
+    },
+    "ch3_console_choose_c": {
+      "id": "ch3_console_choose_c",
+      "speaker": "Peter",
+      "lines": ["Khắc ấn phản nghịch lên linh thú nào?"],
+      "responses": [
+        {
+          "text": "Chọn Bạch Lộc (Hươu)",
+          "nextDialogueId": "ch3_censorship_wrong"
+        },
+        {
+          "text": "Chọn Xích Xà (Rắn)",
+          "nextDialogueId": "ch3_censorship_wrong"
+        }
+      ]
+    },
+    "ch3_censorship_wrong": {
+      "id": "ch3_censorship_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Tít tít tít! Báo động đỏ chớp sáng, bàn điều khiển rung lắc và trả lại nguyên trạng!",
+        "Linh thú này đại diện cho người vắng mặt khỏi kinh đô vào Tháng Ba Năm 312 nên vô tội. Mình cần xem kỹ lại niên biểu."
+      ],
+      "responses": []
+    },
+    "ch3_censorship_success": {
+      "id": "ch3_censorship_success",
+      "speaker": "Peter",
+      "lines": [
+        "Cạch... Tinh! Đèn xanh dịu dàng tỏa sáng trên ấn Dạ Lang (Sói). Cơ cấu khóa rên rỉ mở chốt!",
+        "Dạ Lang về kinh từ Tháng Hai đến Tháng Năm, chính là kẻ duy nhất có mặt châm ngòi biến loạn Tháng Ba! Cổng Hoàng Lăng đã mở!"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["solved_censorship_ledger"]
+      }
+    },
+    "ch3_royal_mausoleum_sealed": {
+      "id": "ch3_royal_mausoleum_sealed",
+      "speaker": "Peter",
+      "lines": [
+        "Cổng Hoàng Lăng Ký Ức bị phong ấn bởi bản án phản quốc của Ty Kiểm Duyệt. Phải giải mã bàn điều khiển linh thú để mở cổng."
+      ],
+      "responses": []
+    },
+    "ch3_pigment_blue_take": {
+      "id": "ch3_pigment_blue_take",
+      "speaker": "Peter",
+      "lines": [
+        "Trong ngăn kéo của bàn thủ thư có một hộp đựng bột khoáng lam ngọc quý phái, dùng để tô màu áo choàng vương giả."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "pigment_lapis_blue",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "found_pigment_blue"
+      }
+    },
+    "ch3_portrait_piece_1": {
+      "id": "ch3_portrait_piece_1",
+      "speaker": "Peter",
+      "lines": [
+        "Nhặt được một mảnh vải tranh chân dung cũ vẽ hình chiếc khiên bạc và huy hiệu chim ưng."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch3_portrait_piece_1"]
+      }
+    },
+    "ch3_portrait_piece_2": {
+      "id": "ch3_portrait_piece_2",
+      "speaker": "Peter",
+      "lines": [
+        "Nhặt được mảnh chân dung thứ hai vẽ bộ giáp sắt kiên cường và chiếc áo choàng đỏ viền vàng."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch3_portrait_piece_2"]
+      }
+    },
+    "ch3_portrait_piece_3": {
+      "id": "ch3_portrait_piece_3",
+      "speaker": "Peter",
+      "lines": [
+        "Nhặt được mảnh chân dung thứ ba vẽ gương mặt cương nghị của người kỵ sĩ với vết sẹo bên mắt trái."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch3_portrait_piece_3"]
+      }
+    },
+    "ch3_ghost_librarian_start": {
+      "id": "ch3_ghost_librarian_start",
+      "speaker": "Nữ Thủ Thư Già",
+      "lines": [
+        "Linh hồn bà cụ thủ thư trôi dạt bên giá sách cũ: 'Con ơi... mẹ quên mất bài hát ru con ngủ rồi... Giọng hát của mẹ đi đâu mất rồi?...'"
+      ],
+      "responses": [],
+      "effects": {
+        "startQuest": "quest_ch3_lost_lullaby"
+      }
+    },
+    "ch3_ghost_librarian_done": {
+      "id": "ch3_ghost_librarian_done",
+      "speaker": "Nữ Thủ Thư Già",
+      "lines": [
+        "Ánh mắt bà cụ rạng rỡ khi nghe lại giai điệu: 'Đúng rồi... Gió ru hoa bay... mẹ nhớ ra rồi! Cảm ơn con, người thợ trẻ tuổi tốt bụng.'",
+        "'Bà để lại cho con bản chép lời ru và bình mực ký ức này nhé... Hãy trân trọng những gì con đang nhớ.'"
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "lost_lullaby_lyrics",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "rewarded_ghost_librarian",
+        "setFlags": ["comforted_ghost_librarian"]
+      }
+    },
+    "ch3_ghost_knight_start": {
+      "id": "ch3_ghost_knight_start",
+      "speaker": "Hồn Kỵ Sĩ",
+      "lines": [
+        "Bóng ma kỵ sĩ cúi đầu bên bia đá trống: 'Ta đã chiến đấu... nhưng khi ngã xuống, không ai còn nhớ khuôn mặt ta. Chân dung của ta đã bị xé làm 3 mảnh...'"
+      ],
+      "responses": [],
+      "effects": {
+        "startQuest": "quest_ch3_shattered_portrait"
+      }
+    },
+    "ch3_ghost_knight_done": {
+      "id": "ch3_ghost_knight_done",
+      "speaker": "Hồn Kỵ Sĩ",
+      "lines": [
+        "Ghép ba mảnh vải tranh lại, gương mặt người kỵ sĩ hiện ra đầy kiêu hãnh: 'Ta nhớ ra rồi... Ta là Đội Trưởng Cận Vệ Hoàng Gia!'",
+        "'Cầm lấy chiếc chìa khóa này. Nó mở lối ngầm vào Kho Ký Ức Bị Xóa Bỏ... Nơi chứa đựng những điều thế giới muốn lãng quên.'"
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "forgotten_vault_key",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "rewarded_ghost_knight",
+        "setFlags": ["restored_knight_portrait", "found_forgotten_vault_key"]
+      }
+    },
+    "ch3_mausoleum_arrival": {
+      "id": "ch3_mausoleum_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Khí lạnh thấu xương bao trùm điện lăng. Trên ngai vàng hoang phế, một bóng hình khoác hoàng bào rách rưới đang ôm đầu rên xiết trong tuyệt vọng."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["met_amnesiac_king"],
+        "startQuest": "quest_ch3_king_dilemma"
+      }
+    },
+    "ch3_amnesiac_king_despair": {
+      "id": "ch3_amnesiac_king_despair",
+      "speaker": "Vua Alden",
+      "lines": [
+        "Đừng lại gần ta! Bàn tay này đã rót chén rượu độc... Ta nhớ rõ mùi hạnh nhân đắng ngắt, nhớ ánh mắt nàng nhìn ta trước khi gục xuống!",
+        "Ta là kẻ sát thê... Ta đáng bị chôn vùi trong lãng quên muôn đời!"
+      ],
+      "responses": []
+    },
+    "ch3_king_doubt": {
+      "id": "ch3_king_doubt",
+      "speaker": "Vua Alden",
+      "lines": [
+        "Bằng chứng của ngươi... khiến đầu óc ta đau nhức dữ dội... Nhưng ta vẫn nhớ rõ chén rượu ấy! Chừng nào chưa thấy cả ruy băng trăn trối lẫn nhật trình điều binh, ta không thể tin!"
+      ],
+      "responses": []
+    },
+    "ch3_queen_ribbon_take": {
+      "id": "ch3_queen_ribbon_take",
+      "speaker": "Peter",
+      "lines": [
+        "Trên bệ thờ hoa trắng có đặt một dải ruy băng lụa bạc. Những dòng chữ thêu bằng chỉ bạc ghi lại lời trăn trối cuối cùng của Hoàng hậu."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "queen_ribbon_item",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "found_queen_ribbon"
+      }
+    },
+    "ch3_royal_dispatch_read": {
+      "id": "ch3_royal_dispatch_read",
+      "speaker": "Peter",
+      "lines": [
+        "Trong rương tài liệu hoàng gia có cuốn nhật trình điều binh đêm trăng khuyết, mang đủ 12 triện son của các tướng lĩnh."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "royal_dispatch_log",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "read_royal_dispatch",
+        "setFlags": ["read_royal_dispatch"]
+      }
+    },
+    "ch3_king_confront": {
+      "id": "ch3_king_confront",
+      "speaker": "Vua Alden",
+      "lines": [
+        "Vua Alden run rẩy nhìn dải ruy băng và cuốn nhật trình: 'Chuyện này... chẳng lẽ ký ức đày đọa ta suốt ngàn năm qua... là giả mạo?!'"
+      ],
+      "responses": [
+        {
+          "text": "Dùng Nhãn Thời Gian soi chiếc ly bạc",
+          "nextDialogueId": "ch3_king_cleared"
+        },
+        {
+          "text": "Đưa nhật trình và ruy băng cho ngài xem",
+          "nextDialogueId": "ch3_king_cleared"
+        }
+      ]
+    },
+    "ch3_king_cleared": {
+      "id": "ch3_king_cleared",
+      "speaker": "Vua Alden",
+      "lines": [
+        "Dưới ánh sáng rực rỡ, ảo ảnh ký ức đen tối vỡ tan! Vua Alden quỳ gối rơi lệ: 'Nàng không hề trách ta... Kẻ hãm hại nàng mang vết chàm rắn đôi! Ta đã không giết nàng!'",
+        "'Cảm ơn cậu, người thợ trẻ. Cầm lấy Ấn Tín Hoàng Gia này để mở lối vào Thánh Điện. Hãy giải thoát cho những linh hồn lầm lạc!'"
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "royal_seal_crest",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "rewarded_king_crest",
+        "takeItems": [
+          {
+            "itemId": "queen_ribbon_item",
+            "quantity": 1
+          }
+        ],
+        "setFlags": ["cleared_king_despair"]
+      }
+    },
+    "ch3_sanctum_door_locked": {
+      "id": "ch3_sanctum_door_locked",
+      "speaker": "Peter",
+      "lines": [
+        "Cánh cửa vào Thánh Điện Hợp Xướng mang hình phù điêu sư tử hoàng gia vương miện. Phải có Ấn Tín Hoàng Gia của Vua Alden mới mở được."
+      ],
+      "responses": []
+    },
+    "ch3_sanctum_door_opens": {
+      "id": "ch3_sanctum_door_opens",
+      "speaker": "Peter",
+      "lines": [
+        "Ấn Tín Hoàng Gia khảm vừa khít vào khuôn đá. Cánh cửa Thánh Điện từ từ tách đôi, những luồng ánh sáng lam ngọc tuôn trào!"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["opened_sanctum_door"]
+      }
+    },
+    "ch3_painter_note_read": {
+      "id": "ch3_painter_note_read",
+      "speaker": "Peter",
+      "lines": [
+        "Bên cạnh giá vẽ có một trang sổ tay của họa sĩ cung đình ghi chép thứ tự pha màu ba lớp để phục chế bức tranh."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "court_painter_note",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "found_painter_note"
+      }
+    },
+    "ch3_pigment_red_take": {
+      "id": "ch3_pigment_red_take",
+      "speaker": "Peter",
+      "lines": [
+        "Dưới chân cột đá lăng mộ có một khay đựng bột khoáng đỏ lưu huỳnh đỏ thắm, dùng để điểm tô môi son trên tranh chân dung."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "pigment_sulfur_red",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "found_pigment_red"
+      }
+    },
+    "ch3_canvas_inspect": {
+      "id": "ch3_canvas_inspect",
+      "speaker": "Peter",
+      "lines": [
+        "Bức tranh chân dung Hoàng hậu bị bao phủ bởi lớp sơn tím kỳ quái che lấp nét mặt. Cần đủ 3 sắc tố tự nhiên để phục chế."
+      ],
+      "responses": [
+        {
+          "text": "Bắt đầu phục chế tranh",
+          "nextDialogueId": "ch3_canvas_layer_1"
+        },
+        {
+          "text": "Lùi lại xem lại ghi chú",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch3_canvas_layer_1": {
+      "id": "ch3_canvas_layer_1",
+      "speaker": "Peter",
+      "lines": ["Chọn sắc tố cho lớp nền:"],
+      "responses": [
+        {
+          "text": "Tô lớp nền bằng Vàng Đất",
+          "nextDialogueId": "ch3_canvas_layer_2"
+        },
+        {
+          "text": "Tô lớp nền bằng Lam Ngọc",
+          "nextDialogueId": "ch3_canvas_wrong"
+        }
+      ]
+    },
+    "ch3_canvas_layer_2": {
+      "id": "ch3_canvas_layer_2",
+      "speaker": "Peter",
+      "lines": ["Lớp nền Vàng Đất ấm áp đã phủ đều. Chọn sắc tố cho lớp áo khoác:"],
+      "responses": [
+        {
+          "text": "Tô áo khoác bằng Lam Ngọc",
+          "nextDialogueId": "ch3_canvas_layer_3"
+        },
+        {
+          "text": "Tô áo khoác bằng Đỏ Lưu Huỳnh",
+          "nextDialogueId": "ch3_canvas_wrong"
+        }
+      ]
+    },
+    "ch3_canvas_layer_3": {
+      "id": "ch3_canvas_layer_3",
+      "speaker": "Peter",
+      "lines": ["Lớp áo Lam Ngọc quý phái đã hiện rõ. Chọn sắc tố hoàn thiện đôi môi son:"],
+      "responses": [
+        {
+          "text": "Điểm môi son bằng Đỏ Lưu Huỳnh",
+          "nextDialogueId": "ch3_canvas_restored"
+        },
+        {
+          "text": "Điểm môi son bằng Vàng Đất",
+          "nextDialogueId": "ch3_canvas_wrong"
+        }
+      ]
+    },
+    "ch3_canvas_wrong": {
+      "id": "ch3_canvas_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Xèo... Các lớp màu hòa lẫn vào nhau tạo thành một vệt xám đục ngầu! May mà lớp sơn lau sạch đi được.",
+        "Thứ tự các lớp màu chưa đúng với chỉ dẫn của họa sĩ cung đình. Mình nên kiểm tra lại ghi chú."
+      ],
+      "responses": []
+    },
+    "ch3_canvas_restored": {
+      "id": "ch3_canvas_restored",
+      "speaker": "Peter",
+      "lines": [
+        "Lớp sơn tím ma quái tan biến hoàn toàn! Nụ cười dịu hiền và ánh mắt ấm áp của Hoàng hậu hiện ra rực rỡ như thuở ban đầu.",
+        "Từ khung tranh rơi ra một chiếc bùa ngọc phát sáng lam ngọc thanh khiết — Bùa Tinh Thể Hồn Nhiên!"
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "pure_crystal_soul_charm",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "restored_queen_canvas_reward",
+        "takeItems": [
+          {
+            "itemId": "pigment_ochre_yellow",
+            "quantity": 1
+          },
+          {
+            "itemId": "pigment_lapis_blue",
+            "quantity": 1
+          },
+          {
+            "itemId": "pigment_sulfur_red",
+            "quantity": 1
+          }
+        ],
+        "setFlags": ["restored_queen_canvas"]
+      }
+    },
+    "ch3_choir_boss_confront": {
+      "id": "ch3_choir_boss_confront",
+      "speaker": "Dàn Hợp Xướng Vô Danh",
+      "lines": [
+        "Khối tinh thể đen khổng lồ xoay vần giữa đại điện, hàng ngàn khuôn mặt u hồn gào thét đồng thanh:",
+        "'HÃY NHỚ LẤY CHÚNG TÔI! Hàng vạn con người đã đổ máu, đã yêu thương, đã xây nên thế giới... tại sao lịch sử lại xóa tên chúng tôi?!'"
+      ],
+      "responses": [
+        {
+          "text": "Tiếng gào của các người đang bóp nghẹt người sống!",
+          "nextDialogueId": "ch3_choir_boss_reply"
+        }
+      ],
+      "effects": {
+        "setFlags": ["met_nameless_choir"],
+        "startQuest": "quest_ch3_nameless_choir"
+      }
+    },
+    "ch3_choir_boss_reply": {
+      "id": "ch3_choir_boss_reply",
+      "speaker": "Peter",
+      "lines": [
+        "Sự tồn tại không thể đo đếm bằng việc có được ghi vào bia đá hay không. Tiếng gào thét của các người đang bóp nghẹt những linh hồn vô tội!",
+        "(Peter siết chặt chuôi kiếm, chuẩn bị bước vào trận chiến quyết định!)"
+      ],
+      "responses": []
+    },
+    "ch3_choir_boss_defeated": {
+      "id": "ch3_choir_boss_defeated",
+      "speaker": "Peter",
+      "lines": [
+        "Khối tinh thể đen rạn nứt rồi vỡ vụn thành triệu hạt bụi sáng. Tiếng thét gào hung dữ lắng dần thành một khúc hát ru thanh thản...",
+        "Hàng vạn linh hồn mỉm cười an lòng rồi tan biến vào hư không, tìm lại được sự bình yên đích thực."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["defeated_nameless_choir"]
+      }
+    },
+    "ch3_seal_restored": {
+      "id": "ch3_seal_restored",
+      "speaker": "Peter",
+      "lines": [
+        "Ánh sáng ký ức tràn ngập tâm trí... Nhưng chờ đã... Ký ức chiều mưa trên căn gác xép, chiếc đồng hồ quả quýt hỏng và lời hứa cùng chia đôi mẩu bánh...",
+        "(Bàn tay run rẩy chạm vào ngực)... Người đứng cạnh mình trong ký ức đó không phải là ông nội... và giọng nói đó không phải của mình. Ký ức này... là của một người khác đã bị thế giới xóa sạch..."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["memory_seal_restored", "learned_memory_resonance"],
+        "endChapter": 3
+      }
+    },
+    "ch3_forgotten_vault_arrival": {
+      "id": "ch3_forgotten_vault_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Một căn phòng ngầm hoàn toàn không có bất kỳ dòng chữ hay biểu tượng nào. Mọi bức tường đều bị mài phẳng lì đến kỳ lạ."
+      ],
+      "responses": []
+    },
+    "ch3_needle_box_inspect": {
+      "id": "ch3_needle_box_inspect",
+      "speaker": "Peter",
+      "lines": [
+        "Trên bệ đá giữa phòng đặt một chiếc hộp nhạc bằng thép đen. Ổ khóa cơ khí của hộp yêu cầu gõ đúng 5 nhịp gõ của bài hát ru cổ xưa."
+      ],
+      "responses": [
+        {
+          "text": "Bắt đầu gõ nhịp",
+          "nextDialogueId": "ch3_box_beat_1"
+        },
+        {
+          "text": "Lùi lại xem lại lời ru",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch3_box_beat_1": {
+      "id": "ch3_box_beat_1",
+      "speaker": "Peter",
+      "lines": ["Gõ nhịp thứ nhất:"],
+      "responses": [
+        {
+          "text": "Gõ ngắn",
+          "nextDialogueId": "ch3_box_beat_2"
+        },
+        {
+          "text": "Gõ dài",
+          "nextDialogueId": "ch3_box_wrong"
+        }
+      ]
+    },
+    "ch3_box_beat_2": {
+      "id": "ch3_box_beat_2",
+      "speaker": "Peter",
+      "lines": ["Nhịp gõ vang lên trong trẻo. Gõ nhịp thứ hai:"],
+      "responses": [
+        {
+          "text": "Gõ ngắn",
+          "nextDialogueId": "ch3_box_beat_3"
+        },
+        {
+          "text": "Gõ dài",
+          "nextDialogueId": "ch3_box_wrong"
+        }
+      ]
+    },
+    "ch3_box_beat_3": {
+      "id": "ch3_box_beat_3",
+      "speaker": "Peter",
+      "lines": ["Bánh răng bên trong khẽ xoay. Gõ nhịp thứ ba:"],
+      "responses": [
+        {
+          "text": "Gõ dài",
+          "nextDialogueId": "ch3_box_beat_4"
+        },
+        {
+          "text": "Gõ ngắn",
+          "nextDialogueId": "ch3_box_wrong"
+        }
+      ]
+    },
+    "ch3_box_beat_4": {
+      "id": "ch3_box_beat_4",
+      "speaker": "Peter",
+      "lines": ["Âm thanh ngân nga rung chuyển. Gõ nhịp thứ tư:"],
+      "responses": [
+        {
+          "text": "Gõ ngắn",
+          "nextDialogueId": "ch3_box_beat_5"
+        },
+        {
+          "text": "Gõ dài",
+          "nextDialogueId": "ch3_box_wrong"
+        }
+      ]
+    },
+    "ch3_box_beat_5": {
+      "id": "ch3_box_beat_5",
+      "speaker": "Peter",
+      "lines": ["Khớp khóa cuối cùng chuẩn bị mở. Gõ nhịp thứ năm:"],
+      "responses": [
+        {
+          "text": "Gõ dài",
+          "nextDialogueId": "ch3_needle_box_open"
+        },
+        {
+          "text": "Gõ ngắn",
+          "nextDialogueId": "ch3_box_wrong"
+        }
+      ]
+    },
+    "ch3_box_wrong": {
+      "id": "ch3_box_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Rắc! Khóa cơ khí giật khựng lại, nắp hộp đóng chặt và các lẫy đàn hồi bật về vị trí cũ.",
+        "Nhịp điệu bị sai rồi. Nhớ lại lời bài hát ru: mỗi nhịp vỗ là tiếng gõ ngắn, mỗi điệu ngân nga là tiếng gõ dài."
+      ],
+      "responses": []
+    },
+    "ch3_needle_box_open": {
+      "id": "ch3_needle_box_open",
+      "speaker": "Peter",
+      "lines": [
+        "Ting... Ting... Tách! Nắp hộp nhạc bật mở, một khúc nhạc thanh thoát dịu êm cất lên.",
+        "Nằm gọn trong lớp lụa đen là một thanh kiếm liễu bằng thép tuyền đen nhánh, lưỡi kiếm thanh mảnh và sắc lẹm — Hoài Niệm Kiếm!"
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "memory_needle_rapier",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "opened_needle_box_reward",
+        "setFlags": ["opened_memory_needle_box"]
+      }
+    },
+    "ch3_unwritten_monument_whisper": {
+      "id": "ch3_unwritten_monument_whisper",
+      "speaker": "Peter",
+      "lines": [
+        "Trên bệ đá góc phòng có một mảnh giấy cháy dở, chữ viết thanh thoát nhưng đã nhòe đi vì nước mắt:",
+        "'...Nếu một ngày thế giới xóa sạch tên tôi khỏi mọi trang sử, xin đừng để người ấy phải quên đi những buổi chiều ấm áp trên căn gác nhỏ...'",
+        "Trái tim Peter khẽ nhói lên một cảm giác xót xa kỳ lạ không thể gọi tên..."
+      ],
+      "responses": []
     }
   }
 }

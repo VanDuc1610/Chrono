@@ -67,6 +67,7 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       'refreshMap',
       'warpTo',
       'healFull',
+      'startTimer',
     ]);
     for (const node of Object.values(dialogueDb.dialogues)) {
       for (const key of Object.keys(node.effects ?? {})) {
@@ -954,6 +955,304 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       session.applyDialogueEffects(dialogueDb.dialogues.ch2_seal_restored.effects!);
       expect(session.getFlag('causality_seal_restored')).toBe(true);
       expect(session.getFlag('learned_causality_resonance')).toBe(true);
+    });
+  });
+
+  describe('Chapter 3 Content Data Integrity (dialogue.json, quests.json, items.json)', () => {
+    it('verifies Chapter 3 items definitions, document page length constraints and stats', () => {
+      const find = (id: string) => itemDb.items.find((i) => i.id === id);
+
+      // Weapon
+      const rapier = find('memory_needle_rapier');
+      expect(rapier).toBeDefined();
+      expect(rapier?.type).toBe('weapon');
+      expect(rapier?.equip?.attack).toBe(11);
+      expect(rapier?.equip?.reach).toBe(38);
+      expect(rapier?.equip?.swingMs).toBe(330);
+
+      // Charm
+      const charm = find('pure_crystal_soul_charm');
+      expect(charm).toBeDefined();
+      expect(charm?.type).toBe('charm');
+      expect(charm?.equip?.maxHp).toBe(22);
+      expect(charm?.equip?.maxMp).toBe(12);
+      expect(charm?.equip?.defense).toBe(3);
+      expect(charm?.equip?.speed).toBe(2);
+
+      // Consumables
+      const shard = find('refined_chrono_shard');
+      expect(shard).toBeDefined();
+      expect(shard?.type).toBe('consumable');
+      expect(shard?.effects?.healAmount).toBe(120);
+
+      const ink = find('memory_ink_flask');
+      expect(ink).toBeDefined();
+      expect(ink?.type).toBe('consumable');
+      expect(ink?.effects?.healAmount).toBe(80);
+      expect(ink?.effects?.mpAmount).toBe(20);
+
+      // Key items & puzzle items
+      expect(find('memory_seal_shard')?.type).toBe('key_item');
+      expect(find('royal_seal_crest')?.type).toBe('key_item');
+      expect(find('ancient_carving_chisel')?.type).toBe('puzzle');
+      expect(find('queen_ribbon_item')?.type).toBe('puzzle');
+      expect(find('pigment_ochre_yellow')?.type).toBe('puzzle');
+      expect(find('pigment_lapis_blue')?.type).toBe('puzzle');
+      expect(find('pigment_sulfur_red')?.type).toBe('puzzle');
+      expect(find('forgotten_vault_key')?.type).toBe('puzzle');
+      expect(find('memory_ember')?.type).toBe('puzzle');
+      expect(find('ancient_amber_resin')?.type).toBe('material');
+
+      // Documents: all pages <= 220 chars
+      const docIds = [
+        'sculptor_apprentice_diary',
+        'sculptor_tax_receipt',
+        'censor_blacklist_doc',
+        'court_timeline_doc',
+        'royal_dispatch_log',
+        'lost_lullaby_lyrics',
+        'court_painter_note',
+        'miner_hymn_scrap',
+        'miner_geological_chart',
+        'acoustic_manual_page',
+      ];
+
+      for (const id of docIds) {
+        const doc = find(id);
+        expect(doc, `Document ${id} must exist`).toBeDefined();
+        expect(doc?.type).toBe('document');
+        expect(doc?.pages?.length).toBeGreaterThan(0);
+        for (const page of doc?.pages ?? []) {
+          expect(
+            page.length,
+            `Page in document ${id} exceeds 220 chars (${page.length}): "${page}"`,
+          ).toBeLessThanOrEqual(220);
+        }
+      }
+    });
+
+    it('verifies all Chapter 3 quest definitions and objectives wiring', () => {
+      const chapter3QuestIds = [
+        'quest_ch3_sepulcher_gate',
+        'quest_ch3_nameless_archivist',
+        'quest_ch3_echoing_vaults',
+        'quest_ch3_faceless_trial',
+        'quest_ch3_archive_censorship',
+        'quest_ch3_king_dilemma',
+        'quest_ch3_nameless_choir',
+        'quest_ch3_lost_lullaby',
+        'quest_ch3_shattered_portrait',
+        'quest_ch3_forgotten_craftsman',
+      ];
+
+      for (const qid of chapter3QuestIds) {
+        const q = questDb.quests.find((item) => item.id === qid);
+        expect(q, `Quest ${qid} must exist in quests.json`).toBeDefined();
+        expect(q?.objectives.length).toBeGreaterThan(0);
+        for (const obj of q?.objectives ?? []) {
+          expect(obj.completeOnFlag, `Objective ${obj.id} must have completeOnFlag`).toBeDefined();
+        }
+      }
+
+      // Verify Chapter 2 leads into Chapter 3
+      const ch2Verdict = questDb.quests.find((q) => q.id === 'quest_ch2_imperial_verdict');
+      expect(ch2Verdict?.followUpQuestId).toBe('quest_ch3_sepulcher_gate');
+    });
+
+    it('verifies all Chapter 3 dialogue node ids exist, have <= 2 responses and lines <= 220 chars', () => {
+      const ch3NodeIds = [
+        // Map 1: Sepulcher Gate
+        'ch3_gate_arrival',
+        'ch3_elder_echo_farewell',
+        'ch3_elder_farewell_reply',
+        'ch3_sepulcher_gate_locked',
+        'ch3_sepulcher_gate_open',
+        'ch3_memory_crystal_whisper',
+        // Map 2: Silent Necropolis
+        'ch3_neris_cornered',
+        'ch3_neris_rescued',
+        'ch3_neris_rescued_name',
+        'ch3_neris_rescued_door',
+        'ch3_neris_necropolis_hint',
+        'ch3_urn_clue_read',
+        'ch3_tax_receipt_read',
+        'ch3_regions_stele_read',
+        'ch3_tomb_owl_inspect',
+        'ch3_tomb_willow_ii_inspect',
+        'ch3_tomb_willow_inspect',
+        'ch3_tomb_almond_inspect',
+        'ch3_tomb_turtle_inspect',
+        'ch3_tomb_wrong_fog',
+        'ch3_tomb_willow_open',
+        'ch3_hall_gate_locked',
+        'ch3_hall_gate_opens',
+        'ch3_secret_vault_locked',
+        'ch3_secret_vault_opens',
+        'ch3_pigment_yellow_take',
+        // Map 3: Hall of Echoes
+        'ch3_echoes_arrival',
+        'ch3_acoustic_manual_read',
+        'ch3_pillar_left_inspect',
+        'ch3_pillar_right_inspect',
+        'ch3_pillar_resonance_success',
+        'ch3_vault_stairs_locked',
+        // Map 4: Memory Vaults
+        'ch3_vaults_arrival',
+        'ch3_hymn_scrap_read',
+        'ch3_geological_chart_read',
+        'ch3_echo_bell_iron',
+        'ch3_echo_bell_silver',
+        'ch3_echo_bell_copper',
+        'ch3_abyss_fall',
+        'ch3_faceless_keeper_confront',
+        'ch3_faceless_keeper_defeated',
+        'ch3_archive_ascent_locked',
+        'ch3_lullaby_crystal_listen',
+        'ch3_ember_take',
+        'ch3_forge_cold',
+        'ch3_forge_rekindled',
+        // Map 5: Great Archive
+        'ch3_archives_arrival',
+        'ch3_neris_archive_talk',
+        'ch3_blacklist_scroll_read',
+        'ch3_court_timeline_read',
+        'ch3_censorship_console_inspect',
+        'ch3_console_choose_a',
+        'ch3_console_choose_b',
+        'ch3_console_choose_c',
+        'ch3_censorship_wrong',
+        'ch3_censorship_success',
+        'ch3_royal_mausoleum_sealed',
+        'ch3_pigment_blue_take',
+        'ch3_portrait_piece_1',
+        'ch3_portrait_piece_2',
+        'ch3_portrait_piece_3',
+        'ch3_ghost_librarian_start',
+        'ch3_ghost_librarian_done',
+        'ch3_ghost_knight_start',
+        'ch3_ghost_knight_done',
+        // Map 6: Royal Mausoleum
+        'ch3_mausoleum_arrival',
+        'ch3_amnesiac_king_despair',
+        'ch3_king_doubt',
+        'ch3_queen_ribbon_take',
+        'ch3_royal_dispatch_read',
+        'ch3_king_confront',
+        'ch3_king_cleared',
+        'ch3_sanctum_door_locked',
+        'ch3_sanctum_door_opens',
+        'ch3_painter_note_read',
+        'ch3_pigment_red_take',
+        'ch3_canvas_inspect',
+        'ch3_canvas_layer_1',
+        'ch3_canvas_layer_2',
+        'ch3_canvas_layer_3',
+        'ch3_canvas_wrong',
+        'ch3_canvas_restored',
+        // Map 7: Choir Sanctum
+        'ch3_choir_boss_confront',
+        'ch3_choir_boss_reply',
+        'ch3_choir_boss_defeated',
+        'ch3_seal_restored',
+        // Map 8: Forgotten Vault
+        'ch3_forgotten_vault_arrival',
+        'ch3_needle_box_inspect',
+        'ch3_box_beat_1',
+        'ch3_box_beat_2',
+        'ch3_box_beat_3',
+        'ch3_box_beat_4',
+        'ch3_box_beat_5',
+        'ch3_box_wrong',
+        'ch3_needle_box_open',
+        'ch3_unwritten_monument_whisper',
+      ];
+
+      for (const id of ch3NodeIds) {
+        const node = dialogueDb.dialogues[id];
+        expect(node, `Dialogue node ${id} must exist in dialogue.json`).toBeDefined();
+        expect(
+          (node.responses ?? []).length,
+          `Dialogue node ${id} must have at most 2 responses`,
+        ).toBeLessThanOrEqual(2);
+        for (const line of node.lines) {
+          expect(line.length, `Line in ${id} exceeds 220 chars: "${line}"`).toBeLessThanOrEqual(
+            220,
+          );
+        }
+      }
+    });
+
+    it('runs through Chapter 3 puzzle flows (sculptor tomb, bell bridge timer, censorship console, King Alden, canvas, music box) with GameSession', () => {
+      const session = GameSession.newGame(createRealDatabase());
+
+      // 1. Sculptor tomb & hall gate opening
+      expect(session.inventory.hasItem('ancient_carving_chisel', 1)).toBe(false);
+      const tombGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch3_tomb_willow_open.effects!,
+      );
+      expect(tombGrant.some((g) => g.itemId === 'ancient_carving_chisel')).toBe(true);
+      expect(session.inventory.hasItem('ancient_carving_chisel', 1)).toBe(true);
+      expect(session.getFlag('solved_sculptor_tomb')).toBe(true);
+
+      session.applyDialogueEffects(dialogueDb.dialogues.ch3_hall_gate_opens.effects!);
+      expect(session.inventory.hasItem('ancient_carving_chisel', 1)).toBe(false);
+      expect(session.getFlag('opened_hall_gate')).toBe(true);
+
+      // 2. Bell bridge timer
+      const bellEffects = dialogueDb.dialogues.ch3_echo_bell_copper.effects!;
+      expect(bellEffects.startTimer).toEqual({ flag: 'ch3_bridge_up', ms: 8000 });
+      session.applyDialogueEffects(bellEffects);
+      expect(session.getFlag('crossed_memory_abyss')).toBe(true);
+
+      // 3. Censorship console puzzle (Wolf is correct)
+      session.applyDialogueEffects(dialogueDb.dialogues.ch3_censorship_success.effects!);
+      expect(session.getFlag('solved_censorship_ledger')).toBe(true);
+
+      // 4. King Alden dilemma
+      session.applyDialogueEffects(dialogueDb.dialogues.ch3_queen_ribbon_take.effects!);
+      expect(session.inventory.hasItem('queen_ribbon_item', 1)).toBe(true);
+
+      session.applyDialogueEffects(dialogueDb.dialogues.ch3_royal_dispatch_read.effects!);
+      expect(session.getFlag('read_royal_dispatch')).toBe(true);
+
+      const kingGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch3_king_cleared.effects!,
+      );
+      expect(session.inventory.hasItem('queen_ribbon_item', 1)).toBe(false);
+      expect(kingGrant.some((g) => g.itemId === 'royal_seal_crest')).toBe(true);
+      expect(session.inventory.hasItem('royal_seal_crest', 1)).toBe(true);
+      expect(session.getFlag('cleared_king_despair')).toBe(true);
+
+      // 5. Queen canvas restoration (Hidden charm)
+      session.applyDialogueEffects(dialogueDb.dialogues.ch3_pigment_yellow_take.effects!);
+      session.applyDialogueEffects(dialogueDb.dialogues.ch3_pigment_blue_take.effects!);
+      session.applyDialogueEffects(dialogueDb.dialogues.ch3_pigment_red_take.effects!);
+      expect(session.inventory.hasItem('pigment_ochre_yellow', 1)).toBe(true);
+      expect(session.inventory.hasItem('pigment_lapis_blue', 1)).toBe(true);
+      expect(session.inventory.hasItem('pigment_sulfur_red', 1)).toBe(true);
+
+      const charmGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch3_canvas_restored.effects!,
+      );
+      expect(session.inventory.hasItem('pigment_ochre_yellow', 1)).toBe(false);
+      expect(session.inventory.hasItem('pigment_lapis_blue', 1)).toBe(false);
+      expect(session.inventory.hasItem('pigment_sulfur_red', 1)).toBe(false);
+      expect(charmGrant.some((g) => g.itemId === 'pure_crystal_soul_charm')).toBe(true);
+      expect(session.inventory.hasItem('pure_crystal_soul_charm', 1)).toBe(true);
+      expect(session.getFlag('restored_queen_canvas')).toBe(true);
+
+      // 6. Music box rhythm beats (Hidden weapon)
+      const rapierGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch3_needle_box_open.effects!,
+      );
+      expect(rapierGrant.some((g) => g.itemId === 'memory_needle_rapier')).toBe(true);
+      expect(session.inventory.hasItem('memory_needle_rapier', 1)).toBe(true);
+      expect(session.getFlag('opened_memory_needle_box')).toBe(true);
+
+      // 7. Memory Seal restoration and Chapter 3 finale
+      session.applyDialogueEffects(dialogueDb.dialogues.ch3_seal_restored.effects!);
+      expect(session.getFlag('memory_seal_restored')).toBe(true);
+      expect(session.getFlag('learned_memory_resonance')).toBe(true);
     });
   });
 });

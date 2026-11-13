@@ -560,7 +560,8 @@
       "rewards": {
         "experience": 220,
         "items": ["causality_seal_shard"]
-      }
+      },
+      "followUpQuestId": "quest_ch3_sepulcher_gate"
     },
     {
       "id": "quest_ch2_innocent_baker",
@@ -596,6 +597,216 @@
       "rewards": {
         "experience": 80,
         "items": ["chrono_shard_minor"]
+      }
+    },
+    {
+      "id": "quest_ch3_sepulcher_gate",
+      "title": "Cổng Tiền Đình Lăng Mộ",
+      "description": "Nghe lời căn dặn từ dư ảnh Trưởng Lão và kích hoạt cơ cấu mở cổng vào Nghĩa Địa Trầm Lặng.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch3_elder_farewell",
+          "description": "Lắng nghe lời căn dặn từ dư ảnh Trưởng Lão",
+          "completed": false,
+          "completeOnFlag": "ch3_elder_echo_faded"
+        },
+        {
+          "id": "obj_ch3_open_sepulcher_gate",
+          "description": "Kích hoạt cơ cấu mở cổng Tiền Đình Lăng Mộ",
+          "completed": false,
+          "completeOnFlag": "opened_sepulcher_gate"
+        }
+      ],
+      "rewards": {
+        "experience": 100,
+        "items": []
+      },
+      "followUpQuestId": "quest_ch3_nameless_archivist"
+    },
+    {
+      "id": "quest_ch3_nameless_archivist",
+      "title": "Thủ Thư Không Tên",
+      "description": "Giải cứu nữ thủ thư Neris khỏi đám bóng ma ký ức và giải mã vị trí ngôi mộ của điêu khắc gia.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch3_save_neris",
+          "description": "Giải cứu thủ thư Neris tại Nghĩa Địa Trầm Lặng",
+          "completed": false,
+          "completeOnFlag": "saved_neris"
+        },
+        {
+          "id": "obj_ch3_solve_sculptor_tomb",
+          "description": "Tìm đúng mộ điêu khắc gia để lấy Đục Chạm Khắc Cổ",
+          "completed": false,
+          "completeOnFlag": "solved_sculptor_tomb"
+        }
+      ],
+      "rewards": {
+        "experience": 140,
+        "items": ["refined_chrono_shard"]
+      },
+      "followUpQuestId": "quest_ch3_echoing_vaults"
+    },
+    {
+      "id": "quest_ch3_echoing_vaults",
+      "title": "Lối Vào Hầm Ngầm",
+      "description": "Mở cổng vào Hành Lang Vang Vọng và kích hoạt cặp thạch trụ âm thoa để hạ màn đá mở cầu thang.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch3_open_hall_gate",
+          "description": "Cắm Đục Chạm Khắc Cổ mở cổng Hành Lang Vang Vọng",
+          "completed": false,
+          "completeOnFlag": "opened_hall_gate"
+        },
+        {
+          "id": "obj_ch3_solve_pillar_resonance",
+          "description": "Đánh trúng cặp thạch trụ trong cùng một nhịp thở",
+          "completed": false,
+          "completeOnFlag": "solved_pillar_resonance"
+        }
+      ],
+      "rewards": {
+        "experience": 160,
+        "items": []
+      },
+      "followUpQuestId": "quest_ch3_faceless_trial"
+    },
+    {
+      "id": "quest_ch3_faceless_trial",
+      "title": "Người Canh Ngục Không Mặt",
+      "description": "Vượt qua vực thẳm bụi tinh thể trong thời gian giới hạn và đánh bại Người Canh Ngục Không Mặt.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch3_cross_memory_abyss",
+          "description": "Gõ chuông đồng ngưng kết bụi tinh thể vượt vực thẳm",
+          "completed": false,
+          "completeOnFlag": "crossed_memory_abyss"
+        },
+        {
+          "id": "obj_ch3_defeat_faceless_keeper",
+          "description": "Đánh bại Người Canh Ngục Không Mặt",
+          "completed": false,
+          "completeOnFlag": "defeated_faceless_keeper"
+        }
+      ],
+      "rewards": {
+        "experience": 200,
+        "items": ["imperial_honey_bread", "imperial_honey_bread"]
+      },
+      "followUpQuestId": "quest_ch3_archive_censorship"
+    },
+    {
+      "id": "quest_ch3_archive_censorship",
+      "title": "Bản Kiểm Duyệt Thư Viện",
+      "description": "Đối chiếu niên biểu sự kiện với Sổ Đen để xác định kẻ phản bội thật và mở cổng Hoàng Lăng.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch3_solve_censorship_ledger",
+          "description": "Đặt ấn phản nghịch lên đúng linh thú trên bàn điều khiển",
+          "completed": false,
+          "completeOnFlag": "solved_censorship_ledger"
+        }
+      ],
+      "rewards": {
+        "experience": 220,
+        "items": ["imperial_honey_bread", "imperial_honey_bread"]
+      },
+      "followUpQuestId": "quest_ch3_king_dilemma"
+    },
+    {
+      "id": "quest_ch3_king_dilemma",
+      "title": "Nỗi Đau Vua Alden",
+      "description": "Thu thập di vật của Hoàng hậu và nhật trình điều binh để tẩy sạch ký ức giả cho Vua Alden.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch3_clear_king_despair",
+          "description": "Minh oan cho Vua Alden và nhận Huy Hiệu Hoàng Gia",
+          "completed": false,
+          "completeOnFlag": "cleared_king_despair"
+        }
+      ],
+      "rewards": {
+        "experience": 260,
+        "items": ["sunset_dried_fish", "sunset_dried_fish", "sunset_dried_fish"]
+      },
+      "followUpQuestId": "quest_ch3_nameless_choir"
+    },
+    {
+      "id": "quest_ch3_nameless_choir",
+      "title": "Khúc Ca Hàng Vạn Linh Hồn",
+      "description": "Tiến vào Thánh Điện Hợp Xướng, đánh bại Dàn Hợp Xướng Vô Danh và khôi phục Lõi Memory Seal.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch3_restore_memory_seal",
+          "description": "Khôi phục Lõi Memory Seal và nhận Memory Resonance",
+          "completed": false,
+          "completeOnFlag": "memory_seal_restored"
+        }
+      ],
+      "rewards": {
+        "experience": 350,
+        "items": ["memory_seal_shard"]
+      }
+    },
+    {
+      "id": "quest_ch3_lost_lullaby",
+      "title": "Điệu Hát Ru Thất Lạc",
+      "description": "Tìm lại giai điệu hát ru xưa cũ từ tinh thể âm thanh để an ủi linh hồn nữ thủ thư già.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch3_comfort_ghost_librarian",
+          "description": "Trao lại lời hát ru cho linh hồn nữ thủ thư già",
+          "completed": false,
+          "completeOnFlag": "comforted_ghost_librarian"
+        }
+      ],
+      "rewards": {
+        "experience": 120,
+        "items": ["memory_ink_flask"]
+      }
+    },
+    {
+      "id": "quest_ch3_shattered_portrait",
+      "title": "Bức Họa Nứt Vỡ",
+      "description": "Tìm 3 mảnh chân dung nứt vỡ rải rác trong khu di tích để phục hồi ký ức cho hồn kỵ sĩ vô danh.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch3_restore_knight_portrait",
+          "description": "Trao đủ 3 mảnh chân dung cho linh hồn kỵ sĩ",
+          "completed": false,
+          "completeOnFlag": "restored_knight_portrait"
+        }
+      ],
+      "rewards": {
+        "experience": 130,
+        "items": ["ancient_amber_resin"]
+      }
+    },
+    {
+      "id": "quest_ch3_forgotten_craftsman",
+      "title": "Lò Rèn Ký Ức",
+      "description": "Tìm lại Tàn Lửa Ký Ức dưới Hầm Ngầm để thắp sáng lại lò rèn ngầm đã nguội lạnh.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch3_rekindle_forge",
+          "description": "Đặt Tàn Lửa Ký Ức vào thắp sáng lại lò rèn cổ",
+          "completed": false,
+          "completeOnFlag": "rekindled_memory_forge"
+        }
+      ],
+      "rewards": {
+        "experience": 150,
+        "items": ["refined_chrono_shard", "refined_chrono_shard"]
       }
     }
   ]

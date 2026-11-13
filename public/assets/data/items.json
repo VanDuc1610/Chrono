@@ -348,6 +348,277 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1
+    },
+    {
+      "id": "sculptor_apprentice_diary",
+      "name": "Nhật Ký Người Học Việc Điêu Khắc",
+      "type": "document",
+      "description": "Hai trang nhật ký viết dở của người thợ học việc, kể về ước nguyện giản dị của vị danh sư điêu khắc.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Nhật ký học trò điêu khắc:\nThầy dặn khi nhắm mắt, đừng dựng tượng đài xa hoa. Thầy chỉ muốn khắc lên bia một loài cây của quê nhà, nơi thầy lớn lên bên dòng sông thuở ấu thơ.",
+        "Thầy bảo loài cây ấy đã che mát suốt những năm tháng nghèo khó đầu đời. Tiếc thay, người đời sau chỉ mải nhìn nét đục tinh xảo mà quên mất nguồn cội của người thợ."
+      ]
+    },
+    {
+      "id": "sculptor_tax_receipt",
+      "name": "Hóa Đơn Thuế Sinh Phần Lô III",
+      "type": "document",
+      "description": "Biên nhận đóng thuế sinh phần đã cũ nát, ghi rõ quê quán và vị trí lô mộ của nghệ nhân điêu khắc triều đình.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Hóa đơn đóng thuế sinh phần:\nNgười đăng ký: Nghệ nhân điêu khắc triều đình.\nQuê quán: Làng Bến Sông Mờ.\nVị trí phần mộ đã trả đủ phí: Lô III tại Nghĩa Địa Trầm Lặng."
+      ]
+    },
+    {
+      "id": "censor_blacklist_doc",
+      "name": "Sổ Đen Kiểm Duyệt Triều Đình",
+      "type": "document",
+      "description": "Văn bản mật của Ty Kiểm Duyệt ghi lại bốn mật danh tướng lĩnh bị nghi ngờ mưu phản trong biến cố Đại Loạn.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Mật lệnh Thư Viện Kiểm Duyệt:\nBốn tướng lĩnh mang mật danh: Huyết Ưng, Dạ Lang, Bạch Lộc, Xích Xà. Chỉ một kẻ mang dã tâm xúi giục phản loạn. Chú ý: Huyết Ưng nắm ấn cấm quân kinh kỳ.",
+        "Lệnh tối mật của triều đình: Bất cứ ai không có mặt ở kinh đô vào đúng tháng biến loạn xảy ra đều phải được xóa tên khỏi sổ đen phản nghịch. Chỉ trừng phạt kẻ ở lại châm ngòi."
+      ]
+    },
+    {
+      "id": "court_timeline_doc",
+      "name": "Niên Biểu Đại Loạn Năm 312",
+      "type": "document",
+      "description": "Trích lục niên biểu triều đình ghi chép chính xác hành tung và thời gian vắng mặt của các tướng lĩnh năm 312.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Niên biểu Đại Loạn Năm 312:\nBiến cố kinh thành bùng phát vào Tháng Ba Năm 312.\nHuyết Ưng: Trấn giữ biên cương phía bắc từ Tháng Giêng đến hết Tháng Sáu Năm 312 mới rút quân.",
+        "Dạ Lang: Về kinh thành hội kiến từ Tháng Hai và ở lại đến Tháng Năm Năm 312.\nBạch Lộc: Đi sứ phương nam từ Tháng Chạp Năm 311 đến Tháng Tám Năm 312.\nXích Xà: Cáo bệnh về quê từ Tháng Hai Năm 312."
+      ]
+    },
+    {
+      "id": "royal_dispatch_log",
+      "name": "Nhật Trình Điều Binh Đêm Trăng Khuyết",
+      "type": "document",
+      "description": "Nhật trình quân lệnh mang triện son xác nhận Vua Alden đang ngoài ải xa vào đêm Hoàng hậu gặp nạn.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Nhật trình điều binh đêm trăng khuyết:\nĐêm Hoàng hậu băng hà, bệ hạ Alden đích thân dẫn kỵ binh trấn áp phiến quân ngoài ải xa suốt ba ngày đêm. Bản lệnh có đủ triện son điểm chỉ của mười hai tướng lĩnh.",
+        "Kẻ dâng chén rượu độc trong yến tiệc hoàng cung mang vết chàm hình hai con rắn quấn nhau ở cổ tay. Nhà vua chưa từng hồi cung trong đêm định mệnh đó. Bản án lưu truyền đã bị bóp méo ký ức."
+      ]
+    },
+    {
+      "id": "lost_lullaby_lyrics",
+      "name": "Lời Ru Của Người Mẹ Quên Lãng",
+      "type": "document",
+      "description": "Giai điệu và nhịp vỗ của bài hát ru cổ xưa, gồm các tiếng gõ ngắn và dài đan xen để mở chiếc hộp bí mật.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Lời ru người mẹ — Điệu ru cổ xưa:\n'Gió ru hoa bay... (ngắn)\nMây trôi về ngàn... (ngắn)\nBình minh ấm áp con hỡi ngủ ngoan... (dài)\nSóng xô bến bờ... (ngắn)\nTrăng soi giấc mơ muôn đời... (dài)'",
+        "Ghi chú của người chép nhạc:\nMỗi nhịp vỗ nhẹ tương ứng tiếng gõ ngắn, mỗi điệu ngân nga tương ứng tiếng gõ dài. Nhịp gõ đúng để mở chiếc hộp là: Ngắn - Ngắn - Dài - Ngắn - Dài."
+      ]
+    },
+    {
+      "id": "court_painter_note",
+      "name": "Ghi Chú Của Họa Sĩ Cung Đình",
+      "type": "document",
+      "description": "Chỉ dẫn pha trộn ba lớp màu khoáng chất tự nhiên để phục chế bức chân dung nguyên bản của Hoàng hậu.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Sổ tay họa sĩ vẽ chân dung Hoàng hậu:\nKhi vẽ bức chân dung sơn dầu, ta tuân theo phép hòa sắc ba lớp: Lớp nền phủ Vàng Đất ấm áp, lớp áo khoác tô Lam Ngọc quý phái, và lớp môi son điểm Đỏ Lưu Huỳnh rực rỡ.",
+        "Nếu vẽ sai thứ tự các lớp màu, bức tranh sẽ bị đục ngầu và mất đi linh khí nguyên bản. Thứ tự phục chế đúng phải là: Vàng Đất (nền) -> Lam Ngọc (áo) -> Đỏ Lưu Huỳnh (môi son)."
+      ]
+    },
+    {
+      "id": "miner_hymn_scrap",
+      "name": "Mảnh Thánh Ca Thợ Mỏ",
+      "type": "document",
+      "description": "Mảnh giấy da cháy cạnh chép khúc hát cổ của thợ mỏ, nói về tác dụng của ba loại chuông kim loại qua vực thẳm.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Mảnh thánh ca thợ mỏ:\n'Chuông sắt vang rền gọi đá lở rơi vực sâu.\nChuông bạc rung rinh đánh thức cõi hư vô ảo mộng.\nChỉ có chuông đồng ngưng kết hạt bụi ký ức, bắc thành nhịp cầu đá vững bước qua đèo.'"
+      ]
+    },
+    {
+      "id": "miner_geological_chart",
+      "name": "Biểu Đồ Địa Chất Thạch Cốc",
+      "type": "document",
+      "description": "Biểu đồ khảo sát quặng kim loại chỉ ra màu sắc đặc trưng của đồng, sắt và bạc khi kết tủa trong lòng đá.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Biểu đồ địa chất hầm mỏ:\nQuặng đồng khi oxy hóa kết tinh nhuộm đá màu gạch nung sẫm.\nQuặng sắt rỉ sét để lại vệt xám tro lạnh lẽo.\nQuặng bạc kết tủa thành từng vảy trắng lấp lánh như sương muối."
+      ]
+    },
+    {
+      "id": "acoustic_manual_page",
+      "name": "Trang Sổ Tay Âm Học Thạch Trụ",
+      "type": "document",
+      "description": "Trang ghi chép cơ chế âm thoa cộng hưởng của cặp thạch trụ cổ, đòi hỏi tác động đồng thời trong thời gian cực ngắn.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Sổ tay âm học thạch trụ:\nHai cột thạch trụ giữa đại sảnh là một cặp âm thoa cộng hưởng. Khi sóng âm truyền qua lại đồng điệu, màn đá ngầm mới chịu hạ xuống. Đánh một trụ rồi dừng lại thì âm vang sẽ lập tức tiêu tán.",
+        "Cần đánh trúng cả hai trụ trong cùng một hơi thở — không quá hai nhịp tim (2 giây). Chỉ những kẻ nắm vững kỹ thuật lướt nhanh mới kích hoạt được hiện tượng cộng hưởng này."
+      ]
+    },
+    {
+      "id": "ancient_carving_chisel",
+      "name": "Đục Chạm Khắc Cổ",
+      "type": "puzzle",
+      "description": "Mũi đục bằng thép xanh của vị danh sư điêu khắc, dùng để khớp vào ổ khóa mở cổng Hành Lang Vang Vọng.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "queen_ribbon_item",
+      "name": "Dải Ruy Băng Lụa Bạc",
+      "type": "puzzle",
+      "description": "Dải ruy băng thêu chỉ bạc của Hoàng hậu mang lời trăn trối, bằng chứng giải tỏa nỗi oan của Vua Alden.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "royal_seal_crest",
+      "name": "Ấn Tín Hoàng Gia Alden",
+      "type": "key_item",
+      "description": "Huy hiệu chạm nổi sư tử vương miện của Vua Alden, dùng để mở phong ấn bước vào Thánh Điện Hợp Xướng.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "pigment_ochre_yellow",
+      "name": "Sắc Tố Vàng Đất",
+      "type": "puzzle",
+      "description": "Bột khoáng vàng đất ấm áp thu lượm từ Nghĩa Địa Trầm Lặng, dùng làm lớp nền phục chế tranh.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "pigment_lapis_blue",
+      "name": "Sắc Tố Lam Ngọc",
+      "type": "puzzle",
+      "description": "Bột lam ngọc nghiền mịn từ Thư Viện Ký Ức, dùng làm lớp màu áo choàng Hoàng hậu.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "pigment_sulfur_red",
+      "name": "Sắc Tố Đỏ Lưu Huỳnh",
+      "type": "puzzle",
+      "description": "Bột khoáng đỏ son lấp lánh thu lượm tại Hoàng Lăng, dùng làm lớp môi son hoàn thiện bức chân dung.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "forgotten_vault_key",
+      "name": "Chìa Khóa Mật Thất Quên Lãng",
+      "type": "puzzle",
+      "description": "Chìa khóa khắc hoa văn rỗng do hồn kỵ sĩ trao lại, dùng mở lối ngầm vào Kho Ký Ức Bị Xóa Bỏ.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "memory_ember",
+      "name": "Tàn Lửa Ký Ức",
+      "type": "puzzle",
+      "description": "Ngọn lửa lam nhạt đọng lại trong hầm ngầm, dùng để thắp sáng lại lò rèn ký ức cổ xưa.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "refined_chrono_shard",
+      "name": "Mảnh Chrono Tinh Khiết",
+      "type": "consumable",
+      "description": "Tinh thể Chrono được gột rửa tạp chất trong dòng chảy ký ức. Hồi phục 120 HP tức thì.",
+      "value": 75,
+      "stackable": true,
+      "maxStack": 20,
+      "effects": {
+        "healAmount": 120
+      }
+    },
+    {
+      "id": "memory_ink_flask",
+      "name": "Bình Mực Ký Ức",
+      "type": "consumable",
+      "description": "Bình mực thơm dịu chắt lọc từ những trang sách cổ ngàn năm. Hồi phục 80 HP và 20 MP.",
+      "value": 90,
+      "stackable": true,
+      "maxStack": 20,
+      "effects": {
+        "healAmount": 80,
+        "mpAmount": 20
+      }
+    },
+    {
+      "id": "ancient_amber_resin",
+      "name": "Nhựa Hổ Phách Hóa Thạch",
+      "type": "material",
+      "description": "Khối nhựa cây hóa thạch lấp lánh ánh kim sa, chứa đựng bụi thời gian nguyên thủy dùng để chế tác bùa chú.",
+      "value": 80,
+      "stackable": true,
+      "maxStack": 50
+    },
+    {
+      "id": "memory_seal_shard",
+      "name": "Mảnh Ấn Ký Ức",
+      "type": "key_item",
+      "description": "Mảnh tinh thể lam ngọc kết tinh từ Lõi Memory Seal, đánh dấu sự cộng hưởng với Quyền Năng Ký Ức.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "memory_needle_rapier",
+      "name": "Hoài Niệm Kiếm",
+      "type": "weapon",
+      "description": "Thanh kiếm liễu bằng thép đen giấu trong hộp nhạc cổ. Lưỡi kiếm mảnh mai như mũi kim nhưng tốc độ vung chém kinh người.",
+      "value": 140,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 11,
+        "reach": 38,
+        "swingMs": 330
+      }
+    },
+    {
+      "id": "pure_crystal_soul_charm",
+      "name": "Bùa Tinh Thể Hồn Nhiên",
+      "type": "charm",
+      "description": "Chiếc bùa ngọc bừng sáng sau khi phục hồi trọn vẹn bức chân dung Hoàng hậu, mang lại sức sống dồi dào và phòng hộ vững vàng.",
+      "value": 130,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 22,
+        "maxMp": 12,
+        "defense": 3,
+        "speed": 2
+      }
     }
   ]
 }
