@@ -8,6 +8,8 @@
     "hud.expMax": "TỐI ĐA",
     "hud.controls": "[WASD/Mũi tên] Di chuyển | [E/Space] Tương tác | [I/B] Túi đồ | [Q] Nhiệm vụ | [K] Lưu | [ESC] Menu",
     "quest.label": "NHIỆM VỤ HIỆN TẠI",
+    "quest.labelMain": "NHIỆM VỤ CHÍNH",
+    "quest.labelSide": "NHIỆM VỤ PHỤ",
     "quest.none": "Không có nhiệm vụ",
     "notify.newQuest": "NHIỆM VỤ MỚI",
     "notify.objectiveDone": "HOÀN THÀNH MỤC TIÊU",

@@ -925,6 +925,8 @@ export class ExplorationScene extends Phaser.Scene {
     if (this.isTransitioning) return;
     this.beginSceneExit();
     this.session.setFlag(chapter === 0 ? FLAGS.prologueComplete : `chapter${chapter}_complete`);
+    // The story moves on: unfinished quests of this chapter must not follow Peter.
+    this.session.closeFinishedChapters();
     this.cameras.main.fadeOut(900, 0, 0, 0);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
       this.scene.start('PrologueEndScene', { chapter });

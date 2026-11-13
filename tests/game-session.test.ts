@@ -314,3 +314,62 @@ describe('Chapter level caps', () => {
     expect(session.level).toBe(13);
   });
 });
+
+describe('Main and side quests per chapter', () => {
+  it('tags every quest; main quests form one chain from the first quest to the last chapter', () => {
+    const quests = (questsJson as unknown as QuestDatabase).quests;
+    for (const q of quests) {
+      expect(['main', 'side'], q.id).toContain(q.kind);
+      expect(typeof q.chapter, q.id).toBe('number');
+    }
+    // Main quests chain one into the next; only the Prologue and Chapter 1 openers (started by
+    // dialogue) have no main predecessor.
+    const mains = quests.filter((q) => q.kind === 'main');
+    const followed = new Set(mains.map((q) => q.followUpQuestId));
+    const openers = mains.filter((q) => !followed.has(q.id)).map((q) => q.id);
+    expect(openers).toEqual(['quest_prologue_awaken', 'quest_ch1_sunset_gate']);
+    for (const q of quests.filter((x) => x.kind === 'side')) {
+      expect(q.followUpQuestId, q.id).toBeUndefined();
+    }
+  });
+
+  it('closes a finished chapter: main quests done, side quests missed, next main quest started', () => {
+    const db = createRealDatabase();
+    const session = GameSession.newGame(db);
+    session.quests.startQuest('quest_ch1_fog_beacon');
+    session.quests.startQuest('quest_ch1_second_dinner');
+    session.quests.startQuest('quest_ch2_innocent_baker');
+    session.setFlag(FLAGS.prologueComplete);
+    session.setFlag('continuum_seal_restored');
+    session.closeFinishedChapters();
+    expect(session.quests.getQuestStage('quest_ch1_fog_beacon')).toBe('completed');
+    expect(session.quests.getQuestStage('quest_ch1_second_dinner')).toBe('failed');
+    expect(session.quests.getQuestStage('quest_ch2_innocent_baker')).toBe('started');
+    // The whole Chapter 1 chain is closed and the story resumes with Chapter 2's first quest.
+    expect(session.quests.getQuestStage('quest_ch1_bellkeeper')).toBe('completed');
+    expect(session.quests.getQuestStage('quest_ch2_outskirts_gate')).toBe('started');
+    expect(session.quests.getActiveQuests().map((q) => q.kind)).toEqual(
+      [...session.quests.getActiveQuests().map((q) => q.kind)].sort(),
+    ); // main before side
+  });
+
+  it('cleans up an old save that still lists Chapter 1 quests after reaching Chapter 2', () => {
+    const db = createRealDatabase();
+    const session = GameSession.newGame(db);
+    session.setFlag(FLAGS.prologueComplete);
+    session.setFlag('continuum_seal_restored');
+    session.level = 9;
+    session.quests.startQuest('quest_ch1_bellkeeper');
+    session.quests.startQuest('quest_ch1_empty_photo');
+    const loaded = GameSession.fromSave(
+      db,
+      session.toSaveData({ mapId: 'map_ch2_imperial_outskirts', x: 0, y: 0 }),
+    );
+    const open = loaded.quests.getActiveQuests().map((q) => q.id);
+    expect(open.some((q) => q.startsWith('quest_ch1_') || q.startsWith('quest_prologue_'))).toBe(
+      false,
+    );
+    expect(open).toContain('quest_ch2_outskirts_gate');
+    expect(loaded.maxLevel).toBe(12);
+  });
+});

@@ -23,12 +23,17 @@ export class QuestTracker {
       .setScrollFactor(0)
       .setDepth(90);
     const bg = createPanel(scene, 0, 0, WIDTH, HEIGHT);
-    const label = scene.add.text(10, 8, t('quest.label'), {
+    this.labels = {
+      main: t('quest.labelMain'),
+      side: t('quest.labelSide'),
+      done: t('quest.label'),
+    };
+    const label = (this.label = scene.add.text(10, 8, this.labels.done, {
       fontFamily: 'monospace',
       fontSize: '9px',
       color: '#00d2ff',
       letterSpacing: 1,
-    });
+    }));
     this.title = scene.add.text(10, 20, '', {
       fontFamily: 'monospace',
       fontSize: '11px',
@@ -49,6 +54,8 @@ export class QuestTracker {
   }
 
   private readonly noneText: string;
+  private readonly label: Phaser.GameObjects.Text;
+  private readonly labels: { main: string; side: string; done: string };
 
   /** Shows the next active quest; returns false when there is nothing to cycle. */
   public cycle(): boolean {
@@ -71,10 +78,15 @@ export class QuestTracker {
 
     this.rows.forEach((r) => r.setText(''));
     if (!quest) {
+      this.label.setText(this.labels.done).setColor('#00d2ff');
       this.title.setText(this.noneText);
       return;
     }
     const done = quest.stage === 'completed';
+    const side = quest.kind === 'side';
+    this.label
+      .setText(done ? this.labels.done : side ? this.labels.side : this.labels.main)
+      .setColor(!done && !side ? '#ffd666' : '#00d2ff');
     const others = active.length > 1 ? `  (+${active.length - 1})` : '';
     fitText(this.title, done ? `✓ ${quest.title}` : `${quest.title}${others}`);
     quest.objectives.forEach((obj, i) => {

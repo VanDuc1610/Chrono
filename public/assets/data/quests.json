@@ -3,6 +3,8 @@
     {
       "id": "quest_prologue_awaken",
       "title": "Buổi Sáng Ở Tiệm Đồng Hồ",
+      "kind": "main",
+      "chapter": 0,
       "description": "Xem lại sổ ghi đơn hàng trên bàn và lấy chiếc chìa khóa đồng thau trước khi xuống mở tiệm.",
       "stage": "started",
       "objectives": [
@@ -28,6 +30,8 @@
     {
       "id": "quest_prologue_town",
       "title": "Buổi Sáng Ngoài Thị Trấn",
+      "kind": "main",
+      "chapter": 0,
       "description": "Ghé thăm Cô Ba, đón vị khách lạ tại tiệm và giao chiếc đồng hồ đã sửa cho khách.",
       "stage": "inactive",
       "objectives": [
@@ -59,6 +63,8 @@
     {
       "id": "quest_prologue_timestop",
       "title": "Giây Phút Thời Gian Ngừng",
+      "kind": "main",
+      "chapter": 0,
       "description": "Cả thị trấn bỗng đứng im giữa tiếng sóng đóng băng và một Bóng Đen lao ra phục kích khi cậu không có vũ khí. Hãy sống sót qua giây phút này.",
       "stage": "inactive",
       "objectives": [
@@ -84,6 +90,8 @@
     {
       "id": "quest_prologue_first_hunt",
       "title": "Xua Tan Bóng Đen Ngoài Phố",
+      "kind": "main",
+      "chapter": 0,
       "description": "Trang bị Thanh Kiếm Gãy trong túi đồ ([I]) và sát cánh cùng Trưởng Lão dọn sạch lũ Bóng Đen ngoài thị trấn đóng băng.",
       "stage": "inactive",
       "objectives": [
@@ -103,6 +111,8 @@
     {
       "id": "quest_prologue_watch",
       "title": "Đồng Hồ Của Ông Nội",
+      "kind": "main",
+      "chapter": 0,
       "description": "Quay về tiệm kiểm tra chiếc đồng hồ quả quýt vừa tự chạy ngược và học Đòn Thời Gian từ Trưởng Lão.",
       "stage": "inactive",
       "objectives": [
@@ -128,6 +138,8 @@
     {
       "id": "quest_prologue_forest",
       "title": "Học Việc Trong Rừng",
+      "kind": "main",
+      "chapter": 0,
       "description": "Theo chân Trưởng Lão qua Rừng Quên Lãng, thực hành Nhãn Thời Gian và đánh bại Bóng Đen chắn lối.",
       "stage": "inactive",
       "objectives": [
@@ -147,6 +159,8 @@
     {
       "id": "quest_prologue_awakening",
       "title": "Điện Thờ Của Trưởng Lão",
+      "kind": "main",
+      "chapter": 0,
       "description": "Làm quen với Bàn Thờ Khoảnh Khắc và lắng nghe Trưởng Lão giảng dạy tại Điện Thờ Đổ Nát.",
       "stage": "inactive",
       "objectives": [
@@ -170,6 +184,8 @@
     {
       "id": "quest_prologue_silence",
       "title": "Bài Kiểm Tra Ở Sảnh Đông",
+      "kind": "main",
+      "chapter": 0,
       "description": "Đánh bại Bóng Đen Thời Gian ở sảnh đông điện thờ theo thử thách của Trưởng Lão trước khi mở Cổng Ngưỡng.",
       "stage": "inactive",
       "objectives": [
@@ -189,6 +205,8 @@
     {
       "id": "quest_prologue_sentinel",
       "title": "Người Gác Biển",
+      "kind": "main",
+      "chapter": 0,
       "description": "Lên Ngọn Hải Đăng Cổ cùng Trưởng Lão, giải thoát Vệ Binh Chìm Trong Sóng để trả lại dòng chảy cho thị trấn.",
       "stage": "inactive",
       "objectives": [
@@ -208,6 +226,8 @@
     {
       "id": "quest_prologue_unwritten",
       "title": "Bản Ghi Không Tên",
+      "kind": "main",
+      "chapter": 0,
       "description": "Thị trấn đã chạy lại bình thường. Đọc bia đá trên đỉnh hải đăng và bước qua Cổng Ngưỡng cùng Trưởng Lão.",
       "stage": "inactive",
       "objectives": [
@@ -226,6 +246,8 @@
     {
       "id": "quest_prologue_remnants",
       "title": "Những Bài Học Về Sáu Quyền Năng",
+      "kind": "side",
+      "chapter": 0,
       "description": "Cùng Trưởng Lão tìm hiểu các bia đá, bản vẽ cổ và dư chấn nằm rải rác trong Điện Thờ Đổ Nát.",
       "stage": "inactive",
       "objectives": [
@@ -256,6 +278,8 @@
     {
       "id": "quest_prologue_forgotten_child",
       "title": "Đôi Dép Nhỏ Trước Hiên",
+      "kind": "side",
+      "chapter": 0,
       "description": "Đôi dép trẻ con nằm lẻ loi trước hiên một ngôi nhà không ai nhận trong thị trấn đóng băng.",
       "stage": "inactive",
       "objectives": [
@@ -274,6 +298,8 @@
     {
       "id": "quest_ch1_sunset_gate",
       "title": "Bờ Biển Hoàng Hôn",
+      "kind": "main",
+      "chapter": 1,
       "description": "Bước ra khỏi Cổng Ngưỡng tới bờ biển chìm trong hoàng hôn đứng im. Nghe Trưởng Lão chỉ dẫn và tìm vật lệch nhịp để phá vòng lặp đường đi.",
       "stage": "inactive",
       "objectives": [
@@ -299,6 +325,8 @@
     {
       "id": "quest_ch1_abandoned_village",
       "title": "Ngôi Làng Trong Hoàng Hôn",
+      "kind": "main",
+      "chapter": 1,
       "description": "Làng chài bỏ hoang bị chia làm ba lớp thời gian chồng lấn. Kích hoạt Mỏ Neo Thời Gian giữa làng và đồng bộ cột chuông ngã ba để mở đường lên hải đăng.",
       "stage": "inactive",
       "objectives": [
@@ -324,6 +352,8 @@
     {
       "id": "quest_ch1_fog_beacon",
       "title": "Ngọn Đèn Trong Sương",
+      "kind": "main",
+      "chapter": 1,
       "description": "Nói chuyện với Người Gác Hải Đăng Già trên đỉnh dốc và sửa bánh xe thủy triều để rút nước mở lối xuống di tích đáy biển.",
       "stage": "inactive",
       "objectives": [
@@ -349,6 +379,8 @@
     {
       "id": "quest_ch1_sunken_ruins",
       "title": "Nhịp Chuông Đáy Biển",
+      "kind": "main",
+      "chapter": 1,
       "description": "Đi theo sổ trực đèn hải đăng và gõ đúng thứ tự ba trụ chuông trong Hành Lang Đáy Biển để mở phong ấn vào thánh điện.",
       "stage": "inactive",
       "objectives": [
@@ -368,6 +400,8 @@
     {
       "id": "quest_ch1_bellkeeper",
       "title": "Tiếng Chuông Hoàng Hôn Cuối",
+      "kind": "main",
+      "chapter": 1,
       "description": "Đối diện The Sunken Bellkeeper dưới Thánh Điện Chuông Chìm, giải thoát cho ông và khôi phục Lõi Continuum Seal.",
       "stage": "inactive",
       "objectives": [
@@ -393,6 +427,8 @@
     {
       "id": "quest_ch1_fisherman_letter",
       "title": "Lá Thư Người Đánh Cá",
+      "kind": "side",
+      "chapter": 1,
       "description": "Hồn ngư dân bên bến thuyền vẫn day dứt vì mảnh giấy dặn nhà chưa kịp gửi trước cơn bão. Hãy quay về lớp Quá Khứ tìm lá thư và đưa tin lại cho chú.",
       "stage": "inactive",
       "objectives": [
@@ -417,6 +453,8 @@
     {
       "id": "quest_ch1_empty_photo",
       "title": "Bức Ảnh Thờ Trống",
+      "kind": "side",
+      "chapter": 1,
       "description": "Trên bàn thờ nhỏ trong làng có khung ảnh thờ đã phai trắng khuôn mặt. Dùng Nhãn Thời Gian để chạm vào dấu tích ký ức còn sót lại.",
       "stage": "inactive",
       "objectives": [
@@ -435,6 +473,8 @@
     {
       "id": "quest_ch1_second_dinner",
       "title": "Bữa Tối Thứ Hai",
+      "kind": "side",
+      "chapter": 1,
       "description": "Bà Tư chiều nào cũng dọn mâm cơm hai chén mà không nhớ nổi mình đang đợi ai. Hãy xem lớp Quá Khứ rồi quay về nhắc lại giúp bà.",
       "stage": "inactive",
       "objectives": [
@@ -459,6 +499,8 @@
     {
       "id": "quest_ch2_outskirts_gate",
       "title": "Con Đường Vào Đế Chế",
+      "kind": "main",
+      "chapter": 2,
       "description": "Lắng nghe lời căn dặn cuối cùng của Trưởng Lão tại Vùng Ngoại Ô Bia Đá và tìm lối vào hầm mộ bên dưới thành phố.",
       "stage": "inactive",
       "objectives": [
@@ -478,6 +520,8 @@
     {
       "id": "quest_ch2_rebellion_contact",
       "title": "Lửa Dưới Hầm Ngầm",
+      "kind": "main",
+      "chapter": 2,
       "description": "Giải cứu Lyra khỏi lũ búp bê cơ khí và giải câu đố ổ khóa ba trăm năm để mở đường lên quảng trường.",
       "stage": "inactive",
       "objectives": [
@@ -503,6 +547,8 @@
     {
       "id": "quest_ch2_praetor_plea",
       "title": "Lời Cầu Của Thẩm Phán",
+      "kind": "main",
+      "chapter": 2,
       "description": "Gặp Thẩm Phán Lưu Đày dưới chân tượng Hoàng Đế và nhận Bút Khắc cùng lệnh bài vào Đại Thư Viện.",
       "stage": "inactive",
       "objectives": [
@@ -528,6 +574,8 @@
     {
       "id": "quest_ch2_archive_infiltration",
       "title": "Xóa Tên Khỏi Bản Án",
+      "kind": "main",
+      "chapter": 2,
       "description": "Đột nhập Đại Thư Viện Nhân Quả, tìm phiến đá phán quyết và tẩy xóa nguyên nhân để hạ màn chắn tội danh.",
       "stage": "inactive",
       "objectives": [
@@ -547,6 +595,8 @@
     {
       "id": "quest_ch2_imperial_verdict",
       "title": "Cán Cân Gãy",
+      "kind": "main",
+      "chapter": 2,
       "description": "Đối đầu Bản Án Đế Chế tại Điện Phán Quyết Tối Cao, khôi phục Lõi Causality Seal và giải phóng vùng đất.",
       "stage": "inactive",
       "objectives": [
@@ -566,6 +616,8 @@
     {
       "id": "quest_ch2_innocent_baker",
       "title": "Mẻ Bánh Chưa Khét",
+      "kind": "side",
+      "chapter": 2,
       "description": "Hồn ma ông lão thợ bánh vẫn đau đáu vì mẻ bánh bị kết tội làm khét lò. Hãy giúp ông an lòng rời đi.",
       "stage": "inactive",
       "objectives": [
@@ -584,6 +636,8 @@
     {
       "id": "quest_ch2_automaton_duty",
       "title": "Mệnh Lệnh Năm Mươi Năm",
+      "kind": "side",
+      "chapter": 2,
       "description": "Cỗ máy tuần tra hỏng hóc lặp đi lặp lại lệnh truy bắt một đứa trẻ năm mươi năm trước. Hãy giúp nó hoàn tất nhiệm vụ.",
       "stage": "inactive",
       "objectives": [
@@ -602,6 +656,8 @@
     {
       "id": "quest_ch3_sepulcher_gate",
       "title": "Cổng Tiền Đình Lăng Mộ",
+      "kind": "main",
+      "chapter": 3,
       "description": "Nghe lời căn dặn từ dư ảnh Trưởng Lão và kích hoạt cơ cấu mở cổng vào Nghĩa Địa Trầm Lặng.",
       "stage": "inactive",
       "objectives": [
@@ -627,6 +683,8 @@
     {
       "id": "quest_ch3_nameless_archivist",
       "title": "Thủ Thư Không Tên",
+      "kind": "main",
+      "chapter": 3,
       "description": "Giải cứu nữ thủ thư Neris khỏi đám bóng ma ký ức và giải mã vị trí ngôi mộ của điêu khắc gia.",
       "stage": "inactive",
       "objectives": [
@@ -652,6 +710,8 @@
     {
       "id": "quest_ch3_echoing_vaults",
       "title": "Lối Vào Hầm Ngầm",
+      "kind": "main",
+      "chapter": 3,
       "description": "Mở cổng vào Hành Lang Vang Vọng và kích hoạt cặp thạch trụ âm thoa để hạ màn đá mở cầu thang.",
       "stage": "inactive",
       "objectives": [
@@ -677,6 +737,8 @@
     {
       "id": "quest_ch3_faceless_trial",
       "title": "Người Canh Ngục Không Mặt",
+      "kind": "main",
+      "chapter": 3,
       "description": "Vượt qua vực thẳm bụi tinh thể trong thời gian giới hạn và đánh bại Người Canh Ngục Không Mặt.",
       "stage": "inactive",
       "objectives": [
@@ -702,6 +764,8 @@
     {
       "id": "quest_ch3_archive_censorship",
       "title": "Bản Kiểm Duyệt Thư Viện",
+      "kind": "main",
+      "chapter": 3,
       "description": "Đối chiếu niên biểu sự kiện với Sổ Đen để xác định kẻ phản bội thật và mở cổng Hoàng Lăng.",
       "stage": "inactive",
       "objectives": [
@@ -721,6 +785,8 @@
     {
       "id": "quest_ch3_king_dilemma",
       "title": "Nỗi Đau Vua Alden",
+      "kind": "main",
+      "chapter": 3,
       "description": "Thu thập di vật của Hoàng hậu và nhật trình điều binh để tẩy sạch ký ức giả cho Vua Alden.",
       "stage": "inactive",
       "objectives": [
@@ -740,6 +806,8 @@
     {
       "id": "quest_ch3_nameless_choir",
       "title": "Khúc Ca Hàng Vạn Linh Hồn",
+      "kind": "main",
+      "chapter": 3,
       "description": "Tiến vào Thánh Điện Hợp Xướng, đánh bại Dàn Hợp Xướng Vô Danh và khôi phục Lõi Memory Seal.",
       "stage": "inactive",
       "objectives": [
@@ -758,6 +826,8 @@
     {
       "id": "quest_ch3_lost_lullaby",
       "title": "Điệu Hát Ru Thất Lạc",
+      "kind": "side",
+      "chapter": 3,
       "description": "Tìm lại giai điệu hát ru xưa cũ từ tinh thể âm thanh để an ủi linh hồn nữ thủ thư già.",
       "stage": "inactive",
       "objectives": [
@@ -776,6 +846,8 @@
     {
       "id": "quest_ch3_shattered_portrait",
       "title": "Bức Họa Nứt Vỡ",
+      "kind": "side",
+      "chapter": 3,
       "description": "Tìm 3 mảnh chân dung nứt vỡ rải rác trong khu di tích để phục hồi ký ức cho hồn kỵ sĩ vô danh.",
       "stage": "inactive",
       "objectives": [
@@ -794,6 +866,8 @@
     {
       "id": "quest_ch3_forgotten_craftsman",
       "title": "Lò Rèn Ký Ức",
+      "kind": "side",
+      "chapter": 3,
       "description": "Tìm lại Tàn Lửa Ký Ức dưới Hầm Ngầm để thắp sáng lại lò rèn ngầm đã nguội lạnh.",
       "stage": "inactive",
       "objectives": [

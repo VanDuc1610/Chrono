@@ -16,9 +16,16 @@ export interface IQuestReward {
   gold?: number;
 }
 
+/** Main quests lead Peter through the story; side quests are optional. */
+export type QuestKind = 'main' | 'side';
+
 export interface IQuest {
   id: string;
   title: string;
+  /** Defaults to 'main'. */
+  kind?: QuestKind;
+  /** 0 = Prologue, n = Chapter n. Defaults to 0. */
+  chapter?: number;
   description: string;
   stage: QuestStage;
   objectives: IQuestObjective[];

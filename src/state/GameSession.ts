@@ -35,6 +35,13 @@ export const FLAGS = {
   timeRestored: 'time_restored',
 } as const;
 
+/** Flags that mark Chapter n (index + 1) as finished, besides `chapter<n>_complete`. */
+const CHAPTER_SEAL_FLAGS = [
+  'continuum_seal_restored',
+  'causality_seal_restored',
+  'memory_seal_restored',
+] as const;
+
 export interface MapPosition {
   mapId: string;
   x: number;
@@ -113,7 +120,29 @@ export class GameSession {
       session.quickSlots[i] = id ?? null;
     });
     session.hp = clamp(session.hp, 1, session.getStats().maxHp);
+    // Saves made before quests were closed per chapter still list finished chapters' quests.
+    session.closeFinishedChapters();
     return session;
+  }
+
+  /** Last finished chapter (0 = Prologue), or -1 while the Prologue is still being played. */
+  public get lastFinishedChapter(): number {
+    let last = this.getFlag(FLAGS.prologueComplete) ? 0 : -1;
+    for (let n = 1; n <= 9; n++) {
+      if (this.getFlag(`chapter${n}_complete`) || this.getFlag(CHAPTER_SEAL_FLAGS[n - 1] ?? '')) {
+        last = n;
+      }
+    }
+    return last;
+  }
+
+  /** Closes the open quests of every finished chapter, then starts the next main quest. */
+  public closeFinishedChapters(): void {
+    const last = this.lastFinishedChapter;
+    if (last < 0) return;
+    // Closing a main quest starts its follow-up, which may itself belong to a finished chapter.
+    do this.syncQuestProgress();
+    while (this.quests.closeChapter(last) > 0);
   }
 
   /** True if a combat command is available (player.json `commandFlags`). */

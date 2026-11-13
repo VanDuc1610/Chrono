@@ -75,6 +75,7 @@ export class QuestSystem implements IQuestSystem {
     }
   }
 
+  /** Started quests, main quests first (story order kept within each kind). */
   public getActiveQuests(): IQuest[] {
     const active: IQuest[] = [];
     for (const quest of this.quests.values()) {
@@ -82,7 +83,27 @@ export class QuestSystem implements IQuestSystem {
         active.push(quest);
       }
     }
-    return active;
+    return [...active.filter((q) => q.kind !== 'side'), ...active.filter((q) => q.kind === 'side')];
+  }
+
+  /**
+   * Closes every still-open quest of chapters up to `chapter` once the story has left them
+   * behind (past chapters cannot be revisited): a main quest counts as done, a side quest as
+   * missed. Silent — no events, no rewards. Returns the number of quests closed.
+   */
+  public closeChapter(chapter: number): number {
+    let closed = 0;
+    for (const quest of this.quests.values()) {
+      if (quest.stage !== 'started' || (quest.chapter ?? 0) > chapter) continue;
+      if (quest.kind === 'side') {
+        quest.stage = 'failed';
+      } else {
+        quest.stage = 'completed';
+        for (const obj of quest.objectives) obj.completed = true;
+      }
+      closed++;
+    }
+    return closed;
   }
 
   public getQuestStage(questId: string): QuestStage {

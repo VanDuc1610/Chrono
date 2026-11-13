@@ -1930,7 +1930,16 @@
       "lines": [
         "Lõi Continuum Seal đã ổn định dưới ánh sao đêm dịu nhẹ. Lối mở về vùng đất kế tiếp đang chờ phía trước."
       ],
-      "responses": []
+      "responses": [
+        {
+          "text": "Bước qua Cổng Ngưỡng sang vùng đất kế tiếp",
+          "nextDialogueId": "ch1_seal_onward"
+        },
+        {
+          "text": "Ở lại thêm một lát",
+          "nextDialogueId": null
+        }
+      ]
     },
     "ch1_chapter2_exit_locked": {
       "id": "ch1_chapter2_exit_locked",
@@ -3056,7 +3065,16 @@
       "lines": [
         "Lõi Causality Seal tỏa ánh hổ phách dịu dàng. Vùng đất này đã được tự viết tiếp ngày mai của nó."
       ],
-      "responses": []
+      "responses": [
+        {
+          "text": "Bước qua Cổng Ngưỡng sang vùng đất kế tiếp",
+          "nextDialogueId": "ch2_seal_onward"
+        },
+        {
+          "text": "Ở lại thêm một lát",
+          "nextDialogueId": null
+        }
+      ]
     },
     "ch2_founding_stone": {
       "id": "ch2_founding_stone",
@@ -4581,6 +4599,34 @@
       "speaker": "Peter",
       "lines": ["Lối ngầm xuống mật thất đã mở."],
       "responses": []
+    },
+    "ch1_seal_onward": {
+      "id": "ch1_seal_onward",
+      "speaker": "Peter",
+      "lines": [
+        "Ánh sáng Cổng Ngưỡng bao trùm lấy mình. Khi mở mắt ra, mình đã đứng ở vùng đất kế tiếp."
+      ],
+      "responses": [],
+      "effects": {
+        "warpTo": {
+          "mapId": "map_ch2_imperial_outskirts",
+          "spawnId": "from_ch1"
+        }
+      }
+    },
+    "ch2_seal_onward": {
+      "id": "ch2_seal_onward",
+      "speaker": "Peter",
+      "lines": [
+        "Ánh sáng Cổng Ngưỡng bao trùm lấy mình. Khi mở mắt ra, mình đã đứng ở vùng đất kế tiếp."
+      ],
+      "responses": [],
+      "effects": {
+        "warpTo": {
+          "mapId": "map_ch3_sepulcher_gate",
+          "spawnId": "from_ch2"
+        }
+      }
     }
   }
 }

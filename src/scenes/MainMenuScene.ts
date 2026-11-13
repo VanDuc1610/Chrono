@@ -300,7 +300,9 @@ export class MainMenuScene extends Phaser.Scene {
     startNewSession(this);
     this.cameras.main.fadeOut(300, 0, 0, 0);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-      this.scene.start('ExplorationScene');
+      // Always pass data: Phaser reuses the scene's previous start data when none is given, so a
+      // new game after an end card would otherwise open on that chapter's first map.
+      this.scene.start('ExplorationScene', {});
     });
   }
 
@@ -311,7 +313,7 @@ export class MainMenuScene extends Phaser.Scene {
     startSessionFromSave(this, saveData);
     this.cameras.main.fadeOut(300, 0, 0, 0);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-      this.scene.start('ExplorationScene');
+      this.scene.start('ExplorationScene', {});
     });
   }
 
