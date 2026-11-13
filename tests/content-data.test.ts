@@ -1202,6 +1202,9 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       const bellEffects = dialogueDb.dialogues.ch3_echo_bell_copper.effects!;
       expect(bellEffects.startTimer).toEqual({ flag: 'ch3_bridge_up', ms: 8000 });
       session.applyDialogueEffects(bellEffects);
+      // The bell only raises the bridge; reaching the far bank (map trigger) marks the crossing.
+      expect(session.getFlag('crossed_memory_abyss')).toBe(false);
+      session.applyDialogueEffects(dialogueDb.dialogues.ch3_abyss_crossed.effects!);
       expect(session.getFlag('crossed_memory_abyss')).toBe(true);
 
       // 3. Censorship console puzzle (Wolf is correct)

@@ -3410,7 +3410,7 @@
       "id": "ch3_tomb_willow_inspect",
       "speaker": "Peter",
       "lines": [
-        "Bia mộ số Lô III khắc hình Cây Liễu rủ lá soi bóng nước. Quanh bệ mộ có rãnh khóa khớp với nét đục."
+        "Bia mộ số Lô III khắc hình Cây Liễu rủ lá soi bóng nước. Nắp mộ phủ một lớp bụi mỏng."
       ],
       "responses": [
         {
@@ -3686,8 +3686,7 @@
         "startTimer": {
           "flag": "ch3_bridge_up",
           "ms": 8000
-        },
-        "setFlags": ["crossed_memory_abyss"]
+        }
       }
     },
     "ch3_abyss_fall": {
@@ -3905,8 +3904,8 @@
       "id": "ch3_censorship_wrong",
       "speaker": "Peter",
       "lines": [
-        "Tít tít tít! Báo động đỏ chớp sáng, bàn điều khiển rung lắc và trả lại nguyên trạng!",
-        "Linh thú này đại diện cho người vắng mặt khỏi kinh đô vào Tháng Ba Năm 312 nên vô tội. Mình cần xem kỹ lại niên biểu."
+        "Tít tít tít! Báo động đỏ chớp sáng, bàn điều khiển rung lắc rồi trả các nút về chỗ cũ.",
+        "Ấn phản nghịch không chịu nằm trên linh thú này. Mình nên đối chiếu từng người với đúng tháng Đại Loạn trong niên biểu."
       ],
       "responses": []
     },
@@ -4492,6 +4491,17 @@
         "Trái tim Peter khẽ nhói lên một cảm giác xót xa kỳ lạ không thể gọi tên..."
       ],
       "responses": []
+    },
+    "ch3_abyss_crossed": {
+      "id": "ch3_abyss_crossed",
+      "speaker": "Peter",
+      "lines": [
+        "Chân vừa chạm bờ đá bên kia, nhịp cầu sau lưng đã tan thành bụi tím. Phù... qua được rồi."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["crossed_memory_abyss"]
+      }
     }
   }
 }
