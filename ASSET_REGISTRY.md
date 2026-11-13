@@ -257,3 +257,15 @@ The following specifications have been drafted in compliance with [ASSET_POLICY.
 - `MOB_ENFORCER_001` — Causality Enforcer, 32 × 32 × 4 stance (frame 2 lunges): violet light armour, plumed steel helmet, rapier, cape → `art-source/enemies/causality_enforcer/generated/candidates/causality_enforcer_v1.png`.
 - `BOSS_VERDICT_001` — The Imperial Verdict, 64 × 64 × 5 (0-3 idle: scales sway, sword flames, amber core; 4 kneeling, scales broken, sword lowered) → `art-source/enemies/imperial_verdict/generated/candidates/imperial_verdict_v1.png`.
 - Previews ×8 (×4 for the boss) in each `previews/` folder. **Validation:** all PASSED. **Status:** `APPROVED` by the owner 2026-11-13 — files in `generated/approved/`, deployed to `public/assets/npcs/{lyra_idle,exiled_praetor_idle}.png` and `public/assets/enemies/{imperial_automaton,causality_enforcer,imperial_verdict}.png` (keys `npc_lyra`, `npc_exiled_praetor`, `enemy_imperial_automaton`, `enemy_causality_enforcer`, `boss_imperial_verdict`); placed in the maps with T-52.
+
+### Chapter 3 characters (T-58) – candidates
+
+- **Generator:** `scripts/author-ch3-characters.js` (Pipeline B, deterministic pixel rules, no image model).
+- `NPC_NERIS_001_CAND` — Neris, the nameless librarian, 32 × 32 × 4 idle (page turn, blink): side braid, ash-grey tunic with faint blue embroidery, satchel with a reading lens, open book → `art-source/npcs/neris/generated/candidates/neris_idle_v1.png`.
+- `NPC_KING_ALDEN_001_CAND` — King Alden, 32 × 32 × 4 idle (chalice trembling): on a stone throne, crown slipping, faded red robe with gold trim, hand at his temple → `art-source/npcs/amnesiac_king/generated/candidates/amnesiac_king_idle_v1.png`.
+- `MOB_MEMORY_WRAITH_001_CAND` — Memory Wraith, 32 × 32 × 4 float: violet hooded cloak tapering into a wisp, cyan eyes in the void, memory motes → `art-source/enemies/memory_wraith/generated/candidates/memory_wraith_v1.png`.
+- `MOB_THOUGHT_EATER_001_CAND` — Thought Eater, 32 × 32 × 4 crawl: low six-legged beast, violet crystal shards on its back, toothed maw → `art-source/enemies/thought_eater/generated/candidates/thought_eater_v1.png`.
+- `MOB_HOLLOW_ARCHIVIST_001_CAND` — Hollow Archivist, 32 × 32 × 4 idle: ash-grey robe with an empty hood (a faint light flickers inside), scroll tags, staff of bronze archive tubes → `art-source/enemies/hollow_archivist/generated/candidates/hollow_archivist_v1.png`.
+- `BOSS_FACELESS_KEEPER_001_CAND` — The Keeper Without a Face (mid-boss), 48 × 48 × 5 (0-3 idle; 4 defeated, mirror cracked, blade dropped): grey shroud, a flat mirror for a face, mirror-shard blade → `art-source/enemies/faceless_keeper/generated/candidates/faceless_keeper_v1.png`.
+- `BOSS_NAMELESS_CHOIR_001_CAND` — The Nameless Choir, 64 × 64 × 5 (0-3 idle, ghost faces orbit and sing; 4 dissolving): floating black crystal with a cyan core → `art-source/enemies/nameless_choir/generated/candidates/nameless_choir_v1.png`.
+- Previews in each `previews/` folder. **Validation:** all PASSED. **Status:** `CONCEPT_PENDING_APPROVAL`.
