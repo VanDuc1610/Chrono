@@ -2,6 +2,9 @@ import Phaser from 'phaser';
 import type { Player } from '../entities/Player';
 import { FLAGS, type GameSession } from '../state/GameSession';
 import {
+  chantState,
+  inParryWindow,
+  sniperOutcome,
   distance,
   facingFromAngle,
   inSlash,
@@ -64,6 +67,22 @@ interface Roamer {
   nextPool?: number;
   /** A decoy's health bar copies its source's, so the bar does not give it away. */
   shownRatio?: number;
+  /** Ghost Sniper: shot in flight (fires at `fireAt`) and when it may aim again. */
+  aim?: { fireAt: number } | null;
+  nextAimAt?: number;
+  /** Banner Carrier: the verse it last sang. */
+  verse?: number;
+  /** Fell near a Banner Carrier: lies there until the next verse raises it (or it is final). */
+  pending?: boolean;
+  /** Undying Knight's charge. */
+  charge?: {
+    phase: 'stomp' | 'run' | 'stunned';
+    until: number;
+    dx: number;
+    dy: number;
+    hit: boolean;
+  };
+  nextChargeAt?: number;
 }
 
 const ELDER_FLAG = 'elder_joined';
@@ -89,6 +108,10 @@ export class ActionCombat {
   private defeated = false;
   private ambushFired = false;
   private hudMp = -1;
+  /** When Peter last started a dodge (perfect dodge against snipers). */
+  private lastDashAt = -Infinity;
+  /** Sniper aim lines, redrawn each frame. */
+  private readonly aimLines: Phaser.GameObjects.Graphics;
   /** Health bars over Peter (HP + MP) and over every enemy, redrawn each frame. */
   private readonly bars: Phaser.GameObjects.Graphics;
 
@@ -106,6 +129,7 @@ export class ActionCombat {
     this.combat = session.database.player.combat;
     this.group = scene.physics.add.group();
     this.bars = scene.add.graphics().setDepth(48);
+    this.aimLines = scene.add.graphics().setDepth(47);
     this.defs = defs;
     for (const def of defs) this.spawn(def);
     if (this.roamers.some((r) => r.def.hunter)) this.announceHunters();
@@ -339,7 +363,11 @@ export class ActionCombat {
     this.drawBars();
     const paused = this.host.isPaused() || this.defeated;
     if (paused) {
-      for (const r of this.roamers) if (r.alive) r.sprite.setVelocity(0, 0);
+      this.aimLines.clear();
+      for (const r of this.roamers) {
+        if (r.alive) r.sprite.setVelocity(0, 0);
+        r.aim = null;
+      }
       this.elder?.setVelocity(0, 0);
       return;
     }
@@ -352,8 +380,15 @@ export class ActionCombat {
     }
 
     const target: Point = { x: this.player.x, y: this.player.y };
+    this.aimLines.clear();
+    this.updateChants(now);
     for (const r of this.roamers) {
       if (!r.alive || now < r.stunUntil) continue;
+      if (r.enemy.field?.sniper) {
+        this.updateSniper(r, now);
+        continue;
+      }
+      if (r.enemy.field?.charge && this.updateCharge(r, now)) continue;
       const before = r.brain.state;
       const out = thinkRoamer(r.brain, {
         pos: { x: r.sprite.x, y: r.sprite.y },
@@ -385,6 +420,10 @@ export class ActionCombat {
       }
       if (r.brain.state === 'windup' && before !== 'windup') r.sprite.setTint(0xff7070);
       if (r.brain.state !== 'windup' && before === 'windup') r.sprite.clearTint();
+      const parry = r.enemy.field?.parry;
+      if (parry && inParryWindow(r.brain.state, r.brain.timer, parry.flashMs)) {
+        r.sprite.setTintFill(0xf4f8ff);
+      }
       const reflect = r.enemy.field?.reflect;
       if (reflect) {
         const glow = isGlowing(now, r.glowOffset, reflect.everyMs, reflect.glowMs);
@@ -460,9 +499,21 @@ export class ActionCombat {
       if (!r.alive) continue;
       if (!inSlash(origin, aim, r.sprite, reach, this.tuning.slashArcDeg)) continue;
       landed = true;
+      const parry = r.enemy.field?.parry;
+      if (parry && inParryWindow(r.brain.state, r.brain.timer, parry.flashMs)) {
+        // Parried: no damage, but the spear is knocked aside and the guard drops.
+        r.brain = { ...r.brain, state: 'recover', timer: parry.staggerMs };
+        r.sprite.setTint(0x8fb8ff);
+        this.scene.time.delayedCall(parry.staggerMs, () => r.alive && r.sprite.clearTint());
+        this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.parried'), '#cfe8ff');
+        this.sound.playSlash();
+        continue;
+      }
       const hit = rollHit(attack, r.enemy.defense, this.combat, this.rng);
       if (this.defended(r, hit.damage)) continue;
-      this.damageRoamer(r, hit.damage, hit.critical);
+      const stunned = r.charge?.phase === 'stunned';
+      const mult = stunned ? (r.enemy.field?.charge?.stunnedDamageMult ?? 1) : 1;
+      this.damageRoamer(r, Math.floor(hit.damage * mult), hit.critical || stunned);
     }
     if (!landed) this.blinkOnWhiff(origin, aim);
   }
@@ -531,8 +582,13 @@ export class ActionCombat {
         Math.floor(attack * this.combat.skillMultiplier - r.enemy.defense),
       );
       this.damageRoamer(r, damage, false);
-      // Time slows around them: their wind-up is lost.
-      r.brain = { ...r.brain, state: 'recover', timer: this.tuning.enemy.recoverMs };
+      // Time slows around them: their wind-up is lost (a spear wall loses its guard longer).
+      const guardBreak = r.enemy.field?.parry?.guardBreakMs;
+      r.brain = {
+        ...r.brain,
+        state: 'recover',
+        timer: guardBreak ?? this.tuning.enemy.recoverMs,
+      };
       r.sprite.clearTint();
     }
   }
@@ -551,6 +607,7 @@ export class ActionCombat {
     const s = this.tuning.dashSpeed;
     this.player.forceVelocity((x / len) * s, (y / len) * s, this.tuning.dashMs);
     this.invulnUntil = Math.max(this.invulnUntil, now + this.tuning.dashMs + 80);
+    this.lastDashAt = now;
     this.nextDash = now + this.tuning.dashCooldownMs;
     this.player.sprite.setAlpha(0.55);
     this.scene.time.delayedCall(this.tuning.dashMs + 40, () => this.player.sprite.setAlpha(1));
@@ -564,6 +621,12 @@ export class ActionCombat {
     const field = r.enemy.field;
     if (!field) return false;
     const now = this.scene.time.now;
+    const chant = field.chant;
+    if (chant && chantState(now, r.glowOffset, chant.chantMs, chant.breathMs).chanting) {
+      this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.bannerWard'), '#ff9090');
+      this.sound.playSlash();
+      return true;
+    }
     if (
       field.frontShieldDeg &&
       shieldBlocks(r.facing, r.sprite, this.player, field.frontShieldDeg, r.brain.state)
@@ -588,7 +651,7 @@ export class ActionCombat {
     return false;
   }
 
-  private hitPlayer(r: Roamer): void {
+  private hitPlayer(r: Roamer, opts: { mult?: number; stunMs?: number } = {}): void {
     const now = this.scene.time.now;
     if (r.clone) return;
     if (now < this.invulnUntil || this.defeated) return;
@@ -597,6 +660,7 @@ export class ActionCombat {
       this.session.getStats().defense,
       this.combat,
       this.rng,
+      opts.mult ?? 1,
     );
     const floor = r.def.ambush ? 1 : 0;
     this.session.hp = Math.max(floor, this.session.hp - damage);
@@ -604,6 +668,10 @@ export class ActionCombat {
     const away = Math.atan2(this.player.y - r.sprite.y, this.player.x - r.sprite.x);
     const k = this.tuning.knockback;
     this.player.forceVelocity(Math.cos(away) * k, Math.sin(away) * k, 130);
+    if (opts.stunMs) {
+      const stun = opts.stunMs;
+      this.scene.time.delayedCall(130, () => this.player.forceVelocity(0, 0, stun));
+    }
     this.player.playAction('peter_hurt', this.player.getMovementSystem().getLastFacing(), 260);
     this.player.sprite.setTint(0xff5050);
     this.scene.time.delayedCall(160, () => this.player.sprite.clearTint());
@@ -657,8 +725,26 @@ export class ActionCombat {
 
   private defeatRoamer(r: Roamer): void {
     r.alive = false;
+    r.charge = undefined;
     r.sprite.setVelocity(0, 0);
     if (r.sprite.body) (r.sprite.body as Phaser.Physics.Arcade.Body).enable = false;
+    if (!r.clone && !r.enemy.field?.chant && this.carrierNear(r)) {
+      // A Banner Carrier's song will raise it again: it lies there until then.
+      r.pending = true;
+      r.sprite.clearTint();
+      this.scene.tweens.add({ targets: r.sprite, alpha: 0.35, duration: 300 });
+      return;
+    }
+    this.finalDefeat(r);
+    if (r.enemy.field?.chant) {
+      // Its song is over: the fallen around it stay down for good.
+      for (const o of this.roamers) if (o.pending && !this.carrierNear(o)) this.finalDefeat(o);
+    }
+  }
+
+  /** The enemy is gone for good: burst, fade, rewards, flags. */
+  private finalDefeat(r: Roamer): void {
+    r.pending = false;
     if (this.scene.anims.exists('hit_spark_burst')) {
       this.scene.add
         .sprite(r.sprite.x, r.sprite.y, 'hit_spark')
@@ -680,7 +766,7 @@ export class ActionCombat {
     );
     if (r.def.defeatedFlag) this.session.setFlag(r.def.defeatedFlag);
     const group = r.def.group;
-    if (group && this.roamers.every((o) => o.def.group !== group || !o.alive)) {
+    if (group && this.roamers.every((o) => o.def.group !== group || (!o.alive && !o.pending))) {
       this.session.setFlag(`cleared_${group}`);
     }
     this.session.syncQuestProgress();
@@ -699,6 +785,155 @@ export class ActionCombat {
         onComplete: () => r.sprite.destroy(),
       });
     }
+  }
+
+  // ------------------------------------------------------------------ Chapter 4 enemies
+
+  /** Ghost Sniper: aims a line at Peter, white at the end, then fires. */
+  private updateSniper(r: Roamer, now: number): void {
+    const sn = r.enemy.field?.sniper;
+    if (!sn) return;
+    r.sprite.setVelocity(0, 0);
+    const d = distance(r.sprite, this.player);
+    if (Math.abs(this.player.x - r.sprite.x) > 2) this.faceX(r, this.player.x - r.sprite.x);
+    if (!r.aim) {
+      if (d <= sn.range && now >= (r.nextAimAt ?? 0)) r.aim = { fireAt: now + sn.aimMs };
+      return;
+    }
+    if (d > sn.range * 1.4) {
+      r.aim = null;
+      return;
+    }
+    const white = r.aim.fireAt - now <= sn.whiteMs;
+    this.aimLines
+      .lineStyle(white ? 2 : 1, white ? 0xffffff : 0xff3a2a, white ? 0.95 : 0.7)
+      .lineBetween(r.sprite.x, r.sprite.y - 4, this.player.x, this.player.y);
+    if (now < r.aim.fireAt) return;
+    r.aim = null;
+    r.nextAimAt = now + sn.cooldownMs;
+    const blocked = this.lineBlocked(r.sprite, this.player);
+    const outcome = sniperOutcome(now, this.lastDashAt, sn.whiteMs, blocked);
+    this.sound.playSlash();
+    if (outcome === 'perfect') {
+      this.session.mp = Math.min(this.session.getStats().maxMp, this.session.mp + sn.perfectMp);
+      this.floatText(this.player.x, this.player.y - 24, this.t('action.perfectDodge'), '#9fe8ff');
+      this.host.refreshHud();
+    } else if (outcome === 'cover') {
+      this.floatText(this.player.x, this.player.y - 24, this.t('action.arrowCover'), '#c8c0b0');
+    } else {
+      this.hitPlayer(r, { mult: sn.damageMult, stunMs: sn.stunMs });
+    }
+  }
+
+  /** True when a wall tile lies on the straight line between a and b. */
+  private lineBlocked(a: Point, b: Point): boolean {
+    const n = Math.ceil(distance(a, b) / 8);
+    for (let i = 1; i < n; i++) {
+      const x = Math.floor((a.x + ((b.x - a.x) * i) / n) / 32);
+      const y = Math.floor((a.y + ((b.y - a.y) * i) / n) / 32);
+      if (this.walls.getTileAt(x, y)?.collides) return true;
+    }
+    return false;
+  }
+
+  /** Undying Knight: stomp, lock aim, charge; a wall stuns it. True while it is busy charging. */
+  private updateCharge(r: Roamer, now: number): boolean {
+    const ch = r.enemy.field?.charge;
+    if (!ch) return false;
+    const c = r.charge;
+    if (!c) {
+      const d = distance(r.sprite, this.player);
+      const chasing = r.brain.state === 'chase' || r.brain.state === 'windup';
+      if (chasing && d <= ch.range && d > 48 && now >= (r.nextChargeAt ?? 0)) {
+        r.charge = { phase: 'stomp', until: now + ch.stompMs, dx: 0, dy: 0, hit: false };
+        r.sprite.setVelocity(0, 0);
+        r.sprite.setTint(0xffd27a);
+        this.scene.cameras.main.shake(90, 0.002);
+        return true;
+      }
+      return false;
+    }
+    if (c.phase === 'stomp') {
+      r.sprite.setVelocity(0, 0);
+      if (Math.abs(this.player.x - r.sprite.x) > 2) this.faceX(r, this.player.x - r.sprite.x);
+      if (now >= c.until) {
+        // The aim locks now: a dodge before this moment changes nothing.
+        const dx = this.player.x - r.sprite.x;
+        const dy = this.player.y - r.sprite.y;
+        const len = Math.hypot(dx, dy) || 1;
+        r.charge = { phase: 'run', until: now + ch.maxMs, dx: dx / len, dy: dy / len, hit: false };
+        r.sprite.setTint(0xff9a5a);
+      }
+      return true;
+    }
+    if (c.phase === 'run') {
+      r.sprite.setVelocity(c.dx * ch.speed, c.dy * ch.speed);
+      const body = r.sprite.body as Phaser.Physics.Arcade.Body | null;
+      const b = body?.blocked;
+      const started = now > c.until - ch.maxMs + 60;
+      if (b && started && (b.left || b.right || b.up || b.down)) {
+        r.charge = { ...c, phase: 'stunned', until: now + ch.stunMs };
+        r.sprite.setVelocity(0, 0);
+        r.sprite.setTint(0xfff27a);
+        this.scene.cameras.main.shake(140, 0.005);
+        this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.stunned'), '#fff27a');
+        return true;
+      }
+      if (!c.hit && distance(r.sprite, this.player) <= this.tuning.enemy.attackRange + 6) {
+        c.hit = true;
+        this.hitPlayer(r, { mult: ch.hitMult });
+      }
+      if (now >= c.until) {
+        r.charge = undefined;
+        r.nextChargeAt = now + ch.cooldownMs;
+        r.sprite.clearTint();
+        r.sprite.setVelocity(0, 0);
+        r.brain = { ...r.brain, state: 'recover', timer: this.tuning.enemy.recoverMs };
+      }
+      return true;
+    }
+    // Stunned against a wall.
+    r.sprite.setVelocity(0, 0);
+    if (now >= c.until) {
+      r.charge = undefined;
+      r.nextChargeAt = now + ch.cooldownMs;
+      r.sprite.clearTint();
+      r.brain = { ...r.brain, state: 'chase' };
+    }
+    return true;
+  }
+
+  /** Banner Carriers: glow while singing; each new verse raises the fallen around them. */
+  private updateChants(now: number): void {
+    for (const r of this.roamers) {
+      const chant = r.enemy.field?.chant;
+      if (!chant || !r.alive) continue;
+      const st = chantState(now, r.glowOffset, chant.chantMs, chant.breathMs);
+      if (st.chanting) r.sprite.setTint(0xff7070);
+      else if (r.brain.state !== 'windup') r.sprite.clearTint();
+      if (r.verse === undefined) r.verse = st.verse;
+      if (st.verse === r.verse || !st.chanting) continue;
+      r.verse = st.verse;
+      for (const o of this.roamers) {
+        if (!o.pending || distance(o.sprite, r.sprite) > chant.radius) continue;
+        o.pending = false;
+        o.alive = true;
+        o.hp = Math.max(1, Math.ceil(o.enemy.maxHp * chant.revivePct));
+        o.stunUntil = now + 300;
+        o.brain = { ...o.brain, state: 'chase' };
+        if (o.sprite.body) (o.sprite.body as Phaser.Physics.Arcade.Body).enable = true;
+        this.scene.tweens.killTweensOf(o.sprite);
+        o.sprite.setAlpha(1).setScale(1);
+        this.floatText(o.sprite.x, o.sprite.y - 18, this.t('action.risen'), '#ff8080');
+      }
+    }
+  }
+
+  private carrierNear(r: Roamer): boolean {
+    return this.roamers.some((o) => {
+      const chant = o.enemy.field?.chant;
+      return !!chant && o.alive && o !== r && distance(o.sprite, r.sprite) <= chant.radius;
+    });
   }
 
   // ------------------------------------------------------------------ health bars

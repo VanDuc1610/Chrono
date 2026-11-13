@@ -507,6 +507,124 @@
           ]
         }
       }
+    },
+    {
+      "id": "enemy_ghost_sniper",
+      "name": "Xạ Thủ Vô Hồn",
+      "level": 15,
+      "maxHp": 120,
+      "hp": 120,
+      "attack": 30,
+      "defense": 12,
+      "speed": 7,
+      "spriteKey": "enemy_ghost_sniper",
+      "skills": [],
+      "expReward": 90,
+      "lootTable": [
+        {
+          "itemId": "refined_chrono_shard",
+          "chance": 0.15
+        }
+      ],
+      "field": {
+        "facesLeft": true,
+        "sniper": {
+          "range": 230,
+          "aimMs": 1200,
+          "whiteMs": 250,
+          "cooldownMs": 2200,
+          "damageMult": 1.6,
+          "stunMs": 500,
+          "perfectMp": 3
+        }
+      }
+    },
+    {
+      "id": "enemy_endless_phalanx",
+      "name": "Đội Hình Trùng Điệp",
+      "level": 16,
+      "maxHp": 230,
+      "hp": 230,
+      "attack": 26,
+      "defense": 22,
+      "speed": 7,
+      "spriteKey": "enemy_endless_phalanx",
+      "skills": [],
+      "expReward": 100,
+      "lootTable": [
+        {
+          "itemId": "refined_chrono_shard",
+          "chance": 0.15
+        }
+      ],
+      "field": {
+        "facesLeft": true,
+        "frontShieldDeg": 180,
+        "parry": {
+          "flashMs": 250,
+          "staggerMs": 1500,
+          "guardBreakMs": 2000
+        }
+      }
+    },
+    {
+      "id": "enemy_banner_carrier",
+      "name": "Lính Cầm Cờ",
+      "level": 15,
+      "maxHp": 160,
+      "hp": 160,
+      "attack": 18,
+      "defense": 14,
+      "speed": 8,
+      "spriteKey": "enemy_banner_carrier",
+      "skills": [],
+      "expReward": 90,
+      "lootTable": [
+        {
+          "itemId": "refined_chrono_shard",
+          "chance": 0.15
+        }
+      ],
+      "field": {
+        "chant": {
+          "chantMs": 2000,
+          "breathMs": 1000,
+          "radius": 128,
+          "revivePct": 0.5
+        }
+      }
+    },
+    {
+      "id": "enemy_undying_knight",
+      "name": "Kỵ Sĩ Bất Tử",
+      "level": 17,
+      "maxHp": 260,
+      "hp": 260,
+      "attack": 30,
+      "defense": 20,
+      "speed": 8,
+      "spriteKey": "enemy_undying_knight",
+      "skills": [],
+      "expReward": 120,
+      "lootTable": [
+        {
+          "itemId": "refined_chrono_shard",
+          "chance": 0.15
+        }
+      ],
+      "field": {
+        "facesLeft": true,
+        "charge": {
+          "range": 190,
+          "stompMs": 600,
+          "speed": 330,
+          "maxMs": 900,
+          "stunMs": 2000,
+          "hitMult": 1.5,
+          "stunnedDamageMult": 2,
+          "cooldownMs": 2500
+        }
+      }
     }
   ]
 }

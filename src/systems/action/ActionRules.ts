@@ -311,3 +311,39 @@ export function isGlowing(now: number, offset: number, everyMs: number, glowMs: 
   if (everyMs <= 0) return false;
   return (((now + offset) % everyMs) + everyMs) % everyMs < glowMs;
 }
+
+// ------------------------------------------------------------------ Chapter 4 timing rules
+
+export type SniperOutcome = 'perfect' | 'cover' | 'hit';
+
+/**
+ * A Ghost Sniper's shot fired at `fireAt`: blocked by a wall, perfectly dodged when Peter's last
+ * dodge started while the aim line was white (the last `whiteMs`), otherwise a hit. A dodge
+ * started earlier has run out by the time the arrow flies.
+ */
+export function sniperOutcome(
+  fireAt: number,
+  lastDashAt: number,
+  whiteMs: number,
+  blocked: boolean,
+): SniperOutcome {
+  if (blocked) return 'cover';
+  return lastDashAt >= fireAt - whiteMs - 30 && lastDashAt <= fireAt ? 'perfect' : 'hit';
+}
+
+/** A spear can be parried in the last `flashMs` of its wind-up. */
+export function inParryWindow(state: RoamerState, timerLeft: number, flashMs: number): boolean {
+  return state === 'windup' && timerLeft <= flashMs;
+}
+
+/** Banner Carrier rhythm: which verse it is on and whether it is singing (shielded). */
+export function chantState(
+  now: number,
+  offset: number,
+  chantMs: number,
+  breathMs: number,
+): { verse: number; chanting: boolean } {
+  const cycle = chantMs + breathMs;
+  const t = Math.max(0, now + offset);
+  return { verse: Math.floor(t / cycle), chanting: t % cycle < chantMs };
+}

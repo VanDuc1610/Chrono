@@ -155,6 +155,45 @@ export interface FieldTraits {
   pool?: { everyMs: number; lifeMs: number; radius: number; slowPct: number; mpPerSec: number };
   /** Below half HP, splits off this many 1-HP decoys that cannot hurt (Temporal Strike clears them). */
   clonesAtHalf?: number;
+  /**
+   * Stands still and aims at Peter from afar: a red line for `aimMs`, white for its last
+   * `whiteMs`. A dodge started while it is white is a perfect dodge (+`perfectMp`); otherwise the
+   * shot hits (`damageMult` × damage, stun) unless a wall stands between them.
+   */
+  sniper?: {
+    range: number;
+    aimMs: number;
+    whiteMs: number;
+    cooldownMs: number;
+    damageMult: number;
+    stunMs: number;
+    perfectMp: number;
+  };
+  /**
+   * The spear flashes white for the last `flashMs` of its wind-up: a slash then parries it and
+   * the guard drops for `staggerMs`. Temporal Strike drops the guard for `guardBreakMs`.
+   */
+  parry?: { flashMs: number; staggerMs: number; guardBreakMs: number };
+  /**
+   * Sings for `chantMs` (slashes are blocked), then breathes for `breathMs`. Allies that fall
+   * within `radius` px rise again with `revivePct` of their HP when the next verse starts.
+   */
+  chant?: { chantMs: number; breathMs: number; radius: number; revivePct: number };
+  /**
+   * Within `range` px it stomps for `stompMs` (still turning), locks its aim and charges at
+   * `speed` for up to `maxMs`. Hitting a wall stuns it for `stunMs`, taking `stunnedDamageMult`
+   * × damage; running into Peter deals `hitMult` × damage. Waits `cooldownMs` between charges.
+   */
+  charge?: {
+    range: number;
+    stompMs: number;
+    speed: number;
+    maxMs: number;
+    stunMs: number;
+    hitMult: number;
+    stunnedDamageMult: number;
+    cooldownMs: number;
+  };
 }
 
 /**
