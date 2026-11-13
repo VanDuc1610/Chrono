@@ -180,6 +180,14 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_imperial_automaton', 'assets/enemies/imperial_automaton.png', 32],
       ['enemy_causality_enforcer', 'assets/enemies/causality_enforcer.png', 32],
       ['boss_imperial_verdict', 'assets/enemies/imperial_verdict.png', 64],
+      // Chapter 3 (T-58, owner approved 2026-11-13).
+      ['npc_neris', 'assets/npcs/neris_idle.png', 32],
+      ['npc_amnesiac_king', 'assets/npcs/amnesiac_king_idle.png', 32],
+      ['enemy_memory_wraith', 'assets/enemies/memory_wraith.png', 32],
+      ['enemy_thought_eater', 'assets/enemies/thought_eater.png', 32],
+      ['enemy_hollow_archivist', 'assets/enemies/hollow_archivist.png', 32],
+      ['boss_faceless_keeper', 'assets/enemies/faceless_keeper.png', 48],
+      ['boss_nameless_choir', 'assets/enemies/nameless_choir.png', 64],
     ] as const) {
       this.load.spritesheet(key, file, { frameWidth: size, frameHeight: size });
     }
@@ -268,6 +276,13 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_imperial_automaton_idle', 'enemy_imperial_automaton', 3, 6],
       ['enemy_causality_enforcer_idle', 'enemy_causality_enforcer', 3, 5],
       ['boss_imperial_verdict_idle', 'boss_imperial_verdict', 3, 4],
+      ['npc_neris_idle', 'npc_neris', 3, 4],
+      ['npc_amnesiac_king_idle', 'npc_amnesiac_king', 3, 3],
+      ['enemy_memory_wraith_idle', 'enemy_memory_wraith', 3, 6],
+      ['enemy_thought_eater_idle', 'enemy_thought_eater', 3, 6],
+      ['enemy_hollow_archivist_idle', 'enemy_hollow_archivist', 3, 4],
+      ['boss_faceless_keeper_idle', 'boss_faceless_keeper', 3, 4],
+      ['boss_nameless_choir_idle', 'boss_nameless_choir', 3, 5],
     ] as const) {
       if (!this.anims.exists(key)) {
         this.anims.create({
