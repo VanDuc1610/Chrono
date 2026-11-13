@@ -2,6 +2,8 @@
 
 Completed tasks moved out of [TASKS.md](TASKS.md) to keep the board short. Newest first. Read only when you need history.
 
+- **T-58** Chapter 3 art approved and integrated: Neris, King Alden, Memory Wraith, Thought Eater, Hollow Archivist, The Keeper Without a Face (48×48), The Nameless Choir (64×64) — Claude
+
 - **T-56** Chapter 3 content (`dialogue.json`, `quests.json`, `items.json`, `tests/content-data.test.ts`): 22 items (10 documents with pages ≤ 220 chars, 7 puzzles, 1 weapon, 1 charm, 2 consumables, 2 key items, 1 material), 10 quests (7 main + 3 side), 83 dialogue nodes across 8 maps with natural Vietnamese ≤ 220 chars/line and ≤ 2 choices/node, Sculptor's Tomb (3 clues, 5 tombs, Willow III correct), 8s copper bell bridge timer, Wolf censorship deduction, King Alden false memory cleared via ribbon + dispatch log, hidden Queen canvas 3-layer restoration (Pure Crystal charm), 5-beat music box (Needle Rapier), and Memory Seal restoration with endChapter: 3; verified with typecheck, lint, prettier, and 98 unit tests — Antigravity
 
 - **T-54** Chapter 3 design (`docs/story/CHAPTER_03_DESIGN.md`, Vietnamese): "The Kingdom of Forgotten Souls" structured §1–§11 (Peter's Unwritten stake, 8 maps 75–100 min using existing dungeon/sunken/wilds tilesets, 5 rising-difficulty cross-referencing puzzles: Sculptor's Tomb, Kinetic Resonance, 8s Timed Abyss, Censorship Ledger, and King Alden's Forgery; 3 new real-time behaviours: teleport-evade, hazard pool, phantasm clone; turn-based Mid-Boss Faceless Keeper & Final Boss Nameless Choir; 7 main + 3 side quests; hidden Needle Rapier & Pure Crystal charm; §11 ID contract) — Antigravity Owner approved 2026-11-13 with the §12 changes (Claude review).

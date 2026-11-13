@@ -619,6 +619,418 @@
         "defense": 3,
         "speed": 2
       }
+    },
+    {
+      "id": "courier_journal_scrap",
+      "name": "Mảnh Nhật Trình Liên Lạc",
+      "type": "document",
+      "description": "Trang giấy da cháy cạnh của người liên lạc quân báo ghi lại thời khắc và hướng xuất phát.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Nhật trình người liên lạc:\n...Ta rời đại bản doanh vào buổi chiều, khi bóng của cột cờ dài đúng bằng chiều cao cột cờ. Men theo con đường hướng về phía ngôi sao không bao giờ lặn trên bầu trời phương bắc..."
+      ]
+    },
+    {
+      "id": "astronomy_guide_leaflet",
+      "name": "Tờ Chỉ Dẫn Thiên Văn Quân Sự",
+      "type": "document",
+      "description": "Bản đối chiếu góc nghiêng mặt trời với độ dài bóng cọc và vị trí bốn vì sao đêm.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Chỉ dẫn thiên văn quân sự:\nBóng cọc dài gấp đôi vật khi mặt trời cao 30 độ; bằng vật khi cao 45 độ; bằng nửa vật khi 60 độ. Sao Mai chỉ mọc trước bình minh, Sao Hôm lặn sau hoàng hôn, Bắc Đẩu đứng yên phương bắc."
+      ]
+    },
+    {
+      "id": "hydraulic_manual_sheet",
+      "name": "Bản Hướng Dẫn Áp Suất Thủy Lực",
+      "type": "document",
+      "description": "Tờ sơ đồ kỹ thuật chỉ dẫn giới hạn chịu lực của cánh cửa thủy lực dưới hầm chiến hào.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Sổ tay vận hành cửa thủy lực:\nHai đĩa cân áp suất phải nặng bằng nhau, đúng 25 cân mỗi bên thì cửa mở êm ru. Nếu một đĩa nặng hơn 35 cân, then sắt sẽ bật tung kéo sập kho phía sau."
+      ]
+    },
+    {
+      "id": "quartermaster_ledger",
+      "name": "Sổ Bộ Quân Nhu Tiền Đồn",
+      "type": "document",
+      "description": "Trang sổ kiểm kê quân nhu ghi lại mối tương quan khối lượng giữa ba loại bao hàng tiếp tế.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Sổ bộ quân nhu tiền đồn:\nBao lúa nặng gấp đôi bao thảo dược. Bao lưu huỳnh bằng hai bao lúa. Cả ba loại bao, mỗi loại lấy đúng một bao thì tổng khối lượng vừa tròn 35 cân."
+      ]
+    },
+    {
+      "id": "artillery_grid_map",
+      "name": "Bản Đồ Tọa Độ Pháo Binh",
+      "type": "document",
+      "description": "Bản đồ phác thảo vị trí trận địa cung nỏ và doanh trại của hai phe trên bình nguyên.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Bản đồ tọa độ hỏa lực:\nTrận địa cung nỏ và pháo kích của địch bố trí kiên cố trên ngọn đồi phía Tây Bắc. Phía Đông Nam là vị trí đóng quân của doanh trại Veridia."
+      ]
+    },
+    {
+      "id": "wind_vane_record",
+      "name": "Nhật Ký Hướng Gió Thung Lũng",
+      "type": "document",
+      "description": "Bản ghi chép hướng gió chướng quét qua thung lũng mưa tên.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Nhật ký đo gió thung lũng:\nGió chướng thổi dữ dội từ hướng Đông Bắc, cuốn theo bụi than và đẩy toàn bộ các đợt mưa tên bay lệch sâu về phía Tây Nam thung lũng."
+      ]
+    },
+    {
+      "id": "smoke_signal_code",
+      "name": "Mật Mã Tín Hiệu Khói",
+      "type": "document",
+      "description": "Quy tắc điều chỉnh gương phản quang để ra hiệu lệnh ngưng bắn cho pháo thủ.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Quy ước tín hiệu quang học:\nĐể báo hiệu ngưng bắn khẩn cấp, ánh phản quang xanh phải được rọi vuông góc với đường gió thổi, hướng thẳng vào mắt của kẻ đang giương cung."
+      ]
+    },
+    {
+      "id": "burial_plaque_scrap",
+      "name": "Mảnh Bia Chôn Cất Tử Sĩ",
+      "type": "document",
+      "description": "Mảnh đá khắc ghi đặc điểm địa hình của bốn gò đất nơi các đội quân ngã xuống.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Mảnh bia chôn cất tử sĩ:\nBắc là dốc thoải đá sỏi; Đông là bãi lau sậy ven sông; Tây là chiến hào bùn nơi xe công thành sa lầy; Trung tâm là gò đất cao nhất chiến trường."
+      ]
+    },
+    {
+      "id": "bran_company_roster",
+      "name": "Danh Sách Đại Đội Của Bran",
+      "type": "document",
+      "description": "Tờ giấy nhăn nhúm ghi lại vị trí triển khai tác chiến đặc trưng của từng nhóm chiến binh.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Danh sách đại đội tử sĩ — Bran ghi:\nKỵ mã cần dốc thoải để lấy đà xung phong. Xạ thủ ẩn nấp nơi lau sậy che thân. Bộ binh giáp nặng chặn nơi xe công thành sa lầy. Người cầm cờ đứng chỗ cả đạo quân nhìn thấy."
+      ]
+    },
+    {
+      "id": "first_fallen_epitaph",
+      "name": "Văn Bia Mộ Người Đầu Tiên Ngã Xuống",
+      "type": "document",
+      "description": "Khắc văn cổ xưa ghi lại thứ tự ngã xuống của bốn chiến binh đầu tiên trên bình nguyên.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Văn bia Mộ Người Đầu Tiên Ngã Xuống:\n'Kỵ mã ngã trước khi xạ thủ kịp giương cung; bộ binh ngã ngay sau kỵ mã; người cầm cờ là kẻ đứng sau cùng.'"
+      ]
+    },
+    {
+      "id": "sentry_codebook_page",
+      "name": "Trang Mật Lệnh Tiền Tiêu",
+      "type": "document",
+      "description": "Trang sổ tay ghi lại quy luật hỏi đáp mật lệnh giữa lính gác chiến hào ban đêm.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Trang mật lệnh tiền tiêu:\nĐêm thứ nhất hỏi 'Băng' — đáp 'Nước'. Đêm thứ hai hỏi 'Rượu' — đáp 'Nho'. Đáp lại bằng thứ có trước khi chuyển hóa."
+      ]
+    },
+    {
+      "id": "treaty_scrap_land",
+      "name": "Mảnh Hiệp Ước: Đất Đai",
+      "type": "document",
+      "description": "Mảnh giấy da cổ ghi điều khoản phân chia ranh giới đất đai, mang dấu triện tròn nguyên vẹn.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Hiệp Ước Hòa Bình — Mảnh 1: Ranh Giới Đất Đai:\n...Hai bên đồng thuận chia đôi thung lũng làm vùng phi quân sự. Dưới góc văn bản đóng dấu triện tròn nguyên vẹn của phiên đàm phán mở đầu."
+      ]
+    },
+    {
+      "id": "treaty_scrap_prisoners",
+      "name": "Mảnh Hiệp Ước: Tù Binh",
+      "type": "document",
+      "description": "Mảnh giấy da cổ ghi điều khoản trao đổi tù binh chiến tranh.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Hiệp Ước Hòa Bình — Mảnh 2: Tù Binh:\n...Phóng thích toàn bộ tù nhân chiến tranh không kèm điều kiện chuộc. Ghi chú bên lề: Bản điều khoản này được bàn sau khi ranh giới đất đã ngã ngũ."
+      ]
+    },
+    {
+      "id": "treaty_scrap_waters",
+      "name": "Mảnh Hiệp Ước: Nguồn Nước",
+      "type": "document",
+      "description": "Mảnh giấy da cổ ghi điều khoản chia sẻ dòng sông chung, mang dấu triện vỡ góc.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Hiệp Ước Hòa Bình — Mảnh 3: Nguồn Nước:\n...Quyền sử dụng dòng sông chung không bị ngăn cấm bởi bất kỳ chiến lũy nào. Mực son mang dấu triện vỡ góc chỉ bắt đầu dùng từ phiên đàm phán thứ ba."
+      ]
+    },
+    {
+      "id": "treaty_scrap_signatures",
+      "name": "Mảnh Hiệp Ước: Lời Thề Chung",
+      "type": "document",
+      "description": "Mảnh giấy da cổ ghi lời thề và chữ ký kết nghĩa của hai vị tướng ở dòng cuối cùng.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Hiệp Ước Hòa Bình — Mảnh 4: Lời Thề & Chữ Ký:\n...Nguyện thần linh chứng giám cho nền hòa bình muôn thuở. Chữ ký và hoa điểm chỉ kết nghĩa của hai vị thống soái ở dòng cuối cùng của văn bản."
+      ]
+    },
+    {
+      "id": "maelis_letter",
+      "name": "Lá Thư Chưa Gửi Của Maelis",
+      "type": "puzzle",
+      "description": "Lá thư gấp nếp đã ố vàng của cô con gái Maelis gửi cho cha mình ở chiến trường xa.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "sack_grain",
+      "name": "Bao Lúa Mạch Quân Nhu",
+      "type": "puzzle",
+      "description": "Bao tải gai buộc chặt chứa lúa mạch khô dự trữ trong chiến hào.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 10
+    },
+    {
+      "id": "sack_herbs",
+      "name": "Bao Thảo Dược Cứu Thương",
+      "type": "puzzle",
+      "description": "Bao vải thô chứa các loại lá thuốc phơi khô dùng băng bó vết thương.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 10
+    },
+    {
+      "id": "sack_sulfur",
+      "name": "Bao Lưu Huỳnh Công Binh",
+      "type": "puzzle",
+      "description": "Bao bột khoáng màu vàng nồng mùi diêm sinh dùng chế tạo hỏa khí.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 10
+    },
+    {
+      "id": "relic_long_haft",
+      "name": "Cán Gỗ Bịt Sắt Cổ",
+      "type": "puzzle",
+      "description": "Cán gỗ dài bịt sắt hoen rỉ, một đầu gãy nham nhở tìm thấy trên chiến trường.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "relic_wide_blade",
+      "name": "Lưỡi Thép Bản Rộng Cổ",
+      "type": "puzzle",
+      "description": "Lưỡi thép bản dày và nặng, mép lưỡi mẻ nhiều vết chém sâu qua giáp trụ.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "relic_curved_limb",
+      "name": "Thanh Gỗ Uốn Cong Cổ",
+      "type": "puzzle",
+      "description": "Thanh gỗ uốn cong dẻo dai, hai đầu còn vết hằn buộc dây đã sờn rách.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "relic_tattered_pole",
+      "name": "Cây Sào Buộc Vải Cổ",
+      "type": "puzzle",
+      "description": "Cây sào gỗ cao vút, đầu sào còn buộc một dải vải sờn cháy xém bám đầy tro bụi.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "finality_seal_shard",
+      "name": "Mảnh Ấn Finality",
+      "type": "key_item",
+      "description": "Mảnh tinh thể màu tro xám viền bạc kết tinh từ Lõi Finality Seal, đánh dấu sự khép lại trọn vẹn của thực tại.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "spear_of_finality",
+      "name": "Ngọn Giáo Điểm Dừng",
+      "type": "weapon",
+      "description": "Ngọn giáo huyền thoại cất giấu trong lăng mộ người đầu tiên ngã xuống, mũi giáo màu thép xám vươn xa và quét uy lực.",
+      "value": 160,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 14,
+        "reach": 46,
+        "swingMs": 400
+      }
+    },
+    {
+      "id": "vow_of_the_father_blade",
+      "name": "Thanh Gươm Nguyện Vọng",
+      "type": "weapon",
+      "description": "Thanh kiếm gia truyền của Thống Soái Aldric gửi gắm niềm tin vào tương lai của người con gái nhỏ.",
+      "value": 150,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 13,
+        "reach": 38,
+        "swingMs": 300
+      }
+    },
+    {
+      "id": "valiant_crest_cuirass",
+      "name": "Giáp Ngực Dũng Cảm",
+      "type": "charm",
+      "description": "Tấm giáp ngực bằng hợp kim nặng trích xuất từ kho quân nhu kiên cố của Sol-Karis.",
+      "value": 140,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 35,
+        "defense": 6
+      }
+    },
+    {
+      "id": "ashes_of_peace_charm",
+      "name": "Tro Tàn Bình Yên",
+      "type": "charm",
+      "description": "Chiếc bùa đúc từ nắm tro tàn của thanh kiếm lão tướng buông xuống, mang lại sự chở che thanh thản.",
+      "value": 140,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 34,
+        "defense": 5
+      }
+    },
+    {
+      "id": "dreamless_rest_charm",
+      "name": "Giấc Ngủ Không Mộng Mị",
+      "type": "charm",
+      "description": "Mảnh bùa thanh tẩy nỗi đau thể xác, mang lại giấc ngủ vĩnh hằng không còn vương vấn ác mộng chiến trường.",
+      "value": 130,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxMp": 20,
+        "defense": 2,
+        "speed": 3
+      }
+    },
+    {
+      "id": "mothers_name_carving",
+      "name": "Mảnh Khắc Tên Mẹ",
+      "type": "charm",
+      "description": "Phiến đá nhỏ khắc lại tên người mẹ tần tảo do Binh nhì Bran trao lại trước khi thanh thản ra đi.",
+      "value": 130,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 3,
+        "maxHp": 20
+      }
+    },
+    {
+      "id": "ember_quill_charm",
+      "name": "Bùa Tàn Lửa Ngòi Bút",
+      "type": "charm",
+      "description": "Chiếc bùa làm từ cán bút lông cháy sém sau khi thiêu hủy bộ sử thi giả tạo của Sử quan Elion.",
+      "value": 120,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxMp": 16,
+        "attack": 2,
+        "speed": 2
+      }
+    },
+    {
+      "id": "atonement_chronicle",
+      "name": "Biên Niên Sử Chuộc Tội",
+      "type": "charm",
+      "description": "Tập sách da ghi lại bài học đau xót và lời sám hối chân thành của Sử quan Elion trước vong linh tử sĩ.",
+      "value": 120,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 24,
+        "defense": 4
+      }
+    },
+    {
+      "id": "interval_lens_charm",
+      "name": "Thấu Kính Khe Nứt",
+      "type": "charm",
+      "description": "Mảnh thấu kính pha lê rơi lại từ tà áo của Kuro khi biến mất vào The Interval, tỏa hào quang lam tím huyền bí.",
+      "value": 180,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 26,
+        "maxMp": 14,
+        "defense": 4,
+        "speed": 2
+      }
+    },
+    {
+      "id": "last_light_charm",
+      "name": "Bùa Ánh Sáng Cuối Cùng",
+      "type": "charm",
+      "description": "Bùa hộ mệnh của người lính gác hầm trú ẩn sau khi nhận được lời đáp chính xác cho mật lệnh tiền tiêu.",
+      "value": 150,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 30,
+        "maxMp": 16,
+        "defense": 4,
+        "speed": 3
+      }
+    },
+    {
+      "id": "phoenix_draught",
+      "name": "Nước Tiên Phục Hồi",
+      "type": "consumable",
+      "description": "Thần dược pha chế từ thảo mộc quý hiếm trong kho quân nhu, hồi phục trọn vẹn toàn bộ thể lực và tinh thần.",
+      "value": 100,
+      "stackable": true,
+      "maxStack": 10,
+      "effects": {
+        "healAmount": 999,
+        "mpAmount": 999
+      }
     }
   ]
 }

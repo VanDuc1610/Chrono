@@ -821,7 +821,8 @@
       "rewards": {
         "experience": 350,
         "items": ["memory_seal_shard"]
-      }
+      },
+      "followUpQuestId": "quest_ch4_vale_of_banners"
     },
     {
       "id": "quest_ch3_lost_lullaby",
@@ -881,6 +882,227 @@
       "rewards": {
         "experience": 150,
         "items": ["refined_chrono_shard", "refined_chrono_shard"]
+      }
+    },
+    {
+      "id": "quest_ch4_vale_of_banners",
+      "title": "Bình Nguyên Cờ Rách",
+      "kind": "main",
+      "chapter": 4,
+      "description": "Tiến vào doanh trại Veridia giữa chiến trường vô tận và hội kiến Thống Soái Aldric.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch4_meet_aldric",
+          "description": "Hội kiến Thống Soái Aldric tại lều chỉ huy",
+          "completed": false,
+          "completeOnFlag": "met_general_aldric"
+        }
+      ],
+      "rewards": {
+        "experience": 180,
+        "items": []
+      },
+      "followUpQuestId": "quest_ch4_letter_unsent"
+    },
+    {
+      "id": "quest_ch4_letter_unsent",
+      "title": "Lá Thư Chưa Gửi",
+      "kind": "main",
+      "chapter": 4,
+      "description": "Tìm cách mở hòm thư quân báo tại doanh trại Veridia và mở đường tiến sang tiền đồn Sol-Karis.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch4_open_courier_box",
+          "description": "Mở khóa thành công hòm thư quân báo",
+          "completed": false,
+          "completeOnFlag": "opened_courier_box"
+        },
+        {
+          "id": "obj_ch4_reach_solkaris",
+          "description": "Vượt qua chiến hào tiến vào tiền đồn Sol-Karis",
+          "completed": false,
+          "completeOnFlag": "reached_solkaris"
+        }
+      ],
+      "rewards": {
+        "experience": 220,
+        "items": []
+      },
+      "followUpQuestId": "quest_ch4_arrow_storm"
+    },
+    {
+      "id": "quest_ch4_arrow_storm",
+      "title": "Vượt Làn Tên Lửa",
+      "kind": "main",
+      "chapter": 4,
+      "description": "Vượt qua các ụ đá che chắn trong thung lũng mưa tên và điều chỉnh gương tín hiệu làm ngưng hỏa lực địch.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch4_silence_arrow_storm",
+          "description": "Điều chỉnh gương phản quang dứt hẳn mưa tên trong thung lũng",
+          "completed": false,
+          "completeOnFlag": "silenced_arrow_storm"
+        }
+      ],
+      "rewards": {
+        "experience": 240,
+        "items": ["refined_chrono_shard", "refined_chrono_shard"]
+      },
+      "followUpQuestId": "quest_ch4_crimson_standard"
+    },
+    {
+      "id": "quest_ch4_crimson_standard",
+      "title": "Cờ Máu Bất Tử",
+      "kind": "main",
+      "chapter": 4,
+      "description": "Hóa giải trận địa 4 gò tử sĩ bằng các di vật binh khí cổ và đánh bại Lá Cờ Huyết Sắc.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch4_solve_fallen_arms",
+          "description": "Cắm đúng các di vật binh khí vào 4 gò đất tử sĩ",
+          "completed": false,
+          "completeOnFlag": "solved_fallen_arms_array"
+        },
+        {
+          "id": "obj_ch4_defeat_crimson_standard",
+          "description": "Đánh bại Lá Cờ Huyết Sắc bảo vệ pháo đài",
+          "completed": false,
+          "completeOnFlag": "defeated_crimson_standard"
+        }
+      ],
+      "rewards": {
+        "experience": 280,
+        "items": ["ancient_amber_resin", "ancient_amber_resin"]
+      },
+      "followUpQuestId": "quest_ch4_broken_peace"
+    },
+    {
+      "id": "quest_ch4_broken_peace",
+      "title": "Hiệp Ước Vỡ Vụn",
+      "kind": "main",
+      "chapter": 4,
+      "description": "Vượt qua cuộc phục kích tại Trường Lũy, giải quyết nỗi lòng của Sử quan Elion và Tướng Aldric, phục chế hiệp ước hòa bình.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch4_clear_ramparts_ambush",
+          "description": "Đẩy lùi đợt phục kích bất ngờ tại Trường Lũy Đổ Nát",
+          "completed": false,
+          "completeOnFlag": "cleared_ramparts_ambush"
+        },
+        {
+          "id": "obj_ch4_resolve_elion",
+          "description": "Định đoạt số phận bộ sử thi cùng Sử quan Elion",
+          "completed": false,
+          "completeOnFlag": "resolved_chronicler_elion"
+        },
+        {
+          "id": "obj_ch4_restore_peace_treaty",
+          "description": "Phục chế 4 mảnh Hiệp Ước Hòa Bình trên bàn đá tưởng niệm",
+          "completed": false,
+          "completeOnFlag": "restored_peace_treaty"
+        },
+        {
+          "id": "obj_ch4_resolve_aldric_letter",
+          "description": "Định đoạt số phận lá thư của con gái Tướng Aldric",
+          "completed": false,
+          "completeOnFlag": "resolved_aldric_letter"
+        }
+      ],
+      "rewards": {
+        "experience": 320,
+        "items": ["phoenix_draught"]
+      },
+      "followUpQuestId": "quest_ch4_the_last_war"
+    },
+    {
+      "id": "quest_ch4_the_last_war",
+      "title": "Điểm Dừng Cuộc Chiến",
+      "kind": "main",
+      "chapter": 4,
+      "description": "Tiến vào Thánh Điện Điểm Dừng, ban cái chết thanh thản cho Chiến Tranh Vĩnh Cửu và đối diện với người bạn từ quá khứ.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch4_defeat_the_last_war",
+          "description": "Kích hoạt nghi thức Finality đánh bại The Last War",
+          "completed": false,
+          "completeOnFlag": "defeated_the_last_war"
+        },
+        {
+          "id": "obj_ch4_meet_kuro",
+          "description": "Gặp gỡ Kuro trong gian phòng đổ nát",
+          "completed": false,
+          "completeOnFlag": "met_kuro_first_time"
+        }
+      ],
+      "rewards": {
+        "experience": 450,
+        "items": ["finality_seal_shard"]
+      }
+    },
+    {
+      "id": "quest_ch4_soldier_count",
+      "title": "Lần Chết Thứ 1.428",
+      "kind": "side",
+      "chapter": 4,
+      "description": "Giúp Binh nhì Bran giải tỏa nỗi sợ hãi tột cùng trước lần ngã xuống thứ 1.428.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch4_resolve_bran",
+          "description": "Lựa chọn cái kết cho Binh nhì Bran",
+          "completed": false,
+          "completeOnFlag": "resolved_soldier_bran"
+        }
+      ],
+      "rewards": {
+        "experience": 190,
+        "items": []
+      }
+    },
+    {
+      "id": "quest_ch4_first_fallen",
+      "title": "Mộ Người Đầu Tiên",
+      "kind": "side",
+      "chapter": 4,
+      "description": "Khám phá lối xuống hầm mộ cổ dưới cỗ xe chiến cháy và giải mã bia đá tử sĩ đầu tiên.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch4_open_first_fallen_tomb",
+          "description": "Mở phong ấn Mộ Người Đầu Tiên Ngã Xuống",
+          "completed": false,
+          "completeOnFlag": "opened_first_fallen_tomb"
+        }
+      ],
+      "rewards": {
+        "experience": 230,
+        "items": ["spear_of_finality"]
+      }
+    },
+    {
+      "id": "quest_ch4_last_sentry",
+      "title": "Mật Lệnh Lính Gác",
+      "kind": "side",
+      "chapter": 4,
+      "description": "Tìm ra mật khẩu tiền tiêu để đáp lời hồn lính gác trong căn hầm trú ẩn dưới Trường Lũy.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch4_answer_sentry",
+          "description": "Đáp đúng mật lệnh tiền tiêu với hồn lính gác",
+          "completed": false,
+          "completeOnFlag": "answered_sentry"
+        }
+      ],
+      "rewards": {
+        "experience": 200,
+        "items": ["last_light_charm"]
       }
     }
   ]

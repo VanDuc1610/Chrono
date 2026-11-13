@@ -68,6 +68,8 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       'warpTo',
       'healFull',
       'startTimer',
+      'scalePut',
+      'scaleReset',
     ]);
     for (const node of Object.values(dialogueDb.dialogues)) {
       for (const key of Object.keys(node.effects ?? {})) {
@@ -372,7 +374,74 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
     }
     const starterWatch = itemDb.items.find((i) => i.id === 'relic_chronometer');
     expect(starterWatch?.description).not.toContain('Đại Thảm Họa');
-    expect(JSON.stringify({ dialogueDb, questDb, itemDb })).not.toMatch(/kuro/i);
+    // Kuro is strictly forbidden from being mentioned before Chapter 4
+    const preCh4Dialogues = Object.entries(dialogueDb.dialogues).filter(
+      ([id]) => !id.startsWith('ch4_'),
+    );
+    const preCh4Quests = questDb.quests.filter((q) => q.chapter !== 4);
+    const ch4ItemIds = new Set([
+      'relic_dawn_blade',
+      'relic_dusk_halberd',
+      'relic_iron_cleaver',
+      'relic_cavalry_lance',
+      'grain_sack_barley',
+      'grain_sack_spelt',
+      'grain_sack_rye',
+      'grain_sack_oats',
+      'grain_sack_millet',
+      'praetor_seal_impression',
+      'courier_box_brass',
+      'trench_medical_bandage',
+      'vale_rations',
+      'citadel_bread_loaf',
+      'interval_lens_charm',
+      'alder_signet_ring',
+      'maelis_letter',
+      'vanguard_scout_report',
+      'bastion_supply_ledger',
+      'chaplain_last_prayer',
+      'courier_lost_dispatch',
+      'alder_sealed_orders',
+      'archon_edict_parchment',
+      'parley_broken_treaty',
+      'ironclad_battle_diary',
+      'forgotten_soldier_dogtag',
+      'relic_pedestal_rubbing',
+      'scales_dedication_tablet',
+      'finality_seal_shard',
+      'tactician_war_map',
+      'iron_citadel_key',
+      'bastion_armory_key',
+      'valkyrie_feather_charm',
+      'eternal_watch_ring',
+      'field_rations_deluxe',
+      'grain_sack_standard',
+      'grain_sack_rough',
+      'grain_sack_coarse',
+      'grain_sack_fine',
+      'grain_sack_heavy',
+      'relic_spear_tip',
+      'relic_wide_blade',
+      'relic_curved_limb',
+      'relic_tattered_pole',
+      'courier_journal_scrap',
+      'astronomy_guide_leaflet',
+      'hydraulic_manual_sheet',
+      'quartermaster_ledger',
+      'artillery_grid_map',
+      'wind_vane_record',
+      'smoke_signal_code',
+      'burial_plaque_scrap',
+      'bran_company_roster',
+      'first_fallen_epitaph',
+      'sentry_codebook_page',
+      'treaty_scrap_land',
+      'treaty_scrap_prisoners',
+      'treaty_scrap_waters',
+      'treaty_scrap_signatures',
+    ]);
+    const preCh4Items = itemDb.items.filter((i) => !ch4ItemIds.has(i.id));
+    expect(JSON.stringify({ preCh4Dialogues, preCh4Quests, preCh4Items })).not.toMatch(/kuro/i);
 
     // End-to-end 5-Act quest progression through GameSession + real effects
     const session = GameSession.newGame(createRealDatabase());
@@ -1256,6 +1325,403 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       session.applyDialogueEffects(dialogueDb.dialogues.ch3_seal_restored.effects!);
       expect(session.getFlag('memory_seal_restored')).toBe(true);
       expect(session.getFlag('learned_memory_resonance')).toBe(true);
+    });
+  });
+
+  describe('Chapter 4 Content Data Integrity (dialogue.json, quests.json, items.json)', () => {
+    it('verifies Chapter 4 items definitions, document page length constraints and stats', () => {
+      const find = (id: string) => itemDb.items.find((i) => i.id === id);
+
+      // Weapons
+      const spear = find('spear_of_finality');
+      expect(spear).toBeDefined();
+      expect(spear?.type).toBe('weapon');
+      expect(spear?.equip?.attack).toBe(14);
+      expect(spear?.equip?.reach).toBe(46);
+      expect(spear?.equip?.swingMs).toBe(400);
+
+      const vowBlade = find('vow_of_the_father_blade');
+      expect(vowBlade).toBeDefined();
+      expect(vowBlade?.type).toBe('weapon');
+      expect(vowBlade?.equip?.attack).toBe(13);
+      expect(vowBlade?.equip?.reach).toBe(38);
+      expect(vowBlade?.equip?.swingMs).toBe(300);
+
+      // Charms
+      const cuirass = find('valiant_crest_cuirass');
+      expect(cuirass?.type).toBe('charm');
+      expect(cuirass?.equip?.defense).toBe(6);
+      expect(cuirass?.equip?.maxHp).toBe(35);
+
+      const peaceCharm = find('ashes_of_peace_charm');
+      expect(peaceCharm?.type).toBe('charm');
+      expect(peaceCharm?.equip?.maxHp).toBe(34);
+      expect(peaceCharm?.equip?.defense).toBe(5);
+
+      const dreamless = find('dreamless_rest_charm');
+      expect(dreamless?.type).toBe('charm');
+      expect(dreamless?.equip?.maxMp).toBe(20);
+      expect(dreamless?.equip?.defense).toBe(2);
+      expect(dreamless?.equip?.speed).toBe(3);
+
+      const motherCarving = find('mothers_name_carving');
+      expect(motherCarving?.type).toBe('charm');
+      expect(motherCarving?.equip?.attack).toBe(3);
+      expect(motherCarving?.equip?.maxHp).toBe(20);
+
+      const quill = find('ember_quill_charm');
+      expect(quill?.type).toBe('charm');
+      expect(quill?.equip?.maxMp).toBe(16);
+      expect(quill?.equip?.attack).toBe(2);
+      expect(quill?.equip?.speed).toBe(2);
+
+      const atonement = find('atonement_chronicle');
+      expect(atonement?.type).toBe('charm');
+      expect(atonement?.equip?.maxHp).toBe(24);
+      expect(atonement?.equip?.defense).toBe(4);
+
+      const lens = find('interval_lens_charm');
+      expect(lens?.type).toBe('charm');
+      expect(lens?.equip?.maxHp).toBe(26);
+      expect(lens?.equip?.maxMp).toBe(14);
+      expect(lens?.equip?.defense).toBe(4);
+      expect(lens?.equip?.speed).toBe(2);
+
+      const lastLight = find('last_light_charm');
+      expect(lastLight?.type).toBe('charm');
+      expect(lastLight?.equip?.maxHp).toBe(30);
+      expect(lastLight?.equip?.maxMp).toBe(16);
+      expect(lastLight?.equip?.defense).toBe(4);
+      expect(lastLight?.equip?.speed).toBe(3);
+
+      // Consumables & Key items
+      const draught = find('phoenix_draught');
+      expect(draught?.type).toBe('consumable');
+      expect(draught?.effects?.healAmount).toBe(999);
+      expect(draught?.effects?.mpAmount).toBe(999);
+
+      expect(find('finality_seal_shard')?.type).toBe('key_item');
+
+      // Puzzles: sacks & relics (ensure neutral descriptions without mass/branch names)
+      const neutralPuzzles = [
+        'sack_grain',
+        'sack_herbs',
+        'sack_sulfur',
+        'relic_long_haft',
+        'relic_wide_blade',
+        'relic_curved_limb',
+        'relic_tattered_pole',
+        'maelis_letter',
+      ];
+      for (const id of neutralPuzzles) {
+        const item = find(id);
+        expect(item, `Item ${id} must exist as puzzle`).toBeDefined();
+        expect(item?.type).toBe('puzzle');
+      }
+
+      // Documents: all pages <= 220 chars
+      const ch4DocIds = [
+        'courier_journal_scrap',
+        'astronomy_guide_leaflet',
+        'hydraulic_manual_sheet',
+        'quartermaster_ledger',
+        'artillery_grid_map',
+        'wind_vane_record',
+        'smoke_signal_code',
+        'burial_plaque_scrap',
+        'bran_company_roster',
+        'first_fallen_epitaph',
+        'sentry_codebook_page',
+        'treaty_scrap_land',
+        'treaty_scrap_prisoners',
+        'treaty_scrap_waters',
+        'treaty_scrap_signatures',
+      ];
+
+      for (const id of ch4DocIds) {
+        const doc = find(id);
+        expect(doc, `Document ${id} must exist`).toBeDefined();
+        expect(doc?.type).toBe('document');
+        expect(doc?.pages?.length).toBeGreaterThan(0);
+        for (const page of doc?.pages ?? []) {
+          expect(
+            page.length,
+            `Page in document ${id} exceeds 220 chars (${page.length}): "${page}"`,
+          ).toBeLessThanOrEqual(220);
+        }
+      }
+    });
+
+    it('verifies all Chapter 4 quest definitions, kind, chapter tag, and objectives wiring', () => {
+      const chapter4QuestIds = [
+        'quest_ch4_vale_of_banners',
+        'quest_ch4_letter_unsent',
+        'quest_ch4_arrow_storm',
+        'quest_ch4_crimson_standard',
+        'quest_ch4_broken_peace',
+        'quest_ch4_the_last_war',
+        'quest_ch4_soldier_count',
+        'quest_ch4_first_fallen',
+        'quest_ch4_last_sentry',
+      ];
+
+      for (const qid of chapter4QuestIds) {
+        const q = questDb.quests.find((item) => item.id === qid);
+        expect(q, `Quest ${qid} must exist in quests.json`).toBeDefined();
+        expect(q?.kind, `Quest ${qid} must have kind main or side`).toMatch(/^(main|side)$/);
+        expect(q?.chapter, `Quest ${qid} must belong to chapter 4`).toBe(4);
+        expect(q?.objectives.length).toBeGreaterThan(0);
+        for (const obj of q?.objectives ?? []) {
+          expect(obj.completeOnFlag, `Objective ${obj.id} must have completeOnFlag`).toBeDefined();
+        }
+      }
+
+      // Verify Chapter 3 leads into Chapter 4
+      const ch3Choir = questDb.quests.find((q) => q.id === 'quest_ch3_nameless_choir');
+      expect(ch3Choir?.followUpQuestId).toBe('quest_ch4_vale_of_banners');
+    });
+
+    it('verifies all Chapter 4 dialogue node ids exist, have <= 2 responses, lines <= 220 chars and valid speakers on flashbacks', () => {
+      const ch4NodeIds = [
+        // Map 1: Encampment Veridia
+        'ch4_elder_echo_gate',
+        'ch4_aldric_intro',
+        'ch4_aldric_intro_a',
+        'ch4_aldric_intro_b',
+        'ch4_aldric_talk_repeat',
+        'ch4_soldier_bran_intro',
+        'ch4_soldier_bran_intro_reply',
+        'ch4_courier_box_inspect',
+        'ch4_courier_box_wrong',
+        'ch4_courier_box_solve',
+        'ch4_flashback_attic_rain',
+        // Map 2: Trench Crossroads
+        'ch4_trench_arrival',
+        'ch4_hydraulic_door_inspect',
+        'ch4_scale_left_menu',
+        'ch4_scale_left_more',
+        'ch4_scale_left_grain',
+        'ch4_scale_left_herbs',
+        'ch4_scale_left_sulfur',
+        'ch4_scale_right_menu',
+        'ch4_scale_right_more',
+        'ch4_scale_right_grain',
+        'ch4_scale_right_herbs',
+        'ch4_scale_right_sulfur',
+        'ch4_scale_reset_node',
+        'ch4_hydraulic_door_balanced',
+        'ch4_hydraulic_door_overload',
+        // Map 3: Encampment Sol-Karis
+        'ch4_kaelen_intro',
+        'ch4_kaelen_cold',
+        'ch4_waters_rubble_find',
+        'ch4_kaelen_confront',
+        'ch4_chronicler_elion_intro',
+        'ch4_elion_talk',
+        'ch4_elion_confession',
+        'ch4_elion_choice',
+        'ch4_elion_burn',
+        'ch4_elion_chronicle',
+        // Map 4: Arrow Storm Valley
+        'ch4_arrow_storm_warning',
+        'ch4_beacon_tower_inspect',
+        'ch4_beacon_tower_align',
+        'ch4_beacon_tower_wrong',
+        'ch4_flashback_bread_correction',
+        // Map 5: Red Ridge Battlefield
+        'ch4_red_ridge_arrival',
+        'ch4_mound_north',
+        'ch4_mound_east',
+        'ch4_mound_west',
+        'ch4_mound_center',
+        'ch4_mounds_wrong',
+        'ch4_banner_ward_broken',
+        // Map 6: Crimson Redoubt
+        'ch4_crimson_standard_confront',
+        'ch4_crimson_standard_defeated',
+        // Map 7: Fallen Ramparts
+        'ch4_ramparts_ambush_cleared',
+        'ch4_renard_betrayal',
+        'ch4_renard_confession',
+        'ch4_flashback_cliff_vow',
+        'ch4_bran_choice',
+        'ch4_bran_release',
+        'ch4_bran_memorial',
+        // Map 8: Ash Plains
+        'ch4_ash_plains_arrival',
+        'ch4_treaty_scrap_find',
+        'ch4_treaty_scrap_prisoners_find',
+        'ch4_chariot_passage',
+        // Map 9: Monument of the Fallen
+        'ch4_monument_altar_inspect',
+        'ch4_treaty_puzzle_solve',
+        'ch4_treaty_wrong',
+        'ch4_flashback_cataclysm_eve',
+        'ch4_aldric_kaelen_reunion',
+        'ch4_aldric_truth',
+        'ch4_aldric_comfort',
+        // Map 10: Sanctum of Finality
+        'ch4_last_war_boss_confront',
+        'ch4_last_war_boss_reply',
+        'ch4_ritual_pillar_1',
+        'ch4_ritual_pillar_2',
+        'ch4_ritual_pillar_3',
+        'ch4_last_war_boss_defeated',
+        'ch4_finality_seal_restored',
+        // Map 11: Interval Sanctuary (Kuro)
+        'ch4_kuro_direct_meeting',
+        'ch4_kuro_direct_meeting_reply',
+        'ch4_kuro_disappears',
+        'ch4_chapter_end',
+        // Map 12: Tomb of the First Fallen
+        'ch4_tomb_first_fallen_inspect',
+        'ch4_tomb_first_fallen_wrong',
+        'ch4_tomb_first_fallen_open',
+        // Map 13: Sentry Cellar
+        'ch4_sentry_challenge',
+        'ch4_sentry_wrong',
+        'ch4_sentry_answered',
+      ];
+
+      const rawDialogues = dialogueJson.dialogues as Record<
+        string,
+        {
+          speaker: string;
+          flashback?: boolean;
+          lines: string[];
+          responses?: unknown[];
+          effects?: { grantItems?: unknown[]; grantOnceFlag?: string };
+        }
+      >;
+
+      for (const id of ch4NodeIds) {
+        const node = rawDialogues[id];
+        expect(node, `Dialogue node ${id} must exist in dialogue.json`).toBeDefined();
+        expect(
+          (node.responses ?? []).length,
+          `Dialogue node ${id} must have at most 2 responses`,
+        ).toBeLessThanOrEqual(2);
+        for (const line of node.lines) {
+          expect(line.length, `Line in ${id} exceeds 220 chars: "${line}"`).toBeLessThanOrEqual(
+            220,
+          );
+        }
+        if (node.flashback) {
+          expect(node.speaker, `Flashback node ${id} must have a speaker`).toBeTruthy();
+        }
+        if (node.effects?.grantItems && node.effects.grantItems.length > 0) {
+          expect(
+            node.effects.grantOnceFlag,
+            `Node ${id} with grantItems must have grantOnceFlag`,
+          ).toBeTruthy();
+        }
+      }
+
+      // Kuro scene contains exact canonical dialogue lines
+      expect(rawDialogues.ch4_kuro_direct_meeting.lines[0]).toBe(
+        'Mày vẫn còn giữ thói quen tìm kiếm những thứ đã biến mất à?',
+      );
+      expect(rawDialogues.ch4_kuro_direct_meeting_reply.lines[1]).toBe(
+        'Mày đã hứa sẽ không quên tao.',
+      );
+    });
+
+    it('runs through Chapter 4 puzzle and choice flows with GameSession', () => {
+      const session = GameSession.newGame(createRealDatabase());
+
+      // 1. Courier box solves and grants maelis_letter
+      const courierGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch4_courier_box_solve.effects!,
+      );
+      expect(courierGrant.some((g) => g.itemId === 'maelis_letter')).toBe(true);
+      expect(session.inventory.hasItem('maelis_letter', 1)).toBe(true);
+      expect(session.getFlag('opened_courier_box')).toBe(true);
+
+      // 2. Hydraulic balanced vs overload
+      const sessionA = GameSession.newGame(createRealDatabase());
+      const balancedGrant = sessionA.applyDialogueEffects(
+        dialogueDb.dialogues.ch4_hydraulic_door_balanced.effects!,
+      );
+      expect(balancedGrant.some((g) => g.itemId === 'phoenix_draught')).toBe(true);
+      expect(sessionA.getFlag('solved_hydraulic_balanced')).toBe(true);
+      expect(sessionA.getFlag('reached_solkaris')).toBe(true);
+
+      const sessionB = GameSession.newGame(createRealDatabase());
+      const overloadGrant = sessionB.applyDialogueEffects(
+        dialogueDb.dialogues.ch4_hydraulic_door_overload.effects!,
+      );
+      expect(overloadGrant.some((g) => g.itemId === 'valiant_crest_cuirass')).toBe(true);
+      expect(sessionB.getFlag('solved_hydraulic_overload')).toBe(true);
+      expect(sessionB.getFlag('ch4_solkaris_store_lost')).toBe(true);
+
+      // 3. Arrow storm silenced & fallen arms solved
+      session.applyDialogueEffects(dialogueDb.dialogues.ch4_beacon_tower_align.effects!);
+      expect(session.getFlag('silenced_arrow_storm')).toBe(true);
+
+      session.applyDialogueEffects(dialogueDb.dialogues.ch4_banner_ward_broken.effects!);
+      expect(session.getFlag('solved_fallen_arms_array')).toBe(true);
+
+      // 4. Sentry answered grants last_light_charm
+      const sentryGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch4_sentry_answered.effects!,
+      );
+      expect(sentryGrant.some((g) => g.itemId === 'last_light_charm')).toBe(true);
+      expect(session.getFlag('answered_sentry')).toBe(true);
+
+      // 5. Elion choices
+      const elionBurnGrant = sessionA.applyDialogueEffects(
+        dialogueDb.dialogues.ch4_elion_burn.effects!,
+      );
+      expect(elionBurnGrant.some((g) => g.itemId === 'ember_quill_charm')).toBe(true);
+      expect(elionBurnGrant.some((g) => g.itemId === 'treaty_scrap_signatures')).toBe(true);
+      expect(sessionA.getFlag('ch4_choice_elion_burn')).toBe(true);
+
+      const elionChronicleGrant = sessionB.applyDialogueEffects(
+        dialogueDb.dialogues.ch4_elion_chronicle.effects!,
+      );
+      expect(elionChronicleGrant.some((g) => g.itemId === 'atonement_chronicle')).toBe(true);
+      expect(elionChronicleGrant.some((g) => g.itemId === 'treaty_scrap_signatures')).toBe(true);
+      expect(sessionB.getFlag('ch4_choice_elion_chronicle')).toBe(true);
+
+      // 6. Bran choices
+      const branReleaseGrant = sessionA.applyDialogueEffects(
+        dialogueDb.dialogues.ch4_bran_release.effects!,
+      );
+      expect(branReleaseGrant.some((g) => g.itemId === 'dreamless_rest_charm')).toBe(true);
+      expect(sessionA.getFlag('ch4_choice_bran_release')).toBe(true);
+
+      const branMemorialGrant = sessionB.applyDialogueEffects(
+        dialogueDb.dialogues.ch4_bran_memorial.effects!,
+      );
+      expect(branMemorialGrant.some((g) => g.itemId === 'mothers_name_carving')).toBe(true);
+      expect(sessionB.getFlag('ch4_choice_bran_memorial')).toBe(true);
+
+      // 7. Aldric choices
+      const aldricTruthGrant = sessionA.applyDialogueEffects(
+        dialogueDb.dialogues.ch4_aldric_truth.effects!,
+      );
+      expect(aldricTruthGrant.some((g) => g.itemId === 'ashes_of_peace_charm')).toBe(true);
+      expect(sessionA.getFlag('ch4_choice_aldric_truth')).toBe(true);
+
+      const aldricComfortGrant = sessionB.applyDialogueEffects(
+        dialogueDb.dialogues.ch4_aldric_comfort.effects!,
+      );
+      expect(aldricComfortGrant.some((g) => g.itemId === 'vow_of_the_father_blade')).toBe(true);
+      expect(sessionB.getFlag('ch4_choice_aldric_comfort')).toBe(true);
+
+      // 8. Hidden Tomb of the First Fallen
+      const tombGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch4_tomb_first_fallen_open.effects!,
+      );
+      expect(tombGrant.some((g) => g.itemId === 'spear_of_finality')).toBe(true);
+      expect(session.getFlag('opened_first_fallen_tomb')).toBe(true);
+
+      // 9. Kuro meeting grants interval_lens_charm
+      const kuroGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch4_kuro_disappears.effects!,
+      );
+      expect(kuroGrant.some((g) => g.itemId === 'interval_lens_charm')).toBe(true);
+      expect(session.getFlag('met_kuro_first_time')).toBe(true);
     });
   });
 });
