@@ -514,7 +514,7 @@
       "level": 15,
       "maxHp": 120,
       "hp": 120,
-      "attack": 30,
+      "attack": 24,
       "defense": 12,
       "speed": 7,
       "spriteKey": "enemy_ghost_sniper",
@@ -533,7 +533,7 @@
           "aimMs": 1200,
           "whiteMs": 250,
           "cooldownMs": 2200,
-          "damageMult": 1.6,
+          "damageMult": 1.4,
           "stunMs": 500,
           "perfectMp": 3
         }
