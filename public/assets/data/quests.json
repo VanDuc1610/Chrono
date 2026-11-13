@@ -387,7 +387,8 @@
       "rewards": {
         "experience": 150,
         "items": ["continuum_seal_shard"]
-      }
+      },
+      "followUpQuestId": "quest_ch2_outskirts_gate"
     },
     {
       "id": "quest_ch1_fisherman_letter",
@@ -453,6 +454,148 @@
       "rewards": {
         "experience": 50,
         "items": ["sunset_dried_fish"]
+      }
+    },
+    {
+      "id": "quest_ch2_outskirts_gate",
+      "title": "Con Đường Vào Đế Chế",
+      "description": "Lắng nghe lời căn dặn cuối cùng của Trưởng Lão tại Vùng Ngoại Ô Bia Đá và tìm lối vào hầm mộ bên dưới thành phố.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch2_enter_hatch",
+          "description": "Cạy mở cửa sập sắt dẫn xuống Hầm Mộ Kháng Chiến",
+          "completed": false,
+          "completeOnFlag": "entered_catacombs_hatch"
+        }
+      ],
+      "rewards": {
+        "experience": 60,
+        "items": []
+      },
+      "followUpQuestId": "quest_ch2_rebellion_contact"
+    },
+    {
+      "id": "quest_ch2_rebellion_contact",
+      "title": "Lửa Dưới Hầm Ngầm",
+      "description": "Giải cứu Lyra khỏi lũ búp bê cơ khí và giải câu đố ổ khóa ba trăm năm để mở đường lên quảng trường.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch2_save_lyra",
+          "description": "Giải cứu nữ chiến binh Lyra khỏi bầy Búp Bê Cơ Khí",
+          "completed": false,
+          "completeOnFlag": "saved_lyra"
+        },
+        {
+          "id": "obj_ch2_unlock_gate",
+          "description": "Dùng quy luật nhân quả đảo ngược mở then cổng hầm ngầm",
+          "completed": false,
+          "completeOnFlag": "unlocked_catacomb_gate"
+        }
+      ],
+      "rewards": {
+        "experience": 90,
+        "items": ["chrono_shard_minor"]
+      },
+      "followUpQuestId": "quest_ch2_praetor_plea"
+    },
+    {
+      "id": "quest_ch2_praetor_plea",
+      "title": "Lời Cầu Của Thẩm Phán",
+      "description": "Gặp Thẩm Phán Lưu Đày dưới chân tượng Hoàng Đế và nhận Bút Khắc cùng lệnh bài vào Đại Thư Viện.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch2_meet_praetor",
+          "description": "Gặp Thẩm Phán Lưu Đày tại Quảng Trường Phán Quyết",
+          "completed": false,
+          "completeOnFlag": "met_exiled_praetor"
+        },
+        {
+          "id": "obj_ch2_get_stylus",
+          "description": "Nhận Bút Khắc Pháp Quan và lệnh bài mở cổng thư viện",
+          "completed": false,
+          "completeOnFlag": "has_praetor_stylus"
+        }
+      ],
+      "rewards": {
+        "experience": 100,
+        "items": []
+      },
+      "followUpQuestId": "quest_ch2_archive_infiltration"
+    },
+    {
+      "id": "quest_ch2_archive_infiltration",
+      "title": "Xóa Tên Khỏi Bản Án",
+      "description": "Đột nhập Đại Thư Viện Nhân Quả, tìm phiến đá phán quyết và tẩy xóa nguyên nhân để hạ màn chắn tội danh.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch2_expunge_verdict",
+          "description": "Gọt sạch dòng nguyên nhân trên Phiến Đá Bản Án",
+          "completed": false,
+          "completeOnFlag": "expunged_peter_verdict"
+        }
+      ],
+      "rewards": {
+        "experience": 120,
+        "items": ["sunset_dried_fish"]
+      },
+      "followUpQuestId": "quest_ch2_imperial_verdict"
+    },
+    {
+      "id": "quest_ch2_imperial_verdict",
+      "title": "Cán Cân Gãy",
+      "description": "Đối đầu Bản Án Đế Chế tại Điện Phán Quyết Tối Cao, khôi phục Lõi Causality Seal và giải phóng vùng đất.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch2_restore_causality_seal",
+          "description": "Khôi phục Lõi Causality Seal và nhận Causality Resonance",
+          "completed": false,
+          "completeOnFlag": "causality_seal_restored"
+        }
+      ],
+      "rewards": {
+        "experience": 220,
+        "items": ["causality_seal_shard"]
+      }
+    },
+    {
+      "id": "quest_ch2_innocent_baker",
+      "title": "Mẻ Bánh Chưa Khét",
+      "description": "Hồn ma ông lão thợ bánh vẫn đau đáu vì mẻ bánh bị kết tội làm khét lò. Hãy giúp ông an lòng rời đi.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch2_comfort_baker",
+          "description": "Giúp người thợ bánh nhận ra lò bánh chưa từng bị cháy",
+          "completed": false,
+          "completeOnFlag": "comforted_baker"
+        }
+      ],
+      "rewards": {
+        "experience": 70,
+        "items": ["imperial_honey_bread"]
+      }
+    },
+    {
+      "id": "quest_ch2_automaton_duty",
+      "title": "Mệnh Lệnh Năm Mươi Năm",
+      "description": "Cỗ máy tuần tra hỏng hóc lặp đi lặp lại lệnh truy bắt một đứa trẻ năm mươi năm trước. Hãy giúp nó hoàn tất nhiệm vụ.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch2_release_automaton",
+          "description": "Giải tỏa mệnh lệnh truy bắt cho cỗ máy tuần tra hỏng",
+          "completed": false,
+          "completeOnFlag": "released_broken_automaton"
+        }
+      ],
+      "rewards": {
+        "experience": 80,
+        "items": ["chrono_shard_minor"]
       }
     }
   ]

@@ -246,6 +246,108 @@
         "maxMp": 8,
         "defense": 2
       }
+    },
+    {
+      "id": "praetor_diary_page",
+      "name": "Trang Nhật Ký Pháp Quan",
+      "type": "document",
+      "description": "Trang giấy da ố vàng từ cuốn sổ tay của Thẩm Phán Lưu Đày ghi chép về quy ước cổng hầm và bí mật ngôi mộ cổ.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Trích nhật ký Thẩm Phán — Quy ước cổng hầm:\nCánh cổng sắt ngầm được niêm phong từ ngày lập quốc. Ổ khóa chỉ nhận chiếc phôi đồng nguyên bản từng nằm trong Hốc Đá Lập Quốc cùng ngày viên đá đầu tiên được đặt xuống.",
+        "Ta đã chôn thanh đoản kiếm của mình sâu trong dãy hầm mộ, nằm cạnh người duy nhất trong lịch sử đế chế bị tuyên án trước cả khi chào đời. Kẻ an nghỉ thuận theo lẽ tự nhiên không giữ gươm báu."
+      ]
+    },
+    {
+      "id": "edict_law_404",
+      "name": "Sắc Lệnh Nhân Quả 404",
+      "type": "document",
+      "description": "Bản sao khắc trên giấy dầu chép từ bia đá ngoại ô về quy tắc hủy bỏ bản án trong Đại Thư Viện.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Sắc Lệnh Nhân Quả 404:\nMọi bản án chỉ có hiệu lực chừng nào NGUYÊN NHÂN cấu thành vẫn còn tồn tại trong sổ bộ. Nếu nguyên nhân bị xóa bỏ, bản án lập tức tiêu tán; nếu chỉ xóa tên hoặc tội danh, chữ sẽ tự khắc lại."
+      ]
+    },
+    {
+      "id": "bronze_key_blank",
+      "name": "Phôi Chìa Đồng Thau",
+      "type": "puzzle",
+      "description": "Chiếc phôi chìa khóa đồng trơn nhẵn chưa tiện răng, tìm thấy trong hộp đồ nghề của người thợ khóa cổ dưới hầm ngầm.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "praetor_chisel_stylus",
+      "name": "Bút Khắc Pháp Quan",
+      "type": "puzzle",
+      "description": "Cây bút khắc bằng kim loại cứng của Thẩm Phán Lưu Đày, dùng để đục và tẩy xóa các dòng chữ khắc trên phiến đá nhân quả.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "blank_unwritten_parchment",
+      "name": "Tờ Giấy Trắng Chưa Viết",
+      "type": "puzzle",
+      "description": "Mảnh giấy da trắng muốt không một vết mực tìm thấy trong ngăn bàn thẩm phán. Trọng lượng nhẹ bẫng tựa hư không.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "praetor_iron_rapier",
+      "name": "Đoản Kiếm Thiết Pháp Quan",
+      "type": "weapon",
+      "description": "Thanh kiếm liễu bằng thép tôi của Thẩm Phán Lưu Đày, lưỡi kiếm thanh mảnh nhưng vung nhanh và bén ngót.",
+      "value": 90,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 8,
+        "reach": 36,
+        "swingMs": 340
+      }
+    },
+    {
+      "id": "scales_of_truth_charm",
+      "name": "Bùa Cán Cân Chân Lý",
+      "type": "charm",
+      "description": "Chiếc bùa mang hình đĩa cân đồng thau cân bằng hoàn hảo. Mang lại sự tĩnh tâm và bảo hộ bền bỉ.",
+      "value": 75,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 16,
+        "maxMp": 8,
+        "defense": 2,
+        "speed": 2
+      }
+    },
+    {
+      "id": "imperial_honey_bread",
+      "name": "Bánh Mì Mật Ong Đế Chế",
+      "type": "consumable",
+      "description": "Ổ bánh nướng thơm lừng phết mật ong rừng từ lò bánh cổ. Hồi phục 60 HP.",
+      "value": 35,
+      "stackable": true,
+      "maxStack": 20,
+      "effects": {
+        "healAmount": 60
+      }
+    },
+    {
+      "id": "causality_seal_shard",
+      "name": "Mảnh Ấn Causality",
+      "type": "key_item",
+      "description": "Mảnh tinh thể màu hổ phách đậm kết tinh từ Lõi Phán Quyết Tối Cao, đánh dấu sự cộng hưởng với Quyền Năng Nhân Quả.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
     }
   ]
 }

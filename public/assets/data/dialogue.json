@@ -2261,6 +2261,744 @@
         "Hốc đá phía đông. Chiếc vỏ ốc giờ đã ở bên mình — mong lời hứa năm xưa cũng đã tìm được đường về."
       ],
       "responses": []
+    },
+    "ch2_outskirts_arrival": {
+      "id": "ch2_outskirts_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Bước qua Cổng Ngưỡng, không khí bỗng khô đặc và lạnh lẽo. Dưới chân là con đường đá nứt nẻ dẫn vào một vùng đất cổ hoang tàn.",
+        "Bên vệ đường, những cột bia đá sừng sững khắc đầy chữ viết phát ra ánh đỏ nhạt ma quái... Chiếc đồng hồ trong túi áo mình lại khẽ giật lùi nửa nhịp."
+      ],
+      "responses": [],
+      "effects": {
+        "startQuest": "quest_ch2_outskirts_gate"
+      }
+    },
+    "ch2_elder_echo_farewell": {
+      "id": "ch2_elder_echo_farewell",
+      "speaker": "Trưởng Lão Thời Gian",
+      "lines": [
+        "Ta chỉ có thể gửi chút dư ảnh cuối cùng tới đây. Vùng đất này bị giam trong xích xiềng Nhân Quả — nơi kẻ nắm quyền tự viết sẵn kết quả cho muôn dân.",
+        "Hãy nhớ lấy lời thợ đồng hồ, Peter: không có nhịp gõ nào tự nhiên vang lên nếu không có bánh răng đầu tiên chuyển động. Cậu là Kẻ Không Tên... chính điều đó khiến chúng khiếp sợ."
+      ],
+      "responses": [
+        {
+          "text": "Cháu sẽ tự tìm ra nguyên nhân cho chính mình",
+          "nextDialogueId": null
+        },
+        {
+          "text": "Ông bảo trọng trên hành trình",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["elder_echo_faded"]
+      }
+    },
+    "ch2_edict_stele_read": {
+      "id": "ch2_edict_stele_read",
+      "speaker": "Peter",
+      "lines": [
+        "Một tấm bia đá cổ khắc sâu dòng chữ đỏ: 'Sắc Lệnh Nhân Quả 404: Bản án chỉ tồn tại khi nguyên nhân còn đó. Xóa bỏ nguyên nhân, án tự tiêu biến.'",
+        "Dưới chân bia có bản sao chép tay trên giấy dầu còn nguyên vẹn nét mực son. Mình cẩn thận nhặt lấy gấp vào tập ghi chép."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "edict_law_404",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_edict_404"
+      }
+    },
+    "ch2_hatch_locked": {
+      "id": "ch2_hatch_locked",
+      "speaker": "Peter",
+      "lines": [
+        "Một nắp cửa sập bằng sắt đúc dày bị rỉ sét đóng chặt trên mặt đá, dẫn thẳng xuống cống ngầm bên dưới thành phố.",
+        "Then cài rỉ cứng nhưng có một khe hở nhỏ. Có lẽ một thanh kiếm cứng cáp có thể cạy bật được then này."
+      ],
+      "responses": [
+        {
+          "text": "Dùng kiếm cạy then cửa sập",
+          "nextDialogueId": "ch2_hatch_open"
+        },
+        {
+          "text": "Để sau",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch2_hatch_open": {
+      "id": "ch2_hatch_open",
+      "speaker": "Peter",
+      "lines": [
+        "Rắc! Chiếc then rỉ bị cạy bật ra. Cánh cửa sập hé mở để lộ luồng gió ẩm mốc từ lòng đất thốc ngược lên mặt đường.",
+        "Lối xuống Hầm Mộ Kháng Chiến đã mở."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["entered_catacombs_hatch"]
+      }
+    },
+    "ch2_lyra_cornered": {
+      "id": "ch2_lyra_cornered",
+      "speaker": "Cô Gái Trẻ",
+      "lines": [
+        "Cút ngay lũ rối sắt! Bản án của chúng mày định sẵn tao chết lúc giữa trưa, còn lâu tao mới chịu ngã xuống trước giờ đó!"
+      ],
+      "responses": []
+    },
+    "ch2_lyra_rescued": {
+      "id": "ch2_lyra_rescued",
+      "speaker": "Lyra",
+      "lines": [
+        "Khá đấy chứ, anh bạn tóc xoăn! Kiếm pháp của anh lạ thật... không giống bất kỳ thế võ nào trong sổ bộ quân đội đế chế.",
+        "Tôi là Lyra. Bản án khắc trên bia đá bảo tôi sẽ chết vào đúng ngọ hôm nay... nhưng tôi chẳng thèm chết đúng giờ!"
+      ],
+      "responses": [
+        {
+          "text": "Cánh cửa sắt phía trước dẫn đi đâu?",
+          "nextDialogueId": "ch2_lyra_gate_hint"
+        },
+        {
+          "text": "Sao cô lại bị chúng bao vây?",
+          "nextDialogueId": "ch2_lyra_explain"
+        }
+      ],
+      "effects": {
+        "setFlags": ["saved_lyra"]
+      }
+    },
+    "ch2_lyra_gate_hint": {
+      "id": "ch2_lyra_gate_hint",
+      "speaker": "Lyra",
+      "lines": [
+        "Cửa đó dẫn thẳng lên Quảng Trường Phán Quyết. Nhưng ổ khóa rỉ đặc từ ba trăm năm trước rồi, chìa thường của thời này đút vào chỉ tổ gãy.",
+        "Nghe bảo thợ khóa cổ ngày xưa từng để lại một hộp đồ nghề quanh các gian mộ... anh thử tìm xem có phôi chìa nào dùng được không."
+      ],
+      "responses": []
+    },
+    "ch2_lyra_explain": {
+      "id": "ch2_lyra_explain",
+      "speaker": "Lyra",
+      "lines": [
+        "Chúng nó gọi là 'Xử Tử Tiền Định'. Thấy ai có nguy cơ phản nghịch là lính cơ khí ập tới chém trước rồi mới ghi sổ sau.",
+        "Nhưng một khi nhân quả bị bẻ cong, cỗ máy sẽ bắt đầu chập mạch. Giờ chúng ta phải tìm đường lên quảng trường đã."
+      ],
+      "responses": []
+    },
+    "ch2_locksmith_box": {
+      "id": "ch2_locksmith_box",
+      "speaker": "Peter",
+      "lines": [
+        "Một hộp đồ nghề bằng đồng xỉn màu của thợ khóa cổ nằm dưới chân kệ đá mục.",
+        "Bên trong còn sót lại một chiếc phôi chìa đồng thau trơn nhẵn chưa tiện răng, mặt kim loại vẫn còn ánh sắc đồng nguyên bản."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "bronze_key_blank",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_bronze_key_blank"
+      }
+    },
+    "ch2_praetor_diary_found": {
+      "id": "ch2_praetor_diary_found",
+      "speaker": "Peter",
+      "lines": [
+        "Kẹp giữa hai phiến đá nứt là một trang nhật ký ố vàng của cựu Thẩm Phán.",
+        "Trang trước chép quy ước mở cổng hầm từ thuở lập quốc; trang sau ghi lại dòng tâm sự cay đắng về một ngôi mộ chôn giấu thanh đoản kiếm của ông."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "praetor_diary_page",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_praetor_diary"
+      }
+    },
+    "ch2_alcove_empty": {
+      "id": "ch2_alcove_empty",
+      "speaker": "Peter",
+      "lines": [
+        "Một hốc đá cổ thụt sâu vào vách tường hầm, bên trên khắc chữ 'HỐC ĐÁ LẬP QUỐC' tỏa ánh sáng Causality màu hổ phách.",
+        "Dường như bất cứ vật thể nào đặt vào đây cũng sẽ bị dòng chảy nhân quả kéo lùi về thời điểm viên đá đầu tiên của đế chế được đặt xuống."
+      ],
+      "responses": []
+    },
+    "ch2_alcove_place_blank": {
+      "id": "ch2_alcove_place_blank",
+      "speaker": "Peter",
+      "lines": [
+        "Mình đặt chiếc phôi chìa đồng trơn vào giữa hốc đá và đưa chiếc đồng hồ của ông nội lại gần. Một quầng sáng hổ phách bùng lên bao bọc chiếc phôi chìa!",
+        "Bề mặt phôi chìa sẫm lại, phủ một lớp ten đồng cổ kính tương ứng ba trăm năm oxy hóa. Chiếc phôi đồng giờ đã tồn tại như một chứng nhân lịch sử."
+      ],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "bronze_key_blank",
+            "quantity": 1
+          }
+        ],
+        "setFlags": ["placed_retroactive_key"]
+      }
+    },
+    "ch2_gate_ancient_locked": {
+      "id": "ch2_gate_ancient_locked",
+      "speaker": "Peter",
+      "lines": [
+        "Cánh cổng sắt kiên cố dẫn lên quảng trường. Ổ khóa đúc liền với ngàm cửa, rỉ sét bám đặc kín từ ba trăm năm trước.",
+        "Cần một chìa khóa có độ tuổi tương thích với ổ khóa lập quốc mới có thể xoay chuyển cơ chế này."
+      ],
+      "responses": []
+    },
+    "ch2_gate_blank_too_new": {
+      "id": "ch2_gate_blank_too_new",
+      "speaker": "Peter",
+      "lines": [
+        "Mình thử tra chiếc phôi đồng vừa nhặt được vào ổ khóa. Thế nhưng phôi chìa còn mới tinh, các khấc rỉ sét cổ xưa không chịu nhận ngàm.",
+        "Theo nhật ký Thẩm Phán, chìa khóa phải nằm trong Hốc Đá Lập Quốc từ thời sơ khai mới tạo ra nguyên nhân mở cửa."
+      ],
+      "responses": []
+    },
+    "ch2_gate_opens": {
+      "id": "ch2_gate_opens",
+      "speaker": "Peter",
+      "lines": [
+        "Ổ khóa cổ nhận diện vết ten đồng ba trăm năm từ chiếc phôi khóa đã được đặt vào hốc quá khứ! Các bánh răng bên trong rùng mình cọt kẹt...",
+        "Cạch! Then sắt nặng nề tự động thụt lùi vào ngàm cửa. Con đường dẫn lên Quảng Trường Phán Quyết đã thông suốt!"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["unlocked_catacomb_gate"]
+      }
+    },
+    "ch2_tomb_1": {
+      "id": "ch2_tomb_1",
+      "speaker": "Peter",
+      "lines": [
+        "Bia mộ đá thứ nhất khắc dòng chữ: 'Chiến Binh Valerius — Sinh năm 142 Đế Chế — Tuyên án và xử trảm năm 168 Đế Chế.'",
+        "Ngôi mộ này yên nghỉ đúng theo dòng chảy thuận của nhân quả."
+      ],
+      "responses": [
+        {
+          "text": "Thử cạy nắp mộ",
+          "nextDialogueId": "ch2_tomb_wrong"
+        },
+        {
+          "text": "Lùi lại",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch2_tomb_2": {
+      "id": "ch2_tomb_2",
+      "speaker": "Peter",
+      "lines": [
+        "Bia mộ đá thứ hai khắc dòng chữ kỳ lạ: 'Tử Tội Marcus — Sinh năm 185 Đế Chế — Tuyên án tử hình năm 179 Đế Chế.'",
+        "Người này bị tuyên án sáu năm trước cả khi chào đời! Đúng như nhật ký Thẩm Phán đã ghi lại."
+      ],
+      "responses": [
+        {
+          "text": "Mở nắp ngôi mộ đặc biệt này",
+          "nextDialogueId": "ch2_tomb_correct"
+        },
+        {
+          "text": "Để nguyên đó",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch2_tomb_3": {
+      "id": "ch2_tomb_3",
+      "speaker": "Peter",
+      "lines": [
+        "Bia mộ đá thứ ba khắc dòng chữ: 'Học Giả Cassian — Sinh năm 210 Đế Chế — Tuyên án lưu đày năm 215 Đế Chế.'",
+        "Người này sinh ra rồi năm năm sau mới bị tuyên án."
+      ],
+      "responses": [
+        {
+          "text": "Thử cạy nắp mộ",
+          "nextDialogueId": "ch2_tomb_wrong"
+        },
+        {
+          "text": "Lùi lại",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch2_tomb_wrong": {
+      "id": "ch2_tomb_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Ngôi mộ này yên nghỉ đúng thứ tự nhân quả. Bên trong chỉ có tro bụi và bia đá mục nát, không có kỷ vật nào của Thẩm Phán."
+      ],
+      "responses": []
+    },
+    "ch2_tomb_correct": {
+      "id": "ch2_tomb_correct",
+      "speaker": "Peter",
+      "lines": [
+        "Nắp phiến đá bật mở! Dưới lớp vải liệm cổ không có hài cốt, chỉ có một thanh kiếm liễu bằng thép tôi sáng quắc đặt trang trọng trên gối nhung.",
+        "Đây chính là Đoản Kiếm Thiết Pháp Quan mà cựu Thẩm Phán giấu lại. Cầm thanh kiếm lên thấy nhẹ tay và bén ngọt — mở túi đồ ([I]) để trang bị."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "praetor_iron_rapier",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_praetor_rapier",
+        "setFlags": ["opened_praetor_tomb"]
+      }
+    },
+    "ch2_tomb_empty": {
+      "id": "ch2_tomb_empty",
+      "speaker": "Peter",
+      "lines": [
+        "Ngôi mộ của tử tội bị kết án trước khi sinh giờ đã trống. Thanh đoản kiếm đang nằm trong túi đồ của mình."
+      ],
+      "responses": []
+    },
+    "ch2_plaza_arrival": {
+      "id": "ch2_plaza_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Bước lên khỏi hầm ngầm, trước mắt là quảng trường rộng lớn của đế chế cổ. Bức tượng Hoàng Đế khổng lồ bịt mắt đứng sừng sững giữa bầu trời tím ngắt.",
+        "Giữa quảng trường là đài máy chém phủ rêu và một chiếc cán cân đá khổng lồ đang nghiêng hẳn sang một bên."
+      ],
+      "responses": []
+    },
+    "ch2_praetor_meet": {
+      "id": "ch2_praetor_meet",
+      "speaker": "Thẩm Phán Lưu Đày",
+      "lines": [
+        "Cậu trai trẻ... đôi mắt cậu nhìn thấy dòng chảy nhân quả đúng không? Lâu lắm rồi ta mới thấy một linh hồn không mang xiềng xích định mệnh.",
+        "Cầm lấy cây Bút Khắc này cùng Lệnh Bài Tư Pháp. Năm xưa chính tay ta dùng nó thảo án, để rồi nhận ra Hoàng Đế đã bí mật xóa sạch tên mình khỏi mọi tội lỗi."
+      ],
+      "responses": [
+        {
+          "text": "Cháu sẽ dùng nó trả lại sự thật",
+          "nextDialogueId": "ch2_praetor_accept"
+        },
+        {
+          "text": "Bản án của cháu ghi những gì?",
+          "nextDialogueId": "ch2_praetor_verdict_info"
+        }
+      ],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "praetor_chisel_stylus",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_praetor_stylus",
+        "setFlags": ["met_exiled_praetor", "has_praetor_stylus", "has_praetor_pass"]
+      }
+    },
+    "ch2_praetor_accept": {
+      "id": "ch2_praetor_accept",
+      "speaker": "Thẩm Phán Lưu Đày",
+      "lines": [
+        "Hãy đến Đại Thư Viện phía đông. Màn chắn tội danh đang chặn đường vào thánh điện — chỉ có Bút Khắc mới sửa được bản án đá."
+      ],
+      "responses": []
+    },
+    "ch2_praetor_verdict_info": {
+      "id": "ch2_praetor_verdict_info",
+      "speaker": "Thẩm Phán Lưu Đày",
+      "lines": [
+        "Nó ghi cậu là 'Kẻ Không Tên' — không được phép tồn tại vì không có mã số nhân quả. Hãy tự tay gọt bỏ nguyên nhân đó đi, cậu trai ạ."
+      ],
+      "responses": []
+    },
+    "ch2_praetor_after": {
+      "id": "ch2_praetor_after",
+      "speaker": "Thẩm Phán Lưu Đày",
+      "lines": [
+        "Đại Thư Viện ở cổng phía đông quảng trường. Cậu đã có Lệnh Bài, lính canh cổng sẽ không thể cản bước."
+      ],
+      "responses": []
+    },
+    "ch2_praetor_desk": {
+      "id": "ch2_praetor_desk",
+      "speaker": "Peter",
+      "lines": [
+        "Cạnh chỗ ngồi của Thẩm Phán có một chiếc bàn đá nứt nẻ. Trong ngăn kéo bí mật giấu một mảnh giấy da trắng tinh, nhẹ bẫng tựa lông hồng.",
+        "Tờ giấy này chưa từng bị ghi một dòng luật lệ nào — một vật phẩm tinh khiết hoàn toàn không mang sức nặng của định mệnh."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "blank_unwritten_parchment",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_blank_parchment"
+      }
+    },
+    "ch2_baker_start": {
+      "id": "ch2_baker_start",
+      "speaker": "Hồn Thợ Bánh",
+      "lines": [
+        "Khét rồi... khét hết cả mẻ bánh rồi! Lính vừa giải ta đi vì tội làm cháy lò... nhưng ta vừa mới nhào bột xong mà!",
+        "Bánh của ta... bánh của ta đâu rồi..."
+      ],
+      "responses": [
+        {
+          "text": "Để cháu xem lại lò bánh giúp bác",
+          "nextDialogueId": "ch2_baker_comfort"
+        },
+        {
+          "text": "Bác bình tĩnh lại đã",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "startQuest": "quest_ch2_innocent_baker"
+      }
+    },
+    "ch2_baker_comfort": {
+      "id": "ch2_baker_comfort",
+      "speaker": "Peter",
+      "lines": [
+        "Bác nhìn xem, lò bánh nguội ngắt và bột vẫn còn thơm phức trong âu đồng. Chưa hề có ngọn lửa nào bốc lên cả, bác không hề có tội.",
+        "(Hồn người thợ bánh nhìn theo ngón tay Peter, giọt nước mắt trong suốt rơi xuống âu bột. Dáng vẻ hoảng loạn tan biến, để lại một ổ bánh mật ong còn ấm nóng.)"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["comforted_baker"],
+        "grantItems": [
+          {
+            "itemId": "imperial_honey_bread",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_baker_bread"
+      }
+    },
+    "ch2_baker_done": {
+      "id": "ch2_baker_done",
+      "speaker": "Peter",
+      "lines": [
+        "Âu bột bánh mì đã nguội, lò nướng đứng im trong nắng nhạt. Người thợ bánh già đã thanh thản siêu thoát."
+      ],
+      "responses": []
+    },
+    "ch2_automaton_inspect": {
+      "id": "ch2_automaton_inspect",
+      "speaker": "Người Máy Hỏng",
+      "lines": [
+        "RÈ... CẢNH BÁO... LỆNH TRUY BẮT SỐ 1042: ĐỨA TRẺ MẶC ÁO HOA... NĂM MƯƠI NĂM CHƯA HOÀN TẤT... TIẾP TỤC TUẦN TRA...",
+        "Bánh răng trong ngực cỗ máy chấp pháp xoay rít chói tai, mắt kính quét liên tục vào khoảng không vô định."
+      ],
+      "responses": [
+        {
+          "text": "Đứa trẻ năm xưa đã già và qua đời thanh thản rồi",
+          "nextDialogueId": "ch2_automaton_resolve"
+        },
+        {
+          "text": "Để nó tự chạy",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "startQuest": "quest_ch2_automaton_duty"
+      }
+    },
+    "ch2_automaton_resolve": {
+      "id": "ch2_automaton_resolve",
+      "speaker": "Peter",
+      "lines": [
+        "Peter dùng Nhãn Thời Gian chiếu lên bộ nhớ cỗ máy hình ảnh đứa trẻ năm xưa đã lớn lên, sống trọn một đời bình yên rồi nhắm mắt giữa con cháu.",
+        "Rè... XÁC NHẬN ĐỐI TƯỢNG HẾT VÒNG ĐỜI... NHIỆM VỤ HOÀN THÀNH... Cỗ máy khẽ cúi đầu, lõi năng lượng tắt dần và nhả ra một mảnh tinh thể hồi phục."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["released_broken_automaton"],
+        "grantItems": [
+          {
+            "itemId": "chrono_shard_minor",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_automaton_shard"
+      }
+    },
+    "ch2_automaton_done": {
+      "id": "ch2_automaton_done",
+      "speaker": "Peter",
+      "lines": [
+        "Cỗ máy tuần tra đứng yên như một bức tượng đồng giữa quảng trường, không còn phát ra tiếng rè đau đớn nữa."
+      ],
+      "responses": []
+    },
+    "ch2_scales_inspect": {
+      "id": "ch2_scales_inspect",
+      "speaker": "Peter",
+      "lines": [
+        "Bức tượng Cán Cân Nhân Quả bằng đá hoa cương. Đĩa cân bên trái đặt một cuốn sách luật bằng sắt nặng trịch, kéo cán cân trĩu hẳn xuống.",
+        "Bia ký dưới chân ghi: 'Chân lý tự do không có hình hài, chỉ có tờ giấy trắng chưa viết mới có thể kéo cân về mức thăng bằng.'"
+      ],
+      "responses": [
+        {
+          "text": "Đặt thử vật nặng lên đĩa cân bên phải",
+          "nextDialogueId": "ch2_scales_heavy"
+        },
+        {
+          "text": "Đặt Tờ Giấy Trắng Chưa Viết lên",
+          "nextDialogueId": "ch2_scales_balanced"
+        }
+      ]
+    },
+    "ch2_scales_heavy": {
+      "id": "ch2_scales_heavy",
+      "speaker": "Peter",
+      "lines": [
+        "Cán cân rung lên bần bật rồi tụt xuống sâu hơn. Một luồng sóng chấn động đẩy Peter lùi lại một bước.",
+        "Sức nặng vật chất chỉ làm cán cân thêm thiên lệch! Cần thứ gì đó hoàn toàn không mang sức nặng của định mệnh."
+      ],
+      "responses": []
+    },
+    "ch2_scales_balanced": {
+      "id": "ch2_scales_balanced",
+      "speaker": "Peter",
+      "lines": [
+        "Mình đặt tờ giấy trắng chưa viết lên đĩa cân bên phải. Kỳ diệu thay, đĩa cân nhẹ bẫng lại từ từ nâng cuốn sách luật nặng ngàn cân lên ngang bằng!",
+        "Hai đĩa cân thăng bằng hoàn hảo tỏa ra ánh sáng cerulean dịu mát. Một ngăn ngầm bật mở hé lộ chiếc Bùa Cán Cân Chân Lý cổ xưa."
+      ],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "blank_unwritten_parchment",
+            "quantity": 1
+          }
+        ],
+        "grantItems": [
+          {
+            "itemId": "scales_of_truth_charm",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_scales_charm",
+        "setFlags": ["solved_scales_puzzle"]
+      }
+    },
+    "ch2_scales_done": {
+      "id": "ch2_scales_done",
+      "speaker": "Peter",
+      "lines": [
+        "Cán Cân Nhân Quả đang giữ trạng thái thăng bằng tuyệt đối giữa cuốn sách luật sắt và tờ giấy trắng tự do."
+      ],
+      "responses": []
+    },
+    "ch2_execution_platform": {
+      "id": "ch2_execution_platform",
+      "speaker": "Peter",
+      "lines": [
+        "Đài máy chém bằng gỗ lim đen bóng đã rỉ sét theo năm tháng. Lưỡi dao treo lơ lửng giữa không trung như đang chờ đợi một thời khắc không bao giờ tới.",
+        "Lyra đã đúng khi từ chối bước lên nơi này."
+      ],
+      "responses": []
+    },
+    "ch2_archives_gate_locked": {
+      "id": "ch2_archives_gate_locked",
+      "speaker": "Peter",
+      "lines": [
+        "Cổng dẫn vào Đại Thư Viện được bảo vệ bởi hai bức tượng lính chấp pháp bằng đồng. Không có Lệnh Bài Tư Pháp, cổng kiên quyết không mở."
+      ],
+      "responses": []
+    },
+    "ch2_archives_arrival": {
+      "id": "ch2_archives_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Đại Thư Viện Nhân Quả hiện ra với những giá sách bằng đá cao chạm vòm trần. Hàng ngàn phiến đá phát ra ánh tím âm u lạnh lẽo.",
+        "Ở cuối sảnh lớn, một màn chắn năng lượng đỏ rực đang ngăn lối sang Điện Phán Quyết Tối Cao."
+      ],
+      "responses": []
+    },
+    "ch2_peter_record": {
+      "id": "ch2_peter_record",
+      "speaker": "Peter",
+      "lines": [
+        "Trên kệ đá cổ phủ bụi, Peter tìm thấy một phiến đá mục nát mang hình thoi khác biệt hoàn toàn với các bản án khác.",
+        "Nội dung ghi: 'Thực Thể Dị Thường: Kẻ Không Tên (Unwritten). Không có mã số nhân quả gốc, không thể định trước tương lai.'",
+        "Bên dưới nét khắc có một dấu vết dũa mòn quen thuộc... giống hệt vết dũa trên chiếc vỏ đồng hồ rỗng ở bờ biển Chương 1."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["read_peter_unwritten_record"]
+      }
+    },
+    "ch2_rebellion_records": {
+      "id": "ch2_rebellion_records",
+      "speaker": "Peter",
+      "lines": [
+        "Ngăn hồ sơ ghi danh những người từng cố gắng sửa đổi sổ bộ: Thẩm Phán Marcus, Tiên Phong Lyra...",
+        "Họ không phải tội phạm, họ chỉ là những người muốn tự tay quyết định ngày mai của chính mình."
+      ],
+      "responses": []
+    },
+    "ch2_tablet_inspect": {
+      "id": "ch2_tablet_inspect",
+      "speaker": "Peter",
+      "lines": [
+        "Phiến Đá Bản Án đang duy trì Màn Chắn Tội Danh, trên mặt đá khắc 3 dòng chữ sắc lẹm:",
+        "(1) Tên: Peter, Kẻ Không Tên.\n(2) Tội danh: Can thiệp dòng chảy thời gian.\n(3) Nguyên nhân: Bước qua Cổng Ngưỡng không giấy phép sinh ra."
+      ],
+      "responses": [
+        {
+          "text": "Dùng Bút Khắc gọt dòng chữ",
+          "nextDialogueId": "ch2_tablet_choose_a"
+        },
+        {
+          "text": "Xem lại tài liệu",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch2_tablet_choose_a": {
+      "id": "ch2_tablet_choose_a",
+      "speaker": "Peter",
+      "lines": [
+        "Sắc Lệnh 404 nhắc nhở: Bản án chỉ sụp đổ khi NGUYÊN NHÂN cấu thành bị xóa bỏ. Bạn muốn gọt dòng chữ nào?"
+      ],
+      "responses": [
+        {
+          "text": "Gọt dòng 1: Tên đối tượng",
+          "nextDialogueId": "ch2_tablet_wrong_name"
+        },
+        {
+          "text": "Xem các dòng tiếp theo",
+          "nextDialogueId": "ch2_tablet_choose_b"
+        }
+      ]
+    },
+    "ch2_tablet_choose_b": {
+      "id": "ch2_tablet_choose_b",
+      "speaker": "Peter",
+      "lines": ["Lựa chọn tiếp theo để gọt dòng chữ trên phiến đá:"],
+      "responses": [
+        {
+          "text": "Gọt dòng 2: Tội danh",
+          "nextDialogueId": "ch2_tablet_wrong_crime"
+        },
+        {
+          "text": "Gọt dòng 3: Nguyên nhân bước qua Cổng Ngưỡng",
+          "nextDialogueId": "ch2_tablet_expunged"
+        }
+      ]
+    },
+    "ch2_tablet_wrong_name": {
+      "id": "ch2_tablet_wrong_name",
+      "speaker": "Peter",
+      "lines": [
+        "Xoẹt... Mũi bút gọt bay cái tên 'Peter'. Thế nhưng phiến đá khẽ rùng mình, mặt đá liền lại như cũ trong chớp mắt!",
+        "Tên gọi không phải là nguyên nhân của tội trạng. Phiến đá không hề suy suyển!"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch2_tablet_wrong_name"]
+      }
+    },
+    "ch2_tablet_wrong_crime": {
+      "id": "ch2_tablet_wrong_crime",
+      "speaker": "Peter",
+      "lines": [
+        "Xoẹt... Peter gọt mờ dòng chữ tội danh. Nhưng chỉ hai giây sau, từng nét chữ đỏ lại từ từ trồi lên khỏi mặt đá!",
+        "Chừng nào nguyên nhân bước qua Cổng Ngưỡng còn đó, tội danh sẽ tự động mọc lại trên mặt đá!"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch2_tablet_wrong_crime"]
+      }
+    },
+    "ch2_tablet_expunged": {
+      "id": "ch2_tablet_expunged",
+      "speaker": "Peter",
+      "lines": [
+        "Xoẹt—! Peter dùng hết sức gọt bay dòng thứ ba: nguyên nhân 'Bước qua Cổng Ngưỡng không giấy phép'.",
+        "Không còn nguyên nhân, toàn bộ phiến đá nứt toác! Bản án sụp đổ thành cát bụi, và Màn Chắn Tội Danh ở cuối sảnh lập tức tan biến!"
+      ],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "praetor_chisel_stylus",
+            "quantity": 1
+          }
+        ],
+        "setFlags": ["expunged_peter_verdict"],
+        "refreshMap": true
+      }
+    },
+    "ch2_barrier_guilt_repel": {
+      "id": "ch2_barrier_guilt_repel",
+      "speaker": "Peter",
+      "lines": [
+        "Tạch tạch—! Một luồng điện màu đỏ từ Màn Chắn Tội Danh giật mạnh đẩy Peter dội ngược lại!",
+        "Màn chắn này chỉ chặn những ai còn mang bản án ghi trong Đại Thư Viện. Cần xóa nguyên nhân bản án trên phiến đá trước!"
+      ],
+      "responses": []
+    },
+    "ch2_verdict_boss_confront": {
+      "id": "ch2_verdict_boss_confront",
+      "speaker": "Bản Án Đế Chế",
+      "lines": [
+        "CẢNH BÁO. Thực thể không mã số nhân quả đã xâm nhập thánh điện. Phán quyết tiền định: Tử hình vì tội làm sai lệch bánh răng vũ trụ.",
+        "Bánh răng định mệnh đã quay, kẻ nào dám kháng cự sẽ bị nghiền nát dưới Cán Cân Công Lý!"
+      ],
+      "responses": [
+        {
+          "text": "Một bộ máy phán xét người ta trước khi sống xứng đáng bị tháo rời!",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "setFlags": ["met_imperial_verdict"]
+      }
+    },
+    "ch2_verdict_released": {
+      "id": "ch2_verdict_released",
+      "speaker": "Bản Án Đế Chế",
+      "lines": [
+        "...Cán cân... nứt vỡ rồi sao? Không có bản án nào được tuyên trước... nghĩa là... tương lai vẫn chưa được viết...",
+        "(Bức tượng khổng lồ buông thanh kiếm rỉ, hai tay run rẩy hạ chiếc cán cân gãy xuống sàn đá và quỳ gối trong tĩnh lặng.)"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["defeated_imperial_verdict"]
+      }
+    },
+    "ch2_seal_restored": {
+      "id": "ch2_seal_restored",
+      "speaker": "Peter",
+      "lines": [
+        "Bên dưới bệ tượng, Lõi Causality Seal tỏa ánh sáng hổ phách ấm áp và thuần khiết, không còn vướng bận xiềng xích phán xét.",
+        "Khi đặt tay lên lõi ấn, một luồng sóng ấm lan tỏa khắp người — Quyền Năng Causality đã thức tỉnh trong mình. Giờ đây, mỗi bước đi đều là do chính mình quyết định.",
+        "Phía trước, Cổng Ngưỡng dẫn sang vùng đất kế tiếp đang từ từ mở lối..."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["causality_seal_restored", "learned_causality_resonance"],
+        "endChapter": 2
+      }
     }
   }
 }

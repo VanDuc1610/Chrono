@@ -765,4 +765,195 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       );
     });
   });
+
+  describe('Chapter 2 Content Data Integrity (dialogue.json, quests.json, items.json)', () => {
+    it('defines all 9 Chapter 2 items with correct types, stats, and document page limits', () => {
+      const items = itemDb.items;
+      const find = (id: string) => items.find((i) => i.id === id);
+
+      const diary = find('praetor_diary_page');
+      expect(diary).toBeDefined();
+      expect(diary?.type).toBe('document');
+      expect(diary?.pages?.length).toBe(2);
+      for (const page of diary?.pages ?? []) {
+        expect(page.length).toBeLessThanOrEqual(220);
+        expect(page.length).toBeGreaterThan(0);
+      }
+
+      const edict = find('edict_law_404');
+      expect(edict).toBeDefined();
+      expect(edict?.type).toBe('document');
+      expect(edict?.pages?.length).toBe(1);
+      expect(edict?.pages?.[0].length).toBeLessThanOrEqual(220);
+
+      expect(find('bronze_key_blank')?.type).toBe('puzzle');
+      expect(find('praetor_chisel_stylus')?.type).toBe('puzzle');
+      expect(find('blank_unwritten_parchment')?.type).toBe('puzzle');
+
+      const rapier = find('praetor_iron_rapier');
+      expect(rapier).toBeDefined();
+      expect(rapier?.type).toBe('weapon');
+      expect(rapier?.equip?.attack).toBe(8);
+      expect(rapier?.equip?.reach).toBe(36);
+      expect(rapier?.equip?.swingMs).toBe(340);
+
+      const charm = find('scales_of_truth_charm');
+      expect(charm).toBeDefined();
+      expect(charm?.type).toBe('charm');
+      expect(charm?.equip?.maxHp).toBe(16);
+      expect(charm?.equip?.maxMp).toBe(8);
+      expect(charm?.equip?.defense).toBe(2);
+      expect(charm?.equip?.speed).toBe(2);
+
+      const bread = find('imperial_honey_bread');
+      expect(bread).toBeDefined();
+      expect(bread?.type).toBe('consumable');
+      expect(bread?.effects?.healAmount).toBe(60);
+
+      expect(find('causality_seal_shard')?.type).toBe('key_item');
+    });
+
+    it('verifies all Chapter 2 dialogue node ids from contract §11.3 exist and have <= 2 responses', () => {
+      const contractIds = [
+        // Outskirts
+        'ch2_outskirts_arrival',
+        'ch2_elder_echo_farewell',
+        'ch2_edict_stele_read',
+        'ch2_hatch_locked',
+        'ch2_hatch_open',
+        // Catacombs
+        'ch2_lyra_cornered',
+        'ch2_lyra_rescued',
+        'ch2_locksmith_box',
+        'ch2_praetor_diary_found',
+        'ch2_alcove_empty',
+        'ch2_alcove_place_blank',
+        'ch2_gate_ancient_locked',
+        'ch2_gate_blank_too_new',
+        'ch2_gate_opens',
+        'ch2_tomb_1',
+        'ch2_tomb_2',
+        'ch2_tomb_3',
+        'ch2_tomb_wrong',
+        'ch2_tomb_correct',
+        'ch2_tomb_empty',
+        // Plaza
+        'ch2_plaza_arrival',
+        'ch2_praetor_meet',
+        'ch2_praetor_after',
+        'ch2_praetor_desk',
+        'ch2_baker_start',
+        'ch2_baker_comfort',
+        'ch2_baker_done',
+        'ch2_automaton_inspect',
+        'ch2_automaton_resolve',
+        'ch2_automaton_done',
+        'ch2_scales_inspect',
+        'ch2_scales_heavy',
+        'ch2_scales_balanced',
+        'ch2_scales_done',
+        'ch2_execution_platform',
+        'ch2_archives_gate_locked',
+        // Archives
+        'ch2_archives_arrival',
+        'ch2_peter_record',
+        'ch2_rebellion_records',
+        'ch2_tablet_inspect',
+        'ch2_tablet_choose_a',
+        'ch2_tablet_choose_b',
+        'ch2_tablet_wrong_name',
+        'ch2_tablet_wrong_crime',
+        'ch2_tablet_expunged',
+        'ch2_barrier_guilt_repel',
+        // Sanctum
+        'ch2_verdict_boss_confront',
+        'ch2_verdict_released',
+        'ch2_seal_restored',
+      ];
+
+      for (const id of contractIds) {
+        const node = dialogueDb.dialogues[id];
+        expect(node, `Dialogue node ${id} must exist`).toBeDefined();
+        expect((node.responses ?? []).length).toBeLessThanOrEqual(2);
+        for (const line of node.lines) {
+          expect(line.length, `Line in ${id} exceeds 220 chars: "${line}"`).toBeLessThanOrEqual(
+            220,
+          );
+        }
+      }
+    });
+
+    it('runs through Chapter 2 puzzle flows (alcove, tomb, scales, verdict tablet) with GameSession', () => {
+      const session = GameSession.newGame(createRealDatabase());
+
+      // 1. Alcove retroactive key puzzle
+      expect(session.inventory.hasItem('bronze_key_blank', 1)).toBe(false);
+      const keyGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch2_locksmith_box.effects!,
+      );
+      expect(keyGrant.some((g) => g.itemId === 'bronze_key_blank')).toBe(true);
+      expect(session.inventory.hasItem('bronze_key_blank', 1)).toBe(true);
+
+      session.applyDialogueEffects(dialogueDb.dialogues.ch2_alcove_place_blank.effects!);
+      expect(session.inventory.hasItem('bronze_key_blank', 1)).toBe(false);
+      expect(session.getFlag('placed_retroactive_key')).toBe(true);
+
+      session.applyDialogueEffects(dialogueDb.dialogues.ch2_gate_opens.effects!);
+      expect(session.getFlag('unlocked_catacomb_gate')).toBe(true);
+
+      // 2. Tomb puzzle (Tomb 2 is correct, sentenced before birth)
+      const tombGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch2_tomb_correct.effects!,
+      );
+      expect(tombGrant.some((g) => g.itemId === 'praetor_iron_rapier')).toBe(true);
+      expect(session.inventory.hasItem('praetor_iron_rapier', 1)).toBe(true);
+      expect(session.getFlag('opened_praetor_tomb')).toBe(true);
+      // Duplicate grant blocked by grantOnceFlag
+      expect(session.applyDialogueEffects(dialogueDb.dialogues.ch2_tomb_correct.effects!)).toEqual(
+        [],
+      );
+
+      // 3. Scales of Truth puzzle
+      const deskGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch2_praetor_desk.effects!,
+      );
+      expect(deskGrant.some((g) => g.itemId === 'blank_unwritten_parchment')).toBe(true);
+      expect(session.inventory.hasItem('blank_unwritten_parchment', 1)).toBe(true);
+
+      const scalesGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch2_scales_balanced.effects!,
+      );
+      expect(session.inventory.hasItem('blank_unwritten_parchment', 1)).toBe(false);
+      expect(scalesGrant.some((g) => g.itemId === 'scales_of_truth_charm')).toBe(true);
+      expect(session.inventory.hasItem('scales_of_truth_charm', 1)).toBe(true);
+      expect(session.getFlag('solved_scales_puzzle')).toBe(true);
+
+      // 4. Verdict tablet puzzle (requires praetor stylus to expunge cause)
+      const praetorGrant = session.applyDialogueEffects(
+        dialogueDb.dialogues.ch2_praetor_meet.effects!,
+      );
+      expect(praetorGrant.some((g) => g.itemId === 'praetor_chisel_stylus')).toBe(true);
+      expect(session.inventory.hasItem('praetor_chisel_stylus', 1)).toBe(true);
+      expect(session.getFlag('has_praetor_pass')).toBe(true);
+
+      // Wrong lines set flags but do not expunge
+      session.applyDialogueEffects(dialogueDb.dialogues.ch2_tablet_wrong_name.effects!);
+      expect(session.getFlag('ch2_tablet_wrong_name')).toBe(true);
+      expect(session.getFlag('expunged_peter_verdict')).toBe(false);
+
+      session.applyDialogueEffects(dialogueDb.dialogues.ch2_tablet_wrong_crime.effects!);
+      expect(session.getFlag('ch2_tablet_wrong_crime')).toBe(true);
+      expect(session.getFlag('expunged_peter_verdict')).toBe(false);
+
+      // Correct line 3 expunges verdict and takes stylus
+      session.applyDialogueEffects(dialogueDb.dialogues.ch2_tablet_expunged.effects!);
+      expect(session.inventory.hasItem('praetor_chisel_stylus', 1)).toBe(false);
+      expect(session.getFlag('expunged_peter_verdict')).toBe(true);
+
+      // 5. Seal restoration and endChapter 2
+      session.applyDialogueEffects(dialogueDb.dialogues.ch2_seal_restored.effects!);
+      expect(session.getFlag('causality_seal_restored')).toBe(true);
+      expect(session.getFlag('learned_causality_resonance')).toBe(true);
+    });
+  });
 });
