@@ -652,3 +652,31 @@ Bỏ `quest_ch4_chronicler_guilt` (Elion đã chuyển vào nhiệm vụ chính)
 - **Node mới:** `ch4_mounds_wrong`, `ch4_treaty_wrong`, `ch4_sentry_challenge`, `ch4_sentry_wrong`, `ch4_sentry_answered`, `ch4_elion_talk`, `ch4_elion_choice`, `ch4_elion_burn`, `ch4_elion_chronicle`, `ch4_aldric_kaelen_reunion`, `ch4_aldric_truth`, `ch4_aldric_comfort`, `ch4_bran_choice`, `ch4_bran_release`, `ch4_bran_memorial`, `ch4_chariot_passage`, `ch4_tomb_first_fallen_wrong`, `ch4_kaelen_cold` (nhánh B), `ch4_waters_rubble_find` (nhánh B), `ch4_ramparts_ambush_cleared`.
 - **Cờ mới:** `reached_solkaris`, `ch4_solkaris_store_lost`, `ch4_jade_reunited`, `cleared_ramparts_ambush`, `answered_sentry`, `opened_chariot_passage`, `ch4_choice_bran_*`, `ch4_choice_elion_*` như §12.4.
 - **Phân công:** Claude gắn các dialogue node vào bản đồ và làm phần engine: vòng xoay, cân, mưa tên, xạ thủ, lính cầm cờ, hiệu ứng hồi tưởng, ba trụ nghi thức, Tường Khí Máu.
+
+### 13.8. Quái cần khéo léo & canh nhịp (owner duyệt 2026-11-14, Claude làm)
+
+Mỗi quái có một cách chơi an toàn và một cách chơi khéo tay; cách khéo tay được thưởng.
+
+- **Xạ Thủ Vô Hồn — né hoàn hảo.** Đứng yên ngoài tầm chém, chiếu tia ngắm đỏ lên Peter. **0,25 giây cuối** tia chuyển trắng rồi bắn.
+  - Né (Shift) đúng lúc tia trắng: mũi tên trượt, chữ "Né hoàn hảo!", Peter hồi 3 MP.
+  - Né sớm khi tia còn đỏ: xạ thủ ngắm lại, vẫn trúng.
+  - Trúng tên: mất nhiều máu và choáng 0,5 giây.
+  - Có đá hoặc tường chắn giữa xạ thủ và Peter lúc bắn: tên cắm vào vật chắn.
+- **Đội Hình Trùng Điệp — gạt giáo.** Khiên chặn toàn bộ phía trước (như búp bê cơ khí Chương 2). Trước khi đâm, mũi giáo **lóe trắng 0,25 giây**.
+  - Chém trúng ngay lúc lóe: "Gạt giáo!", lính mất thăng bằng, khiên hạ 1,5 giây (chém trực diện được).
+  - Đòn Thời Gian cũng phá thế khiên 2 giây.
+  - Vòng ra sau lưng vẫn chém được như cũ.
+- **Lính Cầm Cờ — nhịp hát.** Giương cờ hát 2 giây (khiên cờ đỏ, chém không vào) rồi hạ cờ lấy hơi 1 giây (chém được).
+  - Quái gục trong vòng 4 ô quanh lính cầm cờ **đứng dậy với 50% máu ở đầu câu hát kế tiếp**.
+  - Phần thưởng và cờ "dọn sạch nhóm" chỉ tính khi quái gục hẳn: lúc hồi sinh không còn lính cầm cờ nào gần đó, hoặc lính cầm cờ đã chết.
+- **Kỵ Sĩ Bất Tử (quái mới, `enemy_undying_knight`) — lao thẳng.**
+  - Dậm chân báo hiệu 0,6 giây, trong lúc đó vẫn xoay theo Peter. Hướng lao **chốt ở cuối nhịp dậm**.
+  - Né sớm: nó vẫn nhắm trúng. Né khi nó đã lao: nó lao thẳng qua.
+  - Lao vào tường, hàng rào cọc hay đá: choáng 2 giây, nhận **gấp đôi** sát thương.
+  - Lao trúng Peter: sát thương ×1,5.
+  - Đặt ở Sống Núi Máu và Trường Lũy, gần hàng rào cọc.
+- **Đỡ đòn đúng nhịp trong trận boss theo lượt.** Khi boss ra đòn, một vòng sáng thu nhỏ quanh Peter. Bấm **Space** khi vòng chạm viền (cửa sổ khoảng 0,2 giây): sát thương giảm một nửa, chữ "Đỡ!".
+  - Bấm sớm hoặc trễ: không có tác dụng, phải chờ tới đòn sau.
+  - Boss giữa: vòng thu đều nhịp.
+  - Boss cuối: có đòn nhử — vòng chớp ở giữa chừng như sắp chạm rồi thu tiếp; ai bấm theo cú chớp sẽ hụt.
+  - Áp dụng cho boss Chương 4 trở đi (`timedBlock` trong `enemies.json`).

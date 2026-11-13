@@ -2,7 +2,8 @@
  * CHRONO – Chapter 4 characters (Pipeline B, AGENTS.md §5), CHAPTER_04_DESIGN.md §4, §8, §10.2, §13:
  *   General Aldric, General Kaelen, Private Bran, Chronicler Elion, Private Renard, Kuro (32x32 x4 idle;
  *   Kuro has a 5th "Interval flicker" frame); Ghost Sniper, Endless Phalanx, Banner Carrier (32x32 x4);
- *   The Crimson Standard (48x48, 4 idle + blood wall); The Last War (64x64, 4 idle + kneeling).
+ *   Undying Knight (32x32, 4 idle + charging, §13.8); The Crimson Standard (48x48, 4 idle + blood
+ *   wall); The Last War (64x64, 4 idle + kneeling).
  * Deterministic pixel rules only — no image model, no external reference.
  * Output: art-source/{npcs,enemies}/<name>/generated/candidates/ ONLY (owner approval required).
  *
@@ -543,6 +544,66 @@ function carrierFrame(phase) {
   return c.g;
 }
 
+// ------------------------------------------------------------------ Undying Knight (faces left)
+const KNIGHT = {
+  O: hex('#0a0808'),
+  m: hex('#7a7e86'), // heavy plate
+  M: hex('#50545c'),
+  j: hex('#34373e'),
+  h: hex('#c8c0b0'), // bone horns on the helm
+  v: hex('#0c0a0c'),
+  e: hex('#9affd8'), // undead green-white eyes
+  c: hex('#8a2222'), // tattered red cape
+  C: hex('#5e1616'),
+  p: hex('#4a3420'), // lance shaft
+  q: hex('#c8ccd4'), // lance head
+  d: [140, 120, 100, 170], // stomp dust
+};
+/** phase 0-3 idle (3 = stomp), 4 = charging. */
+function knightFrame(phase) {
+  const c = canvas(32);
+  const charge = phase === 4;
+  const lean = charge ? -2 : 0;
+  // Cape streaming behind (to the right).
+  for (let y = 12; y < 27; y++) {
+    const len = 5 + Math.round(Math.sin((y + phase * 2) / 2)) + (charge ? 3 : 0);
+    c.rect(21, y, 21 + len, y, y % 4 ? 'c' : 'C');
+  }
+  // Helm with bone horns.
+  c.ellipse(16 + lean, 8, 4.5, 4.5, 'm');
+  c.rect(12 + lean, 8, 18 + lean, 9, 'v');
+  c.put(13 + lean, 8, 'e');
+  c.put(15 + lean, 8, 'e');
+  c.line(19 + lean, 6, 22 + lean, 2, 'h');
+  c.line(13 + lean, 5, 11 + lean, 1, 'h');
+  // Plate body.
+  for (let y = 13; y < 26; y++) c.rect(11 + lean, y, 21 + lean, y, y % 4 ? 'm' : 'M');
+  c.rect(10 + lean, 13, 12 + lean, 16, 'j');
+  c.rect(20 + lean, 13, 22 + lean, 16, 'j');
+  // Legs (braced on the stomp, striding when charging).
+  if (charge) {
+    c.rect(10, 26, 13, 30, 'j');
+    c.rect(19, 26, 22, 29, 'j');
+  } else {
+    c.rect(12, 26, 14, 30, 'j');
+    c.rect(18, 26 + (phase === 3 ? 1 : 0), 20, 30, 'j');
+  }
+  // Lance couched forward (left), lowered when charging.
+  const ly = charge ? 19 : 17;
+  c.line(24 + lean, ly, 2, ly + (charge ? 0 : 1), 'p');
+  c.rect(0, ly - 1, 3, ly + 1, 'q');
+  if (phase === 3)
+    for (const [x, y] of [
+      [8, 30],
+      [24, 30],
+      [6, 29],
+      [26, 29],
+    ])
+      c.put(x, y, 'd');
+  c.outline();
+  return c.g;
+}
+
 // ------------------------------------------------------------------ The Crimson Standard (48x48)
 const STANDARD = {
   O: hex('#0a0606'),
@@ -709,7 +770,8 @@ function lastWarFrame(phase, kneel = false) {
       if ((k + fl) % 2) c.put(x, y - 2, 'g');
     }
   }
-  for (let k = 0; k < 10; k++) c.put(3 + ((k * 13 + phase * 7) % 58), 3 + ((k * 29 + phase * 3) % 46), 'a');
+  for (let k = 0; k < 10; k++)
+    c.put(3 + ((k * 13 + phase * 7) % 58), 3 + ((k * 29 + phase * 3) % 46), 'a');
   c.outline();
   return c.g;
 }
@@ -726,6 +788,14 @@ const OUT = [
   ['enemies/ghost_sniper', 'ghost_sniper_v1.png', four(sniperFrame), 32, SNIPER, 8],
   ['enemies/endless_phalanx', 'endless_phalanx_v1.png', four(phalanxFrame), 32, PHALANX, 8],
   ['enemies/banner_carrier', 'banner_carrier_v1.png', four(carrierFrame), 32, CARRIER, 8],
+  [
+    'enemies/undying_knight',
+    'undying_knight_v1.png',
+    [0, 1, 2, 3, 4].map(knightFrame),
+    32,
+    KNIGHT,
+    8,
+  ],
   [
     'enemies/crimson_standard',
     'crimson_standard_v1.png',
