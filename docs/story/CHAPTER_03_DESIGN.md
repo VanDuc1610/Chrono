@@ -510,3 +510,70 @@ Tất cả các định danh bên dưới là quy chuẩn bất biến giữa Co
   - `ch3_needle_box_inspect`: Hộp nhạc không tên phát bài hát ru.
   - `ch3_needle_box_open`: Nhận Hoài Niệm Kiếm (`grantItems: memory_needle_rapier`, `setFlags: ["opened_memory_needle_box"]`).
   - `ch3_unwritten_monument_whisper`: Đọc mảnh giấy cháy dở (dư âm gián tiếp của Kuro).
+
+---
+
+## 12. Quyết Định Của Owner (2026-11-13) & Hợp Đồng Bổ Sung
+
+Owner duyệt toàn bộ §1–§11 cùng các chỉnh sửa dưới đây. **§12 thay thế** những chỗ mâu thuẫn ở §5, §8, §9, §11.
+
+### 12.1. Câu đố — bản đã duyệt
+
+**C1 · Mộ Điêu Khắc Gia (3 manh mối).** Năm ngôi mộ, mỗi mộ khắc một hình và một số lô: Cú (Lô I), Liễu (Lô II), **Liễu (Lô III — đúng)**, Bàng (Lô IV), Rùa (Lô V).
+
+- `sculptor_apprentice_diary`: thầy chỉ muốn khắc lên mộ "cây của quê nhà, nơi thầy lớn lên bên dòng sông" — không nói tên cây.
+- `sculptor_tax_receipt`: quê quán làng **Bến Sông Mờ**; đăng ký sinh phần **Lô III**.
+- Bia vùng miền `ch3_regions_stele_read` (không cấp vật phẩm): mỗi làng khắc một loài cây lên mộ con em mình — Bến Sông Mờ: liễu rủ; Đồi Gió: bàng; Đầm Lặng: sen; …
+- Mở mộ sai → bẫy sương (`ch3_tomb_wrong_fog`, chỉ gợi ý, không phạt nặng). Mộ đúng → `ancient_carving_chisel`. Cắm đục vào cổng → `opened_hall_gate` (lối sang Hành Lang Vang Vọng).
+
+**C2 · Thạch Trụ Âm Thoa (chiến đấu).** Hai trụ cách nhau 5 ô. Phải **chém trúng cả hai trong vòng 2 giây** (lướt Shift giữa hai trụ). Không cần Nhãn Thời Gian, không cần dụ quái.
+
+- `acoustic_manual_page`: hai trụ là một cặp âm thoa; chỉ khi cả hai được đánh "trong cùng một hơi thở — chưa đầy hai nhịp tim" tiếng vang mới nâng được màn đá.
+- Engine: `strikeTargets` (vật thể nhận đòn chém). Chém một trụ → trụ ngân rồi tắt (dòng chữ nổi). Đủ cặp → mở `ch3_pillar_resonance_success` (`solved_pillar_resonance`).
+
+**C3 · Chuông Qua Vực (ghép 2 manh mối + thời gian thực).** Ba chuông chỉ phân biệt bằng **màu**: đỏ gạch, xám tro, trắng.
+
+- `miner_hymn_scrap`: chuông sắt gọi đá lở, chuông bạc đánh thức hư vô, chỉ tiếng **đồng** làm đông kết bụi ký ức thành lối đi.
+- `miner_geological_chart`: quặng đồng nhuộm đá màu **gạch nung**; sắt để vệt **xám tro**; bạc kết thành vảy **trắng**.
+- Chuông đỏ → cầu đá hiện **8 giây** (`ch3_bridge_up`, engine hẹn giờ). Rơi xuống vực → quay về mép vực, không chết. Sang tới bờ bên kia → `crossed_memory_abyss`.
+- POI giữ id `poi_echo_bell_copper / _iron / _silver`, nhưng lời nhắc trên bản đồ chỉ nói màu.
+
+**C4 · Bàn Linh Thú (suy luận theo tháng).** Đại Loạn xảy ra **tháng Ba năm 312**. Ân xá: ai **không ở kinh đô vào tháng Ba** thì vô tội. Bàn điều khiển yêu cầu **đặt ấn phản nghịch lên đúng một linh thú** (kẻ phản bội thật).
+
+- `censor_blacklist_doc`: 4 mật danh, kèm câu đánh lạc hướng: "Huyết Ưng nắm ấn cấm quân".
+- `court_timeline_doc`: Huyết Ưng trấn biên bắc **tháng Giêng → tháng Sáu**; Dạ Lang (Sói) về kinh **tháng Hai**, ở lại tới tháng Năm; Bạch Lộc (Hươu) đi sứ phương nam tháng Chạp năm 311 → tháng Tám; Xích Xà (Rắn) dưỡng bệnh ở quê **từ tháng Hai**.
+- Đáp án: **Sói**. Chọn sai → `ch3_censorship_wrong` (đèn đỏ, gợi ý đối chiếu tháng).
+- Neris có thể tóm tắt dữ kiện (`ch3_neris_archive_talk`) nhưng **không nói đáp án**.
+
+**C5 · Nỗi Oan Vua Alden.** Cần **cả** dải ruy băng (`queen_ribbon_item`) **và** đã đọc nhật trình điều binh (`read_royal_dispatch`). Thiếu một → `ch3_king_doubt` (vua dao động nhưng chưa tin). Đủ → `ch3_king_confront` → chọn soi chiếc ly bằng Nhãn Thời Gian → `ch3_king_cleared`.
+
+**Bùa ẩn · Sắc Màu Nguyên Bản.** Ba sắc tố `pigment_ochre_yellow` (Nghĩa Địa), `pigment_lapis_blue` (Thư Viện), `pigment_sulfur_red` (Hoàng Lăng). Ghi chú họa sĩ `court_painter_note` cho thứ tự lớp: **vàng đất (nền) → lam (áo) → đỏ (môi son)**. Thiếu sắc tố → `ch3_canvas_inspect`. Đủ cả ba → chuỗi chọn lớp `ch3_canvas_layer_1/2/3`. Sai thứ tự → `ch3_canvas_wrong` (sắc tố không mất). Đúng → `ch3_canvas_restored`.
+
+**Vũ khí ẩn · Hộp Nhạc Không Tên.** Mật thất mở bằng `forgotten_vault_key` (thưởng quest phụ kỵ sĩ). Hộp cần gõ nhịp bài ru: **ngắn – ngắn – dài – ngắn – dài**. Nhịp nằm trong `lost_lullaby_lyrics` (thưởng quest phụ nữ thủ thư); lời ru đánh dấu tiếng vỗ nhẹ (ngắn) và tiếng ru ngân (dài). Chuỗi `ch3_box_beat_1..5`, mỗi nút [Ngắn] [Dài]. Sai → `ch3_box_wrong` (về đầu).
+
+### 12.2. Quái, boss, cấp độ
+
+- Bóng Ma Ký Ức: khựng **0,4 giây** sau khi dịch chuyển ra sau lưng Peter rồi mới đâm.
+- Thủ Thư Rỗng: phân thân 1 HP, không gây sát thương. **Đòn Thời Gian (chuột phải) xóa phân thân** (trên bản đồ không có nút "Nhãn Thời Gian").
+- Kẻ Gặm Ý Nghĩ: vũng lầy làm chậm 40% và rút 2 MP/giây.
+- Boss giữa và boss cuối như §6. Chỉ số do Claude chỉnh lại khi thử trận. Trần cấp Chương 3 là 15.
+- **Hình:** vẽ mới **cả 7** (gồm Thủ Thư Rỗng). Boss giữa 48×48, boss cuối 64×64.
+
+### 12.3. Vật phẩm (thay §11.1 ở các dòng trùng)
+
+- Không dùng `ancient_gear`, `tide_dried_fish` → thay bằng `imperial_honey_bread`, `sunset_dried_fish`.
+- Mới: `refined_chrono_shard` (consumable, hồi 120 HP), `lost_lullaby_lyrics` (document), `court_painter_note` (document), `miner_hymn_scrap` (document), `miner_geological_chart` (document), `acoustic_manual_page` (document), `pigment_ochre_yellow` / `pigment_lapis_blue` / `pigment_sulfur_red` (puzzle), `forgotten_vault_key` (puzzle), `memory_ember` (puzzle, quest lò rèn).
+
+### 12.4. Node bổ sung / đổi tên (thay §11.3 ở các dòng trùng)
+
+- Map 2: `ch3_regions_stele_read`; mộ `ch3_tomb_owl_inspect`, `ch3_tomb_willow_ii_inspect`, `ch3_tomb_willow_inspect` (đúng, lựa chọn → `ch3_tomb_willow_open`), `ch3_tomb_almond_inspect`, `ch3_tomb_turtle_inspect`, `ch3_tomb_wrong_fog`; cổng `ch3_hall_gate_locked` / `ch3_hall_gate_opens` (cần đục; `takeItems` đục, `setFlags: ["opened_hall_gate"]`); sắc tố `ch3_pigment_yellow_take`.
+- Map 3: `ch3_acoustic_manual_read` (cấp `acoustic_manual_page`).
+- Map 4: `ch3_hymn_scrap_read`, `ch3_geological_chart_read`; chuông `ch3_echo_bell_copper` (`startTimer`: `{ "flag": "ch3_bridge_up", "ms": 8000 }`), `ch3_echo_bell_iron`, `ch3_echo_bell_silver`; `ch3_abyss_fall`; `ch3_lullaby_crystal_listen` (`heard_lost_lullaby`); `ch3_ember_take` (`memory_ember`); `ch3_forge_cold` / `ch3_forge_rekindled` (`rekindled_memory_forge`).
+- Map 5: `ch3_console_choose_a/b/c`, `ch3_censorship_wrong`, `ch3_censorship_success`; `ch3_pigment_blue_take`; mảnh chân dung `ch3_portrait_piece_1/2/3` (mỗi mảnh đặt cờ `ch3_portrait_piece_n`; đặt ở Map 2, 4, 5).
+- Map 6: `ch3_king_doubt`, `ch3_king_confront`; `ch3_painter_note_read`; `ch3_pigment_red_take`; `ch3_canvas_layer_1/2/3`, `ch3_canvas_wrong`.
+- Map 8: `ch3_box_beat_1..5`, `ch3_box_wrong`.
+- Quest phụ: `ch3_ghost_librarian_done` cấp `lost_lullaby_lyrics`; `ch3_ghost_knight_done` cấp `forgotten_vault_key` và đặt `found_forgotten_vault_key`.
+
+### 12.5. Engine mới (Claude)
+
+`strikeTargets` (C2) · hiệu ứng thoại `startTimer` (cờ tự tắt sau ms, C3) · luật thoại `ifItems` / `ifFlags` (mảng, tất cả phải đúng) · vùng rơi vực quay về mép · vũng lầy · quái dịch chuyển, phân thân · boss khóa lệnh + sao chép trang bị · boss hợp xướng chọn lõi theo bài hát · nối Chương 2 → Chương 3.
