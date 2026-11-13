@@ -2163,6 +2163,968 @@
           "dialogueId": "ch1_bellkeeper_before"
         }
       ]
+    },
+    "map_ch2_imperial_outskirts": {
+      "id": "map_ch2_imperial_outskirts",
+      "name": "Ngoại Ô Bia Đá",
+      "chapter": 2,
+      "tilemap": {
+        "key": "map_ch2_imperial_outskirts",
+        "path": "assets/maps/map_ch2_imperial_outskirts.json"
+      },
+      "tileset": {
+        "name": "wilds_tileset",
+        "key": "wilds_tileset",
+        "path": "assets/tilesets/wilds_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 17,
+        "toGid": 43
+      },
+      "ambient": {
+        "color": "#d0802e",
+        "alpha": 0.09
+      },
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 9
+        },
+        "from_ch1": {
+          "x": 2,
+          "y": 9
+        },
+        "from_catacombs": {
+          "x": 18,
+          "y": 12
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 9
+      },
+      "npcs": [
+        {
+          "id": "npc_elder_echo",
+          "texture": "npc_elder",
+          "anim": "npc_elder_idle",
+          "tile": {
+            "x": 6,
+            "y": 8
+          },
+          "name": "Dư Ảnh Trưởng Lão",
+          "prompt": "[E] Nói chuyện với dư ảnh",
+          "radius": 48,
+          "dialogueId": "ch2_elder_echo_farewell",
+          "visibleWhen": {
+            "unlessFlag": "elder_echo_faded"
+          },
+          "tint": "#9fd3ff",
+          "alpha": 0.6
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_edict_stele",
+          "tile": {
+            "x": 12,
+            "y": 6
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia sắc lệnh",
+          "dialogueId": "ch2_edict_stele_read"
+        }
+      ],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "outskirts_to_catacombs",
+          "area": {
+            "x": 18,
+            "y": 13,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch2_sunken_catacombs",
+          "toSpawn": "from_outskirts",
+          "requiresFlag": "entered_catacombs_hatch",
+          "lockedDialogueId": "ch2_hatch_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_ch2_arrival",
+          "on": "arrive",
+          "onceFlag": "ch2_arrived_outskirts",
+          "delayMs": 400,
+          "dialogueId": "ch2_outskirts_arrival"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "roam_ch2_shade_a",
+          "enemyId": "enemy_temporal_shade",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 10,
+            "y": 13
+          }
+        },
+        {
+          "id": "roam_ch2_shade_b",
+          "enemyId": "enemy_temporal_shade",
+          "texture": "enemy_fracture",
+          "anim": "enemy_fracture_idle",
+          "tile": {
+            "x": 19,
+            "y": 4
+          }
+        }
+      ]
+    },
+    "map_ch2_sunken_catacombs": {
+      "id": "map_ch2_sunken_catacombs",
+      "name": "Hầm Mộ Kháng Chiến",
+      "chapter": 2,
+      "tilemap": {
+        "key": "map_ch2_sunken_catacombs",
+        "path": "assets/maps/map_ch2_sunken_catacombs.json"
+      },
+      "tileset": {
+        "name": "dungeon_tileset",
+        "key": "dungeon_tileset",
+        "path": "assets/tilesets/dungeon_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 4,
+        "toGid": 16
+      },
+      "ambient": {
+        "color": "#d0802e",
+        "alpha": 0.09
+      },
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 9
+        },
+        "from_outskirts": {
+          "x": 2,
+          "y": 9
+        },
+        "from_plaza": {
+          "x": 25,
+          "y": 9
+        },
+        "revive": {
+          "x": 2,
+          "y": 9
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 9
+      },
+      "npcs": [
+        {
+          "id": "npc_lyra",
+          "texture": "npc_lyra",
+          "anim": "npc_lyra_idle",
+          "tile": {
+            "x": 15,
+            "y": 9
+          },
+          "name": "Lyra",
+          "prompt": "[E] Nói chuyện với Lyra",
+          "radius": 44,
+          "dialogueId": "ch2_lyra_cornered",
+          "dialogueRules": [
+            {
+              "ifFlag": "saved_lyra",
+              "dialogueId": "ch2_lyra_gate_hint"
+            },
+            {
+              "ifFlag": "cleared_lyra_attackers",
+              "dialogueId": "ch2_lyra_rescued"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_tomb_1",
+          "tile": {
+            "x": 4,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia mộ",
+          "dialogueId": "ch2_tomb_1"
+        },
+        {
+          "id": "poi_tomb_2",
+          "tile": {
+            "x": 8,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia mộ",
+          "dialogueId": "ch2_tomb_2",
+          "dialogueRules": [
+            {
+              "ifFlag": "granted_praetor_rapier",
+              "dialogueId": "ch2_tomb_empty"
+            }
+          ]
+        },
+        {
+          "id": "poi_tomb_3",
+          "tile": {
+            "x": 12,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia mộ",
+          "dialogueId": "ch2_tomb_3"
+        },
+        {
+          "id": "poi_locksmith_box",
+          "tile": {
+            "x": 3,
+            "y": 14
+          },
+          "radius": 44,
+          "prompt": "[E] Mở hộp đồ nghề",
+          "dialogueId": "ch2_locksmith_box",
+          "dialogueRules": [
+            {
+              "ifFlag": "granted_bronze_key_blank",
+              "dialogueId": "ch2_locksmith_box_empty"
+            }
+          ]
+        },
+        {
+          "id": "poi_praetor_diary",
+          "tile": {
+            "x": 6,
+            "y": 15
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt trang giấy",
+          "dialogueId": "ch2_praetor_diary_found",
+          "dialogueRules": [
+            {
+              "ifFlag": "granted_praetor_diary",
+              "dialogueId": "ch2_diary_spot_empty"
+            }
+          ]
+        },
+        {
+          "id": "poi_founding_alcove",
+          "tile": {
+            "x": 23,
+            "y": 2
+          },
+          "radius": 44,
+          "prompt": "[E] Xem Hốc Đá Lập Quốc",
+          "dialogueId": "ch2_alcove_empty",
+          "dialogueRules": [
+            {
+              "ifFlag": "placed_retroactive_key",
+              "dialogueId": "ch2_alcove_done"
+            },
+            {
+              "ifItem": "bronze_key_blank",
+              "dialogueId": "ch2_alcove_place_blank"
+            }
+          ]
+        },
+        {
+          "id": "poi_catacomb_gate",
+          "tile": {
+            "x": 26,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Xem cổng sắt cổ",
+          "dialogueId": "ch2_gate_ancient_locked",
+          "dialogueRules": [
+            {
+              "ifFlag": "unlocked_catacomb_gate",
+              "dialogueId": "ch2_gate_open_done"
+            },
+            {
+              "ifFlag": "placed_retroactive_key",
+              "dialogueId": "ch2_gate_opens"
+            },
+            {
+              "ifItem": "bronze_key_blank",
+              "dialogueId": "ch2_gate_blank_too_new"
+            }
+          ]
+        }
+      ],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "catacombs_to_outskirts",
+          "area": {
+            "x": 0,
+            "y": 8,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_ch2_imperial_outskirts",
+          "toSpawn": "from_catacombs"
+        },
+        {
+          "id": "catacombs_to_plaza",
+          "area": {
+            "x": 27,
+            "y": 8,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_ch2_forum_plaza",
+          "toSpawn": "from_catacombs",
+          "requiresFlag": "unlocked_catacomb_gate"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_lyra_cry",
+          "on": "zone",
+          "area": {
+            "x": 9,
+            "y": 5,
+            "w": 1,
+            "h": 8
+          },
+          "onceFlag": "trig_lyra_cry",
+          "unlessFlag": "saved_lyra",
+          "dialogueId": "ch2_lyra_cornered"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "roam_lyra_attacker_a",
+          "enemyId": "enemy_imperial_automaton",
+          "texture": "enemy_imperial_automaton",
+          "anim": "enemy_imperial_automaton_idle",
+          "tile": {
+            "x": 14,
+            "y": 9
+          },
+          "group": "lyra_attackers",
+          "respawn": false,
+          "defeatedFlag": "ch2_lyra_attacker_a_down",
+          "patrolRadius": 24
+        },
+        {
+          "id": "roam_lyra_attacker_b",
+          "enemyId": "enemy_imperial_automaton",
+          "texture": "enemy_imperial_automaton",
+          "anim": "enemy_imperial_automaton_idle",
+          "tile": {
+            "x": 16,
+            "y": 10
+          },
+          "group": "lyra_attackers",
+          "respawn": false,
+          "defeatedFlag": "ch2_lyra_attacker_b_down",
+          "patrolRadius": 24
+        },
+        {
+          "id": "roam_catacomb_automaton",
+          "enemyId": "enemy_imperial_automaton",
+          "texture": "enemy_imperial_automaton",
+          "anim": "enemy_imperial_automaton_idle",
+          "tile": {
+            "x": 22,
+            "y": 14
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "unlocked_catacomb_gate"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 26,
+              "y": 8
+            },
+            {
+              "x": 26,
+              "y": 9
+            },
+            {
+              "x": 26,
+              "y": 10
+            }
+          ],
+          "index": 2
+        }
+      ]
+    },
+    "map_ch2_forum_plaza": {
+      "id": "map_ch2_forum_plaza",
+      "name": "Quảng Trường Phán Quyết",
+      "chapter": 2,
+      "tilemap": {
+        "key": "map_ch2_forum_plaza",
+        "path": "assets/maps/map_ch2_forum_plaza.json"
+      },
+      "tileset": {
+        "name": "dungeon_tileset",
+        "key": "dungeon_tileset",
+        "path": "assets/tilesets/dungeon_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 4,
+        "toGid": 16
+      },
+      "ambient": {
+        "color": "#d0802e",
+        "alpha": 0.09
+      },
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 10
+        },
+        "from_catacombs": {
+          "x": 2,
+          "y": 10
+        },
+        "from_archives": {
+          "x": 27,
+          "y": 10
+        },
+        "revive": {
+          "x": 2,
+          "y": 10
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 10
+      },
+      "npcs": [
+        {
+          "id": "npc_exiled_praetor",
+          "texture": "npc_exiled_praetor",
+          "anim": "npc_exiled_praetor_idle",
+          "tile": {
+            "x": 16,
+            "y": 6
+          },
+          "name": "Thẩm Phán Lưu Đày",
+          "prompt": "[E] Nói chuyện với ông lão",
+          "radius": 44,
+          "dialogueId": "ch2_praetor_meet",
+          "dialogueRules": [
+            {
+              "ifFlag": "met_exiled_praetor",
+              "dialogueId": "ch2_praetor_after"
+            }
+          ]
+        },
+        {
+          "id": "npc_citizen_baker",
+          "texture": "npc_fisherman_sau",
+          "anim": "npc_fisherman_sau_idle",
+          "tile": {
+            "x": 7,
+            "y": 15
+          },
+          "name": "Hồn Thợ Bánh",
+          "prompt": "[E] Hỏi chuyện hồn ma",
+          "radius": 44,
+          "dialogueId": "ch2_baker_start",
+          "dialogueRules": [
+            {
+              "ifFlag": "comforted_baker",
+              "dialogueId": "ch2_baker_done"
+            }
+          ],
+          "tint": "#b8c0d0",
+          "alpha": 0.7
+        },
+        {
+          "id": "npc_broken_automaton",
+          "texture": "enemy_imperial_automaton",
+          "tile": {
+            "x": 23,
+            "y": 14
+          },
+          "name": "Người Máy Hỏng",
+          "prompt": "[E] Xem cỗ máy",
+          "radius": 44,
+          "dialogueId": "ch2_automaton_inspect",
+          "dialogueRules": [
+            {
+              "ifFlag": "released_broken_automaton",
+              "dialogueId": "ch2_automaton_done"
+            }
+          ],
+          "tint": "#9a9a9a"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_praetor_desk",
+          "tile": {
+            "x": 11,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bàn đá",
+          "dialogueId": "ch2_praetor_desk",
+          "dialogueRules": [
+            {
+              "ifFlag": "granted_blank_parchment",
+              "dialogueId": "ch2_praetor_desk_empty"
+            }
+          ]
+        },
+        {
+          "id": "poi_causality_scales",
+          "tile": {
+            "x": 20,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Xem cán cân",
+          "dialogueId": "ch2_scales_look",
+          "dialogueRules": [
+            {
+              "ifFlag": "granted_scales_charm",
+              "dialogueId": "ch2_scales_done"
+            },
+            {
+              "ifItem": "blank_unwritten_parchment",
+              "dialogueId": "ch2_scales_inspect"
+            }
+          ]
+        },
+        {
+          "id": "poi_execution_platform",
+          "tile": {
+            "x": 15,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Xem đài hành hình",
+          "dialogueId": "ch2_execution_platform"
+        }
+      ],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "plaza_to_catacombs",
+          "area": {
+            "x": 0,
+            "y": 9,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_ch2_sunken_catacombs",
+          "toSpawn": "from_plaza"
+        },
+        {
+          "id": "plaza_to_archives",
+          "area": {
+            "x": 29,
+            "y": 9,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_ch2_causality_archives",
+          "toSpawn": "from_plaza",
+          "requiresFlag": "has_praetor_pass",
+          "lockedDialogueId": "ch2_archives_gate_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_plaza_arrival",
+          "on": "arrive",
+          "onceFlag": "ch2_arrived_plaza",
+          "delayMs": 400,
+          "dialogueId": "ch2_plaza_arrival"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "roam_plaza_enforcer_a",
+          "enemyId": "enemy_causality_enforcer",
+          "texture": "enemy_causality_enforcer",
+          "anim": "enemy_causality_enforcer_idle",
+          "tile": {
+            "x": 5,
+            "y": 5
+          }
+        },
+        {
+          "id": "roam_plaza_enforcer_b",
+          "enemyId": "enemy_causality_enforcer",
+          "texture": "enemy_causality_enforcer",
+          "anim": "enemy_causality_enforcer_idle",
+          "tile": {
+            "x": 25,
+            "y": 5
+          }
+        },
+        {
+          "id": "roam_plaza_enforcer_c",
+          "enemyId": "enemy_causality_enforcer",
+          "texture": "enemy_causality_enforcer",
+          "anim": "enemy_causality_enforcer_idle",
+          "tile": {
+            "x": 24,
+            "y": 16
+          }
+        }
+      ]
+    },
+    "map_ch2_causality_archives": {
+      "id": "map_ch2_causality_archives",
+      "name": "Đại Thư Viện Nhân Quả",
+      "chapter": 2,
+      "tilemap": {
+        "key": "map_ch2_causality_archives",
+        "path": "assets/maps/map_ch2_causality_archives.json"
+      },
+      "tileset": {
+        "name": "dungeon_tileset",
+        "key": "dungeon_tileset",
+        "path": "assets/tilesets/dungeon_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 4,
+        "toGid": 16
+      },
+      "ambient": {
+        "color": "#7a4ad0",
+        "alpha": 0.1
+      },
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 9
+        },
+        "from_plaza": {
+          "x": 2,
+          "y": 9
+        },
+        "from_sanctum": {
+          "x": 23,
+          "y": 9
+        },
+        "revive": {
+          "x": 2,
+          "y": 9
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 9
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_peter_record",
+          "tile": {
+            "x": 12,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Xem kệ lưu trữ",
+          "dialogueId": "ch2_peter_record"
+        },
+        {
+          "id": "poi_rebellion_records",
+          "tile": {
+            "x": 5,
+            "y": 15
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc hồ sơ",
+          "dialogueId": "ch2_rebellion_records"
+        },
+        {
+          "id": "poi_verdict_tablet",
+          "tile": {
+            "x": 21,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Xem Phiến Đá Bản Án",
+          "dialogueId": "ch2_tablet_inspect",
+          "dialogueRules": [
+            {
+              "ifFlag": "expunged_peter_verdict",
+              "dialogueId": "ch2_tablet_dust"
+            }
+          ]
+        },
+        {
+          "id": "poi_guilt_barrier",
+          "tile": {
+            "x": 24,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm vào màn chắn",
+          "dialogueId": "ch2_barrier_guilt_repel",
+          "visibleWhen": {
+            "unlessFlag": "expunged_peter_verdict"
+          }
+        }
+      ],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "archives_to_plaza",
+          "area": {
+            "x": 0,
+            "y": 8,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_ch2_forum_plaza",
+          "toSpawn": "from_archives"
+        },
+        {
+          "id": "archives_to_sanctum",
+          "area": {
+            "x": 25,
+            "y": 8,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_ch2_verdict_sanctum",
+          "toSpawn": "from_archives",
+          "requiresFlag": "expunged_peter_verdict",
+          "lockedDialogueId": "ch2_barrier_guilt_repel"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_archives_arrival",
+          "on": "arrive",
+          "onceFlag": "entered_archives",
+          "delayMs": 400,
+          "dialogueId": "ch2_archives_arrival"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "roam_archive_enforcer_a",
+          "enemyId": "enemy_causality_enforcer",
+          "texture": "enemy_causality_enforcer",
+          "anim": "enemy_causality_enforcer_idle",
+          "tile": {
+            "x": 9,
+            "y": 5
+          }
+        },
+        {
+          "id": "roam_archive_enforcer_b",
+          "enemyId": "enemy_causality_enforcer",
+          "texture": "enemy_causality_enforcer",
+          "anim": "enemy_causality_enforcer_idle",
+          "tile": {
+            "x": 15,
+            "y": 9
+          }
+        },
+        {
+          "id": "roam_archive_enforcer_c",
+          "enemyId": "enemy_causality_enforcer",
+          "texture": "enemy_causality_enforcer",
+          "anim": "enemy_causality_enforcer_idle",
+          "tile": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "id": "roam_archive_automaton_a",
+          "enemyId": "enemy_imperial_automaton",
+          "texture": "enemy_imperial_automaton",
+          "anim": "enemy_imperial_automaton_idle",
+          "tile": {
+            "x": 18,
+            "y": 5
+          }
+        },
+        {
+          "id": "roam_archive_automaton_b",
+          "enemyId": "enemy_imperial_automaton",
+          "texture": "enemy_imperial_automaton",
+          "anim": "enemy_imperial_automaton_idle",
+          "tile": {
+            "x": 18,
+            "y": 12
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "expunged_peter_verdict"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 24,
+              "y": 8
+            },
+            {
+              "x": 24,
+              "y": 9
+            },
+            {
+              "x": 24,
+              "y": 10
+            }
+          ],
+          "index": 1
+        }
+      ]
+    },
+    "map_ch2_verdict_sanctum": {
+      "id": "map_ch2_verdict_sanctum",
+      "name": "Điện Phán Quyết Tối Cao",
+      "chapter": 2,
+      "tilemap": {
+        "key": "map_ch2_verdict_sanctum",
+        "path": "assets/maps/map_ch2_verdict_sanctum.json"
+      },
+      "tileset": {
+        "name": "dungeon_tileset",
+        "key": "dungeon_tileset",
+        "path": "assets/tilesets/dungeon_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 4,
+        "toGid": 16
+      },
+      "ambient": {
+        "color": "#e0902e",
+        "alpha": 0.12
+      },
+      "spawns": {
+        "default": {
+          "x": 11,
+          "y": 13
+        },
+        "from_archives": {
+          "x": 11,
+          "y": 13
+        },
+        "revive": {
+          "x": 11,
+          "y": 12
+        }
+      },
+      "revive": {
+        "x": 11,
+        "y": 12
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_causality_seal",
+          "tile": {
+            "x": 11,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm vào Lõi Phong Ấn",
+          "dialogueId": "ch2_seal_restored",
+          "dialogueRules": [
+            {
+              "ifFlag": "causality_seal_restored",
+              "dialogueId": "ch2_seal_after"
+            }
+          ],
+          "requiresFlag": "defeated_imperial_verdict"
+        }
+      ],
+      "encounters": [
+        {
+          "id": "enc_imperial_verdict",
+          "enemyId": "boss_imperial_verdict",
+          "texture": "boss_imperial_verdict",
+          "anim": "boss_imperial_verdict_idle",
+          "tile": {
+            "x": 11,
+            "y": 7
+          },
+          "defeatedFlag": "defeated_imperial_verdict",
+          "hitbox": 30,
+          "victoryDialogueId": "ch2_verdict_released"
+        }
+      ],
+      "exits": [
+        {
+          "id": "sanctum_to_archives",
+          "area": {
+            "x": 11,
+            "y": 15,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch2_causality_archives",
+          "toSpawn": "from_sanctum"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_verdict_meet",
+          "on": "zone",
+          "area": {
+            "x": 9,
+            "y": 10,
+            "w": 5,
+            "h": 1
+          },
+          "onceFlag": "trig_verdict_meet",
+          "dialogueId": "ch2_verdict_boss_confront"
+        }
+      ],
+      "roamers": []
     }
   }
 }

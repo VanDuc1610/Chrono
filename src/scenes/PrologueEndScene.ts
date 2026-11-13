@@ -2,7 +2,11 @@ import Phaser from 'phaser';
 import { SoundSystem } from '../systems/audio/SoundSystem';
 import { getSession } from '../state/GameSession';
 
-const CHAPTER_1_START = 'map_ch1_shore_gate';
+/** Where the story continues after each end card (none = back to the title). */
+const NEXT_START: Record<number, { mapId: string; spawnId: string }> = {
+  0: { mapId: 'map_ch1_shore_gate', spawnId: 'from_prologue' },
+  1: { mapId: 'map_ch2_imperial_outskirts', spawnId: 'from_ch1' },
+};
 import { createPanel } from '../ui/Panel';
 import { getStrings } from '../ui/Strings';
 
@@ -130,7 +134,7 @@ export class PrologueEndScene extends Phaser.Scene {
       .text(
         width / 2,
         height - 22,
-        this.chapter === 0 ? t('ending.promptContinue') : t('ending.prompt'),
+        NEXT_START[this.chapter] ? t('ending.promptContinue') : t('ending.prompt'),
         {
           fontFamily: 'monospace',
           fontSize: '10px',
@@ -166,12 +170,13 @@ export class PrologueEndScene extends Phaser.Scene {
     this.soundSystem.playSelect();
     this.cameras.main.fadeOut(500, 0, 0, 0);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-      if (this.chapter === 0) {
-        // The journey goes on: Chapter 1 starts where the Threshold opens onto the sunset shore.
+      const next = NEXT_START[this.chapter];
+      if (next) {
+        // The journey goes on through the next Threshold.
         const session = getSession(this);
         session.applyPendingLevels();
         session.position = null;
-        this.scene.start('ExplorationScene', { mapId: CHAPTER_1_START, spawnId: 'from_prologue' });
+        this.scene.start('ExplorationScene', { mapId: next.mapId, spawnId: next.spawnId });
       } else {
         this.scene.start('MainMenuScene');
       }

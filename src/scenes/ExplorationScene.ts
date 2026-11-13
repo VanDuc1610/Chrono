@@ -298,7 +298,9 @@ export class ExplorationScene extends Phaser.Scene {
     const { x, y } = this.player;
     if (this.checkTriggers(x, y) || this.checkExits(x, y)) return;
 
-    const nearby = this.interactionSystem.getClosestInteractable(new Phaser.Math.Vector2(x, y));
+    const closest = this.interactionSystem.getClosestInteractable(new Phaser.Math.Vector2(x, y));
+    // Points gated by `requiresFlag` stay silent (no prompt, no dialogue) until the flag is set.
+    const nearby = closest?.canInteract(this.player.sprite) ? closest : null;
     this.promptText.setVisible(!!nearby);
     if (nearby) {
       this.promptText.setText(nearby.interactPrompt);
