@@ -3165,6 +3165,1769 @@
         }
       ],
       "roamers": []
+    },
+    "map_ch3_sepulcher_gate": {
+      "id": "map_ch3_sepulcher_gate",
+      "name": "Tiền Đình Lăng Mộ",
+      "chapter": 3,
+      "tilemap": {
+        "key": "map_ch3_sepulcher_gate",
+        "path": "assets/maps/map_ch3_sepulcher_gate.json"
+      },
+      "tileset": {
+        "name": "wilds_tileset",
+        "key": "wilds_tileset",
+        "path": "assets/tilesets/wilds_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 17,
+        "toGid": 43
+      },
+      "ambient": {
+        "color": "#6a5ad8",
+        "alpha": 0.1
+      },
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 9
+        },
+        "from_ch2": {
+          "x": 2,
+          "y": 9
+        },
+        "from_necropolis": {
+          "x": 21,
+          "y": 9
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 9
+      },
+      "npcs": [
+        {
+          "id": "npc_elder_ch3_echo",
+          "texture": "npc_elder",
+          "anim": "npc_elder_idle",
+          "tile": {
+            "x": 6,
+            "y": 8
+          },
+          "name": "Dư Ảnh Trưởng Lão",
+          "prompt": "[E] Nói chuyện với dư ảnh",
+          "radius": 46,
+          "dialogueId": "ch3_elder_echo_farewell",
+          "visibleWhen": {
+            "unlessFlag": "ch3_elder_echo_faded"
+          },
+          "tint": "#c8a8ff",
+          "alpha": 0.5
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_memory_crystal_cluster",
+          "tile": {
+            "x": 10,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Lắng nghe cụm tinh thể",
+          "dialogueId": "ch3_memory_crystal_whisper"
+        },
+        {
+          "id": "poi_sepulcher_gate_mechanism",
+          "tile": {
+            "x": 20,
+            "y": 7
+          },
+          "radius": 44,
+          "prompt": "[E] Xem phiến đá cảm ứng",
+          "dialogueId": "ch3_sepulcher_gate_locked"
+        }
+      ],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "gate_to_necropolis",
+          "area": {
+            "x": 23,
+            "y": 8,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch3_silent_necropolis",
+          "toSpawn": "from_gate",
+          "requiresFlag": "opened_sepulcher_gate",
+          "lockedDialogueId": "ch3_sepulcher_gate_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_ch3_entry",
+          "on": "arrive",
+          "onceFlag": "ch3_arrived_gate_trig",
+          "delayMs": 400,
+          "dialogueId": "ch3_gate_arrival"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "roam_ch3_gate_wraith_a",
+          "enemyId": "enemy_memory_wraith",
+          "texture": "enemy_memory_wraith",
+          "anim": "enemy_memory_wraith_idle",
+          "tile": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "id": "roam_ch3_gate_wraith_b",
+          "enemyId": "enemy_memory_wraith",
+          "texture": "enemy_memory_wraith",
+          "anim": "enemy_memory_wraith_idle",
+          "tile": {
+            "x": 16,
+            "y": 5
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "opened_sepulcher_gate"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 23,
+              "y": 8
+            },
+            {
+              "x": 23,
+              "y": 9
+            }
+          ],
+          "index": 11
+        }
+      ]
+    },
+    "map_ch3_silent_necropolis": {
+      "id": "map_ch3_silent_necropolis",
+      "name": "Nghĩa Địa Trầm Lặng",
+      "chapter": 3,
+      "tilemap": {
+        "key": "map_ch3_silent_necropolis",
+        "path": "assets/maps/map_ch3_silent_necropolis.json"
+      },
+      "tileset": {
+        "name": "dungeon_tileset",
+        "key": "dungeon_tileset",
+        "path": "assets/tilesets/dungeon_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 4,
+        "toGid": 16
+      },
+      "ambient": {
+        "color": "#6a5ad8",
+        "alpha": 0.1
+      },
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 9
+        },
+        "from_gate": {
+          "x": 2,
+          "y": 9
+        },
+        "from_echoes": {
+          "x": 25,
+          "y": 9
+        },
+        "from_vault": {
+          "x": 12,
+          "y": 15
+        },
+        "revive": {
+          "x": 2,
+          "y": 9
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 9
+      },
+      "npcs": [
+        {
+          "id": "npc_neris",
+          "texture": "npc_neris",
+          "anim": "npc_neris_idle",
+          "tile": {
+            "x": 23,
+            "y": 4
+          },
+          "name": "Neris",
+          "prompt": "[E] Nói chuyện với Neris",
+          "radius": 46,
+          "dialogueId": "ch3_neris_cornered",
+          "dialogueRules": [
+            {
+              "ifFlag": "saved_neris",
+              "dialogueId": "ch3_neris_necropolis_hint"
+            },
+            {
+              "ifFlag": "cleared_neris_attackers",
+              "dialogueId": "ch3_neris_rescued"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ancient_urn_clue",
+          "tile": {
+            "x": 4,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Xem chiếc bình cổ",
+          "dialogueId": "ch3_urn_clue_read"
+        },
+        {
+          "id": "poi_tax_receipt",
+          "tile": {
+            "x": 8,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bàn người giữ mộ",
+          "dialogueId": "ch3_tax_receipt_read"
+        },
+        {
+          "id": "poi_regions_stele",
+          "tile": {
+            "x": 14,
+            "y": 2
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia phong tục",
+          "dialogueId": "ch3_regions_stele_read"
+        },
+        {
+          "id": "poi_sculptor_tomb_owl",
+          "tile": {
+            "x": 4,
+            "y": 15
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia mộ",
+          "dialogueId": "ch3_tomb_owl_inspect"
+        },
+        {
+          "id": "poi_sculptor_tomb_willow_ii",
+          "tile": {
+            "x": 8,
+            "y": 15
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia mộ",
+          "dialogueId": "ch3_tomb_willow_ii_inspect"
+        },
+        {
+          "id": "poi_sculptor_tomb_willow",
+          "tile": {
+            "x": 16,
+            "y": 15
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia mộ",
+          "dialogueId": "ch3_tomb_willow_inspect",
+          "dialogueRules": [
+            {
+              "ifFlag": "opened_willow_tomb",
+              "dialogueId": "ch3_tomb_wrong_fog"
+            }
+          ]
+        },
+        {
+          "id": "poi_sculptor_tomb_almond",
+          "tile": {
+            "x": 20,
+            "y": 15
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia mộ",
+          "dialogueId": "ch3_tomb_almond_inspect"
+        },
+        {
+          "id": "poi_sculptor_tomb_turtle",
+          "tile": {
+            "x": 23,
+            "y": 15
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia mộ",
+          "dialogueId": "ch3_tomb_turtle_inspect"
+        },
+        {
+          "id": "poi_hall_gate",
+          "tile": {
+            "x": 26,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Xem cổng chạm khắc",
+          "dialogueId": "ch3_hall_gate_locked",
+          "dialogueRules": [
+            {
+              "ifFlag": "opened_hall_gate",
+              "dialogueId": "ch3_hall_gate_open_done"
+            },
+            {
+              "ifItem": "ancient_carving_chisel",
+              "dialogueId": "ch3_hall_gate_opens"
+            }
+          ]
+        },
+        {
+          "id": "poi_secret_vault_seal",
+          "tile": {
+            "x": 12,
+            "y": 16
+          },
+          "radius": 44,
+          "prompt": "[E] Xem phiến đá nứt",
+          "dialogueId": "ch3_secret_vault_locked",
+          "dialogueRules": [
+            {
+              "ifFlag": "opened_forgotten_vault",
+              "dialogueId": "ch3_vault_open_done"
+            },
+            {
+              "ifItem": "forgotten_vault_key",
+              "dialogueId": "ch3_secret_vault_opens"
+            }
+          ]
+        },
+        {
+          "id": "poi_pigment_yellow",
+          "tile": {
+            "x": 2,
+            "y": 14
+          },
+          "radius": 44,
+          "prompt": "[E] Xem lớp đất vàng",
+          "dialogueId": "ch3_pigment_yellow_take"
+        },
+        {
+          "id": "poi_portrait_piece_1",
+          "tile": {
+            "x": 26,
+            "y": 14
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt mảnh tranh",
+          "dialogueId": "ch3_portrait_piece_1"
+        }
+      ],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "necropolis_to_gate",
+          "area": {
+            "x": 0,
+            "y": 8,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_ch3_sepulcher_gate",
+          "toSpawn": "from_necropolis"
+        },
+        {
+          "id": "necropolis_to_echoes",
+          "area": {
+            "x": 27,
+            "y": 8,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_ch3_hall_of_echoes",
+          "toSpawn": "from_necropolis",
+          "requiresFlag": "opened_hall_gate",
+          "lockedDialogueId": "ch3_hall_gate_locked"
+        },
+        {
+          "id": "necropolis_to_secret_vault",
+          "area": {
+            "x": 12,
+            "y": 17,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch3_forgotten_vault",
+          "toSpawn": "from_necropolis",
+          "requiresFlag": "opened_forgotten_vault",
+          "lockedDialogueId": "ch3_secret_vault_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_neris_cry",
+          "on": "zone",
+          "area": {
+            "x": 17,
+            "y": 2,
+            "w": 1,
+            "h": 7
+          },
+          "onceFlag": "trig_neris_cry",
+          "unlessFlag": "saved_neris",
+          "dialogueId": "ch3_neris_cornered"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "roam_neris_attacker_a",
+          "enemyId": "enemy_memory_wraith",
+          "texture": "enemy_memory_wraith",
+          "anim": "enemy_memory_wraith_idle",
+          "tile": {
+            "x": 21,
+            "y": 5
+          },
+          "group": "neris_attackers",
+          "respawn": false,
+          "defeatedFlag": "ch3_neris_attacker_a_down",
+          "patrolRadius": 24
+        },
+        {
+          "id": "roam_neris_attacker_b",
+          "enemyId": "enemy_memory_wraith",
+          "texture": "enemy_memory_wraith",
+          "anim": "enemy_memory_wraith_idle",
+          "tile": {
+            "x": 24,
+            "y": 6
+          },
+          "group": "neris_attackers",
+          "respawn": false,
+          "defeatedFlag": "ch3_neris_attacker_b_down",
+          "patrolRadius": 24
+        },
+        {
+          "id": "roam_necropolis_wraith",
+          "enemyId": "enemy_memory_wraith",
+          "texture": "enemy_memory_wraith",
+          "anim": "enemy_memory_wraith_idle",
+          "tile": {
+            "x": 12,
+            "y": 8
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "opened_hall_gate"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 26,
+              "y": 8
+            },
+            {
+              "x": 26,
+              "y": 9
+            },
+            {
+              "x": 26,
+              "y": 10
+            }
+          ],
+          "index": 2
+        },
+        {
+          "when": {
+            "flag": "opened_forgotten_vault"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 12,
+              "y": 16
+            }
+          ],
+          "index": 2
+        }
+      ]
+    },
+    "map_ch3_hall_of_echoes": {
+      "id": "map_ch3_hall_of_echoes",
+      "name": "Hành Lang Vang Vọng",
+      "chapter": 3,
+      "tilemap": {
+        "key": "map_ch3_hall_of_echoes",
+        "path": "assets/maps/map_ch3_hall_of_echoes.json"
+      },
+      "tileset": {
+        "name": "dungeon_tileset",
+        "key": "dungeon_tileset",
+        "path": "assets/tilesets/dungeon_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 4,
+        "toGid": 16
+      },
+      "ambient": {
+        "color": "#6a5ad8",
+        "alpha": 0.1
+      },
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 10
+        },
+        "from_necropolis": {
+          "x": 2,
+          "y": 10
+        },
+        "from_vaults": {
+          "x": 27,
+          "y": 10
+        },
+        "revive": {
+          "x": 2,
+          "y": 10
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 10
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_acoustic_manual_shelf",
+          "tile": {
+            "x": 15,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Xem giá đá",
+          "dialogueId": "ch3_acoustic_manual_read"
+        },
+        {
+          "id": "poi_resonance_pillar_left",
+          "tile": {
+            "x": 12,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Xem thạch trụ",
+          "dialogueId": "ch3_pillar_left_inspect"
+        },
+        {
+          "id": "poi_resonance_pillar_right",
+          "tile": {
+            "x": 17,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Xem thạch trụ",
+          "dialogueId": "ch3_pillar_right_inspect"
+        }
+      ],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "echoes_to_necropolis",
+          "area": {
+            "x": 0,
+            "y": 9,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_ch3_silent_necropolis",
+          "toSpawn": "from_echoes"
+        },
+        {
+          "id": "echoes_to_vaults",
+          "area": {
+            "x": 29,
+            "y": 9,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_ch3_memory_vaults",
+          "toSpawn": "from_echoes",
+          "requiresFlag": "solved_pillar_resonance",
+          "lockedDialogueId": "ch3_vault_stairs_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_echoes_arrival",
+          "on": "arrive",
+          "onceFlag": "ch3_arrived_echoes",
+          "delayMs": 400,
+          "dialogueId": "ch3_echoes_arrival"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "roam_echoes_wraith_a",
+          "enemyId": "enemy_memory_wraith",
+          "texture": "enemy_memory_wraith",
+          "anim": "enemy_memory_wraith_idle",
+          "tile": {
+            "x": 6,
+            "y": 14
+          }
+        },
+        {
+          "id": "roam_echoes_wraith_b",
+          "enemyId": "enemy_memory_wraith",
+          "texture": "enemy_memory_wraith",
+          "anim": "enemy_memory_wraith_idle",
+          "tile": {
+            "x": 23,
+            "y": 5
+          }
+        },
+        {
+          "id": "roam_echoes_wraith_c",
+          "enemyId": "enemy_memory_wraith",
+          "texture": "enemy_memory_wraith",
+          "anim": "enemy_memory_wraith_idle",
+          "tile": {
+            "x": 15,
+            "y": 15
+          }
+        },
+        {
+          "id": "roam_echoes_archivist_a",
+          "enemyId": "enemy_hollow_archivist",
+          "texture": "enemy_hollow_archivist",
+          "anim": "enemy_hollow_archivist_idle",
+          "tile": {
+            "x": 6,
+            "y": 5
+          }
+        },
+        {
+          "id": "roam_echoes_archivist_b",
+          "enemyId": "enemy_hollow_archivist",
+          "texture": "enemy_hollow_archivist",
+          "anim": "enemy_hollow_archivist_idle",
+          "tile": {
+            "x": 23,
+            "y": 14
+          }
+        }
+      ],
+      "strikeTargets": [
+        {
+          "id": "pillar_left",
+          "tile": {
+            "x": 12,
+            "y": 9
+          },
+          "group": "resonance",
+          "windowMs": 2000,
+          "doneFlag": "solved_pillar_resonance",
+          "dialogueId": "ch3_pillar_resonance_success"
+        },
+        {
+          "id": "pillar_right",
+          "tile": {
+            "x": 17,
+            "y": 9
+          },
+          "group": "resonance",
+          "windowMs": 2000,
+          "doneFlag": "solved_pillar_resonance",
+          "dialogueId": "ch3_pillar_resonance_success"
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "solved_pillar_resonance"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 28,
+              "y": 9
+            },
+            {
+              "x": 28,
+              "y": 10
+            },
+            {
+              "x": 28,
+              "y": 11
+            }
+          ],
+          "index": 2
+        }
+      ]
+    },
+    "map_ch3_memory_vaults": {
+      "id": "map_ch3_memory_vaults",
+      "name": "Hầm Ngầm Tinh Thể",
+      "chapter": 3,
+      "tilemap": {
+        "key": "map_ch3_memory_vaults",
+        "path": "assets/maps/map_ch3_memory_vaults.json"
+      },
+      "tileset": {
+        "name": "sunken_tileset",
+        "key": "sunken_tileset",
+        "path": "assets/tilesets/sunken_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 4,
+        "toGid": 30
+      },
+      "ambient": {
+        "color": "#8a4ad8",
+        "alpha": 0.12
+      },
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 9
+        },
+        "from_echoes": {
+          "x": 2,
+          "y": 9
+        },
+        "from_archives": {
+          "x": 23,
+          "y": 9
+        },
+        "abyss_edge": {
+          "x": 6,
+          "y": 9
+        },
+        "abyss_edge_east": {
+          "x": 19,
+          "y": 11
+        },
+        "revive": {
+          "x": 2,
+          "y": 9
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 9
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_echo_bell_copper",
+          "tile": {
+            "x": 4,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Gõ chuông đỏ gạch",
+          "dialogueId": "ch3_echo_bell_copper"
+        },
+        {
+          "id": "poi_echo_bell_iron",
+          "tile": {
+            "x": 4,
+            "y": 6
+          },
+          "radius": 44,
+          "prompt": "[E] Gõ chuông xám tro",
+          "dialogueId": "ch3_echo_bell_iron"
+        },
+        {
+          "id": "poi_echo_bell_silver",
+          "tile": {
+            "x": 4,
+            "y": 12
+          },
+          "radius": 44,
+          "prompt": "[E] Gõ chuông trắng",
+          "dialogueId": "ch3_echo_bell_silver"
+        },
+        {
+          "id": "poi_echo_bell_copper_east",
+          "tile": {
+            "x": 19,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Gõ chuông đỏ gạch",
+          "dialogueId": "ch3_echo_bell_copper"
+        },
+        {
+          "id": "poi_miner_hymn",
+          "tile": {
+            "x": 2,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt mảnh giấy",
+          "dialogueId": "ch3_hymn_scrap_read"
+        },
+        {
+          "id": "poi_ore_cart",
+          "tile": {
+            "x": 6,
+            "y": 15
+          },
+          "radius": 44,
+          "prompt": "[E] Xem xe goòng",
+          "dialogueId": "ch3_geological_chart_read"
+        },
+        {
+          "id": "poi_lullaby_crystal",
+          "tile": {
+            "x": 22,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Áp tai vào tinh thể",
+          "dialogueId": "ch3_lullaby_crystal_listen"
+        },
+        {
+          "id": "poi_ember_vein",
+          "tile": {
+            "x": 23,
+            "y": 15
+          },
+          "radius": 44,
+          "prompt": "[E] Xem mạch đá đỏ",
+          "dialogueId": "ch3_ember_take"
+        },
+        {
+          "id": "poi_memory_forge",
+          "tile": {
+            "x": 20,
+            "y": 15
+          },
+          "radius": 44,
+          "prompt": "[E] Xem lò rèn ngầm",
+          "dialogueId": "ch3_forge_cold",
+          "dialogueRules": [
+            {
+              "ifFlag": "rekindled_memory_forge",
+              "dialogueId": "ch3_forge_warm"
+            },
+            {
+              "ifItem": "memory_ember",
+              "dialogueId": "ch3_forge_rekindled"
+            }
+          ]
+        },
+        {
+          "id": "poi_portrait_piece_2",
+          "tile": {
+            "x": 19,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt mảnh tranh",
+          "dialogueId": "ch3_portrait_piece_2"
+        }
+      ],
+      "encounters": [
+        {
+          "id": "enc_faceless_keeper",
+          "enemyId": "boss_faceless_keeper",
+          "texture": "boss_faceless_keeper",
+          "anim": "boss_faceless_keeper_idle",
+          "tile": {
+            "x": 21,
+            "y": 9
+          },
+          "defeatedFlag": "defeated_faceless_keeper",
+          "hitbox": 28,
+          "victoryDialogueId": "ch3_faceless_keeper_defeated"
+        }
+      ],
+      "exits": [
+        {
+          "id": "vaults_to_echoes",
+          "area": {
+            "x": 0,
+            "y": 8,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_ch3_hall_of_echoes",
+          "toSpawn": "from_vaults"
+        },
+        {
+          "id": "vaults_to_archives",
+          "area": {
+            "x": 25,
+            "y": 8,
+            "w": 1,
+            "h": 3
+          },
+          "toMap": "map_ch3_great_archive",
+          "toSpawn": "from_vaults",
+          "requiresFlag": "defeated_faceless_keeper",
+          "lockedDialogueId": "ch3_archive_ascent_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_vaults_arrival",
+          "on": "arrive",
+          "onceFlag": "ch3_arrived_vaults",
+          "delayMs": 400,
+          "dialogueId": "ch3_vaults_arrival"
+        },
+        {
+          "id": "trig_abyss_north",
+          "on": "zone",
+          "area": {
+            "x": 8,
+            "y": 2,
+            "w": 10,
+            "h": 7
+          },
+          "repeat": true,
+          "teleportTo": "abyss_edge",
+          "dialogueId": "ch3_abyss_fall"
+        },
+        {
+          "id": "trig_abyss_south",
+          "on": "zone",
+          "area": {
+            "x": 8,
+            "y": 10,
+            "w": 10,
+            "h": 7
+          },
+          "repeat": true,
+          "teleportTo": "abyss_edge",
+          "dialogueId": "ch3_abyss_fall"
+        },
+        {
+          "id": "trig_abyss_path",
+          "on": "zone",
+          "area": {
+            "x": 8,
+            "y": 9,
+            "w": 10,
+            "h": 1
+          },
+          "repeat": true,
+          "unlessFlag": "ch3_bridge_up",
+          "teleportTo": "abyss_edge",
+          "dialogueId": "ch3_abyss_fall"
+        },
+        {
+          "id": "trig_abyss_crossed",
+          "on": "zone",
+          "area": {
+            "x": 18,
+            "y": 2,
+            "w": 1,
+            "h": 15
+          },
+          "onceFlag": "trig_abyss_crossed",
+          "dialogueId": "ch3_abyss_crossed"
+        },
+        {
+          "id": "trig_keeper_meet",
+          "on": "zone",
+          "area": {
+            "x": 19,
+            "y": 5,
+            "w": 1,
+            "h": 9
+          },
+          "onceFlag": "trig_keeper_meet",
+          "dialogueId": "ch3_faceless_keeper_confront"
+        }
+      ],
+      "roamers": [],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "ch3_bridge_up"
+          },
+          "layer": "ground",
+          "tiles": [
+            {
+              "x": 8,
+              "y": 9
+            },
+            {
+              "x": 9,
+              "y": 9
+            },
+            {
+              "x": 10,
+              "y": 9
+            },
+            {
+              "x": 11,
+              "y": 9
+            },
+            {
+              "x": 12,
+              "y": 9
+            },
+            {
+              "x": 13,
+              "y": 9
+            },
+            {
+              "x": 14,
+              "y": 9
+            },
+            {
+              "x": 15,
+              "y": 9
+            },
+            {
+              "x": 16,
+              "y": 9
+            },
+            {
+              "x": 17,
+              "y": 9
+            }
+          ],
+          "index": 2
+        }
+      ]
+    },
+    "map_ch3_great_archive": {
+      "id": "map_ch3_great_archive",
+      "name": "Đại Thư Viện Ký Ức",
+      "chapter": 3,
+      "tilemap": {
+        "key": "map_ch3_great_archive",
+        "path": "assets/maps/map_ch3_great_archive.json"
+      },
+      "tileset": {
+        "name": "dungeon_tileset",
+        "key": "dungeon_tileset",
+        "path": "assets/tilesets/dungeon_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 4,
+        "toGid": 16
+      },
+      "ambient": {
+        "color": "#6a5ad8",
+        "alpha": 0.1
+      },
+      "spawns": {
+        "default": {
+          "x": 15,
+          "y": 17
+        },
+        "from_vaults": {
+          "x": 15,
+          "y": 17
+        },
+        "from_mausoleum": {
+          "x": 15,
+          "y": 3
+        },
+        "revive": {
+          "x": 15,
+          "y": 17
+        }
+      },
+      "revive": {
+        "x": 15,
+        "y": 17
+      },
+      "npcs": [
+        {
+          "id": "npc_neris_desk",
+          "texture": "npc_neris",
+          "anim": "npc_neris_idle",
+          "tile": {
+            "x": 12,
+            "y": 16
+          },
+          "name": "Neris",
+          "prompt": "[E] Hỏi Neris",
+          "radius": 46,
+          "dialogueId": "ch3_neris_archive_talk"
+        },
+        {
+          "id": "npc_ghost_librarian",
+          "texture": "npc_vendor_ba",
+          "anim": "npc_vendor_ba_idle",
+          "tile": {
+            "x": 6,
+            "y": 7
+          },
+          "name": "Hồn Bà Thủ Thư",
+          "prompt": "[E] Hỏi chuyện hồn ma",
+          "radius": 46,
+          "dialogueId": "ch3_ghost_librarian_start",
+          "dialogueRules": [
+            {
+              "ifFlag": "comforted_ghost_librarian",
+              "dialogueId": "ch3_ghost_librarian_after"
+            },
+            {
+              "ifFlag": "heard_lost_lullaby",
+              "dialogueId": "ch3_ghost_librarian_done"
+            }
+          ],
+          "tint": "#a8c8ff",
+          "alpha": 0.7
+        },
+        {
+          "id": "npc_ghost_knight",
+          "texture": "enemy_causality_enforcer",
+          "anim": "enemy_causality_enforcer_idle",
+          "tile": {
+            "x": 24,
+            "y": 7
+          },
+          "name": "Hồn Kỵ Sĩ",
+          "prompt": "[E] Hỏi chuyện hồn kỵ sĩ",
+          "radius": 46,
+          "dialogueId": "ch3_ghost_knight_start",
+          "dialogueRules": [
+            {
+              "ifFlag": "restored_knight_portrait",
+              "dialogueId": "ch3_ghost_knight_after"
+            },
+            {
+              "ifFlags": ["ch3_portrait_piece_1", "ch3_portrait_piece_2", "ch3_portrait_piece_3"],
+              "dialogueId": "ch3_ghost_knight_done"
+            }
+          ],
+          "tint": "#a8c8ff",
+          "alpha": 0.7
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_censorship_console",
+          "tile": {
+            "x": 15,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bàn linh thú",
+          "dialogueId": "ch3_censorship_console_inspect",
+          "dialogueRules": [
+            {
+              "ifFlag": "solved_censorship_ledger",
+              "dialogueId": "ch3_console_done"
+            }
+          ]
+        },
+        {
+          "id": "poi_blacklist_scroll",
+          "tile": {
+            "x": 10,
+            "y": 8
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc sổ đen",
+          "dialogueId": "ch3_blacklist_scroll_read"
+        },
+        {
+          "id": "poi_court_timeline_book",
+          "tile": {
+            "x": 20,
+            "y": 8
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc niên biểu",
+          "dialogueId": "ch3_court_timeline_read"
+        },
+        {
+          "id": "poi_pigment_blue",
+          "tile": {
+            "x": 4,
+            "y": 16
+          },
+          "radius": 44,
+          "prompt": "[E] Xem lọ đá xanh",
+          "dialogueId": "ch3_pigment_blue_take"
+        },
+        {
+          "id": "poi_portrait_piece_3",
+          "tile": {
+            "x": 26,
+            "y": 16
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt mảnh tranh",
+          "dialogueId": "ch3_portrait_piece_3"
+        }
+      ],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "archives_to_vaults",
+          "area": {
+            "x": 15,
+            "y": 19,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch3_memory_vaults",
+          "toSpawn": "from_archives"
+        },
+        {
+          "id": "archives_to_mausoleum",
+          "area": {
+            "x": 14,
+            "y": 0,
+            "w": 3,
+            "h": 2
+          },
+          "toMap": "map_ch3_royal_mausoleum",
+          "toSpawn": "from_archives",
+          "requiresFlag": "solved_censorship_ledger",
+          "lockedDialogueId": "ch3_royal_mausoleum_sealed"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_archives_arrival",
+          "on": "arrive",
+          "onceFlag": "ch3_arrived_archives",
+          "delayMs": 400,
+          "dialogueId": "ch3_archives_arrival"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "roam_archive_archivist_a",
+          "enemyId": "enemy_hollow_archivist",
+          "texture": "enemy_hollow_archivist",
+          "anim": "enemy_hollow_archivist_idle",
+          "tile": {
+            "x": 8,
+            "y": 13
+          }
+        },
+        {
+          "id": "roam_archive_archivist_b",
+          "enemyId": "enemy_hollow_archivist",
+          "texture": "enemy_hollow_archivist",
+          "anim": "enemy_hollow_archivist_idle",
+          "tile": {
+            "x": 22,
+            "y": 13
+          }
+        },
+        {
+          "id": "roam_archive_archivist_c",
+          "enemyId": "enemy_hollow_archivist",
+          "texture": "enemy_hollow_archivist",
+          "anim": "enemy_hollow_archivist_idle",
+          "tile": {
+            "x": 15,
+            "y": 9
+          }
+        },
+        {
+          "id": "roam_archive_eater_a",
+          "enemyId": "enemy_thought_eater",
+          "texture": "enemy_thought_eater",
+          "anim": "enemy_thought_eater_idle",
+          "tile": {
+            "x": 6,
+            "y": 3
+          }
+        },
+        {
+          "id": "roam_archive_eater_b",
+          "enemyId": "enemy_thought_eater",
+          "texture": "enemy_thought_eater",
+          "anim": "enemy_thought_eater_idle",
+          "tile": {
+            "x": 24,
+            "y": 3
+          }
+        }
+      ]
+    },
+    "map_ch3_royal_mausoleum": {
+      "id": "map_ch3_royal_mausoleum",
+      "name": "Hoàng Lăng Ký Ức",
+      "chapter": 3,
+      "tilemap": {
+        "key": "map_ch3_royal_mausoleum",
+        "path": "assets/maps/map_ch3_royal_mausoleum.json"
+      },
+      "tileset": {
+        "name": "dungeon_tileset",
+        "key": "dungeon_tileset",
+        "path": "assets/tilesets/dungeon_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 4,
+        "toGid": 16
+      },
+      "ambient": {
+        "color": "#c89a3a",
+        "alpha": 0.08
+      },
+      "spawns": {
+        "default": {
+          "x": 13,
+          "y": 15
+        },
+        "from_archives": {
+          "x": 13,
+          "y": 15
+        },
+        "from_sanctum": {
+          "x": 13,
+          "y": 3
+        },
+        "revive": {
+          "x": 13,
+          "y": 15
+        }
+      },
+      "revive": {
+        "x": 13,
+        "y": 15
+      },
+      "npcs": [
+        {
+          "id": "npc_amnesiac_king",
+          "texture": "npc_amnesiac_king",
+          "anim": "npc_amnesiac_king_idle",
+          "tile": {
+            "x": 13,
+            "y": 6
+          },
+          "name": "Vua Alden",
+          "prompt": "[E] Nói chuyện với nhà vua",
+          "radius": 46,
+          "dialogueId": "ch3_amnesiac_king_despair",
+          "dialogueRules": [
+            {
+              "ifFlag": "cleared_king_despair",
+              "dialogueId": "ch3_king_after"
+            },
+            {
+              "ifItem": "queen_ribbon_item",
+              "ifFlag": "read_royal_dispatch",
+              "dialogueId": "ch3_king_confront"
+            },
+            {
+              "ifItem": "queen_ribbon_item",
+              "dialogueId": "ch3_king_doubt"
+            },
+            {
+              "ifFlag": "read_royal_dispatch",
+              "dialogueId": "ch3_king_doubt"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_queen_ribbon_shrine",
+          "tile": {
+            "x": 6,
+            "y": 8
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bệ thờ",
+          "dialogueId": "ch3_queen_ribbon_take"
+        },
+        {
+          "id": "poi_royal_dispatch_log",
+          "tile": {
+            "x": 20,
+            "y": 8
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc nhật trình",
+          "dialogueId": "ch3_royal_dispatch_read"
+        },
+        {
+          "id": "poi_court_painter_note",
+          "tile": {
+            "x": 4,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Xem sổ tay họa sĩ",
+          "dialogueId": "ch3_painter_note_read"
+        },
+        {
+          "id": "poi_pigment_red",
+          "tile": {
+            "x": 9,
+            "y": 15
+          },
+          "radius": 44,
+          "prompt": "[E] Xem lớp đá đỏ",
+          "dialogueId": "ch3_pigment_red_take"
+        },
+        {
+          "id": "poi_queen_portrait_canvas",
+          "tile": {
+            "x": 22,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bức chân dung",
+          "dialogueId": "ch3_canvas_look",
+          "dialogueRules": [
+            {
+              "ifFlag": "restored_queen_canvas",
+              "dialogueId": "ch3_canvas_done"
+            },
+            {
+              "ifItems": ["pigment_ochre_yellow", "pigment_lapis_blue", "pigment_sulfur_red"],
+              "dialogueId": "ch3_canvas_inspect"
+            }
+          ]
+        },
+        {
+          "id": "poi_sanctum_door",
+          "tile": {
+            "x": 13,
+            "y": 2
+          },
+          "radius": 44,
+          "prompt": "[E] Xem cửa Thánh Điện",
+          "dialogueId": "ch3_sanctum_door_locked",
+          "dialogueRules": [
+            {
+              "ifFlag": "opened_sanctum_door",
+              "dialogueId": "ch3_sanctum_door_opens"
+            },
+            {
+              "ifItem": "royal_seal_crest",
+              "dialogueId": "ch3_sanctum_door_opens"
+            }
+          ]
+        }
+      ],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "mausoleum_to_archives",
+          "area": {
+            "x": 13,
+            "y": 17,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch3_great_archive",
+          "toSpawn": "from_mausoleum"
+        },
+        {
+          "id": "mausoleum_to_sanctum",
+          "area": {
+            "x": 13,
+            "y": 0,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch3_choir_sanctum",
+          "toSpawn": "from_mausoleum",
+          "requiresFlag": "opened_sanctum_door",
+          "lockedDialogueId": "ch3_sanctum_door_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_mausoleum_arrival",
+          "on": "arrive",
+          "onceFlag": "ch3_arrived_mausoleum",
+          "delayMs": 400,
+          "dialogueId": "ch3_mausoleum_arrival"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "roam_mausoleum_eater_a",
+          "enemyId": "enemy_thought_eater",
+          "texture": "enemy_thought_eater",
+          "anim": "enemy_thought_eater_idle",
+          "tile": {
+            "x": 5,
+            "y": 4
+          }
+        },
+        {
+          "id": "roam_mausoleum_eater_b",
+          "enemyId": "enemy_thought_eater",
+          "texture": "enemy_thought_eater",
+          "anim": "enemy_thought_eater_idle",
+          "tile": {
+            "x": 21,
+            "y": 4
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "opened_sanctum_door"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 13,
+              "y": 2
+            }
+          ],
+          "index": 2
+        }
+      ]
+    },
+    "map_ch3_choir_sanctum": {
+      "id": "map_ch3_choir_sanctum",
+      "name": "Thánh Điện Hợp Xướng",
+      "chapter": 3,
+      "tilemap": {
+        "key": "map_ch3_choir_sanctum",
+        "path": "assets/maps/map_ch3_choir_sanctum.json"
+      },
+      "tileset": {
+        "name": "sunken_tileset",
+        "key": "sunken_tileset",
+        "path": "assets/tilesets/sunken_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 4,
+        "toGid": 30
+      },
+      "ambient": {
+        "color": "#4ad0e0",
+        "alpha": 0.1
+      },
+      "spawns": {
+        "default": {
+          "x": 11,
+          "y": 13
+        },
+        "from_mausoleum": {
+          "x": 11,
+          "y": 13
+        },
+        "revive": {
+          "x": 11,
+          "y": 13
+        }
+      },
+      "revive": {
+        "x": 11,
+        "y": 13
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_memory_seal",
+          "tile": {
+            "x": 11,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm vào Lõi Ký Ức",
+          "dialogueId": "ch3_seal_restored",
+          "dialogueRules": [
+            {
+              "ifFlag": "memory_seal_restored",
+              "dialogueId": "ch3_seal_after"
+            }
+          ],
+          "requiresFlag": "defeated_nameless_choir"
+        }
+      ],
+      "encounters": [
+        {
+          "id": "enc_nameless_choir",
+          "enemyId": "boss_nameless_choir",
+          "texture": "boss_nameless_choir",
+          "anim": "boss_nameless_choir_idle",
+          "tile": {
+            "x": 11,
+            "y": 7
+          },
+          "defeatedFlag": "defeated_nameless_choir",
+          "hitbox": 34,
+          "victoryDialogueId": "ch3_choir_boss_defeated"
+        }
+      ],
+      "exits": [
+        {
+          "id": "sanctum_to_mausoleum",
+          "area": {
+            "x": 11,
+            "y": 15,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch3_royal_mausoleum",
+          "toSpawn": "from_sanctum"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_choir_encounter",
+          "on": "zone",
+          "area": {
+            "x": 9,
+            "y": 10,
+            "w": 5,
+            "h": 1
+          },
+          "onceFlag": "trig_choir_encounter",
+          "dialogueId": "ch3_choir_boss_confront"
+        }
+      ],
+      "roamers": []
+    },
+    "map_ch3_forgotten_vault": {
+      "id": "map_ch3_forgotten_vault",
+      "name": "Kho Ký Ức Bị Xóa Bỏ",
+      "chapter": 3,
+      "tilemap": {
+        "key": "map_ch3_forgotten_vault",
+        "path": "assets/maps/map_ch3_forgotten_vault.json"
+      },
+      "tileset": {
+        "name": "dungeon_tileset",
+        "key": "dungeon_tileset",
+        "path": "assets/tilesets/dungeon_tileset.png"
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "collision": {
+        "fromGid": 4,
+        "toGid": 16
+      },
+      "ambient": {
+        "color": "#202030",
+        "alpha": 0.25
+      },
+      "spawns": {
+        "default": {
+          "x": 10,
+          "y": 11
+        },
+        "from_necropolis": {
+          "x": 10,
+          "y": 11
+        }
+      },
+      "revive": {
+        "x": 10,
+        "y": 11
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_blank_music_box",
+          "tile": {
+            "x": 10,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Xem hộp nhạc",
+          "dialogueId": "ch3_needle_box_inspect",
+          "dialogueRules": [
+            {
+              "ifFlag": "opened_memory_needle_box",
+              "dialogueId": "ch3_needle_box_empty"
+            }
+          ]
+        },
+        {
+          "id": "poi_unwritten_monument",
+          "tile": {
+            "x": 5,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bia không chữ",
+          "dialogueId": "ch3_unwritten_monument_whisper"
+        }
+      ],
+      "encounters": [],
+      "exits": [
+        {
+          "id": "vault_to_necropolis",
+          "area": {
+            "x": 10,
+            "y": 13,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch3_silent_necropolis",
+          "toSpawn": "from_vault"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_vault_arrival",
+          "on": "arrive",
+          "onceFlag": "ch3_arrived_vault",
+          "delayMs": 400,
+          "dialogueId": "ch3_forgotten_vault_arrival"
+        }
+      ],
+      "roamers": []
     }
   }
 }

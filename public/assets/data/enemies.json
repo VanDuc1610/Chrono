@@ -313,6 +313,200 @@
           ]
         }
       }
+    },
+    {
+      "id": "enemy_memory_wraith",
+      "name": "Bóng Ma Ký Ức",
+      "level": 12,
+      "maxHp": 150,
+      "hp": 150,
+      "attack": 24,
+      "defense": 14,
+      "speed": 14,
+      "spriteKey": "enemy_memory_wraith",
+      "skills": [],
+      "expReward": 70,
+      "lootTable": [
+        {
+          "itemId": "chrono_shard_minor",
+          "chance": 0.3
+        }
+      ],
+      "field": {
+        "blinkOnWhiff": {
+          "range": 90
+        }
+      }
+    },
+    {
+      "id": "enemy_thought_eater",
+      "name": "Kẻ Gặm Ý Nghĩ",
+      "level": 13,
+      "maxHp": 190,
+      "hp": 190,
+      "attack": 22,
+      "defense": 16,
+      "speed": 9,
+      "spriteKey": "enemy_thought_eater",
+      "skills": [],
+      "expReward": 80,
+      "lootTable": [
+        {
+          "itemId": "chrono_shard_minor",
+          "chance": 0.3
+        }
+      ],
+      "field": {
+        "pool": {
+          "everyMs": 6000,
+          "lifeMs": 8000,
+          "radius": 30,
+          "slowPct": 0.4,
+          "mpPerSec": 2
+        }
+      }
+    },
+    {
+      "id": "enemy_hollow_archivist",
+      "name": "Thủ Thư Rỗng",
+      "level": 13,
+      "maxHp": 170,
+      "hp": 170,
+      "attack": 23,
+      "defense": 15,
+      "speed": 11,
+      "spriteKey": "enemy_hollow_archivist",
+      "skills": [],
+      "expReward": 80,
+      "lootTable": [
+        {
+          "itemId": "chrono_shard_minor",
+          "chance": 0.3
+        }
+      ],
+      "field": {
+        "clonesAtHalf": 2
+      }
+    },
+    {
+      "id": "boss_faceless_keeper",
+      "name": "Kẻ Canh Ngục Không Mặt",
+      "level": 13,
+      "maxHp": 380,
+      "hp": 380,
+      "attack": 16,
+      "defense": 16,
+      "speed": 12,
+      "spriteKey": "boss_faceless_keeper",
+      "spriteScale": 2,
+      "skills": [],
+      "expReward": 200,
+      "lootTable": [],
+      "mechanic": {
+        "damageReduction": 0,
+        "hpFloor": 0,
+        "recoverPct": 0,
+        "recoverMessage": "",
+        "unlockAfterTurns": 99,
+        "unlockMessage": "",
+        "actions": [],
+        "startsUnshielded": true,
+        "releasedFrame": 4,
+        "defeatMessage": "Tấm gương trên mặt Kẻ Canh Ngục nứt toác. Nó buông lưỡi gương, đứng lặng như một bức tượng không tên.",
+        "mirrorGear": {
+          "pct": 0.1,
+          "message": "Kẻ Canh Ngục nâng tấm gương lên — hình bóng Peter hiện trong đó, và nó học lấy một phần sức mạnh của cậu!"
+        },
+        "memoryLock": {
+          "everyTurns": 2,
+          "lockTurns": 2,
+          "staggerBonus": 0.5,
+          "staggerMessage": "Tấm gương rạn nứt! Ký ức bị khóa vỡ ra — đòn kế tiếp sẽ đánh trúng tận lõi!",
+          "releaseMessage": "Lớp băng ký ức tan ra, mọi lệnh của Peter đã được giải phóng.",
+          "options": [
+            {
+              "command": "attack",
+              "announce": "KHÓA KÝ ỨC: Nút [1] TẤN CÔNG bị đóng băng! Thử một đòn khác xem…",
+              "staggerBy": ["skill"]
+            },
+            {
+              "command": "skill",
+              "announce": "KHÓA KÝ ỨC: Nút [2] KỸ NĂNG bị đóng băng! Thử một đòn khác xem…",
+              "staggerBy": ["attack"]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "boss_nameless_choir",
+      "name": "Dàn Hợp Xướng Vô Danh",
+      "level": 15,
+      "maxHp": 560,
+      "hp": 560,
+      "attack": 22,
+      "defense": 18,
+      "speed": 11,
+      "spriteKey": "boss_nameless_choir",
+      "spriteScale": 1.6,
+      "skills": [],
+      "expReward": 300,
+      "lootTable": [],
+      "mechanic": {
+        "damageReduction": 0.85,
+        "hpFloor": 1,
+        "recoverPct": 0.5,
+        "recoverMessage": "Hàng vạn giọng hát dâng lên che chở — khối tinh thể liền lại những vết nứt!",
+        "unlockAfterTurns": 99,
+        "unlockMessage": "",
+        "releasedFrame": 4,
+        "defeatMessage": "Khúc hợp xướng lặng dần. Từng khuôn mặt ma mỉm cười rồi tan thành bụi sáng.",
+        "actions": [
+          {
+            "id": "core_youth",
+            "label": "LÕI TUỔI TRẺ",
+            "message": ""
+          },
+          {
+            "id": "core_war",
+            "label": "LÕI CHIẾN TRANH",
+            "message": ""
+          },
+          {
+            "id": "core_funeral",
+            "label": "LÕI TANG LỄ",
+            "message": ""
+          }
+        ],
+        "songs": {
+          "cracksToBreak": 3,
+          "coreDamage": 120,
+          "wrongPct": 0.15,
+          "wrongMp": 8,
+          "breakMessage": "Lá Chắn Nghìn Ký Ức vỡ vụn! Các khuôn mặt dịu lại — lõi năng lượng đã lộ ra!",
+          "wrongMessage": "TIẾNG GÀO LÃNG QUÊN! Peter bị dội ngược, mất {damage} HP và 8 MP!",
+          "list": [
+            {
+              "id": "youth",
+              "coreId": "core_youth",
+              "announce": "Dàn hợp xướng hát: \"Bờ tre tiếng sáo diều, mâm cơm mẹ gọi bên sông…\"",
+              "crackMessage": "Lõi Tuổi Trẻ ngân vang hòa âm — lá chắn nứt một mảng!"
+            },
+            {
+              "id": "war",
+              "coreId": "core_war",
+              "announce": "Dàn hợp xướng hát: \"Mũi tên xé toạc màn sương, tiếng gươm đao gãy nát…\"",
+              "crackMessage": "Lõi Chiến Tranh ngân vang hòa âm — lá chắn nứt một mảng!"
+            },
+            {
+              "id": "funeral",
+              "coreId": "core_funeral",
+              "announce": "Dàn hợp xướng hát: \"Nén hương tàn trong đêm lạnh, giọt lệ tiễn người nằm xuống…\"",
+              "crackMessage": "Lõi Tang Lễ ngân vang hòa âm — lá chắn nứt một mảng!"
+            }
+          ]
+        }
+      }
     }
   ]
 }

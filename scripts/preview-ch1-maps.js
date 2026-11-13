@@ -9,10 +9,11 @@ import { renderLayout, scaledPng } from './pixel-art/tile-kit.js';
 import { writeFile } from './pixel-art/pixel.js';
 import { CH1_MAPS } from './ch1-layout.js';
 import { CH2_MAPS } from './ch2-layout.js';
+import { CH3_MAPS } from './ch3-layout.js';
 
-/** `node <script> ch2` builds Chapter 2 instead of Chapter 1. */
-const CH2 = process.argv[2] === 'ch2';
-const MAPS = CH2 ? CH2_MAPS : CH1_MAPS;
+/** `node <script> ch2|ch3` builds that chapter instead of Chapter 1. */
+const CHAPTER = process.argv[2] ?? 'ch1';
+const MAPS = { ch1: CH1_MAPS, ch2: CH2_MAPS, ch3: CH3_MAPS }[CHAPTER] ?? CH1_MAPS;
 
 const SHEETS = {
   // v2 candidates (Chapter 1 props) until approved, then the deployed files.
@@ -36,7 +37,7 @@ function loadSheet(file) {
   return { w: ihdr.width, h: ihdr.height, buf: Buffer.from(pixels), cols: ihdr.width / 32 };
 }
 
-const outDir = CH2 ? 'art-source/maps/chapter2/previews' : 'art-source/maps/chapter1/previews';
+const outDir = `art-source/maps/chapter${CHAPTER.slice(2) || '1'}/previews`;
 fs.mkdirSync(outDir, { recursive: true });
 for (const def of MAPS) {
   const sheet = loadSheet(SHEETS[def.tileset]);

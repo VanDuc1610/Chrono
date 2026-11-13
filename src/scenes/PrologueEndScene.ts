@@ -6,6 +6,7 @@ import { getSession } from '../state/GameSession';
 const NEXT_START: Record<number, { mapId: string; spawnId: string }> = {
   0: { mapId: 'map_ch1_shore_gate', spawnId: 'from_prologue' },
   1: { mapId: 'map_ch2_imperial_outskirts', spawnId: 'from_ch1' },
+  2: { mapId: 'map_ch3_sepulcher_gate', spawnId: 'from_ch2' },
 };
 import { createPanel } from '../ui/Panel';
 import { getStrings } from '../ui/Strings';

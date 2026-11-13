@@ -6,10 +6,11 @@
 import fs from 'fs';
 import { CH1_MAPS } from './ch1-layout.js';
 import { CH2_MAPS } from './ch2-layout.js';
+import { CH3_MAPS } from './ch3-layout.js';
 
-/** `node <script> ch2` builds Chapter 2 instead of Chapter 1. */
-const CH2 = process.argv[2] === 'ch2';
-const MAPS = CH2 ? CH2_MAPS : CH1_MAPS;
+/** `node <script> ch2|ch3` builds that chapter instead of Chapter 1. */
+const CHAPTER = process.argv[2] ?? 'ch1';
+const MAPS = { ch1: CH1_MAPS, ch2: CH2_MAPS, ch3: CH3_MAPS }[CHAPTER] ?? CH1_MAPS;
 
 const TILESETS = {
   wilds: {

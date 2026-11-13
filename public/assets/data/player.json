@@ -40,6 +40,10 @@
       {
         "untilFlag": "causality_seal_restored",
         "cap": 12
+      },
+      {
+        "untilFlag": "memory_seal_restored",
+        "cap": 15
       }
     ]
   },

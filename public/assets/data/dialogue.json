@@ -3762,7 +3762,10 @@
       "lines": [
         "Một lò rèn ngầm cổ xưa đứng im lìm, than đá đã nguội ngắt từ nhiều thế kỷ. Cần có một ngọn lửa ký ức vĩnh cửu để thắp sáng lại lò."
       ],
-      "responses": []
+      "responses": [],
+      "effects": {
+        "startQuest": "quest_ch3_forgotten_craftsman"
+      }
     },
     "ch3_forge_rekindled": {
       "id": "ch3_forge_rekindled",
@@ -4502,6 +4505,82 @@
       "effects": {
         "setFlags": ["crossed_memory_abyss"]
       }
+    },
+    "ch3_canvas_look": {
+      "id": "ch3_canvas_look",
+      "speaker": "Peter",
+      "lines": [
+        "Bức tranh chân dung Hoàng hậu bị bao phủ bởi lớp sơn tím kỳ quái che lấp nét mặt. Cần đủ 3 sắc tố tự nhiên để phục chế."
+      ],
+      "responses": []
+    },
+    "ch3_canvas_done": {
+      "id": "ch3_canvas_done",
+      "speaker": "Peter",
+      "lines": [
+        "Bức chân dung Hoàng hậu đã lấy lại sắc màu nguyên bản — ánh mắt nàng dịu dàng như vừa mỉm cười."
+      ],
+      "responses": []
+    },
+    "ch3_console_done": {
+      "id": "ch3_console_done",
+      "speaker": "Peter",
+      "lines": ["Bàn điều khiển linh thú im lặng. Ấn phản nghịch đã nằm đúng chỗ của nó."],
+      "responses": []
+    },
+    "ch3_king_after": {
+      "id": "ch3_king_after",
+      "speaker": "Peter",
+      "lines": [
+        "Vua Alden ngồi thẳng lưng trên ngai, mắt hướng về phía Thánh Điện. Nỗi đau vẫn còn, nhưng không còn là tội lỗi."
+      ],
+      "responses": []
+    },
+    "ch3_hall_gate_open_done": {
+      "id": "ch3_hall_gate_open_done",
+      "speaker": "Peter",
+      "lines": ["Cánh cổng chạm khắc đã mở, chiếc đục cổ nằm yên trong hốc tròn."],
+      "responses": []
+    },
+    "ch3_forge_warm": {
+      "id": "ch3_forge_warm",
+      "speaker": "Peter",
+      "lines": ["Lò rèn ngầm cháy đều, ánh lửa ký ức ấm áp phủ lên vách đá."],
+      "responses": []
+    },
+    "ch3_ghost_librarian_after": {
+      "id": "ch3_ghost_librarian_after",
+      "speaker": "Hồn Bà Thủ Thư",
+      "lines": ["Hồn bà thủ thư khe khẽ ngân điệu ru, đôi mắt khép hờ như đang nhìn thấy mẹ mình."],
+      "responses": []
+    },
+    "ch3_ghost_knight_after": {
+      "id": "ch3_ghost_knight_after",
+      "speaker": "Hồn Kỵ Sĩ",
+      "lines": [
+        "Hồn kỵ sĩ đứng lặng trước bức chân dung ghép lại, tay đặt lên ngực như một lời thề cuối cùng."
+      ],
+      "responses": []
+    },
+    "ch3_needle_box_empty": {
+      "id": "ch3_needle_box_empty",
+      "speaker": "Peter",
+      "lines": [
+        "Chiếc hộp nhạc thép đen đã mở, bên trong chỉ còn lớp nhung lõm theo hình thanh kiếm."
+      ],
+      "responses": []
+    },
+    "ch3_seal_after": {
+      "id": "ch3_seal_after",
+      "speaker": "Peter",
+      "lines": ["Lõi Memory Seal tỏa ánh lam dịu. Những linh hồn quanh đây đã thôi khóc than."],
+      "responses": []
+    },
+    "ch3_vault_open_done": {
+      "id": "ch3_vault_open_done",
+      "speaker": "Peter",
+      "lines": ["Lối ngầm xuống mật thất đã mở."],
+      "responses": []
     }
   }
 }
