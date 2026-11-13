@@ -269,3 +269,17 @@ The following specifications have been drafted in compliance with [ASSET_POLICY.
 - `BOSS_FACELESS_KEEPER_001` — The Keeper Without a Face (mid-boss), 48 × 48 × 5 (0-3 idle; 4 defeated, mirror cracked, blade dropped): grey shroud, a flat mirror for a face, mirror-shard blade → `art-source/enemies/faceless_keeper/generated/candidates/faceless_keeper_v1.png`.
 - `BOSS_NAMELESS_CHOIR_001` — The Nameless Choir, 64 × 64 × 5 (0-3 idle, ghost faces orbit and sing; 4 dissolving): floating black crystal with a cyan core → `art-source/enemies/nameless_choir/generated/candidates/nameless_choir_v1.png`.
 - Previews in each `previews/` folder. **Validation:** all PASSED. **Status:** `APPROVED` by the owner 2026-11-13 — files in `generated/approved/`, deployed to `public/assets/npcs/{neris_idle,amnesiac_king_idle}.png` and `public/assets/enemies/{memory_wraith,thought_eater,hollow_archivist,faceless_keeper,nameless_choir}.png` (keys `npc_neris`, `npc_amnesiac_king`, `enemy_memory_wraith`, `enemy_thought_eater`, `enemy_hollow_archivist`, `boss_faceless_keeper`, `boss_nameless_choir`).
+
+### Chapter 4 characters and warfield tileset (T-64)
+
+- **Generators:** `scripts/author-ch4-characters.js`, `scripts/author-warfield-tileset.js` (Pipeline B, deterministic pixel rules, no image model).
+- `NPC_ALDRIC_001` — General Aldric, 32 × 32 × 4 idle: white hair and long beard, torn blue cloak over cracked plate, both trembling hands on a sword planted point-down.
+- `NPC_KAELEN_001` — General Kaelen, 32 × 32 × 4 idle: black armour with a broken-sun emblem, scar across the nose, glaive.
+- `NPC_BRAN_001` — Private Bran, 32 × 32 × 4 idle: bandaged brow, neck and arms, wooden spear covered in tally marks.
+- `NPC_ELION_001` — Chronicler Elion, 32 × 32 × 4 idle: ash-grey robe, clouded eyes, hide-bound tome wrapped in a chain.
+- `NPC_RENARD_001` — Private Renard, 32 × 32 × 4 idle (shaking): oversized helm, Veridia blue tabard, sword held low.
+- `NPC_KURO_001` — Kuro, 32 × 32 × 5 (0-3 idle, 4 Interval flicker): straight black hair cut short (never curly), silver-grey cloak whose hem frays into violet light, cold eyes with a violet glint.
+- `MOB_GHOST_SNIPER_001`, `MOB_ENDLESS_PHALANX_001` (tower shield, faces left), `MOB_BANNER_CARRIER_001` (crimson aura), `MOB_UNDYING_KNIGHT_001` (32 × 32 × 5, frame 4 charging, faces left).
+- `BOSS_CRIMSON_STANDARD_001` — 48 × 48 × 5 (4 = blood wall); `BOSS_LAST_WAR_001` — 64 × 64 × 5 (4 = kneeling).
+- `ENV_WARFIELD_001` — `warfield_tileset_v1` (256 × 256): tiles 0-42 are the approved wilds v2 tiles recoloured to a scorched battlefield (same indices and collision); 43-47 new ground (arrow field, duckboards, crater, ash drift, blood mud); 48-63 new props (war tent, palisade, spiked barrier, torn banner, siege wreck, sword forest, burnt chariot, burial mound, signal mirror, cover rock, treaty table, memorial altar, ritual pillar, sandbags, supply crates, Finality Seal).
+- **Validation:** all PASSED. **Status:** `APPROVED` — the owner delegated every Chapter 4 decision to Claude on 2026-11-14 and reviews the art in the playtest. Files in `generated/approved/`, deployed to `public/assets/npcs/{aldric,kaelen,soldier_bran,chronicler_elion,renard,kuro}_idle.png`, `public/assets/enemies/{ghost_sniper,endless_phalanx,banner_carrier,undying_knight,crimson_standard,the_last_war}.png`, `public/assets/tilesets/warfield_tileset.png`.

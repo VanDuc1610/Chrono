@@ -188,6 +188,19 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_hollow_archivist', 'assets/enemies/hollow_archivist.png', 32],
       ['boss_faceless_keeper', 'assets/enemies/faceless_keeper.png', 48],
       ['boss_nameless_choir', 'assets/enemies/nameless_choir.png', 64],
+      // Chapter 4 (T-64; owner delegated Chapter 4 to Claude 2026-11-14, reviews in playtest).
+      ['npc_aldric', 'assets/npcs/aldric_idle.png', 32],
+      ['npc_kaelen', 'assets/npcs/kaelen_idle.png', 32],
+      ['npc_soldier_bran', 'assets/npcs/soldier_bran_idle.png', 32],
+      ['npc_chronicler_elion', 'assets/npcs/chronicler_elion_idle.png', 32],
+      ['npc_renard', 'assets/npcs/renard_idle.png', 32],
+      ['npc_kuro', 'assets/npcs/kuro_idle.png', 32],
+      ['enemy_ghost_sniper', 'assets/enemies/ghost_sniper.png', 32],
+      ['enemy_endless_phalanx', 'assets/enemies/endless_phalanx.png', 32],
+      ['enemy_banner_carrier', 'assets/enemies/banner_carrier.png', 32],
+      ['enemy_undying_knight', 'assets/enemies/undying_knight.png', 32],
+      ['boss_crimson_standard', 'assets/enemies/crimson_standard.png', 48],
+      ['boss_the_last_war', 'assets/enemies/the_last_war.png', 64],
     ] as const) {
       this.load.spritesheet(key, file, { frameWidth: size, frameHeight: size });
     }
@@ -283,6 +296,17 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_hollow_archivist_idle', 'enemy_hollow_archivist', 3, 4],
       ['boss_faceless_keeper_idle', 'boss_faceless_keeper', 3, 4],
       ['boss_nameless_choir_idle', 'boss_nameless_choir', 3, 5],
+      ['npc_aldric_idle', 'npc_aldric', 3, 3],
+      ['npc_kaelen_idle', 'npc_kaelen', 3, 3],
+      ['npc_soldier_bran_idle', 'npc_soldier_bran', 3, 3],
+      ['npc_chronicler_elion_idle', 'npc_chronicler_elion', 3, 3],
+      ['npc_renard_idle', 'npc_renard', 3, 6],
+      ['enemy_ghost_sniper_idle', 'enemy_ghost_sniper', 3, 5],
+      ['enemy_endless_phalanx_idle', 'enemy_endless_phalanx', 3, 5],
+      ['enemy_banner_carrier_idle', 'enemy_banner_carrier', 3, 5],
+      ['enemy_undying_knight_idle', 'enemy_undying_knight', 3, 5],
+      ['boss_crimson_standard_idle', 'boss_crimson_standard', 3, 4],
+      ['boss_the_last_war_idle', 'boss_the_last_war', 3, 4],
     ] as const) {
       if (!this.anims.exists(key)) {
         this.anims.create({
@@ -292,6 +316,15 @@ export class PreloadScene extends Phaser.Scene {
           repeat: -1,
         });
       }
+    }
+    if (!this.anims.exists('npc_kuro_idle')) {
+      // Kuro: idle with an occasional Interval flicker (frame 4).
+      this.anims.create({
+        key: 'npc_kuro_idle',
+        frames: this.anims.generateFrameNumbers('npc_kuro', { frames: [0, 1, 2, 3, 0, 1, 4, 3] }),
+        frameRate: 4,
+        repeat: -1,
+      });
     }
     if (!this.anims.exists('boss_sentinel_idle')) {
       this.anims.create({
