@@ -19,15 +19,15 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-Goal (owner, 2026-11-13): build Chapter 3 "The Kingdom of Forgotten Souls" from
-[CHAPTER_03_DESIGN.md](story/CHAPTER_03_DESIGN.md) — owner approved §1–§11 with the changes in
-**§12** (§12 wins where they differ).
+Goal (owner, 2026-11-14): design Chapter 4 "The War Without End" — long, tense, strong characters
+with backstories, hazy flashbacks, rounds of puzzles and story choices that lead to different
+rewards. Design first; build starts only after the owner approves the document.
 
-### T-56 · Chapter 3 content
+### T-61 · Chapter 4 design
 
-- **Assignee:** Antigravity · **Status:** DONE
-- **Locks:** `public/assets/data/dialogue.json`, `public/assets/data/quests.json`, `public/assets/data/items.json`, `tests/content-data.test.ts`
-- **Contract:** CHAPTER_03_DESIGN.md §7, §11 and §12 (exact ids)
+- **Assignee:** Antigravity · **Status:** TODO
+- **Locks:** `docs/story/CHAPTER_04_DESIGN.md` (new)
+- **Contract:** structure of CHAPTER_03_DESIGN.md §1–§11 + §12 lessons; canon in STORY_CHAPTER_04.md and CHRONO_STORY_BIBLE.md (Kuro's first direct meeting happens here)
 
 ## Backlog (scheduled after current locks are released)
 
@@ -38,8 +38,8 @@ Goal (owner, 2026-11-13): build Chapter 3 "The Kingdom of Forgotten Souls" from
 
 ## Done (latest 5 — older entries in [TASKS_ARCHIVE.md](TASKS_ARCHIVE.md))
 
+- **T-60** Playtest fixes: the 8-second bell bridge starts counting only after the dialogue is closed (startTimer during a dialogue waits for it to end); HP + MP bars over Peter (once armed) and an HP bar over every map enemy (decoys copy their source's bar), so pickup/kill banners no longer hide the player's health. Verified: 101 unit tests, live CDP run (bridge flag off while reading, on with countdown after closing, off 8 s later) — Claude
 - **T-59** Owner/friend playtest fixes: New Game / Continue after an end card no longer reopen the last chapter's first map (Phaser keeps a scene's previous start data when none is passed — the menu now always passes data; this also caused the reset level, Prologue level cap and Chapter 1 quests seen in Chapter 2). Saves already past a seal (Chapter 1 or 2) get a 'Bước qua Cổng Ngưỡng' choice at the seal to reach the next chapter. Quests tagged main/side + chapter; the tracker shows NHIỆM VỤ CHÍNH / PHỤ, main first; finishing a chapter (and loading an old save) closes that chapter's open quests — main done, side missed — and starts the next main quest. Verified: 101 unit tests, live CDP run of Chapter 2 end → Chapter 3, title → New Game, stuck save → seal → Chapter 3, save → Continue — Claude
 - **T-57** Chapter 3 playable: 8 maps (Tiền Đình → Nghĩa Địa → Hành Lang Vang Vọng → Hầm Ngầm Tinh Thể → Đại Thư Viện → Hoàng Lăng → Thánh Điện Hợp Xướng, + hidden Kho Ký Ức), Chapter 2 end card continues into Chapter 3. Engine: strike targets (resonance pillars), startTimer (8-second bridge, abyss falls back to the edge), ifItems/ifFlags rules, Memory Wraith blink, Thought Eater pools, Hollow Archivist decoys, Faceless Keeper memory lock + mirror, Nameless Choir songs and cores (keys 6-8). Review of T-56: answers no longer given away (tomb III, red bell, console hint, painter's note, lullaby). Verified: 98 unit tests, 4 CDP suites, live run of every puzzle, both bosses and the end card — Claude
 - **T-58** Chapter 3 art approved and integrated: Neris, King Alden, Memory Wraith, Thought Eater, Hollow Archivist, The Keeper Without a Face (48×48), The Nameless Choir (64×64) — Claude
 - **T-56** Chapter 3 content (`dialogue.json`, `quests.json`, `items.json`, `tests/content-data.test.ts`): 22 items (10 documents with pages ≤ 220 chars, 7 puzzles, 1 weapon, 1 charm, 2 consumables, 2 key items, 1 material), 10 quests (7 main + 3 side), 83 dialogue nodes across 8 maps with natural Vietnamese ≤ 220 chars/line and ≤ 2 choices/node, Sculptor's Tomb (3 clues, 5 tombs, Willow III correct), 8s copper bell bridge timer, Wolf censorship deduction, King Alden false memory cleared via ribbon + dispatch log, hidden Queen canvas 3-layer restoration (Pure Crystal charm), 5-beat music box (Needle Rapier), and Memory Seal restoration with endChapter: 3; verified with typecheck, lint, prettier, and 98 unit tests — Antigravity
-- **T-54** Chapter 3 design (`docs/story/CHAPTER_03_DESIGN.md`, Vietnamese): "The Kingdom of Forgotten Souls" structured §1–§11 (Peter's Unwritten stake, 8 maps 75–100 min using existing dungeon/sunken/wilds tilesets, 5 rising-difficulty cross-referencing puzzles: Sculptor's Tomb, Kinetic Resonance, 8s Timed Abyss, Censorship Ledger, and King Alden's Forgery; 3 new real-time behaviours: teleport-evade, hazard pool, phantasm clone; turn-based Mid-Boss Faceless Keeper & Final Boss Nameless Choir; 7 main + 3 side quests; hidden Needle Rapier & Pure Crystal charm; §11 ID contract) — Antigravity Owner approved 2026-11-13 with the §12 changes (Claude review).

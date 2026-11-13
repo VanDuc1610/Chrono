@@ -62,6 +62,8 @@ interface Roamer {
   cloned?: boolean;
   /** Next time it may leave a pool. */
   nextPool?: number;
+  /** A decoy's health bar copies its source's, so the bar does not give it away. */
+  shownRatio?: number;
 }
 
 const ELDER_FLAG = 'elder_joined';
@@ -87,6 +89,8 @@ export class ActionCombat {
   private defeated = false;
   private ambushFired = false;
   private hudMp = -1;
+  /** Health bars over Peter (HP + MP) and over every enemy, redrawn each frame. */
+  private readonly bars: Phaser.GameObjects.Graphics;
 
   constructor(
     private readonly scene: Phaser.Scene,
@@ -101,6 +105,7 @@ export class ActionCombat {
     this.tuning = resolveActionTuning(session.database.player.action);
     this.combat = session.database.player.combat;
     this.group = scene.physics.add.group();
+    this.bars = scene.add.graphics().setDepth(48);
     this.defs = defs;
     for (const def of defs) this.spawn(def);
     if (this.roamers.some((r) => r.def.hunter)) this.announceHunters();
@@ -307,6 +312,7 @@ export class ActionCombat {
       pathAt: 0,
       clone: true,
       cloned: true,
+      shownRatio: src.hp / src.enemy.maxHp,
     });
   }
 
@@ -330,6 +336,7 @@ export class ActionCombat {
   // ------------------------------------------------------------------ frame
 
   public update(delta: number): void {
+    this.drawBars();
     const paused = this.host.isPaused() || this.defeated;
     if (paused) {
       for (const r of this.roamers) if (r.alive) r.sprite.setVelocity(0, 0);
@@ -692,6 +699,34 @@ export class ActionCombat {
         onComplete: () => r.sprite.destroy(),
       });
     }
+  }
+
+  // ------------------------------------------------------------------ health bars
+
+  private drawBars(): void {
+    const g = this.bars;
+    g.clear();
+    const bar = (cx: number, top: number, w: number, h: number, ratio: number, color: number) => {
+      const x = Math.round(cx - w / 2);
+      g.fillStyle(0x05060c, 0.85).fillRect(x - 1, top - 1, w + 2, h + 2);
+      g.fillStyle(color, 1).fillRect(x, top, Math.round(w * Math.max(0, Math.min(1, ratio))), h);
+    };
+    const hpColor = (ratio: number) =>
+      ratio > 0.5 ? 0x4ade80 : ratio > 0.25 ? 0xfacc15 : 0xef4444;
+    for (const r of this.roamers) {
+      if (!r.alive || r.def.ambush || !r.sprite.active) continue;
+      const ratio = r.shownRatio ?? r.hp / r.enemy.maxHp;
+      const top = r.sprite.y - r.sprite.displayHeight * r.sprite.originY - 6;
+      bar(r.sprite.x, top, 22, 3, ratio, ratio > 0.5 ? 0xf87171 : 0xef4444);
+    }
+    // Peter's bars appear once he can fight.
+    if (!this.flag('has_broken_blade')) return;
+    const p = this.player.sprite;
+    const stats = this.session.getStats();
+    const top = p.y - p.displayHeight * p.originY - 9;
+    const hp = this.session.hp / stats.maxHp;
+    bar(p.x, top, 26, 3, hp, hpColor(hp));
+    bar(p.x, top + 5, 26, 2, this.session.mp / stats.maxMp, 0x38bdf8);
   }
 
   // ------------------------------------------------------------------ the Elder

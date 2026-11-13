@@ -183,6 +183,12 @@ export class ExplorationScene extends Phaser.Scene {
       if (event.type === 'node_changed' && event.node) this.summonVisions(event.node.id);
       if (event.type === 'dialogue_ended') {
         this.dismissVisions();
+        // A timed bridge starts counting once the player has finished reading, not mid-dialogue.
+        if (this.pendingTimer) {
+          const timer = this.pendingTimer;
+          this.pendingTimer = null;
+          this.startTimer(timer.flag, timer.ms);
+        }
         if (this.pendingEnding) this.startPrologueEnding(this.pendingChapter);
         else if (this.pendingWarp) {
           const warp = this.pendingWarp;
@@ -291,6 +297,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       this.soundSystem.stopBgm(true);
       // A running startTimer does not outlive the map (no bridge left hanging in a save).
+      this.pendingTimer = null;
       for (const f of this.timedFlags) this.session.setFlag(f, false);
       this.timedFlags.clear();
       this.timerText = null;
@@ -795,6 +802,8 @@ export class ExplorationScene extends Phaser.Scene {
   /** Flags held by a running startTimer; cleared when it ends or the map is left. */
   private timedFlags = new Set<string>();
   private timerText: Phaser.GameObjects.Text | null = null;
+  /** A startTimer met during a dialogue; it starts when the dialogue closes. */
+  private pendingTimer: { flag: string; ms: number } | null = null;
 
   /** startTimer: the flag holds for `ms`, with a countdown on screen, then clears. */
   private startTimer(flag: string, ms: number): void {
@@ -831,7 +840,10 @@ export class ExplorationScene extends Phaser.Scene {
   }
 
   private applyEffects(effects: DialogueEffects): void {
-    if (effects.startTimer) this.startTimer(effects.startTimer.flag, effects.startTimer.ms);
+    if (effects.startTimer) {
+      if (this.dialogueSystem.isActive()) this.pendingTimer = { ...effects.startTimer };
+      else this.startTimer(effects.startTimer.flag, effects.startTimer.ms);
+    }
     const granted = this.session.applyDialogueEffects(effects);
     this.refreshFrozen();
     this.applyTileSwaps();
