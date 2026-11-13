@@ -113,7 +113,7 @@ export function catacombsLayout() {
   const { ground, walls } = room(W, H, 63);
   // Tomb row along the north wall: three inscribed tombs in their niches.
   fill(walls, 1, 2, 16, 4, D.WALL_FACE);
-  for (const x of [4, 8, 12]) {
+  for (const x of [2, 5, 8, 11, 14]) {
     walls[4][x] = -1;
     walls[3][x] = D.STELE;
     ground[4][x] = D.ENGRAVED;
@@ -130,6 +130,7 @@ export function catacombsLayout() {
   fill(walls, 9, 13, 9, 16, D.WALL_FACE);
   walls[14][3] = D.RELIQUARY; // locksmith's toolbox
   ground[15][6] = D.ENGRAVED; // the praetor's diary page
+  walls[2][17] = D.STELE; // dedication plaque of the tomb row (the calendar clue)
   // The Founding Alcove in the north-east niche.
   fill(walls, 20, 2, 20, 5, D.WALL_FACE);
   walls[2][23] = D.ALTAR;
@@ -159,9 +160,12 @@ export function catacombsLayout() {
     exits: { to_outskirts: { x: 0, y: 8, w: 1, h: 3 }, to_plaza: { x: 27, y: 8, w: 1, h: 3 } },
     points: {
       lyra: { x: 15, y: 9 },
-      tomb_1: { x: 4, y: 3 },
-      tomb_2: { x: 8, y: 3 },
-      tomb_3: { x: 12, y: 3 },
+      tomb_1: { x: 2, y: 3 },
+      tomb_2: { x: 5, y: 3 },
+      tomb_3: { x: 8, y: 3 },
+      tomb_4: { x: 11, y: 3 },
+      tomb_5: { x: 14, y: 3 },
+      plaque: { x: 17, y: 2 },
       locksmith_box: { x: 3, y: 14 },
       diary: { x: 6, y: 15 },
       alcove: { x: 23, y: 2 },

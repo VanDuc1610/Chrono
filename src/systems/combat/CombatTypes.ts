@@ -113,7 +113,9 @@ export interface ICombatActionResult {
 
 /** How a small enemy defends itself when fought on the map. */
 export interface FieldTraits {
-  /** Blocks slashes from the front inside this arc (degrees), except while recovering. */
+  /** The sprite sheet looks left (flip when walking right). */
+  facesLeft?: boolean;
+  /** Blocks slashes from the side it faces, inside this arc (degrees), except while recovering. */
   frontShieldDeg?: number;
   /** Glows red for `glowMs` every `everyMs`; a hit while glowing hurts Peter for `pct` of it. */
   reflect?: { pct: number; everyMs: number; glowMs: number };

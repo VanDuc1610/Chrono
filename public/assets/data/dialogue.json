@@ -2439,7 +2439,7 @@
       "id": "ch2_alcove_place_blank",
       "speaker": "Peter",
       "lines": [
-        "Mình đặt chiếc phôi chìa đồng trơn vào giữa hốc đá và đưa chiếc đồng hồ của ông nội lại gần. Một quầng sáng hổ phách bùng lên bao bọc chiếc phôi chìa!",
+        "Vòng niên đại khớp vào tiết Đông Chí — ngày bóng trưa dài nhất trong năm. Một quầng sáng hổ phách bùng lên bao bọc chiếc phôi chìa!",
         "Bề mặt phôi chìa sẫm lại, phủ một lớp ten đồng cổ kính tương ứng ba trăm năm oxy hóa. Chiếc phôi đồng giờ đã tồn tại như một chứng nhân lịch sử."
       ],
       "responses": [],
@@ -2487,7 +2487,7 @@
       "id": "ch2_tomb_1",
       "speaker": "Peter",
       "lines": [
-        "Bia mộ đá thứ nhất khắc dòng chữ: 'Chiến Binh Valerius — Sinh năm 142 Đế Chế — Tuyên án và xử trảm năm 168 Đế Chế.'"
+        "Bia mộ thứ 1: 'Chiến Binh Valerius — Sinh năm 142 Đế Chế — Tuyên án và xử trảm năm 168 Đế Chế.'"
       ],
       "responses": [
         {
@@ -2504,12 +2504,12 @@
       "id": "ch2_tomb_2",
       "speaker": "Peter",
       "lines": [
-        "Bia mộ đá thứ hai khắc dòng chữ: 'Tử Tội Marcus — Sinh năm 185 Đế Chế — Tuyên án tử hình năm 179 Đế Chế.'"
+        "Bia mộ thứ 2: 'Thợ Dệt Octavia — Sinh năm thứ 3 triều Hoàng Đế Bịt Mắt — Tuyên án lưu đày năm 175 Đế Chế.'"
       ],
       "responses": [
         {
           "text": "Thử mở nắp mộ",
-          "nextDialogueId": "ch2_tomb_correct"
+          "nextDialogueId": "ch2_tomb_wrong"
         },
         {
           "text": "Lùi lại",
@@ -2521,7 +2521,7 @@
       "id": "ch2_tomb_3",
       "speaker": "Peter",
       "lines": [
-        "Bia mộ đá thứ ba khắc dòng chữ: 'Học Giả Cassian — Sinh năm 210 Đế Chế — Tuyên án lưu đày năm 215 Đế Chế.'"
+        "Bia mộ thứ 3: 'Tử Tội Marcus — Sinh năm 185 Đế Chế — Tuyên án tử hình năm thứ 20 triều Hoàng Đế Bịt Mắt.'"
       ],
       "responses": [
         {
@@ -2538,7 +2538,7 @@
       "id": "ch2_tomb_wrong",
       "speaker": "Peter",
       "lines": [
-        "Ngôi mộ này yên nghỉ đúng thứ tự nhân quả. Bên trong chỉ có tro bụi và bia đá mục nát, không có kỷ vật nào của Thẩm Phán."
+        "Nắp mộ nặng trịch không suy suyển, bụi đá rơi lả tả. Ngôi mộ này yên nghỉ đúng thứ tự nhân quả — mình đã đọc sai niên đại ở đâu đó."
       ],
       "responses": []
     },
@@ -2546,7 +2546,7 @@
       "id": "ch2_tomb_correct",
       "speaker": "Peter",
       "lines": [
-        "Ngày tuyên án đứng trước cả ngày sinh — đúng người trong nhật ký! Nắp phiến đá bật mở: dưới lớp vải liệm không có hài cốt, chỉ có một thanh kiếm liễu thép tôi sáng quắc.",
+        "Sinh năm thứ 14 triều Bịt Mắt — tức năm 183 — mà bị tuyên án năm 181! Nắp phiến đá bật mở: dưới lớp vải liệm không có hài cốt, chỉ có một thanh kiếm liễu thép tôi sáng quắc.",
         "Đây chính là Đoản Kiếm Thiết Pháp Quan mà cựu Thẩm Phán giấu lại. Cầm thanh kiếm lên thấy nhẹ tay và bén ngọt — mở túi đồ ([I]) để trang bị."
       ],
       "responses": [],
@@ -2634,19 +2634,10 @@
       "id": "ch2_praetor_desk",
       "speaker": "Peter",
       "lines": [
-        "Cạnh chỗ ngồi của Thẩm Phán có một chiếc bàn đá nứt nẻ. Trong ngăn kéo bí mật giấu một mảnh giấy da trắng tinh, nhẹ bẫng tựa lông hồng.",
-        "Tờ giấy này chưa từng bị ghi một dòng luật lệ nào — một vật phẩm tinh khiết hoàn toàn không mang sức nặng của định mệnh."
+        "Bàn đá của Thẩm Phán. Ngăn kéo bí mật đã bị lục tung, chỉ còn vệt mực son khô và một dòng chữ ông viết vội:",
+        "\"Những trang giấy chưa từng mang tên ai, ta đã gửi lại cho những người dám chống lại sổ bộ.\""
       ],
-      "responses": [],
-      "effects": {
-        "grantItems": [
-          {
-            "itemId": "blank_unwritten_parchment",
-            "quantity": 1
-          }
-        ],
-        "grantOnceFlag": "granted_blank_parchment"
-      }
+      "responses": []
     },
     "ch2_baker_start": {
       "id": "ch2_baker_start",
@@ -2749,7 +2740,7 @@
       "speaker": "Peter",
       "lines": [
         "Bức tượng Cán Cân Nhân Quả bằng đá hoa cương. Đĩa cân bên trái đặt một cuốn sách luật bằng sắt nặng trịch, kéo cán cân trĩu hẳn xuống.",
-        "Bia ký dưới chân ghi: 'Chân lý tự do không có hình hài, chỉ có tờ giấy trắng chưa viết mới có thể kéo cân về mức thăng bằng.'"
+        "Bia ký dưới chân: \"Đế Chế cân mọi thứ bằng những gì đã được viết ra. Thứ duy nhất nó không cân nổi là thứ chưa từng được viết.\""
       ],
       "responses": [
         {
@@ -2757,7 +2748,7 @@
           "nextDialogueId": "ch2_scales_heavy"
         },
         {
-          "text": "Đặt Tờ Giấy Trắng Chưa Viết lên",
+          "text": "Đặt tờ giấy trắng lên đĩa cân",
           "nextDialogueId": "ch2_scales_balanced"
         }
       ]
@@ -2848,16 +2839,26 @@
       "speaker": "Peter",
       "lines": [
         "Ngăn hồ sơ ghi danh những người từng cố sửa đổi sổ bộ: một Thẩm Phán đã bị xóa tên, Tiên Phong Lyra, và hàng trăm cái tên khác...",
-        "Họ không phải tội phạm, họ chỉ là những người muốn tự tay quyết định ngày mai của chính mình."
+        "Họ không phải tội phạm, họ chỉ là những người muốn tự tay quyết định ngày mai của chính mình.",
+        "Kẹp giữa xấp hồ sơ là một tờ giấy da trắng tinh — phe nổi dậy để dành nó cho những cái tên chưa ai dám viết. Nó nhẹ bẫng như không có gì. Mình cất vào túi."
       ],
-      "responses": []
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "blank_unwritten_parchment",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "granted_blank_parchment"
+      }
     },
     "ch2_tablet_inspect": {
       "id": "ch2_tablet_inspect",
       "speaker": "Peter",
       "lines": [
-        "Phiến Đá Bản Án đang duy trì Màn Chắn Tội Danh, trên mặt đá khắc 3 dòng chữ sắc lẹm:",
-        "(1) Tên: Peter, Kẻ Không Tên.\n(2) Tội danh: Can thiệp dòng chảy thời gian.\n(3) Nguyên nhân: Bước qua Cổng Ngưỡng không giấy phép sinh ra."
+        "Phiến Đá Bản Án duy trì Màn Chắn Tội Danh. Bốn dòng chữ khắc không theo thứ tự nào, cũng không có nhãn:",
+        "(1) Bị xóa khỏi sổ bộ vào ngày phán quyết.\n(2) Bước qua Cổng Ngưỡng không giấy phép.\n(3) Sinh ra không mang dòng ghi chép gốc.\n(4) Can thiệp dòng chảy thời gian."
       ],
       "responses": [
         {
@@ -2873,14 +2874,14 @@
     "ch2_tablet_choose_a": {
       "id": "ch2_tablet_choose_a",
       "speaker": "Peter",
-      "lines": ["Mũi Bút Khắc đặt lên mặt đá. Gọt dòng nào đây?"],
+      "lines": ["Mũi Bút Khắc đặt lên mặt đá. Chỉ gọt được một dòng mỗi lần."],
       "responses": [
         {
-          "text": "Gọt dòng 1: Tên đối tượng",
-          "nextDialogueId": "ch2_tablet_wrong_name"
+          "text": "Gọt dòng 1",
+          "nextDialogueId": "ch2_tablet_wrong_result"
         },
         {
-          "text": "Xem các dòng tiếp theo",
+          "text": "Xem các dòng khác",
           "nextDialogueId": "ch2_tablet_choose_b"
         }
       ]
@@ -2888,15 +2889,15 @@
     "ch2_tablet_choose_b": {
       "id": "ch2_tablet_choose_b",
       "speaker": "Peter",
-      "lines": ["Còn hai dòng nữa. Gọt dòng nào?"],
+      "lines": ["Còn ba dòng."],
       "responses": [
         {
-          "text": "Gọt dòng 2: Tội danh",
+          "text": "Gọt dòng 2",
           "nextDialogueId": "ch2_tablet_wrong_crime"
         },
         {
-          "text": "Gọt dòng 3: Nguyên nhân bước qua Cổng Ngưỡng",
-          "nextDialogueId": "ch2_tablet_expunged"
+          "text": "Xem các dòng khác",
+          "nextDialogueId": "ch2_tablet_choose_c"
         }
       ]
     },
@@ -2904,8 +2905,8 @@
       "id": "ch2_tablet_wrong_name",
       "speaker": "Peter",
       "lines": [
-        "Xoẹt... Mũi bút gọt bay cái tên 'Peter'. Thế nhưng phiến đá khẽ rùng mình, mặt đá liền lại như cũ trong chớp mắt!",
-        "Tên gọi không phải là nguyên nhân của tội trạng. Phiến đá không hề suy suyển!"
+        "Xoẹt... nét chữ mờ đi, rồi chỉ vài nhịp tim sau lại từ từ trồi lên khỏi mặt đá. Phiến đá vẫn đứng vững.",
+        "Dòng này chưa phải gốc rễ của bản án. Sắc Lệnh 404 nói gì về căn nguyên nhỉ..."
       ],
       "responses": [],
       "effects": {
@@ -2916,8 +2917,8 @@
       "id": "ch2_tablet_wrong_crime",
       "speaker": "Peter",
       "lines": [
-        "Xoẹt... Peter gọt mờ dòng chữ tội danh. Nhưng chỉ hai giây sau, từng nét chữ đỏ lại từ từ trồi lên khỏi mặt đá!",
-        "Chừng nào nguyên nhân bước qua Cổng Ngưỡng còn đó, tội danh sẽ tự động mọc lại trên mặt đá!"
+        "Xoẹt... nét chữ mờ đi, rồi chỉ vài nhịp tim sau lại từ từ trồi lên khỏi mặt đá. Phiến đá vẫn đứng vững.",
+        "Dòng này chưa phải gốc rễ của bản án. Sắc Lệnh 404 nói gì về căn nguyên nhỉ..."
       ],
       "responses": [],
       "effects": {
@@ -2928,8 +2929,8 @@
       "id": "ch2_tablet_expunged",
       "speaker": "Peter",
       "lines": [
-        "Xoẹt—! Peter dùng hết sức gọt bay dòng thứ ba: nguyên nhân 'Bước qua Cổng Ngưỡng không giấy phép'.",
-        "Không còn nguyên nhân, toàn bộ phiến đá nứt toác! Bản án sụp đổ thành cát bụi, và Màn Chắn Tội Danh ở cuối sảnh lập tức tan biến!"
+        "Xoẹt—! Mình gọt bay dòng thứ ba: \"Sinh ra không mang dòng ghi chép gốc\" — điều đã xảy ra trước mọi điều khác.",
+        "Không còn căn nguyên, cả phiến đá nứt toác! Bản án sụp thành cát bụi, và Màn Chắn Tội Danh ở cuối sảnh tan biến."
       ],
       "responses": [],
       "effects": {
@@ -3000,7 +3001,7 @@
       "speaker": "Peter",
       "lines": [
         "Bức tượng Cán Cân Nhân Quả bằng đá hoa cương. Đĩa cân bên trái đặt một cuốn sách luật bằng sắt nặng trịch, kéo cán cân trĩu hẳn xuống.",
-        "Bia ký dưới chân ghi: 'Chân lý tự do không có hình hài, chỉ có tờ giấy trắng chưa viết mới có thể kéo cân về mức thăng bằng.'"
+        "Bia ký dưới chân: \"Đế Chế cân mọi thứ bằng những gì đã được viết ra. Thứ duy nhất nó không cân nổi là thứ chưa từng được viết.\""
       ],
       "responses": [
         {
@@ -3041,12 +3042,6 @@
       ],
       "responses": []
     },
-    "ch2_praetor_desk_empty": {
-      "id": "ch2_praetor_desk_empty",
-      "speaker": "Peter",
-      "lines": ["Ngăn kéo bí mật dưới bàn đá giờ trống không."],
-      "responses": []
-    },
     "ch2_tablet_dust": {
       "id": "ch2_tablet_dust",
       "speaker": "Peter",
@@ -3060,6 +3055,148 @@
       "speaker": "Peter",
       "lines": [
         "Lõi Causality Seal tỏa ánh hổ phách dịu dàng. Vùng đất này đã được tự viết tiếp ngày mai của nó."
+      ],
+      "responses": []
+    },
+    "ch2_founding_stone": {
+      "id": "ch2_founding_stone",
+      "speaker": "Peter",
+      "lines": [
+        "Viên đá móng đầu tiên của Đế Chế, mặt đá mòn nhẵn. Dòng khắc cổ: \"Viên đá này chạm đất vào trưa ngày mà bóng người dài nhất trong năm.\""
+      ],
+      "responses": []
+    },
+    "ch2_alcove_dial_1": {
+      "id": "ch2_alcove_dial_1",
+      "speaker": "Peter",
+      "lines": [
+        "Mình đặt phôi chìa vào hốc. Quanh miệng hốc là một vòng niên đại khắc bốn tiết khí, phải xoay về đúng thời khắc mà phôi chìa cần \"đã từng nằm ở đây\"."
+      ],
+      "responses": [
+        {
+          "text": "Xoay về Hạ Chí",
+          "nextDialogueId": "ch2_alcove_wrong_season"
+        },
+        {
+          "text": "Xem các tiết khác",
+          "nextDialogueId": "ch2_alcove_dial_2"
+        }
+      ]
+    },
+    "ch2_alcove_dial_2": {
+      "id": "ch2_alcove_dial_2",
+      "speaker": "Peter",
+      "lines": ["Vòng niên đại kẹt kẹt xoay."],
+      "responses": [
+        {
+          "text": "Xoay về Đông Chí",
+          "nextDialogueId": "ch2_alcove_place_blank"
+        },
+        {
+          "text": "Xem các tiết khác",
+          "nextDialogueId": "ch2_alcove_dial_3"
+        }
+      ]
+    },
+    "ch2_alcove_dial_3": {
+      "id": "ch2_alcove_dial_3",
+      "speaker": "Peter",
+      "lines": ["Còn hai tiết khí."],
+      "responses": [
+        {
+          "text": "Xoay về Xuân Phân",
+          "nextDialogueId": "ch2_alcove_wrong_season"
+        },
+        {
+          "text": "Xoay về Thu Phân",
+          "nextDialogueId": "ch2_alcove_wrong_season"
+        }
+      ]
+    },
+    "ch2_alcove_wrong_season": {
+      "id": "ch2_alcove_wrong_season",
+      "speaker": "Peter",
+      "lines": [
+        "Ánh hổ phách bùng lên rồi tắt phụt. Lớp ten đồng vừa phủ lên phôi chìa tan biến — sai thời khắc, phôi chìa vẫn mới tinh. Mình lấy nó ra.",
+        "Ngày viên đá đầu tiên chạm đất... có lẽ bia móng nào đó ngoài kia còn ghi lại."
+      ],
+      "responses": []
+    },
+    "ch2_tomb_4": {
+      "id": "ch2_tomb_4",
+      "speaker": "Peter",
+      "lines": [
+        "Bia mộ thứ 4: 'Ca Nữ Aurelia — Sinh năm thứ 14 triều Hoàng Đế Bịt Mắt — Tuyên án tử hình năm 181 Đế Chế.'"
+      ],
+      "responses": [
+        {
+          "text": "Thử mở nắp mộ",
+          "nextDialogueId": "ch2_tomb_correct"
+        },
+        {
+          "text": "Lùi lại",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch2_tomb_5": {
+      "id": "ch2_tomb_5",
+      "speaker": "Peter",
+      "lines": [
+        "Bia mộ thứ 5: 'Học Giả Cassian — Sinh năm 210 Đế Chế — Tuyên án lưu đày năm 215 Đế Chế.'"
+      ],
+      "responses": [
+        {
+          "text": "Thử mở nắp mộ",
+          "nextDialogueId": "ch2_tomb_wrong"
+        },
+        {
+          "text": "Lùi lại",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch2_tomb_plaque": {
+      "id": "ch2_tomb_plaque",
+      "speaker": "Peter",
+      "lines": [
+        "Tấm bia đề tặng ở đầu dãy mộ: \"Dãy hầm mộ này khởi công vào năm thứ nhất triều Hoàng Đế Bịt Mắt — tức năm 170 Đế Chế.\""
+      ],
+      "responses": []
+    },
+    "ch2_tablet_choose_c": {
+      "id": "ch2_tablet_choose_c",
+      "speaker": "Peter",
+      "lines": ["Còn hai dòng."],
+      "responses": [
+        {
+          "text": "Gọt dòng 3",
+          "nextDialogueId": "ch2_tablet_expunged"
+        },
+        {
+          "text": "Gọt dòng 4",
+          "nextDialogueId": "ch2_tablet_wrong_name"
+        }
+      ]
+    },
+    "ch2_tablet_wrong_result": {
+      "id": "ch2_tablet_wrong_result",
+      "speaker": "Peter",
+      "lines": [
+        "Xoẹt... nét chữ mờ đi, rồi chỉ vài nhịp tim sau lại từ từ trồi lên khỏi mặt đá. Phiến đá vẫn đứng vững.",
+        "Dòng này chưa phải gốc rễ của bản án. Sắc Lệnh 404 nói gì về căn nguyên nhỉ..."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch2_tablet_wrong_result"]
+      }
+    },
+    "ch2_rebellion_records_read": {
+      "id": "ch2_rebellion_records_read",
+      "speaker": "Peter",
+      "lines": [
+        "Ngăn hồ sơ ghi danh những người từng cố sửa đổi sổ bộ: một Thẩm Phán đã bị xóa tên, Tiên Phong Lyra, và hàng trăm cái tên khác...",
+        "Họ không phải tội phạm, họ chỉ là những người muốn tự tay quyết định ngày mai của chính mình."
       ],
       "responses": []
     }

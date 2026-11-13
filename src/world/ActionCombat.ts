@@ -250,13 +250,12 @@ export class ActionCombat {
         const len = Math.hypot(dx, dy) || 1;
         const v = r.speed * out.pace;
         r.sprite.setVelocity((dx / len) * v, (dy / len) * v);
-        if (Math.abs(dx) > 2) r.sprite.setFlipX(dx < 0);
-        if (len > 2) r.facing = Math.atan2(dy, dx);
+        if (Math.abs(dx) > 2) this.faceX(r, dx);
       } else {
         r.sprite.setVelocity(0, 0);
       }
-      if (r.brain.state === 'windup') {
-        r.facing = Math.atan2(target.y - r.sprite.y, target.x - r.sprite.x);
+      if (r.brain.state === 'windup' && Math.abs(target.x - r.sprite.x) > 2) {
+        this.faceX(r, target.x - r.sprite.x);
       }
       if (r.brain.state === 'windup' && before !== 'windup') r.sprite.setTint(0xff7070);
       if (r.brain.state !== 'windup' && before === 'windup') r.sprite.clearTint();
@@ -272,6 +271,16 @@ export class ActionCombat {
       }
     }
     this.updateElder(now);
+  }
+
+  /**
+   * Turns the enemy left or right; its front (where a shield is held) follows the art's facing
+   * (`field.facesLeft` when the sheet is drawn looking left).
+   */
+  private faceX(r: Roamer, dx: number): void {
+    const left = dx < 0;
+    r.sprite.setFlipX(r.enemy.field?.facesLeft ? !left : left);
+    r.facing = left ? Math.PI : 0;
   }
 
   /** Next point toward `target` around walls (tile BFS, recomputed every 350 ms). */

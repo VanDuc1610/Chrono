@@ -157,9 +157,24 @@ export class GameSession {
   }
 
   public get maxLevel(): number {
+    const p = this.db.player.player;
+    const all = p.expThresholds.length;
+    const caps = [
+      ...(p.prologueLevelCap
+        ? [{ untilFlag: FLAGS.prologueComplete, cap: p.prologueLevelCap }]
+        : []),
+      ...(p.chapterLevelCaps ?? []),
+    ];
+    const active = caps.find((c) => !this.getFlag(c.untilFlag));
+    return active ? Math.min(active.cap, all) : all;
+  }
+
+  /** While capped, EXP banks at most one level beyond the cap (no huge jump when it lifts). */
+  private clampBankedExp(): void {
     const all = this.db.player.player.expThresholds.length;
-    const cap = this.db.player.player.prologueLevelCap;
-    return cap && !this.getFlag(FLAGS.prologueComplete) ? Math.min(cap, all) : all;
+    if (this.maxLevel >= all) return;
+    const ceiling = this.thresholdFor(this.maxLevel + 2) - 1;
+    if (this.maxLevel + 2 <= all && this.exp > ceiling) this.exp = ceiling;
   }
 
   /** Applies level-ups held back by a cap that has since been lifted (e.g. leaving the Prologue). */
@@ -189,6 +204,7 @@ export class GameSession {
     if (amount <= 0) return reached;
 
     this.exp += amount;
+    this.clampBankedExp();
     while (this.level < this.maxLevel && this.exp >= this.thresholdFor(this.level + 1)) {
       this.level++;
       reached.push(this.level);

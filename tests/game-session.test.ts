@@ -297,3 +297,20 @@ describe('GameSession, Progression & Quest Chaining', () => {
     expect(session.quests.getQuestStage('quest_prologue_silence')).toBe('started');
   });
 });
+describe('Chapter level caps', () => {
+  it('holds Chapter 1 at level 9 and Chapter 2 at 12, banking at most one level', () => {
+    const session = GameSession.newGame(createRealDatabase());
+    session.setFlag(FLAGS.prologueComplete);
+    session.addExp(100000);
+    expect(session.level).toBe(9);
+    expect(session.exp).toBe(2349); // threshold of level 11 minus 1: one level banked
+    session.setFlag('continuum_seal_restored');
+    session.applyPendingLevels();
+    expect(session.level).toBe(10);
+    session.addExp(100000);
+    expect(session.level).toBe(12);
+    session.setFlag('causality_seal_restored');
+    session.applyPendingLevels();
+    expect(session.level).toBe(13);
+  });
+});

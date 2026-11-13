@@ -2238,6 +2238,16 @@
           "radius": 44,
           "prompt": "[E] Đọc bia sắc lệnh",
           "dialogueId": "ch2_edict_stele_read"
+        },
+        {
+          "id": "poi_founding_stone",
+          "tile": {
+            "x": 8,
+            "y": 11
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia móng",
+          "dialogueId": "ch2_founding_stone"
         }
       ],
       "encounters": [],
@@ -2363,42 +2373,6 @@
       ],
       "interactables": [
         {
-          "id": "poi_tomb_1",
-          "tile": {
-            "x": 4,
-            "y": 3
-          },
-          "radius": 44,
-          "prompt": "[E] Đọc bia mộ",
-          "dialogueId": "ch2_tomb_1"
-        },
-        {
-          "id": "poi_tomb_2",
-          "tile": {
-            "x": 8,
-            "y": 3
-          },
-          "radius": 44,
-          "prompt": "[E] Đọc bia mộ",
-          "dialogueId": "ch2_tomb_2",
-          "dialogueRules": [
-            {
-              "ifFlag": "granted_praetor_rapier",
-              "dialogueId": "ch2_tomb_empty"
-            }
-          ]
-        },
-        {
-          "id": "poi_tomb_3",
-          "tile": {
-            "x": 12,
-            "y": 3
-          },
-          "radius": 44,
-          "prompt": "[E] Đọc bia mộ",
-          "dialogueId": "ch2_tomb_3"
-        },
-        {
           "id": "poi_locksmith_box",
           "tile": {
             "x": 3,
@@ -2446,7 +2420,7 @@
             },
             {
               "ifItem": "bronze_key_blank",
-              "dialogueId": "ch2_alcove_place_blank"
+              "dialogueId": "ch2_alcove_dial_1"
             }
           ]
         },
@@ -2473,6 +2447,72 @@
               "dialogueId": "ch2_gate_blank_too_new"
             }
           ]
+        },
+        {
+          "id": "poi_tomb_1",
+          "tile": {
+            "x": 2,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia mộ",
+          "dialogueId": "ch2_tomb_1"
+        },
+        {
+          "id": "poi_tomb_2",
+          "tile": {
+            "x": 5,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia mộ",
+          "dialogueId": "ch2_tomb_2"
+        },
+        {
+          "id": "poi_tomb_3",
+          "tile": {
+            "x": 8,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia mộ",
+          "dialogueId": "ch2_tomb_3"
+        },
+        {
+          "id": "poi_tomb_4",
+          "tile": {
+            "x": 11,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia mộ",
+          "dialogueId": "ch2_tomb_4",
+          "dialogueRules": [
+            {
+              "ifFlag": "granted_praetor_rapier",
+              "dialogueId": "ch2_tomb_empty"
+            }
+          ]
+        },
+        {
+          "id": "poi_tomb_5",
+          "tile": {
+            "x": 14,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia mộ",
+          "dialogueId": "ch2_tomb_5"
+        },
+        {
+          "id": "poi_tomb_plaque",
+          "tile": {
+            "x": 17,
+            "y": 2
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia đề tặng",
+          "dialogueId": "ch2_tomb_plaque"
         }
       ],
       "encounters": [],
@@ -2698,13 +2738,7 @@
           },
           "radius": 44,
           "prompt": "[E] Xem bàn đá",
-          "dialogueId": "ch2_praetor_desk",
-          "dialogueRules": [
-            {
-              "ifFlag": "granted_blank_parchment",
-              "dialogueId": "ch2_praetor_desk_empty"
-            }
-          ]
+          "dialogueId": "ch2_praetor_desk"
         },
         {
           "id": "poi_causality_scales",
@@ -2874,7 +2908,13 @@
           },
           "radius": 44,
           "prompt": "[E] Đọc hồ sơ",
-          "dialogueId": "ch2_rebellion_records"
+          "dialogueId": "ch2_rebellion_records",
+          "dialogueRules": [
+            {
+              "ifFlag": "granted_blank_parchment",
+              "dialogueId": "ch2_rebellion_records_read"
+            }
+          ]
         },
         {
           "id": "poi_verdict_tablet",

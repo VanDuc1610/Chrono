@@ -17,7 +17,9 @@
       "defense": 1,
       "speed": 1
     },
-    "expThresholds": [0, 50, 120, 220, 350, 520, 740, 900, 1080, 1280, 1500],
+    "expThresholds": [
+      0, 50, 120, 220, 350, 520, 740, 1000, 1350, 1800, 2350, 3000, 3750, 4600, 5600
+    ],
     "startingItems": [
       {
         "itemId": "chrono_shard_minor",
@@ -29,7 +31,17 @@
       }
     ],
     "combatItemId": "chrono_shard_minor",
-    "prologueLevelCap": 3
+    "prologueLevelCap": 3,
+    "chapterLevelCaps": [
+      {
+        "untilFlag": "continuum_seal_restored",
+        "cap": 9
+      },
+      {
+        "untilFlag": "causality_seal_restored",
+        "cap": 12
+      }
+    ]
   },
   "combat": {
     "attackMultiplier": 2,

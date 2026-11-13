@@ -269,7 +269,7 @@
       "stackable": false,
       "maxStack": 1,
       "pages": [
-        "Sắc Lệnh Nhân Quả 404:\nMọi bản án chỉ có hiệu lực chừng nào NGUYÊN NHÂN cấu thành vẫn còn tồn tại trong sổ bộ. Nếu nguyên nhân bị xóa bỏ, bản án lập tức tiêu tán; nếu chỉ xóa tên hoặc tội danh, chữ sẽ tự khắc lại."
+        "Sắc Lệnh Nhân Quả 404:\nMọi bản án đứng trên CĂN NGUYÊN của nó — điều đã xảy ra TRƯỚC NHẤT trong chuỗi. Gọt căn nguyên, bản án tiêu tán. Gọt bất cứ dòng nào khác, chữ sẽ tự khắc lại."
       ]
     },
     {
@@ -294,7 +294,7 @@
       "id": "blank_unwritten_parchment",
       "name": "Tờ Giấy Trắng Chưa Viết",
       "type": "puzzle",
-      "description": "Mảnh giấy da trắng muốt không một vết mực tìm thấy trong ngăn bàn thẩm phán. Trọng lượng nhẹ bẫng tựa hư không.",
+      "description": "Tờ giấy da trắng muốt phe nổi dậy cất giữ, chưa từng mang một dòng chữ nào. Nhẹ bẫng tựa hư không.",
       "value": 0,
       "stackable": false,
       "maxStack": 1

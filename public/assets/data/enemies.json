@@ -219,14 +219,14 @@
       "id": "enemy_imperial_automaton",
       "name": "Búp Bê Cơ Khí",
       "level": 8,
-      "maxHp": 70,
-      "hp": 70,
-      "attack": 16,
-      "defense": 10,
+      "maxHp": 200,
+      "hp": 200,
+      "attack": 18,
+      "defense": 14,
       "speed": 8,
       "spriteKey": "enemy_imperial_automaton",
       "skills": [],
-      "expReward": 40,
+      "expReward": 50,
       "lootTable": [
         {
           "itemId": "chrono_shard_minor",
@@ -234,21 +234,22 @@
         }
       ],
       "field": {
-        "frontShieldDeg": 140
+        "facesLeft": true,
+        "frontShieldDeg": 110
       }
     },
     {
       "id": "enemy_causality_enforcer",
       "name": "Lính Chấp Pháp",
       "level": 9,
-      "maxHp": 55,
-      "hp": 55,
-      "attack": 18,
-      "defense": 8,
+      "maxHp": 150,
+      "hp": 150,
+      "attack": 20,
+      "defense": 12,
       "speed": 12,
       "spriteKey": "enemy_causality_enforcer",
       "skills": [],
-      "expReward": 45,
+      "expReward": 55,
       "lootTable": [
         {
           "itemId": "chrono_shard_minor",
@@ -266,11 +267,11 @@
     {
       "id": "boss_imperial_verdict",
       "name": "Bản Án Đế Chế",
-      "level": 10,
-      "maxHp": 220,
-      "hp": 220,
-      "attack": 15,
-      "defense": 14,
+      "level": 12,
+      "maxHp": 280,
+      "hp": 280,
+      "attack": 16,
+      "defense": 16,
       "speed": 10,
       "spriteKey": "boss_imperial_verdict",
       "spriteScale": 1.6,

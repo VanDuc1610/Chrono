@@ -915,7 +915,7 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
 
       // 3. Scales of Truth puzzle
       const deskGrant = session.applyDialogueEffects(
-        dialogueDb.dialogues.ch2_praetor_desk.effects!,
+        dialogueDb.dialogues.ch2_rebellion_records.effects!,
       );
       expect(deskGrant.some((g) => g.itemId === 'blank_unwritten_parchment')).toBe(true);
       expect(session.inventory.hasItem('blank_unwritten_parchment', 1)).toBe(true);

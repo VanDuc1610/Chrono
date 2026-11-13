@@ -24,6 +24,11 @@ export interface PlayerDefinition {
   expThresholds: number[];
   /** Level cap while the Prologue is not complete (GDD: 3); afterwards the thresholds decide. */
   prologueLevelCap?: number;
+  /**
+   * Later chapter caps, in story order: each holds until its flag is set (e.g. the chapter's seal
+   * restored). Extra EXP waits for the next chapter (at most one level banked).
+   */
+  chapterLevelCaps?: { untilFlag: string; cap: number }[];
   startingItems: IItemStack[];
   /** Item consumed by the combat ITEM command. */
   combatItemId: string;
