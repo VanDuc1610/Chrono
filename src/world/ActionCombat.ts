@@ -20,7 +20,7 @@ import { SoundSystem } from '../systems/audio/SoundSystem';
 import type { CombatTuning, IEnemyDefinition } from '../systems/combat/CombatTypes';
 import type { Translate } from '../ui/Strings';
 import { conditionHolds, tileCenter } from './MapRegistry';
-import type { MapRoamerDefinition } from './MapTypes';
+import type { MapRoamerDefinition, MapStrikeTarget } from './MapTypes';
 
 /** What the exploration scene provides to the real-time combat layer. */
 export interface ActionHost {
@@ -56,6 +56,12 @@ interface Roamer {
   /** Phase shift of the reflect glow, so a group does not glow in sync. */
   glowOffset: number;
   glowShown: boolean;
+  /** A harmless 1-HP decoy (no rewards). */
+  clone?: boolean;
+  /** Decoys already split off. */
+  cloned?: boolean;
+  /** Next time it may leave a pool. */
+  nextPool?: number;
 }
 
 const ELDER_FLAG = 'elder_joined';
@@ -115,6 +121,96 @@ export class ActionCombat {
       scene.input.off('pointerdown', onPointer);
       shift?.off('down', onShift);
     });
+  }
+
+  // ------------------------------------------------------------------ pools
+
+  private pools: {
+    x: number;
+    y: number;
+    r: number;
+    until: number;
+    slow: number;
+    mp: number;
+    g: Phaser.GameObjects.Arc;
+  }[] = [];
+  private baseSpeed: number | null = null;
+
+  private updatePools(now: number, delta: number): void {
+    for (const r of this.roamers) {
+      const p = r.enemy.field?.pool;
+      if (!p || !r.alive || r.clone) continue;
+      if (r.nextPool === undefined) r.nextPool = now + p.everyMs / 2;
+      if (now < r.nextPool) continue;
+      r.nextPool = now + p.everyMs;
+      const g = this.scene.add
+        .circle(r.sprite.x, r.sprite.y + 6, p.radius, 0x8a3ad8, 0.32)
+        .setStrokeStyle(1, 0xc890ff, 0.6)
+        .setDepth(2);
+      this.pools.push({
+        x: r.sprite.x,
+        y: r.sprite.y + 6,
+        r: p.radius,
+        until: now + p.lifeMs,
+        slow: p.slowPct,
+        mp: p.mpPerSec,
+        g,
+      });
+    }
+    let slow = 0;
+    for (const pool of this.pools) {
+      if (now > pool.until) {
+        pool.g.destroy();
+        continue;
+      }
+      if (distance(this.player, pool) <= pool.r) {
+        slow = Math.max(slow, pool.slow);
+        this.session.mp = Math.max(0, this.session.mp - (pool.mp * delta) / 1000);
+      }
+    }
+    this.pools = this.pools.filter((pool) => now <= pool.until);
+    if (this.baseSpeed === null) this.baseSpeed = this.player.getSpeed();
+    this.player.setSpeed(this.baseSpeed * (1 - slow));
+  }
+
+  // ------------------------------------------------------------------ strike targets
+
+  private strikes: { def: MapStrikeTarget; lastHit: number }[] = [];
+  private onStrikeGroup: ((def: MapStrikeTarget) => void) | null = null;
+
+  /** Objects Peter hits with a slash (resonance pillars); `onGroup` runs when a group completes. */
+  public setStrikeTargets(defs: MapStrikeTarget[], onGroup: (def: MapStrikeTarget) => void): void {
+    this.strikes = defs.map((def) => ({ def, lastHit: -Infinity }));
+    this.onStrikeGroup = onGroup;
+  }
+
+  private strikeTargets(origin: Point, aim: number, reach: number, now: number): void {
+    for (const s of this.strikes) {
+      if (this.flag(s.def.doneFlag)) continue;
+      const pos = tileCenter(s.def.tile);
+      if (!inSlash(origin, aim, pos, reach + 18, this.tuning.slashArcDeg)) continue;
+      s.lastHit = now;
+      const ring = this.scene.add
+        .circle(pos.x, pos.y, 10, 0x9fe8ff, 0.3)
+        .setStrokeStyle(2, 0xd8f6ff, 0.9)
+        .setDepth(40);
+      this.scene.tweens.add({
+        targets: ring,
+        radius: 30,
+        alpha: 0,
+        duration: 600,
+        onComplete: () => ring.destroy(),
+      });
+      const group = this.strikes.filter((o) => o.def.group === s.def.group);
+      if (group.every((o) => now - o.lastHit <= s.def.windowMs)) {
+        for (const o of group) o.lastHit = -Infinity;
+        for (const f of s.def.setFlags ?? []) this.session.setFlag(f);
+        this.session.setFlag(s.def.doneFlag);
+        this.onStrikeGroup?.(s.def);
+      } else {
+        this.floatText(pos.x, pos.y - 20, this.t(s.def.hintKey ?? 'action.strikeHum'), '#9fe8ff');
+      }
+    }
   }
 
   // ------------------------------------------------------------------ setup
@@ -188,6 +284,29 @@ export class ActionCombat {
       facing: Math.PI / 2,
       glowOffset: Math.floor(this.rng() * 4000),
       glowShown: false,
+    });
+  }
+
+  /** A Hollow Archivist's decoy: same look and moves, 1 HP, harmless, no reward. */
+  private spawnClone(src: Roamer, k: number): void {
+    const angle = (k / 2) * Math.PI * 2 + Math.PI / 2;
+    const x = src.sprite.x + Math.cos(angle) * 28;
+    const y = src.sprite.y + Math.sin(angle) * 28;
+    const sprite = this.group.create(x, y, src.def.texture) as Phaser.Physics.Arcade.Sprite;
+    if (src.def.anim && this.scene.anims.exists(src.def.anim)) sprite.play(src.def.anim);
+    sprite.body?.setSize(18, 18);
+    sprite.setAlpha(0.88);
+    this.roamers.push({
+      ...src,
+      sprite,
+      hp: 1,
+      brain: { ...newBrain({ x, y }), state: 'chase' },
+      alive: true,
+      stunUntil: 0,
+      waypoint: null,
+      pathAt: 0,
+      clone: true,
+      cloned: true,
     });
   }
 
@@ -270,6 +389,7 @@ export class ActionCombat {
         this.hitPlayer(r);
       }
     }
+    this.updatePools(now, delta);
     this.updateElder(now);
   }
 
@@ -326,13 +446,40 @@ export class ActionCombat {
     this.player.playAction('peter_attack', facingFromAngle(aim), 380);
     this.sound.playSlash();
     this.drawSlash(origin, aim, reach);
+    this.strikeTargets(origin, aim, reach, now);
     const attack = this.session.getStats().attack;
+    let landed = false;
     for (const r of this.roamers) {
       if (!r.alive) continue;
       if (!inSlash(origin, aim, r.sprite, reach, this.tuning.slashArcDeg)) continue;
+      landed = true;
       const hit = rollHit(attack, r.enemy.defense, this.combat, this.rng);
       if (this.defended(r, hit.damage)) continue;
       this.damageRoamer(r, hit.damage, hit.critical);
+    }
+    if (!landed) this.blinkOnWhiff(origin, aim);
+  }
+
+  /** Memory Wraiths: a missed slash lets them blink behind Peter, then wind up (0.4 s to dodge). */
+  private blinkOnWhiff(origin: Point, aim: number): void {
+    for (const r of this.roamers) {
+      const b = r.enemy.field?.blinkOnWhiff;
+      if (!b || !r.alive || r.clone || distance(r.sprite, origin) > b.range) continue;
+      const puff = this.scene.add.circle(r.sprite.x, r.sprite.y, 12, 0x6a3a9a, 0.5).setDepth(40);
+      this.scene.tweens.add({
+        targets: puff,
+        alpha: 0,
+        radius: 22,
+        duration: 300,
+        onComplete: () => puff.destroy(),
+      });
+      const bx = origin.x - Math.cos(aim) * 24;
+      const by = origin.y - Math.sin(aim) * 24;
+      r.sprite.setPosition(bx, by);
+      r.sprite.setVelocity(0, 0);
+      this.faceX(r, origin.x - bx);
+      r.brain = { ...r.brain, state: 'windup', timer: 400 };
+      r.sprite.setTint(0xff7070);
     }
   }
 
@@ -365,6 +512,10 @@ export class ActionCombat {
       duration: 380,
       onComplete: () => ring.destroy(),
     });
+    for (const r of this.roamers) {
+      if (r.alive && r.clone && distance(r.sprite, this.player) <= this.tuning.skillRadius + 60)
+        this.defeatRoamer(r);
+    }
     const attack = this.session.getStats().attack;
     for (const r of this.roamers) {
       if (!r.alive || distance(r.sprite, this.player) > this.tuning.skillRadius + 10) continue;
@@ -432,6 +583,7 @@ export class ActionCombat {
 
   private hitPlayer(r: Roamer): void {
     const now = this.scene.time.now;
+    if (r.clone) return;
     if (now < this.invulnUntil || this.defeated) return;
     const { damage } = rollHit(
       r.enemy.attack,
@@ -488,6 +640,11 @@ export class ActionCombat {
     if (r.brain.state === 'idle' || r.brain.state === 'patrol' || r.brain.state === 'return') {
       r.brain = { ...r.brain, state: 'chase' };
     }
+    const split = r.enemy.field?.clonesAtHalf;
+    if (split && !r.clone && !r.cloned && r.hp > 0 && r.hp <= r.enemy.maxHp / 2) {
+      r.cloned = true;
+      for (let k = 0; k < split; k++) this.spawnClone(r, k);
+    }
     if (r.hp <= 0) this.defeatRoamer(r);
   }
 
@@ -508,6 +665,7 @@ export class ActionCombat {
       duration: 380,
       onComplete: () => r.sprite.destroy(),
     });
+    if (r.clone) return;
     const rewards = this.session.claimEnemyRewards(r.enemy, this.rng);
     this.host.notify(
       this.t('action.defeated', { name: r.enemy.name }),

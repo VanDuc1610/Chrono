@@ -134,6 +134,11 @@ export class CombatScene extends Phaser.Scene {
     });
     this.combatSystem.startBattle([this.player], [this.enemy]);
     if (template.script?.rescue) this.combatSystem.partyHpFloor = 1;
+    const mirror = template.mechanic?.mirrorGear;
+    if (mirror) {
+      this.enemy.stats.attack += Math.round(this.player.stats.attack * mirror.pct);
+      this.time.delayedCall(300, () => this.setBattleLog(mirror.message));
+    }
 
     // 3. Render Combatants
     this.createCombatants();
@@ -380,7 +385,9 @@ export class CombatScene extends Phaser.Scene {
     this.input.keyboard.on('keydown-THREE', () => this.handlePlayerAction('item'));
     this.input.keyboard.on('keydown-FOUR', () => this.handlePlayerAction('defend'));
     this.input.keyboard.on('keydown-FIVE', () => this.handlePlayerAction('escape'));
-    this.input.keyboard.on('keydown-SIX', () => this.handlePlayerAction('environment'));
+    this.input.keyboard.on('keydown-SIX', () => this.handlePlayerAction('environment', 0));
+    this.input.keyboard.on('keydown-SEVEN', () => this.handlePlayerAction('environment', 1));
+    this.input.keyboard.on('keydown-EIGHT', () => this.handlePlayerAction('environment', 2));
   }
 
   private updateStatusBars(): void {
@@ -446,10 +453,18 @@ export class CombatScene extends Phaser.Scene {
     this.commandButtons.forEach((b, i) =>
       b.setVisible(enabled && this.isCommandAvailable(this.commandTypes[i])),
     );
-    const env = enabled ? this.combatSystem.getAvailableEnvironmentAction(this.enemy.id) : null;
-    this.environmentButton
-      ?.setText(env ? this.t('combat.cmd.environment', { label: env.label }) : '')
-      .setVisible(!!env);
+    const cores = enabled ? this.combatSystem.getSongCores(this.enemy.id) : [];
+    const env =
+      enabled && cores.length === 0
+        ? this.combatSystem.getAvailableEnvironmentAction(this.enemy.id)
+        : null;
+    const envText =
+      cores.length > 0
+        ? cores.map((c, i) => `[${6 + i}] ${c.label}`).join('  ')
+        : env
+          ? this.t('combat.cmd.environment', { label: env.label })
+          : '';
+    this.environmentButton?.setText(envText).setVisible(envText !== '');
     this.turnIndicatorText.setText(this.t(enabled ? 'combat.turn.yours' : 'combat.turn.resolving'));
     if (enabled) {
       this.commandPanel.clearTint();
@@ -503,7 +518,7 @@ export class CombatScene extends Phaser.Scene {
     this.time.delayedCall(delayMs, () => this.beginTurn());
   }
 
-  public handlePlayerAction(type: PlayerCommand): void {
+  public handlePlayerAction(type: PlayerCommand, choice = 0): void {
     if (this.isProcessingTurn || this.combatSystem.isBattleOver()) return;
     if (type !== 'environment' && !this.isCommandAvailable(type)) return;
     if (this.combatSystem.getActiveCombatantId() !== this.player.id) return;
@@ -533,7 +548,11 @@ export class CombatScene extends Phaser.Scene {
 
     // ENVIRONMENT: only when the boss currently offers one (key 6 is ignored otherwise).
     if (type === 'environment') {
-      const env = this.combatSystem.getAvailableEnvironmentAction(this.enemy.id);
+      const cores = this.combatSystem.getSongCores(this.enemy.id);
+      const env =
+        cores.length > 0
+          ? cores[choice]
+          : this.combatSystem.getAvailableEnvironmentAction(this.enemy.id);
       if (!env) return;
       action.environmentId = env.id;
     }
@@ -594,6 +613,7 @@ export class CombatScene extends Phaser.Scene {
   private isCommandAvailable(type: PlayerCommand): boolean {
     const script = this.enemyTemplate.script;
     if (script?.lockedCommands?.includes(type)) return false;
+    if (this.combatSystem?.getLockedCommand(this.enemy.id) === type) return false;
     if (script?.unlockedCommands?.includes(type)) return true;
     return this.session.isCommandUnlocked(type);
   }
@@ -762,11 +782,16 @@ export class CombatScene extends Phaser.Scene {
 
   /** Sentence bosses: shows the verdict on Peter's next move, with a red flash. */
   private announceSentence(): void {
-    const line = this.combatSystem.announceSentence(this.enemy.id);
-    if (!line) return;
+    const lines = this.combatSystem.bossTurnCues(this.enemy.id);
+    const verdict = this.combatSystem.announceSentence(this.enemy.id);
+    if (verdict) lines.push(verdict);
+    if (lines.length === 0) return;
     this.time.delayedCall(700, () => {
-      this.setBattleLog(line);
+      this.setBattleLog(lines.join(' '));
       this.cameras.main.flash(200, 255, 80, 60);
+      this.setButtonsEnabled(
+        this.combatSystem.getActiveCombatantId() === this.player.id && !this.isProcessingTurn,
+      );
     });
   }
 

@@ -32,7 +32,30 @@ export interface DialogueRule {
   ifItem?: string;
   /** The rule applies only while Peter does NOT carry this item. */
   unlessItem?: string;
+  /** All of these items must be carried (e.g. three pigments). */
+  ifItems?: string[];
+  /** All of these flags must be set (e.g. three portrait pieces found). */
+  ifFlags?: string[];
   dialogueId: string;
+}
+
+/**
+ * Something on the map that Peter strikes with a slash (not E): e.g. a resonance pillar. When every
+ * target of a group has been struck within `windowMs` of each other, the group completes.
+ */
+export interface MapStrikeTarget {
+  id: string;
+  tile: TilePoint;
+  group: string;
+  /** All targets of the group must be struck within this time (ms). */
+  windowMs: number;
+  /** Ignored once this flag is set (the puzzle is solved). */
+  doneFlag: string;
+  /** Flags set and dialogue opened when the group completes. */
+  setFlags?: string[];
+  dialogueId?: string;
+  /** strings.json key floated over the target when struck alone. */
+  hintKey?: string;
 }
 
 /** Present only while `flag` is set (if given) and `unlessFlag` is not (if given). */
@@ -193,6 +216,8 @@ export interface MapDefinition {
   interactables?: MapInteractableDefinition[];
   encounters?: MapEncounterDefinition[];
   roamers?: MapRoamerDefinition[];
+  /** Objects struck with a slash (resonance pillars). */
+  strikeTargets?: MapStrikeTarget[];
   /**
    * Tiles that change with story flags, live (no reload): e.g. a mirror lighting up when aligned.
    * `index` is the 0-based tileset index; later entries win; tiles go back when the flag clears.

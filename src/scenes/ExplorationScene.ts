@@ -246,6 +246,13 @@ export class ExplorationScene extends Phaser.Scene {
       },
       this.t,
     );
+    this.action.setStrikeTargets(this.mapDef.strikeTargets ?? [], (def) => {
+      this.applyTileSwaps();
+      this.action?.syncSpawns();
+      this.session.syncQuestProgress();
+      this.questTracker.refresh();
+      if (def.dialogueId) this.time.delayedCall(500, () => this.openDialogue(def.dialogueId!));
+    });
     this.setupQuestListeners();
     this.setupKeys();
 
@@ -281,7 +288,13 @@ export class ExplorationScene extends Phaser.Scene {
         .setScrollFactor(0)
         .setDepth(79);
     }
-    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.soundSystem.stopBgm(true));
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.soundSystem.stopBgm(true);
+      // A running startTimer does not outlive the map (no bridge left hanging in a save).
+      for (const f of this.timedFlags) this.session.setFlag(f, false);
+      this.timedFlags.clear();
+      this.timerText = null;
+    });
   }
 
   public update(_time: number, delta: number): void {
@@ -779,7 +792,46 @@ export class ExplorationScene extends Phaser.Scene {
   }
 
   /** Applies data-driven effects and announces any items received. */
+  /** Flags held by a running startTimer; cleared when it ends or the map is left. */
+  private timedFlags = new Set<string>();
+  private timerText: Phaser.GameObjects.Text | null = null;
+
+  /** startTimer: the flag holds for `ms`, with a countdown on screen, then clears. */
+  private startTimer(flag: string, ms: number): void {
+    this.session.setFlag(flag);
+    this.timedFlags.add(flag);
+    const ends = this.time.now + ms;
+    this.timerText?.destroy();
+    this.timerText = this.add
+      .text(this.scale.width / 2, 54, '', {
+        fontFamily: 'monospace',
+        fontSize: '20px',
+        color: '#9fe8ff',
+        stroke: '#061018',
+        strokeThickness: 4,
+      })
+      .setOrigin(0.5)
+      .setScrollFactor(0)
+      .setDepth(200);
+    const tick = this.time.addEvent({
+      delay: 100,
+      loop: true,
+      callback: () => {
+        const left = Math.max(0, ends - this.time.now);
+        this.timerText?.setText(`${Math.ceil(left / 1000)}`);
+        if (left > 0) return;
+        tick.remove();
+        this.timerText?.destroy();
+        this.timerText = null;
+        this.timedFlags.delete(flag);
+        this.session.setFlag(flag, false);
+        this.applyTileSwaps();
+      },
+    });
+  }
+
   private applyEffects(effects: DialogueEffects): void {
+    if (effects.startTimer) this.startTimer(effects.startTimer.flag, effects.startTimer.ms);
     const granted = this.session.applyDialogueEffects(effects);
     this.refreshFrozen();
     this.applyTileSwaps();

@@ -54,6 +54,8 @@ export function pickDialogue(
     if (rule.unlessFlag && state.getFlag(rule.unlessFlag)) continue;
     if (rule.ifItem && !has(rule.ifItem)) continue;
     if (rule.unlessItem && has(rule.unlessItem)) continue;
+    if (rule.ifItems && !rule.ifItems.every(has)) continue;
+    if (rule.ifFlags && !rule.ifFlags.every((f) => state.getFlag(f))) continue;
     return rule.dialogueId;
   }
   return defaultId;

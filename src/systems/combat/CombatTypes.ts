@@ -100,6 +100,36 @@ export interface BossMechanic {
   defeatMessage?: string;
   /** Verdicts the boss announces; `cracksToBreak` defied verdicts break the shield. */
   sentences?: { cracksToBreak: number; list: BossSentence[]; breakMessage: string };
+  /** The fight starts without the shield (a boss beaten by its own rule, not by breaking it). */
+  startsUnshielded?: boolean;
+  /** At the start, the boss copies part of Peter's attack (`pct`). */
+  mirrorGear?: { pct: number; message: string };
+  /**
+   * Every `everyTurns` boss turns, one of Peter's commands is locked for `lockTurns`. Landing a hit
+   * with a command in `staggerBy` while it holds cracks the boss: the lock lifts and its next hit
+   * taken is increased by `staggerBonus`.
+   */
+  memoryLock?: {
+    everyTurns: number;
+    lockTurns: number;
+    staggerBonus: number;
+    staggerMessage: string;
+    releaseMessage: string;
+    options: { command: CombatActionType; announce: string; staggerBy: CombatActionType[] }[];
+  };
+  /**
+   * Each boss turn a verse is sung; Peter answers by striking the core it names (environment
+   * actions, keys 6-8). Right: pure damage and a crack; wrong: a scream that hurts and drains MP.
+   */
+  songs?: {
+    cracksToBreak: number;
+    breakMessage: string;
+    coreDamage: number;
+    wrongPct: number;
+    wrongMp: number;
+    wrongMessage: string;
+    list: { id: string; announce: string; coreId: string; crackMessage: string }[];
+  };
 }
 
 export interface ICombatActionResult {
@@ -119,6 +149,12 @@ export interface FieldTraits {
   frontShieldDeg?: number;
   /** Glows red for `glowMs` every `everyMs`; a hit while glowing hurts Peter for `pct` of it. */
   reflect?: { pct: number; everyMs: number; glowMs: number };
+  /** When Peter's slash hits nothing and this enemy is within `range` px, it blinks behind him. */
+  blinkOnWhiff?: { range: number };
+  /** Leaves a pool every `everyMs` that lasts `lifeMs`: inside, Peter is slowed and loses MP. */
+  pool?: { everyMs: number; lifeMs: number; radius: number; slowPct: number; mpPerSec: number };
+  /** Below half HP, splits off this many 1-HP decoys that cannot hurt (Temporal Strike clears them). */
+  clonesAtHalf?: number;
 }
 
 /**

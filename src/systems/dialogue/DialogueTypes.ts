@@ -36,6 +36,8 @@ export interface DialogueEffects {
   healFull?: boolean;
   /** Items handed over / used up (e.g. a puzzle object placed, a letter delivered). */
   takeItems?: { itemId: string; quantity: number }[];
+  /** Sets `flag` now and clears it after `ms` (e.g. a bridge that holds for 8 seconds). */
+  startTimer?: { flag: string; ms: number };
 }
 
 export interface DialogueNode {

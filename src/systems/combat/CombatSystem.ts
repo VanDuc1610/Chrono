@@ -61,6 +61,13 @@ interface BossState {
   /** Verdict in force for Peter's next action (sentence bosses). */
   sentence: BossSentence | null;
   cracks: number;
+  /** Boss turns taken (memory lock cadence). */
+  turns: number;
+  lock: { command: CombatActionType; turnsLeft: number; staggerBy: CombatActionType[] } | null;
+  /** The next hit the boss takes is increased (stagger). */
+  staggered: boolean;
+  /** Verse currently sung (songs). */
+  song: { id: string; coreId: string; crackMessage: string } | null;
 }
 
 export class CombatSystem implements ICombatSystem {
@@ -119,7 +126,12 @@ export class CombatSystem implements ICombatSystem {
           stunTurns: 0,
           sentence: null,
           cracks: 0,
+          turns: 0,
+          lock: null,
+          staggered: false,
+          song: null,
         });
+      if (e.mechanic?.startsUnshielded) this.bosses.get(e.id)!.shield = false;
     }
     this.refreshTurnQueue();
   }
@@ -241,9 +253,96 @@ export class CombatSystem implements ICombatSystem {
     return boss.sentence.announce;
   }
 
+  /**
+   * After the boss's turn: memory-lock cadence and the verse it sings. Returns battle-log lines.
+   */
+  public bossTurnCues(enemyId: string): string[] {
+    const boss = this.bosses.get(enemyId);
+    const enemy = this.getCombatant(enemyId);
+    const m = enemy?.mechanic;
+    if (!boss || !m || !enemy?.isAlive) return [];
+    const out: string[] = [];
+    boss.turns++;
+    const ml = m.memoryLock;
+    if (ml) {
+      if (boss.lock) {
+        boss.lock.turnsLeft--;
+        if (boss.lock.turnsLeft <= 0) {
+          boss.lock = null;
+          out.push(ml.releaseMessage);
+        }
+      } else if (boss.turns % ml.everyTurns === 0 && ml.options.length > 0) {
+        const o = ml.options[Math.floor(this.rng() * ml.options.length) % ml.options.length];
+        boss.lock = { command: o.command, turnsLeft: ml.lockTurns, staggerBy: o.staggerBy };
+        out.push(o.announce);
+      }
+    }
+    const sg = m.songs;
+    if (sg && boss.shield && sg.list.length > 0) {
+      const s = sg.list[Math.floor(this.rng() * sg.list.length) % sg.list.length];
+      boss.song = { id: s.id, coreId: s.coreId, crackMessage: s.crackMessage };
+      out.push(s.announce);
+    }
+    return out;
+  }
+
+  /** Command locked by the boss's memory lock, if any. */
+  public getLockedCommand(enemyId: string): CombatActionType | null {
+    return this.bosses.get(enemyId)?.lock?.command ?? null;
+  }
+
+  /** The cores Peter may strike (songs), in key order 6, 7, 8. */
+  public getSongCores(enemyId: string): BossEnvironmentAction[] {
+    const enemy = this.getCombatant(enemyId);
+    const boss = this.bosses.get(enemyId);
+    if (!enemy?.mechanic?.songs || !boss?.shield || !enemy.isAlive) return [];
+    return enemy.mechanic.actions;
+  }
+
+  /** Answers the sung verse by striking a core. */
+  private strikeCore(
+    peter: ICombatant,
+    enemy: ICombatant,
+    coreId: string,
+  ): { damage: number; message: string } {
+    const boss = this.bosses.get(enemy.id);
+    const sg = enemy.mechanic?.songs;
+    if (!boss || !sg) return { damage: 0, message: '' };
+    const song = boss.song;
+    boss.song = null;
+    if (song && song.coreId === coreId) {
+      const dealt = Math.min(sg.coreDamage, Math.max(0, enemy.stats.hp - 1));
+      enemy.stats.hp -= dealt;
+      boss.cracks++;
+      let message = song.crackMessage;
+      if (boss.cracks >= sg.cracksToBreak) {
+        boss.shield = false;
+        message += ` ${sg.breakMessage}`;
+      }
+      return { damage: dealt, message };
+    }
+    const hit = this.applyDamage(peter, Math.max(1, Math.ceil(peter.stats.maxHp * sg.wrongPct)));
+    if (peter.stats.mp !== undefined) peter.stats.mp = Math.max(0, peter.stats.mp - sg.wrongMp);
+    if (peter.stats.hp <= 0) peter.isAlive = false;
+    return { damage: 0, message: formatString({ m: sg.wrongMessage }, 'm', { damage: hit.dealt }) };
+  }
+
   /** The verdict currently in force against Peter, if any. */
   public getSentence(enemyId: string): BossSentence | null {
     return this.bosses.get(enemyId)?.sentence ?? null;
+  }
+
+  /** Memory lock: a hit landed with the right command cracks the boss's mirror. */
+  private judgeLock(type: CombatActionType, damage: number): string {
+    let text = '';
+    for (const [id, boss] of this.bosses) {
+      const ml = this.getCombatant(id)?.mechanic?.memoryLock;
+      if (!ml || !boss.lock || damage <= 0 || !boss.lock.staggerBy.includes(type)) continue;
+      boss.lock = null;
+      boss.staggered = true;
+      text += ` ${ml.staggerMessage}`;
+    }
+    return text;
   }
 
   /** Judges Peter's action against the verdicts in force; returns extra battle-log text. */
@@ -277,6 +376,10 @@ export class CombatSystem implements ICombatSystem {
   /** Applies shield reduction and the HP floor to damage dealt to `target`. */
   private applyDamage(target: ICombatant, damage: number): { dealt: number; shielded: boolean } {
     const boss = this.bosses.get(target.id);
+    if (boss?.staggered) {
+      boss.staggered = false;
+      damage = Math.ceil(damage * (1 + (target.mechanic?.memoryLock?.staggerBonus ?? 0)));
+    }
     const m = target.mechanic;
     if (boss?.shield && m) {
       const reduced = Math.max(1, Math.floor(damage * (1 - m.damageReduction)));
@@ -394,6 +497,12 @@ export class CombatSystem implements ICombatSystem {
       }
 
       case 'environment': {
+        if (target.mechanic?.songs) {
+          const r = this.strikeCore(source, target, action.environmentId ?? '');
+          damage = r.damage;
+          message = r.message;
+          break;
+        }
         const env = this.getAvailableEnvironmentAction(target.id);
         const boss = this.bosses.get(target.id);
         if (!env || !boss || env.id !== action.environmentId) {
@@ -414,7 +523,10 @@ export class CombatSystem implements ICombatSystem {
       }
     }
 
-    if (source.type === 'player') message += this.judgeSentences(source, action.type);
+    if (source.type === 'player') {
+      message += this.judgeSentences(source, action.type);
+      message += this.judgeLock(action.type, damage);
+    }
 
     if (target.stats.hp <= 0 && target.isAlive) {
       target.isAlive = false;
