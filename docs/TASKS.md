@@ -28,6 +28,8 @@ new enemy and boss mechanics. Chapter 6 is **not** the last chapter.
 - **Assignee:** Claude · **Status:** IN PROGRESS
 - **Locks:** `src/**`, `public/assets/**`, `scripts/*ch6*`, `tests/**`
 - **Plan:** CHAPTER_06_DESIGN.md with §17 review and §18 owner decisions
+- **Done so far:** engine (light beam, glyph dials with unknown labels, geared rings, Heel Shadow / Twin Star / Origin Nullifier / Archon Construct, glyph-shield songs, Genesis Purge + pin, erasing mist, hidden and multi-ring blocks), art approved and loaded (celestial tileset + 10 sprites), enemies and level cap 24, 18 map layouts, content (188 nodes, 10 quests, 24 items), all 18 maps wired; 129 unit tests pass
+- **Next:** live CDP probe of the whole chapter (maps 1-9, then 10-18), fix what it finds, then report to the owner
 
 ## Backlog (scheduled after current locks are released)
 

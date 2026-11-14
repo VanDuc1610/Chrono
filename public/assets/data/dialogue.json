@@ -9788,11 +9788,11 @@
       "effects": {
         "grantItems": [
           {
-            "itemId": "quartz_oil_drop",
+            "itemId": "quartz_oil_gallery",
             "quantity": 1
           }
         ],
-        "grantOnceFlag": "took_quartz_oil_drop"
+        "grantOnceFlag": "took_quartz_oil_gallery"
       }
     },
     "ch6_gallery_exit_locked": {
@@ -10195,7 +10195,12 @@
         "Một căn phòng nhỏ, không cửa sổ. Trên bàn có một đĩa sao bằng đồng và một mảnh giấy.",
         "Phòng riêng của Chronos?"
       ],
-      "responses": []
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch6_fb_chronos"
+        }
+      ]
     },
     "ch6_fb_chronos": {
       "id": "ch6_fb_chronos",
@@ -10367,11 +10372,11 @@
       "effects": {
         "grantItems": [
           {
-            "itemId": "quartz_oil_drop",
+            "itemId": "quartz_oil_core",
             "quantity": 1
           }
         ],
-        "grantOnceFlag": "took_quartz_oil_drop"
+        "grantOnceFlag": "took_quartz_oil_core"
       }
     },
     "ch6_core_exit_locked": {
@@ -10505,7 +10510,8 @@
       ],
       "responses": [],
       "effects": {
-        "startQuest": "quest_ch6_mute_melody"
+        "startQuest": "quest_ch6_mute_melody",
+        "setFlags": ["ch6_bell_quest"]
       }
     },
     "ch6_cracked_need": {
@@ -10525,8 +10531,16 @@
       "effects": {
         "takeItems": [
           {
-            "itemId": "quartz_oil_drop",
-            "quantity": 3
+            "itemId": "quartz_oil_gallery",
+            "quantity": 1
+          },
+          {
+            "itemId": "quartz_oil_core",
+            "quantity": 1
+          },
+          {
+            "itemId": "quartz_oil_bell",
+            "quantity": 1
           }
         ],
         "grantItems": [
@@ -10554,11 +10568,11 @@
       "effects": {
         "grantItems": [
           {
-            "itemId": "quartz_oil_drop",
+            "itemId": "quartz_oil_bell",
             "quantity": 1
           }
         ],
-        "grantOnceFlag": "took_quartz_oil_drop"
+        "grantOnceFlag": "took_quartz_oil_bell"
       }
     },
     "ch6_secret_forgotten_take": {
@@ -10923,6 +10937,21 @@
       "id": "ch6_remnant_after",
       "speaker": "Dư Ảnh Chronos",
       "lines": ["Đi đi. Thời gian của ta đã hết từ lâu."],
+      "responses": []
+    },
+    "ch6_kuro_watch": {
+      "id": "ch6_kuro_watch",
+      "speaker": "Kuro",
+      "lines": ["Đừng nhìn tao. Lo cái thứ trước mặt mày đi."],
+      "responses": []
+    },
+    "ch6_kuro_after_warden": {
+      "id": "ch6_kuro_after_warden",
+      "speaker": "Kuro",
+      "lines": [
+        "...Mày hạ được nó thật.",
+        "Tao vẫn không nhớ tên mày. Nhưng tao nhớ cái cách mày đứng chắn trước mặt tao."
+      ],
       "responses": []
     },
     "ch6_name_stone": {

@@ -1661,6 +1661,15 @@
       }
     },
     {
+      "id": "quartz_oil_drop",
+      "name": "Giọt Dầu Thạch Anh",
+      "type": "puzzle",
+      "description": "Dầu đông lại như hổ phách, dùng để đánh bóng chuông.",
+      "value": 0,
+      "stackable": true,
+      "maxStack": 10
+    },
+    {
       "id": "parchment_great_fracture",
       "name": "Cuộn Da Vụ Phân Tách",
       "type": "document",
@@ -1796,13 +1805,31 @@
       "maxStack": 1
     },
     {
-      "id": "quartz_oil_drop",
-      "name": "Giọt Dầu Thạch Anh",
+      "id": "quartz_oil_gallery",
+      "name": "Giọt Dầu Thạch Anh (Phòng Tranh)",
       "type": "puzzle",
       "description": "Dầu đông lại như hổ phách, dùng để đánh bóng chuông.",
       "value": 0,
-      "stackable": true,
-      "maxStack": 10
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "quartz_oil_core",
+      "name": "Giọt Dầu Thạch Anh (Lõi Máy)",
+      "type": "puzzle",
+      "description": "Dầu đông lại như hổ phách, dùng để đánh bóng chuông.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "quartz_oil_bell",
+      "name": "Giọt Dầu Thạch Anh (Thánh Điện)",
+      "type": "puzzle",
+      "description": "Dầu đông lại như hổ phách, dùng để đánh bóng chuông.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
     },
     {
       "id": "celestial_nectar_flask",

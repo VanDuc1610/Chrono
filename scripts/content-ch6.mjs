@@ -281,9 +281,7 @@ P('ch6_family_spared', [
 take(
   'ch6_oil_take_1',
   ['Dưới chân tượng có một giọt dầu thạch anh đông lại như hổ phách.'],
-  'quartz_oil_drop',
-  1,
-  {},
+  'quartz_oil_gallery',
 );
 P('ch6_gallery_exit_locked', ['Cửa phía đông chưa mở.']);
 
@@ -466,10 +464,14 @@ P('ch6_trapdoor_open', ['Chìa đồng xanh vừa khít. Cửa sập mở ra, c�
 P('ch6_archives_exit_locked', ['Cửa phía đông khóa. Có lẽ chìa nằm trong tay một trong ba tượng.']);
 
 // ================================================================== 9. Chronos' cell (hidden A, C11)
-P('ch6_cell_arrival', [
-  'Một căn phòng nhỏ, không cửa sổ. Trên bàn có một đĩa sao bằng đồng và một mảnh giấy.',
-  'Phòng riêng của Chronos?',
-]);
+P(
+  'ch6_cell_arrival',
+  [
+    'Một căn phòng nhỏ, không cửa sổ. Trên bàn có một đĩa sao bằng đồng và một mảnh giấy.',
+    'Phòng riêng của Chronos?',
+  ],
+  { responses: [to('…', 'ch6_fb_chronos')] },
+);
 FB('ch6_fb_chronos', 'Ký Ức Của Ngai Vàng', [
   'Một bóng người cao lớn đứng trước tấm gương lớn. Trong gương, từng thế giới đang rung lên.',
   'Có thứ gì đó từ khoảng đen ngoài rìa đang nuốt dần các thế giới.',
@@ -539,9 +541,7 @@ take(
 take(
   'ch6_oil_take_2',
   ['Trong khe bánh răng có một giọt dầu thạch anh đông cứng.'],
-  'quartz_oil_drop',
-  1,
-  {},
+  'quartz_oil_core',
 );
 P('ch6_core_exit_locked', ['Thang máy phía đông chưa có điện.']);
 
@@ -600,7 +600,7 @@ P(
     'Quả chuông thứ năm nằm dưới đất, nứt một đường dài. Mặt chuông xỉn như đá cũ.',
     'Nếu có dầu thạch anh để đánh bóng, có lẽ nó sẽ ngân lại được. Nghe nói có ba giọt rải rác trong điện.',
   ],
-  { effects: { startQuest: 'quest_ch6_mute_melody' } },
+  { effects: { startQuest: 'quest_ch6_mute_melody', setFlags: ['ch6_bell_quest'] } },
 );
 P('ch6_cracked_need', ['Cần đủ ba giọt dầu thạch anh, và phải biết giai điệu đúng của điện này.']);
 P(
@@ -611,7 +611,11 @@ P(
   ],
   {
     effects: {
-      takeItems: [{ itemId: 'quartz_oil_drop', quantity: 3 }],
+      takeItems: [
+        { itemId: 'quartz_oil_gallery', quantity: 1 },
+        { itemId: 'quartz_oil_core', quantity: 1 },
+        { itemId: 'quartz_oil_bell', quantity: 1 },
+      ],
       ...grant('echoing_origin_bell', 1, 'took_echoing_origin_bell', {
         setFlags: ['restored_chime_bell'],
         grantExp: 50,
@@ -620,7 +624,7 @@ P(
   },
 );
 P('ch6_cracked_done', ['Quả chuông nhỏ đã lành, thỉnh thoảng tự ngân khi có gió.']);
-take('ch6_oil_take_3', ['Trong hốc tường có một giọt dầu thạch anh.'], 'quartz_oil_drop', 1, {});
+take('ch6_oil_take_3', ['Trong hốc tường có một giọt dầu thạch anh.'], 'quartz_oil_bell');
 take(
   'ch6_secret_forgotten_take',
   [
@@ -799,6 +803,11 @@ N(
   { effects: { setFlags: ['ch6_remnant_spoke'] } },
 );
 N('ch6_remnant_after', 'Dư Ảnh Chronos', ['Đi đi. Thời gian của ta đã hết từ lâu.']);
+K('ch6_kuro_watch', ['Đừng nhìn tao. Lo cái thứ trước mặt mày đi.']);
+K('ch6_kuro_after_warden', [
+  '...Mày hạ được nó thật.',
+  'Tao vẫn không nhớ tên mày. Nhưng tao nhớ cái cách mày đứng chắn trước mặt tao.',
+]);
 P(
   'ch6_name_stone',
   [
@@ -1128,10 +1137,19 @@ const CH6_ITEMS = [
   ),
   keyItem('origin_seal_half', 'Nửa Ấn Origin', 'Một nửa Ấn Origin đã vỡ. Nửa kia chìm xuống vực.'),
   puzzle(
-    'quartz_oil_drop',
-    'Giọt Dầu Thạch Anh',
+    'quartz_oil_gallery',
+    'Giọt Dầu Thạch Anh (Phòng Tranh)',
     'Dầu đông lại như hổ phách, dùng để đánh bóng chuông.',
-    true,
+  ),
+  puzzle(
+    'quartz_oil_core',
+    'Giọt Dầu Thạch Anh (Lõi Máy)',
+    'Dầu đông lại như hổ phách, dùng để đánh bóng chuông.',
+  ),
+  puzzle(
+    'quartz_oil_bell',
+    'Giọt Dầu Thạch Anh (Thánh Điện)',
+    'Dầu đông lại như hổ phách, dùng để đánh bóng chuông.',
   ),
   {
     id: 'celestial_nectar_flask',

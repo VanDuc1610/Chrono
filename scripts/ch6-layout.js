@@ -625,7 +625,7 @@ export function celestialChessboard() {
   for (let r = 0; r < 4; r++)
     for (let c = 0; c < 4; c++) {
       const blank = CHESS_BLANKS.some(([br, bc]) => br === r && bc === c);
-      L.walls[CHESS_ORIGIN.y + r][CHESS_ORIGIN.x + c] = blank
+      L.ground[CHESS_ORIGIN.y + r][CHESS_ORIGIN.x + c] = blank
         ? Ce.P_EMPTY
         : PIECE[CHESS_SOLUTION[r][c]];
     }
