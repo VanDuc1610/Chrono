@@ -6267,7 +6267,10 @@
         "Không có đất, không có trời. Chỉ có những mảnh thế giới trôi lơ lửng như lá rụng trên mặt hồ xám bạc.",
         "Vết nứt Kuro để lại... mình đã rơi qua nó."
       ],
-      "responses": []
+      "responses": [],
+      "effects": {
+        "startQuest": "quest_ch5_into_the_interval"
+      }
     },
     "ch5_kuro_meet": {
       "id": "ch5_kuro_meet",
@@ -6414,7 +6417,7 @@
             "quantity": 1
           }
         ],
-        "grantOnceFlag": "took_pruned_plank"
+        "grantOnceFlag": "took_garden_plank"
       }
     },
     "ch5_gap_inspect": {
@@ -6438,7 +6441,14 @@
         "startTimer": {
           "flag": "ch5_garden_shadow_plank",
           "ms": 20000
-        }
+        },
+        "takeItems": [
+          {
+            "itemId": "pruned_plank",
+            "quantity": 1
+          }
+        ],
+        "clearFlags": ["took_garden_plank"]
       }
     },
     "ch5_garden_crossed": {

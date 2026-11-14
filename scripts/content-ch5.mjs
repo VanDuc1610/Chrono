@@ -31,10 +31,14 @@ const take = (id, lines, itemId, quantity = 1, more = {}) =>
   P(id, lines, { effects: grant(itemId, quantity, `took_${itemId}`, more) });
 
 // ================================================================== Map 1 — Interval shore
-P('ch5_arrival', [
-  'Không có đất, không có trời. Chỉ có những mảnh thế giới trôi lơ lửng như lá rụng trên mặt hồ xám bạc.',
-  'Vết nứt Kuro để lại... mình đã rơi qua nó.',
-]);
+P(
+  'ch5_arrival',
+  [
+    'Không có đất, không có trời. Chỉ có những mảnh thế giới trôi lơ lửng như lá rụng trên mặt hồ xám bạc.',
+    'Vết nứt Kuro để lại... mình đã rơi qua nó.',
+  ],
+  { effects: { startQuest: 'quest_ch5_into_the_interval' } },
+);
 K(
   'ch5_kuro_meet',
   [
@@ -100,13 +104,19 @@ take(
   ['Một tấm ván mục của nhánh bị tỉa. Cầm lên thấy nhẹ bẫng như sương.'],
   'pruned_plank',
 );
+D.ch5_plank_take_garden.effects.grantOnceFlag = 'took_garden_plank';
 P('ch5_gap_inspect', ['Khe sâu hun hút, thiếu đúng một tấm ván.']);
 P('ch5_gap_pruned_void', ['Ở nhánh này, bên kia khe chẳng còn gì cả. Chỉ có sương xám.']);
 P(
   'ch5_gap_place_shadow',
   ['Tấm ván nhánh tỉa đặt xuống khe, mờ mờ như một cái bóng. Phải qua nhanh lên!'],
   {
-    effects: { startTimer: { flag: 'ch5_garden_shadow_plank', ms: 20000 } },
+    // The plank is spent as a shadow; if it fades before Peter crosses, another lies where it was.
+    effects: {
+      startTimer: { flag: 'ch5_garden_shadow_plank', ms: 20000 },
+      takeItems: [{ itemId: 'pruned_plank', quantity: 1 }],
+      clearFlags: ['took_garden_plank'],
+    },
   },
 );
 K('ch5_garden_crossed', ['Không tệ. Cứ thế mà đi.'], {
