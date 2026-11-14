@@ -19,9 +19,21 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-Chapter 4 is playable end to end and waits for the owner's playtest. Next: Chapter 5
-"The Garden of Infinite Possibilities" from [CHAPTER_05_DESIGN.md](story/CHAPTER_05_DESIGN.md)
-(written by Claude, owner approved with §14) — the owner delegated Chapters 4-5 to Claude.
+Goal (owner, 2026-11-14): build Chapter 5 "The Garden of Infinite Possibilities" from
+[CHAPTER_05_DESIGN.md](story/CHAPTER_05_DESIGN.md) (approved with §14) and expand it with more puzzle
+variety. Chapter 4 waits for the owner's playtest.
+
+### T-65 · Chapter 5 expansion design
+
+- **Assignee:** Antigravity · **Status:** TODO
+- **Locks:** `docs/story/CHAPTER_05_EXPANSION.md` (new)
+- **Contract:** proposals only (no JSON, code or art); Claude reviews, the owner approves, Claude builds
+
+### T-66 · Chapter 5 build
+
+- **Assignee:** Claude · **Status:** IN PROGRESS
+- **Locks:** `src/**`, `public/assets/data/*.json`, `scripts/content-ch5.mjs`, `scripts/ch5-layout.js`, `tests/**`
+- **Done so far:** content (176 nodes, 10 quests, 31 items), art approved and loaded (interval + steel tilesets, 9 characters)
 
 ## Backlog (scheduled after current locks are released)
 

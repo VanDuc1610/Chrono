@@ -283,3 +283,13 @@ The following specifications have been drafted in compliance with [ASSET_POLICY.
 - `BOSS_CRIMSON_STANDARD_001` — 48 × 48 × 5 (4 = blood wall); `BOSS_LAST_WAR_001` — 64 × 64 × 5 (4 = kneeling).
 - `ENV_WARFIELD_001` — `warfield_tileset_v1` (256 × 256): tiles 0-42 are the approved wilds v2 tiles recoloured to a scorched battlefield (same indices and collision); 43-47 new ground (arrow field, duckboards, crater, ash drift, blood mud); 48-63 new props (war tent, palisade, spiked barrier, torn banner, siege wreck, sword forest, burnt chariot, burial mound, signal mirror, cover rock, treaty table, memorial altar, ritual pillar, sandbags, supply crates, Finality Seal).
 - **Validation:** all PASSED. **Status:** `APPROVED` — the owner delegated every Chapter 4 decision to Claude on 2026-11-14 and reviews the art in the playtest. Files in `generated/approved/`, deployed to `public/assets/npcs/{aldric,kaelen,soldier_bran,chronicler_elion,renard,kuro}_idle.png`, `public/assets/enemies/{ghost_sniper,endless_phalanx,banner_carrier,undying_knight,crimson_standard,the_last_war}.png`, `public/assets/tilesets/warfield_tileset.png`.
+
+### Chapter 5 characters and tilesets
+
+- **Generators:** `scripts/author-ch5-characters.js`, `scripts/author-ch5-tilesets.js` (Pipeline B, deterministic pixel rules, no image model).
+- `BOSS_OTHER_PETER_001` — The Other Peter, 48 × 48 × 5 (4 = kneeling): Peter's curly-hair identity lock kept, grey streaks (owner-approved), white Gardener armour with violet seams, giant pruning shears.
+- `BOSS_UNBORN_KING_001` — The Unborn King, 64 × 64 × 5 (4 = crowns fallen): faceless, three stacked crowns, robe of unused swaddling cloths.
+- `NPC_IVO_001`, `NPC_MIRA_001` (32 × 32 × 4); `MOB_BRANCH_PHANTOM_001`, `MOB_UNBORN_COCOON_001`, `MOB_UNBORN_HORROR_001`, `MOB_PARADOX_CRYSTAL_001`, `MOB_CHRONOS_GARDENER_001` (faces left).
+- `ENV_INTERVAL_001` — `interval_tileset_v1` (128 × 384): sunken tiles 0-31 tinted violet-silver + 32-47 (collide 32-43, walkable 44-47; collision GID 4-44).
+- `ENV_STEEL_001` — `steel_tileset_v1` (128 × 256): dungeon tiles 0-15 tinted rusted steel + 16-31 (collide 16-27, walkable 28-31; collision GID 4-28).
+- **Validation:** all PASSED. **Status:** `APPROVED` by the owner 2026-11-14 — `generated/approved/`, deployed to `public/assets/{npcs,enemies,tilesets}/`.

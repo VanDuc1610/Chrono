@@ -201,6 +201,16 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_undying_knight', 'assets/enemies/undying_knight.png', 32],
       ['boss_crimson_standard', 'assets/enemies/crimson_standard.png', 48],
       ['boss_the_last_war', 'assets/enemies/the_last_war.png', 64],
+      // Chapter 5 (owner approved 2026-11-14).
+      ['npc_ivo', 'assets/npcs/ivo_idle.png', 32],
+      ['npc_mira', 'assets/npcs/mira_idle.png', 32],
+      ['enemy_branch_phantom', 'assets/enemies/branch_phantom.png', 32],
+      ['enemy_unborn_cocoon', 'assets/enemies/unborn_cocoon.png', 32],
+      ['enemy_unborn_horror', 'assets/enemies/unborn_horror.png', 32],
+      ['enemy_paradox_crystal', 'assets/enemies/paradox_crystal.png', 32],
+      ['enemy_chronos_gardener', 'assets/enemies/chronos_gardener.png', 32],
+      ['boss_other_peter', 'assets/enemies/other_peter.png', 48],
+      ['boss_unborn_king', 'assets/enemies/unborn_king.png', 64],
     ] as const) {
       this.load.spritesheet(key, file, { frameWidth: size, frameHeight: size });
     }
@@ -307,6 +317,15 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_undying_knight_idle', 'enemy_undying_knight', 3, 5],
       ['boss_crimson_standard_idle', 'boss_crimson_standard', 3, 4],
       ['boss_the_last_war_idle', 'boss_the_last_war', 3, 4],
+      ['npc_ivo_idle', 'npc_ivo', 3, 3],
+      ['npc_mira_idle', 'npc_mira', 3, 4],
+      ['enemy_branch_phantom_idle', 'enemy_branch_phantom', 3, 3],
+      ['enemy_unborn_cocoon_idle', 'enemy_unborn_cocoon', 3, 4],
+      ['enemy_unborn_horror_idle', 'enemy_unborn_horror', 3, 6],
+      ['enemy_paradox_crystal_idle', 'enemy_paradox_crystal', 3, 5],
+      ['enemy_chronos_gardener_idle', 'enemy_chronos_gardener', 3, 4],
+      ['boss_other_peter_idle', 'boss_other_peter', 3, 4],
+      ['boss_unborn_king_idle', 'boss_unborn_king', 3, 4],
     ] as const) {
       if (!this.anims.exists(key)) {
         this.anims.create({
