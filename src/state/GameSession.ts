@@ -42,6 +42,7 @@ const CHAPTER_SEAL_FLAGS = [
   'memory_seal_restored',
   'finality_seal_restored',
   'possibility_seal_restored',
+  'origin_seal_cracked',
 ] as const;
 
 export interface MapPosition {

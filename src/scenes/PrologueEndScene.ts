@@ -9,6 +9,7 @@ const NEXT_START: Record<number, { mapId: string; spawnId: string }> = {
   2: { mapId: 'map_ch3_sepulcher_gate', spawnId: 'from_ch2' },
   3: { mapId: 'map_ch4_encampment_veridia', spawnId: 'from_ch3' },
   4: { mapId: 'map_ch5_interval_shore', spawnId: 'from_ch4' },
+  5: { mapId: 'map_ch6_celestial_stairs', spawnId: 'from_ch5' },
 };
 import { createPanel } from '../ui/Panel';
 import { getStrings } from '../ui/Strings';

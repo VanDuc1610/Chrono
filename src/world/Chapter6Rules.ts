@@ -53,9 +53,15 @@ export function traceBeam(s: BeamSetup): BeamTrace {
   const max = s.maxSteps ?? 200;
   for (let i = 0; i < max; i++) {
     pos = { x: pos.x + dir.x, y: pos.y + dir.y };
-    if (s.blocked(pos.x, pos.y)) return { path, color, end: 'wall', lit: false };
-    path.push({ ...pos });
     const key = tileKey(pos);
+    // Mirror, prism, brass and target pillars stand on wall tiles but take the beam.
+    const special =
+      s.mirrors.has(key) ||
+      s.prisms.has(key) ||
+      s.brass.has(key) ||
+      (pos.x === s.target.x && pos.y === s.target.y);
+    if (!special && s.blocked(pos.x, pos.y)) return { path, color, end: 'wall', lit: false };
+    path.push({ ...pos });
     if (pos.x === s.target.x && pos.y === s.target.y) {
       return { path, color, end: 'target', lit: color === 'blue' };
     }

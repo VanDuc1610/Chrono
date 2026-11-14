@@ -113,7 +113,7 @@ describe('Chapter 5 data', () => {
     expect(def('enemy_paradox_crystal').field?.echo?.delayMs).toBe(1000);
     expect(def('enemy_chronos_gardener').field?.lineCut?.windupMs).toBe(800);
     expect(def('boss_kuro_duel').script?.endAtEnemyPct).toBe(0.5);
-    expect(playerJson.player.expThresholds).toHaveLength(21);
+    expect(playerJson.player.expThresholds.length).toBeGreaterThanOrEqual(21);
     expect(playerJson.player.chapterLevelCaps).toContainEqual({
       untilFlag: 'possibility_seal_restored',
       cap: 21,

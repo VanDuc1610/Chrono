@@ -211,6 +211,17 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_chronos_gardener', 'assets/enemies/chronos_gardener.png', 32],
       ['boss_other_peter', 'assets/enemies/other_peter.png', 48],
       ['boss_unborn_king', 'assets/enemies/unborn_king.png', 64],
+      // Chapter 6 (owner approved 2026-11-14).
+      ['npc_chronos_remnant', 'assets/npcs/chronos_remnant_idle.png', 32],
+      ['npc_solon', 'assets/npcs/solon_idle.png', 32],
+      ['enemy_heel_shadow', 'assets/enemies/heel_shadow.png', 32],
+      ['enemy_origin_nullifier', 'assets/enemies/origin_nullifier.png', 32],
+      ['enemy_archon_construct', 'assets/enemies/archon_construct.png', 32],
+      ['enemy_twin_star', 'assets/enemies/twin_star.png', 16],
+      ['boss_broken_herald', 'assets/enemies/broken_herald.png', 48],
+      ['boss_remnant_deacon', 'assets/enemies/remnant_deacon.png', 48],
+      ['boss_echo_forgotten', 'assets/enemies/echo_forgotten.png', 48],
+      ['boss_genesis_warden', 'assets/enemies/genesis_warden.png', 64],
     ] as const) {
       this.load.spritesheet(key, file, { frameWidth: size, frameHeight: size });
     }
@@ -326,6 +337,16 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_chronos_gardener_idle', 'enemy_chronos_gardener', 3, 4],
       ['boss_other_peter_idle', 'boss_other_peter', 3, 4],
       ['boss_unborn_king_idle', 'boss_unborn_king', 3, 4],
+      ['npc_chronos_remnant_idle', 'npc_chronos_remnant', 3, 3],
+      ['npc_solon_idle', 'npc_solon', 3, 3],
+      ['enemy_heel_shadow_idle', 'enemy_heel_shadow', 3, 6],
+      ['enemy_origin_nullifier_idle', 'enemy_origin_nullifier', 3, 5],
+      ['enemy_archon_construct_idle', 'enemy_archon_construct', 3, 4],
+      ['enemy_twin_star_idle', 'enemy_twin_star', 3, 6],
+      ['boss_broken_herald_idle', 'boss_broken_herald', 3, 4],
+      ['boss_remnant_deacon_idle', 'boss_remnant_deacon', 3, 4],
+      ['boss_echo_forgotten_idle', 'boss_echo_forgotten', 3, 4],
+      ['boss_genesis_warden_idle', 'boss_genesis_warden', 3, 4],
     ] as const) {
       if (!this.anims.exists(key)) {
         this.anims.create({
