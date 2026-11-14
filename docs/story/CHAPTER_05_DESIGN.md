@@ -496,3 +496,12 @@ Possibility cho Peter **nhìn ký ức của Kuro**, không phải của mình. 
 2. **Lối thứ ba ở lựa chọn 3** chỉ mở khi người chơi lắng nghe Kuro. Bạn muốn nó là "bí mật" hay có gợi ý nhẹ trong thoại?
 3. **Trận đấu ngắn với Kuro** (nếu ngăn Kuro) — có nên để người chơi **thua cũng không sao** (cốt truyện vẫn đi tiếp) không? Claude đề xuất là có.
 4. **Câu đố trí nhớ C4** thưởng thêm khi trả lời không mở sổ — bạn thấy có quá khó với người chơi không chú ý lời thoại không? (Mở sổ vẫn trả lời được, nên không ai bị kẹt.)
+
+## 14. Quyết Định Của Owner (2026-11-14)
+
+Owner duyệt §1–§13. Trả lời các câu hỏi mở:
+
+1. Peter của nhánh Alpha có vợ và con gái: **đồng ý**. Peter chính vẫn độc thân.
+2. Lối thứ ba ở lựa chọn 3: **có gợi ý nhẹ trong thoại.** Ở hầm trẻ em, Mira hỏi Kuro: *"Chú không mang được cả thành phố thì mang tụi con thôi cũng được mà?"* Câu này không nói đó là một lựa chọn trong game.
+3. Trận ngắn với Kuro khi ngăn anh: **thua vẫn đi tiếp** (cốt truyện không đổi, chỉ khác một câu thoại).
+4. Câu đố trí nhớ có thưởng thêm khi không mở sổ: **giữ như thiết kế.**
