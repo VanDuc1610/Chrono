@@ -258,6 +258,29 @@ export interface MapDefinition {
   scales?: MapScale[];
   /** Arrow volleys falling on an area, telegraphed by shadows; cover tiles are safe. */
   volleys?: MapVolley[];
+  /** Light beams steered by mirror dials (Chapter 6). */
+  beams?: MapBeam[];
+  /** Glowing floor discs: a Heel Shadow that crosses one is undone (Chapter 6). */
+  lightTiles?: TilePoint[];
+}
+
+/**
+ * A light beam from `start` going `dir`: each mirror is a dial whose value key is 'slash' (/), 'backslash' (back slash) or
+ * 'none'; prisms tint it blue; a white beam scatters on brass. Reaching `target` blue sets
+ * `solvedFlag` and opens `solvedDialogueId` once.
+ */
+export interface MapBeam {
+  id: string;
+  start: TilePoint;
+  dir: TilePoint;
+  mirrors: { dialId: string; tile: TilePoint }[];
+  prisms?: TilePoint[];
+  brass?: TilePoint[];
+  target: TilePoint;
+  /** The beam only shines once this flag is set (e.g. the lamp is lit). */
+  requiresFlag?: string;
+  solvedFlag: string;
+  solvedDialogueId: string;
 }
 
 export interface MapDial {
@@ -266,7 +289,15 @@ export interface MapDial {
   radius?: number;
   /** Prompt shown near the dial, e.g. "[E] Xoay vòng Hướng". */
   prompt: string;
-  values: { key: string; label: string }[];
+  values: {
+    key: string;
+    label: string;
+    /** Shown instead of `label` until `knownFlag` is set (a glyph not learned yet). */
+    unknownLabel?: string;
+    knownFlag?: string;
+  }[];
+  /** Turning this dial also turns these dials by `step` (geared rings). */
+  couples?: { dialId: string; step: number }[];
   /** Only turnable once this flag is set / while the condition holds. */
   requiresFlag?: string;
   visibleWhen?: FlagCondition;

@@ -296,6 +296,12 @@ export class ExplorationScene extends Phaser.Scene {
       this.t,
     );
     this.field.registerDials(this.interactionSystem);
+    this.field.setupBeams((x, y) => {
+      const layer = this.wallLayer;
+      if (x < 0 || y < 0 || x >= layer.layer.width || y >= layer.layer.height) return true;
+      return layer.getTileAt(x, y)?.collides ?? false;
+    });
+    this.action.setLightTiles(this.mapDef.lightTiles ?? []);
     this.setupQuestListeners();
     this.setupKeys();
 

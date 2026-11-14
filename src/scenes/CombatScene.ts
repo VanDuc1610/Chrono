@@ -419,6 +419,21 @@ export class CombatScene extends Phaser.Scene {
     const inner = 22;
     const outline = this.add.circle(cx, cy, inner).setStrokeStyle(2, 0xffffff, 0.85).setDepth(50);
     const ring = this.add.circle(cx, cy, 72).setStrokeStyle(3, 0xffc04a, 1).setDepth(51);
+    if (tb.hidden) {
+      // An unseen blow: only a dark ripple on Peter, 300 ms before it lands.
+      ring.setVisible(false);
+      this.time.delayedCall(Math.max(0, tb.ringMs - 300), () => {
+        const ripple = this.add.circle(cx, cy, 6, 0x1a0f2a, 0.7).setDepth(51);
+        ripple.setStrokeStyle(2, 0x7a5aa8, 0.9);
+        this.tweens.add({
+          targets: ripple,
+          radius: inner + 6,
+          alpha: 0,
+          duration: 300,
+          onComplete: () => ripple.destroy(),
+        });
+      });
+    }
     const hint = this.add
       .text(cx, cy - 56, this.t('combat.blockHint'), {
         fontFamily: 'monospace',
@@ -633,6 +648,7 @@ export class CombatScene extends Phaser.Scene {
           : this.combatSystem.getAvailableEnvironmentAction(this.enemy.id);
       if (!env) return;
       action.environmentId = env.id;
+      if (env.setFlag) this.session.setFlag(env.setFlag);
     }
 
     this.isProcessingTurn = true;
@@ -832,6 +848,31 @@ export class CombatScene extends Phaser.Scene {
       return;
     }
 
+    // Genesis Purge: while it charges the boss does not attack; at zero it fires.
+    const purge = this.combatSystem.purgeTurn(this.enemy.id);
+    if (purge) {
+      this.setBattleLog(purge.message);
+      if (purge.fired) {
+        this.cameras.main.flash(400, 255, 240, 200);
+        this.cameras.main.shake(300, 0.012);
+        this.playPeterAnim('hurt');
+        this.updateStatusBars();
+        if (purge.damage > 0)
+          this.showFloatingNumber(
+            this.playerSprite.x,
+            this.playerSprite.y - 20,
+            `-${purge.damage}`,
+            '#ff3355',
+          );
+      } else {
+        this.enemySprite.setTint(0xfff0b0);
+        this.time.delayedCall(300, () => this.enemySprite.clearTint());
+      }
+      this.announceSentence();
+      this.endTurn(ENEMY_TO_PLAYER_DELAY_MS);
+      return;
+    }
+
     const mirror = this.enemyTemplate.mechanic?.mirror;
     const copy = mirror ? this.combatSystem.mirrorCommand() : 'attack';
     if (mirror && copy === 'defend') {
@@ -870,42 +911,48 @@ export class CombatScene extends Phaser.Scene {
     }
     const tb = this.enemyTemplate.timedBlock;
     if (tb) {
-      const second = (first: boolean): void =>
-        this.runBlockRing(tb, (blocked2, pressed2) => {
-          this.blockFeedback(blocked2, pressed2);
-          const blocks = (first ? 1 : 0) + (blocked2 ? 1 : 0);
-          const factor = blocks === 0 ? 1 : blocks === 1 ? (1 + tb.factor) / 2 : tb.factor;
-          this.performEnemyAttack(factor * heavy);
-        });
-      if (tb.double) {
-        this.runBlockRing(tb, (blocked1, pressed1) => {
-          this.blockFeedback(blocked1, pressed1);
-          this.time.delayedCall(120, () => second(blocked1));
-        });
-        return;
-      }
-      this.runBlockRing(tb, (blocked, pressed) => {
-        if (blocked) {
-          this.showFloatingNumber(
-            this.playerSprite.x,
-            this.playerSprite.y - 34,
-            this.t('combat.blocked'),
-            '#9fe8ff',
-          );
-          this.cameras.main.flash(120, 160, 230, 255);
-        } else if (pressed) {
-          this.showFloatingNumber(
-            this.playerSprite.x,
-            this.playerSprite.y - 34,
-            this.t('combat.blockMiss'),
-            '#c8c0b0',
-          );
-        }
-        this.performEnemyAttack((blocked ? tb.factor : 1) * heavy);
-      });
+      const count = tb.count ?? (tb.double ? 2 : 1);
+      let blocks = 0;
+      const ringAt = (k: number): void =>
+        this.runBlockRing(
+          { ...tb, windowMs: Math.max(60, tb.windowMs - k * (tb.shrinkMs ?? 0)) },
+          (blocked, pressed) => {
+            this.blockFeedback(blocked, pressed);
+            if (blocked) blocks++;
+            if (k + 1 < count) {
+              this.time.delayedCall(120, () => ringAt(k + 1));
+              return;
+            }
+            this.afterBlocks(blocks, count);
+            // Each block takes off its share of the reduction.
+            const factor = 1 - ((1 - tb.factor) * blocks) / count;
+            this.performEnemyAttack(factor * heavy);
+          },
+        );
+      ringAt(0);
       return;
     }
     this.performEnemyAttack(heavy);
+  }
+
+  /** After the last ring: a perfect series breaks a weapon; any block opens a charging back. */
+  private afterBlocks(blocks: number, count: number): void {
+    const tb = this.enemyTemplate.timedBlock;
+    if (blocks > 0) {
+      const opened = this.combatSystem.notePerfectBlock(this.enemy.id);
+      if (opened) this.time.delayedCall(500, () => this.setBattleLog(opened));
+    }
+    if (!tb?.allBlockedPct || blocks < count || count < 2) return;
+    const loss = Math.min(
+      this.enemy.stats.hp - 1,
+      Math.floor(this.enemy.stats.hp * tb.allBlockedPct),
+    );
+    if (loss <= 0) return;
+    this.enemy.stats.hp -= loss;
+    this.updateStatusBars();
+    this.showFloatingNumber(this.enemySprite.x, this.enemySprite.y - 20, `-${loss}`, '#ff4d79');
+    if (tb.allBlockedMessage)
+      this.time.delayedCall(300, () => this.setBattleLog(tb.allBlockedMessage ?? ''));
   }
 
   private blockFeedback(blocked: boolean, pressed: boolean): void {

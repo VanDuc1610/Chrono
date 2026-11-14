@@ -2,9 +2,10 @@ import Phaser from 'phaser';
 import type { GameSession } from '../state/GameSession';
 import type { InteractionSystem } from '../systems/interaction/InteractionSystem';
 import { SoundSystem } from '../systems/audio/SoundSystem';
-import type { MapDefinition, MapScale, MapVolley } from './MapTypes';
+import type { MapBeam, MapDefinition, MapDial, MapScale, MapVolley } from './MapTypes';
 import { conditionHolds } from './MapRegistry';
 import { dialFlags, dialIndex, readScale, type Pans } from './PuzzleRules';
+import { stepIndex, tileKey, traceBeam, type Mirror } from './Chapter6Rules';
 import type { Translate } from '../ui/Strings';
 
 export interface FieldHost {
@@ -50,7 +51,7 @@ export class Chapter4Field {
       // A dial with no value set yet shows its first value.
       if (!def.values.some((v) => flag(`${def.id}_${v.key}`))) this.setDial(def.id, def.values, 0);
       const pos = new Phaser.Math.Vector2(tileCenter(def.tile).x, tileCenter(def.tile).y);
-      const label = () => def.values[dialIndex(def.id, def.values, flag)]?.label ?? '';
+      const label = () => this.dialLabel(def);
       interaction.register({
         id: def.id,
         get interactPrompt() {
@@ -64,11 +65,86 @@ export class Chapter4Field {
         onInteract: () => {
           const next = (dialIndex(def.id, def.values, flag) + 1) % def.values.length;
           this.setDial(def.id, def.values, next);
+          for (const c of def.couples ?? []) {
+            const other = (this.map.dials ?? []).find((d) => d.id === c.dialId);
+            if (!other) continue;
+            const i = dialIndex(other.id, other.values, flag);
+            this.setDial(other.id, other.values, stepIndex(i, c.step, other.values.length));
+          }
+          this.drawBeams();
           this.sound.playSelect();
           this.float(pos.x, pos.y - 20, label(), '#ffd88a');
         },
       });
     }
+  }
+
+  /** The dial's current value; a glyph not learned yet shows its unknown label. */
+  private dialLabel(def: MapDial): string {
+    const v = def.values[dialIndex(def.id, def.values, (f) => this.session.getFlag(f))];
+    if (!v) return '';
+    if (v.knownFlag && v.unknownLabel && !this.session.getFlag(v.knownFlag)) return v.unknownLabel;
+    return v.label;
+  }
+
+  // ------------------------------------------------------------------ beams
+
+  private beamGfx: Phaser.GameObjects.Graphics | null = null;
+  private beamBlocked: ((x: number, y: number) => boolean) | null = null;
+
+  /** Light beams (Chapter 6): drawn now and after every dial turn. */
+  public setupBeams(blocked: (x: number, y: number) => boolean): void {
+    if (!this.map.beams?.length) return;
+    this.beamBlocked = blocked;
+    this.beamGfx = this.scene.add.graphics().setDepth(5).setBlendMode(Phaser.BlendModes.ADD);
+    this.drawBeams();
+  }
+
+  private drawBeams(): void {
+    const g = this.beamGfx;
+    const blocked = this.beamBlocked;
+    if (!g || !blocked) return;
+    g.clear();
+    for (const beam of this.map.beams ?? []) {
+      if (beam.requiresFlag && !this.session.getFlag(beam.requiresFlag)) continue;
+      const trace = this.trace(beam, blocked);
+      const pts = trace.path.map(tileCenter);
+      let blue = false;
+      const prisms = new Set((beam.prisms ?? []).map(tileKey));
+      for (let i = 1; i < pts.length; i++) {
+        const color = blue ? 0x58b8ff : 0xfff4c8;
+        g.lineStyle(6, color, 0.25).lineBetween(pts[i - 1].x, pts[i - 1].y, pts[i].x, pts[i].y);
+        g.lineStyle(2, color, 0.95).lineBetween(pts[i - 1].x, pts[i - 1].y, pts[i].x, pts[i].y);
+        if (prisms.has(tileKey(trace.path[i]))) blue = true;
+      }
+      const end = pts[pts.length - 1];
+      if (end) g.fillStyle(trace.lit ? 0x58b8ff : 0xffe0a0, 0.8).fillCircle(end.x, end.y, 5);
+      if (trace.lit && !this.session.getFlag(beam.solvedFlag)) {
+        this.session.setFlag(beam.solvedFlag);
+        this.sound.playSelect();
+        this.scene.time.delayedCall(500, () => this.host.openDialogue(beam.solvedDialogueId));
+      }
+    }
+  }
+
+  private trace(beam: MapBeam, blocked: (x: number, y: number) => boolean) {
+    const mirrors = new Map<string, Mirror>();
+    for (const m of beam.mirrors) {
+      const dial = (this.map.dials ?? []).find((d) => d.id === m.dialId);
+      if (!dial) continue;
+      const key = dial.values[dialIndex(dial.id, dial.values, (f) => this.session.getFlag(f))]?.key;
+      if (key === 'slash') mirrors.set(tileKey(m.tile), '/');
+      else if (key === 'backslash') mirrors.set(tileKey(m.tile), '\\');
+    }
+    return traceBeam({
+      start: beam.start,
+      dir: beam.dir,
+      mirrors,
+      prisms: new Set((beam.prisms ?? []).map(tileKey)),
+      brass: new Set((beam.brass ?? []).map(tileKey)),
+      target: beam.target,
+      blocked,
+    });
   }
 
   private setDial(id: string, values: { key: string; label: string }[], index: number): void {

@@ -77,6 +77,10 @@ interface BossState {
   wallIn: number;
   /** Finality ritual: open once the boss first rises again, pillars lit in order. */
   ritual: { open: boolean; progress: number; done: boolean };
+  /** Genesis Purge: boss turns left to charge (null = not charging), cooldown, back opened. */
+  purge: { left: number | null; cooldown: number; open: boolean };
+  /** Erasing mist: boss turns it stays cleared. */
+  mistClear: number;
 }
 
 export class CombatSystem implements ICombatSystem {
@@ -183,6 +187,8 @@ export class CombatSystem implements ICombatSystem {
           wall: null,
           wallIn: e.mechanic.bloodWall?.everyTurns ?? 0,
           ritual: { open: false, progress: 0, done: false },
+          purge: { left: null, cooldown: 0, open: false },
+          mistClear: 0,
         });
       if (e.mechanic?.startsUnshielded) this.bosses.get(e.id)!.shield = false;
     }
@@ -335,6 +341,25 @@ export class CombatSystem implements ICombatSystem {
       boss.wall = { cuts: 0 };
       out.push(bw.raiseMessage);
     }
+    const pg = m.purge;
+    if (pg) {
+      if (boss.purge.cooldown > 0) boss.purge.cooldown--;
+      else if (boss.purge.left === null && enemy.stats.hp <= enemy.stats.maxHp * pg.belowPct) {
+        boss.purge = { left: pg.chargeTurns, cooldown: 0, open: false };
+        out.push(formatString({ m: pg.chargeMessage }, 'm', { n: pg.chargeTurns }));
+      }
+    }
+    const mist = m.mist;
+    if (mist) {
+      if (boss.mistClear > 0) boss.mistClear--;
+      else {
+        const peter = this.state.combatants.find((c) => c.type === 'player');
+        if (peter?.stats.mp !== undefined) {
+          peter.stats.mp = Math.max(0, peter.stats.mp - mist.mpPerTurn);
+          out.push(mist.drainMessage);
+        }
+      }
+    }
     const sg = m.songs;
     if (sg && boss.shield && sg.list.length > 0) {
       const s = sg.list[Math.floor(this.rng() * sg.list.length) % sg.list.length];
@@ -377,7 +402,64 @@ export class CombatSystem implements ICombatSystem {
     const nc = m.nameCall;
     if (nc && !boss.shield && this.hasFlag(nc.flag) && !boss.done.has(nc.action.id))
       out.push(nc.action);
+    const pg = m.purge;
+    if (
+      pg &&
+      boss.purge.left !== null &&
+      this.hasFlag(pg.pinFlag) &&
+      (boss.purge.open || (!!pg.allyFlag && this.hasFlag(pg.allyFlag)))
+    )
+      out.push(pg.pinAction);
+    if (m.mist && boss.mistClear <= 0) out.push(m.mist.clearAction);
     return out;
+  }
+
+  /**
+   * Start of the boss's turn while it charges its Purge: counts down, and at zero fires it
+   * (`damagePct` of Peter's max HP). Null when it is not charging (it acts as usual).
+   */
+  public purgeTurn(enemyId: string): { fired: boolean; damage: number; message: string } | null {
+    const boss = this.bosses.get(enemyId);
+    const enemy = this.getCombatant(enemyId);
+    const pg = enemy?.mechanic?.purge;
+    if (!boss || !pg || boss.purge.left === null || !enemy?.isAlive) return null;
+    boss.purge.left--;
+    if (boss.purge.left > 0) {
+      return {
+        fired: false,
+        damage: 0,
+        message: formatString({ m: pg.tickMessage }, 'm', { n: boss.purge.left }),
+      };
+    }
+    boss.purge = { left: null, cooldown: pg.cooldownTurns, open: false };
+    const peter = this.state.combatants.find((c) => c.type === 'player');
+    if (!peter) return { fired: true, damage: 0, message: pg.fireMessage };
+    const hit = this.applyDamage(peter, Math.ceil(peter.stats.maxHp * pg.damagePct));
+    if (peter.stats.hp <= 0) {
+      peter.isAlive = false;
+      const living = this.state.combatants.some((c) => c.type !== 'enemy' && c.isAlive);
+      if (!living) this.state.phase = 'defeat';
+    }
+    return {
+      fired: true,
+      damage: hit.dealt,
+      message: formatString({ m: pg.fireMessage }, 'm', { damage: hit.dealt }),
+    };
+  }
+
+  /** True while the boss charges its Purge. */
+  public isCharging(enemyId: string): boolean {
+    const left = this.bosses.get(enemyId)?.purge.left;
+    return left !== null && left !== undefined;
+  }
+
+  /** Peter blocked one of the boss's blows perfectly: while it charges, its back opens. */
+  public notePerfectBlock(enemyId: string): string | null {
+    const boss = this.bosses.get(enemyId);
+    const pg = this.getCombatant(enemyId)?.mechanic?.purge;
+    if (!boss || !pg || boss.purge.left === null || boss.purge.open) return null;
+    boss.purge.open = true;
+    return pg.openMessage;
   }
 
   /** True while the boss's blood wall stands. */
@@ -444,6 +526,17 @@ export class CombatSystem implements ICombatSystem {
         message += ` ${sg.breakMessage}`;
       }
       return { damage: dealt, message };
+    }
+    if (sg.wrongHealPct) {
+      const before = enemy.stats.hp;
+      enemy.stats.hp = Math.min(
+        enemy.stats.maxHp,
+        before + Math.ceil(enemy.stats.maxHp * sg.wrongHealPct),
+      );
+      return {
+        damage: 0,
+        message: formatString({ m: sg.wrongMessage }, 'm', { heal: enemy.stats.hp - before }),
+      };
     }
     const hit = this.applyDamage(peter, Math.max(1, Math.ceil(peter.stats.maxHp * sg.wrongPct)));
     if (peter.stats.mp !== undefined) peter.stats.mp = Math.max(0, peter.stats.mp - sg.wrongMp);
@@ -648,6 +741,22 @@ export class CombatSystem implements ICombatSystem {
           damage = Math.min(target.stats.hp, Math.ceil(target.stats.maxHp * nc.damagePct));
           target.stats.hp -= damage;
           message = nc.action.message;
+          break;
+        }
+        const pg = target.mechanic?.purge;
+        const pgBoss = this.bosses.get(target.id);
+        if (pg && pgBoss && action.environmentId === pg.pinAction.id) {
+          pgBoss.purge = { left: null, cooldown: pg.cooldownTurns, open: false };
+          pgBoss.stunTurns += 1;
+          damage = Math.min(target.stats.hp, pg.pinDamage);
+          target.stats.hp -= damage;
+          message = pg.pinAction.message;
+          break;
+        }
+        const mist = target.mechanic?.mist;
+        if (mist && pgBoss && action.environmentId === mist.clearAction.id) {
+          pgBoss.mistClear = mist.clearTurns;
+          message = mist.clearAction.message;
           break;
         }
         if (target.mechanic?.bloodWall && this.bosses.get(target.id)?.wall) {

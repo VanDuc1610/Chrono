@@ -50,6 +50,8 @@ export interface BossEnvironmentAction {
   setHpPct?: number;
   /** Battle-log line when used. */
   message: string;
+  /** Story flag set when Peter uses it (read by the map afterwards). */
+  setFlag?: string;
 }
 
 /** Something that happens at the start of the player's turn in a scripted battle. */
@@ -193,8 +195,40 @@ export interface BossMechanic {
     coreDamage: number;
     wrongPct: number;
     wrongMp: number;
+    /** A wrong core feeds the boss instead: it heals this fraction of max HP ({heal}). */
+    wrongHealPct?: number;
     wrongMessage: string;
     list: { id: string; announce: string; coreId: string; crackMessage: string }[];
+  };
+  /**
+   * Genesis Purge: once the boss is at or below `belowPct`, it charges for `chargeTurns` of its
+   * turns (no attacks), then deals `damagePct` of Peter's max HP. While it charges, `pinAction`
+   * is offered if Peter knows `pinFlag` and either `allyFlag` holds (Kuro holds the boss) or he
+   * blocked one of its blows perfectly. Pulling the pin: `pinDamage`, one lost turn, charge over.
+   */
+  purge?: {
+    belowPct: number;
+    chargeTurns: number;
+    cooldownTurns: number;
+    damagePct: number;
+    pinFlag: string;
+    allyFlag?: string;
+    pinDamage: number;
+    pinAction: BossEnvironmentAction;
+    chargeMessage: string;
+    tickMessage: string;
+    fireMessage: string;
+    openMessage: string;
+  };
+  /**
+   * Erasing mist: each boss turn Peter loses `mpPerTurn` MP, unless `clearAction` (keys 6-8)
+   * lit the field within the last `clearTurns` boss turns.
+   */
+  mist?: {
+    mpPerTurn: number;
+    clearTurns: number;
+    clearAction: BossEnvironmentAction;
+    drainMessage: string;
   };
 }
 
@@ -274,6 +308,52 @@ export interface FieldTraits {
    * straight line `length` px long and `width` px wide toward where Peter stood.
    */
   lineCut?: { range: number; windupMs: number; length: number; width: number; cooldownMs: number };
+  /**
+   * Heel Shadow: walks where Peter was `delayMs` ago and strikes that spot every `strikeEveryMs`
+   * (`radius` px). Slashes pass through it; a light disc or a firing laser undoes it.
+   */
+  trail?: { delayMs: number; strikeEveryMs: number; radius: number };
+  /**
+   * Twin Star: two orbs (`texture`) circle each other `orbitPx` apart every `periodMs`. Hitting
+   * both within `windowMs` deals `pairMult` × damage; a lone hit heals it `healPct` of max HP.
+   */
+  twin?: {
+    texture: string;
+    orbitPx: number;
+    periodMs: number;
+    windowMs: number;
+    pairMult: number;
+    healPct: number;
+  };
+  /**
+   * Origin Nullifier: every `everyMs` (Peter within `radius` + 60 px) three beats of `beatMs`, then
+   * a ring grows to `radius` in `ringMs`. Dashing through the ring: +`perfectMp` MP and it is
+   * stunned `stunMs`. Caught by it: hit and slowed `slowPct` for `slowMs`.
+   */
+  rings?: {
+    everyMs: number;
+    beatMs: number;
+    ringMs: number;
+    radius: number;
+    slowPct: number;
+    slowMs: number;
+    perfectMp: number;
+    stunMs: number;
+  };
+  /**
+   * Archon Construct: every `everyMs` (Peter within `range`) a laser line through Peter blinks
+   * three times (`blinkMs` each) and fires for `fireMs`. A slash on the third blink shuts it off
+   * and heals Peter `healHp`.
+   */
+  laser?: {
+    range: number;
+    everyMs: number;
+    blinkMs: number;
+    fireMs: number;
+    length: number;
+    width: number;
+    healHp: number;
+  };
 }
 
 /**
@@ -325,6 +405,15 @@ export interface IEnemyDefinition {
     feintChance?: number;
     /** Two rings in a row (each block takes off half of the reduction). */
     double?: boolean;
+    /** Rings in a row (overrides `double`); each block takes off its share of the reduction. */
+    count?: number;
+    /** Each further ring's window is this much narrower. */
+    shrinkMs?: number;
+    /** Blocking every ring breaks its weapon: it loses this fraction of its current HP. */
+    allBlockedPct?: number;
+    allBlockedMessage?: string;
+    /** The ring cannot be seen: only a dark ripple on Peter 300 ms before it lands. */
+    hidden?: boolean;
   };
   /** Real-time behaviour on the map (small enemies). */
   field?: FieldTraits;

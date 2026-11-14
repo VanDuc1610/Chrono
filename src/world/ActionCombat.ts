@@ -23,7 +23,8 @@ import { SoundSystem } from '../systems/audio/SoundSystem';
 import type { CombatTuning, IEnemyDefinition } from '../systems/combat/CombatTypes';
 import type { Translate } from '../ui/Strings';
 import { conditionHolds, tileCenter } from './MapRegistry';
-import type { MapRoamerDefinition, MapStrikeTarget } from './MapTypes';
+import type { MapRoamerDefinition, MapStrikeTarget, TilePoint } from './MapTypes';
+import { laserStage, ringCrosses, ringState, trailPosition, twinPaired } from './Chapter6Rules';
 
 /** What the exploration scene provides to the real-time combat layer. */
 export interface ActionHost {
@@ -90,6 +91,18 @@ interface Roamer {
   /** Gardener's cut in progress. */
   cut?: { at: number; ang: number; from: Point } | null;
   nextCutAt?: number;
+  /** Heel Shadow: next strike. */
+  nextStrikeAt?: number;
+  /** Twin Star: the two orbs and when each was last hit alone. */
+  orbs?: Phaser.GameObjects.Image[];
+  orbHitAt?: [number, number];
+  /** Origin Nullifier: ring in progress (started at) and whether it already met Peter. */
+  ringAt?: number | null;
+  ringDone?: boolean;
+  nextRingAt?: number;
+  /** Archon Construct: laser in progress. */
+  laser?: { at: number; from: Point; to: Point; fired: boolean } | null;
+  nextLaserAt?: number;
 }
 
 const ELDER_FLAG = 'elder_joined';
@@ -125,6 +138,13 @@ export class ActionCombat {
   private readonly aimLines: Phaser.GameObjects.Graphics;
   /** Health bars over Peter (HP + MP) and over every enemy, redrawn each frame. */
   private readonly bars: Phaser.GameObjects.Graphics;
+  /** Where Peter walked (Heel Shadows follow it), the last 3 s. */
+  private trailLog: { t: number; x: number; y: number }[] = [];
+  /** Light discs that undo Heel Shadows. */
+  private lightKeys = new Set<string>();
+  /** Slowed by an Origin Nullifier's ring until then. */
+  private slowUntil = 0;
+  private slowPct = 0;
 
   constructor(
     private readonly scene: Phaser.Scene,
@@ -209,6 +229,7 @@ export class ActionCombat {
       }
     }
     this.pools = this.pools.filter((pool) => now <= pool.until);
+    if (now < this.slowUntil) slow = Math.max(slow, this.slowPct);
     if (this.baseSpeed === null) this.baseSpeed = this.player.getSpeed();
     this.player.setSpeed(this.baseSpeed * (1 - slow));
   }
@@ -325,6 +346,25 @@ export class ActionCombat {
       glowOffset: Math.floor(this.rng() * 4000),
       glowShown: false,
     });
+    const tw = enemy.field?.twin;
+    if (tw) {
+      const r = this.roamers[this.roamers.length - 1];
+      sprite.setAlpha(0);
+      r.orbs = [0, 1].map(() => this.scene.add.image(pos.x, pos.y, tw.texture).setDepth(9));
+      r.orbHitAt = [-Infinity, -Infinity];
+    }
+    if (enemy.field?.trail) sprite.setAlpha(0.75);
+  }
+
+  /** Glowing floor discs (Chapter 6). */
+  public setLightTiles(tiles: TilePoint[]): void {
+    this.lightKeys = new Set(tiles.map((t) => `${t.x},${t.y}`));
+    for (const t of tiles) {
+      const c = tileCenter(t);
+      const disc = this.scene.add.circle(c.x, c.y, 12, 0xfff2b0, 0.35).setDepth(1);
+      disc.setStrokeStyle(2, 0xffe48a, 0.8);
+      this.scene.tweens.add({ targets: disc, alpha: 0.6, yoyo: true, repeat: -1, duration: 900 });
+    }
   }
 
   /** A Hollow Archivist's decoy: same look and moves, 1 HP, harmless, no reward. */
@@ -402,6 +442,10 @@ export class ActionCombat {
 
     const target: Point = { x: this.player.x, y: this.player.y };
     this.aimLines.clear();
+    if (this.roamers.some((r) => r.alive && r.enemy.field?.trail)) {
+      this.trailLog.push({ t: now, x: this.player.x, y: this.player.y });
+      while (this.trailLog.length > 0 && this.trailLog[0].t < now - 3000) this.trailLog.shift();
+    }
     this.updateChants(now);
     for (const r of this.roamers) {
       if (!r.alive || now < r.stunUntil) continue;
@@ -410,6 +454,12 @@ export class ActionCombat {
         this.updateCocoon(r, now);
         continue;
       }
+      if (r.enemy.field?.trail) {
+        this.updateTrail(r, now);
+        continue;
+      }
+      if (r.enemy.field?.rings && this.updateRings(r, now)) continue;
+      if (r.enemy.field?.laser && this.updateLaser(r, now)) continue;
       if (r.enemy.field?.phase) this.updatePhase(r, now);
       if (r.enemy.field?.lineCut && this.updateLineCut(r, now)) continue;
       if (r.enemy.field?.sniper) {
@@ -469,6 +519,7 @@ export class ActionCombat {
       }
     }
     this.updatePools(now, delta);
+    this.placeOrbs(now);
     this.updateElder(now);
   }
 
@@ -532,8 +583,13 @@ export class ActionCombat {
     this.scheduleEchoes(origin, aim, reach);
     for (const r of this.roamers) {
       if (!r.alive || now < (r.shiftedUntil ?? 0)) continue;
+      if (r.enemy.field?.twin) {
+        if (this.slashTwin(r, origin, aim, reach, attack, now)) landed = true;
+        continue;
+      }
       if (!inSlash(origin, aim, r.sprite, reach, this.tuning.slashArcDeg)) continue;
       landed = true;
+      if (this.shutLaser(r, now)) continue;
       const parry = r.enemy.field?.parry;
       if (parry && inParryWindow(r.brain.state, r.brain.timer, parry.flashMs)) {
         // Parried: no damage, but the spear is knocked aside and the guard drops.
@@ -667,6 +723,10 @@ export class ActionCombat {
     const field = r.enemy.field;
     if (!field) return false;
     const now = this.scene.time.now;
+    if (field.trail) {
+      this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.shadowSlash'), '#b0a0d0');
+      return true;
+    }
     if (field.phase && !this.isSolid(r, now)) {
       this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.faded'), '#b09aff');
       const behind = Math.atan2(r.sprite.y - this.player.y, r.sprite.x - this.player.x);
@@ -823,6 +883,9 @@ export class ActionCombat {
   /** The enemy is gone for good: burst, fade, rewards, flags. */
   private finalDefeat(r: Roamer): void {
     r.pending = false;
+    for (const o of r.orbs ?? []) {
+      this.scene.tweens.add({ targets: o, alpha: 0, duration: 380, onComplete: () => o.destroy() });
+    }
     if (this.scene.anims.exists('hit_spark_burst')) {
       this.scene.add
         .sprite(r.sprite.x, r.sprite.y, 'hit_spark')
@@ -991,6 +1054,240 @@ export class ActionCombat {
     const d = Math.hypot(this.player.x - (c.from.x + vx * t), this.player.y - (c.from.y + vy * t));
     if (d <= lc.width / 2 + 6) this.hitPlayer(r, { mult: 1.3 });
     return true;
+  }
+
+  // ------------------------------------------------------------------ Chapter 6 enemies
+
+  /** Heel Shadow: stands where Peter was a moment ago and strikes there. */
+  private updateTrail(r: Roamer, now: number): void {
+    const tr = r.enemy.field?.trail;
+    if (!tr) return;
+    const pos = trailPosition(this.trailLog, now, tr.delayMs);
+    r.sprite.setVelocity(0, 0);
+    if (pos) {
+      if (Math.abs(pos.x - r.sprite.x) > 2) this.faceX(r, pos.x - r.sprite.x);
+      r.sprite.setPosition(pos.x, pos.y);
+    }
+    const tile = `${Math.floor(r.sprite.x / 32)},${Math.floor(r.sprite.y / 32)}`;
+    if (this.lightKeys.has(tile)) {
+      this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.shadowBurnt'), '#fff2b0');
+      this.defeatRoamer(r);
+      return;
+    }
+    r.nextStrikeAt ??= now + tr.strikeEveryMs;
+    if (now < r.nextStrikeAt) return;
+    r.nextStrikeAt = now + tr.strikeEveryMs;
+    const puff = this.scene.add.circle(r.sprite.x, r.sprite.y, 8, 0x2a1840, 0.6).setDepth(40);
+    this.scene.tweens.add({
+      targets: puff,
+      radius: tr.radius,
+      alpha: 0,
+      duration: 260,
+      onComplete: () => puff.destroy(),
+    });
+    if (distance(r.sprite, this.player) <= tr.radius) this.hitPlayer(r);
+  }
+
+  /** Twin Star: the two orbs circle the (hidden) body. */
+  private placeOrbs(now: number): void {
+    for (const r of this.roamers) {
+      const tw = r.enemy.field?.twin;
+      if (!tw || !r.orbs || !r.alive) continue;
+      const a = ((now + r.glowOffset) / tw.periodMs) * Math.PI * 2;
+      r.orbs.forEach((o, k) => {
+        const ang = a + k * Math.PI;
+        o.setPosition(
+          r.sprite.x + (Math.cos(ang) * tw.orbitPx) / 2,
+          r.sprite.y + (Math.sin(ang) * tw.orbitPx) / 2,
+        );
+      });
+    }
+  }
+
+  /** A slash on a Twin Star: both orbs within the window, or it heals. True when an orb was hit. */
+  private slashTwin(
+    r: Roamer,
+    origin: Point,
+    aim: number,
+    reach: number,
+    attack: number,
+    now: number,
+  ): boolean {
+    const tw = r.enemy.field?.twin;
+    const orbs = r.orbs;
+    const hitAt = r.orbHitAt;
+    if (!tw || !orbs || !hitAt) return false;
+    const hit = orbs.map((o) => inSlash(origin, aim, o, reach, this.tuning.slashArcDeg));
+    if (!hit[0] && !hit[1]) return false;
+    const pair =
+      (hit[0] && hit[1]) ||
+      (hit[0] && twinPaired(hitAt[1], now, tw.windowMs)) ||
+      (hit[1] && twinPaired(hitAt[0], now, tw.windowMs));
+    if (pair) {
+      hitAt[0] = hitAt[1] = -Infinity;
+      for (const o of orbs) {
+        o.setTintFill(0xffffff);
+        this.scene.time.delayedCall(90, () => o.active && o.clearTint());
+      }
+      const roll = rollHit(attack, r.enemy.defense, this.combat, this.rng);
+      this.damageRoamer(r, Math.floor(roll.damage * tw.pairMult), true);
+      return true;
+    }
+    const k = hit[0] ? 0 : 1;
+    const at = now;
+    hitAt[k] = at;
+    orbs[k].setTint(0xffe08a);
+    this.floatText(orbs[k].x, orbs[k].y - 14, this.t('action.twinOne'), '#ffe08a');
+    this.scene.time.delayedCall(tw.windowMs, () => {
+      if (!r.alive || hitAt[k] !== at) return;
+      hitAt[k] = -Infinity;
+      orbs[k].clearTint();
+      // The pair merges again: it heals.
+      const heal = Math.ceil(r.enemy.maxHp * tw.healPct);
+      r.hp = Math.min(r.enemy.maxHp, r.hp + heal);
+      this.floatText(r.sprite.x, r.sprite.y - 18, `+${heal}`, '#8fe8a0');
+    });
+    return true;
+  }
+
+  /** Origin Nullifier: beats, then a growing ring. True while it is busy. */
+  private updateRings(r: Roamer, now: number): boolean {
+    const rg = r.enemy.field?.rings;
+    if (!rg) return false;
+    const d = distance(r.sprite, this.player);
+    if (r.ringAt === null || r.ringAt === undefined) {
+      if (now < (r.nextRingAt ?? 0) || d > rg.radius + 60) return false;
+      r.ringAt = now;
+      r.ringDone = false;
+    }
+    r.sprite.setVelocity(0, 0);
+    const st = ringState(now, r.ringAt, rg.beatMs, rg.ringMs, rg.radius);
+    if (st.phase === 'beat') {
+      if ((now - r.ringAt) % rg.beatMs < 120) r.sprite.setTintFill(0xd8b0ff);
+      else r.sprite.clearTint();
+      this.aimLines
+        .lineStyle(1, 0xb080ff, 0.25 * st.beat)
+        .strokeCircle(r.sprite.x, r.sprite.y, rg.radius);
+      return true;
+    }
+    if (st.phase === 'ring') {
+      r.sprite.clearTint();
+      this.aimLines.lineStyle(4, 0xc890ff, 0.85).strokeCircle(r.sprite.x, r.sprite.y, st.radius);
+      if (!r.ringDone && ringCrosses(d, st.radius)) {
+        r.ringDone = true;
+        if (now - this.lastDashAt <= this.tuning.dashMs + 80) {
+          // Perfect dodge: Peter slips through the wave; the eye is stunned.
+          const maxMp = this.session.getStats().maxMp;
+          this.session.mp = Math.min(maxMp, this.session.mp + rg.perfectMp);
+          r.stunUntil = now + rg.stunMs;
+          r.sprite.setTint(0x8fb8ff);
+          this.scene.time.delayedCall(rg.stunMs, () => r.alive && r.sprite.clearTint());
+          this.floatText(
+            this.player.x,
+            this.player.y - 22,
+            this.t('action.perfectDodge'),
+            '#9fe8ff',
+          );
+          this.host.refreshHud();
+        } else if (now >= this.invulnUntil) {
+          this.hitPlayer(r);
+          this.slowUntil = now + rg.slowMs;
+          this.slowPct = rg.slowPct;
+        }
+      }
+      return true;
+    }
+    r.ringAt = null;
+    r.nextRingAt = now + rg.everyMs;
+    return false;
+  }
+
+  /** Archon Construct: a laser through Peter blinks three times, then fires. True while busy. */
+  private updateLaser(r: Roamer, now: number): boolean {
+    const lz = r.enemy.field?.laser;
+    if (!lz) return false;
+    if (!r.laser) {
+      if (now < (r.nextLaserAt ?? 0) || distance(r.sprite, this.player) > lz.range) return false;
+      const dx = this.player.x - r.sprite.x;
+      const dy = this.player.y - r.sprite.y;
+      // The line runs through Peter along the axis he is farther away on.
+      const across = Math.abs(dx) >= Math.abs(dy);
+      const from = across
+        ? { x: r.sprite.x, y: this.player.y }
+        : { x: this.player.x, y: r.sprite.y };
+      const sx = across ? Math.sign(dx) || 1 : 0;
+      const sy = across ? 0 : Math.sign(dy) || 1;
+      r.laser = {
+        at: now,
+        from,
+        to: { x: from.x + sx * lz.length, y: from.y + sy * lz.length },
+        fired: false,
+      };
+    }
+    r.sprite.setVelocity(0, 0);
+    const lsr = r.laser;
+    const st = laserStage(now, lsr.at, lz.blinkMs, lz.fireMs);
+    if (st.stage === 'blink') {
+      const third = st.n === 3;
+      if (st.lit) {
+        this.aimLines
+          .lineStyle(lz.width, third ? 0xffe066 : 0xff3a2a, third ? 0.5 : 0.3)
+          .lineBetween(lsr.from.x, lsr.from.y, lsr.to.x, lsr.to.y);
+      }
+      if (third) r.sprite.setTint(0xffe066);
+      return true;
+    }
+    if (st.stage === 'fire') {
+      r.sprite.setTint(0xff7070);
+      this.aimLines
+        .lineStyle(lz.width, 0xffffff, 0.9)
+        .lineBetween(lsr.from.x, lsr.from.y, lsr.to.x, lsr.to.y);
+      if (!lsr.fired) {
+        lsr.fired = true;
+        this.sound.playSlash();
+        if (this.segmentDistance(this.player, lsr.from, lsr.to) <= lz.width / 2 + 6) {
+          this.hitPlayer(r, { mult: 1.2 });
+        }
+        for (const o of this.roamers) {
+          if (!o.alive || !o.enemy.field?.trail) continue;
+          if (this.segmentDistance(o.sprite, lsr.from, lsr.to) > lz.width / 2 + 8) continue;
+          this.floatText(o.sprite.x, o.sprite.y - 18, this.t('action.shadowBurnt'), '#fff2b0');
+          this.defeatRoamer(o);
+        }
+      }
+      return true;
+    }
+    r.laser = null;
+    r.nextLaserAt = now + lz.everyMs;
+    r.sprite.clearTint();
+    return false;
+  }
+
+  /** A slash on an Archon Construct during the third blink shuts its laser. */
+  private shutLaser(r: Roamer, now: number): boolean {
+    const lz = r.enemy.field?.laser;
+    const lsr = r.laser;
+    if (!lz || !lsr) return false;
+    const st = laserStage(now, lsr.at, lz.blinkMs, lz.fireMs);
+    if (st.stage !== 'blink' || st.n !== 3) return false;
+    r.laser = null;
+    r.nextLaserAt = now + lz.everyMs;
+    r.sprite.setTint(0x58b8ff);
+    this.scene.time.delayedCall(400, () => r.alive && r.sprite.clearTint());
+    const max = this.session.getStats().maxHp;
+    this.session.hp = Math.min(max, this.session.hp + lz.healHp);
+    this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.laserShut'), '#58b8ff');
+    this.floatText(this.player.x, this.player.y - 20, `+${lz.healHp}`, '#8fe8a0');
+    this.host.refreshHud();
+    return true;
+  }
+
+  private segmentDistance(p: Point, a: Point, b: Point): number {
+    const vx = b.x - a.x;
+    const vy = b.y - a.y;
+    const len2 = vx * vx + vy * vy || 1;
+    const t = Math.max(0, Math.min(1, ((p.x - a.x) * vx + (p.y - a.y) * vy) / len2));
+    return Math.hypot(p.x - (a.x + vx * t), p.y - (a.y + vy * t));
   }
 
   /** True when a wall tile lies on the straight line between a and b. */
