@@ -19,14 +19,14 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-Goal (owner, 2026-11-14): build Chapter 5 "The Garden of Infinite Possibilities" from
-[CHAPTER_05_DESIGN.md](story/CHAPTER_05_DESIGN.md) (approved with §14) and expand it with more puzzle
-variety. Chapter 4 waits for the owner's playtest.
+Goal (owner, 2026-11-14): Chapter 5 is built and waits for the owner's playtest. Next, design Chapter 6
+"The Hour of the Gods" — about as long as Chapter 5, ~65% puzzles and world mysteries, ~35% combat with
+new enemy and boss mechanics. Chapter 6 is **not** the last chapter.
 
-### T-65 · Chapter 5 expansion design
+### T-67 · Chapter 6 design
 
-- **Assignee:** Antigravity · **Status:** DONE
-- **Locks:** (none)
+- **Assignee:** Antigravity · **Status:** TODO
+- **Locks:** `docs/story/CHAPTER_06_DESIGN.md` (new)
 - **Contract:** proposals only (no JSON, code or art); Claude reviews, the owner approves, Claude builds
 
 ## Backlog (scheduled after current locks are released)
