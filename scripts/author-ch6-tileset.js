@@ -296,9 +296,11 @@ const CELESTIAL_TILES = [
   }),
   piece(() => {}),
   C((t) => {
-    rect(t, 0, 10, 31, 22, 'g');
-    rect(t, 0, 12, 31, 20, 'G');
-    for (let x = 2; x < 32; x += 6) rect(t, x, 14, x + 2, 18, 'y');
+    rect(t, 2, 2, 29, 29, 'G');
+    rect(t, 4, 4, 27, 27, 'g');
+    rect(t, 8, 8, 23, 23, 'G');
+    ellipse(t, 16, 16, 4, 4, 'y');
+    put(t, 15, 15, 'w');
     return t;
   }),
   (() => {

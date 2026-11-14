@@ -290,6 +290,7 @@ export class ExplorationScene extends Phaser.Scene {
       {
         openDialogue: (id) => this.openDialogue(id),
         hurt: (damage) => this.action?.hazardHit(damage) ?? false,
+        onDialTurned: () => this.applyTileSwaps(),
         refreshHud: () => this.statusHud.refresh(),
         isPaused: () => this.isTransitioning || this.satchel.isOpen || this.dialogueBox.isOpen(),
       },

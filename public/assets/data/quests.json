@@ -1264,7 +1264,8 @@
           "completed": false,
           "completeOnFlag": "escaped_collision"
         }
-      ]
+      ],
+      "followUpQuestId": "quest_ch6_celestial_ascent"
     },
     {
       "id": "quest_ch5_uprooted_seeds",
@@ -1359,6 +1360,214 @@
           "description": "Tìm sự thật cho Kỹ sư Ivo",
           "completed": false,
           "completeOnFlag": "resolved_ivo_redemption"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch6_celestial_ascent",
+      "title": "Bậc Thang Lên Trời",
+      "kind": "main",
+      "chapter": 6,
+      "description": "Peter đặt chân lên Celestial Realm. Phải đọc được chữ của thần để đi tiếp.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch6_gate_1",
+          "description": "Mở cổng Tiền Sân",
+          "completed": false,
+          "completeOnFlag": "solved_ch6_gate_1"
+        },
+        {
+          "id": "obj_ch6_beam",
+          "description": "Làm mắt tượng Archon sáng lên",
+          "completed": false,
+          "completeOnFlag": "aligned_pillars_c02"
+        }
+      ],
+      "followUpQuestId": "quest_ch6_herald_fall"
+    },
+    {
+      "id": "quest_ch6_herald_fall",
+      "title": "Sứ Giả Cánh Gãy",
+      "kind": "main",
+      "chapter": 6,
+      "description": "Kẻ canh cửa của Chronos chắn lối. Khiên của hắn khắc bằng chữ cổ.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch6_herald",
+          "description": "Vượt qua Sứ Giả Gãy Cánh",
+          "completed": false,
+          "completeOnFlag": "defeated_broken_herald"
+        }
+      ],
+      "followUpQuestId": "quest_ch6_fractured_truth"
+    },
+    {
+      "id": "quest_ch6_fractured_truth",
+      "title": "Chân Tướng Phân Tách",
+      "kind": "main",
+      "chapter": 6,
+      "description": "Chính Điện Phân Tách giữ dấu vết của ngày Chronos tự bẻ gãy quyền năng của mình.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch6_rift",
+          "description": "Thắp Bệ Kẽ Nứt",
+          "completed": false,
+          "completeOnFlag": "solved_fracture_altars"
+        },
+        {
+          "id": "obj_ch6_eras",
+          "description": "Xếp lại bốn bích họa",
+          "completed": false,
+          "completeOnFlag": "sorted_eras_c04"
+        }
+      ],
+      "followUpQuestId": "quest_ch6_genesis_engine"
+    },
+    {
+      "id": "quest_ch6_genesis_engine",
+      "title": "Trái Tim Vũ Trụ",
+      "kind": "main",
+      "chapter": 6,
+      "description": "Lõi Máy Khởi Nguyên đã ngừng quay. Tìm đường tới đó.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch6_cascade",
+          "description": "Vượt qua thác ánh sáng",
+          "completed": false,
+          "completeOnFlag": "bridged_chasm_c05"
+        },
+        {
+          "id": "obj_ch6_tribunal",
+          "description": "Lấy chìa khóa ở Thư Khố",
+          "completed": false,
+          "completeOnFlag": "solved_archon_tribunal"
+        },
+        {
+          "id": "obj_ch6_core",
+          "description": "Khởi động Lõi Máy",
+          "completed": false,
+          "completeOnFlag": "activated_genesis_core"
+        }
+      ],
+      "followUpQuestId": "quest_ch6_the_unwritten_path"
+    },
+    {
+      "id": "quest_ch6_the_unwritten_path",
+      "title": "Con Đường Vô Danh",
+      "kind": "main",
+      "chapter": 6,
+      "description": "Đại Điện chỉ mở cho kẻ biết viết đúng chính mình.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch6_bells",
+          "description": "Đánh thức Thánh Điện Chuông Câm",
+          "completed": false,
+          "completeOnFlag": "solved_chime_bell"
+        },
+        {
+          "id": "obj_ch6_orrery",
+          "description": "Đi vào lõi Đài Thiên Cầu",
+          "completed": false,
+          "completeOnFlag": "solved_orrery"
+        },
+        {
+          "id": "obj_ch6_threshold",
+          "description": "Mở Cổng Ngưỡng",
+          "completed": false,
+          "completeOnFlag": "opened_threshold_gate"
+        }
+      ],
+      "followUpQuestId": "quest_ch6_empty_throne"
+    },
+    {
+      "id": "quest_ch6_empty_throne",
+      "title": "Ngai Vàng Trống Rỗng",
+      "kind": "main",
+      "chapter": 6,
+      "description": "Ngai của Chronos nằm cuối con đường. Có thứ gì đó vẫn canh giữ nó.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch6_deacon",
+          "description": "Vượt qua Tàn Ảnh Chấp Sự",
+          "completed": false,
+          "completeOnFlag": "defeated_remnant_deacon"
+        },
+        {
+          "id": "obj_ch6_warden",
+          "description": "Hạ Thực Thể Giám Hộ",
+          "completed": false,
+          "completeOnFlag": "defeated_genesis_warden"
+        }
+      ],
+      "followUpQuestId": "quest_ch6_abyss_awakening"
+    },
+    {
+      "id": "quest_ch6_abyss_awakening",
+      "title": "Vực Thẳm Thức Giấc",
+      "kind": "main",
+      "chapter": 6,
+      "description": "Dư ảnh Chronos nói Peter vừa mở thứ Ngài đã khóa.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch6_abyss",
+          "description": "Tới Vực Thẳm Hư Không",
+          "completed": false,
+          "completeOnFlag": "witnessed_ch6_cliffhanger"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch6_solon_atonement",
+      "title": "Sự Sám Hối Của Solon",
+      "kind": "side",
+      "chapter": 6,
+      "description": "Archon Solon từng đóng dấu lệnh trục xuất các thế giới. Ông muốn tìm lại bản sớ can ngăn đã bị xé.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch6_solon",
+          "description": "Mang bản sớ về cho Solon",
+          "completed": false,
+          "completeOnFlag": "resolved_solon_guilt"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch6_mute_melody",
+      "title": "Khúc Ca Chuông Câm",
+      "kind": "side",
+      "chapter": 6,
+      "description": "Quả chuông thứ năm của Thánh Điện bị nứt. Ba giọt dầu thạch anh có thể làm nó ngân lại.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch6_bell",
+          "description": "Đánh bóng và gõ lại quả chuông nứt",
+          "completed": false,
+          "completeOnFlag": "restored_chime_bell"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch6_lost_constellation",
+      "title": "Chòm Sao Đã Mất",
+      "kind": "side",
+      "chapter": 6,
+      "description": "Một chòm sao đã bị xóa khỏi bầu trời. Bàn cờ thiên thể có thể đặt nó trở lại.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch6_chess",
+          "description": "Giải bàn cờ thiên thể",
+          "completed": false,
+          "completeOnFlag": "aligned_celestial_chess"
         }
       ]
     }

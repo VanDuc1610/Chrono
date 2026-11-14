@@ -12,12 +12,14 @@ import { CH2_MAPS } from './ch2-layout.js';
 import { CH3_MAPS } from './ch3-layout.js';
 import { CH4_MAPS } from './ch4-layout.js';
 import { CH5_MAPS } from './ch5-layout.js';
+import { CH6_MAPS } from './ch6-layout.js';
 
-/** `node <script> ch2|ch3|ch4|ch5` builds that chapter instead of Chapter 1. */
+/** `node <script> ch2|ch3|ch4|ch5|ch6` builds that chapter instead of Chapter 1. */
 const CHAPTER = process.argv[2] ?? 'ch1';
 const MAPS =
-  { ch1: CH1_MAPS, ch2: CH2_MAPS, ch3: CH3_MAPS, ch4: CH4_MAPS, ch5: CH5_MAPS }[CHAPTER] ??
-  CH1_MAPS;
+  { ch1: CH1_MAPS, ch2: CH2_MAPS, ch3: CH3_MAPS, ch4: CH4_MAPS, ch5: CH5_MAPS, ch6: CH6_MAPS }[
+    CHAPTER
+  ] ?? CH1_MAPS;
 
 const SHEETS = {
   // v2 candidates (Chapter 1 props) until approved, then the deployed files.
@@ -33,6 +35,7 @@ const SHEETS = {
   warfield: 'public/assets/tilesets/warfield_tileset.png',
   interval: 'public/assets/tilesets/interval_tileset.png',
   steel: 'public/assets/tilesets/steel_tileset.png',
+  celestial: 'public/assets/tilesets/celestial_tileset.png',
   // Candidate until approved (ENV_SUNKEN_001).
   sunken: fs.existsSync('public/assets/tilesets/sunken_tileset.png')
     ? 'public/assets/tilesets/sunken_tileset.png'

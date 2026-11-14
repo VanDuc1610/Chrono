@@ -14,6 +14,8 @@ export interface FieldHost {
   hurt(damage: number): boolean;
   refreshHud(): void;
   isPaused(): boolean;
+  /** A dial was turned: tiles that follow dial flags (mirrors, rings, pieces) update. */
+  onDialTurned?(): void;
 }
 
 const tileCenter = (t: { x: number; y: number }) => ({ x: t.x * 32 + 16, y: t.y * 32 + 16 });
@@ -72,6 +74,7 @@ export class Chapter4Field {
             this.setDial(other.id, other.values, stepIndex(i, c.step, other.values.length));
           }
           this.drawBeams();
+          this.host.onDialTurned?.();
           this.sound.playSelect();
           this.float(pos.x, pos.y - 20, label(), '#ffd88a');
         },

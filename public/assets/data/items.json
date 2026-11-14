@@ -1659,6 +1659,271 @@
         "maxMp": 15,
         "speed": 3
       }
+    },
+    {
+      "id": "parchment_great_fracture",
+      "name": "Cuộn Da Vụ Phân Tách",
+      "type": "document",
+      "description": "Ghi chép về ngày quyền năng bị bẻ gãy.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Ngày ấy Ngài đặt hai cực ở hai đầu ranh giới. Một bên quyết điều gì được bắt đầu, một bên quyết điều gì phải kết thúc.",
+        "Nơi hai cực va vào nhau để lại một kẽ nứt. Thứ rơi ra từ kẽ nứt ấy không thuộc về quyền năng nào."
+      ]
+    },
+    {
+      "id": "celestial_mechanic_handbook",
+      "name": "Sổ Tay Kỹ Sư Trụ Trời",
+      "type": "document",
+      "description": "Sổ tay vận hành Lõi Máy Khởi Nguyên.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Ba bánh răng: nhỏ 12 răng, vừa 18 răng, lớn 36 răng. Mỗi cần có ba nấc: I, II, III (vòng mỗi nhịp).",
+        "Máy chỉ chạy êm khi trong một nhịp, cả ba bánh quét qua cùng một số răng.",
+        "Ghi chú cuối: chốt điều áp nằm trên lưng người canh giữ. Rút nó ra lúc hắn tụ lực, năng lượng sẽ dội ngược."
+      ]
+    },
+    {
+      "id": "chronos_private_scrap",
+      "name": "Mảnh Giấy Riêng Của Chronos",
+      "type": "document",
+      "description": "Nét chữ run, viết vội.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Đêm trước ngày ta tự bẻ mình, ta xoay đĩa sao để Sao Bắc Cực nằm đối diện chòm Bọ Cạp. Ở đó ta cất thứ cuối cùng còn là của ta."
+      ]
+    },
+    {
+      "id": "solon_torn_plea",
+      "name": "Bản Sớ Xé Rách Của Solon",
+      "type": "document",
+      "description": "Tờ sớ bị xé đôi, góc có vết son đỏ.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": ["Đừng tỉa những thế giới đang khóc. Hãy dạy chúng cách tự lành. — Archon Solon"]
+    },
+    {
+      "id": "world_secret_fracture",
+      "name": "Bí Mật I: Bích Họa Phân Tách",
+      "type": "document",
+      "description": "Tấm bích họa nhỏ trong rương của Chronos.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Chronos dùng chính thanh kiếm của mình chém đôi khối ngọc quyền năng. Từ vết nứt, một tia sáng màu thiên thanh rơi xuống trần gian."
+      ]
+    },
+    {
+      "id": "world_secret_first_pruner",
+      "name": "Bí Mật II: Nhật Ký Kẻ Tỉa Cành Đầu Tiên",
+      "type": "document",
+      "description": "Cuốn nhật ký giấu sau một viên gạch.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Ngài không muốn tỉa. Ngài bảo đó là cách ly. Những nhánh bị thứ trong khoảng đen chạm vào phải bị cắt trước khi nó lan sang nhánh khác.",
+        "Nhưng ta đã tỉa cả những nhánh chưa bị chạm. Vì sợ. Ta xin lỗi."
+      ]
+    },
+    {
+      "id": "world_secret_null_hour",
+      "name": "Bí Mật III: Bản Đồ Giờ Thứ 25",
+      "type": "document",
+      "description": "Bản đồ sao khắc trên kim loại.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Các dòng thời gian được vẽ như những đường cong hội tụ về một điểm, ngày càng nhanh. Điểm đó ghi: \"Giờ Thứ 25\"."
+      ]
+    },
+    {
+      "id": "world_secret_first_forgotten",
+      "name": "Bí Mật IV: Người Từng Ngồi Cạnh Ngai",
+      "type": "document",
+      "description": "Chép lại từ một tấm bia tưởng niệm không tên.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Người từng ngồi cạnh ngai. Người là ánh sáng đầu tiên, có trước cả các bánh răng.",
+        "Rồi tên người bị chính trời xóa đi. Không ai còn được gọi tên ấy nữa."
+      ]
+    },
+    {
+      "id": "archon_library_key",
+      "name": "Chìa Đồng Xanh Của Thư Khố",
+      "type": "key_item",
+      "description": "Chìa khóa Archon Vane trao cho kẻ phán xử đúng.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "genesis_core_shard",
+      "name": "Mảnh Lõi Khởi Nguyên",
+      "type": "key_item",
+      "description": "Mảnh lõi sáng rơi ra khi Lõi Máy quay lại.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "genesis_regulator_pin",
+      "name": "Chốt Khởi Nguyên",
+      "type": "key_item",
+      "description": "Cái chốt vàng rút ra từ lưng Thực Thể Giám Hộ.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "origin_seal_half",
+      "name": "Nửa Ấn Origin",
+      "type": "key_item",
+      "description": "Một nửa Ấn Origin đã vỡ. Nửa kia chìm xuống vực.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "quartz_oil_drop",
+      "name": "Giọt Dầu Thạch Anh",
+      "type": "puzzle",
+      "description": "Dầu đông lại như hổ phách, dùng để đánh bóng chuông.",
+      "value": 0,
+      "stackable": true,
+      "maxStack": 10
+    },
+    {
+      "id": "celestial_nectar_flask",
+      "name": "Bình Mật Trời",
+      "type": "consumable",
+      "description": "Mật ong của những bông hoa không bao giờ tàn. Hồi 150 HP và 60 MP.",
+      "value": 0,
+      "stackable": true,
+      "maxStack": 20,
+      "effects": {
+        "healAmount": 150,
+        "mpAmount": 60
+      }
+    },
+    {
+      "id": "origin_astral_blade",
+      "name": "Kiếm Tinh Tú Khởi Nguyên",
+      "type": "weapon",
+      "description": "Thanh kiếm người thợ rèn trên trời rèn từ bụi sao.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 18,
+        "reach": 44,
+        "swingMs": 320
+      }
+    },
+    {
+      "id": "broken_herald_feather",
+      "name": "Lông Vũ Sứ Giả",
+      "type": "charm",
+      "description": "Một chiếc lông kim loại rơi từ cánh Sứ Giả.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxMp": 20,
+        "speed": 3
+      }
+    },
+    {
+      "id": "celestial_amber_shard",
+      "name": "Hổ Phách Thiên Giới",
+      "type": "charm",
+      "description": "Kết tinh nơi hai cực gặp nhau.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxMp": 20,
+        "defense": 3
+      }
+    },
+    {
+      "id": "echoing_origin_bell",
+      "name": "Chuông Ngân Khởi Nguyên",
+      "type": "charm",
+      "description": "Chiếc chuông con rơi ra từ quả chuông đã lành.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxMp": 25,
+        "defense": 5
+      }
+    },
+    {
+      "id": "solon_mercy_clasp",
+      "name": "Móc Cài Từ Bi Của Solon",
+      "type": "charm",
+      "description": "Kỷ vật của một Archon đã sám hối.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 30,
+        "defense": 5
+      }
+    },
+    {
+      "id": "seal_of_the_first_hour",
+      "name": "Ấn Chương Giờ Ban Sơ",
+      "type": "charm",
+      "description": "Thứ cuối cùng Chronos cất giữ cho riêng mình.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 35,
+        "defense": 6
+      }
+    },
+    {
+      "id": "null_origin_insignia",
+      "name": "Phù Hiệu Hư Không",
+      "type": "charm",
+      "description": "Phù hiệu đen để lại từ tiếng vọng của Kẻ Bị Quên.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 40,
+        "maxMp": 25,
+        "attack": 4,
+        "defense": 6,
+        "speed": 3
+      }
+    },
+    {
+      "id": "bran_count_token",
+      "name": "Thẻ Số 1.427",
+      "type": "charm",
+      "description": "Con số Peter khắc cho những người lính không tên.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 20,
+        "attack": 2
+      }
     }
   ]
 }

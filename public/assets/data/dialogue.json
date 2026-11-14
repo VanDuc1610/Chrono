@@ -9290,6 +9290,1843 @@
       "speaker": "Kỹ Sư Ivo",
       "lines": ["Nước đã xuống tới hầm. Lũ trẻ sẽ không khát nữa."],
       "responses": []
+    },
+    "ch6_arrival_together": {
+      "id": "ch6_arrival_together",
+      "speaker": "Peter",
+      "lines": [
+        "Cầu thang ánh sáng dừng ở một bậc đá trắng. Phía trên là bầu trời nứt toác, sau những vết nứt là khoảng đen không có sao.",
+        "Celestial Realm. Nơi Chronos đúc nên sáu quyền năng... giờ chỉ còn bụi và bánh răng kẹt cứng.",
+        "Kuro bước lên bậc cuối, đứng cạnh mình. Lần này không ai đi trước ai."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch6_kuro_ally", "kuro_with_peter"],
+        "clearFlags": ["kuro_left"],
+        "startQuest": "quest_ch6_celestial_ascent"
+      }
+    },
+    "ch6_arrival_alone": {
+      "id": "ch6_arrival_alone",
+      "speaker": "Peter",
+      "lines": [
+        "Cầu thang ánh sáng dừng ở một bậc đá trắng. Phía trên là bầu trời nứt toác, sau những vết nứt là khoảng đen không có sao.",
+        "Celestial Realm. Nơi Chronos đúc nên sáu quyền năng... giờ chỉ còn bụi và bánh răng kẹt cứng.",
+        "Trên bậc đá có một vệt chém màu tím còn ấm. Kuro đã lên đây trước mình."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["kuro_left"],
+        "clearFlags": ["kuro_with_peter", "ch6_kuro_ally"],
+        "startQuest": "quest_ch6_celestial_ascent"
+      }
+    },
+    "ch6_stairs_kuro": {
+      "id": "ch6_stairs_kuro",
+      "speaker": "Kuro",
+      "lines": [
+        "Hồi nhỏ tao tưởng trên trời là chỗ đẹp nhất. Hóa ra chỉ là một cái xưởng bỏ hoang.",
+        "Nhìn mấy bánh răng kia đi. Kẹt hết. Thế mà bên dưới người ta vẫn gọi đây là thiên đàng."
+      ],
+      "responses": []
+    },
+    "ch6_stairs_stele": {
+      "id": "ch6_stairs_stele",
+      "speaker": "Peter",
+      "lines": [
+        "Bia đá khắc chữ cổ, bên dưới có người dịch lại bằng nét mực đã phai:",
+        "'Origin quyết điều gì được phép bắt đầu. Không có nó, hạt giống không nảy mầm, đứa trẻ không cất tiếng khóc đầu tiên.'"
+      ],
+      "responses": []
+    },
+    "ch6_stairs_exit_note": {
+      "id": "ch6_stairs_exit_note",
+      "speaker": "Peter",
+      "lines": ["Phía đông là cổng của Tiền Sân. Có tiếng gió thổi qua những cột đá gãy."],
+      "responses": []
+    },
+    "ch6_courtyard_arrival": {
+      "id": "ch6_courtyard_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Một màn ánh sáng chói lòa chắn cổng phía bắc. Trước cổng là một bệ đá có hai khe khắc chữ.",
+        "Hai bên sân có hai tấm bia. Không có lời dịch nào cả. Phải tự đọc thôi."
+      ],
+      "responses": []
+    },
+    "ch6_stele_sun": {
+      "id": "ch6_stele_sun",
+      "speaker": "Peter",
+      "lines": ["Tấm bia khắc một mặt trời tỏa tia. Ngay dưới mặt trời là một ký tự: [A]."],
+      "responses": []
+    },
+    "ch6_stele_void": {
+      "id": "ch6_stele_void",
+      "speaker": "Peter",
+      "lines": [
+        "Tấm bia khắc một vòng tròn rỗng ruột, không có gì bên trong. Dưới vòng tròn là ký tự: [X]."
+      ],
+      "responses": []
+    },
+    "ch6_gate_text": {
+      "id": "ch6_gate_text",
+      "speaker": "Peter",
+      "lines": [
+        "Chữ trên vòm cổng đã có người dịch: 'Cổng chỉ mở cho kẻ biết xóa đi bức màn rực rỡ, để đón lại sự tĩnh lặng ban đầu.'"
+      ],
+      "responses": []
+    },
+    "ch6_gate1_empty": {
+      "id": "ch6_gate1_empty",
+      "speaker": "Peter",
+      "lines": ["Bệ khắc còn trống. Hai khe đá chờ hai ký tự."],
+      "responses": []
+    },
+    "ch6_gate1_wrong": {
+      "id": "ch6_gate1_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Ký tự vừa khắc lóe lên rồi tắt ngấm. Màn sáng vẫn đứng nguyên.",
+        "Bức màn cần biến mất. Ký tự đứng trước là thứ bị tác động, ký tự sau là điều xảy ra với nó?"
+      ],
+      "responses": []
+    },
+    "ch6_gate1_right": {
+      "id": "ch6_gate1_right",
+      "speaker": "Peter",
+      "lines": [
+        "[A] rồi [X]. Ánh sáng... rồi trống rỗng.",
+        "Màn sáng co lại như ngọn nến bị thổi, rồi tắt hẳn. Cổng phía bắc mở ra.",
+        "Hai ký tự đầu tiên. Mình bắt đầu hiểu cách người ở đây viết: thứ trước, rồi điều xảy ra với nó."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["solved_ch6_gate_1", "ch6_glyph_a_known", "ch6_glyph_x_known"]
+      }
+    },
+    "ch6_gate1_done": {
+      "id": "ch6_gate1_done",
+      "speaker": "Peter",
+      "lines": ["Bệ khắc đã nguội. Cổng phía bắc vẫn mở."],
+      "responses": []
+    },
+    "ch6_courtyard_gate_locked": {
+      "id": "ch6_courtyard_gate_locked",
+      "speaker": "Peter",
+      "lines": ["Màn ánh sáng chói tới mức không mở nổi mắt. Không đi qua được."],
+      "responses": []
+    },
+    "ch6_shadow_intro": {
+      "id": "ch6_shadow_intro",
+      "speaker": "Peter",
+      "lines": [
+        "Có thứ gì giẫm đúng lên chỗ mình vừa đứng... Một cái bóng. Bóng của chính mình, tóc xoăn, dáng đứng y hệt.",
+        "Kiếm chém qua nó như chém vào khói. Nhưng nó cứ bám theo sau một nhịp.",
+        "Mấy đĩa sáng trên sàn kia... Nếu dắt cái bóng đi ngang qua ánh sáng thì sao?"
+      ],
+      "responses": []
+    },
+    "ch6_pillars_arrival": {
+      "id": "ch6_pillars_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Điện Trụ Thiên Thể. Một ngọn đèn bên tây vẫn cháy, ánh sáng của nó đâm thẳng vào một tấm gương xoay được.",
+        "Ở góc đông có tượng Archon, mắt ngọc tối om. Cánh cửa phía bắc đóng chặt."
+      ],
+      "responses": []
+    },
+    "ch6_floor_diagram": {
+      "id": "ch6_floor_diagram",
+      "speaker": "Peter",
+      "lines": [
+        "Hình khắc trên sàn: một tia sáng đi từ ngọn đèn phía tây, gãy khúc qua những tấm gương, rồi chạm vào mắt tượng.",
+        "Cạnh mắt tượng có vẽ một giọt nước màu lam."
+      ],
+      "responses": []
+    },
+    "ch6_optics_note": {
+      "id": "ch6_optics_note",
+      "speaker": "Peter",
+      "lines": [
+        "Văn bia: 'Ánh sáng trắng đi qua lăng kính sẽ nhuốm sắc lam. Mắt Archon chỉ nhận ánh sáng lam.'",
+        "'Trụ đồng làm tan ánh sáng trắng. Ánh sáng đã nhuốm lam thì đi qua nó được.'"
+      ],
+      "responses": []
+    },
+    "ch6_mural_daynight": {
+      "id": "ch6_mural_daynight",
+      "speaker": "Peter",
+      "lines": [
+        "Bức bích họa chia làm hai nửa. Nửa trái: mặt trời giữa trưa, khắc ký tự [A].",
+        "Nửa phải: bầu trời đêm không trăng. Ký tự khắc ở đó là [O].",
+        "Vậy [O] là thứ ngược với [A]."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch6_glyph_o_known"]
+      }
+    },
+    "ch6_beam_solved": {
+      "id": "ch6_beam_solved",
+      "speaker": "Peter",
+      "lines": [
+        "Tia sáng lam chạm vào mắt tượng. Mắt ngọc bừng sáng, rồi một tiếng cạch vang lên ở phía bắc.",
+        "Cánh cửa đá trượt sang bên. Có cầu thang dẫn lên cao."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["aligned_pillars_c02"]
+      }
+    },
+    "ch6_pillars_gate_locked": {
+      "id": "ch6_pillars_gate_locked",
+      "speaker": "Peter",
+      "lines": ["Cửa đá phía bắc khóa chặt. Phải làm mắt tượng sáng lên."],
+      "responses": []
+    },
+    "ch6_construct_intro": {
+      "id": "ch6_construct_intro",
+      "speaker": "Peter",
+      "lines": [
+        "Người đá bốn tay giơ tay lên. Một vệt đỏ chạy ngang sàn, nhấp nháy... một, hai...",
+        "Nhịp thứ ba nó chuyển sang vàng. Nếu chém đúng lúc đó, có khi tia sáng sẽ tắt?"
+      ],
+      "responses": []
+    },
+    "ch6_herald_confront": {
+      "id": "ch6_herald_confront",
+      "speaker": "Sứ Giả Gãy Cánh",
+      "lines": [
+        "Kẻ không tên. Ta đã nghe tiếng bước chân ngươi từ lúc ngươi đặt chân lên bậc đầu tiên.",
+        "Ta chờ Chủ Nhân trở về suốt mười nghìn chu kỳ. Ngươi không phải Chủ Nhân."
+      ],
+      "responses": [
+        {
+          "text": "Chronos đang ở đâu?",
+          "nextDialogueId": "ch6_herald_where"
+        }
+      ]
+    },
+    "ch6_herald_where": {
+      "id": "ch6_herald_where",
+      "speaker": "Sứ Giả Gãy Cánh",
+      "lines": [
+        "Câu hỏi đó không dành cho kẻ chưa được ghi tên.",
+        "Khiên của ta khắc bằng chữ của Ngài. Đọc được thì đi qua. Không đọc được thì nằm lại."
+      ],
+      "responses": []
+    },
+    "ch6_herald_kuro_help": {
+      "id": "ch6_herald_kuro_help",
+      "speaker": "Kuro",
+      "lines": [
+        "(Một bóng người đứng trên xà ngang, quay lại nhìn mình như nhìn một người xa lạ.)",
+        "Mày lại đi theo tao à? Tao không nhớ mày là ai... nhưng mặt mày làm tao thấy khó chịu kiểu quen quen.",
+        "Con chim sắt đó cứng lắm. Tao đi trước đây."
+      ],
+      "responses": []
+    },
+    "ch6_herald_kuro_stop": {
+      "id": "ch6_herald_kuro_stop",
+      "speaker": "Kuro",
+      "lines": [
+        "(Kuro đứng trên xà ngang, vết chém tím còn bốc khói trên cánh Sứ Giả.)",
+        "Mày vẫn lết theo à. Con chim sắt này để phần mày. Tao còn việc ở trên kia.",
+        "Đừng cản tao lần nữa, Peter."
+      ],
+      "responses": []
+    },
+    "ch6_herald_defeated": {
+      "id": "ch6_herald_defeated",
+      "speaker": "Sứ Giả Gãy Cánh",
+      "lines": [
+        "Ngươi đọc được chữ của Ngài... dù chưa từng được ai dạy.",
+        "Đi đi. Ngai vàng ở cuối con đường này. Nhưng đừng mong thấy ai ngồi trên đó."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "broken_herald_feather",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_broken_herald_feather",
+        "setFlags": ["defeated_broken_herald"]
+      }
+    },
+    "ch6_herald_after": {
+      "id": "ch6_herald_after",
+      "speaker": "Sứ Giả Gãy Cánh",
+      "lines": ["Ngai vàng đã lạnh từ lâu. Ta chỉ còn biết giữ cửa."],
+      "responses": []
+    },
+    "ch6_herald_truth": {
+      "id": "ch6_herald_truth",
+      "speaker": "Sứ Giả Gãy Cánh",
+      "lines": [
+        "Ngươi có ánh mắt của kẻ thích nghe sự thật trần trụi. Được, ta nói thêm một điều.",
+        "Ngai không trống vì Ngài bỏ đi. Ngài không bao giờ rời khỏi đây. Ngài chỉ không thể ngồi lên nó nữa."
+      ],
+      "responses": []
+    },
+    "ch6_roost_exit_locked": {
+      "id": "ch6_roost_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Sứ Giả đứng chắn lối phía đông."],
+      "responses": []
+    },
+    "ch6_nave_arrival": {
+      "id": "ch6_nave_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Chính Điện Phân Tách. Sáu bệ thờ xếp thành vòng tròn quanh một bệ đá trống ở giữa.",
+        "Mỗi bệ khắc một huy hiệu. Túi đồ của mình ấm lên khi đến gần vài bệ... những mảnh ấn mình đã mang theo."
+      ],
+      "responses": []
+    },
+    "ch6_parchment_take": {
+      "id": "ch6_parchment_take",
+      "speaker": "Peter",
+      "lines": ["Một cuộn da cũ kẹp dưới chân cột. Chữ đã được dịch sang tiếng người."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "parchment_great_fracture",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_parchment_great_fracture"
+      }
+    },
+    "ch6_rift_idle": {
+      "id": "ch6_rift_idle",
+      "speaker": "Peter",
+      "lines": ["Bệ Kẽ Nứt im lìm. Có lẽ cần thắp đúng những bệ thờ quanh nó."],
+      "responses": []
+    },
+    "ch6_rift_wrong": {
+      "id": "ch6_rift_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Năng lượng chạy vào Bệ Kẽ Nứt rồi bật ngược lại. Sàn đá rung lên.",
+        "Không đúng. Phải là hai cực, không hơn không kém."
+      ],
+      "responses": []
+    },
+    "ch6_rift_right": {
+      "id": "ch6_rift_right",
+      "speaker": "Peter",
+      "lines": [
+        "Hai luồng sáng, một từ bệ không mảnh ấn nào đáp lại, một từ bệ Finality, gặp nhau giữa Bệ Kẽ Nứt.",
+        "Cái bắt đầu và cái kết thúc. Chỗ chúng va vào nhau để lại một vết nứt nhỏ màu thiên thanh...",
+        "Màu của thanh kiếm gãy trong tay mình."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "celestial_amber_shard",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_celestial_amber_shard",
+        "setFlags": ["solved_fracture_altars"]
+      }
+    },
+    "ch6_rift_done": {
+      "id": "ch6_rift_done",
+      "speaker": "Peter",
+      "lines": ["Bệ Kẽ Nứt vẫn tỏa ánh thiên thanh nhè nhẹ."],
+      "responses": []
+    },
+    "ch6_nave_exit_locked": {
+      "id": "ch6_nave_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Cửa phía đông chưa mở. Bệ Kẽ Nứt ở giữa điện vẫn tối."],
+      "responses": []
+    },
+    "ch6_gallery_arrival": {
+      "id": "ch6_gallery_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Phòng Trưng Bày Kỷ Nguyên. Bốn bức bích họa kể về một thế giới bị bỏ rơi, treo lộn xộn.",
+        "Bên dưới là bốn khung trống. Có lẽ phải xếp lại chúng cho đúng."
+      ],
+      "responses": []
+    },
+    "ch6_mural_names": {
+      "id": "ch6_mural_names",
+      "speaker": "Peter",
+      "lines": ["Bích họa: người dân đứng giữa phố, không ai nhớ tên thành phố mình đang sống."],
+      "responses": []
+    },
+    "ch6_mural_ash": {
+      "id": "ch6_mural_ash",
+      "speaker": "Peter",
+      "lines": ["Bích họa: tro phủ kín chiến trường. Không còn ai sinh ra, cũng không ai chết đi."],
+      "responses": []
+    },
+    "ch6_mural_sea": {
+      "id": "ch6_mural_sea",
+      "speaker": "Peter",
+      "lines": ["Bích họa: biển đóng băng giữa con sóng, tàu thuyền nằm bất động trên mặt nước."],
+      "responses": []
+    },
+    "ch6_mural_sky": {
+      "id": "ch6_mural_sky",
+      "speaker": "Peter",
+      "lines": ["Bích họa: bầu trời nứt toác, những dòng thời gian xô vào nhau."],
+      "responses": []
+    },
+    "ch6_erosion_stele": {
+      "id": "ch6_erosion_stele",
+      "speaker": "Peter",
+      "lines": [
+        "Bia Thứ Tự Xâm Thực: 'Một thế giới không chết từ thân xác. Đầu tiên dòng chảy của nó lệch đi (Continuum).'",
+        "'Sau đó ký ức bị vấy bẩn (Memory). Rồi các khả năng va vào nhau (Possibility). Cuối cùng ranh giới kết thúc đông cứng lại (Finality).'"
+      ],
+      "responses": []
+    },
+    "ch6_eras_empty": {
+      "id": "ch6_eras_empty",
+      "speaker": "Peter",
+      "lines": ["Vẫn còn khung để trống."],
+      "responses": []
+    },
+    "ch6_eras_wrong": {
+      "id": "ch6_eras_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Bốn bức tranh rung lên rồi tự trượt về chỗ cũ.",
+        "Lịch sử của sự lãng quên bị đặt sai thứ tự."
+      ],
+      "responses": []
+    },
+    "ch6_eras_right": {
+      "id": "ch6_eras_right",
+      "speaker": "Peter",
+      "lines": [
+        "Biển đóng băng, rồi quên tên, rồi trời nứt, rồi tro tàn. Bốn khung khớp lại thành một vòng.",
+        "Dưới khung cuối hiện ra hai ký tự. [I] khắc cạnh một dòng sông đang chảy. [U] khắc cạnh một mặt hồ phẳng lặng.",
+        "Dòng chảy, và sự đứng yên."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["sorted_eras_c04", "ch6_glyph_i_known", "ch6_glyph_u_known"]
+      }
+    },
+    "ch6_eras_done": {
+      "id": "ch6_eras_done",
+      "speaker": "Peter",
+      "lines": ["Bốn bức tranh đã nằm yên trong khung."],
+      "responses": []
+    },
+    "ch6_memorial_plain": {
+      "id": "ch6_memorial_plain",
+      "speaker": "Peter",
+      "lines": [
+        "Bức tường khắc kín tên những người lính thiên giới đã bị xóa. Nhiều cái tên chỉ còn lại vết đục."
+      ],
+      "responses": []
+    },
+    "ch6_memorial_bran": {
+      "id": "ch6_memorial_bran",
+      "speaker": "Peter",
+      "lines": [
+        "Bức tường khắc kín tên những người lính bị xóa. Mình nhớ tới Bran, người lính đếm số lần mình chết.",
+        "Mình lấy mũi kiếm gãy khắc thêm một con số vào góc tường: 1.427.",
+        "Ở đây cũng phải có ai đó đếm hộ họ."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "bran_count_token",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_bran_count_token"
+      }
+    },
+    "ch6_memorial_done": {
+      "id": "ch6_memorial_done",
+      "speaker": "Peter",
+      "lines": ["Con số 1.427 vẫn còn trên góc tường."],
+      "responses": []
+    },
+    "ch6_family_plain": {
+      "id": "ch6_family_plain",
+      "speaker": "Peter",
+      "lines": ["Bích họa vẽ một gia đình thần thánh. Có một chỗ bị đục trống cạnh Chronos."],
+      "responses": []
+    },
+    "ch6_family_letter": {
+      "id": "ch6_family_letter",
+      "speaker": "Peter",
+      "lines": [
+        "Bích họa vẽ một gia đình thần thánh, cạnh Chronos có một chỗ bị đục trống.",
+        "Peter ở nhánh Alpha đã buông kéo để ôm con gái... Còn mình thì đang đứng giữa trời, không ai chờ ở nhà."
+      ],
+      "responses": []
+    },
+    "ch6_family_spared": {
+      "id": "ch6_family_spared",
+      "speaker": "Peter",
+      "lines": [
+        "Bích họa vẽ một gia đình thần thánh, cạnh Chronos có một chỗ bị đục trống.",
+        "Không biết Peter ở nhánh Alpha giờ còn cầm cây kéo bạc không. Còn phải tỉa bao nhiêu người để giữ mái nhà đó."
+      ],
+      "responses": []
+    },
+    "ch6_oil_take_1": {
+      "id": "ch6_oil_take_1",
+      "speaker": "Peter",
+      "lines": ["Dưới chân tượng có một giọt dầu thạch anh đông lại như hổ phách."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "quartz_oil_drop",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_quartz_oil_drop"
+      }
+    },
+    "ch6_gallery_exit_locked": {
+      "id": "ch6_gallery_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Cửa phía đông chưa mở."],
+      "responses": []
+    },
+    "ch6_cascade_arrival": {
+      "id": "ch6_cascade_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Một thác ánh sáng lỏng đổ từ trời xuống, chẻ đôi căn phòng. Bên kia thác còn một vực sâu đầy sao.",
+        "Mỗi bên có một bệ khắc hai khe."
+      ],
+      "responses": []
+    },
+    "ch6_stele_flow": {
+      "id": "ch6_stele_flow",
+      "speaker": "Peter",
+      "lines": [
+        "Bia bên thác khắc hình dòng thác đang đổ. Hình thứ hai: cũng dòng thác ấy, nhưng đứng im như tượng.",
+        "Dòng chữ đã dịch: 'Muốn bước qua, đừng làm dòng chảy biến mất. Hãy để nó còn đó, mà đứng yên.'"
+      ],
+      "responses": []
+    },
+    "ch6_a1_empty": {
+      "id": "ch6_a1_empty",
+      "speaker": "Peter",
+      "lines": ["Bệ khắc còn trống."],
+      "responses": []
+    },
+    "ch6_a1_wrong": {
+      "id": "ch6_a1_wrong",
+      "speaker": "Peter",
+      "lines": ["Thác ánh sáng sôi lên, bắn tia lửa ra ngoài. Không phải mệnh lệnh nó chờ."],
+      "responses": []
+    },
+    "ch6_a1_erase": {
+      "id": "ch6_a1_erase",
+      "speaker": "Peter",
+      "lines": [
+        "Dòng thác biến mất trong một thoáng, và mọi thứ có thể bước lên cũng biến mất theo.",
+        "Rồi ánh sáng đổ xuống lại như chưa từng tắt. Xóa đi thì chẳng còn gì để bước lên."
+      ],
+      "responses": []
+    },
+    "ch6_a1_right": {
+      "id": "ch6_a1_right",
+      "speaker": "Peter",
+      "lines": [
+        "[I] rồi [U]. Dòng chảy, đứng yên.",
+        "Thác ánh sáng khựng lại giữa chừng, đông thành những bậc pha lê trong suốt."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["froze_cascade_c05"]
+      }
+    },
+    "ch6_a1_done": {
+      "id": "ch6_a1_done",
+      "speaker": "Peter",
+      "lines": ["Thác vẫn đông cứng thành bậc thang."],
+      "responses": []
+    },
+    "ch6_stele_matter": {
+      "id": "ch6_stele_matter",
+      "speaker": "Peter",
+      "lines": [
+        "Bia bên vực khắc một khối đá vuông. Cạnh nó là ký tự [E].",
+        "Dòng chữ: 'Ánh sáng không đỡ nổi một bàn chân. Vật thì đỡ được.'"
+      ],
+      "responses": []
+    },
+    "ch6_a2_empty": {
+      "id": "ch6_a2_empty",
+      "speaker": "Peter",
+      "lines": ["Bệ khắc còn trống."],
+      "responses": []
+    },
+    "ch6_a2_wrong": {
+      "id": "ch6_a2_wrong",
+      "speaker": "Peter",
+      "lines": ["Ký tự lóe lên rồi rơi xuống vực, mất hút giữa những vì sao."],
+      "responses": []
+    },
+    "ch6_a2_reverse": {
+      "id": "ch6_a2_reverse",
+      "speaker": "Peter",
+      "lines": [
+        "Một khối đá trôi ra giữa vực, rồi tan thành ánh sáng và rơi mất.",
+        "Ngược rồi. Đá biến thành sáng thì đâu đỡ được ai."
+      ],
+      "responses": []
+    },
+    "ch6_a2_right": {
+      "id": "ch6_a2_right",
+      "speaker": "Peter",
+      "lines": [
+        "[A] rồi [E]. Ánh sáng, thành vật.",
+        "Ánh sao dưới vực dâng lên, kết lại thành một chiếc cầu mây chắc nịch."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["bridged_chasm_c05", "ch6_glyph_e_known"]
+      }
+    },
+    "ch6_a2_done": {
+      "id": "ch6_a2_done",
+      "speaker": "Peter",
+      "lines": ["Chiếc cầu mây vẫn nằm vắt qua vực."],
+      "responses": []
+    },
+    "ch6_cascade_exit_locked": {
+      "id": "ch6_cascade_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Bên này không có lối đi tiếp."],
+      "responses": []
+    },
+    "ch6_archives_arrival": {
+      "id": "ch6_archives_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Thư Khố Thiên Đình. Những giá sách bằng đá cao tới trần, bụi phủ dày như tuyết.",
+        "Giữa sảnh có ba tượng Archon đứng trước ba bệ chọn. Dưới chân mỗi tượng khắc một câu."
+      ],
+      "responses": []
+    },
+    "ch6_archives_smell_kept": {
+      "id": "ch6_archives_smell_kept",
+      "speaker": "Peter",
+      "lines": [
+        "Mùi bụi giấy ở đây... làm mình nhớ tiệm đồng hồ một sáng mưa. Mùi dầu máy với gỗ thông.",
+        "May quá. Mình vẫn còn nhớ."
+      ],
+      "responses": []
+    },
+    "ch6_archives_smell_lost": {
+      "id": "ch6_archives_smell_lost",
+      "speaker": "Peter",
+      "lines": [
+        "Lạ thật. Mình biết mình từng có một tiệm đồng hồ. Mình biết sáng nào cũng mở cửa ở đó.",
+        "Nhưng mình không tài nào nhớ nổi nó có mùi gì."
+      ],
+      "responses": []
+    },
+    "ch6_tribunal_law": {
+      "id": "ch6_tribunal_law",
+      "speaker": "Peter",
+      "lines": [
+        "Bia Luật Phán Xử: 'Trong ba vị Archon có đúng một Kẻ Giữ Lời, luôn nói đúng.'",
+        "'Một Kẻ Dối Trá và một Kẻ Phản Ngôn. Cả hai luôn nói sai. Chìa khóa nằm trong tay Kẻ Giữ Lời.'"
+      ],
+      "responses": []
+    },
+    "ch6_testimony_solon": {
+      "id": "ch6_testimony_solon",
+      "speaker": "Peter",
+      "lines": ["Dưới chân tượng Solon: 'Kael là Kẻ Dối Trá.'"],
+      "responses": []
+    },
+    "ch6_testimony_kael": {
+      "id": "ch6_testimony_kael",
+      "speaker": "Peter",
+      "lines": ["Dưới chân tượng Kael: 'Vane là Kẻ Phản Ngôn.'"],
+      "responses": []
+    },
+    "ch6_testimony_vane": {
+      "id": "ch6_testimony_vane",
+      "speaker": "Peter",
+      "lines": ["Dưới chân tượng Vane: 'Ta không phải Kẻ Dối Trá.'"],
+      "responses": []
+    },
+    "ch6_verdict_empty": {
+      "id": "ch6_verdict_empty",
+      "speaker": "Peter",
+      "lines": ["Vẫn còn tượng chưa được gán vai."],
+      "responses": []
+    },
+    "ch6_verdict_wrong": {
+      "id": "ch6_verdict_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Ba bức tượng rung lên. Bụi trần rơi lả tả.",
+        "Phán quyết sai. Thử giả sử từng người nói thật, xem lời của hai người kia có còn đứng vững không."
+      ],
+      "responses": []
+    },
+    "ch6_verdict_right": {
+      "id": "ch6_verdict_right",
+      "speaker": "Peter",
+      "lines": [
+        "Vane giữ lời. Kael phản ngôn. Solon dối trá.",
+        "Tượng Vane mở bàn tay đá. Trong lòng bàn tay là một chiếc chìa khóa bằng đồng xanh."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "archon_library_key",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_archon_library_key",
+        "setFlags": ["solved_archon_tribunal"]
+      }
+    },
+    "ch6_verdict_done": {
+      "id": "ch6_verdict_done",
+      "speaker": "Peter",
+      "lines": ["Ba bức tượng đứng yên. Tượng Vane vẫn mở bàn tay."],
+      "responses": []
+    },
+    "ch6_solon_meet": {
+      "id": "ch6_solon_meet",
+      "speaker": "Archon Solon",
+      "lines": [
+        "(Một bóng ma màu lam tách ra khỏi tượng Solon, tay ôm một con dấu.)",
+        "Ngươi gọi ta là kẻ dối trá. Đúng. Ta đã đóng dấu lên lệnh trục xuất hàng nghìn thế giới vào The Interval.",
+        "Ta từng viết một bản sớ can ngăn. Hội Đồng xé nó, nhét vào giá cuối, cạnh cửa sổ phía đông. Tìm lại giúp ta."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch6_solon_asked"],
+        "startQuest": "quest_ch6_solon_atonement"
+      }
+    },
+    "ch6_solon_waiting": {
+      "id": "ch6_solon_waiting",
+      "speaker": "Archon Solon",
+      "lines": ["Giá cuối, cạnh cửa sổ phía đông. Bản sớ có vết son đỏ."],
+      "responses": []
+    },
+    "ch6_solon_plea": {
+      "id": "ch6_solon_plea",
+      "speaker": "Archon Solon",
+      "lines": [
+        "Đúng nét chữ của ta... \"Đừng tỉa những thế giới đang khóc. Hãy dạy chúng cách tự lành.\"",
+        "Ta đã viết đúng, nhưng lại không dám làm theo. Cầm lấy cái này. Đừng làm một kẻ đóng dấu như ta."
+      ],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "solon_torn_plea",
+            "quantity": 1
+          }
+        ],
+        "grantItems": [
+          {
+            "itemId": "solon_mercy_clasp",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_solon_mercy_clasp",
+        "setFlags": ["resolved_solon_guilt"]
+      }
+    },
+    "ch6_solon_after": {
+      "id": "ch6_solon_after",
+      "speaker": "Archon Solon",
+      "lines": ["Lần đầu tiên sau mười nghìn chu kỳ, con dấu trong tay ta nhẹ đi."],
+      "responses": []
+    },
+    "ch6_shelf_plain": {
+      "id": "ch6_shelf_plain",
+      "speaker": "Peter",
+      "lines": ["Những cuộn chép tay về luật lệ thiên giới. Không có gì đặc biệt."],
+      "responses": []
+    },
+    "ch6_plea_take": {
+      "id": "ch6_plea_take",
+      "speaker": "Peter",
+      "lines": ["Giữa hai cuộn luật có một tờ giấy bị xé đôi, góc còn vết son đỏ."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "solon_torn_plea",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_solon_torn_plea"
+      }
+    },
+    "ch6_secret_pruner_take": {
+      "id": "ch6_secret_pruner_take",
+      "speaker": "Peter",
+      "lines": ["Sau một viên gạch lỏng có cuốn nhật ký nhỏ. Bìa ghi: \"Kẻ Tỉa Cành Đầu Tiên\"."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "world_secret_first_pruner",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_world_secret_first_pruner"
+      }
+    },
+    "ch6_names_stele": {
+      "id": "ch6_names_stele",
+      "speaker": "Peter",
+      "lines": [
+        "Một bảng dài khắc tên người. Cạnh mỗi cái tên là ký tự [N].",
+        "Có một dòng bị đục trống. Chỉ còn ký tự [N] và một vòng tròn rỗng [X] ngay sau nó."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch6_glyph_n_seen"]
+      }
+    },
+    "ch6_chronicle": {
+      "id": "ch6_chronicle",
+      "speaker": "Peter",
+      "lines": [
+        "Trên bục là cuốn \"Chính Sử Thiên Giới\", mạ vàng. Trong đó Chronos chưa từng sai, chưa từng tỉa ai."
+      ],
+      "responses": [
+        {
+          "text": "Giữ lại, để ai đó đọc rồi tự nghĩ",
+          "nextDialogueId": "ch6_chronicle_keep"
+        },
+        {
+          "text": "Đốt nó đi",
+          "nextDialogueId": "ch6_chronicle_burn"
+        }
+      ]
+    },
+    "ch6_chronicle_elion": {
+      "id": "ch6_chronicle_elion",
+      "speaker": "Peter",
+      "lines": [
+        "Trên bục là cuốn \"Chính Sử Thiên Giới\", mạ vàng. Trong đó Chronos chưa từng sai, chưa từng tỉa ai.",
+        "Elion đã đốt cuốn sử dối trá của mình. Lần này mình cũng được chọn."
+      ],
+      "responses": [
+        {
+          "text": "Giữ lại, để ai đó đọc rồi tự nghĩ",
+          "nextDialogueId": "ch6_chronicle_keep"
+        },
+        {
+          "text": "Đốt nó đi",
+          "nextDialogueId": "ch6_chronicle_burn"
+        }
+      ]
+    },
+    "ch6_chronicle_keep": {
+      "id": "ch6_chronicle_keep",
+      "speaker": "Peter",
+      "lines": ["Mình gấp cuốn sách lại, để nguyên trên bục. Người đọc sau sẽ tự biết nghi ngờ."],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch6_chronicle_kept", "ch6_chronicle_decided"]
+      }
+    },
+    "ch6_chronicle_burn": {
+      "id": "ch6_chronicle_burn",
+      "speaker": "Peter",
+      "lines": ["Lửa liếm qua lớp vàng mỏng. Bên dưới chỉ là giấy, như mọi cuốn sách khác."],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch6_chronicle_burnt", "ch6_chronicle_decided"]
+      }
+    },
+    "ch6_chronicle_done": {
+      "id": "ch6_chronicle_done",
+      "speaker": "Peter",
+      "lines": ["Bục sách giờ đã yên."],
+      "responses": []
+    },
+    "ch6_trapdoor_locked": {
+      "id": "ch6_trapdoor_locked",
+      "speaker": "Peter",
+      "lines": ["Một cửa sập dưới sàn, khóa bằng ổ đồng xanh."],
+      "responses": []
+    },
+    "ch6_trapdoor_open": {
+      "id": "ch6_trapdoor_open",
+      "speaker": "Peter",
+      "lines": ["Chìa đồng xanh vừa khít. Cửa sập mở ra, cầu thang xoắn dẫn xuống dưới."],
+      "responses": [],
+      "effects": {
+        "warpTo": {
+          "mapId": "map_ch6_secret_chronos_cell",
+          "spawnId": "default"
+        }
+      }
+    },
+    "ch6_archives_exit_locked": {
+      "id": "ch6_archives_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Cửa phía đông khóa. Có lẽ chìa nằm trong tay một trong ba tượng."],
+      "responses": []
+    },
+    "ch6_cell_arrival": {
+      "id": "ch6_cell_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Một căn phòng nhỏ, không cửa sổ. Trên bàn có một đĩa sao bằng đồng và một mảnh giấy.",
+        "Phòng riêng của Chronos?"
+      ],
+      "responses": []
+    },
+    "ch6_fb_chronos": {
+      "id": "ch6_fb_chronos",
+      "speaker": "Ký Ức Của Ngai Vàng",
+      "lines": [
+        "Một bóng người cao lớn đứng trước tấm gương lớn. Trong gương, từng thế giới đang rung lên.",
+        "Có thứ gì đó từ khoảng đen ngoài rìa đang nuốt dần các thế giới.",
+        "'Quyền năng hợp nhất này là ngọn hải đăng gọi nó tới. Ta phải tự bẻ gãy mình.'",
+        "Lưỡi kiếm vung lên. Tiếng pha lê vỡ."
+      ],
+      "responses": [],
+      "flashback": true
+    },
+    "ch6_cell_ceiling": {
+      "id": "ch6_cell_ceiling",
+      "speaker": "Peter",
+      "lines": ["Trần phòng vẽ mười hai cung sao. Chòm Bọ Cạp nằm ở cung II."],
+      "responses": []
+    },
+    "ch6_scrap_take": {
+      "id": "ch6_scrap_take",
+      "speaker": "Peter",
+      "lines": ["Mảnh giấy viết vội, nét chữ run."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "chronos_private_scrap",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_chronos_private_scrap"
+      }
+    },
+    "ch6_disc_wrong": {
+      "id": "ch6_disc_wrong",
+      "speaker": "Peter",
+      "lines": ["Đĩa sao kêu lách cách rồi trôi về chỗ cũ. Không đúng."],
+      "responses": []
+    },
+    "ch6_disc_right": {
+      "id": "ch6_disc_right",
+      "speaker": "Peter",
+      "lines": [
+        "Sao Bắc Cực dừng ở cung VIII, đối diện chòm Bọ Cạp. Rương đá bên cạnh bật mở.",
+        "Bên trong là một tấm bích họa nhỏ và một con dấu khắc chữ \"Giờ Ban Sơ\"."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "world_secret_fracture",
+            "quantity": 1
+          },
+          {
+            "itemId": "seal_of_the_first_hour",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_chronos_chest",
+        "setFlags": ["unlocked_hidden_chronos_cell"]
+      }
+    },
+    "ch6_disc_done": {
+      "id": "ch6_disc_done",
+      "speaker": "Peter",
+      "lines": ["Rương đá đã trống."],
+      "responses": []
+    },
+    "ch6_cell_back": {
+      "id": "ch6_cell_back",
+      "speaker": "Peter",
+      "lines": ["Leo lên lại Thư Khố."],
+      "responses": [],
+      "effects": {
+        "warpTo": {
+          "mapId": "map_ch6_archives_ruins",
+          "spawnId": "from_cell"
+        }
+      }
+    },
+    "ch6_core_arrival": {
+      "id": "ch6_core_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Lõi Máy Khởi Nguyên. Ba bánh răng thiên thể khổng lồ đứng im, mỗi cái gắn một cần chỉnh tốc độ.",
+        "Ở giữa là một cần gạt lớn. Nếu chạy lệch nhịp, chắc trục sẽ cháy."
+      ],
+      "responses": []
+    },
+    "ch6_handbook_take": {
+      "id": "ch6_handbook_take",
+      "speaker": "Peter",
+      "lines": ["Một cuốn sổ tay kẹp dưới bệ máy, mép giấy cháy sém."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "celestial_mechanic_handbook",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_celestial_mechanic_handbook",
+        "setFlags": ["read_celestial_handbook"]
+      }
+    },
+    "ch6_core_wrong": {
+      "id": "ch6_core_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Ba bánh răng rít lên, tia lửa bắn tung tóe rồi tất cả lại khựng lại.",
+        "Nhịp quay lệch nhau. Mỗi bánh phải quét qua cùng một số răng trong cùng một nhịp."
+      ],
+      "responses": []
+    },
+    "ch6_core_unset": {
+      "id": "ch6_core_unset",
+      "speaker": "Peter",
+      "lines": ["Vẫn còn bánh răng chưa chỉnh tốc độ."],
+      "responses": []
+    },
+    "ch6_core_right": {
+      "id": "ch6_core_right",
+      "speaker": "Peter",
+      "lines": [
+        "Bánh nhỏ quay nhanh, bánh lớn quay chậm, cả ba quét qua đúng ba mươi sáu răng mỗi nhịp.",
+        "Lõi Máy cất lên một tiếng ngân dài. Một mảnh lõi sáng rơi ra từ khe máy."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "genesis_core_shard",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_genesis_core_shard",
+        "setFlags": ["activated_genesis_core"]
+      }
+    },
+    "ch6_core_done": {
+      "id": "ch6_core_done",
+      "speaker": "Peter",
+      "lines": ["Lõi Máy vẫn ngân đều."],
+      "responses": []
+    },
+    "ch6_secret_null_take": {
+      "id": "ch6_secret_null_take",
+      "speaker": "Peter",
+      "lines": [
+        "Sau lõi máy, nơi trước đây bị bánh răng che khuất, có một tấm bản đồ sao khắc trên kim loại."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "world_secret_null_hour",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_world_secret_null_hour"
+      }
+    },
+    "ch6_oil_take_2": {
+      "id": "ch6_oil_take_2",
+      "speaker": "Peter",
+      "lines": ["Trong khe bánh răng có một giọt dầu thạch anh đông cứng."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "quartz_oil_drop",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_quartz_oil_drop"
+      }
+    },
+    "ch6_core_exit_locked": {
+      "id": "ch6_core_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Thang máy phía đông chưa có điện."],
+      "responses": []
+    },
+    "ch6_bell_arrival": {
+      "id": "ch6_bell_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Thánh Điện Chuông Câm. Bốn quả chuông đồng không có quả lắc treo thành hàng.",
+        "Mình có thể dùng thanh kiếm gãy để gõ. Nhưng gõ theo thứ tự nào?"
+      ],
+      "responses": []
+    },
+    "ch6_bell_star": {
+      "id": "ch6_bell_star",
+      "speaker": "Peter",
+      "lines": ["Chuông khắc chữ \"Đá Sao\". Tiếng ngân nặng và trầm."],
+      "responses": []
+    },
+    "ch6_bell_wood": {
+      "id": "ch6_bell_wood",
+      "speaker": "Peter",
+      "lines": ["Chuông khắc chữ \"Gỗ Mục\". Tiếng ngân khô, vỡ vụn."],
+      "responses": []
+    },
+    "ch6_bell_silver": {
+      "id": "ch6_bell_silver",
+      "speaker": "Peter",
+      "lines": ["Chuông khắc chữ \"Bạc Lạnh\". Tiếng ngân trong và buốt."],
+      "responses": []
+    },
+    "ch6_bell_void": {
+      "id": "ch6_bell_void",
+      "speaker": "Peter",
+      "lines": ["Chuông khắc chữ \"Khí Hư Vô\". Gõ vào gần như không nghe thấy gì."],
+      "responses": []
+    },
+    "ch6_bell_poem": {
+      "id": "ch6_bell_poem",
+      "speaker": "Peter",
+      "lines": [
+        "Bài thơ trên bia: 'Khởi đầu từ đá trời rơi xuống,'",
+        "'Lạnh ngàn thu như ánh bạc ngời. Cây đời mục rũ thân tàn tạ, rồi tan vào hư ảo khôn nguôi.'"
+      ],
+      "responses": []
+    },
+    "ch6_bell_rule": {
+      "id": "ch6_bell_rule",
+      "speaker": "Peter",
+      "lines": [
+        "Bia Luật Chuông Câm: 'Nơi này âm thanh không đi từ lúc sinh ra tới lúc tan biến.'",
+        "'Nó đi từ cõi hư vô, quay về hạt giống ban sơ.'"
+      ],
+      "responses": []
+    },
+    "ch6_gardener_chime": {
+      "id": "ch6_gardener_chime",
+      "speaker": "Peter",
+      "lines": [
+        "Có tiếng chuông gió đâu đây. Đồng, rồi bạc, rồi thủy tinh. Đúng thứ tự Người Làm Vườn từng treo.",
+        "Ông ấy đếm ngược mọi thứ từ cuối về đầu... Có khi chuông ở đây cũng vậy."
+      ],
+      "responses": []
+    },
+    "ch6_bells_empty": {
+      "id": "ch6_bells_empty",
+      "speaker": "Peter",
+      "lines": ["Vẫn còn nhịp chưa chọn chuông."],
+      "responses": []
+    },
+    "ch6_bells_wrong": {
+      "id": "ch6_bells_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Bốn tiếng chuông va vào nhau thành một tiếng đục ngầu.",
+        "Giai điệu sai nhịp. Bài thơ chỉ là chiều xuôi."
+      ],
+      "responses": []
+    },
+    "ch6_bells_right": {
+      "id": "ch6_bells_right",
+      "speaker": "Peter",
+      "lines": [
+        "Hư Vô... Gỗ Mục... Bạc Lạnh... Đá Sao.",
+        "Bốn tiếng chuông nối vào nhau như một hơi thở dài. Cánh cửa phía đông mở."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch6_fb_promise"
+        }
+      ],
+      "effects": {
+        "setFlags": ["solved_chime_bell"]
+      }
+    },
+    "ch6_fb_promise": {
+      "id": "ch6_fb_promise",
+      "speaker": "Ký Ức Mờ",
+      "lines": [
+        "Mỏm đá có cây bàng gãy, bờ biển Khánh Hòa. Năm mười bốn tuổi. Mưa lất phất.",
+        "Kuro bẻ đôi ổ bánh mì: 'Nếu một ngày tao bị xóa tên, mày phải là người nhớ.'",
+        "'Tao không chỉ nhớ mày. Tao chừa cho mày một cái ghế. Cả thế giới bảo mày chưa từng sinh ra, tao vẫn đi tìm.'",
+        "Kuro cười, quay mặt ra biển cho mưa che đi."
+      ],
+      "responses": [],
+      "flashback": true,
+      "effects": {
+        "setFlags": ["ch6_promise_remembered"]
+      }
+    },
+    "ch6_kuro_bell": {
+      "id": "ch6_kuro_bell",
+      "speaker": "Kuro",
+      "lines": [
+        "Tiếng chuông này... mày có nghe thấy tiếng mưa trong đó không?",
+        "Tao nhớ ra rồi. Cái ghế. Mày hứa chừa cho tao một cái ghế. Tao tưởng tao quên mất đoạn đó rồi chứ."
+      ],
+      "responses": []
+    },
+    "ch6_cracked_first": {
+      "id": "ch6_cracked_first",
+      "speaker": "Peter",
+      "lines": [
+        "Quả chuông thứ năm nằm dưới đất, nứt một đường dài. Mặt chuông xỉn như đá cũ.",
+        "Nếu có dầu thạch anh để đánh bóng, có lẽ nó sẽ ngân lại được. Nghe nói có ba giọt rải rác trong điện."
+      ],
+      "responses": [],
+      "effects": {
+        "startQuest": "quest_ch6_mute_melody"
+      }
+    },
+    "ch6_cracked_need": {
+      "id": "ch6_cracked_need",
+      "speaker": "Peter",
+      "lines": ["Cần đủ ba giọt dầu thạch anh, và phải biết giai điệu đúng của điện này."],
+      "responses": []
+    },
+    "ch6_cracked_polish": {
+      "id": "ch6_cracked_polish",
+      "speaker": "Peter",
+      "lines": [
+        "Ba giọt dầu thạch anh tan ra trên mặt chuông. Vết nứt mờ dần.",
+        "Mình gõ lại giai điệu ban nãy. Quả chuông nhỏ ngân lên, và một chiếc chuông con rơi ra từ lòng nó."
+      ],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "quartz_oil_drop",
+            "quantity": 3
+          }
+        ],
+        "grantItems": [
+          {
+            "itemId": "echoing_origin_bell",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_echoing_origin_bell",
+        "setFlags": ["restored_chime_bell"],
+        "grantExp": 50
+      }
+    },
+    "ch6_cracked_done": {
+      "id": "ch6_cracked_done",
+      "speaker": "Peter",
+      "lines": ["Quả chuông nhỏ đã lành, thỉnh thoảng tự ngân khi có gió."],
+      "responses": []
+    },
+    "ch6_oil_take_3": {
+      "id": "ch6_oil_take_3",
+      "speaker": "Peter",
+      "lines": ["Trong hốc tường có một giọt dầu thạch anh."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "quartz_oil_drop",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_quartz_oil_drop"
+      }
+    },
+    "ch6_secret_forgotten_take": {
+      "id": "ch6_secret_forgotten_take",
+      "speaker": "Peter",
+      "lines": [
+        "Một tấm bia tưởng niệm không có tên. Chỉ có một dòng: \"Người từng ngồi cạnh ngai.\"",
+        "Mình chép lại dòng chữ, cùng những nét khắc mờ bên dưới."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "world_secret_first_forgotten",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_world_secret_first_forgotten"
+      }
+    },
+    "ch6_bell_exit_locked": {
+      "id": "ch6_bell_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Cửa phía đông vẫn đóng. Bốn quả chuông chưa ngân đúng."],
+      "responses": []
+    },
+    "ch6_orrery_arrival": {
+      "id": "ch6_orrery_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Đài Thiên Cầu. Ba vành vàng lồng vào nhau, lơ lửng giữa trời sao. Mỗi vành có một khe cửa.",
+        "Chỉ có một lối đi từ phía nam dẫn tới. Ba cần gạt nằm cạnh lối đi."
+      ],
+      "responses": []
+    },
+    "ch6_orrery_chart": {
+      "id": "ch6_orrery_chart",
+      "speaker": "Peter",
+      "lines": [
+        "Bản khắc bên lối đi: 'Ba vành khớp răng với nhau. Xoay vành trong, vành giữa lùi một nấc. Xoay vành giữa, vành ngoài tiến một nấc.'",
+        "'Vành ngoài cùng tự quay một mình. Lõi chỉ mở cho kẻ đi thẳng từ phía nam vào.'"
+      ],
+      "responses": []
+    },
+    "ch6_orrery_core": {
+      "id": "ch6_orrery_core",
+      "speaker": "Peter",
+      "lines": ["Ba khe cửa thẳng hàng. Mình bước vào giữa lõi. Ánh sáng dưới chân cuốn mình đi."],
+      "responses": [],
+      "effects": {
+        "setFlags": ["solved_orrery"],
+        "warpTo": {
+          "mapId": "map_ch6_threshold_gate",
+          "spawnId": "from_ring"
+        }
+      }
+    },
+    "ch6_threshold_arrival": {
+      "id": "ch6_threshold_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Cổng Ngưỡng Thần Thể. Một màn sáng chắn lối lên Đại Điện. Trước cổng là bệ khắc ba khe."
+      ],
+      "responses": []
+    },
+    "ch6_threshold_riddle": {
+      "id": "ch6_threshold_riddle",
+      "speaker": "Peter",
+      "lines": [
+        "Lời sấm trên cổng: 'Ngươi có thân xác như mọi tạo vật. Nhưng sổ trời không chép tên ngươi.'",
+        "'Hãy viết chính ngươi.'"
+      ],
+      "responses": []
+    },
+    "ch6_threshold_empty": {
+      "id": "ch6_threshold_empty",
+      "speaker": "Peter",
+      "lines": ["Bệ khắc còn trống."],
+      "responses": []
+    },
+    "ch6_threshold_wrong": {
+      "id": "ch6_threshold_wrong",
+      "speaker": "Peter",
+      "lines": ["Cổng thở ra một tiếng dài. \"Ngươi khắc một cái tên không phải của ngươi.\""],
+      "responses": []
+    },
+    "ch6_threshold_wrong_ex": {
+      "id": "ch6_threshold_wrong_ex",
+      "speaker": "Peter",
+      "lines": ["Cổng thở dài. \"Xóa đi một vật? Ngươi vẫn đang đứng đây mà.\""],
+      "responses": []
+    },
+    "ch6_threshold_wrong_nx": {
+      "id": "ch6_threshold_wrong_nx",
+      "speaker": "Peter",
+      "lines": ["Cổng thở dài. \"Chỉ là một cái tên bị xóa? Ngươi có thân xác.\""],
+      "responses": []
+    },
+    "ch6_threshold_right": {
+      "id": "ch6_threshold_right",
+      "speaker": "Peter",
+      "lines": [
+        "[E], [N], [X]. Một vật. Có tên... không. Một vật không tên.",
+        "Màn sáng lặng đi. Rồi nó tách ra, như một tấm rèm có người vừa vén."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch6_fb_unwritten"
+        }
+      ],
+      "effects": {
+        "setFlags": ["opened_threshold_gate", "ch6_glyph_n_known"]
+      }
+    },
+    "ch6_fb_unwritten": {
+      "id": "ch6_fb_unwritten",
+      "speaker": "Ký Ức Mờ",
+      "lines": [
+        "Bụi sáng nổ tung khắp nơi. Một tia sáng không màu rơi xuống, rơi mãi, rồi đáp vào đôi tay nhăn nheo của một ông thợ đồng hồ.",
+        "Có một giọng nói không rõ của ai: 'Đứa bé này không có sợi chỉ định mệnh nào. Nó là một trang giấy trắng.'",
+        "'Hãy nuôi nó như một đứa trẻ bình thường. Cho tới ngày các bánh răng ngừng quay.'"
+      ],
+      "responses": [],
+      "flashback": true
+    },
+    "ch6_threshold_done": {
+      "id": "ch6_threshold_done",
+      "speaker": "Peter",
+      "lines": ["Màn sáng đã vén lên."],
+      "responses": []
+    },
+    "ch6_crack_closed": {
+      "id": "ch6_crack_closed",
+      "speaker": "Peter",
+      "lines": [
+        "Một khe nứt trên tường, phía sau có ánh sao. Hẹp quá, nhưng hình như nó đáp lại thứ gì đó..."
+      ],
+      "responses": []
+    },
+    "ch6_crack_open": {
+      "id": "ch6_crack_open",
+      "speaker": "Peter",
+      "lines": ["Mảnh lõi trong túi rung lên. Khe nứt giãn ra vừa một người."],
+      "responses": [],
+      "effects": {
+        "warpTo": {
+          "mapId": "map_ch6_celestial_chessboard",
+          "spawnId": "default"
+        }
+      }
+    },
+    "ch6_threshold_exit_locked": {
+      "id": "ch6_threshold_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Màn sáng chắn lối. Phải khắc đúng chính mình."],
+      "responses": []
+    },
+    "ch6_chess_arrival": {
+      "id": "ch6_chess_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Một bàn cờ đá bốn nhân bốn, lơ lửng giữa trời. Mười hai quân đã nằm sẵn, còn tám ô trống.",
+        "Trên cao có một khoảng tối hình người cầm búa, như thể ai đó đã xóa một chòm sao khỏi bầu trời."
+      ],
+      "responses": [],
+      "effects": {
+        "startQuest": "quest_ch6_lost_constellation"
+      }
+    },
+    "ch6_chess_rules": {
+      "id": "ch6_chess_rules",
+      "speaker": "Peter",
+      "lines": [
+        "Luật bàn cờ: 'Không có hai quân cùng loại trên một hàng hay một cột.'",
+        "'Mặt Trăng không bao giờ đứng ngay dưới hay ngay bên phải Mặt Trời. Sao Chổi nào cũng phải chạm ít nhất một Hư Không.'"
+      ],
+      "responses": []
+    },
+    "ch6_chess_empty": {
+      "id": "ch6_chess_empty",
+      "speaker": "Peter",
+      "lines": ["Vẫn còn ô trống."],
+      "responses": []
+    },
+    "ch6_chess_wrong": {
+      "id": "ch6_chess_wrong",
+      "speaker": "Peter",
+      "lines": ["Các quân cờ rung lên rồi đứng im. Có luật nào đó đang bị phá."],
+      "responses": []
+    },
+    "ch6_chess_right": {
+      "id": "ch6_chess_right",
+      "speaker": "Peter",
+      "lines": [
+        "Quân cuối cùng vào chỗ. Bàn cờ sáng lên, và khoảng tối trên trời lấp đầy bằng sao. Chòm Người Thợ Rèn.",
+        "Một giọng trầm vang lên từ chòm sao: 'Thanh kiếm gãy đó là ta rèn. Ta rèn nó cho một đứa trẻ không ai đặt tên.'",
+        "'Cầm lấy thanh này. Khi nào lưỡi cũ lành lại, mang nó về đây cho ta xem.'"
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "origin_astral_blade",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_origin_astral_blade",
+        "setFlags": ["aligned_celestial_chess"]
+      }
+    },
+    "ch6_chess_done": {
+      "id": "ch6_chess_done",
+      "speaker": "Peter",
+      "lines": ["Chòm Người Thợ Rèn vẫn sáng trên đầu."],
+      "responses": []
+    },
+    "ch6_chess_back": {
+      "id": "ch6_chess_back",
+      "speaker": "Peter",
+      "lines": ["Quay lại Cổng Ngưỡng."],
+      "responses": [],
+      "effects": {
+        "warpTo": {
+          "mapId": "map_ch6_threshold_gate",
+          "spawnId": "from_chess"
+        }
+      }
+    },
+    "ch6_approach_arrival": {
+      "id": "ch6_approach_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Đường Dẫn Điện Thờ. Hành lang dài, hai bên là cột đá. Cuối hành lang có một bóng người cầm búa."
+      ],
+      "responses": []
+    },
+    "ch6_deacon_confront": {
+      "id": "ch6_deacon_confront",
+      "speaker": "Tàn Ảnh Chấp Sự",
+      "lines": [
+        "Ba nhịp. Ngày xưa ta gõ ba nhịp để mở cửa Đại Điện mỗi sáng.",
+        "Giờ không còn ai cần mở cửa nữa. Nhưng ta vẫn gõ. Đỡ được cả ba thì ngươi đi qua."
+      ],
+      "responses": []
+    },
+    "ch6_deacon_defeated": {
+      "id": "ch6_deacon_defeated",
+      "speaker": "Tàn Ảnh Chấp Sự",
+      "lines": ["Ba nhịp... đủ rồi. Cửa đã mở cho ngươi."],
+      "responses": [],
+      "effects": {
+        "setFlags": ["defeated_remnant_deacon"]
+      }
+    },
+    "ch6_approach_exit_locked": {
+      "id": "ch6_approach_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Tàn Ảnh Chấp Sự đứng chắn lối."],
+      "responses": []
+    },
+    "ch6_thrones_arrival": {
+      "id": "ch6_thrones_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Đại Điện Ngai Vàng. Ngai của Chronos nằm cuối điện, vỡ làm đôi, phủ bụi sao.",
+        "Trước ngai có một cỗ máy hình nhân sư khổng lồ đang nằm. Vương miện bánh răng trên đầu nó từ từ quay."
+      ],
+      "responses": []
+    },
+    "ch6_kuro_returns_help": {
+      "id": "ch6_kuro_returns_help",
+      "speaker": "Kuro",
+      "lines": [
+        "(Kuro bước ra từ sau cột, thở dốc, vạt áo cháy sém.)",
+        "Lại là mày. Kỳ lạ thật... tao quên tên mày rồi, mà chân tao cứ dẫn tao quay lại chỗ mày.",
+        "Con nhân sư đó không cho tao lại gần ngai. Đứng xa ra mà xem."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch6_kuro_returned"]
+      }
+    },
+    "ch6_kuro_returns_stop": {
+      "id": "ch6_kuro_returns_stop",
+      "speaker": "Kuro",
+      "lines": [
+        "(Kuro bước ra từ sau cột, tay ôm sườn.)",
+        "Tao tới trước mày cả ngày trời mà vẫn không qua nổi con nhân sư đó.",
+        "Đừng tưởng tao cần mày giúp. Tao chỉ... đứng đây xem thôi."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch6_kuro_returned"]
+      }
+    },
+    "ch6_warden_confront": {
+      "id": "ch6_warden_confront",
+      "speaker": "Thực Thể Giám Hộ Khởi Nguyên",
+      "lines": [
+        "KẺ KHÔNG TÊN. KHÔNG ĐƯỢC CHẠM VÀO NGAI.",
+        "GENESIS PURGE SẼ XÓA NGƯƠI VỀ LẠI LÚC CHƯA BẮT ĐẦU."
+      ],
+      "responses": []
+    },
+    "ch6_warden_kuro_tip": {
+      "id": "ch6_warden_kuro_tip",
+      "speaker": "Kuro",
+      "lines": [
+        "Nghe này. Sổ tay ở lõi máy nói cái chốt điều áp nằm trên lưng nó.",
+        "Lúc nó đứng im tụ lực, tao giữ chân nó. Mày rút chốt."
+      ],
+      "responses": []
+    },
+    "ch6_warden_defeated": {
+      "id": "ch6_warden_defeated",
+      "speaker": "Peter",
+      "lines": [
+        "Cỗ máy nằm xuống như một con thú già. Một cái chốt bằng vàng lăn ra khỏi lưng nó.",
+        "Sau lưng ngai vỡ, có thứ gì đó vừa thở ra."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "genesis_regulator_pin",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_genesis_regulator_pin",
+        "setFlags": ["defeated_genesis_warden"]
+      }
+    },
+    "ch6_remnant": {
+      "id": "ch6_remnant",
+      "speaker": "Dư Ảnh Chronos",
+      "lines": [
+        "(Một bóng người bằng ánh sáng vàng ngồi lên chiếc ngai vỡ, nhẹ như không.)",
+        "Ngươi đã đi rất xa, kẻ không tên. Ngươi đọc chữ của ta. Ngươi hạ người canh cửa của ta.",
+        "Và ngươi vừa mở thứ ta đã khóa."
+      ],
+      "responses": [
+        {
+          "text": "Ngài đã khóa thứ gì?",
+          "nextDialogueId": "ch6_remnant_2"
+        }
+      ]
+    },
+    "ch6_remnant_2": {
+      "id": "ch6_remnant_2",
+      "speaker": "Dư Ảnh Chronos",
+      "lines": [
+        "(Dư ảnh nhìn về phía cánh cửa phía đông, nơi có tiếng gió hú từ một vực sâu.)",
+        "Đi mà xem. Ta không còn đủ hình hài để ngăn ngươi nữa."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch6_remnant_spoke"]
+      }
+    },
+    "ch6_remnant_after": {
+      "id": "ch6_remnant_after",
+      "speaker": "Dư Ảnh Chronos",
+      "lines": ["Đi đi. Thời gian của ta đã hết từ lâu."],
+      "responses": []
+    },
+    "ch6_name_stone": {
+      "id": "ch6_name_stone",
+      "speaker": "Peter",
+      "lines": [
+        "Dưới chân ngai có một phiến đá không tên. Trên đó, hai cái tên khắc sát cạnh nhau, nét non nớt như của trẻ con.",
+        "Peter. Kuro.",
+        "Ai đã khắc ở đây? Và từ bao giờ?"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch6_saw_name_stone"]
+      }
+    },
+    "ch6_nook_closed": {
+      "id": "ch6_nook_closed",
+      "speaker": "Peter",
+      "lines": ["Một khe nứt tối om sau cột. Có hơi lạnh tỏa ra."],
+      "responses": []
+    },
+    "ch6_nook_open": {
+      "id": "ch6_nook_open",
+      "speaker": "Peter",
+      "lines": ["Khe nứt giờ đã rộng ra sau trận đánh. Có bậc đá dẫn xuống bóng tối."],
+      "responses": [],
+      "effects": {
+        "warpTo": {
+          "mapId": "map_ch6_first_forgotten_nook",
+          "spawnId": "default"
+        }
+      }
+    },
+    "ch6_thrones_exit_locked": {
+      "id": "ch6_thrones_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Cửa phía đông dẫn tới một vực sâu. Chưa đi được."],
+      "responses": []
+    },
+    "ch6_abyss_arrival": {
+      "id": "ch6_abyss_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Vực Thẳm Hư Không. Một dải mây hẹp dẫn ra giữa khoảng đen. Ở cuối dải mây là Ấn Origin."
+      ],
+      "responses": []
+    },
+    "ch6_cliff_1": {
+      "id": "ch6_cliff_1",
+      "speaker": "Peter",
+      "lines": [
+        "Ấn Origin lơ lửng trước mặt. Nó đã nứt một đường dài từ trên xuống dưới.",
+        "Mình đưa tay ra. Vết nứt toác rộng thêm, như thể chỉ chờ có người chạm vào."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch6_fb_forgotten"
+        }
+      ]
+    },
+    "ch6_fb_forgotten": {
+      "id": "ch6_fb_forgotten",
+      "speaker": "Ký Ức Mờ",
+      "lines": [
+        "Khoảng đen trước khi có bất cứ điều gì. Một bóng hình khổng lồ bị xích bằng những sợi xích chữ vàng.",
+        "Nó gào thét mà không có tiếng. Từng phần cơ thể nó bị bóc ra khỏi khái niệm."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch6_cliff_2"
+        }
+      ],
+      "flashback": true
+    },
+    "ch6_cliff_2": {
+      "id": "ch6_cliff_2",
+      "speaker": "Peter",
+      "lines": [
+        "Dưới đáy vực, một con mắt mở ra. To như cả một vầng trăng.",
+        "Ấn Origin vỡ đôi. Một nửa rơi vào tay mình, một nửa chìm xuống bóng tối."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch6_cliff_kuro"
+        }
+      ]
+    },
+    "ch6_cliff_kuro": {
+      "id": "ch6_cliff_kuro",
+      "speaker": "Kuro",
+      "lines": [
+        "(Một làn sóng đen dâng lên, hất Kuro văng về phía bên kia khoảng không.)",
+        "Peter! Giữ lấy thanh kiếm!",
+        "Tao sẽ tìm thấy mày... ở điểm tận cùng!"
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch6_cliff_end"
+        }
+      ]
+    },
+    "ch6_cliff_end": {
+      "id": "ch6_cliff_end",
+      "speaker": "Peter",
+      "lines": [
+        "Rồi chỉ còn mình đứng trên bờ vực đổ nát. Thanh kiếm gãy trong tay nóng rực.",
+        "Ở đâu đó dưới kia, thứ đã bị Chronos khóa lại vừa thức dậy."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["origin_seal_cracked", "witnessed_ch6_cliffhanger"],
+        "grantItems": [
+          {
+            "itemId": "origin_seal_half",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_origin_seal_half",
+        "endChapter": 6
+      }
+    },
+    "ch6_nook_arrival": {
+      "id": "ch6_nook_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Hốc đá dưới chân ngai. Một khối cầu bóng tối lơ lửng trên bệ khắc ba khe.",
+        "Khối cầu như đang chờ ai đó gọi đúng tên nó."
+      ],
+      "responses": []
+    },
+    "ch6_nook_empty": {
+      "id": "ch6_nook_empty",
+      "speaker": "Peter",
+      "lines": ["Bệ khắc còn trống."],
+      "responses": []
+    },
+    "ch6_nook_wrong": {
+      "id": "ch6_nook_wrong",
+      "speaker": "Peter",
+      "lines": ["Khối cầu co lại, im lìm. Không phải tên của nó."],
+      "responses": []
+    },
+    "ch6_nook_right": {
+      "id": "ch6_nook_right",
+      "speaker": "Peter",
+      "lines": [
+        "[A], [N], [X]. Ánh sáng đầu tiên... có tên, đã bị xóa.",
+        "Khối cầu vỡ ra. Một cái bóng khổng lồ đứng dậy, những sợi xích chữ vàng kêu loảng xoảng."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch6_echo_awake"],
+        "refreshMap": true
+      }
+    },
+    "ch6_echo_confront": {
+      "id": "ch6_echo_confront",
+      "speaker": "Tiếng Vọng Của Kẻ Bị Quên",
+      "lines": [
+        "...Ai... gọi... tên ta...",
+        "Không ai được gọi. Không ai được nhớ. Sương của ta sẽ lau sạch ngươi."
+      ],
+      "responses": []
+    },
+    "ch6_echo_defeated": {
+      "id": "ch6_echo_defeated",
+      "speaker": "Tiếng Vọng Của Kẻ Bị Quên",
+      "lines": [
+        "Cảm ơn... đã gọi... một lần.",
+        "(Tiếng vọng tan thành bụi chữ vàng, để lại một phù hiệu đen.)"
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "null_origin_insignia",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_null_origin_insignia",
+        "setFlags": ["defeated_echo_first_forgotten"]
+      }
+    },
+    "ch6_nook_done": {
+      "id": "ch6_nook_done",
+      "speaker": "Peter",
+      "lines": ["Hốc đá yên lặng. Chỉ còn bụi chữ vàng lấp lánh."],
+      "responses": []
+    },
+    "ch6_nook_back": {
+      "id": "ch6_nook_back",
+      "speaker": "Peter",
+      "lines": ["Quay lên Đại Điện."],
+      "responses": [],
+      "effects": {
+        "warpTo": {
+          "mapId": "map_ch6_hall_of_thrones",
+          "spawnId": "from_nook"
+        }
+      }
     }
   }
 }
