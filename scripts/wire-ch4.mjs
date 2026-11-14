@@ -588,7 +588,7 @@ add('map_ch4_red_ridge_battlefield', 'Sống Núi Máu', (p) => ({
     poi('poi_ch4_relic_limb', p.relic_limb, '[E] Nhặt binh khí cổ', 'ch4_relic_limb_take'),
     poi('poi_ch4_relic_pole', p.relic_pole, '[E] Nhặt binh khí cổ', 'ch4_relic_pole_take'),
     poi('poi_ch4_plaque', p.plaque, '[E] Xem mảnh bia', 'ch4_plaque_take'),
-    poi('poi_ch4_incense', p.incense, '[E] Thắp hương', 'ch4_mounds_wrong', {
+    poi('poi_ch4_incense', p.incense, '[E] Thắp hương cho bốn gò đất', 'ch4_mounds_wrong', {
       dialogueRules: [
         { ifFlag: 'solved_fallen_arms_array', dialogueId: 'ch4_mounds_done' },
         {
@@ -602,6 +602,13 @@ add('map_ch4_red_ridge_battlefield', 'Sống Núi Máu', (p) => ({
         },
       ],
     }),
+  ],
+  dialChecks: [
+    {
+      ifFlags: ['ch4_mound_n_haft', 'ch4_mound_e_limb', 'ch4_mound_w_blade', 'ch4_mound_c_pole'],
+      unlessFlag: 'solved_fallen_arms_array',
+      dialogueId: 'ch4_banner_ward_broken',
+    },
   ],
   dials: [
     moundDial('ch4_mound_n', p.dial_north, 'Bắc'),

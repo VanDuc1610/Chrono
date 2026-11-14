@@ -258,6 +258,11 @@ export interface MapDefinition {
   scales?: MapScale[];
   /** Arrow volleys falling on an area, telegraphed by shadows; cover tiles are safe. */
   volleys?: MapVolley[];
+  /**
+   * Checked after every dial turn: when all `ifFlags` hold (and `unlessFlag` does not), the
+   * dialogue opens at once — the puzzle solves itself without a separate confirm step.
+   */
+  dialChecks?: { ifFlags: string[]; unlessFlag?: string; dialogueId: string }[];
   /** Light beams steered by mirror dials (Chapter 6). */
   beams?: MapBeam[];
   /** Glowing floor discs: a Heel Shadow that crosses one is undone (Chapter 6). */

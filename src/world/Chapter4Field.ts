@@ -75,10 +75,22 @@ export class Chapter4Field {
           }
           this.drawBeams();
           this.host.onDialTurned?.();
+          this.runDialChecks();
           this.sound.playSelect();
           this.float(pos.x, pos.y - 20, label(), '#ffd88a');
         },
       });
+    }
+  }
+
+  /** A dial combination that is right opens its dialogue without a confirm step. */
+  private runDialChecks(): void {
+    const flag = (f: string) => this.session.getFlag(f);
+    for (const c of this.map.dialChecks ?? []) {
+      if (c.unlessFlag && flag(c.unlessFlag)) continue;
+      if (!c.ifFlags.every(flag)) continue;
+      this.scene.time.delayedCall(400, () => this.host.openDialogue(c.dialogueId));
+      return;
     }
   }
 

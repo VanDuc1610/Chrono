@@ -5950,7 +5950,7 @@
             "y": 13
           },
           "radius": 44,
-          "prompt": "[E] Thắp hương",
+          "prompt": "[E] Thắp hương cho bốn gò đất",
           "dialogueId": "ch4_mounds_wrong",
           "dialogueRules": [
             {
@@ -5973,6 +5973,18 @@
         "color": "#c83a2a",
         "alpha": 0.1
       },
+      "dialChecks": [
+        {
+          "ifFlags": [
+            "ch4_mound_n_haft",
+            "ch4_mound_e_limb",
+            "ch4_mound_w_blade",
+            "ch4_mound_c_pole"
+          ],
+          "unlessFlag": "solved_fallen_arms_array",
+          "dialogueId": "ch4_banner_ward_broken"
+        }
+      ],
       "dials": [
         {
           "id": "ch4_mound_n",
