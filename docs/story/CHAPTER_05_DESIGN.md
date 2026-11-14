@@ -502,6 +502,6 @@ Possibility cho Peter **nhìn ký ức của Kuro**, không phải của mình. 
 Owner duyệt §1–§13. Trả lời các câu hỏi mở:
 
 1. Peter của nhánh Alpha có vợ và con gái: **đồng ý**. Peter chính vẫn độc thân.
-2. Lối thứ ba ở lựa chọn 3: **có gợi ý nhẹ trong thoại.** Ở hầm trẻ em, Mira hỏi Kuro: *"Chú không mang được cả thành phố thì mang tụi con thôi cũng được mà?"* Câu này không nói đó là một lựa chọn trong game.
+2. Lối thứ ba ở lựa chọn 3: **có gợi ý nhẹ trong thoại.** Ở hầm trẻ em, Mira hỏi Kuro: _"Chú không mang được cả thành phố thì mang tụi con thôi cũng được mà?"_ Câu này không nói đó là một lựa chọn trong game.
 3. Trận ngắn với Kuro khi ngăn anh: **thua vẫn đi tiếp** (cốt truyện không đổi, chỉ khác một câu thoại).
 4. Câu đố trí nhớ có thưởng thêm khi không mở sổ: **giữ như thiết kế.**
