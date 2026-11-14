@@ -899,6 +899,8 @@ export class ExplorationScene extends Phaser.Scene {
   private startTimer(flag: string, ms: number): void {
     this.session.setFlag(flag);
     this.timedFlags.add(flag);
+    // The timed bridge / plank appears now (the timer may start after its dialogue closed).
+    this.applyTileSwaps();
     const ends = this.time.now + ms;
     this.timerText?.destroy();
     this.timerText = this.add
