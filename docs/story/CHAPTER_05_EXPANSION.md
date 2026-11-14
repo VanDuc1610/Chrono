@@ -629,3 +629,102 @@ Hầu hết các câu đố đều tận dụng 100% engine hiện có (`layerVa
 ---
 
 _Tài liệu kết thúc. Sẵn sàng chuyển giao cho Claude Code review kỹ thuật và trình Project Owner phê duyệt._
+
+---
+
+## 9. Claude Review — Bản Đã Sửa (2026-11-14)
+
+§9 thay thế mọi chỗ khác ở §2–§8. Câu hỏi mở (§7) dùng mặc định cho tới khi owner nói khác:
+
+- Bé Na: giữ mong manh, không khẳng định khỏi bệnh.
+- Đồng hồ cát: bỏ phần canh giờ (xem EX-07).
+- Kuro: giữ "tao – mày" tới cuối.
+
+**EX-01 · Khối đá và bóng đổ.**
+
+- Giữ nguyên ý tưởng. Khối đá là một vòng xoay vị trí: **[E] Đẩy khối đá** chuyển qua Bắc → Đông → Nam → Tây (cờ `ch5x_rock_<hướng>`); ô đá đổi theo `tileSwaps`.
+- Chỉ đẩy được ở nhánh Sống. Bệ cảm ứng (POI) ở nhánh Tỉa kiểm tra `ch5x_rock_north` → `ch5x_puzzle_ex1_solved`.
+
+**EX-02 · Hộp thời tiết — phải loại trừ, không đọc thẳng đáp án.**
+
+- Nhật ký Người Làm Vườn trang 4 chỉ còn: _"Nguyệt Thảo cần đúng thứ nhánh Sống đang thiếu, và tránh mọi thứ đã giết nhánh Tỉa."_
+- Hoa nhánh Sống: úng nước vì mưa, gió đọng, run vì lạnh.
+- Hoa nhánh Tỉa: chết vì nắng gắt khô hạn và gió lốc.
+- **Loại trừ:**
+  - Độ ẩm: không mưa (thừa), không khô (đã giết Tỉa) → Sương.
+  - Nhiệt độ: thiếu ấm (nên không băng giá), không nắng gắt → Ôn hòa.
+  - Dòng khí: không đọng, không lốc → Gió thoảng.
+- Mỗi vòng xoay có thêm một giá trị đầu tiên "(chưa chỉnh)" để không có vòng nào đúng sẵn.
+
+**EX-04 · Ba nhân chứng — viết lại logic (bản cũ mâu thuẫn).**
+
+- Ba dư ảnh X, Y, Z **không ghi** ai thuộc nhánh nào.
+- Bia đá:
+  - kẻ được ở lại luôn nói dối;
+  - kẻ bị tỉa luôn nói thật;
+  - kẻ lưu đày luôn nói ngược với kẻ bị tỉa (tức cũng nói dối).
+- Lời khai:
+  - **X:** "Z là kẻ bị tỉa."
+  - **Y:** "Chiếc chìa khóa nằm trong ngực áo của Z."
+  - **Z:** "X đang nói thật."
+- **Suy luận:**
+  - Chỉ có đúng một người nói thật.
+  - Nếu X nói thật thì Z cũng thật — vô lý, nên X nói dối.
+  - Z bảo "X nói thật", nên Z cũng nói dối.
+  - Vậy Y là người nói thật, và chìa khóa ở **Z**.
+- **Đầu vào:** vòng xoay [X / Y / Z] + POI "Chỉ định".
+
+**EX-06 · Giai điệu bằng thơ.**
+
+- Năm vòng xoay "Nốt 1…5", mỗi vòng 5 chất liệu cộng "(trống)", + cần [Phát âm chuỗi].
+- **Đáp án:** Gió Hư Không → Nước Chảy → Thủy Tinh → Thủy Tinh → Thủy Tinh.
+- Chọn Kim Loại ở bất kỳ nốt nào = sai (phím kẹt).
+
+**EX-07 · Đồng hồ cát hai chiều — đổi thành câu đố đong cát theo lượt, bỏ canh giờ.**
+
+- Khoang giữa có vạch 0–5.
+- Cần [Lật đồng hồ]:
+  - ở nhánh Sống: **+3 vạch**;
+  - ở nhánh Tỉa: **−2 vạch** (không xuống dưới 0);
+  - vượt quá 5: bình vỡ, về 0.
+- **Manh mối:**
+  - Bệ đá: _"Cổng hư không chỉ nhận cát dừng ở vạch thứ tư."_
+  - Ghi chép người Vùng Xám: _"Nhánh sống rót ba vạch mỗi lần lật, nhánh tỉa hút ngược hai. Quá năm vạch thì bình vỡ, cát rơi sạch."_
+- **Lời giải ngắn nhất:** Sống (3) → Tỉa (1) → Sống (4), rồi kéo [Khóa cân bằng].
+- **Kỹ thuật:** cờ `ch5x_sand_0..5` (luôn đúng một cờ), POI Lật có `dialogueRules` theo nhánh và mức hiện tại; [Khóa] kiểm tra `ch5x_sand_4`.
+
+**EX-08 · Tấm gương của lựa chọn cũ.**
+
+- Ánh xạ cờ thật:
+  - **Cành Liễu Gãy (buông bỏ)** ↔ `ch5_choice_alpha_letter` (đọc thư, Peter-Alpha tháo giáp);
+  - **Chiếc Nhẫn Rỉ (níu giữ)** ↔ `ch5_choice_alpha_spared` (trao thư, anh ấy tiếp tục tỉa để giữ con).
+- Bệ Thanh Kiếm luôn sai.
+- **Thưởng:** cờ `unity_mindset_active` — Vua Chưa Sinh mất lượt đầu tiên của trận (engine: `script.stunIfFlag`).
+
+**Bùa và vật phẩm** (chỉ dùng chỉ số game có):
+
+| Id                        | Chỉ số              |
+| :------------------------ | :------------------ |
+| `na_braided_ribbon`       | maxHp 30, defense 4 |
+| `pruner_compassion_gem`   | attack 3, maxMp 18  |
+| `ivo_precision_lens`      | maxMp 15, speed 3   |
+| `quantum_astrolabe_charm` | maxMp 22, speed 3   |
+| `singularity_sand_charm`  | defense 8, maxHp 10 |
+
+`chronos_coolant_flask` giữ nguyên (hồi 120 HP, 40 MP).
+
+**Nhiệm vụ phụ:**
+
+- **Ivo:** "dùng Temporal Sight" → chỉ cần một POI ở nhánh Tỉa của lò phản ứng.
+- **Người Làm Vườn:**
+  - Ba chuông gió treo bằng vòng xoay thứ tự, đáp án Đồng → Bạc → Thủy Tinh.
+  - Người Làm Vườn tuần tra trong nhà kính chỉ xuất hiện khi chưa có `pacified_the_gardener`.
+- **Bé Na:** giữ nguyên các bước.
+
+**Bản đồ mới:**
+
+- `map_ch5_glass_greenhouse`: interval tileset.
+- `map_ch5_alpha_harbor`: coastal tileset, có hai nhánh.
+- `map_ch5_observatory_ruins`: steel tileset.
+
+Chương 5 nâng lên **17 bản đồ**.
