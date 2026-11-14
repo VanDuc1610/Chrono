@@ -774,3 +774,167 @@ Toàn bộ tài nguyên được vẽ theo Pipeline B (Code-authored pixel art h
 ---
 
 _Tài liệu kết thúc. Sẵn sàng chuyển giao cho Claude Code review kỹ thuật và trình Project Owner phê duyệt._
+
+---
+
+## 17. Claude Review — Bản Đã Sửa (2026-11-14)
+
+§17 thay thế mọi chỗ khác ở §2–§16 khi hai bên mâu thuẫn. Những gì §17 không nhắc tới thì giữ nguyên.
+
+### 17.1. Lỗi logic phải sửa
+
+**C06 · Ba Archon — đáp án cũ sai.**
+
+- Kẻ Nói Dối và Kẻ Nói Ngược đều luôn nói sai, nên trong ba câu chỉ có đúng một câu đúng.
+- Kiểm cả ba trường hợp:
+  - Solon nói thật → Kael nói sai, vậy Vane là Kẻ Nói Ngược → câu của Kael ("Vane là kẻ nói ngược") lại đúng. Mâu thuẫn.
+  - Kael nói thật → Vane là Kẻ Nói Ngược → câu của Vane ("Tôi không phải kẻ nói dối") đúng. Mâu thuẫn.
+  - Vane nói thật → câu của Kael sai (đúng vai) → Solon phải nói sai, nên Kael không phải Kẻ Nói Dối → Kael là Kẻ Nói Ngược, Solon là Kẻ Nói Dối. Không mâu thuẫn.
+- **Nghiệm duy nhất:** Vane nói thật (giữ chìa), Kael nói ngược, Solon nói dối.
+- Đổi tên vai cho rõ: **Kẻ Giữ Lời** (luôn đúng), **Kẻ Dối Trá** và **Kẻ Phản Ngôn** (cả hai luôn sai). Bia luật ghi đủ ba dòng đó.
+- Nhiệm vụ phụ Solon (kẻ dối trá sám hối) vẫn hợp.
+
+**C07 · Bánh răng — số cũ không có nghiệm.**
+
+- Với 6/12/18 răng và nấc 3/2/1, tốc độ quét là 18/24/18, không bằng nhau.
+- **Sửa thành 12 / 18 / 36 răng.** Đáp án: Nhỏ = Nấc III, Trung = Nấc II, Lớn = Nấc I (cùng quét 36). Đây là nghiệm duy nhất trong nấc 1–3.
+- Bỏ toàn bộ phần nháp tính toán và câu "bộ truyền động phụ 1/2".
+
+**C03 · Hai bệ đối cực — trái canon.**
+
+- `STORY_CHAPTER_06.md` §4 ghi Peter sinh ra từ kẽ nứt giữa **Origin và Finality**, không phải Possibility.
+- **Sửa:**
+  - Bệ giữa là "Bệ Kẽ Nứt" (trống, không huy hiệu).
+  - Sáu bệ quanh chỉ có huy hiệu, không có chữ. Năm huy hiệu người chơi đã thấy ở chương 1–5, còn một huy hiệu lạ là Origin.
+  - Cuộn da: _"Một bên quyết điều gì được bắt đầu, một bên quyết điều gì phải kết thúc."_
+  - Đáp án: bệ lạ (Origin) + bệ Finality.
+
+**C04 · Bích họa — đáp án trùng thứ tự đang treo.**
+
+- Bốn bức treo sẵn theo thứ tự I→II→III→IV, đúng bằng đáp án.
+- **Sửa:** tường treo theo thứ tự II, IV, I, III. Người chơi đặt vào 4 khung (vòng xoay). Đáp án vẫn là I→II→III→IV.
+
+**C05 · Thác — bia lộ đáp án.**
+
+- Bia đang ghi sẵn `[I]`, `[U]` và còn nhắc `[E]` gây rối.
+- **Sửa:** bia chỉ tả bằng lời và hình (dòng thác, mặt hồ đóng băng), không có ký tự.
+
+**C10 · Kẻ Vô Danh — câu đố tự mâu thuẫn.**
+
+- Câu sấm cấm `[E]` (không là tạo vật) nhưng đáp án lại có `[E]`.
+- **Sửa câu sấm:** _"Ngươi có thân xác như mọi tạo vật. Nhưng sổ trời không chép tên ngươi. Hãy viết chính ngươi."_
+- Đáp án `[E][N][X]` (Vật · Tên-không), đúng ngữ pháp ở §17.2.
+- Sai có thoại riêng:
+  - `[E][X]` → _"Ngươi vẫn đang đứng đây mà."_
+  - `[N][X]` → _"Chỉ là một cái tên bị xóa? Ngươi có thân xác."_
+
+**C13 · Tàn Tích Hư Vô — vượt giới hạn và tự đặt nghĩa.**
+
+- Đáp án 4 ký tự trong khi bệ chỉ nhận 3, và `[A]` = "khởi đầu" chưa từng được dạy.
+- **Sửa:**
+  - Bốn mảnh nhật ký cho biết người ấy là _"ánh sáng đầu tiên"_ và _"tên người bị chính trời xóa"_.
+  - Đáp án `[A][N][X]`.
+
+**C11 · Đĩa sao — thiếu dữ kiện.**
+
+- Không ai biết Bọ Cạp nằm ở cung nào.
+- **Sửa:** trần mật thất vẽ chòm Bọ Cạp ở cung II. Đối diện là cung VIII.
+
+**C12 · Bàn cờ — luật cũ không có nghiệm.**
+
+- Không bảng 4×4 nào thỏa "Mặt Trời không bao giờ kề Mặt Trăng" (Claude đã chạy máy kiểm hết mọi bảng).
+- **Luật mới:**
+  - không hai quân cùng loại trên một hàng hay một cột;
+  - Mặt Trăng không bao giờ đứng ngay dưới hoặc ngay bên phải Mặt Trời;
+  - mỗi Sao Chổi phải chạm ít nhất một Hư Không.
+- Với luật mới có 10 bảng hợp lệ. Bàn cờ bày sẵn 12 quân, chừa 4 ô trống (mỗi hàng một ô) sao cho chỉ có một cách điền.
+- Claude chọn ô trống và kiểm lại bằng máy khi dựng.
+
+**C02 + C09 · hai câu đố tia sáng cùng kiểu.**
+
+- Cả hai đều là xoay gương dẫn tia, lại chưa có sơ đồ để kiểm đáp án.
+- **Sửa:**
+  - Giữ C02 (tia sáng qua lăng kính). Sơ đồ sàn phải vẽ đủ để suy ra hướng từng trụ. Claude dựng bản đồ rồi chốt đáp án.
+  - **Thay C09 bằng "Vòng Thiên Cầu":** ba vành đồng tâm, mỗi vành có cửa. Xoay vành trong thì vành giữa quay ngược một nấc (khớp răng). Bản đồ sao trên tường cho biết vị trí cửa thẳng hàng.
+  - Không thể dò bừa vì các vành kéo nhau. Đây là kiểu suy luận không gian, chưa chương nào có.
+
+### 17.2. Chữ Khởi Nguyên — học thật, ngữ pháp nhất quán
+
+- **Bia không ghi nghĩa tiếng Việt.** Bia chỉ có ký tự + hình vẽ + tình huống. Lần đầu người chơi dùng đúng một ký tự, **Sổ Chữ Cổ** trong túi tự ghi nghĩa. Chưa dùng đúng thì sổ để "?".
+- **Ba quy tắc** (người chơi tự rút ra qua C01 → C05 → C10):
+  1. `[thứ][X]` = xóa thứ đó. Ví dụ `[A][X]` tắt màn sáng; `[N][X]` = vô danh.
+  2. `[thứ][trạng thái]` = biến thứ đó thành trạng thái. Ví dụ `[I][U]` làm dòng thác đứng yên.
+  3. Cặp đối: Sáng ↔ Tối, Dòng ↔ Tĩnh. Dùng trong trận Sứ Giả.
+- **Thứ tự dạy:**
+  - `[A]`, `[X]` ở bản đồ 2;
+  - `[O]` ở bản đồ 3 (bích họa ngày/đêm);
+  - `[I]`, `[U]` ở C04;
+  - `[E]` ở C05;
+  - `[N]` ở thư khố sau C06.
+- **Giao diện:** bệ khắc 1–3 ô, mỗi ô là một vòng xoay ký tự + nút [Khắc]. Dùng lại `dials`, không cần UI mới.
+
+### 17.3. Chiến đấu — bỏ trùng, đổi sang theo lượt
+
+- **Aether Sentinel trùng quái chập chờn chương 5** (`phase`). Thay bằng **Bóng Gót:** một bóng đuổi theo đúng đường Peter đã đi 1,5 giây trước và chém vào chỗ Peter vừa đứng. Dụ bóng đi qua trụ laser của Archon Construct thì bóng tan.
+- **Celestial Reflector gần giống khiên phalanx chương 4.** Thay bằng **Sao Đôi:** hai quả cầu quay quanh nhau. Phải chém trúng cả hai trong vòng 0,5 giây, nếu không chúng nhập lại và hồi máu.
+- **Origin Nullifier giữ.** Đổi "khóa kỹ năng" thành làm chậm Peter 3 giây (trên bản đồ không có trạng thái khóa kỹ năng).
+- **Archon Construct giữ.**
+- **Boss là trận theo lượt.** Mọi thao tác "chạy ra sau lưng, bấm E" đổi thành lựa chọn môi trường:
+  - **Sứ Giả Gãy Cánh, pha 2:**
+    - Khiên mang một ký tự. Lựa chọn môi trường cho khắc ký tự đối của nó (quy tắc 3).
+    - Khắc `[X]` hay khắc trùng ký tự thì khiên hút sức, boss hồi máu.
+    - Khắc đúng thì khiên vỡ, boss mất một lượt.
+  - **Genesis Warden, pha 2:**
+    - Genesis Purge tụ lực 3 lượt, có hiện bộ đếm.
+    - Đã đọc sổ tay C07 (cờ `read_celestial_handbook`) thì có lựa chọn **[Rút Chốt Khởi Nguyên]**.
+    - Có Kuro thì Kuro giữ boss, rút chốt mất 1 lượt.
+    - Không có Kuro thì phải đỡ hoàn hảo một đòn trước để mở lưng boss.
+    - Rút chốt: boss mất 400 HP và mất lượt.
+    - Không kịp: Purge gây 60% máu tối đa, **không phải 999**. Không có đường chết chắc.
+    - `genesis_regulator_pin` là vật nhận được sau khi rút, không phải vật mang vào.
+  - **Echo of the First Forgotten:**
+    - Đòn vô hình có **gợn đen trên ô của Peter 0,3 giây trước** (không chỉ báo bằng âm thanh).
+    - Sương xóa niệm hút 8 MP mỗi lượt cho tới khi Peter dùng lựa chọn khắc `[A]`.
+  - **Remnant Deacon:** đỡ ba nhịp (mở rộng `timedBlock.double` thành `count: 3`), cửa sổ hẹp dần.
+- Bảng EXP do Claude nối tiếp đường cong hiện có (thang tích lũy). Bỏ bảng ở §9.7.
+
+### 17.4. Mạch truyện — giữ bớt bí mật cho chương sau
+
+Chương 6 không phải chương cuối, nên không trả lời hết mọi câu hỏi mở.
+
+- **OQ-01 (Peter):** hé lộ Peter rơi ra từ kẽ nứt Origin–Finality (đúng canon §4).
+  - FB-03: người đỡ đứa bé là một thợ đồng hồ già.
+  - Giọng nói trong FB-03 **để mơ hồ**, không khẳng định là Trưởng Lão.
+- **OQ-02 (lời hứa):** hé nửa sau ở FB-01 — **giữ**.
+- **OQ-03 (Chronos):**
+  - FB-02 chỉ hé rằng Chronos tự bẻ quyền năng để tránh "thứ trong Hư Không".
+  - Chuyện **Chronos tự hy sinh làm phong ấn để dành cho chương 7+**.
+  - Phương án kết 3 sửa: dư ảnh Chronos chỉ nói _"Ngươi vừa mở thứ ta đã khóa."_, không giải thích.
+- **OQ-04 (Null Hour):** Bí Mật 3 ("Giờ Thứ 25") — **giữ**, ở mức cảnh báo.
+- **OQ-05 (First Forgotten):** Bí Mật 4 chỉ nói _"người từng ngồi cạnh ngai"_. Bỏ chi tiết "vị thần tự nguyện gánh xóa bỏ".
+- **Bí Mật 5:** "lời hứa Peter–Kuro là tiếng vọng lời thề Chronos" — **Claude đề xuất bỏ.** Nó biến tình bạn hai người thành định mệnh có sẵn và làm nhẹ lời hứa. Thay bằng: tên Peter và Kuro khắc cạnh nhau trên một phiến đá vô danh (không giải thích).
+- **Ấn Origin:**
+  - Không phục hồi. Cờ `origin_seal_cracked`, không có `origin_seal_restored`.
+  - Màn kết chương 6 dùng cờ này.
+  - Ẩn C phải vào được **trước** cảnh kết: lối vào đặt ở Đại Điện, mở sau khi hạ Warden. Bước vào Vực Thẳm là kết chương.
+
+### 17.5. Hồi đáp chương 4–5 — cụ thể hơn
+
+- `ch4_choice_aldric_truth`: Sứ Giả trả lời thêm một câu hỏi về ngai trống.
+- `ch4_choice_bran_memorial`: ở danh sách tử sĩ thiên giới, Peter khắc thêm con số 1.427 của Bran. Nhận một dòng thoại và một bùa nhỏ.
+- `ch4_choice_elion_burn`: ở thư khố có một "chính sử" tô vẽ. Lần này Peter được chọn giữ hay đốt; chương 6 không phạt lựa chọn nào.
+- `pacified_the_gardener`: bỏ "Nhà Kính Khởi Nguyên" (không có bản đồ này). Thay bằng: tiếng chuông gió Đồng–Bạc–Thủy Tinh vang ở Thánh Điện Chuông Câm, cho một gợi ý nhẹ cho C08.
+- `completed_na_crane_quest`: dải ruy băng của Na nói một câu khi Peter vào trận boss dưới 30% máu.
+- Đổi tên cờ cho khớp chương 5: `ch5_took_alpha_memory` (mất mùi tiệm) / `ch5_refused_alpha_memory` (còn nhớ).
+
+### 17.6. Vật phẩm và nhiệm vụ
+
+- **Thêm vào hợp đồng ID:**
+  - `celestial_amber_shard` (thưởng C03);
+  - `quartz_oil_drop` ×3 (nhiệm vụ chuông, xếp chồng được);
+  - `glyph_codex` (Sổ Chữ Cổ);
+  - năm tài liệu `world_secret_*`.
+- **`echoing_origin_bell`:** chỉ thưởng ở nhiệm vụ phụ. C08 thưởng mở đường.
+- **`quest_ch6_lost_constellation`** có câu chuyện riêng: chòm "Người Thợ Rèn" bị xóa là người đã rèn thanh kiếm gãy của Peter. Giải C12 thì nghe được một câu của người thợ rèn.
+- **Tổng bản đồ:** 18 (15 chính + 3 ẩn).
+- **Cấp tối đa:** 24.
