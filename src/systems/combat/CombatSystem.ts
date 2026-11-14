@@ -794,6 +794,13 @@ export class CombatSystem implements ICombatSystem {
     }
 
     if (source.type === 'player') {
+      // Genesis Purge: Temporal Sight reveals the regulator on the charging boss's back.
+      const pgb = this.bosses.get(target.id);
+      const pgm = target.mechanic?.purge;
+      if (action.type === 'skill' && pgm && pgb && pgb.purge.left !== null && !pgb.purge.open) {
+        pgb.purge.open = true;
+        message += ` ${pgm.openMessage}`;
+      }
       this.lastPlayerCommand = action.type;
       message += this.judgeSentences(source, action.type);
       message += this.judgeLock(action.type, damage);

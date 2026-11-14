@@ -19,17 +19,9 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-Goal (owner, 2026-11-14): Chapter 5 is built and waits for the owner's playtest. Chapter 6 design is approved (§17, §18); build it next. Chapter 6
+Goal (owner, 2026-11-14): Chapter 5 is built and waits for the owner's playtest. Chapter 6 is built and waits for the owner's playtest. Chapter 6
 "The Hour of the Gods" — about as long as Chapter 5, ~65% puzzles and world mysteries, ~35% combat with
 new enemy and boss mechanics. Chapter 6 is **not** the last chapter.
-
-### T-68 · Chapter 6 build
-
-- **Assignee:** Claude · **Status:** IN PROGRESS
-- **Locks:** `src/**`, `public/assets/**`, `scripts/*ch6*`, `tests/**`
-- **Plan:** CHAPTER_06_DESIGN.md with §17 review and §18 owner decisions
-- **Done so far:** engine (light beam, glyph dials with unknown labels, geared rings, Heel Shadow / Twin Star / Origin Nullifier / Archon Construct, glyph-shield songs, Genesis Purge + pin, erasing mist, hidden and multi-ring blocks), art approved and loaded (celestial tileset + 10 sprites), enemies and level cap 24, 18 map layouts, content (188 nodes, 10 quests, 24 items), all 18 maps wired; 129 unit tests pass
-- **Next:** live CDP probe of the whole chapter (maps 1-9, then 10-18), fix what it finds, then report to the owner
 
 ## Backlog (scheduled after current locks are released)
 
@@ -40,8 +32,8 @@ new enemy and boss mechanics. Chapter 6 is **not** the last chapter.
 
 ## Done (latest 5 — older entries in [TASKS_ARCHIVE.md](TASKS_ARCHIVE.md))
 
+- **T-68** Chapter 6 playable: 18 maps on the celestial tileset (hidden Chronos cell, chessboard and First Forgotten's nook), Origin Glyphs learned by use (unknown glyphs show "?"), light beam through mirrors / prism / brass, geared orrery rings, 4×4 star chessboard (solver-checked), four new foes (Heel Shadow, Twin Star, Origin Nullifier, Archon Construct), Broken Herald glyph shield, Remnant Deacon triple block, Genesis Warden purge + regulator pin (Kuro holds it, or Temporal Sight reveals it), hidden Echo of the First Forgotten (unseen blows, erasing mist), Kuro together / ahead by Chapter 5 choice, Chapter 5 → 6 → end card, level cap 24. Verified: 132 unit tests, live CDP runs of the whole chapter (every puzzle right and wrong, all four bosses, both Kuro branches, end card) — Claude
 - **T-67** Chapter 6 design (`docs/story/CHAPTER_06_DESIGN.md`, Vietnamese): "The Hour of the Gods" structured §1–§16 (Origin Authority, 16 maps 150–180 min, ~65% puzzle/mystery + 35% combat; central mechanic Origin Glyphs with 7 prime characters & Reality Inscription; 13 distinct deduction puzzles C01–C13 with airtight logic & zero timer pressure; 5 World Secrets unravelling the Great Fracture & First Forgotten; deep callbacks to Ch4/Ch5 choices; 4 flashbacks with Chronos perspective; 4 timing enemies, 1 elite, mid-boss Broken Herald with glyph cancellation, end-of-chapter boss Genesis Warden with regulator pin interaction, hidden boss Echo of the First Forgotten; Level cap 24; 10 quests; full ch6_ ID contract; 3 cliffhanger options recommending shattered Chronos throne & First Forgotten awakening, followed by 3-chapter roadmap Ch7–Ch9 ending) — Antigravity
 - **T-66** Chapter 5 playable: 17 maps on the interval and steel tilesets (hidden uprooted garden and old seed bed), living/pruned branch shift rebuilding the map in place, Kuro fighting beside Peter (shifts foes out of time), phase/cocoon/echo/line-cut foes, every T-65 puzzle (EX-01 to EX-08) plus safe, quantum bridge, reactor switches, heir naming, Kuro's three questions, Other Peter (finisher), Unborn King (name call + Kuro ally), collision escape and three seal endings, Chapter 4 → 5 end card, level cap 21. Verified: 120 unit tests, live CDP runs of the whole chapter (every puzzle right and wrong, both bosses, hidden garden blade, end card) — Claude
 - **T-65** Chapter 5 expansion design (`docs/story/CHAPTER_05_EXPANSION.md`, Vietnamese): 8 new distinct deduction puzzles (EX-01 to EX-08 across 4 acts: shadow cross-branch, greenhouse microclimate, Na's chalk sky, 3-witness truth table, quantum astrolabe, poem word melody with broken key substitution, reverse gravity hourglass, dynamic choice mirror), 3 deep side quests (Na's 1000th crane, Gardener's requiem, Ivo's redemption), 3 new maps (glass greenhouse 22×16, alpha harbor 26×18, observatory 24×18), key dialogues, engine specs, owner questions, and full ch5x_ ID contract — Antigravity
 - **T-63** Chapter 4 playable: 13 maps (warfield tileset; hidden sentry cellar and First Fallen tomb), dials, two-pan scale (two solutions), arrow volleys with cover, flashback screen, skill/timing enemies (sniper perfect dodge, phalanx parry, banner chant revives, knight charge into walls), timed block in boss fights, Crimson Standard blood wall, The Last War's three-pillar ritual, level cap 18, Chapter 3 → 4 end card, battle Item picks the best-fitting heal. Review of T-62 (answer leaks, two-word sentry answer, ~45 missing pickup/locked nodes, side quest starts). Verified: 116 unit tests, live CDP run of the whole chapter (every puzzle right and wrong, the three choices, both bosses, Kuro, end card) — Claude
-- **T-64** Chapter 4 art: warfield tileset (wilds recoloured + 21 war tiles), Aldric, Kaelen, Bran, Elion, Renard, Kuro, Ghost Sniper, Endless Phalanx, Banner Carrier, Undying Knight, The Crimson Standard (48×48), The Last War (64×64); approved under the owner's Chapter 4 delegation, reviewed in the playtest — Claude

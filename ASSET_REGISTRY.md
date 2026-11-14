@@ -293,3 +293,12 @@ The following specifications have been drafted in compliance with [ASSET_POLICY.
 - `ENV_INTERVAL_001` — `interval_tileset_v1` (128 × 384): sunken tiles 0-31 tinted violet-silver + 32-47 (collide 32-43, walkable 44-47; collision GID 4-44).
 - `ENV_STEEL_001` — `steel_tileset_v1` (128 × 256): dungeon tiles 0-15 tinted rusted steel + 16-31 (collide 16-27, walkable 28-31; collision GID 4-28).
 - **Validation:** all PASSED. **Status:** `APPROVED` by the owner 2026-11-14 — `generated/approved/`, deployed to `public/assets/{npcs,enemies,tilesets}/`.
+
+### Chapter 6 characters and tileset
+
+- **Generators:** `scripts/author-ch6-characters.js`, `scripts/author-ch6-tileset.js` (Pipeline B, deterministic pixel rules, no image model). Review sheets: `art-source/reviews/ch6_*.png`.
+- `BOSS_BROKEN_HERALD_001` (48 × 48 × 5, 4 = kneeling), `BOSS_GENESIS_WARDEN_001` (64 × 64 × 5, 4 = spent), `BOSS_ECHO_FORGOTTEN_001` and `BOSS_REMNANT_DEACON_001` (48 × 48 × 4).
+- `MOB_HEEL_SHADOW_001` (Peter's shadow, curly-hair silhouette kept), `MOB_ORIGIN_NULLIFIER_001`, `MOB_ARCHON_CONSTRUCT_001` (32 × 32 × 4), `MOB_TWIN_STAR_001` (16 × 16 × 4 orb).
+- `NPC_CHRONOS_REMNANT_001`, `NPC_SOLON_001` (32 × 32 × 4).
+- `ENV_CELESTIAL_001` — `celestial_tileset_v1` (128 × 384): dungeon tiles 0-15 tinted white marble + 16-47 (collide 16-43, walkable 44-47; collision GID 4-44).
+- **Status:** `APPROVED` by the owner 2026-11-14 — `generated/approved/`, deployed to `public/assets/{npcs,enemies,tilesets}/`.

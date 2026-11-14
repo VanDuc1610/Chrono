@@ -94,7 +94,7 @@ export function celestialStairs() {
     height,
     ground: L.ground,
     walls: L.walls,
-    spawns: { default: pt(2, 8), from_ch5: pt(2, 8), from_courtyard: pt(22, 8) },
+    spawns: { default: pt(2, 8), from_ch5: pt(2, 8), from_courtyard: pt(21, 8) },
     exits: {},
     points: { stele: pt(5, 6), kuro: pt(4, 9) },
   };
@@ -135,7 +135,7 @@ export function outerCourtyard() {
     height,
     ground: L.ground,
     walls: L.walls,
-    spawns: { default: pt(1, 9), from_stairs: pt(1, 9), from_pillars: pt(14, 3) },
+    spawns: { default: pt(2, 9), from_stairs: pt(2, 9), from_pillars: pt(14, 3) },
     exits: {},
     points: {
       stele_sun: pt(10, 6),
@@ -195,7 +195,7 @@ export function hallOfPillars() {
     height,
     ground: L.ground,
     walls: L.walls,
-    spawns: { default: pt(15, 18), from_courtyard: pt(15, 18), from_herald: pt(24, 2) },
+    spawns: { default: pt(15, 17), from_courtyard: pt(15, 17), from_herald: pt(24, 2) },
     exits: {},
     points: {
       floor_diagram: pt(6, 7),
@@ -231,7 +231,7 @@ export function heraldRoost() {
     height,
     ground: L.ground,
     walls: L.walls,
-    spawns: { default: pt(11, 14), from_pillars: pt(11, 14), from_nave: pt(20, 8) },
+    spawns: { default: pt(11, 13), from_pillars: pt(11, 13), from_nave: pt(19, 8) },
     exits: {},
     points: { herald: pt(11, 5) },
   };
@@ -268,7 +268,7 @@ export function fractureNave() {
     height,
     ground: L.ground,
     walls: L.walls,
-    spawns: { default: pt(1, 10), from_herald: pt(1, 10), from_gallery: pt(30, 10) },
+    spawns: { default: pt(2, 10), from_herald: pt(2, 10), from_gallery: pt(29, 10) },
     exits: {},
     points: {
       rift: pt(16, 11),
@@ -299,7 +299,7 @@ export function galleryOfEras() {
     height,
     ground: L.ground,
     walls: L.walls,
-    spawns: { default: pt(1, 9), from_nave: pt(1, 9), from_cascade: pt(24, 9) },
+    spawns: { default: pt(2, 9), from_nave: pt(2, 9), from_cascade: pt(23, 9) },
     exits: {},
     points: {
       murals: [pt(6, 2), pt(10, 2), pt(14, 2), pt(18, 2)],
@@ -341,7 +341,7 @@ export function frozenCascade() {
     height,
     ground: L.ground,
     walls: L.walls,
-    spawns: { default: pt(1, 10), from_gallery: pt(1, 10), from_archives: pt(24, 10) },
+    spawns: { default: pt(2, 10), from_gallery: pt(2, 10), from_archives: pt(23, 10) },
     exits: {},
     points: {
       stele_flow: pt(7, 5),
@@ -387,9 +387,9 @@ export function archivesRuins() {
     ground: L.ground,
     walls: L.walls,
     spawns: {
-      default: pt(1, 10),
-      from_cascade: pt(1, 10),
-      from_core: pt(28, 10),
+      default: pt(2, 10),
+      from_cascade: pt(2, 10),
+      from_core: pt(27, 10),
       from_cell: pt(4, 16),
     },
     exits: {},
@@ -460,7 +460,7 @@ export function genesisCore() {
     height,
     ground: L.ground,
     walls: L.walls,
-    spawns: { default: pt(1, 10), from_archives: pt(1, 10), from_bell: pt(26, 10) },
+    spawns: { default: pt(2, 10), from_archives: pt(2, 10), from_bell: pt(25, 10) },
     exits: {},
     points: {
       gears: [pt(9, 7), pt(14, 7), pt(19, 7)],
@@ -501,7 +501,7 @@ export function bellSanctuary() {
     height,
     ground: L.ground,
     walls: L.walls,
-    spawns: { default: pt(1, 9), from_core: pt(1, 9), from_ring: pt(22, 9) },
+    spawns: { default: pt(2, 9), from_core: pt(2, 9), from_ring: pt(21, 9) },
     exits: {},
     points: {
       bells: [pt(6, 4), pt(10, 4), pt(14, 4), pt(18, 4)],
@@ -552,7 +552,7 @@ export function orrery() {
     height,
     ground: L.ground,
     walls: L.walls,
-    spawns: { default: pt(13, 20), from_bell: pt(13, 20), from_gate: pt(13, 15) },
+    spawns: { default: pt(13, 19), from_bell: pt(13, 19), from_gate: pt(13, 15) },
     exits: {},
     points: {
       levers: { inner: pt(10, 17), middle: pt(13, 18), outer: pt(16, 17) },
@@ -666,7 +666,7 @@ export function sanctumApproach() {
     height,
     ground: L.ground,
     walls: L.walls,
-    spawns: { default: pt(1, 8), from_gate: pt(1, 8), from_thrones: pt(30, 8) },
+    spawns: { default: pt(2, 8), from_gate: pt(2, 8), from_thrones: pt(29, 8) },
     exits: {},
     points: {
       deacon: pt(16, 8),
@@ -705,10 +705,10 @@ export function hallOfThrones() {
     ground: L.ground,
     walls: L.walls,
     spawns: {
-      default: pt(1, 11),
-      from_approach: pt(1, 11),
+      default: pt(2, 11),
+      from_approach: pt(2, 11),
       from_nook: pt(25, 17),
-      from_abyss: pt(28, 11),
+      from_abyss: pt(27, 11),
     },
     exits: {},
     points: {

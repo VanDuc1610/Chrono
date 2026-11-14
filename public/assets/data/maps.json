@@ -12878,7 +12878,7 @@
           "y": 8
         },
         "from_courtyard": {
-          "x": 22,
+          "x": 21,
           "y": 8
         }
       },
@@ -12972,11 +12972,11 @@
       "bgm": "ambient",
       "spawns": {
         "default": {
-          "x": 1,
+          "x": 2,
           "y": 9
         },
         "from_stairs": {
-          "x": 1,
+          "x": 2,
           "y": 9
         },
         "from_pillars": {
@@ -12985,7 +12985,7 @@
         }
       },
       "revive": {
-        "x": 1,
+        "x": 2,
         "y": 9
       },
       "npcs": [],
@@ -13237,11 +13237,11 @@
       "spawns": {
         "default": {
           "x": 15,
-          "y": 18
+          "y": 17
         },
         "from_courtyard": {
           "x": 15,
-          "y": 18
+          "y": 17
         },
         "from_herald": {
           "x": 24,
@@ -13250,7 +13250,7 @@
       },
       "revive": {
         "x": 15,
-        "y": 18
+        "y": 17
       },
       "npcs": [],
       "interactables": [
@@ -13627,20 +13627,20 @@
       "spawns": {
         "default": {
           "x": 11,
-          "y": 14
+          "y": 13
         },
         "from_pillars": {
           "x": 11,
-          "y": 14
+          "y": 13
         },
         "from_nave": {
-          "x": 20,
+          "x": 19,
           "y": 8
         }
       },
       "revive": {
         "x": 11,
-        "y": 14
+        "y": 13
       },
       "npcs": [
         {
@@ -13780,20 +13780,20 @@
       "bgm": "ambient",
       "spawns": {
         "default": {
-          "x": 1,
+          "x": 2,
           "y": 10
         },
         "from_herald": {
-          "x": 1,
+          "x": 2,
           "y": 10
         },
         "from_gallery": {
-          "x": 30,
+          "x": 29,
           "y": 10
         }
       },
       "revive": {
-        "x": 1,
+        "x": 2,
         "y": 10
       },
       "npcs": [],
@@ -14140,20 +14140,20 @@
       "bgm": "ambient",
       "spawns": {
         "default": {
-          "x": 1,
+          "x": 2,
           "y": 9
         },
         "from_nave": {
-          "x": 1,
+          "x": 2,
           "y": 9
         },
         "from_cascade": {
-          "x": 24,
+          "x": 23,
           "y": 9
         }
       },
       "revive": {
-        "x": 1,
+        "x": 2,
         "y": 9
       },
       "npcs": [],
@@ -14521,20 +14521,20 @@
       "bgm": "ambient",
       "spawns": {
         "default": {
-          "x": 1,
+          "x": 2,
           "y": 10
         },
         "from_gallery": {
-          "x": 1,
+          "x": 2,
           "y": 10
         },
         "from_archives": {
-          "x": 24,
+          "x": 23,
           "y": 10
         }
       },
       "revive": {
-        "x": 1,
+        "x": 2,
         "y": 10
       },
       "npcs": [],
@@ -15089,15 +15089,15 @@
       "bgm": "ambient",
       "spawns": {
         "default": {
-          "x": 1,
+          "x": 2,
           "y": 10
         },
         "from_cascade": {
-          "x": 1,
+          "x": 2,
           "y": 10
         },
         "from_core": {
-          "x": 28,
+          "x": 27,
           "y": 10
         },
         "from_cell": {
@@ -15106,7 +15106,7 @@
         }
       },
       "revive": {
-        "x": 1,
+        "x": 2,
         "y": 10
       },
       "npcs": [
@@ -15668,20 +15668,20 @@
       "bgm": "ambient",
       "spawns": {
         "default": {
-          "x": 1,
+          "x": 2,
           "y": 10
         },
         "from_archives": {
-          "x": 1,
+          "x": 2,
           "y": 10
         },
         "from_bell": {
-          "x": 26,
+          "x": 25,
           "y": 10
         }
       },
       "revive": {
-        "x": 1,
+        "x": 2,
         "y": 10
       },
       "npcs": [],
@@ -15943,20 +15943,20 @@
       "bgm": "ambient",
       "spawns": {
         "default": {
-          "x": 1,
+          "x": 2,
           "y": 9
         },
         "from_core": {
-          "x": 1,
+          "x": 2,
           "y": 9
         },
         "from_ring": {
-          "x": 22,
+          "x": 21,
           "y": 9
         }
       },
       "revive": {
-        "x": 1,
+        "x": 2,
         "y": 9
       },
       "npcs": [],
@@ -16375,11 +16375,11 @@
       "spawns": {
         "default": {
           "x": 13,
-          "y": 20
+          "y": 19
         },
         "from_bell": {
           "x": 13,
-          "y": 20
+          "y": 19
         },
         "from_gate": {
           "x": 13,
@@ -16388,7 +16388,7 @@
       },
       "revive": {
         "x": 13,
-        "y": 20
+        "y": 19
       },
       "npcs": [],
       "interactables": [
@@ -17838,20 +17838,20 @@
       "bgm": "ambient",
       "spawns": {
         "default": {
-          "x": 1,
+          "x": 2,
           "y": 8
         },
         "from_gate": {
-          "x": 1,
+          "x": 2,
           "y": 8
         },
         "from_thrones": {
-          "x": 30,
+          "x": 29,
           "y": 8
         }
       },
       "revive": {
-        "x": 1,
+        "x": 2,
         "y": 8
       },
       "npcs": [],
@@ -18000,11 +18000,11 @@
       "bgm": "ambient",
       "spawns": {
         "default": {
-          "x": 1,
+          "x": 2,
           "y": 11
         },
         "from_approach": {
-          "x": 1,
+          "x": 2,
           "y": 11
         },
         "from_nook": {
@@ -18012,12 +18012,12 @@
           "y": 17
         },
         "from_abyss": {
-          "x": 28,
+          "x": 27,
           "y": 11
         }
       },
       "revive": {
-        "x": 1,
+        "x": 2,
         "y": 11
       },
       "npcs": [

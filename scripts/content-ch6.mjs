@@ -364,6 +364,7 @@ P(
   {
     effects: grant('archon_library_key', 1, 'took_archon_library_key', {
       setFlags: ['solved_archon_tribunal'],
+      refreshMap: true,
     }),
   },
 );
@@ -529,6 +530,7 @@ P(
   {
     effects: grant('genesis_core_shard', 1, 'took_genesis_core_shard', {
       setFlags: ['activated_genesis_core'],
+      refreshMap: true,
     }),
   },
 );
@@ -752,7 +754,7 @@ K(
     'Lại là mày. Kỳ lạ thật... tao quên tên mày rồi, mà chân tao cứ dẫn tao quay lại chỗ mày.',
     'Con nhân sư đó không cho tao lại gần ngai. Đứng xa ra mà xem.',
   ],
-  { effects: { setFlags: ['ch6_kuro_returned'] } },
+  { effects: { setFlags: ['ch6_kuro_returned'], refreshMap: true } },
 );
 K(
   'ch6_kuro_returns_stop',
@@ -761,7 +763,7 @@ K(
     'Tao tới trước mày cả ngày trời mà vẫn không qua nổi con nhân sư đó.',
     'Đừng tưởng tao cần mày giúp. Tao chỉ... đứng đây xem thôi.',
   ],
-  { effects: { setFlags: ['ch6_kuro_returned'] } },
+  { effects: { setFlags: ['ch6_kuro_returned'], refreshMap: true } },
 );
 N('ch6_warden_confront', 'Thực Thể Giám Hộ Khởi Nguyên', [
   'KẺ KHÔNG TÊN. KHÔNG ĐƯỢC CHẠM VÀO NGAI.',
@@ -1082,7 +1084,7 @@ const CH6_ITEMS = [
     [
       'Ba bánh răng: nhỏ 12 răng, vừa 18 răng, lớn 36 răng. Mỗi cần có ba nấc: I, II, III (vòng mỗi nhịp).',
       'Máy chỉ chạy êm khi trong một nhịp, cả ba bánh quét qua cùng một số răng.',
-      'Ghi chú cuối: chốt điều áp nằm trên lưng người canh giữ. Rút nó ra lúc hắn tụ lực, năng lượng sẽ dội ngược.',
+      'Ghi chú cuối: chốt điều áp nằm trên lưng người canh giữ. Lúc hắn tụ lực, nhìn xuyên thời gian sẽ thấy chốt. Rút nó ra, năng lượng dội ngược.',
     ],
   ),
   doc('chronos_private_scrap', 'Mảnh Giấy Riêng Của Chronos', 'Nét chữ run, viết vội.', [

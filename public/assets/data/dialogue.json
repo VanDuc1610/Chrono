@@ -9997,7 +9997,8 @@
           }
         ],
         "grantOnceFlag": "took_archon_library_key",
-        "setFlags": ["solved_archon_tribunal"]
+        "setFlags": ["solved_archon_tribunal"],
+        "refreshMap": true
       }
     },
     "ch6_verdict_done": {
@@ -10338,7 +10339,8 @@
           }
         ],
         "grantOnceFlag": "took_genesis_core_shard",
-        "setFlags": ["activated_genesis_core"]
+        "setFlags": ["activated_genesis_core"],
+        "refreshMap": true
       }
     },
     "ch6_core_done": {
@@ -10853,7 +10855,8 @@
       ],
       "responses": [],
       "effects": {
-        "setFlags": ["ch6_kuro_returned"]
+        "setFlags": ["ch6_kuro_returned"],
+        "refreshMap": true
       }
     },
     "ch6_kuro_returns_stop": {
@@ -10866,7 +10869,8 @@
       ],
       "responses": [],
       "effects": {
-        "setFlags": ["ch6_kuro_returned"]
+        "setFlags": ["ch6_kuro_returned"],
+        "refreshMap": true
       }
     },
     "ch6_warden_confront": {

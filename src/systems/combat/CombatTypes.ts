@@ -204,7 +204,7 @@ export interface BossMechanic {
    * Genesis Purge: once the boss is at or below `belowPct`, it charges for `chargeTurns` of its
    * turns (no attacks), then deals `damagePct` of Peter's max HP. While it charges, `pinAction`
    * is offered if Peter knows `pinFlag` and either `allyFlag` holds (Kuro holds the boss) or he
-   * blocked one of its blows perfectly. Pulling the pin: `pinDamage`, one lost turn, charge over.
+   * used his skill on it while it charges (Temporal Sight reveals the pin). Pulling the pin: `pinDamage`, one lost turn, charge over.
    */
   purge?: {
     belowPct: number;
