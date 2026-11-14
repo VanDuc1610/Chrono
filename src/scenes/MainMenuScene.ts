@@ -2,10 +2,11 @@ import Phaser from 'phaser';
 import { SaveSystem } from '../systems/save/SaveSystem';
 import { SoundSystem } from '../systems/audio/SoundSystem';
 import { startNewSession, startSessionFromSave } from '../state/GameSession';
+import { applyChapterStart, CHAPTER_STARTS, type ChapterStart } from '../state/ChapterStarts';
 import { createPanel } from '../ui/Panel';
 import { getStrings, type Translate } from '../ui/Strings';
 
-type MenuItemId = 'newGame' | 'continue' | 'options';
+type MenuItemId = 'newGame' | 'continue' | 'chapters' | 'options';
 
 interface MenuItem {
   id: MenuItemId;
@@ -24,6 +25,8 @@ export class MainMenuScene extends Phaser.Scene {
 
   private optionsContainer!: Phaser.GameObjects.Container;
   private isOptionsOpen = false;
+  private chaptersContainer!: Phaser.GameObjects.Container;
+  private isChaptersOpen = false;
   private soundStatusText!: Phaser.GameObjects.Text;
   private t!: Translate;
 
@@ -34,6 +37,7 @@ export class MainMenuScene extends Phaser.Scene {
   public init(): void {
     this.selectedIndex = 0;
     this.isOptionsOpen = false;
+    this.isChaptersOpen = false;
     this.menuItems = [];
   }
 
@@ -89,6 +93,12 @@ export class MainMenuScene extends Phaser.Scene {
         text: hasSavedGame ? this.t('menu.continue') : this.t('menu.continueNoSave'),
         enabled: hasSavedGame,
         action: () => this.continueGame(),
+      },
+      {
+        id: 'chapters',
+        text: this.t('menu.chapters'),
+        enabled: true,
+        action: () => this.toggleChapters(),
       },
       {
         id: 'options',
@@ -148,7 +158,15 @@ export class MainMenuScene extends Phaser.Scene {
         if (this.isOptionsOpen) {
           this.toggleOptionsModal();
         }
+        if (this.isChaptersOpen) this.toggleChapters();
       });
+      const digits = ['ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX', 'SEVEN', 'EIGHT', 'NINE'];
+      digits.forEach((key, i) =>
+        this.input.keyboard?.on(`keydown-${key}`, () => {
+          const start = CHAPTER_STARTS[i];
+          if (this.isChaptersOpen && start) this.startChapter(start);
+        }),
+      );
     }
 
     // Version & Footer
@@ -170,6 +188,7 @@ export class MainMenuScene extends Phaser.Scene {
 
     // Create Options Modal
     this.createOptionsModal(width, height);
+    this.createChaptersModal(width, height);
 
     // Start procedural ambient ruin BGM and clean up on shutdown
     this.soundSystem.startBgm('ambient');
@@ -252,8 +271,83 @@ export class MainMenuScene extends Phaser.Scene {
     this.soundSystem.playSelect();
   }
 
+  /** Chapter select: each chapter starts with the level, gear and story of the ones before it. */
+  private createChaptersModal(width: number, height: number): void {
+    const w = 380;
+    const rowH = 24;
+    const h = 92 + CHAPTER_STARTS.length * rowH;
+    this.chaptersContainer = this.add
+      .container(width / 2 - w / 2, height / 2 - h / 2)
+      .setDepth(200)
+      .setVisible(false);
+    const bg = createPanel(this, 0, 0, w, h);
+    const header = this.add
+      .text(w / 2, 20, this.t('menu.chaptersTitle'), {
+        fontFamily: 'monospace',
+        fontSize: '12px',
+        color: '#00e1ff',
+        fontStyle: 'bold',
+      })
+      .setOrigin(0.5);
+    const rows = CHAPTER_STARTS.map((c, i) => {
+      const row = this.add
+        .text(
+          w / 2,
+          48 + i * rowH,
+          this.t('menu.chapterItem', { n: c.chapter, title: c.title, lv: c.level }),
+          {
+            fontFamily: 'monospace',
+            fontSize: '11px',
+            color: '#e0e8ff',
+            backgroundColor: '#161f36',
+            padding: { left: 8, right: 8, top: 3, bottom: 3 },
+          },
+        )
+        .setOrigin(0.5)
+        .setInteractive({ useHandCursor: true });
+      row.on('pointerover', () => row.setColor('#00e1ff'));
+      row.on('pointerout', () => row.setColor('#e0e8ff'));
+      row.on('pointerdown', () => this.startChapter(c));
+      return row;
+    });
+    const hint = this.add
+      .text(w / 2, h - 34, this.t('menu.chaptersHint'), {
+        fontFamily: 'monospace',
+        fontSize: '10px',
+        color: '#657499',
+      })
+      .setOrigin(0.5);
+    const close = this.add
+      .text(w / 2, h - 16, this.t('menu.optionsClose'), {
+        fontFamily: 'monospace',
+        fontSize: '11px',
+        color: '#94a3b8',
+      })
+      .setOrigin(0.5)
+      .setInteractive({ useHandCursor: true });
+    close.on('pointerdown', () => this.toggleChapters());
+    this.chaptersContainer.add([bg, header, ...rows, hint, close]);
+  }
+
+  public toggleChapters(): void {
+    this.isChaptersOpen = !this.isChaptersOpen;
+    this.chaptersContainer.setVisible(this.isChaptersOpen);
+    this.soundSystem.playSelect();
+  }
+
+  /** Starts a fresh session at the beginning of a chapter (see ChapterStarts). */
+  public startChapter(start: ChapterStart): void {
+    const session = startNewSession(this);
+    applyChapterStart(session, start);
+    this.soundSystem.playSelect();
+    this.cameras.main.fadeOut(300, 0, 0, 0);
+    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+      this.scene.start('ExplorationScene', { mapId: start.mapId, spawnId: start.spawnId });
+    });
+  }
+
   private navigate(direction: number): void {
-    if (this.isOptionsOpen) return;
+    if (this.isOptionsOpen || this.isChaptersOpen) return;
     const prev = this.selectedIndex;
     let next = prev + direction;
 
@@ -287,7 +381,7 @@ export class MainMenuScene extends Phaser.Scene {
   }
 
   private selectOption(): void {
-    if (this.isOptionsOpen) return;
+    if (this.isOptionsOpen || this.isChaptersOpen) return;
     const current = this.menuItems[this.selectedIndex];
     if (current && current.enabled) {
       this.soundSystem.playSelect();
