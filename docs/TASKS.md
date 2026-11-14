@@ -19,26 +19,9 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-Goal (owner, 2026-11-14): build Chapter 4 "The War Without End" from
-[CHAPTER_04_DESIGN.md](story/CHAPTER_04_DESIGN.md) — owner approved §1–§12 with the changes in
-**§13** (§13 wins where they differ).
-
-### T-62 · Chapter 4 content
-
-- **Assignee:** Antigravity · **Status:** DONE
-- **Locks:** (none)
-- **Contract:** CHAPTER_04_DESIGN.md §12 + §13 (exact ids)
-
-### T-63 · Chapter 4 engine and maps
-
-- **Assignee:** Claude · **Status:** IN PROGRESS
-- **Locks:** `src/**`, `public/assets/data/maps.json`, `enemies.json`, `player.json`, `strings.json`, `scripts/ch4-layout.js`, `tests/chapter4-*.test.ts`
-- **Scope:** dials, scales, arrow volleys + cover, sniper aim line, phalanx guard break, banner revive aura, flashback presentation, Crimson Standard blood wall, Last War ritual pillars, level cap 18, 12 maps
-
-### T-64 · Chapter 4 art
-
-- **Assignee:** Claude · **Status:** TODO (owner approves every image)
-- **Scope:** warfield tileset, Aldric, Kaelen, Bran, Elion, Renard, Kuro, 3 enemies, Crimson Standard 48×48, The Last War 64×64
+Chapter 4 is playable end to end and waits for the owner's playtest. Next: Chapter 5
+"The Garden of Infinite Possibilities" from [CHAPTER_05_DESIGN.md](story/CHAPTER_05_DESIGN.md)
+(written by Claude, owner approved with §14) — the owner delegated Chapters 4-5 to Claude.
 
 ## Backlog (scheduled after current locks are released)
 
@@ -49,8 +32,8 @@ Goal (owner, 2026-11-14): build Chapter 4 "The War Without End" from
 
 ## Done (latest 5 — older entries in [TASKS_ARCHIVE.md](TASKS_ARCHIVE.md))
 
+- **T-63** Chapter 4 playable: 13 maps (warfield tileset; hidden sentry cellar and First Fallen tomb), dials, two-pan scale (two solutions), arrow volleys with cover, flashback screen, skill/timing enemies (sniper perfect dodge, phalanx parry, banner chant revives, knight charge into walls), timed block in boss fights, Crimson Standard blood wall, The Last War's three-pillar ritual, level cap 18, Chapter 3 → 4 end card, battle Item picks the best-fitting heal. Review of T-62 (answer leaks, two-word sentry answer, ~45 missing pickup/locked nodes, side quest starts). Verified: 116 unit tests, live CDP run of the whole chapter (every puzzle right and wrong, the three choices, both bosses, Kuro, end card) — Claude
+- **T-64** Chapter 4 art: warfield tileset (wilds recoloured + 21 war tiles), Aldric, Kaelen, Bran, Elion, Renard, Kuro, Ghost Sniper, Endless Phalanx, Banner Carrier, Undying Knight, The Crimson Standard (48×48), The Last War (64×64); approved under the owner's Chapter 4 delegation, reviewed in the playtest — Claude
 - **T-62** Chapter 4 content (`dialogue.json`, `quests.json`, `items.json`, `tests/content-data.test.ts`): 35 items (15 documents with pages ≤ 220 chars, 9 neutral puzzles & sacks, 4 relic weapons, 3 charms, 3 consumables, key item finality_seal_shard), 9 quests (6 main + 3 side with kind and chapter: 4, ch3 follow-up wired), 80+ dialogue nodes across 12 maps with natural Vietnamese ≤ 220 chars/line and ≤ 2 choices/node, flashback flags, exact 2-sentence Kuro meeting, 3 major ethical choices, Elion wrong-order clue, altar poem, and dual-solution hydraulic gate / scales; verified with typecheck, lint, prettier, and 109 unit tests (28 content-data) — Antigravity
 - **T-61** Chapter 4 design (`docs/story/CHAPTER_04_DESIGN.md`, Vietnamese): "The War Without End" structured §1–§12 (Finality Authority, 12 maps 120–150 min in 3 Temporal Rings: Eve of Battle -> Endless Carnage -> Ash Field; 4 deep characters: Aldric, Kaelen, Bran the 1,427th death, Chronicler Elion; 6 new cross-referencing puzzles including 2-solution hydraulic pressure gate; 3 major ethical choices with distinct rewards and Chapter 6 ending flags; 4 hazy flashbacks with "flashback": true; canonical first direct meeting with Kuro in a quiet ruined room with exact canon lines; 3 new enemy behaviors: ghost sniper laser telegraph, endless phalanx frontal shield, banner carrier resurrect aura; mid-boss The Crimson Standard 48×48, final boss The Last War 64×64 with Finality Execution ritual; hidden Spear of Finality & Interval Lens charm; §12 ID contract) — Antigravity
 - **T-60** Playtest fixes: the 8-second bell bridge starts counting only after the dialogue is closed (startTimer during a dialogue waits for it to end); HP + MP bars over Peter (once armed) and an HP bar over every map enemy (decoys copy their source's bar), so pickup/kill banners no longer hide the player's health. Verified: 101 unit tests, live CDP run (bridge flag off while reading, on with countdown after closing, off 8 s later) — Claude
-- **T-59** Owner/friend playtest fixes: New Game / Continue after an end card no longer reopen the last chapter's first map (Phaser keeps a scene's previous start data when none is passed — the menu now always passes data; this also caused the reset level, Prologue level cap and Chapter 1 quests seen in Chapter 2). Saves already past a seal (Chapter 1 or 2) get a 'Bước qua Cổng Ngưỡng' choice at the seal to reach the next chapter. Quests tagged main/side + chapter; the tracker shows NHIỆM VỤ CHÍNH / PHỤ, main first; finishing a chapter (and loading an old save) closes that chapter's open quests — main done, side missed — and starts the next main quest. Verified: 101 unit tests, live CDP run of Chapter 2 end → Chapter 3, title → New Game, stuck save → seal → Chapter 3, save → Continue — Claude
-- **T-57** Chapter 3 playable: 8 maps (Tiền Đình → Nghĩa Địa → Hành Lang Vang Vọng → Hầm Ngầm Tinh Thể → Đại Thư Viện → Hoàng Lăng → Thánh Điện Hợp Xướng, + hidden Kho Ký Ức), Chapter 2 end card continues into Chapter 3. Engine: strike targets (resonance pillars), startTimer (8-second bridge, abyss falls back to the edge), ifItems/ifFlags rules, Memory Wraith blink, Thought Eater pools, Hollow Archivist decoys, Faceless Keeper memory lock + mirror, Nameless Choir songs and cores (keys 6-8). Review of T-56: answers no longer given away (tomb III, red bell, console hint, painter's note, lullaby). Verified: 98 unit tests, 4 CDP suites, live run of every puzzle, both bosses and the end card — Claude
