@@ -938,3 +938,12 @@ Chương 6 không phải chương cuối, nên không trả lời hết mọi c�
 - **`quest_ch6_lost_constellation`** có câu chuyện riêng: chòm "Người Thợ Rèn" bị xóa là người đã rèn thanh kiếm gãy của Peter. Giải C12 thì nghe được một câu của người thợ rèn.
 - **Tổng bản đồ:** 18 (15 chính + 3 ẩn).
 - **Cấp tối đa:** 24.
+
+## 18. Quyết Định Của Owner (2026-11-14)
+
+Owner duyệt §1–§17. Trả lời các câu hỏi mở:
+
+1. Kết chương 6: **đồng ý** phương án 3 (bản đã sửa ở §17.4). Ấn Origin nứt, phong ấn vỡ, Peter và Kuro bị hất về hai phía.
+2. Tổng số chương: **đồng ý** dàn ý chương 7–9 ở §14.2 (kết thúc ở chương 9).
+3. Bí Mật 5: **bỏ** như Claude đề xuất. Thay bằng phiến đá vô danh khắc tên Peter và Kuro cạnh nhau.
+4. Boss ẩn Echo of the First Forgotten: **giữ** ở chương 6.

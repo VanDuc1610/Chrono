@@ -19,15 +19,15 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-Goal (owner, 2026-11-14): Chapter 5 is built and waits for the owner's playtest. Next, design Chapter 6
+Goal (owner, 2026-11-14): Chapter 5 is built and waits for the owner's playtest. Chapter 6 design is approved (§17, §18); build it next. Chapter 6
 "The Hour of the Gods" — about as long as Chapter 5, ~65% puzzles and world mysteries, ~35% combat with
 new enemy and boss mechanics. Chapter 6 is **not** the last chapter.
 
-### T-67 · Chapter 6 design
+### T-68 · Chapter 6 build
 
-- **Assignee:** Antigravity · **Status:** DONE
-- **Locks:** (none)
-- **Contract:** proposals only (no JSON, code or art); Claude reviews, the owner approves, Claude builds
+- **Assignee:** Claude · **Status:** IN PROGRESS
+- **Locks:** `src/**`, `public/assets/**`, `scripts/*ch6*`, `tests/**`
+- **Plan:** CHAPTER_06_DESIGN.md with §17 review and §18 owner decisions
 
 ## Backlog (scheduled after current locks are released)
 
