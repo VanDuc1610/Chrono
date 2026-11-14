@@ -1313,6 +1313,54 @@
           "completeOnFlag": "finished_chalk_sky"
         }
       ]
+    },
+    {
+      "id": "quest_ch5x_na_paper_crane",
+      "title": "Cánh Hạc Của Bé Na",
+      "kind": "side",
+      "chapter": 5,
+      "description": "Bé Na gấp tới con hạc thứ chín trăm chín mươi chín thì đổ bệnh.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch5x_crane",
+          "description": "Mang con hạc thứ một nghìn cho bé Na",
+          "completed": false,
+          "completeOnFlag": "completed_na_crane_quest"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch5x_gardener_requiem",
+      "title": "Khúc Ca Của Người Cắt Tỉa",
+      "kind": "side",
+      "chapter": 5,
+      "description": "Bức tượng một Người Làm Vườn ôm cành cây gãy, dưới chân là ba cái móc treo chuông trống.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch5x_chimes",
+          "description": "Treo lại chuông gió tiễn đưa",
+          "completed": false,
+          "completeOnFlag": "pacified_the_gardener"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch5x_ivo_unfinished_machine",
+      "title": "Cỗ Máy Dang Dở Của Ivo",
+      "kind": "side",
+      "chapter": 5,
+      "description": "Ivo không dám mở van nước làm mát vì tin chính mình đã làm thành phố nổ tung.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch5x_ivo",
+          "description": "Tìm sự thật cho Kỹ sư Ivo",
+          "completed": false,
+          "completeOnFlag": "resolved_ivo_redemption"
+        }
+      ]
     }
   ]
 }

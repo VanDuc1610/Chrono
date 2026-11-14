@@ -8,10 +8,13 @@ import { CH1_MAPS } from './ch1-layout.js';
 import { CH2_MAPS } from './ch2-layout.js';
 import { CH3_MAPS } from './ch3-layout.js';
 import { CH4_MAPS } from './ch4-layout.js';
+import { CH5_MAPS } from './ch5-layout.js';
 
-/** `node <script> ch2|ch3|ch4` builds that chapter instead of Chapter 1. */
+/** `node <script> ch2|ch3|ch4|ch5` builds that chapter instead of Chapter 1. */
 const CHAPTER = process.argv[2] ?? 'ch1';
-const MAPS = { ch1: CH1_MAPS, ch2: CH2_MAPS, ch3: CH3_MAPS, ch4: CH4_MAPS }[CHAPTER] ?? CH1_MAPS;
+const MAPS =
+  { ch1: CH1_MAPS, ch2: CH2_MAPS, ch3: CH3_MAPS, ch4: CH4_MAPS, ch5: CH5_MAPS }[CHAPTER] ??
+  CH1_MAPS;
 
 const TILESETS = {
   wilds: {
@@ -45,6 +48,22 @@ const TILESETS = {
     w: 256,
     h: 256,
     count: 64,
+  },
+  interval: {
+    name: 'interval_tileset',
+    image: '../tilesets/interval_tileset.png',
+    columns: 4,
+    w: 128,
+    h: 384,
+    count: 48,
+  },
+  steel: {
+    name: 'steel_tileset',
+    image: '../tilesets/steel_tileset.png',
+    columns: 4,
+    w: 128,
+    h: 256,
+    count: 32,
   },
   dungeon: {
     name: 'dungeon_tileset',

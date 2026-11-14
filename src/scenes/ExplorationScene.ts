@@ -150,6 +150,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.session = getSession(this);
     this.pendingNotice = data?.notice ?? null;
     this.pendingDialogueId = data?.openDialogueId ?? null;
+    this.keepBranch = !!data?.returnPosition;
 
     const db = this.cache.json.get('data_maps') as MapDatabase;
     this.mapDef = resolveMap(db, data?.mapId ?? this.session.position?.mapId);
@@ -219,6 +220,9 @@ export class ExplorationScene extends Phaser.Scene {
     });
 
     if (this.mapDef.branches) {
+      // Walking in (an exit, a warp) always starts in the living branch; only a switch made on
+      // this map (rebuilt in place, Peter keeps his position) keeps the pruned one.
+      if (!this.keepBranch) this.session.setFlag(`branch_${this.mapDef.id}_pruned`, false);
       const pruned = this.session.getFlag(`branch_${this.mapDef.id}_pruned`);
       this.session.setFlag(`branch_${this.mapDef.id}_living`, !pruned);
     }
@@ -431,6 +435,9 @@ export class ExplorationScene extends Phaser.Scene {
       } else this.freePlayer();
     }
   }
+
+  /** Rebuilt in place (branch switch, battle return): keep the current branch. */
+  private keepBranch = false;
 
   /** Set once this scene run has created Peter (init leaves the previous run's object). */
   private playerReady = false;

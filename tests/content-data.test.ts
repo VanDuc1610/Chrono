@@ -377,7 +377,7 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
     expect(starterWatch?.description).not.toContain('Đại Thảm Họa');
     // Kuro is strictly forbidden from being mentioned before Chapter 4
     const preCh4Dialogues = Object.entries(dialogueDb.dialogues).filter(
-      ([id]) => !/^ch[4-9]_/.test(id),
+      ([id]) => !/^ch[4-9]x?_/.test(id),
     );
     const preCh4Quests = questDb.quests.filter((q) => (q.chapter ?? 0) < 4);
     const ch4ItemIds = new Set([

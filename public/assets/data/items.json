@@ -1371,6 +1371,294 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1
+    },
+    {
+      "id": "interval_astronomy_scrap",
+      "name": "Mảnh Giấy Thiên Văn Interval",
+      "type": "document",
+      "description": "Ghi chép vị trí các nguồn sáng trong The Interval.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Ở nhánh sống, mặt trời giả của Interval treo ở phía Đông.\nỞ nhánh tỉa, nguồn sáng duy nhất là vết nứt tím phía Bắc."
+      ]
+    },
+    {
+      "id": "gardener_journal_p4",
+      "name": "Nhật Ký Người Làm Vườn — Trang 4",
+      "type": "document",
+      "description": "Nhật ký chăm Nguyệt Thảo trong nhà kính.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "'Nguyệt Thảo cần đúng thứ nhánh sống đang thiếu, và tránh mọi thứ đã giết nhánh tỉa.'",
+        "'Chuông tiễn đưa treo từ tiếng trầm nhất tới tiếng trong nhất, móc thứ nhất tới móc thứ ba.'"
+      ]
+    },
+    {
+      "id": "pure_interval_seed",
+      "name": "Hạt Mầm Bất Tận",
+      "type": "puzzle",
+      "description": "Hạt mầm trong suốt từ đóa Nguyệt Thảo.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "windchime_bronze",
+      "name": "Chuông Gió Đồng",
+      "type": "puzzle",
+      "description": "Chiếc chuông gió bằng đồng.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "windchime_silver",
+      "name": "Chuông Gió Bạc",
+      "type": "puzzle",
+      "description": "Chiếc chuông gió bằng bạc.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "windchime_glass",
+      "name": "Chuông Gió Thủy Tinh",
+      "type": "puzzle",
+      "description": "Chiếc chuông gió bằng thủy tinh.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "pruner_compassion_gem",
+      "name": "Ngọc Trắc Ẩn",
+      "type": "charm",
+      "description": "Viên ngọc Người Làm Vườn để lại khi buông kéo.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 3,
+        "maxMp": 18
+      }
+    },
+    {
+      "id": "na_origami_crane_scrap",
+      "name": "Con Hạc Giấy Thứ 999",
+      "type": "document",
+      "description": "Con hạc giấy Na gấp dở trước khi đổ bệnh.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Trên cánh hạc, nét chữ nguệch ngoạc: \"Con ước bố không phải thức đêm tỉa cây nữa.\""
+      ]
+    },
+    {
+      "id": "origami_paper_cyan",
+      "name": "Giấy Màu Xanh Ngọc",
+      "type": "puzzle",
+      "description": "Tờ giấy màu còn sót trong ngăn tủ nhánh tỉa.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "thousandth_paper_crane",
+      "name": "Con Hạc Giấy Thứ 1.000",
+      "type": "puzzle",
+      "description": "Con hạc xanh ngọc do chính tay Peter gấp.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "na_braided_ribbon",
+      "name": "Dây Cói Của Bé Na",
+      "type": "charm",
+      "description": "Sợi dây cói bện tóc có gắn một bánh răng đồng hồ tí xíu.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 30,
+        "defense": 4
+      }
+    },
+    {
+      "id": "conscience_iron_key",
+      "name": "Chìa Khóa Lương Tâm",
+      "type": "puzzle",
+      "description": "Chiếc chìa khóa sắt lấy từ ngực áo của một dư ảnh.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "pruner_confession_parchment",
+      "name": "Thư Thú Tội Của Kẻ Tỉa",
+      "type": "document",
+      "description": "Cuộn giấy da trên gác thượng vọng lâu.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "'Giọng nói ấy không có mặt. Nó chỉ nói: tỉa một nhánh, giữ một nhánh. Tôi đã tưởng đó là Chronos.'",
+        "'Nhưng Chronos đã vỡ thành sáu mảnh từ lâu. Thứ giao kèo với tôi chỉ là phần còn sót lại — một cái kéo biết nói.'"
+      ]
+    },
+    {
+      "id": "astronomy_lens_living",
+      "name": "Thấu Kính Sao — Nhánh Sống",
+      "type": "puzzle",
+      "description": "Mảnh thấu kính khắc quỹ đạo sao nguyên vẹn.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "astronomy_lens_pruned",
+      "name": "Thấu Kính Sao — Nhánh Tỉa",
+      "type": "puzzle",
+      "description": "Mảnh thấu kính khắc quỹ đạo sao bị lệch pha.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "beta_astronomy_log_1",
+      "name": "Bản Ghi Thiên Văn Beta I",
+      "type": "document",
+      "description": "Nhật ký của đài thiên văn Beta.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "'Khi thế giới còn nguyên vẹn, chòm sao Thiên Xứng nằm ở kinh độ 60°. Vết nứt Chronos bẻ cong ánh sáng một góc bằng đúng độ lệch pha thời gian.'"
+      ]
+    },
+    {
+      "id": "beta_astronomy_log_2",
+      "name": "Bản Ghi Thiên Văn Beta II",
+      "type": "document",
+      "description": "Trang ghi thiên văn tìm thấy trong đổ nát.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "'Độ lệch pha giữa hai nhánh đo được là +30°. Tiêu điểm chỉ hội tụ khi góc nghiêng kính bằng kinh độ nguyên bản cộng độ lệch pha.'"
+      ]
+    },
+    {
+      "id": "quantum_astrolabe_charm",
+      "name": "Thước Đo Lượng Tử",
+      "type": "charm",
+      "description": "Bùa hộ mệnh của đài thiên văn đảo ngược.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxMp": 22,
+        "speed": 3
+      }
+    },
+    {
+      "id": "mira_tuning_notes",
+      "name": "Sổ Tay Điều Âm Của Mira",
+      "type": "document",
+      "description": "Cuốn sổ nhỏ ghi cách chơi cây đàn đồng thau.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "'Phím Kim Loại kẹt rồi. Tụi mình chơi bù: chỗ nào cần tiếng kim khí thì gõ Thủy Tinh hai lần liền, nghe lạnh y như vậy.'"
+      ]
+    },
+    {
+      "id": "clockwork_music_cylinder",
+      "name": "Trục Hộp Nhạc Ru Con",
+      "type": "puzzle",
+      "description": "Trục đồng ghi giai điệu ru của hầm trú ẩn.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "grey_researcher_notes",
+      "name": "Ghi Chép Của Người Vùng Xám",
+      "type": "document",
+      "description": "Sổ tay về đồng hồ cát hai chiều.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "'Nhánh sống rót ba vạch mỗi lần lật, nhánh tỉa hút ngược hai. Quá năm vạch thì bình vỡ, cát rơi sạch.'"
+      ]
+    },
+    {
+      "id": "singularity_sand_charm",
+      "name": "Cát Điểm Dị Thường",
+      "type": "charm",
+      "description": "Chiếc bùa kết tinh từ hai dòng cát đứng yên.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "defense": 8,
+        "maxHp": 10
+      }
+    },
+    {
+      "id": "black_box_recorder",
+      "name": "Hộp Đen Lò Phản Ứng",
+      "type": "puzzle",
+      "description": "Thiết bị ghi dữ liệu điều áp của Thượng Hội Đồng.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "council_override_decree",
+      "name": "Mật Lệnh Thượng Hội Đồng",
+      "type": "document",
+      "description": "Văn bản niêm phong trong hòm sắt đen.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "'Lệnh khẩn của Viện Trưởng: nâng công suất lò lên 300%. Bỏ qua mọi cảnh báo của kỹ sư trưởng Ivo.'",
+        "'Ghi chú tay bên lề: Nếu có chuyện gì, ghi tên Ivo vào báo cáo.'"
+      ]
+    },
+    {
+      "id": "chronos_coolant_flask",
+      "name": "Bình Nước Làm Mát Chronos",
+      "type": "consumable",
+      "description": "Nước làm mát lò pha thảo dược. Hồi 120 HP và 40 MP.",
+      "value": 0,
+      "stackable": true,
+      "maxStack": 20,
+      "effects": {
+        "healAmount": 120,
+        "mpAmount": 40
+      }
+    },
+    {
+      "id": "ivo_precision_lens",
+      "name": "Thấu Kính Chuẩn Xác Của Ivo",
+      "type": "charm",
+      "description": "Chiếc thấu kính đo đạc Ivo đeo suốt trăm năm.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxMp": 15,
+        "speed": 3
+      }
     }
   ]
 }

@@ -7701,6 +7701,5150 @@
           "dialogueId": "ch4_kuro_direct_meeting"
         }
       ]
+    },
+    "map_ch5_interval_shore": {
+      "id": "map_ch5_interval_shore",
+      "name": "Bờ Vực Interval",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_interval_shore",
+        "path": "assets/maps/map_ch5_interval_shore.json"
+      },
+      "tileset": {
+        "name": "interval_tileset",
+        "key": "interval_tileset",
+        "path": "assets/tilesets/interval_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 44
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 7
+        },
+        "from_ch4": {
+          "x": 2,
+          "y": 7
+        },
+        "from_garden": {
+          "x": 21,
+          "y": 7
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 7
+      },
+      "branches": true,
+      "layerVariants": [
+        {
+          "when": {
+            "flag": "branch_map_ch5_interval_shore_pruned"
+          },
+          "ground": "Ground_Pruned",
+          "walls": "Walls_Pruned"
+        }
+      ],
+      "npcs": [
+        {
+          "id": "npc_ch5_kuro_shore",
+          "texture": "npc_kuro",
+          "anim": "npc_kuro_idle",
+          "tile": {
+            "x": 11,
+            "y": 7
+          },
+          "name": "Kuro",
+          "prompt": "[E] Nói chuyện với Kuro",
+          "radius": 44,
+          "dialogueId": "ch5_kuro_meet",
+          "visibleWhen": {
+            "unlessFlag": "kuro_with_peter"
+          }
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_map_ch5_interval_shore_sprout_8_6",
+          "tile": {
+            "x": 8,
+            "y": 6
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm Mầm Rẽ Nhánh",
+          "dialogueId": "ch5_sprout_touch"
+        },
+        {
+          "id": "poi_map_ch5_interval_shore_sprout_20_6",
+          "tile": {
+            "x": 20,
+            "y": 6
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm Mầm Rẽ Nhánh",
+          "dialogueId": "ch5_sprout_touch"
+        }
+      ],
+      "ambient": {
+        "color": "#7a5cff",
+        "alpha": 0.12
+      },
+      "exits": [
+        {
+          "id": "shore_to_garden",
+          "area": {
+            "x": 23,
+            "y": 7,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_seed_garden",
+          "toSpawn": "from_shore",
+          "requiresFlag": "met_kuro_interval",
+          "lockedDialogueId": "ch5_shore_kuro_first"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch5_t_shore",
+          "on": "arrive",
+          "onceFlag": "ch5_t_shore_seen",
+          "delayMs": 400,
+          "dialogueId": "ch5_arrival"
+        },
+        {
+          "id": "ch5_t_sprout",
+          "on": "zone",
+          "area": {
+            "x": 5,
+            "y": 3,
+            "w": 5,
+            "h": 8
+          },
+          "onceFlag": "ch5_t_sprout_seen",
+          "dialogueId": "ch5_sprout_intro",
+          "requiresFlag": "met_kuro_interval"
+        }
+      ]
+    },
+    "map_ch5_seed_garden": {
+      "id": "map_ch5_seed_garden",
+      "name": "Vườn Hạt Khả Năng",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_seed_garden",
+        "path": "assets/maps/map_ch5_seed_garden.json"
+      },
+      "tileset": {
+        "name": "interval_tileset",
+        "key": "interval_tileset",
+        "path": "assets/tilesets/interval_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 44
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 8
+        },
+        "from_shore": {
+          "x": 2,
+          "y": 8
+        },
+        "from_alpha": {
+          "x": 25,
+          "y": 8
+        },
+        "from_greenhouse": {
+          "x": 25,
+          "y": 3
+        },
+        "from_uprooted": {
+          "x": 4,
+          "y": 12
+        },
+        "from_old_seeds": {
+          "x": 12,
+          "y": 4
+        },
+        "gap_west": {
+          "x": 14,
+          "y": 8
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 8
+      },
+      "branches": true,
+      "layerVariants": [
+        {
+          "when": {
+            "flag": "branch_map_ch5_seed_garden_pruned"
+          },
+          "ground": "Ground_Pruned",
+          "walls": "Walls_Pruned"
+        }
+      ],
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_map_ch5_seed_garden_sprout_13_9",
+          "tile": {
+            "x": 13,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm Mầm Rẽ Nhánh",
+          "dialogueId": "ch5_sprout_touch"
+        },
+        {
+          "id": "poi_map_ch5_seed_garden_sprout_19_3",
+          "tile": {
+            "x": 19,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm Mầm Rẽ Nhánh",
+          "dialogueId": "ch5_sprout_touch"
+        },
+        {
+          "id": "poi_ch5_garden_plank",
+          "tile": {
+            "x": 6,
+            "y": 12
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt tấm ván",
+          "dialogueId": "ch5_plank_take_garden",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_seed_garden_pruned"
+          }
+        },
+        {
+          "id": "poi_ch5_garden_gap",
+          "tile": {
+            "x": 15,
+            "y": 8
+          },
+          "radius": 44,
+          "prompt": "[E] Xem khe nứt",
+          "dialogueId": "ch5_gap_inspect",
+          "dialogueRules": [
+            {
+              "ifFlag": "branch_map_ch5_seed_garden_pruned",
+              "dialogueId": "ch5_gap_pruned_void"
+            },
+            {
+              "ifItem": "pruned_plank",
+              "dialogueId": "ch5_gap_place_shadow"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_old_seeds",
+          "tile": {
+            "x": 12,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Xem luống đất nhỏ",
+          "dialogueId": "ch5_old_seeds_offer",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_seed_garden_living"
+          }
+        },
+        {
+          "id": "poi_ch5_uprooted",
+          "tile": {
+            "x": 3,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Xem lối mòn",
+          "dialogueId": "ch5_uprooted_path_hidden",
+          "dialogueRules": [
+            {
+              "ifItems": [
+                "seed_spring_old",
+                "seed_summer",
+                "seed_autumn",
+                "seed_winter",
+                "seed_spring_new"
+              ],
+              "dialogueId": "ch5_uprooted_path_open"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_seed_spring_old",
+          "tile": {
+            "x": 25,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt hạt giống",
+          "dialogueId": "ch5_seed_spring_old_take",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_seed_garden_living"
+          }
+        },
+        {
+          "id": "poi_ch5x_rock_pruned",
+          "tile": {
+            "x": 21,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Xem khối sa thạch",
+          "dialogueId": "ch5x_rock_pruned",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_seed_garden_pruned"
+          }
+        },
+        {
+          "id": "poi_ch5x_sensor",
+          "tile": {
+            "x": 21,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bệ cảm ứng",
+          "dialogueId": "ch5x_sensor_living",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5x_ex1_solved",
+              "dialogueId": "ch5x_ex1_done"
+            },
+            {
+              "ifFlags": ["branch_map_ch5_seed_garden_pruned", "ch5x_rock_south"],
+              "dialogueId": "ch5x_ex1_solved"
+            },
+            {
+              "ifFlag": "branch_map_ch5_seed_garden_pruned",
+              "dialogueId": "ch5x_sensor_wrong"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5x_sun_stele",
+          "tile": {
+            "x": 24,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc tấm bia",
+          "dialogueId": "ch5x_sun_stele"
+        }
+      ],
+      "ambient": {
+        "color": "#9a7aff",
+        "alpha": 0.1
+      },
+      "fallbackSpawn": "gap_west",
+      "dials": [
+        {
+          "id": "ch5x_rock",
+          "tile": {
+            "x": 21,
+            "y": 3
+          },
+          "radius": 36,
+          "prompt": "[E] Đẩy khối đá",
+          "values": [
+            {
+              "key": "north",
+              "label": "Bệ Bắc"
+            },
+            {
+              "key": "east",
+              "label": "Bệ Đông"
+            },
+            {
+              "key": "south",
+              "label": "Bệ Nam"
+            },
+            {
+              "key": "west",
+              "label": "Bệ Tây"
+            }
+          ],
+          "visibleWhen": {
+            "flag": "branch_map_ch5_seed_garden_living"
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "ch5_garden_shadow_plank"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 16,
+              "y": 8
+            }
+          ],
+          "index": 45
+        },
+        {
+          "when": {
+            "flag": "ch5x_rock_north"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 21,
+              "y": 2
+            }
+          ],
+          "index": 5
+        },
+        {
+          "when": {
+            "flag": "ch5x_rock_east"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 22,
+              "y": 3
+            }
+          ],
+          "index": 5
+        },
+        {
+          "when": {
+            "flag": "ch5x_rock_south"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 21,
+              "y": 4
+            }
+          ],
+          "index": 5
+        },
+        {
+          "when": {
+            "flag": "ch5x_rock_west"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 20,
+              "y": 3
+            }
+          ],
+          "index": 5
+        }
+      ],
+      "roamers": [
+        {
+          "id": "r_ch5_garden_phantom_a",
+          "enemyId": "enemy_branch_phantom",
+          "texture": "enemy_branch_phantom",
+          "anim": "enemy_branch_phantom_idle",
+          "tile": {
+            "x": 7,
+            "y": 5
+          }
+        },
+        {
+          "id": "r_ch5_garden_phantom_b",
+          "enemyId": "enemy_branch_phantom",
+          "texture": "enemy_branch_phantom",
+          "anim": "enemy_branch_phantom_idle",
+          "tile": {
+            "x": 10,
+            "y": 12
+          }
+        },
+        {
+          "id": "r_ch5_garden_gardener",
+          "enemyId": "enemy_chronos_gardener",
+          "texture": "enemy_chronos_gardener",
+          "anim": "enemy_chronos_gardener_idle",
+          "tile": {
+            "x": 23,
+            "y": 11
+          }
+        }
+      ],
+      "exits": [
+        {
+          "id": "garden_to_shore",
+          "area": {
+            "x": 0,
+            "y": 8,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_interval_shore",
+          "toSpawn": "from_garden"
+        },
+        {
+          "id": "garden_to_alpha",
+          "area": {
+            "x": 27,
+            "y": 8,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_alpha_town",
+          "toSpawn": "from_garden",
+          "requiresFlag": "ch5_crossed_garden",
+          "lockedDialogueId": "ch5_garden_exit_locked"
+        },
+        {
+          "id": "garden_to_greenhouse",
+          "area": {
+            "x": 27,
+            "y": 3,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_glass_greenhouse",
+          "toSpawn": "from_garden",
+          "requiresFlag": "ch5x_ex1_solved",
+          "lockedDialogueId": "ch5x_greenhouse_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch5_t_garden",
+          "on": "arrive",
+          "onceFlag": "ch5_t_garden_seen",
+          "delayMs": 400,
+          "dialogueId": "ch5_garden_arrival"
+        },
+        {
+          "id": "ch5_t_cat",
+          "on": "zone",
+          "area": {
+            "x": 8,
+            "y": 6,
+            "w": 4,
+            "h": 5
+          },
+          "onceFlag": "ch5_t_cat_seen",
+          "dialogueId": "ch5_kuro_story_cat",
+          "requiresFlag": "met_kuro_interval"
+        },
+        {
+          "id": "ch5_t_paradox",
+          "on": "zone",
+          "area": {
+            "x": 13,
+            "y": 6,
+            "w": 2,
+            "h": 5
+          },
+          "onceFlag": "ch5_t_paradox_seen",
+          "dialogueId": "ch5_paradox_intro"
+        },
+        {
+          "id": "ch5_t_crossed",
+          "on": "zone",
+          "area": {
+            "x": 18,
+            "y": 7,
+            "w": 2,
+            "h": 3
+          },
+          "onceFlag": "ch5_t_crossed_seen",
+          "dialogueId": "ch5_garden_crossed"
+        },
+        {
+          "id": "ch5_t_gardener",
+          "on": "zone",
+          "area": {
+            "x": 20,
+            "y": 9,
+            "w": 5,
+            "h": 4
+          },
+          "onceFlag": "ch5_t_gardener_seen",
+          "dialogueId": "ch5_gardener_first"
+        },
+        {
+          "id": "ch5x_t_shadow",
+          "on": "zone",
+          "area": {
+            "x": 19,
+            "y": 2,
+            "w": 5,
+            "h": 4
+          },
+          "onceFlag": "ch5x_t_shadow_seen",
+          "dialogueId": "ch5x_kuro_shadow_hint",
+          "requiresFlag": "met_kuro_interval"
+        }
+      ]
+    },
+    "map_ch5_glass_greenhouse": {
+      "id": "map_ch5_glass_greenhouse",
+      "name": "Nhà Kính Ký Ức",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_glass_greenhouse",
+        "path": "assets/maps/map_ch5_glass_greenhouse.json"
+      },
+      "tileset": {
+        "name": "interval_tileset",
+        "key": "interval_tileset",
+        "path": "assets/tilesets/interval_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 44
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 8
+        },
+        "from_garden": {
+          "x": 2,
+          "y": 8
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 8
+      },
+      "branches": true,
+      "layerVariants": [
+        {
+          "when": {
+            "flag": "branch_map_ch5_glass_greenhouse_pruned"
+          },
+          "ground": "Ground_Pruned",
+          "walls": "Walls_Pruned"
+        }
+      ],
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_map_ch5_glass_greenhouse_sprout_19_12",
+          "tile": {
+            "x": 19,
+            "y": 12
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm Mầm Rẽ Nhánh",
+          "dialogueId": "ch5_sprout_touch"
+        },
+        {
+          "id": "poi_ch5x_flower",
+          "tile": {
+            "x": 11,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Xem Nguyệt Thảo",
+          "dialogueId": "ch5x_flower_living",
+          "dialogueRules": [
+            {
+              "ifFlag": "branch_map_ch5_glass_greenhouse_pruned",
+              "dialogueId": "ch5x_flower_pruned"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5x_journal",
+          "tile": {
+            "x": 5,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Xem cuốn nhật ký",
+          "dialogueId": "ch5x_journal_take"
+        },
+        {
+          "id": "poi_ch5x_pump",
+          "tile": {
+            "x": 11,
+            "y": 10
+          },
+          "radius": 44,
+          "prompt": "[E] Bơm vi khí hậu",
+          "dialogueId": "ch5x_weather_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5x_weather_balanced",
+              "dialogueId": "ch5x_weather_done"
+            },
+            {
+              "ifFlags": ["ch5x_humidity_mist", "ch5x_temperature_mild", "ch5x_airflow_breeze"],
+              "dialogueId": "ch5x_weather_success"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5x_chime_bronze",
+          "tile": {
+            "x": 4,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt chuông gió",
+          "dialogueId": "ch5x_chime_bronze_take"
+        },
+        {
+          "id": "poi_ch5x_chime_silver",
+          "tile": {
+            "x": 18,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt chuông gió",
+          "dialogueId": "ch5x_chime_silver_take"
+        },
+        {
+          "id": "poi_ch5x_chime_glass",
+          "tile": {
+            "x": 4,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt chuông gió",
+          "dialogueId": "ch5x_chime_glass_take"
+        },
+        {
+          "id": "poi_ch5x_statue",
+          "tile": {
+            "x": 16,
+            "y": 14
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bức tượng",
+          "dialogueId": "ch5x_gardener_statue",
+          "requiresFlag": "ch5x_weather_balanced",
+          "dialogueRules": [
+            {
+              "ifFlag": "pacified_the_gardener",
+              "dialogueId": "ch5x_chimes_done"
+            },
+            {
+              "ifItems": ["windchime_bronze", "windchime_silver", "windchime_glass"],
+              "ifFlags": ["ch5x_hook_1_bronze", "ch5x_hook_2_silver", "ch5x_hook_3_glass"],
+              "dialogueId": "ch5x_gardener_peace"
+            },
+            {
+              "ifItems": ["windchime_bronze", "windchime_silver", "windchime_glass"],
+              "dialogueId": "ch5x_chimes_wrong"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#8ad8c8",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch5x_humidity",
+          "tile": {
+            "x": 8,
+            "y": 8
+          },
+          "radius": 36,
+          "prompt": "[E] Van Độ Ẩm",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa chỉnh)"
+            },
+            {
+              "key": "arid",
+              "label": "Khô cằn"
+            },
+            {
+              "key": "rain",
+              "label": "Mưa rào"
+            },
+            {
+              "key": "mist",
+              "label": "Sương mù"
+            }
+          ]
+        },
+        {
+          "id": "ch5x_temperature",
+          "tile": {
+            "x": 11,
+            "y": 8
+          },
+          "radius": 36,
+          "prompt": "[E] Van Nhiệt Độ",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa chỉnh)"
+            },
+            {
+              "key": "freeze",
+              "label": "Băng giá"
+            },
+            {
+              "key": "mild",
+              "label": "Ôn hòa"
+            },
+            {
+              "key": "scorching",
+              "label": "Nắng gắt"
+            }
+          ]
+        },
+        {
+          "id": "ch5x_airflow",
+          "tile": {
+            "x": 14,
+            "y": 8
+          },
+          "radius": 36,
+          "prompt": "[E] Van Dòng Khí",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa chỉnh)"
+            },
+            {
+              "key": "gale",
+              "label": "Gió lốc"
+            },
+            {
+              "key": "still",
+              "label": "Tĩnh lặng"
+            },
+            {
+              "key": "breeze",
+              "label": "Gió thoảng"
+            }
+          ]
+        },
+        {
+          "id": "ch5x_hook_1",
+          "tile": {
+            "x": 15,
+            "y": 12
+          },
+          "radius": 36,
+          "prompt": "[E] Móc treo 1",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "bronze",
+              "label": "Chuông đồng"
+            },
+            {
+              "key": "silver",
+              "label": "Chuông bạc"
+            },
+            {
+              "key": "glass",
+              "label": "Chuông thủy tinh"
+            }
+          ],
+          "requiresItems": ["windchime_bronze", "windchime_silver", "windchime_glass"],
+          "requiresFlag": "ch5x_weather_balanced"
+        },
+        {
+          "id": "ch5x_hook_2",
+          "tile": {
+            "x": 16,
+            "y": 12
+          },
+          "radius": 36,
+          "prompt": "[E] Móc treo 2",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "bronze",
+              "label": "Chuông đồng"
+            },
+            {
+              "key": "silver",
+              "label": "Chuông bạc"
+            },
+            {
+              "key": "glass",
+              "label": "Chuông thủy tinh"
+            }
+          ],
+          "requiresItems": ["windchime_bronze", "windchime_silver", "windchime_glass"],
+          "requiresFlag": "ch5x_weather_balanced"
+        },
+        {
+          "id": "ch5x_hook_3",
+          "tile": {
+            "x": 17,
+            "y": 12
+          },
+          "radius": 36,
+          "prompt": "[E] Móc treo 3",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "bronze",
+              "label": "Chuông đồng"
+            },
+            {
+              "key": "silver",
+              "label": "Chuông bạc"
+            },
+            {
+              "key": "glass",
+              "label": "Chuông thủy tinh"
+            }
+          ],
+          "requiresItems": ["windchime_bronze", "windchime_silver", "windchime_glass"],
+          "requiresFlag": "ch5x_weather_balanced"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "r_ch5x_greenhouse_gardener",
+          "enemyId": "enemy_chronos_gardener",
+          "texture": "enemy_chronos_gardener",
+          "anim": "enemy_chronos_gardener_idle",
+          "tile": {
+            "x": 15,
+            "y": 6
+          },
+          "visibleWhen": {
+            "unlessFlag": "pacified_the_gardener"
+          }
+        },
+        {
+          "id": "r_ch5x_greenhouse_phantom",
+          "enemyId": "enemy_branch_phantom",
+          "texture": "enemy_branch_phantom",
+          "anim": "enemy_branch_phantom_idle",
+          "tile": {
+            "x": 6,
+            "y": 11
+          }
+        }
+      ],
+      "exits": [
+        {
+          "id": "greenhouse_to_garden",
+          "area": {
+            "x": 0,
+            "y": 8,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_seed_garden",
+          "toSpawn": "from_greenhouse"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch5x_t_greenhouse",
+          "on": "arrive",
+          "onceFlag": "ch5x_t_greenhouse_seen",
+          "delayMs": 400,
+          "dialogueId": "ch5x_greenhouse_arrival"
+        }
+      ]
+    },
+    "map_ch5_alpha_town": {
+      "id": "map_ch5_alpha_town",
+      "name": "Khánh Hòa Ở Lại",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_alpha_town",
+        "path": "assets/maps/map_ch5_alpha_town.json"
+      },
+      "tileset": {
+        "name": "coastal_tileset",
+        "key": "coastal_tileset",
+        "path": "assets/tilesets/coastal_tileset.png"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 44
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 8
+        },
+        "from_garden": {
+          "x": 2,
+          "y": 8
+        },
+        "from_shop": {
+          "x": 6,
+          "y": 7
+        },
+        "from_harbor": {
+          "x": 22,
+          "y": 15
+        },
+        "from_tower": {
+          "x": 14,
+          "y": 2
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 8
+      },
+      "npcs": [
+        {
+          "id": "npc_ch5_coba",
+          "texture": "npc_vendor_ba",
+          "anim": "npc_vendor_ba_idle",
+          "tile": {
+            "x": 17,
+            "y": 10
+          },
+          "name": "Cô Ba",
+          "prompt": "[E] Nói chuyện với Cô Ba",
+          "radius": 44,
+          "dialogueId": "ch5_coba_alpha",
+          "dialogueRules": [
+            {
+              "ifItem": "na_origami_crane_scrap",
+              "unlessFlag": "completed_na_crane_quest",
+              "dialogueId": "ch5x_coba_crane_talk"
+            }
+          ]
+        },
+        {
+          "id": "npc_ch5_na",
+          "texture": "npc_forgotten_child",
+          "anim": "npc_forgotten_child_flicker",
+          "tile": {
+            "x": 9,
+            "y": 10
+          },
+          "name": "Bé Na",
+          "prompt": "[E] Nói chuyện với Bé Na",
+          "radius": 44,
+          "dialogueId": "ch5_na",
+          "tint": "#ffe0c8",
+          "dialogueRules": [
+            {
+              "ifFlag": "completed_na_crane_quest",
+              "dialogueId": "ch5x_na_after"
+            },
+            {
+              "ifItem": "thousandth_paper_crane",
+              "dialogueId": "ch5x_na_place_crane"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch5_rhyme",
+          "tile": {
+            "x": 12,
+            "y": 7
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc chữ phấn trên tường",
+          "dialogueId": "ch5_rhyme"
+        },
+        {
+          "id": "poi_ch5_chalk_blue",
+          "tile": {
+            "x": 2,
+            "y": 14
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt mẩu phấn",
+          "dialogueId": "ch5_chalk_blue_take"
+        },
+        {
+          "id": "poi_ch5_chalk_gold",
+          "tile": {
+            "x": 26,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt mẩu phấn",
+          "dialogueId": "ch5_chalk_gold_take"
+        },
+        {
+          "id": "poi_ch5_seed_summer",
+          "tile": {
+            "x": 20,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt hạt giống",
+          "dialogueId": "ch5_seed_summer_take"
+        }
+      ],
+      "ambient": {
+        "color": "#ffd8a0",
+        "alpha": 0.06
+      },
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "opened_alpha_safe"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 14,
+              "y": 0
+            },
+            {
+              "x": 15,
+              "y": 0
+            }
+          ],
+          "index": 2
+        }
+      ],
+      "exits": [
+        {
+          "id": "alpha_to_garden",
+          "area": {
+            "x": 0,
+            "y": 8,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch5_seed_garden",
+          "toSpawn": "from_alpha"
+        },
+        {
+          "id": "alpha_to_shop",
+          "area": {
+            "x": 6,
+            "y": 6,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_alpha_clockshop",
+          "toSpawn": "from_town"
+        },
+        {
+          "id": "alpha_to_harbor",
+          "area": {
+            "x": 22,
+            "y": 17,
+            "w": 2,
+            "h": 1
+          },
+          "toMap": "map_ch5_alpha_harbor",
+          "toSpawn": "from_town"
+        },
+        {
+          "id": "alpha_to_tower",
+          "area": {
+            "x": 14,
+            "y": 0,
+            "w": 2,
+            "h": 1
+          },
+          "toMap": "map_ch5_pruner_tower",
+          "toSpawn": "from_town",
+          "requiresFlag": "opened_alpha_safe",
+          "lockedDialogueId": "ch5_tower_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch5_t_alpha",
+          "on": "arrive",
+          "onceFlag": "ch5_t_alpha_seen",
+          "delayMs": 400,
+          "dialogueId": "ch5_alpha_arrival"
+        },
+        {
+          "id": "ch5_t_kuro_alpha",
+          "on": "zone",
+          "area": {
+            "x": 3,
+            "y": 7,
+            "w": 4,
+            "h": 4
+          },
+          "onceFlag": "ch5_t_kuro_alpha_seen",
+          "dialogueId": "ch5_kuro_alpha"
+        }
+      ]
+    },
+    "map_ch5_alpha_harbor": {
+      "id": "map_ch5_alpha_harbor",
+      "name": "Bến Thuyền Vắng Lặng",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_alpha_harbor",
+        "path": "assets/maps/map_ch5_alpha_harbor.json"
+      },
+      "tileset": {
+        "name": "coastal_tileset",
+        "key": "coastal_tileset",
+        "path": "assets/tilesets/coastal_tileset.png"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 44
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 11,
+          "y": 2
+        },
+        "from_town": {
+          "x": 11,
+          "y": 2
+        }
+      },
+      "revive": {
+        "x": 11,
+        "y": 2
+      },
+      "branches": true,
+      "layerVariants": [
+        {
+          "when": {
+            "flag": "branch_map_ch5_alpha_harbor_pruned"
+          },
+          "ground": "Ground_Pruned",
+          "walls": "Walls_Pruned"
+        }
+      ],
+      "npcs": [
+        {
+          "id": "npc_ch5x_coba_harbor",
+          "texture": "npc_vendor_ba",
+          "anim": "npc_vendor_ba_idle",
+          "tile": {
+            "x": 8,
+            "y": 4
+          },
+          "name": "Cô Ba",
+          "prompt": "[E] Nói chuyện với Cô Ba",
+          "radius": 44,
+          "dialogueId": "ch5x_coba_harbor",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_alpha_harbor_living"
+          }
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_map_ch5_alpha_harbor_sprout_18_4",
+          "tile": {
+            "x": 18,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm Mầm Rẽ Nhánh",
+          "dialogueId": "ch5_sprout_touch"
+        },
+        {
+          "id": "poi_ch5x_chalk_living",
+          "tile": {
+            "x": 12,
+            "y": 11
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bức vẽ phấn",
+          "dialogueId": "ch5x_chalk_living",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_alpha_harbor_living"
+          }
+        },
+        {
+          "id": "poi_ch5x_chalk_pruned",
+          "tile": {
+            "x": 7,
+            "y": 6
+          },
+          "radius": 44,
+          "prompt": "[E] Xem vách gỗ gãy",
+          "dialogueId": "ch5x_chalk_pruned",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_alpha_harbor_pruned"
+          }
+        },
+        {
+          "id": "poi_ch5x_drawing",
+          "tile": {
+            "x": 11,
+            "y": 16
+          },
+          "radius": 44,
+          "prompt": "[E] Tô lại bầu trời",
+          "dialogueId": "ch5x_chalk_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5x_chalk_solved",
+              "dialogueId": "ch5x_chalk_done"
+            },
+            {
+              "ifFlags": [
+                "ch5x_sky_1_sun",
+                "ch5x_sky_2_gulls",
+                "ch5x_sky_3_lighthouse",
+                "ch5x_sky_4_sail"
+              ],
+              "dialogueId": "ch5x_chalk_success"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#a0d8ff",
+        "alpha": 0.06
+      },
+      "dials": [
+        {
+          "id": "ch5x_sky_1",
+          "tile": {
+            "x": 11,
+            "y": 11
+          },
+          "radius": 36,
+          "prompt": "[E] Ô tranh I",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "sun",
+              "label": "Mặt trời cười"
+            },
+            {
+              "key": "gulls",
+              "label": "Đàn hải âu"
+            },
+            {
+              "key": "lighthouse",
+              "label": "Ngọn hải đăng"
+            },
+            {
+              "key": "sail",
+              "label": "Cánh buồm"
+            }
+          ]
+        },
+        {
+          "id": "ch5x_sky_2",
+          "tile": {
+            "x": 12,
+            "y": 12
+          },
+          "radius": 36,
+          "prompt": "[E] Ô tranh II",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "sun",
+              "label": "Mặt trời cười"
+            },
+            {
+              "key": "gulls",
+              "label": "Đàn hải âu"
+            },
+            {
+              "key": "lighthouse",
+              "label": "Ngọn hải đăng"
+            },
+            {
+              "key": "sail",
+              "label": "Cánh buồm"
+            }
+          ]
+        },
+        {
+          "id": "ch5x_sky_3",
+          "tile": {
+            "x": 11,
+            "y": 14
+          },
+          "radius": 36,
+          "prompt": "[E] Ô tranh III",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "sun",
+              "label": "Mặt trời cười"
+            },
+            {
+              "key": "gulls",
+              "label": "Đàn hải âu"
+            },
+            {
+              "key": "lighthouse",
+              "label": "Ngọn hải đăng"
+            },
+            {
+              "key": "sail",
+              "label": "Cánh buồm"
+            }
+          ]
+        },
+        {
+          "id": "ch5x_sky_4",
+          "tile": {
+            "x": 12,
+            "y": 15
+          },
+          "radius": 36,
+          "prompt": "[E] Ô tranh IV",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "sun",
+              "label": "Mặt trời cười"
+            },
+            {
+              "key": "gulls",
+              "label": "Đàn hải âu"
+            },
+            {
+              "key": "lighthouse",
+              "label": "Ngọn hải đăng"
+            },
+            {
+              "key": "sail",
+              "label": "Cánh buồm"
+            }
+          ]
+        }
+      ],
+      "exits": [
+        {
+          "id": "harbor_to_town",
+          "area": {
+            "x": 11,
+            "y": 0,
+            "w": 2,
+            "h": 1
+          },
+          "toMap": "map_ch5_alpha_town",
+          "toSpawn": "from_harbor"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch5x_t_harbor",
+          "on": "arrive",
+          "onceFlag": "ch5x_t_harbor_seen",
+          "delayMs": 400,
+          "dialogueId": "ch5x_harbor_arrival"
+        }
+      ]
+    },
+    "map_ch5_alpha_clockshop": {
+      "id": "map_ch5_alpha_clockshop",
+      "name": "Tiệm Đồng Hồ Hai Thế Giới",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_alpha_clockshop",
+        "path": "assets/maps/map_ch5_alpha_clockshop.json"
+      },
+      "tileset": {
+        "name": "steel_tileset",
+        "key": "steel_tileset",
+        "path": "assets/tilesets/steel_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 28
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 7,
+          "y": 9
+        },
+        "from_town": {
+          "x": 7,
+          "y": 9
+        }
+      },
+      "revive": {
+        "x": 7,
+        "y": 9
+      },
+      "branches": true,
+      "layerVariants": [
+        {
+          "when": {
+            "flag": "branch_map_ch5_alpha_clockshop_pruned"
+          },
+          "ground": "Ground_Pruned",
+          "walls": "Walls_Pruned"
+        }
+      ],
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_map_ch5_alpha_clockshop_sprout_12_9",
+          "tile": {
+            "x": 12,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm Mầm Rẽ Nhánh",
+          "dialogueId": "ch5_sprout_touch"
+        },
+        {
+          "id": "poi_ch5_clock_wedding",
+          "tile": {
+            "x": 3,
+            "y": 2
+          },
+          "radius": 30,
+          "prompt": "[E] Xem đồng hồ",
+          "dialogueId": "ch5_clock_wedding",
+          "dialogueRules": [
+            {
+              "ifFlag": "branch_map_ch5_alpha_clockshop_pruned",
+              "dialogueId": "ch5_clock_wedding_pruned"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_clock_daughter",
+          "tile": {
+            "x": 5,
+            "y": 2
+          },
+          "radius": 30,
+          "prompt": "[E] Xem đồng hồ",
+          "dialogueId": "ch5_clock_daughter",
+          "dialogueRules": [
+            {
+              "ifFlag": "branch_map_ch5_alpha_clockshop_pruned",
+              "dialogueId": "ch5_clock_daughter_pruned"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_clock_grandpa",
+          "tile": {
+            "x": 7,
+            "y": 2
+          },
+          "radius": 30,
+          "prompt": "[E] Xem đồng hồ",
+          "dialogueId": "ch5_clock_grandpa",
+          "dialogueRules": [
+            {
+              "ifFlag": "branch_map_ch5_alpha_clockshop_pruned",
+              "dialogueId": "ch5_clock_grandpa_pruned"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_clock_sea",
+          "tile": {
+            "x": 9,
+            "y": 2
+          },
+          "radius": 30,
+          "prompt": "[E] Xem đồng hồ",
+          "dialogueId": "ch5_clock_sea",
+          "dialogueRules": [
+            {
+              "ifFlag": "branch_map_ch5_alpha_clockshop_pruned",
+              "dialogueId": "ch5_clock_sea_pruned"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_clock_shop",
+          "tile": {
+            "x": 11,
+            "y": 2
+          },
+          "radius": 30,
+          "prompt": "[E] Xem đồng hồ",
+          "dialogueId": "ch5_clock_shop",
+          "dialogueRules": [
+            {
+              "ifFlag": "branch_map_ch5_alpha_clockshop_pruned",
+              "dialogueId": "ch5_clock_shop_pruned"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_photo",
+          "tile": {
+            "x": 13,
+            "y": 2
+          },
+          "radius": 44,
+          "prompt": "[E] Xem tấm ảnh",
+          "dialogueId": "ch5_wedding_photo",
+          "dialogueRules": [
+            {
+              "ifFlag": "branch_map_ch5_alpha_clockshop_pruned",
+              "dialogueId": "ch5_wedding_photo_pruned"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_drawer",
+          "tile": {
+            "x": 4,
+            "y": 7
+          },
+          "radius": 44,
+          "prompt": "[E] Mở ngăn kéo",
+          "dialogueId": "ch5_safe_note_take",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_alpha_clockshop_living"
+          }
+        },
+        {
+          "id": "poi_ch5_safe",
+          "tile": {
+            "x": 13,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Mở két sắt",
+          "dialogueId": "ch5_safe_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "opened_alpha_safe",
+              "dialogueId": "ch5_safe_open_again"
+            },
+            {
+              "ifFlag": "branch_map_ch5_alpha_clockshop_pruned",
+              "dialogueId": "ch5_safe_pruned"
+            },
+            {
+              "ifFlags": ["ch5_safe_h_7", "ch5_safe_m_30"],
+              "dialogueId": "ch5_safe_open"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5x_paper",
+          "tile": {
+            "x": 2,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Lục ngăn tủ",
+          "dialogueId": "ch5x_paper_take",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_alpha_clockshop_pruned"
+          }
+        },
+        {
+          "id": "poi_ch5x_bench",
+          "tile": {
+            "x": 3,
+            "y": 7
+          },
+          "radius": 44,
+          "prompt": "[E] Ngồi vào bàn thợ",
+          "dialogueId": "ch5x_bench_idle",
+          "dialogueRules": [
+            {
+              "ifItem": "origami_paper_cyan",
+              "dialogueId": "ch5x_bench_fold"
+            }
+          ]
+        }
+      ],
+      "dials": [
+        {
+          "id": "ch5_safe_h",
+          "tile": {
+            "x": 11,
+            "y": 5
+          },
+          "radius": 36,
+          "prompt": "[E] Vòng Giờ",
+          "values": [
+            {
+              "key": "1",
+              "label": "1 giờ"
+            },
+            {
+              "key": "2",
+              "label": "2 giờ"
+            },
+            {
+              "key": "3",
+              "label": "3 giờ"
+            },
+            {
+              "key": "4",
+              "label": "4 giờ"
+            },
+            {
+              "key": "5",
+              "label": "5 giờ"
+            },
+            {
+              "key": "6",
+              "label": "6 giờ"
+            },
+            {
+              "key": "7",
+              "label": "7 giờ"
+            },
+            {
+              "key": "8",
+              "label": "8 giờ"
+            },
+            {
+              "key": "9",
+              "label": "9 giờ"
+            },
+            {
+              "key": "10",
+              "label": "10 giờ"
+            },
+            {
+              "key": "11",
+              "label": "11 giờ"
+            },
+            {
+              "key": "12",
+              "label": "12 giờ"
+            }
+          ],
+          "visibleWhen": {
+            "flag": "branch_map_ch5_alpha_clockshop_living"
+          }
+        },
+        {
+          "id": "ch5_safe_m",
+          "tile": {
+            "x": 11,
+            "y": 7
+          },
+          "radius": 36,
+          "prompt": "[E] Vòng Phút",
+          "values": [
+            {
+              "key": "00",
+              "label": "00 phút"
+            },
+            {
+              "key": "15",
+              "label": "15 phút"
+            },
+            {
+              "key": "30",
+              "label": "30 phút"
+            },
+            {
+              "key": "45",
+              "label": "45 phút"
+            }
+          ],
+          "visibleWhen": {
+            "flag": "branch_map_ch5_alpha_clockshop_living"
+          }
+        }
+      ],
+      "exits": [
+        {
+          "id": "shop_to_town",
+          "area": {
+            "x": 7,
+            "y": 11,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_alpha_town",
+          "toSpawn": "from_shop"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch5_t_shop",
+          "on": "arrive",
+          "onceFlag": "ch5_t_shop_seen",
+          "delayMs": 400,
+          "dialogueId": "ch5_shop_arrival"
+        }
+      ]
+    },
+    "map_ch5_pruner_tower": {
+      "id": "map_ch5_pruner_tower",
+      "name": "Vọng Lâu Kẻ Tỉa Cành",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_pruner_tower",
+        "path": "assets/maps/map_ch5_pruner_tower.json"
+      },
+      "tileset": {
+        "name": "interval_tileset",
+        "key": "interval_tileset",
+        "path": "assets/tilesets/interval_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 44
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 11,
+          "y": 13
+        },
+        "from_town": {
+          "x": 11,
+          "y": 13
+        },
+        "from_beta": {
+          "x": 19,
+          "y": 8
+        },
+        "from_attic": {
+          "x": 11,
+          "y": 2
+        },
+        "revive": {
+          "x": 11,
+          "y": 13
+        }
+      },
+      "revive": {
+        "x": 11,
+        "y": 13
+      },
+      "npcs": [
+        {
+          "id": "npc_ch5x_ghost_x",
+          "texture": "enemy_branch_phantom",
+          "anim": "enemy_branch_phantom_idle",
+          "tile": {
+            "x": 6,
+            "y": 5
+          },
+          "name": "Dư Ảnh X",
+          "prompt": "[E] Nói chuyện với Dư Ảnh X",
+          "radius": 44,
+          "dialogueId": "ch5x_ghost_x",
+          "alpha": 0.7,
+          "tint": "#d8d0ff"
+        },
+        {
+          "id": "npc_ch5x_ghost_y",
+          "texture": "enemy_branch_phantom",
+          "anim": "enemy_branch_phantom_idle",
+          "tile": {
+            "x": 11,
+            "y": 4
+          },
+          "name": "Dư Ảnh Y",
+          "prompt": "[E] Nói chuyện với Dư Ảnh Y",
+          "radius": 44,
+          "dialogueId": "ch5x_ghost_y",
+          "alpha": 0.7,
+          "tint": "#d8d0ff"
+        },
+        {
+          "id": "npc_ch5x_ghost_z",
+          "texture": "enemy_branch_phantom",
+          "anim": "enemy_branch_phantom_idle",
+          "tile": {
+            "x": 16,
+            "y": 5
+          },
+          "name": "Dư Ảnh Z",
+          "prompt": "[E] Nói chuyện với Dư Ảnh Z",
+          "radius": 44,
+          "dialogueId": "ch5x_ghost_z",
+          "alpha": 0.7,
+          "tint": "#d8d0ff"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch5x_witness_stele",
+          "tile": {
+            "x": 3,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia đá",
+          "dialogueId": "ch5x_witness_stele"
+        },
+        {
+          "id": "poi_ch5x_accuse",
+          "tile": {
+            "x": 13,
+            "y": 7
+          },
+          "radius": 44,
+          "prompt": "[E] Chỉ định người giữ chìa",
+          "dialogueId": "ch5x_witness_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5x_witness_solved",
+              "dialogueId": "ch5x_witness_done"
+            },
+            {
+              "ifFlag": "ch5x_accuse_z",
+              "dialogueId": "ch5x_witness_success"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5x_attic",
+          "tile": {
+            "x": 11,
+            "y": 2
+          },
+          "radius": 44,
+          "prompt": "[E] Cửa gác thượng",
+          "dialogueId": "ch5x_attic_locked",
+          "dialogueRules": [
+            {
+              "ifFlag": "opened_pruner_attic",
+              "dialogueId": "ch5x_attic_done"
+            },
+            {
+              "ifItem": "conscience_iron_key",
+              "dialogueId": "ch5x_attic_open"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#e8e8ff",
+        "alpha": 0.06
+      },
+      "dials": [
+        {
+          "id": "ch5x_accuse",
+          "tile": {
+            "x": 9,
+            "y": 7
+          },
+          "radius": 36,
+          "prompt": "[E] Chọn dư ảnh",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "x",
+              "label": "Dư ảnh X"
+            },
+            {
+              "key": "y",
+              "label": "Dư ảnh Y"
+            },
+            {
+              "key": "z",
+              "label": "Dư ảnh Z"
+            }
+          ]
+        }
+      ],
+      "encounters": [
+        {
+          "id": "enc_other_peter",
+          "enemyId": "boss_other_peter",
+          "texture": "boss_other_peter",
+          "anim": "boss_other_peter_idle",
+          "tile": {
+            "x": 11,
+            "y": 10
+          },
+          "defeatedFlag": "defeated_other_peter",
+          "hitbox": 30,
+          "victoryDialogueId": "ch5_other_peter_defeated"
+        }
+      ],
+      "exits": [
+        {
+          "id": "tower_to_town",
+          "area": {
+            "x": 11,
+            "y": 15,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_alpha_town",
+          "toSpawn": "from_tower"
+        },
+        {
+          "id": "tower_to_beta",
+          "area": {
+            "x": 21,
+            "y": 8,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_beta_city",
+          "toSpawn": "from_tower",
+          "requiresFlag": "resolved_alpha_letter",
+          "lockedDialogueId": "ch5_tower_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch5_t_tower",
+          "on": "arrive",
+          "onceFlag": "ch5_t_tower_seen",
+          "delayMs": 400,
+          "dialogueId": "ch5_tower_arrival"
+        },
+        {
+          "id": "ch5_t_other_peter",
+          "on": "zone",
+          "area": {
+            "x": 7,
+            "y": 12,
+            "w": 9,
+            "h": 1
+          },
+          "onceFlag": "ch5_t_other_peter_seen",
+          "dialogueId": "ch5_other_peter_confront",
+          "unlessFlag": "defeated_other_peter"
+        },
+        {
+          "id": "ch5_t_react_spared",
+          "on": "zone",
+          "area": {
+            "x": 1,
+            "y": 2,
+            "w": 20,
+            "h": 13
+          },
+          "onceFlag": "ch5_t_react_spared_seen",
+          "dialogueId": "ch5_kuro_reacts_spared",
+          "requiresFlag": "ch5_choice_alpha_spared"
+        },
+        {
+          "id": "ch5_t_react_letter",
+          "on": "zone",
+          "area": {
+            "x": 1,
+            "y": 2,
+            "w": 20,
+            "h": 13
+          },
+          "onceFlag": "ch5_t_react_letter_seen",
+          "dialogueId": "ch5_kuro_reacts_letter",
+          "requiresFlag": "ch5_choice_alpha_letter"
+        },
+        {
+          "id": "ch5_t_song",
+          "on": "zone",
+          "area": {
+            "x": 1,
+            "y": 2,
+            "w": 20,
+            "h": 13
+          },
+          "onceFlag": "ch5_t_song_seen",
+          "dialogueId": "ch5_kuro_story_song",
+          "requiresFlag": "ch5_t_react_letter_seen"
+        },
+        {
+          "id": "ch5_t_song2",
+          "on": "zone",
+          "area": {
+            "x": 1,
+            "y": 2,
+            "w": 20,
+            "h": 13
+          },
+          "onceFlag": "ch5_t_song2_seen",
+          "dialogueId": "ch5_kuro_story_song",
+          "requiresFlag": "ch5_t_react_spared_seen",
+          "unlessFlag": "took_kuro_ledger_page_2"
+        }
+      ]
+    },
+    "map_ch5_beta_city": {
+      "id": "map_ch5_beta_city",
+      "name": "Thành Phố Đồng Hồ Thép",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_beta_city",
+        "path": "assets/maps/map_ch5_beta_city.json"
+      },
+      "tileset": {
+        "name": "steel_tileset",
+        "key": "steel_tileset",
+        "path": "assets/tilesets/steel_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 28
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 8
+        },
+        "from_tower": {
+          "x": 2,
+          "y": 8
+        },
+        "from_reactor": {
+          "x": 27,
+          "y": 8
+        },
+        "from_observatory": {
+          "x": 27,
+          "y": 2
+        },
+        "bridge_start": {
+          "x": 8,
+          "y": 8
+        },
+        "revive": {
+          "x": 2,
+          "y": 8
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 8
+      },
+      "branches": true,
+      "layerVariants": [
+        {
+          "when": {
+            "flag": "branch_map_ch5_beta_city_pruned"
+          },
+          "ground": "Ground_Pruned",
+          "walls": "Walls_Pruned"
+        }
+      ],
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_map_ch5_beta_city_sprout_7_6",
+          "tile": {
+            "x": 7,
+            "y": 6
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm Mầm Rẽ Nhánh",
+          "dialogueId": "ch5_sprout_touch"
+        },
+        {
+          "id": "poi_ch5_plank_a",
+          "tile": {
+            "x": 4,
+            "y": 12
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt tấm ván",
+          "dialogueId": "ch5_plank_pruned_a_take",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_beta_city_pruned"
+          }
+        },
+        {
+          "id": "poi_ch5_plank_b",
+          "tile": {
+            "x": 6,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt tấm ván",
+          "dialogueId": "ch5_plank_pruned_b_take",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_beta_city_pruned"
+          }
+        },
+        {
+          "id": "poi_ch5_plank_living",
+          "tile": {
+            "x": 3,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt tấm ván",
+          "dialogueId": "ch5_plank_living_take",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_beta_city_living"
+          }
+        },
+        {
+          "id": "poi_ch5_bridge_log",
+          "tile": {
+            "x": 2,
+            "y": 12
+          },
+          "radius": 44,
+          "prompt": "[E] Xem cuốn sổ",
+          "dialogueId": "ch5_bridge_log_take"
+        },
+        {
+          "id": "poi_ch5_seed_autumn",
+          "tile": {
+            "x": 25,
+            "y": 12
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt hạt giống",
+          "dialogueId": "ch5_seed_autumn_take"
+        },
+        {
+          "id": "poi_ch5_chalk_red",
+          "tile": {
+            "x": 26,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt mẩu phấn",
+          "dialogueId": "ch5_chalk_red_take"
+        },
+        {
+          "id": "poi_ch5_cell_3",
+          "tile": {
+            "x": 12,
+            "y": 8
+          },
+          "radius": 40,
+          "prompt": "[E] Xem khoảng trống",
+          "dialogueId": "ch5_cell_inspect",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5_cell_3_p",
+              "dialogueId": "ch5_cell_done"
+            },
+            {
+              "ifFlag": "branch_map_ch5_beta_city_living",
+              "dialogueId": "ch5_cell_living"
+            },
+            {
+              "ifItem": "pruned_plank",
+              "dialogueId": "ch5_cell_3_place"
+            },
+            {
+              "ifItem": "living_plank",
+              "dialogueId": "ch5_cell_3_shadow"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_cell_6",
+          "tile": {
+            "x": 15,
+            "y": 8
+          },
+          "radius": 40,
+          "prompt": "[E] Xem khoảng trống",
+          "dialogueId": "ch5_cell_inspect",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5_cell_6_p",
+              "dialogueId": "ch5_cell_done"
+            },
+            {
+              "ifFlag": "branch_map_ch5_beta_city_living",
+              "dialogueId": "ch5_cell_living"
+            },
+            {
+              "ifItem": "pruned_plank",
+              "dialogueId": "ch5_cell_6_place"
+            },
+            {
+              "ifItem": "living_plank",
+              "dialogueId": "ch5_cell_6_shadow"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_cell_9",
+          "tile": {
+            "x": 18,
+            "y": 8
+          },
+          "radius": 40,
+          "prompt": "[E] Xem khoảng trống",
+          "dialogueId": "ch5_cell_inspect",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5_cell_9_p",
+              "dialogueId": "ch5_cell_done"
+            },
+            {
+              "ifFlag": "branch_map_ch5_beta_city_living",
+              "dialogueId": "ch5_cell_living"
+            },
+            {
+              "ifItem": "pruned_plank",
+              "dialogueId": "ch5_cell_9_place"
+            },
+            {
+              "ifItem": "living_plank",
+              "dialogueId": "ch5_cell_9_shadow"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#ff9a50",
+        "alpha": 0.06
+      },
+      "fallbackSpawn": "bridge_start",
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "ch5_cell_3_p",
+            "unlessFlag": "branch_map_ch5_beta_city_living"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 12,
+              "y": 8
+            }
+          ],
+          "index": 28
+        },
+        {
+          "when": {
+            "flag": "ch5_cell_3_shadow",
+            "unlessFlag": "branch_map_ch5_beta_city_living"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 12,
+              "y": 8
+            }
+          ],
+          "index": 29
+        },
+        {
+          "when": {
+            "flag": "ch5_cell_6_p",
+            "unlessFlag": "branch_map_ch5_beta_city_living"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 15,
+              "y": 8
+            }
+          ],
+          "index": 28
+        },
+        {
+          "when": {
+            "flag": "ch5_cell_6_shadow",
+            "unlessFlag": "branch_map_ch5_beta_city_living"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 15,
+              "y": 8
+            }
+          ],
+          "index": 29
+        },
+        {
+          "when": {
+            "flag": "ch5_cell_9_p",
+            "unlessFlag": "branch_map_ch5_beta_city_living"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 18,
+              "y": 8
+            }
+          ],
+          "index": 28
+        },
+        {
+          "when": {
+            "flag": "ch5_cell_9_shadow",
+            "unlessFlag": "branch_map_ch5_beta_city_living"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 18,
+              "y": 8
+            }
+          ],
+          "index": 29
+        }
+      ],
+      "roamers": [
+        {
+          "id": "r_ch5_beta_cocoon_a",
+          "enemyId": "enemy_unborn_cocoon",
+          "texture": "enemy_unborn_cocoon",
+          "anim": "enemy_unborn_cocoon_idle",
+          "tile": {
+            "x": 22,
+            "y": 5
+          }
+        },
+        {
+          "id": "r_ch5_beta_cocoon_b",
+          "enemyId": "enemy_unborn_cocoon",
+          "texture": "enemy_unborn_cocoon",
+          "anim": "enemy_unborn_cocoon_idle",
+          "tile": {
+            "x": 22,
+            "y": 11
+          }
+        },
+        {
+          "id": "r_ch5_beta_horror",
+          "enemyId": "enemy_unborn_horror",
+          "texture": "enemy_unborn_horror",
+          "anim": "enemy_unborn_horror_idle",
+          "tile": {
+            "x": 6,
+            "y": 10
+          }
+        },
+        {
+          "id": "r_ch5_beta_gardener",
+          "enemyId": "enemy_chronos_gardener",
+          "texture": "enemy_chronos_gardener",
+          "anim": "enemy_chronos_gardener_idle",
+          "tile": {
+            "x": 25,
+            "y": 8
+          }
+        }
+      ],
+      "exits": [
+        {
+          "id": "beta_to_tower",
+          "area": {
+            "x": 0,
+            "y": 8,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_pruner_tower",
+          "toSpawn": "from_beta"
+        },
+        {
+          "id": "beta_to_reactor",
+          "area": {
+            "x": 29,
+            "y": 8,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_chronos_reactor",
+          "toSpawn": "from_beta",
+          "requiresFlag": "crossed_quantum_bridge",
+          "lockedDialogueId": "ch5_beta_exit_locked"
+        },
+        {
+          "id": "beta_to_observatory",
+          "area": {
+            "x": 28,
+            "y": 1,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_observatory_ruins",
+          "toSpawn": "from_beta"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch5_t_beta",
+          "on": "arrive",
+          "onceFlag": "ch5_t_beta_seen",
+          "delayMs": 400,
+          "dialogueId": "ch5_beta_arrival"
+        },
+        {
+          "id": "ch5_t_kuro_beta",
+          "on": "zone",
+          "area": {
+            "x": 3,
+            "y": 6,
+            "w": 4,
+            "h": 5
+          },
+          "onceFlag": "ch5_t_kuro_beta_seen",
+          "dialogueId": "ch5_kuro_beta"
+        },
+        {
+          "id": "ch5_t_bridge_crossed",
+          "on": "zone",
+          "area": {
+            "x": 20,
+            "y": 7,
+            "w": 2,
+            "h": 3
+          },
+          "onceFlag": "ch5_t_bridge_crossed_seen",
+          "dialogueId": "ch5_bridge_crossed"
+        }
+      ]
+    },
+    "map_ch5_observatory_ruins": {
+      "id": "map_ch5_observatory_ruins",
+      "name": "Đài Thiên Văn Đảo Ngược",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_observatory_ruins",
+        "path": "assets/maps/map_ch5_observatory_ruins.json"
+      },
+      "tileset": {
+        "name": "steel_tileset",
+        "key": "steel_tileset",
+        "path": "assets/tilesets/steel_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 28
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 10,
+          "y": 11
+        },
+        "from_beta": {
+          "x": 10,
+          "y": 11
+        }
+      },
+      "revive": {
+        "x": 10,
+        "y": 11
+      },
+      "branches": true,
+      "layerVariants": [
+        {
+          "when": {
+            "flag": "branch_map_ch5_observatory_ruins_pruned"
+          },
+          "ground": "Ground_Pruned",
+          "walls": "Walls_Pruned"
+        }
+      ],
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_map_ch5_observatory_ruins_sprout_3_11",
+          "tile": {
+            "x": 3,
+            "y": 11
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm Mầm Rẽ Nhánh",
+          "dialogueId": "ch5_sprout_touch"
+        },
+        {
+          "id": "poi_ch5x_lens_living",
+          "tile": {
+            "x": 3,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt thấu kính",
+          "dialogueId": "ch5x_lens_living_take",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_observatory_ruins_living"
+          }
+        },
+        {
+          "id": "poi_ch5x_lens_pruned",
+          "tile": {
+            "x": 16,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt thấu kính",
+          "dialogueId": "ch5x_lens_pruned_take",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_observatory_ruins_pruned"
+          }
+        },
+        {
+          "id": "poi_ch5x_log_1",
+          "tile": {
+            "x": 4,
+            "y": 10
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bàn đọc",
+          "dialogueId": "ch5x_log_1_take",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_observatory_ruins_living"
+          }
+        },
+        {
+          "id": "poi_ch5x_log_2",
+          "tile": {
+            "x": 15,
+            "y": 11
+          },
+          "radius": 44,
+          "prompt": "[E] Bới đống đổ nát",
+          "dialogueId": "ch5x_log_2_take",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_observatory_ruins_pruned"
+          }
+        },
+        {
+          "id": "poi_ch5x_telescope",
+          "tile": {
+            "x": 10,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Chiếu tiêu điểm",
+          "dialogueId": "ch5x_telescope_missing",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5x_observatory_aligned",
+              "dialogueId": "ch5x_telescope_done"
+            },
+            {
+              "ifItems": ["astronomy_lens_living", "astronomy_lens_pruned"],
+              "ifFlag": "ch5x_angle_a90",
+              "dialogueId": "ch5x_telescope_success"
+            },
+            {
+              "ifItems": ["astronomy_lens_living", "astronomy_lens_pruned"],
+              "dialogueId": "ch5x_telescope_wrong"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#9ab8ff",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch5x_angle",
+          "tile": {
+            "x": 8,
+            "y": 6
+          },
+          "radius": 36,
+          "prompt": "[E] Vành góc nghiêng",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "a30",
+              "label": "30°"
+            },
+            {
+              "key": "a60",
+              "label": "60°"
+            },
+            {
+              "key": "a90",
+              "label": "90°"
+            },
+            {
+              "key": "a120",
+              "label": "120°"
+            }
+          ]
+        }
+      ],
+      "roamers": [
+        {
+          "id": "r_ch5x_observatory_crystal",
+          "enemyId": "enemy_paradox_crystal",
+          "texture": "enemy_paradox_crystal",
+          "anim": "enemy_paradox_crystal_idle",
+          "tile": {
+            "x": 12,
+            "y": 9
+          }
+        }
+      ],
+      "exits": [
+        {
+          "id": "observatory_to_beta",
+          "area": {
+            "x": 10,
+            "y": 13,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_beta_city",
+          "toSpawn": "from_observatory"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch5x_t_observatory",
+          "on": "arrive",
+          "onceFlag": "ch5x_t_observatory_seen",
+          "delayMs": 400,
+          "dialogueId": "ch5x_observatory_arrival"
+        }
+      ]
+    },
+    "map_ch5_chronos_reactor": {
+      "id": "map_ch5_chronos_reactor",
+      "name": "Lò Phản Ứng Chronos",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_chronos_reactor",
+        "path": "assets/maps/map_ch5_chronos_reactor.json"
+      },
+      "tileset": {
+        "name": "steel_tileset",
+        "key": "steel_tileset",
+        "path": "assets/tilesets/steel_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 28
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 8
+        },
+        "from_beta": {
+          "x": 2,
+          "y": 8
+        },
+        "from_shelter": {
+          "x": 23,
+          "y": 8
+        },
+        "revive": {
+          "x": 2,
+          "y": 8
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 8
+      },
+      "branches": true,
+      "layerVariants": [
+        {
+          "when": {
+            "flag": "branch_map_ch5_chronos_reactor_pruned"
+          },
+          "ground": "Ground_Pruned",
+          "walls": "Walls_Pruned"
+        }
+      ],
+      "npcs": [
+        {
+          "id": "npc_ch5_ivo",
+          "texture": "npc_ivo",
+          "anim": "npc_ivo_idle",
+          "tile": {
+            "x": 9,
+            "y": 10
+          },
+          "name": "Kỹ Sư Ivo",
+          "prompt": "[E] Nói chuyện với Kỹ Sư Ivo",
+          "radius": 44,
+          "dialogueId": "ch5_ivo_meet",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_chronos_reactor_living"
+          },
+          "dialogueRules": [
+            {
+              "ifFlag": "resolved_ivo_redemption",
+              "dialogueId": "ch5x_ivo_after"
+            },
+            {
+              "ifItem": "council_override_decree",
+              "dialogueId": "ch5x_ivo_vindication"
+            },
+            {
+              "ifFlag": "restarted_reactor",
+              "unlessFlag": "ivo_guilt_heard",
+              "dialogueId": "ch5x_ivo_guilt_talk"
+            },
+            {
+              "ifFlag": "met_ivo",
+              "dialogueId": "ch5_ivo_again"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_map_ch5_chronos_reactor_sprout_15_13",
+          "tile": {
+            "x": 15,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm Mầm Rẽ Nhánh",
+          "dialogueId": "ch5_sprout_touch"
+        },
+        {
+          "id": "poi_ch5_reactor_start",
+          "tile": {
+            "x": 22,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Khởi động lò",
+          "dialogueId": "ch5_reactor_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "restarted_reactor",
+              "dialogueId": "ch5_reactor_done"
+            },
+            {
+              "ifFlag": "ch5_sw_a_l_on",
+              "dialogueId": "ch5_reactor_wrong"
+            },
+            {
+              "ifFlag": "ch5_sw_b_p_on",
+              "dialogueId": "ch5_reactor_wrong"
+            },
+            {
+              "ifFlag": "ch5_sw_c_p_on",
+              "dialogueId": "ch5_reactor_wrong"
+            },
+            {
+              "ifFlags": ["ch5_sw_b_l_on", "ch5_sw_c_l_on", "ch5_sw_a_p_on"],
+              "dialogueId": "ch5_reactor_start"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_warning_plate",
+          "tile": {
+            "x": 16,
+            "y": 11
+          },
+          "radius": 44,
+          "prompt": "[E] Xem tấm biển",
+          "dialogueId": "ch5_warning_plate_take",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_chronos_reactor_pruned"
+          }
+        },
+        {
+          "id": "poi_ch5_wiring",
+          "tile": {
+            "x": 21,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Xem tủ điện",
+          "dialogueId": "ch5_wiring_take",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_chronos_reactor_living"
+          }
+        },
+        {
+          "id": "poi_ch5x_black_box",
+          "tile": {
+            "x": 4,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Bới đống đổ nát",
+          "dialogueId": "ch5x_black_box_sealed",
+          "visibleWhen": {
+            "flag": "branch_map_ch5_chronos_reactor_pruned"
+          },
+          "dialogueRules": [
+            {
+              "ifFlag": "ivo_guilt_heard",
+              "dialogueId": "ch5x_black_box_take"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#ff8a3a",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch5_sw_a_l",
+          "tile": {
+            "x": 6,
+            "y": 5
+          },
+          "radius": 36,
+          "prompt": "[E] Công tắc máy A",
+          "values": [
+            {
+              "key": "off",
+              "label": "Tắt"
+            },
+            {
+              "key": "on",
+              "label": "Bật"
+            }
+          ],
+          "visibleWhen": {
+            "flag": "branch_map_ch5_chronos_reactor_living"
+          }
+        },
+        {
+          "id": "ch5_sw_a_p",
+          "tile": {
+            "x": 6,
+            "y": 5
+          },
+          "radius": 36,
+          "prompt": "[E] Công tắc máy A",
+          "values": [
+            {
+              "key": "off",
+              "label": "Tắt"
+            },
+            {
+              "key": "on",
+              "label": "Bật"
+            }
+          ],
+          "visibleWhen": {
+            "flag": "branch_map_ch5_chronos_reactor_pruned"
+          }
+        },
+        {
+          "id": "ch5_sw_b_l",
+          "tile": {
+            "x": 12,
+            "y": 5
+          },
+          "radius": 36,
+          "prompt": "[E] Công tắc máy B",
+          "values": [
+            {
+              "key": "off",
+              "label": "Tắt"
+            },
+            {
+              "key": "on",
+              "label": "Bật"
+            }
+          ],
+          "visibleWhen": {
+            "flag": "branch_map_ch5_chronos_reactor_living"
+          }
+        },
+        {
+          "id": "ch5_sw_b_p",
+          "tile": {
+            "x": 12,
+            "y": 5
+          },
+          "radius": 36,
+          "prompt": "[E] Công tắc máy B",
+          "values": [
+            {
+              "key": "off",
+              "label": "Tắt"
+            },
+            {
+              "key": "on",
+              "label": "Bật"
+            }
+          ],
+          "visibleWhen": {
+            "flag": "branch_map_ch5_chronos_reactor_pruned"
+          }
+        },
+        {
+          "id": "ch5_sw_c_l",
+          "tile": {
+            "x": 18,
+            "y": 5
+          },
+          "radius": 36,
+          "prompt": "[E] Công tắc máy C",
+          "values": [
+            {
+              "key": "off",
+              "label": "Tắt"
+            },
+            {
+              "key": "on",
+              "label": "Bật"
+            }
+          ],
+          "visibleWhen": {
+            "flag": "branch_map_ch5_chronos_reactor_living"
+          }
+        },
+        {
+          "id": "ch5_sw_c_p",
+          "tile": {
+            "x": 18,
+            "y": 5
+          },
+          "radius": 36,
+          "prompt": "[E] Công tắc máy C",
+          "values": [
+            {
+              "key": "off",
+              "label": "Tắt"
+            },
+            {
+              "key": "on",
+              "label": "Bật"
+            }
+          ],
+          "visibleWhen": {
+            "flag": "branch_map_ch5_chronos_reactor_pruned"
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "restarted_reactor"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 25,
+              "y": 8
+            }
+          ],
+          "index": 2
+        }
+      ],
+      "roamers": [
+        {
+          "id": "r_ch5_reactor_crystal",
+          "enemyId": "enemy_paradox_crystal",
+          "texture": "enemy_paradox_crystal",
+          "anim": "enemy_paradox_crystal_idle",
+          "tile": {
+            "x": 19,
+            "y": 10
+          }
+        },
+        {
+          "id": "r_ch5_reactor_phantom",
+          "enemyId": "enemy_branch_phantom",
+          "texture": "enemy_branch_phantom",
+          "anim": "enemy_branch_phantom_idle",
+          "tile": {
+            "x": 7,
+            "y": 12
+          }
+        }
+      ],
+      "exits": [
+        {
+          "id": "reactor_to_beta",
+          "area": {
+            "x": 0,
+            "y": 8,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_beta_city",
+          "toSpawn": "from_reactor"
+        },
+        {
+          "id": "reactor_to_shelter",
+          "area": {
+            "x": 25,
+            "y": 8,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_children_shelter",
+          "toSpawn": "from_reactor",
+          "requiresFlag": "restarted_reactor",
+          "lockedDialogueId": "ch5_reactor_exit_locked"
+        }
+      ]
+    },
+    "map_ch5_children_shelter": {
+      "id": "map_ch5_children_shelter",
+      "name": "Hầm Trú Ẩn Trẻ Em",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_children_shelter",
+        "path": "assets/maps/map_ch5_children_shelter.json"
+      },
+      "tileset": {
+        "name": "steel_tileset",
+        "key": "steel_tileset",
+        "path": "assets/tilesets/steel_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 28
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 7
+        },
+        "from_reactor": {
+          "x": 2,
+          "y": 7
+        },
+        "from_grey": {
+          "x": 17,
+          "y": 7
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 7
+      },
+      "npcs": [
+        {
+          "id": "npc_ch5_mira",
+          "texture": "npc_mira",
+          "anim": "npc_mira_idle",
+          "tile": {
+            "x": 9,
+            "y": 5
+          },
+          "name": "Mira",
+          "prompt": "[E] Nói chuyện với Mira",
+          "radius": 44,
+          "dialogueId": "ch5_mira_meet",
+          "dialogueRules": [
+            {
+              "ifFlag": "finished_chalk_sky",
+              "dialogueId": "ch5_mira_after"
+            },
+            {
+              "ifItems": ["chalk_blue", "chalk_gold", "chalk_red", "chalk_white"],
+              "dialogueId": "ch5_mira_chalk_done"
+            },
+            {
+              "ifFlag": "met_mira",
+              "dialogueId": "ch5_mira_again"
+            }
+          ]
+        },
+        {
+          "id": "npc_ch5_ivo_shelter",
+          "texture": "npc_ivo",
+          "anim": "npc_ivo_idle",
+          "tile": {
+            "x": 13,
+            "y": 8
+          },
+          "name": "Kỹ Sư Ivo",
+          "prompt": "[E] Nói chuyện với Kỹ Sư Ivo",
+          "radius": 44,
+          "dialogueId": "ch5_ivo_shelter"
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch5x_poem",
+          "tile": {
+            "x": 4,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bài thơ trên vách",
+          "dialogueId": "ch5x_poem_wall"
+        },
+        {
+          "id": "poi_ch5x_notes",
+          "tile": {
+            "x": 15,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Xem cuốn sổ nhỏ",
+          "dialogueId": "ch5x_mira_notes_take"
+        },
+        {
+          "id": "poi_ch5x_piano_metal",
+          "tile": {
+            "x": 11,
+            "y": 11
+          },
+          "radius": 30,
+          "prompt": "[E] Thử phím Kim Loại",
+          "dialogueId": "ch5x_piano_metal"
+        },
+        {
+          "id": "poi_ch5x_play",
+          "tile": {
+            "x": 10,
+            "y": 10
+          },
+          "radius": 30,
+          "prompt": "[E] Phát âm chuỗi",
+          "dialogueId": "ch5x_piano_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5x_piano_melody_played",
+              "dialogueId": "ch5x_piano_done"
+            },
+            {
+              "ifFlags": [
+                "ch5x_note_1_wind",
+                "ch5x_note_2_water",
+                "ch5x_note_3_glass",
+                "ch5x_note_4_glass",
+                "ch5x_note_5_glass"
+              ],
+              "dialogueId": "ch5x_piano_success"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_seed_spring_new",
+          "tile": {
+            "x": 17,
+            "y": 12
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt hạt giống",
+          "dialogueId": "ch5_seed_spring_new_take"
+        }
+      ],
+      "ambient": {
+        "color": "#ffc890",
+        "alpha": 0.06
+      },
+      "dials": [
+        {
+          "id": "ch5x_note_1",
+          "tile": {
+            "x": 7,
+            "y": 10
+          },
+          "radius": 36,
+          "prompt": "[E] Nốt 1",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "metal",
+              "label": "Kim Loại"
+            },
+            {
+              "key": "wood",
+              "label": "Gỗ Mục"
+            },
+            {
+              "key": "glass",
+              "label": "Thủy Tinh"
+            },
+            {
+              "key": "wind",
+              "label": "Gió Hư Không"
+            },
+            {
+              "key": "water",
+              "label": "Nước Chảy"
+            }
+          ]
+        },
+        {
+          "id": "ch5x_note_2",
+          "tile": {
+            "x": 8,
+            "y": 12
+          },
+          "radius": 36,
+          "prompt": "[E] Nốt 2",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "metal",
+              "label": "Kim Loại"
+            },
+            {
+              "key": "wood",
+              "label": "Gỗ Mục"
+            },
+            {
+              "key": "glass",
+              "label": "Thủy Tinh"
+            },
+            {
+              "key": "wind",
+              "label": "Gió Hư Không"
+            },
+            {
+              "key": "water",
+              "label": "Nước Chảy"
+            }
+          ]
+        },
+        {
+          "id": "ch5x_note_3",
+          "tile": {
+            "x": 10,
+            "y": 12
+          },
+          "radius": 36,
+          "prompt": "[E] Nốt 3",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "metal",
+              "label": "Kim Loại"
+            },
+            {
+              "key": "wood",
+              "label": "Gỗ Mục"
+            },
+            {
+              "key": "glass",
+              "label": "Thủy Tinh"
+            },
+            {
+              "key": "wind",
+              "label": "Gió Hư Không"
+            },
+            {
+              "key": "water",
+              "label": "Nước Chảy"
+            }
+          ]
+        },
+        {
+          "id": "ch5x_note_4",
+          "tile": {
+            "x": 12,
+            "y": 12
+          },
+          "radius": 36,
+          "prompt": "[E] Nốt 4",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "metal",
+              "label": "Kim Loại"
+            },
+            {
+              "key": "wood",
+              "label": "Gỗ Mục"
+            },
+            {
+              "key": "glass",
+              "label": "Thủy Tinh"
+            },
+            {
+              "key": "wind",
+              "label": "Gió Hư Không"
+            },
+            {
+              "key": "water",
+              "label": "Nước Chảy"
+            }
+          ]
+        },
+        {
+          "id": "ch5x_note_5",
+          "tile": {
+            "x": 13,
+            "y": 10
+          },
+          "radius": 36,
+          "prompt": "[E] Nốt 5",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "metal",
+              "label": "Kim Loại"
+            },
+            {
+              "key": "wood",
+              "label": "Gỗ Mục"
+            },
+            {
+              "key": "glass",
+              "label": "Thủy Tinh"
+            },
+            {
+              "key": "wind",
+              "label": "Gió Hư Không"
+            },
+            {
+              "key": "water",
+              "label": "Nước Chảy"
+            }
+          ]
+        }
+      ],
+      "exits": [
+        {
+          "id": "shelter_to_reactor",
+          "area": {
+            "x": 0,
+            "y": 7,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_chronos_reactor",
+          "toSpawn": "from_shelter"
+        },
+        {
+          "id": "shelter_to_grey",
+          "area": {
+            "x": 19,
+            "y": 7,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_grey_prune",
+          "toSpawn": "from_shelter",
+          "requiresFlag": "met_mira",
+          "lockedDialogueId": "ch5_shelter_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch5_t_shelter",
+          "on": "arrive",
+          "onceFlag": "ch5_t_shelter_seen",
+          "delayMs": 400,
+          "dialogueId": "ch5_shelter_arrival"
+        },
+        {
+          "id": "ch5_t_promise",
+          "on": "zone",
+          "area": {
+            "x": 1,
+            "y": 2,
+            "w": 18,
+            "h": 11
+          },
+          "onceFlag": "ch5_t_promise_seen",
+          "dialogueId": "ch5_kuro_story_promise",
+          "requiresFlag": "met_mira"
+        },
+        {
+          "id": "ch5_t_resolve",
+          "on": "zone",
+          "area": {
+            "x": 1,
+            "y": 2,
+            "w": 18,
+            "h": 11
+          },
+          "onceFlag": "ch5_t_resolve_seen",
+          "dialogueId": "ch5_kuro_resolve",
+          "requiresFlag": "took_kuro_ledger_page_3"
+        }
+      ]
+    },
+    "map_ch5_grey_prune": {
+      "id": "map_ch5_grey_prune",
+      "name": "Vùng Xám Tỉa Bỏ",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_grey_prune",
+        "path": "assets/maps/map_ch5_grey_prune.json"
+      },
+      "tileset": {
+        "name": "interval_tileset",
+        "key": "interval_tileset",
+        "path": "assets/tilesets/interval_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 44
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 8
+        },
+        "from_shelter": {
+          "x": 2,
+          "y": 8
+        },
+        "from_anchor": {
+          "x": 25,
+          "y": 8
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 8
+      },
+      "branches": true,
+      "layerVariants": [
+        {
+          "when": {
+            "flag": "branch_map_ch5_grey_prune_pruned"
+          },
+          "ground": "Ground_Pruned",
+          "walls": "Walls_Pruned"
+        }
+      ],
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_map_ch5_grey_prune_sprout_15_13",
+          "tile": {
+            "x": 15,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm Mầm Rẽ Nhánh",
+          "dialogueId": "ch5_sprout_touch"
+        },
+        {
+          "id": "poi_ch5_p_silver",
+          "tile": {
+            "x": 5,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Lắng nghe bức chân dung",
+          "dialogueId": "ch5_portrait_silver"
+        },
+        {
+          "id": "poi_ch5_p_copper",
+          "tile": {
+            "x": 11,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Lắng nghe bức chân dung",
+          "dialogueId": "ch5_portrait_copper"
+        },
+        {
+          "id": "poi_ch5_p_iron",
+          "tile": {
+            "x": 17,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Lắng nghe bức chân dung",
+          "dialogueId": "ch5_portrait_iron"
+        },
+        {
+          "id": "poi_ch5_genealogy",
+          "tile": {
+            "x": 23,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Xem phả hệ",
+          "dialogueId": "ch5_genealogy_take"
+        },
+        {
+          "id": "poi_ch5_grey_stele",
+          "tile": {
+            "x": 3,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia đá",
+          "dialogueId": "ch5_grey_stele_take"
+        },
+        {
+          "id": "poi_ch5_heir_call",
+          "tile": {
+            "x": 13,
+            "y": 6
+          },
+          "radius": 44,
+          "prompt": "[E] Gọi tên người thừa kế",
+          "dialogueId": "ch5_heir_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "named_unborn_heir",
+              "dialogueId": "ch5_heir_again"
+            },
+            {
+              "ifFlag": "ch5_heir_aurel",
+              "dialogueId": "ch5_heir_named"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_chalk_white",
+          "tile": {
+            "x": 25,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt mẩu phấn",
+          "dialogueId": "ch5_chalk_white_take"
+        },
+        {
+          "id": "poi_ch5_seed_winter",
+          "tile": {
+            "x": 7,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt hạt giống",
+          "dialogueId": "ch5_seed_winter_take"
+        },
+        {
+          "id": "poi_ch5x_hourglass_flip",
+          "tile": {
+            "x": 19,
+            "y": 12
+          },
+          "radius": 44,
+          "prompt": "[E] Lật đồng hồ cát",
+          "dialogueId": "ch5x_sand_l_0",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5x_hourglass_balanced",
+              "dialogueId": "ch5x_hourglass_done"
+            },
+            {
+              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_0"],
+              "dialogueId": "ch5x_sand_l_0"
+            },
+            {
+              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_0"],
+              "dialogueId": "ch5x_sand_p_0"
+            },
+            {
+              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_1"],
+              "dialogueId": "ch5x_sand_l_1"
+            },
+            {
+              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_1"],
+              "dialogueId": "ch5x_sand_p_1"
+            },
+            {
+              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_2"],
+              "dialogueId": "ch5x_sand_l_2"
+            },
+            {
+              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_2"],
+              "dialogueId": "ch5x_sand_p_2"
+            },
+            {
+              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_3"],
+              "dialogueId": "ch5x_sand_l_3"
+            },
+            {
+              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_3"],
+              "dialogueId": "ch5x_sand_p_3"
+            },
+            {
+              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_4"],
+              "dialogueId": "ch5x_sand_l_4"
+            },
+            {
+              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_4"],
+              "dialogueId": "ch5x_sand_p_4"
+            },
+            {
+              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_5"],
+              "dialogueId": "ch5x_sand_l_5"
+            },
+            {
+              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_5"],
+              "dialogueId": "ch5x_sand_p_5"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5x_hourglass_lock",
+          "tile": {
+            "x": 21,
+            "y": 11
+          },
+          "radius": 44,
+          "prompt": "[E] Gạt khóa cân bằng",
+          "dialogueId": "ch5x_hourglass_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5x_hourglass_balanced",
+              "dialogueId": "ch5x_hourglass_done"
+            },
+            {
+              "ifFlag": "ch5x_sand_4",
+              "dialogueId": "ch5x_hourglass_success"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5x_hourglass_tablet",
+          "tile": {
+            "x": 21,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bệ đá",
+          "dialogueId": "ch5x_hourglass_tablet"
+        },
+        {
+          "id": "poi_ch5x_grey_notes",
+          "tile": {
+            "x": 12,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Xem cuốn sổ",
+          "dialogueId": "ch5x_grey_notes_take"
+        }
+      ],
+      "ambient": {
+        "color": "#b8b8c8",
+        "alpha": 0.12
+      },
+      "dials": [
+        {
+          "id": "ch5_heir",
+          "tile": {
+            "x": 9,
+            "y": 6
+          },
+          "radius": 36,
+          "prompt": "[E] Chọn cái tên",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "corvin",
+              "label": "Hoàng tử Corvin"
+            },
+            {
+              "key": "elric",
+              "label": "Hoàng tử Elric"
+            },
+            {
+              "key": "aurel",
+              "label": "Hoàng tử Aurel"
+            },
+            {
+              "key": "lysa",
+              "label": "Công chúa Lysa"
+            }
+          ]
+        }
+      ],
+      "roamers": [
+        {
+          "id": "r_ch5_grey_crystal_a",
+          "enemyId": "enemy_paradox_crystal",
+          "texture": "enemy_paradox_crystal",
+          "anim": "enemy_paradox_crystal_idle",
+          "tile": {
+            "x": 8,
+            "y": 10
+          }
+        },
+        {
+          "id": "r_ch5_grey_crystal_b",
+          "enemyId": "enemy_paradox_crystal",
+          "texture": "enemy_paradox_crystal",
+          "anim": "enemy_paradox_crystal_idle",
+          "tile": {
+            "x": 24,
+            "y": 10
+          }
+        },
+        {
+          "id": "r_ch5_grey_phantom",
+          "enemyId": "enemy_branch_phantom",
+          "texture": "enemy_branch_phantom",
+          "anim": "enemy_branch_phantom_idle",
+          "tile": {
+            "x": 14,
+            "y": 9
+          }
+        }
+      ],
+      "exits": [
+        {
+          "id": "grey_to_shelter",
+          "area": {
+            "x": 0,
+            "y": 8,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_children_shelter",
+          "toSpawn": "from_grey"
+        },
+        {
+          "id": "grey_to_anchor",
+          "area": {
+            "x": 27,
+            "y": 8,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_kuro_asks",
+          "toSpawn": "from_grey"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch5_t_grey",
+          "on": "arrive",
+          "onceFlag": "ch5_t_grey_seen",
+          "delayMs": 400,
+          "dialogueId": "ch5_grey_arrival",
+          "effects": {
+            "setFlags": ["ch5x_sand_0"]
+          }
+        }
+      ]
+    },
+    "map_ch5_kuro_asks": {
+      "id": "map_ch5_kuro_asks",
+      "name": "Nơi Kuro Hỏi Lại",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_kuro_asks",
+        "path": "assets/maps/map_ch5_kuro_asks.json"
+      },
+      "tileset": {
+        "name": "interval_tileset",
+        "key": "interval_tileset",
+        "path": "assets/tilesets/interval_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 44
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 6
+        },
+        "from_grey": {
+          "x": 2,
+          "y": 6
+        },
+        "from_throne": {
+          "x": 15,
+          "y": 6
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 6
+      },
+      "npcs": [
+        {
+          "id": "npc_ch5_kuro_anchor",
+          "texture": "npc_kuro",
+          "anim": "npc_kuro_idle",
+          "tile": {
+            "x": 9,
+            "y": 5
+          },
+          "name": "Kuro",
+          "prompt": "[E] Nói chuyện với Kuro",
+          "radius": 44,
+          "dialogueId": "ch5_kuro_waiting",
+          "visibleWhen": {
+            "unlessFlag": "kuro_left"
+          },
+          "dialogueRules": [
+            {
+              "ifFlag": "resolved_beta_choice",
+              "dialogueId": "ch5_kuro_after_choice"
+            },
+            {
+              "ifFlags": [
+                "answered_q1",
+                "answered_q2",
+                "answered_q3",
+                "ch5_q1_right",
+                "ch5_q2_right",
+                "ch5_q3_right"
+              ],
+              "unlessFlag": "ch5_opened_ledger_quiz",
+              "dialogueId": "ch5_kuro_smile"
+            },
+            {
+              "ifFlags": [
+                "answered_q1",
+                "answered_q2",
+                "answered_q3",
+                "ch5_q1_right",
+                "ch5_q2_right",
+                "ch5_q3_right"
+              ],
+              "dialogueId": "ch5_kuro_after_quiz_open"
+            },
+            {
+              "ifFlags": [
+                "answered_q1",
+                "answered_q2",
+                "answered_q3",
+                "ch5_q1_right",
+                "ch5_q2_right",
+                "ch5_choice_alpha_letter"
+              ],
+              "dialogueId": "ch5_kuro_after_quiz_open"
+            },
+            {
+              "ifFlags": [
+                "answered_q1",
+                "answered_q2",
+                "answered_q3",
+                "ch5_q1_right",
+                "ch5_q3_right",
+                "ch5_choice_alpha_letter"
+              ],
+              "dialogueId": "ch5_kuro_after_quiz_open"
+            },
+            {
+              "ifFlags": [
+                "answered_q1",
+                "answered_q2",
+                "answered_q3",
+                "ch5_q2_right",
+                "ch5_q3_right",
+                "ch5_choice_alpha_letter"
+              ],
+              "dialogueId": "ch5_kuro_after_quiz_open"
+            },
+            {
+              "ifFlags": ["answered_q1", "answered_q2", "answered_q3"],
+              "dialogueId": "ch5_kuro_after_quiz"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch5_q1",
+          "tile": {
+            "x": 5,
+            "y": 4
+          },
+          "radius": 30,
+          "prompt": "[E] Trả lời",
+          "dialogueId": "ch5_q1_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "answered_q1",
+              "dialogueId": "ch5_q_done"
+            },
+            {
+              "ifFlag": "ch5_dial_q1_banhduc",
+              "dialogueId": "ch5_q1_right"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_q2",
+          "tile": {
+            "x": 15,
+            "y": 4
+          },
+          "radius": 30,
+          "prompt": "[E] Trả lời",
+          "dialogueId": "ch5_q2_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "answered_q2",
+              "dialogueId": "ch5_q_done"
+            },
+            {
+              "ifFlag": "ch5_dial_q2_chieu",
+              "dialogueId": "ch5_q2_right"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_q3",
+          "tile": {
+            "x": 10,
+            "y": 9
+          },
+          "radius": 30,
+          "prompt": "[E] Trả lời",
+          "dialogueId": "ch5_q3_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "answered_q3",
+              "dialogueId": "ch5_q_done"
+            },
+            {
+              "ifFlag": "ch5_dial_q3_bang",
+              "dialogueId": "ch5_q3_right"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#9a7aff",
+        "alpha": 0.12
+      },
+      "dials": [
+        {
+          "id": "ch5_dial_q1",
+          "tile": {
+            "x": 3,
+            "y": 4
+          },
+          "radius": 36,
+          "prompt": "[E] Tên con mèo",
+          "values": [
+            {
+              "key": "banhbeo",
+              "label": "Bánh Bèo"
+            },
+            {
+              "key": "muop",
+              "label": "Mướp"
+            },
+            {
+              "key": "banhduc",
+              "label": "Bánh Đúc"
+            },
+            {
+              "key": "bachan",
+              "label": "Ba Chân"
+            }
+          ]
+        },
+        {
+          "id": "ch5_dial_q2",
+          "tile": {
+            "x": 13,
+            "y": 4
+          },
+          "radius": 36,
+          "prompt": "[E] Bài hát của mẹ",
+          "values": [
+            {
+              "key": "rucon",
+              "label": "Ru Con Bến Cá"
+            },
+            {
+              "key": "chieu",
+              "label": "Chiều Trên Bến Cũ"
+            },
+            {
+              "key": "gacxep",
+              "label": "Chiều Mưa Gác Xép"
+            },
+            {
+              "key": "benmua",
+              "label": "Bến Cũ Mưa Rơi"
+            }
+          ]
+        },
+        {
+          "id": "ch5_dial_q3",
+          "tile": {
+            "x": 8,
+            "y": 9
+          },
+          "radius": 36,
+          "prompt": "[E] Nơi hứa",
+          "values": [
+            {
+              "key": "hoanghon",
+              "label": "Mỏm đá hoàng hôn"
+            },
+            {
+              "key": "gac",
+              "label": "Gác xép mưa"
+            },
+            {
+              "key": "bentau",
+              "label": "Bến tàu"
+            },
+            {
+              "key": "bang",
+              "label": "Mỏm đá có cây bàng gãy"
+            }
+          ]
+        }
+      ],
+      "encounters": [
+        {
+          "id": "enc_kuro_duel",
+          "enemyId": "boss_kuro_duel",
+          "texture": "npc_kuro",
+          "anim": "npc_kuro_idle",
+          "tile": {
+            "x": 9,
+            "y": 5
+          },
+          "defeatedFlag": "ch5_kuro_duel_won",
+          "hidden": true,
+          "victoryDialogueId": "ch5_kuro_duel_end"
+        }
+      ],
+      "exits": [
+        {
+          "id": "anchor_to_grey",
+          "area": {
+            "x": 0,
+            "y": 6,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_grey_prune",
+          "toSpawn": "from_anchor"
+        },
+        {
+          "id": "anchor_to_throne",
+          "area": {
+            "x": 17,
+            "y": 6,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_unborn_throne",
+          "toSpawn": "from_anchor",
+          "requiresFlag": "ch5_anchor_settled",
+          "lockedDialogueId": "ch5_anchor_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch5_t_anchor",
+          "on": "arrive",
+          "onceFlag": "ch5_t_anchor_seen",
+          "delayMs": 400,
+          "dialogueId": "ch5_kuro_asks_intro"
+        },
+        {
+          "id": "ch5_t_duel",
+          "on": "zone",
+          "area": {
+            "x": 1,
+            "y": 2,
+            "w": 16,
+            "h": 9
+          },
+          "requiresFlag": "ch5_choice_stop_kuro",
+          "unlessFlag": "ch5_kuro_duel_done",
+          "onceFlag": "ch5_t_duel_seen",
+          "dialogueId": "ch5_kuro_duel_begin",
+          "encounterId": "enc_kuro_duel"
+        }
+      ]
+    },
+    "map_ch5_unborn_throne": {
+      "id": "map_ch5_unborn_throne",
+      "name": "Ngai Vua Chưa Sinh",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_unborn_throne",
+        "path": "assets/maps/map_ch5_unborn_throne.json"
+      },
+      "tileset": {
+        "name": "interval_tileset",
+        "key": "interval_tileset",
+        "path": "assets/tilesets/interval_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 44
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 12
+        },
+        "from_anchor": {
+          "x": 2,
+          "y": 12
+        },
+        "from_shore": {
+          "x": 11,
+          "y": 2
+        },
+        "revive": {
+          "x": 2,
+          "y": 12
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 12
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch5x_mirror",
+          "tile": {
+            "x": 4,
+            "y": 10
+          },
+          "radius": 44,
+          "prompt": "[E] Nhìn vào Gương Hư Vô",
+          "dialogueId": "ch5x_mirror_blank",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5x_mirror_passed",
+              "dialogueId": "ch5x_mirror_done"
+            },
+            {
+              "ifFlag": "ch5_choice_alpha_letter",
+              "dialogueId": "ch5x_mirror_letter"
+            },
+            {
+              "ifFlag": "ch5_choice_alpha_spared",
+              "dialogueId": "ch5x_mirror_spared"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5x_altar_willow",
+          "tile": {
+            "x": 3,
+            "y": 12
+          },
+          "radius": 30,
+          "prompt": "[E] Đặt lễ lên Bệ Cành Liễu",
+          "dialogueId": "ch5x_mirror_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5x_mirror_passed",
+              "dialogueId": "ch5x_mirror_done"
+            },
+            {
+              "ifFlag": "ch5_choice_alpha_letter",
+              "dialogueId": "ch5x_mirror_pass"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5x_altar_ring",
+          "tile": {
+            "x": 5,
+            "y": 12
+          },
+          "radius": 30,
+          "prompt": "[E] Đặt lễ lên Bệ Chiếc Nhẫn",
+          "dialogueId": "ch5x_mirror_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5x_mirror_passed",
+              "dialogueId": "ch5x_mirror_done"
+            },
+            {
+              "ifFlag": "ch5_choice_alpha_spared",
+              "dialogueId": "ch5x_mirror_pass"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5x_altar_sword",
+          "tile": {
+            "x": 7,
+            "y": 12
+          },
+          "radius": 30,
+          "prompt": "[E] Đặt lễ lên Bệ Thanh Kiếm",
+          "dialogueId": "ch5x_mirror_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5x_mirror_passed",
+              "dialogueId": "ch5x_mirror_done"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#d8c8ff",
+        "alpha": 0.1
+      },
+      "encounters": [
+        {
+          "id": "enc_unborn_king",
+          "enemyId": "boss_unborn_king",
+          "texture": "boss_unborn_king",
+          "anim": "boss_unborn_king_idle",
+          "tile": {
+            "x": 11,
+            "y": 5
+          },
+          "defeatedFlag": "defeated_unborn_king",
+          "hitbox": 34,
+          "victoryDialogueId": "ch5_unborn_king_defeated"
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "defeated_unborn_king"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 11,
+              "y": 0
+            }
+          ],
+          "index": 2
+        }
+      ],
+      "exits": [
+        {
+          "id": "throne_to_anchor",
+          "area": {
+            "x": 0,
+            "y": 12,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_kuro_asks",
+          "toSpawn": "from_throne"
+        },
+        {
+          "id": "throne_to_shore",
+          "area": {
+            "x": 11,
+            "y": 0,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch5_collision_shore",
+          "toSpawn": "from_throne",
+          "requiresFlag": "defeated_unborn_king",
+          "lockedDialogueId": "ch5_throne_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch5_t_king_kuro",
+          "on": "zone",
+          "area": {
+            "x": 8,
+            "y": 8,
+            "w": 7,
+            "h": 2
+          },
+          "onceFlag": "ch5_t_king_kuro_seen",
+          "dialogueId": "ch5_kuro_joins_battle",
+          "requiresFlag": "ch5_kuro_by_side",
+          "unlessFlag": "defeated_unborn_king"
+        },
+        {
+          "id": "ch5_t_king",
+          "on": "zone",
+          "area": {
+            "x": 8,
+            "y": 8,
+            "w": 7,
+            "h": 2
+          },
+          "onceFlag": "ch5_t_king_seen",
+          "dialogueId": "ch5_unborn_king_confront",
+          "unlessFlag": "defeated_unborn_king"
+        }
+      ]
+    },
+    "map_ch5_collision_shore": {
+      "id": "map_ch5_collision_shore",
+      "name": "Bờ Va Chạm",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_collision_shore",
+        "path": "assets/maps/map_ch5_collision_shore.json"
+      },
+      "tileset": {
+        "name": "interval_tileset",
+        "key": "interval_tileset",
+        "path": "assets/tilesets/interval_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 44
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 7
+        },
+        "from_throne": {
+          "x": 2,
+          "y": 7
+        },
+        "collision_start": {
+          "x": 2,
+          "y": 7
+        },
+        "core": {
+          "x": 27,
+          "y": 8
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 7
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch5_collision_start",
+          "tile": {
+            "x": 3,
+            "y": 7
+          },
+          "radius": 44,
+          "prompt": "[E] Bước lên bờ va chạm",
+          "dialogueId": "ch5_collision_start",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5_collision_big",
+              "dialogueId": "ch5_collision_start_big"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_possibility_seal",
+          "tile": {
+            "x": 27,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm vào Lõi Phong Ấn",
+          "dialogueId": "ch5_seal_stop",
+          "requiresFlag": "escaped_collision",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch5_choice_partial_pull",
+              "dialogueId": "ch5_seal_partial"
+            },
+            {
+              "ifFlag": "ch5_choice_help_kuro",
+              "dialogueId": "ch5_seal_help"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#b09aff",
+        "alpha": 0.14
+      },
+      "triggers": [
+        {
+          "id": "ch5_t_collision",
+          "on": "arrive",
+          "onceFlag": "ch5_t_collision_seen",
+          "delayMs": 400,
+          "dialogueId": "ch5_collision_arrival"
+        },
+        {
+          "id": "ch5_t_grey_isle_0",
+          "on": "zone",
+          "area": {
+            "x": 6,
+            "y": 8,
+            "w": 1,
+            "h": 1
+          },
+          "repeat": true,
+          "teleportTo": "collision_start",
+          "dialogueId": "ch5_island_fall"
+        },
+        {
+          "id": "ch5_t_grey_isle_1",
+          "on": "zone",
+          "area": {
+            "x": 8,
+            "y": 8,
+            "w": 1,
+            "h": 1
+          },
+          "repeat": true,
+          "teleportTo": "collision_start",
+          "dialogueId": "ch5_island_fall"
+        },
+        {
+          "id": "ch5_t_grey_isle_2",
+          "on": "zone",
+          "area": {
+            "x": 10,
+            "y": 4,
+            "w": 1,
+            "h": 1
+          },
+          "repeat": true,
+          "teleportTo": "collision_start",
+          "dialogueId": "ch5_island_fall"
+        },
+        {
+          "id": "ch5_t_grey_isle_3",
+          "on": "zone",
+          "area": {
+            "x": 12,
+            "y": 6,
+            "w": 1,
+            "h": 1
+          },
+          "repeat": true,
+          "teleportTo": "collision_start",
+          "dialogueId": "ch5_island_fall"
+        },
+        {
+          "id": "ch5_t_grey_isle_4",
+          "on": "zone",
+          "area": {
+            "x": 14,
+            "y": 7,
+            "w": 1,
+            "h": 1
+          },
+          "repeat": true,
+          "teleportTo": "collision_start",
+          "dialogueId": "ch5_island_fall"
+        },
+        {
+          "id": "ch5_t_grey_isle_5",
+          "on": "zone",
+          "area": {
+            "x": 16,
+            "y": 10,
+            "w": 1,
+            "h": 1
+          },
+          "repeat": true,
+          "teleportTo": "collision_start",
+          "dialogueId": "ch5_island_fall"
+        },
+        {
+          "id": "ch5_t_grey_isle_6",
+          "on": "zone",
+          "area": {
+            "x": 18,
+            "y": 9,
+            "w": 1,
+            "h": 1
+          },
+          "repeat": true,
+          "teleportTo": "collision_start",
+          "dialogueId": "ch5_island_fall"
+        },
+        {
+          "id": "ch5_t_grey_isle_7",
+          "on": "zone",
+          "area": {
+            "x": 20,
+            "y": 5,
+            "w": 1,
+            "h": 1
+          },
+          "repeat": true,
+          "teleportTo": "collision_start",
+          "dialogueId": "ch5_island_fall"
+        },
+        {
+          "id": "ch5_t_grey_isle_8",
+          "on": "zone",
+          "area": {
+            "x": 22,
+            "y": 6,
+            "w": 1,
+            "h": 1
+          },
+          "repeat": true,
+          "teleportTo": "collision_start",
+          "dialogueId": "ch5_island_fall"
+        },
+        {
+          "id": "ch5_t_collision_end",
+          "on": "zone",
+          "area": {
+            "x": 24,
+            "y": 7,
+            "w": 1,
+            "h": 1
+          },
+          "requiresFlag": "ch5_collision_clock",
+          "onceFlag": "ch5_collision_done",
+          "dialogueId": "ch5_collision_escaped"
+        },
+        {
+          "id": "ch5_t_collision_late",
+          "on": "zone",
+          "area": {
+            "x": 24,
+            "y": 7,
+            "w": 1,
+            "h": 1
+          },
+          "repeat": true,
+          "unlessFlag": "ch5_collision_clock",
+          "teleportTo": "collision_start",
+          "dialogueId": "ch5_collision_late"
+        }
+      ]
+    },
+    "map_ch5_uprooted_garden": {
+      "id": "map_ch5_uprooted_garden",
+      "name": "Vườn Hạt Bị Nhổ",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_uprooted_garden",
+        "path": "assets/maps/map_ch5_uprooted_garden.json"
+      },
+      "tileset": {
+        "name": "interval_tileset",
+        "key": "interval_tileset",
+        "path": "assets/tilesets/interval_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 44
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 8,
+          "y": 9
+        }
+      },
+      "revive": {
+        "x": 8,
+        "y": 9
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch5_tend",
+          "tile": {
+            "x": 8,
+            "y": 7
+          },
+          "radius": 44,
+          "prompt": "[E] Vun đất",
+          "dialogueId": "ch5_plots_missing",
+          "dialogueRules": [
+            {
+              "ifFlag": "planted_uprooted_seeds",
+              "dialogueId": "ch5_plots_done"
+            },
+            {
+              "ifItems": [
+                "seed_spring_old",
+                "seed_summer",
+                "seed_autumn",
+                "seed_winter",
+                "seed_spring_new"
+              ],
+              "ifFlags": [
+                "ch5_plot_1_xuan_cu",
+                "ch5_plot_2_ha",
+                "ch5_plot_3_thu",
+                "ch5_plot_4_dong",
+                "ch5_plot_5_xuan_moi"
+              ],
+              "dialogueId": "ch5_plots_right"
+            },
+            {
+              "ifItems": [
+                "seed_spring_old",
+                "seed_summer",
+                "seed_autumn",
+                "seed_winter",
+                "seed_spring_new"
+              ],
+              "dialogueId": "ch5_plots_wrong"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_uprooted_back",
+          "tile": {
+            "x": 8,
+            "y": 10
+          },
+          "radius": 44,
+          "prompt": "[E] Quay về vườn hạt",
+          "dialogueId": "ch5_uprooted_back"
+        }
+      ],
+      "ambient": {
+        "color": "#9a7aff",
+        "alpha": 0.1
+      },
+      "dials": [
+        {
+          "id": "ch5_plot_1",
+          "tile": {
+            "x": 3,
+            "y": 6
+          },
+          "radius": 36,
+          "prompt": "[E] Luống 1",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "xuan_cu",
+              "label": "Xuân (nét cũ)"
+            },
+            {
+              "key": "ha",
+              "label": "Hạ"
+            },
+            {
+              "key": "thu",
+              "label": "Thu"
+            },
+            {
+              "key": "dong",
+              "label": "Đông"
+            },
+            {
+              "key": "xuan_moi",
+              "label": "Xuân (nét mới)"
+            }
+          ],
+          "requiresItems": [
+            "seed_spring_old",
+            "seed_summer",
+            "seed_autumn",
+            "seed_winter",
+            "seed_spring_new"
+          ]
+        },
+        {
+          "id": "ch5_plot_2",
+          "tile": {
+            "x": 5,
+            "y": 4
+          },
+          "radius": 36,
+          "prompt": "[E] Luống 2",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "xuan_cu",
+              "label": "Xuân (nét cũ)"
+            },
+            {
+              "key": "ha",
+              "label": "Hạ"
+            },
+            {
+              "key": "thu",
+              "label": "Thu"
+            },
+            {
+              "key": "dong",
+              "label": "Đông"
+            },
+            {
+              "key": "xuan_moi",
+              "label": "Xuân (nét mới)"
+            }
+          ],
+          "requiresItems": [
+            "seed_spring_old",
+            "seed_summer",
+            "seed_autumn",
+            "seed_winter",
+            "seed_spring_new"
+          ]
+        },
+        {
+          "id": "ch5_plot_3",
+          "tile": {
+            "x": 8,
+            "y": 3
+          },
+          "radius": 36,
+          "prompt": "[E] Luống 3",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "xuan_cu",
+              "label": "Xuân (nét cũ)"
+            },
+            {
+              "key": "ha",
+              "label": "Hạ"
+            },
+            {
+              "key": "thu",
+              "label": "Thu"
+            },
+            {
+              "key": "dong",
+              "label": "Đông"
+            },
+            {
+              "key": "xuan_moi",
+              "label": "Xuân (nét mới)"
+            }
+          ],
+          "requiresItems": [
+            "seed_spring_old",
+            "seed_summer",
+            "seed_autumn",
+            "seed_winter",
+            "seed_spring_new"
+          ]
+        },
+        {
+          "id": "ch5_plot_4",
+          "tile": {
+            "x": 11,
+            "y": 4
+          },
+          "radius": 36,
+          "prompt": "[E] Luống 4",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "xuan_cu",
+              "label": "Xuân (nét cũ)"
+            },
+            {
+              "key": "ha",
+              "label": "Hạ"
+            },
+            {
+              "key": "thu",
+              "label": "Thu"
+            },
+            {
+              "key": "dong",
+              "label": "Đông"
+            },
+            {
+              "key": "xuan_moi",
+              "label": "Xuân (nét mới)"
+            }
+          ],
+          "requiresItems": [
+            "seed_spring_old",
+            "seed_summer",
+            "seed_autumn",
+            "seed_winter",
+            "seed_spring_new"
+          ]
+        },
+        {
+          "id": "ch5_plot_5",
+          "tile": {
+            "x": 13,
+            "y": 6
+          },
+          "radius": 36,
+          "prompt": "[E] Luống 5",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "xuan_cu",
+              "label": "Xuân (nét cũ)"
+            },
+            {
+              "key": "ha",
+              "label": "Hạ"
+            },
+            {
+              "key": "thu",
+              "label": "Thu"
+            },
+            {
+              "key": "dong",
+              "label": "Đông"
+            },
+            {
+              "key": "xuan_moi",
+              "label": "Xuân (nét mới)"
+            }
+          ],
+          "requiresItems": [
+            "seed_spring_old",
+            "seed_summer",
+            "seed_autumn",
+            "seed_winter",
+            "seed_spring_new"
+          ]
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch5_t_uprooted",
+          "on": "arrive",
+          "onceFlag": "ch5_t_uprooted_seen",
+          "delayMs": 400,
+          "dialogueId": "ch5_uprooted_arrival"
+        }
+      ]
+    },
+    "map_ch5_old_seeds": {
+      "id": "map_ch5_old_seeds",
+      "name": "Những Hạt Giống Cũ",
+      "chapter": 5,
+      "tilemap": {
+        "key": "map_ch5_old_seeds",
+        "path": "assets/maps/map_ch5_old_seeds.json"
+      },
+      "tileset": {
+        "name": "interval_tileset",
+        "key": "interval_tileset",
+        "path": "assets/tilesets/interval_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 44
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 8,
+          "y": 9
+        }
+      },
+      "revive": {
+        "x": 8,
+        "y": 9
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch5_old_aldric",
+          "tile": {
+            "x": 4,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Xem luống đất",
+          "dialogueId": "ch5_seed_empty",
+          "dialogueRules": [
+            {
+              "ifFlag": "watered_old_seed",
+              "dialogueId": "ch5_seed_already"
+            },
+            {
+              "ifFlag": "ch4_choice_aldric_truth",
+              "dialogueId": "ch5_seed_aldric_truth"
+            },
+            {
+              "ifFlag": "ch4_choice_aldric_comfort",
+              "dialogueId": "ch5_seed_aldric_comfort"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_old_bran",
+          "tile": {
+            "x": 8,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Xem luống đất",
+          "dialogueId": "ch5_seed_empty",
+          "dialogueRules": [
+            {
+              "ifFlag": "watered_old_seed",
+              "dialogueId": "ch5_seed_already"
+            },
+            {
+              "ifFlag": "ch4_choice_bran_release",
+              "dialogueId": "ch5_seed_bran_release"
+            },
+            {
+              "ifFlag": "ch4_choice_bran_memorial",
+              "dialogueId": "ch5_seed_bran_memorial"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_old_elion",
+          "tile": {
+            "x": 12,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Xem luống đất",
+          "dialogueId": "ch5_seed_empty",
+          "dialogueRules": [
+            {
+              "ifFlag": "watered_old_seed",
+              "dialogueId": "ch5_seed_already"
+            },
+            {
+              "ifFlag": "ch4_choice_elion_burn",
+              "dialogueId": "ch5_seed_elion_burn"
+            },
+            {
+              "ifFlag": "ch4_choice_elion_chronicle",
+              "dialogueId": "ch5_seed_elion_chronicle"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch5_old_back",
+          "tile": {
+            "x": 8,
+            "y": 10
+          },
+          "radius": 44,
+          "prompt": "[E] Quay về vườn hạt",
+          "dialogueId": "ch5_old_seeds_back"
+        }
+      ],
+      "ambient": {
+        "color": "#c8b8ff",
+        "alpha": 0.1
+      },
+      "triggers": [
+        {
+          "id": "ch5_t_old_seeds",
+          "on": "arrive",
+          "onceFlag": "ch5_t_old_seeds_seen",
+          "delayMs": 400,
+          "dialogueId": "ch5_old_seeds_arrival"
+        }
+      ]
     }
   }
 }

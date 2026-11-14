@@ -6546,7 +6546,7 @@
       "speaker": "Kuro",
       "lines": [
         "Nhánh của mày. Cái nhánh mày ở lại.",
-        "Tao chờ ở đây. Nhánh này có người không ưa tao."
+        "Nhánh này có người không ưa tao. Tao đi sau mày, đừng ngoái lại."
       ],
       "responses": []
     },
@@ -8317,6 +8317,969 @@
           "spawnId": "from_uprooted"
         }
       }
+    },
+    "ch5x_sun_stele": {
+      "id": "ch5x_sun_stele",
+      "speaker": "Peter",
+      "lines": [
+        "Tấm bia giữa sân đá khắc: \"Vật chỉ mở lối khi bóng của nó che khuất dấu tích của thực tại đối nghịch.\"",
+        "Dưới chân bia còn kẹp một mảnh giấy thiên văn."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "interval_astronomy_scrap",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_interval_astronomy_scrap"
+      }
+    },
+    "ch5x_kuro_shadow_hint": {
+      "id": "ch5x_kuro_shadow_hint",
+      "speaker": "Kuro",
+      "lines": [
+        "Thấy bệ cảm ứng kia không? Nó chỉ thức dậy ở nhánh tỉa.",
+        "Nhưng sa thạch ở nhánh tỉa mục rồi, đẩy là vỡ. Muốn dời đá thì dời ở nhánh sống."
+      ],
+      "responses": []
+    },
+    "ch5x_rock_pruned": {
+      "id": "ch5x_rock_pruned",
+      "speaker": "Peter",
+      "lines": ["Khối sa thạch ở nhánh này mục nát. Chạm mạnh là vỡ vụn."],
+      "responses": []
+    },
+    "ch5x_sensor_living": {
+      "id": "ch5x_sensor_living",
+      "speaker": "Peter",
+      "lines": ["Ở nhánh này, bệ cảm ứng chỉ là một phiến đá phẳng lặng."],
+      "responses": []
+    },
+    "ch5x_sensor_wrong": {
+      "id": "ch5x_sensor_wrong",
+      "speaker": "Peter",
+      "lines": ["Bóng của khối đá chưa phủ trúng mạch ngầm. Bệ cảm ứng vẫn tối."],
+      "responses": []
+    },
+    "ch5x_ex1_solved": {
+      "id": "ch5x_ex1_solved",
+      "speaker": "Peter",
+      "lines": [
+        "Bóng khối đá phủ kín bệ cảm ứng. Mạch ngầm bừng sáng tím, cánh cửa phía đông bắc mở ra."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch5x_ex1_solved"]
+      }
+    },
+    "ch5x_ex1_done": {
+      "id": "ch5x_ex1_done",
+      "speaker": "Peter",
+      "lines": ["Bệ cảm ứng vẫn sáng dưới bóng khối đá."],
+      "responses": []
+    },
+    "ch5x_greenhouse_locked": {
+      "id": "ch5x_greenhouse_locked",
+      "speaker": "Peter",
+      "lines": ["Cánh cửa đá phía đông bắc đóng chặt. Có gì đó liên quan tới sân đá bên cạnh."],
+      "responses": []
+    },
+    "ch5x_greenhouse_arrival": {
+      "id": "ch5x_greenhouse_arrival",
+      "speaker": "Peter",
+      "lines": ["Một nhà kính vòm kính rạn nứt. Ở giữa là bồn Nguyệt Thảo, nụ hoa héo rũ."],
+      "responses": []
+    },
+    "ch5x_journal_take": {
+      "id": "ch5x_journal_take",
+      "speaker": "Peter",
+      "lines": ["Một cuốn nhật ký bìa sứ nằm cạnh bình tưới."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "gardener_journal_p4",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_gardener_journal_p4"
+      }
+    },
+    "ch5x_flower_living": {
+      "id": "ch5x_flower_living",
+      "speaker": "Peter",
+      "lines": [
+        "Nguyệt Thảo ở nhánh sống: cánh nhợt, thân mềm oặt vì úng nước, gốc đất đen sũng. Không khí đọng lại, phiến lá run vì lạnh."
+      ],
+      "responses": []
+    },
+    "ch5x_flower_pruned": {
+      "id": "ch5x_flower_pruned",
+      "speaker": "Peter",
+      "lines": [
+        "Nguyệt Thảo ở nhánh tỉa đã hóa thạch: thân cứng như kim loại, cánh hoa cháy xám vì nắng gắt khô hạn, búp non bị gió lốc xé toạc."
+      ],
+      "responses": []
+    },
+    "ch5x_weather_wrong": {
+      "id": "ch5x_weather_wrong",
+      "speaker": "Peter",
+      "lines": ["Lồng kính phun khí xì xì, nụ hoa khẽ co lại. Khí hậu chưa đúng."],
+      "responses": []
+    },
+    "ch5x_weather_success": {
+      "id": "ch5x_weather_success",
+      "speaker": "Peter",
+      "lines": [
+        "Màn sương mỏng phủ xuống, hơi ấm lan nhẹ, một làn gió thoảng đi qua. Nụ Nguyệt Thảo từ từ hé mở.",
+        "Giữa nhụy hoa là một hạt mầm trong suốt. Sau bồn hoa, một bức tượng cũ hiện ra."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "pure_interval_seed",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_pure_interval_seed",
+        "setFlags": ["ch5x_weather_balanced"],
+        "startQuest": "quest_ch5x_gardener_requiem"
+      }
+    },
+    "ch5x_weather_done": {
+      "id": "ch5x_weather_done",
+      "speaker": "Peter",
+      "lines": ["Nguyệt Thảo nở rộ dưới màn sương."],
+      "responses": []
+    },
+    "ch5x_gardener_statue": {
+      "id": "ch5x_gardener_statue",
+      "speaker": "Peter",
+      "lines": [
+        "Bức tượng một Người Làm Vườn ôm cành cây gãy. Dưới chân tượng có ba cái móc treo trống.",
+        "Có ai đó từng treo chuông gió ở đây, để tiễn những cành cây bị tỉa."
+      ],
+      "responses": []
+    },
+    "ch5x_chime_bronze_take": {
+      "id": "ch5x_chime_bronze_take",
+      "speaker": "Peter",
+      "lines": ["Một chiếc chuông gió bằng đồng. Lắc nhẹ: tiếng trầm và đục."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "windchime_bronze",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_windchime_bronze"
+      }
+    },
+    "ch5x_chime_silver_take": {
+      "id": "ch5x_chime_silver_take",
+      "speaker": "Peter",
+      "lines": ["Một chiếc chuông gió bằng bạc. Lắc nhẹ: tiếng ngân vừa phải."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "windchime_silver",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_windchime_silver"
+      }
+    },
+    "ch5x_chime_glass_take": {
+      "id": "ch5x_chime_glass_take",
+      "speaker": "Peter",
+      "lines": ["Một chiếc chuông gió bằng thủy tinh. Lắc nhẹ: tiếng trong vắt."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "windchime_glass",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_windchime_glass"
+      }
+    },
+    "ch5x_chimes_missing": {
+      "id": "ch5x_chimes_missing",
+      "speaker": "Peter",
+      "lines": ["Ba cái móc treo trống. Cần đủ ba chiếc chuông gió."],
+      "responses": []
+    },
+    "ch5x_chimes_wrong": {
+      "id": "ch5x_chimes_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Gió thổi qua, ba chiếc chuông kêu lộn xộn chói tai. Thứ tự này không giống một khúc tiễn đưa."
+      ],
+      "responses": []
+    },
+    "ch5x_gardener_peace": {
+      "id": "ch5x_gardener_peace",
+      "speaker": "Peter",
+      "lines": [
+        "Gió Interval thổi qua: trầm, rồi ngân, rồi trong vắt. Một khúc tiễn đưa.",
+        "Người Làm Vườn bước tới, khựng lại, rồi từ từ quỳ xuống, buông chiếc kéo xuống thảm rêu bạc."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "pruner_compassion_gem",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_pruner_compassion_gem",
+        "setFlags": ["pacified_the_gardener"]
+      }
+    },
+    "ch5x_chimes_done": {
+      "id": "ch5x_chimes_done",
+      "speaker": "Peter",
+      "lines": ["Ba chiếc chuông gió khẽ ngân trong gió."],
+      "responses": []
+    },
+    "ch5x_harbor_arrival": {
+      "id": "ch5x_harbor_arrival",
+      "speaker": "Peter",
+      "lines": ["Bến thuyền vắng lặng. Mặt biển phẳng như gương."],
+      "responses": []
+    },
+    "ch5x_chalk_living": {
+      "id": "ch5x_chalk_living",
+      "speaker": "Peter",
+      "lines": [
+        "Bức tranh phấn trên cầu tàu bị sóng xóa mất một góc. Nét chữ trẻ con ghi bên cạnh:",
+        "\"Ở góc trời cao nhất, Na vẽ một mặt trời biết cười. Phía dưới mặt trời là thứ bay lượn tự do.\""
+      ],
+      "responses": []
+    },
+    "ch5x_chalk_pruned": {
+      "id": "ch5x_chalk_pruned",
+      "speaker": "Peter",
+      "lines": [
+        "Ở nhánh tỉa, cầu tàu sập một nửa. Trên vách gỗ gãy, bức vẽ phấn còn nguyên trong bóng râm:",
+        "\"Gần mặt biển nhất, Na luôn vẽ con thuyền buồm trắng của bố. Ngay trên con thuyền là ngọn tháp chiếu sáng trong đêm.\""
+      ],
+      "responses": []
+    },
+    "ch5x_coba_harbor": {
+      "id": "ch5x_coba_harbor",
+      "speaker": "Cô Ba",
+      "lines": [
+        "Con bé Na vẽ trời kỳ lắm: lúc nào cũng vẽ từ trên cao nhất xuống tới mặt biển.",
+        "Nó bảo vậy để cái gì trên trời cũng nhìn thấy được con thuyền của bố nó."
+      ],
+      "responses": []
+    },
+    "ch5x_chalk_wrong": {
+      "id": "ch5x_chalk_wrong",
+      "speaker": "Peter",
+      "lines": ["Nét phấn lạo xạo rồi mờ đi. Bầu trời của Na chưa đúng thứ tự cô bé từng vẽ."],
+      "responses": []
+    },
+    "ch5x_chalk_success": {
+      "id": "ch5x_chalk_success",
+      "speaker": "Peter",
+      "lines": [
+        "Bốn hình vẽ sáng lên cùng lúc. Dưới cầu tàu, một khoang gỗ nhỏ bật mở.",
+        "Bên trong là một con hạc giấy gấp dở, trên cánh có số 999."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "na_origami_crane_scrap",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_na_origami_crane_scrap",
+        "setFlags": ["ch5x_chalk_solved"],
+        "startQuest": "quest_ch5x_na_paper_crane"
+      }
+    },
+    "ch5x_chalk_done": {
+      "id": "ch5x_chalk_done",
+      "speaker": "Peter",
+      "lines": ["Bầu trời phấn của Na vẫn còn đó, rực rỡ."],
+      "responses": []
+    },
+    "ch5x_coba_crane_talk": {
+      "id": "ch5x_coba_crane_talk",
+      "speaker": "Cô Ba",
+      "lines": [
+        "Con hạc thứ chín trăm chín mươi chín... Con bé gấp tới đó thì đổ bệnh. Phổi nó yếu lắm.",
+        "Nó tin gấp đủ một nghìn con thì điều ước thành thật. Mà giấy màu ở nhà hết rồi con ơi."
+      ],
+      "responses": []
+    },
+    "ch5x_paper_take": {
+      "id": "ch5x_paper_take",
+      "speaker": "Peter",
+      "lines": ["Trong ngăn tủ hoang tàn của nhánh tỉa còn sót một tờ giấy màu xanh ngọc."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "origami_paper_cyan",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_origami_paper_cyan"
+      }
+    },
+    "ch5x_bench_idle": {
+      "id": "ch5x_bench_idle",
+      "speaker": "Peter",
+      "lines": ["Bàn thợ đồng hồ. Đồ nghề vẫn xếp ngay ngắn như của chính mình."],
+      "responses": []
+    },
+    "ch5x_bench_fold": {
+      "id": "ch5x_bench_fold",
+      "speaker": "Peter",
+      "lines": [
+        "Mình ngồi xuống bàn thợ. Đôi tay quen sửa bánh răng gấp từng nếp giấy thật chậm.",
+        "Con hạc thứ một nghìn hoàn thành."
+      ],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "origami_paper_cyan",
+            "quantity": 1
+          }
+        ],
+        "grantItems": [
+          {
+            "itemId": "thousandth_paper_crane",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_thousandth_paper_crane"
+      }
+    },
+    "ch5x_na_place_crane": {
+      "id": "ch5x_na_place_crane",
+      "speaker": "Bé Na",
+      "lines": [
+        "(Na đang ngủ thiếp đi. Mình đặt con hạc xanh ngọc cạnh gối cô bé.)",
+        "(Na khẽ mỉm cười trong mơ, bàn tay nhỏ buông ra một sợi dây cói bện tóc có gắn chiếc bánh răng đồng hồ tí xíu.)"
+      ],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "thousandth_paper_crane",
+            "quantity": 1
+          }
+        ],
+        "grantItems": [
+          {
+            "itemId": "na_braided_ribbon",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_na_braided_ribbon",
+        "setFlags": ["completed_na_crane_quest"]
+      }
+    },
+    "ch5x_na_after": {
+      "id": "ch5x_na_after",
+      "speaker": "Bé Na",
+      "lines": ["(Na ngủ say, con hạc xanh ngọc nằm cạnh gối.)"],
+      "responses": []
+    },
+    "ch5x_witness_stele": {
+      "id": "ch5x_witness_stele",
+      "speaker": "Peter",
+      "lines": [
+        "Bia đá vọng lâu: \"Kẻ được ở lại luôn nói dối. Kẻ bị tỉa luôn nói thật. Kẻ lưu đày luôn nói ngược với kẻ bị tỉa.\"",
+        "Bên dưới khắc thêm: \"Ba dư ảnh của cùng một người. Ai giữ Chìa Khóa Lương Tâm?\""
+      ],
+      "responses": []
+    },
+    "ch5x_ghost_x": {
+      "id": "ch5x_ghost_x",
+      "speaker": "Dư Ảnh X",
+      "lines": ["Dư ảnh X: 'Z là kẻ bị tỉa.'"],
+      "responses": []
+    },
+    "ch5x_ghost_y": {
+      "id": "ch5x_ghost_y",
+      "speaker": "Dư Ảnh Y",
+      "lines": ["Dư ảnh Y: 'Chiếc chìa khóa nằm trong ngực áo của Z.'"],
+      "responses": []
+    },
+    "ch5x_ghost_z": {
+      "id": "ch5x_ghost_z",
+      "speaker": "Dư Ảnh Z",
+      "lines": ["Dư ảnh Z: 'X đang nói thật.'"],
+      "responses": []
+    },
+    "ch5x_witness_wrong": {
+      "id": "ch5x_witness_wrong",
+      "speaker": "Peter",
+      "lines": ["Ba dư ảnh tan thành khói xám rồi tụ lại. Phán xét sai khiến họ thêm thống khổ."],
+      "responses": []
+    },
+    "ch5x_witness_success": {
+      "id": "ch5x_witness_success",
+      "speaker": "Peter",
+      "lines": ["Dư ảnh Z cúi đầu, mở ngực áo khói. Một chiếc chìa khóa sắt rơi xuống."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "conscience_iron_key",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_conscience_iron_key",
+        "setFlags": ["ch5x_witness_solved"]
+      }
+    },
+    "ch5x_witness_done": {
+      "id": "ch5x_witness_done",
+      "speaker": "Peter",
+      "lines": ["Ba dư ảnh đứng lặng."],
+      "responses": []
+    },
+    "ch5x_attic_locked": {
+      "id": "ch5x_attic_locked",
+      "speaker": "Peter",
+      "lines": ["Cửa gác thượng vọng lâu khóa bằng một ổ khóa sắt."],
+      "responses": []
+    },
+    "ch5x_attic_open": {
+      "id": "ch5x_attic_open",
+      "speaker": "Peter",
+      "lines": [
+        "Chìa khóa xoay. Trên gác thượng chỉ có một cuộn giấy da, nét chữ của Kẻ Tỉa Cành."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "pruner_confession_parchment",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_pruner_confession_parchment",
+        "setFlags": ["opened_pruner_attic"]
+      }
+    },
+    "ch5x_attic_done": {
+      "id": "ch5x_attic_done",
+      "speaker": "Peter",
+      "lines": ["Gác thượng trống trơn."],
+      "responses": []
+    },
+    "ch5x_observatory_arrival": {
+      "id": "ch5x_observatory_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Đài thiên văn đảo ngược. Kính viễn vọng đồng thau chĩa vào khoảng không không có sao."
+      ],
+      "responses": []
+    },
+    "ch5x_lens_living_take": {
+      "id": "ch5x_lens_living_take",
+      "speaker": "Peter",
+      "lines": ["Một mảnh thấu kính khắc chòm sao, còn trong suốt."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "astronomy_lens_living",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_astronomy_lens_living"
+      }
+    },
+    "ch5x_lens_pruned_take": {
+      "id": "ch5x_lens_pruned_take",
+      "speaker": "Peter",
+      "lines": ["Một mảnh thấu kính nứt chân chim, khắc cùng chòm sao nhưng lệch vị trí."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "astronomy_lens_pruned",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_astronomy_lens_pruned"
+      }
+    },
+    "ch5x_log_1_take": {
+      "id": "ch5x_log_1_take",
+      "speaker": "Peter",
+      "lines": ["Bản ghi thiên văn trên bàn đọc."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "beta_astronomy_log_1",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_beta_astronomy_log_1"
+      }
+    },
+    "ch5x_log_2_take": {
+      "id": "ch5x_log_2_take",
+      "speaker": "Peter",
+      "lines": ["Một trang ghi thiên văn trong đống đổ nát."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "beta_astronomy_log_2",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_beta_astronomy_log_2"
+      }
+    },
+    "ch5x_telescope_missing": {
+      "id": "ch5x_telescope_missing",
+      "speaker": "Peter",
+      "lines": ["Kính viễn vọng có hai khe cắm thấu kính, đều trống."],
+      "responses": []
+    },
+    "ch5x_telescope_wrong": {
+      "id": "ch5x_telescope_wrong",
+      "speaker": "Peter",
+      "lines": ["Tia sáng tán xạ chói lòa rồi tắt. Tiêu điểm bị phân kỳ."],
+      "responses": []
+    },
+    "ch5x_telescope_success": {
+      "id": "ch5x_telescope_success",
+      "speaker": "Peter",
+      "lines": [
+        "Hai chùm tia lam và tím giao nhau giữa vòm trần, đúng tại biểu tượng Con Thoi Thời Gian.",
+        "Hòm tiếp tế của đài thiên văn bật mở."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "quantum_astrolabe_charm",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_quantum_astrolabe_charm",
+        "setFlags": ["ch5x_observatory_aligned"]
+      }
+    },
+    "ch5x_telescope_done": {
+      "id": "ch5x_telescope_done",
+      "speaker": "Peter",
+      "lines": ["Hai chùm tia vẫn giao nhau trên vòm trần."],
+      "responses": []
+    },
+    "ch5x_poem_wall": {
+      "id": "ch5x_poem_wall",
+      "speaker": "Peter",
+      "lines": [
+        "Bài thơ ru khắc trên vách giường tầng:",
+        "\"Gió luồn khe đá buốt đôi mi, / Nước nhỏ giọt rầu rĩ chuỗi sầu bi. / Búa sắt gõ vang hồi báo tử, / Kính tan tành mộng vỡ chẳng còn chi.\""
+      ],
+      "responses": []
+    },
+    "ch5x_mira_notes_take": {
+      "id": "ch5x_mira_notes_take",
+      "speaker": "Peter",
+      "lines": ["Cuốn sổ nhỏ của Mira, ghi cách chơi cây đàn đồng thau."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "mira_tuning_notes",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_mira_tuning_notes"
+      }
+    },
+    "ch5x_piano_metal": {
+      "id": "ch5x_piano_metal",
+      "speaker": "Peter",
+      "lines": ["Thử phím Kim Loại: kẹt cứng, chỉ kêu cạch khô khốc."],
+      "responses": []
+    },
+    "ch5x_piano_wrong": {
+      "id": "ch5x_piano_wrong",
+      "speaker": "Peter",
+      "lines": ["Cây đàn rít lên chói tai. Lũ trẻ giật mình rên rỉ trong giấc ngủ."],
+      "responses": []
+    },
+    "ch5x_piano_success": {
+      "id": "ch5x_piano_success",
+      "speaker": "Peter",
+      "lines": [
+        "Gió, nước, rồi ba tiếng thủy tinh trong vắt. Cả căn hầm lặng đi nghe.",
+        "Nắp đàn bật ra một ngăn bí mật: một trục hộp nhạc bằng đồng."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch5x_kuro_mira_special"
+        }
+      ],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "clockwork_music_cylinder",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_clockwork_music_cylinder",
+        "setFlags": ["ch5x_piano_melody_played"]
+      }
+    },
+    "ch5x_kuro_mira_special": {
+      "id": "ch5x_kuro_mira_special",
+      "speaker": "Kuro",
+      "lines": [
+        "(Mira tựa đầu vào vai Kuro, ngủ thiếp đi.)",
+        "Bài này... mẹ tao cũng hát kiểu vậy. Lời khác, nhưng nhịp y hệt."
+      ],
+      "responses": []
+    },
+    "ch5x_piano_done": {
+      "id": "ch5x_piano_done",
+      "speaker": "Peter",
+      "lines": ["Cây đàn im lặng. Lũ trẻ đang ngủ."],
+      "responses": []
+    },
+    "ch5x_hourglass_tablet": {
+      "id": "ch5x_hourglass_tablet",
+      "speaker": "Peter",
+      "lines": ["Bệ đá dưới đồng hồ cát khắc: \"Cổng hư không chỉ nhận cát dừng ở vạch thứ tư.\""],
+      "responses": []
+    },
+    "ch5x_grey_notes_take": {
+      "id": "ch5x_grey_notes_take",
+      "speaker": "Peter",
+      "lines": ["Cuốn sổ của một người nghiên cứu Vùng Xám."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "grey_researcher_notes",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_grey_researcher_notes"
+      }
+    },
+    "ch5x_sand_l_0": {
+      "id": "ch5x_sand_l_0",
+      "speaker": "Peter",
+      "lines": ["Lật đồng hồ ở nhánh sống: cát rót xuống. Khoang giữa ở vạch 3."],
+      "responses": [],
+      "effects": {
+        "clearFlags": ["ch5x_sand_0", "ch5x_sand_1", "ch5x_sand_2", "ch5x_sand_4", "ch5x_sand_5"],
+        "setFlags": ["ch5x_sand_3"]
+      }
+    },
+    "ch5x_sand_p_0": {
+      "id": "ch5x_sand_p_0",
+      "speaker": "Peter",
+      "lines": ["Lật đồng hồ ở nhánh tỉa: cát bị hút ngược lên. Khoang giữa ở vạch 0."],
+      "responses": [],
+      "effects": {
+        "clearFlags": ["ch5x_sand_1", "ch5x_sand_2", "ch5x_sand_3", "ch5x_sand_4", "ch5x_sand_5"],
+        "setFlags": ["ch5x_sand_0"]
+      }
+    },
+    "ch5x_sand_l_1": {
+      "id": "ch5x_sand_l_1",
+      "speaker": "Peter",
+      "lines": ["Lật đồng hồ ở nhánh sống: cát rót xuống. Khoang giữa ở vạch 4."],
+      "responses": [],
+      "effects": {
+        "clearFlags": ["ch5x_sand_0", "ch5x_sand_1", "ch5x_sand_2", "ch5x_sand_3", "ch5x_sand_5"],
+        "setFlags": ["ch5x_sand_4"]
+      }
+    },
+    "ch5x_sand_p_1": {
+      "id": "ch5x_sand_p_1",
+      "speaker": "Peter",
+      "lines": ["Lật đồng hồ ở nhánh tỉa: cát bị hút ngược lên. Khoang giữa ở vạch 0."],
+      "responses": [],
+      "effects": {
+        "clearFlags": ["ch5x_sand_1", "ch5x_sand_2", "ch5x_sand_3", "ch5x_sand_4", "ch5x_sand_5"],
+        "setFlags": ["ch5x_sand_0"]
+      }
+    },
+    "ch5x_sand_l_2": {
+      "id": "ch5x_sand_l_2",
+      "speaker": "Peter",
+      "lines": ["Lật đồng hồ ở nhánh sống: cát rót xuống. Khoang giữa ở vạch 5."],
+      "responses": [],
+      "effects": {
+        "clearFlags": ["ch5x_sand_0", "ch5x_sand_1", "ch5x_sand_2", "ch5x_sand_3", "ch5x_sand_4"],
+        "setFlags": ["ch5x_sand_5"]
+      }
+    },
+    "ch5x_sand_p_2": {
+      "id": "ch5x_sand_p_2",
+      "speaker": "Peter",
+      "lines": ["Lật đồng hồ ở nhánh tỉa: cát bị hút ngược lên. Khoang giữa ở vạch 0."],
+      "responses": [],
+      "effects": {
+        "clearFlags": ["ch5x_sand_1", "ch5x_sand_2", "ch5x_sand_3", "ch5x_sand_4", "ch5x_sand_5"],
+        "setFlags": ["ch5x_sand_0"]
+      }
+    },
+    "ch5x_sand_l_3": {
+      "id": "ch5x_sand_l_3",
+      "speaker": "Peter",
+      "lines": [
+        "Lật đồng hồ ở nhánh sống: cát rót ào xuống, tràn quá vạch năm — bình vỡ, cát rơi sạch. Vạch 0."
+      ],
+      "responses": [],
+      "effects": {
+        "clearFlags": ["ch5x_sand_1", "ch5x_sand_2", "ch5x_sand_3", "ch5x_sand_4", "ch5x_sand_5"],
+        "setFlags": ["ch5x_sand_0"]
+      }
+    },
+    "ch5x_sand_p_3": {
+      "id": "ch5x_sand_p_3",
+      "speaker": "Peter",
+      "lines": ["Lật đồng hồ ở nhánh tỉa: cát bị hút ngược lên. Khoang giữa ở vạch 1."],
+      "responses": [],
+      "effects": {
+        "clearFlags": ["ch5x_sand_0", "ch5x_sand_2", "ch5x_sand_3", "ch5x_sand_4", "ch5x_sand_5"],
+        "setFlags": ["ch5x_sand_1"]
+      }
+    },
+    "ch5x_sand_l_4": {
+      "id": "ch5x_sand_l_4",
+      "speaker": "Peter",
+      "lines": [
+        "Lật đồng hồ ở nhánh sống: cát rót ào xuống, tràn quá vạch năm — bình vỡ, cát rơi sạch. Vạch 0."
+      ],
+      "responses": [],
+      "effects": {
+        "clearFlags": ["ch5x_sand_1", "ch5x_sand_2", "ch5x_sand_3", "ch5x_sand_4", "ch5x_sand_5"],
+        "setFlags": ["ch5x_sand_0"]
+      }
+    },
+    "ch5x_sand_p_4": {
+      "id": "ch5x_sand_p_4",
+      "speaker": "Peter",
+      "lines": ["Lật đồng hồ ở nhánh tỉa: cát bị hút ngược lên. Khoang giữa ở vạch 2."],
+      "responses": [],
+      "effects": {
+        "clearFlags": ["ch5x_sand_0", "ch5x_sand_1", "ch5x_sand_3", "ch5x_sand_4", "ch5x_sand_5"],
+        "setFlags": ["ch5x_sand_2"]
+      }
+    },
+    "ch5x_sand_l_5": {
+      "id": "ch5x_sand_l_5",
+      "speaker": "Peter",
+      "lines": [
+        "Lật đồng hồ ở nhánh sống: cát rót ào xuống, tràn quá vạch năm — bình vỡ, cát rơi sạch. Vạch 0."
+      ],
+      "responses": [],
+      "effects": {
+        "clearFlags": ["ch5x_sand_1", "ch5x_sand_2", "ch5x_sand_3", "ch5x_sand_4", "ch5x_sand_5"],
+        "setFlags": ["ch5x_sand_0"]
+      }
+    },
+    "ch5x_sand_p_5": {
+      "id": "ch5x_sand_p_5",
+      "speaker": "Peter",
+      "lines": ["Lật đồng hồ ở nhánh tỉa: cát bị hút ngược lên. Khoang giữa ở vạch 3."],
+      "responses": [],
+      "effects": {
+        "clearFlags": ["ch5x_sand_0", "ch5x_sand_1", "ch5x_sand_2", "ch5x_sand_4", "ch5x_sand_5"],
+        "setFlags": ["ch5x_sand_3"]
+      }
+    },
+    "ch5x_hourglass_wrong": {
+      "id": "ch5x_hourglass_wrong",
+      "speaker": "Peter",
+      "lines": ["Khóa cân bằng kêu rắc. Cát nổ thành bụi xám, rơi sạch về vạch 0."],
+      "responses": [],
+      "effects": {
+        "clearFlags": ["ch5x_sand_1", "ch5x_sand_2", "ch5x_sand_3", "ch5x_sand_4", "ch5x_sand_5"],
+        "setFlags": ["ch5x_sand_0"]
+      }
+    },
+    "ch5x_hourglass_success": {
+      "id": "ch5x_hourglass_success",
+      "speaker": "Peter",
+      "lines": [
+        "Cát dừng đúng vạch thứ tư. Hai dòng chảy đứng yên một nhịp thở, rồi kết tinh thành một chiếc bùa xám."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "singularity_sand_charm",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_singularity_sand_charm",
+        "setFlags": ["ch5x_hourglass_balanced"]
+      }
+    },
+    "ch5x_hourglass_done": {
+      "id": "ch5x_hourglass_done",
+      "speaker": "Peter",
+      "lines": ["Đồng hồ cát đứng yên ở vạch thứ tư."],
+      "responses": []
+    },
+    "ch5x_mirror_letter": {
+      "id": "ch5x_mirror_letter",
+      "speaker": "Peter",
+      "lines": [
+        "Gương Hư Vô hiện lên một người đàn ông tóc xoăn mỉm cười, buông một cành liễu xuống dòng nước xuôi.",
+        "Từ vết nứt có tiếng thì thầm: \"Hãy đặt lên đài thứ mà tâm hồn ngươi đã khắc ở Vọng Lâu.\""
+      ],
+      "responses": []
+    },
+    "ch5x_mirror_spared": {
+      "id": "ch5x_mirror_spared",
+      "speaker": "Peter",
+      "lines": [
+        "Gương Hư Vô hiện lên một bàn tay nắm chặt chiếc nhẫn bạc đến mức tứa máu.",
+        "Từ vết nứt có tiếng thì thầm: \"Hãy đặt lên đài thứ mà tâm hồn ngươi đã khắc ở Vọng Lâu.\""
+      ],
+      "responses": []
+    },
+    "ch5x_mirror_blank": {
+      "id": "ch5x_mirror_blank",
+      "speaker": "Peter",
+      "lines": ["Gương Hư Vô mờ sương, chưa phản chiếu gì."],
+      "responses": []
+    },
+    "ch5x_altar_willow": {
+      "id": "ch5x_altar_willow",
+      "speaker": "Peter",
+      "lines": ["Bệ Cành Liễu Gãy — sự buông bỏ."],
+      "responses": []
+    },
+    "ch5x_altar_ring": {
+      "id": "ch5x_altar_ring",
+      "speaker": "Peter",
+      "lines": ["Bệ Chiếc Nhẫn Rỉ — sự níu giữ."],
+      "responses": []
+    },
+    "ch5x_mirror_wrong": {
+      "id": "ch5x_mirror_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Tấm gương hắt ra một tia sáng lạnh: \"Lời tuyên thệ của ngươi mâu thuẫn với vết sẹo trong tim ngươi.\""
+      ],
+      "responses": []
+    },
+    "ch5x_mirror_pass": {
+      "id": "ch5x_mirror_pass",
+      "speaker": "Peter",
+      "lines": [
+        "Tấm gương lặng đi, rồi phản chiếu đúng gương mặt mình. Không lệch một nét.",
+        "Tâm trí mình chưa bao giờ tĩnh như lúc này."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch5x_mirror_passed", "unity_mindset_active"]
+      }
+    },
+    "ch5x_mirror_done": {
+      "id": "ch5x_mirror_done",
+      "speaker": "Peter",
+      "lines": ["Tấm gương phản chiếu gương mặt mình, bình thản."],
+      "responses": []
+    },
+    "ch5x_ivo_guilt_talk": {
+      "id": "ch5x_ivo_guilt_talk",
+      "speaker": "Kỹ Sư Ivo",
+      "lines": [
+        "Lò chạy rồi... nhưng tôi không dám mở van nước làm mát xuống hầm trẻ em.",
+        "Năm đó chính công thức của tôi làm thành phố này nổ tung. Lỡ nó nổ thêm lần nữa thì sao?"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ivo_guilt_heard"],
+        "startQuest": "quest_ch5x_ivo_unfinished_machine"
+      }
+    },
+    "ch5x_black_box_sealed": {
+      "id": "ch5x_black_box_sealed",
+      "speaker": "Peter",
+      "lines": ["Một chiếc hòm sắt đen chôn dưới đống đổ nát. Không rõ của ai."],
+      "responses": []
+    },
+    "ch5x_black_box_take": {
+      "id": "ch5x_black_box_take",
+      "speaker": "Peter",
+      "lines": [
+        "Chiếc hòm sắt đen của Thượng Hội Đồng. Bên trong là một hộp ghi dữ liệu và một văn bản niêm phong."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "black_box_recorder",
+            "quantity": 1
+          },
+          {
+            "itemId": "council_override_decree",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_black_box_recorder"
+      }
+    },
+    "ch5x_ivo_vindication": {
+      "id": "ch5x_ivo_vindication",
+      "speaker": "Kỹ Sư Ivo",
+      "lines": [
+        "(Ivo đọc văn bản, tay run lên.) Viện Trưởng... tự ý đẩy công suất lên ba trăm phần trăm. Bất chấp cảnh báo đỏ của tôi.",
+        "(Ông gạt cần xả áp. Tiếng nước chảy vang xuống hầm trú ẩn.) Cảm ơn cậu. Tôi đã mang nỗi tội không phải của mình trăm năm."
+      ],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "council_override_decree",
+            "quantity": 1
+          }
+        ],
+        "grantItems": [
+          {
+            "itemId": "ivo_precision_lens",
+            "quantity": 1
+          },
+          {
+            "itemId": "chronos_coolant_flask",
+            "quantity": 3
+          }
+        ],
+        "grantOnceFlag": "took_ivo_precision_lens",
+        "setFlags": ["resolved_ivo_redemption", "shelter_water_restored"]
+      }
+    },
+    "ch5x_ivo_after": {
+      "id": "ch5x_ivo_after",
+      "speaker": "Kỹ Sư Ivo",
+      "lines": ["Nước đã xuống tới hầm. Lũ trẻ sẽ không khát nữa."],
+      "responses": []
     }
   }
 }

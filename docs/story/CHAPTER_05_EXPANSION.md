@@ -643,7 +643,7 @@ _Tài liệu kết thúc. Sẵn sàng chuyển giao cho Claude Code review kỹ 
 **EX-01 · Khối đá và bóng đổ.**
 
 - Giữ nguyên ý tưởng. Khối đá là một vòng xoay vị trí: **[E] Đẩy khối đá** chuyển qua Bắc → Đông → Nam → Tây (cờ `ch5x_rock_<hướng>`); ô đá đổi theo `tileSwaps`.
-- Chỉ đẩy được ở nhánh Sống. Bệ cảm ứng (POI) ở nhánh Tỉa kiểm tra `ch5x_rock_north` → `ch5x_puzzle_ex1_solved`.
+- Chỉ đẩy được ở nhánh Sống. Bệ cảm ứng (POI) đặt ngay phía nam bệ Nam, chỉ hoạt động ở nhánh Tỉa. Ánh sáng nhánh Tỉa đến từ phía Bắc nên bóng đổ về phía Nam: **đáp án là đẩy đá vào bệ Nam** (`ch5x_rock_south`) → `ch5x_ex1_solved`.
 
 **EX-02 · Hộp thời tiết — phải loại trừ, không đọc thẳng đáp án.**
 
