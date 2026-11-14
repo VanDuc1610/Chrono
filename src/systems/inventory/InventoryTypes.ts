@@ -21,6 +21,8 @@ export interface EquipStats {
   reach?: number;
   /** ms between slashes (default player.json action.swingMs). */
   swingMs?: number;
+  /** Weapons only: a second slash 0.2 s later deals this fraction again (Blade of Possibility). */
+  echoPct?: number;
 }
 
 export type EquipSlot = 'weapon' | 'charm';

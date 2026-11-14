@@ -43,6 +43,9 @@ export interface CombatSystemOptions {
   rng?: () => number;
   /** Battle-log templates overriding DEFAULT_COMBAT_TEXT (e.g. strings.json). */
   text?: Record<string, string>;
+  /** Story state for boss options that depend on it (letters carried, names learned). */
+  hasItem?: (itemId: string) => boolean;
+  hasFlag?: (flag: string) => boolean;
 }
 
 /** What happens at the start of an enemy's turn before it attacks. */
@@ -91,6 +94,10 @@ export class CombatSystem implements ICombatSystem {
   private readonly resolveItem: (itemId: string) => CombatItemEffect | undefined;
   private readonly text: Record<string, string>;
   private rng: () => number;
+  private readonly hasItem: (itemId: string) => boolean;
+  private readonly hasFlag: (flag: string) => boolean;
+  /** Peter's command last turn (mirror bosses copy it). */
+  private lastPlayerCommand: CombatActionType = 'attack';
   /** Party HP cannot drop below this (scripted fights Peter must survive); 0 = off. */
   public partyHpFloor = 0;
 
@@ -99,6 +106,43 @@ export class CombatSystem implements ICombatSystem {
     this.resolveItem = options.resolveItem;
     this.rng = options.rng ?? (() => Math.random());
     this.text = { ...DEFAULT_COMBAT_TEXT, ...(options.text ?? {}) };
+    this.hasItem = options.hasItem ?? (() => false);
+    this.hasFlag = options.hasFlag ?? (() => false);
+  }
+
+  /** What a mirror boss does this turn: the command Peter used last. */
+  public mirrorCommand(): CombatActionType {
+    return this.lastPlayerCommand;
+  }
+
+  /** Stuns a boss for `turns` of its turns (scripted). */
+  public stun(enemyId: string, turns: number): void {
+    const boss = this.bosses.get(enemyId);
+    if (boss) boss.stunTurns += turns;
+  }
+
+  /** Locks one of Peter's commands for `turns` boss turns (mirror boss skill). */
+  public lockCommand(enemyId: string, command: CombatActionType, turns: number): void {
+    const boss = this.bosses.get(enemyId);
+    if (boss) boss.lock = { command, turnsLeft: turns, staggerBy: [] };
+  }
+
+  /** An ally's strike: `damage` straight to the enemy (shield ignored). */
+  public allyHit(enemyId: string, damage: number): number {
+    const e = this.getCombatant(enemyId);
+    if (!e || !e.isAlive) return 0;
+    const dealt = Math.min(e.stats.hp, Math.max(1, damage));
+    e.stats.hp -= dealt;
+    if (e.stats.hp <= 0) {
+      e.isAlive = false;
+      this.state.phase = 'victory';
+    }
+    return dealt;
+  }
+
+  /** Ends the battle in Peter's favour (a duel stops before anyone falls). */
+  public forceVictory(): void {
+    this.state.phase = 'victory';
   }
 
   private t(key: string, vars?: Record<string, string | number>): string {
@@ -326,7 +370,14 @@ export class CombatSystem implements ICombatSystem {
     if (!m || !boss || !enemy?.isAlive) return [];
     if (m.bloodWall && boss.wall) return [m.bloodWall.cutAction];
     if (m.ritual && boss.ritual.open && !boss.ritual.done) return m.ritual.pillars;
-    return [];
+    const out: BossEnvironmentAction[] = [];
+    const fin = m.finisher;
+    if (fin && this.hasItem(fin.itemId) && enemy.stats.hp <= enemy.stats.maxHp * fin.belowPct)
+      out.push(fin.action);
+    const nc = m.nameCall;
+    if (nc && !boss.shield && this.hasFlag(nc.flag) && !boss.done.has(nc.action.id))
+      out.push(nc.action);
+    return out;
   }
 
   /** True while the boss's blood wall stands. */
@@ -511,6 +562,13 @@ export class CombatSystem implements ICombatSystem {
 
         const hit = this.applyDamage(target, damage);
         damage = hit.dealt;
+        const drain = source.mechanic?.drainAfterBreak;
+        if (drain && !this.bosses.get(source.id)?.shield && damage > 0) {
+          source.stats.hp = Math.min(
+            source.stats.maxHp,
+            source.stats.hp + Math.ceil(damage * drain),
+          );
+        }
         message += this.t('combat.log.attack', { ...names, damage });
         if (isCritical) message += this.t('combat.log.crit');
         if (hit.shielded) message += this.t('combat.log.shielded');
@@ -575,6 +633,23 @@ export class CombatSystem implements ICombatSystem {
       }
 
       case 'environment': {
+        const fin = target.mechanic?.finisher;
+        if (fin && action.environmentId === fin.action.id) {
+          damage = target.stats.hp;
+          target.stats.hp = 0;
+          message = fin.action.message;
+          break;
+        }
+        const nc = target.mechanic?.nameCall;
+        const ncBoss = this.bosses.get(target.id);
+        if (nc && ncBoss && action.environmentId === nc.action.id) {
+          ncBoss.done.add(nc.action.id);
+          ncBoss.stunTurns += nc.stunTurns;
+          damage = Math.min(target.stats.hp, Math.ceil(target.stats.maxHp * nc.damagePct));
+          target.stats.hp -= damage;
+          message = nc.action.message;
+          break;
+        }
         if (target.mechanic?.bloodWall && this.bosses.get(target.id)?.wall) {
           message = this.cutTether(target);
           break;
@@ -610,6 +685,7 @@ export class CombatSystem implements ICombatSystem {
     }
 
     if (source.type === 'player') {
+      this.lastPlayerCommand = action.type;
       message += this.judgeSentences(source, action.type);
       message += this.judgeLock(action.type, damage);
     }

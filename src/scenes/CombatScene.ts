@@ -131,9 +131,16 @@ export class CombatScene extends Phaser.Scene {
       tuning: this.session.database.player.combat,
       resolveItem: (itemId) => this.session.resolveCombatItem(itemId),
       text: getStringTable(this),
+      hasItem: (id) => this.session.inventory.hasItem(id, 1),
+      hasFlag: (flag) => this.session.getFlag(flag),
     });
     this.combatSystem.startBattle([this.player], [this.enemy]);
     if (template.script?.rescue) this.combatSystem.partyHpFloor = 1;
+    const prepared = template.script?.stunIfFlag;
+    if (prepared && this.session.getFlag(prepared.flag)) {
+      this.combatSystem.stun(this.enemy.id, prepared.turns);
+      this.time.delayedCall(300, () => this.setBattleLog(prepared.message));
+    }
     const mirror = template.mechanic?.mirrorGear;
     if (mirror) {
       this.enemy.stats.attack += Math.round(this.player.stats.attack * mirror.pct);
@@ -671,7 +678,29 @@ export class CombatScene extends Phaser.Scene {
       );
     }
 
+    const endAt = this.enemyTemplate.script?.endAtEnemyPct;
+    if (endAt && this.enemy.isAlive && this.enemy.stats.hp <= this.enemy.stats.maxHp * endAt) {
+      this.combatSystem.forceVictory();
+    }
+    this.allyStrike();
     this.endTurn(PLAYER_TO_ENEMY_DELAY_MS);
+  }
+
+  /** An ally beside Peter (Kuro) strikes every few rounds. */
+  private allyStrike(): void {
+    const a = this.enemyTemplate.script?.allyStrike;
+    if (!a || !this.session.getFlag(a.requiresFlag) || this.combatSystem.isBattleOver()) return;
+    if (this.combatSystem.getState().turnCount % a.everyTurns !== 0) return;
+    const dealt = this.combatSystem.allyHit(
+      this.enemy.id,
+      Math.ceil(this.enemy.stats.maxHp * a.damagePct),
+    );
+    this.time.delayedCall(450, () => {
+      this.setBattleLog(a.message.replace('{damage}', String(dealt)));
+      this.showHitSpark(this.enemySprite, 0xb09aff);
+      this.showFloatingNumber(this.enemySprite.x, this.enemySprite.y - 30, `-${dealt}`, '#b09aff');
+      this.updateStatusBars();
+    });
   }
 
   // ------------------------------------------------------------- animation
@@ -803,8 +832,58 @@ export class CombatScene extends Phaser.Scene {
       return;
     }
 
+    const mirror = this.enemyTemplate.mechanic?.mirror;
+    const copy = mirror ? this.combatSystem.mirrorCommand() : 'attack';
+    if (mirror && copy === 'defend') {
+      this.combatSystem.executeAction({
+        type: 'defend',
+        sourceId: this.enemy.id,
+        targetId: this.enemy.id,
+      });
+      this.setBattleLog(mirror.defendMessage);
+      this.announceSentence();
+      this.endTurn(ENEMY_TO_PLAYER_DELAY_MS);
+      return;
+    }
+    if (mirror && copy === 'item') {
+      const before = this.enemy.stats.hp;
+      this.enemy.stats.hp = Math.min(
+        this.enemy.stats.maxHp,
+        before + Math.ceil(this.enemy.stats.maxHp * mirror.healPct),
+      );
+      this.updateStatusBars();
+      this.setBattleLog(mirror.healMessage);
+      this.showFloatingNumber(
+        this.enemySprite.x,
+        this.enemySprite.y - 20,
+        `+${this.enemy.stats.hp - before}`,
+        '#88edff',
+      );
+      this.announceSentence();
+      this.endTurn(ENEMY_TO_PLAYER_DELAY_MS);
+      return;
+    }
+    const heavy = mirror && copy === 'skill' ? mirror.skillMult : 1;
+    if (heavy > 1 && mirror) {
+      this.combatSystem.lockCommand(this.enemy.id, 'skill', 1);
+      this.setBattleLog(mirror.skillMessage);
+    }
     const tb = this.enemyTemplate.timedBlock;
     if (tb) {
+      const second = (first: boolean): void =>
+        this.runBlockRing(tb, (blocked2, pressed2) => {
+          this.blockFeedback(blocked2, pressed2);
+          const blocks = (first ? 1 : 0) + (blocked2 ? 1 : 0);
+          const factor = blocks === 0 ? 1 : blocks === 1 ? (1 + tb.factor) / 2 : tb.factor;
+          this.performEnemyAttack(factor * heavy);
+        });
+      if (tb.double) {
+        this.runBlockRing(tb, (blocked1, pressed1) => {
+          this.blockFeedback(blocked1, pressed1);
+          this.time.delayedCall(120, () => second(blocked1));
+        });
+        return;
+      }
       this.runBlockRing(tb, (blocked, pressed) => {
         if (blocked) {
           this.showFloatingNumber(
@@ -822,11 +901,30 @@ export class CombatScene extends Phaser.Scene {
             '#c8c0b0',
           );
         }
-        this.performEnemyAttack(blocked ? tb.factor : undefined);
+        this.performEnemyAttack((blocked ? tb.factor : 1) * heavy);
       });
       return;
     }
-    this.performEnemyAttack();
+    this.performEnemyAttack(heavy);
+  }
+
+  private blockFeedback(blocked: boolean, pressed: boolean): void {
+    if (blocked) {
+      this.showFloatingNumber(
+        this.playerSprite.x,
+        this.playerSprite.y - 34,
+        this.t('combat.blocked'),
+        '#9fe8ff',
+      );
+      this.cameras.main.flash(120, 160, 230, 255);
+    } else if (pressed) {
+      this.showFloatingNumber(
+        this.playerSprite.x,
+        this.playerSprite.y - 34,
+        this.t('combat.blockMiss'),
+        '#c8c0b0',
+      );
+    }
   }
 
   /** The enemy's attack on Peter (`damageFactor` from a timed block). */

@@ -134,7 +134,12 @@
     "action.bannerWard": "KHIÊN CỜ!",
     "action.risen": "ĐỨNG DẬY!",
     "action.stunned": "CHOÁNG!",
+    "action.branchShift": "RẼ NHÁNH!",
+    "action.faded": "BÓNG MỜ!",
+    "action.hatched": "KÉN ĐÃ NỞ!",
     "field.noSack": "Không còn bao này trong túi",
+    "field.fallTitle": "RƠI XUỐNG!",
+    "field.fallBody": "Tấm ván tan biến dưới chân — Peter bị hất về đầu cầu.",
     "combat.blockHint": "[SPACE] ĐỠ khi vòng chạm viền",
     "combat.blocked": "ĐỠ!",
     "combat.blockMiss": "Hụt nhịp",
@@ -146,6 +151,7 @@
     "chapter.2.title": "Đế Chế Nhân Quả Giả",
     "action.strikeHum": "Ngân lên… rồi tắt",
     "chapter.3.title": "Vương Quốc Linh Hồn Bị Quên Lãng",
-    "chapter.4.title": "Cuộc Chiến Bất Tận"
+    "chapter.4.title": "Cuộc Chiến Bất Tận",
+    "chapter.5.title": "Khu Vườn Của Những Khả Năng Vô Tận"
   }
 }

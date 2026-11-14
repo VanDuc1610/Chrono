@@ -245,6 +245,13 @@ export interface MapDefinition {
   ambient?: { color: string; alpha: number };
   /** Chapter this map belongs to (0 = Prologue) — chooses the end card. */
   chapter?: number;
+  /**
+   * Chapter 5 branch switching: flags `branch_<id>_pruned` / `branch_<id>_living` (exactly one
+   * set); the dialogue effect toggleBranch flips them and rebuilds the map in place.
+   */
+  branches?: boolean;
+  /** Where Peter lands when a timed tile vanishes under him (e.g. a shadow plank fading). */
+  fallbackSpawn?: string;
   /** Dials turned with [E] (one value at a time); see src/world/PuzzleRules.ts. */
   dials?: MapDial[];
   /** Two-pan scales fed with sacks by the dialogue effect scalePut. */

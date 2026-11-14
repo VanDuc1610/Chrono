@@ -42,6 +42,8 @@ export interface DialogueEffects {
   scalePut?: { scaleId: string; pan: 'left' | 'right'; itemId: string };
   /** Gives back every sack on that scale. */
   scaleReset?: string;
+  /** Chapter 5: switch this map between its living and pruned branch (rebuilt in place). */
+  toggleBranch?: boolean;
 }
 
 export interface DialogueNode {

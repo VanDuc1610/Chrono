@@ -19,7 +19,7 @@
     },
     "expThresholds": [
       0, 50, 120, 220, 350, 520, 740, 1000, 1350, 1800, 2350, 3000, 3750, 4600, 5600, 6800, 8200,
-      9800
+      9800, 11600, 13600, 15800
     ],
     "startingItems": [
       {
@@ -49,6 +49,10 @@
       {
         "untilFlag": "finality_seal_restored",
         "cap": 18
+      },
+      {
+        "untilFlag": "possibility_seal_restored",
+        "cap": 21
       }
     ]
   },

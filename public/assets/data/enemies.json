@@ -728,6 +728,331 @@
           "finishMessage": "NHÁT CHÉM FINALITY!"
         }
       }
+    },
+    {
+      "id": "enemy_branch_phantom",
+      "name": "Bóng Nhánh",
+      "level": 18,
+      "maxHp": 200,
+      "hp": 200,
+      "attack": 30,
+      "defense": 22,
+      "speed": 8,
+      "spriteKey": "enemy_branch_phantom",
+      "skills": [],
+      "expReward": 130,
+      "lootTable": [
+        {
+          "itemId": "refined_chrono_shard",
+          "chance": 0.18
+        }
+      ],
+      "field": {
+        "phase": {
+          "everyMs": 1200,
+          "solidMs": 600
+        }
+      }
+    },
+    {
+      "id": "enemy_unborn_cocoon",
+      "name": "Kén Chưa Sinh",
+      "level": 18,
+      "maxHp": 90,
+      "hp": 90,
+      "attack": 1,
+      "defense": 10,
+      "speed": 1,
+      "spriteKey": "enemy_unborn_cocoon",
+      "skills": [],
+      "expReward": 40,
+      "lootTable": [
+        {
+          "itemId": "refined_chrono_shard",
+          "chance": 0.18
+        }
+      ],
+      "field": {
+        "cocoon": {
+          "hatchMs": 6000,
+          "into": "enemy_unborn_horror",
+          "texture": "enemy_unborn_horror",
+          "anim": "enemy_unborn_horror_idle"
+        }
+      }
+    },
+    {
+      "id": "enemy_unborn_horror",
+      "name": "Nỗi Kinh Hoàng Chưa Sinh",
+      "level": 19,
+      "maxHp": 300,
+      "hp": 300,
+      "attack": 34,
+      "defense": 22,
+      "speed": 8,
+      "spriteKey": "enemy_unborn_horror",
+      "skills": [],
+      "expReward": 150,
+      "lootTable": [
+        {
+          "itemId": "refined_chrono_shard",
+          "chance": 0.18
+        }
+      ],
+      "field": {}
+    },
+    {
+      "id": "enemy_paradox_crystal",
+      "name": "Tinh Thể Nghịch Lý",
+      "level": 19,
+      "maxHp": 170,
+      "hp": 170,
+      "attack": 30,
+      "defense": 26,
+      "speed": 6,
+      "spriteKey": "enemy_paradox_crystal",
+      "skills": [],
+      "expReward": 130,
+      "lootTable": [
+        {
+          "itemId": "refined_chrono_shard",
+          "chance": 0.18
+        }
+      ],
+      "field": {
+        "echo": {
+          "delayMs": 1000,
+          "range": 140
+        }
+      }
+    },
+    {
+      "id": "enemy_chronos_gardener",
+      "name": "Người Làm Vườn",
+      "level": 20,
+      "maxHp": 340,
+      "hp": 340,
+      "attack": 36,
+      "defense": 28,
+      "speed": 5,
+      "spriteKey": "enemy_chronos_gardener",
+      "skills": [],
+      "expReward": 180,
+      "lootTable": [
+        {
+          "itemId": "refined_chrono_shard",
+          "chance": 0.18
+        }
+      ],
+      "field": {
+        "facesLeft": true,
+        "lineCut": {
+          "range": 200,
+          "windupMs": 800,
+          "length": 220,
+          "width": 22,
+          "cooldownMs": 2600
+        }
+      }
+    },
+    {
+      "id": "boss_other_peter",
+      "name": "Peter Nhánh Alpha",
+      "level": 19,
+      "maxHp": 680,
+      "hp": 680,
+      "attack": 32,
+      "defense": 24,
+      "speed": 12,
+      "spriteKey": "boss_other_peter",
+      "spriteScale": 1.5,
+      "skills": [],
+      "expReward": 400,
+      "lootTable": [],
+      "timedBlock": {
+        "ringMs": 800,
+        "windowMs": 220,
+        "factor": 0.5
+      },
+      "mechanic": {
+        "damageReduction": 0,
+        "hpFloor": 0,
+        "recoverPct": 0,
+        "recoverMessage": "",
+        "unlockAfterTurns": 99,
+        "unlockMessage": "",
+        "actions": [],
+        "startsUnshielded": true,
+        "releasedFrame": 4,
+        "defeatMessage": "Peter nhánh Alpha khuỵu xuống. Chiếc kéo tỉa trượt khỏi tay anh.",
+        "mirror": {
+          "skillMult": 1.6,
+          "healPct": 0.08,
+          "defendMessage": "Peter nhánh Alpha giương kéo thủ thế — giống hệt cách mình vừa làm.",
+          "skillMessage": "KÉO TỈA! Anh ta học theo Đòn Thời Gian của mình, cắt một nhát nặng — Kỹ Năng bị khóa một lượt!",
+          "healMessage": "Anh ta cũng lấy ra một mảnh chrono, hệt như mình."
+        },
+        "finisher": {
+          "itemId": "letter_to_daughter",
+          "belowPct": 0.3,
+          "action": {
+            "id": "read_letter",
+            "label": "ĐỌC LÁ THƯ",
+            "message": "'Na của bố...' — Peter nhánh Alpha buông kéo, hai tay ôm mặt. Trận đấu dừng lại."
+          }
+        }
+      }
+    },
+    {
+      "id": "boss_unborn_king",
+      "name": "Vua Chưa Sinh",
+      "level": 21,
+      "maxHp": 900,
+      "hp": 900,
+      "attack": 34,
+      "defense": 26,
+      "speed": 11,
+      "spriteKey": "boss_unborn_king",
+      "spriteScale": 1.6,
+      "skills": [],
+      "expReward": 600,
+      "lootTable": [],
+      "timedBlock": {
+        "ringMs": 900,
+        "windowMs": 200,
+        "factor": 0.5,
+        "feintChance": 0.35,
+        "double": true
+      },
+      "script": {
+        "stunIfFlag": {
+          "flag": "unity_mindset_active",
+          "turns": 1,
+          "message": "Tâm Cảnh Thống Nhất: Vua Chưa Sinh khựng lại trước ánh mắt không dao động của Peter!"
+        },
+        "allyStrike": {
+          "name": "Kuro",
+          "requiresFlag": "ch5_kuro_by_side",
+          "everyTurns": 2,
+          "damagePct": 0.05,
+          "message": "Kuro chém xuyên qua lớp khăn quấn — Vua Chưa Sinh mất {damage} HP!"
+        }
+      },
+      "mechanic": {
+        "damageReduction": 0.8,
+        "hpFloor": 1,
+        "recoverPct": 0.4,
+        "recoverMessage": "Ba vương miện rực sáng — Vua Chưa Sinh hút lấy những triều đại chưa có, liền lại vết thương!",
+        "unlockAfterTurns": 99,
+        "unlockMessage": "",
+        "releasedFrame": 4,
+        "defeatMessage": "Ba vương miện rơi xuống. Vị vua không mặt cúi đầu, tan vào ánh sáng.",
+        "drainAfterBreak": 0.5,
+        "actions": [
+          {
+            "id": "deny_begin",
+            "label": "CHƯA TỪNG BẮT ĐẦU",
+            "message": ""
+          },
+          {
+            "id": "deny_end",
+            "label": "CHƯA TỪNG KẾT THÚC",
+            "message": ""
+          },
+          {
+            "id": "deny_remember",
+            "label": "CHƯA TỪNG ĐƯỢC NHỚ",
+            "message": ""
+          }
+        ],
+        "songs": {
+          "cracksToBreak": 3,
+          "coreDamage": 90,
+          "wrongPct": 0.12,
+          "wrongMp": 6,
+          "breakMessage": "Cả ba vương miện nứt vỡ! Vua Chưa Sinh gào lên, tìm cách hút máu để được sinh ra.",
+          "wrongMessage": "Lời phủ nhận lạc nhịp — vương miện dội ngược, Peter mất {damage} HP và 6 MP!",
+          "list": [
+            {
+              "id": "begin_a",
+              "coreId": "deny_begin",
+              "announce": "Vương miện đồng rực lên: 'Ngai vàng đã đúc, quốc kỳ đã may... chỉ chưa có buổi sáng đăng quang.'",
+              "crackMessage": "Vương miện đồng nứt toác!"
+            },
+            {
+              "id": "begin_b",
+              "coreId": "deny_begin",
+              "announce": "Vương miện đồng rực lên: 'Bản đồ của ta đã vẽ xong, quân lính đã xếp hàng — chỉ còn thiếu tiếng trống mở màn.'",
+              "crackMessage": "Vương miện đồng nứt toác!"
+            },
+            {
+              "id": "end_a",
+              "coreId": "deny_end",
+              "announce": "Vương miện bạc ngân vang: 'Ta trị vì mãi mãi. Không một vị vua nào của ta được phép băng hà.'",
+              "crackMessage": "Vương miện bạc rạn vỡ!"
+            },
+            {
+              "id": "end_b",
+              "coreId": "deny_end",
+              "announce": "Vương miện bạc ngân vang: 'Hoàng hôn không bao giờ buông xuống trên kinh thành của ta.'",
+              "crackMessage": "Vương miện bạc rạn vỡ!"
+            },
+            {
+              "id": "rem_a",
+              "coreId": "deny_remember",
+              "announce": "Vương miện vàng thì thầm: 'Ta từng tồn tại ngàn năm, nhưng không bia đá, không bài ca nào còn nhắc tên ta.'",
+              "crackMessage": "Vương miện vàng vỡ vụn!"
+            },
+            {
+              "id": "rem_b",
+              "coreId": "deny_remember",
+              "announce": "Vương miện vàng thì thầm: 'Hậu thế đi ngang lăng tẩm của ta mà không biết đó là lăng tẩm.'",
+              "crackMessage": "Vương miện vàng vỡ vụn!"
+            }
+          ]
+        },
+        "nameCall": {
+          "flag": "named_unborn_heir",
+          "stunTurns": 2,
+          "damagePct": 0.15,
+          "action": {
+            "id": "call_aurel",
+            "label": "GỌI TÊN AUREL",
+            "message": "'AUREL!' — Vị vua không mặt khựng lại như một đứa trẻ nghe tiếng mẹ gọi. Nó đứng im, run rẩy."
+          }
+        }
+      }
+    },
+    {
+      "id": "boss_kuro_duel",
+      "name": "Kuro",
+      "level": 20,
+      "maxHp": 600,
+      "hp": 600,
+      "attack": 30,
+      "defense": 24,
+      "speed": 14,
+      "spriteKey": "npc_kuro",
+      "spriteScale": 1.6,
+      "skills": [],
+      "expReward": 0,
+      "lootTable": [],
+      "timedBlock": {
+        "ringMs": 800,
+        "windowMs": 220,
+        "factor": 0.5
+      },
+      "script": {
+        "lockedCommands": ["escape"],
+        "endAtEnemyPct": 0.5,
+        "rescue": {
+          "belowHpPct": 0.25,
+          "dialogueId": "ch5_kuro_duel_spared",
+          "event": {
+            "dialogueId": "ch5_kuro_duel_begin"
+          }
+        }
+      }
     }
   ]
 }

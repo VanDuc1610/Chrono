@@ -83,10 +83,21 @@ interface Roamer {
     hit: boolean;
   };
   nextChargeAt?: number;
+  /** Shifted into the other branch by Kuro until then (cannot act or be hit). */
+  shiftedUntil?: number;
+  /** When it appeared (cocoons hatch after a while). */
+  bornAt?: number;
+  /** Gardener's cut in progress. */
+  cut?: { at: number; ang: number; from: Point } | null;
+  nextCutAt?: number;
 }
 
 const ELDER_FLAG = 'elder_joined';
 const ELDER_PARTED_FLAG = 'elder_parted';
+/** Chapter 5: Kuro walks and fights beside Peter until he leaves. */
+const KURO_FLAG = 'kuro_with_peter';
+const KURO_LEFT_FLAG = 'kuro_left';
+const KURO_SHIFT_MS = 15000;
 
 /**
  * Real-time combat on the map: roaming enemies, Peter's slash (left click toward the cursor),
@@ -340,21 +351,31 @@ export class ActionCombat {
     });
   }
 
-  private get elderActive(): boolean {
-    return this.flag(ELDER_FLAG) && !this.flag(ELDER_PARTED_FLAG);
+  /** The ally walking with Peter: the Elder (Prologue) or Kuro (Chapter 5). */
+  private get allyTexture(): string | null {
+    if (this.flag(ELDER_FLAG) && !this.flag(ELDER_PARTED_FLAG)) return 'npc_elder';
+    if (this.flag(KURO_FLAG) && !this.flag(KURO_LEFT_FLAG)) return 'npc_kuro';
+    return null;
   }
 
-  /** The Elder follows Peter (unless he already stands on this map as an NPC). */
+  private get elderActive(): boolean {
+    return this.allyTexture !== null;
+  }
+
+  private nextShiftAt = 0;
+
+  /** The ally follows Peter (unless he already stands on this map as an NPC). */
   private spawnElder(): void {
-    if (!this.elderActive || !this.scene.textures.exists('npc_elder')) return;
+    const texture = this.allyTexture;
+    if (!texture || !this.scene.textures.exists(texture)) return;
     const standing = this.scene.children.list.some(
-      (o) => o instanceof Phaser.GameObjects.Sprite && o.texture.key === 'npc_elder' && o.visible,
+      (o) => o instanceof Phaser.GameObjects.Sprite && o.texture.key === texture && o.visible,
     );
     if (standing) return;
-    this.elder = this.scene.physics.add.sprite(this.player.x - 26, this.player.y + 4, 'npc_elder');
+    this.elder = this.scene.physics.add.sprite(this.player.x - 26, this.player.y + 4, texture);
     this.elder.body?.setSize(14, 12);
     this.elder.body?.setOffset(9, 18);
-    if (this.scene.anims.exists('npc_elder_idle')) this.elder.play('npc_elder_idle');
+    if (this.scene.anims.exists(`${texture}_idle`)) this.elder.play(`${texture}_idle`);
   }
 
   // ------------------------------------------------------------------ frame
@@ -384,6 +405,13 @@ export class ActionCombat {
     this.updateChants(now);
     for (const r of this.roamers) {
       if (!r.alive || now < r.stunUntil) continue;
+      if (now < (r.shiftedUntil ?? 0)) continue;
+      if (r.enemy.field?.cocoon) {
+        this.updateCocoon(r, now);
+        continue;
+      }
+      if (r.enemy.field?.phase) this.updatePhase(r, now);
+      if (r.enemy.field?.lineCut && this.updateLineCut(r, now)) continue;
       if (r.enemy.field?.sniper) {
         this.updateSniper(r, now);
         continue;
@@ -431,7 +459,12 @@ export class ActionCombat {
         if (!glow && r.glowShown && r.brain.state !== 'windup') r.sprite.clearTint();
         r.glowShown = glow;
       }
-      if (out.strike && distance(r.sprite, target) <= this.tuning.enemy.attackRange + 10) {
+      const faded = r.enemy.field?.phase && !this.isSolid(r, now);
+      if (
+        out.strike &&
+        !faded &&
+        distance(r.sprite, target) <= this.tuning.enemy.attackRange + 10
+      ) {
         this.hitPlayer(r);
       }
     }
@@ -495,8 +528,10 @@ export class ActionCombat {
     this.strikeTargets(origin, aim, reach, now);
     const attack = this.session.getStats().attack;
     let landed = false;
+    const echoed: { r: Roamer; damage: number }[] = [];
+    this.scheduleEchoes(origin, aim, reach);
     for (const r of this.roamers) {
-      if (!r.alive) continue;
+      if (!r.alive || now < (r.shiftedUntil ?? 0)) continue;
       if (!inSlash(origin, aim, r.sprite, reach, this.tuning.slashArcDeg)) continue;
       landed = true;
       const parry = r.enemy.field?.parry;
@@ -513,9 +548,20 @@ export class ActionCombat {
       if (this.defended(r, hit.damage)) continue;
       const stunned = r.charge?.phase === 'stunned';
       const mult = stunned ? (r.enemy.field?.charge?.stunnedDamageMult ?? 1) : 1;
-      this.damageRoamer(r, Math.floor(hit.damage * mult), hit.critical || stunned);
+      const dealt = Math.floor(hit.damage * mult);
+      this.damageRoamer(r, dealt, hit.critical || stunned);
+      echoed.push({ r, damage: dealt });
     }
     if (!landed) this.blinkOnWhiff(origin, aim);
+    // Blade of Possibility: the other branch's slash follows 0.2 s later.
+    const echoPct = weapon?.echoPct ?? 0;
+    if (echoPct > 0 && echoed.length > 0) {
+      this.scene.time.delayedCall(200, () => {
+        this.drawSlash(origin, aim + 0.25, reach);
+        for (const { r, damage } of echoed)
+          if (r.alive) this.damageRoamer(r, Math.max(1, Math.floor(damage * echoPct)), false);
+      });
+    }
   }
 
   /** Memory Wraiths: a missed slash lets them blink behind Peter, then wind up (0.4 s to dodge). */
@@ -621,6 +667,15 @@ export class ActionCombat {
     const field = r.enemy.field;
     if (!field) return false;
     const now = this.scene.time.now;
+    if (field.phase && !this.isSolid(r, now)) {
+      this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.faded'), '#b09aff');
+      const behind = Math.atan2(r.sprite.y - this.player.y, r.sprite.x - this.player.x);
+      r.sprite.setPosition(
+        this.player.x - Math.cos(behind) * 26,
+        this.player.y - Math.sin(behind) * 26,
+      );
+      return true;
+    }
     const chant = field.chant;
     if (chant && chantState(now, r.glowOffset, chant.chantMs, chant.breathMs).chanting) {
       this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.bannerWard'), '#ff9090');
@@ -848,6 +903,96 @@ export class ActionCombat {
     }
   }
 
+  /** Branch Phantom rhythm: solid for `solidMs` of each `everyMs`. */
+  private isSolid(r: Roamer, now: number): boolean {
+    const ph = r.enemy.field?.phase;
+    if (!ph) return true;
+    return (now + r.glowOffset) % ph.everyMs < ph.solidMs;
+  }
+
+  private updatePhase(r: Roamer, now: number): void {
+    r.sprite.setAlpha(this.isSolid(r, now) ? 1 : 0.3);
+  }
+
+  /** Unborn Cocoon: pulses faster as it nears hatching, then hatches into its horror. */
+  private updateCocoon(r: Roamer, now: number): void {
+    const co = r.enemy.field?.cocoon;
+    if (!co) return;
+    r.sprite.setVelocity(0, 0);
+    r.bornAt ??= now;
+    const left = co.hatchMs - (now - r.bornAt);
+    if (left < 2000) r.sprite.setTint(Math.floor(now / 150) % 2 ? 0xff9ab8 : 0xffffff);
+    if (left > 0) return;
+    // Hatch: the cocoon is gone (no reward), a horror stands in its place.
+    r.alive = false;
+    r.sprite.destroy();
+    const def = this.defs.find((d) => d.id === r.def.id) ?? r.def;
+    this.spawn({
+      ...def,
+      id: `${r.def.id}_hatched_${Math.floor(now)}`,
+      enemyId: co.into,
+      texture: co.texture,
+      anim: co.anim,
+      tile: { x: Math.floor(r.sprite.x / 32), y: Math.floor(r.sprite.y / 32) },
+      sight: 400,
+      leash: 800,
+    });
+    this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.hatched'), '#ff8aa8');
+  }
+
+  /** Paradox Crystals near Peter repeat his slash from where they float. */
+  private scheduleEchoes(origin: Point, aim: number, reach: number): void {
+    for (const r of this.roamers) {
+      const echo = r.enemy.field?.echo;
+      if (!echo || !r.alive || distance(r.sprite, origin) > echo.range) continue;
+      this.scene.time.delayedCall(echo.delayMs, () => {
+        if (!r.alive) return;
+        const from = { x: r.sprite.x, y: r.sprite.y };
+        this.drawSlash(from, aim, reach);
+        if (inSlash(from, aim, this.player, reach, this.tuning.slashArcDeg)) this.hitPlayer(r);
+      });
+    }
+  }
+
+  /** Chronos Gardener: telegraphed straight cut. True while it is cutting. */
+  private updateLineCut(r: Roamer, now: number): boolean {
+    const lc = r.enemy.field?.lineCut;
+    if (!lc) return false;
+    if (!r.cut) {
+      if (now < (r.nextCutAt ?? 0) || distance(r.sprite, this.player) > lc.range) return false;
+      const ang = Math.atan2(this.player.y - r.sprite.y, this.player.x - r.sprite.x);
+      r.cut = { at: now + lc.windupMs, ang, from: { x: r.sprite.x, y: r.sprite.y } };
+      r.sprite.setVelocity(0, 0);
+      r.sprite.setTint(0xff7070);
+    }
+    const c = r.cut;
+    const ex = c.from.x + Math.cos(c.ang) * lc.length;
+    const ey = c.from.y + Math.sin(c.ang) * lc.length;
+    r.sprite.setVelocity(0, 0);
+    if (now < c.at) {
+      this.aimLines.lineStyle(lc.width, 0xff3a2a, 0.18).lineBetween(c.from.x, c.from.y, ex, ey);
+      return true;
+    }
+    r.cut = null;
+    r.nextCutAt = now + lc.cooldownMs;
+    r.sprite.clearTint();
+    this.aimLines.lineStyle(3, 0xffffff, 0.9).lineBetween(c.from.x, c.from.y, ex, ey);
+    this.sound.playSlash();
+    // Distance from Peter to the cut segment.
+    const vx = ex - c.from.x;
+    const vy = ey - c.from.y;
+    const t = Math.max(
+      0,
+      Math.min(
+        1,
+        ((this.player.x - c.from.x) * vx + (this.player.y - c.from.y) * vy) / (vx * vx + vy * vy),
+      ),
+    );
+    const d = Math.hypot(this.player.x - (c.from.x + vx * t), this.player.y - (c.from.y + vy * t));
+    if (d <= lc.width / 2 + 6) this.hitPlayer(r, { mult: 1.3 });
+    return true;
+  }
+
   /** True when a wall tile lies on the straight line between a and b. */
   private lineBlocked(a: Point, b: Point): boolean {
     const n = Math.ceil(distance(a, b) / 8);
@@ -1025,7 +1170,27 @@ export class ActionCombat {
         elder.setVelocity(0, 0);
         if (now >= this.nextAllyHit) {
           this.nextAllyHit = now + ally.cooldownMs;
-          const hit = rollHit(ally.attack, foe.enemy.defense, this.combat, this.rng);
+          const kuro = this.allyTexture === 'npc_kuro';
+          const hit = rollHit(
+            kuro ? ally.attack * 2 : ally.attack,
+            foe.enemy.defense,
+            this.combat,
+            this.rng,
+          );
+          if (kuro && now >= this.nextShiftAt) {
+            // Branch Shift: the foe is pushed into the other branch for 3 s.
+            this.nextShiftAt = now + KURO_SHIFT_MS;
+            foe.shiftedUntil = now + 3000;
+            foe.sprite.setVelocity(0, 0);
+            foe.sprite.setAlpha(0.2);
+            this.scene.time.delayedCall(3000, () => foe && foe.alive && foe.sprite.setAlpha(1));
+            this.floatText(
+              foe.sprite.x,
+              foe.sprite.y - 18,
+              this.t('action.branchShift'),
+              '#b09aff',
+            );
+          }
           const glow = this.scene.add
             .circle(foe.sprite.x, foe.sprite.y, 12, 0xffd666, 0.5)
             .setDepth(41);

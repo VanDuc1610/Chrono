@@ -147,8 +147,8 @@ describe('Chapter 4 puzzles and progression', () => {
   });
 
   it('the level curve reaches 18, capped at 18 until the Finality seal', () => {
-    expect(playerJson.player.expThresholds).toHaveLength(18);
-    expect(playerJson.player.chapterLevelCaps.at(-1)).toEqual({
+    expect(playerJson.player.expThresholds.length).toBeGreaterThanOrEqual(18);
+    expect(playerJson.player.chapterLevelCaps).toContainEqual({
       untilFlag: 'finality_seal_restored',
       cap: 18,
     });

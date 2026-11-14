@@ -146,6 +146,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.pendingWarp = null;
     this.action = null;
     this.field = null;
+    this.playerReady = false;
     this.session = getSession(this);
     this.pendingNotice = data?.notice ?? null;
     this.pendingDialogueId = data?.openDialogueId ?? null;
@@ -217,6 +218,10 @@ export class ExplorationScene extends Phaser.Scene {
       }
     });
 
+    if (this.mapDef.branches) {
+      const pruned = this.session.getFlag(`branch_${this.mapDef.id}_pruned`);
+      this.session.setFlag(`branch_${this.mapDef.id}_living`, !pruned);
+    }
     this.buildMap();
     this.interactionSystem = new InteractionSystem();
 
@@ -232,6 +237,8 @@ export class ExplorationScene extends Phaser.Scene {
     // Prologue v3: empty-handed until the Elder throws Peter the Broken Blade.
     this.player.setArmed(this.session.getFlag(FLAGS.hasBlade));
     this.physics.add.collider(this.player.sprite, this.wallLayer);
+    this.playerReady = true;
+    this.freePlayer();
     this.cameras.main.startFollow(this.player.sprite, true, 0.09, 0.09);
     // Maps smaller than the view (e.g. Peter's room) are centred instead of pinned top-left.
     const mapW = this.wallLayer.width;
@@ -413,6 +420,44 @@ export class ExplorationScene extends Phaser.Scene {
       if (!conditionHolds(swap.when, this.flagOn)) continue;
       for (const t of swap.tiles) layerOf(swap.layer).putTileAt(swap.index + 1, t.x, t.y);
     }
+    if (this.playerReady && this.isInsideWall()) {
+      const fallback = this.mapDef.fallbackSpawn
+        ? this.mapDef.spawns[this.mapDef.fallbackSpawn]
+        : undefined;
+      if (fallback) {
+        this.player.sprite.setPosition(fallback.x * 32 + 16, fallback.y * 32 + 16);
+        this.cameras.main.shake(160, 0.006);
+        this.showNotification(this.t('field.fallTitle'), this.t('field.fallBody'));
+      } else this.freePlayer();
+    }
+  }
+
+  /** Set once this scene run has created Peter (init leaves the previous run's object). */
+  private playerReady = false;
+
+  private isInsideWall(): boolean {
+    const tx = Math.floor(this.player.x / 32);
+    const ty = Math.floor(this.player.y / 32);
+    return this.wallLayer.getTileAt(tx, ty)?.collides ?? false;
+  }
+
+  /** Moves Peter to the nearest open tile if he stands inside a wall. */
+  private freePlayer(): void {
+    if (!this.isInsideWall()) return;
+    const sx = Math.floor(this.player.x / 32);
+    const sy = Math.floor(this.player.y / 32);
+    for (let r = 1; r <= 8; r++)
+      for (let dy = -r; dy <= r; dy++)
+        for (let dx = -r; dx <= r; dx++) {
+          if (Math.max(Math.abs(dx), Math.abs(dy)) !== r) continue;
+          const x = sx + dx;
+          const y = sy + dy;
+          if (x < 0 || y < 0 || x >= this.wallLayer.layer.width || y >= this.wallLayer.layer.height)
+            continue;
+          if (this.wallLayer.getTileAt(x, y)?.collides) continue;
+          this.player.sprite.setPosition(x * 32 + 16, y * 32 + 16);
+          return;
+        }
   }
 
   private spawnNpcs(): void {
@@ -903,6 +948,13 @@ export class ExplorationScene extends Phaser.Scene {
       this.field?.put(scaleId, pan, itemId);
     }
     if (effects.scaleReset) this.field?.reset(effects.scaleReset);
+    if (effects.toggleBranch && this.mapDef.branches) {
+      const id = this.mapDef.id;
+      const pruned = !this.session.getFlag(`branch_${id}_pruned`);
+      this.session.setFlag(`branch_${id}_pruned`, pruned);
+      this.session.setFlag(`branch_${id}_living`, !pruned);
+      this.pendingRefresh = true;
+    }
     if (effects.startTimer) {
       if (this.dialogueSystem.isActive()) this.pendingTimer = { ...effects.startTimer };
       else this.startTimer(effects.startTimer.flag, effects.startTimer.ms);
@@ -971,6 +1023,9 @@ export class ExplorationScene extends Phaser.Scene {
 
   public toggleInventory(): void {
     this.satchel.toggle();
+    if (this.satchel.isOpen && this.mapDef.id === 'map_ch5_kuro_asks') {
+      this.session.setFlag('ch5_opened_ledger_quiz');
+    }
     if (this.satchel.isOpen) this.player.sprite.setVelocity(0, 0);
   }
 

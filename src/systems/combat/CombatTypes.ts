@@ -76,6 +76,21 @@ export interface BattleScript {
    * reopens with `dialogueId`.
    */
   rescue?: { belowHpPct: number; dialogueId: string; event: Omit<BattleEvent, 'atTurn'> };
+  /** The enemy loses its first `turns` turns when this story flag is set (e.g. a prepared mind). */
+  stunIfFlag?: { flag: string; turns: number; message: string };
+  /**
+   * An ally strikes the enemy every `everyTurns` rounds while `requiresFlag` holds (Kuro beside
+   * Peter): `damagePct` of the enemy's max HP, through its shield.
+   */
+  allyStrike?: {
+    name: string;
+    requiresFlag: string;
+    everyTurns: number;
+    damagePct: number;
+    message: string;
+  };
+  /** The battle is won as soon as the enemy falls to this fraction of its max HP (a duel). */
+  endAtEnemyPct?: number;
 }
 
 /**
@@ -136,6 +151,23 @@ export interface BossMechanic {
   startsUnshielded?: boolean;
   bloodWall?: BossBloodWall;
   ritual?: BossRitual;
+  /**
+   * The Other Peter: each turn he uses the command Peter used the turn before — attack, defend,
+   * skill (a heavy cut ×`skillMult` that locks Peter's skill for a turn) or item (heals `healPct`).
+   */
+  mirror?: {
+    skillMult: number;
+    healPct: number;
+    defendMessage: string;
+    skillMessage: string;
+    healMessage: string;
+  };
+  /** Ends the fight when used: offered (keys 6-8) while Peter carries `itemId` and the boss is at or below `belowPct`. */
+  finisher?: { itemId: string; belowPct: number; action: BossEnvironmentAction };
+  /** Offered once the shield is broken while `flag` holds: stuns the boss and deals `damagePct` of its max HP. */
+  nameCall?: { flag: string; stunTurns: number; damagePct: number; action: BossEnvironmentAction };
+  /** After its shield breaks, the boss heals by this fraction of the damage its attacks deal. */
+  drainAfterBreak?: number;
   /** At the start, the boss copies part of Peter's attack (`pct`). */
   mirrorGear?: { pct: number; message: string };
   /**
@@ -228,6 +260,20 @@ export interface FieldTraits {
     stunnedDamageMult: number;
     cooldownMs: number;
   };
+  /**
+   * Branch Phantom: solid for `solidMs` of every `everyMs`, otherwise a faded ghost from the other
+   * branch — slashes pass through it (it slips behind Peter) and it cannot strike.
+   */
+  phase?: { everyMs: number; solidMs: number };
+  /** Unborn Cocoon: stays put; after `hatchMs` it hatches into `into` (enemies.json id). */
+  cocoon?: { hatchMs: number; into: string; texture: string; anim?: string };
+  /** Paradox Crystal: repeats Peter's last slash from where it floats, `delayMs` later. */
+  echo?: { delayMs: number; range: number };
+  /**
+   * Chronos Gardener: raises its shears for `windupMs` (a red line shows the cut), then cuts a
+   * straight line `length` px long and `width` px wide toward where Peter stood.
+   */
+  lineCut?: { range: number; windupMs: number; length: number; width: number; cooldownMs: number };
 }
 
 /**
@@ -272,7 +318,14 @@ export interface IEnemyDefinition {
    * within `windowMs` of it touching his outline multiplies the hit by `factor`. With
    * `feintChance`, the ring may lunge in and flash halfway, then draw back (a fake cue).
    */
-  timedBlock?: { ringMs: number; windowMs: number; factor: number; feintChance?: number };
+  timedBlock?: {
+    ringMs: number;
+    windowMs: number;
+    factor: number;
+    feintChance?: number;
+    /** Two rings in a row (each block takes off half of the reduction). */
+    double?: boolean;
+  };
   /** Real-time behaviour on the map (small enemies). */
   field?: FieldTraits;
   expReward: number;

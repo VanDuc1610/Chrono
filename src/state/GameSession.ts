@@ -41,6 +41,7 @@ const CHAPTER_SEAL_FLAGS = [
   'causality_seal_restored',
   'memory_seal_restored',
   'finality_seal_restored',
+  'possibility_seal_restored',
 ] as const;
 
 export interface MapPosition {
@@ -442,7 +443,7 @@ export class GameSession {
     for (const id of Object.values(this.equipment)) {
       const equip = id ? this.inventory.getItemDefinition(id)?.equip : undefined;
       for (const [k, v] of Object.entries(equip ?? {}) as [keyof EquipStats, number][]) {
-        if (k === 'reach' || k === 'swingMs') continue;
+        if (k === 'reach' || k === 'swingMs' || k === 'echoPct') continue;
         sum[k] = (sum[k] ?? 0) + v;
       }
     }
