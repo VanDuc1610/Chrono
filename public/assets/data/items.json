@@ -1032,6 +1032,345 @@
         "healAmount": 999,
         "mpAmount": 999
       }
+    },
+    {
+      "id": "kuro_ledger",
+      "name": "Sổ Nhớ Hộ",
+      "type": "key_item",
+      "description": "Cuốn sổ Kuro đưa cho Peter để ghi lại những gì anh kể về mình.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": ["Trang đầu, nét chữ của Kuro:\n'Ghi lại những gì tao kể. Tao sẽ hỏi lại.'"]
+    },
+    {
+      "id": "kuro_ledger_page_1",
+      "name": "Sổ Nhớ Hộ — Trang 1",
+      "type": "document",
+      "description": "Chuyện đầu tiên Kuro kể.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Kuro kể ở vườn hạt:\nHồi nhỏ, Kuro nuôi một con mèo mướp ba chân, đặt tên là Bánh Đúc vì nó trắng như bánh đúc."
+      ]
+    },
+    {
+      "id": "kuro_ledger_page_2",
+      "name": "Sổ Nhớ Hộ — Trang 2",
+      "type": "document",
+      "description": "Chuyện thứ hai Kuro kể.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Kuro kể sau trận ở vọng lâu:\nMẹ Kuro hay hát bài 'Chiều Trên Bến Cũ' mỗi khi trời mưa."
+      ]
+    },
+    {
+      "id": "kuro_ledger_page_3",
+      "name": "Sổ Nhớ Hộ — Trang 3",
+      "type": "document",
+      "description": "Chuyện thứ ba Kuro kể.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Kuro kể ở hầm trú ẩn:\nHai đứa hứa với nhau ở mỏm đá có cây bàng gãy, nhìn ra biển."
+      ]
+    },
+    {
+      "id": "pruned_plank",
+      "name": "Ván Nhánh Tỉa",
+      "type": "puzzle",
+      "description": "Tấm ván mục của một nhánh bị tỉa, nhẹ bẫng như sương.",
+      "value": 0,
+      "stackable": true,
+      "maxStack": 10
+    },
+    {
+      "id": "living_plank",
+      "name": "Ván Nhánh Sống",
+      "type": "puzzle",
+      "description": "Tấm ván thép chắc chắn của nhánh còn sống.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "alpha_safe_note",
+      "name": "Mảnh Giấy Trong Ngăn Kéo",
+      "type": "document",
+      "description": "Mảnh giấy gấp tư tìm thấy trong tiệm đồng hồ nhánh Alpha.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "'Két chỉ mở theo chiếc đồng hồ duy nhất chưa từng bị thời gian của hai thế giới làm lệch.'"
+      ]
+    },
+    {
+      "id": "letter_to_daughter",
+      "name": "Thư Gửi Na",
+      "type": "puzzle",
+      "description": "Lá thư chưa gửi Peter nhánh Alpha viết cho con gái.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "'Na của bố. Nếu một ngày con đọc được thư này...'\n(Phần còn lại, mình không nỡ đọc tiếp một mình.)"
+      ]
+    },
+    {
+      "id": "bridge_worker_log",
+      "name": "Sổ Tổ Thợ Cầu",
+      "type": "document",
+      "description": "Cuốn sổ của tổ thợ sửa cây cầu lượng tử ở nhánh Beta.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "'Ván của nhánh nào chỉ vững dưới chân người của nhánh đó; ván mang sang chỉ là cái bóng sắp tan.'"
+      ]
+    },
+    {
+      "id": "ivo_reactor_log",
+      "name": "Nhật Ký Kỹ Sư Ivo",
+      "type": "document",
+      "description": "Nhật ký vận hành lò phản ứng Chronos.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "'Máy A và máy C không bao giờ được chạy cùng một nhánh — hai lõi sẽ cộng hưởng.'\n'Một máy không thể chạy ở cả hai nhánh cùng lúc.'"
+      ]
+    },
+    {
+      "id": "reactor_warning_plate",
+      "name": "Biển Cảnh Báo Nhánh Tỉa",
+      "type": "document",
+      "description": "Tấm biển rỉ sét chỉ còn ở nhánh bị tỉa.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": ["'Máy A ở nhánh này phải chạy để giữ tường hầm trẻ em.'"]
+    },
+    {
+      "id": "reactor_wiring",
+      "name": "Sơ Đồ Dây Cổng Lò",
+      "type": "document",
+      "description": "Sơ đồ điện của cổng lò phản ứng.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": ["'Cổng lò cần đúng hai lõi sáng ở nhánh Sống.'"]
+    },
+    {
+      "id": "prune_stele_rubbing",
+      "name": "Bản Chép Bia Vùng Xám",
+      "type": "document",
+      "description": "Dòng chữ chép từ tấm bia đá đang tan dần.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": ["'Trong ba nhánh, chỉ nhánh đã bị tỉa mới nói dối — vì nó không còn gì để mất.'"]
+    },
+    {
+      "id": "unborn_genealogy",
+      "name": "Phả Hệ Ngai Chưa Sinh",
+      "type": "document",
+      "description": "Tấm phả hệ của một hoàng tộc chưa từng tồn tại.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Hoàng hậu thứ nhất: Hoàng tử Cả Corvin (con trưởng).\nHoàng hậu thứ hai: Hoàng tử Elric, Hoàng tử Aurel, Công chúa Lysa.",
+        "Ghi chú bên lề: Elric và Lysa mất khi còn nhỏ. Aurel — 'chưa sinh'.\nNhánh viền sắt bị tỉa trước tiên."
+      ]
+    },
+    {
+      "id": "chalk_blue",
+      "name": "Phấn Xanh Trời",
+      "type": "puzzle",
+      "description": "Một mẩu phấn màu xanh da trời.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "chalk_gold",
+      "name": "Phấn Vàng Nắng",
+      "type": "puzzle",
+      "description": "Một mẩu phấn vàng như nắng sớm.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "chalk_red",
+      "name": "Phấn Đỏ Hoàng Hôn",
+      "type": "puzzle",
+      "description": "Một mẩu phấn đỏ như hoàng hôn.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "chalk_white",
+      "name": "Phấn Trắng Mây",
+      "type": "puzzle",
+      "description": "Một mẩu phấn trắng như mây.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "mira_drawing",
+      "name": "Bức Vẽ Của Mira",
+      "type": "document",
+      "description": "Bức vẽ bằng phấn Mira tặng.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Hai người đứng dưới một bầu trời thật to: một người tóc xoăn, một người áo xám. Bên dưới, nét chữ nguệch ngoạc: \"chú tiên với chú tóc xoăn\"."
+      ]
+    },
+    {
+      "id": "seed_spring_old",
+      "name": "Hạt Xuân (Nét Cũ)",
+      "type": "puzzle",
+      "description": "Hạt giống bị nhổ, khắc hình mầm non và một nét cọ cũ đã mờ.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "seed_summer",
+      "name": "Hạt Hạ",
+      "type": "puzzle",
+      "description": "Hạt giống bị nhổ, khắc hình bình tưới.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "seed_autumn",
+      "name": "Hạt Thu",
+      "type": "puzzle",
+      "description": "Hạt giống bị nhổ, khắc hình chiếc giỏ đầy quả.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "seed_winter",
+      "name": "Hạt Đông",
+      "type": "puzzle",
+      "description": "Hạt giống bị nhổ, khắc hình bông tuyết.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "seed_spring_new",
+      "name": "Hạt Xuân (Nét Mới)",
+      "type": "puzzle",
+      "description": "Hạt giống bị nhổ, khắc hình mầm non và một nét cọ còn tươi mới.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "blade_of_possibility",
+      "name": "Kiếm Khả Thể",
+      "type": "weapon",
+      "description": "Lưỡi kiếm như có hai cái bóng: mỗi nhát chém kéo theo một vệt chém của nhánh kia.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 16,
+        "reach": 42,
+        "swingMs": 340,
+        "echoPct": 0.3
+      }
+    },
+    {
+      "id": "silver_pruning_shears",
+      "name": "Kéo Tỉa Bạc",
+      "type": "weapon",
+      "description": "Chiếc kéo dự phòng của Kẻ Tỉa Cành. Tầm ngắn nhưng cắt rất nhanh.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 15,
+        "reach": 30,
+        "swingMs": 240
+      }
+    },
+    {
+      "id": "alpha_wedding_ring",
+      "name": "Nhẫn Cưới Nhánh Alpha",
+      "type": "charm",
+      "description": "Chiếc nhẫn chưa từng dùng để tỉa ai.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 36,
+        "defense": 6
+      }
+    },
+    {
+      "id": "chosen_seed_aldric",
+      "name": "Bùa Hạt Giống: Người Cha",
+      "type": "charm",
+      "description": "Mọc từ hạt giống của Aldric.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 40,
+        "defense": 6
+      }
+    },
+    {
+      "id": "chosen_seed_bran",
+      "name": "Bùa Hạt Giống: Người Lính",
+      "type": "charm",
+      "description": "Mọc từ hạt giống của Bran.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 5,
+        "maxHp": 20
+      }
+    },
+    {
+      "id": "chosen_seed_elion",
+      "name": "Bùa Hạt Giống: Người Chép Sử",
+      "type": "charm",
+      "description": "Mọc từ hạt giống của Elion.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxMp": 24,
+        "defense": 3,
+        "speed": 3
+      }
+    },
+    {
+      "id": "possibility_seal_shard",
+      "name": "Mảnh Ấn Possibility",
+      "type": "key_item",
+      "description": "Mảnh tinh thể tím bạc kết tinh từ Lõi Possibility Seal.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
     }
   ]
 }

@@ -1043,7 +1043,8 @@
       "rewards": {
         "experience": 450,
         "items": ["finality_seal_shard"]
-      }
+      },
+      "followUpQuestId": "quest_ch5_into_the_interval"
     },
     {
       "id": "quest_ch4_soldier_count",
@@ -1104,6 +1105,214 @@
         "experience": 200,
         "items": ["last_light_charm"]
       }
+    },
+    {
+      "id": "quest_ch5_into_the_interval",
+      "title": "Khoảng Không Giữa Các Nhánh",
+      "kind": "main",
+      "chapter": 5,
+      "description": "Peter rơi qua vết nứt vào The Interval, nơi những thế giới bị tỉa bỏ trôi dạt.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch5_meet_kuro",
+          "description": "Tìm Kuro giữa bờ vực",
+          "completed": false,
+          "completeOnFlag": "met_kuro_interval"
+        },
+        {
+          "id": "obj_ch5_learn_shift",
+          "description": "Chạm vào Mầm Rẽ Nhánh",
+          "completed": false,
+          "completeOnFlag": "learned_branch_shift"
+        }
+      ],
+      "followUpQuestId": "quest_ch5_the_gardener"
+    },
+    {
+      "id": "quest_ch5_the_gardener",
+      "title": "Người Làm Vườn",
+      "kind": "main",
+      "chapter": 5,
+      "description": "Kuro tưới những thế giới đang chết bằng chính trí nhớ của mình. Băng qua khu vườn của anh.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch5_cross_garden",
+          "description": "Vượt qua khe nứt giữa vườn hạt",
+          "completed": false,
+          "completeOnFlag": "ch5_crossed_garden"
+        }
+      ],
+      "followUpQuestId": "quest_ch5_alpha_life"
+    },
+    {
+      "id": "quest_ch5_alpha_life",
+      "title": "Cuộc Đời Ở Lại",
+      "kind": "main",
+      "chapter": 5,
+      "description": "Một Khánh Hòa nơi Peter chưa từng rời đi. Trong tiệm đồng hồ có một chiếc két sắt khóa bằng giờ.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch5_open_safe",
+          "description": "Mở két sắt trong tiệm đồng hồ",
+          "completed": false,
+          "completeOnFlag": "opened_alpha_safe"
+        }
+      ],
+      "followUpQuestId": "quest_ch5_the_pruner"
+    },
+    {
+      "id": "quest_ch5_the_pruner",
+      "title": "Kẻ Tỉa Cành",
+      "kind": "main",
+      "chapter": 5,
+      "description": "Một Peter khác chờ trên vọng lâu, tay cầm chiếc kéo đã tỉa hàng trăm thế giới.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch5_beat_other_peter",
+          "description": "Đối mặt Peter nhánh Alpha",
+          "completed": false,
+          "completeOnFlag": "defeated_other_peter"
+        },
+        {
+          "id": "obj_ch5_resolve_letter",
+          "description": "Quyết định số phận lá thư",
+          "completed": false,
+          "completeOnFlag": "resolved_alpha_letter"
+        }
+      ],
+      "followUpQuestId": "quest_ch5_steel_city"
+    },
+    {
+      "id": "quest_ch5_steel_city",
+      "title": "Thành Phố Đồng Hồ Thép",
+      "kind": "main",
+      "chapter": 5,
+      "description": "Nhánh Beta đã khóa thời gian để không ai phải chết, rồi tự sụp đổ.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch5_cross_bridge",
+          "description": "Vượt cây cầu lượng tử",
+          "completed": false,
+          "completeOnFlag": "crossed_quantum_bridge"
+        },
+        {
+          "id": "obj_ch5_restart_reactor",
+          "description": "Khởi động lại lò phản ứng",
+          "completed": false,
+          "completeOnFlag": "restarted_reactor"
+        }
+      ],
+      "followUpQuestId": "quest_ch5_the_children"
+    },
+    {
+      "id": "quest_ch5_the_children",
+      "title": "Bầu Trời Vẽ Bằng Phấn",
+      "kind": "main",
+      "chapter": 5,
+      "description": "Bốn mươi đứa trẻ cuối cùng của Beta sống dưới một bầu trời vẽ tay.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch5_meet_mira",
+          "description": "Vào hầm trú ẩn",
+          "completed": false,
+          "completeOnFlag": "met_mira"
+        },
+        {
+          "id": "obj_ch5_reach_anchor",
+          "description": "Theo Kuro tới nơi thả neo",
+          "completed": false,
+          "completeOnFlag": "ch5_reached_anchor"
+        }
+      ],
+      "followUpQuestId": "quest_ch5_unborn_king"
+    },
+    {
+      "id": "quest_ch5_unborn_king",
+      "title": "Vua Chưa Sinh",
+      "kind": "main",
+      "chapter": 5,
+      "description": "Kuro muốn kéo nhánh Beta trở lại tồn tại, và một vị vua chưa từng được sinh ra đang chờ.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch5_answer_kuro",
+          "description": "Trả lời Kuro",
+          "completed": false,
+          "completeOnFlag": "answered_kuro_ledger"
+        },
+        {
+          "id": "obj_ch5_beta_choice",
+          "description": "Quyết định số phận nhánh Beta",
+          "completed": false,
+          "completeOnFlag": "resolved_beta_choice"
+        },
+        {
+          "id": "obj_ch5_beat_king",
+          "description": "Đánh bại Vua Chưa Sinh",
+          "completed": false,
+          "completeOnFlag": "defeated_unborn_king"
+        },
+        {
+          "id": "obj_ch5_escape",
+          "description": "Thoát khỏi bờ va chạm",
+          "completed": false,
+          "completeOnFlag": "escaped_collision"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch5_uprooted_seeds",
+      "title": "Những Hạt Giống Bị Nhổ",
+      "kind": "side",
+      "chapter": 5,
+      "description": "Ai đó đã nhổ những hạt giống khỏi luống và vứt rải rác khắp các nhánh.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch5_plant_seeds",
+          "description": "Gieo lại năm hạt giống",
+          "completed": false,
+          "completeOnFlag": "planted_uprooted_seeds"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch5_old_seeds",
+      "title": "Những Hạt Giống Cũ",
+      "kind": "side",
+      "chapter": 5,
+      "description": "Mỗi lựa chọn ở chiến trường cũ đã rơi xuống thành một hạt giống.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch5_water_seed",
+          "description": "Tưới một hạt giống",
+          "completed": false,
+          "completeOnFlag": "watered_old_seed"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch5_chalk_sky",
+      "title": "Bầu Trời Của Mira",
+      "kind": "side",
+      "chapter": 5,
+      "description": "Mira cần bốn màu phấn để vẽ cho xong bầu trời trên trần hầm.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch5_chalk",
+          "description": "Mang đủ bốn màu phấn cho Mira",
+          "completed": false,
+          "completeOnFlag": "finished_chalk_sky"
+        }
+      ]
     }
   ]
 }

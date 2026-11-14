@@ -6259,6 +6259,2064 @@
         "Ba trụ đá tắt lịm quanh sàn: một khắc bàn tay mở, một khắc lá thư, một khắc ngọn nến."
       ],
       "responses": []
+    },
+    "ch5_arrival": {
+      "id": "ch5_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Không có đất, không có trời. Chỉ có những mảnh thế giới trôi lơ lửng như lá rụng trên mặt hồ xám bạc.",
+        "Vết nứt Kuro để lại... mình đã rơi qua nó."
+      ],
+      "responses": []
+    },
+    "ch5_kuro_meet": {
+      "id": "ch5_kuro_meet",
+      "speaker": "Kuro",
+      "lines": [
+        "Mày theo tao tới tận đây thật à.",
+        "(Kuro đứng giữa những quả hạt phát sáng, tay cầm một chiếc bình tưới bằng thủy tinh rạn.)",
+        "Đây là The Interval. Những thế giới Chronos cắt bỏ trôi về đây để chết. Tao tưới cho chúng sống thêm được chút nào hay chút ấy."
+      ],
+      "responses": [
+        {
+          "text": "Anh tưới bằng gì?",
+          "nextDialogueId": "ch5_kuro_meet_water"
+        }
+      ]
+    },
+    "ch5_kuro_meet_water": {
+      "id": "ch5_kuro_meet_water",
+      "speaker": "Kuro",
+      "lines": [
+        "Bằng thứ duy nhất tao còn: trí nhớ.",
+        "Mỗi lần tưới, tao quên một chút. Hôm qua tao quên mùi mưa. Hôm nay... tao không chắc.",
+        "Cầm lấy. Mỗi khi tao kể gì về tao, mày ghi vào đây. Rồi tao sẽ hỏi lại."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "kuro_ledger",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_kuro_ledger",
+        "setFlags": ["met_kuro_interval", "kuro_with_peter"]
+      }
+    },
+    "ch5_sprout_intro": {
+      "id": "ch5_sprout_intro",
+      "speaker": "Kuro",
+      "lines": [
+        "Thấy cái mầm phát sáng kia không? Chạm vào nó, mày sẽ thấy chính chỗ này ở nhánh bị tỉa.",
+        "Cùng một nơi, hai số phận. Có cây cầu ở nhánh này mà mất ở nhánh kia. Tập quen đi."
+      ],
+      "responses": []
+    },
+    "ch5_sprout_touch": {
+      "id": "ch5_sprout_touch",
+      "speaker": "Peter",
+      "lines": ["Mầm Rẽ Nhánh rung nhẹ dưới tay, như một nhịp tim."],
+      "responses": [
+        {
+          "text": "Chạm vào mầm",
+          "nextDialogueId": "ch5_sprout_shift"
+        },
+        {
+          "text": "Để sau",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch5_sprout_shift": {
+      "id": "ch5_sprout_shift",
+      "speaker": "Peter",
+      "lines": ["Thế giới chao đảo. Màu sắc tràn ra rồi rút lại như thủy triều..."],
+      "responses": [],
+      "effects": {
+        "toggleBranch": true,
+        "setFlags": ["learned_branch_shift"]
+      }
+    },
+    "ch5_shore_exit_locked": {
+      "id": "ch5_shore_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Bờ vực đứt gãy ở nhánh này. Có lẽ ở nhánh kia vẫn còn lối đi."],
+      "responses": []
+    },
+    "ch5_shore_kuro_first": {
+      "id": "ch5_shore_kuro_first",
+      "speaker": "Peter",
+      "lines": ["Kuro đang đợi ở giữa vườn hạt. Nên tới nói chuyện với anh ấy trước."],
+      "responses": []
+    },
+    "ch5_garden_arrival": {
+      "id": "ch5_garden_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Hàng trăm cái cây treo những quả hạt sáng mờ. Trong mỗi quả là một thế giới nhỏ đang thở yếu ớt."
+      ],
+      "responses": []
+    },
+    "ch5_kuro_story_cat": {
+      "id": "ch5_kuro_story_cat",
+      "speaker": "Kuro",
+      "lines": [
+        "Quả kia... nhìn giống cái sân nhà tao ngày xưa.",
+        "Hồi nhỏ tao nuôi một con mèo mướp ba chân, đặt tên là Bánh Đúc vì nó trắng như bánh đúc.",
+        "(Kuro cười, rồi khựng lại rất lâu.) ...Tao không nhớ nó chết thế nào nữa. Mày ghi lại đi."
+      ],
+      "responses": [
+        {
+          "text": "Ghi vào sổ",
+          "nextDialogueId": "ch5_fb_cat"
+        }
+      ],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "kuro_ledger_page_1",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_kuro_ledger_page_1"
+      }
+    },
+    "ch5_fb_cat": {
+      "id": "ch5_fb_cat",
+      "speaker": "Ký Ức Của Kuro",
+      "lines": [
+        "Mưa rơi trên mái hiên. Một cậu bé ôm con mèo ba chân ướt sũng vào lòng.",
+        "Một cậu bé khác đứng bên cạnh, nghiêng chiếc dù rách che cho cả hai. Gương mặt cậu ấy hiện rõ: tóc xoăn, mắt xám xanh — là mình.",
+        "Còn gương mặt cậu bé ôm mèo thì vẫn mờ, như nhìn qua một lớp kính mưa."
+      ],
+      "responses": [],
+      "flashback": true
+    },
+    "ch5_paradox_intro": {
+      "id": "ch5_paradox_intro",
+      "speaker": "Kuro",
+      "lines": [
+        "Khe này thiếu một tấm ván. Ở nhánh tỉa có một tấm nằm ngay kia.",
+        "Mày mang nó sang nhánh này được, nhưng nó chỉ là cái bóng. Hai mươi giây là tan. Nhớ đấy."
+      ],
+      "responses": []
+    },
+    "ch5_plank_take_garden": {
+      "id": "ch5_plank_take_garden",
+      "speaker": "Peter",
+      "lines": ["Một tấm ván mục của nhánh bị tỉa. Cầm lên thấy nhẹ bẫng như sương."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "pruned_plank",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_pruned_plank"
+      }
+    },
+    "ch5_gap_inspect": {
+      "id": "ch5_gap_inspect",
+      "speaker": "Peter",
+      "lines": ["Khe sâu hun hút, thiếu đúng một tấm ván."],
+      "responses": []
+    },
+    "ch5_gap_pruned_void": {
+      "id": "ch5_gap_pruned_void",
+      "speaker": "Peter",
+      "lines": ["Ở nhánh này, bên kia khe chẳng còn gì cả. Chỉ có sương xám."],
+      "responses": []
+    },
+    "ch5_gap_place_shadow": {
+      "id": "ch5_gap_place_shadow",
+      "speaker": "Peter",
+      "lines": ["Tấm ván nhánh tỉa đặt xuống khe, mờ mờ như một cái bóng. Phải qua nhanh lên!"],
+      "responses": [],
+      "effects": {
+        "startTimer": {
+          "flag": "ch5_garden_shadow_plank",
+          "ms": 20000
+        }
+      }
+    },
+    "ch5_garden_crossed": {
+      "id": "ch5_garden_crossed",
+      "speaker": "Kuro",
+      "lines": ["Không tệ. Cứ thế mà đi."],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch5_crossed_garden"]
+      }
+    },
+    "ch5_gardener_first": {
+      "id": "ch5_gardener_first",
+      "speaker": "Kuro",
+      "lines": [
+        "Người Làm Vườn của Chronos. Chúng không ác đâu, chỉ làm việc của chúng: tỉa.",
+        "Nhát kéo của nó cắt thẳng một đường. Thấy nó giơ kéo lên thì bước ra khỏi đường đó."
+      ],
+      "responses": []
+    },
+    "ch5_garden_exit_locked": {
+      "id": "ch5_garden_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Khe nứt còn chắn lối. Phải tìm cách qua nó trước."],
+      "responses": []
+    },
+    "ch5_seed_spring_old_take": {
+      "id": "ch5_seed_spring_old_take",
+      "speaker": "Peter",
+      "lines": ["Một hạt giống bị nhổ khỏi luống, khắc hình mầm non và một nét cọ cũ đã mờ."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "seed_spring_old",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_seed_spring_old",
+        "startQuest": "quest_ch5_uprooted_seeds"
+      }
+    },
+    "ch5_uprooted_path_hidden": {
+      "id": "ch5_uprooted_path_hidden",
+      "speaker": "Peter",
+      "lines": ["Một lối mòn khuất sau hàng cây khô. Đất ở đây như vừa bị ai cày xới rồi bỏ dở."],
+      "responses": []
+    },
+    "ch5_uprooted_path_open": {
+      "id": "ch5_uprooted_path_open",
+      "speaker": "Peter",
+      "lines": ["Năm hạt giống trong túi ấm dần lên. Lối mòn mở ra."],
+      "responses": [],
+      "effects": {
+        "warpTo": {
+          "mapId": "map_ch5_uprooted_garden",
+          "spawnId": "default"
+        }
+      }
+    },
+    "ch5_old_seeds_offer": {
+      "id": "ch5_old_seeds_offer",
+      "speaker": "Kuro",
+      "lines": [
+        "Luống này là của mày.",
+        "Mỗi lần mày chọn, một hạt rơi xuống đây. Tao tưới hộ. Muốn xem chúng mọc thành gì không?"
+      ],
+      "responses": [
+        {
+          "text": "Đi xem",
+          "nextDialogueId": "ch5_old_seeds_go"
+        },
+        {
+          "text": "Để sau",
+          "nextDialogueId": null
+        }
+      ],
+      "effects": {
+        "startQuest": "quest_ch5_old_seeds"
+      }
+    },
+    "ch5_old_seeds_go": {
+      "id": "ch5_old_seeds_go",
+      "speaker": "Peter",
+      "lines": ["Kuro dẫn mình qua một vòm lá xám..."],
+      "responses": [],
+      "effects": {
+        "warpTo": {
+          "mapId": "map_ch5_old_seeds",
+          "spawnId": "default"
+        }
+      }
+    },
+    "ch5_alpha_arrival": {
+      "id": "ch5_alpha_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Khánh Hòa. Tiếng sóng, mùi cá khô, tiếng còi tàu sớm...",
+        "Nhưng không phải Khánh Hòa của mình. Ở đây, mình chưa từng rời đi."
+      ],
+      "responses": []
+    },
+    "ch5_kuro_alpha": {
+      "id": "ch5_kuro_alpha",
+      "speaker": "Kuro",
+      "lines": [
+        "Nhánh của mày. Cái nhánh mày ở lại.",
+        "Tao chờ ở đây. Nhánh này có người không ưa tao."
+      ],
+      "responses": []
+    },
+    "ch5_coba_alpha": {
+      "id": "ch5_coba_alpha",
+      "speaker": "Cô Ba",
+      "lines": [
+        "Ủa Peter, sao hôm nay mặc đồ lạ vậy con? Vợ con đâu, bé Na không theo hả?",
+        "Hồi sáng thấy bé Na vẽ trời bằng phấn ngoài bến, dễ thương ghê."
+      ],
+      "responses": []
+    },
+    "ch5_na": {
+      "id": "ch5_na",
+      "speaker": "Bé Na",
+      "lines": [
+        "Chú giống ba con quá... mà tóc ba con có sợi bạc hà.",
+        "Ba con đi tỉa cây hoài, ít về lắm. Ba nói tỉa cây thì vườn mới đẹp."
+      ],
+      "responses": []
+    },
+    "ch5_rhyme": {
+      "id": "ch5_rhyme",
+      "speaker": "Peter",
+      "lines": [
+        "Trên bức tường cạnh bến, ai đó viết bằng phấn một bài đồng dao:",
+        "'Xuân gieo, Hạ tưới, Thu hái, Đông ngủ — rồi Xuân lại về.'"
+      ],
+      "responses": []
+    },
+    "ch5_chalk_blue_take": {
+      "id": "ch5_chalk_blue_take",
+      "speaker": "Peter",
+      "lines": ["Một mẩu phấn màu xanh da trời rơi cạnh bậc thềm."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "chalk_blue",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_chalk_blue"
+      }
+    },
+    "ch5_chalk_gold_take": {
+      "id": "ch5_chalk_gold_take",
+      "speaker": "Peter",
+      "lines": ["Một mẩu phấn vàng như nắng sớm, kẹp trong khe thuyền."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "chalk_gold",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_chalk_gold"
+      }
+    },
+    "ch5_seed_summer_take": {
+      "id": "ch5_seed_summer_take",
+      "speaker": "Peter",
+      "lines": ["Một hạt giống bị nhổ, khắc hình bình tưới."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "seed_summer",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_seed_summer",
+        "startQuest": "quest_ch5_uprooted_seeds"
+      }
+    },
+    "ch5_tower_locked": {
+      "id": "ch5_tower_locked",
+      "speaker": "Peter",
+      "lines": [
+        "Cổng vọng lâu trên đồi khóa bằng một ổ khóa hình mặt đồng hồ. Có lẽ chìa ở trong tiệm."
+      ],
+      "responses": []
+    },
+    "ch5_shop_arrival": {
+      "id": "ch5_shop_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Tiệm đồng hồ của ông nội. Mọi thứ y nguyên...",
+        "Chỉ có thêm một tấm ảnh cưới treo trên tường."
+      ],
+      "responses": []
+    },
+    "ch5_wedding_photo": {
+      "id": "ch5_wedding_photo",
+      "speaker": "Peter",
+      "lines": [
+        "Ảnh cưới của một Peter khác, tóc đã điểm bạc. Bên cạnh là một người phụ nữ cười hiền, tay bế một bé gái."
+      ],
+      "responses": []
+    },
+    "ch5_wedding_photo_pruned": {
+      "id": "ch5_wedding_photo_pruned",
+      "speaker": "Peter",
+      "lines": ["Khung ảnh vỡ. Tấm ảnh bên trong cháy xém mất một nửa."],
+      "responses": []
+    },
+    "ch5_safe_note_take": {
+      "id": "ch5_safe_note_take",
+      "speaker": "Peter",
+      "lines": ["Trong ngăn kéo bàn thợ có một mảnh giấy gấp tư."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "alpha_safe_note",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_alpha_safe_note"
+      }
+    },
+    "ch5_clock_wedding": {
+      "id": "ch5_clock_wedding",
+      "speaker": "Peter",
+      "lines": ["Chiếc đồng hồ khắc chữ \"Cưới\". Kim chỉ 3:15."],
+      "responses": []
+    },
+    "ch5_clock_wedding_pruned": {
+      "id": "ch5_clock_wedding_pruned",
+      "speaker": "Peter",
+      "lines": ["Chiếc đồng hồ khắc chữ \"Cưới\", mặt kính nứt. Kim dừng ở 3:45."],
+      "responses": []
+    },
+    "ch5_clock_daughter": {
+      "id": "ch5_clock_daughter",
+      "speaker": "Peter",
+      "lines": ["Chiếc đồng hồ khắc chữ \"Con gái\". Kim chỉ 7:30."],
+      "responses": []
+    },
+    "ch5_clock_daughter_pruned": {
+      "id": "ch5_clock_daughter_pruned",
+      "speaker": "Peter",
+      "lines": ["Chiếc đồng hồ khắc chữ \"Con gái\", mặt kính nứt. Kim dừng ở 7:30."],
+      "responses": []
+    },
+    "ch5_clock_grandpa": {
+      "id": "ch5_clock_grandpa",
+      "speaker": "Peter",
+      "lines": ["Chiếc đồng hồ khắc chữ \"Ông\". Kim chỉ 9:45."],
+      "responses": []
+    },
+    "ch5_clock_grandpa_pruned": {
+      "id": "ch5_clock_grandpa_pruned",
+      "speaker": "Peter",
+      "lines": ["Chiếc đồng hồ khắc chữ \"Ông\", mặt kính nứt. Kim dừng ở 2:15."],
+      "responses": []
+    },
+    "ch5_clock_sea": {
+      "id": "ch5_clock_sea",
+      "speaker": "Peter",
+      "lines": ["Chiếc đồng hồ khắc chữ \"Biển\". Kim chỉ 12:00."],
+      "responses": []
+    },
+    "ch5_clock_sea_pruned": {
+      "id": "ch5_clock_sea_pruned",
+      "speaker": "Peter",
+      "lines": ["Chiếc đồng hồ khắc chữ \"Biển\", mặt kính nứt. Kim dừng ở 11:00."],
+      "responses": []
+    },
+    "ch5_clock_shop": {
+      "id": "ch5_clock_shop",
+      "speaker": "Peter",
+      "lines": ["Chiếc đồng hồ khắc chữ \"Tiệm\". Kim chỉ 4:30."],
+      "responses": []
+    },
+    "ch5_clock_shop_pruned": {
+      "id": "ch5_clock_shop_pruned",
+      "speaker": "Peter",
+      "lines": ["Chiếc đồng hồ khắc chữ \"Tiệm\", mặt kính nứt. Kim dừng ở 4:00."],
+      "responses": []
+    },
+    "ch5_safe_open": {
+      "id": "ch5_safe_open",
+      "speaker": "Peter",
+      "lines": [
+        "Tách. Két sắt bật mở.",
+        "Bên trong là một lá thư chưa gửi, đề \"Gửi Na\", và một chiếc chìa khóa hình mặt đồng hồ."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "letter_to_daughter",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_letter_to_daughter",
+        "setFlags": ["opened_alpha_safe"]
+      }
+    },
+    "ch5_safe_wrong": {
+      "id": "ch5_safe_wrong",
+      "speaker": "Peter",
+      "lines": ["Chốt két lạch cạch rồi kẹt cứng. Giờ của hai thế giới chưa khớp."],
+      "responses": []
+    },
+    "ch5_safe_pruned": {
+      "id": "ch5_safe_pruned",
+      "speaker": "Peter",
+      "lines": ["Két ở nhánh này bị cạy tung. Bên trong trống rỗng."],
+      "responses": []
+    },
+    "ch5_safe_open_again": {
+      "id": "ch5_safe_open_again",
+      "speaker": "Peter",
+      "lines": ["Két đã mở. Bên trong không còn gì."],
+      "responses": []
+    },
+    "ch5_tower_arrival": {
+      "id": "ch5_tower_arrival",
+      "speaker": "Peter",
+      "lines": ["Vọng lâu trắng toát trên đồi, như một chiếc kéo khổng lồ cắm xuống đất."],
+      "responses": []
+    },
+    "ch5_other_peter_confront": {
+      "id": "ch5_other_peter_confront",
+      "speaker": "Peter Nhánh Alpha",
+      "lines": [
+        "Tao biết thế nào mày cũng tới. Mày có khuôn mặt của tao hồi hai mươi sáu tuổi.",
+        "Ở nhánh này, tao không rời đi. Tao cưới cô ấy, có bé Na. Rồi một ngày, Chronos đánh dấu nhánh này để tỉa.",
+        "Một giọng nói cho tao giao kèo: giữ được nhánh này, đổi lại tao phải tỉa những nhánh khác. Tao đã tỉa bốn trăm mười hai thế giới."
+      ],
+      "responses": [
+        {
+          "text": "Bốn trăm... sao anh làm được?",
+          "nextDialogueId": "ch5_other_peter_why"
+        }
+      ]
+    },
+    "ch5_other_peter_why": {
+      "id": "ch5_other_peter_why",
+      "speaker": "Peter Nhánh Alpha",
+      "lines": [
+        "Mỗi lần tỉa, tao nghĩ tới bé Na ngủ say. Vậy là làm được.",
+        "Nếu là con mày, mày có làm khác không?",
+        "(Peter không trả lời được.)"
+      ],
+      "responses": []
+    },
+    "ch5_other_peter_defeated": {
+      "id": "ch5_other_peter_defeated",
+      "speaker": "Peter Nhánh Alpha",
+      "lines": [
+        "(Người đàn ông tóc điểm bạc quỳ gối. Chiếc kéo tỉa rơi xuống nền đá.)",
+        "Mày thắng rồi. Giờ mày định làm gì với tao?"
+      ],
+      "responses": [
+        {
+          "text": "Đọc lá thư cho anh ấy nghe",
+          "nextDialogueId": "ch5_alpha_letter_read"
+        },
+        {
+          "text": "Trao lá thư, để anh ấy về",
+          "nextDialogueId": "ch5_alpha_letter_give"
+        }
+      ],
+      "effects": {
+        "setFlags": ["defeated_other_peter"]
+      }
+    },
+    "ch5_alpha_letter_read": {
+      "id": "ch5_alpha_letter_read",
+      "speaker": "Peter",
+      "lines": [
+        "'Na của bố. Nếu một ngày con đọc được thư này, bố mong con biết bố chưa từng làm điều gì khiến con phải xấu hổ...'",
+        "(Giọng mình nghẹn lại. Người đàn ông tóc điểm bạc ôm mặt.)"
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch5_alpha_letter_read_2"
+        }
+      ]
+    },
+    "ch5_alpha_letter_read_2": {
+      "id": "ch5_alpha_letter_read_2",
+      "speaker": "Peter Nhánh Alpha",
+      "lines": [
+        "Tao viết câu đó... trước khi nhận giao kèo.",
+        "(Anh tháo từng mảnh giáp trắng, đặt xuống đất.) Tao sẽ về với con bé. Nhánh này có bị tỉa thì cha con tao đi cùng nhau.",
+        "Cầm lấy. Nhẫn cưới của tao. Nó chưa từng dùng để tỉa ai."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch5_alpha_memory_offer"
+        }
+      ],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "alpha_wedding_ring",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_alpha_wedding_ring",
+        "setFlags": ["ch5_choice_alpha_letter", "resolved_alpha_letter", "ch5_trust_letter"]
+      }
+    },
+    "ch5_alpha_letter_give": {
+      "id": "ch5_alpha_letter_give",
+      "speaker": "Peter Nhánh Alpha",
+      "lines": [
+        "Cảm ơn. Con bé sẽ được lớn lên.",
+        "(Anh khoác lại giáp, nhặt chiếc kéo lên.) Đừng để tao gặp lại mày trong vườn của thằng Kuro.",
+        "Cái này là kéo dự phòng của tao. Mày cần nó hơn tao."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch5_alpha_memory_offer"
+        }
+      ],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "letter_to_daughter",
+            "quantity": 1
+          }
+        ],
+        "grantItems": [
+          {
+            "itemId": "silver_pruning_shears",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_silver_pruning_shears",
+        "setFlags": ["ch5_choice_alpha_spared", "resolved_alpha_letter"]
+      }
+    },
+    "ch5_alpha_memory_offer": {
+      "id": "ch5_alpha_memory_offer",
+      "speaker": "Peter Nhánh Alpha",
+      "lines": [
+        "Còn cái này. Tao giữ một mảnh ký ức về thằng Kuro — thứ mày đã đánh mất. Mày lấy đi."
+      ],
+      "responses": [
+        {
+          "text": "Nhận mảnh ký ức",
+          "nextDialogueId": "ch5_alpha_memory_take"
+        },
+        {
+          "text": "Từ chối",
+          "nextDialogueId": "ch5_alpha_memory_refuse"
+        }
+      ]
+    },
+    "ch5_alpha_memory_take": {
+      "id": "ch5_alpha_memory_take",
+      "speaker": "Peter",
+      "lines": [
+        "(Một luồng ấm chảy vào trí nhớ: tiếng cười của hai đứa trẻ trên mỏm đá, gió biển mặn chát...)",
+        "(Nhưng cùng lúc, một thứ nhỏ bé trôi đi: mùi dầu máy của tiệm đồng hồ buổi sáng. Mình không còn nhớ nó nữa.)"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch5_took_alpha_memory"]
+      }
+    },
+    "ch5_alpha_memory_refuse": {
+      "id": "ch5_alpha_memory_refuse",
+      "speaker": "Peter",
+      "lines": ["Tôi sẽ tự nhớ. Theo cách của tôi."],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch5_refused_alpha_memory"]
+      }
+    },
+    "ch5_kuro_reacts_spared": {
+      "id": "ch5_kuro_reacts_spared",
+      "speaker": "Kuro",
+      "lines": [
+        "Mày vừa thả một con dao về lại vườn của tao.",
+        "...Nhưng tao hiểu. Nếu tao có con, có khi tao cũng thế."
+      ],
+      "responses": []
+    },
+    "ch5_kuro_reacts_letter": {
+      "id": "ch5_kuro_reacts_letter",
+      "speaker": "Kuro",
+      "lines": [
+        "Hắn tháo giáp rồi à. Bốn trăm mười hai thế giới... và một lá thư.",
+        "Chữ viết tay đôi khi nặng hơn cả một quyền năng."
+      ],
+      "responses": []
+    },
+    "ch5_kuro_story_song": {
+      "id": "ch5_kuro_story_song",
+      "speaker": "Kuro",
+      "lines": [
+        "Mưa lại rơi trong The Interval rồi. Lạ thật, ở đây làm gì có mây.",
+        "Mẹ tao hay hát bài 'Chiều Trên Bến Cũ' mỗi khi trời mưa. Tao chỉ còn nhớ tên bài, giai điệu thì mất rồi."
+      ],
+      "responses": [
+        {
+          "text": "Ghi vào sổ",
+          "nextDialogueId": "ch5_fb_song"
+        }
+      ],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "kuro_ledger_page_2",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_kuro_ledger_page_2"
+      }
+    },
+    "ch5_fb_song": {
+      "id": "ch5_fb_song",
+      "speaker": "Ký Ức Của Kuro",
+      "lines": [
+        "Một người phụ nữ ngồi khâu áo bên khung cửa, mưa giăng ngoài hiên.",
+        "Bà hát khe khẽ. Lời bị nhiễu như sóng radio cũ, chỉ nghe rõ một câu: '...chiều trên bến cũ...'",
+        "Cậu bé tóc đen nằm gối đầu lên đùi mẹ, mắt nhắm hờ."
+      ],
+      "responses": [],
+      "flashback": true
+    },
+    "ch5_tower_exit_locked": {
+      "id": "ch5_tower_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Vết nứt sang nhánh Beta còn khép. Phải giải quyết chuyện ở vọng lâu trước."],
+      "responses": []
+    },
+    "ch5_beta_arrival": {
+      "id": "ch5_beta_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Một thành phố bằng thép đứng im. Mọi chiếc đồng hồ trên các tòa tháp đều dừng ở cùng một giờ.",
+        "Trên tấm bảng hiệu lớn còn dòng chữ: 'Dự án Đồng Hồ Thép — Nhân loại không bao giờ già đi.'"
+      ],
+      "responses": []
+    },
+    "ch5_kuro_beta": {
+      "id": "ch5_kuro_beta",
+      "speaker": "Kuro",
+      "lines": [
+        "Nhánh Beta. Họ muốn khóa Chronos để không ai phải chết.",
+        "Và giờ thì không ai còn sống để mà chết. Gần như không ai."
+      ],
+      "responses": []
+    },
+    "ch5_bridge_log_take": {
+      "id": "ch5_bridge_log_take",
+      "speaker": "Peter",
+      "lines": ["Cuốn sổ của tổ thợ cầu, kẹp dưới một chiếc mũ bảo hộ."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "bridge_worker_log",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_bridge_worker_log"
+      }
+    },
+    "ch5_plank_pruned_a_take": {
+      "id": "ch5_plank_pruned_a_take",
+      "speaker": "Peter",
+      "lines": ["Một tấm ván của nhánh tỉa nằm trong đống đổ nát."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "pruned_plank",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_beta_plank_a"
+      }
+    },
+    "ch5_plank_pruned_b_take": {
+      "id": "ch5_plank_pruned_b_take",
+      "speaker": "Peter",
+      "lines": ["Thêm một tấm ván của nhánh tỉa, mép mục nát."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "pruned_plank",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_beta_plank_b"
+      }
+    },
+    "ch5_plank_living_take": {
+      "id": "ch5_plank_living_take",
+      "speaker": "Peter",
+      "lines": ["Trên mái nhà có một tấm ván thép của nhánh sống, còn chắc chắn."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "living_plank",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_living_plank"
+      }
+    },
+    "ch5_cell_3_place": {
+      "id": "ch5_cell_3_place",
+      "speaker": "Peter",
+      "lines": ["Đặt tấm ván nhánh tỉa vào chỗ trống. Nó khớp vào như chưa từng rời đi."],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "pruned_plank",
+            "quantity": 1
+          }
+        ],
+        "setFlags": ["ch5_cell_3_p"]
+      }
+    },
+    "ch5_cell_3_shadow": {
+      "id": "ch5_cell_3_shadow",
+      "speaker": "Peter",
+      "lines": ["Tấm ván nhánh sống đặt xuống, mờ như một cái bóng. Hai mươi giây!"],
+      "responses": [],
+      "effects": {
+        "startTimer": {
+          "flag": "ch5_cell_3_shadow",
+          "ms": 20000
+        }
+      }
+    },
+    "ch5_cell_6_place": {
+      "id": "ch5_cell_6_place",
+      "speaker": "Peter",
+      "lines": ["Đặt tấm ván nhánh tỉa vào chỗ trống. Nó khớp vào như chưa từng rời đi."],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "pruned_plank",
+            "quantity": 1
+          }
+        ],
+        "setFlags": ["ch5_cell_6_p"]
+      }
+    },
+    "ch5_cell_6_shadow": {
+      "id": "ch5_cell_6_shadow",
+      "speaker": "Peter",
+      "lines": ["Tấm ván nhánh sống đặt xuống, mờ như một cái bóng. Hai mươi giây!"],
+      "responses": [],
+      "effects": {
+        "startTimer": {
+          "flag": "ch5_cell_6_shadow",
+          "ms": 20000
+        }
+      }
+    },
+    "ch5_cell_9_place": {
+      "id": "ch5_cell_9_place",
+      "speaker": "Peter",
+      "lines": ["Đặt tấm ván nhánh tỉa vào chỗ trống. Nó khớp vào như chưa từng rời đi."],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "pruned_plank",
+            "quantity": 1
+          }
+        ],
+        "setFlags": ["ch5_cell_9_p"]
+      }
+    },
+    "ch5_cell_9_shadow": {
+      "id": "ch5_cell_9_shadow",
+      "speaker": "Peter",
+      "lines": ["Tấm ván nhánh sống đặt xuống, mờ như một cái bóng. Hai mươi giây!"],
+      "responses": [],
+      "effects": {
+        "startTimer": {
+          "flag": "ch5_cell_9_shadow",
+          "ms": 20000
+        }
+      }
+    },
+    "ch5_cell_inspect": {
+      "id": "ch5_cell_inspect",
+      "speaker": "Peter",
+      "lines": ["Khoảng trống giữa hai tấm ván. Gió hư không hun hút thổi lên."],
+      "responses": []
+    },
+    "ch5_cell_living": {
+      "id": "ch5_cell_living",
+      "speaker": "Peter",
+      "lines": ["Ở nhánh này cây cầu gần như mất hết. Đặt ván ở đây chẳng đi tới đâu."],
+      "responses": []
+    },
+    "ch5_cell_done": {
+      "id": "ch5_cell_done",
+      "speaker": "Peter",
+      "lines": ["Tấm ván đã nằm vững ở đây."],
+      "responses": []
+    },
+    "ch5_bridge_fall": {
+      "id": "ch5_bridge_fall",
+      "speaker": "Peter",
+      "lines": ["Ván dưới chân tan biến! Mình rơi xuống rồi bị hất ngược về đầu cầu."],
+      "responses": []
+    },
+    "ch5_bridge_crossed": {
+      "id": "ch5_bridge_crossed",
+      "speaker": "Kuro",
+      "lines": ["Qua rồi. Mày bắt đầu nghĩ giống người làm vườn rồi đấy."],
+      "responses": [],
+      "effects": {
+        "setFlags": ["crossed_quantum_bridge"]
+      }
+    },
+    "ch5_seed_autumn_take": {
+      "id": "ch5_seed_autumn_take",
+      "speaker": "Peter",
+      "lines": ["Một hạt giống bị nhổ, khắc hình chiếc giỏ đầy quả."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "seed_autumn",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_seed_autumn",
+        "startQuest": "quest_ch5_uprooted_seeds"
+      }
+    },
+    "ch5_chalk_red_take": {
+      "id": "ch5_chalk_red_take",
+      "speaker": "Peter",
+      "lines": ["Một mẩu phấn đỏ như hoàng hôn, lăn trong rãnh thép."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "chalk_red",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_chalk_red"
+      }
+    },
+    "ch5_beta_exit_locked": {
+      "id": "ch5_beta_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Bên kia vực mới có đường sang lò phản ứng."],
+      "responses": []
+    },
+    "ch5_ivo_meet": {
+      "id": "ch5_ivo_meet",
+      "speaker": "Kỹ Sư Ivo",
+      "lines": [
+        "Cậu từ đâu tới? ...Không quan trọng. Lò này giữ hầm trú ẩn cho lũ trẻ. Nó tắt rồi.",
+        "Ba máy phát, mỗi máy có công tắc ở cả hai nhánh. Tôi đã viết hết luật vào nhật ký. Mắt tôi giờ không đọc nổi nữa."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "ivo_reactor_log",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_ivo_reactor_log",
+        "setFlags": ["met_ivo"]
+      }
+    },
+    "ch5_ivo_again": {
+      "id": "ch5_ivo_again",
+      "speaker": "Kỹ Sư Ivo",
+      "lines": [
+        "Hai nhánh, ba máy. Một máy không thể chạy ở cả hai nhánh cùng lúc. Đừng quên điều đó."
+      ],
+      "responses": []
+    },
+    "ch5_warning_plate_take": {
+      "id": "ch5_warning_plate_take",
+      "speaker": "Peter",
+      "lines": ["Một tấm biển cảnh báo rỉ sét, chỉ còn đọc được ở nhánh này."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "reactor_warning_plate",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_reactor_warning_plate"
+      }
+    },
+    "ch5_wiring_take": {
+      "id": "ch5_wiring_take",
+      "speaker": "Peter",
+      "lines": ["Sơ đồ dây điện của cổng lò, dán trên tủ điện."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "reactor_wiring",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_reactor_wiring"
+      }
+    },
+    "ch5_reactor_start": {
+      "id": "ch5_reactor_start",
+      "speaker": "Peter",
+      "lines": [
+        "Ba lõi máy phát lần lượt sáng lên. Tiếng ù trầm vang khắp lò phản ứng.",
+        "Cổng sang hầm trú ẩn mở ra."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["restarted_reactor"]
+      }
+    },
+    "ch5_reactor_wrong": {
+      "id": "ch5_reactor_wrong",
+      "speaker": "Peter",
+      "lines": ["Lò rít lên chói tai. Tia lửa bắn ra, mọi công tắc bật ngược về vị trí tắt."],
+      "responses": [],
+      "effects": {
+        "clearFlags": [
+          "ch5_sw_a_l_on",
+          "ch5_sw_b_l_on",
+          "ch5_sw_c_l_on",
+          "ch5_sw_a_p_on",
+          "ch5_sw_b_p_on",
+          "ch5_sw_c_p_on"
+        ]
+      }
+    },
+    "ch5_reactor_done": {
+      "id": "ch5_reactor_done",
+      "speaker": "Peter",
+      "lines": ["Lò phản ứng chạy đều. Hầm trú ẩn đã có điện."],
+      "responses": []
+    },
+    "ch5_reactor_exit_locked": {
+      "id": "ch5_reactor_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Cổng hầm trú ẩn đóng chặt. Lò phản ứng chưa chạy."],
+      "responses": []
+    },
+    "ch5_shelter_arrival": {
+      "id": "ch5_shelter_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Trần hầm phủ kín những nét phấn: mây, mặt trời, chim, cầu vồng... Một bầu trời vẽ tay."
+      ],
+      "responses": []
+    },
+    "ch5_mira_meet": {
+      "id": "ch5_mira_meet",
+      "speaker": "Mira",
+      "lines": [
+        "Chú tiên! Chú về rồi! (Cô bé ôm chầm lấy chân Kuro.)",
+        "Chú này là ai vậy? Chú cũng biết bay hả? Con chưa thấy trời thật bao giờ. Con vẽ theo lời ông Ivo kể.",
+        "Phấn của con gần hết rồi... Chú tìm giúp con bốn màu được không? Xanh trời, vàng nắng, đỏ hoàng hôn, trắng mây."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["met_mira"],
+        "startQuest": "quest_ch5_chalk_sky"
+      }
+    },
+    "ch5_mira_again": {
+      "id": "ch5_mira_again",
+      "speaker": "Mira",
+      "lines": [
+        "Chú tiên bảo sẽ đưa cả thành phố ra ngoài.",
+        "Nếu chú không mang được cả thành phố thì mang tụi con thôi cũng được mà?"
+      ],
+      "responses": []
+    },
+    "ch5_mira_chalk_done": {
+      "id": "ch5_mira_chalk_done",
+      "speaker": "Mira",
+      "lines": [
+        "Đủ bốn màu luôn! (Mira trèo lên vai Kuro, vẽ một đám mây trắng thật to lên trần hầm.)",
+        "Chú cầm cái này đi. Con vẽ chú với chú tiên đứng dưới trời đó."
+      ],
+      "responses": [],
+      "effects": {
+        "takeItems": [
+          {
+            "itemId": "chalk_blue",
+            "quantity": 1
+          },
+          {
+            "itemId": "chalk_gold",
+            "quantity": 1
+          },
+          {
+            "itemId": "chalk_red",
+            "quantity": 1
+          },
+          {
+            "itemId": "chalk_white",
+            "quantity": 1
+          }
+        ],
+        "grantItems": [
+          {
+            "itemId": "mira_drawing",
+            "quantity": 1
+          },
+          {
+            "itemId": "refined_chrono_shard",
+            "quantity": 2
+          }
+        ],
+        "grantOnceFlag": "rewarded_chalk_sky",
+        "setFlags": ["finished_chalk_sky"]
+      }
+    },
+    "ch5_mira_after": {
+      "id": "ch5_mira_after",
+      "speaker": "Mira",
+      "lines": ["Bầu trời của con đẹp chưa chú?"],
+      "responses": []
+    },
+    "ch5_ivo_shelter": {
+      "id": "ch5_ivo_shelter",
+      "speaker": "Kỹ Sư Ivo",
+      "lines": [
+        "Chúng tôi đã xóa cái chết. Và cùng với nó, xóa luôn ngày mai.",
+        "Lũ trẻ này là tất cả những gì còn lại. Bốn mươi đứa."
+      ],
+      "responses": []
+    },
+    "ch5_kuro_story_promise": {
+      "id": "ch5_kuro_story_promise",
+      "speaker": "Kuro",
+      "lines": [
+        "Lời hứa của tụi mình... tao nhớ là mình hứa ở mỏm đá có cây bàng gãy, nhìn ra biển.",
+        "Tao chỉ nhớ chỗ, không nhớ lời. Buồn cười không?"
+      ],
+      "responses": [
+        {
+          "text": "Ghi vào sổ",
+          "nextDialogueId": "ch5_fb_storm"
+        }
+      ],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "kuro_ledger_page_3",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_kuro_ledger_page_3"
+      }
+    },
+    "ch5_fb_storm": {
+      "id": "ch5_fb_storm",
+      "speaker": "Ký Ức Của Kuro",
+      "lines": [
+        "Đêm bão. Lần này mình đứng ở chỗ của Kuro, nhìn vào tiệm đồng hồ qua làn mưa.",
+        "Bên trong, một chàng trai tóc xoăn ngủ gục trên bàn thợ, tay vẫn cầm tua vít. Kuro đứng nhìn rất lâu, không gõ cửa.",
+        "'Trật tự này thối rữa rồi. Tao sẽ đi tìm một khả năng khác... để không ai phải bị quên. Kể cả mày.'"
+      ],
+      "responses": [],
+      "flashback": true
+    },
+    "ch5_kuro_resolve": {
+      "id": "ch5_kuro_resolve",
+      "speaker": "Kuro",
+      "lines": [
+        "Tao sẽ kéo cả nhánh này về. Bốn mươi đứa trẻ, một thành phố. Tao còn đủ ký ức để làm một lần nữa.",
+        "Đi với tao tới Vùng Xám. Tao cần một chỗ đủ rộng để thả neo."
+      ],
+      "responses": []
+    },
+    "ch5_seed_spring_new_take": {
+      "id": "ch5_seed_spring_new_take",
+      "speaker": "Peter",
+      "lines": ["Một hạt giống bị nhổ, khắc hình mầm non và một nét cọ còn tươi mới."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "seed_spring_new",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_seed_spring_new",
+        "startQuest": "quest_ch5_uprooted_seeds"
+      }
+    },
+    "ch5_shelter_exit_locked": {
+      "id": "ch5_shelter_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Nên chào lũ trẻ trước đã."],
+      "responses": []
+    },
+    "ch5_grey_arrival": {
+      "id": "ch5_grey_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Vùng Xám. Những mảnh phố, mảnh rừng, mảnh biển trôi qua rồi tan thành bụi như tàn tro."
+      ],
+      "responses": []
+    },
+    "ch5_grey_stele_take": {
+      "id": "ch5_grey_stele_take",
+      "speaker": "Peter",
+      "lines": ["Mình chép lại dòng chữ trên tấm bia đá đang tan dần."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "prune_stele_rubbing",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_prune_stele_rubbing"
+      }
+    },
+    "ch5_genealogy_take": {
+      "id": "ch5_genealogy_take",
+      "speaker": "Peter",
+      "lines": ["Một tấm phả hệ hoàng tộc trôi lơ lửng, vẫn còn đọc được."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "unborn_genealogy",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_unborn_genealogy"
+      }
+    },
+    "ch5_portrait_silver": {
+      "id": "ch5_portrait_silver",
+      "speaker": "Peter",
+      "lines": ["Bức chân dung viền bạc thì thầm: 'Người thừa kế không phải con trưởng.'"],
+      "responses": []
+    },
+    "ch5_portrait_copper": {
+      "id": "ch5_portrait_copper",
+      "speaker": "Peter",
+      "lines": ["Bức chân dung viền đồng thì thầm: 'Người thừa kế là con của hoàng hậu thứ hai.'"],
+      "responses": []
+    },
+    "ch5_portrait_iron": {
+      "id": "ch5_portrait_iron",
+      "speaker": "Peter",
+      "lines": ["Bức chân dung viền sắt thì thầm: 'Người thừa kế là con trưởng.'"],
+      "responses": []
+    },
+    "ch5_heir_named": {
+      "id": "ch5_heir_named",
+      "speaker": "Peter",
+      "lines": [
+        "Cái tên vang lên, và cả ba bức chân dung cùng quay về một phía, như cúi đầu.",
+        "Mình đã biết tên thật của Vua Chưa Sinh."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["named_unborn_heir"]
+      }
+    },
+    "ch5_heir_wrong": {
+      "id": "ch5_heir_wrong",
+      "speaker": "Peter",
+      "lines": ["Cái tên tan vào gió xám, không vọng lại."],
+      "responses": []
+    },
+    "ch5_heir_again": {
+      "id": "ch5_heir_again",
+      "speaker": "Peter",
+      "lines": ["Ba bức chân dung lặng im. Cái tên đã được gọi."],
+      "responses": []
+    },
+    "ch5_chalk_white_take": {
+      "id": "ch5_chalk_white_take",
+      "speaker": "Peter",
+      "lines": ["Một mẩu phấn trắng như mây, nằm trên mảnh vỉa hè trôi nổi."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "chalk_white",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_chalk_white"
+      }
+    },
+    "ch5_seed_winter_take": {
+      "id": "ch5_seed_winter_take",
+      "speaker": "Peter",
+      "lines": ["Một hạt giống bị nhổ, khắc hình bông tuyết."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "seed_winter",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_seed_winter",
+        "startQuest": "quest_ch5_uprooted_seeds"
+      }
+    },
+    "ch5_kuro_asks_intro": {
+      "id": "ch5_kuro_asks_intro",
+      "speaker": "Kuro",
+      "lines": [
+        "(Kuro đứng giữa vòng neo, nhìn mình như nhìn một người lạ.)",
+        "Xin lỗi... mày là ai nhỉ? À không, tao biết mày. Tao chỉ không nhớ vì sao tao biết.",
+        "Mày có cuốn sổ đúng không? Ba hòn đá quanh vòng neo... tao khắc câu hỏi lên đó rồi. Trả lời tao đi."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch5_reached_anchor"]
+      }
+    },
+    "ch5_q1_right": {
+      "id": "ch5_q1_right",
+      "speaker": "Kuro",
+      "lines": ["Bánh Đúc... Ừ. Nó hay nằm phơi nắng trên bậu cửa sổ. Tao nhớ ra rồi."],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch5_q1_right", "answered_q1"]
+      }
+    },
+    "ch5_q1_wrong": {
+      "id": "ch5_q1_wrong",
+      "speaker": "Kuro",
+      "lines": ["Không phải... Tao nghĩ vậy. Tao không chắc nữa."],
+      "responses": [],
+      "effects": {
+        "setFlags": ["answered_q1"]
+      }
+    },
+    "ch5_q2_right": {
+      "id": "ch5_q2_right",
+      "speaker": "Kuro",
+      "lines": [
+        "'Chiều Trên Bến Cũ'... (Kuro khẽ ngân một đoạn giai điệu, rồi dừng lại, ngạc nhiên vì mình còn nhớ.)"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch5_q2_right", "answered_q2"]
+      }
+    },
+    "ch5_q2_wrong": {
+      "id": "ch5_q2_wrong",
+      "speaker": "Kuro",
+      "lines": ["Không phải... Tao nghĩ vậy. Tao không chắc nữa."],
+      "responses": [],
+      "effects": {
+        "setFlags": ["answered_q2"]
+      }
+    },
+    "ch5_q3_right": {
+      "id": "ch5_q3_right",
+      "speaker": "Kuro",
+      "lines": ["Mỏm đá có cây bàng gãy. Đúng rồi... mày đứng bên trái, tao bên phải."],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch5_fb_promise"
+        }
+      ],
+      "effects": {
+        "setFlags": ["ch5_q3_right", "answered_q3"]
+      }
+    },
+    "ch5_q3_wrong": {
+      "id": "ch5_q3_wrong",
+      "speaker": "Kuro",
+      "lines": ["Không phải... Tao nghĩ vậy. Tao không chắc nữa."],
+      "responses": [],
+      "effects": {
+        "setFlags": ["answered_q3"]
+      }
+    },
+    "ch5_q_done": {
+      "id": "ch5_q_done",
+      "speaker": "Peter",
+      "lines": ["Câu này đã trả lời rồi."],
+      "responses": []
+    },
+    "ch5_fb_promise": {
+      "id": "ch5_fb_promise",
+      "speaker": "Ký Ức Của Kuro",
+      "lines": [
+        "Mỏm đá có cây bàng gãy, gió biển mặn chát. Hai đứa trẻ ngồi sát nhau.",
+        "Cậu bé tóc đen nói: 'Nếu một ngày tao bị xóa tên, mày phải là người nhớ...'",
+        "Cậu bé tóc xoăn mở miệng đáp — và ký ức vỡ vụn như kính."
+      ],
+      "responses": [],
+      "flashback": true
+    },
+    "ch5_kuro_waiting": {
+      "id": "ch5_kuro_waiting",
+      "speaker": "Kuro",
+      "lines": ["Ba hòn đá. Ba câu hỏi. Trả lời tao đi."],
+      "responses": []
+    },
+    "ch5_kuro_smile": {
+      "id": "ch5_kuro_smile",
+      "speaker": "Kuro",
+      "lines": ["Mày nhớ hộ tao thật à...", "(Kuro cười — lần đầu tiên kể từ khi gặp lại.)"],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch5_beta_offer_open"
+        }
+      ],
+      "effects": {
+        "setFlags": ["answered_kuro_ledger"]
+      }
+    },
+    "ch5_kuro_after_quiz_open": {
+      "id": "ch5_kuro_after_quiz_open",
+      "speaker": "Kuro",
+      "lines": ["Cảm ơn. Có những thứ tao giữ lại được rồi."],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch5_beta_offer_open"
+        }
+      ],
+      "effects": {
+        "setFlags": ["answered_kuro_ledger"]
+      }
+    },
+    "ch5_kuro_after_quiz": {
+      "id": "ch5_kuro_after_quiz",
+      "speaker": "Kuro",
+      "lines": ["...Ừ. Có những thứ không quay về được nữa."],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch5_beta_offer"
+        }
+      ],
+      "effects": {
+        "setFlags": ["answered_kuro_ledger"]
+      }
+    },
+    "ch5_beta_offer": {
+      "id": "ch5_beta_offer",
+      "speaker": "Kuro",
+      "lines": [
+        "Giờ tao thả neo. Mày giữ một đầu, tao giữ đầu kia, kéo cả nhánh Beta về.",
+        "Va chạm sẽ nuốt mất Vùng Xám và vài nhánh nhỏ. Nhưng bốn mươi đứa trẻ sẽ được thấy trời."
+      ],
+      "responses": [
+        {
+          "text": "Giúp Kuro kéo",
+          "nextDialogueId": "ch5_help_kuro"
+        },
+        {
+          "text": "Cắt neo, ngăn Kuro lại",
+          "nextDialogueId": "ch5_stop_kuro"
+        }
+      ]
+    },
+    "ch5_beta_offer_open": {
+      "id": "ch5_beta_offer_open",
+      "speaker": "Kuro",
+      "lines": [
+        "Giờ tao thả neo. Mày giữ một đầu, tao giữ đầu kia, kéo cả nhánh Beta về.",
+        "Va chạm sẽ nuốt mất Vùng Xám và vài nhánh nhỏ. Nhưng bốn mươi đứa trẻ sẽ được thấy trời."
+      ],
+      "responses": [
+        {
+          "text": "Chỉ kéo hầm trú ẩn thôi",
+          "nextDialogueId": "ch5_partial_pull"
+        },
+        {
+          "text": "Chọn giữa giúp hay ngăn",
+          "nextDialogueId": "ch5_beta_offer"
+        }
+      ]
+    },
+    "ch5_partial_pull": {
+      "id": "ch5_partial_pull",
+      "speaker": "Peter",
+      "lines": [
+        "Không cần kéo cả thành phố. Kéo hầm trú ẩn thôi — bốn mươi đứa trẻ, không hơn.",
+        "(Kuro im lặng rất lâu.) ...Con bé Mira cũng nói vậy. Được. Kéo từng phần.",
+        "Kuro: \"Lần này... tao không phải quên gì cả.\""
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": [
+          "ch5_choice_partial_pull",
+          "resolved_beta_choice",
+          "ch5_kuro_by_side",
+          "ch5_anchor_settled"
+        ]
+      }
+    },
+    "ch5_help_kuro": {
+      "id": "ch5_help_kuro",
+      "speaker": "Peter",
+      "lines": [
+        "Hai bàn tay cùng ghì lấy sợi neo. Cả nhánh Beta rung chuyển, trượt dần về phía này.",
+        "Kuro: \"...Được rồi. Được rồi. Tụi nhỏ sẽ thấy trời.\"",
+        "Kuro quay sang mình, ánh mắt bối rối: \"Mày vừa trả lời tao gì ấy nhỉ? ...Thôi, không sao.\""
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": [
+          "ch5_choice_help_kuro",
+          "resolved_beta_choice",
+          "ch5_kuro_by_side",
+          "ch5_collision_big",
+          "ch5_anchor_settled"
+        ]
+      }
+    },
+    "ch5_stop_kuro": {
+      "id": "ch5_stop_kuro",
+      "speaker": "Peter",
+      "lines": [
+        "Mình rút kiếm, cắt phăng sợi neo. Kuro ngã ngồi xuống nền đá.",
+        "Kuro: \"...Mày đã hứa.\"",
+        "Kuro: \"Đứng dậy đi. Nếu mày muốn ngăn tao, thì ngăn cho trọn.\""
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch5_choice_stop_kuro", "resolved_beta_choice", "kuro_left"]
+      }
+    },
+    "ch5_kuro_duel_begin": {
+      "id": "ch5_kuro_duel_begin",
+      "speaker": "Kuro",
+      "lines": ["(Bình tưới thủy tinh trong tay Kuro vỡ ra, hóa thành một thanh kiếm ánh tím.)"],
+      "responses": []
+    },
+    "ch5_kuro_duel_end": {
+      "id": "ch5_kuro_duel_end",
+      "speaker": "Kuro",
+      "lines": [
+        "(Kuro lùi lại, thở dốc.) Mày vẫn cứng đầu như hồi nhỏ.",
+        "Tao sẽ tìm cách khác. Một mình."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch5_anchor_settled", "ch5_kuro_duel_done"]
+      }
+    },
+    "ch5_kuro_duel_spared": {
+      "id": "ch5_kuro_duel_spared",
+      "speaker": "Kuro",
+      "lines": [
+        "(Kuro hạ kiếm xuống.) Tao không đánh mày được. Chưa bao giờ đánh được.",
+        "(Anh quay lưng, bước vào vết nứt.) Tao sẽ tìm cách khác. Một mình."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch5_anchor_settled", "ch5_kuro_duel_done"],
+        "healFull": true
+      }
+    },
+    "ch5_kuro_after_choice": {
+      "id": "ch5_kuro_after_choice",
+      "speaker": "Kuro",
+      "lines": ["Đi thôi. Ngai vua đang đợi."],
+      "responses": []
+    },
+    "ch5_anchor_exit_locked": {
+      "id": "ch5_anchor_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Kuro vẫn đang đợi câu trả lời của mình."],
+      "responses": []
+    },
+    "ch5_unborn_king_confront": {
+      "id": "ch5_unborn_king_confront",
+      "speaker": "Peter",
+      "lines": [
+        "Một vị vua không có gương mặt ngồi trên ngai dệt từ những tấm khăn quấn trẻ sơ sinh chưa từng dùng.",
+        "Ba chiếc vương miện chồng lên nhau trên đầu nó."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch5_unborn_king_speaks"
+        }
+      ]
+    },
+    "ch5_unborn_king_speaks": {
+      "id": "ch5_unborn_king_speaks",
+      "speaker": "Vua Chưa Sinh",
+      "lines": [
+        "TA LÀ MỌI VỊ VUA CHƯA TỪNG ĐƯỢC SINH RA. TA LÀ MỌI TRIỀU ĐẠI KHÔNG KỊP BẮT ĐẦU.",
+        "HÃY ĐỂ TA ĐƯỢC SINH RA — DÙ PHẢI DÙNG MÁU CỦA NGƯƠI."
+      ],
+      "responses": []
+    },
+    "ch5_kuro_joins_battle": {
+      "id": "ch5_kuro_joins_battle",
+      "speaker": "Kuro",
+      "lines": ["Lần này mày không đánh một mình."],
+      "responses": []
+    },
+    "ch5_unborn_king_defeated": {
+      "id": "ch5_unborn_king_defeated",
+      "speaker": "Vua Chưa Sinh",
+      "lines": [
+        "(Ba vương miện rơi xuống, vỡ thành ánh sáng. Vị vua không mặt cúi đầu.)",
+        "...Cảm ơn. Không được sinh ra cũng là một cách để được yên."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["defeated_unborn_king"]
+      }
+    },
+    "ch5_throne_exit_locked": {
+      "id": "ch5_throne_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Vua Chưa Sinh còn ngồi trên ngai."],
+      "responses": []
+    },
+    "ch5_collision_arrival": {
+      "id": "ch5_collision_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Bờ Va Chạm. Hai nhánh thực tại cọ vào nhau như hai tảng băng. Từng hòn đảo nhỏ nứt toác.",
+        "Đảo màu tím vẫn đứng vững — nhánh còn được tưới thì không vỡ. Đảo xám thì đang tan."
+      ],
+      "responses": []
+    },
+    "ch5_collision_start": {
+      "id": "ch5_collision_start",
+      "speaker": "Peter",
+      "lines": [
+        "Bước lên những hòn đảo trôi nổi. Phải tới được Lõi trước khi bờ va chạm khép lại!"
+      ],
+      "responses": [],
+      "effects": {
+        "startTimer": {
+          "flag": "ch5_collision_clock",
+          "ms": 40000
+        }
+      }
+    },
+    "ch5_collision_start_big": {
+      "id": "ch5_collision_start_big",
+      "speaker": "Peter",
+      "lines": ["Va chạm lần này dữ dội hơn nhiều. Phải chạy thật nhanh!"],
+      "responses": [],
+      "effects": {
+        "startTimer": {
+          "flag": "ch5_collision_clock",
+          "ms": 30000
+        }
+      }
+    },
+    "ch5_island_fall": {
+      "id": "ch5_island_fall",
+      "speaker": "Peter",
+      "lines": ["Hòn đảo xám vỡ vụn dưới chân! Mình bị hất ngược về bờ."],
+      "responses": []
+    },
+    "ch5_collision_late": {
+      "id": "ch5_collision_late",
+      "speaker": "Peter",
+      "lines": ["Bờ va chạm đã khép lại. Phải chạy lại từ đầu."],
+      "responses": []
+    },
+    "ch5_collision_escaped": {
+      "id": "ch5_collision_escaped",
+      "speaker": "Peter",
+      "lines": ["Mình nhảy lên hòn đảo cuối cùng. Phía sau, cả bờ va chạm sụp đổ vào hư không."],
+      "responses": [],
+      "effects": {
+        "setFlags": ["escaped_collision"],
+        "warpTo": {
+          "mapId": "map_ch5_collision_shore",
+          "spawnId": "core"
+        }
+      }
+    },
+    "ch5_seal_help": {
+      "id": "ch5_seal_help",
+      "speaker": "Peter",
+      "lines": [
+        "Lõi Possibility Seal nảy mầm trong lòng bàn tay, như một hạt giống biết thở.",
+        "Mình hiểu rồi: mỗi khả năng đều đáng được sống — nhưng không phải tất cả đều có thể sống cùng lúc."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch5_farewell_help"
+        }
+      ],
+      "effects": {
+        "setFlags": ["possibility_seal_restored", "learned_possibility_resonance"],
+        "grantItems": [
+          {
+            "itemId": "possibility_seal_shard",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_possibility_seal_shard"
+      }
+    },
+    "ch5_seal_partial": {
+      "id": "ch5_seal_partial",
+      "speaker": "Peter",
+      "lines": [
+        "Lõi Possibility Seal nảy mầm trong lòng bàn tay, như một hạt giống biết thở.",
+        "Mình hiểu rồi: mỗi khả năng đều đáng được sống — nhưng không phải tất cả đều có thể sống cùng lúc."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch5_farewell_partial"
+        }
+      ],
+      "effects": {
+        "setFlags": ["possibility_seal_restored", "learned_possibility_resonance"],
+        "grantItems": [
+          {
+            "itemId": "possibility_seal_shard",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_possibility_seal_shard"
+      }
+    },
+    "ch5_seal_stop": {
+      "id": "ch5_seal_stop",
+      "speaker": "Peter",
+      "lines": [
+        "Lõi Possibility Seal nảy mầm trong lòng bàn tay, như một hạt giống biết thở.",
+        "Mình hiểu rồi: mỗi khả năng đều đáng được sống — nhưng không phải tất cả đều có thể sống cùng lúc."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch5_farewell_stop"
+        }
+      ],
+      "effects": {
+        "setFlags": ["possibility_seal_restored", "learned_possibility_resonance"],
+        "grantItems": [
+          {
+            "itemId": "possibility_seal_shard",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_possibility_seal_shard"
+      }
+    },
+    "ch5_farewell_help": {
+      "id": "ch5_farewell_help",
+      "speaker": "Kuro",
+      "lines": [
+        "Tụi nhỏ thấy trời rồi. Mày thấy không? Chúng nó đang chỉ trỏ đám mây kìa.",
+        "Tao sẽ đi tiếp, lên tận nơi Chronos ngồi. Có những thế giới chỉ ở đó mới cứu được.",
+        "(Kuro nhìn mình rất lâu, rồi cau mày như cố nhớ một cái tên.) ...Gặp lại sau nhé, người lạ tốt bụng."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch5_chapter_end"
+        }
+      ]
+    },
+    "ch5_farewell_partial": {
+      "id": "ch5_farewell_partial",
+      "speaker": "Kuro",
+      "lines": [
+        "Bốn mươi đứa, một cái hầm, một bầu trời. Vừa đủ.",
+        "Mày biết không, lần đầu tiên tao cứu một thế giới mà không phải quên gì.",
+        "Lên Celestial Realm đi, Peter. Lần này tao muốn mày đi cùng — không phải đi sau tao."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch5_chapter_end"
+        }
+      ]
+    },
+    "ch5_farewell_stop": {
+      "id": "ch5_farewell_stop",
+      "speaker": "Peter",
+      "lines": [
+        "Kuro đã đi rồi, về phía những vì sao không thuộc về thế giới nào.",
+        "Ở bờ bên kia, nhánh Beta vẫn tan chậm từng chút. Lũ trẻ còn thời gian. Mình phải tìm ra cách khác trước khi nó hết.",
+        "Câu cuối Kuro để lại vẫn vang trong đầu: '...Mày đã hứa.'"
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch5_chapter_end"
+        }
+      ]
+    },
+    "ch5_chapter_end": {
+      "id": "ch5_chapter_end",
+      "speaker": "Peter",
+      "lines": [
+        "Phía trên The Interval, một cầu thang ánh sáng hiện ra, dẫn lên Celestial Realm.",
+        "Nơi bắt đầu của mọi quyền năng. Và có lẽ, của cả lời hứa năm xưa."
+      ],
+      "responses": [],
+      "effects": {
+        "endChapter": 5
+      }
+    },
+    "ch5_uprooted_arrival": {
+      "id": "ch5_uprooted_arrival",
+      "speaker": "Peter",
+      "lines": ["Năm luống đất xếp vòng tròn. Đất còn ấm, như vừa có ai gieo hạt rồi bị nhổ đi."],
+      "responses": []
+    },
+    "ch5_plots_wrong": {
+      "id": "ch5_plots_wrong",
+      "speaker": "Peter",
+      "lines": ["Đất khô lại, các hạt giống im lìm. Thứ tự chưa đúng với vòng mùa."],
+      "responses": []
+    },
+    "ch5_plots_right": {
+      "id": "ch5_plots_right",
+      "speaker": "Peter",
+      "lines": [
+        "Năm hạt giống nảy mầm cùng lúc, vươn thành một thân cây ánh tím.",
+        "Giữa thân cây là một thanh kiếm, lưỡi kiếm như có hai cái bóng."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "blade_of_possibility",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_blade_of_possibility",
+        "setFlags": ["planted_uprooted_seeds"]
+      }
+    },
+    "ch5_plots_done": {
+      "id": "ch5_plots_done",
+      "speaker": "Peter",
+      "lines": ["Cây ánh tím đứng lặng giữa vòng đất."],
+      "responses": []
+    },
+    "ch5_plots_missing": {
+      "id": "ch5_plots_missing",
+      "speaker": "Peter",
+      "lines": ["Năm luống đất trống. Phải tìm đủ năm hạt giống bị nhổ."],
+      "responses": []
+    },
+    "ch5_old_seeds_arrival": {
+      "id": "ch5_old_seeds_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Một khu vườn nhỏ. Mỗi luống mọc lên từ một lựa chọn của mình ở chiến trường cũ.",
+        "Kuro: \"Chỉ tưới được một hạt thôi. Chọn cái mày muốn giữ.\""
+      ],
+      "responses": []
+    },
+    "ch5_seed_aldric_truth": {
+      "id": "ch5_seed_aldric_truth",
+      "speaker": "Peter",
+      "lines": [
+        "Trong hạt giống: Aldric về tới làng, đặt một nhành tử đằng lên mộ Maelis. Ông ngồi đó rất lâu, thanh thản."
+      ],
+      "responses": [
+        {
+          "text": "Tưới hạt này",
+          "nextDialogueId": "ch5_water_aldric"
+        },
+        {
+          "text": "Để sau",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch5_seed_aldric_comfort": {
+      "id": "ch5_seed_aldric_comfort",
+      "speaker": "Peter",
+      "lines": [
+        "Trong hạt giống: lời nói dối đã thành thật. Maelis già đi bên cháu chắt, chiều nào cũng ngóng ra cổng làng.",
+        "Kuro: \"Mày nói dối để ông ấy yên lòng. Vậy cái nhánh này... có đáng được sống không?\""
+      ],
+      "responses": [
+        {
+          "text": "Tưới hạt này",
+          "nextDialogueId": "ch5_water_aldric"
+        },
+        {
+          "text": "Để sau",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch5_seed_bran_release": {
+      "id": "ch5_seed_bran_release",
+      "speaker": "Peter",
+      "lines": ["Trong hạt giống: Bran ngủ yên dưới gốc cây. Anh không còn đếm nữa."],
+      "responses": [
+        {
+          "text": "Tưới hạt này",
+          "nextDialogueId": "ch5_water_bran"
+        },
+        {
+          "text": "Để sau",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch5_seed_bran_memorial": {
+      "id": "ch5_seed_bran_memorial",
+      "speaker": "Peter",
+      "lines": [
+        "Trong hạt giống: tên mẹ Bran khắc trên phiến đá. Một người phụ nữ đang dừng lại đọc nó."
+      ],
+      "responses": [
+        {
+          "text": "Tưới hạt này",
+          "nextDialogueId": "ch5_water_bran"
+        },
+        {
+          "text": "Để sau",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch5_seed_elion_burn": {
+      "id": "ch5_seed_elion_burn",
+      "speaker": "Peter",
+      "lines": ["Trong hạt giống: một khoảng đất phủ tro. Giữa lớp tro, mầm non đã nhú lên."],
+      "responses": [
+        {
+          "text": "Tưới hạt này",
+          "nextDialogueId": "ch5_water_elion"
+        },
+        {
+          "text": "Để sau",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch5_seed_elion_chronicle": {
+      "id": "ch5_seed_elion_chronicle",
+      "speaker": "Peter",
+      "lines": [
+        "Trong hạt giống: cuốn biên niên sử mở ở trang cuối. Có một dòng nhắc tới \"chàng trai áo xám đi ngược hướng quân lính\"."
+      ],
+      "responses": [
+        {
+          "text": "Tưới hạt này",
+          "nextDialogueId": "ch5_water_elion"
+        },
+        {
+          "text": "Để sau",
+          "nextDialogueId": null
+        }
+      ]
+    },
+    "ch5_water_aldric": {
+      "id": "ch5_water_aldric",
+      "speaker": "Peter",
+      "lines": [
+        "Nước trong bình tưới của Kuro lấp lánh. Hạt giống vươn thành một mầm cây nhỏ, đậu một chiếc bùa."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "chosen_seed_aldric",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_chosen_seed_charm",
+        "setFlags": ["watered_old_seed", "ch5_watered_aldric", "ch5_trust_seed"]
+      }
+    },
+    "ch5_water_bran": {
+      "id": "ch5_water_bran",
+      "speaker": "Peter",
+      "lines": [
+        "Nước trong bình tưới của Kuro lấp lánh. Hạt giống vươn thành một mầm cây nhỏ, đậu một chiếc bùa."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "chosen_seed_bran",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_chosen_seed_charm",
+        "setFlags": ["watered_old_seed", "ch5_watered_bran", "ch5_trust_seed"]
+      }
+    },
+    "ch5_water_elion": {
+      "id": "ch5_water_elion",
+      "speaker": "Peter",
+      "lines": [
+        "Nước trong bình tưới của Kuro lấp lánh. Hạt giống vươn thành một mầm cây nhỏ, đậu một chiếc bùa."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "chosen_seed_elion",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_chosen_seed_charm",
+        "setFlags": ["watered_old_seed", "ch5_watered_elion", "ch5_trust_seed"]
+      }
+    },
+    "ch5_seed_empty": {
+      "id": "ch5_seed_empty",
+      "speaker": "Peter",
+      "lines": ["Luống đất trống. Chưa có hạt nào rơi xuống đây."],
+      "responses": []
+    },
+    "ch5_seed_already": {
+      "id": "ch5_seed_already",
+      "speaker": "Peter",
+      "lines": ["Mình đã chọn tưới một hạt khác rồi."],
+      "responses": []
+    },
+    "ch5_old_seeds_back": {
+      "id": "ch5_old_seeds_back",
+      "speaker": "Peter",
+      "lines": ["Quay về vườn hạt."],
+      "responses": [],
+      "effects": {
+        "warpTo": {
+          "mapId": "map_ch5_seed_garden",
+          "spawnId": "from_old_seeds"
+        }
+      }
+    },
+    "ch5_uprooted_back": {
+      "id": "ch5_uprooted_back",
+      "speaker": "Peter",
+      "lines": ["Quay về vườn hạt."],
+      "responses": [],
+      "effects": {
+        "warpTo": {
+          "mapId": "map_ch5_seed_garden",
+          "spawnId": "from_uprooted"
+        }
+      }
     }
   }
 }

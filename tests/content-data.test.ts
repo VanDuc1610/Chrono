@@ -70,6 +70,7 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       'startTimer',
       'scalePut',
       'scaleReset',
+      'toggleBranch',
     ]);
     for (const node of Object.values(dialogueDb.dialogues)) {
       for (const key of Object.keys(node.effects ?? {})) {
@@ -376,9 +377,9 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
     expect(starterWatch?.description).not.toContain('Đại Thảm Họa');
     // Kuro is strictly forbidden from being mentioned before Chapter 4
     const preCh4Dialogues = Object.entries(dialogueDb.dialogues).filter(
-      ([id]) => !id.startsWith('ch4_'),
+      ([id]) => !/^ch[4-9]_/.test(id),
     );
-    const preCh4Quests = questDb.quests.filter((q) => q.chapter !== 4);
+    const preCh4Quests = questDb.quests.filter((q) => (q.chapter ?? 0) < 4);
     const ch4ItemIds = new Set([
       'relic_dawn_blade',
       'relic_dusk_halberd',
@@ -440,7 +441,10 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       'treaty_scrap_waters',
       'treaty_scrap_signatures',
     ]);
-    const preCh4Items = itemDb.items.filter((i) => !ch4ItemIds.has(i.id));
+    // Chapter 5 items that name Kuro (his ledger) are after his first appearance too.
+    const preCh4Items = itemDb.items.filter(
+      (i) => !ch4ItemIds.has(i.id) && !i.id.startsWith('kuro_'),
+    );
     expect(JSON.stringify({ preCh4Dialogues, preCh4Quests, preCh4Items })).not.toMatch(/kuro/i);
 
     // End-to-end 5-Act quest progression through GameSession + real effects
