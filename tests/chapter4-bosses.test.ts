@@ -154,3 +154,25 @@ describe('Chapter 4 puzzles and progression', () => {
     });
   });
 });
+
+describe('Battle healing item', () => {
+  it('uses the weakest item that covers the missing HP, never the full draught first', async () => {
+    const { GameSession } = await import('../src/state/GameSession');
+    const itemsJson = (await import('../public/assets/data/items.json')).default;
+    const questsJson = (await import('../public/assets/data/quests.json')).default;
+    const s = GameSession.newGame({
+      items: itemsJson as never,
+      quests: questsJson as never,
+      enemies: enemiesJson as never,
+      player: playerJson as never,
+    });
+    s.inventory.addItem('refined_chrono_shard', 2);
+    s.inventory.addItem('phoenix_draught', 1);
+    expect(s.pickCombatItem(20)).toBe('chrono_shard_minor');
+    expect(s.pickCombatItem(100)).toBe('refined_chrono_shard');
+    expect(s.pickCombatItem(500)).toBe('refined_chrono_shard');
+    s.inventory.removeItem('refined_chrono_shard', 2);
+    s.inventory.removeItem('chrono_shard_minor', s.inventory.getItemCount('chrono_shard_minor'));
+    expect(s.pickCombatItem(500)).toBe('phoenix_draught');
+  });
+});

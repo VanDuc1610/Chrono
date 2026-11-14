@@ -371,7 +371,7 @@ export class CombatScene extends Phaser.Scene {
   }
 
   private itemButtonLabel(): string {
-    const id = this.session.combatItemId;
+    const id = this.session.pickCombatItem(this.player.stats.maxHp - this.player.stats.hp);
     const count = this.session.inventory.getItemCount(id);
     const name = this.session.inventory.getItemDefinition(id)?.name ?? id;
     return this.t('combat.cmd.item', { name, count });
@@ -395,6 +395,8 @@ export class CombatScene extends Phaser.Scene {
   }
 
   private blockArmed = false;
+  /** When the closing ring touches Peter's outline (tests and probes read it). */
+  public blockEndsAt = 0;
   private blockPressedAt: number | null = null;
 
   /**
@@ -424,8 +426,10 @@ export class CombatScene extends Phaser.Scene {
     this.blockPressedAt = null;
     const feint = (tb.feintChance ?? 0) > 0 && Math.random() < (tb.feintChance ?? 0);
     const end = this.time.now + tb.ringMs;
+    this.blockEndsAt = end;
+    let anim: Phaser.Tweens.Tween | Phaser.Tweens.TweenChain;
     if (feint) {
-      this.tweens.chain({
+      anim = this.tweens.chain({
         targets: ring,
         tweens: [
           { radius: inner + 3, duration: tb.ringMs * 0.35, ease: 'Quad.easeIn' },
@@ -441,12 +445,15 @@ export class CombatScene extends Phaser.Scene {
         ],
       });
     } else {
-      this.tweens.add({ targets: ring, radius: inner, duration: tb.ringMs, ease: 'Linear' });
+      anim = this.tweens.add({ targets: ring, radius: inner, duration: tb.ringMs, ease: 'Linear' });
     }
     this.time.delayedCall(tb.ringMs, () => {
       this.blockArmed = false;
       const pressed = this.blockPressedAt !== null;
       const blocked = pressed && Math.abs((this.blockPressedAt ?? 0) - end) <= tb.windowMs / 2;
+      // Stop the ring's tween first: it may still tick this frame and touch a destroyed Arc.
+      anim.stop();
+      this.tweens.killTweensOf(ring);
       ring.destroy();
       outline.destroy();
       hint.destroy();
@@ -601,7 +608,7 @@ export class CombatScene extends Phaser.Scene {
 
     // ITEM consumes a shard from the satchel; with none left the turn is not spent (B6).
     if (type === 'item') {
-      const itemId = this.session.combatItemId;
+      const itemId = this.session.pickCombatItem(this.player.stats.maxHp - this.player.stats.hp);
       if (!this.session.inventory.removeItem(itemId, 1)) {
         const name = this.session.inventory.getItemDefinition(itemId)?.name ?? itemId;
         this.setBattleLog(this.t('combat.noItem', { name }));

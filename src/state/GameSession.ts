@@ -405,6 +405,29 @@ export class GameSession {
     return this.db.player.player.combatItemId;
   }
 
+  /**
+   * Healing item the battle Item command uses: the weakest one that still covers `missingHp`, else
+   * the strongest — never a full-restore draught while anything else is left. Falls back to
+   * player.json `combatItemId` when the satchel holds no healing item.
+   */
+  public pickCombatItem(missingHp: number): string {
+    const heals = this.inventory
+      .getAllItems()
+      .map((s) => {
+        const def = this.inventory.getItemDefinition(s.itemId);
+        return {
+          id: s.itemId,
+          heal: def?.type === 'consumable' ? (def.effects?.healAmount ?? 0) : 0,
+        };
+      })
+      .filter((h) => h.heal > 0);
+    const ordinary = heals.filter((h) => h.heal < 999);
+    const pool = ordinary.length > 0 ? ordinary : heals;
+    if (pool.length === 0) return this.combatItemId;
+    const fits = pool.filter((h) => h.heal >= missingHp).sort((a, b) => a.heal - b.heal);
+    return (fits[0] ?? [...pool].sort((a, b) => b.heal - a.heal)[0]).id;
+  }
+
   public resolveCombatItem(itemId: string): CombatItemEffect | undefined {
     const def = this.inventory.getItemDefinition(itemId);
     const healAmount = def?.effects?.healAmount;

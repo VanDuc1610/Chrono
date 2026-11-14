@@ -70,6 +70,8 @@ interface BossState {
   song: { id: string; coreId: string; crackMessage: string } | null;
   /** Blood wall standing (cuts landed so far). */
   wall: { cuts: number } | null;
+  /** Boss turns until the next blood wall (counted only while no wall stands). */
+  wallIn: number;
   /** Finality ritual: open once the boss first rises again, pillars lit in order. */
   ritual: { open: boolean; progress: number; done: boolean };
 }
@@ -135,6 +137,7 @@ export class CombatSystem implements ICombatSystem {
           staggered: false,
           song: null,
           wall: null,
+          wallIn: e.mechanic.bloodWall?.everyTurns ?? 0,
           ritual: { open: false, progress: 0, done: false },
         });
       if (e.mechanic?.startsUnshielded) this.bosses.get(e.id)!.shield = false;
@@ -284,7 +287,7 @@ export class CombatSystem implements ICombatSystem {
       }
     }
     const bw = m.bloodWall;
-    if (bw && !boss.wall && boss.turns % bw.everyTurns === 0) {
+    if (bw && !boss.wall && --boss.wallIn <= 0) {
       boss.wall = { cuts: 0 };
       out.push(bw.raiseMessage);
     }
@@ -343,6 +346,7 @@ export class CombatSystem implements ICombatSystem {
     boss.wall.cuts++;
     if (boss.wall.cuts >= bw.cutsToBreak) {
       boss.wall = null;
+      boss.wallIn = bw.everyTurns;
       return `${bw.cutMessage} ${bw.breakMessage}`;
     }
     return bw.cutMessage;

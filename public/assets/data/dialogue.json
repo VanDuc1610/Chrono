@@ -4592,7 +4592,16 @@
       "id": "ch3_seal_after",
       "speaker": "Peter",
       "lines": ["Lõi Memory Seal tỏa ánh lam dịu. Những linh hồn quanh đây đã thôi khóc than."],
-      "responses": []
+      "responses": [
+        {
+          "text": "Bước qua Cổng Ngưỡng sang vùng đất kế tiếp",
+          "nextDialogueId": "ch3_seal_onward"
+        },
+        {
+          "text": "Ở lại thêm một lát",
+          "nextDialogueId": null
+        }
+      ]
     },
     "ch3_vault_open_done": {
       "id": "ch3_vault_open_done",
@@ -4731,7 +4740,7 @@
       "speaker": "Peter",
       "lines": [
         "Cạch... Chốt hòm giật khựng lại, các bánh răng cơ khí không chịu nhả khóa.",
-        "Tổ hợp hướng và góc độ dường như chưa ăn khớp với nhật trình của người liên lạc."
+        "Ba vòng xoay dường như chưa ăn khớp với nhật trình của người liên lạc."
       ],
       "responses": []
     },
@@ -4788,12 +4797,12 @@
       ],
       "responses": [
         {
-          "text": "Đặt hàng lên đĩa trái",
-          "nextDialogueId": "ch4_scale_left_menu"
+          "text": "Đặt bao lên đĩa cân",
+          "nextDialogueId": "ch4_scale_pan_menu"
         },
         {
-          "text": "Đặt hàng lên đĩa phải",
-          "nextDialogueId": "ch4_scale_right_menu"
+          "text": "Gạt cần lấy lại các bao",
+          "nextDialogueId": "ch4_scale_reset_node"
         }
       ]
     },
@@ -5164,7 +5173,7 @@
       "speaker": "Peter",
       "lines": [
         "Trên đỉnh tháp có một tấm gương phản quang lớn xoay được tám hướng la bàn.",
-        "Cần xoay gương rọi vuông góc với hướng gió thổi và hướng thẳng vào trận địa bắn của địch rồi kéo cần phát tín hiệu."
+        "Xoay gương tới hướng cần rọi rồi kéo cần phát tín hiệu."
       ],
       "responses": []
     },
@@ -5291,7 +5300,8 @@
       ],
       "responses": [],
       "effects": {
-        "setFlags": ["cleared_ramparts_ambush"]
+        "setFlags": ["cleared_ramparts_ambush"],
+        "refreshMap": true
       }
     },
     "ch4_renard_betrayal": {
@@ -5318,7 +5328,15 @@
         "(Renard quỳ sụp xuống đất, run rẩy ôm lấy hai đầu gối nấc nghẹn.)",
         "Tôi xin lỗi... tôi đã quá khiếp sợ... Đêm nay lính gác dưới hầm trú ẩn hỏi 'Tro'... Hãy xuống đó lấy bùa hộ mệnh đi, tôi sẽ gạt lại cần mở cổng cho các người."
       ],
-      "responses": []
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch4_flashback_cliff_vow"
+        }
+      ],
+      "effects": {
+        "startQuest": "quest_ch4_last_sentry"
+      }
     },
     "ch4_flashback_cliff_vow": {
       "id": "ch4_flashback_cliff_vow",
@@ -5329,7 +5347,10 @@
         "Người bạn đeo sợi dây chuyền pha lê lam tím lập lòe, siết chặt tay Peter: 'Nếu một mai thế giới này sụp đổ... nếu một trong hai đứa mình bị xóa tên... đứa còn lại tuyệt đối không được quên.'",
         "Peter hỏi: 'Làm sao quên được chứ?' Người bạn thoáng cười buồn: 'Ký ức là thứ dễ vỡ nhất trần đời, Peter à.'"
       ],
-      "responses": []
+      "responses": [],
+      "effects": {
+        "refreshMap": true
+      }
     },
     "ch4_bran_choice": {
       "id": "ch4_bran_choice",
@@ -5365,7 +5386,8 @@
           }
         ],
         "grantOnceFlag": "rewarded_bran_release",
-        "setFlags": ["ch4_choice_bran_release", "resolved_soldier_bran"]
+        "setFlags": ["ch4_choice_bran_release", "resolved_soldier_bran"],
+        "refreshMap": true
       }
     },
     "ch4_bran_memorial": {
@@ -5384,7 +5406,8 @@
           }
         ],
         "grantOnceFlag": "rewarded_bran_memorial",
-        "setFlags": ["ch4_choice_bran_memorial", "resolved_soldier_bran"]
+        "setFlags": ["ch4_choice_bran_memorial", "resolved_soldier_bran"],
+        "refreshMap": true
       }
     },
     "ch4_ash_plains_arrival": {
@@ -5439,7 +5462,8 @@
       ],
       "responses": [],
       "effects": {
-        "setFlags": ["opened_chariot_passage"]
+        "setFlags": ["opened_chariot_passage"],
+        "startQuest": "quest_ch4_first_fallen"
       }
     },
     "ch4_monument_altar_inspect": {
@@ -5449,7 +5473,12 @@
         "Văn bia cổ trên bàn thờ Đài Tưởng Niệm khắc ghi ba câu thơ trang nghiêm:",
         "'Mở tay cho kẻ đã đẩy ta xuống vực; đọc nốt lá thư người cha chưa dám đọc; rồi thắp một ngọn nến cho những cái tên.'"
       ],
-      "responses": []
+      "responses": [
+        {
+          "text": "Đặt tay lên văn bia",
+          "nextDialogueId": "ch4_flashback_cataclysm_eve"
+        }
+      ]
     },
     "ch4_treaty_puzzle_solve": {
       "id": "ch4_treaty_puzzle_solve",
@@ -5460,7 +5489,8 @@
       ],
       "responses": [],
       "effects": {
-        "setFlags": ["restored_peace_treaty"]
+        "setFlags": ["restored_peace_treaty"],
+        "refreshMap": true
       }
     },
     "ch4_treaty_wrong": {
@@ -5481,7 +5511,10 @@
         "Bóng người bạn đứng ở bậu cửa tiệm sửa đồng hồ giữa màn mưa bão. Câu nói bị tiếng sấm cắt ngang: 'Trật tự này... thối rữa rồi. Tao sẽ đi tìm một...'",
         "Bóng lưng dứt khoát bước ra màn đêm mịt mù, để lại Peter vươn tay trong vô vọng."
       ],
-      "responses": []
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch4_seen_cataclysm"]
+      }
     },
     "ch4_aldric_kaelen_reunion": {
       "id": "ch4_aldric_kaelen_reunion",
@@ -5520,7 +5553,8 @@
           }
         ],
         "grantOnceFlag": "rewarded_aldric_truth",
-        "setFlags": ["ch4_choice_aldric_truth", "resolved_aldric_letter"]
+        "setFlags": ["ch4_choice_aldric_truth", "resolved_aldric_letter"],
+        "refreshMap": true
       }
     },
     "ch4_aldric_comfort": {
@@ -5539,7 +5573,8 @@
           }
         ],
         "grantOnceFlag": "rewarded_aldric_comfort",
-        "setFlags": ["ch4_choice_aldric_comfort", "resolved_aldric_letter"]
+        "setFlags": ["ch4_choice_aldric_comfort", "resolved_aldric_letter"],
+        "refreshMap": true
       }
     },
     "ch4_last_war_boss_confront": {
@@ -5611,14 +5646,13 @@
         "Lõi Finality Seal bừng sáng trên bệ đá, truyền vào tâm trí Peter sự thông tuệ về ranh giới khép lại của vạn vật.",
         "Phía sau thánh điện, một mảng tường đổ nát hé lộ lối vào một gian phòng hoang phế tĩnh lặng..."
       ],
-      "responses": [
-        {
-          "text": "Bước vào gian phòng đổ nát",
-          "nextDialogueId": "ch4_kuro_direct_meeting"
-        }
-      ],
+      "responses": [],
       "effects": {
-        "setFlags": ["finality_seal_restored", "learned_finality_resonance"]
+        "setFlags": ["finality_seal_restored", "learned_finality_resonance"],
+        "warpTo": {
+          "mapId": "map_ch4_interval_sanctuary",
+          "spawnId": "from_sanctum"
+        }
       }
     },
     "ch4_kuro_direct_meeting": {
@@ -5721,23 +5755,17 @@
     "ch4_sentry_challenge": {
       "id": "ch4_sentry_challenge",
       "speaker": "Hồn Lính Gác",
-      "lines": ["Đêm nay lính gác hỏi 'Tro' — ngươi đáp lại điều gì?"],
-      "responses": [
-        {
-          "text": "Đáp 'Củi'",
-          "nextDialogueId": "ch4_sentry_answered"
-        },
-        {
-          "text": "Đáp 'Khói'",
-          "nextDialogueId": "ch4_sentry_wrong"
-        }
-      ]
+      "lines": [
+        "Ai đó? Đêm nay lính gác hỏi 'Tro'.",
+        "(Trên cửa hầm có một vòng chữ khắc xoay được. Xoay tới lời đáp rồi đáp lời.)"
+      ],
+      "responses": []
     },
     "ch4_sentry_wrong": {
       "id": "ch4_sentry_wrong",
       "speaker": "Hồn Lính Gác",
       "lines": [
-        "Sai rồi! Khói chỉ là tàn dư bốc lên sau khi lửa lụi tàn!",
+        "Sai mật lệnh! Kẻ lạ không được bước vào hầm tiền tiêu.",
         "(Hồn lính gác chĩa mũi giáo đẩy Peter lùi về sau bậc thềm hầm trú ẩn.)"
       ],
       "responses": []
@@ -5760,6 +5788,477 @@
         "grantOnceFlag": "rewarded_sentry_charm",
         "setFlags": ["answered_sentry"]
       }
+    },
+    "ch4_scale_pan_menu": {
+      "id": "ch4_scale_pan_menu",
+      "speaker": "Peter",
+      "lines": ["Đặt bao hàng lên đĩa nào?"],
+      "responses": [
+        {
+          "text": "Đĩa trái",
+          "nextDialogueId": "ch4_scale_left_menu"
+        },
+        {
+          "text": "Đĩa phải",
+          "nextDialogueId": "ch4_scale_right_menu"
+        }
+      ]
+    },
+    "ch4_monument_altar_reread": {
+      "id": "ch4_monument_altar_reread",
+      "speaker": "Peter",
+      "lines": [
+        "Văn bia trên bàn thờ khắc ba câu thơ:",
+        "'Mở tay cho kẻ đã đẩy ta xuống vực; đọc nốt lá thư người cha chưa dám đọc; rồi thắp một ngọn nến cho những cái tên.'"
+      ],
+      "responses": []
+    },
+    "ch3_seal_onward": {
+      "id": "ch3_seal_onward",
+      "speaker": "Peter",
+      "lines": [
+        "Ánh sáng Cổng Ngưỡng bao trùm lấy mình. Khi mở mắt ra, mình đã đứng ở vùng đất kế tiếp."
+      ],
+      "responses": [],
+      "effects": {
+        "warpTo": {
+          "mapId": "map_ch4_encampment_veridia",
+          "spawnId": "from_ch3"
+        }
+      }
+    },
+    "ch4_camp_exit_locked": {
+      "id": "ch4_camp_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Thống Soái Aldric đang đứng giữa doanh trại. Nên chào ông ấy trước khi đi tiếp."],
+      "responses": []
+    },
+    "ch4_compass_board": {
+      "id": "ch4_compass_board",
+      "speaker": "Peter",
+      "lines": [
+        "Bàn khắc la bàn trong lều chỉ huy. Góc bàn còn dòng ghi chú của người trực:",
+        "'Buổi sáng, bóng cột cờ đại bản doanh đổ về Tây Bắc. Buổi chiều, bóng ấy đổ về Đông Bắc.'"
+      ],
+      "responses": []
+    },
+    "ch4_leaflet_take": {
+      "id": "ch4_leaflet_take",
+      "speaker": "Peter",
+      "lines": [
+        "Trên bàn quân báo có một tờ chỉ dẫn thiên văn cho lính liên lạc. Mình gấp lại cất đi."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "astronomy_guide_leaflet",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_astronomy_guide_leaflet"
+      }
+    },
+    "ch4_courier_box_open_again": {
+      "id": "ch4_courier_box_open_again",
+      "speaker": "Peter",
+      "lines": ["Hòm thư đã mở, bên trong trống rỗng."],
+      "responses": []
+    },
+    "ch4_aldric_letter_wait": {
+      "id": "ch4_aldric_letter_wait",
+      "speaker": "Thống Soái Aldric",
+      "lines": [
+        "Lá thư của Maelis... ta chưa đủ can đảm đọc nó. Cậu giữ hộ ta.",
+        "Khi cuộc chiến này tới hồi kết, hãy đọc nó cho ta nghe ở Đài Tưởng Niệm."
+      ],
+      "responses": []
+    },
+    "ch4_bran_wait": {
+      "id": "ch4_bran_wait",
+      "speaker": "Binh Nhì Bran",
+      "lines": ["Đại đội tôi sẽ giữ Trường Lũy phía đông. Nếu anh tới được đó... tôi sẽ đợi."],
+      "responses": []
+    },
+    "ch4_journal_take": {
+      "id": "ch4_journal_take",
+      "speaker": "Peter",
+      "lines": ["Kẹp dưới bao cát là một trang nhật trình cháy cạnh."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "courier_journal_scrap",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_courier_journal_scrap"
+      }
+    },
+    "ch4_manual_take": {
+      "id": "ch4_manual_take",
+      "speaker": "Peter",
+      "lines": ["Một tờ sổ tay kỹ thuật dính bùn, ghi cách vận hành cửa thủy lực."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "hydraulic_manual_sheet",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_hydraulic_manual_sheet"
+      }
+    },
+    "ch4_ledger_take": {
+      "id": "ch4_ledger_take",
+      "speaker": "Peter",
+      "lines": ["Sổ bộ quân nhu của tiền đồn, vẫn còn đọc được vài dòng."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "quartermaster_ledger",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_quartermaster_ledger"
+      }
+    },
+    "ch4_codebook_take": {
+      "id": "ch4_codebook_take",
+      "speaker": "Peter",
+      "lines": ["Trong túi áo một người lính gác có trang sổ ghi mật lệnh."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "sentry_codebook_page",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_sentry_codebook_page"
+      }
+    },
+    "ch4_sacks_grain": {
+      "id": "ch4_sacks_grain",
+      "speaker": "Peter",
+      "lines": ["Hai bao lúa mạch quân nhu nằm dưới gầm ván."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "sack_grain",
+            "quantity": 2
+          }
+        ],
+        "grantOnceFlag": "took_sack_grain"
+      }
+    },
+    "ch4_sacks_herbs": {
+      "id": "ch4_sacks_herbs",
+      "speaker": "Peter",
+      "lines": ["Hai bao thảo dược cứu thương còn khô ráo."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "sack_herbs",
+            "quantity": 2
+          }
+        ],
+        "grantOnceFlag": "took_sack_herbs"
+      }
+    },
+    "ch4_sacks_sulfur": {
+      "id": "ch4_sacks_sulfur",
+      "speaker": "Peter",
+      "lines": ["Hai bao lưu huỳnh công binh, nồng mùi diêm sinh."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "sack_sulfur",
+            "quantity": 2
+          }
+        ],
+        "grantOnceFlag": "took_sack_sulfur"
+      }
+    },
+    "ch4_hydraulic_door_open": {
+      "id": "ch4_hydraulic_door_open",
+      "speaker": "Peter",
+      "lines": ["Cánh cửa thủy lực đã mở. Lối sang tiền đồn Sol-Karis thông suốt."],
+      "responses": []
+    },
+    "ch4_door_locked": {
+      "id": "ch4_door_locked",
+      "speaker": "Peter",
+      "lines": ["Cánh cửa thủy lực đóng chặt. Cơ cấu hai đĩa cân bên cạnh mới mở được nó."],
+      "responses": []
+    },
+    "ch4_elion_after": {
+      "id": "ch4_elion_after",
+      "speaker": "Sử Quan Elion",
+      "lines": ["Cuộc chiến này đã có đủ người chép sử rồi. Giờ nó cần một người kết thúc."],
+      "responses": []
+    },
+    "ch4_solkaris_gate_locked": {
+      "id": "ch4_solkaris_gate_locked",
+      "speaker": "Peter",
+      "lines": ["Lính gác Sol-Karis chặn cổng phía đông. Phải gặp Đại Tướng Kaelen trước đã."],
+      "responses": []
+    },
+    "ch4_tower_grid_take": {
+      "id": "ch4_tower_grid_take",
+      "speaker": "Peter",
+      "lines": ["Dưới chân tháp tín hiệu có tấm bản đồ tọa độ bọc da."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "artillery_grid_map",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_artillery_grid_map"
+      }
+    },
+    "ch4_tower_wind_take": {
+      "id": "ch4_tower_wind_take",
+      "speaker": "Peter",
+      "lines": ["Trên cột đo gió còn buộc một cuốn nhật ký hướng gió."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "wind_vane_record",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_wind_vane_record"
+      }
+    },
+    "ch4_tower_smoke_take": {
+      "id": "ch4_tower_smoke_take",
+      "speaker": "Peter",
+      "lines": ["Trong hộc tháp có tờ quy ước tín hiệu của lính pháo thủ."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "smoke_signal_code",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_smoke_signal_code"
+      }
+    },
+    "ch4_beacon_done": {
+      "id": "ch4_beacon_done",
+      "speaker": "Peter",
+      "lines": ["Tấm gương vẫn hướng về ngọn đồi xa. Thung lũng đã yên tiếng tên."],
+      "responses": []
+    },
+    "ch4_valley_exit_locked": {
+      "id": "ch4_valley_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Mưa tên trút xuống cửa ải phía đông. Phải khiến trận địa địch ngừng bắn trước."],
+      "responses": []
+    },
+    "ch4_relic_haft_take": {
+      "id": "ch4_relic_haft_take",
+      "speaker": "Peter",
+      "lines": ["Một cán gỗ dài bịt sắt cắm nghiêng trong đất."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "relic_long_haft",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_relic_long_haft"
+      }
+    },
+    "ch4_relic_blade_take": {
+      "id": "ch4_relic_blade_take",
+      "speaker": "Peter",
+      "lines": ["Một lưỡi thép bản rộng vùi nửa trong bùn."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "relic_wide_blade",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_relic_wide_blade"
+      }
+    },
+    "ch4_relic_limb_take": {
+      "id": "ch4_relic_limb_take",
+      "speaker": "Peter",
+      "lines": ["Một thanh gỗ uốn cong nằm giữa đám lau cháy."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "relic_curved_limb",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_relic_curved_limb"
+      }
+    },
+    "ch4_relic_pole_take": {
+      "id": "ch4_relic_pole_take",
+      "speaker": "Peter",
+      "lines": ["Một cây sào cao còn buộc mảnh vải cháy xém."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "relic_tattered_pole",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_relic_tattered_pole"
+      }
+    },
+    "ch4_plaque_take": {
+      "id": "ch4_plaque_take",
+      "speaker": "Peter",
+      "lines": ["Một mảnh bia đá vỡ, chữ khắc vẫn còn rõ."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "burial_plaque_scrap",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_burial_plaque_scrap"
+      }
+    },
+    "ch4_mounds_done": {
+      "id": "ch4_mounds_done",
+      "speaker": "Peter",
+      "lines": ["Bốn ngọn lửa xanh vẫn cháy lặng lẽ trên bốn gò đất."],
+      "responses": []
+    },
+    "ch4_ridge_ward_locked": {
+      "id": "ch4_ridge_ward_locked",
+      "speaker": "Peter",
+      "lines": ["Bức tường khí máu chặn lối lên pháo đài. Bốn gò đất tử sĩ đang tiếp sức cho nó."],
+      "responses": []
+    },
+    "ch4_redoubt_exit_locked": {
+      "id": "ch4_redoubt_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Lá Cờ Huyết Sắc còn đứng, cổng sang Trường Lũy vẫn đóng."],
+      "responses": []
+    },
+    "ch4_ramparts_arrival": {
+      "id": "ch4_ramparts_arrival",
+      "speaker": "Peter",
+      "lines": ["Cổng đá phía sau sập xuống! Từ bốn phía trường lũy, lính địch đổ ra phục kích!"],
+      "responses": []
+    },
+    "ch4_ramparts_gate_locked": {
+      "id": "ch4_ramparts_gate_locked",
+      "speaker": "Peter",
+      "lines": ["Cần gạt bẫy sập đã khóa cổng phía đông. Ai đó đã cố tình hạ nó xuống."],
+      "responses": []
+    },
+    "ch4_cellar_locked": {
+      "id": "ch4_cellar_locked",
+      "speaker": "Peter",
+      "lines": ["Nắp hầm trú ẩn khóa từ bên trong. Phải biết lối xuống mới vào được."],
+      "responses": []
+    },
+    "ch4_renard_after": {
+      "id": "ch4_renard_after",
+      "speaker": "Binh Nhì Renard",
+      "lines": [
+        "Cổng phía đông đã mở rồi... Hầm trú ẩn ở góc tây nam, lính gác dưới đó hỏi 'Tro'."
+      ],
+      "responses": []
+    },
+    "ch4_sentry_after": {
+      "id": "ch4_sentry_after",
+      "speaker": "Hồn Lính Gác",
+      "lines": ["Hồn lính gác khẽ gật đầu. Căn hầm đã được canh giữ đủ lâu rồi."],
+      "responses": []
+    },
+    "ch4_chariot_plain": {
+      "id": "ch4_chariot_plain",
+      "speaker": "Peter",
+      "lines": [
+        "Xác cỗ xe chiến cháy rụi. Dưới gầm xe hình như có gì đó... nhưng không biết bắt đầu từ đâu."
+      ],
+      "responses": []
+    },
+    "ch4_chariot_open": {
+      "id": "ch4_chariot_open",
+      "speaker": "Peter",
+      "lines": ["Lối thang đá dưới xác xe chiến vẫn mở."],
+      "responses": []
+    },
+    "ch4_epitaph_take": {
+      "id": "ch4_epitaph_take",
+      "speaker": "Peter",
+      "lines": ["Mình chép lại văn bia khắc trên đầu mộ vào sổ tay."],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "first_fallen_epitaph",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_first_fallen_epitaph"
+      }
+    },
+    "ch4_tomb_open_again": {
+      "id": "ch4_tomb_open_again",
+      "speaker": "Peter",
+      "lines": ["Nắp mộ đã mở. Người chiến binh đầu tiên đã được yên nghỉ."],
+      "responses": []
+    },
+    "ch4_treaty_missing": {
+      "id": "ch4_treaty_missing",
+      "speaker": "Peter",
+      "lines": ["Bàn đá có bốn rãnh, mỗi rãnh vừa một mảnh giấy da. Vẫn còn thiếu mảnh hiệp ước."],
+      "responses": []
+    },
+    "ch4_treaty_done": {
+      "id": "ch4_treaty_done",
+      "speaker": "Peter",
+      "lines": ["Bản hiệp ước đã liền lại trên bàn đá, chữ son vẫn ấm ánh vàng."],
+      "responses": []
+    },
+    "ch4_kaelen_monument": {
+      "id": "ch4_kaelen_monument",
+      "speaker": "Đại Tướng Kaelen",
+      "lines": ["Ta và lão già này... đã đợi ba trăm năm cho một buổi chiều yên tĩnh như thế này."],
+      "responses": []
+    },
+    "ch4_sanctum_locked": {
+      "id": "ch4_sanctum_locked",
+      "speaker": "Peter",
+      "lines": [
+        "Aldric và Kaelen vẫn đang đợi mình đọc lá thư. Chưa thể bước vào Thánh Điện lúc này."
+      ],
+      "responses": []
+    },
+    "ch4_pillars_hint": {
+      "id": "ch4_pillars_hint",
+      "speaker": "Peter",
+      "lines": [
+        "Ba trụ đá tắt lịm quanh sàn: một khắc bàn tay mở, một khắc lá thư, một khắc ngọn nến."
+      ],
+      "responses": []
     }
   }
 }

@@ -725,7 +725,8 @@
       "stackable": false,
       "maxStack": 1,
       "pages": [
-        "Danh sách đại đội tử sĩ — Bran ghi:\nKỵ mã cần dốc thoải để lấy đà xung phong. Xạ thủ ẩn nấp nơi lau sậy che thân. Bộ binh giáp nặng chặn nơi xe công thành sa lầy. Người cầm cờ đứng chỗ cả đạo quân nhìn thấy."
+        "Danh sách đại đội tử sĩ — Bran ghi:\nKỵ mã cần dốc thoải để lấy đà xung phong. Xạ thủ ẩn nấp nơi lau sậy che thân. Bộ binh giáp nặng chặn nơi xe công thành sa lầy. Người cầm cờ đứng chỗ cả đạo quân nhìn thấy.",
+        "Dòng cuối, nét chữ run run:\nNhững người ngã xuống đầu tiên nằm dưới cỗ xe chiến cháy ngoài Cánh Đồng Tro."
       ]
     },
     {
@@ -815,7 +816,7 @@
       "type": "puzzle",
       "description": "Bao tải gai buộc chặt chứa lúa mạch khô dự trữ trong chiến hào.",
       "value": 0,
-      "stackable": false,
+      "stackable": true,
       "maxStack": 10
     },
     {
@@ -824,7 +825,7 @@
       "type": "puzzle",
       "description": "Bao vải thô chứa các loại lá thuốc phơi khô dùng băng bó vết thương.",
       "value": 0,
-      "stackable": false,
+      "stackable": true,
       "maxStack": 10
     },
     {
@@ -833,7 +834,7 @@
       "type": "puzzle",
       "description": "Bao bột khoáng màu vàng nồng mùi diêm sinh dùng chế tạo hỏa khí.",
       "value": 0,
-      "stackable": false,
+      "stackable": true,
       "maxStack": 10
     },
     {

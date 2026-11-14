@@ -4928,6 +4928,2779 @@
         }
       ],
       "roamers": []
+    },
+    "map_ch4_encampment_veridia": {
+      "id": "map_ch4_encampment_veridia",
+      "name": "Doanh Trại Veridia",
+      "chapter": 4,
+      "tilemap": {
+        "key": "map_ch4_encampment_veridia",
+        "path": "assets/maps/map_ch4_encampment_veridia.json"
+      },
+      "tileset": {
+        "name": "warfield_tileset",
+        "key": "warfield_tileset",
+        "path": "assets/tilesets/warfield_tileset.png"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 64
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 8
+        },
+        "from_ch3": {
+          "x": 2,
+          "y": 8
+        },
+        "from_trench": {
+          "x": 23,
+          "y": 8
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 8
+      },
+      "npcs": [
+        {
+          "id": "npc_ch4_aldric",
+          "texture": "npc_aldric",
+          "anim": "npc_aldric_idle",
+          "tile": {
+            "x": 12,
+            "y": 8
+          },
+          "name": "Thống Soái Aldric",
+          "prompt": "[E] Nói chuyện với Thống Soái Aldric",
+          "radius": 44,
+          "dialogueId": "ch4_aldric_intro",
+          "dialogueRules": [
+            {
+              "ifItem": "maelis_letter",
+              "dialogueId": "ch4_aldric_letter_wait"
+            },
+            {
+              "ifFlag": "met_general_aldric",
+              "dialogueId": "ch4_aldric_talk_repeat"
+            }
+          ]
+        },
+        {
+          "id": "npc_ch4_bran",
+          "texture": "npc_soldier_bran",
+          "anim": "npc_soldier_bran_idle",
+          "tile": {
+            "x": 5,
+            "y": 10
+          },
+          "name": "Binh Nhì Bran",
+          "prompt": "[E] Nói chuyện với Binh Nhì Bran",
+          "radius": 44,
+          "dialogueId": "ch4_soldier_bran_intro",
+          "dialogueRules": [
+            {
+              "ifFlag": "received_bran_roster",
+              "dialogueId": "ch4_bran_wait"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch4_compass",
+          "tile": {
+            "x": 7,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bàn khắc la bàn",
+          "dialogueId": "ch4_compass_board"
+        },
+        {
+          "id": "poi_ch4_leaflet",
+          "tile": {
+            "x": 10,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bàn quân báo",
+          "dialogueId": "ch4_leaflet_take"
+        },
+        {
+          "id": "poi_ch4_courier_box",
+          "tile": {
+            "x": 19,
+            "y": 6
+          },
+          "radius": 44,
+          "prompt": "[E] Kéo chốt hòm thư",
+          "dialogueId": "ch4_courier_box_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "opened_courier_box",
+              "dialogueId": "ch4_courier_box_open_again"
+            },
+            {
+              "ifFlags": ["ch4_dial_dir_ne", "ch4_dial_angle_a45", "ch4_dial_star_bacdau"],
+              "dialogueId": "ch4_courier_box_solve"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#ff6a3a",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch4_dial_dir",
+          "tile": {
+            "x": 17,
+            "y": 9
+          },
+          "radius": 40,
+          "prompt": "[E] Xoay vòng Hướng",
+          "values": [
+            {
+              "key": "n",
+              "label": "Bắc"
+            },
+            {
+              "key": "ne",
+              "label": "Đông Bắc"
+            },
+            {
+              "key": "e",
+              "label": "Đông"
+            },
+            {
+              "key": "se",
+              "label": "Đông Nam"
+            },
+            {
+              "key": "s",
+              "label": "Nam"
+            },
+            {
+              "key": "sw",
+              "label": "Tây Nam"
+            },
+            {
+              "key": "w",
+              "label": "Tây"
+            },
+            {
+              "key": "nw",
+              "label": "Tây Bắc"
+            }
+          ]
+        },
+        {
+          "id": "ch4_dial_angle",
+          "tile": {
+            "x": 19,
+            "y": 9
+          },
+          "radius": 40,
+          "prompt": "[E] Xoay vòng Góc",
+          "values": [
+            {
+              "key": "a30",
+              "label": "30°"
+            },
+            {
+              "key": "a45",
+              "label": "45°"
+            },
+            {
+              "key": "a60",
+              "label": "60°"
+            },
+            {
+              "key": "a90",
+              "label": "90°"
+            }
+          ]
+        },
+        {
+          "id": "ch4_dial_star",
+          "tile": {
+            "x": 21,
+            "y": 9
+          },
+          "radius": 40,
+          "prompt": "[E] Xoay vòng Sao",
+          "values": [
+            {
+              "key": "mai",
+              "label": "Sao Mai"
+            },
+            {
+              "key": "hom",
+              "label": "Sao Hôm"
+            },
+            {
+              "key": "chucnu",
+              "label": "Chức Nữ"
+            },
+            {
+              "key": "bacdau",
+              "label": "Bắc Đẩu"
+            }
+          ]
+        }
+      ],
+      "exits": [
+        {
+          "id": "camp_to_trench",
+          "area": {
+            "x": 25,
+            "y": 7,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch4_trench_crossroads",
+          "toSpawn": "from_camp",
+          "requiresFlag": "met_general_aldric",
+          "lockedDialogueId": "ch4_camp_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_ch4_elder",
+          "on": "arrive",
+          "onceFlag": "ch4_arrived_veridia",
+          "delayMs": 500,
+          "dialogueId": "ch4_elder_echo_gate"
+        }
+      ]
+    },
+    "map_ch4_trench_crossroads": {
+      "id": "map_ch4_trench_crossroads",
+      "name": "Chiến Hào Giao Tuyến",
+      "chapter": 4,
+      "tilemap": {
+        "key": "map_ch4_trench_crossroads",
+        "path": "assets/maps/map_ch4_trench_crossroads.json"
+      },
+      "tileset": {
+        "name": "warfield_tileset",
+        "key": "warfield_tileset",
+        "path": "assets/tilesets/warfield_tileset.png"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 64
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 8
+        },
+        "from_camp": {
+          "x": 2,
+          "y": 8
+        },
+        "from_solkaris": {
+          "x": 24,
+          "y": 8
+        },
+        "revive": {
+          "x": 2,
+          "y": 8
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 8
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch4_journal",
+          "tile": {
+            "x": 3,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Lục bao cát",
+          "dialogueId": "ch4_journal_take"
+        },
+        {
+          "id": "poi_ch4_manual",
+          "tile": {
+            "x": 9,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt tờ giấy",
+          "dialogueId": "ch4_manual_take"
+        },
+        {
+          "id": "poi_ch4_ledger",
+          "tile": {
+            "x": 14,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Xem sổ bộ",
+          "dialogueId": "ch4_ledger_take"
+        },
+        {
+          "id": "poi_ch4_codebook",
+          "tile": {
+            "x": 21,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Lục túi áo",
+          "dialogueId": "ch4_codebook_take"
+        },
+        {
+          "id": "poi_ch4_sacks_grain",
+          "tile": {
+            "x": 6,
+            "y": 12
+          },
+          "radius": 44,
+          "prompt": "[E] Lấy bao hàng",
+          "dialogueId": "ch4_sacks_grain"
+        },
+        {
+          "id": "poi_ch4_sacks_herbs",
+          "tile": {
+            "x": 12,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Lấy bao hàng",
+          "dialogueId": "ch4_sacks_herbs"
+        },
+        {
+          "id": "poi_ch4_sacks_sulfur",
+          "tile": {
+            "x": 18,
+            "y": 12
+          },
+          "radius": 44,
+          "prompt": "[E] Lấy bao hàng",
+          "dialogueId": "ch4_sacks_sulfur"
+        },
+        {
+          "id": "poi_ch4_hydraulic_door",
+          "tile": {
+            "x": 25,
+            "y": 7
+          },
+          "radius": 44,
+          "prompt": "[E] Xem cửa thủy lực",
+          "dialogueId": "ch4_hydraulic_door_inspect",
+          "dialogueRules": [
+            {
+              "ifFlag": "reached_solkaris",
+              "dialogueId": "ch4_hydraulic_door_open"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#7a5a3a",
+        "alpha": 0.1
+      },
+      "scales": [
+        {
+          "id": "ch4_hydraulic",
+          "weights": {
+            "sack_grain": 10,
+            "sack_herbs": 5,
+            "sack_sulfur": 20
+          },
+          "balanceAt": 25,
+          "breakAbove": 35,
+          "balancedDialogueId": "ch4_hydraulic_door_balanced",
+          "overloadDialogueId": "ch4_hydraulic_door_overload"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "r_ch4_trench_phalanx_a",
+          "enemyId": "enemy_endless_phalanx",
+          "texture": "enemy_endless_phalanx",
+          "anim": "enemy_endless_phalanx_idle",
+          "tile": {
+            "x": 8,
+            "y": 12
+          }
+        },
+        {
+          "id": "r_ch4_trench_phalanx_b",
+          "enemyId": "enemy_endless_phalanx",
+          "texture": "enemy_endless_phalanx",
+          "anim": "enemy_endless_phalanx_idle",
+          "tile": {
+            "x": 19,
+            "y": 3
+          }
+        },
+        {
+          "id": "r_ch4_trench_carrier",
+          "enemyId": "enemy_banner_carrier",
+          "texture": "enemy_banner_carrier",
+          "anim": "enemy_banner_carrier_idle",
+          "tile": {
+            "x": 14,
+            "y": 12
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "reached_solkaris"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 26,
+              "y": 7
+            },
+            {
+              "x": 26,
+              "y": 8
+            }
+          ],
+          "index": 2
+        }
+      ],
+      "exits": [
+        {
+          "id": "trench_to_camp",
+          "area": {
+            "x": 0,
+            "y": 7,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch4_encampment_veridia",
+          "toSpawn": "from_trench"
+        },
+        {
+          "id": "trench_to_solkaris",
+          "area": {
+            "x": 27,
+            "y": 7,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch4_encampment_solkaris",
+          "toSpawn": "from_trench",
+          "requiresFlag": "reached_solkaris",
+          "lockedDialogueId": "ch4_door_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_ch4_trench",
+          "on": "arrive",
+          "onceFlag": "ch4_arrived_trench",
+          "delayMs": 400,
+          "dialogueId": "ch4_trench_arrival"
+        }
+      ]
+    },
+    "map_ch4_encampment_solkaris": {
+      "id": "map_ch4_encampment_solkaris",
+      "name": "Tiền Đồn Sol-Karis",
+      "chapter": 4,
+      "tilemap": {
+        "key": "map_ch4_encampment_solkaris",
+        "path": "assets/maps/map_ch4_encampment_solkaris.json"
+      },
+      "tileset": {
+        "name": "warfield_tileset",
+        "key": "warfield_tileset",
+        "path": "assets/tilesets/warfield_tileset.png"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 64
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 8
+        },
+        "from_trench": {
+          "x": 2,
+          "y": 8
+        },
+        "from_valley": {
+          "x": 20,
+          "y": 8
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 8
+      },
+      "npcs": [
+        {
+          "id": "npc_ch4_kaelen",
+          "texture": "npc_kaelen",
+          "anim": "npc_kaelen_idle",
+          "tile": {
+            "x": 12,
+            "y": 5
+          },
+          "name": "Đại Tướng Kaelen",
+          "prompt": "[E] Nói chuyện với Đại Tướng Kaelen",
+          "radius": 44,
+          "dialogueId": "ch4_kaelen_intro",
+          "dialogueRules": [
+            {
+              "ifFlag": "met_general_kaelen",
+              "dialogueId": "ch4_kaelen_confront"
+            },
+            {
+              "ifFlag": "ch4_solkaris_store_lost",
+              "dialogueId": "ch4_kaelen_cold"
+            }
+          ]
+        },
+        {
+          "id": "npc_ch4_elion",
+          "texture": "npc_chronicler_elion",
+          "anim": "npc_chronicler_elion_idle",
+          "tile": {
+            "x": 6,
+            "y": 10
+          },
+          "name": "Sử Quan Elion",
+          "prompt": "[E] Nói chuyện với Sử Quan Elion",
+          "radius": 44,
+          "dialogueId": "ch4_chronicler_elion_intro",
+          "dialogueRules": [
+            {
+              "ifFlag": "resolved_chronicler_elion",
+              "dialogueId": "ch4_elion_after"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch4_rubble",
+          "tile": {
+            "x": 17,
+            "y": 11
+          },
+          "radius": 44,
+          "prompt": "[E] Bới đống đổ nát",
+          "dialogueId": "ch4_waters_rubble_find",
+          "visibleWhen": {
+            "flag": "ch4_solkaris_store_lost"
+          }
+        }
+      ],
+      "ambient": {
+        "color": "#3a3a6a",
+        "alpha": 0.1
+      },
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "met_general_kaelen"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 22,
+              "y": 7
+            },
+            {
+              "x": 22,
+              "y": 8
+            }
+          ],
+          "index": 2
+        }
+      ],
+      "exits": [
+        {
+          "id": "solkaris_to_trench",
+          "area": {
+            "x": 0,
+            "y": 7,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch4_trench_crossroads",
+          "toSpawn": "from_solkaris"
+        },
+        {
+          "id": "solkaris_to_valley",
+          "area": {
+            "x": 23,
+            "y": 7,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch4_arrow_storm_valley",
+          "toSpawn": "from_solkaris",
+          "requiresFlag": "met_general_kaelen",
+          "lockedDialogueId": "ch4_solkaris_gate_locked"
+        }
+      ]
+    },
+    "map_ch4_arrow_storm_valley": {
+      "id": "map_ch4_arrow_storm_valley",
+      "name": "Thung Lũng Mưa Tên",
+      "chapter": 4,
+      "tilemap": {
+        "key": "map_ch4_arrow_storm_valley",
+        "path": "assets/maps/map_ch4_arrow_storm_valley.json"
+      },
+      "tileset": {
+        "name": "warfield_tileset",
+        "key": "warfield_tileset",
+        "path": "assets/tilesets/warfield_tileset.png"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 64
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 8
+        },
+        "from_solkaris": {
+          "x": 2,
+          "y": 8
+        },
+        "from_ridge": {
+          "x": 26,
+          "y": 8
+        },
+        "revive": {
+          "x": 2,
+          "y": 8
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 8
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch4_tower_grid",
+          "tile": {
+            "x": 9,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Xem tháp tín hiệu",
+          "dialogueId": "ch4_tower_grid_take"
+        },
+        {
+          "id": "poi_ch4_tower_wind",
+          "tile": {
+            "x": 15,
+            "y": 12
+          },
+          "radius": 44,
+          "prompt": "[E] Xem cột đo gió",
+          "dialogueId": "ch4_tower_wind_take"
+        },
+        {
+          "id": "poi_ch4_tower_smoke",
+          "tile": {
+            "x": 21,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Xem tháp tín hiệu",
+          "dialogueId": "ch4_tower_smoke_take"
+        },
+        {
+          "id": "poi_ch4_mirror_lever",
+          "tile": {
+            "x": 27,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Kéo cần phát tín hiệu",
+          "dialogueId": "ch4_beacon_tower_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "silenced_arrow_storm",
+              "dialogueId": "ch4_beacon_done"
+            },
+            {
+              "ifFlag": "ch4_dial_mirror_nw",
+              "dialogueId": "ch4_beacon_tower_align"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#ff8a3c",
+        "alpha": 0.1
+      },
+      "dials": [
+        {
+          "id": "ch4_dial_mirror",
+          "tile": {
+            "x": 25,
+            "y": 5
+          },
+          "radius": 40,
+          "prompt": "[E] Xoay gương",
+          "values": [
+            {
+              "key": "n",
+              "label": "Bắc"
+            },
+            {
+              "key": "ne",
+              "label": "Đông Bắc"
+            },
+            {
+              "key": "e",
+              "label": "Đông"
+            },
+            {
+              "key": "se",
+              "label": "Đông Nam"
+            },
+            {
+              "key": "s",
+              "label": "Nam"
+            },
+            {
+              "key": "sw",
+              "label": "Tây Nam"
+            },
+            {
+              "key": "w",
+              "label": "Tây"
+            },
+            {
+              "key": "nw",
+              "label": "Tây Bắc"
+            }
+          ]
+        }
+      ],
+      "volleys": [
+        {
+          "area": {
+            "x": 2,
+            "y": 2,
+            "w": 24,
+            "h": 12
+          },
+          "everyMs": 2600,
+          "warnMs": 1000,
+          "shots": 4,
+          "radius": 28,
+          "damage": 34,
+          "cover": [
+            {
+              "x": 7,
+              "y": 5
+            },
+            {
+              "x": 7,
+              "y": 10
+            },
+            {
+              "x": 13,
+              "y": 7
+            },
+            {
+              "x": 18,
+              "y": 4
+            },
+            {
+              "x": 18,
+              "y": 11
+            },
+            {
+              "x": 23,
+              "y": 7
+            }
+          ],
+          "untilFlag": "silenced_arrow_storm"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "r_ch4_valley_sniper_a",
+          "enemyId": "enemy_ghost_sniper",
+          "texture": "enemy_ghost_sniper",
+          "anim": "enemy_ghost_sniper_idle",
+          "tile": {
+            "x": 13,
+            "y": 2
+          }
+        },
+        {
+          "id": "r_ch4_valley_sniper_b",
+          "enemyId": "enemy_ghost_sniper",
+          "texture": "enemy_ghost_sniper",
+          "anim": "enemy_ghost_sniper_idle",
+          "tile": {
+            "x": 20,
+            "y": 13
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "silenced_arrow_storm"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 28,
+              "y": 7
+            },
+            {
+              "x": 28,
+              "y": 8
+            }
+          ],
+          "index": 2
+        }
+      ],
+      "exits": [
+        {
+          "id": "valley_to_solkaris",
+          "area": {
+            "x": 0,
+            "y": 7,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch4_encampment_solkaris",
+          "toSpawn": "from_valley"
+        },
+        {
+          "id": "valley_to_ridge",
+          "area": {
+            "x": 29,
+            "y": 7,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch4_red_ridge_battlefield",
+          "toSpawn": "from_valley",
+          "requiresFlag": "silenced_arrow_storm",
+          "lockedDialogueId": "ch4_valley_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_ch4_valley",
+          "on": "arrive",
+          "onceFlag": "ch4_arrived_valley",
+          "delayMs": 400,
+          "dialogueId": "ch4_arrow_storm_warning"
+        },
+        {
+          "id": "trig_ch4_bread",
+          "on": "zone",
+          "area": {
+            "x": 7,
+            "y": 4,
+            "w": 1,
+            "h": 8
+          },
+          "onceFlag": "ch4_seen_bread",
+          "dialogueId": "ch4_flashback_bread_correction"
+        }
+      ]
+    },
+    "map_ch4_red_ridge_battlefield": {
+      "id": "map_ch4_red_ridge_battlefield",
+      "name": "Sống Núi Máu",
+      "chapter": 4,
+      "tilemap": {
+        "key": "map_ch4_red_ridge_battlefield",
+        "path": "assets/maps/map_ch4_red_ridge_battlefield.json"
+      },
+      "tileset": {
+        "name": "warfield_tileset",
+        "key": "warfield_tileset",
+        "path": "assets/tilesets/warfield_tileset.png"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 64
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 9
+        },
+        "from_valley": {
+          "x": 2,
+          "y": 9
+        },
+        "from_redoubt": {
+          "x": 14,
+          "y": 2
+        },
+        "revive": {
+          "x": 2,
+          "y": 9
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 9
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch4_relic_haft",
+          "tile": {
+            "x": 7,
+            "y": 15
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt binh khí cổ",
+          "dialogueId": "ch4_relic_haft_take"
+        },
+        {
+          "id": "poi_ch4_relic_blade",
+          "tile": {
+            "x": 20,
+            "y": 15
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt binh khí cổ",
+          "dialogueId": "ch4_relic_blade_take"
+        },
+        {
+          "id": "poi_ch4_relic_limb",
+          "tile": {
+            "x": 22,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt binh khí cổ",
+          "dialogueId": "ch4_relic_limb_take"
+        },
+        {
+          "id": "poi_ch4_relic_pole",
+          "tile": {
+            "x": 5,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt binh khí cổ",
+          "dialogueId": "ch4_relic_pole_take"
+        },
+        {
+          "id": "poi_ch4_plaque",
+          "tile": {
+            "x": 2,
+            "y": 14
+          },
+          "radius": 44,
+          "prompt": "[E] Xem mảnh bia",
+          "dialogueId": "ch4_plaque_take"
+        },
+        {
+          "id": "poi_ch4_incense",
+          "tile": {
+            "x": 14,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Thắp hương",
+          "dialogueId": "ch4_mounds_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "solved_fallen_arms_array",
+              "dialogueId": "ch4_mounds_done"
+            },
+            {
+              "ifFlags": [
+                "ch4_mound_n_haft",
+                "ch4_mound_e_limb",
+                "ch4_mound_w_blade",
+                "ch4_mound_c_pole"
+              ],
+              "dialogueId": "ch4_banner_ward_broken"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#c83a2a",
+        "alpha": 0.1
+      },
+      "dials": [
+        {
+          "id": "ch4_mound_n",
+          "tile": {
+            "x": 14,
+            "y": 5
+          },
+          "radius": 40,
+          "prompt": "[E] Cắm binh khí (Bắc)",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "haft",
+              "label": "Cán gỗ dài"
+            },
+            {
+              "key": "blade",
+              "label": "Lưỡi thép rộng"
+            },
+            {
+              "key": "limb",
+              "label": "Thanh gỗ cong"
+            },
+            {
+              "key": "pole",
+              "label": "Cây sào vải"
+            }
+          ],
+          "requiresItems": [
+            "relic_long_haft",
+            "relic_wide_blade",
+            "relic_curved_limb",
+            "relic_tattered_pole"
+          ]
+        },
+        {
+          "id": "ch4_mound_w",
+          "tile": {
+            "x": 4,
+            "y": 10
+          },
+          "radius": 40,
+          "prompt": "[E] Cắm binh khí (Tây)",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "haft",
+              "label": "Cán gỗ dài"
+            },
+            {
+              "key": "blade",
+              "label": "Lưỡi thép rộng"
+            },
+            {
+              "key": "limb",
+              "label": "Thanh gỗ cong"
+            },
+            {
+              "key": "pole",
+              "label": "Cây sào vải"
+            }
+          ],
+          "requiresItems": [
+            "relic_long_haft",
+            "relic_wide_blade",
+            "relic_curved_limb",
+            "relic_tattered_pole"
+          ]
+        },
+        {
+          "id": "ch4_mound_e",
+          "tile": {
+            "x": 24,
+            "y": 10
+          },
+          "radius": 40,
+          "prompt": "[E] Cắm binh khí (Đông)",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "haft",
+              "label": "Cán gỗ dài"
+            },
+            {
+              "key": "blade",
+              "label": "Lưỡi thép rộng"
+            },
+            {
+              "key": "limb",
+              "label": "Thanh gỗ cong"
+            },
+            {
+              "key": "pole",
+              "label": "Cây sào vải"
+            }
+          ],
+          "requiresItems": [
+            "relic_long_haft",
+            "relic_wide_blade",
+            "relic_curved_limb",
+            "relic_tattered_pole"
+          ]
+        },
+        {
+          "id": "ch4_mound_c",
+          "tile": {
+            "x": 14,
+            "y": 11
+          },
+          "radius": 40,
+          "prompt": "[E] Cắm binh khí (Trung Tâm)",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "haft",
+              "label": "Cán gỗ dài"
+            },
+            {
+              "key": "blade",
+              "label": "Lưỡi thép rộng"
+            },
+            {
+              "key": "limb",
+              "label": "Thanh gỗ cong"
+            },
+            {
+              "key": "pole",
+              "label": "Cây sào vải"
+            }
+          ],
+          "requiresItems": [
+            "relic_long_haft",
+            "relic_wide_blade",
+            "relic_curved_limb",
+            "relic_tattered_pole"
+          ]
+        }
+      ],
+      "roamers": [
+        {
+          "id": "r_ch4_ridge_knight_a",
+          "enemyId": "enemy_undying_knight",
+          "texture": "enemy_undying_knight",
+          "anim": "enemy_undying_knight_idle",
+          "tile": {
+            "x": 9,
+            "y": 8
+          }
+        },
+        {
+          "id": "r_ch4_ridge_knight_b",
+          "enemyId": "enemy_undying_knight",
+          "texture": "enemy_undying_knight",
+          "anim": "enemy_undying_knight_idle",
+          "tile": {
+            "x": 19,
+            "y": 11
+          }
+        },
+        {
+          "id": "r_ch4_ridge_carrier_a",
+          "enemyId": "enemy_banner_carrier",
+          "texture": "enemy_banner_carrier",
+          "anim": "enemy_banner_carrier_idle",
+          "tile": {
+            "x": 6,
+            "y": 13
+          }
+        },
+        {
+          "id": "r_ch4_ridge_carrier_b",
+          "enemyId": "enemy_banner_carrier",
+          "texture": "enemy_banner_carrier",
+          "anim": "enemy_banner_carrier_idle",
+          "tile": {
+            "x": 22,
+            "y": 6
+          }
+        },
+        {
+          "id": "r_ch4_ridge_phalanx",
+          "enemyId": "enemy_endless_phalanx",
+          "texture": "enemy_endless_phalanx",
+          "anim": "enemy_endless_phalanx_idle",
+          "tile": {
+            "x": 18,
+            "y": 5
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "solved_fallen_arms_array"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 13,
+              "y": 1
+            },
+            {
+              "x": 14,
+              "y": 1
+            },
+            {
+              "x": 15,
+              "y": 1
+            }
+          ],
+          "index": 2
+        }
+      ],
+      "exits": [
+        {
+          "id": "ridge_to_valley",
+          "area": {
+            "x": 0,
+            "y": 8,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch4_arrow_storm_valley",
+          "toSpawn": "from_ridge"
+        },
+        {
+          "id": "ridge_to_redoubt",
+          "area": {
+            "x": 13,
+            "y": 0,
+            "w": 3,
+            "h": 1
+          },
+          "toMap": "map_ch4_crimson_redoubt",
+          "toSpawn": "from_ridge",
+          "requiresFlag": "solved_fallen_arms_array",
+          "lockedDialogueId": "ch4_ridge_ward_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_ch4_ridge",
+          "on": "arrive",
+          "onceFlag": "ch4_arrived_ridge",
+          "delayMs": 400,
+          "dialogueId": "ch4_red_ridge_arrival"
+        }
+      ]
+    },
+    "map_ch4_crimson_redoubt": {
+      "id": "map_ch4_crimson_redoubt",
+      "name": "Pháo Đài Cờ Huyết Sắc",
+      "chapter": 4,
+      "tilemap": {
+        "key": "map_ch4_crimson_redoubt",
+        "path": "assets/maps/map_ch4_crimson_redoubt.json"
+      },
+      "tileset": {
+        "name": "warfield_tileset",
+        "key": "warfield_tileset",
+        "path": "assets/tilesets/warfield_tileset.png"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 64
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 11,
+          "y": 13
+        },
+        "from_ridge": {
+          "x": 11,
+          "y": 13
+        },
+        "from_ramparts": {
+          "x": 19,
+          "y": 8
+        },
+        "revive": {
+          "x": 11,
+          "y": 13
+        }
+      },
+      "revive": {
+        "x": 11,
+        "y": 13
+      },
+      "npcs": [],
+      "interactables": [],
+      "ambient": {
+        "color": "#a8241e",
+        "alpha": 0.12
+      },
+      "encounters": [
+        {
+          "id": "enc_crimson_standard",
+          "enemyId": "boss_crimson_standard",
+          "texture": "boss_crimson_standard",
+          "anim": "boss_crimson_standard_idle",
+          "tile": {
+            "x": 11,
+            "y": 6
+          },
+          "defeatedFlag": "defeated_crimson_standard",
+          "hitbox": 30,
+          "victoryDialogueId": "ch4_crimson_standard_defeated"
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "defeated_crimson_standard"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 21,
+              "y": 7
+            },
+            {
+              "x": 21,
+              "y": 8
+            }
+          ],
+          "index": 2
+        }
+      ],
+      "exits": [
+        {
+          "id": "redoubt_to_ridge",
+          "area": {
+            "x": 11,
+            "y": 15,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch4_red_ridge_battlefield",
+          "toSpawn": "from_redoubt"
+        },
+        {
+          "id": "redoubt_to_ramparts",
+          "area": {
+            "x": 21,
+            "y": 7,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch4_fallen_ramparts",
+          "toSpawn": "from_redoubt",
+          "requiresFlag": "defeated_crimson_standard",
+          "lockedDialogueId": "ch4_redoubt_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_ch4_standard",
+          "on": "zone",
+          "area": {
+            "x": 8,
+            "y": 10,
+            "w": 7,
+            "h": 1
+          },
+          "onceFlag": "ch4_met_crimson_standard",
+          "unlessFlag": "defeated_crimson_standard",
+          "dialogueId": "ch4_crimson_standard_confront"
+        }
+      ]
+    },
+    "map_ch4_fallen_ramparts": {
+      "id": "map_ch4_fallen_ramparts",
+      "name": "Trường Lũy Đổ Nát",
+      "chapter": 4,
+      "tilemap": {
+        "key": "map_ch4_fallen_ramparts",
+        "path": "assets/maps/map_ch4_fallen_ramparts.json"
+      },
+      "tileset": {
+        "name": "warfield_tileset",
+        "key": "warfield_tileset",
+        "path": "assets/tilesets/warfield_tileset.png"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 64
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 8
+        },
+        "from_redoubt": {
+          "x": 2,
+          "y": 8
+        },
+        "from_ash": {
+          "x": 22,
+          "y": 8
+        },
+        "from_cellar": {
+          "x": 5,
+          "y": 11
+        },
+        "revive": {
+          "x": 2,
+          "y": 8
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 8
+      },
+      "npcs": [
+        {
+          "id": "npc_ch4_renard",
+          "texture": "npc_renard",
+          "anim": "npc_renard_idle",
+          "tile": {
+            "x": 19,
+            "y": 8
+          },
+          "name": "Binh Nhì Renard",
+          "prompt": "[E] Nói chuyện với Binh Nhì Renard",
+          "radius": 44,
+          "dialogueId": "ch4_renard_betrayal",
+          "visibleWhen": {
+            "flag": "cleared_ramparts_ambush"
+          },
+          "dialogueRules": [
+            {
+              "ifFlag": "experienced_renard_betrayal",
+              "dialogueId": "ch4_renard_after"
+            }
+          ]
+        },
+        {
+          "id": "npc_ch4_bran_ramparts",
+          "texture": "npc_soldier_bran",
+          "anim": "npc_soldier_bran_idle",
+          "tile": {
+            "x": 10,
+            "y": 11
+          },
+          "name": "Binh Nhì Bran",
+          "prompt": "[E] Nói chuyện với Binh Nhì Bran",
+          "radius": 44,
+          "dialogueId": "ch4_bran_choice",
+          "visibleWhen": {
+            "flag": "experienced_renard_betrayal",
+            "unlessFlag": "resolved_soldier_bran"
+          }
+        }
+      ],
+      "interactables": [],
+      "ambient": {
+        "color": "#8a7a6a",
+        "alpha": 0.1
+      },
+      "roamers": [
+        {
+          "id": "r_ch4_ambush_phalanx_a",
+          "enemyId": "enemy_endless_phalanx",
+          "texture": "enemy_endless_phalanx",
+          "anim": "enemy_endless_phalanx_idle",
+          "tile": {
+            "x": 12,
+            "y": 4
+          },
+          "group": "ramparts_ambush",
+          "visibleWhen": {
+            "unlessFlag": "cleared_ramparts_ambush"
+          },
+          "sight": 400,
+          "leash": 900
+        },
+        {
+          "id": "r_ch4_ambush_phalanx_b",
+          "enemyId": "enemy_endless_phalanx",
+          "texture": "enemy_endless_phalanx",
+          "anim": "enemy_endless_phalanx_idle",
+          "tile": {
+            "x": 14,
+            "y": 11
+          },
+          "group": "ramparts_ambush",
+          "visibleWhen": {
+            "unlessFlag": "cleared_ramparts_ambush"
+          },
+          "sight": 400,
+          "leash": 900
+        },
+        {
+          "id": "r_ch4_ambush_sniper",
+          "enemyId": "enemy_ghost_sniper",
+          "texture": "enemy_ghost_sniper",
+          "anim": "enemy_ghost_sniper_idle",
+          "tile": {
+            "x": 22,
+            "y": 3
+          },
+          "group": "ramparts_ambush",
+          "visibleWhen": {
+            "unlessFlag": "cleared_ramparts_ambush"
+          },
+          "sight": 400,
+          "leash": 900
+        },
+        {
+          "id": "r_ch4_ambush_knight",
+          "enemyId": "enemy_undying_knight",
+          "texture": "enemy_undying_knight",
+          "anim": "enemy_undying_knight_idle",
+          "tile": {
+            "x": 9,
+            "y": 9
+          },
+          "group": "ramparts_ambush",
+          "visibleWhen": {
+            "unlessFlag": "cleared_ramparts_ambush"
+          },
+          "sight": 400,
+          "leash": 900
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "experienced_renard_betrayal"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 24,
+              "y": 7
+            },
+            {
+              "x": 24,
+              "y": 8
+            }
+          ],
+          "index": 2
+        }
+      ],
+      "exits": [
+        {
+          "id": "ramparts_to_redoubt",
+          "area": {
+            "x": 0,
+            "y": 7,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch4_crimson_redoubt",
+          "toSpawn": "from_ramparts"
+        },
+        {
+          "id": "ramparts_to_ash",
+          "area": {
+            "x": 25,
+            "y": 7,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch4_ash_plains",
+          "toSpawn": "from_ramparts",
+          "requiresFlag": "experienced_renard_betrayal",
+          "lockedDialogueId": "ch4_ramparts_gate_locked"
+        },
+        {
+          "id": "ramparts_to_cellar",
+          "area": {
+            "x": 5,
+            "y": 13,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch4_sentry_cellar",
+          "toSpawn": "from_ramparts",
+          "requiresFlag": "experienced_renard_betrayal",
+          "lockedDialogueId": "ch4_cellar_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_ch4_ramparts",
+          "on": "arrive",
+          "onceFlag": "ch4_arrived_ramparts",
+          "delayMs": 400,
+          "dialogueId": "ch4_ramparts_arrival"
+        },
+        {
+          "id": "trig_ch4_ambush_cleared",
+          "on": "zone",
+          "area": {
+            "x": 1,
+            "y": 1,
+            "w": 24,
+            "h": 14
+          },
+          "requiresFlag": "cleared_ramparts_ambush",
+          "onceFlag": "ch4_saw_ambush_cleared",
+          "dialogueId": "ch4_ramparts_ambush_cleared"
+        }
+      ]
+    },
+    "map_ch4_sentry_cellar": {
+      "id": "map_ch4_sentry_cellar",
+      "name": "Hầm Trú Ẩn Tiền Tiêu",
+      "chapter": 4,
+      "tilemap": {
+        "key": "map_ch4_sentry_cellar",
+        "path": "assets/maps/map_ch4_sentry_cellar.json"
+      },
+      "tileset": {
+        "name": "dungeon_tileset",
+        "key": "dungeon_tileset",
+        "path": "assets/tilesets/dungeon_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 16
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 8,
+          "y": 9
+        },
+        "from_ramparts": {
+          "x": 8,
+          "y": 9
+        }
+      },
+      "revive": {
+        "x": 8,
+        "y": 9
+      },
+      "npcs": [
+        {
+          "id": "npc_ch4_sentry",
+          "texture": "enemy_ghost_sniper",
+          "anim": "enemy_ghost_sniper_idle",
+          "tile": {
+            "x": 8,
+            "y": 4
+          },
+          "name": "Hồn Lính Gác",
+          "prompt": "[E] Đến gần hồn lính gác",
+          "radius": 44,
+          "dialogueId": "ch4_sentry_challenge",
+          "alpha": 0.75,
+          "tint": "#c8d8ff",
+          "dialogueRules": [
+            {
+              "ifFlag": "answered_sentry",
+              "dialogueId": "ch4_sentry_after"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch4_sentry_answer",
+          "tile": {
+            "x": 10,
+            "y": 6
+          },
+          "radius": 44,
+          "prompt": "[E] Đáp lời",
+          "dialogueId": "ch4_sentry_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "answered_sentry",
+              "dialogueId": "ch4_sentry_after"
+            },
+            {
+              "ifFlag": "ch4_dial_word_cui",
+              "dialogueId": "ch4_sentry_answered"
+            }
+          ]
+        }
+      ],
+      "dials": [
+        {
+          "id": "ch4_dial_word",
+          "tile": {
+            "x": 6,
+            "y": 6
+          },
+          "radius": 40,
+          "prompt": "[E] Xoay vòng chữ",
+          "values": [
+            {
+              "key": "lua",
+              "label": "Lửa"
+            },
+            {
+              "key": "cui",
+              "label": "Củi"
+            },
+            {
+              "key": "khoi",
+              "label": "Khói"
+            },
+            {
+              "key": "than",
+              "label": "Than"
+            }
+          ]
+        }
+      ],
+      "exits": [
+        {
+          "id": "cellar_to_ramparts",
+          "area": {
+            "x": 8,
+            "y": 11,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch4_fallen_ramparts",
+          "toSpawn": "from_cellar"
+        }
+      ]
+    },
+    "map_ch4_ash_plains": {
+      "id": "map_ch4_ash_plains",
+      "name": "Cánh Đồng Tro Tàn",
+      "chapter": 4,
+      "tilemap": {
+        "key": "map_ch4_ash_plains",
+        "path": "assets/maps/map_ch4_ash_plains.json"
+      },
+      "tileset": {
+        "name": "warfield_tileset",
+        "key": "warfield_tileset",
+        "path": "assets/tilesets/warfield_tileset.png"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 64
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 9
+        },
+        "from_ramparts": {
+          "x": 2,
+          "y": 9
+        },
+        "from_monument": {
+          "x": 25,
+          "y": 9
+        },
+        "from_tomb": {
+          "x": 22,
+          "y": 6
+        },
+        "revive": {
+          "x": 2,
+          "y": 9
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 9
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch4_scrap_land",
+          "tile": {
+            "x": 6,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Bới đống tro",
+          "dialogueId": "ch4_treaty_scrap_find"
+        },
+        {
+          "id": "poi_ch4_scrap_prisoners",
+          "tile": {
+            "x": 17,
+            "y": 14
+          },
+          "radius": 44,
+          "prompt": "[E] Xem chân cự kiếm",
+          "dialogueId": "ch4_treaty_scrap_prisoners_find"
+        },
+        {
+          "id": "poi_ch4_chariot",
+          "tile": {
+            "x": 21,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Xem xác xe chiến",
+          "dialogueId": "ch4_chariot_plain",
+          "dialogueRules": [
+            {
+              "ifFlag": "opened_chariot_passage",
+              "dialogueId": "ch4_chariot_open"
+            },
+            {
+              "ifItem": "bran_company_roster",
+              "dialogueId": "ch4_chariot_passage"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#c8c0b8",
+        "alpha": 0.1
+      },
+      "roamers": [
+        {
+          "id": "r_ch4_ash_wraith_a",
+          "enemyId": "enemy_memory_wraith",
+          "texture": "enemy_memory_wraith",
+          "anim": "enemy_memory_wraith_idle",
+          "tile": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "id": "r_ch4_ash_wraith_b",
+          "enemyId": "enemy_memory_wraith",
+          "texture": "enemy_memory_wraith",
+          "anim": "enemy_memory_wraith_idle",
+          "tile": {
+            "x": 18,
+            "y": 7
+          }
+        },
+        {
+          "id": "r_ch4_ash_phalanx",
+          "enemyId": "enemy_endless_phalanx",
+          "texture": "enemy_endless_phalanx",
+          "anim": "enemy_endless_phalanx_idle",
+          "tile": {
+            "x": 14,
+            "y": 13
+          }
+        },
+        {
+          "id": "r_ch4_ash_knight",
+          "enemyId": "enemy_undying_knight",
+          "texture": "enemy_undying_knight",
+          "anim": "enemy_undying_knight_idle",
+          "tile": {
+            "x": 24,
+            "y": 12
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "opened_chariot_passage"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 22,
+              "y": 4
+            }
+          ],
+          "index": 14
+        }
+      ],
+      "exits": [
+        {
+          "id": "ash_to_ramparts",
+          "area": {
+            "x": 0,
+            "y": 8,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch4_fallen_ramparts",
+          "toSpawn": "from_ash"
+        },
+        {
+          "id": "ash_to_monument",
+          "area": {
+            "x": 27,
+            "y": 8,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch4_monument_of_the_fallen",
+          "toSpawn": "from_ash"
+        },
+        {
+          "id": "ash_to_tomb",
+          "area": {
+            "x": 22,
+            "y": 4,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch4_tomb_of_the_first_fallen",
+          "toSpawn": "from_ash",
+          "requiresFlag": "opened_chariot_passage"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_ch4_ash",
+          "on": "arrive",
+          "onceFlag": "ch4_arrived_ash",
+          "delayMs": 400,
+          "dialogueId": "ch4_ash_plains_arrival"
+        }
+      ]
+    },
+    "map_ch4_tomb_of_the_first_fallen": {
+      "id": "map_ch4_tomb_of_the_first_fallen",
+      "name": "Mộ Người Đầu Tiên Ngã Xuống",
+      "chapter": 4,
+      "tilemap": {
+        "key": "map_ch4_tomb_of_the_first_fallen",
+        "path": "assets/maps/map_ch4_tomb_of_the_first_fallen.json"
+      },
+      "tileset": {
+        "name": "dungeon_tileset",
+        "key": "dungeon_tileset",
+        "path": "assets/tilesets/dungeon_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 16
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 12,
+          "y": 12
+        },
+        "from_ash": {
+          "x": 12,
+          "y": 12
+        }
+      },
+      "revive": {
+        "x": 12,
+        "y": 12
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch4_epitaph",
+          "tile": {
+            "x": 10,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc văn bia",
+          "dialogueId": "ch4_epitaph_take"
+        },
+        {
+          "id": "poi_ch4_tomb_lid",
+          "tile": {
+            "x": 10,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Đẩy nắp mộ",
+          "dialogueId": "ch4_tomb_first_fallen_inspect",
+          "dialogueRules": [
+            {
+              "ifFlag": "opened_first_fallen_tomb",
+              "dialogueId": "ch4_tomb_open_again"
+            },
+            {
+              "ifFlags": [
+                "ch4_tomb_i_haft",
+                "ch4_tomb_ii_blade",
+                "ch4_tomb_iii_limb",
+                "ch4_tomb_iv_pole"
+              ],
+              "dialogueId": "ch4_tomb_first_fallen_open"
+            },
+            {
+              "ifItems": [
+                "relic_long_haft",
+                "relic_wide_blade",
+                "relic_curved_limb",
+                "relic_tattered_pole"
+              ],
+              "dialogueId": "ch4_tomb_first_fallen_wrong"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#6a7a9a",
+        "alpha": 0.1
+      },
+      "dials": [
+        {
+          "id": "ch4_tomb_i",
+          "tile": {
+            "x": 4,
+            "y": 7
+          },
+          "radius": 40,
+          "prompt": "[E] Bệ I",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "haft",
+              "label": "Cán gỗ dài"
+            },
+            {
+              "key": "blade",
+              "label": "Lưỡi thép rộng"
+            },
+            {
+              "key": "limb",
+              "label": "Thanh gỗ cong"
+            },
+            {
+              "key": "pole",
+              "label": "Cây sào vải"
+            }
+          ],
+          "requiresItems": [
+            "relic_long_haft",
+            "relic_wide_blade",
+            "relic_curved_limb",
+            "relic_tattered_pole"
+          ]
+        },
+        {
+          "id": "ch4_tomb_ii",
+          "tile": {
+            "x": 8,
+            "y": 7
+          },
+          "radius": 40,
+          "prompt": "[E] Bệ II",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "haft",
+              "label": "Cán gỗ dài"
+            },
+            {
+              "key": "blade",
+              "label": "Lưỡi thép rộng"
+            },
+            {
+              "key": "limb",
+              "label": "Thanh gỗ cong"
+            },
+            {
+              "key": "pole",
+              "label": "Cây sào vải"
+            }
+          ],
+          "requiresItems": [
+            "relic_long_haft",
+            "relic_wide_blade",
+            "relic_curved_limb",
+            "relic_tattered_pole"
+          ]
+        },
+        {
+          "id": "ch4_tomb_iii",
+          "tile": {
+            "x": 12,
+            "y": 7
+          },
+          "radius": 40,
+          "prompt": "[E] Bệ III",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "haft",
+              "label": "Cán gỗ dài"
+            },
+            {
+              "key": "blade",
+              "label": "Lưỡi thép rộng"
+            },
+            {
+              "key": "limb",
+              "label": "Thanh gỗ cong"
+            },
+            {
+              "key": "pole",
+              "label": "Cây sào vải"
+            }
+          ],
+          "requiresItems": [
+            "relic_long_haft",
+            "relic_wide_blade",
+            "relic_curved_limb",
+            "relic_tattered_pole"
+          ]
+        },
+        {
+          "id": "ch4_tomb_iv",
+          "tile": {
+            "x": 16,
+            "y": 7
+          },
+          "radius": 40,
+          "prompt": "[E] Bệ IV",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "haft",
+              "label": "Cán gỗ dài"
+            },
+            {
+              "key": "blade",
+              "label": "Lưỡi thép rộng"
+            },
+            {
+              "key": "limb",
+              "label": "Thanh gỗ cong"
+            },
+            {
+              "key": "pole",
+              "label": "Cây sào vải"
+            }
+          ],
+          "requiresItems": [
+            "relic_long_haft",
+            "relic_wide_blade",
+            "relic_curved_limb",
+            "relic_tattered_pole"
+          ]
+        }
+      ],
+      "roamers": [
+        {
+          "id": "r_ch4_tomb_guard",
+          "enemyId": "enemy_undying_knight",
+          "texture": "enemy_undying_knight",
+          "anim": "enemy_undying_knight_idle",
+          "tile": {
+            "x": 15,
+            "y": 10
+          }
+        }
+      ],
+      "exits": [
+        {
+          "id": "tomb_to_ash",
+          "area": {
+            "x": 10,
+            "y": 13,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch4_ash_plains",
+          "toSpawn": "from_tomb"
+        }
+      ]
+    },
+    "map_ch4_monument_of_the_fallen": {
+      "id": "map_ch4_monument_of_the_fallen",
+      "name": "Đài Tưởng Niệm Vô Danh",
+      "chapter": 4,
+      "tilemap": {
+        "key": "map_ch4_monument_of_the_fallen",
+        "path": "assets/maps/map_ch4_monument_of_the_fallen.json"
+      },
+      "tileset": {
+        "name": "warfield_tileset",
+        "key": "warfield_tileset",
+        "path": "assets/tilesets/warfield_tileset.png"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 64
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 8
+        },
+        "from_ash": {
+          "x": 2,
+          "y": 8
+        },
+        "from_sanctum": {
+          "x": 12,
+          "y": 2
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 8
+      },
+      "npcs": [
+        {
+          "id": "npc_ch4_aldric_monument",
+          "texture": "npc_aldric",
+          "anim": "npc_aldric_idle",
+          "tile": {
+            "x": 6,
+            "y": 11
+          },
+          "name": "Thống Soái Aldric",
+          "prompt": "[E] Nói chuyện với Thống Soái Aldric",
+          "radius": 44,
+          "dialogueId": "ch4_aldric_kaelen_reunion",
+          "visibleWhen": {
+            "flag": "restored_peace_treaty",
+            "unlessFlag": "resolved_aldric_letter"
+          }
+        },
+        {
+          "id": "npc_ch4_kaelen_monument",
+          "texture": "npc_kaelen",
+          "anim": "npc_kaelen_idle",
+          "tile": {
+            "x": 8,
+            "y": 11
+          },
+          "name": "Đại Tướng Kaelen",
+          "prompt": "[E] Nói chuyện với Đại Tướng Kaelen",
+          "radius": 44,
+          "dialogueId": "ch4_kaelen_monument",
+          "visibleWhen": {
+            "flag": "restored_peace_treaty"
+          }
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch4_altar",
+          "tile": {
+            "x": 12,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bàn thờ",
+          "dialogueId": "ch4_monument_altar_inspect",
+          "dialogueRules": [
+            {
+              "ifFlag": "ch4_seen_cataclysm",
+              "dialogueId": "ch4_monument_altar_reread"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch4_treaty_seal",
+          "tile": {
+            "x": 12,
+            "y": 7
+          },
+          "radius": 44,
+          "prompt": "[E] Đóng ấn hiệp ước",
+          "dialogueId": "ch4_treaty_missing",
+          "dialogueRules": [
+            {
+              "ifFlag": "restored_peace_treaty",
+              "dialogueId": "ch4_treaty_done"
+            },
+            {
+              "ifItems": [
+                "treaty_scrap_land",
+                "treaty_scrap_prisoners",
+                "treaty_scrap_waters",
+                "treaty_scrap_signatures"
+              ],
+              "ifFlags": [
+                "ch4_slot_1_land",
+                "ch4_slot_2_prisoners",
+                "ch4_slot_3_waters",
+                "ch4_slot_4_oath"
+              ],
+              "dialogueId": "ch4_treaty_puzzle_solve"
+            },
+            {
+              "ifItems": [
+                "treaty_scrap_land",
+                "treaty_scrap_prisoners",
+                "treaty_scrap_waters",
+                "treaty_scrap_signatures"
+              ],
+              "dialogueId": "ch4_treaty_wrong"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#d8d0c0",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch4_slot_1",
+          "tile": {
+            "x": 9,
+            "y": 10
+          },
+          "radius": 40,
+          "prompt": "[E] Rãnh hiệp ước 1",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "land",
+              "label": "Đất Đai"
+            },
+            {
+              "key": "prisoners",
+              "label": "Tù Binh"
+            },
+            {
+              "key": "waters",
+              "label": "Nguồn Nước"
+            },
+            {
+              "key": "oath",
+              "label": "Lời Thề"
+            }
+          ],
+          "requiresItems": [
+            "treaty_scrap_land",
+            "treaty_scrap_prisoners",
+            "treaty_scrap_waters",
+            "treaty_scrap_signatures"
+          ]
+        },
+        {
+          "id": "ch4_slot_2",
+          "tile": {
+            "x": 11,
+            "y": 10
+          },
+          "radius": 40,
+          "prompt": "[E] Rãnh hiệp ước 2",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "land",
+              "label": "Đất Đai"
+            },
+            {
+              "key": "prisoners",
+              "label": "Tù Binh"
+            },
+            {
+              "key": "waters",
+              "label": "Nguồn Nước"
+            },
+            {
+              "key": "oath",
+              "label": "Lời Thề"
+            }
+          ],
+          "requiresItems": [
+            "treaty_scrap_land",
+            "treaty_scrap_prisoners",
+            "treaty_scrap_waters",
+            "treaty_scrap_signatures"
+          ]
+        },
+        {
+          "id": "ch4_slot_3",
+          "tile": {
+            "x": 13,
+            "y": 10
+          },
+          "radius": 40,
+          "prompt": "[E] Rãnh hiệp ước 3",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "land",
+              "label": "Đất Đai"
+            },
+            {
+              "key": "prisoners",
+              "label": "Tù Binh"
+            },
+            {
+              "key": "waters",
+              "label": "Nguồn Nước"
+            },
+            {
+              "key": "oath",
+              "label": "Lời Thề"
+            }
+          ],
+          "requiresItems": [
+            "treaty_scrap_land",
+            "treaty_scrap_prisoners",
+            "treaty_scrap_waters",
+            "treaty_scrap_signatures"
+          ]
+        },
+        {
+          "id": "ch4_slot_4",
+          "tile": {
+            "x": 15,
+            "y": 10
+          },
+          "radius": 40,
+          "prompt": "[E] Rãnh hiệp ước 4",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "land",
+              "label": "Đất Đai"
+            },
+            {
+              "key": "prisoners",
+              "label": "Tù Binh"
+            },
+            {
+              "key": "waters",
+              "label": "Nguồn Nước"
+            },
+            {
+              "key": "oath",
+              "label": "Lời Thề"
+            }
+          ],
+          "requiresItems": [
+            "treaty_scrap_land",
+            "treaty_scrap_prisoners",
+            "treaty_scrap_waters",
+            "treaty_scrap_signatures"
+          ]
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "resolved_aldric_letter"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 11,
+              "y": 0
+            },
+            {
+              "x": 12,
+              "y": 0
+            },
+            {
+              "x": 13,
+              "y": 0
+            }
+          ],
+          "index": 11
+        }
+      ],
+      "exits": [
+        {
+          "id": "monument_to_ash",
+          "area": {
+            "x": 0,
+            "y": 7,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch4_ash_plains",
+          "toSpawn": "from_monument"
+        },
+        {
+          "id": "monument_to_sanctum",
+          "area": {
+            "x": 11,
+            "y": 0,
+            "w": 3,
+            "h": 1
+          },
+          "toMap": "map_ch4_sanctum_of_finality",
+          "toSpawn": "from_monument",
+          "requiresFlag": "resolved_aldric_letter",
+          "lockedDialogueId": "ch4_sanctum_locked"
+        }
+      ]
+    },
+    "map_ch4_sanctum_of_finality": {
+      "id": "map_ch4_sanctum_of_finality",
+      "name": "Thánh Điện Điểm Dừng",
+      "chapter": 4,
+      "tilemap": {
+        "key": "map_ch4_sanctum_of_finality",
+        "path": "assets/maps/map_ch4_sanctum_of_finality.json"
+      },
+      "tileset": {
+        "name": "warfield_tileset",
+        "key": "warfield_tileset",
+        "path": "assets/tilesets/warfield_tileset.png"
+      },
+      "collision": {
+        "fromGid": 17,
+        "toGid": 64
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 11,
+          "y": 13
+        },
+        "from_monument": {
+          "x": 11,
+          "y": 13
+        },
+        "revive": {
+          "x": 11,
+          "y": 13
+        }
+      },
+      "revive": {
+        "x": 11,
+        "y": 13
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch4_finality_seal",
+          "tile": {
+            "x": 11,
+            "y": 3
+          },
+          "radius": 44,
+          "prompt": "[E] Chạm vào Lõi Phong Ấn",
+          "dialogueId": "ch4_finality_seal_restored",
+          "requiresFlag": "defeated_the_last_war"
+        }
+      ],
+      "ambient": {
+        "color": "#e8e0ff",
+        "alpha": 0.08
+      },
+      "encounters": [
+        {
+          "id": "enc_the_last_war",
+          "enemyId": "boss_the_last_war",
+          "texture": "boss_the_last_war",
+          "anim": "boss_the_last_war_idle",
+          "tile": {
+            "x": 11,
+            "y": 7
+          },
+          "defeatedFlag": "defeated_the_last_war",
+          "hitbox": 34,
+          "victoryDialogueId": "ch4_last_war_boss_defeated"
+        }
+      ],
+      "exits": [
+        {
+          "id": "sanctum_to_monument",
+          "area": {
+            "x": 11,
+            "y": 15,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch4_monument_of_the_fallen",
+          "toSpawn": "from_sanctum"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "trig_ch4_pillars",
+          "on": "arrive",
+          "onceFlag": "ch4_saw_pillars",
+          "delayMs": 400,
+          "dialogueId": "ch4_pillars_hint"
+        },
+        {
+          "id": "trig_ch4_last_war",
+          "on": "zone",
+          "area": {
+            "x": 8,
+            "y": 10,
+            "w": 7,
+            "h": 1
+          },
+          "onceFlag": "ch4_met_last_war",
+          "unlessFlag": "defeated_the_last_war",
+          "dialogueId": "ch4_last_war_boss_confront"
+        }
+      ]
+    },
+    "map_ch4_interval_sanctuary": {
+      "id": "map_ch4_interval_sanctuary",
+      "name": "Gian Phòng Đổ Nát",
+      "chapter": 4,
+      "tilemap": {
+        "key": "map_ch4_interval_sanctuary",
+        "path": "assets/maps/map_ch4_interval_sanctuary.json"
+      },
+      "tileset": {
+        "name": "dungeon_tileset",
+        "key": "dungeon_tileset",
+        "path": "assets/tilesets/dungeon_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 16
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 9,
+          "y": 9
+        },
+        "from_sanctum": {
+          "x": 9,
+          "y": 9
+        }
+      },
+      "revive": {
+        "x": 9,
+        "y": 9
+      },
+      "npcs": [
+        {
+          "id": "npc_ch4_kuro",
+          "texture": "npc_kuro",
+          "anim": "npc_kuro_idle",
+          "tile": {
+            "x": 9,
+            "y": 4
+          },
+          "name": "Kuro",
+          "prompt": "[E] Bước tới gần",
+          "radius": 44,
+          "dialogueId": "ch4_kuro_direct_meeting",
+          "visibleWhen": {
+            "unlessFlag": "met_kuro_first_time"
+          }
+        }
+      ],
+      "interactables": [],
+      "ambient": {
+        "color": "#7a5cff",
+        "alpha": 0.12
+      },
+      "exits": [],
+      "triggers": [
+        {
+          "id": "trig_ch4_kuro",
+          "on": "arrive",
+          "onceFlag": "ch4_kuro_meeting_started",
+          "delayMs": 1200,
+          "dialogueId": "ch4_kuro_direct_meeting"
+        }
+      ]
     }
   }
 }

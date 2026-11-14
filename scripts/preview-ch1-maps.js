@@ -10,10 +10,11 @@ import { writeFile } from './pixel-art/pixel.js';
 import { CH1_MAPS } from './ch1-layout.js';
 import { CH2_MAPS } from './ch2-layout.js';
 import { CH3_MAPS } from './ch3-layout.js';
+import { CH4_MAPS } from './ch4-layout.js';
 
-/** `node <script> ch2|ch3` builds that chapter instead of Chapter 1. */
+/** `node <script> ch2|ch3|ch4` builds that chapter instead of Chapter 1. */
 const CHAPTER = process.argv[2] ?? 'ch1';
-const MAPS = { ch1: CH1_MAPS, ch2: CH2_MAPS, ch3: CH3_MAPS }[CHAPTER] ?? CH1_MAPS;
+const MAPS = { ch1: CH1_MAPS, ch2: CH2_MAPS, ch3: CH3_MAPS, ch4: CH4_MAPS }[CHAPTER] ?? CH1_MAPS;
 
 const SHEETS = {
   // v2 candidates (Chapter 1 props) until approved, then the deployed files.
@@ -26,6 +27,7 @@ const SHEETS = {
     ? 'art-source/environment/coastal/generated/candidates/coastal_tileset_v2.png'
     : 'public/assets/tilesets/coastal_tileset.png',
   dungeon: 'public/assets/tilesets/dungeon_tileset.png',
+  warfield: 'public/assets/tilesets/warfield_tileset.png',
   // Candidate until approved (ENV_SUNKEN_001).
   sunken: fs.existsSync('public/assets/tilesets/sunken_tileset.png')
     ? 'public/assets/tilesets/sunken_tileset.png'
