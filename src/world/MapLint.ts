@@ -58,10 +58,7 @@ export function lintMaps(data: MapLintData): LintFinding[] {
       findings.push({
         mapId: m.id,
         rule,
-        severity:
-          rule === 'reveal-without-refresh' || rule === 'trigger-covers-spawn'
-            ? 'warning'
-            : 'error',
+        severity: rule === 'reveal-without-refresh' ? 'warning' : 'error',
         message,
         ...(p ? { x: p.x, y: p.y } : {}),
       });
@@ -76,6 +73,17 @@ export function lintMaps(data: MapLintData): LintFinding[] {
     const blocking = (gid: number): boolean =>
       gid >= m.collision.fromGid && gid <= m.collision.toGid;
     const opened = new Set<string>();
+    // Branch shifts rebuild using layerVariants. Union all possible wall layers, even when
+    // their conditions cannot hold together: this is an optimistic reachability test.
+    for (const variant of m.layerVariants ?? []) {
+      if (!variant.walls) continue;
+      const alternative = tm.layers.find((l) => l.name === variant.walls)?.data;
+      if (!alternative || alternative.length !== walls.length)
+        throw new Error(`Invalid variant wall layer: ${m.id}/${variant.walls}`);
+      for (let i = 0; i < alternative.length; i++)
+        if (!blocking(alternative[i])) opened.add(`${i % tm.width},${Math.floor(i / tm.width)}`);
+    }
+    // Includes timer bridges: startTimer sets a flag and reapplies these same swaps.
     for (const s of m.tileSwaps ?? [])
       if (s.layer === 'walls' && !blocking(s.index + 1))
         for (const p of s.tiles) opened.add(key(p));
@@ -87,9 +95,7 @@ export function lintMaps(data: MapLintData): LintFinding[] {
           add('spawn-near-exit', `spawn ${id} is within 2 tiles of exit ${e.id}`, p);
       if (!inside(p) || blocking(walls[p.y * tm.width + p.x]))
         add('spawn-blocked', `spawn ${id} is blocked before swaps`, p);
-      for (const t of m.triggers ?? [])
-        if (t.on === 'zone' && t.area && distance(p, t.area) === 0)
-          add('trigger-covers-spawn', `trigger ${t.id} contains spawn ${id}`, p);
+      // Zone triggers are polled by ExplorationScene.update; spawning inside is valid.
     }
     const start = m.spawns.default ?? Object.values(m.spawns)[0];
     const reached = new Set<string>();
@@ -112,6 +118,53 @@ export function lintMaps(data: MapLintData): LintFinding[] {
         }
     }
     const accessible = (r: TileRect): boolean => queue.some((p) => distance(p, r) <= 1);
+    // A reachable scripted same-map warp can join disconnected islands (Chapter 5 core).
+    // Do not seed every spawn: only destinations of dialogue/teleport sources we can reach.
+    let expanded = true;
+    while (expanded) {
+      const before = queue.length;
+      const seed = (id: string): void => {
+        const p = m.spawns[id];
+        if (p && walkable(p) && !reached.has(key(p))) {
+          queue.push(p);
+          reached.add(key(p));
+        }
+      };
+      const pending: string[] = [];
+      for (const e of [...(m.npcs ?? []), ...(m.interactables ?? [])])
+        if (accessible({ ...e.tile, w: 1, h: 1 })) {
+          pending.push(e.dialogueId, ...(e.dialogueRules ?? []).map((r) => r.dialogueId));
+        }
+      for (const t of m.triggers ?? [])
+        if (t.on === 'arrive' || (t.area && queue.some((p) => distance(p, t.area!) === 0))) {
+          if (t.teleportTo) seed(t.teleportTo);
+          if (t.effects?.warpTo?.mapId === m.id) seed(t.effects.warpTo.spawnId);
+          if (t.dialogueId) pending.push(t.dialogueId);
+        }
+      const seen = new Set<string>();
+      while (pending.length) {
+        const id = pending.pop()!;
+        if (seen.has(id)) continue;
+        seen.add(id);
+        const node = nodes[id];
+        if (node?.effects?.warpTo?.mapId === m.id) seed(node.effects.warpTo.spawnId);
+        for (const r of node?.responses ?? []) if (r.nextDialogueId) pending.push(r.nextDialogueId);
+      }
+      for (let i = before; i < queue.length; i++) {
+        const p = queue[i];
+        for (const q of [
+          { x: p.x - 1, y: p.y },
+          { x: p.x + 1, y: p.y },
+          { x: p.x, y: p.y - 1 },
+          { x: p.x, y: p.y + 1 },
+        ])
+          if (walkable(q) && !reached.has(key(q))) {
+            queue.push(q);
+            reached.add(key(q));
+          }
+      }
+      expanded = queue.length > before;
+    }
     for (const e of m.exits ?? [])
       if (!accessible(e.area)) add('unreachable', `exit ${e.id} cannot be reached`, e.area);
     for (const e of [...(m.npcs ?? []), ...(m.interactables ?? [])])
