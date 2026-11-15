@@ -3,7 +3,7 @@
  * (outline: CHAPTER_06_DESIGN.md §14.2; art contract for T-69 / T-70):
  *
  * voidcore_tileset (128 × 384, 4 × 12): the approved dungeon tiles 0-15 tinted to the Deep Void's
- *   ink and pale cyan (same shapes and indices), + 16-47:
+ *   ink and violet (same shapes and indices), + 16-47:
  *   collide 16 deep void · 17 name stone (erased) · 18 name stone (renamed, glowing) ·
  *   19 glyph-chain post · 20 memory lantern (dark) · 21 memory lantern (lit) · 22 cradle of the
  *   forgotten · 23 ghost house (outline only) · 24 hollow tree · 25 echo well · 26 broken clock face ·
@@ -82,27 +82,27 @@ function sheetWith(base, extraTiles, palette, totalRows) {
 
 const VP = {
   O: hex('#04050a'),
-  v: hex('#05060c'), // deep void
-  V: hex('#10142a'),
-  s: hex('#cfe8ff'), // faint stars / motes
-  c: hex('#7ad8e8'), // pale cyan glow
-  C: hex('#3a8a9a'),
-  w: hex('#f2fbff'),
+  v: hex('#0a0614'), // deep void
+  V: hex('#1c1236'),
+  s: hex('#e6dcff'), // faint stars / motes
+  c: hex('#b48cff'), // violet glow
+  C: hex('#6a4ab0'),
+  w: hex('#f6f0ff'),
   g: hex('#e8c060'), // gold glyph chains
   G: hex('#9a7a2a'),
-  k: hex('#3a3e52'), // ink stone
-  K: hex('#262a3a'),
-  n: hex('#5a6078'),
-  a: hex('#8a8ea4'), // ash
-  A: hex('#5c6074'),
+  k: hex('#3a2e52'), // ink stone
+  K: hex('#261c3a'),
+  n: hex('#5c4e7a'),
+  a: hex('#8e86a8'), // ash
+  A: hex('#5e5678'),
   t: hex('#3a2e2a'), // dead wood
   T: hex('#58463c'),
   b: hex('#c8a878'), // faded sand / boat wood
   B: hex('#8a704e'),
   p: hex('#8a6ad8'), // violet (Kuro's Interval)
-  i: [16, 18, 34, 230], // ink
-  f: [200, 220, 240, 110], // fog
-  h: [120, 220, 240, 150], // ghost outline
+  i: [24, 14, 40, 230], // ink
+  f: [214, 196, 245, 110], // fog
+  h: [190, 150, 255, 150], // ghost outline
 };
 const C = (fn) => outline(fn(tile('.')));
 const deepVoid = (seed) => {
@@ -352,17 +352,17 @@ const VOID_TILES = [
 if (VOID_TILES.length !== 32) throw new Error(`expected 32 tiles, got ${VOID_TILES.length}`);
 
 const INK_RAMP = [
-  [6, 8, 14],
-  [22, 26, 40],
-  [46, 54, 76],
-  [96, 110, 136],
-  [186, 210, 226],
+  [8, 4, 16],
+  [30, 20, 52],
+  [62, 44, 98],
+  [114, 96, 152],
+  [208, 194, 238],
 ];
 const voidcore = sheetWith(
   tinted(
     'public/assets/tilesets/dungeon_tileset.png',
     INK_RAMP,
-    (l) => [Math.round(90 + l * 60), Math.round(200 + l * 40), 240],
+    (l) => [Math.round(180 + l * 50), Math.round(130 + l * 70), 255],
     1.6,
   ),
   VOID_TILES,

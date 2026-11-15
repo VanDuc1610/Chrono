@@ -115,8 +115,8 @@ const KURO_VOID = {
   d: hex('#3a3e48'),
   u: hex('#1a1c24'),
   f: hex('#14141a'),
-  i: [10, 12, 26, 240], // void ink
-  k: [122, 216, 232, 220], // pale cyan cracks
+  i: [18, 10, 32, 240], // void ink
+  k: [190, 150, 255, 220], // violet cracks
 };
 function kuroVoidFrame(phase) {
   const c = canvas(32);
@@ -208,10 +208,10 @@ function motherFrame(phase) {
 
 // ------------------------------------------------------------------ Nameless shade
 const SHADE = {
-  O: [24, 34, 52, 180],
-  p: [200, 226, 240, 170],
-  P: [150, 184, 210, 160],
-  n: [100, 130, 160, 160],
+  O: [32, 22, 54, 180],
+  p: [222, 208, 246, 170],
+  P: [178, 158, 222, 160],
+  n: [122, 100, 172, 160],
 };
 function shadeFrame(phase) {
   const c = canvas(32);
@@ -283,7 +283,7 @@ const EATER = {
   m: hex('#2a2238'),
   M: hex('#4a3a62'),
   t: hex('#e8e0f0'), // teeth
-  c: hex('#7ad8e8'), // swallowed glyph letters
+  c: hex('#b48cff'), // swallowed glyph letters
 };
 function eaterFrame(phase) {
   const c = canvas(32);
@@ -312,10 +312,10 @@ function eaterFrame(phase) {
 // ------------------------------------------------------------------ Hollow Husk
 const HUSK = {
   O: hex('#0a0a10'),
-  a: hex('#8a8ea4'),
-  A: hex('#5c6074'),
-  v: hex('#05060c'), // the hole where a name was
-  c: hex('#7ad8e8'),
+  a: hex('#8e86a8'),
+  A: hex('#5e5678'),
+  v: hex('#0a0614'), // the hole where a name was
+  c: hex('#b48cff'),
 };
 function huskFrame(phase) {
   const c = canvas(32);
@@ -343,7 +343,7 @@ const MOTH = {
   O: [20, 24, 36, 220],
   w: hex('#f2f4f8'),
   W: hex('#b8c0cc'),
-  c: hex('#7ad8e8'),
+  c: hex('#b48cff'),
 };
 function mothFrame(phase) {
   const c = canvas(32);
@@ -370,10 +370,10 @@ function mothFrame(phase) {
 // ------------------------------------------------------------------ Ink Hound
 const HOUND = {
   O: hex('#04040a'),
-  i: hex('#141828'),
-  I: hex('#262c44'),
-  e: hex('#7ad8e8'),
-  d: [10, 12, 26, 200], // dripping ink
+  i: hex('#1a1028'),
+  I: hex('#2e2048'),
+  e: hex('#b48cff'),
+  d: [20, 12, 34, 200], // dripping ink
 };
 function houndFrame(phase) {
   const c = canvas(32);
