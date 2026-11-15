@@ -19,9 +19,21 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-Goal (owner, 2026-11-14): Chapter 5 is built and waits for the owner's playtest. Chapter 6 is built and waits for the owner's playtest. Chapter 6
-"The Hour of the Gods" — about as long as Chapter 5, ~65% puzzles and world mysteries, ~35% combat with
-new enemy and boss mechanics. Chapter 6 is **not** the last chapter.
+Goal (owner, 2026-11-15): Chapters 5 and 6 are built and wait for the owner's playtest. Next, Chapter 7
+"The Cradle of the Forgotten" (outline: CHAPTER_06_DESIGN.md §14.2) — about as long as Chapter 6, puzzles and
+mysteries first, with new enemy and boss mechanics. The story ends at Chapter 9 (owner decision, §18).
+
+### T-69 · Chapter 7 design
+
+- **Assignee:** Antigravity · **Status:** TODO
+- **Locks:** `docs/story/CHAPTER_07_DESIGN.md` (new)
+- **Contract:** proposals only (no JSON, code or art); use the art IDs of T-70; Claude reviews, the owner approves, Claude builds
+
+### T-70 · Chapter 7 art (first set)
+
+- **Assignee:** Claude · **Status:** IN PROGRESS
+- **Locks:** `scripts/author-ch7-*`, `art-source/**/ch7*`, `art-source/environment/voidcore/**`
+- **Scope:** void-core tileset, Kuro (void-touched), Kuro's mother, nameless shades, The First Forgotten (frail), four foe concepts; bosses after the design is approved
 
 ## Backlog (scheduled after current locks are released)
 
