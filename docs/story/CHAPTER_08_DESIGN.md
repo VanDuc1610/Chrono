@@ -35,15 +35,15 @@ Cuối chương 7, mắt xích cuối của Chronos vỡ. Giờ Số Không bắ
 
 ## 2. Hé Lộ Bí Mật (OQ)
 
-| Mã    | Câu hỏi                                   | Hé lộ ở chương 8                                                                                                                                                                                                                                              | Giữ cho chương 9                                                         |
-| :---- | :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------- |
-| OQ-01 | Bản chất Unwritten của Peter; ai xé trang | **[PROPOSAL]** Trang giấy trắng bọc linh hồn Peter là **trang từng ghi tên The First Forgotten** trong Sổ Khởi Nguyên. Khi bị xóa tên, ngài tự xé trang trống ấy ra và gửi theo tia sáng cuối của Chronos (ch6). Vì vậy Peter là "chỗ một cái tên đã từng ở". | Peter có thể nhận một cái tên mới (làm mỏ neo) hay không: kết thúc thật. |
-| OQ-04 | Null Hour                                 | Xác nhận bản vẽ chương 7: Null Hour là **cơ chế tự hủy Chronos tự cài**, kích hoạt khi Ấn Origin vỡ. Nó không ác: nó ép mọi thế giới về một điểm để không thế giới nào bị Hư Không ăn dần.                                                                    | Có tắt hẳn được không (tùy kết thúc).                                    |
-| OQ-03 | Chronos ở đâu                             | Chuỗi xích vỡ ở ch7 giải phóng ý thức Chronos. Cuối ch8 **Chronos tái sinh hiện ra** trên đỉnh tháp.                                                                                                                                                          | Toàn bộ động cơ và trận chiến.                                           |
-| OQ-02 | Nửa sau lời hứa Peter–Kuro                | Kuro nhắc lại "chiếc ghế trống" và kể nửa câu còn thiếu khi đứng trên đỉnh tháp. Peter chưa đáp.                                                                                                                                                              | Câu đáp của Peter ở kết thúc.                                            |
-| OQ-05 | The First Forgotten                       | Ngài xuất hiện trong ánh sáng mờ ở Thánh Điện Trang Xé (Hồi 3), xác nhận OQ-01, rồi biến mất vào tháp.                                                                                                                                                        | Ngài chuyển giao gì cho Peter.                                           |
+| Mã    | Câu hỏi                                             | Hé lộ ở chương 8                                                                                                                                                                                                                                                                                                                                                                          | Giữ cho chương 9                                                         |
+| :---- | :-------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------- |
+| OQ-01 | Bản chất Unwritten của Peter; vì sao có trang trắng | **[CANON — owner 2026-11-15]** Peter **từng là một trang giấy** trong Sổ Khởi Nguyên: trang ghi tên The First Forgotten. Đêm Phân Tách, lệnh xóa tên của Chronos **vận hành lỗi**: thay vì chỉ làm mờ chữ, nó giật rời cả trang. Trang trống rơi theo tia sáng cuối của Chronos (ch6). Không ai cố ý — Peter là **sai sót duy nhất** của cuốn sổ. Vì vậy Hư Không không bám được vào cậu. | Peter có thể nhận một cái tên mới (làm mỏ neo) hay không: kết thúc thật. |
+| OQ-04 | Null Hour                                           | Xác nhận bản vẽ chương 7: Null Hour là **cơ chế tự hủy Chronos tự cài**, kích hoạt khi Ấn Origin vỡ. Nó không ác: nó ép mọi thế giới về một điểm để không thế giới nào bị Hư Không ăn dần.                                                                                                                                                                                                | Có tắt hẳn được không (tùy kết thúc).                                    |
+| OQ-03 | Chronos ở đâu                                       | Chuỗi xích vỡ ở ch7 giải phóng ý thức Chronos. Cuối ch8 **Chronos tái sinh hiện ra** trên đỉnh tháp.                                                                                                                                                                                                                                                                                      | Toàn bộ động cơ và trận chiến.                                           |
+| OQ-02 | Nửa sau lời hứa Peter–Kuro                          | Kuro nhắc lại "chiếc ghế trống" và kể nửa câu còn thiếu khi đứng trên đỉnh tháp. Peter chưa đáp.                                                                                                                                                                                                                                                                                          | Câu đáp của Peter ở kết thúc.                                            |
+| OQ-05 | The First Forgotten                                 | Ngài xuất hiện trong ánh sáng mờ ở Thánh Điện Trang Xé (Hồi 3), xác nhận OQ-01, rồi biến mất vào tháp.                                                                                                                                                                                                                                                                                    | Ngài chuyển giao gì cho Peter.                                           |
 
-**Phương án dự phòng cho OQ-01** (nếu owner không chọn bản trên): Chronos tự tay xé trang. Peter là "trang chưa ai được viết vào". Cách này ít bi kịch hơn và giữ First Forgotten trong vai người chứng kiến.
+**Hệ quả cho chương 9:** Chronos coi Peter là "lỗi cần sửa" (đưa trang về sổ), Kuro coi Peter là bằng chứng rằng sai sót cũng có quyền tồn tại. Đây là mâu thuẫn trung tâm của trận ba bên.
 
 ---
 
@@ -261,7 +261,7 @@ Mọi câu đều **không giới hạn thời gian**, có manh mối trong bả
   - B phải ▼▼▲ ghép C trái ▲▲▼.
   - Câu: "NGƯỜI CÓ TÊN Ở TRANG NÀY ĐÃ TỰ XÓA ĐỂ GIỮ CỬA."
 - Solver sẽ kiểm tra không còn cách ghép nào khác khi build.
-- **Sau câu đố:** First Forgotten hiện ra trong ánh sáng mờ và kể OQ-01 (§2).
+- **Sau câu đố:** First Forgotten hiện ra trong ánh sáng mờ và kể OQ-01 (§2): ngài tự nguyện bị xóa tên, nhưng việc trang giấy rơi ra là **lỗi của cuốn sổ**, không ai muốn.
 
 ### C09 · Phòng Tuyến Bốn Cửa
 
@@ -431,9 +431,11 @@ Pháp Quan Lưu Đày (ch2) và Cờ Máu (ch4) dính làm một.
 ## 10. Hồi Tưởng (4)
 
 - **FB-01 · Xưởng Đúc** (bản đồ 4): Ivo trẻ và Kuro 14 tuổi sửa chung một chiếc đồng hồ ở Beta. Kuro: "Mày làm cho nó chạy, tao làm cho nó đẹp."
-- **FB-02 · Đêm Xé Trang** (bản đồ 10): góc nhìn First Forgotten.
-  - Ngài nhìn tên mình mờ khỏi trang, rồi tự xé trang trống ấy ra, gấp làm đôi và gửi theo tia sáng cuối của Chronos.
-  - Thoại: "Một chỗ trống… để ai đó sau này còn được gọi tên."
+- **FB-02 · Đêm Trang Rơi** (bản đồ 10): góc nhìn First Forgotten.
+  - Ngài nhìn Chronos đọc lệnh xóa tên mình. Chữ mờ dần, rồi cuốn sổ rung lên, **trang giấy bật khỏi gáy** như bị gió giật. Chronos sững sờ, với tay không kịp.
+  - Trang trống bay theo tia sáng cuối cùng, rơi xuống trần gian.
+  - Thoại First Forgotten: "Cuốn sổ chưa bao giờ sai… cho đến đêm đó."
+
 - **FB-03 · Phòng Tuyến Cũ** (bản đồ 11): Peter nhỏ và Kuro nhỏ dựng "pháo đài" bằng thuyền thúng chống bão. Kuro: "Cửa nào yếu thì tao đứng."
 - **FB-04 · Ông Thợ Đồng Hồ** (bản đồ 15): ông thợ đặt chiếc đồng hồ vỏ đồng vào tay Peter tám tuổi. "Đồng hồ không giữ thời gian. Người giữ đồng hồ mới giữ."
 
@@ -518,7 +520,7 @@ Cảnh ở `map_ch8_tower_crown`:
 4. **FB-04** (ông thợ đồng hồ).
 5. Ánh vàng từ những sợi xích tan ở ch7 cuộn lại thành một hình người: **Chronos tái sinh**.
    - Ngài nhìn Kuro: "Possibility. Vết nứt đầu tiên của mọi vết nứt."
-   - Rồi nhìn Peter: "Còn ngươi… là chỗ trống ta để lại."
+   - Rồi nhìn Peter: "Còn ngươi… là trang giấy ta đánh rơi. Lỗi duy nhất của ta."
    - Ngài đưa tay ra đòi nửa Ấn Origin.
 6. Kuro bước lên chắn trước Peter. Peter đứng giữa hai người.
 7. Màn hình tối: **"KẾT THÚC CHƯƠNG 8 — GIỜ THỨ 25 ĐANG CHỜ. HẸN GẶP LẠI Ở CHƯƠNG 9: VỊ THẦN GÃY CÁNH."**
@@ -562,3 +564,14 @@ Cờ đặt: `ch8_chronos_returned` (mở trần cấp chương 9; dùng làm d�
 4. **Dáng vẻ Chronos tái sinh:** canon mới ở mức khái niệm. Mình đề xuất **người đàn ông cao, tóc bạc trắng, áo choàng vàng rách thành sợi xích, mặt đồng hồ không kim sau lưng**. Bạn đồng ý, hay có hình dung khác?
 5. **Boss ẩn Tàn Ảnh Sáu Ấn:** giữ ở chương 8 để báo trước chương 9, hay bỏ?
 6. **Trần cấp:** chương 8 lên 29, chương 9 lên 30, được chưa?
+
+## 17. Quyết Định Của Owner (2026-11-15)
+
+1. **OQ-01:** Peter từng là một trang giấy trong Sổ Khởi Nguyên; trang bị tách ra do **lỗi vận hành** khi lệnh xóa tên chạy, không phải do ai cố ý xé. Đã sửa §2, C08, FB-02 và cảnh kết (§14).
+2. Đồng đội theo hồi Ivo → Lyra → Neris, hồi cuối cả đội — **đồng ý**.
+3. Tỉ lệ 60% giải đố / 40% chiến đấu — **đồng ý**.
+4. Dáng vẻ Chronos tái sinh (tóc bạc, áo choàng vàng rách thành xích, mặt đồng hồ không kim sau lưng) — **đồng ý**.
+5. Boss ẩn Tàn Ảnh Sáu Ấn — **giữ**.
+6. Trần cấp: chương 8 lên 29, chương 9 lên 30 — **đồng ý**.
+
+Bước tiếp: Claude vẽ hình chương 8 (§13.1), owner duyệt, rồi build.
