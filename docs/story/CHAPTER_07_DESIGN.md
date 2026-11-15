@@ -704,3 +704,200 @@ Toàn bộ trang bị tuân thủ các chỉ số hợp lệ của engine: `maxH
 ---
 
 _Tài liệu kết thúc. Sẵn sàng chuyển giao cho Claude Code review kỹ thuật và trình Project Owner phê duyệt._
+
+---
+
+## 18. Claude Review — Bản Đã Sửa (2026-11-15)
+
+§18 thay thế mọi chỗ khác ở §1–§17 khi hai bên mâu thuẫn. Những gì §18 không nhắc tới thì giữ nguyên.
+
+### 18.1. Màu sắc & tên gọi
+
+- **Hư không mang sắc tím** (owner yêu cầu 2026-11-15). Bỏ "xám tro và mực đen" ở §1.1. Hình đã vẽ theo màu tím.
+- **Mẹ Kuro tên Trần Thị Mai**, gọi là **bà Mai**.
+  - Người Việt gọi bằng tên chính chứ không bằng họ, nên "Mai Thị Lệ" mà gọi "bà Mai" là sai.
+  - C03 sửa lại ở §18.3.
+- **Mã bản đồ:** dùng `map_ch7_cradle_of_dawn` (§17.1 ghi nhầm `cradle_dawn`).
+- `map_ch7_silent_bell_crypt` đổi thành `map_ch7_fog_lullaby_maze` (Mê Cung Sương Lời Ru), vì C09 được thay (§18.3).
+
+### 18.2. Lỗi logic phải sửa
+
+**C05 · Ba thủy thủ — có HAI nghiệm, không phải một.**
+
+Kẻ Nói Dối và Kẻ Nói Ngược đều luôn nói sai, nên chỉ đúng một câu đúng.
+
+| Giả sử nói thật            | Kéo theo                                                                                     | Kết quả         |
+| -------------------------- | -------------------------------------------------------------------------------------------- | --------------- |
+| A ("B nói dối")            | B nói dối, nên C không phải Kẻ Nói Ngược, nên C phải nói thật — nhưng A đã nói thật          | Mâu thuẫn       |
+| B ("C nói ngược")          | C nói ngược, A nói dối. Câu của A ("B nói dối") sai; câu của C ("tôi là thuyền trưởng") sai  | Hợp lệ          |
+| C ("tôi là thuyền trưởng") | B phải nói sai, A cũng sai. A nói "B nói dối" là sai, nên B là Kẻ Nói Ngược, A là Kẻ Nói Dối | **Cũng hợp lệ** |
+
+Bản gốc loại trường hợp C nhầm, vì mặc định B là Kẻ Nói Dối. Thêm nữa, đây là **lần thứ ba** dùng kiểu câu đố nói thật/nói dối (đã có ở EX-04 chương 5 và C06 chương 6). → **Thay hẳn** (§18.3).
+
+**C06 · Kim đồng hồ — chỉ là xếp số tăng dần.** Bốn mảnh 2/5/8/11 xếp theo thứ tự đọc là xong.
+
+- **Sửa:** chuỗi vẫn cộng 3 mỗi góc nhưng tính vòng 12 giờ, và **không bắt đầu từ số nhỏ nhất**.
+- Đồng hồ quả quýt của Peter dừng lúc **8 giờ**, đúng lúc rơi xuống vực. Người chơi thấy chi tiết này ở bản đồ 1 (POI "Đồng hồ quả quýt").
+- Ghi chú thợ đồng hồ: _"Giờ bắt đầu là giờ ngươi rơi xuống."_
+- **Đáp án:** 12 giờ = Kim 8 · 3 giờ = Kim 11 · 6 giờ = Kim 2 (vì 14 − 12) · 9 giờ = Kim 5.
+
+**C07 · Kệ sách — bảng tra nối thẳng mùi, ký ức, khối lượng và cuộn sách.** Tức là đáp án nằm sẵn trên bảng.
+
+- **Sửa:**
+  - Bỏ hết số gam.
+  - Mỗi cuộn chỉ có **mùi** (tro, hoa cúc, quặng sắt, đá sao).
+  - Bảng tra chỉ nối **mùi → loại ký ức**.
+  - Ghi chú của thủ thư chỉ nói **thứ tự các loại ký ức**.
+- Người chơi phải nối hai bước: cuộn → mùi → ký ức → ngăn.
+- **Đáp án không đổi:** A, B, C, D.
+
+**C02 · Ba cửa sổ — văn bia ghi luôn tên đèn trong ngoặc.**
+
+- **Sửa:** bia chỉ nói _"sóng biển", "rơm ruộng", "trang giấy"_, không ghi tên đèn. Người chơi tự nối sang Lam / Vàng / Trắng.
+- **Đáp án không đổi.**
+
+**C10 · Mắt xích — lời First Forgotten ghi sẵn `[U]`.**
+
+- **Sửa:** ngài chỉ nói _"sợi xích đúc từ sự đứng yên"_. Người chơi phải nhớ từ chương 6 rằng `[U]` = Tĩnh.
+- **Đáp án không đổi.**
+
+**C11 · Đục đá — bốn phiến ghi sẵn độ cứng I–IV, văn bia nối thẳng loại đá với loại đục.**
+
+- **Sửa:** các phiến **không đánh số**, chỉ tả bề ngoài (đá vôi mềm vỡ vụn · đá trầm tích nhiều lớp · đá sao lấp lánh · đá hư không hút sáng). Thứ tự đặt là thứ tự trên bệ.
+
+**C04 · Sỏi giếng — mô tả mỗi viên dùng lại nguyên câu chữ trong văn bia.** Người chơi chỉ cần dò chữ trùng.
+
+- **Sửa:**
+  - Mỗi viên chỉ mô tả cảm giác khi cầm. Thêm một tờ ghi chép so sánh: _"Đá Sao nặng hơn Thạch Anh nhưng nhẹ hơn Quặng Sắt; Sỏi Hư Vô nặng nhất nhưng nuốt mất tiếng"_.
+  - Văn bia nói: nốt càng trầm thì sỏi càng nặng, và sỏi nào nuốt mất tiếng thì không dùng được.
+- **Đáp án không đổi.**
+
+**C01 · Người gác cầu.** Là câu nhập môn nên giữ độ dễ. Nhưng câu "tiếng gọi người anh cả trong nhà" gần như đọc thẳng ra **ANH**.
+
+- **Sửa:** đổi thành _"tên lão là tiếng các em trong xóm vẫn gọi người lớn tuổi hơn mình"_.
+- **Đáp án vẫn là A–N–H.**
+
+### 18.3. Câu đố thay mới
+
+**C05 (mới) · Ba Cánh Buồm** — suy luận bảng ghép, kiểu chưa từng dùng.
+
+- **Đầu vào:** chỉ định thủy thủ nào là thuyền trưởng (vòng xoay A/B/C + POI "Trao hải đồ").
+- **Manh mối:**
+  1. Ba thủy thủ quê Nha Trang, Cam Ranh và Ninh Hòa; lái ba thuyền buồm đỏ, trắng và nâu.
+  2. Nhật ký: _"Thuyền trưởng luôn lái buồm nâu."_
+  3. Thủy thủ C quê Ninh Hòa (thẻ bài).
+  4. B chưa từng đặt chân tới Cam Ranh (lời A).
+  5. Người lái buồm trắng là dân Cam Ranh (sổ bến).
+  6. Buồm nâu không phải của người Ninh Hòa (vết sơn trên mạn thuyền C).
+- **Suy luận:**
+  - C quê Ninh Hòa, B không quê Cam Ranh, nên B quê Nha Trang và A quê Cam Ranh.
+  - Buồm trắng là của người Cam Ranh, tức của A.
+  - Buồm nâu không phải của C (Ninh Hòa), nên là của B. C lái buồm đỏ.
+  - Thuyền trưởng lái buồm nâu, vậy là **B**.
+- Mỗi suy luận đều bị ép bởi đúng một manh mối, nên chỉ có một nghiệm.
+- **Hồi đáp chương 6:** `ch6_chronicle_kept` thì có thêm một trang sử xác nhận manh mối 5. Người chơi đã đốt cuốn sử vẫn giải được.
+
+**C09 (mới) · Mê Cung Sương Lời Ru** — câu đố đi đường, thay cho chuông.
+
+- Chuông đã dùng ở chương 3, chương 5 (chuông gió) và chương 6, lại thêm C12. Lời bia C09 bản gốc còn nói thẳng thứ tự.
+- **Bố trí:** một vùng tường sương. Đi vào ô sai thì bị đẩy về đầu (như vực chương 3).
+- **Manh mối:** bà Mai hát bài _"Chiều Trên Bến Cũ"_. Mỗi câu nhắc một mốc theo thứ tự: bến thuyền → gốc bàng → giếng cạn → ngọn đèn. Các mốc này nằm rải trong sương.
+- **Lời giải:** đi lần lượt qua các mốc đúng thứ tự trong lời ru. Chỉ đường nối các mốc theo thứ tự đó là không có tường sương chặn. Claude dựng bản đồ và kiểm mọi lối rẽ.
+- **Hồi đáp:** `ch5_refused_alpha_memory` thì Peter tự nhớ thêm một câu hát, nên mê cung ngắn hơn một mốc.
+
+**C12 (mới) · Lá Thư Mất Dấu** — câu đố dấu tiếng Việt, gắn với chủ đề "bị xóa".
+
+- Hư không ăn mất hết dấu của lá thư bà Mai để lại: _"Me cho con o ben cu"_.
+- **Đầu vào:** ba vòng xoay cho ba từ:
+  - từ 1: me / mẹ / mé / mè;
+  - từ 2: cho / chờ / chở / chó;
+  - từ 3: ben / bén / bến / bên.
+- **Manh mối:**
+  - tên bài hát "Chiều Trên **Bến** Cũ";
+  - hồi tưởng FB-01: _"mai bão tan mẹ lại ra bến **chờ** thuyền về"_;
+  - người viết là mẹ.
+- **Đáp án:** **mẹ · chờ · bến** → _"Mẹ chờ con ở bến cũ."_
+- "Chở" bị loại vì lời ru và hồi tưởng đều nói về việc đợi. Sai thì một dòng mực lại nuốt chữ.
+- **Thưởng:** `mother_golden_hairpin` (nhiệm vụ phụ Chiếc Kẹp Tóc).
+
+**C13 (bổ sung đề bài) · Trái Tim Tro Thủy Tinh.** Bản gốc chỉ có đáp án, không có manh mối. Claude bổ sung:
+
+- Ba van, mỗi van có 3 nấc (Trái / Giữa / Phải). Mỗi nấc xả một lượng tro và mực khác nhau, ghi trên bảng van.
+- Cần tổng tro **bằng** tổng mực.
+- Claude chọn bộ số sao cho chỉ có đúng một tổ hợp cân, và kiểm bằng máy khi dựng.
+- Đáp án dự kiến giữ nguyên: Trái · Giữa · Phải.
+
+### 18.4. Chiến đấu
+
+**Quái thường:**
+
+- **Vỏ Rỗng trùng Xạ Thủ chương 4** (né đúng lúc tia chuyển trắng). Thay bằng luật **đèn xanh đèn đỏ**:
+  - Vỏ Rỗng chỉ cử động khi Peter cử động. Peter đứng yên thì chúng hóa đá, và chém vào lúc hóa đá gây ×2.
+  - Đứng yên quá 2 giây thì lỗ đen giữa ngực hút Peter lại gần.
+- **Kẻ Ăn Tên:** giữ, nhưng thêm điểm khác với gạt giáo chương 4: lúc nghẹn, nó nhả chữ nổ trúng **quái khác** quanh nó. "Câm Lặng" đổi thành **mất Đòn Thời Gian 3 giây** (Claude làm trạng thái mới).
+- **Đàn Bướm Xóa:** giữ. Bỏ "màn hình tối" vì khó chịu khi chơi lâu. Thay bằng mất 6 HP mỗi giây trong 4 giây, lăn né (Shift) thì phủi hết.
+- **Chó Mực:** giữ. Vệt mực chỉ làm chậm, **không** hút MP, để khác vũng mực chương 2. "Chảy máu" đổi thành sát thương ×1,3 (game không có trạng thái chảy máu).
+
+**Elite · Thẩm Phán Hư Không:** đánh ngay trên bản đồ, không chuyển sang màn đánh theo lượt.
+
+- Ba vòng xích rơi xuống thành tam giác.
+- Điểm khác với mưa tên chương 4: **ô an toàn duy nhất là chỗ ba vòng giao nhau**, ngược với thói quen chạy ra ngoài.
+
+**Boss giữa · Kẻ Khóc Không Tên.** Pha 2 bản gốc (chọn đúng khuôn mặt đang khóc) trùng cơ chế "bài hát lõi" ở chương 3, 5 và 6. Thay bằng **Bể Nước Mắt**:
+
+- Mỗi lượt của boss, bể thêm 1 giọt (hiện bộ đếm).
+- Mỗi lần Peter đỡ đúng nhịp thì lau đi 1 giọt.
+- Đủ 5 giọt thì lũ nước mắt trút xuống: mất 40% máu, bể về 0.
+- Pha 1 giữ nguyên.
+
+**Boss cuối · Kuro hư không hóa.** Giữ cách kết thúc bằng hòa giải (owner xác nhận ở §19). Điều kiện:
+
+- Lựa chọn "Gọi tên thật của Kuro" (phím 6) chỉ hiện khi đủ ba điều:
+  - có `kuro_mother_brooch` (thưởng C03);
+  - có cờ `ch7_mother_song_remembered` (giải C09);
+  - Kuro còn dưới 40% máu.
+- Thiếu một điều thì vẫn thắng được bằng đánh tới khi còn 10% máu, nhưng thoại kết lạnh hơn và **không** có cảnh bà Mai ôm Kuro.
+- Sửa thoại: Kuro **không** cầm thanh kiếm gãy (đó là kiếm của Peter). Kuro buông "lưỡi kiếm khả thể" của chính mình.
+- Pha 2 "hồi máu nếu Peter đánh thường" trùng cơ chế phán quyết chương 2–3 → bỏ. Thay bằng: xúc tu mực mỗi lượt khóa một lệnh, phá bằng Đòn Thời Gian.
+
+**Boss ẩn · Bóng Nguyên Sơ.** Bản gốc chưa có cơ chế. Claude đề xuất **nhịp đôi ngược**:
+
+- Hai vòng sáng thu vào cùng lúc, một vòng thật và một vòng giả.
+- Vòng thật mang màu của chương 7 (tím), vòng giả màu vàng.
+- Phải đỡ theo vòng tím.
+
+**Chỉ số không có trong game, phải bỏ hoặc thay:**
+
+| Chỗ ghi                                             | Xử lý                                                                          |
+| --------------------------------------------------- | ------------------------------------------------------------------------------ |
+| "+10% chí mạng" (người thợ rèn)                     | Đổi thành: kiếm gãy được mài lại, +2 attack cho vũ khí đang đeo trong chương 7 |
+| "giảm 20% sát thương từ mực" (Kẹp Tóc Vàng)         | Bỏ, giữ maxHp 40 · defense 6                                                   |
+| "tăng sát thương Đòn Thời Gian" (Mảnh Thép Hẹn Ước) | Bỏ; đây là vật cốt truyện, giữ cho chương 9                                    |
+| `echoPct 15%` (Kiếm Cắt Hư Vô)                      | Ghi là 0,15                                                                    |
+
+### 18.5. Mạch truyện & canon
+
+- **First Forgotten không được thành Authority thứ 7.**
+  - Bản gốc nói ngài cai quản "những khả năng không thành hình", trùng với Possibility (quyền năng của Kuro).
+  - Chương 6 đã định ngài là "ánh sáng đầu tiên"; đáp án hốc đá là `[A][N][X]`.
+  - **Sửa:** ngài là **người cùng giữ Origin với Chronos** thuở Khởi Nguyên. Khi vết nứt mở, ngài tự nguyện để Chronos xóa tên mình và trói mình lại làm nút chặn. Đúng 6 Authority.
+- **FB-03 mâu thuẫn chương 6.**
+  - Chương 6: tia sáng rơi vào tay một ông thợ đồng hồ già.
+  - Bản chương 7: chiếc nôi trôi dạt vào bãi biển.
+  - **Sửa:** cùng đêm ấy, kể từ phía ông thợ. Ông bọc đứa bé bằng chiếc áo thợ rồi đặt vào một chiếc nôi gỗ. Không khẳng định ông là "ông nội" (giữ mơ hồ như chương 6).
+- **Bí Mật 1 ("Peter là trang giấy xé từ Sổ Khởi Nguyên"):** chương 7 chỉ được thêm chi tiết nhỏ cho OQ-01. Giữ hình ảnh "trang giấy trắng" (vang lại lời chương 6), nhưng **không** nói ai xé và xé từ đâu. Để chương 8.
+- **Bí Mật 4 (Null Hour là cơ chế tự hủy khi sáu ấn vỡ):** giữ ở mức một bản vẽ chưa đầy đủ. Đây là [PROPOSAL] lớn, owner xác nhận ở §19.
+- **Đầm lầy và sương** trong bảng hồi đáp (ruy băng của Na, giọt dầu của Solon) giữ nguyên; Claude gắn vào bản đồ.
+
+### 18.6. Nhiệm vụ phụ còn thiếu nội dung
+
+- **`quest_ch7_lost_compass` (La bàn thủy thủ mù):** chưa có cách giải.
+  - Claude đề xuất: tìm ba mảnh la bàn trên ba con thuyền.
+  - Kim la bàn chỉ đúng khi đặt lên nóc thuyền buồm nâu (vang lại C05 mới).
+- **`quest_ch7_first_mason` (Di nguyện thợ khắc đá):** giải C11 xong thì khắc tên lão lên bia. Bia tên chuyển sang trạng thái sáng.
+
+### 18.7. Tóm tắt các con số
+
+- 17 bản đồ chính + 3 ẩn.
+- Cấp tối đa: 27.
+- Tỉ lệ khoảng 60% giải đố / 40% chiến đấu.
