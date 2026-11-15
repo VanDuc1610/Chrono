@@ -231,6 +231,10 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_hollow_husk', 'assets/enemies/hollow_husk.png', 32],
       ['enemy_erasure_moths', 'assets/enemies/erasure_moths.png', 32],
       ['enemy_ink_hound', 'assets/enemies/ink_hound.png', 32],
+      ['enemy_void_inquisitor', 'assets/enemies/void_inquisitor.png', 32],
+      ['boss_nameless_weeper', 'assets/enemies/nameless_weeper.png', 48],
+      ['boss_kuro_void', 'assets/enemies/kuro_boss.png', 48],
+      ['boss_primordial_shade', 'assets/enemies/primordial_shade.png', 48],
     ] as const) {
       this.load.spritesheet(key, file, { frameWidth: size, frameHeight: size });
     }
@@ -364,6 +368,10 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_hollow_husk_idle', 'enemy_hollow_husk', 3, 4],
       ['enemy_erasure_moths_idle', 'enemy_erasure_moths', 3, 8],
       ['enemy_ink_hound_idle', 'enemy_ink_hound', 3, 7],
+      ['enemy_void_inquisitor_idle', 'enemy_void_inquisitor', 3, 4],
+      ['boss_nameless_weeper_idle', 'boss_nameless_weeper', 3, 4],
+      ['boss_kuro_void_idle', 'boss_kuro_void', 3, 4],
+      ['boss_primordial_shade_idle', 'boss_primordial_shade', 3, 4],
     ] as const) {
       if (!this.anims.exists(key)) {
         this.anims.create({

@@ -3,7 +3,8 @@
  * Forgotten" (outline: CHAPTER_06_DESIGN.md §14.2; art contract for T-69 / T-70):
  *   Kuro void-touched (32x32 x5, keeps Kuro's approved look: straight black hair, silver-grey cloak),
  *   Kuro's mother (an echo), a nameless shade, The First Forgotten (frail, 48x48 x4),
- *   Name Eater, Hollow Husk, Erasure Moths, Ink Hound (32x32 x4). Bosses come after the design.
+ *   Name Eater, Hollow Husk, Erasure Moths, Ink Hound (32x32 x4); bosses after the design: The Nameless
+ *   Weeper, Kuro's boss form (48x48 x5), The Primordial Shade (48x48 x4), The Void Inquisitor (32x32 x4).
  * Deterministic pixel rules only — no image model, no external reference.
  * Output: art-source/{npcs,enemies}/<name>/generated/candidates/ ONLY.
  *
@@ -390,6 +391,152 @@ function houndFrame(phase) {
   return c.g;
 }
 
+// ------------------------------------------------------------------ The Nameless Weeper (48)
+const WEEPER = {
+  O: hex('#06040c'),
+  k: hex('#4a405e'), // weeping stone
+  K: hex('#2e2640'),
+  n: hex('#6a5e86'),
+  e: hex('#14101e'), // hollow eyes
+  t: hex('#b48cff'), // violet tears
+  T: hex('#e6dcff'),
+};
+function weeperFrame(phase, spent = false) {
+  const c = canvas(48);
+  const drop = phase * 3;
+  c.ellipse(24, 30, 18, 15, 'K');
+  c.ellipse(24, 28, 16, 13, 'k');
+  // Three faces pressed into the stone.
+  for (const [x, y, r] of [
+    [24, 22, 6],
+    [14, 31, 5],
+    [34, 31, 5],
+  ]) {
+    c.ellipse(x, y, r, r + 1, 'n');
+    c.put(x - 2, y - 1, 'e');
+    c.put(x + 2, y - 1, 'e');
+    c.rect(x - 2, y + 3, x + 2, y + 3, 'e');
+    if (!spent) {
+      c.line(x - 2, y, x - 2, y + 4 + (drop % 6), 't');
+      c.put(x - 2, y + 5 + (drop % 6), 'T');
+    }
+  }
+  if (spent) c.ellipse(24, 44, 14, 2, 't');
+  c.outline();
+  return c.g;
+}
+
+// ------------------------------------------------------------------ Kuro, boss form (48)
+const KURO_BOSS = {
+  O: hex('#04030a'),
+  h: hex('#14141a'),
+  H: hex('#2a2a36'),
+  s: hex('#c8a488'),
+  S: hex('#98765e'),
+  e: hex('#9a7aff'),
+  x: hex('#05030c'),
+  c: hex('#7e8490'),
+  C: hex('#565c68'),
+  u: hex('#1a1c24'),
+  i: [20, 10, 34, 240], // void ink
+  k: [190, 150, 255, 230], // violet cracks
+  b: hex('#c8b0ff'), // the Possibility blade
+  B: hex('#7a5cd6'),
+};
+function kuroBossFrame(phase, knelt = false) {
+  const c = canvas(48);
+  const bob = knelt ? 6 : [0, -1, -1, 0][phase];
+  const hem = knelt ? 40 : 44;
+  // Ink wings unfolding behind him (gone when he kneels).
+  if (!knelt)
+    for (let k = 0; k < 6; k++) {
+      c.line(24, 20 + bob, 4 + k * 2, 6 + k * 3 + (phase % 2), 'i');
+      c.line(24, 20 + bob, 44 - k * 2, 6 + k * 3 + ((phase + 1) % 2), 'i');
+    }
+  // Cloak and body, scaled from his 32 px sprite.
+  for (let y = 19; y < hem; y++) c.rect(15, y + bob, 33, y + bob, y % 7 === 0 ? 'C' : 'c');
+  c.rect(19, 21 + bob, 29, hem - 4 + bob, 'u');
+  c.ellipse(24, 13 + bob, 6, 7, 'h');
+  c.ellipse(24, 15 + bob, 5, 5, 's');
+  c.rect(18, 8 + bob, 30, 11 + bob, 'h');
+  c.rect(19, 12 + bob, 22, 12 + bob, 'h');
+  c.put(22, 15 + bob, 'x');
+  c.put(26, 15 + bob, 'e');
+  for (const [x, y] of [
+    [16, 38],
+    [17, 35],
+    [18, 32],
+    [31, 37],
+    [30, 34],
+    [21, 16],
+  ])
+    c.put(x, y + bob, (x + y + phase) % 3 === 0 ? 'k' : 'i');
+  // His own blade of Possibility, lowered when he kneels.
+  if (knelt) c.line(34, 44, 44, 40, 'b');
+  else {
+    c.line(34, 30 + bob, 42, 8 + bob, 'b');
+    c.line(35, 30 + bob, 43, 8 + bob, 'B');
+  }
+  for (let x = 15; x <= 33; x++) if ((x * 3 + phase) % 5 < 2) c.put(x, 45, 'i');
+  c.outline();
+  return c.g;
+}
+
+// ------------------------------------------------------------------ The Primordial Shade (48)
+const PRIMORDIAL = {
+  O: [6, 4, 12, 255],
+  v: [26, 16, 44, 240],
+  V: [52, 34, 84, 230],
+  e: hex('#f6f0ff'),
+  t: hex('#b48cff'), // the true ring
+  g: hex('#e8c060'), // the false ring
+};
+function primordialFrame(phase) {
+  const c = canvas(48);
+  for (let y = 8; y < 46; y++) {
+    const half = Math.round(4 + (y - 8) * 0.32 + Math.sin((y + phase * 2) / 5));
+    c.rect(24 - half, y, 24 + half, y, y % 6 === 0 ? 'V' : 'v');
+  }
+  c.ellipse(24, 10, 5, 6, 'v');
+  c.put(22, 10, 'e');
+  c.put(26, 10, 'e');
+  // Two rings circling it, a violet one and a gold one, out of step.
+  for (let k = 0; k < 24; k++) {
+    const a = (k / 24) * Math.PI * 2;
+    if ((k + phase) % 3 !== 0) c.put(24 + Math.cos(a) * 17, 28 + Math.sin(a) * 6, 't');
+    if ((k + phase + 1) % 3 !== 0) c.put(24 + Math.cos(a) * 13, 22 + Math.sin(a + 1) * 9, 'g');
+  }
+  c.outline();
+  return c.g;
+}
+
+// ------------------------------------------------------------------ The Void Inquisitor (32)
+const INQUISITOR = {
+  O: hex('#06040a'),
+  r: hex('#3a2e52'), // chain-mail robe
+  R: hex('#261c3a'),
+  f: hex('#d8d0e8'),
+  g: hex('#e8c060'), // judgement chains
+  G: hex('#9a7a2a'),
+  t: hex('#b48cff'),
+};
+function inquisitorFrame(phase) {
+  const c = canvas(32);
+  const bob = [0, -1, 0, 1][phase];
+  for (let y = 12; y < 30; y++) {
+    const half = Math.round(4 + (y - 12) * 0.35);
+    c.rect(15 - half, y, 15 + half, y, y % 3 === 0 ? 'R' : 'r');
+  }
+  c.ellipse(15, 8 + bob, 4, 5, 'R');
+  c.rect(13, 8 + bob, 17, 9 + bob, 'f');
+  // A staff crowned with a glyph, chains swinging from it.
+  c.rect(24, 4 + bob, 25, 29, 'G');
+  c.ellipse(24.5, 4 + bob, 2.5, 2.5, 't');
+  for (let k = 0; k < 4; k++) c.put(26 + ((k + phase) % 2), 8 + k * 3, 'g');
+  c.outline();
+  return c.g;
+}
+
 // ------------------------------------------------------------------ output
 const four = (fn) => [0, 1, 2, 3].map((p) => fn(p));
 const OUT = [
@@ -401,6 +548,24 @@ const OUT = [
   ['enemies/hollow_husk', 'hollow_husk_v1.png', four(huskFrame), 32, HUSK, 8],
   ['enemies/erasure_moths', 'erasure_moths_v1.png', four(mothFrame), 32, MOTH, 8],
   ['enemies/ink_hound', 'ink_hound_v1.png', four(houndFrame), 32, HOUND, 8],
+  [
+    'enemies/nameless_weeper',
+    'nameless_weeper_v1.png',
+    [...four((p) => weeperFrame(p)), weeperFrame(0, true)],
+    48,
+    WEEPER,
+    6,
+  ],
+  [
+    'enemies/kuro_boss',
+    'kuro_boss_v1.png',
+    [...four((p) => kuroBossFrame(p)), kuroBossFrame(0, true)],
+    48,
+    KURO_BOSS,
+    6,
+  ],
+  ['enemies/primordial_shade', 'primordial_shade_v1.png', four(primordialFrame), 48, PRIMORDIAL, 6],
+  ['enemies/void_inquisitor', 'void_inquisitor_v1.png', four(inquisitorFrame), 32, INQUISITOR, 8],
 ].map(([dir, name, frames, size, palette, k]) => ({
   file: `art-source/${dir}/generated/candidates/${name}`,
   frames,
