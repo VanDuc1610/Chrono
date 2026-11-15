@@ -23,7 +23,7 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 Goal (owner, 2026-11-15): Chapters 5–7 are built and wait for the owner's playtest. Chapters 8 and 9
 are built and verified — the story is complete (4 endings). Next: the owner's playtest of Chapters 5–9. The story ends at Chapter 9.
 
-### T-83 · Chapter 9 answer key (`docs/testing/DAP_AN_CHUONG_9.md`) — **Codex** · `IN PROGRESS`
+### T-83 · Chapter 9 answer key (`docs/testing/DAP_AN_CHUONG_9.md`) — **Codex** · `DONE`
 
 _Locks:_ `docs/testing/DAP_AN_CHUONG_9.md` (new). Read-only: everything else.
 
