@@ -27,7 +27,7 @@ and verified too. Antigravity designs Chapter 9 (the finale) while Codex reviews
 
 _Locks:_ `scripts/author-ch9-*.js`, `art-source/**/` for Chapter 9 sprites and the nexus tileset. Build locks will be added when the build starts.
 
-### T-81 · Chapter 9 dialogue script (`docs/story/CHAPTER_09_SCRIPT.md`) — **Antigravity** · `IN PROGRESS`
+### T-81 · Chapter 9 dialogue script (`docs/story/CHAPTER_09_SCRIPT.md`) — **Antigravity** · `DONE`
 
 _Locks:_ `docs/story/CHAPTER_09_SCRIPT.md` (new).
 
@@ -44,8 +44,8 @@ _Locks:_ `src/systems/combat/CombatTypes.ts`, `src/systems/combat/CombatSystem.t
 
 ## Done (latest 5 — older entries in [TASKS_ARCHIVE.md](TASKS_ARCHIVE.md))
 
+- **T-81** Chapter 9 dialogue script (`docs/story/CHAPTER_09_SCRIPT.md`, Vietnamese): full script across all 22 maps (both routes, crown, epilogue, 3 hidden maps) with arrival lines, NPCs (with past-flag variants), clues/secrets pickups, C01–C13 puzzles (intro/clue/wrong/right/done), boss confronts and victories, `ch9_kuro_crossroad` choice, and beat-by-beat dialogue for all 4 endings; lines ≤ 220 chars, Kuro "tao/mày", Lyra halberd, C10 slots shuffled — Antigravity
 - **T-79** Map lint errors in chapters 0–7 fixed (spawns moved off exits, blocked exits and the Chapter 5 seal path opened; zero lint errors left) and the Chapter 8 answer key (`docs/testing/DAP_AN_CHUONG_8.md`) — Codex
 - **T-78** Chapter 9 design v2 (`docs/story/CHAPTER_09_DESIGN.md`): Kuro puppet-master route with five clues on real past scenes, four lieutenants, four endings, Thiên Nguyên revealed through C10; Claude review §20, owner decisions §21 — Antigravity
-- **T-78** Chapter 9 design v2 (`docs/story/CHAPTER_09_DESIGN.md`, Vietnamese): Kuro "Kẻ Giật Dây" puppet-master route added (5 real-clue foreshadowings from Ch4–Ch8, 4 Possibility-twisted lieutenants with distinct ring mechanics Bran/Lyra/Neris/Other-Peter, Kuro boss ~2400 HP; 22 maps max [6 shared + 6 empty chair + 6 puppet master + 1 finale + 3 hidden]); 4 endings (The Eternal Order, The Unbound Eternity, The Last Chronarch true ending with widened gate, and "Trang Giấy Trở Về" for Kuro route); First Forgotten true name revealed as Thiên Nguyên via C10; C12 replaced with 3–4–5 quantum gears dial puzzle; C02/C03/C05/C10/C13 reworked with airtight unique proofs; real-time map foes (HP 420–550), turn-based Sixfold Divinity with 64x64 combat Chronos; valid engine stat scale; §18 review intact + §19 changelog — Antigravity
 - **T-77** Code review of the Chapter 8 engine (`docs/reviews/T-74_CODEX_REVIEW.md`): every puzzle walked on the map grid; found the Herald could die before the 11:59 anchoring and that the barracks anchor drove every Phase Wraith; both fixed by Claude with regression tests — Codex
 - **T-74** Chapter 8 playable: 15 maps + 3 hidden on the convergence tileset, World Anchoring posts (anchored tile swaps), companions by act (Ivo → Lyra → Neris) walking beside Peter and Kuro, Assimilator / Doom Bell / Twin-Era Legionnaire / Phase Wraith, Second-Hand Warden, Convergent Praetor (mirror verdict, heal penalty), Herald of the Null Hour (25th-hour clock, companion calls, Kuro save, 11:59 finisher), Sixfold Echo (six seal phases), three defence waves, 13 puzzles (solver-checked), Chapter 7 → 8 → end card, level cap 29, chapter select 8, HUD titles for chapters 6–8. Verified: 162 unit tests, live CDP runs of every map, puzzle (right and wrong), boss and the end card — Claude
