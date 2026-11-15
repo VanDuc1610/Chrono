@@ -9,6 +9,8 @@ import {
   ICombatAction,
   ICombatActionResult,
   ICombatant,
+  IEnemyDefinition,
+  PairedRingTurn,
 } from './CombatTypes';
 import { ICombatSystem } from './ICombatSystem';
 import { formatString } from '../../ui/Strings';
@@ -84,8 +86,8 @@ interface BossState {
   mistClear: number;
   /** Pool of tears: drops so far. */
   tears: number;
-  /** The 25th hour: where the hand stands, companions already called, Kuro's save still left. */
-  clock: { hand: number; called: Set<string>; kuroSave: boolean };
+  /** The 25th hour: where the hand stands and whether Kuro's save is still left. */
+  clock: { hand: number; kuroSave: boolean };
 }
 
 export class CombatSystem implements ICombatSystem {
@@ -140,11 +142,13 @@ export class CombatSystem implements ICombatSystem {
   public allyHit(enemyId: string, damage: number): number {
     const e = this.getCombatant(enemyId);
     if (!e || !e.isAlive) return 0;
-    const dealt = Math.min(e.stats.hp, Math.max(1, damage));
+    const floor = e.mechanic?.finisher?.required ? 1 : 0;
+    const dealt = Math.max(0, Math.min(e.stats.hp - floor, Math.max(0, damage)));
     e.stats.hp -= dealt;
     if (e.stats.hp <= 0) {
       e.isAlive = false;
-      this.state.phase = 'victory';
+      if (!this.state.combatants.some((c) => c.type === 'enemy' && c.isAlive))
+        this.state.phase = 'victory';
     }
     return dealt;
   }
@@ -197,7 +201,6 @@ export class CombatSystem implements ICombatSystem {
           tears: 0,
           clock: {
             hand: e.mechanic.clockHand?.start ?? 0,
-            called: new Set(),
             kuroSave: true,
           },
         });
@@ -277,16 +280,84 @@ export class CombatSystem implements ICombatSystem {
     return this.bosses.get(enemyId)?.shield ?? false;
   }
 
+  /** The injected combat RNG chooses one pattern for the whole paired-ring turn. */
+  public rollPairedRings(tb: NonNullable<IEnemyDefinition['timedBlock']>): PairedRingTurn | null {
+    if (!tb.pair) return null;
+    const inSync = this.rng() < tb.pair.syncChance;
+    return { inSync, impactMs: [tb.ringMs, tb.ringMs + (inSync ? 0 : 300)] };
+  }
+
+  /** A synchronous block redirects the blows into the boss, preserving required finishers. */
+  public resolvePairedRings(
+    enemyId: string,
+    tb: NonNullable<IEnemyDefinition['timedBlock']>,
+    turn: PairedRingTurn,
+    blocks: number,
+  ): { collided: boolean; damageDealt: number; damageFactor: number } {
+    const enemy = this.getCombatant(enemyId);
+    if (tb.pair && turn.inSync && blocks === 2 && enemy?.isAlive) {
+      const damage = Math.max(0, Math.floor(enemy.stats.maxHp * tb.pair.collidePct));
+      return { collided: true, damageDealt: this.allyHit(enemyId, damage), damageFactor: 0 };
+    }
+    return {
+      collided: false,
+      damageDealt: 0,
+      damageFactor: 1 - ((1 - tb.factor) * Math.max(0, Math.min(2, blocks))) / 2,
+    };
+  }
+
+  private actionAvailable(action: BossEnvironmentAction, boss: BossState): boolean {
+    return (
+      !boss.done.has(action.id) &&
+      (!action.requiresFlag || this.hasFlag(action.requiresFlag)) &&
+      (action.requires ?? []).every((id) => boss.done.has(id))
+    );
+  }
+
+  /** Ordinary and clock-hand calls use the same once-only state and story gates. */
+  private getAvailableCalls(enemyId: string): BossEnvironmentAction[] {
+    const enemy = this.getCombatant(enemyId);
+    const boss = this.bosses.get(enemyId);
+    const m = enemy?.mechanic;
+    if (!enemy?.isAlive || !boss || !m) return [];
+    const calls =
+      enemy.stats.hp <= enemy.stats.maxHp * (m.callsBelowPct ?? 1) ? [...(m.calls ?? [])] : [];
+    if (m.clockHand && boss.clock.hand > m.clockHand.start) calls.push(...m.clockHand.calls);
+    return calls.filter((call) => this.actionAvailable(call, boss));
+  }
+
+  private applyEnvironmentEffects(
+    source: ICombatant,
+    target: ICombatant,
+    boss: BossState,
+    action: BossEnvironmentAction,
+  ): { damage: number; healing: number } {
+    boss.done.add(action.id);
+    if (action.stunTurns) boss.stunTurns += action.stunTurns;
+    if (action.breakShield) boss.shield = false;
+    let damage = 0;
+    if (action.setHpPct !== undefined) {
+      const capped = Math.ceil(target.stats.maxHp * action.setHpPct);
+      damage = Math.max(0, target.stats.hp - capped);
+      target.stats.hp = Math.min(target.stats.hp, capped);
+    }
+    const healing = Math.max(
+      0,
+      Math.min(
+        source.stats.maxHp - source.stats.hp,
+        Math.ceil(source.stats.maxHp * (action.healPct ?? 0)),
+      ),
+    );
+    source.stats.hp += healing;
+    return { damage, healing };
+  }
+
   /** The next environment action the player may take against this boss, if any. */
   public getAvailableEnvironmentAction(enemyId: string): BossEnvironmentAction | null {
     const boss = this.bosses.get(enemyId);
     const enemy = this.getCombatant(enemyId);
     if (!boss || !enemy?.isAlive || !boss.unlocked || !enemy.mechanic) return null;
-    return (
-      enemy.mechanic.actions.find(
-        (a) => !boss.done.has(a.id) && (a.requires ?? []).every((r) => boss.done.has(r)),
-      ) ?? null
-    );
+    return enemy.mechanic.actions.find((a) => this.actionAvailable(a, boss)) ?? null;
   }
 
   /**
@@ -416,13 +487,13 @@ export class CombatSystem implements ICombatSystem {
    */
   public getEnvironmentOptions(enemyId: string): BossEnvironmentAction[] {
     const cores = this.getSongCores(enemyId);
-    if (cores.length > 0) return cores;
+    if (cores.length > 0) return cores.slice(0, 3);
     const enemy = this.getCombatant(enemyId);
     const boss = this.bosses.get(enemyId);
     const m = enemy?.mechanic;
     if (!m || !boss || !enemy?.isAlive) return [];
     if (m.bloodWall && boss.wall) return [m.bloodWall.cutAction];
-    if (m.ritual && boss.ritual.open && !boss.ritual.done) return m.ritual.pillars;
+    if (m.ritual && boss.ritual.open && !boss.ritual.done) return m.ritual.pillars.slice(0, 3);
     const out: BossEnvironmentAction[] = [];
     const fin = m.finisher;
     if (
@@ -444,10 +515,8 @@ export class CombatSystem implements ICombatSystem {
     )
       out.push(pg.pinAction);
     if (m.mist && boss.mistClear <= 0) out.push(m.mist.clearAction);
-    const ch = m.clockHand;
-    if (ch && boss.clock.hand > ch.start)
-      for (const c of ch.calls) if (!boss.clock.called.has(c.id) && out.length < 3) out.push(c);
-    return out;
+    out.push(...this.getAvailableCalls(enemyId));
+    return out.slice(0, 3);
   }
 
   /** The 25th hour's hand (null when this boss has none). */
@@ -713,6 +782,20 @@ export class CombatSystem implements ICombatSystem {
       );
     }
 
+    if (action.type === 'environment') {
+      const definedCalls = [
+        ...(target.mechanic?.calls ?? []),
+        ...(target.mechanic?.clockHand?.calls ?? []),
+      ];
+      if (
+        definedCalls.some((call) => call.id === action.environmentId) &&
+        !this.getAvailableCalls(target.id).some((call) => call.id === action.environmentId)
+      )
+        throw new Error(
+          `Invalid combat action: companion call "${action.environmentId}" is not available.`,
+        );
+    }
+
     // A defensive stance lasts until the defender's next action.
     this.defendedCombatants.delete(source.id);
 
@@ -840,11 +923,14 @@ export class CombatSystem implements ICombatSystem {
           break;
         }
         const ch = target.mechanic?.clockHand;
-        const call = ch?.calls.find((c) => c.id === action.environmentId);
-        if (ch && call && pgBoss && !pgBoss.clock.called.has(call.id)) {
-          pgBoss.clock.called.add(call.id);
-          pgBoss.clock.hand = pushClock(pgBoss.clock.hand, ch.pushBy, ch.start);
-          message = `${call.message} ${formatString({ m: ch.tickMessage }, 'm', { n: pgBoss.clock.hand, top: ch.top })}`;
+        const call = this.getAvailableCalls(target.id).find((c) => c.id === action.environmentId);
+        if (call && pgBoss) {
+          ({ damage, healing } = this.applyEnvironmentEffects(source, target, pgBoss, call));
+          message = call.message;
+          if (ch?.calls.some((c) => c.id === call.id)) {
+            pgBoss.clock.hand = pushClock(pgBoss.clock.hand, ch.pushBy, ch.start);
+            message += ` ${formatString({ m: ch.tickMessage }, 'm', { n: pgBoss.clock.hand, top: ch.top })}`;
+          }
           break;
         }
         const mist = target.mechanic?.mist;
@@ -874,14 +960,7 @@ export class CombatSystem implements ICombatSystem {
             `Invalid combat action: environment action "${action.environmentId ?? ''}" is not available.`,
           );
         }
-        boss.done.add(env.id);
-        if (env.stunTurns) boss.stunTurns += env.stunTurns;
-        if (env.breakShield) boss.shield = false;
-        if (env.setHpPct !== undefined) {
-          const capped = Math.ceil(target.stats.maxHp * env.setHpPct);
-          damage = Math.max(0, target.stats.hp - capped);
-          target.stats.hp = Math.min(target.stats.hp, capped);
-        }
+        ({ damage, healing } = this.applyEnvironmentEffects(source, target, boss, env));
         message = env.message;
         break;
       }

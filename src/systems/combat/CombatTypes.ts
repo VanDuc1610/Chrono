@@ -35,6 +35,15 @@ export interface ICombatAction {
   damageFactor?: number;
 }
 
+/** The finale's two real, colored block rings. */
+export interface PairedRingSettings {
+  goldLabel: string;
+  violetLabel: string;
+  syncChance: number;
+  collidePct: number;
+  message: string;
+}
+
 /** A battlefield action offered while fighting a boss (e.g. turning a lighthouse lens). */
 export interface BossEnvironmentAction {
   id: string;
@@ -42,6 +51,10 @@ export interface BossEnvironmentAction {
   label: string;
   /** Ids of actions that must be done first. */
   requires?: string[];
+  /** Offered only while this story flag is set. */
+  requiresFlag?: string;
+  /** Restores Peter by this fraction of his maximum HP, capped at full HP. */
+  healPct?: number;
   /** The boss loses this many of its turns. */
   stunTurns?: number;
   /** Removes the shield: no damage reduction, no HP floor. */
@@ -143,6 +156,10 @@ export interface BossMechanic {
   unlockOnSkill?: boolean;
   unlockMessage: string;
   actions: BossEnvironmentAction[];
+  /** Once-per-battle companion calls, sharing the clock-hand call handling. */
+  calls?: BossEnvironmentAction[];
+  /** Calls become available at or below this boss HP fraction (absent = any HP). */
+  callsBelowPct?: number;
   /** Spritesheet frame shown on victory instead of the dissolve (e.g. kneeling). */
   releasedFrame?: number;
   /** Replaces the "dissolves" line when the boss falls. */
@@ -560,10 +577,14 @@ export interface IEnemyDefinition {
     /** Mirror Verdict: ring durations drawn from this pool; every second turn replays the last backwards. */
     echoPool?: number[];
     echoMessage?: string;
+    /** Two real rings. One Space blocks both when they arrive in sync. */
+    pair?: PairedRingSettings | null;
     /** Sixfold Echo: from HP fraction `below` down, these ring settings apply (first match wins). */
     phases?: {
       below: number;
       set: {
+        /** null ends the paired-ring phase and returns to ordinary rings. */
+        pair?: PairedRingSettings | null;
         count?: number;
         shrinkMs?: number;
         hidden?: boolean;
@@ -582,6 +603,12 @@ export interface IEnemyDefinition {
 
 export interface EnemyDatabase {
   enemies: IEnemyDefinition[];
+}
+
+export interface PairedRingTurn {
+  inSync: boolean;
+  /** Gold and violet impact times, relative to the start of the turn. */
+  impactMs: [number, number];
 }
 
 /** Combat formula tuning, from the `combat` block of public/assets/data/player.json. */

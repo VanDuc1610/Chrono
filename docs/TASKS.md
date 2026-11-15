@@ -31,7 +31,9 @@ _Locks:_ `scripts/author-ch9-*.js`, `art-source/**/` for Chapter 9 sprites and t
 
 _Locks:_ `docs/story/CHAPTER_09_SCRIPT.md` (new).
 
-### T-82 · Chapter 9 engine: paired rings, companion-call effects, 4-card ending router — **Codex** · `IN PROGRESS`
+### T-82 · Chapter 9 engine: paired rings, companion-call effects, 4-card ending router — **Codex** · `DONE`
+
+Result: injected paired-ring timing/collision, shared once-only companion effects and flag gates, four Chapter 9 ending cards plus a neutral fallback; 19 new unit tests, all 198 tests passing, live Chromium rings/endings and combat/session regressions verified.
 
 _Locks:_ `src/systems/combat/CombatTypes.ts`, `src/systems/combat/CombatSystem.ts`, `src/scenes/CombatScene.ts`, `src/scenes/PrologueEndScene.ts`, `tests/chapter9-engine.test.ts` (new); new `ending.ch9.*` keys in `strings.json` only.
 

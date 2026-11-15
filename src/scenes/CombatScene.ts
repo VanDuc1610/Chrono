@@ -5,6 +5,7 @@ import {
   ICombatAction,
   ICombatant,
   IEnemyDefinition,
+  PairedRingTurn,
 } from '../systems/combat/CombatTypes';
 import type { DialogueDatabase } from '../systems/dialogue/DialogueTypes';
 import { FLAGS } from '../state/GameSession';
@@ -101,6 +102,10 @@ export class CombatScene extends Phaser.Scene {
     this.echoTurn = 0;
     this.phaseShown = -1;
     this.pendingCues = [];
+    this.pairedBlocks = null;
+    this.blockArmed = false;
+    this.blockPressedAt = null;
+    this.blockEndsAt = 0;
     this.session = getSession(this);
     this.t = getStrings(this);
   }
@@ -406,7 +411,13 @@ export class CombatScene extends Phaser.Scene {
     this.input.keyboard.on('keydown-SEVEN', () => this.handlePlayerAction('environment', 1));
     this.input.keyboard.on('keydown-EIGHT', () => this.handlePlayerAction('environment', 2));
     // Timed block: only the first press while the ring closes counts.
-    this.input.keyboard.on('keydown-SPACE', () => {
+    this.input.keyboard.on('keydown-SPACE', (event?: KeyboardEvent) => {
+      if (this.pairedBlocks) {
+        if (event?.repeat) return;
+        const next = this.pairedBlocks.find((block) => !block.resolved);
+        if (next && next.pressedAt === null) next.pressedAt = this.time.now;
+        return;
+      }
       if (this.blockArmed && this.blockPressedAt === null) this.blockPressedAt = this.time.now;
     });
   }
@@ -455,6 +466,77 @@ export class CombatScene extends Phaser.Scene {
   /** When the closing ring touches Peter's outline (tests and probes read it). */
   public blockEndsAt = 0;
   private blockPressedAt: number | null = null;
+  private pairedBlocks: { end: number; pressedAt: number | null; resolved: boolean }[] | null =
+    null;
+
+  /** Two real, overlapping animations with independently armed impact windows. */
+  private runPairedRings(
+    tb: NonNullable<IEnemyDefinition['timedBlock']>,
+    turn: PairedRingTurn,
+    done: (blocks: number) => void,
+  ): void {
+    const pair = tb.pair;
+    if (!pair) return;
+    const cx = this.playerSprite.x;
+    const cy = this.playerSprite.y;
+    const started = this.time.now;
+    const outline = this.add.circle(cx, cy, 22).setStrokeStyle(2, 0xffffff).setDepth(50);
+    const rings = [0xffc04a, 0xb48cff].map((color, i) => {
+      const ring = this.add
+        .circle(cx + (i === 0 ? -90 : 90), cy, 72)
+        .setStrokeStyle(i === 0 ? 5 : 2, color)
+        .setDepth(51);
+      this.tweens.add({
+        targets: ring,
+        x: cx,
+        radius: 22,
+        duration: turn.impactMs[i],
+        ease: 'Linear',
+      });
+      return ring;
+    });
+    const labels = [pair.goldLabel, pair.violetLabel].map((text, i) =>
+      this.add
+        .text(cx + (i === 0 ? -90 : 90), cy - 80, text, {
+          fontFamily: 'monospace',
+          fontSize: '11px',
+          color: i === 0 ? '#ffc04a' : '#b48cff',
+        })
+        .setOrigin(0.5)
+        .setDepth(52),
+    );
+    const blocks = (turn.inSync ? [turn.impactMs[0]] : turn.impactMs).map((impact) => ({
+      end: started + impact,
+      pressedAt: null as number | null,
+      resolved: false,
+    }));
+    this.pairedBlocks = blocks;
+    this.blockArmed = true;
+    this.blockEndsAt = blocks[0].end;
+    let blocked = 0;
+    blocks.forEach((block, i) =>
+      this.time.delayedCall(block.end - started, () => {
+        block.resolved = true;
+        const pressed = block.pressedAt !== null;
+        const correct = pressed && Math.abs(block.pressedAt! - block.end) <= tb.windowMs / 2;
+        if (correct) blocked += turn.inSync ? 2 : 1;
+        this.blockFeedback(correct, pressed);
+        if (i + 1 < blocks.length) {
+          this.blockEndsAt = blocks[i + 1].end;
+          return;
+        }
+        this.pairedBlocks = null;
+        this.blockArmed = false;
+        for (const ring of rings) {
+          this.tweens.killTweensOf(ring);
+          ring.destroy();
+        }
+        for (const label of labels) label.destroy();
+        outline.destroy();
+        done(blocked);
+      }),
+    );
+  }
 
   /**
    * A ring closes on Peter; Space as it touches his outline blocks. A feint lunges the ring in and
@@ -985,6 +1067,27 @@ export class CombatScene extends Phaser.Scene {
     const tb0 = this.enemyTemplate.timedBlock;
     if (tb0) {
       const { tb, altHidden } = this.ringSettings(tb0);
+      const paired = this.combatSystem.rollPairedRings(tb);
+      if (paired) {
+        this.runPairedRings(tb, paired, (blocks) => {
+          const result = this.combatSystem.resolvePairedRings(this.enemy.id, tb, paired, blocks);
+          if (result.collided) {
+            this.updateStatusBars();
+            this.setBattleLog(tb.pair!.message);
+            this.showFloatingNumber(
+              this.enemySprite.x,
+              this.enemySprite.y - 20,
+              `-${result.damageDealt}`,
+              '#b48cff',
+            );
+            this.endTurn(ENEMY_TO_PLAYER_DELAY_MS);
+          } else {
+            this.afterBlocks(blocks, 2);
+            this.performEnemyAttack(result.damageFactor * heavy);
+          }
+        });
+        return;
+      }
       const count = tb.count ?? (tb.double ? 2 : 1);
       const echo = tb.echoPool
         ? echoRhythm(++this.echoTurn, this.echoPrev, count, tb.echoPool, Math.random)

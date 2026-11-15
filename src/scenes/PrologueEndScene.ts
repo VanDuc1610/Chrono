@@ -16,6 +16,16 @@ const NEXT_START: Record<number, { mapId: string; spawnId: string }> = {
 import { createPanel } from '../ui/Panel';
 import { getStrings } from '../ui/Strings';
 
+/** Ending flags are exclusive in story data. If several are present, the first listed wins. */
+export function chapter9EndingKeys(hasFlag: (flag: string) => boolean): {
+  title: string;
+  closing: string;
+} {
+  const endings = ['order', 'unbound', 'true', 'returned_page'] as const;
+  const ending = endings.find((id) => hasFlag(`ch9_ending_${id}`)) ?? 'default';
+  return { title: `ending.ch9.${ending}.title`, closing: `ending.ch9.${ending}.closing` };
+}
+
 /**
  * Closing card of the Prologue vertical slice. Reached after the Elder's farewell once
  * "Silence the Fracture" is complete; returns to the title screen.
@@ -40,6 +50,7 @@ export class PrologueEndScene extends Phaser.Scene {
     const { width, height } = this.scale;
     const session = getSession(this);
     const t = getStrings(this);
+    const ending = this.chapter === 9 ? chapter9EndingKeys((flag) => session.getFlag(flag)) : null;
 
     const bg = this.add.graphics();
     bg.fillGradientStyle(0x05060c, 0x05060c, 0x0d1424, 0x0d1424, 1);
@@ -65,8 +76,8 @@ export class PrologueEndScene extends Phaser.Scene {
       });
     }
 
-    const cardWidth = 380;
-    const cardHeight = 220;
+    const cardWidth = ending ? Math.min(width - 48, 620) : 380;
+    const cardHeight = ending ? 246 : 220;
     const card = createPanel(
       this,
       width / 2 - cardWidth / 2,
@@ -79,7 +90,11 @@ export class PrologueEndScene extends Phaser.Scene {
       .text(
         width / 2,
         height * 0.28,
-        this.chapter === 0 ? t('ending.title') : t('ending.titleChapter', { n: this.chapter }),
+        ending
+          ? t(ending.title)
+          : this.chapter === 0
+            ? t('ending.title')
+            : t('ending.titleChapter', { n: this.chapter }),
         {
           fontFamily: 'monospace',
           fontSize: '20px',
@@ -87,6 +102,8 @@ export class PrologueEndScene extends Phaser.Scene {
           fontStyle: 'bold',
           stroke: '#081427',
           strokeThickness: 5,
+          wordWrap: ending ? { width: cardWidth - 48 } : undefined,
+          align: 'center',
         },
       )
       .setOrigin(0.5)
@@ -111,24 +128,27 @@ export class PrologueEndScene extends Phaser.Scene {
       .text(
         width / 2,
         height * 0.52,
-        [
-          t('ending.statsPlayer', { name: session.playerName, level: session.level }),
-          t('ending.statsQuests', { completed, total: quests.length }),
-          t('ending.statsPlaytime', { playtime }),
-        ],
+        ending
+          ? t(ending.closing)
+          : [
+              t('ending.statsPlayer', { name: session.playerName, level: session.level }),
+              t('ending.statsQuests', { completed, total: quests.length }),
+              t('ending.statsPlaytime', { playtime }),
+            ],
         {
           fontFamily: 'monospace',
           fontSize: '12px',
           color: '#b8c5de',
           align: 'center',
           lineSpacing: 6,
+          wordWrap: ending ? { width: cardWidth - 48 } : undefined,
         },
       )
       .setOrigin(0.5)
       .setAlpha(0);
 
     const thanks = this.add
-      .text(width / 2, height * 0.71, t('ending.thanks'), {
+      .text(width / 2, height * 0.71, t(ending ? 'ending.ch9.end' : 'ending.thanks'), {
         fontFamily: 'monospace',
         fontSize: '12px',
         color: '#ffd666',
@@ -140,7 +160,11 @@ export class PrologueEndScene extends Phaser.Scene {
       .text(
         width / 2,
         height - 22,
-        NEXT_START[this.chapter] ? t('ending.promptContinue') : t('ending.prompt'),
+        ending
+          ? t('ending.ch9.prompt')
+          : NEXT_START[this.chapter]
+            ? t('ending.promptContinue')
+            : t('ending.prompt'),
         {
           fontFamily: 'monospace',
           fontSize: '10px',
@@ -163,6 +187,10 @@ export class PrologueEndScene extends Phaser.Scene {
 
     // Accept input only after the card has faded in, so a held key can't skip it.
     this.time.delayedCall(1800, () => {
+      if (ending)
+        thanks
+          .setInteractive({ useHandCursor: true })
+          .on('pointerdown', () => this.returnToTitle());
       if (!this.input.keyboard) return;
       for (const key of ['keydown-E', 'keydown-SPACE', 'keydown-ENTER']) {
         this.input.keyboard.on(key, () => this.returnToTitle());
@@ -176,7 +204,7 @@ export class PrologueEndScene extends Phaser.Scene {
     this.soundSystem.playSelect();
     this.cameras.main.fadeOut(500, 0, 0, 0);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
-      const next = NEXT_START[this.chapter];
+      const next = this.chapter === 9 ? undefined : NEXT_START[this.chapter];
       if (next) {
         // The journey goes on through the next Threshold.
         const session = getSession(this);
