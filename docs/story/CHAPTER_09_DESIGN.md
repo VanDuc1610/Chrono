@@ -713,3 +713,107 @@ Người chơi đưa ra quyết định tối thượng tại `map_ch9_crown_of_
 - `ch9_ending_unbound`: Kích hoạt Kết thúc 2.
 - `ch9_ending_true`: Kích hoạt Kết thúc 3 (True Ending).
 - `ch9_game_completed`: Kết thúc toàn bộ trò chơi CHRONO.
+
+---
+
+## 18. Claude Review (2026-11-15)
+
+Khung chương tốt: 18 bản đồ, 3 kết thúc có cảnh rõ ràng, "chiếc ghế trống" làm sợi chỉ xuyên suốt, câu trả lời của Peter cho lời hứa rất đẹp. Dưới đây là những chỗ phải sửa trước khi build. Mục nào cần owner quyết định thì đánh dấu **[OWNER]**.
+
+### 18.1. Lệch canon
+
+1. **OQ-05: The First Forgotten.** Bản này viết ngài "phản đối Chronos rồi bị Chronos xóa tên để giữ trật tự". Canon đã duyệt (Ch7 §19, Ch8 §17) là ngài **cùng giữ Origin với Chronos và tự nguyện** để bị xóa tên, làm nút chặn vết nứt. Phải sửa lại cho khớp.
+   - Tên thật "Aethelgard" là **[OWNER]**. Tên kiểu phương Tây lạc tông với một thế giới nhiều tên Việt (bà Mai, cô Ba, bé Na). Gợi ý: để tên thật hiện ra qua chính câu đố C10 thay vì đặt sẵn.
+2. **OQ-03:** canon hỏi "vì sao Chronos tự hy sinh làm phong ấn". Ch7 đã chốt thân xác ngài hóa thành các sợi xích vàng; Ch8 đã chốt Null Hour là cơ chế tự hủy ngài tự cài. Câu trả lời ở đây ("tự bẻ quyền năng thành 6 mảnh làm van xả") là ý mới, phải nối được với hai điều đó, và cần đánh dấu [PROPOSAL].
+3. **OQ-02:** câu Kuro nói ở Ch8 là: "Tao sẽ để lại một chiếc ghế trống cho mày… và nếu tao không về kịp, mày cứ ngồi vào ghế ấy." Bản này đổi nửa đầu thành "Nếu một ngày tao bị xóa tên, mày phải là người nhớ" — phải dùng đúng câu Ch8. Câu đáp của Peter giữ nguyên, rất hay.
+4. **FB-02** lặp lại đúng đoạn hồi tưởng trang giấy rơi đã có ở Ch8. Thay bằng ký ức mới, ví dụ: Chronos và Kẻ Bị Quên Đầu Tiên cùng đặt chiếc ghế thứ hai cạnh ngai vàng (nối với Bí mật 2).
+5. **Vũ khí:** Lyra dùng **kích** (`lyra_vanguard_halberd`, Ch8), không phải rìu. Kuro dùng **lưỡi kiếm Possibility** của mình; "thanh kiếm gãy" là của Peter.
+6. **Bà Mai** (mẹ Kuro, Ch7–8) vắng mặt hoàn toàn. Bà nên có mặt ở cảnh kết thật của Kuro.
+
+### 18.2. Cờ không tồn tại hoặc sai chương (§8)
+
+- `ch6_choice_kuro_help` → cờ thật là `ch6_kuro_ally` (đối lại là `kuro_left`).
+- `ivo_debt_repaid` → `settled_ivo_debt`.
+- `completed_na_crane_quest` là cờ **chương 5**. Con hạc ở chương 8 là `gave_na_papers`.
+- Còn thiếu hồi đáp cho các cờ đối lập:
+  - `ch4_choice_aldric_comfort`, `ch4_choice_bran_release`, `ch4_choice_elion_chronicle`;
+  - `ch6_chronicle_kept` / `ch6_chronicle_burnt`, `resolved_solon_guilt`;
+  - `restored_kuro_mother_name`, `ch8_anchored_1159`, `delivered_elion_page`.
+
+### 18.3. Hiệu ứng engine không có
+
+Engine **không có**:
+
+- chí mạng cả đội, giảm sát thương diện rộng, hồi MP mỗi lượt;
+- hồi sinh một lần, thanh "Hiệp Đồng", độ bền trang bị;
+- chỉ số `critChance`.
+
+Chỉ số trang bị hợp lệ: `attack`, `defense`, `maxHp`, `maxMp`, `speed`, cùng `reach`, `swingMs`, `echoPct` cho vũ khí.
+
+**Thang chỉ số sai.** Vũ khí mạnh nhất hiện nay là `attack: 24` (Kiếm La Bàn Hội Tụ), bùa mạnh nhất khoảng `maxHp: 55`. Đề xuất cho chương 9:
+
+- vũ khí tối thượng khoảng 28–30;
+- vũ khí ẩn khoảng 26;
+- bùa khoảng `maxHp` 60–70.
+
+Hồi đáp lựa chọn nên thể hiện bằng thoại, vật phẩm hoặc một nút "gọi đồng đội" trong trận boss (cơ chế đã có ở Ch8).
+
+### 18.4. Câu đố
+
+| Mã  | Vấn đề                                                                                                                                           | Yêu cầu                                                                                     |
+| :-- | :----------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
+| C02 | Lời dẫn đọc thẳng ra thứ tự, không cần suy luận. Lặp ý C10/C13 của Ch8 (xếp sáu ấn theo thứ tự).                                                 | Thay bằng cơ chế khác.                                                                      |
+| C03 | Ba đáp án đều là "B", người chơi đoán được. Tiêu chí "tự phủ định" mang tính cảm nhận, không chặt.                                               | Viết lại thành một câu logic có lời giải chặt, đáp án không cùng vị trí.                    |
+| C05 | **Không duy nhất.** Ràng buộc chỉ cho: vàng trước tro, tím trước khi thấy xanh. Không có gì xếp tím so với vàng và tro.                          | Thêm ràng buộc, chứng minh lại.                                                             |
+| C10 | Ba lựa chọn đúng quá hiển nhiên ("Bóng Ma Hư Vô", "Đao Phủ"…). Có thể giữ như khoảnh khắc cảm xúc, nhưng nên có một lựa chọn sai mà nghe hợp lý. | Gợi ý: mỗi ổ một câu nói thật của nhân vật đã gặp, giống ổ ấn Ch8.                          |
+| C12 | Đong 3 bình cần engine mới (ngăn xếp trạng thái, hoàn tác).                                                                                      | Đổi sang cơ chế làm được bằng dial, hoặc giữ nguyên nếu owner muốn (Claude làm engine).     |
+| C13 | Quá dễ: chỉ một cột cần thắp.                                                                                                                    | Mở rộng: nhiều cột lệch, thao tác thắp một cột thì đảo cả cột đối diện, hoặc kiểu tương tự. |
+
+Các câu C01, C04, C06, C07, C08, C09, C11 đạt (C08 cần ghi số nửa cung của từng nốt ngay trong lời dẫn). Riêng C04, C06, C09 khá giống bài toán sách giáo khoa. Owner thích câu đố gắn với thế giới, nên mỗi câu cần một lớp truyện (ai để lại câu đố, vì sao).
+
+### 18.5. Chiến đấu
+
+1. **Quái thường là quái trên bản đồ (thời gian thực):** chém, lướt, kỹ năng; không có "Space" hay "lượt".
+   - Viết lại 4 con theo kiểu Ch7–8: dấu hiệu báo trước (ms) và cách khắc chế bằng chém/lướt/kỹ năng.
+   - Máu khoảng 450–550, không phải 720–1150.
+   - "Đánh nhầm bóng giả nổ" và "phản 100% sát thương" làm được (gần với cơ chế phản đòn Ch4).
+2. **Elite** "Bản Án Bốn Nhịp" là cơ chế theo lượt. Chọn một trong hai: (a) làm mini-boss theo lượt; (b) viết lại thành quái bản đồ như Kẻ Gác Kim Giây.
+3. **Kiến Trúc Sư:** 3600 máu là quá cao (boss Ch8 khoảng 1700–1900, đề xuất khoảng 2200). "Lướt ra sau lưng" không làm được trong trận theo lượt; đổi thành hành động môi trường (đã có).
+4. **Thần Tính Lục Hợp (boss cuối)** cần đặc tả theo lượt cụ thể. Đề xuất của Claude, Antigravity viết lại theo hướng này:
+   - **Pha 1 — hai màu vòng:**
+     - vòng vàng của Chronos và vòng tím của Kuro cùng lao tới;
+     - đỡ đúng lúc hai vòng trùng nhịp → hai đòn đập vào nhau, cả hai bên mất máu;
+     - đỡ lệch → Peter chịu cả hai.
+   - **Pha 2 — Kuro về phe Peter:**
+     - nút "Gọi đồng đội": Ivo, Lyra, Neris, Aldric/Bran, mỗi người một tác dụng;
+     - lựa chọn cũ quyết định ai có mặt. Ví dụ: `gave_na_papers` thì Na thả hạc, hồi 30% máu một lần;
+     - Kuro có lời thoại khác theo `ch7_kuro_embraced`.
+   - **Pha 3 — 12:00:** chỉ kết thúc bằng hành động "Khắc trang cuối" (chiêu kết liễu bắt buộc, như Sứ Giả Ch8).
+5. **Boss ẩn:** 5000 máu là quá cao (đề xuất khoảng 2600). "Đảo phím" làm được bằng cơ chế khóa lệnh đã có.
+
+### 18.6. Kết thúc
+
+- **[OWNER]** Kết thật đang **bắt buộc** `ch7_kuro_embraced`. Ai thắng Kuro bằng đánh ở chương 7 sẽ mất kết thật vĩnh viễn mà không biết.
+  - Đề xuất: kết thật cần `ch8_learned_torn_page` và C10 đúng, cộng với **một trong hai**:
+    - `ch7_kuro_embraced`;
+    - một nhiệm vụ phụ chương 9 để Kuro mở lòng, ví dụ tìm Bà Mai ở Tâm Điểm.
+- Cần nói rõ: khi chưa đủ điều kiện, màn chọn chỉ hiện 2 kết thúc, và có một dòng gợi ý rằng "còn một con đường thứ ba".
+- Thêm Bà Mai vào nhịp 5 của kết thật (Kuro về nhà ăn cơm, vang lại Bí mật II của Ch7).
+
+### 18.7. Hình (Pipeline B)
+
+- **Tileset `nexus`:** 64 ô như Ch8 là đủ (ghép từ dungeon + ô mới).
+- **Quái bản đồ:** 32×32 × 4 khung chờ, như các chương trước. Không cần 4 hướng đi.
+- **`npc_kuro_interval`** không cần vẽ mới; dùng `npc_kuro`, và `npc_kuro_void` cho đoạn yếu lòng.
+- **Boss:**
+  - `boss_sixfold_divinity` 64×64, 3 trạng thái tương ứng 3 pha;
+  - `boss_primeval_architect` 64×64;
+  - `boss_void_singularity_core` 48 hoặc 64;
+  - `boss_chronos_reborn` (Chronos chiến đấu ở Pha 1) **[OWNER]**: dùng sprite NPC đã duyệt phóng to, hay vẽ dạng chiến đấu riêng.
+- **Đạo cụ** (ghế trống, bệ khởi thảo, cân 3 đĩa) làm thành ô trong tileset.
+
+### 18.8. Engine (Claude)
+
+- Trận ba bên: **không** tách 3 phe thật. Chronos + Kuro ở Pha 1 là **một** boss phát hai màu vòng (mở rộng `timedBlock`).
+- Bộ định tuyến kết thúc: `PrologueEndScene` với 3 thẻ kết và danh đề.
+- Engine bình nước (C12): chỉ làm nếu owner giữ câu này.
