@@ -235,8 +235,8 @@ export function villageLayout() {
     ground,
     walls,
     spawns: {
-      default: { x: 1, y: 10 },
-      from_shore: { x: 1, y: 10 },
+      default: { x: 2, y: 10 },
+      from_shore: { x: 2, y: 10 },
       from_beacon: { x: 27, y: 4 },
       loop_alley: { x: 15, y: 11 },
     },
@@ -305,7 +305,7 @@ export function beaconLayout() {
     spawns: {
       default: { x: 2, y: 14 },
       from_village: { x: 2, y: 14 },
-      from_ruins: { x: 19, y: 13 },
+      from_ruins: { x: 18, y: 13 },
     },
     exits: { to_village: { x: 0, y: 12, w: 1, h: 4 }, to_ruins: { x: 19, y: 16, w: 2, h: 1 } },
     points: { keeper: { x: 11, y: 8 }, tide_wheel: { x: 13, y: 6 }, logbook: { x: 9, y: 10 } },

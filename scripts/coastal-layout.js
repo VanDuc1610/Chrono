@@ -150,7 +150,7 @@ export function townLayout() {
     height: H,
     ground,
     walls,
-    spawns: { default: { x: 5, y: 6 }, from_house: { x: 5, y: 5 }, from_forest: { x: 25, y: 1 } },
+    spawns: { default: { x: 5, y: 6 }, from_house: { x: 5, y: 6 }, from_forest: { x: 25, y: 2 } },
     exits: {
       to_room: { x: 5, y: 4, w: 1, h: 1 },
       to_forest: { x: 25, y: 0, w: 2, h: 1 },
@@ -205,7 +205,7 @@ export function roomLayout() {
     height: H,
     ground,
     walls,
-    spawns: { default: { x: 3, y: 4 }, from_town: { x: 7, y: 8 } },
+    spawns: { default: { x: 3, y: 4 }, from_town: { x: 7, y: 7 } },
     exits: { to_town: { x: 7, y: 9, w: 1, h: 1 } },
     points: {
       bed: { x: 2, y: 3 },

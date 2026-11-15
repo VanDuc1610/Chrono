@@ -1,47 +1,56 @@
-# Map lint v2 report (T-75)
+# Map lint report - T-79
 
-## Runtime confirmation
+Chapters 0-7 lint now has **zero errors**. The 14 fixed error entries were removed from KNOWN, leaving the existing 41 reveal warnings. Chapter 8 data and files were preserved.
 
-On 2026-11-15, launched Vite on port 3000 and Chromium with Playwright. Selected Chapter 7 using canvas focus, ArrowDown, Enter, 7. At map_ch7_ash_abyss_drop tile (3,8), closed arrival dialogue, installed an in-memory zone trigger covering that stationary position. Its flag was false immediately and true after 250 ms, with onceFlag set. No source/data files changed for the probe. ExplorationScene.update calls checkTriggers every frame after dialogue/transition guards; canFire checks flags, not entry edges. Removed trigger-covers-spawn: containment at spawn is not a bug in this runtime.
+## Fixes in source layouts and map definitions
 
-## Reachability changes
+| Map                        | Change                                                                                                                                                         |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| map_peters_room            | from_town (7,8) -> (7,7).                                                                                                                                      |
+| map_coastal_town           | from_house (5,5) -> (5,6), from_forest (25,1) -> (25,2).                                                                                                       |
+| map_shattered_antechamber  | from_lighthouse (12,3) -> (12,4). Its spawn registry is hand-authored in maps.json.                                                                            |
+| map_ch1_abandoned_village  | default, from_shore and revive (1,10) -> (2,10).                                                                                                               |
+| map_ch1_sunset_beacon      | from_ruins (19,13) -> (18,13), clear in both base and low-tide Walls.                                                                                          |
+| map_ch2_imperial_outskirts | from_catacombs (18,12) -> (18,11).                                                                                                                             |
+| map_ch5_alpha_town         | from_shop (6,7) -> (6,8). Live validation additionally found the shop door itself blocked entry. Its visual tile is now on Ground and its Walls cell is empty. |
+| map_ch5_beta_city          | from_observatory (27,2) -> (27,3), clear in living and pruned Walls.                                                                                           |
+| map_ch5_unborn_throne      | Open (11,1), preserving the boss-gated exit tile at (11,0).                                                                                                    |
+| map_ch5_collision_shore    | Add 12 violet elbow tiles to connect the diagonal joins orthogonally. Grey trap islands are preserved.                                                         |
+| map_ch7_stranded_fleet     | Open (12,1) below fleet_to_well.                                                                                                                               |
+| map_ch7_fog_lullaby_maze   | Open (12,1) below maze_to_tree.                                                                                                                                |
 
-Union base Walls with every layerVariants Walls layer, including Chapter 5 living/pruned branches. Also union every nonblocking walls tileSwap (GID = index + 1), including timer bridges regardless of flag state or timer duration. Reachable same-map dialogue warps/trigger teleports connect components; arbitrary unused spawns do not. Conditions remain optimistic. The old 12 unreachable findings become 4: eight disappear through variant routes. Same-map warp support does not suppress the Chapter 5 seal finding because its source trigger is not four-way reachable.
+Spawn changes are mirrored in their layout metadata and the runtime maps.json registry. Chapter 5 wiring already reads layout spawns. The earlier chapters' tilemap generators do not write map registry spawns, so those registry entries are updated directly. The village revive follows its corrected default spawn.
 
-## Remaining errors: assessment
+Only five affected tilemaps were regenerated. generate-ch1-maps.js now accepts optional map IDs after the chapter argument and rejects unknown IDs before writing. Commands used were:
 
-Three unreachable exits are real static blockers: the entire row y=1 is GID 4, within collision 4..44, while the exit is at y=0. No relevant variant/swap or reachable warp crosses the row. For throne_to_shore, the victory swap opens (11,0) only, not (11,1). For fleet_to_well and maze_to_tree, (12,0) is already open but (12,1) stays blocked. Correct the generators owned by Claude.
+- node scripts/generate-ch1-maps.js ch5 map_ch5_unborn_throne map_ch5_collision_shore
+- node scripts/generate-ch1-maps.js ch7 map_ch7_stranded_fleet map_ch7_fog_lullaby_maze
+- node scripts/generate-ch1-maps.js ch5 map_ch5_alpha_town
 
-The fourth finding is the Chapter 5 seal POI: the violet island path contains diagonal-only joins (e.g. (5,7) to (6,6)), with both orthogonal neighbors blocking. The completion zone at (24,7) therefore cannot be reached by four-way BFS, so its warp to core is not a valid reachable seed. This is a likely corridor/corner-clearance problem rather than a missing seal warp; confirm with actual movement/dash before changing data. Add orthogonal stepping tiles in ch5-layout.js if confirmed.
+Semantic diffs against HEAD show eight changed map definitions, limited to the listed spawn/revive fields. The four corridor/path tilemaps change one Ground and one Walls cell each at the three northern entrances, and 12 cells per layer on the collision shore. Alpha changes one cell per layer for its shop door. No unrelated tilemap or Chapter 8 map definition changed.
 
-The blocked arrival spawn has a base blocking tile, independent of story flags. The nine spawn-near-exit errors retain the original requested clearance policy: they are genuine distance violations, but proximity alone does not prove immediate travel (especially at distance 1). Review movement/body clearance in playtest before treating every one as an instant-exit bug.
+## Live verification
 
-## Warnings and false positives
+Used npm run dev and headless Chromium through Playwright. Entered via the real chapter-select UI for Chapters 1, 2, 5 and 7. To isolate each location, restarted ExplorationScene at its named spawn with the relevant story gates already unlocked, suppressed unrelated introduction triggers, and paused field enemies. All movement to exits used real arrow-key events. This verifies local arrival/collision/travel behavior rather than a complete natural chapter playthrough.
 
-Reveal traversal follows all response branches, cycle-safe, with any refreshMap/startTimer exempting the chain as originally specified. Warning does not prove a bug: applyEffects already calls applyTileSwaps (ExplorationScene), so swap-only flags are false positives. visibleWhen NPCs/interactables still require rebuild; warp, endChapter, toggleBranch or a later refresh can make warnings harmless. The per-finding notes below distinguish swap-only flags from visibility conditions. Timer exemption re-applies swaps but does not recreate visibleWhen entities. No game data was changed.
+- Every listed arrival remained on its source map while idle and had a clear player collision tile.
+- Walked from the new room/town/sanctuary/village/outskirts/Alpha/Beta spawns into their intended exits and observed the expected destination map. Both village default and from_shore were checked.
+- Walked from the corrected beacon arrival back to the sunken corridors with low tide active. With tide_lowered false, separately arrived at the same spawn on base Walls and walked north to (18,12), remaining unblocked.
+- Walked through the new northern openings from unborn_throne to collision_shore, stranded_fleet to echo_well_depths, and fog_lullaby_maze to bang_tree_promontory.
+- For the collision shore, started ch5_collision_start through E and closed the dialogue to start its actual 40-second timer. Walked the 34-step safe path with arrow keys, avoiding grey trap tiles. The end trigger set escaped_collision after 9,727 ms. Closed that dialogue, let its warp reach core, walked to the seal and pressed E. ch5_seal_stop opened with escaped_collision true.
+- Alpha door regression was confirmed before its fix. Walking upward stopped Peter at pixel (208,224), body.blocked.up true, outside the exit. After moving the door visual to Ground, the same approach transitioned to map_ch5_alpha_clockshop.
 
-## Chapter 0 / map_peters_room
+## Lint interpretation and remaining warnings
 
-- **error / spawn-near-exit** spawn from_town is within 2 tiles of exit room_to_town at (7, 8). Assessment / suggested fix: Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.
+The lint uses optimistic four-way BFS over base Walls plus all wall variants and nonblocking tile swaps, including timer bridges. Reachable same-map dialogue warps and trigger teleports connect components. It does not prove that every flag combination is attainable or that a route fits within a timer. The collision-shore timed traversal was therefore checked separately in the live game.
+
+Zone triggers are polled by ExplorationScene.update, including when the player spawns inside. The old trigger-covers-spawn rule remains removed following the T-75 live confirmation.
+
+Reveal warnings remain documented below. A swap-only flag is generally a false positive because applyEffects already reapplies tile swaps. visibleWhen entities may still need a rebuild. A warp, endChapter, toggleBranch or later refresh can also make an apparent reveal warning harmless. Dialogue traversal is cycle-safe and optimistic across response branches. A timer reapplies swaps but does not recreate visibleWhen entities.
 
 ## Chapter 0 / map_coastal_town
 
-- **error / spawn-near-exit** spawn from_house is within 2 tiles of exit town_to_room at (5, 5). Assessment / suggested fix: Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.
-- **error / spawn-near-exit** spawn from_forest is within 2 tiles of exit town_to_forest at (25, 1). Assessment / suggested fix: Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.
 - **warning / reveal-without-refresh** chain town_time_stops sets time_frozen without refreshMap/startTimer. Assessment / suggested fix: Visibility condition uses this flag: likely needs a rebuild after the chain; review warp/endChapter/toggleBranch or victory-return rebuild before adding refreshMap.
-
-## Chapter 0 / map_shattered_antechamber
-
-- **error / spawn-near-exit** spawn from_lighthouse is within 2 tiles of exit antechamber_to_lighthouse at (12, 3). Assessment / suggested fix: Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.
-
-## Chapter 1 / map_ch1_abandoned_village
-
-- **error / spawn-near-exit** spawn default is within 2 tiles of exit village_to_shore at (1, 10). Assessment / suggested fix: Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.
-- **error / spawn-near-exit** spawn from_shore is within 2 tiles of exit village_to_shore at (1, 10). Assessment / suggested fix: Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.
-
-## Chapter 1 / map_ch1_sunset_beacon
-
-- **error / spawn-blocked** spawn from_ruins is blocked before swaps at (19, 13). Assessment / suggested fix: Base Walls tile contains a blocking GID before swaps; move this arrival spawn to a walkable tile.
 
 ## Chapter 1 / map_ch1_sunken_corridors
 
@@ -52,7 +61,6 @@ Reveal traversal follows all response branches, cycle-safe, with any refreshMap/
 
 ## Chapter 2 / map_ch2_imperial_outskirts
 
-- **error / spawn-near-exit** spawn from_catacombs is within 2 tiles of exit outskirts_to_catacombs at (18, 12). Assessment / suggested fix: Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.
 - **warning / reveal-without-refresh** chain ch2_elder_echo_farewell sets elder_echo_faded without refreshMap/startTimer. Assessment / suggested fix: Visibility condition uses this flag: likely needs a rebuild after the chain; review warp/endChapter/toggleBranch or victory-return rebuild before adding refreshMap.
 
 ## Chapter 2 / map_ch2_sunken_catacombs
@@ -102,13 +110,8 @@ Reveal traversal follows all response branches, cycle-safe, with any refreshMap/
 
 - **warning / reveal-without-refresh** chain ch5x_gardener_peace sets pacified_the_gardener without refreshMap/startTimer. Assessment / suggested fix: Visibility condition uses this flag: likely needs a rebuild after the chain; review warp/endChapter/toggleBranch or victory-return rebuild before adding refreshMap.
 
-## Chapter 5 / map_ch5_alpha_town
-
-- **error / spawn-near-exit** spawn from_shop is within 2 tiles of exit alpha_to_shop at (6, 7). Assessment / suggested fix: Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.
-
 ## Chapter 5 / map_ch5_beta_city
 
-- **error / spawn-near-exit** spawn from_observatory is within 2 tiles of exit beta_to_observatory at (27, 2). Assessment / suggested fix: Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.
 - **warning / reveal-without-refresh** chain ch5_cell_3_place sets ch5_cell_3_p without refreshMap/startTimer. Assessment / suggested fix: Likely false positive: only tileSwaps use this flag on this map, and applyEffects already reapplies swaps. No data fix suggested without a failing playtest.
 - **warning / reveal-without-refresh** chain ch5_cell_6_place sets ch5_cell_6_p without refreshMap/startTimer. Assessment / suggested fix: Likely false positive: only tileSwaps use this flag on this map, and applyEffects already reapplies swaps. No data fix suggested without a failing playtest.
 - **warning / reveal-without-refresh** chain ch5_cell_9_place sets ch5_cell_9_p without refreshMap/startTimer. Assessment / suggested fix: Likely false positive: only tileSwaps use this flag on this map, and applyEffects already reapplies swaps. No data fix suggested without a failing playtest.
@@ -122,14 +125,6 @@ Reveal traversal follows all response branches, cycle-safe, with any refreshMap/
 - **warning / reveal-without-refresh** chain ch5_kuro_smile sets kuro_left without refreshMap/startTimer. Assessment / suggested fix: Visibility condition uses this flag: likely needs a rebuild after the chain; review warp/endChapter/toggleBranch or victory-return rebuild before adding refreshMap.
 - **warning / reveal-without-refresh** chain ch5_kuro_after_quiz_open sets kuro_left without refreshMap/startTimer. Assessment / suggested fix: Visibility condition uses this flag: likely needs a rebuild after the chain; review warp/endChapter/toggleBranch or victory-return rebuild before adding refreshMap.
 - **warning / reveal-without-refresh** chain ch5_kuro_after_quiz sets kuro_left without refreshMap/startTimer. Assessment / suggested fix: Visibility condition uses this flag: likely needs a rebuild after the chain; review warp/endChapter/toggleBranch or victory-return rebuild before adding refreshMap.
-
-## Chapter 5 / map_ch5_unborn_throne
-
-- **error / unreachable** exit throne_to_shore cannot be reached at (11, 0). Assessment / suggested fix: North exit is separated from the interior by the full blocking row y=1 (GID 4); no variant, swap or reachable warp opens it. Open the entrance tile at y=1 in the chapter layout generator.
-
-## Chapter 5 / map_ch5_collision_shore
-
-- **error / unreachable** object poi_ch5_possibility_seal cannot be reached at (27, 4). Assessment / suggested fix: Likely path/corner-clearance bug: diagonal-only violet islands disconnect the start from the completion trigger at (24,7). Its ch5_collision_escaped warp exists but cannot be seeded until that trigger is reachable. Verify movement/dash; connect islands orthogonally if confirmed.
 
 ## Chapter 6 / map_ch6_outer_courtyard
 
@@ -162,7 +157,6 @@ Reveal traversal follows all response branches, cycle-safe, with any refreshMap/
 
 ## Chapter 7 / map_ch7_stranded_fleet
 
-- **error / unreachable** exit fleet_to_well cannot be reached at (12, 0). Assessment / suggested fix: North exit is separated from the interior by the full blocking row y=1 (GID 4); no variant, swap or reachable warp opens it. Open the entrance tile at y=1 in the chapter layout generator.
 - **warning / reveal-without-refresh** chain ch7_c05_right sets solved_stranded_fleet without refreshMap/startTimer. Assessment / suggested fix: Likely false positive: only tileSwaps use this flag on this map, and applyEffects already reapplies swaps. No data fix suggested without a failing playtest.
 
 ## Chapter 7 / map_ch7_clock_graveyard
@@ -173,10 +167,6 @@ Reveal traversal follows all response branches, cycle-safe, with any refreshMap/
 
 - **warning / reveal-without-refresh** chain ch7_c08_right sets opened_childhood_pledge_box without refreshMap/startTimer. Assessment / suggested fix: Likely false positive: only tileSwaps use this flag on this map, and applyEffects already reapplies swaps. No data fix suggested without a failing playtest.
 
-## Chapter 7 / map_ch7_fog_lullaby_maze
-
-- **error / unreachable** exit maze_to_tree cannot be reached at (12, 0). Assessment / suggested fix: North exit is separated from the interior by the full blocking row y=1 (GID 4); no variant, swap or reachable warp opens it. Open the entrance tile at y=1 in the chapter layout generator.
-
 ## Chapter 7 / map_ch7_chain_cathedral
 
 - **warning / reveal-without-refresh** chain ch7_forgotten_meet sets communed_first_forgotten without refreshMap/startTimer. Assessment / suggested fix: Likely false positive: only tileSwaps use this flag on this map, and applyEffects already reapplies swaps. No data fix suggested without a failing playtest.
@@ -186,18 +176,10 @@ Reveal traversal follows all response branches, cycle-safe, with any refreshMap/
 
 - **warning / reveal-without-refresh** chain ch7_pin_right sets stabilized_third_chain without refreshMap/startTimer. Assessment / suggested fix: Likely false positive: only tileSwaps use this flag on this map, and applyEffects already reapplies swaps. No data fix suggested without a failing playtest.
 
-## Chapter 8 (T-74, not baselined)
+## Chapter 8
 
-No findings in the current snapshot (18 maps). New Chapter 8 errors fail the real-data test; none are added to KNOWN.
+No Chapter 8 findings are baselined. Its maps are still discovered automatically and checked by the real-data test.
 
-Stable baseline: 55 findings (14 errors, 41 warnings).
+## T-79 verification
 
-## T-75 verification and handoff
-
-- Chapter 7 answer key: DAP_AN_CHUONG_7.md (Vietnamese), all 13 puzzles, compass side quest, field elite, three bosses and both Kuro outcomes; data/design differences are listed there.
-- Real-data map test uses eager import.meta.glob for every public/assets/maps/*.json file. Chapter 8 maps are checked automatically and never added to KNOWN. Snapshot: 18 Chapter 8 maps, zero findings.
-- Typecheck and ESLint passed; npm test passed 161 tests across 24 files.
-- Full-repo Prettier check still fails on six T-74 data files: dialogue.json, enemies.json, items.json, maps.json, player.json, quests.json. They are outside T-75 locks and were not modified. T-75 files pass their scoped formatting check.
-- npm run e2e -- --workers=1 passed all six tests (chapter select and existing smoke on Chromium, Firefox, WebKit). Eight chapter starts checked against mapId, level and equipped weapon, with no console errors or failed asset requests. Chapter-select durations: Chromium 15.2 s, Firefox 21.3 s, WebKit 44.2 s.
-- Initial default six-worker run was resource-heavy; repeated full-page boots also timed out in WebKit. The final test preloads once and returns via Phaser scene lifecycle, then starts each fresh chapter with real menu/number keys. Timeout remains 60 seconds.
-- Pull --rebase was attempted before the first two parts but Git refused because T-74 had concurrent unstaged changes; no other-agent changes were stashed. A later pull before the final commit succeeded (branch up to date). No push.
+Typecheck, ESLint, the full Prettier check and npm test all passed before the map-fix commit. The suite contains 165 tests in 25 files. Scoped diffs confirm Chapter 8 map definitions and files are unchanged.

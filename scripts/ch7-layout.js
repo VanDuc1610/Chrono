@@ -283,6 +283,7 @@ export function strandedFleet() {
   const L = room(width, height, 706, Vc.SAND, Vc.SAND);
   door(L, [
     [12, 0],
+    [12, 1],
     [31, 10],
   ]);
   L.walls[10][31] = Vc.DOOR;
@@ -524,6 +525,7 @@ export function fogLullabyMaze() {
   const L = room(width, height, 712);
   door(L, [
     [12, 0],
+    [12, 1],
     [23, 9],
   ]);
   L.walls[9][23] = Vc.FOG;

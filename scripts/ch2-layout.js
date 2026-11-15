@@ -88,7 +88,7 @@ export function outskirtsLayout() {
     height: H,
     ground,
     walls,
-    spawns: { default: { x: 2, y: 9 }, from_ch1: { x: 2, y: 9 }, from_catacombs: { x: 18, y: 12 } },
+    spawns: { default: { x: 2, y: 9 }, from_ch1: { x: 2, y: 9 }, from_catacombs: { x: 18, y: 11 } },
     exits: { to_catacombs: { x: 18, y: 13, w: 1, h: 1 } },
     points: {
       elder_echo: { x: 6, y: 8 },

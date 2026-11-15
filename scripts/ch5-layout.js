@@ -297,7 +297,8 @@ export function alphaTown() {
   // The clock shop (north-west) and houses.
   fill(walls, 3, 2, 9, 4, C.ROOF);
   fill(walls, 3, 5, 9, 6, C.LIME_WALL);
-  walls[6][6] = C.DOOR;
+  ground[6][6] = C.DOOR;
+  walls[6][6] = -1;
   fill(walls, 18, 2, 24, 4, C.ROOF);
   fill(walls, 18, 5, 24, 6, C.WALL_WINDOW);
   place(
@@ -324,7 +325,7 @@ export function alphaTown() {
     spawns: {
       default: { x: 2, y: 8 },
       from_garden: { x: 2, y: 8 },
-      from_shop: { x: 6, y: 7 },
+      from_shop: { x: 6, y: 8 },
       from_harbor: { x: 22, y: 15 },
       from_tower: { x: 14, y: 2 },
     },
@@ -548,7 +549,7 @@ export function betaCity() {
       default: { x: 2, y: 8 },
       from_tower: { x: 2, y: 8 },
       from_reactor: { x: 27, y: 8 },
-      from_observatory: { x: 27, y: 2 },
+      from_observatory: { x: 27, y: 3 },
       bridge_start: { x: 8, y: 8 },
       revive: { x: 2, y: 8 },
     },
@@ -807,7 +808,10 @@ export function unbornThrone() {
   const width = 22;
   const height = 16;
   const L = room(width, height, 527, I.FLOOR, I.SAND);
-  door(L, [[0, 12]]);
+  door(L, [
+    [0, 12],
+    [11, 1],
+  ]);
   for (const t of THRONE_GATE) L.walls[t.y][t.x] = I.GATE;
   place(L.walls, [[11, 3]], I.THRONE);
   place(L.walls, [[4, 11]], I.P_SILVER); // the Mirror of Nothing
@@ -853,23 +857,35 @@ export function collisionShore() {
   const violet = [
     [4, 7],
     [5, 7],
+    [6, 7],
     [6, 6],
     [7, 6],
+    [8, 6],
     [8, 5],
     [9, 5],
+    [10, 5],
     [10, 6],
+    [11, 6],
     [11, 7],
+    [12, 7],
     [12, 8],
     [13, 8],
+    [14, 8],
     [14, 9],
     [15, 9],
+    [16, 9],
     [16, 8],
+    [17, 8],
     [17, 7],
+    [18, 7],
     [18, 6],
     [19, 6],
+    [20, 6],
     [20, 7],
+    [21, 7],
     [21, 8],
     [22, 8],
+    [23, 8],
     [23, 7],
     [24, 7],
   ];

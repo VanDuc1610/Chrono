@@ -15,42 +15,6 @@ import type { DialogueDatabase } from '../src/systems/dialogue/DialogueTypes';
 const KNOWN: { finding: LintFinding; reason: string }[] = [
   {
     finding: {
-      mapId: 'map_peters_room',
-      rule: 'spawn-near-exit',
-      severity: 'error',
-      message: 'spawn from_town is within 2 tiles of exit room_to_town',
-      x: 7,
-      y: 8,
-    },
-    reason:
-      'Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.',
-  },
-  {
-    finding: {
-      mapId: 'map_coastal_town',
-      rule: 'spawn-near-exit',
-      severity: 'error',
-      message: 'spawn from_house is within 2 tiles of exit town_to_room',
-      x: 5,
-      y: 5,
-    },
-    reason:
-      'Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.',
-  },
-  {
-    finding: {
-      mapId: 'map_coastal_town',
-      rule: 'spawn-near-exit',
-      severity: 'error',
-      message: 'spawn from_forest is within 2 tiles of exit town_to_forest',
-      x: 25,
-      y: 1,
-    },
-    reason:
-      'Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.',
-  },
-  {
-    finding: {
       mapId: 'map_coastal_town',
       rule: 'reveal-without-refresh',
       severity: 'warning',
@@ -58,54 +22,6 @@ const KNOWN: { finding: LintFinding; reason: string }[] = [
     },
     reason:
       'Review chain: add refreshMap only if needed; tile swaps already reapply in applyEffects, and warp/endChapter/toggleBranch may rebuild anyway.',
-  },
-  {
-    finding: {
-      mapId: 'map_shattered_antechamber',
-      rule: 'spawn-near-exit',
-      severity: 'error',
-      message: 'spawn from_lighthouse is within 2 tiles of exit antechamber_to_lighthouse',
-      x: 12,
-      y: 3,
-    },
-    reason:
-      'Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.',
-  },
-  {
-    finding: {
-      mapId: 'map_ch1_abandoned_village',
-      rule: 'spawn-near-exit',
-      severity: 'error',
-      message: 'spawn default is within 2 tiles of exit village_to_shore',
-      x: 1,
-      y: 10,
-    },
-    reason:
-      'Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.',
-  },
-  {
-    finding: {
-      mapId: 'map_ch1_abandoned_village',
-      rule: 'spawn-near-exit',
-      severity: 'error',
-      message: 'spawn from_shore is within 2 tiles of exit village_to_shore',
-      x: 1,
-      y: 10,
-    },
-    reason:
-      'Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.',
-  },
-  {
-    finding: {
-      mapId: 'map_ch1_sunset_beacon',
-      rule: 'spawn-blocked',
-      severity: 'error',
-      message: 'spawn from_ruins is blocked before swaps',
-      x: 19,
-      y: 13,
-    },
-    reason:
-      'Base Walls tile contains a blocking GID before swaps; move this arrival spawn to a walkable tile.',
   },
   {
     finding: {
@@ -149,18 +65,6 @@ const KNOWN: { finding: LintFinding; reason: string }[] = [
     },
     reason:
       'Review chain: add refreshMap only if needed; tile swaps already reapply in applyEffects, and warp/endChapter/toggleBranch may rebuild anyway.',
-  },
-  {
-    finding: {
-      mapId: 'map_ch2_imperial_outskirts',
-      rule: 'spawn-near-exit',
-      severity: 'error',
-      message: 'spawn from_catacombs is within 2 tiles of exit outskirts_to_catacombs',
-      x: 18,
-      y: 12,
-    },
-    reason:
-      'Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.',
   },
   {
     finding: {
@@ -322,30 +226,6 @@ const KNOWN: { finding: LintFinding; reason: string }[] = [
   },
   {
     finding: {
-      mapId: 'map_ch5_alpha_town',
-      rule: 'spawn-near-exit',
-      severity: 'error',
-      message: 'spawn from_shop is within 2 tiles of exit alpha_to_shop',
-      x: 6,
-      y: 7,
-    },
-    reason:
-      'Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.',
-  },
-  {
-    finding: {
-      mapId: 'map_ch5_beta_city',
-      rule: 'spawn-near-exit',
-      severity: 'error',
-      message: 'spawn from_observatory is within 2 tiles of exit beta_to_observatory',
-      x: 27,
-      y: 2,
-    },
-    reason:
-      'Spawn violates the requested two-tile clearance. Move it inward; distance 1 is a clearance risk, not proof of immediate teleport.',
-  },
-  {
-    finding: {
       mapId: 'map_ch5_beta_city',
       rule: 'reveal-without-refresh',
       severity: 'warning',
@@ -413,30 +293,6 @@ const KNOWN: { finding: LintFinding; reason: string }[] = [
     },
     reason:
       'Review chain: add refreshMap only if needed; tile swaps already reapply in applyEffects, and warp/endChapter/toggleBranch may rebuild anyway.',
-  },
-  {
-    finding: {
-      mapId: 'map_ch5_unborn_throne',
-      rule: 'unreachable',
-      severity: 'error',
-      message: 'exit throne_to_shore cannot be reached',
-      x: 11,
-      y: 0,
-    },
-    reason:
-      'North exit is separated from the interior by the full blocking row y=1 (GID 4); no variant, swap or reachable warp opens it. Open the entrance tile at y=1 in the chapter layout generator.',
-  },
-  {
-    finding: {
-      mapId: 'map_ch5_collision_shore',
-      rule: 'unreachable',
-      severity: 'error',
-      message: 'object poi_ch5_possibility_seal cannot be reached',
-      x: 27,
-      y: 4,
-    },
-    reason:
-      'Diagonal-only violet islands prevent four-way access to the completion trigger that warps to core; verify movement/dash and connect stepping tiles if confirmed.',
   },
   {
     finding: {
@@ -521,18 +377,6 @@ const KNOWN: { finding: LintFinding; reason: string }[] = [
   {
     finding: {
       mapId: 'map_ch7_stranded_fleet',
-      rule: 'unreachable',
-      severity: 'error',
-      message: 'exit fleet_to_well cannot be reached',
-      x: 12,
-      y: 0,
-    },
-    reason:
-      'North exit is separated from the interior by the full blocking row y=1 (GID 4); no variant, swap or reachable warp opens it. Open the entrance tile at y=1 in the chapter layout generator.',
-  },
-  {
-    finding: {
-      mapId: 'map_ch7_stranded_fleet',
       rule: 'reveal-without-refresh',
       severity: 'warning',
       message: 'chain ch7_c05_right sets solved_stranded_fleet without refreshMap/startTimer',
@@ -559,18 +403,6 @@ const KNOWN: { finding: LintFinding; reason: string }[] = [
     },
     reason:
       'Review chain: add refreshMap only if needed; tile swaps already reapply in applyEffects, and warp/endChapter/toggleBranch may rebuild anyway.',
-  },
-  {
-    finding: {
-      mapId: 'map_ch7_fog_lullaby_maze',
-      rule: 'unreachable',
-      severity: 'error',
-      message: 'exit maze_to_tree cannot be reached',
-      x: 12,
-      y: 0,
-    },
-    reason:
-      'North exit is separated from the interior by the full blocking row y=1 (GID 4); no variant, swap or reachable warp opens it. Open the entrance tile at y=1 in the chapter layout generator.',
   },
   {
     finding: {

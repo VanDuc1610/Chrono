@@ -13,7 +13,7 @@ import { CH6_MAPS } from './ch6-layout.js';
 import { CH7_MAPS } from './ch7-layout.js';
 import { CH8_MAPS } from './ch8-layout.js';
 
-/** `node <script> ch2|ch3|ch4|ch5|ch6` builds that chapter instead of Chapter 1. */
+/** `node <script> ch5 [mapId ...]` builds a chapter, optionally selecting only named maps. */
 const CHAPTER = process.argv[2] ?? 'ch1';
 const MAPS =
   {
@@ -26,6 +26,12 @@ const MAPS =
     ch7: CH7_MAPS,
     ch8: CH8_MAPS,
   }[CHAPTER] ?? CH1_MAPS;
+
+const selectedIds = new Set(process.argv.slice(3));
+for (const id of selectedIds) {
+  if (!MAPS.some((map) => map.id === id)) throw new Error(`Unknown ${CHAPTER} map: ${id}`);
+}
+const selectedMaps = MAPS.filter((map) => selectedIds.size === 0 || selectedIds.has(map.id));
 
 const TILESETS = {
   wilds: {
@@ -161,7 +167,7 @@ function toTiled(layout, ts) {
   };
 }
 
-for (const def of MAPS) {
+for (const def of selectedMaps) {
   const layout = def.build();
   const file = `public/assets/maps/${def.id}.json`;
   fs.writeFileSync(file, JSON.stringify(toTiled(layout, TILESETS[def.tileset])) + '\n');
