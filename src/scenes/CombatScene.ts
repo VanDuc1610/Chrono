@@ -419,6 +419,19 @@ export class CombatScene extends Phaser.Scene {
     const inner = 22;
     const outline = this.add.circle(cx, cy, inner).setStrokeStyle(2, 0xffffff, 0.85).setDepth(50);
     const ring = this.add.circle(cx, cy, 72).setStrokeStyle(3, 0xffc04a, 1).setDepth(51);
+    let decoy: Phaser.GameObjects.Arc | null = null;
+    if (tb.decoyLeadMs) {
+      // The true ring is violet; a gold one closes early to bait the block.
+      ring.setStrokeStyle(3, 0xb48cff, 1);
+      decoy = this.add.circle(cx, cy, 72).setStrokeStyle(3, 0xe8c060, 1).setDepth(51);
+      this.tweens.add({
+        targets: decoy,
+        radius: inner,
+        duration: Math.max(100, tb.ringMs - tb.decoyLeadMs),
+        ease: 'Linear',
+        onComplete: () => decoy?.setVisible(false),
+      });
+    }
     if (tb.hidden) {
       // An unseen blow: only a dark ripple on Peter, 300 ms before it lands.
       ring.setVisible(false);
@@ -477,6 +490,10 @@ export class CombatScene extends Phaser.Scene {
       anim.stop();
       this.tweens.killTweensOf(ring);
       ring.destroy();
+      if (decoy) {
+        this.tweens.killTweensOf(decoy);
+        decoy.destroy();
+      }
       outline.destroy();
       hint.destroy();
       done(blocked, pressed);

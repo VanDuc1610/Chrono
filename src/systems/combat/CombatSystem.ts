@@ -81,6 +81,8 @@ interface BossState {
   purge: { left: number | null; cooldown: number; open: boolean };
   /** Erasing mist: boss turns it stays cleared. */
   mistClear: number;
+  /** Pool of tears: drops so far. */
+  tears: number;
 }
 
 export class CombatSystem implements ICombatSystem {
@@ -189,6 +191,7 @@ export class CombatSystem implements ICombatSystem {
           ritual: { open: false, progress: 0, done: false },
           purge: { left: null, cooldown: 0, open: false },
           mistClear: 0,
+          tears: 0,
         });
       if (e.mechanic?.startsUnshielded) this.bosses.get(e.id)!.shield = false;
     }
@@ -349,6 +352,23 @@ export class CombatSystem implements ICombatSystem {
         out.push(formatString({ m: pg.chargeMessage }, 'm', { n: pg.chargeTurns }));
       }
     }
+    const tears = m.tears;
+    if (tears) {
+      boss.tears++;
+      if (boss.tears >= tears.max) {
+        boss.tears = 0;
+        const peter = this.state.combatants.find((c) => c.type === 'player');
+        if (peter) {
+          const hit = this.applyDamage(peter, Math.ceil(peter.stats.maxHp * tears.floodPct));
+          if (peter.stats.hp <= 0) {
+            peter.isAlive = false;
+            this.state.phase = 'defeat';
+          }
+          out.push(formatString({ m: tears.floodMessage }, 'm', { damage: hit.dealt }));
+        }
+      } else
+        out.push(formatString({ m: tears.dropMessage }, 'm', { n: boss.tears, max: tears.max }));
+    }
     const mist = m.mist;
     if (mist) {
       if (boss.mistClear > 0) boss.mistClear--;
@@ -397,7 +417,12 @@ export class CombatSystem implements ICombatSystem {
     if (m.ritual && boss.ritual.open && !boss.ritual.done) return m.ritual.pillars;
     const out: BossEnvironmentAction[] = [];
     const fin = m.finisher;
-    if (fin && this.hasItem(fin.itemId) && enemy.stats.hp <= enemy.stats.maxHp * fin.belowPct)
+    if (
+      fin &&
+      this.hasItem(fin.itemId) &&
+      (!fin.flag || this.hasFlag(fin.flag)) &&
+      enemy.stats.hp <= enemy.stats.maxHp * fin.belowPct
+    )
       out.push(fin.action);
     const nc = m.nameCall;
     if (nc && !boss.shield && this.hasFlag(nc.flag) && !boss.done.has(nc.action.id))
@@ -447,15 +472,25 @@ export class CombatSystem implements ICombatSystem {
     };
   }
 
+  /** Drops in the boss's pool of tears (tests / HUD). */
+  public getTears(enemyId: string): number {
+    return this.bosses.get(enemyId)?.tears ?? 0;
+  }
+
   /** True while the boss charges its Purge. */
   public isCharging(enemyId: string): boolean {
     const left = this.bosses.get(enemyId)?.purge.left;
     return left !== null && left !== undefined;
   }
 
-  /** Peter blocked one of the boss's blows perfectly: while it charges, its back opens. */
+  /** Peter blocked one of the boss's blows perfectly: a tear is wiped; a charging back opens. */
   public notePerfectBlock(enemyId: string): string | null {
     const boss = this.bosses.get(enemyId);
+    const tears = this.getCombatant(enemyId)?.mechanic?.tears;
+    if (boss && tears && boss.tears > 0) {
+      boss.tears--;
+      return formatString({ m: tears.wipeMessage }, 'm', { n: boss.tears, max: tears.max });
+    }
     const pg = this.getCombatant(enemyId)?.mechanic?.purge;
     if (!boss || !pg || boss.purge.left === null || boss.purge.open) return null;
     boss.purge.open = true;

@@ -25,6 +25,15 @@ import type { Translate } from '../ui/Strings';
 import { conditionHolds, tileCenter } from './MapRegistry';
 import type { MapRoamerDefinition, MapStrikeTarget, TilePoint } from './MapTypes';
 import { laserStage, ringCrosses, ringState, trailPosition, twinPaired } from './Chapter6Rules';
+import {
+  chainCenters,
+  chainVerdict,
+  figureEight,
+  houndSolid,
+  huskFrozen,
+  huskPulls,
+  tellStage,
+} from './Chapter7Rules';
 
 /** What the exploration scene provides to the real-time combat layer. */
 export interface ActionHost {
@@ -103,6 +112,19 @@ interface Roamer {
   /** Archon Construct: laser in progress. */
   laser?: { at: number; from: Point; to: Point; fired: boolean } | null;
   nextLaserAt?: number;
+  /** Hollow Husk: frozen while Peter stands still. */
+  frozen?: boolean;
+  /** Name Eater: breath in progress. */
+  inhaleAt?: number | null;
+  nextInhaleAt?: number;
+  /** Erasure Moths: closing in since. */
+  swarmAt?: number | null;
+  nextSwarmAt?: number;
+  /** Ink Hound: already bit during this pause. */
+  bit?: boolean;
+  /** Void Inquisitor: chain circles in progress. */
+  chains?: { at: number; centers: Point[] } | null;
+  nextChainAt?: number;
 }
 
 const ELDER_FLAG = 'elder_joined';
@@ -145,6 +167,13 @@ export class ActionCombat {
   /** Slowed by an Origin Nullifier's ring until then. */
   private slowUntil = 0;
   private slowPct = 0;
+  /** When Peter last moved (Hollow Husks pull after a while). */
+  private stillSince = 0;
+  /** Temporal Strike unavailable until then (a Name Eater swallowed it). */
+  private silencedUntil = 0;
+  /** Erasure Moths clinging: damage per second until then. */
+  private dotUntil = 0;
+  private dotPerSec = 0;
 
   constructor(
     private readonly scene: Phaser.Scene,
@@ -442,6 +471,13 @@ export class ActionCombat {
 
     const target: Point = { x: this.player.x, y: this.player.y };
     this.aimLines.clear();
+    const pBody = this.player.sprite.body as Phaser.Physics.Arcade.Body | null;
+    if (!pBody || !huskFrozen(Math.hypot(pBody.velocity.x, pBody.velocity.y)))
+      this.stillSince = now;
+    if (now < this.dotUntil) {
+      this.session.hp = Math.max(1, this.session.hp - (this.dotPerSec * delta) / 1000);
+      if (Math.floor(now / 500) !== Math.floor((now - delta) / 500)) this.host.refreshHud();
+    }
     if (this.roamers.some((r) => r.alive && r.enemy.field?.trail)) {
       this.trailLog.push({ t: now, x: this.player.x, y: this.player.y });
       while (this.trailLog.length > 0 && this.trailLog[0].t < now - 3000) this.trailLog.shift();
@@ -458,6 +494,11 @@ export class ActionCombat {
         this.updateTrail(r, now);
         continue;
       }
+      if (r.enemy.field?.freezeWatch && this.updateHusk(r, now)) continue;
+      if (r.enemy.field?.inhale && this.updateInhale(r, now)) continue;
+      if (r.enemy.field?.swarm && this.updateSwarm(r, now)) continue;
+      if (r.enemy.field?.hound && this.updateHound(r, now)) continue;
+      if (r.enemy.field?.chainTrial && this.updateChains(r, now)) continue;
       if (r.enemy.field?.rings && this.updateRings(r, now)) continue;
       if (r.enemy.field?.laser && this.updateLaser(r, now)) continue;
       if (r.enemy.field?.phase) this.updatePhase(r, now);
@@ -590,6 +631,15 @@ export class ActionCombat {
       if (!inSlash(origin, aim, r.sprite, reach, this.tuning.slashArcDeg)) continue;
       landed = true;
       if (this.shutLaser(r, now)) continue;
+      if (this.chokeEater(r, now)) {
+        this.damageRoamer(
+          r,
+          rollHit(attack, r.enemy.defense, this.combat, this.rng).damage * 2,
+          true,
+        );
+        continue;
+      }
+      if (this.scatterSwarm(r, now)) continue;
       const parry = r.enemy.field?.parry;
       if (parry && inParryWindow(r.brain.state, r.brain.timer, parry.flashMs)) {
         // Parried: no damage, but the spear is knocked aside and the guard drops.
@@ -603,7 +653,8 @@ export class ActionCombat {
       const hit = rollHit(attack, r.enemy.defense, this.combat, this.rng);
       if (this.defended(r, hit.damage)) continue;
       const stunned = r.charge?.phase === 'stunned';
-      const mult = stunned ? (r.enemy.field?.charge?.stunnedDamageMult ?? 1) : 1;
+      const frozen = r.frozen ? (r.enemy.field?.freezeWatch?.frozenMult ?? 1) : 1;
+      const mult = (stunned ? (r.enemy.field?.charge?.stunnedDamageMult ?? 1) : 1) * frozen;
       const dealt = Math.floor(hit.damage * mult);
       this.damageRoamer(r, dealt, hit.critical || stunned);
       echoed.push({ r, damage: dealt });
@@ -647,6 +698,10 @@ export class ActionCombat {
   public skill(): void {
     const now = this.scene.time.now;
     if (!this.canAct || !this.flag(FLAGS.temporalSight) || now < this.nextSkill) return;
+    if (now < this.silencedUntil) {
+      this.floatText(this.player.x, this.player.y - 22, this.t('action.silenced'), '#c8a0ff');
+      return;
+    }
     const cost = this.combat.skillMpCost;
     if (this.session.mp < cost) {
       this.floatText(this.player.x, this.player.y - 22, this.t('action.noMp'), '#8fb8ff');
@@ -679,10 +734,20 @@ export class ActionCombat {
     const attack = this.session.getStats().attack;
     for (const r of this.roamers) {
       if (!r.alive || distance(r.sprite, this.player) > this.tuning.skillRadius + 10) continue;
-      const damage = Math.max(
-        this.combat.skillMinDamage,
-        Math.floor(attack * this.combat.skillMultiplier - r.enemy.defense),
-      );
+      if (this.houndRunning(r, now)) continue;
+      const hd = r.enemy.field?.hound;
+      const damage =
+        Math.max(
+          this.combat.skillMinDamage,
+          Math.floor(attack * this.combat.skillMultiplier - r.enemy.defense),
+        ) * (hd ? hd.skillMult : 1);
+      if (hd) {
+        // The ink bursts: its trail is gone and Peter drinks the spark.
+        for (const pool of this.pools) pool.g.destroy();
+        this.pools = [];
+        this.session.mp = Math.min(this.session.getStats().maxMp, this.session.mp + hd.mpGain);
+        this.floatText(r.sprite.x, r.sprite.y - 30, this.t('action.inkBurst'), '#e6dcff');
+      }
       this.damageRoamer(r, damage, false);
       // Time slows around them: their wind-up is lost (a spear wall loses its guard longer).
       const guardBreak = r.enemy.field?.parry?.guardBreakMs;
@@ -711,6 +776,10 @@ export class ActionCombat {
     this.invulnUntil = Math.max(this.invulnUntil, now + this.tuning.dashMs + 80);
     this.lastDashAt = now;
     this.nextDash = now + this.tuning.dashCooldownMs;
+    if (now < this.dotUntil) {
+      this.dotUntil = 0;
+      this.floatText(this.player.x, this.player.y - 22, this.t('action.brushed'), '#e6dcff');
+    }
     this.player.sprite.setAlpha(0.55);
     this.scene.time.delayedCall(this.tuning.dashMs + 40, () => this.player.sprite.setAlpha(1));
   }
@@ -725,6 +794,10 @@ export class ActionCombat {
     const now = this.scene.time.now;
     if (field.trail) {
       this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.shadowSlash'), '#b0a0d0');
+      return true;
+    }
+    if (this.houndRunning(r, now)) {
+      this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.inkRun'), '#b48cff');
       return true;
     }
     if (field.phase && !this.isSolid(r, now)) {
@@ -1288,6 +1361,194 @@ export class ActionCombat {
     const len2 = vx * vx + vy * vy || 1;
     const t = Math.max(0, Math.min(1, ((p.x - a.x) * vx + (p.y - a.y) * vy) / len2));
     return Math.hypot(p.x - (a.x + vx * t), p.y - (a.y + vy * t));
+  }
+
+  // ------------------------------------------------------------------ Chapter 7 enemies
+
+  /** Hollow Husk: moves only while Peter moves; frozen, it can be cut harder but its chest pulls. */
+  private updateHusk(r: Roamer, now: number): boolean {
+    const fw = r.enemy.field?.freezeWatch;
+    if (!fw) return false;
+    const body = this.player.sprite.body as Phaser.Physics.Arcade.Body | null;
+    const speed = body ? Math.hypot(body.velocity.x, body.velocity.y) : 0;
+    if (!huskFrozen(speed)) {
+      if (r.frozen) r.sprite.clearTint();
+      r.frozen = false;
+      return false;
+    }
+    if (!r.frozen) r.sprite.setTint(0x9a90b8);
+    r.frozen = true;
+    r.sprite.setVelocity(0, 0);
+    const d = distance(r.sprite, this.player);
+    if (huskPulls(this.stillSince, now, fw.pullAfterMs) && d < 200) {
+      const k = fw.pullSpeed / (d || 1);
+      this.player.forceVelocity(
+        (r.sprite.x - this.player.x) * k,
+        (r.sprite.y - this.player.y) * k,
+        80,
+      );
+      if (d <= this.tuning.enemy.attackRange + 6) this.hitPlayer(r);
+    }
+    return true;
+  }
+
+  /** Name Eater: breathes in; a slash on the glowing mouth chokes it. True while busy. */
+  private updateInhale(r: Roamer, now: number): boolean {
+    const ih = r.enemy.field?.inhale;
+    if (!ih) return false;
+    const d = distance(r.sprite, this.player);
+    if (r.inhaleAt === null || r.inhaleAt === undefined) {
+      if (now < (r.nextInhaleAt ?? 0) || d > ih.range) return false;
+      r.inhaleAt = now;
+    }
+    r.sprite.setVelocity(0, 0);
+    const st = tellStage(now, r.inhaleAt, ih.tellMs, ih.windowMs);
+    if (st.stage === 'tell') {
+      r.sprite.setScale(1 + ((now - r.inhaleAt) / ih.tellMs) * 0.3);
+      if (st.window) r.sprite.setTint(0xc8a0ff);
+      this.aimLines.lineStyle(1, 0xb48cff, 0.35).strokeCircle(r.sprite.x, r.sprite.y, ih.range);
+      return true;
+    }
+    if (d <= ih.range) {
+      this.hitPlayer(r);
+      this.session.mp = Math.max(0, this.session.mp - ih.mpDrain);
+      this.silencedUntil = now + ih.silenceMs;
+      this.floatText(this.player.x, this.player.y - 22, this.t('action.silenced'), '#c8a0ff');
+      this.host.refreshHud();
+    }
+    this.endInhale(r, now);
+    return false;
+  }
+
+  private endInhale(r: Roamer, now: number): void {
+    const ih = r.enemy.field?.inhale;
+    r.inhaleAt = null;
+    r.nextInhaleAt = now + (ih?.cooldownMs ?? 3000);
+    r.sprite.setScale(1);
+    r.sprite.clearTint();
+  }
+
+  /** A slash on a Name Eater's glowing mouth: it chokes and spits letters at its neighbours. */
+  private chokeEater(r: Roamer, now: number): boolean {
+    const ih = r.enemy.field?.inhale;
+    if (!ih || r.inhaleAt === null || r.inhaleAt === undefined) return false;
+    const st = tellStage(now, r.inhaleAt, ih.tellMs, ih.windowMs);
+    if (st.stage !== 'tell' || !st.window) return false;
+    this.endInhale(r, now);
+    r.stunUntil = now + ih.stunMs;
+    this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.choked'), '#e6dcff');
+    for (const o of this.roamers) {
+      if (o === r || !o.alive || o.clone || distance(o.sprite, r.sprite) > ih.chokeRadius) continue;
+      this.damageRoamer(o, Math.ceil(o.enemy.maxHp * ih.chokePct), true);
+    }
+    return true;
+  }
+
+  /** Erasure Moths: they close in on Peter; one slash as they bunch up scatters the whole swarm. */
+  private updateSwarm(r: Roamer, now: number): boolean {
+    const sw = r.enemy.field?.swarm;
+    if (!sw) return false;
+    if (r.swarmAt === null || r.swarmAt === undefined) {
+      if (now < (r.nextSwarmAt ?? 0) || distance(r.sprite, this.player) > sw.range) return false;
+      r.swarmAt = now;
+    }
+    const st = tellStage(now, r.swarmAt, sw.gatherMs, sw.windowMs);
+    if (st.stage === 'tell') {
+      const left = 1 - (now - r.swarmAt) / sw.gatherMs;
+      const radius = 18 + left * 70;
+      this.aimLines
+        .lineStyle(st.window ? 3 : 1, st.window ? 0xffffff : 0xd8ccf0, 0.7)
+        .strokeCircle(this.player.x, this.player.y, radius);
+      const ang = Math.atan2(r.sprite.y - this.player.y, r.sprite.x - this.player.x);
+      r.sprite.setVelocity(0, 0);
+      r.sprite.setPosition(
+        this.player.x + Math.cos(ang) * radius,
+        this.player.y + Math.sin(ang) * radius,
+      );
+      return true;
+    }
+    r.swarmAt = null;
+    r.nextSwarmAt = now + sw.everyMs;
+    if (now >= this.invulnUntil) {
+      this.dotUntil = now + sw.dotMs;
+      this.dotPerSec = sw.dotPerSec;
+      this.floatText(this.player.x, this.player.y - 22, this.t('action.mothsCling'), '#e6dcff');
+    }
+    return false;
+  }
+
+  /** A slash while the moths bunch up around Peter scatters them for good. */
+  private scatterSwarm(r: Roamer, now: number): boolean {
+    const sw = r.enemy.field?.swarm;
+    if (!sw || r.swarmAt === null || r.swarmAt === undefined) return false;
+    const st = tellStage(now, r.swarmAt, sw.gatherMs, sw.windowMs);
+    if (st.stage !== 'tell' || !st.window) return false;
+    r.swarmAt = null;
+    const max = this.session.getStats().maxHp;
+    this.session.hp = Math.min(max, this.session.hp + sw.healHp);
+    this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.swarmCut'), '#ffffff');
+    this.floatText(this.player.x, this.player.y - 20, `+${sw.healHp}`, '#8fe8a0');
+    this.defeatRoamer(r);
+    this.host.refreshHud();
+    return true;
+  }
+
+  /** Ink Hound: races a figure eight around Peter, then stands solid for a breath. */
+  private updateHound(r: Roamer, now: number): boolean {
+    const hd = r.enemy.field?.hound;
+    if (!hd) return false;
+    const solid = houndSolid(now, r.glowOffset, hd.runMs, hd.pauseMs);
+    if (!solid) {
+      if (distance(r.sprite, this.player) > hd.radius * 3) return false;
+      const p = figureEight(this.player, now + r.glowOffset, hd.radius, hd.periodMs);
+      r.sprite.setVelocity(0, 0);
+      if (Math.abs(p.x - r.sprite.x) > 1) this.faceX(r, p.x - r.sprite.x);
+      r.sprite.setPosition(p.x, p.y);
+      r.sprite.setAlpha(0.6);
+      r.bit = false;
+      return true;
+    }
+    r.sprite.setAlpha(1);
+    r.sprite.setVelocity(0, 0);
+    if (!r.bit) {
+      r.bit = true;
+      if (distance(r.sprite, this.player) <= 34) this.hitPlayer(r, { mult: hd.biteMult });
+    }
+    return true;
+  }
+
+  private houndRunning(r: Roamer, now: number): boolean {
+    const hd = r.enemy.field?.hound;
+    return !!hd && !houndSolid(now, r.glowOffset, hd.runMs, hd.pauseMs);
+  }
+
+  /** Void Inquisitor: three chain circles close around a spot; only where all three meet is safe. */
+  private updateChains(r: Roamer, now: number): boolean {
+    const ct = r.enemy.field?.chainTrial;
+    if (!ct) return false;
+    if (!r.chains) {
+      if (now < (r.nextChainAt ?? 0) || distance(r.sprite, this.player) > ct.range) return false;
+      const a = this.rng() * Math.PI * 2;
+      const spot = { x: this.player.x + Math.cos(a) * 40, y: this.player.y + Math.sin(a) * 40 };
+      r.chains = { at: now, centers: chainCenters(spot, ct.offset, this.rng() * Math.PI) };
+    }
+    r.sprite.setVelocity(0, 0);
+    const ch = r.chains;
+    if (now < ch.at + ct.warnMs) {
+      for (const c of ch.centers)
+        this.aimLines.lineStyle(2, 0xe8c060, 0.55).strokeCircle(c.x, c.y, ct.radius);
+      return true;
+    }
+    r.chains = null;
+    r.nextChainAt = now + ct.everyMs;
+    for (const c of ch.centers)
+      this.aimLines.lineStyle(4, 0xffffff, 0.9).strokeCircle(c.x, c.y, ct.radius);
+    if (chainVerdict(this.player, ch.centers, ct.radius) === 'safe') {
+      this.floatText(this.player.x, this.player.y - 22, this.t('action.chainSafe'), '#e8c060');
+    } else {
+      this.hitPlayer(r, { mult: ct.damageMult });
+    }
+    return false;
   }
 
   /** True when a wall tile lies on the straight line between a and b. */

@@ -164,8 +164,11 @@ export interface BossMechanic {
     skillMessage: string;
     healMessage: string;
   };
-  /** Ends the fight when used: offered (keys 6-8) while Peter carries `itemId` and the boss is at or below `belowPct`. */
-  finisher?: { itemId: string; belowPct: number; action: BossEnvironmentAction };
+  /**
+   * Ends the fight when used: offered (keys 6-8) while Peter carries `itemId` (and `flag` holds,
+   * if set) and the boss is at or below `belowPct`.
+   */
+  finisher?: { itemId: string; flag?: string; belowPct: number; action: BossEnvironmentAction };
   /** Offered once the shield is broken while `flag` holds: stuns the boss and deals `damagePct` of its max HP. */
   nameCall?: { flag: string; stunTurns: number; damagePct: number; action: BossEnvironmentAction };
   /** After its shield breaks, the boss heals by this fraction of the damage its attacks deal. */
@@ -224,6 +227,17 @@ export interface BossMechanic {
    * Erasing mist: each boss turn Peter loses `mpPerTurn` MP, unless `clearAction` (keys 6-8)
    * lit the field within the last `clearTurns` boss turns.
    */
+  /**
+   * Pool of tears: each boss turn adds a drop; a perfect block wipes one; at `max` the flood hits
+   * Peter for `floodPct` of his max HP and the pool empties.
+   */
+  tears?: {
+    max: number;
+    floodPct: number;
+    dropMessage: string;
+    wipeMessage: string;
+    floodMessage: string;
+  };
   mist?: {
     mpPerTurn: number;
     clearTurns: number;
@@ -354,6 +368,68 @@ export interface FieldTraits {
     width: number;
     healHp: number;
   };
+  /**
+   * Hollow Husk: moves only while Peter moves. Frozen (Peter still) it takes `frozenMult` × damage,
+   * but after `pullAfterMs` of stillness its chest pulls Peter in at `pullSpeed`.
+   */
+  freezeWatch?: { pullAfterMs: number; pullSpeed: number; frozenMult: number };
+  /**
+   * Name Eater: within `range` it breathes in for `tellMs`; a slash in the last `windowMs` (its
+   * mouth glows) chokes it: stunned `stunMs`, letters hit foes within `chokeRadius` for `chokePct`
+   * of their max HP. Otherwise Peter is hit, loses `mpDrain` MP and his skill for `silenceMs`.
+   */
+  inhale?: {
+    range: number;
+    tellMs: number;
+    windowMs: number;
+    cooldownMs: number;
+    stunMs: number;
+    chokeRadius: number;
+    chokePct: number;
+    mpDrain: number;
+    silenceMs: number;
+  };
+  /**
+   * Erasure Moths: every `everyMs` (Peter within `range`) they close in for `gatherMs`; a slash in
+   * the last `windowMs` scatters the swarm for good and heals Peter `healHp`. Otherwise they cling:
+   * `dotPerSec` damage for `dotMs`, which a dodge brushes off.
+   */
+  swarm?: {
+    range: number;
+    everyMs: number;
+    gatherMs: number;
+    windowMs: number;
+    healHp: number;
+    dotPerSec: number;
+    dotMs: number;
+  };
+  /**
+   * Ink Hound: races a figure eight (`radius`, `periodMs`) around Peter for `runMs` — slashes pass
+   * through — then stands solid `pauseMs` and bites (`biteMult`). Temporal Strike while it stands
+   * deals `skillMult` × damage, wipes its ink and gives `mpGain` MP.
+   */
+  hound?: {
+    runMs: number;
+    pauseMs: number;
+    radius: number;
+    periodMs: number;
+    biteMult: number;
+    skillMult: number;
+    mpGain: number;
+  };
+  /**
+   * Void Inquisitor: every `everyMs` (Peter within `range`) three chain circles (`radius`, set
+   * `offset` px around a spot near Peter) glow for `warnMs`; standing where all three overlap is
+   * safe, anywhere else is hit (`damageMult`).
+   */
+  chainTrial?: {
+    range: number;
+    everyMs: number;
+    warnMs: number;
+    radius: number;
+    offset: number;
+    damageMult: number;
+  };
 }
 
 /**
@@ -414,6 +490,8 @@ export interface IEnemyDefinition {
     allBlockedMessage?: string;
     /** The ring cannot be seen: only a dark ripple on Peter 300 ms before it lands. */
     hidden?: boolean;
+    /** A second, false ring (gold) closes `decoyLeadMs` earlier; only the violet ring counts. */
+    decoyLeadMs?: number;
   };
   /** Real-time behaviour on the map (small enemies). */
   field?: FieldTraits;
