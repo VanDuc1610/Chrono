@@ -394,7 +394,7 @@ Pháp Quan Lưu Đày (ch2) và Cờ Máu (ch4) dính làm một.
 ### 9.4. Boss cuối: Sứ Giả Giờ Số Không (`boss_null_hour_herald`, bản đồ 14, theo lượt)
 
 - **Kim Giờ Thứ 25:**
-  - Mặt đồng hồ boss bắt đầu ở **20**.
+  - Mặt đồng hồ boss bắt đầu ở **18**.
   - Mỗi lượt kim tiến **+1**, cộng thêm **+1 cho mỗi vòng đỡ trượt**.
   - Chạm **25**: đòn **Giờ Số Không** gây 70% máu tối đa, rồi kim về 20.
 - **Đồng đội giữ giờ:** trong menu kỹ năng có "Gọi đồng đội". Mỗi người (Ivo, Lyra, Neris, Kuro) dùng được **1 lần** mỗi trận, đẩy kim lùi 2 giờ. Có 4 lần, phải dùng khéo.
@@ -575,3 +575,24 @@ Cờ đặt: `ch8_chronos_returned` (mở trần cấp chương 9; dùng làm d�
 6. Trần cấp: chương 8 lên 29, chương 9 lên 30 — **đồng ý**.
 
 Bước tiếp: Claude vẽ hình chương 8 (§13.1), owner duyệt, rồi build.
+
+## 18. Ghi Chú Khi Build (Claude, 2026-11-15)
+
+Những chỗ bản build khác §1–§16 để khớp engine hoặc để cân bằng. Đây là bản đúng.
+
+- **C05 (Hai Ca Gác):** Kuro không phải một cọc thứ hai. Peter bấm "Nhờ Kuro xoay Cọc Neo 3" ở ban công vùng 2, Kuro đặt cọc 3 sang **Chiến hào**. Vào vùng 3 rồi Peter tự xoay cọc 3 sang **Sol-Karis** để mở cổng.
+- **C06:** khi xoay ô 2 tới [X], người chơi đi qua [U] trước. [Tên][Tĩnh] là đáp án nên game tự giải ngay; lời cảnh báo [Tên][Không] chỉ hiện khi tới thẳng [X].
+- **C07 (Gương Hai Cõi):** đáp án là **cọc 1 = Thượng Giới** (lăng kính nhuộm xanh tia sáng), **cọc 2 = Cõi Linh Hồn** (gương bạc bẻ tia xuống ổ khóa). Ổ khóa chỉ nhận ánh sáng xanh.
+- **C08:** ngoài A–B–C xuôi, còn một cách ghép là cả trang lộn ngược (C–B–A ngược). Trang đó không đọc được chữ, nên game chỉ nhận trang xuôi. Câu khắc dưới bệ ghi rõ "Trang ghép xong phải đọc xuôi được".
+- **C09 / trận phòng tuyến:** làm gọn thành **3 đợt quái**: đợt 1 Kẻ Đồng Hóa, đợt 2 Lính Hai Đời và Bóng Lệch Pha, đợt 3 Chuông Báo Tận và Kẻ Đồng Hóa. Chưa có thanh "sức giữ" của từng cổng.
+- **C10 (Sáu Ổ Ấn):** câu khắc là thoại thật từ các chương 1–8, ổ 12 giờ là câu của Kẻ Bị Quên Đầu Tiên.
+- **Sứ Giả Giờ Số Không** (cân bằng sau khi chạy thử ở Lv 27):
+  - 1900 máu;
+  - kim bắt đầu ở **18**;
+  - Giờ Số Không lấy 40% máu và không bao giờ hạ gục Peter ngay;
+  - gọi được **3 đồng đội** (Ivo, Lyra, Neris), Kuro tự giữ kim một lần;
+  - chiêu "Neo kim ở 11:59" mở khi boss dưới 15% máu.
+- **Tàn Ảnh Sáu Ấn:** 1800 máu. Sáu pha dùng lại các kiểu vòng đỡ cũ: ba nhịp, vòng mồi vàng, vòng ẩn, ba nhịp hẹp dần, vòng giả, bốn nhịp.
+- **Pháp Quan Hội Tụ:** 3 vòng đỡ. Mỗi lượt chẵn đọc ngược nhịp lượt trước. Đỡ trọn ba nhịp thì Lyra phá khiên (mất 12% máu).
+- **Kết chương:** Kuro ấm áp hay lạnh lùng thể hiện ở câu lúc tới đỉnh tháp. Con hạc của Na chỉ xuất hiện nếu đã đưa đủ giấy.
+- **Lời giải từng câu:** `tests/chapter8-rules.test.ts` có solver chứng minh C03, C04, C07, C08, C11, C12 chỉ có một đáp án.

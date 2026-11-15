@@ -10,10 +10,7 @@
       "defense": 4,
       "speed": 10,
       "spriteKey": "enemy_fracture",
-      "skills": [
-        "chrono_scratch",
-        "temporal_flux"
-      ],
+      "skills": ["chrono_scratch", "temporal_flux"],
       "expReward": 50,
       "lootTable": [
         {
@@ -32,9 +29,7 @@
       "defense": 8,
       "speed": 6,
       "spriteKey": "enemy_fracture",
-      "skills": [
-        "gear_crush"
-      ],
+      "skills": ["gear_crush"],
       "expReward": 90,
       "lootTable": [
         {
@@ -53,10 +48,7 @@
       "defense": 10,
       "speed": 8,
       "spriteKey": "boss_sentinel",
-      "skills": [
-        "tidal_crush",
-        "stasis_wave"
-      ],
+      "skills": ["tidal_crush", "stasis_wave"],
       "expReward": 100,
       "lootTable": [
         {
@@ -83,9 +75,7 @@
           {
             "id": "lens_right",
             "label": "THẤU KÍNH PHẢI",
-            "requires": [
-              "lens_left"
-            ],
+            "requires": ["lens_left"],
             "breakShield": true,
             "setHpPct": 0.12,
             "message": "Luồng sáng vàng ấm xuyên qua lồng ngực Vệ Binh — lớp sóng giam hãm vỡ tan!"
@@ -160,17 +150,13 @@
           {
             "id": "tide_gear",
             "label": "ĐẢO BÁNH RĂNG",
-            "requires": [
-              "bell_cord"
-            ],
+            "requires": ["bell_cord"],
             "message": "Bánh răng thủy triều quay thuận chiều — nhịp chuông bắt đầu đồng bộ với sóng."
           },
           {
             "id": "last_chime",
             "label": "GÕ NHỊP CUỐI",
-            "requires": [
-              "tide_gear"
-            ],
+            "requires": ["tide_gear"],
             "breakShield": true,
             "setHpPct": 0.15,
             "message": "Tiếng chuông hoàng hôn cuối cùng ngân trọn — lớp giáp đảo ngược vỡ tan!"
@@ -190,10 +176,7 @@
       "defense": 2,
       "speed": 10,
       "spriteKey": "enemy_fracture",
-      "skills": [
-        "chrono_scratch",
-        "temporal_flux"
-      ],
+      "skills": ["chrono_scratch", "temporal_flux"],
       "expReward": 20,
       "lootTable": [
         {
@@ -213,20 +196,12 @@
       "speed": 14,
       "spriteKey": "enemy_fracture",
       "spriteScale": 2.8,
-      "skills": [
-        "chrono_scratch",
-        "temporal_flux"
-      ],
+      "skills": ["chrono_scratch", "temporal_flux"],
       "expReward": 0,
       "lootTable": [],
       "script": {
-        "lockedCommands": [
-          "escape",
-          "skill"
-        ],
-        "unlockedCommands": [
-          "attack"
-        ],
+        "lockedCommands": ["escape", "skill"],
+        "unlockedCommands": ["attack"],
         "rescue": {
           "belowHpPct": 0.2,
           "dialogueId": "battle_elder_rescue",
@@ -320,13 +295,8 @@
             {
               "id": "blade",
               "announce": "BẢN ÁN TUYÊN: \"Kẻ vung gươm sẽ phải đổ máu!\" (Đánh lúc này sẽ bị phạt — hãy nghĩ cách khác.)",
-              "forbidden": [
-                "attack",
-                "skill"
-              ],
-              "defiedBy": [
-                "defend"
-              ],
+              "forbidden": ["attack", "skill"],
+              "defiedBy": ["defend"],
               "punishPct": 0.25,
               "punishMessage": "Bản án ứng nghiệm — Peter đổ máu, mất {damage} HP!",
               "crackMessage": "Peter không vung gươm — bản án mất nguyên nhân, cán cân nứt một vết!"
@@ -334,14 +304,8 @@
             {
               "id": "hesitate",
               "announce": "BẢN ÁN TUYÊN: \"Kẻ chần chừ sẽ bị nghiền nát!\" (Đỡ hay dùng đồ lúc này sẽ bị phạt.)",
-              "forbidden": [
-                "defend",
-                "item"
-              ],
-              "defiedBy": [
-                "attack",
-                "skill"
-              ],
+              "forbidden": ["defend", "item"],
+              "defiedBy": ["attack", "skill"],
               "punishPct": 0.25,
               "punishMessage": "Bản án ứng nghiệm — sấm sét giáng xuống, Peter mất {damage} HP!",
               "crackMessage": "Peter không chần chừ — bản án mất nguyên nhân, cán cân nứt một vết!"
@@ -463,16 +427,12 @@
             {
               "command": "attack",
               "announce": "KHÓA KÝ ỨC: Nút [1] TẤN CÔNG bị đóng băng! Thử một đòn khác xem…",
-              "staggerBy": [
-                "skill"
-              ]
+              "staggerBy": ["skill"]
             },
             {
               "command": "skill",
               "announce": "KHÓA KÝ ỨC: Nút [2] KỸ NĂNG bị đóng băng! Thử một đòn khác xem…",
-              "staggerBy": [
-                "attack"
-              ]
+              "staggerBy": ["attack"]
             }
           ]
         }
@@ -760,11 +720,7 @@
               "message": "Trụ Lá Thư bừng sáng ngọn lửa lam — sự thật của người cha được đón nhận."
             }
           ],
-          "order": [
-            "pillar_hand",
-            "pillar_letter",
-            "pillar_candle"
-          ],
+          "order": ["pillar_hand", "pillar_letter", "pillar_candle"],
           "openMessage": "Chiến Tranh Vĩnh Cửu đổ gục... rồi gượng dậy! \"CHIẾN TRANH KHÔNG BAO GIỜ CHẾT!\" Ba trụ nghi thức quanh sàn đấu le lói sáng.",
           "wrongPct": 0.12,
           "wrongMessage": "Ba trụ tắt ngấm! Khối cự giáp vung kiếm phản đòn — Peter mất {damage} HP.",
@@ -1087,9 +1043,7 @@
         "factor": 0.5
       },
       "script": {
-        "lockedCommands": [
-          "escape"
-        ],
+        "lockedCommands": ["escape"],
         "endAtEnemyPct": 0.5,
         "rescue": {
           "belowHpPct": 0.25,
@@ -1686,16 +1640,12 @@
             {
               "command": "attack",
               "announce": "Xúc tu mực quấn chặt tay kiếm — [1] TẤN CÔNG bị khóa!",
-              "staggerBy": [
-                "skill"
-              ]
+              "staggerBy": ["skill"]
             },
             {
               "command": "item",
               "announce": "Xúc tu mực quấn lấy túi đồ — [3] VẬT PHẨM bị khóa!",
-              "staggerBy": [
-                "skill"
-              ]
+              "staggerBy": ["skill"]
             }
           ]
         }
@@ -1892,11 +1842,7 @@
         "windowMs": 230,
         "factor": 0.45,
         "count": 3,
-        "echoPool": [
-          650,
-          850,
-          1050
-        ],
+        "echoPool": [650, 850, 1050],
         "echoMessage": "Bản Án Đảo: Pháp Quan đọc lại bản án lượt trước — từ cuối lên đầu!",
         "allBlockedPct": 0.12,
         "allBlockedMessage": "Đỡ trọn ba nhịp! Lyra lao vào, ngọn kích phá vỡ tấm khiên cẩm thạch!"
@@ -1922,8 +1868,8 @@
       "id": "boss_null_hour_herald",
       "name": "Sứ Giả Giờ Số Không",
       "level": 29,
-      "maxHp": 2300,
-      "hp": 2300,
+      "maxHp": 1900,
+      "hp": 1900,
       "attack": 54,
       "defense": 34,
       "speed": 14,
@@ -1951,7 +1897,7 @@
         "defeatMessage": "Kim đồng hồ dừng ở 11:59. Sứ Giả quỳ xuống, mặt số trên ngực nó lặng im.",
         "finisher": {
           "itemId": "origin_seal_half",
-          "belowPct": 0.1,
+          "belowPct": 0.15,
           "action": {
             "id": "anchor_1159",
             "label": "NEO KIM Ở 11:59",
@@ -1960,9 +1906,9 @@
           }
         },
         "clockHand": {
-          "start": 20,
+          "start": 18,
           "top": 25,
-          "strikePct": 0.7,
+          "strikePct": 0.4,
           "pushBy": 2,
           "calls": [
             {
@@ -1993,8 +1939,8 @@
       "id": "boss_sixfold_echo",
       "name": "Tàn Ảnh Sáu Ấn",
       "level": 29,
-      "maxHp": 2100,
-      "hp": 2100,
+      "maxHp": 1800,
+      "hp": 1800,
       "attack": 54,
       "defense": 32,
       "speed": 14,

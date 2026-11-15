@@ -279,9 +279,19 @@ P('ch8_barracks_arrival', [
 N('ch8_lyra_barracks', 'Lyra', [
   'Mỗi khúc đất một cọc. Lính chiến hào biết đường ván, lê dương biết bậc đá. Phải đi đúng thứ tự.',
 ]);
-K('ch8_kuro_post', [
-  'Cái cọc bên kia ban công à? Tao với tới. Possibility mà, xoay một cái cọc thì có gì khó.',
-]);
+K(
+  'ch8_kuro_post',
+  [
+    'Cái cọc bên kia ban công à? Tao với tới. Possibility mà, xoay một cái cọc thì có gì khó.',
+    '(Kuro búng tay. Cọc Neo 3 xoay sang Chiến hào.)',
+  ],
+  {
+    effects: {
+      setFlags: ['ch8_c05_p3_w'],
+      clearFlags: ['ch8_c05_p3_s', 'ch8_c05_p3_none'],
+    },
+  },
+);
 N('ch8_bran', 'Hồn Bran', [
   'Đừng dẫm vào hố bom. Lính chiến hào biết chỗ này. (Bóng Bran mờ đi, tay vẫn chỉ về phía bậc đá.)',
 ]);

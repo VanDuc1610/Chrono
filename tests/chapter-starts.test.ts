@@ -4,6 +4,7 @@ import questsJson from '../public/assets/data/quests.json';
 import enemiesJson from '../public/assets/data/enemies.json';
 import playerJson from '../public/assets/data/player.json';
 import mapsJson from '../public/assets/data/maps.json';
+import stringsJson from '../public/assets/data/strings.json';
 import type { GameDatabase, PlayerDatabase } from '../src/state/GameDatabase';
 import { GameSession } from '../src/state/GameSession';
 import { applyChapterStart, CHAPTER_STARTS, firstMainQuest } from '../src/state/ChapterStarts';
@@ -48,5 +49,11 @@ describe('Chapter select', () => {
       expect(s.hp).toBe(s.getStats().maxHp);
       expect(s.lastFinishedChapter).toBe(c.chapter - 1);
     }
+  });
+
+  it('every chapter has a HUD title in strings.json', () => {
+    const table = (stringsJson as unknown as { strings: Record<string, string> }).strings;
+    for (const c of CHAPTER_STARTS)
+      expect(table[`chapter.${c.chapter}.title`], `chapter ${c.chapter}`).toBeTruthy();
   });
 });

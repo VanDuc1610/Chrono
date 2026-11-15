@@ -152,7 +152,7 @@ const LIST = [
       },
     },
   }),
-  boss('boss_null_hour_herald', 'Sứ Giả Giờ Số Không', 29, 2300, 54, 34, 14, 1800, {
+  boss('boss_null_hour_herald', 'Sứ Giả Giờ Số Không', 29, 1900, 54, 34, 14, 1800, {
     spriteScale: 1.15,
     timedBlock: { ringMs: 820, windowMs: 220, factor: 0.45, count: 2 },
     mechanic: {
@@ -161,7 +161,7 @@ const LIST = [
       defeatMessage: 'Kim đồng hồ dừng ở 11:59. Sứ Giả quỳ xuống, mặt số trên ngực nó lặng im.',
       finisher: {
         itemId: 'origin_seal_half',
-        belowPct: 0.1,
+        belowPct: 0.15,
         action: {
           id: 'anchor_1159',
           label: 'NEO KIM Ở 11:59',
@@ -171,9 +171,9 @@ const LIST = [
         },
       },
       clockHand: {
-        start: 20,
+        start: 18,
         top: 25,
-        strikePct: 0.7,
+        strikePct: 0.4,
         pushBy: 2,
         calls: [
           call('call_ivo', 'GỌI IVO', 'Ivo chèn cờ lê vào bánh răng của kim giờ!'),
@@ -189,7 +189,7 @@ const LIST = [
       },
     },
   }),
-  boss('boss_sixfold_echo', 'Tàn Ảnh Sáu Ấn', 29, 2100, 54, 32, 14, 1500, {
+  boss('boss_sixfold_echo', 'Tàn Ảnh Sáu Ấn', 29, 1800, 54, 32, 14, 1500, {
     timedBlock: {
       ringMs: 900,
       windowMs: 220,

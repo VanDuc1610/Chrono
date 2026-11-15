@@ -480,9 +480,7 @@
     "map_shattered_antechamber": {
       "id": "map_shattered_antechamber",
       "name": "Điện Thờ Đổ Nát",
-      "aliases": [
-        "prologue_sanctuary"
-      ],
+      "aliases": ["prologue_sanctuary"],
       "tilemap": {
         "key": "prologue_map",
         "path": "assets/maps/prologue_map.json"
@@ -671,9 +669,7 @@
           "on": "arrive",
           "onceFlag": "elder_parted",
           "effects": {
-            "setFlags": [
-              "elder_parted"
-            ]
+            "setFlags": ["elder_parted"]
           }
         }
       ],
@@ -4338,11 +4334,7 @@
               "dialogueId": "ch3_ghost_knight_after"
             },
             {
-              "ifFlags": [
-                "ch3_portrait_piece_1",
-                "ch3_portrait_piece_2",
-                "ch3_portrait_piece_3"
-              ],
+              "ifFlags": ["ch3_portrait_piece_1", "ch3_portrait_piece_2", "ch3_portrait_piece_3"],
               "dialogueId": "ch3_ghost_knight_done"
             }
           ],
@@ -4635,11 +4627,7 @@
               "dialogueId": "ch3_canvas_done"
             },
             {
-              "ifItems": [
-                "pigment_ochre_yellow",
-                "pigment_lapis_blue",
-                "pigment_sulfur_red"
-              ],
+              "ifItems": ["pigment_ochre_yellow", "pigment_lapis_blue", "pigment_sulfur_red"],
               "dialogueId": "ch3_canvas_inspect"
             }
           ]
@@ -5061,11 +5049,7 @@
               "dialogueId": "ch4_courier_box_open_again"
             },
             {
-              "ifFlags": [
-                "ch4_dial_dir_ne",
-                "ch4_dial_angle_a45",
-                "ch4_dial_star_bacdau"
-              ],
+              "ifFlags": ["ch4_dial_dir_ne", "ch4_dial_angle_a45", "ch4_dial_star_bacdau"],
               "dialogueId": "ch4_courier_box_solve"
             }
           ]
@@ -8059,10 +8043,7 @@
               "dialogueId": "ch5x_ex1_done"
             },
             {
-              "ifFlags": [
-                "branch_map_ch5_seed_garden_pruned",
-                "ch5x_rock_south"
-              ],
+              "ifFlags": ["branch_map_ch5_seed_garden_pruned", "ch5x_rock_south"],
               "dialogueId": "ch5x_ex1_solved"
             },
             {
@@ -8428,11 +8409,7 @@
               "dialogueId": "ch5x_weather_done"
             },
             {
-              "ifFlags": [
-                "ch5x_humidity_mist",
-                "ch5x_temperature_mild",
-                "ch5x_airflow_breeze"
-              ],
+              "ifFlags": ["ch5x_humidity_mist", "ch5x_temperature_mild", "ch5x_airflow_breeze"],
               "dialogueId": "ch5x_weather_success"
             }
           ]
@@ -8483,24 +8460,12 @@
               "dialogueId": "ch5x_chimes_done"
             },
             {
-              "ifItems": [
-                "windchime_bronze",
-                "windchime_silver",
-                "windchime_glass"
-              ],
-              "ifFlags": [
-                "ch5x_hook_1_bronze",
-                "ch5x_hook_2_silver",
-                "ch5x_hook_3_glass"
-              ],
+              "ifItems": ["windchime_bronze", "windchime_silver", "windchime_glass"],
+              "ifFlags": ["ch5x_hook_1_bronze", "ch5x_hook_2_silver", "ch5x_hook_3_glass"],
               "dialogueId": "ch5x_gardener_peace"
             },
             {
-              "ifItems": [
-                "windchime_bronze",
-                "windchime_silver",
-                "windchime_glass"
-              ],
+              "ifItems": ["windchime_bronze", "windchime_silver", "windchime_glass"],
               "dialogueId": "ch5x_chimes_wrong"
             }
           ]
@@ -8618,11 +8583,7 @@
               "label": "Chuông thủy tinh"
             }
           ],
-          "requiresItems": [
-            "windchime_bronze",
-            "windchime_silver",
-            "windchime_glass"
-          ],
+          "requiresItems": ["windchime_bronze", "windchime_silver", "windchime_glass"],
           "requiresFlag": "ch5x_weather_balanced"
         },
         {
@@ -8651,11 +8612,7 @@
               "label": "Chuông thủy tinh"
             }
           ],
-          "requiresItems": [
-            "windchime_bronze",
-            "windchime_silver",
-            "windchime_glass"
-          ],
+          "requiresItems": ["windchime_bronze", "windchime_silver", "windchime_glass"],
           "requiresFlag": "ch5x_weather_balanced"
         },
         {
@@ -8684,11 +8641,7 @@
               "label": "Chuông thủy tinh"
             }
           ],
-          "requiresItems": [
-            "windchime_bronze",
-            "windchime_silver",
-            "windchime_glass"
-          ],
+          "requiresItems": ["windchime_bronze", "windchime_silver", "windchime_glass"],
           "requiresFlag": "ch5x_weather_balanced"
         }
       ],
@@ -9435,10 +9388,7 @@
               "dialogueId": "ch5_safe_pruned"
             },
             {
-              "ifFlags": [
-                "ch5_safe_h_7",
-                "ch5_safe_m_30"
-              ],
+              "ifFlags": ["ch5_safe_h_7", "ch5_safe_m_30"],
               "dialogueId": "ch5_safe_open"
             }
           ]
@@ -10444,18 +10394,12 @@
               "dialogueId": "ch5x_telescope_done"
             },
             {
-              "ifItems": [
-                "astronomy_lens_living",
-                "astronomy_lens_pruned"
-              ],
+              "ifItems": ["astronomy_lens_living", "astronomy_lens_pruned"],
               "ifFlag": "ch5x_angle_a90",
               "dialogueId": "ch5x_telescope_success"
             },
             {
-              "ifItems": [
-                "astronomy_lens_living",
-                "astronomy_lens_pruned"
-              ],
+              "ifItems": ["astronomy_lens_living", "astronomy_lens_pruned"],
               "dialogueId": "ch5x_telescope_wrong"
             }
           ]
@@ -10662,11 +10606,7 @@
               "dialogueId": "ch5_reactor_wrong"
             },
             {
-              "ifFlags": [
-                "ch5_sw_b_l_on",
-                "ch5_sw_c_l_on",
-                "ch5_sw_a_p_on"
-              ],
+              "ifFlags": ["ch5_sw_b_l_on", "ch5_sw_c_l_on", "ch5_sw_a_p_on"],
               "dialogueId": "ch5_reactor_start"
             }
           ]
@@ -10978,12 +10918,7 @@
               "dialogueId": "ch5_mira_after"
             },
             {
-              "ifItems": [
-                "chalk_blue",
-                "chalk_gold",
-                "chalk_red",
-                "chalk_white"
-              ],
+              "ifItems": ["chalk_blue", "chalk_gold", "chalk_red", "chalk_white"],
               "dialogueId": "ch5_mira_chalk_done"
             },
             {
@@ -11484,87 +11419,51 @@
               "dialogueId": "ch5x_hourglass_done"
             },
             {
-              "ifFlags": [
-                "branch_map_ch5_grey_prune_living",
-                "ch5x_sand_0"
-              ],
+              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_0"],
               "dialogueId": "ch5x_sand_l_0"
             },
             {
-              "ifFlags": [
-                "branch_map_ch5_grey_prune_pruned",
-                "ch5x_sand_0"
-              ],
+              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_0"],
               "dialogueId": "ch5x_sand_p_0"
             },
             {
-              "ifFlags": [
-                "branch_map_ch5_grey_prune_living",
-                "ch5x_sand_1"
-              ],
+              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_1"],
               "dialogueId": "ch5x_sand_l_1"
             },
             {
-              "ifFlags": [
-                "branch_map_ch5_grey_prune_pruned",
-                "ch5x_sand_1"
-              ],
+              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_1"],
               "dialogueId": "ch5x_sand_p_1"
             },
             {
-              "ifFlags": [
-                "branch_map_ch5_grey_prune_living",
-                "ch5x_sand_2"
-              ],
+              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_2"],
               "dialogueId": "ch5x_sand_l_2"
             },
             {
-              "ifFlags": [
-                "branch_map_ch5_grey_prune_pruned",
-                "ch5x_sand_2"
-              ],
+              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_2"],
               "dialogueId": "ch5x_sand_p_2"
             },
             {
-              "ifFlags": [
-                "branch_map_ch5_grey_prune_living",
-                "ch5x_sand_3"
-              ],
+              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_3"],
               "dialogueId": "ch5x_sand_l_3"
             },
             {
-              "ifFlags": [
-                "branch_map_ch5_grey_prune_pruned",
-                "ch5x_sand_3"
-              ],
+              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_3"],
               "dialogueId": "ch5x_sand_p_3"
             },
             {
-              "ifFlags": [
-                "branch_map_ch5_grey_prune_living",
-                "ch5x_sand_4"
-              ],
+              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_4"],
               "dialogueId": "ch5x_sand_l_4"
             },
             {
-              "ifFlags": [
-                "branch_map_ch5_grey_prune_pruned",
-                "ch5x_sand_4"
-              ],
+              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_4"],
               "dialogueId": "ch5x_sand_p_4"
             },
             {
-              "ifFlags": [
-                "branch_map_ch5_grey_prune_living",
-                "ch5x_sand_5"
-              ],
+              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_5"],
               "dialogueId": "ch5x_sand_l_5"
             },
             {
-              "ifFlags": [
-                "branch_map_ch5_grey_prune_pruned",
-                "ch5x_sand_5"
-              ],
+              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_5"],
               "dialogueId": "ch5x_sand_p_5"
             }
           ]
@@ -11711,9 +11610,7 @@
           "delayMs": 400,
           "dialogueId": "ch5_grey_arrival",
           "effects": {
-            "setFlags": [
-              "ch5x_sand_0"
-            ]
+            "setFlags": ["ch5x_sand_0"]
           }
         }
       ]
@@ -11836,11 +11733,7 @@
               "dialogueId": "ch5_kuro_after_quiz_open"
             },
             {
-              "ifFlags": [
-                "answered_q1",
-                "answered_q2",
-                "answered_q3"
-              ],
+              "ifFlags": ["answered_q1", "answered_q2", "answered_q3"],
               "dialogueId": "ch5_kuro_after_quiz"
             }
           ]
@@ -13154,10 +13047,7 @@
               "dialogueId": "ch6_gate1_done"
             },
             {
-              "ifFlags": [
-                "ch6_gate1_s1_a",
-                "ch6_gate1_s2_x"
-              ],
+              "ifFlags": ["ch6_gate1_s1_a", "ch6_gate1_s2_x"],
               "dialogueId": "ch6_gate1_right"
             },
             {
@@ -13964,10 +13854,7 @@
               "dialogueId": "ch6_rift_wrong"
             },
             {
-              "ifFlags": [
-                "ch6_alt_origin_on",
-                "ch6_alt_finality_on"
-              ],
+              "ifFlags": ["ch6_alt_origin_on", "ch6_alt_finality_on"],
               "dialogueId": "ch6_rift_right"
             }
           ]
@@ -14699,17 +14586,11 @@
               "dialogueId": "ch6_a1_done"
             },
             {
-              "ifFlags": [
-                "ch6_a1_s1_i",
-                "ch6_a1_s2_u"
-              ],
+              "ifFlags": ["ch6_a1_s1_i", "ch6_a1_s2_u"],
               "dialogueId": "ch6_a1_right"
             },
             {
-              "ifFlags": [
-                "ch6_a1_s1_i",
-                "ch6_a1_s2_x"
-              ],
+              "ifFlags": ["ch6_a1_s1_i", "ch6_a1_s2_x"],
               "dialogueId": "ch6_a1_erase"
             },
             {
@@ -14737,17 +14618,11 @@
               "dialogueId": "ch6_a2_done"
             },
             {
-              "ifFlags": [
-                "ch6_a2_s1_a",
-                "ch6_a2_s2_e"
-              ],
+              "ifFlags": ["ch6_a2_s1_a", "ch6_a2_s2_e"],
               "dialogueId": "ch6_a2_right"
             },
             {
-              "ifFlags": [
-                "ch6_a2_s1_e",
-                "ch6_a2_s2_a"
-              ],
+              "ifFlags": ["ch6_a2_s1_e", "ch6_a2_s2_a"],
               "dialogueId": "ch6_a2_reverse"
             },
             {
@@ -15334,11 +15209,7 @@
               "dialogueId": "ch6_verdict_done"
             },
             {
-              "ifFlags": [
-                "ch6_role_solon_liar",
-                "ch6_role_kael_rev",
-                "ch6_role_vane_keeper"
-              ],
+              "ifFlags": ["ch6_role_solon_liar", "ch6_role_kael_rev", "ch6_role_vane_keeper"],
               "dialogueId": "ch6_verdict_right"
             },
             {
@@ -15855,11 +15726,7 @@
               "dialogueId": "ch6_core_done"
             },
             {
-              "ifFlags": [
-                "ch6_gear_small_iii",
-                "ch6_gear_mid_ii",
-                "ch6_gear_large_i"
-              ],
+              "ifFlags": ["ch6_gear_small_iii", "ch6_gear_mid_ii", "ch6_gear_large_i"],
               "dialogueId": "ch6_core_right"
             },
             {
@@ -16222,11 +16089,7 @@
               "dialogueId": "ch6_cracked_done"
             },
             {
-              "ifItems": [
-                "quartz_oil_gallery",
-                "quartz_oil_core",
-                "quartz_oil_bell"
-              ],
+              "ifItems": ["quartz_oil_gallery", "quartz_oil_core", "quartz_oil_bell"],
               "ifFlag": "solved_chime_bell",
               "dialogueId": "ch6_cracked_polish"
             },
@@ -16914,27 +16777,15 @@
               "dialogueId": "ch6_threshold_done"
             },
             {
-              "ifFlags": [
-                "ch6_th_s1_e",
-                "ch6_th_s2_n",
-                "ch6_th_s3_x"
-              ],
+              "ifFlags": ["ch6_th_s1_e", "ch6_th_s2_n", "ch6_th_s3_x"],
               "dialogueId": "ch6_threshold_right"
             },
             {
-              "ifFlags": [
-                "ch6_th_s1_e",
-                "ch6_th_s2_x",
-                "ch6_th_s3_none"
-              ],
+              "ifFlags": ["ch6_th_s1_e", "ch6_th_s2_x", "ch6_th_s3_none"],
               "dialogueId": "ch6_threshold_wrong_ex"
             },
             {
-              "ifFlags": [
-                "ch6_th_s1_n",
-                "ch6_th_s2_x",
-                "ch6_th_s3_none"
-              ],
+              "ifFlags": ["ch6_th_s1_n", "ch6_th_s2_x", "ch6_th_s3_none"],
               "dialogueId": "ch6_threshold_wrong_nx"
             },
             {
@@ -18494,11 +18345,7 @@
               "dialogueId": "ch6_nook_done"
             },
             {
-              "ifFlags": [
-                "ch6_nk_s1_a",
-                "ch6_nk_s2_n",
-                "ch6_nk_s3_x"
-              ],
+              "ifFlags": ["ch6_nk_s1_a", "ch6_nk_s2_n", "ch6_nk_s3_x"],
               "dialogueId": "ch6_nook_right"
             },
             {
@@ -18927,11 +18774,7 @@
               "dialogueId": "ch7_c01_done"
             },
             {
-              "ifFlags": [
-                "ch7_c01_s1_a",
-                "ch7_c01_s2_n",
-                "ch7_c01_s3_h"
-              ],
+              "ifFlags": ["ch7_c01_s1_a", "ch7_c01_s2_n", "ch7_c01_s3_h"],
               "dialogueId": "ch7_c01_right"
             },
             {
@@ -19240,11 +19083,7 @@
               "dialogueId": "ch7_c02_done"
             },
             {
-              "ifFlags": [
-                "ch7_window_1_lam",
-                "ch7_window_2_vang",
-                "ch7_window_3_trang"
-              ],
+              "ifFlags": ["ch7_window_1_lam", "ch7_window_2_vang", "ch7_window_3_trang"],
               "dialogueId": "ch7_c02_right"
             },
             {
@@ -19365,11 +19204,7 @@
       ],
       "dialChecks": [
         {
-          "ifFlags": [
-            "ch7_window_1_lam",
-            "ch7_window_2_vang",
-            "ch7_window_3_trang"
-          ],
+          "ifFlags": ["ch7_window_1_lam", "ch7_window_2_vang", "ch7_window_3_trang"],
           "unlessFlag": "opened_erased_hamlet_gate",
           "dialogueId": "ch7_c02_right"
         }
@@ -19590,11 +19425,7 @@
               "dialogueId": "ch7_mother_restored"
             },
             {
-              "ifFlags": [
-                "ch7_c03_s1_tran",
-                "ch7_c03_s2_thi",
-                "ch7_c03_s3_mai"
-              ],
+              "ifFlags": ["ch7_c03_s1_tran", "ch7_c03_s2_thi", "ch7_c03_s3_mai"],
               "dialogueId": "ch7_c03_right"
             },
             {
@@ -19904,11 +19735,7 @@
               "dialogueId": "ch7_c04_done"
             },
             {
-              "ifFlags": [
-                "ch7_funnel_1_iron",
-                "ch7_funnel_2_star",
-                "ch7_funnel_3_quartz"
-              ],
+              "ifFlags": ["ch7_funnel_1_iron", "ch7_funnel_2_star", "ch7_funnel_3_quartz"],
               "dialogueId": "ch7_c04_right"
             },
             {
@@ -20254,9 +20081,7 @@
               "dialogueId": "ch7_c05_done"
             },
             {
-              "ifFlags": [
-                "ch7_captain_b"
-              ],
+              "ifFlags": ["ch7_captain_b"],
               "dialogueId": "ch7_c05_right"
             },
             {
@@ -20332,11 +20157,7 @@
               "dialogueId": "ch7_compass_done"
             },
             {
-              "ifItems": [
-                "compass_shard_1",
-                "compass_shard_2",
-                "compass_shard_3"
-              ],
+              "ifItems": ["compass_shard_1", "compass_shard_2", "compass_shard_3"],
               "dialogueId": "ch7_compass_place"
             }
           ]
@@ -20535,12 +20356,7 @@
               "dialogueId": "ch7_c06_done"
             },
             {
-              "ifFlags": [
-                "ch7_clock_q12_8",
-                "ch7_clock_q3_11",
-                "ch7_clock_q6_2",
-                "ch7_clock_q9_5"
-              ],
+              "ifFlags": ["ch7_clock_q12_8", "ch7_clock_q3_11", "ch7_clock_q6_2", "ch7_clock_q9_5"],
               "dialogueId": "ch7_c06_right"
             },
             {
@@ -21448,12 +21264,7 @@
               "dialogueId": "ch7_c07_done"
             },
             {
-              "ifFlags": [
-                "ch7_shelf_1_a",
-                "ch7_shelf_2_b",
-                "ch7_shelf_3_c",
-                "ch7_shelf_4_d"
-              ],
+              "ifFlags": ["ch7_shelf_1_a", "ch7_shelf_2_b", "ch7_shelf_3_c", "ch7_shelf_4_d"],
               "dialogueId": "ch7_c07_right"
             },
             {
@@ -21752,11 +21563,7 @@
               "dialogueId": "ch7_c08_done"
             },
             {
-              "ifFlags": [
-                "ch7_box_day_15",
-                "ch7_box_month_07",
-                "ch7_box_age_14"
-              ],
+              "ifFlags": ["ch7_box_day_15", "ch7_box_month_07", "ch7_box_age_14"],
               "dialogueId": "ch7_c08_right"
             },
             {
@@ -22262,11 +22069,7 @@
               "dialogueId": "ch7_c12_done"
             },
             {
-              "ifFlags": [
-                "ch7_word_1_me1",
-                "ch7_word_2_cho1",
-                "ch7_word_3_ben2"
-              ],
+              "ifFlags": ["ch7_word_1_me1", "ch7_word_2_cho1", "ch7_word_3_ben2"],
               "dialogueId": "ch7_c12_right"
             },
             {
@@ -23068,11 +22871,7 @@
               "dialogueId": "ch7_core_done"
             },
             {
-              "ifFlags": [
-                "ch7_valve_1_trai",
-                "ch7_valve_2_giua",
-                "ch7_valve_3_phai"
-              ],
+              "ifFlags": ["ch7_valve_1_trai", "ch7_valve_2_giua", "ch7_valve_3_phai"],
               "dialogueId": "ch7_c13_right"
             }
           ]
@@ -23641,11 +23440,7 @@
               "dialogueId": "ch8_na_thanks"
             },
             {
-              "ifItems": [
-                "colored_paper_red",
-                "colored_paper_blue",
-                "colored_paper_gold"
-              ],
+              "ifItems": ["colored_paper_red", "colored_paper_blue", "colored_paper_gold"],
               "dialogueId": "ch8_na_give"
             },
             {
@@ -23785,11 +23580,7 @@
       ],
       "dialChecks": [
         {
-          "ifFlags": [
-            "ch8_c02_p1_kh",
-            "ch8_c02_p2_beta",
-            "ch8_c02_p3_kh"
-          ],
+          "ifFlags": ["ch8_c02_p1_kh", "ch8_c02_p2_beta", "ch8_c02_p3_kh"],
           "unlessFlag": "solved_na_chalk_shore",
           "dialogueId": "ch8_c02_right"
         }
@@ -24234,10 +24025,7 @@
       ],
       "dialChecks": [
         {
-          "ifFlags": [
-            "ch8_gear_mid_t16",
-            "ch8_gear_out_t24"
-          ],
+          "ifFlags": ["ch8_gear_mid_t16", "ch8_gear_out_t24"],
           "unlessFlag": "solved_ivo_gears",
           "dialogueId": "ch8_c03_right"
         }
@@ -24743,12 +24531,7 @@
       ],
       "dialChecks": [
         {
-          "ifFlags": [
-            "ch8_banner_1_d",
-            "ch8_banner_2_a",
-            "ch8_banner_3_c",
-            "ch8_banner_4_b"
-          ],
+          "ifFlags": ["ch8_banner_1_d", "ch8_banner_2_a", "ch8_banner_3_c", "ch8_banner_4_b"],
           "unlessFlag": "solved_ragged_causality",
           "dialogueId": "ch8_c04_right"
         }
@@ -24906,10 +24689,10 @@
           "id": "poi_ch8_kuro_post",
           "tile": {
             "x": 18,
-            "y": 9
+            "y": 7
           },
           "radius": 44,
-          "prompt": "[E] Hỏi Kuro",
+          "prompt": "[E] Nhờ Kuro xoay Cọc Neo 3 (bên kia)",
           "dialogueId": "ch8_kuro_post"
         },
         {
@@ -25005,29 +24788,6 @@
           },
           "radius": 40,
           "prompt": "[E] Cọc Neo 3",
-          "values": [
-            {
-              "key": "none",
-              "label": "(chưa neo)"
-            },
-            {
-              "key": "s",
-              "label": "Sol-Karis"
-            },
-            {
-              "key": "w",
-              "label": "Chiến hào"
-            }
-          ]
-        },
-        {
-          "id": "ch8_c05_p3",
-          "tile": {
-            "x": 18,
-            "y": 7
-          },
-          "radius": 40,
-          "prompt": "[E] Nhờ Kuro xoay Cọc Neo 3 (bên kia)",
           "values": [
             {
               "key": "none",
@@ -25884,27 +25644,17 @@
       ],
       "dialChecks": [
         {
-          "ifFlags": [
-            "ch8_c06_a1_n",
-            "ch8_c06_a2_x"
-          ],
+          "ifFlags": ["ch8_c06_a1_n", "ch8_c06_a2_x"],
           "unlessFlag": "ch8_names_still",
           "dialogueId": "ch8_c06_nx"
         },
         {
-          "ifFlags": [
-            "ch8_c06_a1_n",
-            "ch8_c06_a2_u"
-          ],
+          "ifFlags": ["ch8_c06_a1_n", "ch8_c06_a2_u"],
           "unlessFlag": "ch8_names_still",
           "dialogueId": "ch8_c06_one"
         },
         {
-          "ifFlags": [
-            "ch8_names_still",
-            "ch8_c06_b1_e",
-            "ch8_c06_b2_a"
-          ],
+          "ifFlags": ["ch8_names_still", "ch8_c06_b1_e", "ch8_c06_b2_a"],
           "unlessFlag": "solved_flowing_names",
           "dialogueId": "ch8_c06_right"
         }
@@ -26452,7 +26202,7 @@
           "id": "poi_ch8_c08",
           "tile": {
             "x": 11,
-            "y": 9
+            "y": 10
           },
           "radius": 44,
           "prompt": "[E] Xem trang ghép",
@@ -26604,11 +26354,7 @@
       ],
       "dialChecks": [
         {
-          "ifFlags": [
-            "ch8_c08_s1_a_up",
-            "ch8_c08_s2_b_up",
-            "ch8_c08_s3_c_up"
-          ],
+          "ifFlags": ["ch8_c08_s1_a_up", "ch8_c08_s2_b_up", "ch8_c08_s3_c_up"],
           "unlessFlag": "solved_torn_page",
           "dialogueId": "ch8_c08_right"
         }
@@ -26820,11 +26566,7 @@
               "dialogueId": "ch8_na_thanks"
             },
             {
-              "ifItems": [
-                "colored_paper_red",
-                "colored_paper_blue",
-                "colored_paper_gold"
-              ],
+              "ifItems": ["colored_paper_red", "colored_paper_blue", "colored_paper_gold"],
               "dialogueId": "ch8_na_give"
             },
             {
@@ -27007,12 +26749,7 @@
       ],
       "dialChecks": [
         {
-          "ifFlags": [
-            "ch8_gate_n_ivo",
-            "ch8_gate_e_lyra",
-            "ch8_gate_s_neris",
-            "ch8_gate_w_trench"
-          ],
+          "ifFlags": ["ch8_gate_n_ivo", "ch8_gate_e_lyra", "ch8_gate_s_neris", "ch8_gate_w_trench"],
           "unlessFlag": "solved_four_gates",
           "dialogueId": "ch8_c09_right"
         }
@@ -28632,11 +28369,7 @@
       ],
       "dialChecks": [
         {
-          "ifFlags": [
-            "ch8_c11_d1_n2",
-            "ch8_c11_d2_n4",
-            "ch8_c11_d3_n9"
-          ],
+          "ifFlags": ["ch8_c11_d1_n2", "ch8_c11_d2_n4", "ch8_c11_d3_n9"],
           "unlessFlag": "solved_war_archive",
           "dialogueId": "ch8_c11_right"
         }
@@ -28783,9 +28516,7 @@
       ],
       "dialChecks": [
         {
-          "ifFlags": [
-            "ch8_c12_name_peter"
-          ],
+          "ifFlags": ["ch8_c12_name_peter"],
           "unlessFlag": "solved_kuro_ledger",
           "dialogueId": "ch8_c12_right"
         }

@@ -384,7 +384,7 @@ add('map_ch8_twin_era_barracks', 'Doanh Trại Hai Thời', (p) => ({
     poi('poi_ch8_bran_tag', p.bran, '[E] Xem thẻ bài', 'ch8_bran_tag', {
       visibleWhen: { unlessFlag: 'ch4_choice_bran_memorial' },
     }),
-    poi('poi_ch8_kuro_post', { x: 18, y: 9 }, '[E] Hỏi Kuro', 'ch8_kuro_post'),
+    poi('poi_ch8_kuro_post', p.kuro, '[E] Nhờ Kuro xoay Cọc Neo 3 (bên kia)', 'ch8_kuro_post'),
     poi('poi_ch8_barricade', { x: 5, y: 19 }, '[E] Xem đống chướng ngại', 'ch8_barricade', {
       visibleWhen: { unlessFlag: 'broke_archive_barricade' },
       dialogueRules: [{ ifFlag: 'ch8_with_lyra', dialogueId: 'ch8_barricade_break' }],
@@ -397,7 +397,6 @@ add('map_ch8_twin_era_barracks', 'Doanh Trại Hai Thời', (p) => ({
     dial('ch8_c05_p1', p.posts[0], '[E] Cọc Neo 1', ERAS('s')),
     dial('ch8_c05_p2', p.posts[1], '[E] Cọc Neo 2', ERAS('w')),
     dial('ch8_c05_p3', p.posts[2], '[E] Cọc Neo 3', ERAS('s')),
-    dial('ch8_c05_p3', p.kuro, '[E] Nhờ Kuro xoay Cọc Neo 3 (bên kia)', ERAS('s')),
   ],
   roamers: [
     ...p.legion.map((t, k) => roamer(`ch8_legion_b${k}`, 'enemy_twin_era_legionnaire', t)),
@@ -676,7 +675,7 @@ add('map_ch8_torn_page_sanctum', 'Thánh Điện Trang Xé', (p) => ({
       'ch8_strip_c',
       'took_torn_page_strip_c',
     ),
-    poi('poi_ch8_c08', { x: 11, y: 9 }, '[E] Xem trang ghép', 'ch8_c08_wrong', {
+    poi('poi_ch8_c08', { x: 11, y: 10 }, '[E] Xem trang ghép', 'ch8_c08_wrong', {
       visibleWhen: { unlessFlag: 'solved_torn_page' },
       dialogueRules: [
         { ifFlag: 'ch8_c08_s1_none', dialogueId: 'ch8_c08_rule' },

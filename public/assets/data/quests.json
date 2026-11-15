@@ -56,9 +56,7 @@
       ],
       "rewards": {
         "experience": 20,
-        "items": [
-          "coastal_pancake"
-        ]
+        "items": ["coastal_pancake"]
       },
       "followUpQuestId": "quest_prologue_timestop"
     },
@@ -85,9 +83,7 @@
       ],
       "rewards": {
         "experience": 15,
-        "items": [
-          "chrono_shard_minor"
-        ]
+        "items": ["chrono_shard_minor"]
       },
       "followUpQuestId": "quest_prologue_first_hunt"
     },
@@ -156,9 +152,7 @@
       ],
       "rewards": {
         "experience": 25,
-        "items": [
-          "chrono_shard_minor"
-        ]
+        "items": ["chrono_shard_minor"]
       },
       "followUpQuestId": "quest_prologue_awakening"
     },
@@ -183,9 +177,7 @@
       ],
       "rewards": {
         "experience": 50,
-        "items": [
-          "chrono_shard_minor"
-        ]
+        "items": ["chrono_shard_minor"]
       },
       "followUpQuestId": "quest_prologue_silence"
     },
@@ -206,9 +198,7 @@
       ],
       "rewards": {
         "experience": 30,
-        "items": [
-          "chrono_shard_minor"
-        ]
+        "items": ["chrono_shard_minor"]
       },
       "followUpQuestId": "quest_prologue_sentinel"
     },
@@ -229,9 +219,7 @@
       ],
       "rewards": {
         "experience": 60,
-        "items": [
-          "sentinel_core_relic"
-        ]
+        "items": ["sentinel_core_relic"]
       },
       "followUpQuestId": "quest_prologue_unwritten"
     },
@@ -284,9 +272,7 @@
       ],
       "rewards": {
         "experience": 40,
-        "items": [
-          "ancient_gear"
-        ]
+        "items": ["ancient_gear"]
       }
     },
     {
@@ -359,9 +345,7 @@
       ],
       "rewards": {
         "experience": 60,
-        "items": [
-          "coastal_pancake"
-        ]
+        "items": ["coastal_pancake"]
       },
       "followUpQuestId": "quest_ch1_fog_beacon"
     },
@@ -409,9 +393,7 @@
       ],
       "rewards": {
         "experience": 80,
-        "items": [
-          "chrono_shard_minor"
-        ]
+        "items": ["chrono_shard_minor"]
       },
       "followUpQuestId": "quest_ch1_bellkeeper"
     },
@@ -438,9 +420,7 @@
       ],
       "rewards": {
         "experience": 150,
-        "items": [
-          "continuum_seal_shard"
-        ]
+        "items": ["continuum_seal_shard"]
       },
       "followUpQuestId": "quest_ch2_outskirts_gate"
     },
@@ -467,9 +447,7 @@
       ],
       "rewards": {
         "experience": 50,
-        "items": [
-          "chrono_shard_minor"
-        ]
+        "items": ["chrono_shard_minor"]
       }
     },
     {
@@ -489,9 +467,7 @@
       ],
       "rewards": {
         "experience": 50,
-        "items": [
-          "sea_glass_charm"
-        ]
+        "items": ["sea_glass_charm"]
       }
     },
     {
@@ -517,9 +493,7 @@
       ],
       "rewards": {
         "experience": 50,
-        "items": [
-          "sunset_dried_fish"
-        ]
+        "items": ["sunset_dried_fish"]
       }
     },
     {
@@ -566,9 +540,7 @@
       ],
       "rewards": {
         "experience": 90,
-        "items": [
-          "chrono_shard_minor"
-        ]
+        "items": ["chrono_shard_minor"]
       },
       "followUpQuestId": "quest_ch2_praetor_plea"
     },
@@ -616,9 +588,7 @@
       ],
       "rewards": {
         "experience": 120,
-        "items": [
-          "sunset_dried_fish"
-        ]
+        "items": ["sunset_dried_fish"]
       },
       "followUpQuestId": "quest_ch2_imperial_verdict"
     },
@@ -639,9 +609,7 @@
       ],
       "rewards": {
         "experience": 220,
-        "items": [
-          "causality_seal_shard"
-        ]
+        "items": ["causality_seal_shard"]
       },
       "followUpQuestId": "quest_ch3_sepulcher_gate"
     },
@@ -662,9 +630,7 @@
       ],
       "rewards": {
         "experience": 70,
-        "items": [
-          "imperial_honey_bread"
-        ]
+        "items": ["imperial_honey_bread"]
       }
     },
     {
@@ -684,9 +650,7 @@
       ],
       "rewards": {
         "experience": 80,
-        "items": [
-          "chrono_shard_minor"
-        ]
+        "items": ["chrono_shard_minor"]
       }
     },
     {
@@ -739,9 +703,7 @@
       ],
       "rewards": {
         "experience": 140,
-        "items": [
-          "refined_chrono_shard"
-        ]
+        "items": ["refined_chrono_shard"]
       },
       "followUpQuestId": "quest_ch3_echoing_vaults"
     },
@@ -795,10 +757,7 @@
       ],
       "rewards": {
         "experience": 200,
-        "items": [
-          "imperial_honey_bread",
-          "imperial_honey_bread"
-        ]
+        "items": ["imperial_honey_bread", "imperial_honey_bread"]
       },
       "followUpQuestId": "quest_ch3_archive_censorship"
     },
@@ -819,10 +778,7 @@
       ],
       "rewards": {
         "experience": 220,
-        "items": [
-          "imperial_honey_bread",
-          "imperial_honey_bread"
-        ]
+        "items": ["imperial_honey_bread", "imperial_honey_bread"]
       },
       "followUpQuestId": "quest_ch3_king_dilemma"
     },
@@ -843,11 +799,7 @@
       ],
       "rewards": {
         "experience": 260,
-        "items": [
-          "sunset_dried_fish",
-          "sunset_dried_fish",
-          "sunset_dried_fish"
-        ]
+        "items": ["sunset_dried_fish", "sunset_dried_fish", "sunset_dried_fish"]
       },
       "followUpQuestId": "quest_ch3_nameless_choir"
     },
@@ -868,9 +820,7 @@
       ],
       "rewards": {
         "experience": 350,
-        "items": [
-          "memory_seal_shard"
-        ]
+        "items": ["memory_seal_shard"]
       },
       "followUpQuestId": "quest_ch4_vale_of_banners"
     },
@@ -891,9 +841,7 @@
       ],
       "rewards": {
         "experience": 120,
-        "items": [
-          "memory_ink_flask"
-        ]
+        "items": ["memory_ink_flask"]
       }
     },
     {
@@ -913,9 +861,7 @@
       ],
       "rewards": {
         "experience": 130,
-        "items": [
-          "ancient_amber_resin"
-        ]
+        "items": ["ancient_amber_resin"]
       }
     },
     {
@@ -935,10 +881,7 @@
       ],
       "rewards": {
         "experience": 150,
-        "items": [
-          "refined_chrono_shard",
-          "refined_chrono_shard"
-        ]
+        "items": ["refined_chrono_shard", "refined_chrono_shard"]
       }
     },
     {
@@ -1006,10 +949,7 @@
       ],
       "rewards": {
         "experience": 240,
-        "items": [
-          "refined_chrono_shard",
-          "refined_chrono_shard"
-        ]
+        "items": ["refined_chrono_shard", "refined_chrono_shard"]
       },
       "followUpQuestId": "quest_ch4_crimson_standard"
     },
@@ -1036,10 +976,7 @@
       ],
       "rewards": {
         "experience": 280,
-        "items": [
-          "ancient_amber_resin",
-          "ancient_amber_resin"
-        ]
+        "items": ["ancient_amber_resin", "ancient_amber_resin"]
       },
       "followUpQuestId": "quest_ch4_broken_peace"
     },
@@ -1078,9 +1015,7 @@
       ],
       "rewards": {
         "experience": 320,
-        "items": [
-          "phoenix_draught"
-        ]
+        "items": ["phoenix_draught"]
       },
       "followUpQuestId": "quest_ch4_the_last_war"
     },
@@ -1107,9 +1042,7 @@
       ],
       "rewards": {
         "experience": 450,
-        "items": [
-          "finality_seal_shard"
-        ]
+        "items": ["finality_seal_shard"]
       },
       "followUpQuestId": "quest_ch5_into_the_interval"
     },
@@ -1150,9 +1083,7 @@
       ],
       "rewards": {
         "experience": 230,
-        "items": [
-          "spear_of_finality"
-        ]
+        "items": ["spear_of_finality"]
       }
     },
     {
@@ -1172,9 +1103,7 @@
       ],
       "rewards": {
         "experience": 200,
-        "items": [
-          "last_light_charm"
-        ]
+        "items": ["last_light_charm"]
       }
     },
     {

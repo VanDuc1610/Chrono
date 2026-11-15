@@ -1041,9 +1041,7 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1,
-      "pages": [
-        "Trang đầu, nét chữ của Kuro:\n'Ghi lại những gì tao kể. Tao sẽ hỏi lại.'"
-      ]
+      "pages": ["Trang đầu, nét chữ của Kuro:\n'Ghi lại những gì tao kể. Tao sẽ hỏi lại.'"]
     },
     {
       "id": "kuro_ledger_page_1",
@@ -1155,9 +1153,7 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1,
-      "pages": [
-        "'Máy A ở nhánh này phải chạy để giữ tường hầm trẻ em.'"
-      ]
+      "pages": ["'Máy A ở nhánh này phải chạy để giữ tường hầm trẻ em.'"]
     },
     {
       "id": "reactor_wiring",
@@ -1167,9 +1163,7 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1,
-      "pages": [
-        "'Cổng lò cần đúng hai lõi sáng ở nhánh Sống.'"
-      ]
+      "pages": ["'Cổng lò cần đúng hai lõi sáng ở nhánh Sống.'"]
     },
     {
       "id": "prune_stele_rubbing",
@@ -1179,9 +1173,7 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1,
-      "pages": [
-        "'Trong ba nhánh, chỉ nhánh đã bị tỉa mới nói dối — vì nó không còn gì để mất.'"
-      ]
+      "pages": ["'Trong ba nhánh, chỉ nhánh đã bị tỉa mới nói dối — vì nó không còn gì để mất.'"]
     },
     {
       "id": "unborn_genealogy",
@@ -1724,9 +1716,7 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1,
-      "pages": [
-        "Đừng tỉa những thế giới đang khóc. Hãy dạy chúng cách tự lành. — Archon Solon"
-      ]
+      "pages": ["Đừng tỉa những thế giới đang khóc. Hãy dạy chúng cách tự lành. — Archon Solon"]
     },
     {
       "id": "world_secret_fracture",
@@ -2054,9 +2044,7 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1,
-      "pages": [
-        "Peter và Kuro — dù cả thế giới có quên tụi mình."
-      ]
+      "pages": ["Peter và Kuro — dù cả thế giới có quên tụi mình."]
     },
     {
       "id": "void_sea_chart",
@@ -2262,9 +2250,7 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1,
-      "pages": [
-        "\"…và người thợ đồng hồ đi lên tháp, không mang theo gì ngoài những cái tên.\""
-      ]
+      "pages": ["\"…và người thợ đồng hồ đi lên tháp, không mang theo gì ngoài những cái tên.\""]
     },
     {
       "id": "world_secret_null_hour_switch",
