@@ -2362,6 +2362,198 @@
         "maxHp": 50,
         "defense": 7
       }
+    },
+    {
+      "id": "clue_ch9_interval_rift",
+      "name": "Manh Mối: Dấu Vết Kẽ Nứt",
+      "type": "document",
+      "description": "Bản ghi không gian cổ.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Kẽ nứt ở Khoảng Giữa không tự mở ra. Có một luồng Khả Năng đã chủ động xé rách không gian, ngay khi thanh kiếm gãy phát sáng."
+      ]
+    },
+    {
+      "id": "clue_ch9_ledger_divergence",
+      "name": "Manh Mối: Sổ Cái Phân Kỳ",
+      "type": "document",
+      "description": "Một trang sổ cái viết tay.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Những dòng tính toán về từng lựa chọn của Peter, kèm mức áp lực nghịch lý mỗi lựa chọn đẩy lên."
+      ]
+    },
+    {
+      "id": "clue_ch9_seal_spark",
+      "name": "Manh Mối: Tàn Lửa Kích Nổ",
+      "type": "document",
+      "description": "Mảnh tinh thể ánh tím.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Vết nứt của Ấn Origin không do quá tải. Một tia Khả Năng tím đã kích nổ nó từ phía sau, đúng lúc Kẻ Giám Hộ gục ngã."
+      ]
+    },
+    {
+      "id": "clue_ch9_possible_mother",
+      "name": "Manh Mối: Người Mẹ Khả Dĩ",
+      "type": "document",
+      "description": "Mảnh tro tàn ánh tím nhạt.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "\"Bà Mai\" ở đáy Hư Không không mang mã linh hồn Khánh Hòa. Đó có thể là một bản thể được tạo ra từ Khả Năng."
+      ]
+    },
+    {
+      "id": "clue_ch9_clock_stall",
+      "name": "Manh Mối: Kim 11:59",
+      "type": "document",
+      "description": "Nhật ký máy móc của tháp.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Kim đồng hồ bị ghim ở 11:59 bằng năng lượng Khả Năng, cho tới khi Chronos suy kiệt, buộc phải rời ngai."
+      ]
+    },
+    {
+      "id": "world_secret_ch9_chronos_grief",
+      "name": "Bí Mật I: Nỗi Đau Của Chronos",
+      "type": "document",
+      "description": "Cuộn da thuộc phủ bụi vàng.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Khi ta tự tay cắt cành nhánh đầu tiên, nước mắt ta hóa thành cát thời gian.",
+        "Ta không căm ghét những nhánh bị bỏ rơi. Ta chỉ không thể để tất cả cùng chết."
+      ]
+    },
+    {
+      "id": "world_secret_ch9_the_empty_chair",
+      "name": "Bí Mật II: Chiếc Ghế Thứ Hai",
+      "type": "document",
+      "description": "Bản vẽ ngai vàng nguyên thủy.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Bên cạnh ngai của Chronos luôn có chiếc ghế thứ hai của Thiên Nguyên. Hai vị thần cùng cầm cán cân.",
+        "Khi Thiên Nguyên tự xóa tên, chiếc ghế phủ bụi nhưng chưa từng bị dỡ bỏ."
+      ]
+    },
+    {
+      "id": "world_secret_ch9_malfunction_record",
+      "name": "Bí Mật III: Bản Ghi Lỗi Vận Hành",
+      "type": "document",
+      "description": "Nhật ký của Cỗ Máy Khởi Nguyên.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Khi lệnh xóa tên chạy, áp lực nghẽn đã bứt một trang giấy văng ra khe nứt.",
+        "Đó là trang giấy tự do duy nhất, không chịu bất kỳ luật lệ nào của số mệnh."
+      ]
+    },
+    {
+      "id": "world_secret_ch9_thien_nguyen_testament",
+      "name": "Bí Mật IV: Lời Trăn Trối",
+      "type": "document",
+      "description": "Lời Thiên Nguyên để lại.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Ta trao lại tên của ta cho trang giấy tự do trong tương lai. Hãy dạy Chronos cách dừng lại."
+      ]
+    },
+    {
+      "id": "world_secret_ch9_kuro_confession",
+      "name": "Bí Mật V: Lời Tự Thú",
+      "type": "document",
+      "description": "Mẩu giấy nhàu của Kuro.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": ["Nếu tao biến mất, tao mong mày là người duy nhất gọi tên tao."]
+    },
+    {
+      "id": "last_chronarch_blade",
+      "name": "Kiếm Chúa Tể Cuối Cùng",
+      "type": "weapon",
+      "description": "Thanh kiếm gãy hoàn thiện bằng ánh sáng lam ngọc của bản thể Unwritten.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 29,
+        "speed": 4,
+        "reach": 48,
+        "swingMs": 280,
+        "echoPct": 0.2
+      }
+    },
+    {
+      "id": "broken_divinity_edge",
+      "name": "Lưỡi Kiếm Thần Gãy",
+      "type": "weapon",
+      "description": "Lưỡi kiếm cổ từ Hầm Mộ Lời Thề.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 26,
+        "defense": 5,
+        "reach": 44,
+        "swingMs": 300
+      }
+    },
+    {
+      "id": "empty_chair_token",
+      "name": "Kỷ Vật Chiếc Ghế Trống",
+      "type": "charm",
+      "description": "Một chiếc ghế đá nhỏ xíu, mát lạnh trong lòng bàn tay.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 65,
+        "defense": 4
+      }
+    },
+    {
+      "id": "sixfold_harmony_clasp",
+      "name": "Khóa Hòa Âm Sáu Ấn",
+      "type": "charm",
+      "description": "Sáu vòng ấn khóa vào nhau, ngân khẽ khi chạm.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 70,
+        "defense": 6,
+        "speed": 6
+      }
+    },
+    {
+      "id": "divine_nectar_ampoule",
+      "name": "Ống Cam Lộ Thần Thánh",
+      "type": "consumable",
+      "description": "Hồi 180 HP và 40 MP.",
+      "value": 0,
+      "stackable": true,
+      "maxStack": 20,
+      "effects": {
+        "healAmount": 180,
+        "mpAmount": 40
+      }
     }
   ]
 }

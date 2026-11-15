@@ -14672,6 +14672,2289 @@
           "nextDialogueId": "ch8_ivo_debt_done"
         }
       ]
+    },
+    "ch9_apex_arrival_1": {
+      "id": "ch9_apex_arrival_1",
+      "speaker": "Peter",
+      "lines": [
+        "Không gian quanh Peter đông cứng lại giữa ranh giới của các thực tại. Bầu trời vỡ vụn thành những mảnh gương pha lê phản chiếu ngàn dòng thời gian.",
+        "Một mặt đồng hồ khổng lồ không có kim ngự trị phía sau khoảng không, tiếng tích tắc vọng lại như nhịp đập của chính cội nguồn vũ trụ."
+      ],
+      "responses": [
+        {
+          "text": "Kuro... mày có ở đây không?",
+          "nextDialogueId": "ch9_apex_arrival_2"
+        }
+      ],
+      "effects": {
+        "setFlags": ["ch9_started", "kuro_with_peter"],
+        "startQuest": "quest_ch9_nexus_arrival"
+      }
+    },
+    "ch9_apex_arrival_2": {
+      "id": "ch9_apex_arrival_2",
+      "speaker": "Kuro",
+      "lines": [
+        "Tao ở ngay cạnh mày đây, Peter. Nhìn kìa... đây chính là Tâm Điểm Vĩnh Hằng. Nơi lão già Chronos viết ra cái gọi là số mệnh.",
+        "Kim đồng hồ đang kẹt ở 11:59 của Giờ Thứ 25. Thời gian không còn chảy nữa. Mọi thứ đang chờ một quyết định."
+      ],
+      "responses": [
+        {
+          "text": "Chronos... ngài ấy ở đâu?",
+          "nextDialogueId": "ch9_apex_chronos_confront"
+        }
+      ]
+    },
+    "ch9_apex_chronos_confront": {
+      "id": "ch9_apex_chronos_confront",
+      "speaker": "Chronos",
+      "lines": [
+        "Kẻ mang ngọn lửa Khả Năng — vết nứt đầu tiên của vạn cổ. Và Peter... trang giấy ta đánh rơi, lỗi lầm duy nhất của ta.",
+        "Hãy giao nửa Ấn Khởi Nguyên ra đây. Để trật tự được hàn gắn, để dòng thời gian không nổ tung vào Hư Không."
+      ],
+      "responses": [
+        {
+          "text": "Trật tự của ngài được xây trên sự cắt tỉa tàn nhẫn!",
+          "nextDialogueId": "ch9_apex_chronos_reply_1"
+        },
+        {
+          "text": "Ngài bẻ gãy chính mình chỉ để duy trì sự cô độc này sao?",
+          "nextDialogueId": "ch9_apex_chronos_reply_2"
+        }
+      ]
+    },
+    "ch9_apex_chronos_reply_1": {
+      "id": "ch9_apex_chronos_reply_1",
+      "speaker": "Chronos",
+      "lines": [
+        "Nếu không có vết cắt, cái cây sẽ thối rữa từ gốc rễ. Các ngươi ngây thơ nghĩ rằng tự do vô hạn sẽ cứu vớt được muôn loài sao?"
+      ],
+      "responses": [
+        {
+          "text": "Bọn ta sẽ tự tìm câu trả lời.",
+          "nextDialogueId": "ch9_apex_chronos_part"
+        }
+      ]
+    },
+    "ch9_apex_chronos_reply_2": {
+      "id": "ch9_apex_chronos_reply_2",
+      "speaker": "Chronos",
+      "lines": [
+        "Ngươi là trang giấy không tên, làm sao hiểu được sức nặng của việc giữ cho cỗ máy vũ trụ không tan biến thành cát bụi."
+      ],
+      "responses": [
+        {
+          "text": "Nhưng tôi có đôi mắt để nhìn thấy nỗi đau của họ.",
+          "nextDialogueId": "ch9_apex_chronos_part"
+        }
+      ]
+    },
+    "ch9_apex_chronos_part": {
+      "id": "ch9_apex_chronos_part",
+      "speaker": "Kuro",
+      "lines": [
+        "Đừng nghe lão ta nói nhảm, Peter! Cổng vào các tầng đền thờ đã mở. Muốn chạm vào Lõi Khởi Nguyên, ta phải vượt qua các quy luật cổ đại."
+      ],
+      "responses": []
+    },
+    "ch9_c01_intro": {
+      "id": "ch9_c01_intro",
+      "speaker": "Bia đá",
+      "lines": [
+        "Bệ Cân Tam Thế Cổ Đại: Ba đĩa cân Quá Khứ (Memory), Hiện Tại (Continuum), Tương Lai (Possibility) đang trĩu nặng.",
+        "Chỉ khi ba con thoi thời gian mang trọng số chuẩn xác được đặt lên, cổng chuyển dịch mới mở lối."
+      ],
+      "responses": [
+        {
+          "text": "Đọc văn bia chỉ dẫn",
+          "nextDialogueId": "ch9_c01_clue"
+        }
+      ]
+    },
+    "ch9_c01_clue": {
+      "id": "ch9_c01_clue",
+      "speaker": "Bia đá",
+      "lines": [
+        "Quá khứ nặng hơn hiện tại đúng 3 khắc. Tương lai bằng hai lần quá khứ trừ đi hiện tại.",
+        "Cán cân vũ trụ chỉ đứng yên khi tổng trọng số của Tam Thế đạt đúng 27 khắc."
+      ],
+      "responses": []
+    },
+    "ch9_c01_wrong": {
+      "id": "ch9_c01_wrong",
+      "speaker": "Bia đá",
+      "lines": [
+        "Cán cân nghiêng lệch dữ dội. Trọng số Tam Thế không đạt mức cân bằng 27 khắc. Dòng chảy thời gian bị nhiễu loạn."
+      ],
+      "responses": [
+        {
+          "text": "Thử lại một lần nữa.",
+          "nextDialogueId": "ch9_c01_intro"
+        }
+      ]
+    },
+    "ch9_c01_right": {
+      "id": "ch9_c01_right",
+      "speaker": "Bia đá",
+      "lines": [
+        "Ba đĩa cân thăng bằng tuyệt đối trên trục vàng. Ánh sáng hòa âm rực sáng, cánh cổng dịch chuyển dẫn tới Ngưỡng Cửa Các Kỷ Nguyên mở ra."
+      ],
+      "responses": [
+        {
+          "text": "Bước qua cổng.",
+          "nextDialogueId": "ch9_c01_done"
+        }
+      ],
+      "effects": {
+        "setFlags": ["solved_tri_balance"],
+        "refreshMap": true
+      }
+    },
+    "ch9_c01_done": {
+      "id": "ch9_c01_done",
+      "speaker": "Kuro",
+      "lines": [
+        "Mày tính toán nhanh như ngày xưa sửa đồng hồ vậy, Peter. Bước tiếp thôi, cánh cổng đang rung lên rồi."
+      ],
+      "responses": []
+    },
+    "ch9_epochs_arrival": {
+      "id": "ch9_epochs_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Những bức tường nơi đây khắc lại bốn thời kỳ của vũ trụ: Kỷ Nguyên Vàng, Đại Phân Tách, Hư Không Xâm Lấn, và Kỷ Nguyên Sụp Đổ.",
+        "Không khí ngột ngạt. Lính canh mang đao ánh sáng đang tuần tra trên hành lang."
+      ],
+      "responses": [
+        {
+          "text": "Cẩn thận bước chân.",
+          "nextDialogueId": "ch9_epochs_kuro_warn"
+        }
+      ],
+      "effects": {
+        "startQuest": "quest_ch9_unravel_truth"
+      }
+    },
+    "ch9_epochs_kuro_warn": {
+      "id": "ch9_epochs_kuro_warn",
+      "speaker": "Kuro",
+      "lines": [
+        "Bọn Lính Canh Tâm Điểm đấy. Đao của chúng chém hai nhịp rất nhanh rồi mới tung nhát đâm chéo. Canh nhát đâm chéo mà lướt ra sau lưng chúng!"
+      ],
+      "responses": []
+    },
+    "ch9_clue_1_pickup": {
+      "id": "ch9_clue_1_pickup",
+      "speaker": "Peter",
+      "lines": [
+        "Ở góc tường nứt vỡ có một bản ghi chép không gian cổ mang ký hiệu kẽ nứt: [Dấu Vết Kẽ Nứt Ch4].",
+        "Kỳ lạ... bản ghi cho thấy kẽ nứt ở căn phòng đổ nát Chương 4 không phải ngẫu nhiên xuất hiện. Có một luồng năng lượng Possibility chủ động xé rách không gian từ trước."
+      ],
+      "responses": [
+        {
+          "text": "Kuro... đã chủ động tìm mình từ đầu?",
+          "nextDialogueId": "ch9_clue_1_kuro_reaction"
+        }
+      ],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "clue_ch9_interval_rift",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_clue_ch9_interval_rift",
+        "setFlags": ["found_clue_ch9_1"]
+      }
+    },
+    "ch9_clue_1_kuro_reaction": {
+      "id": "ch9_clue_1_kuro_reaction",
+      "speaker": "Kuro",
+      "lines": [
+        "Mày tìm thấy gì ở đó thế Peter? Mấy mảnh vụn lịch sử cũ thôi, đừng bận tâm. Phía trước có cửa vào Sảnh Lăng Kính kìa!"
+      ],
+      "responses": []
+    },
+    "ch9_prism_arrival": {
+      "id": "ch9_prism_arrival",
+      "speaker": "Kuro",
+      "lines": [
+        "Nhìn trần điện kìa... một khối lăng kính tam giác treo lơ lửng, nhưng ba chùm sáng chiếu vào nó đang bị lệch hướng.",
+        "Muốn kích hoạt bệ lăng kính, phải tìm được ba viên Tinh Thể Khởi Nguyên cắm vào ba góc."
+      ],
+      "responses": [
+        {
+          "text": "Để tao kiểm tra bệ điều khiển.",
+          "nextDialogueId": "ch9_c02_intro"
+        }
+      ]
+    },
+    "ch9_secret_1_pickup": {
+      "id": "ch9_secret_1_pickup",
+      "speaker": "Peter",
+      "lines": [
+        "Phía sau bức tượng gãy là một cuộn da thuộc phủ bụi vàng: [Nỗi Đau Của Chronos - Trang 1/2].",
+        "Từng dòng chữ run rẩy: 'Khi ta tự tay cắt bỏ cành nhánh đầu tiên, nước mắt ta hóa thành cát thời gian. Ta không căm ghét những nhánh bị bỏ rơi... ta chỉ không thể để tất cả cùng chết.'"
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "world_secret_ch9_chronos_grief",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_world_secret_ch9_chronos_grief"
+      }
+    },
+    "ch9_clue_2_pickup": {
+      "id": "ch9_clue_2_pickup",
+      "speaker": "Peter",
+      "lines": [
+        "Dưới chân một trụ gương vỡ kẹp một trang giấy quen thuộc: [Bản Phân Kỳ Sổ Cái Ch5].",
+        "Chữ viết tay của Kuro: 'Nếu Peter viết thư cho Alpha, áp lực nghịch lý tăng. Nếu Peter tha cho Alpha, vết nứt mở rộng.' Kuro đã tính trước cả lựa chọn của mình."
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "clue_ch9_ledger_divergence",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_clue_ch9_ledger_divergence",
+        "setFlags": ["found_clue_ch9_2"]
+      }
+    },
+    "ch9_c02_intro": {
+      "id": "ch9_c02_intro",
+      "speaker": "Bệ Lăng Kính",
+      "lines": [
+        "Trận đồ Quang Phổ Tam Giác Lồng: Ba đỉnh tam giác (Bắc, Tây Nam, Đông Nam) điều khiển ba chùm tia màu cơ bản.",
+        "Cần cắm đúng ba Tinh Thể Khởi Nguyên (Đỏ, Lam, Lục) để mở đồng thời ba Cổng Thứ Cấp (Yellow, Cyan, Magenta) và chiếu sáng tâm điểm."
+      ],
+      "responses": [
+        {
+          "text": "Đọc văn bia quang phổ",
+          "nextDialogueId": "ch9_c02_clue"
+        }
+      ]
+    },
+    "ch9_c02_clue": {
+      "id": "ch9_c02_clue",
+      "speaker": "Bệ Lăng Kính",
+      "lines": [
+        "Cổng Yellow (giữa Bắc và Tây Nam) cần Ý Chí (Đỏ) kết hợp Sự Sống (Lục).",
+        "Cổng Magenta (giữa Bắc và Đông Nam) cần Ý Chí (Đỏ) kết hợp Dòng Chảy (Lam).",
+        "Cổng Cyan (giữa Đông Nam và Tây Nam) cần Dòng Chảy (Lam) kết hợp Sự Sống (Lục)."
+      ],
+      "responses": []
+    },
+    "ch9_c02_wrong": {
+      "id": "ch9_c02_wrong",
+      "speaker": "Bệ Lăng Kính",
+      "lines": [
+        "Ánh sáng phát ra bị xung đột. Các cổng thứ cấp chìm vào bóng tối. Màu sắc ở các đỉnh chưa đồng pha với văn bia."
+      ],
+      "responses": [
+        {
+          "text": "Rút tinh thể ra cắm lại.",
+          "nextDialogueId": "ch9_c02_intro"
+        }
+      ]
+    },
+    "ch9_c02_right": {
+      "id": "ch9_c02_right",
+      "speaker": "Bệ Lăng Kính",
+      "lines": [
+        "Ba chùm tia giao thoa hoàn hảo! Cổng Yellow, Cyan, Magenta cùng bừng sáng. Tại tâm điểm, một chùm sáng Trắng Bạc tinh khiết chiếu thẳng lên đỉnh vòm."
+      ],
+      "responses": [
+        {
+          "text": "Lối đi đã mở!",
+          "nextDialogueId": "ch9_c02_done"
+        }
+      ],
+      "effects": {
+        "setFlags": ["solved_spectral_interference"],
+        "refreshMap": true
+      }
+    },
+    "ch9_c02_done": {
+      "id": "ch9_c02_done",
+      "speaker": "Kuro",
+      "lines": [
+        "Ánh sáng trắng của Khởi Nguyên... Lâu lắm rồi tao mới thấy lại màu này. Đi nào Peter, đại điện tiếp theo ở ngay trước mắt."
+      ],
+      "responses": []
+    },
+    "ch9_creeds_arrival": {
+      "id": "ch9_creeds_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Ba bức tượng đá sừng sững: Tượng Chronos ở bệ A, Tượng Kuro ở bệ B, và Tượng Thiên Nguyên ở bệ C.",
+        "Không khí nơi đây tĩnh mịch đến rợn người, tựa như ba thời đại đang nhìn chằm chằm vào nhau."
+      ],
+      "responses": [
+        {
+          "text": "Kiểm tra bia đá trung tâm.",
+          "nextDialogueId": "ch9_c03_intro"
+        }
+      ]
+    },
+    "ch9_fb_01_trigger": {
+      "id": "ch9_fb_01_trigger",
+      "speaker": "Ký ức",
+      "lines": [
+        "Ánh nắng chiều Khánh Hòa ấm áp tràn ngập tâm trí. Hai đứa trẻ ngồi trên mỏm đá ngắm sóng biển vỗ bờ.",
+        "Kuro bẻ đôi ổ bánh mì mật ong thơm phức, đưa cho Peter nửa lớn hơn: 'Ăn đi mày. Dù cả thế giới có quên tao, mày cũng không được quên tao đấy nhé!'"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["seen_fb_01"]
+      },
+      "flashback": true
+    },
+    "ch9_clue_3_pickup": {
+      "id": "ch9_clue_3_pickup",
+      "speaker": "Peter",
+      "lines": [
+        "Dưới chân bệ tượng của Kuro có một mảnh vỡ tinh thể mang ánh sáng tím: [Tàn Lửa Kích Nổ Ấn Ch6].",
+        "Mẫu phân tích năng lượng tại Đại Điện Khởi Nguyên... Vết nứt của Ấn Origin ở Chương 6 không phải do áp lực tự nhiên, mà bị kích nổ bởi một luồng sóng Possibility lén phóng ra từ sau lưng khi Peter hạ Genesis Warden!"
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "clue_ch9_seal_spark",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_clue_ch9_seal_spark",
+        "setFlags": ["found_clue_ch9_3"]
+      }
+    },
+    "ch9_c03_intro": {
+      "id": "ch9_c03_intro",
+      "speaker": "Bia Trung Tâm",
+      "lines": [
+        "Ba Lời Chứng Khởi Nguyên: Trong ba bức tượng, chính xác MỘT tượng nói thật hoàn toàn, MỘT tượng nói dối hoàn toàn, và MỘT tượng nói nửa thật nửa dối (câu đầu dối, câu sau thật).",
+        "Hãy đặt đúng ba huy hiệu [Sự Thật], [Nửa Thật], [Dối Trá] vào bệ của ba nhân chứng."
+      ],
+      "responses": [
+        {
+          "text": "Lắng nghe lời chứng của từng tượng.",
+          "nextDialogueId": "ch9_c03_clues"
+        }
+      ]
+    },
+    "ch9_c03_clues": {
+      "id": "ch9_c03_clues",
+      "speaker": "Peter",
+      "lines": [
+        "Tượng Chronos (A): '1. Thiên Nguyên nói dối hoàn toàn. / 2. Bệ của ta là bệ duy nhất không có vết nứt.'",
+        "Tượng Kuro (B): '1. Chronos là người nói thật hoàn toàn. / 2. Ta là người nói thật hoàn toàn.'",
+        "Tượng Thiên Nguyên (C): '1. Kuro nói dối hoàn toàn. / 2. Chiếc ghế thứ hai từng được đặt cạnh ngai vàng.'"
+      ],
+      "responses": []
+    },
+    "ch9_c03_wrong": {
+      "id": "ch9_c03_wrong",
+      "speaker": "Bia Trung Tâm",
+      "lines": [
+        "Các huy hiệu bị đẩy bật ra ngoài. Lời chứng mâu thuẫn lẫn nhau, hệ thống logic sụp đổ."
+      ],
+      "responses": [
+        {
+          "text": "Suy luận lại từ đầu.",
+          "nextDialogueId": "ch9_c03_intro"
+        }
+      ]
+    },
+    "ch9_c03_right": {
+      "id": "ch9_c03_right",
+      "speaker": "Bia Trung Tâm",
+      "lines": [
+        "Chính xác tuyệt đối! Tượng Kuro sụp đổ mặt nạ, Tượng Thiên Nguyên tỏa sáng ấm áp, Tượng Chronos cúi đầu trầm mặc.",
+        "Cửa điện phía Bắc rung chuyển mở lối tiến vào Hành Lang Bộ Hồi Thoát."
+      ],
+      "responses": [
+        {
+          "text": "Tiến lên phía trước.",
+          "nextDialogueId": "ch9_c03_done"
+        }
+      ],
+      "effects": {
+        "setFlags": ["solved_tri_witness"],
+        "refreshMap": true
+      }
+    },
+    "ch9_c03_done": {
+      "id": "ch9_c03_done",
+      "speaker": "Kuro",
+      "lines": [
+        "Hừ... chỉ là mấy câu đố chữ của người chết để lại thôi. Đi nhanh lên Peter, tao nghe thấy tiếng bánh răng chuyển động ở phòng bên rồi."
+      ],
+      "responses": []
+    },
+    "ch9_escapement_arrival": {
+      "id": "ch9_escapement_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Một con lắc khổng lồ dài bằng cả tòa tháp đang vung qua vung lại. Tiếng gõ tích tắc làm rung chuyển sàn đá dưới chân.",
+        "Những Bóng Ma Nhiệt Dịch bay lượn quanh các quả lắc, thân thể chúng nhấp nháy tạo ra ảo ảnh đánh lừa thị giác."
+      ],
+      "responses": [
+        {
+          "text": "Cẩn thận quái vật!",
+          "nextDialogueId": "ch9_escapement_specter_warn"
+        }
+      ]
+    },
+    "ch9_escapement_specter_warn": {
+      "id": "ch9_escapement_specter_warn",
+      "speaker": "Peter",
+      "lines": [
+        "Bóng Ma Nhiệt Dịch tạo ra hai bóng giả. Chỉ có con thật mới có nhịp sáng ngực đập theo tiếng tích tắc của đồng hồ. Phải dùng Đòn Thời Gian chém trúng con thật!"
+      ],
+      "responses": [
+        {
+          "text": "Tiến tới bệ con lắc.",
+          "nextDialogueId": "ch9_c04_intro"
+        }
+      ]
+    },
+    "ch9_clue_4_pickup": {
+      "id": "ch9_clue_4_pickup",
+      "speaker": "Peter",
+      "lines": [
+        "Bên cạnh con lắc có một mảnh tro tàn phát ra ánh sáng tím nhạt: [Bản Thể Người Mẹ Khả Dĩ Ch7].",
+        "Báo cáo dao động linh hồn... 'Bà Mai' mà Kuro ôm ở Chương 7 không hề có mã linh hồn cổ của người Khánh Hòa. Đó là một bản thể được Kuro tạo ra từ Khả Năng để đánh vào lòng trắc ẩn của mình!"
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "clue_ch9_possible_mother",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_clue_ch9_possible_mother",
+        "setFlags": ["found_clue_ch9_4"]
+      }
+    },
+    "ch9_c04_intro": {
+      "id": "ch9_c04_intro",
+      "speaker": "Bệ Con Lắc",
+      "lines": [
+        "Bộ Hồi Thoát Thần Thánh do Chronos chế tạo để đếm nhịp Giờ 25. Con lắc đang bị lệch nhịp nghiêm trọng.",
+        "Có ba quả gia trọng A, B, C trượt trên thanh nấc từ 1 đến 9. Cần điều chỉnh vị trí để đưa dao động về trạng thái cộng hưởng tĩnh."
+      ],
+      "responses": [
+        {
+          "text": "Đọc cuộn giấy quy luật con lắc",
+          "nextDialogueId": "ch9_c04_clue"
+        }
+      ]
+    },
+    "ch9_c04_clue": {
+      "id": "ch9_c04_clue",
+      "speaker": "Cuộn giấy",
+      "lines": [
+        "Gia trọng A là số chẵn nguyên tố duy nhất.",
+        "Gia trọng B là lập phương của A.",
+        "Gia trọng C là căn bậc hai của tích số giữa A và B."
+      ],
+      "responses": []
+    },
+    "ch9_c04_wrong": {
+      "id": "ch9_c04_wrong",
+      "speaker": "Bệ Con Lắc",
+      "lines": [
+        "Con lắc rung lắc dữ dội, tiếng kim gõ lệch pha vang lên chói tai. Tần số dao động bị phá vỡ hoàn toàn."
+      ],
+      "responses": [
+        {
+          "text": "Chỉnh lại vị trí các quả lắc.",
+          "nextDialogueId": "ch9_c04_intro"
+        }
+      ]
+    },
+    "ch9_c04_right": {
+      "id": "ch9_c04_right",
+      "speaker": "Bệ Con Lắc",
+      "lines": [
+        "Tiếng tích... tắc... tích... tắc trở nên êm ái, thanh thoát. Con lắc dao động mượt mà, giải phóng khóa từ mở cánh cửa lớn dẫn vào Thư Khố Da Thuộc."
+      ],
+      "responses": [
+        {
+          "text": "Vào thư khố thôi.",
+          "nextDialogueId": "ch9_c04_done"
+        }
+      ],
+      "effects": {
+        "setFlags": ["solved_escapement"],
+        "refreshMap": true
+      }
+    },
+    "ch9_c04_done": {
+      "id": "ch9_c04_done",
+      "speaker": "Kuro",
+      "lines": [
+        "Nhịp đập êm tai đấy Peter. Ngay phía trước là Thư Khố Da Thuộc, nơi cất giữ các bản chép cổ nhất của vũ trụ."
+      ],
+      "responses": []
+    },
+    "ch9_archive_arrival": {
+      "id": "ch9_archive_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Hàng vạn cuộn da thuộc cổ xưa xếp tầng tầng lớp lớp trên các giá sách khổng lồ. Mùi mực thời gian nồng đậm khắp không gian.",
+        "Tại trung tâm căn phòng, một bàn giải mã da thuộc cổ đại đang phát ra ánh sáng lung linh dưới lớp mực tẩy xóa."
+      ],
+      "responses": [
+        {
+          "text": "Kiểm tra bàn giải mã.",
+          "nextDialogueId": "ch9_c05_intro"
+        }
+      ]
+    },
+    "ch9_clue_5_pickup": {
+      "id": "ch9_clue_5_pickup",
+      "speaker": "Peter",
+      "lines": [
+        "Trên một kệ sách khuất có một bản nhật ký máy móc: [Cơ Chế Giữ Kim 11:59 Ch8].",
+        "Bản tính toán tại Tim Đồng Hồ: Kuro đã cố tình dùng năng lượng Possibility ghim kim đồng hồ ở 11:59 để Chronos suy kiệt, ép vị thần tối cao phải rời ngai vàng!"
+      ],
+      "responses": [
+        {
+          "text": "Năm manh mối đã đủ... Mọi thứ đều do một tay Kuro sắp đặt!",
+          "nextDialogueId": "ch9_clues_complete"
+        }
+      ],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "clue_ch9_clock_stall",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_clue_ch9_clock_stall",
+        "setFlags": ["found_clue_ch9_5"]
+      }
+    },
+    "ch9_clues_complete": {
+      "id": "ch9_clues_complete",
+      "speaker": "Peter",
+      "lines": [
+        "Từ kẽ nứt Chương 4, cuốn sổ cái Chương 5, ấn vỡ Chương 6, mẹ giả Chương 7, cho đến việc ghim đồng hồ Chương 8... Kuro không hề là nạn nhân. Kuro chính là kẻ giật dây tất cả!"
+      ],
+      "responses": []
+    },
+    "ch9_c05_intro": {
+      "id": "ch9_c05_intro",
+      "speaker": "Bàn Da Thuộc",
+      "lines": [
+        "Trang da thuộc cổ đại bị viết đè qua các thời kỳ bằng bốn loại mực: Vàng Son, Tro Tàn, Tử Lam, Xanh Thủy Tinh.",
+        "Có ba lọ dung môi tẩy rửa (solv_gold, solv_ash, solv_violet). Phải dùng đúng thứ tự để bóc tách các lớp mà không làm cháy mặt giấy."
+      ],
+      "responses": [
+        {
+          "text": "Đọc biên niên sử tẩy xóa",
+          "nextDialogueId": "ch9_c05_clue"
+        }
+      ]
+    },
+    "ch9_c05_clue": {
+      "id": "ch9_c05_clue",
+      "speaker": "Cuộn giấy",
+      "lines": [
+        "Lớp mực Vàng Son (gold) nằm ở bề mặt ngoài cùng, khô cứng dưới ánh sáng.",
+        "Lớp mực Tử Lam (violet) nằm ngay dưới lớp Tro Tàn (ash), hấp thu hơi lạnh của tro.",
+        "Lớp chữ Xanh Thủy Tinh (cerulean) nằm sâu nhất dưới đáy da thuộc, chỉ hiện ra khi lớp Tử Lam tan biến."
+      ],
+      "responses": []
+    },
+    "ch9_c05_wrong": {
+      "id": "ch9_c05_wrong",
+      "speaker": "Bàn Da Thuộc",
+      "lines": [
+        "Mặt giấy bốc khói đen! Trật tự hóa chất bị nghịch đảo, trang da thuộc tự phục hồi về trạng thái ban đầu để tránh bị thiêu rụi."
+      ],
+      "responses": [
+        {
+          "text": "Tẩy rửa lại từ đầu.",
+          "nextDialogueId": "ch9_c05_intro"
+        }
+      ]
+    },
+    "ch9_c05_right": {
+      "id": "ch9_c05_right",
+      "speaker": "Bàn Da Thuộc",
+      "lines": [
+        "Từng lớp mực tan biến hoàn hảo! Dưới lớp tro và tím, dòng chữ Xanh Thủy Tinh hiện lên sáng rực, chỉ ra con đường dẫn tới Ngai Vàng Khởi Nguyên."
+      ],
+      "responses": [
+        {
+          "text": "Quay lại nhìn Kuro...",
+          "nextDialogueId": "ch9_kuro_crossroad"
+        }
+      ],
+      "effects": {
+        "setFlags": ["solved_creation_palimpsest"],
+        "startQuest": "quest_ch9_crossroad_decision"
+      }
+    },
+    "ch9_kuro_crossroad": {
+      "id": "ch9_kuro_crossroad",
+      "speaker": "Kuro",
+      "lines": [
+        "Bản đồ hiện ra rồi, Peter. Mọi chướng ngại đã dọn sạch. Giờ chỉ còn tao với mày bước lên đỉnh vinh quang thôi. Sao mày nhìn tao chằm chằm vậy?"
+      ],
+      "responses": [
+        {
+          "text": "Tao vẫn tin mày. Chiếc ghế ấy luôn có chỗ cho mày.",
+          "nextDialogueId": "ch9_route_choice_empty_chair"
+        },
+        {
+          "text": "Mày đã giật dây tất cả... Mẹ mày, những vết nứt, mọi thứ!",
+          "nextDialogueId": "ch9_route_choice_puppet_master"
+        }
+      ]
+    },
+    "ch9_route_choice_empty_chair": {
+      "id": "ch9_route_choice_empty_chair",
+      "speaker": "Kuro",
+      "lines": [
+        "Peter... Mày biết hết những toan tính của tao mà mày vẫn chọn tin tao sao?",
+        "Được... Tao sẽ đi cùng mày đến cùng. Dù có phải đối đầu với Thần Tính Lục Hợp, tao cũng sẽ không buông tay!"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch9_route_empty_chair", "ch9_route_chosen"],
+        "startQuest": "quest_ch9_path_of_empty_chair",
+        "refreshMap": true
+      }
+    },
+    "ch9_route_choice_puppet_master": {
+      "id": "ch9_route_choice_puppet_master",
+      "speaker": "Kuro",
+      "lines": [
+        "Hahaha... Ha ha ha! Thông minh lắm, Peter! Mày nhận ra rồi đấy à?",
+        "Đúng thế! Kẻ mang quyền năng Khả Năng mới là kẻ xứng đáng nhào nặn vũ trụ này! Bọn mày chỉ là những con cờ dọn đường cho tao thôi!",
+        "Muốn ngăn cản tao? Bước qua xác bốn Đại Phó Tướng của tao ở Cõi Phân Kỳ đi!"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch9_route_puppet_master", "ch9_route_chosen", "kuro_left"],
+        "clearFlags": ["kuro_with_peter"],
+        "startQuest": "quest_ch9_hunt_lieutenants",
+        "refreshMap": true
+      }
+    },
+    "ch9_penrose_arrival": {
+      "id": "ch9_penrose_arrival",
+      "speaker": "Kuro",
+      "lines": [
+        "Cầu thang này không có điểm tựa, trôi lơ lửng giữa vực thẳm sao sa. Mỗi phiến đá đều khắc những chữ số cổ.",
+        "Đi sai một bước là cả nhịp cầu thang sẽ sụp đổ, Peter à. Hãy nhìn kỹ bia đá ở chân thang."
+      ],
+      "responses": [
+        {
+          "text": "Đọc bia chân thang.",
+          "nextDialogueId": "ch9_c06_intro"
+        }
+      ]
+    },
+    "ch9_c06_intro": {
+      "id": "ch9_c06_intro",
+      "speaker": "Bia Chân Thang",
+      "lines": [
+        "Bậc thang được xây dựng bởi các môn đồ đầu tiên của Chronos, tuân theo quy luật cộng hòa tự nhiên.",
+        "Mỗi bước chân của Đấng Kiến Tạo bằng tổng hai bước chân liền trước. Khởi đầu từ bước Một, rồi bước Hai..."
+      ],
+      "responses": []
+    },
+    "ch9_c06_wrong": {
+      "id": "ch9_c06_wrong",
+      "speaker": "Peter",
+      "lines": [
+        "Bậc đá rung chuyển rồi tan biến thành bụi sáng! Peter trượt chân và rơi nhẹ xuống đệm năng lượng ở chân cầu thang an toàn."
+      ],
+      "responses": [
+        {
+          "text": "Thử bước lại cẩn thận.",
+          "nextDialogueId": "ch9_c06_intro"
+        }
+      ]
+    },
+    "ch9_c06_right": {
+      "id": "ch9_c06_right",
+      "speaker": "Peter",
+      "lines": [
+        "Từng bậc đá sáng bừng hào quang vàng kim vững chãi nâng bước Peter và Kuro lên cao, nối liền bờ vực sang Mật Thất Ma Phương Ký Ức."
+      ],
+      "responses": [
+        {
+          "text": "Lên đỉnh cầu thang.",
+          "nextDialogueId": "ch9_c06_done"
+        }
+      ],
+      "effects": {
+        "setFlags": ["solved_penrose_steps"],
+        "refreshMap": true
+      }
+    },
+    "ch9_c06_done": {
+      "id": "ch9_c06_done",
+      "speaker": "Peter",
+      "lines": [
+        "Chúng ta đã qua được vực thẳm. Phía trước có một luồng áp lực khổng lồ... Đại Pháp Quan đang trấn giữ ở đó."
+      ],
+      "responses": []
+    },
+    "ch9_matrix_arrival": {
+      "id": "ch9_matrix_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Sàn đá ở đây là một ma phương 3x3 khổng lồ. Sáu ô đá đã được đặt sẵn, chỉ còn ba ô trống đang phát ra ánh sáng chờ đợi."
+      ],
+      "responses": [
+        {
+          "text": "Nhìn về phía góc phòng...",
+          "nextDialogueId": "ch9_inquisitor_encounter"
+        }
+      ]
+    },
+    "ch9_inquisitor_encounter": {
+      "id": "ch9_inquisitor_encounter",
+      "speaker": "Đại Pháp Quan",
+      "lines": [
+        "Kẻ Chưa Từng Được Ghi và Kẻ Mang Khả Năng... Các ngươi to gan dám bước chân vào cõi cấm của ký ức.",
+        "Ta là Đại Pháp Quan Tâm Điểm. Hãy nếm trải Bản Án Bốn Nhịp của công lý vĩnh cửu!"
+      ],
+      "responses": []
+    },
+    "ch9_inquisitor_defeat": {
+      "id": "ch9_inquisitor_defeat",
+      "speaker": "Đại Pháp Quan",
+      "lines": [
+        "Không thể nào... Bản án bốn nhịp bị bẻ gãy... Trang giấy đánh rơi năm xưa nay đã thành lưỡi kiếm..."
+      ],
+      "responses": [
+        {
+          "text": "Thu nhặt khối đá niên đại rơi ra.",
+          "nextDialogueId": "ch9_c07_intro"
+        }
+      ],
+      "effects": {
+        "setFlags": ["ch9_inquisitor_spoke"]
+      }
+    },
+    "ch9_c07_intro": {
+      "id": "ch9_c07_intro",
+      "speaker": "Ma Phương Ký Ức",
+      "lines": [
+        "Ma phương 3x3 niên đại cổ: Tổng của mỗi hàng, cột, đường chéo luôn luôn bằng 15.",
+        "Đã có sẵn: Hàng 1: [8, 1, 6]; Hàng 2: [3, ?, 7]; Hàng 3: [?, 9, ?]. Hãy đặt ba khối đá 2, 4, 5 vào đúng vị trí."
+      ],
+      "responses": []
+    },
+    "ch9_c07_wrong": {
+      "id": "ch9_c07_wrong",
+      "speaker": "Ma Phương Ký Ức",
+      "lines": [
+        "Các khối đá kêu lạch cạch. Dòng năng lượng niên đại chưa đồng nhất 15. Ma phương từ chối kích hoạt."
+      ],
+      "responses": [
+        {
+          "text": "Nhấc đá ra xếp lại.",
+          "nextDialogueId": "ch9_c07_intro"
+        }
+      ]
+    },
+    "ch9_c07_right": {
+      "id": "ch9_c07_right",
+      "speaker": "Ma Phương Ký Ức",
+      "lines": [
+        "Mọi hàng, cột, đường chéo bừng sáng con số 15 huyền diệu! Sàn đá hạ xuống tạo thành bậc thang dẫn tới Thành Trì Kiến Trúc Sư."
+      ],
+      "responses": [
+        {
+          "text": "Tiến vào thành trì.",
+          "nextDialogueId": "ch9_c07_done"
+        }
+      ],
+      "effects": {
+        "setFlags": ["solved_memory_matrix"],
+        "refreshMap": true
+      }
+    },
+    "ch9_c07_done": {
+      "id": "ch9_c07_done",
+      "speaker": "Kuro",
+      "lines": [
+        "Giải quyết gọn ghẽ lắm, Peter. Nhưng cỗ máy bảo vệ ở phòng sau không dễ đối phó như tên Pháp Quan đâu."
+      ],
+      "responses": []
+    },
+    "ch9_architect_arrival": {
+      "id": "ch9_architect_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Một cỗ máy đá khổng lồ bốn tay đang ngự trị giữa phòng, ba bánh đà năng lượng Thời Gian, Không Gian, Nhân Quả xoay tít sau lưng nó."
+      ],
+      "responses": [
+        {
+          "text": "Kiến Trúc Sư Nguyên Thủy thức tỉnh!",
+          "nextDialogueId": "ch9_architect_boss_intro"
+        }
+      ]
+    },
+    "ch9_architect_boss_intro": {
+      "id": "ch9_architect_boss_intro",
+      "speaker": "Kiến Trúc Sư",
+      "lines": [
+        "CẢNH BÁO XÂM NHẬP TÂM ĐIỂM. KÍCH HOẠT QUY TRÌNH THANH LỌC THỜI GIAN. TAM TRỤC VẬN HÀNH."
+      ],
+      "responses": []
+    },
+    "ch9_architect_kuro_hold": {
+      "id": "ch9_architect_kuro_hold",
+      "speaker": "Kuro",
+      "lines": [
+        "Nó suy yếu rồi, Peter! Tao đang dùng Khả Năng giữ chặt tay và bánh đà của nó! Mau chọn hành động [Ngắt Bộ Điều Áp Cổ] ở sau lưng nó đi!"
+      ],
+      "responses": [
+        {
+          "text": "[Ngắt Bộ Điều Áp Cổ]",
+          "nextDialogueId": "ch9_architect_boss_win"
+        }
+      ]
+    },
+    "ch9_architect_boss_win": {
+      "id": "ch9_architect_boss_win",
+      "speaker": "Peter",
+      "lines": [
+        "Tiếng rắc vang lên! Bộ điều áp cổ bị ngắt rời, ba bánh đà dừng quay rồi vỡ vụn thành cát bụi. Kiến Trúc Sư quỳ sụp xuống, tắt hẳn ánh sáng mắt."
+      ],
+      "responses": [
+        {
+          "text": "Chúng ta thắng rồi!",
+          "nextDialogueId": "ch9_fb_02_trigger"
+        }
+      ],
+      "effects": {
+        "setFlags": ["ch9_architect_spoke"]
+      }
+    },
+    "ch9_fb_02_trigger": {
+      "id": "ch9_fb_02_trigger",
+      "speaker": "Ký ức",
+      "lines": [
+        "Ảo ảnh thời viễn cổ hiện lên: Chronos trong áo choàng vàng nguyên vẹn và một vị thần hiền từ đang cùng nhau khiêng một chiếc ghế đá trắng đặt cạnh ngai vàng.",
+        "Vị thần hiền từ mỉm cười: 'Chronos, ngai vàng này không dành cho một người đơn độc. Khi mệt mỏi, hãy để chiếc ghế thứ hai sẻ chia gánh nặng cùng ngài.'"
+      ],
+      "responses": [
+        {
+          "text": "Chiếc ghế thứ hai... từng thực sự tồn tại!",
+          "nextDialogueId": "ch9_architect_done"
+        }
+      ],
+      "effects": {
+        "setFlags": ["seen_fb_02"]
+      },
+      "flashback": true
+    },
+    "ch9_architect_done": {
+      "id": "ch9_architect_done",
+      "speaker": "Kuro",
+      "lines": [
+        "Ký ức vừa rồi... Lão già Chronos cũng từng có bạn đồng hành sao? Nhưng người bạn đó giờ ở đâu rồi?"
+      ],
+      "responses": []
+    },
+    "ch9_chime_arrival": {
+      "id": "ch9_chime_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Bốn chiếc chuông pha lê khổng lồ treo giữa không trung. Ở dưới sân điện... mọi người đều đang ở đây!"
+      ],
+      "responses": [
+        {
+          "text": "Chào mọi người!",
+          "nextDialogueId": "ch9_companions_greet"
+        }
+      ]
+    },
+    "ch9_companions_greet": {
+      "id": "ch9_companions_greet",
+      "speaker": "Lyra",
+      "lines": [
+        "Peter! Ngọn kích của tôi đã phá tan phong ấn biên giới để đến đây cùng cậu. Nhân quả giả tạo không thể ngăn cản chúng ta!"
+      ],
+      "responses": [
+        {
+          "text": "Cảm ơn Lyra!",
+          "nextDialogueId": "ch9_neris_greet"
+        }
+      ],
+      "effects": {
+        "setFlags": ["met_lyra_ch9"]
+      }
+    },
+    "ch9_neris_greet": {
+      "id": "ch9_neris_greet",
+      "speaker": "Neris",
+      "lines": [
+        "Tôi đã ghi lại tất cả những cái tên bị lãng quên vào cuốn sổ này. Giờ là lúc chúng ta trả lại tiếng nói cho họ."
+      ],
+      "responses": [
+        {
+          "text": "Cô Ba và bé Na cũng đến sao?",
+          "nextDialogueId": "ch9_coba_na_greet"
+        }
+      ],
+      "effects": {
+        "setFlags": ["met_neris_ch9"]
+      }
+    },
+    "ch9_coba_na_greet": {
+      "id": "ch9_coba_na_greet",
+      "speaker": "Cô Ba & Bé Na",
+      "lines": [
+        "Chú Peter ơi! Con hạc giấy của chú vẫn bay nè! Chú phải thắng để về quán ăn chè với con nhé!",
+        "Cô Ba tin ở con, Peter. Cả xóm biển Khánh Hòa vẫn đang chờ con về sửa đồng hồ đấy."
+      ],
+      "responses": [
+        {
+          "text": "Con nhất định sẽ về!",
+          "nextDialogueId": "ch9_aldric_variant"
+        }
+      ]
+    },
+    "ch9_aldric_variant": {
+      "id": "ch9_aldric_variant",
+      "speaker": "Aldric",
+      "lines": [
+        "Peter! Ta mang theo di nguyện của toàn quân đoàn. Lưỡi kiếm của cậu mang theo hy vọng chấm dứt cuộc chiến bất tận này!"
+      ],
+      "responses": [
+        {
+          "text": "Nhìn lên bốn chiếc chuông pha lê.",
+          "nextDialogueId": "ch9_c08_intro"
+        }
+      ]
+    },
+    "ch9_c08_intro": {
+      "id": "ch9_c08_intro",
+      "speaker": "Dàn Chuông Pha Lê",
+      "lines": [
+        "Bốn chiếc chuông mang các nốt nhạc: Chuông 1 (Đô - 0 nửa cung, cố định), Chuông 2 (Rê - 2 nửa cung), Chuông 3 (Fa - 5 nửa cung), Chuông 4 (La - 9 nửa cung).",
+        "Cần chỉnh các chuông thành Hợp Âm Trưởng hoàn hảo: Gốc (0), Ba Trưởng (Mi: 4 nửa cung), Năm Đúng (Sol: 7 nửa cung), Bát Độ (Đô cao: 12 nửa cung)."
+      ],
+      "responses": []
+    },
+    "ch9_c08_wrong": {
+      "id": "ch9_c08_wrong",
+      "speaker": "Dàn Chuông Pha Lê",
+      "lines": [
+        "Tiếng chuông vang lên âm thanh chói gắt của quãng ba căng (tritone)! Sóng âm va đập làm rung chuyển căn phòng."
+      ],
+      "responses": [
+        {
+          "text": "Chỉnh lại các nấc chuông.",
+          "nextDialogueId": "ch9_c08_intro"
+        }
+      ]
+    },
+    "ch9_c08_right": {
+      "id": "ch9_c08_right",
+      "speaker": "Dàn Chuông Pha Lê",
+      "lines": [
+        "Khúc ca Trưởng ngân vang trong trẻo tuyệt mỹ! Âm thanh thuần khiết xua tan màn sương mù thời gian, mở ra cánh cổng tiến vào Thánh Đường Thiên Cầu Vi Mô."
+      ],
+      "responses": [
+        {
+          "text": "Tiến bước thôi!",
+          "nextDialogueId": "ch9_c08_done"
+        }
+      ],
+      "effects": {
+        "setFlags": ["solved_broken_chime"],
+        "refreshMap": true
+      }
+    },
+    "ch9_c08_done": {
+      "id": "ch9_c08_done",
+      "speaker": "Lyra",
+      "lines": [
+        "Bọn tôi sẽ giữ vững hậu phương cho cậu ở đây. Hãy tiến lên và định đoạt tương lai, Peter!"
+      ],
+      "responses": []
+    },
+    "ch9_astrolabe_arrival": {
+      "id": "ch9_astrolabe_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Một mô hình thiên cầu khổng lồ mô phỏng ba hành tinh thời gian quay quanh ngai vàng trung tâm. Kẻ Dệt Nghịch Lý đang lượn quanh các quỹ đạo."
+      ],
+      "responses": [
+        {
+          "text": "Để ý chiếc kén của nó!",
+          "nextDialogueId": "ch9_astrolabe_weaver_warn"
+        }
+      ]
+    },
+    "ch9_astrolabe_weaver_warn": {
+      "id": "ch9_astrolabe_weaver_warn",
+      "speaker": "Kuro",
+      "lines": [
+        "Kẻ Dệt Nghịch Lý khép cánh kén thì phản 100% đòn đánh. Đợi hai tiếng chuông keng... keng báo hiệu kén mở 1.2 giây rồi mới xông vào đánh nhé Peter!"
+      ],
+      "responses": [
+        {
+          "text": "Tao rõ rồi.",
+          "nextDialogueId": "ch9_secret_2_pickup"
+        }
+      ]
+    },
+    "ch9_secret_2_pickup": {
+      "id": "ch9_secret_2_pickup",
+      "speaker": "Peter",
+      "lines": [
+        "Trong hộc đá bệ thiên cầu có bản vẽ cổ: [Chiếc Ghế Thứ Hai - Trang 1/2].",
+        "Bản vẽ ghi chú: 'Bên cạnh ngai vàng của Chronos luôn có chiếc ghế thứ hai của Thiên Nguyên. Hai vị thần cùng cầm cán cân. Khi Thiên Nguyên tự xóa tên mình, chiếc ghế bị phủ bụi nhưng chưa từng bị dỡ bỏ.'"
+      ],
+      "responses": [
+        {
+          "text": "Chiếc ghế trống... vốn dĩ đã ở đó từ thuở sơ khai!",
+          "nextDialogueId": "ch9_side_quest_kuro_heart_trigger"
+        }
+      ],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "world_secret_ch9_the_empty_chair",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_world_secret_ch9_the_empty_chair"
+      }
+    },
+    "ch9_side_quest_kuro_heart_trigger": {
+      "id": "ch9_side_quest_kuro_heart_trigger",
+      "speaker": "Kuro",
+      "lines": [
+        "Peter... nhìn bản vẽ đó, tao lại thấy nhớ mẹ tao... Mày có nghĩ nếu một ngày tao tan biến, mẹ tao có còn nhớ đến tao không?"
+      ],
+      "responses": [
+        {
+          "text": "Mẹ mày sẽ nhớ, và tao cũng sẽ mãi mãi nhớ mày.",
+          "nextDialogueId": "ch9_kuro_heart_open"
+        },
+        {
+          "text": "Đừng bi quan, chúng ta sắp thắng rồi.",
+          "nextDialogueId": "ch9_c09_intro"
+        }
+      ],
+      "effects": {
+        "startQuest": "quest_ch9_kuro_heart"
+      }
+    },
+    "ch9_kuro_heart_open": {
+      "id": "ch9_kuro_heart_open",
+      "speaker": "Kuro",
+      "lines": [
+        "Cảm ơn mày... Tao từng nghĩ trên đời này chỉ có quyền lực mới bảo vệ được bản thân. Nhưng có lẽ... tao đã sai."
+      ],
+      "responses": [
+        {
+          "text": "Cùng giải câu đố thiên cầu nào.",
+          "nextDialogueId": "ch9_c09_intro"
+        }
+      ],
+      "effects": {
+        "setFlags": ["kuro_heart_opened"]
+      }
+    },
+    "ch9_c09_intro": {
+      "id": "ch9_c09_intro",
+      "speaker": "Trục Xoay Thiên Cầu",
+      "lines": [
+        "Hệ thống ba hành tinh thời gian: Alpha chu kỳ 3 ngày (đang ở vị trí 1), Beta chu kỳ 4 ngày (đang ở vị trí 2), Gamma chu kỳ 6 ngày (đang ở vị trí 4).",
+        "Cần vặn trục thêm bao nhiêu ngày để cả ba hành tinh cùng thẳng hàng tại điểm số 0 của chu kỳ?"
+      ],
+      "responses": []
+    },
+    "ch9_c09_wrong": {
+      "id": "ch9_c09_wrong",
+      "speaker": "Trục Xoay Thiên Cầu",
+      "lines": [
+        "Các hành tinh xoay lệch quỹ đạo và va chạm vào nhau tóe lửa! Các thiên cầu chưa thể đồng quy tại điểm số 0."
+      ],
+      "responses": [
+        {
+          "text": "Tính toán lại số ngày đồng dư.",
+          "nextDialogueId": "ch9_c09_intro"
+        }
+      ]
+    },
+    "ch9_c09_right": {
+      "id": "ch9_c09_right",
+      "speaker": "Trục Xoay Thiên Cầu",
+      "lines": [
+        "Trục xoay dừng lại ở số 2. Cả ba hành tinh Alpha, Beta, Gamma cùng trượt vào rãnh số 0 thẳng hàng tắp! Cánh cửa dẫn vào Thánh Điện Kẻ Vô Danh mở toang."
+      ],
+      "responses": [
+        {
+          "text": "Bước vào thánh điện cuối cùng!",
+          "nextDialogueId": "ch9_c09_done"
+        }
+      ],
+      "effects": {
+        "setFlags": ["solved_astrolabe"],
+        "refreshMap": true
+      }
+    },
+    "ch9_c09_done": {
+      "id": "ch9_c09_done",
+      "speaker": "Peter",
+      "lines": [
+        "Thánh Điện Kẻ Vô Danh ở ngay trước mặt... Nơi trang sách của mình sẽ tìm lại được định nghĩa trọn vẹn."
+      ],
+      "responses": []
+    },
+    "ch9_unwritten_arrival": {
+      "id": "ch9_unwritten_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Một căn phòng tĩnh lặng không một hạt bụi. Ở giữa phòng là Bệ Khởi Thảo bằng đá trắng, nơi phát ra hào quang lam ngọc dịu dàng."
+      ],
+      "responses": [
+        {
+          "text": "Tiến lại gần bệ đá.",
+          "nextDialogueId": "ch9_c10_intro"
+        }
+      ]
+    },
+    "ch9_fb_03_trigger": {
+      "id": "ch9_fb_03_trigger",
+      "speaker": "Ký ức",
+      "lines": [
+        "Tiếng sóng biển gầm rú trong cơn bão năm xưa. Người thợ đồng hồ già lom khom bế đứa trẻ sơ sinh quấn trong mảnh áo choàng xám.",
+        "Bên cạnh đứa bé là một thanh kiếm gãy phát ra ánh sáng lam ngọc: 'Đứa trẻ này không có tên... nhưng ánh mắt nó sáng như bầu trời sao Khánh Hòa vậy.'"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["seen_fb_03"]
+      },
+      "flashback": true
+    },
+    "ch9_c10_intro": {
+      "id": "ch9_c10_intro",
+      "speaker": "Bệ Khởi Thảo",
+      "lines": [
+        "Trang Sách Khởi Nguyên chưa được ghi tên: Peter đặt trang giấy bản thể của mình lên bệ. Cần điền đúng ba mệnh đề định nghĩa bản thể.",
+        "Ba ổ xoay ký tự đang chờ đợi sự thật được khẳng định."
+      ],
+      "responses": [
+        {
+          "text": "Khắc chữ vào ba ổ",
+          "nextDialogueId": "ch9_c10_choices"
+        }
+      ]
+    },
+    "ch9_c10_choices": {
+      "id": "ch9_c10_choices",
+      "speaker": "Bệ Khởi Thảo",
+      "lines": [
+        "Ổ 1 (Tên thật của Kẻ Bị Quên Đầu Tiên): [A. Thiên Nguyên] / [B. Hư Vô] / [C. Vô Danh].",
+        "Ổ 2 (Bản thể Peter trong lời Chronos): [A. Vết nứt đầu tiên] / [B. Người canh giữ ngai] / [C. Trang giấy ta đánh rơi].",
+        "Ổ 3 (Lời thề đáp lại lời hứa Kuro): [A. Mày cứ ngồi vào ghế một mình] / [B. Tao sẽ để lại một chiếc ghế trống cho mày] / [C. Chiếc ghế ấy sẽ bị thiêu rụi]."
+      ],
+      "responses": []
+    },
+    "ch9_c10_wrong": {
+      "id": "ch9_c10_wrong",
+      "speaker": "Bệ Khởi Thảo",
+      "lines": [
+        "Các ký tự mờ nhạt đi. Trang giấy từ chối khắc ghi những định nghĩa sai lệch về số phận."
+      ],
+      "responses": [
+        {
+          "text": "Suy ngẫm lại và khắc lại.",
+          "nextDialogueId": "ch9_c10_choices"
+        }
+      ]
+    },
+    "ch9_c10_right": {
+      "id": "ch9_c10_right",
+      "speaker": "Bệ Khởi Thảo",
+      "lines": [
+        "Toàn bộ trang giấy bừng sáng ánh hào quang lam ngọc rực rỡ (#00c8ff)! Tên của THIÊN NGUYÊN bừng sáng trên trang sách!",
+        "Thanh kiếm gãy của Peter hấp thụ ánh sáng ấy, gắn kết lại thành vũ khí tối thượng: [Thanh Kiếm Chúa Tể Thời Gian Cuối Cùng - Last Chronarch Blade]!"
+      ],
+      "responses": [
+        {
+          "text": "Cầm lấy thanh kiếm hoàn thiện.",
+          "nextDialogueId": "ch9_c10_done"
+        }
+      ],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "last_chronarch_blade",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_last_chronarch_blade",
+        "setFlags": ["solved_final_inscription"],
+        "refreshMap": true
+      }
+    },
+    "ch9_c10_done": {
+      "id": "ch9_c10_done",
+      "speaker": "Kuro",
+      "lines": [
+        "Thanh kiếm đẹp lắm, Peter... Giờ thì không còn điều gì ngăn cản chúng ta nữa. Cánh cửa Đại Điện Ngai Vàng đã mở. Đi gặp Chronos thôi!"
+      ],
+      "responses": []
+    },
+    "ch9_crossroad_arrival": {
+      "id": "ch9_crossroad_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Một cơn bão tím hỗn mang gầm rú xé rách không gian. Tại ngã tư các chiều thời gian, hình bóng Chronos đang bị trói chặt trong những sợi xích tím Possibility."
+      ],
+      "responses": [
+        {
+          "text": "Chronos! Ngài làm sao vậy?",
+          "nextDialogueId": "ch9_chronos_trapped_talk"
+        }
+      ]
+    },
+    "ch9_chronos_trapped_talk": {
+      "id": "ch9_chronos_trapped_talk",
+      "speaker": "Chronos",
+      "lines": [
+        "Kuro đã dùng quyền năng Khả Năng trói ta vào một nhánh thực tại 'chưa từng tái sinh'... Ta không còn thân xác để chiến đấu nữa...",
+        "Peter... Nếu ngươi là trang giấy ta đánh rơi, hãy làm cái việc mà cuốn sổ này không làm được: Ngăn chặn Kuro trước khi nó nuốt chửng mọi thực tại!"
+      ],
+      "responses": [
+        {
+          "text": "Tôi sẽ ngăn chặn nó!",
+          "nextDialogueId": "ch9_chronos_trapped_end"
+        }
+      ],
+      "effects": {
+        "setFlags": ["chronos_plea_heard"]
+      }
+    },
+    "ch9_chronos_trapped_end": {
+      "id": "ch9_chronos_trapped_end",
+      "speaker": "Kuro",
+      "lines": [
+        "Vô ích thôi Peter! Bốn cánh cổng của bốn Phó Tướng đang chờ mày ở Thung Lũng Cờ Lệch Pha. Mày sẽ gục ngã trước những bóng ma quá khứ của chính mày!"
+      ],
+      "responses": []
+    },
+    "ch9_bran_arrival": {
+      "id": "ch9_bran_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Một thung lũng đầy những lá cờ rách nát bay phần phật. Người lính trẻ mang số hiệu 1.427 đứng chắn giữa đường, đôi mắt rực lửa tím Possibility."
+      ],
+      "responses": [
+        {
+          "text": "Bran... là cậu sao?",
+          "nextDialogueId": "ch9_bran_confront"
+        }
+      ]
+    },
+    "ch9_bran_confront": {
+      "id": "ch9_bran_confront",
+      "speaker": "Bran Tái Sinh",
+      "lines": [
+        "Ta không phải Bran của nấm mồ kia! Ta là nhánh khả năng nơi ta sống sót để phục thù! Ngài Kuro đã ban cho ta sức mạnh bất tử!"
+      ],
+      "responses": [
+        {
+          "text": "Cậu bị Kuro lợi dụng rồi!",
+          "nextDialogueId": "ch9_bran_memorial_check"
+        }
+      ]
+    },
+    "ch9_bran_memorial_check": {
+      "id": "ch9_bran_memorial_check",
+      "speaker": "Bran Tái Sinh",
+      "lines": [
+        "(Nếu có cờ ch4_choice_bran_memorial): \"Số hiệu 1.427... Peter? Cậu... cậu là người đã khắc tên ta lên bia mộ sao? Đầu ta đau quá...",
+        "(Nếu không có cờ): \"Chết đi, kẻ cản đường Ngài Kuro!"
+      ],
+      "responses": []
+    },
+    "ch9_bran_defeat": {
+      "id": "ch9_bran_defeat",
+      "speaker": "Bran Tái Sinh",
+      "lines": [
+        "Lá cờ... rốt cuộc đã hạ xuống... Cảm ơn cậu, Peter... Hãy giải thoát cho những người khác..."
+      ],
+      "responses": []
+    },
+    "ch9_lyra_boss_arrival": {
+      "id": "ch9_lyra_boss_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Những chiếc cân sắt khổng lồ bị gãy gục giữa quảng trường đổ nát. Một nữ chiến binh cầm kích uy dũng bước ra từ bóng tối."
+      ],
+      "responses": [
+        {
+          "text": "Lyra... tại sao lại là cô?",
+          "nextDialogueId": "ch9_lyra_boss_confront"
+        }
+      ]
+    },
+    "ch9_lyra_boss_confront": {
+      "id": "ch9_lyra_boss_confront",
+      "speaker": "Pháp Quan Lyra",
+      "lines": [
+        "Ta là nhánh khả năng nơi Lyra chấp nhận chiếc ngai Đại Pháp Quan để bảo vệ trật tự tuyệt đối! Không ai được phép chống lại phán quyết của Kuro!",
+        "Cây kích này sẽ thực thi bản án nhân quả đảo nghịch lên đầu ngươi!"
+      ],
+      "responses": []
+    },
+    "ch9_lyra_boss_defeat": {
+      "id": "ch9_lyra_boss_defeat",
+      "speaker": "Pháp Quan Lyra",
+      "lines": [
+        "Chiếc khiên phán quyết đã nứt... Cậu nói đúng, Peter... Tự do không bao giờ nằm trong tay một kẻ giật dây..."
+      ],
+      "responses": []
+    },
+    "ch9_neris_boss_arrival": {
+      "id": "ch9_neris_boss_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Căn phòng ngập trong làn nước mực đen ngòm. Một bóng ma nữ tử lơ lửng, xung quanh là những trang sách câm bay lượn như bão tố."
+      ],
+      "responses": [
+        {
+          "text": "Neris! Hãy tỉnh lại đi!",
+          "nextDialogueId": "ch9_neris_boss_confront"
+        }
+      ]
+    },
+    "ch9_neris_boss_confront": {
+      "id": "ch9_neris_boss_confront",
+      "speaker": "Neris Mất Trí",
+      "lines": [
+        "Tên của ta là gì? Ký ức của ta là gì? Kuro nói chỉ cần xóa sạch ngươi, ta sẽ có được một cái tên vĩnh viễn không bị lãng quên!",
+        "Hãy chìm vào bão mực câm lặng đi!"
+      ],
+      "responses": []
+    },
+    "ch9_neris_boss_defeat": {
+      "id": "ch9_neris_boss_defeat",
+      "speaker": "Neris Mất Trí",
+      "lines": [
+        "Dòng mực đen tan biến rồi... Tôi nhớ ra rồi, tên tôi là Neris... Người thủ thư của những linh hồn... Cảm ơn cậu, Peter..."
+      ],
+      "responses": []
+    },
+    "ch9_other_peter_arrival": {
+      "id": "ch9_other_peter_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Hàng ngàn mảnh gương vỡ phản chiếu hình bóng của Peter. Từ trong chiếc gương lớn nhất, một người bước ra: Mái tóc xoăn, chiếc áo choàng than chì, nhưng cầm một thanh kiếm nguyên vẹn rực lửa tím."
+      ],
+      "responses": [
+        {
+          "text": "Ngươi là... chính ta?",
+          "nextDialogueId": "ch9_other_peter_confront"
+        }
+      ]
+    },
+    "ch9_other_peter_confront": {
+      "id": "ch9_other_peter_confront",
+      "speaker": "Peter Thứ Hai",
+      "lines": [
+        "Ta là nhánh khả năng nơi Peter chấp nhận đứng cạnh Kuro để thống trị vạn cõi! Kẻ yếu đuối mang thanh kiếm gãy như ngươi không xứng đáng tồn tại!"
+      ],
+      "responses": []
+    },
+    "ch9_other_peter_defeat": {
+      "id": "ch9_other_peter_defeat",
+      "speaker": "Peter Thứ Hai",
+      "lines": [
+        "Thanh kiếm nguyên vẹn của ta... lại gãy trước một mảnh giấy rách sao? Kuro... ngươi đã chọn sai quân cờ rồi..."
+      ],
+      "responses": [
+        {
+          "text": "Nhặt cuộn bí mật trên bệ gương.",
+          "nextDialogueId": "ch9_secret_3_pickup"
+        }
+      ]
+    },
+    "ch9_secret_3_pickup": {
+      "id": "ch9_secret_3_pickup",
+      "speaker": "Peter",
+      "lines": [
+        "Cuộn tài liệu rơi ra từ mảnh gương: [Bản Ghi Lỗi Vận Hành - Trang 1/2].",
+        "Ghi nhận sự cố ở Kỷ Nguyên Đầu: 'Khi lệnh xóa tên chạy, áp lực nghẽn đã bứt một trang giấy văng ra khe nứt. Đó là trang giấy tự do duy nhất, không chịu bất kỳ luật lệ nào của số mệnh.'"
+      ],
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "world_secret_ch9_malfunction_record",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_world_secret_ch9_malfunction_record"
+      }
+    },
+    "ch9_kuro_boss_arrival": {
+      "id": "ch9_kuro_boss_arrival",
+      "speaker": "Kuro",
+      "lines": [
+        "Mày đã hạ hết bốn phó tướng của tao... Khá lắm Peter! Nhưng ở đây, trên Ngai Vàng Muôn Nhánh, tao chính là Chúa Tể Khả Năng!",
+        "Tao sẽ viết lại toàn bộ thực tại! Mọi thế giới sẽ vận hành theo ý muốn của tao!"
+      ],
+      "responses": [
+        {
+          "text": "Một thế giới bị ép buộc bởi khả năng của mày cũng chỉ là một nhà tù khác!",
+          "nextDialogueId": "ch9_kuro_boss_fight_start"
+        }
+      ]
+    },
+    "ch9_kuro_boss_fight_start": {
+      "id": "ch9_kuro_boss_fight_start",
+      "speaker": "Kuro",
+      "lines": [
+        "Để xem thanh kiếm gãy của mày có cản được bão tố Possibility không! Tiếp chiêu đi, Peter!"
+      ],
+      "responses": []
+    },
+    "ch9_kuro_boss_finisher_prompt": {
+      "id": "ch9_kuro_boss_finisher_prompt",
+      "speaker": "Peter",
+      "lines": [
+        "Kuro kiệt sức quỳ sụp xuống, nhưng năng lượng Possibility quanh hắn bắt đầu bùng nổ mất kiểm soát, đe dọa nuốt chửng toàn bộ các cõi giới!",
+        "Chỉ có một cách duy nhất để phong ấn nguồn năng lượng vô hạn này: Peter phải dùng chính bản thể trang giấy của mình bọc lấy hắn!"
+      ],
+      "responses": [
+        {
+          "text": "Trang Giấy Trở Về",
+          "nextDialogueId": "ch9_end_4_1"
+        }
+      ],
+      "effects": {
+        "setFlags": ["defeated_kuro_puppet_master"]
+      }
+    },
+    "ch9_sixfold_arrival": {
+      "id": "ch9_sixfold_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Đại Điện Ngai Vàng rực sáng ánh hào quang của sáu quyền năng. Chronos trong hình hài chiến đấu uy nghiêm đứng cạnh Ngai Vàng.",
+        "Kim đồng hồ nhích dần từng tích tắc cuối cùng hướng về con số 12:00."
+      ],
+      "responses": [
+        {
+          "text": "Chronos, dừng lại đi!",
+          "nextDialogueId": "ch9_sixfold_boss_intro"
+        }
+      ]
+    },
+    "ch9_sixfold_boss_intro": {
+      "id": "ch9_sixfold_boss_intro",
+      "speaker": "Chronos",
+      "lines": [
+        "Giờ Thứ 25 sắp điểm 12:00. Hoặc các ngươi giao nộp nửa Ấn Khởi Nguyên để cứu lấy trật tự, hoặc tất cả sẽ bị chôn vùi trong Hư Không!"
+      ],
+      "responses": [
+        {
+          "text": "Kuro, đứng cạnh tao! Chúng ta sẽ tìm ra con đường thứ ba!",
+          "nextDialogueId": "ch9_sixfold_phase_1"
+        }
+      ]
+    },
+    "ch9_sixfold_phase_1": {
+      "id": "ch9_sixfold_phase_1",
+      "speaker": "Peter",
+      "lines": [
+        "Pha 1: Trận chiến hai màu vòng! Vòng vàng Trật Tự của Chronos và vòng tím Khả Năng của Kuro cùng lao tới.",
+        "Căn đúng khoảnh khắc hai vòng trùng nhịp trên ô của Peter để kích nổ hai luồng năng lượng triệt tiêu nhau!"
+      ],
+      "responses": []
+    },
+    "ch9_sixfold_phase_2_intro": {
+      "id": "ch9_sixfold_phase_2_intro",
+      "speaker": "Chronos",
+      "lines": [
+        "Khá lắm... Nhưng Thần Tính Lục Hợp không thể bị khuất phục bởi những kẻ phàm trần!",
+        "Thần Tính thức tỉnh sáu cánh hào quang thần thánh!"
+      ],
+      "responses": [
+        {
+          "text": "Kuro, kề vai sát cánh!",
+          "nextDialogueId": "ch9_sixfold_phase_2_allies"
+        }
+      ]
+    },
+    "ch9_sixfold_phase_2_allies": {
+      "id": "ch9_sixfold_phase_2_allies",
+      "speaker": "Kuro",
+      "lines": [
+        "Mày không đơn độc đâu Peter! Nhìn kìa, đồng đội của chúng ta đang tiếp sức từ phía sau!"
+      ],
+      "responses": []
+    },
+    "ch9_sixfold_phase_3_finisher": {
+      "id": "ch9_sixfold_phase_3_finisher",
+      "speaker": "Peter",
+      "lines": [
+        "Đồng hồ điểm đúng 12:00:00! Sáu cánh thần thánh vỡ vụn, boss giữ cố định ở 1 HP.",
+        "Khoảnh khắc quyết định lịch sử đã đến! Peter giơ cao thanh kiếm hoàn thiện, sẵn sàng thi triển chiêu thức quyết định."
+      ],
+      "responses": [
+        {
+          "text": "Khắc Trang Cuối",
+          "nextDialogueId": "ch9_sixfold_victory"
+        }
+      ]
+    },
+    "ch9_sixfold_victory": {
+      "id": "ch9_sixfold_victory",
+      "speaker": "Chronos",
+      "lines": [
+        "Ngươi đã khắc lại quy luật... Ngai vàng đã mở... Hãy bước lên Vương Miện Vĩnh Hằng và đưa ra quyết định của ngươi, Peter."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_sixfold_phase_3_after"
+        }
+      ],
+      "effects": {
+        "refreshMap": true
+      }
+    },
+    "ch9_crown_arrival": {
+      "id": "ch9_crown_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Đỉnh cao nhất của cõi sáng tạo. Trước mắt Peter là cỗ máy vận mệnh của toàn vũ trụ. Kim đồng hồ đã dừng ở điểm 12:00.",
+        "Một quyết định tại đây sẽ định hình số phận của hàng tỷ sinh linh mãi mãi về sau."
+      ],
+      "responses": [
+        {
+          "text": "Tiến bước lên ngai.",
+          "nextDialogueId": "ch9_crown_gate_check"
+        }
+      ],
+      "effects": {
+        "startQuest": "quest_ch9_the_final_choice"
+      }
+    },
+    "ch9_fb_04_trigger": {
+      "id": "ch9_fb_04_trigger",
+      "speaker": "Ký ức",
+      "lines": [
+        "Dưới ánh hoàng hôn Khánh Hòa đỏ rực, ngón tay út của Kuro đưa ra móc ngoặc với ngón tay Peter.",
+        "'Mày đã hứa sẽ nhớ tên tao... Dù thời gian có trôi đi đâu, lời hứa này cũng không bao giờ tan biến!'"
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["seen_fb_04"]
+      },
+      "flashback": true
+    },
+    "ch9_crown_gate_check": {
+      "id": "ch9_crown_gate_check",
+      "speaker": "Peter",
+      "lines": [
+        "Vương Miện Vĩnh Hằng. Ba bệ đá đứng quanh mặt đồng hồ đang điểm 12:00.",
+        "Một bệ để trao Ấn cho Chronos, một bệ để phá Ngai Vàng cùng Kuro. Bệ thứ ba... cần một trái tim đã được hàn gắn."
+      ],
+      "responses": [],
+      "effects": {
+        "setFlags": ["ch9_crown_seen"]
+      }
+    },
+    "ch9_crypt_arrival": {
+      "id": "ch9_crypt_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Một hầm mộ cổ kính nằm sâu dưới lòng đất. Bốn bia mộ đá của bốn vị dũng sĩ Kỷ Nguyên Đầu đang đứng im lìm."
+      ],
+      "responses": [
+        {
+          "text": "Kiểm tra bia mộ trung tâm.",
+          "nextDialogueId": "ch9_c11_intro"
+        }
+      ],
+      "effects": {
+        "startQuest": "quest_ch9_crypt_of_vows"
+      }
+    },
+    "ch9_c11_intro": {
+      "id": "ch9_c11_intro",
+      "speaker": "Bia Mộ Cổ",
+      "lines": [
+        "Bốn Dũng Sĩ Kỷ Nguyên Đầu (A, B, C, D) cần xếp đúng vị trí 1, 2, 3, 4 trên bệ danh dự.",
+        "Phiến A: 'Ta không đứng đầu, nhưng đứng ngay trước Kẻ Mang Khiên (C).'",
+        "Phiến B: 'Ta đứng ở vị trí số lẻ.' — Phiến C: 'Ta đứng sau phiến A đúng một bậc.' — Phiến D: 'Ta đứng cuối cùng.'"
+      ],
+      "responses": []
+    },
+    "ch9_c11_wrong": {
+      "id": "ch9_c11_wrong",
+      "speaker": "Bia Mộ Cổ",
+      "lines": [
+        "Các phiến đá chấn động. Vị trí các dũng sĩ bị nghịch đảo lời thề. Hầm mộ không mở khóa."
+      ],
+      "responses": [
+        {
+          "text": "Xếp lại các phiến đá.",
+          "nextDialogueId": "ch9_c11_intro"
+        }
+      ]
+    },
+    "ch9_c11_right": {
+      "id": "ch9_c11_right",
+      "speaker": "Bia Mộ Cổ",
+      "lines": [
+        "Bốn phiến đá khép lại hoàn hảo! Bệ mộ bật mở, để lộ thanh cổ kiếm: [Lưỡi Kiếm Thần Tính Gãy - Broken Divinity Edge] (attack: 26, defense: 5)."
+      ],
+      "responses": [
+        {
+          "text": "Nhận lấy thanh kiếm cổ.",
+          "nextDialogueId": "ch9_c11_done"
+        }
+      ],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "broken_divinity_edge",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_broken_divinity_edge",
+        "setFlags": ["solved_permutation_cipher"],
+        "refreshMap": true
+      }
+    },
+    "ch9_c11_done": {
+      "id": "ch9_c11_done",
+      "speaker": "Peter",
+      "lines": [
+        "Thanh kiếm mang ý chí kiên cường của những người đi trước. Nó sẽ giúp mình vững bước hơn."
+      ],
+      "responses": []
+    },
+    "ch9_quantum_arrival": {
+      "id": "ch9_quantum_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Két bí mật của xưởng đúc Ivo. Ba bánh răng lượng tử I, II, III kết nối với một rương báu cổ bằng vàng ròng."
+      ],
+      "responses": [
+        {
+          "text": "Kiểm tra cơ chế bánh răng.",
+          "nextDialogueId": "ch9_c12_intro"
+        }
+      ],
+      "effects": {
+        "startQuest": "quest_ch9_quantum_vault"
+      }
+    },
+    "ch9_c12_intro": {
+      "id": "ch9_c12_intro",
+      "speaker": "Bản Vẽ Ivo",
+      "lines": [
+        "Ba bánh răng có nấc xoay từ 1 đến 5.",
+        "Bánh răng Một là nấc số lẻ nguyên tố nhỏ nhất. Bánh răng Hai hơn Bánh răng Một đúng 1 nấc. Bánh răng Ba là cạnh huyền cân bằng bình phương của hai bánh trước."
+      ],
+      "responses": []
+    },
+    "ch9_c12_wrong": {
+      "id": "ch9_c12_wrong",
+      "speaker": "Bản Vẽ Ivo",
+      "lines": [
+        "Các bánh răng kẹt cứng! Tỷ số truyền động không tạo thành tam giác cân bằng bình phương."
+      ],
+      "responses": [
+        {
+          "text": "Vặn lại các nấc số.",
+          "nextDialogueId": "ch9_c12_intro"
+        }
+      ]
+    },
+    "ch9_c12_right": {
+      "id": "ch9_c12_right",
+      "speaker": "Peter",
+      "lines": [
+        "Ba bánh răng 3 - 4 - 5 khớp vào nhau xoay tít! Khóa két bật mở, để lộ kỷ vật thiêng liêng: [Bùa Chiếc Ghế Trống - Empty Chair Token] (maxHp: 65, defense: 4)."
+      ],
+      "responses": [
+        {
+          "text": "Đeo bùa vào người.",
+          "nextDialogueId": "ch9_c12_done"
+        }
+      ],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "empty_chair_token",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_empty_chair_token",
+        "setFlags": ["solved_quantum_gears"],
+        "refreshMap": true
+      }
+    },
+    "ch9_c12_done": {
+      "id": "ch9_c12_done",
+      "speaker": "Peter",
+      "lines": [
+        "Chiếc bùa ấm áp lạ thường, như thể có một người bạn vô hình luôn đứng bên cạnh che chở."
+      ],
+      "responses": []
+    },
+    "ch9_sanctum_first_arrival": {
+      "id": "ch9_sanctum_first_arrival",
+      "speaker": "Peter",
+      "lines": [
+        "Nơi an nghỉ nguyên thủy của Thiên Nguyên — vị thần đồng hành đã tự nguyện xóa tên mình để cứu lấy thực tại.",
+        "Tám cột đá xếp thành vòng bát giác bao quanh mộ tượng. Ở trung tâm là một Trục Đảo Cực."
+      ],
+      "responses": [
+        {
+          "text": "Kiểm tra cơ chế bát giác.",
+          "nextDialogueId": "ch9_c13_intro"
+        }
+      ],
+      "effects": {
+        "startQuest": "quest_ch9_first_legacy"
+      }
+    },
+    "ch9_c13_intro": {
+      "id": "ch9_c13_intro",
+      "speaker": "Mộ Tượng Thiên Nguyên",
+      "lines": [
+        "Trận Đồ Bát Giác: tám cột quanh mộ tượng. Đang sáng: cột 3, 6, 7, 8.",
+        "Chạm một cột thì chính nó và hai cột kề bên cùng đảo sáng tối. Hãy thắp sáng cả tám cột."
+      ],
+      "responses": []
+    },
+    "ch9_c13_wrong": {
+      "id": "ch9_c13_wrong",
+      "speaker": "Mộ Tượng Thiên Nguyên",
+      "lines": ["Trục giữa bị khóa chặt! Trận đồ bị mất cân bằng đối xứng."],
+      "responses": [
+        {
+          "text": "Đặt lại trạng thái ban đầu.",
+          "nextDialogueId": "ch9_c13_intro"
+        }
+      ]
+    },
+    "ch9_c13_right": {
+      "id": "ch9_c13_right",
+      "speaker": "Peter",
+      "lines": [
+        "Toàn bộ tám cột đá cùng bừng sáng hào quang trắng bạc rực rỡ! Bệ mộ hé mở, hé lộ hai tài liệu bí mật cổ xưa nhất của vũ trụ."
+      ],
+      "responses": [
+        {
+          "text": "Đọc hai cuộn tài liệu.",
+          "nextDialogueId": "ch9_secrets_4_5_pickup"
+        }
+      ],
+      "effects": {
+        "setFlags": ["solved_octagonal_inversion"],
+        "refreshMap": true
+      }
+    },
+    "ch9_secrets_4_5_pickup": {
+      "id": "ch9_secrets_4_5_pickup",
+      "speaker": "Peter",
+      "lines": [
+        "Nhận được [Lời Trăn Trối Của Thiên Nguyên] và [Lời Tự Thú Của Kuro].",
+        "Thiên Nguyên viết: 'Ta trao lại tên của ta cho trang giấy tự do trong tương lai.' — Và mẩu giấy của Kuro: 'Nếu tao biến mất, tao mong mày là người duy nhất gọi tên tao...'"
+      ],
+      "responses": [
+        {
+          "text": "Một luồng năng lượng đen tím bùng lên từ sâu trong bệ mộ!",
+          "nextDialogueId": "ch9_void_boss_intro"
+        }
+      ],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "world_secret_ch9_thien_nguyen_testament",
+            "quantity": 1
+          },
+          {
+            "itemId": "world_secret_ch9_kuro_confession",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_ch9_secrets_4_5"
+      }
+    },
+    "ch9_void_boss_intro": {
+      "id": "ch9_void_boss_intro",
+      "speaker": "Lõi Kỳ Dị Hư Vô",
+      "lines": [
+        "TIẾNG GẦM CỦA HƯ KHÔNG NGUYÊN THỦY! Khối cầu đen tím với hàng vạn xúc tu ánh sáng trồi lên, bóp méo toàn bộ không-thời gian xung quanh!"
+      ],
+      "responses": []
+    },
+    "ch9_void_boss_defeat": {
+      "id": "ch9_void_boss_defeat",
+      "speaker": "Peter",
+      "lines": [
+        "Khối cầu đen tím phát nổ tan biến thành ngàn hạt bụi sao hiền hòa! Một huy hiệu cổ đại rơi xuống tay Peter: [Bùa Lục Hợp - Sixfold Harmony Clasp] (maxHp: 70, defense: 6, speed: 6)."
+      ],
+      "responses": [
+        {
+          "text": "Chúng ta đã hoàn thành di nguyện của Thiên Nguyên.",
+          "nextDialogueId": "ch9_c13_done"
+        }
+      ],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "sixfold_harmony_clasp",
+            "quantity": 1
+          }
+        ],
+        "grantOnceFlag": "took_sixfold_harmony_clasp"
+      }
+    },
+    "ch9_c13_done": {
+      "id": "ch9_c13_done",
+      "speaker": "Peter",
+      "lines": [
+        "Mọi bí mật của Kỷ Nguyên Đầu đã được sáng tỏ trọn vẹn. Lòng mình thanh thản hơn bao giờ hết."
+      ],
+      "responses": []
+    },
+    "ch9_wrong_generic": {
+      "id": "ch9_wrong_generic",
+      "speaker": "Peter",
+      "lines": ["Không đúng. Mọi thứ trở về như cũ. Đọc lại manh mối đã."],
+      "responses": []
+    },
+    "ch9_exit_locked": {
+      "id": "ch9_exit_locked",
+      "speaker": "Peter",
+      "lines": ["Lối này còn đóng. Phải giải xong thử thách ở đây trước."],
+      "responses": []
+    },
+    "ch9_route_locked": {
+      "id": "ch9_route_locked",
+      "speaker": "Peter",
+      "lines": ["Cánh cổng này không thuộc về con đường mình đã chọn."],
+      "responses": []
+    },
+    "ch9_crown_hint": {
+      "id": "ch9_crown_hint",
+      "speaker": "Peter",
+      "lines": [
+        "Bệ thứ ba lạnh ngắt. Còn một con đường thứ ba... nhưng trái tim người bạn đồng hành vẫn chưa được hàn gắn."
+      ],
+      "responses": []
+    },
+    "ch9_pillar_flip": {
+      "id": "ch9_pillar_flip",
+      "speaker": "Peter",
+      "lines": ["Cột đá và hai cột kề bên đảo sáng tối."],
+      "responses": []
+    },
+    "ch9_sixfold_phase_3_after": {
+      "id": "ch9_sixfold_phase_3_after",
+      "speaker": "Peter",
+      "lines": [
+        "Trang Cuối đã được khắc. Thần Tính Lục Hợp lặng im. Con đường lên Vương Miện Vĩnh Hằng mở ra."
+      ],
+      "responses": []
+    },
+    "ch9_end_1_1": {
+      "id": "ch9_end_1_1",
+      "speaker": "Peter",
+      "lines": [
+        "Mình đặt nửa Ấn Origin vào tay Chronos. Chiếc ấn khép lại nguyên vẹn, ánh vàng lạnh lùng."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_1_2"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_1_2": {
+      "id": "ch9_end_1_2",
+      "speaker": "Kuro",
+      "lines": ["Không... Peter! (Bão Khả Năng tắt lịm. Thân hình Kuro mờ dần vào Khoảng Giữa.)"],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_1_3"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_1_3": {
+      "id": "ch9_end_1_3",
+      "speaker": "Chronos",
+      "lines": ["Kim đồng hồ đi qua 12:00. Các thế giới, về chỗ của mình."],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_1_4"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_1_4": {
+      "id": "ch9_end_1_4",
+      "speaker": "Peter",
+      "lines": [
+        "Khánh Hòa, Sol-Karis, Beta tách khỏi nhau. Những người từng bị xóa tên biến mất, không để lại dấu vết.",
+        "Mình tỉnh dậy trong tiệm đồng hồ. Nắng sớm, tiếng chuông cửa leng keng. Trong lòng là một khoảng trống không lấp được."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_1_5"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_1_5": {
+      "id": "ch9_end_1_5",
+      "speaker": "Peter",
+      "lines": [
+        "\"Trật tự đã được bảo toàn. Nhưng cái giá của sự vĩnh cửu là những giấc mơ không bao giờ được bắt đầu.\""
+      ],
+      "responses": [],
+      "flashback": false,
+      "effects": {
+        "setFlags": ["ch9_ending_order", "ch9_game_completed"],
+        "endChapter": 9
+      }
+    },
+    "ch9_end_2_1": {
+      "id": "ch9_end_2_1",
+      "speaker": "Kuro",
+      "lines": [
+        "Cùng nhau nhé, Peter! (Hai lưỡi kiếm chém xuống. Ngai Vàng vỡ, Chronos tan thành muôn mảnh vàng.)"
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_2_2"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_2_2": {
+      "id": "ch9_end_2_2",
+      "speaker": "Peter",
+      "lines": ["Sổ Khởi Nguyên bùng cháy. Mọi ranh giới tan biến, muôn vàn thực tại ùa vào nhau."],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_2_3"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_2_3": {
+      "id": "ch9_end_2_3",
+      "speaker": "Kuro",
+      "lines": ["Tự do rồi! Tự do... (Kuro cười, nhưng đường viền thân thể cậu bắt đầu tan ra.)"],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_2_4"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_2_4": {
+      "id": "ch9_end_2_4",
+      "speaker": "Peter",
+      "lines": [
+        "Không còn quá khứ, không còn tương lai. Tiệm đồng hồ trôi lơ lửng giữa biển mây tím, nửa thực nửa hư."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_2_5"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_2_5": {
+      "id": "ch9_end_2_5",
+      "speaker": "Peter",
+      "lines": [
+        "\"Không còn xiềng xích, không còn cắt tỉa. Thực tại đã tự do, nhưng tự do trong một giấc mơ không bao giờ thức tỉnh.\""
+      ],
+      "responses": [],
+      "flashback": false,
+      "effects": {
+        "setFlags": ["ch9_ending_unbound", "ch9_game_completed"],
+        "endChapter": 9
+      }
+    },
+    "ch9_end_3_1": {
+      "id": "ch9_end_3_1",
+      "speaker": "Peter",
+      "lines": [
+        "Tao sẽ không ngồi vào đó một mình. Tao sẽ để lại một chiếc ghế trống cho mày, cho đến khi nào mày trở về."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_3_2"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_3_2": {
+      "id": "ch9_end_3_2",
+      "speaker": "Chronos",
+      "lines": [
+        "Trang giấy ta đánh rơi... Hóa ra sự sống không phải cỗ máy cần sửa. Ta đã canh một chiếc lồng quá lâu rồi."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_3_3"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_3_3": {
+      "id": "ch9_end_3_3",
+      "speaker": "Peter",
+      "lines": [
+        "Chronos tan thành làn gió ấm. Sáu quyền năng trở về với muôn loài, không còn ai phán xét ai."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_3_4"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_3_4": {
+      "id": "ch9_end_3_4",
+      "speaker": "Kuro",
+      "lines": [
+        "(Kuro móc ngón tay út vào tay mình, như hồi mười tuổi.) Lần này tao về kịp rồi đó."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_3_5"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_3_5": {
+      "id": "ch9_end_3_5",
+      "speaker": "Peter",
+      "lines": [
+        "Cạnh Mỏ Neo Thời Gian, một chiếc ghế đá trắng được dựng lên, đợi người bạn tri kỷ.",
+        "Bình minh Khánh Hòa. Quán cô Ba mở cửa, bé Na vẫy tay. Chiếc đồng hồ quả quýt tích tắc từng giây bình dị."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_3_6"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_3_6": {
+      "id": "ch9_end_3_6",
+      "speaker": "Bà Mai",
+      "lines": ["Hai đứa về rồi đấy à? Cơm nước mẹ nấu xong cả rồi, mau vào ăn đi kẻo nguội."],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_3_7"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_3_7": {
+      "id": "ch9_end_3_7",
+      "speaker": "Peter",
+      "lines": ["\"CHRONO – The Fractured Divinity. Câu chuyện kết thúc, cuộc đời bắt đầu.\""],
+      "responses": [],
+      "flashback": false,
+      "effects": {
+        "setFlags": ["ch9_ending_true", "ch9_game_completed"],
+        "endChapter": 9
+      }
+    },
+    "ch9_end_4_1": {
+      "id": "ch9_end_4_1",
+      "speaker": "Peter",
+      "lines": [
+        "Không nhà tù nào giam được Khả Năng, trừ chính Sổ Khởi Nguyên. Và mình... vốn là một trang của nó."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_4_2"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_4_2": {
+      "id": "ch9_end_4_2",
+      "speaker": "Kuro",
+      "lines": [
+        "Mày chịu làm trang giấy trắng giam tao sao, Peter? Rồi không một ai sẽ nhớ mày từng tồn tại!"
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_4_3"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_4_3": {
+      "id": "ch9_end_4_3",
+      "speaker": "Peter",
+      "lines": [
+        "Chỉ cần thế giới này được sống tiếp theo cách của nó. Tên của tao, có hay không... không còn quan trọng nữa."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_4_4"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_4_4": {
+      "id": "ch9_end_4_4",
+      "speaker": "Peter",
+      "lines": [
+        "Sổ Khởi Nguyên khép lại. Các thế giới tách rời và lành lặn. Ở Khánh Hòa, quán cô Ba vẫn mở cửa buổi sáng.",
+        "Nhưng không ai còn nhớ góc phố ấy từng có một tiệm sửa đồng hồ nhỏ."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_4_5"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_4_5": {
+      "id": "ch9_end_4_5",
+      "speaker": "Peter",
+      "lines": [
+        "Trên đỉnh Tháp Neo, một chiếc ghế đá trắng đứng lặng giữa ngàn sao, vĩnh viễn trống không."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_4_6"
+        }
+      ],
+      "flashback": false
+    },
+    "ch9_end_4_6": {
+      "id": "ch9_end_4_6",
+      "speaker": "Peter",
+      "lines": [
+        "\"Trang giấy đã trở về với cuốn sách. Người hùng đã cứu lấy thế giới, nhưng thế giới không còn chỗ cho anh.\""
+      ],
+      "responses": [],
+      "flashback": false,
+      "effects": {
+        "setFlags": ["ch9_ending_returned_page", "ch9_game_completed"],
+        "endChapter": 9
+      }
+    },
+    "ch9_end_4_crane": {
+      "id": "ch9_end_4_crane",
+      "speaker": "Peter",
+      "lines": [
+        "Chỉ còn con hạc giấy ba màu của bé Na, chao liệng một mình trên mỏm đá hoàng hôn."
+      ],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch9_end_4_5"
+        }
+      ]
+    },
+    "ch9_pick_order": {
+      "id": "ch9_pick_order",
+      "speaker": "Bệ Vận Mệnh",
+      "lines": ["[KẾT THÚC 1: TRẬT TỰ VĨNH CỬU] Trao Ấn cho Chronos?"],
+      "responses": [
+        {
+          "text": "Chọn con đường này",
+          "nextDialogueId": "ch9_end_1_1"
+        },
+        {
+          "text": "Chưa, để mình nghĩ thêm",
+          "nextDialogueId": "ch9_pick_wait"
+        }
+      ]
+    },
+    "ch9_pick_unbound": {
+      "id": "ch9_pick_unbound",
+      "speaker": "Bệ Vận Mệnh",
+      "lines": ["[KẾT THÚC 2: VĨNH HẰNG BẤT TẬN] Cùng Kuro chém nát Ngai Vàng?"],
+      "responses": [
+        {
+          "text": "Chọn con đường này",
+          "nextDialogueId": "ch9_end_2_1"
+        },
+        {
+          "text": "Chưa, để mình nghĩ thêm",
+          "nextDialogueId": "ch9_pick_wait"
+        }
+      ]
+    },
+    "ch9_pick_true": {
+      "id": "ch9_pick_true",
+      "speaker": "Bệ Vận Mệnh",
+      "lines": ["[KẾT THÚC 3: CHÚA TỂ THỜI GIAN CUỐI CÙNG] Khắc lời thề Chiếc Ghế Trống?"],
+      "responses": [
+        {
+          "text": "Chọn con đường này",
+          "nextDialogueId": "ch9_end_3_1"
+        },
+        {
+          "text": "Chưa, để mình nghĩ thêm",
+          "nextDialogueId": "ch9_pick_wait"
+        }
+      ]
+    },
+    "ch9_pick_wait": {
+      "id": "ch9_pick_wait",
+      "speaker": "Peter",
+      "lines": ["Mình lùi lại một bước. Đồng hồ vẫn đứng ở 12:00, chờ."],
+      "responses": []
     }
   }
 }

@@ -32,6 +32,11 @@ export interface IQuest {
   rewards?: IQuestReward;
   /** Quest started automatically once this one is completed. */
   followUpQuestId?: string;
+  /**
+   * A route opener (Chapter 9): started by a story choice instead of a predecessor; names the quest
+   * whose decision opens it.
+   */
+  branchOf?: string;
 }
 
 export interface QuestDatabase {

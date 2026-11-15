@@ -323,10 +323,15 @@ describe('Main and side quests per chapter', () => {
       expect(typeof q.chapter, q.id).toBe('number');
     }
     // Main quests chain one into the next; only the Prologue and Chapter 1 openers (started by
-    // dialogue) have no main predecessor.
+    // dialogue) have no main predecessor. Chapter 9's route openers name the decision they follow.
     const mains = quests.filter((q) => q.kind === 'main');
+    for (const q of mains.filter((x) => x.branchOf))
+      expect(
+        mains.some((m) => m.id === q.branchOf),
+        q.id,
+      ).toBe(true);
     const followed = new Set(mains.map((q) => q.followUpQuestId));
-    const openers = mains.filter((q) => !followed.has(q.id)).map((q) => q.id);
+    const openers = mains.filter((q) => !followed.has(q.id) && !q.branchOf).map((q) => q.id);
     expect(openers).toEqual(['quest_prologue_awaken', 'quest_ch1_sunset_gate']);
     for (const q of quests.filter((x) => x.kind === 'side')) {
       expect(q.followUpQuestId, q.id).toBeUndefined();

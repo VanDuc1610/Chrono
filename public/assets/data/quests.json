@@ -1962,7 +1962,8 @@
           "completed": false,
           "completeOnFlag": "witnessed_ch8_cliffhanger"
         }
-      ]
+      ],
+      "followUpQuestId": "quest_ch9_nexus_arrival"
     },
     {
       "id": "quest_ch8_na_last_crane",
@@ -2033,6 +2034,271 @@
           "description": "Mang trang cuối tới Tháp Neo",
           "completed": false,
           "completeOnFlag": "delivered_elion_page"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch9_nexus_arrival",
+      "title": "Tâm Điểm Thức Tỉnh",
+      "kind": "main",
+      "chapter": 9,
+      "description": "Kim đồng hồ đứng ở 11:59 của Giờ Thứ 25. Chronos đòi lại nửa Ấn Origin.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch9_scales",
+          "description": "Cân bằng Tam Thế",
+          "completed": false,
+          "completeOnFlag": "solved_tri_balance"
+        }
+      ],
+      "followUpQuestId": "quest_ch9_unravel_truth"
+    },
+    {
+      "id": "quest_ch9_unravel_truth",
+      "title": "Lần Theo Sự Thật",
+      "kind": "main",
+      "chapter": 9,
+      "description": "Những manh mối lạ rải rác khắp Tâm Điểm.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch9_prism",
+          "description": "Hòa quang phổ ba cổng",
+          "completed": false,
+          "completeOnFlag": "solved_spectral_interference"
+        },
+        {
+          "id": "obj_ch9_creeds",
+          "description": "Phân xử ba lời chứng",
+          "completed": false,
+          "completeOnFlag": "solved_tri_witness"
+        },
+        {
+          "id": "obj_ch9_escapement",
+          "description": "Chỉnh con lắc Giờ 25",
+          "completed": false,
+          "completeOnFlag": "solved_escapement"
+        }
+      ],
+      "followUpQuestId": "quest_ch9_crossroad_decision"
+    },
+    {
+      "id": "quest_ch9_crossroad_decision",
+      "title": "Ngã Rẽ",
+      "kind": "main",
+      "chapter": 9,
+      "description": "Trang da thuộc đã lộ ra. Đã đến lúc chọn: tin Kuro, hay vạch mặt Kuro.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch9_route",
+          "description": "Đưa ra lựa chọn",
+          "completed": false,
+          "completeOnFlag": "ch9_route_chosen"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch9_path_of_empty_chair",
+      "title": "Con Đường Chiếc Ghế Trống",
+      "kind": "main",
+      "chapter": 9,
+      "description": "Peter tin Kuro. Hai người cùng đi lên Ngai Vàng Sáu Ấn.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch9_penrose",
+          "description": "Leo Bậc Thang Penrose",
+          "completed": false,
+          "completeOnFlag": "solved_penrose_steps"
+        },
+        {
+          "id": "obj_ch9_matrix",
+          "description": "Hoàn thành Ma Phương Ký Ức",
+          "completed": false,
+          "completeOnFlag": "solved_memory_matrix"
+        },
+        {
+          "id": "obj_ch9_architect",
+          "description": "Vượt qua Kiến Trúc Sư Nguyên Thủy",
+          "completed": false,
+          "completeOnFlag": "defeated_primeval_architect"
+        },
+        {
+          "id": "obj_ch9_chimes",
+          "description": "Lên dây Dàn Chuông Gãy Cánh",
+          "completed": false,
+          "completeOnFlag": "solved_broken_chime"
+        },
+        {
+          "id": "obj_ch9_astrolabe",
+          "description": "Căn Thiên Cầu Vi Mô",
+          "completed": false,
+          "completeOnFlag": "solved_astrolabe"
+        },
+        {
+          "id": "obj_ch9_inscription",
+          "description": "Khắc trang sách cuối",
+          "completed": false,
+          "completeOnFlag": "solved_final_inscription"
+        }
+      ],
+      "followUpQuestId": "quest_ch9_finale_sixfold",
+      "branchOf": "quest_ch9_crossroad_decision"
+    },
+    {
+      "id": "quest_ch9_finale_sixfold",
+      "title": "Thần Tính Lục Hợp",
+      "kind": "main",
+      "chapter": 9,
+      "description": "Chronos hợp nhất sáu quyền năng.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch9_sixfold",
+          "description": "Khắc Trang Cuối",
+          "completed": false,
+          "completeOnFlag": "defeated_sixfold_divinity"
+        }
+      ],
+      "followUpQuestId": "quest_ch9_the_final_choice"
+    },
+    {
+      "id": "quest_ch9_the_final_choice",
+      "title": "Quyết Định Cuối Cùng",
+      "kind": "main",
+      "chapter": 9,
+      "description": "Đồng hồ điểm 12:00 ở Vương Miện Vĩnh Hằng.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch9_choice",
+          "description": "Chọn tương lai cho thực tại",
+          "completed": false,
+          "completeOnFlag": "ch9_game_completed"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch9_hunt_lieutenants",
+      "title": "Bốn Đại Phó Tướng",
+      "kind": "main",
+      "chapter": 9,
+      "description": "Kuro đã lộ mặt. Bốn phó tướng của hắn chặn đường tới Ngai Vàng Muôn Nhánh.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch9_bran",
+          "description": "Hạ Bran Tái Sinh",
+          "completed": false,
+          "completeOnFlag": "defeated_lieutenant_bran"
+        },
+        {
+          "id": "obj_ch9_lyra",
+          "description": "Hạ Pháp Quan Lyra",
+          "completed": false,
+          "completeOnFlag": "defeated_lieutenant_lyra"
+        },
+        {
+          "id": "obj_ch9_neris",
+          "description": "Hạ Neris Mất Trí",
+          "completed": false,
+          "completeOnFlag": "defeated_lieutenant_neris"
+        },
+        {
+          "id": "obj_ch9_other",
+          "description": "Hạ Peter Thứ Hai",
+          "completed": false,
+          "completeOnFlag": "defeated_lieutenant_other_peter"
+        }
+      ],
+      "followUpQuestId": "quest_ch9_puppet_master_end",
+      "branchOf": "quest_ch9_crossroad_decision"
+    },
+    {
+      "id": "quest_ch9_puppet_master_end",
+      "title": "Kẻ Giật Dây",
+      "kind": "main",
+      "chapter": 9,
+      "description": "Kuro ngồi trên Ngai Vàng Muôn Nhánh.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch9_kuro",
+          "description": "Phong ấn Kuro",
+          "completed": false,
+          "completeOnFlag": "ch9_game_completed"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch9_crypt_of_vows",
+      "title": "Lời Thề Câm Lặng",
+      "kind": "side",
+      "chapter": 9,
+      "description": "Bốn dũng sĩ vô danh chờ được xếp đúng chỗ.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch9_vows",
+          "description": "Giải mã hoán vị",
+          "completed": false,
+          "completeOnFlag": "solved_permutation_cipher"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch9_quantum_vault",
+      "title": "Bánh Răng Lượng Tử",
+      "kind": "side",
+      "chapter": 9,
+      "description": "Bản vẽ cũ của Ivo về ba bánh răng.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch9_gears",
+          "description": "Căn ba bánh răng",
+          "completed": false,
+          "completeOnFlag": "solved_quantum_gears"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch9_first_legacy",
+      "title": "Di Sản Thiên Nguyên",
+      "kind": "side",
+      "chapter": 9,
+      "description": "Tám cột đá quanh mộ tượng Thiên Nguyên.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch9_octagon",
+          "description": "Thắp sáng tám cột",
+          "completed": false,
+          "completeOnFlag": "solved_octagonal_inversion"
+        },
+        {
+          "id": "obj_ch9_core",
+          "description": "Hạ Lõi Kỳ Dị Hư Vô",
+          "completed": false,
+          "completeOnFlag": "defeated_void_singularity_core"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch9_kuro_heart",
+      "title": "Trái Tim Kuro",
+      "kind": "side",
+      "chapter": 9,
+      "description": "Kuro đang giấu một nỗi sợ.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch9_heart",
+          "description": "Lắng nghe Kuro",
+          "completed": false,
+          "completeOnFlag": "kuro_heart_opened"
         }
       ]
     }
