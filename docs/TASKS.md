@@ -4,7 +4,7 @@
 **Agents:** Claude Code · Google Antigravity · OpenAI Codex (joined 2026-11-15; takes only tasks assigned to it here).
 **Owner / final approver:** Project owner (all art approval stays with the owner).
 
-## Protocol (both agents MUST follow)
+## Protocol (all agents MUST follow)
 
 1. **Read this file before starting work** (all agents: Claude, Antigravity, Codex). Only work on tasks assigned to you.
 2. **File locks:** a task in `IN PROGRESS` owns the files listed under _Locks_. No other agent may edit those files until the task is `DONE`.
