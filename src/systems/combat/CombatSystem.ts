@@ -12,6 +12,7 @@ import {
 } from './CombatTypes';
 import { ICombatSystem } from './ICombatSystem';
 import { formatString } from '../../ui/Strings';
+import { advanceClock, pushClock } from '../../world/Chapter8Rules';
 
 /**
  * Battle-log templates. These English defaults keep the system usable on its own (tests);
@@ -83,6 +84,8 @@ interface BossState {
   mistClear: number;
   /** Pool of tears: drops so far. */
   tears: number;
+  /** The 25th hour: where the hand stands, companions already called, Kuro's save still left. */
+  clock: { hand: number; called: Set<string>; kuroSave: boolean };
 }
 
 export class CombatSystem implements ICombatSystem {
@@ -192,6 +195,11 @@ export class CombatSystem implements ICombatSystem {
           purge: { left: null, cooldown: 0, open: false },
           mistClear: 0,
           tears: 0,
+          clock: {
+            hand: e.mechanic.clockHand?.start ?? 0,
+            called: new Set(),
+            kuroSave: true,
+          },
         });
       if (e.mechanic?.startsUnshielded) this.bosses.get(e.id)!.shield = false;
     }
@@ -436,7 +444,45 @@ export class CombatSystem implements ICombatSystem {
     )
       out.push(pg.pinAction);
     if (m.mist && boss.mistClear <= 0) out.push(m.mist.clearAction);
+    const ch = m.clockHand;
+    if (ch && boss.clock.hand > ch.start)
+      for (const c of ch.calls) if (!boss.clock.called.has(c.id) && out.length < 3) out.push(c);
     return out;
+  }
+
+  /** The 25th hour's hand (null when this boss has none). */
+  public getClockHand(enemyId: string): number | null {
+    const boss = this.bosses.get(enemyId);
+    const enemy = this.getCombatant(enemyId);
+    return boss && enemy?.mechanic?.clockHand ? boss.clock.hand : null;
+  }
+
+  /**
+   * After the Herald's attack: the hand moves (1 + `misses`); at the top the Null Strike falls on
+   * Peter unless Kuro holds it once. Returns battle-log lines.
+   */
+  public clockTurn(enemyId: string, misses: number): string[] {
+    const boss = this.bosses.get(enemyId);
+    const enemy = this.getCombatant(enemyId);
+    const ch = enemy?.mechanic?.clockHand;
+    if (!boss || !ch || !enemy?.isAlive) return [];
+    const step = advanceClock(boss.clock.hand, misses, ch.start, ch.top, boss.clock.kuroSave);
+    boss.clock.hand = step.hand;
+    if (step.kuroHeld) {
+      boss.clock.kuroSave = false;
+      return [ch.kuroMessage];
+    }
+    if (!step.strike)
+      return [formatString({ m: ch.tickMessage }, 'm', { n: step.hand, top: ch.top })];
+    const peter = this.state.combatants.find((c) => c.type === 'player');
+    if (!peter) return [];
+    // The strike leaves Peter standing (1 HP at worst); the blow that follows can still fell him.
+    const dealt = Math.max(
+      0,
+      Math.min(Math.ceil(peter.stats.maxHp * ch.strikePct), peter.stats.hp - 1),
+    );
+    peter.stats.hp -= dealt;
+    return [formatString({ m: ch.strikeMessage }, 'm', { damage: dealt })];
   }
 
   /**
@@ -786,6 +832,14 @@ export class CombatSystem implements ICombatSystem {
           damage = Math.min(target.stats.hp, pg.pinDamage);
           target.stats.hp -= damage;
           message = pg.pinAction.message;
+          break;
+        }
+        const ch = target.mechanic?.clockHand;
+        const call = ch?.calls.find((c) => c.id === action.environmentId);
+        if (ch && call && pgBoss && !pgBoss.clock.called.has(call.id)) {
+          pgBoss.clock.called.add(call.id);
+          pgBoss.clock.hand = pushClock(pgBoss.clock.hand, ch.pushBy, ch.start);
+          message = `${call.message} ${formatString({ m: ch.tickMessage }, 'm', { n: pgBoss.clock.hand, top: ch.top })}`;
           break;
         }
         const mist = target.mechanic?.mist;

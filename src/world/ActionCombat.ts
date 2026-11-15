@@ -34,6 +34,17 @@ import {
   huskPulls,
   tellStage,
 } from './Chapter7Rules';
+import {
+  bellCrackable,
+  bellState,
+  inTickWindow,
+  mimicCounters,
+  mimicFrame,
+  sweepAngle,
+  tauntActive,
+  wraithSolid,
+  type PeterMove,
+} from './Chapter8Rules';
 
 /** What the exploration scene provides to the real-time combat layer. */
 export interface ActionHost {
@@ -125,6 +136,16 @@ interface Roamer {
   /** Void Inquisitor: chain circles in progress. */
   chains?: { at: number; centers: Point[] } | null;
   nextChainAt?: number;
+  /** Assimilator: the move it has learned. */
+  learned?: PeterMove | null;
+  /** Doom Bell: when this toll cycle began (null = silent) and whether its wave already hit. */
+  bellAt?: number | null;
+  bellHit?: boolean;
+  /** Second-Hand Warden: hand start, stopped until, hits landed in a row, last hand touch. */
+  sweepAt?: number;
+  sweepStopUntil?: number;
+  sweepHits?: number;
+  sweepTouchAt?: number;
 }
 
 const ELDER_FLAG = 'elder_joined';
@@ -133,6 +154,12 @@ const ELDER_PARTED_FLAG = 'elder_parted';
 const KURO_FLAG = 'kuro_with_peter';
 const KURO_LEFT_FLAG = 'kuro_left';
 const KURO_SHIFT_MS = 15000;
+/** Chapter 8: the companion of the act walks with Peter and Kuro (flag → texture, latest first). */
+const COMPANIONS: [string, string][] = [
+  ['ch8_with_neris', 'npc_neris'],
+  ['ch8_with_lyra', 'npc_lyra'],
+  ['ch8_with_ivo', 'npc_ivo'],
+];
 
 /**
  * Real-time combat on the map: roaming enemies, Peter's slash (left click toward the cursor),
@@ -145,6 +172,9 @@ export class ActionCombat {
   private readonly group: Phaser.Physics.Arcade.Group;
   private readonly sound = SoundSystem.getInstance();
   private elder: Phaser.Physics.Arcade.Sprite | null = null;
+  /** Chapter 8: the second ally (Ivo, Lyra or Neris). */
+  private companion: Phaser.Physics.Arcade.Sprite | null = null;
+  private nextCompanionHit = 0;
   private readonly defs: MapRoamerDefinition[];
   private nextSwing = 0;
   private nextDash = 0;
@@ -196,6 +226,7 @@ export class ActionCombat {
     scene.physics.add.collider(this.group, walls);
     scene.physics.add.collider(this.group, this.group);
     this.spawnElder();
+    this.spawnCompanion();
 
     scene.input.mouse?.disableContextMenu();
     const onPointer = (p: Phaser.Input.Pointer): void => {
@@ -447,6 +478,172 @@ export class ActionCombat {
     if (this.scene.anims.exists(`${texture}_idle`)) this.elder.play(`${texture}_idle`);
   }
 
+  private get companionTexture(): string | null {
+    for (const [flag, texture] of COMPANIONS) if (this.flag(flag)) return texture;
+    return null;
+  }
+
+  /** Chapter 8: the act's companion follows Peter too (unless standing here as an NPC). */
+  private spawnCompanion(): void {
+    const texture = this.companionTexture;
+    if (!texture || !this.scene.textures.exists(texture)) return;
+    const standing = this.scene.children.list.some(
+      (o) => o instanceof Phaser.GameObjects.Sprite && o.texture.key === texture && o.visible,
+    );
+    if (standing) return;
+    this.companion = this.scene.physics.add.sprite(this.player.x + 26, this.player.y + 4, texture);
+    this.companion.body?.setSize(14, 12);
+    this.companion.body?.setOffset(9, 18);
+    if (this.scene.anims.exists(`${texture}_idle`)) this.companion.play(`${texture}_idle`);
+  }
+
+  private updateCompanion(now: number): void {
+    const c = this.companion;
+    if (!c) return;
+    const ally = this.tuning.ally;
+    if (distance(c, this.player) > 220) {
+      c.setPosition(this.player.x + 22, this.player.y + 6);
+      c.setVelocity(0, 0);
+      return;
+    }
+    const move = (p: Point, speed: number): void => {
+      const dx = p.x - c.x;
+      const dy = p.y - c.y;
+      const len = Math.hypot(dx, dy) || 1;
+      c.setVelocity((dx / len) * speed, (dy / len) * speed);
+      if (Math.abs(dx) > 2) c.setFlipX(dx < 0);
+    };
+    let foe: Roamer | null = null;
+    let best = Infinity;
+    for (const r of this.roamers) {
+      if (!r.alive || r.def.ambush) continue;
+      const d = distance(r.sprite, c);
+      if (d < 110 && distance(r.sprite, this.player) < 170 && d < best) {
+        best = d;
+        foe = r;
+      }
+    }
+    if (foe) {
+      if (best > ally.reach) move(foe.sprite, ally.speed);
+      else {
+        c.setVelocity(0, 0);
+        if (now >= this.nextCompanionHit) {
+          this.nextCompanionHit = now + ally.cooldownMs * 1.3;
+          const hit = rollHit(ally.attack, foe.enemy.defense, this.combat, this.rng);
+          this.damageRoamer(foe, hit.damage, hit.critical);
+        }
+      }
+      return;
+    }
+    const d = distance(c, this.player);
+    if (d > 46) move(this.player, d > 90 ? ally.speed * 1.3 : ally.speed);
+    else c.setVelocity(0, 0);
+  }
+
+  /** Assimilators near Peter learn the move he just made. */
+  private teach(move: PeterMove): void {
+    for (const r of this.roamers) {
+      const mi = r.enemy.field?.mimic;
+      if (!mi || !r.alive || distance(r.sprite, this.player) > mi.range) continue;
+      r.learned = move;
+      r.sprite.anims.stop();
+      r.sprite.setFrame(mimicFrame(move));
+    }
+  }
+
+  /** A repeated move against an Assimilator: it shrugs it off and strikes back. */
+  private mimicCounter(r: Roamer, move: PeterMove): boolean {
+    const mi = r.enemy.field?.mimic;
+    if (!mi || !mimicCounters(r.learned ?? null, move)) return false;
+    this.floatText(r.sprite.x, r.sprite.y - 20, this.t('action.mimicked'), '#f0c860');
+    this.hitPlayer(r, { mult: mi.counterMult });
+    return true;
+  }
+
+  // ------------------------------------------------------------------ Chapter 8 enemies
+
+  /** Doom Bell: three tolls, then a wave; a slash after the first toll cracks it. */
+  private updateBell(r: Roamer, now: number): boolean {
+    const b = r.enemy.field?.bell;
+    if (!b) return false;
+    r.sprite.setVelocity(0, 0);
+    if (r.bellAt === null || r.bellAt === undefined) {
+      if (distance(r.sprite, this.player) > b.range) return true;
+      r.bellAt = now;
+      r.bellHit = false;
+      r.sprite.anims.stop();
+    }
+    const st = bellState(now, r.bellAt, b.tollMs, b.waveMs);
+    r.sprite.setFrame(Math.min(3, st.tolls));
+    if (st.wave !== null) {
+      const radius = 18 + st.wave * (b.radius - 18);
+      this.aimLines.lineStyle(4, 0xffd890, 0.8).strokeCircle(r.sprite.x, r.sprite.y, radius);
+      const d = distance(r.sprite, this.player);
+      if (!r.bellHit && Math.abs(d - radius) < 14) {
+        r.bellHit = true;
+        this.hitPlayer(r, { mult: b.damageMult });
+      }
+    }
+    if (st.done) {
+      r.bellAt = now + b.restMs;
+      r.bellHit = false;
+      r.sprite.setFrame(0);
+    }
+    return true;
+  }
+
+  /** A slash between the first and second toll cracks the bell. */
+  private crackBell(r: Roamer, now: number): boolean {
+    const b = r.enemy.field?.bell;
+    if (!b || r.bellAt === null || r.bellAt === undefined) return false;
+    if (!bellCrackable(bellState(now, r.bellAt, b.tollMs, b.waveMs))) return false;
+    r.bellAt = now + b.crackMs;
+    r.stunUntil = now + b.crackMs;
+    r.sprite.setFrame(0);
+    r.sprite.setTint(0x9a7050);
+    this.scene.time.delayedCall(b.crackMs, () => r.alive && r.sprite.clearTint());
+    this.floatText(r.sprite.x, r.sprite.y - 22, this.t('action.bellCracked'), '#ffd890');
+    const hit = rollHit(this.session.getStats().attack, r.enemy.defense, this.combat, this.rng);
+    this.damageRoamer(r, hit.damage * 2, true);
+    return true;
+  }
+
+  /** Twin-Era Legionnaire: its shield turns (red) to Peter's companion now and then. */
+  private shieldTurned(r: Roamer, now: number): boolean {
+    const at = r.enemy.field?.allyTaunt;
+    if (!at) return false;
+    const near = !!this.companion && distance(this.companion, r.sprite) < at.range;
+    return tauntActive(now, r.glowOffset, at.everyMs, at.turnMs, near);
+  }
+
+  /** Second-Hand Warden: the hand sweeps round it; touching it hurts. */
+  private updateSweep(r: Roamer, now: number): void {
+    const sw = r.enemy.field?.sweep;
+    if (!sw) return;
+    r.sweepAt ??= now;
+    if (now < (r.sweepStopUntil ?? 0)) {
+      r.sweepAt += this.scene.game.loop.delta;
+      return;
+    }
+    const a = sweepAngle(now, r.sweepAt, sw.periodMs);
+    const tip = {
+      x: r.sprite.x + Math.cos(a) * sw.length,
+      y: r.sprite.y + Math.sin(a) * sw.length,
+    };
+    this.aimLines.lineStyle(5, 0xa07c30, 0.9).lineBetween(r.sprite.x, r.sprite.y, tip.x, tip.y);
+    this.aimLines.lineStyle(2, 0xf0c860, 1).lineBetween(r.sprite.x, r.sprite.y, tip.x, tip.y);
+    if (inTickWindow(now, r.glowOffset, sw.tickMs, sw.windowMs)) {
+      this.aimLines.lineStyle(2, 0xffffff, 0.8).strokeCircle(r.sprite.x, r.sprite.y, 16);
+    }
+    if (
+      this.segmentDistance(this.player, r.sprite, tip) < 14 &&
+      now > (r.sweepTouchAt ?? 0) + 700
+    ) {
+      r.sweepTouchAt = now;
+      this.hitPlayer(r, { mult: sw.sweepMult });
+    }
+  }
+
   // ------------------------------------------------------------------ frame
 
   public update(delta: number): void {
@@ -459,6 +656,7 @@ export class ActionCombat {
         r.aim = null;
       }
       this.elder?.setVelocity(0, 0);
+      this.companion?.setVelocity(0, 0);
       return;
     }
     const now = this.scene.time.now;
@@ -499,6 +697,14 @@ export class ActionCombat {
       if (r.enemy.field?.swarm && this.updateSwarm(r, now)) continue;
       if (r.enemy.field?.hound && this.updateHound(r, now)) continue;
       if (r.enemy.field?.chainTrial && this.updateChains(r, now)) continue;
+      if (r.enemy.field?.bell && this.updateBell(r, now)) continue;
+      if (r.enemy.field?.sweep) this.updateSweep(r, now);
+      if (r.enemy.field?.allyTaunt) {
+        const turned = this.shieldTurned(r, now);
+        if (turned && !r.glowShown) r.sprite.setTint(0xff6a50);
+        if (!turned && r.glowShown) r.sprite.clearTint();
+        r.glowShown = turned;
+      }
       if (r.enemy.field?.rings && this.updateRings(r, now)) continue;
       if (r.enemy.field?.laser && this.updateLaser(r, now)) continue;
       if (r.enemy.field?.phase) this.updatePhase(r, now);
@@ -562,6 +768,7 @@ export class ActionCombat {
     this.updatePools(now, delta);
     this.placeOrbs(now);
     this.updateElder(now);
+    this.updateCompanion(now);
   }
 
   /**
@@ -640,6 +847,8 @@ export class ActionCombat {
         continue;
       }
       if (this.scatterSwarm(r, now)) continue;
+      if (this.mimicCounter(r, 'slash')) continue;
+      if (this.crackBell(r, now)) continue;
       const parry = r.enemy.field?.parry;
       if (parry && inParryWindow(r.brain.state, r.brain.timer, parry.flashMs)) {
         // Parried: no damage, but the spear is knocked aside and the guard drops.
@@ -660,6 +869,7 @@ export class ActionCombat {
       echoed.push({ r, damage: dealt });
     }
     if (!landed) this.blinkOnWhiff(origin, aim);
+    this.teach('slash');
     // Blade of Possibility: the other branch's slash follows 0.2 s later.
     const echoPct = weapon?.echoPct ?? 0;
     if (echoPct > 0 && echoed.length > 0) {
@@ -735,6 +945,7 @@ export class ActionCombat {
     for (const r of this.roamers) {
       if (!r.alive || distance(r.sprite, this.player) > this.tuning.skillRadius + 10) continue;
       if (this.houndRunning(r, now)) continue;
+      if (this.mimicCounter(r, 'skill')) continue;
       const hd = r.enemy.field?.hound;
       const damage =
         Math.max(
@@ -758,6 +969,7 @@ export class ActionCombat {
       };
       r.sprite.clearTint();
     }
+    this.teach('skill');
   }
 
   /** Shift: short invulnerable dash in the walking direction (or the facing). */
@@ -782,6 +994,20 @@ export class ActionCombat {
     }
     this.player.sprite.setAlpha(0.55);
     this.scene.time.delayedCall(this.tuning.dashMs + 40, () => this.player.sprite.setAlpha(1));
+    // An Assimilator that learned the dash lunges after Peter.
+    for (const r of this.roamers) {
+      const mi = r.enemy.field?.mimic;
+      if (!r.alive || !mi || r.learned !== 'dash') continue;
+      if (distance(r.sprite, this.player) > mi.range) continue;
+      this.scene.time.delayedCall(this.tuning.dashMs + 60, () => {
+        if (!r.alive) return;
+        r.sprite.setPosition(this.player.x - 20, this.player.y);
+        r.brain = { ...r.brain, state: 'windup', timer: 350 };
+        r.sprite.setTint(0xff7070);
+        this.floatText(r.sprite.x, r.sprite.y - 20, this.t('action.mimicked'), '#f0c860');
+      });
+    }
+    this.teach('dash');
   }
 
   /**
@@ -809,6 +1035,21 @@ export class ActionCombat {
       );
       return true;
     }
+    const sw = field.sweep;
+    if (sw) {
+      if (!inTickWindow(now, r.glowOffset, sw.tickMs, sw.windowMs)) {
+        r.sweepHits = 0;
+        this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.offBeat'), '#f0c860');
+        this.sound.playSlash();
+        return true;
+      }
+      r.sweepHits = (r.sweepHits ?? 0) + 1;
+      if (r.sweepHits >= 3) {
+        r.sweepHits = 0;
+        r.sweepStopUntil = now + sw.stopMs;
+        this.floatText(r.sprite.x, r.sprite.y - 30, this.t('action.handStopped'), '#fff2b8');
+      }
+    }
     const chant = field.chant;
     if (chant && chantState(now, r.glowOffset, chant.chantMs, chant.breathMs).chanting) {
       this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.bannerWard'), '#ff9090');
@@ -817,6 +1058,7 @@ export class ActionCombat {
     }
     if (
       field.frontShieldDeg &&
+      !this.shieldTurned(r, now) &&
       shieldBlocks(r.facing, r.sprite, this.player, field.frontShieldDeg, r.brain.state)
     ) {
       this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.blocked'), '#9fd3ff');
@@ -1043,7 +1285,14 @@ export class ActionCombat {
   private isSolid(r: Roamer, now: number): boolean {
     const ph = r.enemy.field?.phase;
     if (!ph) return true;
-    return (now + r.glowOffset) % ph.everyMs < ph.solidMs;
+    const anchored = ph.anchor
+      ? this.flag(ph.anchor.ownFlag)
+        ? 'own'
+        : this.flag(ph.anchor.otherFlag)
+          ? 'other'
+          : null
+      : null;
+    return wraithSolid(anchored, now, r.glowOffset, ph.everyMs, ph.solidMs);
   }
 
   private updatePhase(r: Roamer, now: number): void {

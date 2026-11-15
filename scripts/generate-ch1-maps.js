@@ -11,6 +11,7 @@ import { CH4_MAPS } from './ch4-layout.js';
 import { CH5_MAPS } from './ch5-layout.js';
 import { CH6_MAPS } from './ch6-layout.js';
 import { CH7_MAPS } from './ch7-layout.js';
+import { CH8_MAPS } from './ch8-layout.js';
 
 /** `node <script> ch2|ch3|ch4|ch5|ch6` builds that chapter instead of Chapter 1. */
 const CHAPTER = process.argv[2] ?? 'ch1';
@@ -23,6 +24,7 @@ const MAPS =
     ch5: CH5_MAPS,
     ch6: CH6_MAPS,
     ch7: CH7_MAPS,
+    ch8: CH8_MAPS,
   }[CHAPTER] ?? CH1_MAPS;
 
 const TILESETS = {
@@ -73,6 +75,14 @@ const TILESETS = {
     w: 128,
     h: 384,
     count: 48,
+  },
+  convergence: {
+    name: 'convergence_tileset',
+    image: '../tilesets/convergence_tileset.png',
+    columns: 4,
+    w: 128,
+    h: 512,
+    count: 64,
   },
   celestial: {
     name: 'celestial_tileset',

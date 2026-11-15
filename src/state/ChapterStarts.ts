@@ -82,6 +82,22 @@ const GEAR6: [string, number][] = [
   ['seal_of_the_first_hour', 1],
   ['origin_seal_half', 1],
 ];
+/** Origin Glyphs read in Chapter 6 (Chapter 8's library altars use them again). */
+const GLYPHS_KNOWN = ['a', 'o', 'i', 'u', 'e', 'n', 'x'].map((g) => `ch6_glyph_${g}_known`);
+const CH7 = [
+  'ch7_null_hour_begun',
+  'ch7_kuro_redeemed',
+  'ch7_kuro_embraced',
+  'pacified_void_kuro',
+  'restored_kuro_mother_name',
+  'communed_first_forgotten',
+  'kuro_with_peter',
+];
+const GEAR7: [string, number][] = [
+  ['void_severance_blade', 1],
+  ['unwritten_cradle_clasp', 1],
+  ['kuro_mother_brooch', 1],
+];
 const heals = (n: number): [string, number] => ['refined_chrono_shard', n];
 
 export const CHAPTER_STARTS: ChapterStart[] = [
@@ -151,9 +167,19 @@ export const CHAPTER_STARTS: ChapterStart[] = [
     mapId: 'map_ch7_ash_abyss_drop',
     spawnId: 'from_ch6',
     level: 24,
-    flags: [...PROLOGUE, ...CH1, ...CH2, ...CH3, ...CH4, ...CH5, ...CH6],
+    flags: [...PROLOGUE, ...CH1, ...CH2, ...CH3, ...CH4, ...CH5, ...CH6, ...GLYPHS_KNOWN],
     items: [...GEAR1, ...GEAR2, ...GEAR3, ...GEAR4, ...GEAR5, ...GEAR6, heals(10)],
     equip: ['origin_astral_blade', 'seal_of_the_first_hour'],
+  },
+  {
+    chapter: 8,
+    title: 'Giờ Số Không & Sự Hội Tụ',
+    mapId: 'map_ch8_null_rift_landing',
+    spawnId: 'from_ch7',
+    level: 27,
+    flags: [...PROLOGUE, ...CH1, ...CH2, ...CH3, ...CH4, ...CH5, ...CH6, ...GLYPHS_KNOWN, ...CH7],
+    items: [...GEAR1, ...GEAR2, ...GEAR3, ...GEAR4, ...GEAR5, ...GEAR6, ...GEAR7, heals(12)],
+    equip: ['void_severance_blade', 'unwritten_cradle_clasp'],
   },
 ];
 

@@ -1041,7 +1041,9 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1,
-      "pages": ["Trang đầu, nét chữ của Kuro:\n'Ghi lại những gì tao kể. Tao sẽ hỏi lại.'"]
+      "pages": [
+        "Trang đầu, nét chữ của Kuro:\n'Ghi lại những gì tao kể. Tao sẽ hỏi lại.'"
+      ]
     },
     {
       "id": "kuro_ledger_page_1",
@@ -1153,7 +1155,9 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1,
-      "pages": ["'Máy A ở nhánh này phải chạy để giữ tường hầm trẻ em.'"]
+      "pages": [
+        "'Máy A ở nhánh này phải chạy để giữ tường hầm trẻ em.'"
+      ]
     },
     {
       "id": "reactor_wiring",
@@ -1163,7 +1167,9 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1,
-      "pages": ["'Cổng lò cần đúng hai lõi sáng ở nhánh Sống.'"]
+      "pages": [
+        "'Cổng lò cần đúng hai lõi sáng ở nhánh Sống.'"
+      ]
     },
     {
       "id": "prune_stele_rubbing",
@@ -1173,7 +1179,9 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1,
-      "pages": ["'Trong ba nhánh, chỉ nhánh đã bị tỉa mới nói dối — vì nó không còn gì để mất.'"]
+      "pages": [
+        "'Trong ba nhánh, chỉ nhánh đã bị tỉa mới nói dối — vì nó không còn gì để mất.'"
+      ]
     },
     {
       "id": "unborn_genealogy",
@@ -1716,7 +1724,9 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1,
-      "pages": ["Đừng tỉa những thế giới đang khóc. Hãy dạy chúng cách tự lành. — Archon Solon"]
+      "pages": [
+        "Đừng tỉa những thế giới đang khóc. Hãy dạy chúng cách tự lành. — Archon Solon"
+      ]
     },
     {
       "id": "world_secret_fracture",
@@ -2044,7 +2054,9 @@
       "value": 0,
       "stackable": false,
       "maxStack": 1,
-      "pages": ["Peter và Kuro — dù cả thế giới có quên tụi mình."]
+      "pages": [
+        "Peter và Kuro — dù cả thế giới có quên tụi mình."
+      ]
     },
     {
       "id": "void_sea_chart",
@@ -2168,6 +2180,201 @@
         "attack": 5,
         "defense": 7,
         "speed": 4
+      }
+    },
+    {
+      "id": "torn_page_strip_a",
+      "name": "Dải Giấy A",
+      "type": "document",
+      "description": "Một dải của trang Sổ Khởi Nguyên.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Chữ: \"NGƯỜI CÓ TÊN\".\nMép trái (trên xuống): lõm, lồi, lồi.\nMép phải: lồi, lõm, lồi."
+      ]
+    },
+    {
+      "id": "torn_page_strip_b",
+      "name": "Dải Giấy B",
+      "type": "document",
+      "description": "Một dải của trang Sổ Khởi Nguyên.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Chữ: \"Ở TRANG NÀY\".\nMép trái (trên xuống): lõm, lồi, lõm.\nMép phải: lõm, lõm, lồi."
+      ]
+    },
+    {
+      "id": "torn_page_strip_c",
+      "name": "Dải Giấy C",
+      "type": "document",
+      "description": "Một dải của trang Sổ Khởi Nguyên.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Chữ: \"ĐÃ TỰ XÓA ĐỂ GIỮ CỬA\".\nMép trái (trên xuống): lồi, lồi, lõm.\nMép phải: lồi, lồi, lồi."
+      ]
+    },
+    {
+      "id": "elion_final_page",
+      "name": "Trang Cuối Của Elion",
+      "type": "document",
+      "description": "Trang cuối bộ sử, mực còn chưa khô.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Trang cuối viết về một người thợ đồng hồ đi qua sáu thời đại. Dòng cuối còn để trống."
+      ]
+    },
+    {
+      "id": "world_secret_seam_thread",
+      "name": "Bí Mật I: Sợi Chỉ Vàng",
+      "type": "document",
+      "description": "Một đoạn chỉ vàng đứt.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Những đường may nối các thế giới là chính các sợi xích của Chronos, tan ra và khâu chúng lại."
+      ]
+    },
+    {
+      "id": "world_secret_sol_karis_beta_treaty",
+      "name": "Bí Mật II: Giao Ước Hai Thành",
+      "type": "document",
+      "description": "Bản giao ước khắc đá trên Cầu Phán Quyết.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Sol-Karis và Beta từng là hai nhánh của cùng một thực tại. Nhánh bị cắt ra ở Khu Vườn Khả Năng, mỗi bên quên mất bên kia."
+      ]
+    },
+    {
+      "id": "world_secret_elion_last_page",
+      "name": "Bí Mật III: Dòng Cuối Bộ Sử",
+      "type": "document",
+      "description": "Mira đọc to ở chân tháp.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "\"…và người thợ đồng hồ đi lên tháp, không mang theo gì ngoài những cái tên.\""
+      ]
+    },
+    {
+      "id": "world_secret_null_hour_switch",
+      "name": "Bí Mật IV: Công Tắc Giờ Số Không",
+      "type": "document",
+      "description": "Bản vẽ đầy đủ.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Null Hour là cơ chế tự hủy: khi Ấn Origin vỡ, mọi thế giới bị ép về một điểm để không thế giới nào bị Hư Không ăn dần.",
+        "Góc bản vẽ, chữ tay: \"Nếu ta không về, hãy để mọi thứ thành một.\" — C."
+      ]
+    },
+    {
+      "id": "world_secret_unwritten_ledger",
+      "name": "Bí Mật V: Ô Tên Bỏ Trống",
+      "type": "document",
+      "description": "Trang cuối sổ cái của Kuro.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Một ô tên bỏ trống, giữ chỗ từ năm mười bốn tuổi. Bên dưới, nét chữ trẻ con: \"chỗ của thằng thợ đồng hồ\"."
+      ]
+    },
+    {
+      "id": "colored_paper_red",
+      "name": "Giấy Màu Đỏ",
+      "type": "puzzle",
+      "description": "Một tờ giấy màu đỏ, đủ gấp một con hạc.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "colored_paper_blue",
+      "name": "Giấy Màu Xanh",
+      "type": "puzzle",
+      "description": "Một tờ giấy màu xanh, đủ gấp một con hạc.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "colored_paper_gold",
+      "name": "Giấy Màu Vàng",
+      "type": "puzzle",
+      "description": "Một tờ giấy màu vàng, đủ gấp một con hạc.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "convergence_compass_blade",
+      "name": "Kiếm La Bàn Hội Tụ",
+      "type": "weapon",
+      "description": "Lưỡi kiếm Sứ Giả để lại, chuôi có mặt la bàn chỉ về nơi thế giới còn đứng vững.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 24,
+        "reach": 46,
+        "swingMs": 300,
+        "echoPct": 0.2
+      }
+    },
+    {
+      "id": "lyra_vanguard_halberd",
+      "name": "Kích Tiền Phong Của Lyra",
+      "type": "weapon",
+      "description": "Ngọn kích của tiểu đoàn tiền phong. Nặng, chậm, nhưng xa.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 26,
+        "reach": 56,
+        "swingMs": 380,
+        "echoPct": 0
+      }
+    },
+    {
+      "id": "sixfold_hour_charm",
+      "name": "Bùa Sáu Giờ",
+      "type": "charm",
+      "description": "Sáu vòng ấn nhỏ xâu chung một sợi chỉ vàng.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 55,
+        "maxMp": 35,
+        "attack": 7,
+        "defense": 8,
+        "speed": 4
+      }
+    },
+    {
+      "id": "na_last_crane",
+      "name": "Hạc Giấy Ba Màu",
+      "type": "charm",
+      "description": "Con hạc cuối của bé Na, ba màu đỏ xanh vàng.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 50,
+        "defense": 7
       }
     }
   ]

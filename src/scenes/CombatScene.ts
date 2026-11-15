@@ -13,6 +13,7 @@ import { GameSession, getSession } from '../state/GameSession';
 import { registerPeterAnimations } from '../systems/animation/PeterAnimationConfig';
 import { createPanel } from '../ui/Panel';
 import { pickDialogue } from '../world/MapRegistry';
+import { echoRhythm } from '../world/Chapter8Rules';
 import type { DialogueRule } from '../world/MapTypes';
 import { getStrings, getStringTable, Translate } from '../ui/Strings';
 import type { ExplorationSceneData } from './ExplorationScene';
@@ -95,6 +96,11 @@ export class CombatScene extends Phaser.Scene {
     this.environmentButton = null;
     this.commandTypes = [];
     this.firedEvents = new Set();
+    this.lastCommand = 'attack';
+    this.echoPrev = null;
+    this.echoTurn = 0;
+    this.phaseShown = -1;
+    this.pendingCues = [];
     this.session = getSession(this);
     this.t = getStrings(this);
   }
@@ -405,6 +411,46 @@ export class CombatScene extends Phaser.Scene {
     });
   }
 
+  /** Peter's command last turn (a Praetor punishes healing). */
+  private lastCommand: PlayerCommand = 'attack';
+  /** Mirror Verdict: the last ring rhythm and how many rhythms have played. */
+  private echoPrev: number[] | null = null;
+  private echoTurn = 0;
+  /** Ring phase last announced (Sixfold Echo, the Herald's second phase). */
+  private phaseShown = -1;
+  /** Battle-log lines waiting for the end of the boss's turn. */
+  private pendingCues: string[] = [];
+
+  /** This turn's ring settings: HP phases and the Herald's second phase. */
+  private ringSettings(tb: NonNullable<IEnemyDefinition['timedBlock']>): {
+    tb: NonNullable<IEnemyDefinition['timedBlock']>;
+    altHidden: boolean;
+  } {
+    const ratio = this.enemy.stats.hp / this.enemy.stats.maxHp;
+    let out = { ...tb };
+    let phase = -1;
+    let message = '';
+    (tb.phases ?? []).forEach((p, i) => {
+      if (phase < 0 && ratio <= p.below) {
+        phase = i;
+        message = p.message;
+        out = { ...out, ...p.set };
+      }
+    });
+    const ch = this.enemyTemplate.mechanic?.clockHand;
+    const second = !!ch && ratio <= ch.phase2Pct;
+    if (second && ch) {
+      out.count = (out.count ?? 1) + 1;
+      phase = 99;
+      message = ch.phase2Message;
+    }
+    if (phase !== this.phaseShown) {
+      if (phase >= 0 && message) this.setBattleLog(message);
+      this.phaseShown = phase;
+    }
+    return { tb: out, altHidden: second };
+  }
+
   private blockArmed = false;
   /** When the closing ring touches Peter's outline (tests and probes read it). */
   public blockEndsAt = 0;
@@ -676,6 +722,7 @@ export class CombatScene extends Phaser.Scene {
     this.setButtonsEnabled(false);
 
     const result = this.combatSystem.executeAction(action);
+    this.lastCommand = type;
     this.updateStatusBars();
     this.setBattleLog(result.message);
 
@@ -925,18 +972,36 @@ export class CombatScene extends Phaser.Scene {
       this.endTurn(ENEMY_TO_PLAYER_DELAY_MS);
       return;
     }
-    const heavy = mirror && copy === 'skill' ? mirror.skillMult : 1;
+    let heavy = mirror && copy === 'skill' ? mirror.skillMult : 1;
     if (heavy > 1 && mirror) {
       this.combatSystem.lockCommand(this.enemy.id, 'skill', 1);
       this.setBattleLog(mirror.skillMessage);
     }
-    const tb = this.enemyTemplate.timedBlock;
-    if (tb) {
+    const penalty = this.enemyTemplate.mechanic?.healPenalty;
+    if (penalty && this.lastCommand === 'item') {
+      heavy *= penalty.mult;
+      this.setBattleLog(penalty.message);
+    }
+    const tb0 = this.enemyTemplate.timedBlock;
+    if (tb0) {
+      const { tb, altHidden } = this.ringSettings(tb0);
       const count = tb.count ?? (tb.double ? 2 : 1);
+      const echo = tb.echoPool
+        ? echoRhythm(++this.echoTurn, this.echoPrev, count, tb.echoPool, Math.random)
+        : null;
+      if (echo) {
+        this.echoPrev = echo.rings;
+        if (echo.reversed && tb.echoMessage) this.setBattleLog(tb.echoMessage);
+      }
       let blocks = 0;
       const ringAt = (k: number): void =>
         this.runBlockRing(
-          { ...tb, windowMs: Math.max(60, tb.windowMs - k * (tb.shrinkMs ?? 0)) },
+          {
+            ...tb,
+            ringMs: echo?.rings[k] ?? tb.ringMs,
+            hidden: tb.hidden || (altHidden && k % 2 === 1),
+            windowMs: Math.max(60, tb.windowMs - k * (tb.shrinkMs ?? 0)),
+          },
           (blocked, pressed) => {
             this.blockFeedback(blocked, pressed);
             if (blocked) blocks++;
@@ -959,6 +1024,7 @@ export class CombatScene extends Phaser.Scene {
   /** After the last ring: a perfect series breaks a weapon; any block opens a charging back. */
   private afterBlocks(blocks: number, count: number): void {
     const tb = this.enemyTemplate.timedBlock;
+    this.pendingCues.push(...this.combatSystem.clockTurn(this.enemy.id, count - blocks));
     if (blocks > 0) {
       const opened = this.combatSystem.notePerfectBlock(this.enemy.id);
       if (opened) this.time.delayedCall(500, () => this.setBattleLog(opened));
@@ -1049,7 +1115,7 @@ export class CombatScene extends Phaser.Scene {
 
   /** Sentence bosses: shows the verdict on Peter's next move, with a red flash. */
   private announceSentence(): void {
-    const lines = this.combatSystem.bossTurnCues(this.enemy.id);
+    const lines = [...this.pendingCues.splice(0), ...this.combatSystem.bossTurnCues(this.enemy.id)];
     const verdict = this.combatSystem.announceSentence(this.enemy.id);
     if (verdict) lines.push(verdict);
     if (lines.length === 0) return;

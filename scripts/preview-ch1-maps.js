@@ -14,6 +14,7 @@ import { CH4_MAPS } from './ch4-layout.js';
 import { CH5_MAPS } from './ch5-layout.js';
 import { CH6_MAPS } from './ch6-layout.js';
 import { CH7_MAPS } from './ch7-layout.js';
+import { CH8_MAPS } from './ch8-layout.js';
 
 /** `node <script> ch2|ch3|ch4|ch5|ch6` builds that chapter instead of Chapter 1. */
 const CHAPTER = process.argv[2] ?? 'ch1';
@@ -26,6 +27,7 @@ const MAPS =
     ch5: CH5_MAPS,
     ch6: CH6_MAPS,
     ch7: CH7_MAPS,
+    ch8: CH8_MAPS,
   }[CHAPTER] ?? CH1_MAPS;
 
 const SHEETS = {
@@ -44,6 +46,7 @@ const SHEETS = {
   steel: 'public/assets/tilesets/steel_tileset.png',
   celestial: 'public/assets/tilesets/celestial_tileset.png',
   voidcore: 'public/assets/tilesets/voidcore_tileset.png',
+  convergence: 'public/assets/tilesets/convergence_tileset.png',
   // Candidate until approved (ENV_SUNKEN_001).
   sunken: fs.existsSync('public/assets/tilesets/sunken_tileset.png')
     ? 'public/assets/tilesets/sunken_tileset.png'

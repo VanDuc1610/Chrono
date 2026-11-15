@@ -480,7 +480,9 @@
     "map_shattered_antechamber": {
       "id": "map_shattered_antechamber",
       "name": "Điện Thờ Đổ Nát",
-      "aliases": ["prologue_sanctuary"],
+      "aliases": [
+        "prologue_sanctuary"
+      ],
       "tilemap": {
         "key": "prologue_map",
         "path": "assets/maps/prologue_map.json"
@@ -669,7 +671,9 @@
           "on": "arrive",
           "onceFlag": "elder_parted",
           "effects": {
-            "setFlags": ["elder_parted"]
+            "setFlags": [
+              "elder_parted"
+            ]
           }
         }
       ],
@@ -4334,7 +4338,11 @@
               "dialogueId": "ch3_ghost_knight_after"
             },
             {
-              "ifFlags": ["ch3_portrait_piece_1", "ch3_portrait_piece_2", "ch3_portrait_piece_3"],
+              "ifFlags": [
+                "ch3_portrait_piece_1",
+                "ch3_portrait_piece_2",
+                "ch3_portrait_piece_3"
+              ],
               "dialogueId": "ch3_ghost_knight_done"
             }
           ],
@@ -4627,7 +4635,11 @@
               "dialogueId": "ch3_canvas_done"
             },
             {
-              "ifItems": ["pigment_ochre_yellow", "pigment_lapis_blue", "pigment_sulfur_red"],
+              "ifItems": [
+                "pigment_ochre_yellow",
+                "pigment_lapis_blue",
+                "pigment_sulfur_red"
+              ],
               "dialogueId": "ch3_canvas_inspect"
             }
           ]
@@ -5049,7 +5061,11 @@
               "dialogueId": "ch4_courier_box_open_again"
             },
             {
-              "ifFlags": ["ch4_dial_dir_ne", "ch4_dial_angle_a45", "ch4_dial_star_bacdau"],
+              "ifFlags": [
+                "ch4_dial_dir_ne",
+                "ch4_dial_angle_a45",
+                "ch4_dial_star_bacdau"
+              ],
               "dialogueId": "ch4_courier_box_solve"
             }
           ]
@@ -8043,7 +8059,10 @@
               "dialogueId": "ch5x_ex1_done"
             },
             {
-              "ifFlags": ["branch_map_ch5_seed_garden_pruned", "ch5x_rock_south"],
+              "ifFlags": [
+                "branch_map_ch5_seed_garden_pruned",
+                "ch5x_rock_south"
+              ],
               "dialogueId": "ch5x_ex1_solved"
             },
             {
@@ -8409,7 +8428,11 @@
               "dialogueId": "ch5x_weather_done"
             },
             {
-              "ifFlags": ["ch5x_humidity_mist", "ch5x_temperature_mild", "ch5x_airflow_breeze"],
+              "ifFlags": [
+                "ch5x_humidity_mist",
+                "ch5x_temperature_mild",
+                "ch5x_airflow_breeze"
+              ],
               "dialogueId": "ch5x_weather_success"
             }
           ]
@@ -8460,12 +8483,24 @@
               "dialogueId": "ch5x_chimes_done"
             },
             {
-              "ifItems": ["windchime_bronze", "windchime_silver", "windchime_glass"],
-              "ifFlags": ["ch5x_hook_1_bronze", "ch5x_hook_2_silver", "ch5x_hook_3_glass"],
+              "ifItems": [
+                "windchime_bronze",
+                "windchime_silver",
+                "windchime_glass"
+              ],
+              "ifFlags": [
+                "ch5x_hook_1_bronze",
+                "ch5x_hook_2_silver",
+                "ch5x_hook_3_glass"
+              ],
               "dialogueId": "ch5x_gardener_peace"
             },
             {
-              "ifItems": ["windchime_bronze", "windchime_silver", "windchime_glass"],
+              "ifItems": [
+                "windchime_bronze",
+                "windchime_silver",
+                "windchime_glass"
+              ],
               "dialogueId": "ch5x_chimes_wrong"
             }
           ]
@@ -8583,7 +8618,11 @@
               "label": "Chuông thủy tinh"
             }
           ],
-          "requiresItems": ["windchime_bronze", "windchime_silver", "windchime_glass"],
+          "requiresItems": [
+            "windchime_bronze",
+            "windchime_silver",
+            "windchime_glass"
+          ],
           "requiresFlag": "ch5x_weather_balanced"
         },
         {
@@ -8612,7 +8651,11 @@
               "label": "Chuông thủy tinh"
             }
           ],
-          "requiresItems": ["windchime_bronze", "windchime_silver", "windchime_glass"],
+          "requiresItems": [
+            "windchime_bronze",
+            "windchime_silver",
+            "windchime_glass"
+          ],
           "requiresFlag": "ch5x_weather_balanced"
         },
         {
@@ -8641,7 +8684,11 @@
               "label": "Chuông thủy tinh"
             }
           ],
-          "requiresItems": ["windchime_bronze", "windchime_silver", "windchime_glass"],
+          "requiresItems": [
+            "windchime_bronze",
+            "windchime_silver",
+            "windchime_glass"
+          ],
           "requiresFlag": "ch5x_weather_balanced"
         }
       ],
@@ -9388,7 +9435,10 @@
               "dialogueId": "ch5_safe_pruned"
             },
             {
-              "ifFlags": ["ch5_safe_h_7", "ch5_safe_m_30"],
+              "ifFlags": [
+                "ch5_safe_h_7",
+                "ch5_safe_m_30"
+              ],
               "dialogueId": "ch5_safe_open"
             }
           ]
@@ -10394,12 +10444,18 @@
               "dialogueId": "ch5x_telescope_done"
             },
             {
-              "ifItems": ["astronomy_lens_living", "astronomy_lens_pruned"],
+              "ifItems": [
+                "astronomy_lens_living",
+                "astronomy_lens_pruned"
+              ],
               "ifFlag": "ch5x_angle_a90",
               "dialogueId": "ch5x_telescope_success"
             },
             {
-              "ifItems": ["astronomy_lens_living", "astronomy_lens_pruned"],
+              "ifItems": [
+                "astronomy_lens_living",
+                "astronomy_lens_pruned"
+              ],
               "dialogueId": "ch5x_telescope_wrong"
             }
           ]
@@ -10606,7 +10662,11 @@
               "dialogueId": "ch5_reactor_wrong"
             },
             {
-              "ifFlags": ["ch5_sw_b_l_on", "ch5_sw_c_l_on", "ch5_sw_a_p_on"],
+              "ifFlags": [
+                "ch5_sw_b_l_on",
+                "ch5_sw_c_l_on",
+                "ch5_sw_a_p_on"
+              ],
               "dialogueId": "ch5_reactor_start"
             }
           ]
@@ -10918,7 +10978,12 @@
               "dialogueId": "ch5_mira_after"
             },
             {
-              "ifItems": ["chalk_blue", "chalk_gold", "chalk_red", "chalk_white"],
+              "ifItems": [
+                "chalk_blue",
+                "chalk_gold",
+                "chalk_red",
+                "chalk_white"
+              ],
               "dialogueId": "ch5_mira_chalk_done"
             },
             {
@@ -11419,51 +11484,87 @@
               "dialogueId": "ch5x_hourglass_done"
             },
             {
-              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_0"],
+              "ifFlags": [
+                "branch_map_ch5_grey_prune_living",
+                "ch5x_sand_0"
+              ],
               "dialogueId": "ch5x_sand_l_0"
             },
             {
-              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_0"],
+              "ifFlags": [
+                "branch_map_ch5_grey_prune_pruned",
+                "ch5x_sand_0"
+              ],
               "dialogueId": "ch5x_sand_p_0"
             },
             {
-              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_1"],
+              "ifFlags": [
+                "branch_map_ch5_grey_prune_living",
+                "ch5x_sand_1"
+              ],
               "dialogueId": "ch5x_sand_l_1"
             },
             {
-              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_1"],
+              "ifFlags": [
+                "branch_map_ch5_grey_prune_pruned",
+                "ch5x_sand_1"
+              ],
               "dialogueId": "ch5x_sand_p_1"
             },
             {
-              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_2"],
+              "ifFlags": [
+                "branch_map_ch5_grey_prune_living",
+                "ch5x_sand_2"
+              ],
               "dialogueId": "ch5x_sand_l_2"
             },
             {
-              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_2"],
+              "ifFlags": [
+                "branch_map_ch5_grey_prune_pruned",
+                "ch5x_sand_2"
+              ],
               "dialogueId": "ch5x_sand_p_2"
             },
             {
-              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_3"],
+              "ifFlags": [
+                "branch_map_ch5_grey_prune_living",
+                "ch5x_sand_3"
+              ],
               "dialogueId": "ch5x_sand_l_3"
             },
             {
-              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_3"],
+              "ifFlags": [
+                "branch_map_ch5_grey_prune_pruned",
+                "ch5x_sand_3"
+              ],
               "dialogueId": "ch5x_sand_p_3"
             },
             {
-              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_4"],
+              "ifFlags": [
+                "branch_map_ch5_grey_prune_living",
+                "ch5x_sand_4"
+              ],
               "dialogueId": "ch5x_sand_l_4"
             },
             {
-              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_4"],
+              "ifFlags": [
+                "branch_map_ch5_grey_prune_pruned",
+                "ch5x_sand_4"
+              ],
               "dialogueId": "ch5x_sand_p_4"
             },
             {
-              "ifFlags": ["branch_map_ch5_grey_prune_living", "ch5x_sand_5"],
+              "ifFlags": [
+                "branch_map_ch5_grey_prune_living",
+                "ch5x_sand_5"
+              ],
               "dialogueId": "ch5x_sand_l_5"
             },
             {
-              "ifFlags": ["branch_map_ch5_grey_prune_pruned", "ch5x_sand_5"],
+              "ifFlags": [
+                "branch_map_ch5_grey_prune_pruned",
+                "ch5x_sand_5"
+              ],
               "dialogueId": "ch5x_sand_p_5"
             }
           ]
@@ -11610,7 +11711,9 @@
           "delayMs": 400,
           "dialogueId": "ch5_grey_arrival",
           "effects": {
-            "setFlags": ["ch5x_sand_0"]
+            "setFlags": [
+              "ch5x_sand_0"
+            ]
           }
         }
       ]
@@ -11733,7 +11836,11 @@
               "dialogueId": "ch5_kuro_after_quiz_open"
             },
             {
-              "ifFlags": ["answered_q1", "answered_q2", "answered_q3"],
+              "ifFlags": [
+                "answered_q1",
+                "answered_q2",
+                "answered_q3"
+              ],
               "dialogueId": "ch5_kuro_after_quiz"
             }
           ]
@@ -13047,7 +13154,10 @@
               "dialogueId": "ch6_gate1_done"
             },
             {
-              "ifFlags": ["ch6_gate1_s1_a", "ch6_gate1_s2_x"],
+              "ifFlags": [
+                "ch6_gate1_s1_a",
+                "ch6_gate1_s2_x"
+              ],
               "dialogueId": "ch6_gate1_right"
             },
             {
@@ -13854,7 +13964,10 @@
               "dialogueId": "ch6_rift_wrong"
             },
             {
-              "ifFlags": ["ch6_alt_origin_on", "ch6_alt_finality_on"],
+              "ifFlags": [
+                "ch6_alt_origin_on",
+                "ch6_alt_finality_on"
+              ],
               "dialogueId": "ch6_rift_right"
             }
           ]
@@ -14586,11 +14699,17 @@
               "dialogueId": "ch6_a1_done"
             },
             {
-              "ifFlags": ["ch6_a1_s1_i", "ch6_a1_s2_u"],
+              "ifFlags": [
+                "ch6_a1_s1_i",
+                "ch6_a1_s2_u"
+              ],
               "dialogueId": "ch6_a1_right"
             },
             {
-              "ifFlags": ["ch6_a1_s1_i", "ch6_a1_s2_x"],
+              "ifFlags": [
+                "ch6_a1_s1_i",
+                "ch6_a1_s2_x"
+              ],
               "dialogueId": "ch6_a1_erase"
             },
             {
@@ -14618,11 +14737,17 @@
               "dialogueId": "ch6_a2_done"
             },
             {
-              "ifFlags": ["ch6_a2_s1_a", "ch6_a2_s2_e"],
+              "ifFlags": [
+                "ch6_a2_s1_a",
+                "ch6_a2_s2_e"
+              ],
               "dialogueId": "ch6_a2_right"
             },
             {
-              "ifFlags": ["ch6_a2_s1_e", "ch6_a2_s2_a"],
+              "ifFlags": [
+                "ch6_a2_s1_e",
+                "ch6_a2_s2_a"
+              ],
               "dialogueId": "ch6_a2_reverse"
             },
             {
@@ -15209,7 +15334,11 @@
               "dialogueId": "ch6_verdict_done"
             },
             {
-              "ifFlags": ["ch6_role_solon_liar", "ch6_role_kael_rev", "ch6_role_vane_keeper"],
+              "ifFlags": [
+                "ch6_role_solon_liar",
+                "ch6_role_kael_rev",
+                "ch6_role_vane_keeper"
+              ],
               "dialogueId": "ch6_verdict_right"
             },
             {
@@ -15726,7 +15855,11 @@
               "dialogueId": "ch6_core_done"
             },
             {
-              "ifFlags": ["ch6_gear_small_iii", "ch6_gear_mid_ii", "ch6_gear_large_i"],
+              "ifFlags": [
+                "ch6_gear_small_iii",
+                "ch6_gear_mid_ii",
+                "ch6_gear_large_i"
+              ],
               "dialogueId": "ch6_core_right"
             },
             {
@@ -16089,7 +16222,11 @@
               "dialogueId": "ch6_cracked_done"
             },
             {
-              "ifItems": ["quartz_oil_gallery", "quartz_oil_core", "quartz_oil_bell"],
+              "ifItems": [
+                "quartz_oil_gallery",
+                "quartz_oil_core",
+                "quartz_oil_bell"
+              ],
               "ifFlag": "solved_chime_bell",
               "dialogueId": "ch6_cracked_polish"
             },
@@ -16777,15 +16914,27 @@
               "dialogueId": "ch6_threshold_done"
             },
             {
-              "ifFlags": ["ch6_th_s1_e", "ch6_th_s2_n", "ch6_th_s3_x"],
+              "ifFlags": [
+                "ch6_th_s1_e",
+                "ch6_th_s2_n",
+                "ch6_th_s3_x"
+              ],
               "dialogueId": "ch6_threshold_right"
             },
             {
-              "ifFlags": ["ch6_th_s1_e", "ch6_th_s2_x", "ch6_th_s3_none"],
+              "ifFlags": [
+                "ch6_th_s1_e",
+                "ch6_th_s2_x",
+                "ch6_th_s3_none"
+              ],
               "dialogueId": "ch6_threshold_wrong_ex"
             },
             {
-              "ifFlags": ["ch6_th_s1_n", "ch6_th_s2_x", "ch6_th_s3_none"],
+              "ifFlags": [
+                "ch6_th_s1_n",
+                "ch6_th_s2_x",
+                "ch6_th_s3_none"
+              ],
               "dialogueId": "ch6_threshold_wrong_nx"
             },
             {
@@ -18345,7 +18494,11 @@
               "dialogueId": "ch6_nook_done"
             },
             {
-              "ifFlags": ["ch6_nk_s1_a", "ch6_nk_s2_n", "ch6_nk_s3_x"],
+              "ifFlags": [
+                "ch6_nk_s1_a",
+                "ch6_nk_s2_n",
+                "ch6_nk_s3_x"
+              ],
               "dialogueId": "ch6_nook_right"
             },
             {
@@ -18774,7 +18927,11 @@
               "dialogueId": "ch7_c01_done"
             },
             {
-              "ifFlags": ["ch7_c01_s1_a", "ch7_c01_s2_n", "ch7_c01_s3_h"],
+              "ifFlags": [
+                "ch7_c01_s1_a",
+                "ch7_c01_s2_n",
+                "ch7_c01_s3_h"
+              ],
               "dialogueId": "ch7_c01_right"
             },
             {
@@ -19083,7 +19240,11 @@
               "dialogueId": "ch7_c02_done"
             },
             {
-              "ifFlags": ["ch7_window_1_lam", "ch7_window_2_vang", "ch7_window_3_trang"],
+              "ifFlags": [
+                "ch7_window_1_lam",
+                "ch7_window_2_vang",
+                "ch7_window_3_trang"
+              ],
               "dialogueId": "ch7_c02_right"
             },
             {
@@ -19204,7 +19365,11 @@
       ],
       "dialChecks": [
         {
-          "ifFlags": ["ch7_window_1_lam", "ch7_window_2_vang", "ch7_window_3_trang"],
+          "ifFlags": [
+            "ch7_window_1_lam",
+            "ch7_window_2_vang",
+            "ch7_window_3_trang"
+          ],
           "unlessFlag": "opened_erased_hamlet_gate",
           "dialogueId": "ch7_c02_right"
         }
@@ -19425,7 +19590,11 @@
               "dialogueId": "ch7_mother_restored"
             },
             {
-              "ifFlags": ["ch7_c03_s1_tran", "ch7_c03_s2_thi", "ch7_c03_s3_mai"],
+              "ifFlags": [
+                "ch7_c03_s1_tran",
+                "ch7_c03_s2_thi",
+                "ch7_c03_s3_mai"
+              ],
               "dialogueId": "ch7_c03_right"
             },
             {
@@ -19735,7 +19904,11 @@
               "dialogueId": "ch7_c04_done"
             },
             {
-              "ifFlags": ["ch7_funnel_1_iron", "ch7_funnel_2_star", "ch7_funnel_3_quartz"],
+              "ifFlags": [
+                "ch7_funnel_1_iron",
+                "ch7_funnel_2_star",
+                "ch7_funnel_3_quartz"
+              ],
               "dialogueId": "ch7_c04_right"
             },
             {
@@ -20081,7 +20254,9 @@
               "dialogueId": "ch7_c05_done"
             },
             {
-              "ifFlags": ["ch7_captain_b"],
+              "ifFlags": [
+                "ch7_captain_b"
+              ],
               "dialogueId": "ch7_c05_right"
             },
             {
@@ -20157,7 +20332,11 @@
               "dialogueId": "ch7_compass_done"
             },
             {
-              "ifItems": ["compass_shard_1", "compass_shard_2", "compass_shard_3"],
+              "ifItems": [
+                "compass_shard_1",
+                "compass_shard_2",
+                "compass_shard_3"
+              ],
               "dialogueId": "ch7_compass_place"
             }
           ]
@@ -20356,7 +20535,12 @@
               "dialogueId": "ch7_c06_done"
             },
             {
-              "ifFlags": ["ch7_clock_q12_8", "ch7_clock_q3_11", "ch7_clock_q6_2", "ch7_clock_q9_5"],
+              "ifFlags": [
+                "ch7_clock_q12_8",
+                "ch7_clock_q3_11",
+                "ch7_clock_q6_2",
+                "ch7_clock_q9_5"
+              ],
               "dialogueId": "ch7_c06_right"
             },
             {
@@ -21264,7 +21448,12 @@
               "dialogueId": "ch7_c07_done"
             },
             {
-              "ifFlags": ["ch7_shelf_1_a", "ch7_shelf_2_b", "ch7_shelf_3_c", "ch7_shelf_4_d"],
+              "ifFlags": [
+                "ch7_shelf_1_a",
+                "ch7_shelf_2_b",
+                "ch7_shelf_3_c",
+                "ch7_shelf_4_d"
+              ],
               "dialogueId": "ch7_c07_right"
             },
             {
@@ -21563,7 +21752,11 @@
               "dialogueId": "ch7_c08_done"
             },
             {
-              "ifFlags": ["ch7_box_day_15", "ch7_box_month_07", "ch7_box_age_14"],
+              "ifFlags": [
+                "ch7_box_day_15",
+                "ch7_box_month_07",
+                "ch7_box_age_14"
+              ],
               "dialogueId": "ch7_c08_right"
             },
             {
@@ -22069,7 +22262,11 @@
               "dialogueId": "ch7_c12_done"
             },
             {
-              "ifFlags": ["ch7_word_1_me1", "ch7_word_2_cho1", "ch7_word_3_ben2"],
+              "ifFlags": [
+                "ch7_word_1_me1",
+                "ch7_word_2_cho1",
+                "ch7_word_3_ben2"
+              ],
               "dialogueId": "ch7_c12_right"
             },
             {
@@ -22871,7 +23068,11 @@
               "dialogueId": "ch7_core_done"
             },
             {
-              "ifFlags": ["ch7_valve_1_trai", "ch7_valve_2_giua", "ch7_valve_3_phai"],
+              "ifFlags": [
+                "ch7_valve_1_trai",
+                "ch7_valve_2_giua",
+                "ch7_valve_3_phai"
+              ],
               "dialogueId": "ch7_c13_right"
             }
           ]
@@ -23065,6 +23266,5876 @@
           },
           "onceFlag": "ch7_t_end_seen",
           "dialogueId": "ch7_end_1"
+        }
+      ]
+    },
+    "map_ch8_null_rift_landing": {
+      "id": "map_ch8_null_rift_landing",
+      "name": "Bãi Đáp Khe Nứt",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_null_rift_landing",
+        "path": "assets/maps/map_ch8_null_rift_landing.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 3,
+          "y": 9
+        },
+        "from_ch7": {
+          "x": 3,
+          "y": 9
+        },
+        "from_shore": {
+          "x": 22,
+          "y": 9
+        }
+      },
+      "revive": {
+        "x": 3,
+        "y": 9
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch8_rift",
+          "tile": {
+            "x": 20,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Nhìn qua đường may",
+          "dialogueId": "ch8_rift_note"
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch8_a1",
+          "tile": {
+            "x": 5,
+            "y": 7
+          },
+          "radius": 40,
+          "prompt": "[E] Cọc Neo (kênh nước)",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa neo)"
+            },
+            {
+              "key": "kh",
+              "label": "Khánh Hòa"
+            },
+            {
+              "key": "beta",
+              "label": "Thành Phố Beta"
+            }
+          ]
+        },
+        {
+          "id": "ch8_a2",
+          "tile": {
+            "x": 12,
+            "y": 7
+          },
+          "radius": 40,
+          "prompt": "[E] Cọc Neo (khe nứt)",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa neo)"
+            },
+            {
+              "key": "kh",
+              "label": "Khánh Hòa"
+            },
+            {
+              "key": "beta",
+              "label": "Thành Phố Beta"
+            }
+          ]
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "ch8_a1_kh"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 8,
+              "y": 8
+            },
+            {
+              "x": 9,
+              "y": 8
+            },
+            {
+              "x": 8,
+              "y": 9
+            },
+            {
+              "x": 9,
+              "y": 9
+            },
+            {
+              "x": 8,
+              "y": 10
+            },
+            {
+              "x": 9,
+              "y": 10
+            }
+          ],
+          "index": 54
+        },
+        {
+          "when": {
+            "flag": "ch8_a2_beta"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 16,
+              "y": 8
+            },
+            {
+              "x": 17,
+              "y": 8
+            },
+            {
+              "x": 16,
+              "y": 9
+            },
+            {
+              "x": 17,
+              "y": 9
+            },
+            {
+              "x": 16,
+              "y": 10
+            },
+            {
+              "x": 17,
+              "y": 10
+            }
+          ],
+          "index": 55
+        },
+        {
+          "when": {
+            "flag": "ch8_a1_kh"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 5,
+              "y": 7
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_a1_beta"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 5,
+              "y": 7
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_a2_kh"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 12,
+              "y": 7
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_a2_beta"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 12,
+              "y": 7
+            }
+          ],
+          "index": 18
+        }
+      ],
+      "exits": [
+        {
+          "id": "landing_to_shore",
+          "area": {
+            "x": 25,
+            "y": 9,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_steel_tide_shore",
+          "toSpawn": "from_landing"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_arrival",
+          "on": "arrive",
+          "onceFlag": "ch8_t_arrival_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_arrival",
+          "requiresFlag": "ch7_kuro_embraced"
+        },
+        {
+          "id": "ch8_t_arrival_b",
+          "on": "arrive",
+          "onceFlag": "ch8_t_arrival_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_arrival_b",
+          "unlessFlag": "ch7_kuro_embraced"
+        },
+        {
+          "id": "ch8_t_anchor",
+          "on": "zone",
+          "area": {
+            "x": 3,
+            "y": 5,
+            "w": 4,
+            "h": 6
+          },
+          "onceFlag": "ch8_t_anchor_seen",
+          "dialogueId": "ch8_anchor_intro"
+        },
+        {
+          "id": "ch8_t_guilt",
+          "on": "zone",
+          "area": {
+            "x": 10,
+            "y": 3,
+            "w": 6,
+            "h": 12
+          },
+          "onceFlag": "ch8_t_guilt_seen",
+          "dialogueId": "ch8_kuro_guilt",
+          "unlessFlag": "ch6_kuro_ally"
+        },
+        {
+          "id": "ch8_t_c01",
+          "on": "zone",
+          "area": {
+            "x": 19,
+            "y": 3,
+            "w": 5,
+            "h": 13
+          },
+          "onceFlag": "ch8_t_c01_seen",
+          "dialogueId": "ch8_c01_done"
+        }
+      ]
+    },
+    "map_ch8_steel_tide_shore": {
+      "id": "map_ch8_steel_tide_shore",
+      "name": "Bờ Biển Thép",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_steel_tide_shore",
+        "path": "assets/maps/map_ch8_steel_tide_shore.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 3,
+          "y": 10
+        },
+        "from_landing": {
+          "x": 3,
+          "y": 10
+        },
+        "from_market": {
+          "x": 26,
+          "y": 10
+        }
+      },
+      "revive": {
+        "x": 3,
+        "y": 10
+      },
+      "npcs": [
+        {
+          "id": "npc_ch8_coba",
+          "texture": "npc_vendor_ba",
+          "anim": "npc_vendor_ba_idle",
+          "tile": {
+            "x": 19,
+            "y": 15
+          },
+          "name": "Cô Ba",
+          "prompt": "[E] Nói chuyện với Cô Ba",
+          "radius": 44,
+          "dialogueId": "ch8_coba",
+          "dialogueRules": [
+            {
+              "ifFlag": "solved_na_chalk_shore",
+              "dialogueId": "ch8_c02_done"
+            }
+          ]
+        },
+        {
+          "id": "npc_ch8_na",
+          "texture": "npc_forgotten_child",
+          "anim": "npc_forgotten_child_flicker",
+          "tile": {
+            "x": 10,
+            "y": 12
+          },
+          "name": "bé Na",
+          "prompt": "[E] Nói chuyện với bé Na",
+          "radius": 44,
+          "dialogueId": "ch8_na",
+          "dialogueRules": [
+            {
+              "ifFlag": "gave_na_papers",
+              "dialogueId": "ch8_na_thanks"
+            },
+            {
+              "ifItems": [
+                "colored_paper_red",
+                "colored_paper_blue",
+                "colored_paper_gold"
+              ],
+              "dialogueId": "ch8_na_give"
+            },
+            {
+              "ifFlag": "ch8_na_asked",
+              "dialogueId": "ch8_na_waiting"
+            },
+            {
+              "ifFlag": "completed_na_crane_quest",
+              "dialogueId": "ch8_na_crane_short"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch8_chalk",
+          "tile": {
+            "x": 11,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Xem bức vẽ phấn",
+          "dialogueId": "ch8_chalk"
+        },
+        {
+          "id": "poi_ch8_boat",
+          "tile": {
+            "x": 20,
+            "y": 14
+          },
+          "radius": 44,
+          "prompt": "[E] Đẩy thuyền",
+          "dialogueId": "ch8_c02_hint_3",
+          "dialogueRules": [
+            {
+              "ifFlag": "solved_na_chalk_shore",
+              "dialogueId": "ch8_c02_done"
+            },
+            {
+              "unlessFlag": "ch8_c02_p1_kh",
+              "dialogueId": "ch8_c02_hint_1"
+            },
+            {
+              "unlessFlag": "ch8_c02_p2_beta",
+              "dialogueId": "ch8_c02_hint_2"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch8_paper_red",
+          "tile": {
+            "x": 5,
+            "y": 16
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt tờ giấy",
+          "dialogueId": "ch8_paper_red",
+          "visibleWhen": {
+            "unlessFlag": "took_colored_paper_red"
+          }
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch8_c02_p1",
+          "tile": {
+            "x": 4,
+            "y": 6
+          },
+          "radius": 40,
+          "prompt": "[E] Cọc Neo 1",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa neo)"
+            },
+            {
+              "key": "kh",
+              "label": "Khánh Hòa"
+            },
+            {
+              "key": "beta",
+              "label": "Thành Phố Beta"
+            }
+          ]
+        },
+        {
+          "id": "ch8_c02_p2",
+          "tile": {
+            "x": 15,
+            "y": 11
+          },
+          "radius": 40,
+          "prompt": "[E] Cọc Neo 2",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa neo)"
+            },
+            {
+              "key": "kh",
+              "label": "Khánh Hòa"
+            },
+            {
+              "key": "beta",
+              "label": "Thành Phố Beta"
+            }
+          ]
+        },
+        {
+          "id": "ch8_c02_p3",
+          "tile": {
+            "x": 24,
+            "y": 12
+          },
+          "radius": 40,
+          "prompt": "[E] Cọc Neo 3",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa neo)"
+            },
+            {
+              "key": "kh",
+              "label": "Khánh Hòa"
+            },
+            {
+              "key": "beta",
+              "label": "Thành Phố Beta"
+            }
+          ]
+        }
+      ],
+      "dialChecks": [
+        {
+          "ifFlags": [
+            "ch8_c02_p1_kh",
+            "ch8_c02_p2_beta",
+            "ch8_c02_p3_kh"
+          ],
+          "unlessFlag": "solved_na_chalk_shore",
+          "dialogueId": "ch8_c02_right"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "ch8_assim_s0",
+          "enemyId": "enemy_assimilator",
+          "texture": "enemy_assimilator",
+          "anim": "enemy_assimilator_idle",
+          "tile": {
+            "x": 17,
+            "y": 5
+          }
+        },
+        {
+          "id": "ch8_assim_s1",
+          "enemyId": "enemy_assimilator",
+          "texture": "enemy_assimilator",
+          "anim": "enemy_assimilator_idle",
+          "tile": {
+            "x": 24,
+            "y": 17
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "ch8_c02_p1_kh"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 6,
+              "y": 4
+            }
+          ],
+          "index": 19
+        },
+        {
+          "when": {
+            "flag": "ch8_c02_p1_beta"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 6,
+              "y": 4
+            }
+          ],
+          "index": 20
+        },
+        {
+          "when": {
+            "flag": "ch8_c02_p2_beta"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 13,
+              "y": 9
+            },
+            {
+              "x": 14,
+              "y": 9
+            },
+            {
+              "x": 15,
+              "y": 9
+            },
+            {
+              "x": 16,
+              "y": 9
+            },
+            {
+              "x": 17,
+              "y": 9
+            }
+          ],
+          "index": 58
+        },
+        {
+          "when": {
+            "flag": "ch8_c02_p3_kh"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 23,
+              "y": 14
+            },
+            {
+              "x": 24,
+              "y": 14
+            },
+            {
+              "x": 25,
+              "y": 14
+            },
+            {
+              "x": 26,
+              "y": 14
+            }
+          ],
+          "index": 23
+        },
+        {
+          "when": {
+            "flag": "ch8_c02_p3_beta"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 23,
+              "y": 14
+            },
+            {
+              "x": 24,
+              "y": 14
+            },
+            {
+              "x": 25,
+              "y": 14
+            },
+            {
+              "x": 26,
+              "y": 14
+            }
+          ],
+          "index": 49
+        },
+        {
+          "when": {
+            "flag": "ch8_c02_p1_kh"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 4,
+              "y": 6
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_c02_p1_beta"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 4,
+              "y": 6
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_c02_p2_kh"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 15,
+              "y": 11
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_c02_p2_beta"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 15,
+              "y": 11
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_c02_p3_kh"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 24,
+              "y": 12
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_c02_p3_beta"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 24,
+              "y": 12
+            }
+          ],
+          "index": 18
+        }
+      ],
+      "exits": [
+        {
+          "id": "shore_to_landing",
+          "area": {
+            "x": 0,
+            "y": 10,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_null_rift_landing",
+          "toSpawn": "from_shore"
+        },
+        {
+          "id": "shore_to_market",
+          "area": {
+            "x": 29,
+            "y": 10,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_gear_market",
+          "toSpawn": "from_shore",
+          "requiresFlag": "solved_na_chalk_shore",
+          "lockedDialogueId": "ch8_shore_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_shore",
+          "on": "arrive",
+          "onceFlag": "ch8_t_shore_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_shore_arrival"
+        }
+      ]
+    },
+    "map_ch8_gear_market": {
+      "id": "map_ch8_gear_market",
+      "name": "Chợ Bánh Răng",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_gear_market",
+        "path": "assets/maps/map_ch8_gear_market.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 3,
+          "y": 10
+        },
+        "from_foundry_gate": {
+          "x": 23,
+          "y": 10
+        },
+        "from_shore": {
+          "x": 3,
+          "y": 10
+        },
+        "from_vault": {
+          "x": 23,
+          "y": 13
+        }
+      },
+      "revive": {
+        "x": 3,
+        "y": 10
+      },
+      "npcs": [
+        {
+          "id": "npc_ch8_ivo",
+          "texture": "npc_ivo",
+          "anim": "npc_ivo_idle",
+          "tile": {
+            "x": 14,
+            "y": 11
+          },
+          "name": "Ivo",
+          "prompt": "[E] Nói chuyện với Ivo",
+          "radius": 44,
+          "dialogueId": "ch8_ivo",
+          "visibleWhen": {
+            "unlessFlag": "ivo_joined"
+          }
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch8_notebook",
+          "tile": {
+            "x": 9,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc sổ tay Ivo",
+          "dialogueId": "ch8_notebook"
+        },
+        {
+          "id": "poi_ch8_c03",
+          "tile": {
+            "x": 26,
+            "y": 10
+          },
+          "radius": 40,
+          "prompt": "[E] Thử cửa xưởng",
+          "dialogueId": "ch8_c03_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "solved_ivo_gears",
+              "dialogueId": "ch8_c03_done"
+            },
+            {
+              "ifFlag": "ch8_gear_mid_none",
+              "dialogueId": "ch8_notebook"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch8_secret1",
+          "tile": {
+            "x": 4,
+            "y": 5
+          },
+          "radius": 44,
+          "prompt": "[E] Xem dưới sạp hàng",
+          "dialogueId": "ch8_secret1_take",
+          "visibleWhen": {
+            "flag": "solved_ivo_gears",
+            "unlessFlag": "took_world_secret_seam_thread"
+          }
+        },
+        {
+          "id": "poi_ch8_vault",
+          "tile": {
+            "x": 23,
+            "y": 15
+          },
+          "radius": 44,
+          "prompt": "[E] Xem đống thùng thép",
+          "dialogueId": "ch8_vault_locked",
+          "visibleWhen": {
+            "unlessFlag": "opened_ledger_vault"
+          },
+          "dialogueRules": [
+            {
+              "ifItem": "kuro_ledger",
+              "dialogueId": "ch8_vault_open"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch8_gear_mid",
+          "tile": {
+            "x": 12,
+            "y": 8
+          },
+          "radius": 40,
+          "prompt": "[E] Bánh răng giữa",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "t8",
+              "label": "8 răng"
+            },
+            {
+              "key": "t12",
+              "label": "12 răng"
+            },
+            {
+              "key": "t16",
+              "label": "16 răng"
+            },
+            {
+              "key": "t24",
+              "label": "24 răng"
+            }
+          ]
+        },
+        {
+          "id": "ch8_gear_out",
+          "tile": {
+            "x": 15,
+            "y": 8
+          },
+          "radius": 40,
+          "prompt": "[E] Bánh răng ra",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "t8",
+              "label": "8 răng"
+            },
+            {
+              "key": "t12",
+              "label": "12 răng"
+            },
+            {
+              "key": "t16",
+              "label": "16 răng"
+            },
+            {
+              "key": "t24",
+              "label": "24 răng"
+            }
+          ]
+        }
+      ],
+      "dialChecks": [
+        {
+          "ifFlags": [
+            "ch8_gear_mid_t16",
+            "ch8_gear_out_t24"
+          ],
+          "unlessFlag": "solved_ivo_gears",
+          "dialogueId": "ch8_c03_right"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "ch8_assim_m0",
+          "enemyId": "enemy_assimilator",
+          "texture": "enemy_assimilator",
+          "anim": "enemy_assimilator_idle",
+          "tile": {
+            "x": 8,
+            "y": 14
+          }
+        },
+        {
+          "id": "ch8_assim_m1",
+          "enemyId": "enemy_assimilator",
+          "texture": "enemy_assimilator",
+          "anim": "enemy_assimilator_idle",
+          "tile": {
+            "x": 20,
+            "y": 15
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "solved_ivo_gears"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 26,
+              "y": 10
+            }
+          ],
+          "index": 49
+        },
+        {
+          "when": {
+            "flag": "opened_ledger_vault"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 23,
+              "y": 15
+            }
+          ],
+          "index": 49
+        }
+      ],
+      "exits": [
+        {
+          "id": "market_to_shore",
+          "area": {
+            "x": 0,
+            "y": 10,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_steel_tide_shore",
+          "toSpawn": "from_market"
+        },
+        {
+          "id": "market_to_foundry",
+          "area": {
+            "x": 27,
+            "y": 10,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_drowned_foundry",
+          "toSpawn": "from_market",
+          "requiresFlag": "solved_ivo_gears",
+          "lockedDialogueId": "ch8_market_exit_locked"
+        },
+        {
+          "id": "market_to_vault",
+          "area": {
+            "x": 23,
+            "y": 15,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_blank_ledger_vault",
+          "toSpawn": "from_market",
+          "requiresFlag": "opened_ledger_vault",
+          "lockedDialogueId": "ch8_vault_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_market",
+          "on": "arrive",
+          "onceFlag": "ch8_t_market_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_market_arrival"
+        }
+      ]
+    },
+    "map_ch8_drowned_foundry": {
+      "id": "map_ch8_drowned_foundry",
+      "name": "Xưởng Đúc Chìm",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_drowned_foundry",
+        "path": "assets/maps/map_ch8_drowned_foundry.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 3,
+          "y": 10
+        },
+        "from_market": {
+          "x": 3,
+          "y": 10
+        },
+        "from_forum": {
+          "x": 13,
+          "y": 4
+        }
+      },
+      "revive": {
+        "x": 3,
+        "y": 10
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch8_crucible",
+          "tile": {
+            "x": 13,
+            "y": 15
+          },
+          "radius": 44,
+          "prompt": "[E] Xem nồi nấu",
+          "dialogueId": "ch8_crucible"
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "roamers": [
+        {
+          "id": "ch8_bell_f0",
+          "enemyId": "enemy_doom_bell",
+          "texture": "enemy_doom_bell",
+          "anim": "enemy_doom_bell_idle",
+          "tile": {
+            "x": 12,
+            "y": 9
+          }
+        },
+        {
+          "id": "ch8_bell_f1",
+          "enemyId": "enemy_doom_bell",
+          "texture": "enemy_doom_bell",
+          "anim": "enemy_doom_bell_idle",
+          "tile": {
+            "x": 22,
+            "y": 6
+          }
+        },
+        {
+          "id": "ch8_assim_f0",
+          "enemyId": "enemy_assimilator",
+          "texture": "enemy_assimilator",
+          "anim": "enemy_assimilator_idle",
+          "tile": {
+            "x": 22,
+            "y": 14
+          }
+        }
+      ],
+      "exits": [
+        {
+          "id": "foundry_to_market",
+          "area": {
+            "x": 0,
+            "y": 10,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_gear_market",
+          "toSpawn": "from_foundry_gate"
+        },
+        {
+          "id": "foundry_to_forum",
+          "area": {
+            "x": 13,
+            "y": 0,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_ragged_forum",
+          "toSpawn": "from_foundry"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_foundry",
+          "on": "arrive",
+          "onceFlag": "ch8_t_foundry_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_foundry_arrival"
+        },
+        {
+          "id": "ch8_t_bells",
+          "on": "zone",
+          "area": {
+            "x": 3,
+            "y": 7,
+            "w": 3,
+            "h": 6
+          },
+          "onceFlag": "ch8_t_bells_seen",
+          "dialogueId": "ch8_ivo_bells"
+        },
+        {
+          "id": "ch8_t_fb1",
+          "on": "zone",
+          "area": {
+            "x": 10,
+            "y": 8,
+            "w": 6,
+            "h": 5
+          },
+          "onceFlag": "ch8_t_fb1_seen",
+          "dialogueId": "ch8_fb1"
+        }
+      ]
+    },
+    "map_ch8_ragged_forum": {
+      "id": "map_ch8_ragged_forum",
+      "name": "Quảng Trường Cờ Rách",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_ragged_forum",
+        "path": "assets/maps/map_ch8_ragged_forum.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 15,
+          "y": 16
+        },
+        "from_foundry": {
+          "x": 15,
+          "y": 16
+        },
+        "from_barracks": {
+          "x": 25,
+          "y": 10
+        }
+      },
+      "revive": {
+        "x": 15,
+        "y": 16
+      },
+      "npcs": [
+        {
+          "id": "npc_ch8_lyra",
+          "texture": "npc_lyra",
+          "anim": "npc_lyra_idle",
+          "tile": {
+            "x": 15,
+            "y": 9
+          },
+          "name": "Lyra",
+          "prompt": "[E] Nói chuyện với Lyra",
+          "radius": 44,
+          "dialogueId": "ch8_lyra",
+          "visibleWhen": {
+            "unlessFlag": "lyra_joined"
+          }
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch8_clue1",
+          "tile": {
+            "x": 5,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia mực đen",
+          "dialogueId": "ch8_clue_1"
+        },
+        {
+          "id": "poi_ch8_clue2",
+          "tile": {
+            "x": 5,
+            "y": 13
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia mực đen",
+          "dialogueId": "ch8_clue_2"
+        },
+        {
+          "id": "poi_ch8_clue3",
+          "tile": {
+            "x": 24,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc cờ mực vàng",
+          "dialogueId": "ch8_clue_3"
+        },
+        {
+          "id": "poi_ch8_c04",
+          "tile": {
+            "x": 15,
+            "y": 7
+          },
+          "radius": 44,
+          "prompt": "[E] Kể lại trận đánh",
+          "dialogueId": "ch8_c04_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "solved_ragged_causality",
+              "dialogueId": "ch8_c04_done"
+            },
+            {
+              "ifFlag": "ch8_banner_1_none",
+              "dialogueId": "ch8_banner_events"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch8_paper_blue",
+          "tile": {
+            "x": 26,
+            "y": 16
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt tờ giấy",
+          "dialogueId": "ch8_paper_blue",
+          "visibleWhen": {
+            "unlessFlag": "took_colored_paper_blue"
+          }
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch8_banner_1",
+          "tile": {
+            "x": 9,
+            "y": 6
+          },
+          "radius": 40,
+          "prompt": "[E] Cờ thứ 1",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "a",
+              "label": "Trống trận vang"
+            },
+            {
+              "key": "b",
+              "label": "Cổng thành mở"
+            },
+            {
+              "key": "c",
+              "label": "Cờ đỏ rách"
+            },
+            {
+              "key": "d",
+              "label": "Hoàng đế ra lệnh"
+            }
+          ]
+        },
+        {
+          "id": "ch8_banner_2",
+          "tile": {
+            "x": 13,
+            "y": 6
+          },
+          "radius": 40,
+          "prompt": "[E] Cờ thứ 2",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "a",
+              "label": "Trống trận vang"
+            },
+            {
+              "key": "b",
+              "label": "Cổng thành mở"
+            },
+            {
+              "key": "c",
+              "label": "Cờ đỏ rách"
+            },
+            {
+              "key": "d",
+              "label": "Hoàng đế ra lệnh"
+            }
+          ]
+        },
+        {
+          "id": "ch8_banner_3",
+          "tile": {
+            "x": 17,
+            "y": 6
+          },
+          "radius": 40,
+          "prompt": "[E] Cờ thứ 3",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "a",
+              "label": "Trống trận vang"
+            },
+            {
+              "key": "b",
+              "label": "Cổng thành mở"
+            },
+            {
+              "key": "c",
+              "label": "Cờ đỏ rách"
+            },
+            {
+              "key": "d",
+              "label": "Hoàng đế ra lệnh"
+            }
+          ]
+        },
+        {
+          "id": "ch8_banner_4",
+          "tile": {
+            "x": 21,
+            "y": 6
+          },
+          "radius": 40,
+          "prompt": "[E] Cờ thứ 4",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "a",
+              "label": "Trống trận vang"
+            },
+            {
+              "key": "b",
+              "label": "Cổng thành mở"
+            },
+            {
+              "key": "c",
+              "label": "Cờ đỏ rách"
+            },
+            {
+              "key": "d",
+              "label": "Hoàng đế ra lệnh"
+            }
+          ]
+        }
+      ],
+      "dialChecks": [
+        {
+          "ifFlags": [
+            "ch8_banner_1_d",
+            "ch8_banner_2_a",
+            "ch8_banner_3_c",
+            "ch8_banner_4_b"
+          ],
+          "unlessFlag": "solved_ragged_causality",
+          "dialogueId": "ch8_c04_right"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "ch8_legion_r0",
+          "enemyId": "enemy_twin_era_legionnaire",
+          "texture": "enemy_twin_era_legionnaire",
+          "anim": "enemy_twin_era_legionnaire_idle",
+          "tile": {
+            "x": 10,
+            "y": 12
+          }
+        },
+        {
+          "id": "ch8_assim_r0",
+          "enemyId": "enemy_assimilator",
+          "texture": "enemy_assimilator",
+          "anim": "enemy_assimilator_idle",
+          "tile": {
+            "x": 20,
+            "y": 12
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "solved_ragged_causality"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 28,
+              "y": 10
+            }
+          ],
+          "index": 50
+        }
+      ],
+      "exits": [
+        {
+          "id": "forum_to_foundry",
+          "area": {
+            "x": 15,
+            "y": 19,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_drowned_foundry",
+          "toSpawn": "from_forum"
+        },
+        {
+          "id": "forum_to_barracks",
+          "area": {
+            "x": 29,
+            "y": 10,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_twin_era_barracks",
+          "toSpawn": "from_forum",
+          "requiresFlag": "solved_ragged_causality",
+          "lockedDialogueId": "ch8_forum_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_forum",
+          "on": "arrive",
+          "onceFlag": "ch8_t_forum_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_forum_arrival"
+        }
+      ]
+    },
+    "map_ch8_twin_era_barracks": {
+      "id": "map_ch8_twin_era_barracks",
+      "name": "Doanh Trại Hai Thời",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_twin_era_barracks",
+        "path": "assets/maps/map_ch8_twin_era_barracks.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 10
+        },
+        "from_forum": {
+          "x": 2,
+          "y": 10
+        },
+        "from_bridge": {
+          "x": 26,
+          "y": 10
+        },
+        "from_archive": {
+          "x": 5,
+          "y": 18
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 10
+      },
+      "npcs": [
+        {
+          "id": "npc_ch8_bran",
+          "texture": "npc_soldier_bran",
+          "anim": "npc_soldier_bran_idle",
+          "tile": {
+            "x": 14,
+            "y": 14
+          },
+          "name": "hồn Bran",
+          "prompt": "[E] Nói chuyện với hồn Bran",
+          "radius": 44,
+          "dialogueId": "ch8_bran",
+          "visibleWhen": {
+            "flag": "ch4_choice_bran_memorial"
+          }
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch8_bran_tag",
+          "tile": {
+            "x": 14,
+            "y": 14
+          },
+          "radius": 44,
+          "prompt": "[E] Xem thẻ bài",
+          "dialogueId": "ch8_bran_tag",
+          "visibleWhen": {
+            "unlessFlag": "ch4_choice_bran_memorial"
+          }
+        },
+        {
+          "id": "poi_ch8_kuro_post",
+          "tile": {
+            "x": 18,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Hỏi Kuro",
+          "dialogueId": "ch8_kuro_post"
+        },
+        {
+          "id": "poi_ch8_barricade",
+          "tile": {
+            "x": 5,
+            "y": 19
+          },
+          "radius": 44,
+          "prompt": "[E] Xem đống chướng ngại",
+          "dialogueId": "ch8_barricade",
+          "visibleWhen": {
+            "unlessFlag": "broke_archive_barricade"
+          },
+          "dialogueRules": [
+            {
+              "ifFlag": "ch8_with_lyra",
+              "dialogueId": "ch8_barricade_break"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch8_compass",
+          "tile": {
+            "x": 3,
+            "y": 18
+          },
+          "radius": 44,
+          "prompt": "[E] Xem la bàn",
+          "dialogueId": "ch8_compass_hint",
+          "visibleWhen": {
+            "flag": "calibrated_blind_compass",
+            "unlessFlag": "broke_archive_barricade"
+          }
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch8_c05_p1",
+          "tile": {
+            "x": 4,
+            "y": 6
+          },
+          "radius": 40,
+          "prompt": "[E] Cọc Neo 1",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa neo)"
+            },
+            {
+              "key": "s",
+              "label": "Sol-Karis"
+            },
+            {
+              "key": "w",
+              "label": "Chiến hào"
+            }
+          ]
+        },
+        {
+          "id": "ch8_c05_p2",
+          "tile": {
+            "x": 15,
+            "y": 6
+          },
+          "radius": 40,
+          "prompt": "[E] Cọc Neo 2",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa neo)"
+            },
+            {
+              "key": "w",
+              "label": "Chiến hào"
+            },
+            {
+              "key": "s",
+              "label": "Sol-Karis"
+            }
+          ]
+        },
+        {
+          "id": "ch8_c05_p3",
+          "tile": {
+            "x": 25,
+            "y": 6
+          },
+          "radius": 40,
+          "prompt": "[E] Cọc Neo 3",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa neo)"
+            },
+            {
+              "key": "s",
+              "label": "Sol-Karis"
+            },
+            {
+              "key": "w",
+              "label": "Chiến hào"
+            }
+          ]
+        },
+        {
+          "id": "ch8_c05_p3",
+          "tile": {
+            "x": 18,
+            "y": 7
+          },
+          "radius": 40,
+          "prompt": "[E] Nhờ Kuro xoay Cọc Neo 3 (bên kia)",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa neo)"
+            },
+            {
+              "key": "s",
+              "label": "Sol-Karis"
+            },
+            {
+              "key": "w",
+              "label": "Chiến hào"
+            }
+          ]
+        }
+      ],
+      "roamers": [
+        {
+          "id": "ch8_legion_b0",
+          "enemyId": "enemy_twin_era_legionnaire",
+          "texture": "enemy_twin_era_legionnaire",
+          "anim": "enemy_twin_era_legionnaire_idle",
+          "tile": {
+            "x": 6,
+            "y": 13
+          }
+        },
+        {
+          "id": "ch8_legion_b1",
+          "enemyId": "enemy_twin_era_legionnaire",
+          "texture": "enemy_twin_era_legionnaire",
+          "anim": "enemy_twin_era_legionnaire_idle",
+          "tile": {
+            "x": 24,
+            "y": 15
+          }
+        },
+        {
+          "id": "ch8_wraith_b0",
+          "enemyId": "enemy_phase_wraith",
+          "texture": "enemy_phase_wraith",
+          "anim": "enemy_phase_wraith_idle",
+          "tile": {
+            "x": 14,
+            "y": 12
+          }
+        },
+        {
+          "id": "ch8_wraith_b1",
+          "enemyId": "enemy_phase_wraith",
+          "texture": "enemy_phase_wraith",
+          "anim": "enemy_phase_wraith_idle",
+          "tile": {
+            "x": 25,
+            "y": 17
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "ch8_c05_p1_w"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 10,
+              "y": 10
+            },
+            {
+              "x": 10,
+              "y": 11
+            }
+          ],
+          "index": 56
+        },
+        {
+          "when": {
+            "flag": "ch8_c05_p1_s"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 10,
+              "y": 10
+            },
+            {
+              "x": 10,
+              "y": 11
+            }
+          ],
+          "index": 25
+        },
+        {
+          "when": {
+            "flag": "ch8_c05_p2_s"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 20,
+              "y": 10
+            },
+            {
+              "x": 20,
+              "y": 11
+            }
+          ],
+          "index": 57
+        },
+        {
+          "when": {
+            "flag": "ch8_c05_p2_w"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 20,
+              "y": 10
+            },
+            {
+              "x": 20,
+              "y": 11
+            }
+          ],
+          "index": 27
+        },
+        {
+          "when": {
+            "flag": "ch8_c05_p3_w"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 21,
+              "y": 10
+            },
+            {
+              "x": 21,
+              "y": 11
+            }
+          ],
+          "index": 51
+        },
+        {
+          "when": {
+            "flag": "ch8_c05_p3_s"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 29,
+              "y": 10
+            },
+            {
+              "x": 29,
+              "y": 11
+            }
+          ],
+          "index": 50
+        },
+        {
+          "when": {
+            "flag": "broke_archive_barricade"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 5,
+              "y": 20
+            }
+          ],
+          "index": 51
+        },
+        {
+          "when": {
+            "flag": "ch8_c05_p1_s"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 4,
+              "y": 6
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_c05_p1_w"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 4,
+              "y": 6
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_c05_p2_s"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 15,
+              "y": 6
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_c05_p2_w"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 15,
+              "y": 6
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_c05_p3_s"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 25,
+              "y": 6
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_c05_p3_w"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 25,
+              "y": 6
+            }
+          ],
+          "index": 18
+        }
+      ],
+      "exits": [
+        {
+          "id": "barracks_to_forum",
+          "area": {
+            "x": 0,
+            "y": 10,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_ragged_forum",
+          "toSpawn": "from_barracks"
+        },
+        {
+          "id": "barracks_to_bridge",
+          "area": {
+            "x": 29,
+            "y": 10,
+            "w": 1,
+            "h": 2
+          },
+          "toMap": "map_ch8_verdict_bridge",
+          "toSpawn": "from_barracks",
+          "requiresFlag": "solved_twin_watch",
+          "lockedDialogueId": "ch8_barracks_exit_locked"
+        },
+        {
+          "id": "barracks_to_archive",
+          "area": {
+            "x": 5,
+            "y": 21,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_hidden_war_archive",
+          "toSpawn": "from_barracks",
+          "requiresFlag": "broke_archive_barricade"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_barracks",
+          "on": "arrive",
+          "onceFlag": "ch8_t_barracks_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_barracks_arrival"
+        },
+        {
+          "id": "ch8_t_barracks_lyra",
+          "on": "zone",
+          "area": {
+            "x": 1,
+            "y": 8,
+            "w": 4,
+            "h": 5
+          },
+          "onceFlag": "ch8_t_barracks_lyra_seen",
+          "dialogueId": "ch8_lyra_barracks"
+        },
+        {
+          "id": "ch8_t_c05",
+          "on": "zone",
+          "area": {
+            "x": 26,
+            "y": 8,
+            "w": 3,
+            "h": 6
+          },
+          "onceFlag": "ch8_t_c05_seen",
+          "dialogueId": "ch8_c05_right",
+          "requiresFlag": "ch8_c05_p3_s",
+          "unlessFlag": "solved_twin_watch"
+        }
+      ]
+    },
+    "map_ch8_verdict_bridge": {
+      "id": "map_ch8_verdict_bridge",
+      "name": "Cầu Phán Quyết",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_verdict_bridge",
+        "path": "assets/maps/map_ch8_verdict_bridge.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 3,
+          "y": 9
+        },
+        "from_barracks": {
+          "x": 3,
+          "y": 9
+        },
+        "from_library": {
+          "x": 12,
+          "y": 4
+        }
+      },
+      "revive": {
+        "x": 3,
+        "y": 9
+      },
+      "npcs": [
+        {
+          "id": "npc_ch8_aldric",
+          "texture": "npc_aldric",
+          "anim": "npc_aldric_idle",
+          "tile": {
+            "x": 15,
+            "y": 9
+          },
+          "name": "Aldric",
+          "prompt": "[E] Nói chuyện với Aldric",
+          "radius": 44,
+          "dialogueId": "ch8_aldric_after",
+          "visibleWhen": {
+            "flag": "defeated_convergent_praetor"
+          },
+          "dialogueRules": [
+            {
+              "ifFlag": "ch4_choice_aldric_comfort",
+              "dialogueId": "ch8_aldric_after_comfort"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch8_secret2",
+          "tile": {
+            "x": 20,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Xem lan can",
+          "dialogueId": "ch8_secret2_take",
+          "visibleWhen": {
+            "flag": "defeated_convergent_praetor",
+            "unlessFlag": "took_world_secret_sol_karis_beta_treaty"
+          }
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "encounters": [
+        {
+          "id": "enc_convergent_praetor",
+          "enemyId": "boss_convergent_praetor",
+          "texture": "boss_convergent_praetor",
+          "anim": "boss_convergent_praetor_idle",
+          "tile": {
+            "x": 12,
+            "y": 6
+          },
+          "defeatedFlag": "defeated_convergent_praetor",
+          "hitbox": 30,
+          "victoryDialogueId": "ch8_praetor_defeated",
+          "victoryDialogueRules": [
+            {
+              "ifFlag": "ch4_choice_aldric_comfort",
+              "dialogueId": "ch8_praetor_defeated_c"
+            }
+          ]
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "defeated_convergent_praetor"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 12,
+              "y": 1
+            }
+          ],
+          "index": 50
+        }
+      ],
+      "exits": [
+        {
+          "id": "bridge_to_barracks",
+          "area": {
+            "x": 0,
+            "y": 9,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_twin_era_barracks",
+          "toSpawn": "from_bridge"
+        },
+        {
+          "id": "bridge_to_library",
+          "area": {
+            "x": 12,
+            "y": 0,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_ash_stair_library",
+          "toSpawn": "from_bridge",
+          "requiresFlag": "defeated_convergent_praetor",
+          "lockedDialogueId": "ch8_bridge_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_bridge",
+          "on": "arrive",
+          "onceFlag": "ch8_t_bridge_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_bridge_arrival"
+        },
+        {
+          "id": "ch8_t_praetor",
+          "on": "zone",
+          "area": {
+            "x": 9,
+            "y": 8,
+            "w": 6,
+            "h": 3
+          },
+          "onceFlag": "ch8_t_praetor_seen",
+          "dialogueId": "ch8_praetor_confront",
+          "unlessFlag": "defeated_convergent_praetor"
+        }
+      ]
+    },
+    "map_ch8_ash_stair_library": {
+      "id": "map_ch8_ash_stair_library",
+      "name": "Thư Viện Bậc Tro",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_ash_stair_library",
+        "path": "assets/maps/map_ch8_ash_stair_library.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 14,
+          "y": 18
+        },
+        "from_bridge": {
+          "x": 14,
+          "y": 18
+        },
+        "from_ossuary": {
+          "x": 24,
+          "y": 11
+        }
+      },
+      "revive": {
+        "x": 14,
+        "y": 18
+      },
+      "npcs": [
+        {
+          "id": "npc_ch8_neris",
+          "texture": "npc_neris",
+          "anim": "npc_neris_idle",
+          "tile": {
+            "x": 13,
+            "y": 13
+          },
+          "name": "Neris",
+          "prompt": "[E] Nói chuyện với Neris",
+          "radius": 44,
+          "dialogueId": "ch8_neris",
+          "visibleWhen": {
+            "unlessFlag": "neris_joined"
+          }
+        },
+        {
+          "id": "npc_ch8_solon",
+          "texture": "npc_solon",
+          "anim": "npc_solon_idle",
+          "tile": {
+            "x": 5,
+            "y": 17
+          },
+          "name": "Solon",
+          "prompt": "[E] Nói chuyện với Solon",
+          "radius": 44,
+          "dialogueId": "ch8_solon_cold",
+          "dialogueRules": [
+            {
+              "ifFlag": "resolved_solon_guilt",
+              "dialogueId": "ch8_solon"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch8_bia1",
+          "tile": {
+            "x": 4,
+            "y": 8
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia chữ cổ",
+          "dialogueId": "ch8_bia_unread",
+          "dialogueRules": [
+            {
+              "ifFlag": "neris_joined",
+              "dialogueId": "ch8_bia_1"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch8_bia2",
+          "tile": {
+            "x": 23,
+            "y": 8
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bia chữ cổ",
+          "dialogueId": "ch8_bia_unread",
+          "dialogueRules": [
+            {
+              "ifFlag": "neris_joined",
+              "dialogueId": "ch8_bia_2"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch8_paper_gold",
+          "tile": {
+            "x": 22,
+            "y": 18
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt tờ giấy",
+          "dialogueId": "ch8_paper_gold",
+          "visibleWhen": {
+            "unlessFlag": "took_colored_paper_gold"
+          }
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch8_c06_a1",
+          "tile": {
+            "x": 8,
+            "y": 10
+          },
+          "radius": 40,
+          "prompt": "[E] Bệ một, ô 1",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "a",
+              "label": "[A] Sáng",
+              "unknownLabel": "[A] ?",
+              "knownFlag": "ch6_glyph_a_known"
+            },
+            {
+              "key": "o",
+              "label": "[O] Tối",
+              "unknownLabel": "[O] ?",
+              "knownFlag": "ch6_glyph_o_known"
+            },
+            {
+              "key": "i",
+              "label": "[I] Dòng",
+              "unknownLabel": "[I] ?",
+              "knownFlag": "ch6_glyph_i_known"
+            },
+            {
+              "key": "u",
+              "label": "[U] Tĩnh",
+              "unknownLabel": "[U] ?",
+              "knownFlag": "ch6_glyph_u_known"
+            },
+            {
+              "key": "e",
+              "label": "[E] Vật",
+              "unknownLabel": "[E] ?",
+              "knownFlag": "ch6_glyph_e_known"
+            },
+            {
+              "key": "n",
+              "label": "[N] Tên",
+              "unknownLabel": "[N] ?",
+              "knownFlag": "ch6_glyph_n_known"
+            },
+            {
+              "key": "x",
+              "label": "[X] Không",
+              "unknownLabel": "[X] ?",
+              "knownFlag": "ch6_glyph_x_known"
+            }
+          ]
+        },
+        {
+          "id": "ch8_c06_a2",
+          "tile": {
+            "x": 9,
+            "y": 10
+          },
+          "radius": 40,
+          "prompt": "[E] Bệ một, ô 2",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "a",
+              "label": "[A] Sáng",
+              "unknownLabel": "[A] ?",
+              "knownFlag": "ch6_glyph_a_known"
+            },
+            {
+              "key": "o",
+              "label": "[O] Tối",
+              "unknownLabel": "[O] ?",
+              "knownFlag": "ch6_glyph_o_known"
+            },
+            {
+              "key": "i",
+              "label": "[I] Dòng",
+              "unknownLabel": "[I] ?",
+              "knownFlag": "ch6_glyph_i_known"
+            },
+            {
+              "key": "u",
+              "label": "[U] Tĩnh",
+              "unknownLabel": "[U] ?",
+              "knownFlag": "ch6_glyph_u_known"
+            },
+            {
+              "key": "e",
+              "label": "[E] Vật",
+              "unknownLabel": "[E] ?",
+              "knownFlag": "ch6_glyph_e_known"
+            },
+            {
+              "key": "n",
+              "label": "[N] Tên",
+              "unknownLabel": "[N] ?",
+              "knownFlag": "ch6_glyph_n_known"
+            },
+            {
+              "key": "x",
+              "label": "[X] Không",
+              "unknownLabel": "[X] ?",
+              "knownFlag": "ch6_glyph_x_known"
+            }
+          ]
+        },
+        {
+          "id": "ch8_c06_b1",
+          "tile": {
+            "x": 18,
+            "y": 10
+          },
+          "radius": 40,
+          "prompt": "[E] Bệ hai, ô 1",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "a",
+              "label": "[A] Sáng",
+              "unknownLabel": "[A] ?",
+              "knownFlag": "ch6_glyph_a_known"
+            },
+            {
+              "key": "o",
+              "label": "[O] Tối",
+              "unknownLabel": "[O] ?",
+              "knownFlag": "ch6_glyph_o_known"
+            },
+            {
+              "key": "i",
+              "label": "[I] Dòng",
+              "unknownLabel": "[I] ?",
+              "knownFlag": "ch6_glyph_i_known"
+            },
+            {
+              "key": "u",
+              "label": "[U] Tĩnh",
+              "unknownLabel": "[U] ?",
+              "knownFlag": "ch6_glyph_u_known"
+            },
+            {
+              "key": "e",
+              "label": "[E] Vật",
+              "unknownLabel": "[E] ?",
+              "knownFlag": "ch6_glyph_e_known"
+            },
+            {
+              "key": "n",
+              "label": "[N] Tên",
+              "unknownLabel": "[N] ?",
+              "knownFlag": "ch6_glyph_n_known"
+            },
+            {
+              "key": "x",
+              "label": "[X] Không",
+              "unknownLabel": "[X] ?",
+              "knownFlag": "ch6_glyph_x_known"
+            }
+          ]
+        },
+        {
+          "id": "ch8_c06_b2",
+          "tile": {
+            "x": 19,
+            "y": 10
+          },
+          "radius": 40,
+          "prompt": "[E] Bệ hai, ô 2",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "a",
+              "label": "[A] Sáng",
+              "unknownLabel": "[A] ?",
+              "knownFlag": "ch6_glyph_a_known"
+            },
+            {
+              "key": "o",
+              "label": "[O] Tối",
+              "unknownLabel": "[O] ?",
+              "knownFlag": "ch6_glyph_o_known"
+            },
+            {
+              "key": "i",
+              "label": "[I] Dòng",
+              "unknownLabel": "[I] ?",
+              "knownFlag": "ch6_glyph_i_known"
+            },
+            {
+              "key": "u",
+              "label": "[U] Tĩnh",
+              "unknownLabel": "[U] ?",
+              "knownFlag": "ch6_glyph_u_known"
+            },
+            {
+              "key": "e",
+              "label": "[E] Vật",
+              "unknownLabel": "[E] ?",
+              "knownFlag": "ch6_glyph_e_known"
+            },
+            {
+              "key": "n",
+              "label": "[N] Tên",
+              "unknownLabel": "[N] ?",
+              "knownFlag": "ch6_glyph_n_known"
+            },
+            {
+              "key": "x",
+              "label": "[X] Không",
+              "unknownLabel": "[X] ?",
+              "knownFlag": "ch6_glyph_x_known"
+            }
+          ]
+        }
+      ],
+      "dialChecks": [
+        {
+          "ifFlags": [
+            "ch8_c06_a1_n",
+            "ch8_c06_a2_x"
+          ],
+          "unlessFlag": "ch8_names_still",
+          "dialogueId": "ch8_c06_nx"
+        },
+        {
+          "ifFlags": [
+            "ch8_c06_a1_n",
+            "ch8_c06_a2_u"
+          ],
+          "unlessFlag": "ch8_names_still",
+          "dialogueId": "ch8_c06_one"
+        },
+        {
+          "ifFlags": [
+            "ch8_names_still",
+            "ch8_c06_b1_e",
+            "ch8_c06_b2_a"
+          ],
+          "unlessFlag": "solved_flowing_names",
+          "dialogueId": "ch8_c06_right"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "ch8_wraith_l0",
+          "enemyId": "enemy_phase_wraith",
+          "texture": "enemy_phase_wraith",
+          "anim": "enemy_phase_wraith_idle",
+          "tile": {
+            "x": 7,
+            "y": 15
+          }
+        },
+        {
+          "id": "ch8_wraith_l1",
+          "enemyId": "enemy_phase_wraith",
+          "texture": "enemy_phase_wraith",
+          "anim": "enemy_phase_wraith_idle",
+          "tile": {
+            "x": 20,
+            "y": 15
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "ch8_names_still"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 6,
+              "y": 3
+            },
+            {
+              "x": 7,
+              "y": 3
+            },
+            {
+              "x": 8,
+              "y": 3
+            },
+            {
+              "x": 9,
+              "y": 3
+            },
+            {
+              "x": 10,
+              "y": 3
+            },
+            {
+              "x": 11,
+              "y": 3
+            },
+            {
+              "x": 12,
+              "y": 3
+            },
+            {
+              "x": 13,
+              "y": 3
+            },
+            {
+              "x": 14,
+              "y": 3
+            },
+            {
+              "x": 15,
+              "y": 3
+            },
+            {
+              "x": 16,
+              "y": 3
+            },
+            {
+              "x": 17,
+              "y": 3
+            },
+            {
+              "x": 18,
+              "y": 3
+            },
+            {
+              "x": 19,
+              "y": 3
+            },
+            {
+              "x": 20,
+              "y": 3
+            },
+            {
+              "x": 21,
+              "y": 3
+            }
+          ],
+          "index": 33
+        },
+        {
+          "when": {
+            "flag": "solved_flowing_names"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 27,
+              "y": 11
+            }
+          ],
+          "index": 52
+        }
+      ],
+      "exits": [
+        {
+          "id": "library_to_bridge",
+          "area": {
+            "x": 14,
+            "y": 21,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_verdict_bridge",
+          "toSpawn": "from_library"
+        },
+        {
+          "id": "library_to_ossuary",
+          "area": {
+            "x": 27,
+            "y": 11,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_mirror_ossuary",
+          "toSpawn": "from_library",
+          "requiresFlag": "solved_flowing_names",
+          "lockedDialogueId": "ch8_library_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_library",
+          "on": "arrive",
+          "onceFlag": "ch8_t_library_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_library_arrival"
+        }
+      ]
+    },
+    "map_ch8_mirror_ossuary": {
+      "id": "map_ch8_mirror_ossuary",
+      "name": "Hầm Gương Hai Cõi",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_mirror_ossuary",
+        "path": "assets/maps/map_ch8_mirror_ossuary.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 2,
+          "y": 10
+        },
+        "from_library": {
+          "x": 2,
+          "y": 10
+        },
+        "from_sanctum": {
+          "x": 13,
+          "y": 4
+        }
+      },
+      "revive": {
+        "x": 2,
+        "y": 10
+      },
+      "npcs": [
+        {
+          "id": "npc_ch8_elion",
+          "texture": "npc_chronicler_elion",
+          "anim": "npc_chronicler_elion_idle",
+          "tile": {
+            "x": 5,
+            "y": 16
+          },
+          "name": "Elion",
+          "prompt": "[E] Nói chuyện với Elion",
+          "radius": 44,
+          "dialogueId": "ch8_elion",
+          "dialogueRules": [
+            {
+              "ifFlag": "took_elion_final_page",
+              "dialogueId": "ch8_elion_done"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch8_ossuary_note",
+          "tile": {
+            "x": 4,
+            "y": 7
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc chữ khắc",
+          "dialogueId": "ch8_ossuary_note"
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch8_c07_a1",
+          "tile": {
+            "x": 7,
+            "y": 8
+          },
+          "radius": 40,
+          "prompt": "[E] Cọc Neo (gương thứ nhất)",
+          "values": [
+            {
+              "key": "backslash",
+              "label": "Cõi Linh Hồn"
+            },
+            {
+              "key": "none",
+              "label": "Thượng Giới"
+            }
+          ]
+        },
+        {
+          "id": "ch8_c07_a2",
+          "tile": {
+            "x": 15,
+            "y": 8
+          },
+          "radius": 40,
+          "prompt": "[E] Cọc Neo (gương thứ hai)",
+          "values": [
+            {
+              "key": "none",
+              "label": "Thượng Giới"
+            },
+            {
+              "key": "backslash",
+              "label": "Cõi Linh Hồn"
+            }
+          ]
+        }
+      ],
+      "beams": [
+        {
+          "id": "ch8_beam",
+          "start": {
+            "x": 2,
+            "y": 4
+          },
+          "dir": {
+            "x": 1,
+            "y": 0
+          },
+          "mirrors": [
+            {
+              "dialId": "ch8_c07_a1",
+              "tile": {
+                "x": 10,
+                "y": 4
+              }
+            },
+            {
+              "dialId": "ch8_c07_a2",
+              "tile": {
+                "x": 18,
+                "y": 4
+              }
+            }
+          ],
+          "prisms": [
+            {
+              "x": 10,
+              "y": 4
+            }
+          ],
+          "target": {
+            "x": 18,
+            "y": 12
+          },
+          "solvedFlag": "solved_twin_mirrors",
+          "solvedDialogueId": "ch8_c07_right"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "ch8_warden",
+          "enemyId": "enemy_second_hand_warden",
+          "texture": "enemy_second_hand_warden",
+          "anim": "enemy_second_hand_warden_idle",
+          "tile": {
+            "x": 23,
+            "y": 16
+          },
+          "defeatedFlag": "defeated_second_hand_warden",
+          "respawn": false
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "ch8_c07_a1_none"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 10,
+              "y": 4
+            }
+          ],
+          "index": 31
+        },
+        {
+          "when": {
+            "flag": "ch8_c07_a1_backslash"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 10,
+              "y": 4
+            }
+          ],
+          "index": 30
+        },
+        {
+          "when": {
+            "flag": "ch8_c07_a2_backslash"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 18,
+              "y": 4
+            }
+          ],
+          "index": 30
+        },
+        {
+          "when": {
+            "flag": "ch8_c07_a2_none"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 18,
+              "y": 4
+            }
+          ],
+          "index": 62
+        },
+        {
+          "when": {
+            "flag": "solved_twin_mirrors"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 18,
+              "y": 12
+            }
+          ],
+          "index": 39
+        },
+        {
+          "when": {
+            "flag": "solved_twin_mirrors"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 13,
+              "y": 1
+            }
+          ],
+          "index": 53
+        }
+      ],
+      "exits": [
+        {
+          "id": "ossuary_to_library",
+          "area": {
+            "x": 0,
+            "y": 10,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_ash_stair_library",
+          "toSpawn": "from_ossuary"
+        },
+        {
+          "id": "ossuary_to_sanctum",
+          "area": {
+            "x": 13,
+            "y": 0,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_torn_page_sanctum",
+          "toSpawn": "from_ossuary",
+          "requiresFlag": "solved_twin_mirrors",
+          "lockedDialogueId": "ch8_ossuary_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_ossuary",
+          "on": "arrive",
+          "onceFlag": "ch8_t_ossuary_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_ossuary_arrival"
+        },
+        {
+          "id": "ch8_t_ossuary_neris",
+          "on": "zone",
+          "area": {
+            "x": 3,
+            "y": 8,
+            "w": 4,
+            "h": 5
+          },
+          "onceFlag": "ch8_t_ossuary_neris_seen",
+          "dialogueId": "ch8_ossuary_neris"
+        },
+        {
+          "id": "ch8_t_warden",
+          "on": "zone",
+          "area": {
+            "x": 21,
+            "y": 13,
+            "w": 3,
+            "h": 5
+          },
+          "onceFlag": "ch8_t_warden_seen",
+          "dialogueId": "ch8_warden_note"
+        }
+      ]
+    },
+    "map_ch8_torn_page_sanctum": {
+      "id": "map_ch8_torn_page_sanctum",
+      "name": "Thánh Điện Trang Xé",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_torn_page_sanctum",
+        "path": "assets/maps/map_ch8_torn_page_sanctum.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 11,
+          "y": 14
+        },
+        "from_ossuary": {
+          "x": 11,
+          "y": 14
+        },
+        "from_plaza": {
+          "x": 17,
+          "y": 9
+        }
+      },
+      "revive": {
+        "x": 11,
+        "y": 14
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch8_strip_a",
+          "tile": {
+            "x": 4,
+            "y": 10
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt dải giấy",
+          "dialogueId": "ch8_strip_a",
+          "visibleWhen": {
+            "unlessFlag": "took_torn_page_strip_a"
+          }
+        },
+        {
+          "id": "poi_ch8_strip_b",
+          "tile": {
+            "x": 11,
+            "y": 11
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt dải giấy",
+          "dialogueId": "ch8_strip_b",
+          "visibleWhen": {
+            "unlessFlag": "took_torn_page_strip_b"
+          }
+        },
+        {
+          "id": "poi_ch8_strip_c",
+          "tile": {
+            "x": 17,
+            "y": 12
+          },
+          "radius": 44,
+          "prompt": "[E] Nhặt dải giấy",
+          "dialogueId": "ch8_strip_c",
+          "visibleWhen": {
+            "unlessFlag": "took_torn_page_strip_c"
+          }
+        },
+        {
+          "id": "poi_ch8_c08",
+          "tile": {
+            "x": 11,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Xem trang ghép",
+          "dialogueId": "ch8_c08_wrong",
+          "visibleWhen": {
+            "unlessFlag": "solved_torn_page"
+          },
+          "dialogueRules": [
+            {
+              "ifFlag": "ch8_c08_s1_none",
+              "dialogueId": "ch8_c08_rule"
+            },
+            {
+              "ifFlag": "ch8_c08_s2_none",
+              "dialogueId": "ch8_c08_rule"
+            },
+            {
+              "ifFlag": "ch8_c08_s3_none",
+              "dialogueId": "ch8_c08_rule"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch8_c08_s1",
+          "tile": {
+            "x": 8,
+            "y": 7
+          },
+          "radius": 40,
+          "prompt": "[E] Khe trái",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "a_up",
+              "label": "Dải A (xuôi)"
+            },
+            {
+              "key": "a_dn",
+              "label": "Dải A (ngược)"
+            },
+            {
+              "key": "b_up",
+              "label": "Dải B (xuôi)"
+            },
+            {
+              "key": "b_dn",
+              "label": "Dải B (ngược)"
+            },
+            {
+              "key": "c_up",
+              "label": "Dải C (xuôi)"
+            },
+            {
+              "key": "c_dn",
+              "label": "Dải C (ngược)"
+            }
+          ],
+          "requiresFlag": "took_torn_page_strip_c"
+        },
+        {
+          "id": "ch8_c08_s2",
+          "tile": {
+            "x": 11,
+            "y": 7
+          },
+          "radius": 40,
+          "prompt": "[E] Khe giữa",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "a_up",
+              "label": "Dải A (xuôi)"
+            },
+            {
+              "key": "a_dn",
+              "label": "Dải A (ngược)"
+            },
+            {
+              "key": "b_up",
+              "label": "Dải B (xuôi)"
+            },
+            {
+              "key": "b_dn",
+              "label": "Dải B (ngược)"
+            },
+            {
+              "key": "c_up",
+              "label": "Dải C (xuôi)"
+            },
+            {
+              "key": "c_dn",
+              "label": "Dải C (ngược)"
+            }
+          ],
+          "requiresFlag": "took_torn_page_strip_c"
+        },
+        {
+          "id": "ch8_c08_s3",
+          "tile": {
+            "x": 14,
+            "y": 7
+          },
+          "radius": 40,
+          "prompt": "[E] Khe phải",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "a_up",
+              "label": "Dải A (xuôi)"
+            },
+            {
+              "key": "a_dn",
+              "label": "Dải A (ngược)"
+            },
+            {
+              "key": "b_up",
+              "label": "Dải B (xuôi)"
+            },
+            {
+              "key": "b_dn",
+              "label": "Dải B (ngược)"
+            },
+            {
+              "key": "c_up",
+              "label": "Dải C (xuôi)"
+            },
+            {
+              "key": "c_dn",
+              "label": "Dải C (ngược)"
+            }
+          ],
+          "requiresFlag": "took_torn_page_strip_c"
+        }
+      ],
+      "dialChecks": [
+        {
+          "ifFlags": [
+            "ch8_c08_s1_a_up",
+            "ch8_c08_s2_b_up",
+            "ch8_c08_s3_c_up"
+          ],
+          "unlessFlag": "solved_torn_page",
+          "dialogueId": "ch8_c08_right"
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "ch8_learned_torn_page"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 20,
+              "y": 9
+            }
+          ],
+          "index": 53
+        }
+      ],
+      "exits": [
+        {
+          "id": "sanctum_to_ossuary",
+          "area": {
+            "x": 11,
+            "y": 17,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_mirror_ossuary",
+          "toSpawn": "from_sanctum"
+        },
+        {
+          "id": "sanctum_to_plaza",
+          "area": {
+            "x": 21,
+            "y": 9,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_convergence_plaza",
+          "toSpawn": "from_sanctum",
+          "requiresFlag": "ch8_learned_torn_page",
+          "lockedDialogueId": "ch8_sanctum_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_sanctum",
+          "on": "arrive",
+          "onceFlag": "ch8_t_sanctum_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_sanctum_arrival"
+        }
+      ]
+    },
+    "map_ch8_convergence_plaza": {
+      "id": "map_ch8_convergence_plaza",
+      "name": "Quảng Trường Hội Tụ",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_convergence_plaza",
+        "path": "assets/maps/map_ch8_convergence_plaza.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 3,
+          "y": 12
+        },
+        "from_sanctum": {
+          "x": 3,
+          "y": 12
+        },
+        "from_tower": {
+          "x": 16,
+          "y": 4
+        }
+      },
+      "revive": {
+        "x": 3,
+        "y": 12
+      },
+      "npcs": [
+        {
+          "id": "npc_ch8_ivo_gate",
+          "texture": "npc_ivo",
+          "anim": "npc_ivo_idle",
+          "tile": {
+            "x": 16,
+            "y": 4
+          },
+          "name": "Ivo",
+          "prompt": "[E] Nói chuyện với Ivo",
+          "radius": 44,
+          "dialogueId": "ch8_gate_ivo",
+          "dialogueRules": [
+            {
+              "ifFlag": "settled_ivo_debt",
+              "dialogueId": "ch8_ivo_plaza"
+            },
+            {
+              "ifFlag": "solved_kuro_ledger",
+              "dialogueId": "ch8_ivo_plaza_debt"
+            }
+          ]
+        },
+        {
+          "id": "npc_ch8_lyra_gate",
+          "texture": "npc_lyra",
+          "anim": "npc_lyra_idle",
+          "tile": {
+            "x": 26,
+            "y": 12
+          },
+          "name": "Lyra",
+          "prompt": "[E] Nói chuyện với Lyra",
+          "radius": 44,
+          "dialogueId": "ch8_gate_lyra"
+        },
+        {
+          "id": "npc_ch8_neris_gate",
+          "texture": "npc_neris",
+          "anim": "npc_neris_idle",
+          "tile": {
+            "x": 16,
+            "y": 19
+          },
+          "name": "Neris",
+          "prompt": "[E] Nói chuyện với Neris",
+          "radius": 44,
+          "dialogueId": "ch8_gate_neris"
+        },
+        {
+          "id": "npc_ch8_aldric_gate",
+          "texture": "npc_aldric",
+          "anim": "npc_aldric_idle",
+          "tile": {
+            "x": 5,
+            "y": 12
+          },
+          "name": "Aldric",
+          "prompt": "[E] Nói chuyện với Aldric",
+          "radius": 44,
+          "dialogueId": "ch8_gate_aldric",
+          "visibleWhen": {
+            "unlessFlag": "ch4_choice_bran_memorial"
+          }
+        },
+        {
+          "id": "npc_ch8_bran_gate",
+          "texture": "npc_soldier_bran",
+          "anim": "npc_soldier_bran_idle",
+          "tile": {
+            "x": 5,
+            "y": 12
+          },
+          "name": "hồn Bran",
+          "prompt": "[E] Nói chuyện với hồn Bran",
+          "radius": 44,
+          "dialogueId": "ch8_gate_bran",
+          "visibleWhen": {
+            "flag": "ch4_choice_bran_memorial"
+          }
+        },
+        {
+          "id": "npc_ch8_mai",
+          "texture": "npc_kuro_mother",
+          "anim": "npc_kuro_mother_idle",
+          "tile": {
+            "x": 10,
+            "y": 7
+          },
+          "name": "Bà Mai",
+          "prompt": "[E] Nói chuyện với Bà Mai",
+          "radius": 44,
+          "dialogueId": "ch8_mai_song",
+          "visibleWhen": {
+            "flag": "restored_kuro_mother_name"
+          }
+        },
+        {
+          "id": "npc_ch8_na_plaza",
+          "texture": "npc_forgotten_child",
+          "anim": "npc_forgotten_child_flicker",
+          "tile": {
+            "x": 12,
+            "y": 7
+          },
+          "name": "bé Na",
+          "prompt": "[E] Nói chuyện với bé Na",
+          "radius": 44,
+          "dialogueId": "ch8_na",
+          "dialogueRules": [
+            {
+              "ifFlag": "gave_na_papers",
+              "dialogueId": "ch8_na_thanks"
+            },
+            {
+              "ifItems": [
+                "colored_paper_red",
+                "colored_paper_blue",
+                "colored_paper_gold"
+              ],
+              "dialogueId": "ch8_na_give"
+            },
+            {
+              "ifFlag": "ch8_na_asked",
+              "dialogueId": "ch8_na_waiting"
+            },
+            {
+              "ifFlag": "completed_na_crane_quest",
+              "dialogueId": "ch8_na_crane_short"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch8_c09",
+          "tile": {
+            "x": 16,
+            "y": 10
+          },
+          "radius": 44,
+          "prompt": "[E] Ra lệnh",
+          "dialogueId": "ch8_c09_wrong",
+          "visibleWhen": {
+            "unlessFlag": "solved_four_gates"
+          },
+          "dialogueRules": [
+            {
+              "ifFlag": "ch8_gate_n_none",
+              "dialogueId": "ch8_plaza_scout"
+            },
+            {
+              "ifFlag": "ch8_gate_e_none",
+              "dialogueId": "ch8_plaza_scout"
+            },
+            {
+              "ifFlag": "ch8_gate_s_none",
+              "dialogueId": "ch8_plaza_scout"
+            },
+            {
+              "ifFlag": "ch8_gate_w_none",
+              "dialogueId": "ch8_plaza_scout"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch8_gate_n",
+          "tile": {
+            "x": 15,
+            "y": 12
+          },
+          "radius": 30,
+          "prompt": "[E] Cổng Bắc",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa giao)"
+            },
+            {
+              "key": "ivo",
+              "label": "Ivo"
+            },
+            {
+              "key": "lyra",
+              "label": "Lyra"
+            },
+            {
+              "key": "neris",
+              "label": "Neris"
+            },
+            {
+              "key": "trench",
+              "label": "Người lính chiến hào"
+            }
+          ],
+          "requiresFlag": "ch8_t_plaza_seen"
+        },
+        {
+          "id": "ch8_gate_e",
+          "tile": {
+            "x": 16,
+            "y": 12
+          },
+          "radius": 30,
+          "prompt": "[E] Cổng Đông",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa giao)"
+            },
+            {
+              "key": "ivo",
+              "label": "Ivo"
+            },
+            {
+              "key": "lyra",
+              "label": "Lyra"
+            },
+            {
+              "key": "neris",
+              "label": "Neris"
+            },
+            {
+              "key": "trench",
+              "label": "Người lính chiến hào"
+            }
+          ],
+          "requiresFlag": "ch8_t_plaza_seen"
+        },
+        {
+          "id": "ch8_gate_s",
+          "tile": {
+            "x": 17,
+            "y": 12
+          },
+          "radius": 30,
+          "prompt": "[E] Cổng Nam",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa giao)"
+            },
+            {
+              "key": "ivo",
+              "label": "Ivo"
+            },
+            {
+              "key": "lyra",
+              "label": "Lyra"
+            },
+            {
+              "key": "neris",
+              "label": "Neris"
+            },
+            {
+              "key": "trench",
+              "label": "Người lính chiến hào"
+            }
+          ],
+          "requiresFlag": "ch8_t_plaza_seen"
+        },
+        {
+          "id": "ch8_gate_w",
+          "tile": {
+            "x": 16,
+            "y": 13
+          },
+          "radius": 30,
+          "prompt": "[E] Cổng Tây",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa giao)"
+            },
+            {
+              "key": "ivo",
+              "label": "Ivo"
+            },
+            {
+              "key": "lyra",
+              "label": "Lyra"
+            },
+            {
+              "key": "neris",
+              "label": "Neris"
+            },
+            {
+              "key": "trench",
+              "label": "Người lính chiến hào"
+            }
+          ],
+          "requiresFlag": "ch8_t_plaza_seen"
+        }
+      ],
+      "dialChecks": [
+        {
+          "ifFlags": [
+            "ch8_gate_n_ivo",
+            "ch8_gate_e_lyra",
+            "ch8_gate_s_neris",
+            "ch8_gate_w_trench"
+          ],
+          "unlessFlag": "solved_four_gates",
+          "dialogueId": "ch8_c09_right"
+        }
+      ],
+      "roamers": [
+        {
+          "id": "ch8_w1_0",
+          "enemyId": "enemy_assimilator",
+          "texture": "enemy_assimilator",
+          "anim": "enemy_assimilator_idle",
+          "tile": {
+            "x": 16,
+            "y": 7
+          },
+          "group": "ch8_wave1",
+          "visibleWhen": {
+            "flag": "ch8_wave1_on",
+            "unlessFlag": "cleared_ch8_wave1"
+          }
+        },
+        {
+          "id": "ch8_w1_1",
+          "enemyId": "enemy_assimilator",
+          "texture": "enemy_assimilator",
+          "anim": "enemy_assimilator_idle",
+          "tile": {
+            "x": 26,
+            "y": 13
+          },
+          "group": "ch8_wave1",
+          "visibleWhen": {
+            "flag": "ch8_wave1_on",
+            "unlessFlag": "cleared_ch8_wave1"
+          }
+        },
+        {
+          "id": "ch8_w1_2",
+          "enemyId": "enemy_assimilator",
+          "texture": "enemy_assimilator",
+          "anim": "enemy_assimilator_idle",
+          "tile": {
+            "x": 5,
+            "y": 13
+          },
+          "group": "ch8_wave1",
+          "visibleWhen": {
+            "flag": "ch8_wave1_on",
+            "unlessFlag": "cleared_ch8_wave1"
+          }
+        },
+        {
+          "id": "ch8_w2_0",
+          "enemyId": "enemy_twin_era_legionnaire",
+          "texture": "enemy_twin_era_legionnaire",
+          "anim": "enemy_twin_era_legionnaire_idle",
+          "tile": {
+            "x": 24,
+            "y": 12
+          },
+          "group": "ch8_wave2",
+          "visibleWhen": {
+            "flag": "ch8_wave2_on",
+            "unlessFlag": "cleared_ch8_wave2"
+          }
+        },
+        {
+          "id": "ch8_w2_1",
+          "enemyId": "enemy_twin_era_legionnaire",
+          "texture": "enemy_twin_era_legionnaire",
+          "anim": "enemy_twin_era_legionnaire_idle",
+          "tile": {
+            "x": 8,
+            "y": 12
+          },
+          "group": "ch8_wave2",
+          "visibleWhen": {
+            "flag": "ch8_wave2_on",
+            "unlessFlag": "cleared_ch8_wave2"
+          }
+        },
+        {
+          "id": "ch8_w2_2",
+          "enemyId": "enemy_phase_wraith",
+          "texture": "enemy_phase_wraith",
+          "anim": "enemy_phase_wraith_idle",
+          "tile": {
+            "x": 16,
+            "y": 17
+          },
+          "group": "ch8_wave2",
+          "visibleWhen": {
+            "flag": "ch8_wave2_on",
+            "unlessFlag": "cleared_ch8_wave2"
+          }
+        },
+        {
+          "id": "ch8_w3_0",
+          "enemyId": "enemy_doom_bell",
+          "texture": "enemy_doom_bell",
+          "anim": "enemy_doom_bell_idle",
+          "tile": {
+            "x": 16,
+            "y": 7
+          },
+          "group": "ch8_wave3",
+          "visibleWhen": {
+            "flag": "ch8_wave3_on",
+            "unlessFlag": "cleared_ch8_wave3"
+          }
+        },
+        {
+          "id": "ch8_w3_1",
+          "enemyId": "enemy_assimilator",
+          "texture": "enemy_assimilator",
+          "anim": "enemy_assimilator_idle",
+          "tile": {
+            "x": 22,
+            "y": 16
+          },
+          "group": "ch8_wave3",
+          "visibleWhen": {
+            "flag": "ch8_wave3_on",
+            "unlessFlag": "cleared_ch8_wave3"
+          }
+        },
+        {
+          "id": "ch8_w3_2",
+          "enemyId": "enemy_assimilator",
+          "texture": "enemy_assimilator",
+          "anim": "enemy_assimilator_idle",
+          "tile": {
+            "x": 10,
+            "y": 16
+          },
+          "group": "ch8_wave3",
+          "visibleWhen": {
+            "flag": "ch8_wave3_on",
+            "unlessFlag": "cleared_ch8_wave3"
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "held_last_line"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 16,
+              "y": 1
+            }
+          ],
+          "index": 61
+        }
+      ],
+      "exits": [
+        {
+          "id": "plaza_to_sanctum",
+          "area": {
+            "x": 0,
+            "y": 12,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_torn_page_sanctum",
+          "toSpawn": "from_plaza"
+        },
+        {
+          "id": "plaza_to_tower",
+          "area": {
+            "x": 16,
+            "y": 0,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_anchor_tower_base",
+          "toSpawn": "from_plaza",
+          "requiresFlag": "held_last_line",
+          "lockedDialogueId": "ch8_plaza_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_plaza",
+          "on": "arrive",
+          "onceFlag": "ch8_t_plaza_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_plaza_arrival"
+        },
+        {
+          "id": "ch8_t_scout",
+          "on": "zone",
+          "area": {
+            "x": 12,
+            "y": 9,
+            "w": 9,
+            "h": 6
+          },
+          "onceFlag": "ch8_t_scout_seen",
+          "dialogueId": "ch8_plaza_scout"
+        },
+        {
+          "id": "ch8_t_wave1",
+          "on": "zone",
+          "area": {
+            "x": 1,
+            "y": 2,
+            "w": 30,
+            "h": 20
+          },
+          "onceFlag": "ch8_t_wave1_seen",
+          "dialogueId": "ch8_wave1_done",
+          "requiresFlag": "cleared_ch8_wave1"
+        },
+        {
+          "id": "ch8_t_wave2",
+          "on": "zone",
+          "area": {
+            "x": 1,
+            "y": 2,
+            "w": 30,
+            "h": 20
+          },
+          "onceFlag": "ch8_t_wave2_seen",
+          "dialogueId": "ch8_wave2_done",
+          "requiresFlag": "cleared_ch8_wave2"
+        },
+        {
+          "id": "ch8_t_fb3",
+          "on": "zone",
+          "area": {
+            "x": 1,
+            "y": 2,
+            "w": 30,
+            "h": 20
+          },
+          "onceFlag": "ch8_t_fb3_seen",
+          "dialogueId": "ch8_fb3",
+          "requiresFlag": "ch8_wave3_on",
+          "delayMs": 300
+        },
+        {
+          "id": "ch8_t_wave3",
+          "on": "zone",
+          "area": {
+            "x": 1,
+            "y": 2,
+            "w": 30,
+            "h": 20
+          },
+          "onceFlag": "ch8_t_wave3_seen",
+          "dialogueId": "ch8_wave3_done",
+          "requiresFlag": "cleared_ch8_wave3"
+        }
+      ]
+    },
+    "map_ch8_anchor_tower_base": {
+      "id": "map_ch8_anchor_tower_base",
+      "name": "Chân Tháp Neo",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_anchor_tower_base",
+        "path": "assets/maps/map_ch8_anchor_tower_base.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 12,
+          "y": 16
+        },
+        "from_plaza": {
+          "x": 12,
+          "y": 16
+        },
+        "from_gears": {
+          "x": 12,
+          "y": 3
+        }
+      },
+      "revive": {
+        "x": 12,
+        "y": 16
+      },
+      "npcs": [
+        {
+          "id": "npc_ch8_mira",
+          "texture": "npc_mira",
+          "anim": "npc_mira_idle",
+          "tile": {
+            "x": 4,
+            "y": 15
+          },
+          "name": "Mira",
+          "prompt": "[E] Nói chuyện với Mira",
+          "radius": 44,
+          "dialogueId": "ch8_mira",
+          "dialogueRules": [
+            {
+              "ifItem": "elion_final_page",
+              "dialogueId": "ch8_mira_page"
+            },
+            {
+              "ifFlag": "ch5_choice_alpha_spared",
+              "dialogueId": "ch8_mira_spared"
+            }
+          ]
+        }
+      ],
+      "interactables": [
+        {
+          "id": "poi_ch8_socket_1",
+          "tile": {
+            "x": 12,
+            "y": 5
+          },
+          "radius": 24,
+          "prompt": "[E] Đọc câu khắc giờ 12",
+          "dialogueId": "ch8_socket_1"
+        },
+        {
+          "id": "poi_ch8_socket_2",
+          "tile": {
+            "x": 16,
+            "y": 7
+          },
+          "radius": 24,
+          "prompt": "[E] Đọc câu khắc giờ 2",
+          "dialogueId": "ch8_socket_2"
+        },
+        {
+          "id": "poi_ch8_socket_3",
+          "tile": {
+            "x": 16,
+            "y": 10
+          },
+          "radius": 24,
+          "prompt": "[E] Đọc câu khắc giờ 4",
+          "dialogueId": "ch8_socket_3"
+        },
+        {
+          "id": "poi_ch8_socket_4",
+          "tile": {
+            "x": 12,
+            "y": 12
+          },
+          "radius": 24,
+          "prompt": "[E] Đọc câu khắc giờ 6",
+          "dialogueId": "ch8_socket_4"
+        },
+        {
+          "id": "poi_ch8_socket_5",
+          "tile": {
+            "x": 8,
+            "y": 10
+          },
+          "radius": 24,
+          "prompt": "[E] Đọc câu khắc giờ 8",
+          "dialogueId": "ch8_socket_5"
+        },
+        {
+          "id": "poi_ch8_socket_6",
+          "tile": {
+            "x": 8,
+            "y": 7
+          },
+          "radius": 24,
+          "prompt": "[E] Đọc câu khắc giờ 10",
+          "dialogueId": "ch8_socket_6"
+        },
+        {
+          "id": "poi_ch8_c10",
+          "tile": {
+            "x": 12,
+            "y": 9
+          },
+          "radius": 44,
+          "prompt": "[E] Xem mặt đồng hồ",
+          "dialogueId": "ch8_c10_wrong",
+          "visibleWhen": {
+            "unlessFlag": "solved_six_sockets"
+          },
+          "dialogueRules": [
+            {
+              "ifFlag": "ch8_sock_1_none",
+              "dialogueId": "ch8_base_exit_locked"
+            },
+            {
+              "ifFlag": "ch8_sock_2_none",
+              "dialogueId": "ch8_base_exit_locked"
+            },
+            {
+              "ifFlag": "ch8_sock_3_none",
+              "dialogueId": "ch8_base_exit_locked"
+            },
+            {
+              "ifFlag": "ch8_sock_4_none",
+              "dialogueId": "ch8_base_exit_locked"
+            },
+            {
+              "ifFlag": "ch8_sock_5_none",
+              "dialogueId": "ch8_base_exit_locked"
+            },
+            {
+              "ifFlag": "ch8_sock_6_none",
+              "dialogueId": "ch8_base_exit_locked"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch8_secret4",
+          "tile": {
+            "x": 20,
+            "y": 16
+          },
+          "radius": 44,
+          "prompt": "[E] Xem sau chân tháp",
+          "dialogueId": "ch8_secret4_take",
+          "visibleWhen": {
+            "flag": "solved_six_sockets",
+            "unlessFlag": "took_world_secret_null_hour_switch"
+          }
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch8_sock_1",
+          "tile": {
+            "x": 12,
+            "y": 4
+          },
+          "radius": 40,
+          "prompt": "[E] Ổ ấn giờ 12",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "continuum",
+              "label": "Ấn Continuum"
+            },
+            {
+              "key": "causality",
+              "label": "Ấn Causality"
+            },
+            {
+              "key": "memory",
+              "label": "Ấn Memory"
+            },
+            {
+              "key": "finality",
+              "label": "Ấn Finality"
+            },
+            {
+              "key": "possibility",
+              "label": "Ấn Possibility"
+            },
+            {
+              "key": "origin",
+              "label": "Nửa Ấn Origin"
+            }
+          ]
+        },
+        {
+          "id": "ch8_sock_2",
+          "tile": {
+            "x": 17,
+            "y": 6
+          },
+          "radius": 40,
+          "prompt": "[E] Ổ ấn giờ 2",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "continuum",
+              "label": "Ấn Continuum"
+            },
+            {
+              "key": "causality",
+              "label": "Ấn Causality"
+            },
+            {
+              "key": "memory",
+              "label": "Ấn Memory"
+            },
+            {
+              "key": "finality",
+              "label": "Ấn Finality"
+            },
+            {
+              "key": "possibility",
+              "label": "Ấn Possibility"
+            },
+            {
+              "key": "origin",
+              "label": "Nửa Ấn Origin"
+            }
+          ]
+        },
+        {
+          "id": "ch8_sock_3",
+          "tile": {
+            "x": 17,
+            "y": 11
+          },
+          "radius": 40,
+          "prompt": "[E] Ổ ấn giờ 4",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "continuum",
+              "label": "Ấn Continuum"
+            },
+            {
+              "key": "causality",
+              "label": "Ấn Causality"
+            },
+            {
+              "key": "memory",
+              "label": "Ấn Memory"
+            },
+            {
+              "key": "finality",
+              "label": "Ấn Finality"
+            },
+            {
+              "key": "possibility",
+              "label": "Ấn Possibility"
+            },
+            {
+              "key": "origin",
+              "label": "Nửa Ấn Origin"
+            }
+          ]
+        },
+        {
+          "id": "ch8_sock_4",
+          "tile": {
+            "x": 12,
+            "y": 13
+          },
+          "radius": 40,
+          "prompt": "[E] Ổ ấn giờ 6",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "continuum",
+              "label": "Ấn Continuum"
+            },
+            {
+              "key": "causality",
+              "label": "Ấn Causality"
+            },
+            {
+              "key": "memory",
+              "label": "Ấn Memory"
+            },
+            {
+              "key": "finality",
+              "label": "Ấn Finality"
+            },
+            {
+              "key": "possibility",
+              "label": "Ấn Possibility"
+            },
+            {
+              "key": "origin",
+              "label": "Nửa Ấn Origin"
+            }
+          ]
+        },
+        {
+          "id": "ch8_sock_5",
+          "tile": {
+            "x": 7,
+            "y": 11
+          },
+          "radius": 40,
+          "prompt": "[E] Ổ ấn giờ 8",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "continuum",
+              "label": "Ấn Continuum"
+            },
+            {
+              "key": "causality",
+              "label": "Ấn Causality"
+            },
+            {
+              "key": "memory",
+              "label": "Ấn Memory"
+            },
+            {
+              "key": "finality",
+              "label": "Ấn Finality"
+            },
+            {
+              "key": "possibility",
+              "label": "Ấn Possibility"
+            },
+            {
+              "key": "origin",
+              "label": "Nửa Ấn Origin"
+            }
+          ]
+        },
+        {
+          "id": "ch8_sock_6",
+          "tile": {
+            "x": 7,
+            "y": 6
+          },
+          "radius": 40,
+          "prompt": "[E] Ổ ấn giờ 10",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "continuum",
+              "label": "Ấn Continuum"
+            },
+            {
+              "key": "causality",
+              "label": "Ấn Causality"
+            },
+            {
+              "key": "memory",
+              "label": "Ấn Memory"
+            },
+            {
+              "key": "finality",
+              "label": "Ấn Finality"
+            },
+            {
+              "key": "possibility",
+              "label": "Ấn Possibility"
+            },
+            {
+              "key": "origin",
+              "label": "Nửa Ấn Origin"
+            }
+          ]
+        }
+      ],
+      "dialChecks": [
+        {
+          "ifFlags": [
+            "ch8_sock_1_origin",
+            "ch8_sock_2_continuum",
+            "ch8_sock_3_causality",
+            "ch8_sock_4_memory",
+            "ch8_sock_5_finality",
+            "ch8_sock_6_possibility"
+          ],
+          "unlessFlag": "solved_six_sockets",
+          "dialogueId": "ch8_c10_right"
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "ch8_sock_1_origin"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 12,
+              "y": 4
+            }
+          ],
+          "index": 39
+        },
+        {
+          "when": {
+            "flag": "ch8_sock_2_continuum"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 17,
+              "y": 6
+            }
+          ],
+          "index": 39
+        },
+        {
+          "when": {
+            "flag": "ch8_sock_3_causality"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 17,
+              "y": 11
+            }
+          ],
+          "index": 39
+        },
+        {
+          "when": {
+            "flag": "ch8_sock_4_memory"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 12,
+              "y": 13
+            }
+          ],
+          "index": 39
+        },
+        {
+          "when": {
+            "flag": "ch8_sock_5_finality"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 7,
+              "y": 11
+            }
+          ],
+          "index": 39
+        },
+        {
+          "when": {
+            "flag": "ch8_sock_6_possibility"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 7,
+              "y": 6
+            }
+          ],
+          "index": 39
+        },
+        {
+          "when": {
+            "flag": "solved_six_sockets"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 12,
+              "y": 1
+            }
+          ],
+          "index": 60
+        }
+      ],
+      "exits": [
+        {
+          "id": "base_to_plaza",
+          "area": {
+            "x": 12,
+            "y": 19,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_convergence_plaza",
+          "toSpawn": "from_tower"
+        },
+        {
+          "id": "base_to_gears",
+          "area": {
+            "x": 12,
+            "y": 0,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_anchor_tower_gears",
+          "toSpawn": "from_base",
+          "requiresFlag": "solved_six_sockets",
+          "lockedDialogueId": "ch8_base_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_base",
+          "on": "arrive",
+          "onceFlag": "ch8_t_base_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_base_arrival"
+        }
+      ]
+    },
+    "map_ch8_anchor_tower_gears": {
+      "id": "map_ch8_anchor_tower_gears",
+      "name": "Ruột Tháp Bánh Răng",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_anchor_tower_gears",
+        "path": "assets/maps/map_ch8_anchor_tower_gears.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 12,
+          "y": 20
+        },
+        "from_base": {
+          "x": 12,
+          "y": 20
+        },
+        "from_heart": {
+          "x": 12,
+          "y": 3
+        },
+        "from_echo": {
+          "x": 19,
+          "y": 18
+        }
+      },
+      "revive": {
+        "x": 12,
+        "y": 20
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch8_echo_door",
+          "tile": {
+            "x": 21,
+            "y": 18
+          },
+          "radius": 44,
+          "prompt": "[E] Xem cửa bánh răng",
+          "dialogueId": "ch8_echo_door",
+          "visibleWhen": {
+            "unlessFlag": "opened_echo_door"
+          }
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch8_g1",
+          "tile": {
+            "x": 4,
+            "y": 14
+          },
+          "radius": 40,
+          "prompt": "[E] Cọc Neo (vết nứt)",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa neo)"
+            },
+            {
+              "key": "kh",
+              "label": "Khánh Hòa"
+            },
+            {
+              "key": "beta",
+              "label": "Thành Phố Beta"
+            }
+          ]
+        },
+        {
+          "id": "ch8_g2",
+          "tile": {
+            "x": 19,
+            "y": 8
+          },
+          "radius": 40,
+          "prompt": "[E] Cọc Neo (tường bánh răng)",
+          "values": [
+            {
+              "key": "none",
+              "label": "(chưa neo)"
+            },
+            {
+              "key": "kh",
+              "label": "Khánh Hòa"
+            },
+            {
+              "key": "beta",
+              "label": "Thành Phố Beta"
+            }
+          ]
+        }
+      ],
+      "roamers": [
+        {
+          "id": "ch8_wraith_g0",
+          "enemyId": "enemy_phase_wraith",
+          "texture": "enemy_phase_wraith",
+          "anim": "enemy_phase_wraith_idle",
+          "tile": {
+            "x": 8,
+            "y": 16
+          }
+        },
+        {
+          "id": "ch8_legion_g0",
+          "enemyId": "enemy_twin_era_legionnaire",
+          "texture": "enemy_twin_era_legionnaire",
+          "anim": "enemy_twin_era_legionnaire_idle",
+          "tile": {
+            "x": 16,
+            "y": 15
+          }
+        },
+        {
+          "id": "ch8_bell_g0",
+          "enemyId": "enemy_doom_bell",
+          "texture": "enemy_doom_bell",
+          "anim": "enemy_doom_bell_idle",
+          "tile": {
+            "x": 8,
+            "y": 8
+          }
+        },
+        {
+          "id": "ch8_assim_g0",
+          "enemyId": "enemy_assimilator",
+          "texture": "enemy_assimilator",
+          "anim": "enemy_assimilator_idle",
+          "tile": {
+            "x": 16,
+            "y": 8
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "ch8_g1_kh"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 5,
+              "y": 11
+            },
+            {
+              "x": 6,
+              "y": 11
+            },
+            {
+              "x": 7,
+              "y": 11
+            },
+            {
+              "x": 8,
+              "y": 11
+            },
+            {
+              "x": 9,
+              "y": 11
+            },
+            {
+              "x": 10,
+              "y": 11
+            },
+            {
+              "x": 11,
+              "y": 11
+            },
+            {
+              "x": 12,
+              "y": 11
+            },
+            {
+              "x": 13,
+              "y": 11
+            },
+            {
+              "x": 14,
+              "y": 11
+            },
+            {
+              "x": 15,
+              "y": 11
+            },
+            {
+              "x": 16,
+              "y": 11
+            },
+            {
+              "x": 17,
+              "y": 11
+            },
+            {
+              "x": 18,
+              "y": 11
+            }
+          ],
+          "index": 54
+        },
+        {
+          "when": {
+            "flag": "ch8_g2_beta"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 11,
+              "y": 5
+            },
+            {
+              "x": 12,
+              "y": 5
+            }
+          ],
+          "index": 58
+        },
+        {
+          "when": {
+            "flag": "opened_echo_door"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 22,
+              "y": 18
+            }
+          ],
+          "index": 60
+        },
+        {
+          "when": {
+            "flag": "ch8_g1_kh"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 4,
+              "y": 14
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_g1_beta"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 4,
+              "y": 14
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_g2_kh"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 19,
+              "y": 8
+            }
+          ],
+          "index": 18
+        },
+        {
+          "when": {
+            "flag": "ch8_g2_beta"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 19,
+              "y": 8
+            }
+          ],
+          "index": 18
+        }
+      ],
+      "exits": [
+        {
+          "id": "gears_to_base",
+          "area": {
+            "x": 12,
+            "y": 23,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_anchor_tower_base",
+          "toSpawn": "from_gears"
+        },
+        {
+          "id": "gears_to_heart",
+          "area": {
+            "x": 12,
+            "y": 0,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_null_clock_heart",
+          "toSpawn": "from_gears"
+        },
+        {
+          "id": "gears_to_echo",
+          "area": {
+            "x": 23,
+            "y": 18,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_sixfold_echo_hall",
+          "toSpawn": "from_gears",
+          "requiresFlag": "opened_echo_door"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_gears",
+          "on": "arrive",
+          "onceFlag": "ch8_t_gears_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_gears_arrival"
+        },
+        {
+          "id": "ch8_t_gears_kuro",
+          "on": "zone",
+          "area": {
+            "x": 9,
+            "y": 17,
+            "w": 7,
+            "h": 4
+          },
+          "onceFlag": "ch8_t_gears_kuro_seen",
+          "dialogueId": "ch8_gears_kuro"
+        }
+      ]
+    },
+    "map_ch8_null_clock_heart": {
+      "id": "map_ch8_null_clock_heart",
+      "name": "Tim Đồng Hồ Số Không",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_null_clock_heart",
+        "path": "assets/maps/map_ch8_null_clock_heart.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 11,
+          "y": 14
+        },
+        "from_gears": {
+          "x": 11,
+          "y": 14
+        },
+        "from_crown": {
+          "x": 11,
+          "y": 4
+        }
+      },
+      "revive": {
+        "x": 11,
+        "y": 14
+      },
+      "npcs": [],
+      "interactables": [],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "encounters": [
+        {
+          "id": "enc_null_hour_herald",
+          "enemyId": "boss_null_hour_herald",
+          "texture": "boss_null_hour_herald",
+          "anim": "boss_null_hour_herald_idle",
+          "tile": {
+            "x": 11,
+            "y": 6
+          },
+          "defeatedFlag": "defeated_null_hour_herald",
+          "hitbox": 30,
+          "victoryDialogueId": "ch8_herald_defeated"
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "defeated_null_hour_herald"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 11,
+              "y": 1
+            }
+          ],
+          "index": 60
+        }
+      ],
+      "exits": [
+        {
+          "id": "heart_to_gears",
+          "area": {
+            "x": 11,
+            "y": 17,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_anchor_tower_gears",
+          "toSpawn": "from_heart"
+        },
+        {
+          "id": "heart_to_crown",
+          "area": {
+            "x": 11,
+            "y": 0,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_tower_crown",
+          "toSpawn": "from_heart",
+          "requiresFlag": "defeated_null_hour_herald",
+          "lockedDialogueId": "ch8_heart_exit_locked"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_heart",
+          "on": "arrive",
+          "onceFlag": "ch8_t_heart_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_heart_arrival"
+        },
+        {
+          "id": "ch8_t_herald",
+          "on": "zone",
+          "area": {
+            "x": 8,
+            "y": 9,
+            "w": 7,
+            "h": 3
+          },
+          "onceFlag": "ch8_t_herald_seen",
+          "dialogueId": "ch8_herald_confront",
+          "unlessFlag": "defeated_null_hour_herald"
+        }
+      ]
+    },
+    "map_ch8_tower_crown": {
+      "id": "map_ch8_tower_crown",
+      "name": "Đỉnh Tháp",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_tower_crown",
+        "path": "assets/maps/map_ch8_tower_crown.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 10,
+          "y": 12
+        },
+        "from_heart": {
+          "x": 10,
+          "y": 12
+        }
+      },
+      "revive": {
+        "x": 10,
+        "y": 12
+      },
+      "npcs": [],
+      "interactables": [],
+      "ambient": {
+        "color": "#f0c860",
+        "alpha": 0.12
+      },
+      "triggers": [
+        {
+          "id": "ch8_t_crown",
+          "on": "arrive",
+          "onceFlag": "ch8_t_crown_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_crown_warm",
+          "requiresFlag": "ch7_kuro_embraced"
+        },
+        {
+          "id": "ch8_t_crown_b",
+          "on": "arrive",
+          "onceFlag": "ch8_t_crown_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_crown_cold",
+          "unlessFlag": "ch7_kuro_embraced"
+        },
+        {
+          "id": "ch8_t_end",
+          "on": "zone",
+          "area": {
+            "x": 7,
+            "y": 6,
+            "w": 6,
+            "h": 3
+          },
+          "onceFlag": "ch8_t_end_seen",
+          "dialogueId": "ch8_end_1",
+          "requiresFlag": "gave_na_papers"
+        },
+        {
+          "id": "ch8_t_end_b",
+          "on": "zone",
+          "area": {
+            "x": 7,
+            "y": 6,
+            "w": 6,
+            "h": 3
+          },
+          "onceFlag": "ch8_t_end_seen",
+          "dialogueId": "ch8_end_1b",
+          "unlessFlag": "gave_na_papers"
+        }
+      ]
+    },
+    "map_ch8_hidden_war_archive": {
+      "id": "map_ch8_hidden_war_archive",
+      "name": "Kho Binh Thư Hai Triều",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_hidden_war_archive",
+        "path": "assets/maps/map_ch8_hidden_war_archive.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 9,
+          "y": 3
+        },
+        "from_barracks": {
+          "x": 9,
+          "y": 3
+        }
+      },
+      "revive": {
+        "x": 9,
+        "y": 3
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch8_archive_plate",
+          "tile": {
+            "x": 5,
+            "y": 7
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc bản khắc",
+          "dialogueId": "ch8_archive_plate"
+        },
+        {
+          "id": "poi_ch8_c11",
+          "tile": {
+            "x": 9,
+            "y": 11
+          },
+          "radius": 44,
+          "prompt": "[E] Mở cửa sắt",
+          "dialogueId": "ch8_c11_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "solved_war_archive",
+              "dialogueId": "ch8_c11_done"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch8_c11_d1",
+          "tile": {
+            "x": 7,
+            "y": 7
+          },
+          "radius": 40,
+          "prompt": "[E] Vòng số 1",
+          "values": [
+            {
+              "key": "n0",
+              "label": "0"
+            },
+            {
+              "key": "n1",
+              "label": "1"
+            },
+            {
+              "key": "n2",
+              "label": "2"
+            },
+            {
+              "key": "n3",
+              "label": "3"
+            },
+            {
+              "key": "n4",
+              "label": "4"
+            },
+            {
+              "key": "n5",
+              "label": "5"
+            },
+            {
+              "key": "n6",
+              "label": "6"
+            },
+            {
+              "key": "n7",
+              "label": "7"
+            },
+            {
+              "key": "n8",
+              "label": "8"
+            },
+            {
+              "key": "n9",
+              "label": "9"
+            }
+          ]
+        },
+        {
+          "id": "ch8_c11_d2",
+          "tile": {
+            "x": 9,
+            "y": 7
+          },
+          "radius": 40,
+          "prompt": "[E] Vòng số 2",
+          "values": [
+            {
+              "key": "n0",
+              "label": "0"
+            },
+            {
+              "key": "n1",
+              "label": "1"
+            },
+            {
+              "key": "n2",
+              "label": "2"
+            },
+            {
+              "key": "n3",
+              "label": "3"
+            },
+            {
+              "key": "n4",
+              "label": "4"
+            },
+            {
+              "key": "n5",
+              "label": "5"
+            },
+            {
+              "key": "n6",
+              "label": "6"
+            },
+            {
+              "key": "n7",
+              "label": "7"
+            },
+            {
+              "key": "n8",
+              "label": "8"
+            },
+            {
+              "key": "n9",
+              "label": "9"
+            }
+          ]
+        },
+        {
+          "id": "ch8_c11_d3",
+          "tile": {
+            "x": 11,
+            "y": 7
+          },
+          "radius": 40,
+          "prompt": "[E] Vòng số 3",
+          "values": [
+            {
+              "key": "n0",
+              "label": "0"
+            },
+            {
+              "key": "n1",
+              "label": "1"
+            },
+            {
+              "key": "n2",
+              "label": "2"
+            },
+            {
+              "key": "n3",
+              "label": "3"
+            },
+            {
+              "key": "n4",
+              "label": "4"
+            },
+            {
+              "key": "n5",
+              "label": "5"
+            },
+            {
+              "key": "n6",
+              "label": "6"
+            },
+            {
+              "key": "n7",
+              "label": "7"
+            },
+            {
+              "key": "n8",
+              "label": "8"
+            },
+            {
+              "key": "n9",
+              "label": "9"
+            }
+          ]
+        }
+      ],
+      "dialChecks": [
+        {
+          "ifFlags": [
+            "ch8_c11_d1_n2",
+            "ch8_c11_d2_n4",
+            "ch8_c11_d3_n9"
+          ],
+          "unlessFlag": "solved_war_archive",
+          "dialogueId": "ch8_c11_right"
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "solved_war_archive"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 9,
+              "y": 11
+            }
+          ],
+          "index": 51
+        }
+      ],
+      "exits": [
+        {
+          "id": "archive_to_barracks",
+          "area": {
+            "x": 9,
+            "y": 0,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_twin_era_barracks",
+          "toSpawn": "from_archive"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_archive",
+          "on": "arrive",
+          "onceFlag": "ch8_t_archive_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_archive_arrival"
+        }
+      ]
+    },
+    "map_ch8_blank_ledger_vault": {
+      "id": "map_ch8_blank_ledger_vault",
+      "name": "Két Sổ Cái Trống",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_blank_ledger_vault",
+        "path": "assets/maps/map_ch8_blank_ledger_vault.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 8,
+          "y": 8
+        },
+        "from_market": {
+          "x": 8,
+          "y": 8
+        }
+      },
+      "revive": {
+        "x": 8,
+        "y": 8
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch8_ledger",
+          "tile": {
+            "x": 8,
+            "y": 4
+          },
+          "radius": 44,
+          "prompt": "[E] Đọc sổ cái",
+          "dialogueId": "ch8_ledger"
+        },
+        {
+          "id": "poi_ch8_safe",
+          "tile": {
+            "x": 12,
+            "y": 6
+          },
+          "radius": 44,
+          "prompt": "[E] Thử mở két",
+          "dialogueId": "ch8_c12_wrong",
+          "dialogueRules": [
+            {
+              "ifFlag": "solved_kuro_ledger",
+              "dialogueId": "ch8_c12_done"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "dials": [
+        {
+          "id": "ch8_c12_name",
+          "tile": {
+            "x": 8,
+            "y": 6
+          },
+          "radius": 24,
+          "prompt": "[E] Viết tên vào ô trống",
+          "values": [
+            {
+              "key": "none",
+              "label": "(trống)"
+            },
+            {
+              "key": "kuro",
+              "label": "Kuro"
+            },
+            {
+              "key": "na",
+              "label": "Na"
+            },
+            {
+              "key": "ivo",
+              "label": "Ivo"
+            },
+            {
+              "key": "peter",
+              "label": "Peter"
+            }
+          ]
+        }
+      ],
+      "dialChecks": [
+        {
+          "ifFlags": [
+            "ch8_c12_name_peter"
+          ],
+          "unlessFlag": "solved_kuro_ledger",
+          "dialogueId": "ch8_c12_right"
+        }
+      ],
+      "exits": [
+        {
+          "id": "vault_to_market",
+          "area": {
+            "x": 8,
+            "y": 11,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_gear_market",
+          "toSpawn": "from_vault"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_vault",
+          "on": "arrive",
+          "onceFlag": "ch8_t_vault_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_vault_arrival"
+        }
+      ]
+    },
+    "map_ch8_sixfold_echo_hall": {
+      "id": "map_ch8_sixfold_echo_hall",
+      "name": "Sảnh Vọng Sáu Ấn",
+      "chapter": 8,
+      "tilemap": {
+        "key": "map_ch8_sixfold_echo_hall",
+        "path": "assets/maps/map_ch8_sixfold_echo_hall.json"
+      },
+      "tileset": {
+        "name": "convergence_tileset",
+        "key": "convergence_tileset",
+        "path": "assets/tilesets/convergence_tileset.png"
+      },
+      "collision": {
+        "fromGid": 4,
+        "toGid": 48
+      },
+      "layers": {
+        "ground": "Ground",
+        "walls": "Walls"
+      },
+      "bgm": "ambient",
+      "spawns": {
+        "default": {
+          "x": 3,
+          "y": 9
+        },
+        "from_gears": {
+          "x": 3,
+          "y": 9
+        }
+      },
+      "revive": {
+        "x": 3,
+        "y": 9
+      },
+      "npcs": [],
+      "interactables": [
+        {
+          "id": "poi_ch8_pillar_1",
+          "tile": {
+            "x": 5,
+            "y": 4
+          },
+          "radius": 40,
+          "prompt": "[E] Chạm cột Continuum",
+          "dialogueId": "ch8_pillar_1",
+          "visibleWhen": {
+            "unlessFlag": "solved_six_pillars"
+          },
+          "dialogueRules": [
+            {
+              "ifFlag": "ch8_pillar_1",
+              "dialogueId": "ch8_pillar_lit"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch8_pillar_2",
+          "tile": {
+            "x": 11,
+            "y": 3
+          },
+          "radius": 40,
+          "prompt": "[E] Chạm cột Causality",
+          "dialogueId": "ch8_pillar_2",
+          "visibleWhen": {
+            "unlessFlag": "solved_six_pillars"
+          },
+          "dialogueRules": [
+            {
+              "ifFlag": "ch8_pillar_2",
+              "dialogueId": "ch8_pillar_lit"
+            },
+            {
+              "unlessFlag": "ch8_pillar_1",
+              "dialogueId": "ch8_pillar_wrong"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch8_pillar_3",
+          "tile": {
+            "x": 16,
+            "y": 4
+          },
+          "radius": 40,
+          "prompt": "[E] Chạm cột Memory",
+          "dialogueId": "ch8_pillar_3",
+          "visibleWhen": {
+            "unlessFlag": "solved_six_pillars"
+          },
+          "dialogueRules": [
+            {
+              "ifFlag": "ch8_pillar_3",
+              "dialogueId": "ch8_pillar_lit"
+            },
+            {
+              "unlessFlag": "ch8_pillar_2",
+              "dialogueId": "ch8_pillar_wrong"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch8_pillar_4",
+          "tile": {
+            "x": 16,
+            "y": 13
+          },
+          "radius": 40,
+          "prompt": "[E] Chạm cột Finality",
+          "dialogueId": "ch8_pillar_4",
+          "visibleWhen": {
+            "unlessFlag": "solved_six_pillars"
+          },
+          "dialogueRules": [
+            {
+              "ifFlag": "ch8_pillar_4",
+              "dialogueId": "ch8_pillar_lit"
+            },
+            {
+              "unlessFlag": "ch8_pillar_3",
+              "dialogueId": "ch8_pillar_wrong"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch8_pillar_5",
+          "tile": {
+            "x": 11,
+            "y": 14
+          },
+          "radius": 40,
+          "prompt": "[E] Chạm cột Possibility",
+          "dialogueId": "ch8_pillar_5",
+          "visibleWhen": {
+            "unlessFlag": "solved_six_pillars"
+          },
+          "dialogueRules": [
+            {
+              "ifFlag": "ch8_pillar_5",
+              "dialogueId": "ch8_pillar_lit"
+            },
+            {
+              "unlessFlag": "ch8_pillar_4",
+              "dialogueId": "ch8_pillar_wrong"
+            }
+          ]
+        },
+        {
+          "id": "poi_ch8_pillar_6",
+          "tile": {
+            "x": 5,
+            "y": 13
+          },
+          "radius": 40,
+          "prompt": "[E] Chạm cột Origin",
+          "dialogueId": "ch8_pillar_6",
+          "visibleWhen": {
+            "unlessFlag": "solved_six_pillars"
+          },
+          "dialogueRules": [
+            {
+              "ifFlag": "ch8_pillar_6",
+              "dialogueId": "ch8_pillar_lit"
+            },
+            {
+              "unlessFlag": "ch8_pillar_5",
+              "dialogueId": "ch8_pillar_wrong"
+            }
+          ]
+        }
+      ],
+      "ambient": {
+        "color": "#d8a040",
+        "alpha": 0.08
+      },
+      "encounters": [
+        {
+          "id": "enc_sixfold_echo",
+          "enemyId": "boss_sixfold_echo",
+          "texture": "boss_sixfold_echo",
+          "anim": "boss_sixfold_echo_idle",
+          "tile": {
+            "x": 11,
+            "y": 9
+          },
+          "defeatedFlag": "defeated_sixfold_echo",
+          "hitbox": 30,
+          "victoryDialogueId": "ch8_echo_defeated",
+          "visibleWhen": {
+            "flag": "solved_six_pillars"
+          }
+        }
+      ],
+      "tileSwaps": [
+        {
+          "when": {
+            "flag": "ch8_pillar_1"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 5,
+              "y": 4
+            }
+          ],
+          "index": 39
+        },
+        {
+          "when": {
+            "flag": "ch8_pillar_2"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 11,
+              "y": 3
+            }
+          ],
+          "index": 39
+        },
+        {
+          "when": {
+            "flag": "ch8_pillar_3"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 16,
+              "y": 4
+            }
+          ],
+          "index": 39
+        },
+        {
+          "when": {
+            "flag": "ch8_pillar_4"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 16,
+              "y": 13
+            }
+          ],
+          "index": 39
+        },
+        {
+          "when": {
+            "flag": "ch8_pillar_5"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 11,
+              "y": 14
+            }
+          ],
+          "index": 39
+        },
+        {
+          "when": {
+            "flag": "ch8_pillar_6"
+          },
+          "layer": "walls",
+          "tiles": [
+            {
+              "x": 5,
+              "y": 13
+            }
+          ],
+          "index": 39
+        }
+      ],
+      "exits": [
+        {
+          "id": "echo_to_gears",
+          "area": {
+            "x": 0,
+            "y": 9,
+            "w": 1,
+            "h": 1
+          },
+          "toMap": "map_ch8_anchor_tower_gears",
+          "toSpawn": "from_echo"
+        }
+      ],
+      "triggers": [
+        {
+          "id": "ch8_t_echo",
+          "on": "arrive",
+          "onceFlag": "ch8_t_echo_seen",
+          "delayMs": 400,
+          "dialogueId": "ch8_echo_arrival"
+        },
+        {
+          "id": "ch8_t_c13",
+          "on": "zone",
+          "area": {
+            "x": 1,
+            "y": 2,
+            "w": 20,
+            "h": 14
+          },
+          "onceFlag": "ch8_t_c13_seen",
+          "dialogueId": "ch8_c13_right",
+          "requiresFlag": "ch8_pillar_6",
+          "unlessFlag": "solved_six_pillars"
+        },
+        {
+          "id": "ch8_t_echo_confront",
+          "on": "zone",
+          "area": {
+            "x": 8,
+            "y": 7,
+            "w": 2,
+            "h": 5
+          },
+          "onceFlag": "ch8_t_echo_confront_seen",
+          "dialogueId": "ch8_echo_confront",
+          "requiresFlag": "solved_six_pillars",
+          "unlessFlag": "defeated_sixfold_echo"
         }
       ]
     }

@@ -244,6 +244,26 @@ export interface BossMechanic {
     clearAction: BossEnvironmentAction;
     drainMessage: string;
   };
+  /** Causality (Convergent Praetor): healing with an item last turn makes its next blow `mult` stronger. */
+  healPenalty?: { mult: number; message: string };
+  /**
+   * The 25th hour (Herald of the Null Hour): after each of its turns the hand moves 1 + one per
+   * missed ring. At `top` the Null Strike takes `strikePct` of Peter's max HP and the hand returns
+   * to `start` — unless Kuro still has his one save. `calls` (once each) push it back `pushBy`.
+   */
+  clockHand?: {
+    start: number;
+    top: number;
+    strikePct: number;
+    pushBy: number;
+    calls: BossEnvironmentAction[];
+    tickMessage: string;
+    strikeMessage: string;
+    kuroMessage: string;
+    /** Below this HP fraction: one more ring, every second ring unseen. */
+    phase2Pct: number;
+    phase2Message: string;
+  };
 }
 
 export interface ICombatActionResult {
@@ -312,7 +332,12 @@ export interface FieldTraits {
    * Branch Phantom: solid for `solidMs` of every `everyMs`, otherwise a faded ghost from the other
    * branch — slashes pass through it (it slips behind Peter) and it cannot strike.
    */
-  phase?: { everyMs: number; solidMs: number };
+  phase?: {
+    everyMs: number;
+    solidMs: number;
+    /** Phase Wraith: solid while `ownFlag` holds (its world anchored), faded while `otherFlag` does. */
+    anchor?: { ownFlag: string; otherFlag: string };
+  };
   /** Unborn Cocoon: stays put; after `hatchMs` it hatches into `into` (enemies.json id). */
   cocoon?: { hatchMs: number; into: string; texture: string; anim?: string };
   /** Paradox Crystal: repeats Peter's last slash from where it floats, `delayMs` later. */
@@ -430,6 +455,41 @@ export interface FieldTraits {
     offset: number;
     damageMult: number;
   };
+  /**
+   * Assimilator (Chapter 8): it learns Peter's last move (slash / dash / skill). Repeating that
+   * move is countered — a repeated slash or skill does nothing and it strikes back (`counterMult`);
+   * a repeated dash lets it lunge after him.
+   */
+  mimic?: { range: number; counterMult: number };
+  /**
+   * Doom Bell: rings three times `tollMs` apart, then a wave spreads to `radius` over `waveMs`
+   * (`damageMult`; dashing through it is safe). A slash between the first and second toll cracks it
+   * (stunned `crackMs`, the count starts over).
+   */
+  bell?: {
+    range: number;
+    tollMs: number;
+    waveMs: number;
+    radius: number;
+    damageMult: number;
+    crackMs: number;
+    restMs: number;
+  };
+  /** Twin-Era Legionnaire: with Peter's companion near, it turns its shield to them `turnMs` of `everyMs`. */
+  allyTaunt?: { everyMs: number; turnMs: number; range: number };
+  /**
+   * Second-Hand Warden: a hand `length` long sweeps around it (`periodMs` a turn; touching it costs
+   * `sweepMult` and knocks Peter away). It is hurt only in the `windowMs` after each tick
+   * (`tickMs`); three such hits in a row stop the hand for `stopMs`.
+   */
+  sweep?: {
+    length: number;
+    periodMs: number;
+    sweepMult: number;
+    tickMs: number;
+    windowMs: number;
+    stopMs: number;
+  };
 }
 
 /**
@@ -492,6 +552,22 @@ export interface IEnemyDefinition {
     hidden?: boolean;
     /** A second, false ring (gold) closes `decoyLeadMs` earlier; only the violet ring counts. */
     decoyLeadMs?: number;
+    /** Mirror Verdict: ring durations drawn from this pool; every second turn replays the last backwards. */
+    echoPool?: number[];
+    echoMessage?: string;
+    /** Sixfold Echo: from HP fraction `below` down, these ring settings apply (first match wins). */
+    phases?: {
+      below: number;
+      set: {
+        count?: number;
+        shrinkMs?: number;
+        hidden?: boolean;
+        decoyLeadMs?: number;
+        feintChance?: number;
+        ringMs?: number;
+      };
+      message: string;
+    }[];
   };
   /** Real-time behaviour on the map (small enemies). */
   field?: FieldTraits;

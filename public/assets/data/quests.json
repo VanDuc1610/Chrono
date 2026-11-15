@@ -56,7 +56,9 @@
       ],
       "rewards": {
         "experience": 20,
-        "items": ["coastal_pancake"]
+        "items": [
+          "coastal_pancake"
+        ]
       },
       "followUpQuestId": "quest_prologue_timestop"
     },
@@ -83,7 +85,9 @@
       ],
       "rewards": {
         "experience": 15,
-        "items": ["chrono_shard_minor"]
+        "items": [
+          "chrono_shard_minor"
+        ]
       },
       "followUpQuestId": "quest_prologue_first_hunt"
     },
@@ -152,7 +156,9 @@
       ],
       "rewards": {
         "experience": 25,
-        "items": ["chrono_shard_minor"]
+        "items": [
+          "chrono_shard_minor"
+        ]
       },
       "followUpQuestId": "quest_prologue_awakening"
     },
@@ -177,7 +183,9 @@
       ],
       "rewards": {
         "experience": 50,
-        "items": ["chrono_shard_minor"]
+        "items": [
+          "chrono_shard_minor"
+        ]
       },
       "followUpQuestId": "quest_prologue_silence"
     },
@@ -198,7 +206,9 @@
       ],
       "rewards": {
         "experience": 30,
-        "items": ["chrono_shard_minor"]
+        "items": [
+          "chrono_shard_minor"
+        ]
       },
       "followUpQuestId": "quest_prologue_sentinel"
     },
@@ -219,7 +229,9 @@
       ],
       "rewards": {
         "experience": 60,
-        "items": ["sentinel_core_relic"]
+        "items": [
+          "sentinel_core_relic"
+        ]
       },
       "followUpQuestId": "quest_prologue_unwritten"
     },
@@ -272,7 +284,9 @@
       ],
       "rewards": {
         "experience": 40,
-        "items": ["ancient_gear"]
+        "items": [
+          "ancient_gear"
+        ]
       }
     },
     {
@@ -345,7 +359,9 @@
       ],
       "rewards": {
         "experience": 60,
-        "items": ["coastal_pancake"]
+        "items": [
+          "coastal_pancake"
+        ]
       },
       "followUpQuestId": "quest_ch1_fog_beacon"
     },
@@ -393,7 +409,9 @@
       ],
       "rewards": {
         "experience": 80,
-        "items": ["chrono_shard_minor"]
+        "items": [
+          "chrono_shard_minor"
+        ]
       },
       "followUpQuestId": "quest_ch1_bellkeeper"
     },
@@ -420,7 +438,9 @@
       ],
       "rewards": {
         "experience": 150,
-        "items": ["continuum_seal_shard"]
+        "items": [
+          "continuum_seal_shard"
+        ]
       },
       "followUpQuestId": "quest_ch2_outskirts_gate"
     },
@@ -447,7 +467,9 @@
       ],
       "rewards": {
         "experience": 50,
-        "items": ["chrono_shard_minor"]
+        "items": [
+          "chrono_shard_minor"
+        ]
       }
     },
     {
@@ -467,7 +489,9 @@
       ],
       "rewards": {
         "experience": 50,
-        "items": ["sea_glass_charm"]
+        "items": [
+          "sea_glass_charm"
+        ]
       }
     },
     {
@@ -493,7 +517,9 @@
       ],
       "rewards": {
         "experience": 50,
-        "items": ["sunset_dried_fish"]
+        "items": [
+          "sunset_dried_fish"
+        ]
       }
     },
     {
@@ -540,7 +566,9 @@
       ],
       "rewards": {
         "experience": 90,
-        "items": ["chrono_shard_minor"]
+        "items": [
+          "chrono_shard_minor"
+        ]
       },
       "followUpQuestId": "quest_ch2_praetor_plea"
     },
@@ -588,7 +616,9 @@
       ],
       "rewards": {
         "experience": 120,
-        "items": ["sunset_dried_fish"]
+        "items": [
+          "sunset_dried_fish"
+        ]
       },
       "followUpQuestId": "quest_ch2_imperial_verdict"
     },
@@ -609,7 +639,9 @@
       ],
       "rewards": {
         "experience": 220,
-        "items": ["causality_seal_shard"]
+        "items": [
+          "causality_seal_shard"
+        ]
       },
       "followUpQuestId": "quest_ch3_sepulcher_gate"
     },
@@ -630,7 +662,9 @@
       ],
       "rewards": {
         "experience": 70,
-        "items": ["imperial_honey_bread"]
+        "items": [
+          "imperial_honey_bread"
+        ]
       }
     },
     {
@@ -650,7 +684,9 @@
       ],
       "rewards": {
         "experience": 80,
-        "items": ["chrono_shard_minor"]
+        "items": [
+          "chrono_shard_minor"
+        ]
       }
     },
     {
@@ -703,7 +739,9 @@
       ],
       "rewards": {
         "experience": 140,
-        "items": ["refined_chrono_shard"]
+        "items": [
+          "refined_chrono_shard"
+        ]
       },
       "followUpQuestId": "quest_ch3_echoing_vaults"
     },
@@ -757,7 +795,10 @@
       ],
       "rewards": {
         "experience": 200,
-        "items": ["imperial_honey_bread", "imperial_honey_bread"]
+        "items": [
+          "imperial_honey_bread",
+          "imperial_honey_bread"
+        ]
       },
       "followUpQuestId": "quest_ch3_archive_censorship"
     },
@@ -778,7 +819,10 @@
       ],
       "rewards": {
         "experience": 220,
-        "items": ["imperial_honey_bread", "imperial_honey_bread"]
+        "items": [
+          "imperial_honey_bread",
+          "imperial_honey_bread"
+        ]
       },
       "followUpQuestId": "quest_ch3_king_dilemma"
     },
@@ -799,7 +843,11 @@
       ],
       "rewards": {
         "experience": 260,
-        "items": ["sunset_dried_fish", "sunset_dried_fish", "sunset_dried_fish"]
+        "items": [
+          "sunset_dried_fish",
+          "sunset_dried_fish",
+          "sunset_dried_fish"
+        ]
       },
       "followUpQuestId": "quest_ch3_nameless_choir"
     },
@@ -820,7 +868,9 @@
       ],
       "rewards": {
         "experience": 350,
-        "items": ["memory_seal_shard"]
+        "items": [
+          "memory_seal_shard"
+        ]
       },
       "followUpQuestId": "quest_ch4_vale_of_banners"
     },
@@ -841,7 +891,9 @@
       ],
       "rewards": {
         "experience": 120,
-        "items": ["memory_ink_flask"]
+        "items": [
+          "memory_ink_flask"
+        ]
       }
     },
     {
@@ -861,7 +913,9 @@
       ],
       "rewards": {
         "experience": 130,
-        "items": ["ancient_amber_resin"]
+        "items": [
+          "ancient_amber_resin"
+        ]
       }
     },
     {
@@ -881,7 +935,10 @@
       ],
       "rewards": {
         "experience": 150,
-        "items": ["refined_chrono_shard", "refined_chrono_shard"]
+        "items": [
+          "refined_chrono_shard",
+          "refined_chrono_shard"
+        ]
       }
     },
     {
@@ -949,7 +1006,10 @@
       ],
       "rewards": {
         "experience": 240,
-        "items": ["refined_chrono_shard", "refined_chrono_shard"]
+        "items": [
+          "refined_chrono_shard",
+          "refined_chrono_shard"
+        ]
       },
       "followUpQuestId": "quest_ch4_crimson_standard"
     },
@@ -976,7 +1036,10 @@
       ],
       "rewards": {
         "experience": 280,
-        "items": ["ancient_amber_resin", "ancient_amber_resin"]
+        "items": [
+          "ancient_amber_resin",
+          "ancient_amber_resin"
+        ]
       },
       "followUpQuestId": "quest_ch4_broken_peace"
     },
@@ -1015,7 +1078,9 @@
       ],
       "rewards": {
         "experience": 320,
-        "items": ["phoenix_draught"]
+        "items": [
+          "phoenix_draught"
+        ]
       },
       "followUpQuestId": "quest_ch4_the_last_war"
     },
@@ -1042,7 +1107,9 @@
       ],
       "rewards": {
         "experience": 450,
-        "items": ["finality_seal_shard"]
+        "items": [
+          "finality_seal_shard"
+        ]
       },
       "followUpQuestId": "quest_ch5_into_the_interval"
     },
@@ -1083,7 +1150,9 @@
       ],
       "rewards": {
         "experience": 230,
-        "items": ["spear_of_finality"]
+        "items": [
+          "spear_of_finality"
+        ]
       }
     },
     {
@@ -1103,7 +1172,9 @@
       ],
       "rewards": {
         "experience": 200,
-        "items": ["last_light_charm"]
+        "items": [
+          "last_light_charm"
+        ]
       }
     },
     {
@@ -1747,7 +1818,8 @@
           "completed": false,
           "completeOnFlag": "witnessed_ch7_cliffhanger"
         }
-      ]
+      ],
+      "followUpQuestId": "quest_ch8_null_landing"
     },
     {
       "id": "quest_ch7_first_mason",
@@ -1794,6 +1866,244 @@
           "description": "Ghép lại la bàn",
           "completed": false,
           "completeOnFlag": "calibrated_blind_compass"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch8_null_landing",
+      "title": "Bãi Đáp Khe Nứt",
+      "kind": "main",
+      "chapter": 8,
+      "description": "Giờ Số Không đã bắt đầu. Các thế giới dính vào nhau bằng những đường chỉ vàng.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch8_anchor",
+          "description": "Học cách dùng Cọc Neo",
+          "completed": false,
+          "completeOnFlag": "ch8_anchor_learned"
+        }
+      ],
+      "followUpQuestId": "quest_ch8_steel_shore"
+    },
+    {
+      "id": "quest_ch8_steel_shore",
+      "title": "Bờ Biển Thép",
+      "kind": "main",
+      "chapter": 8,
+      "description": "Bờ biển Khánh Hòa bị Thành Phố Beta đâm xuyên. Cô Ba và bé Na mắc kẹt.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch8_boat",
+          "description": "Đưa thuyền cô Ba ra khơi",
+          "completed": false,
+          "completeOnFlag": "solved_na_chalk_shore"
+        },
+        {
+          "id": "obj_ch8_ivo",
+          "description": "Sửa bánh răng cửa xưởng của Ivo",
+          "completed": false,
+          "completeOnFlag": "solved_ivo_gears"
+        }
+      ],
+      "followUpQuestId": "quest_ch8_ragged_empire"
+    },
+    {
+      "id": "quest_ch8_ragged_empire",
+      "title": "Đế Chế Cờ Rách",
+      "kind": "main",
+      "chapter": 8,
+      "description": "Quảng trường Sol-Karis chồng lên bình nguyên chiến hào.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch8_banners",
+          "description": "Kể đúng trận đánh trên bốn lá cờ",
+          "completed": false,
+          "completeOnFlag": "solved_ragged_causality"
+        },
+        {
+          "id": "obj_ch8_barracks",
+          "description": "Vượt qua Doanh Trại Hai Thời",
+          "completed": false,
+          "completeOnFlag": "solved_twin_watch"
+        },
+        {
+          "id": "obj_ch8_praetor",
+          "description": "Vượt qua Pháp Quan Hội Tụ",
+          "completed": false,
+          "completeOnFlag": "defeated_convergent_praetor"
+        }
+      ],
+      "followUpQuestId": "quest_ch8_ash_library"
+    },
+    {
+      "id": "quest_ch8_ash_library",
+      "title": "Thư Viện Bậc Tro",
+      "kind": "main",
+      "chapter": 8,
+      "description": "Chữ trong sách đang chảy khỏi trang. Neris cần giúp.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch8_names",
+          "description": "Giữ những cái tên đứng yên",
+          "completed": false,
+          "completeOnFlag": "solved_flowing_names"
+        },
+        {
+          "id": "obj_ch8_mirrors",
+          "description": "Đưa ánh sáng xanh tới ổ khóa Hầm Gương",
+          "completed": false,
+          "completeOnFlag": "solved_twin_mirrors"
+        }
+      ],
+      "followUpQuestId": "quest_ch8_torn_page"
+    },
+    {
+      "id": "quest_ch8_torn_page",
+      "title": "Trang Xé",
+      "kind": "main",
+      "chapter": 8,
+      "description": "Ba dải giấy của một trang Sổ Khởi Nguyên.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch8_page",
+          "description": "Ghép lại trang giấy",
+          "completed": false,
+          "completeOnFlag": "solved_torn_page"
+        },
+        {
+          "id": "obj_ch8_truth",
+          "description": "Nghe Kẻ Bị Quên Đầu Tiên kể",
+          "completed": false,
+          "completeOnFlag": "ch8_learned_torn_page"
+        }
+      ],
+      "followUpQuestId": "quest_ch8_last_line"
+    },
+    {
+      "id": "quest_ch8_last_line",
+      "title": "Phòng Tuyến Cuối",
+      "kind": "main",
+      "chapter": 8,
+      "description": "Bốn cổng vỡ, bốn thế giới đổ quân vào quảng trường hội tụ.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch8_gates",
+          "description": "Giao mỗi cổng cho đúng người",
+          "completed": false,
+          "completeOnFlag": "solved_four_gates"
+        },
+        {
+          "id": "obj_ch8_hold",
+          "description": "Giữ phòng tuyến qua ba đợt",
+          "completed": false,
+          "completeOnFlag": "held_last_line"
+        }
+      ],
+      "followUpQuestId": "quest_ch8_anchor_tower"
+    },
+    {
+      "id": "quest_ch8_anchor_tower",
+      "title": "Tháp Neo",
+      "kind": "main",
+      "chapter": 8,
+      "description": "Mỏ Neo Thời Gian của Khánh Hòa đã thành một tòa tháp. Kim đồng hồ đang chạy tới Giờ Thứ 25.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch8_sockets",
+          "description": "Đặt sáu ấn vào đúng ổ",
+          "completed": false,
+          "completeOnFlag": "solved_six_sockets"
+        },
+        {
+          "id": "obj_ch8_herald",
+          "description": "Dừng Sứ Giả Giờ Số Không",
+          "completed": false,
+          "completeOnFlag": "defeated_null_hour_herald"
+        },
+        {
+          "id": "obj_ch8_crown",
+          "description": "Lên đỉnh tháp",
+          "completed": false,
+          "completeOnFlag": "witnessed_ch8_cliffhanger"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch8_na_last_crane",
+      "title": "Con Hạc Cuối Của Na",
+      "kind": "side",
+      "chapter": 8,
+      "description": "Bé Na cần giấy ba màu để gấp con hạc cuối cùng.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch8_red",
+          "description": "Tìm giấy đỏ",
+          "completed": false,
+          "completeOnFlag": "found_paper_red"
+        },
+        {
+          "id": "obj_ch8_blue",
+          "description": "Tìm giấy xanh",
+          "completed": false,
+          "completeOnFlag": "found_paper_blue"
+        },
+        {
+          "id": "obj_ch8_gold",
+          "description": "Tìm giấy vàng",
+          "completed": false,
+          "completeOnFlag": "found_paper_gold"
+        },
+        {
+          "id": "obj_ch8_crane",
+          "description": "Đưa giấy cho Na",
+          "completed": false,
+          "completeOnFlag": "gave_na_papers"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch8_ivo_debt",
+      "title": "Món Nợ Của Ivo",
+      "kind": "side",
+      "chapter": 8,
+      "description": "Ivo nợ một người một món nợ chưa trả. Sổ của người đó khóa trong két.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch8_vault",
+          "description": "Mở két sổ cái",
+          "completed": false,
+          "completeOnFlag": "solved_kuro_ledger"
+        },
+        {
+          "id": "obj_ch8_settle",
+          "description": "Báo lại cho Ivo",
+          "completed": false,
+          "completeOnFlag": "settled_ivo_debt"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch8_elion_last_chapter",
+      "title": "Chương Cuối Của Elion",
+      "kind": "side",
+      "chapter": 8,
+      "description": "Elion muốn trang cuối bộ sử được đọc ở nơi thế giới còn đứng vững.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch8_page_home",
+          "description": "Mang trang cuối tới Tháp Neo",
+          "completed": false,
+          "completeOnFlag": "delivered_elion_page"
         }
       ]
     }
