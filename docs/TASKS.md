@@ -24,7 +24,7 @@ Goal (owner, 2026-11-15): Chapters 5 and 6 are built and wait for the owner's pl
 "The Cradle of the Forgotten" (outline: CHAPTER_06_DESIGN.md §14.2) — about as long as Chapter 6, puzzles and
 mysteries first, with new enemy and boss mechanics. The story ends at Chapter 9 (owner decision, §18).
 
-### T-72 · Map lint (catch the recurring map bugs automatically) — **Codex** · `IN PROGRESS`
+### T-72 · Map lint (catch the recurring map bugs automatically) — **Codex** · `DONE`
 
 _Locks:_ `src/world/MapLint.ts` (new), `tests/map-lint.test.ts` (new), `docs/testing/MAP_LINT_REPORT.md` (new).
 Read-only for this task: `public/assets/data/*.json`, `scripts/`, every other `src/` file (report problems, do not fix them).
