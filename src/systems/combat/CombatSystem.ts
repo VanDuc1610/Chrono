@@ -692,6 +692,11 @@ export class CombatSystem implements ICombatSystem {
       target.stats.hp -= dealt;
       return { dealt, shielded: false };
     }
+    if (m?.finisher?.required) {
+      const dealt = Math.max(0, Math.min(damage, target.stats.hp - 1));
+      target.stats.hp -= dealt;
+      return { dealt, shielded: false };
+    }
     target.stats.hp = Math.max(0, target.stats.hp - damage);
     return { dealt: damage, shielded: false };
   }

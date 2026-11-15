@@ -1285,10 +1285,11 @@ export class ActionCombat {
   private isSolid(r: Roamer, now: number): boolean {
     const ph = r.enemy.field?.phase;
     if (!ph) return true;
-    const anchored = ph.anchor
-      ? this.flag(ph.anchor.ownFlag)
+    const pa = r.def.phaseAnchor;
+    const anchored = pa
+      ? this.flag(pa.ownFlag)
         ? 'own'
-        : this.flag(ph.anchor.otherFlag)
+        : this.flag(pa.otherFlag)
           ? 'other'
           : null
       : null;

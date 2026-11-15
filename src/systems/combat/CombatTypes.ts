@@ -168,7 +168,14 @@ export interface BossMechanic {
    * Ends the fight when used: offered (keys 6-8) while Peter carries `itemId` (and `flag` holds,
    * if set) and the boss is at or below `belowPct`.
    */
-  finisher?: { itemId: string; flag?: string; belowPct: number; action: BossEnvironmentAction };
+  finisher?: {
+    itemId: string;
+    flag?: string;
+    belowPct: number;
+    action: BossEnvironmentAction;
+    /** Only the finisher can end the fight: other damage leaves the boss at 1 HP. */
+    required?: boolean;
+  };
   /** Offered once the shield is broken while `flag` holds: stuns the boss and deals `damagePct` of its max HP. */
   nameCall?: { flag: string; stunTurns: number; damagePct: number; action: BossEnvironmentAction };
   /** After its shield breaks, the boss heals by this fraction of the damage its attacks deal. */
@@ -335,8 +342,6 @@ export interface FieldTraits {
   phase?: {
     everyMs: number;
     solidMs: number;
-    /** Phase Wraith: solid while `ownFlag` holds (its world anchored), faded while `otherFlag` does. */
-    anchor?: { ownFlag: string; otherFlag: string };
   };
   /** Unborn Cocoon: stays put; after `hatchMs` it hatches into `into` (enemies.json id). */
   cocoon?: { hatchMs: number; into: string; texture: string; anim?: string };

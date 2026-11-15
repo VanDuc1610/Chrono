@@ -24833,6 +24833,10 @@
           "tile": {
             "x": 14,
             "y": 12
+          },
+          "phaseAnchor": {
+            "ownFlag": "ch8_c05_p2_w",
+            "otherFlag": "ch8_c05_p2_s"
           }
         },
         {
@@ -24843,6 +24847,10 @@
           "tile": {
             "x": 25,
             "y": 17
+          },
+          "phaseAnchor": {
+            "ownFlag": "ch8_c05_p2_w",
+            "otherFlag": "ch8_c05_p2_s"
           }
         }
       ],

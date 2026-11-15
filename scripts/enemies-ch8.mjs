@@ -73,11 +73,7 @@ const LIST = [
     48,
     24,
     {
-      phase: {
-        everyMs: 3000,
-        solidMs: 1500,
-        anchor: { ownFlag: 'ch8_c05_p2_w', otherFlag: 'ch8_c05_p2_s' },
-      },
+      phase: { everyMs: 3000, solidMs: 1500 },
     },
     250,
   ),
@@ -162,6 +158,7 @@ const LIST = [
       finisher: {
         itemId: 'origin_seal_half',
         belowPct: 0.15,
+        required: true,
         action: {
           id: 'anchor_1159',
           label: 'NEO KIM Ở 11:59',

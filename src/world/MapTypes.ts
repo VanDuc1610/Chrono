@@ -135,6 +135,11 @@ export interface MapRoamerDefinition {
   texture: string;
   anim?: string;
   tile: TilePoint;
+  /**
+   * Phase Wraith on this map only: solid while `ownFlag` holds (its world anchored here), faded
+   * while `otherFlag` does, otherwise it blinks.
+   */
+  phaseAnchor?: { ownFlag: string; otherFlag: string };
   /** All roamers of a group defeated → flag `cleared_<group>` (quest objectives). */
   group?: string;
   respawn?: boolean;

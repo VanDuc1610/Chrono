@@ -400,7 +400,11 @@ add('map_ch8_twin_era_barracks', 'Doanh Trại Hai Thời', (p) => ({
   ],
   roamers: [
     ...p.legion.map((t, k) => roamer(`ch8_legion_b${k}`, 'enemy_twin_era_legionnaire', t)),
-    ...p.wraiths.map((t, k) => roamer(`ch8_wraith_b${k}`, 'enemy_phase_wraith', t)),
+    ...p.wraiths.map((t, k) =>
+      roamer(`ch8_wraith_b${k}`, 'enemy_phase_wraith', t, {
+        phaseAnchor: { ownFlag: 'ch8_c05_p2_w', otherFlag: 'ch8_c05_p2_s' },
+      }),
+    ),
   ],
   tileSwaps: [
     swap('ch8_c05_p1_w', B.gap1, Cv.BOARDS),
