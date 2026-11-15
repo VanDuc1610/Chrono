@@ -4,7 +4,8 @@
 
 - **Genre:** 2D Top-down Pixel Art Turn-based RPG (Dark/Cosmic Fantasy).
 - **Core Stack:** Phaser 3, TypeScript (Strict Mode), Vite, Vitest.
-- **Agents:** Claude Code (coordinator: assigns tasks, writes Antigravity prompts, reviews, decides pushes) & Google Antigravity (implementer). Active work and file locks: `docs/TASKS.md`. Never edit a file locked by the other agent.
+- **Agents:** Claude Code (coordinator: assigns tasks, writes prompts for the other agents, reviews, decides pushes), Google Antigravity (designer/implementer) and OpenAI Codex (coding agent, works only on tasks Claude assigns). Active work and file locks: `docs/TASKS.md`. Never edit a file locked by another agent.
+- **Language:** reply to the owner in Vietnamese; code, comments, commits and docs in English; in-game text in Vietnamese.
 - **Art & Identity Lock:** full rules in `.agents/rules/chrono-art.md`. Never alter Peter's design (`docs/art/PETER_DESIGN.md` – adult male, ~26, short compact curly hair). No AI image models, no external references. Owner approval required before any asset enters `public/assets/`.
 - **Secrets:** never output, copy, log or commit credentials, API keys or tokens.
 
