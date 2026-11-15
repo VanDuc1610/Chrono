@@ -52,7 +52,7 @@
 
 ### `CHAR_PETER_002` – Peter idle + walk sheets (v3)
 
-- **Pipeline:** B – code-authored pixel art (AGENTS.md §5), generator `scripts/author-peter-sprites.js`
+- **Pipeline:** B – code-authored pixel art (`.agents/rules/chrono-art.md` §4), generator `scripts/author-peter-sprites.js`
 - **Approved files:** `art-source/characters/peter/generated/approved/peter_idle_v3.png` (128 × 128, 4 frames × 4 dirs), `peter_walk_v3.png` (192 × 128, 6 frames × 4 dirs); review previews in `generated/candidates/previews/`
 - **Runtime files:** `public/assets/characters/peter/peter_idle.png`, `peter_walk.png`
 - **Sources:** `docs/art/PETER_DESIGN.md` palette (22 colours) + `peter_master_v1.png` as visual reference

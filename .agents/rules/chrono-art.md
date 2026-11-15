@@ -52,7 +52,7 @@ This hairstyle is a permanent character identity feature and cannot be changed w
 
 ## 4. Art Production Pipelines
 
-Two approved pipelines (details in AGENTS.md §5). In both, the Coding Agent must:
+Two approved pipelines (stages, directories and sprite standards in `docs/art/SPRITE_PIPELINE.md`; Pipeline B below). In both, the Coding Agent must:
 
 1. **Preserve approved character designs** without independent alterations.
 2. **Never search for external character references** or copyrighted materials.

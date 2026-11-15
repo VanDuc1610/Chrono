@@ -26,7 +26,7 @@ To guarantee 100% original copyright integrity, the following actions are strict
 - **NO Silent Replacements:** Never replace an approved asset with an unreviewed or unrelated asset.
 - **NO Unidentified Placeholders:** Temporary placeholder assets must never be passed off or treated as final approved artwork.
 - **NO Automated Generation Calls:** Do not call Stable Diffusion or any other image-generation model/API. Image generation with Stable Diffusion is strictly manual: the Coding Agent writes text prompts and setting recommendations, and the user generates and selects the image.
-- **Exception – Code-Authored Pixel Art (Pipeline B, owner-approved 2026-11-11):** The Coding Agent may place pixels explicitly in a committed script (see AGENTS.md §5). Output is a candidate like any other and passes the same validation and approval stages below.
+- **Exception – Code-Authored Pixel Art (Pipeline B, owner-approved 2026-11-11):** The Coding Agent may place pixels explicitly in a committed script (see `.agents/rules/chrono-art.md` §4). Output is a candidate like any other and passes the same validation and approval stages below.
 
 ---
 

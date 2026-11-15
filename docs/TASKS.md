@@ -24,6 +24,15 @@ Goal (owner, 2026-11-15): Chapters 5 and 6 are built and wait for the owner's pl
 "The Cradle of the Forgotten" (outline: CHAPTER_06_DESIGN.md §14.2) — about as long as Chapter 6, puzzles and
 mysteries first, with new enemy and boss mechanics. The story ends at Chapter 9 (owner decision, §18).
 
+### T-72 · Map lint (catch the recurring map bugs automatically) — **Codex** · `IN PROGRESS`
+
+_Locks:_ `src/world/MapLint.ts` (new), `tests/map-lint.test.ts` (new), `docs/testing/MAP_LINT_REPORT.md` (new).
+Read-only for this task: `public/assets/data/*.json`, `scripts/`, every other `src/` file (report problems, do not fix them).
+
+### T-73 · Chapter 8 design (`docs/story/CHAPTER_08_DESIGN.md`) — **Claude** · `IN PROGRESS`
+
+_Locks:_ `docs/story/CHAPTER_08_DESIGN.md` (new).
+
 ## Backlog (scheduled after current locks are released)
 
 - **Vietnamese pass on remaining UI** (Combat, Main Menu, Prologue End) via `strings.json` once T-28 lands.
