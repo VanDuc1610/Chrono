@@ -23,6 +23,14 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 Goal (owner, 2026-11-15): Chapters 5–7 are built and wait for the owner's playtest. Chapter 8 is built
 and verified too. Antigravity designs Chapter 9 (the finale) while Codex reviews the Chapter 8 code. The story ends at Chapter 9.
 
+### T-78 · Chapter 9 design v2 (Kuro route + review fixes) — **Antigravity** · `IN PROGRESS`
+
+_Locks:_ `docs/story/CHAPTER_09_DESIGN.md`. Read-only: everything else.
+
+### T-79 · Fix the real map-lint errors in chapters 0–7 + Chapter 8 answer key — **Codex** · `IN PROGRESS`
+
+_Locks:_ `scripts/ch1-layout.js` … `scripts/ch7-layout.js`, `scripts/coastal-layout.js`, `scripts/wire-ch*.mjs` except `wire-ch8.mjs`, `scripts/generate-*.js`, `public/assets/maps/` except `map_ch8_*`, `public/assets/data/maps.json`, `tests/map-lint.test.ts`, `docs/testing/MAP_LINT_REPORT.md`, `docs/testing/DAP_AN_CHUONG_8.md` (new).
+
 ## Backlog (scheduled after current locks are released)
 
 - **Vietnamese pass on remaining UI** (Combat, Main Menu, Prologue End) via `strings.json` once T-28 lands.
