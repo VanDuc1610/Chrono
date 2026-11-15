@@ -901,3 +901,12 @@ Bản gốc loại trường hợp C nhầm, vì mặc định B là Kẻ Nói D
 - 17 bản đồ chính + 3 ẩn.
 - Cấp tối đa: 27.
 - Tỉ lệ khoảng 60% giải đố / 40% chiến đấu.
+
+## 19. Quyết Định Của Owner (2026-11-15)
+
+Owner duyệt §1–§18:
+
+1. Boss Kuro kết thúc bằng hòa giải (gọi tên thật, bà Mai ôm Kuro); thiếu manh mối vẫn thắng bằng đánh nhưng không có cảnh ôm — **đồng ý**.
+2. First Forgotten là người cùng giữ Origin với Chronos, tự nguyện bị xóa tên làm nút chặn vết nứt; ở chương 7 là tiền bối trầm lặng — **đồng ý**.
+3. Bí mật Null Hour là cơ chế tự hủy khi sáu ấn vỡ — **giữ**.
+4. Hình chương 7 (tileset tím + 8 nhân vật/quái) — **duyệt**.

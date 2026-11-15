@@ -302,3 +302,11 @@ The following specifications have been drafted in compliance with [ASSET_POLICY.
 - `NPC_CHRONOS_REMNANT_001`, `NPC_SOLON_001` (32 × 32 × 4).
 - `ENV_CELESTIAL_001` — `celestial_tileset_v1` (128 × 384): dungeon tiles 0-15 tinted white marble + 16-47 (collide 16-43, walkable 44-47; collision GID 4-44).
 - **Status:** `APPROVED` by the owner 2026-11-14 — `generated/approved/`, deployed to `public/assets/{npcs,enemies,tilesets}/`.
+
+### Chapter 7 characters and tileset (first set)
+
+- **Generators:** `scripts/author-ch7-characters.js`, `scripts/author-ch7-tileset.js` (Pipeline B, deterministic, no image model). Review sheets: `art-source/reviews/ch7_*.png`.
+- `NPC_KURO_VOID_001` (32 × 32 × 5, Kuro's approved look with violet void cracks, one dark eye), `NPC_KURO_MOTHER_001`, `NPC_NAMELESS_SHADE_001` (32 × 32 × 4), `NPC_FIRST_FORGOTTEN_001` (48 × 48 × 4).
+- `MOB_NAME_EATER_001`, `MOB_HOLLOW_HUSK_001`, `MOB_ERASURE_MOTHS_001`, `MOB_INK_HOUND_001` (32 × 32 × 4).
+- `ENV_VOIDCORE_001` — `voidcore_tileset_v1` (128 × 384): dungeon tiles 0-15 tinted ink-violet + 16-47 (collide 16-43, walkable 44-47; collision GID 4-44).
+- **Status:** `APPROVED` by the owner 2026-11-15 (violet void, owner request) — `generated/approved/`, deployed to `public/assets/{npcs,enemies,tilesets}/`.

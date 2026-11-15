@@ -222,6 +222,15 @@ export class PreloadScene extends Phaser.Scene {
       ['boss_remnant_deacon', 'assets/enemies/remnant_deacon.png', 48],
       ['boss_echo_forgotten', 'assets/enemies/echo_forgotten.png', 48],
       ['boss_genesis_warden', 'assets/enemies/genesis_warden.png', 64],
+      // Chapter 7 (owner approved 2026-11-15).
+      ['npc_kuro_void', 'assets/npcs/kuro_void_idle.png', 32],
+      ['npc_kuro_mother', 'assets/npcs/kuro_mother_idle.png', 32],
+      ['npc_nameless_shade', 'assets/npcs/nameless_shade_idle.png', 32],
+      ['npc_first_forgotten', 'assets/npcs/first_forgotten_idle.png', 48],
+      ['enemy_name_eater', 'assets/enemies/name_eater.png', 32],
+      ['enemy_hollow_husk', 'assets/enemies/hollow_husk.png', 32],
+      ['enemy_erasure_moths', 'assets/enemies/erasure_moths.png', 32],
+      ['enemy_ink_hound', 'assets/enemies/ink_hound.png', 32],
     ] as const) {
       this.load.spritesheet(key, file, { frameWidth: size, frameHeight: size });
     }
@@ -347,6 +356,14 @@ export class PreloadScene extends Phaser.Scene {
       ['boss_remnant_deacon_idle', 'boss_remnant_deacon', 3, 4],
       ['boss_echo_forgotten_idle', 'boss_echo_forgotten', 3, 4],
       ['boss_genesis_warden_idle', 'boss_genesis_warden', 3, 4],
+      ['npc_kuro_void_idle', 'npc_kuro_void', 3, 3],
+      ['npc_kuro_mother_idle', 'npc_kuro_mother', 3, 3],
+      ['npc_nameless_shade_idle', 'npc_nameless_shade', 3, 3],
+      ['npc_first_forgotten_idle', 'npc_first_forgotten', 3, 2],
+      ['enemy_name_eater_idle', 'enemy_name_eater', 3, 5],
+      ['enemy_hollow_husk_idle', 'enemy_hollow_husk', 3, 4],
+      ['enemy_erasure_moths_idle', 'enemy_erasure_moths', 3, 8],
+      ['enemy_ink_hound_idle', 'enemy_ink_hound', 3, 7],
     ] as const) {
       if (!this.anims.exists(key)) {
         this.anims.create({
