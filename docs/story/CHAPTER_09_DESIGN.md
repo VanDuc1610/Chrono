@@ -736,3 +736,64 @@ Dưới đây là chi tiết toàn bộ các điểm đã được sửa đổi 
 - Quái bản đồ 32×32 × 4 khung chờ (không cần 4 hướng).
 - Tái sử dụng `npc_kuro` và `npc_kuro_void`.
 - Bổ sung `boss_chronos_reborn` 64×64 và 4 Phó Tướng Nhánh B.
+
+---
+
+## 20. Claude Review Bản 2 & Chốt Khi Build (2026-11-15)
+
+Bản 2 đã sửa đủ các điểm của §18. Cả 11 ID manh mối ở §3.1 đều có thật trong dữ liệu, nên cú lật của nhánh "Kẻ Giật Dây" dựa trên đúng những cảnh người chơi đã thấy. Phần còn lại Claude tự chốt khi build; không cần vòng sửa thứ ba.
+
+### 20.1. Câu đố
+
+- **C03:** câu 2 của tượng Chronos ("Vũ trụ bị bẻ gãy không phải do chủ ý") phụ thuộc lore, người chơi khó kiểm chứng. Claude đổi thành một sự thật nhìn thấy được ngay trong phòng (ví dụ "Bệ của ta là bệ duy nhất không có vết nứt"). Lời giải giữ nguyên: Kuro dối hoàn toàn, Thiên Nguyên thật hoàn toàn, Chronos nửa thật nửa dối. Có solver kiểm tra.
+- **C10:** ba đáp án lại cùng là "B". Khi build, Claude xáo vị trí.
+  - Tên "Thiên Nguyên" phải suy ra được: hai chữ "Thiên" và "Nguyên" nằm rải trong Bí mật 4 (`world_secret_ch9_thien_nguyen_testament`) và trên ghế thứ hai (FB-02).
+  - Hai lựa chọn sai cũng là tên nghe hợp lý.
+- **C12:** bỏ các số trong ngoặc ("(3)", "(4)") vì chúng đọc thẳng ra đáp án.
+- **C13:** chưa có trạng thái ban đầu. Claude chốt:
+  - **sáng 1, 3, 5, 7 · tắt 2, 4, 6, 8**;
+  - bấm một cột đảo cột đó và cột đối diện; trục giữa đảo các cột chẵn.
+  - Cách thắp toàn bộ ít bước nhất là gạt trục giữa một lần. Vì vậy Claude thêm luật "trục giữa chỉ mở sau khi cột 2 và cột 4 đều đã được bấm", để lời giải ba bước của bản thiết kế là duy nhất. Solver kiểm tra.
+- **C02, C04–C09, C11:** giữ nguyên, có solver kiểm tra.
+
+### 20.2. Chiến đấu (ánh xạ sang engine có sẵn)
+
+- **4 phó tướng nhánh B:**
+  - **Bran:** 2 vòng đỡ, cửa sổ hẹp dần. Nếu có `ch4_choice_bran_memorial`, Bran mất 200 máu khởi đầu và có một câu thoại nhận ra Peter.
+  - **Lyra:** cơ chế "bản án" của chương 2 — lệnh cấm một hành động, làm trái đúng cách thì nứt khiên.
+  - **Neris:** "bài hát" của chương 7 — chọn đúng lõi theo câu hát, sai thì Neris hồi máu.
+  - **Peter Thứ Hai:** cơ chế "gương" — sao chép hành động lượt trước của Peter.
+- **Kuro (Chúa Tể Khả Năng):**
+  - vòng mồi vàng cộng vòng giả (khả năng giả);
+  - mỗi 3 lượt Kuro gọi lại một phó tướng đã thua làm "bóng" (một nhịp vòng ẩn);
+  - chỉ kết thúc được bằng chiêu bắt buộc **"Trang Giấy Trở Về"**, như Sứ Giả chương 8.
+- **Thần Tính Lục Hợp:**
+  - **Pha 1:** vòng đôi hai màu, Chronos và Kuro (engine mới nhỏ: hai vòng trùng nhịp).
+  - **Pha 2:** nút gọi đồng đội dùng tác dụng có sẵn:
+    - Ivo làm boss mất một lượt;
+    - Lyra phá khiên;
+    - Neris hồi 25% máu;
+    - Na thả hạc (nếu `gave_na_papers`) hồi 30% máu một lần.
+  - Bỏ "hồi sinh" và "+30 giáp" vì engine không có.
+  - **Pha 3:** chiêu bắt buộc "Khắc Trang Cuối".
+- **Callbacks không có trong engine:** đổi sang thoại.
+  - `aldric_legacy_insignia`, "Khiên Aldric": Aldric chỉ có thoại.
+  - `ch8_anchored_1159` chống đẩy lùi: đổi thành một câu thoại của Kuro.
+  - `ch6_kuro_ally` ảnh hưởng năng lượng mở đầu: đổi thành thoại.
+- **Elite Đại Pháp Quan:** quái bản đồ (đòn chém 4 nhịp, chỉ đánh được trong cửa sổ hở sau nhịp 4), như Kẻ Gác Kim Giây.
+
+### 20.3. Cốt truyện
+
+- **Chronos ở nhánh B:** ở Ngã Tư Phân Kỳ (bản đồ 13), Kuro dùng Possibility trói Chronos vào một nhánh "chưa từng tái sinh". Chronos chỉ còn là tiếng nói, cuối cùng nhờ Peter: "Nếu ngươi là trang giấy, hãy làm cái việc mà cuốn sổ không làm được."
+- **Bản đồ 19** (Ngai Vàng Sáu Ấn) chỉ thuộc nhánh A.
+- **Hai nhánh đều đi qua Vương Miện Vĩnh Hằng:** nhánh A để chọn kết thúc, nhánh B để chạy cảnh kết 4. Hai nhánh dùng chung bản đồ vĩ thanh.
+- **Màn kết:** `PrologueEndScene` chương 9 có 4 thẻ kết (tên kết thúc + câu cuối) rồi về màn hình chính. Không có màn credits dài.
+
+### 20.4. Quy mô build
+
+- 22 bản đồ + vĩ thanh; tileset `nexus` 64 ô.
+- Hình cần vẽ:
+  - 4 quái bản đồ, 1 elite;
+  - 4 phó tướng (48), Kuro Chúa Tể (48);
+  - Kiến Trúc Sư (64), Chronos chiến đấu (64), Thần Tính Lục Hợp (64, 3 khung trạng thái), Lõi Kỳ Dị (64).
+- Trần cấp 30.
