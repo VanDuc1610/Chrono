@@ -797,3 +797,9 @@ Bản 2 đã sửa đủ các điểm của §18. Cả 11 ID manh mối ở §3.
   - 4 phó tướng (48), Kuro Chúa Tể (48);
   - Kiến Trúc Sư (64), Chronos chiến đấu (64), Thần Tính Lục Hợp (64, 3 khung trạng thái), Lõi Kỳ Dị (64).
 - Trần cấp 30.
+
+## 21. Quyết Định Của Owner (2026-11-15)
+
+1. Tên thật The First Forgotten: **Thiên Nguyên**, lộ ra qua C10 — **đồng ý**.
+2. Bốn kết thúc như §15 (kết thật cần `ch7_kuro_embraced` HOẶC `quest_ch9_kuro_heart`) — **duyệt**.
+3. Thứ tự làm: Claude vẽ toàn bộ hình chương 9 để owner duyệt một lần, làm engine song song, rồi build cả chương.
