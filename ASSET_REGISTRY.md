@@ -320,3 +320,12 @@ The following specifications have been drafted in compliance with [ASSET_POLICY.
 - `NPC_CHRONOS_REBORN_001` (48 × 48 × 4; silver-white hair, gold cloak fraying into chains, handless clock face).
 - `ENV_CONVERGENCE_001` — `convergence_tileset_v1` (128 × 512): dungeon tiles 0-15 tinted dusk slate + 16-63 (collide 16-47, walkable 48-63; collision GID 4-48).
 - **Status:** `APPROVED` by the owner 2026-11-15 — `generated/approved/`, deployed to `public/assets/{npcs,enemies,tilesets}/`.
+
+### Chapter 9 characters and tileset
+
+- **Generators:** `scripts/author-ch9-characters.js`, `scripts/author-ch9-tileset.js` (Pipeline B, deterministic, no image model). Design: `docs/story/CHAPTER_09_DESIGN.md` §13 with §20.
+- `MOB_NEXUS_SENTINEL_001` (frame 3 = thrust wind-up), `MOB_ENTROPY_SPECTER_001`, `MOB_CHRONAL_JUGGERNAUT_001` (frame 3 = stall), `MOB_PARADOX_WEAVER_001` (frames 2-3 open), `MOB_NEXUS_INQUISITOR_001` (32 × 32 × 4).
+- `BOSS_LIEUTENANT_BRAN_001`, `BOSS_LIEUTENANT_LYRA_001`, `BOSS_LIEUTENANT_NERIS_001` (48 × 48 × 5, 4 = beaten), `BOSS_LIEUTENANT_OTHER_PETER_001` (the approved Chapter 5 Other Peter recoloured, curly hair kept; 48 × 48 × 5), `BOSS_KURO_PUPPET_MASTER_001` (48 × 48 × 5, 4 = sealed in the page).
+- `BOSS_PRIMEVAL_ARCHITECT_001` (64 × 64 × 5, 4 = spent), `BOSS_CHRONOS_COMBAT_001` (64 × 64 × 4, key `boss_chronos_reborn`), `BOSS_SIXFOLD_DIVINITY_001` (64 × 64 × 6, 4 = phase 2, 5 = 12:00), `BOSS_VOID_SINGULARITY_CORE_001` (64 × 64 × 4).
+- `ENV_NEXUS_001` — `nexus_tileset_v1` (128 × 512): dungeon tiles 0-15 tinted nexus violet + 16-63 (collide 16-47, walkable 48-63; collision GID 4-48).
+- **Status:** `APPROVED` by the owner 2026-11-15 — `generated/approved/`, deployed to `public/assets/{enemies,tilesets}/`.

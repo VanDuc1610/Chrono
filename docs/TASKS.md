@@ -27,6 +27,14 @@ and verified too. Antigravity designs Chapter 9 (the finale) while Codex reviews
 
 _Locks:_ `scripts/author-ch9-*.js`, `art-source/**/` for Chapter 9 sprites and the nexus tileset. Build locks will be added when the build starts.
 
+### T-81 · Chapter 9 dialogue script (`docs/story/CHAPTER_09_SCRIPT.md`) — **Antigravity** · `IN PROGRESS`
+
+_Locks:_ `docs/story/CHAPTER_09_SCRIPT.md` (new).
+
+### T-82 · Chapter 9 engine: paired rings, companion-call effects, 4-card ending router — **Codex** · `IN PROGRESS`
+
+_Locks:_ `src/systems/combat/CombatTypes.ts`, `src/systems/combat/CombatSystem.ts`, `src/scenes/CombatScene.ts`, `src/scenes/PrologueEndScene.ts`, `tests/chapter9-engine.test.ts` (new); new `ending.ch9.*` keys in `strings.json` only.
+
 ## Backlog (scheduled after current locks are released)
 
 - **Vietnamese pass on remaining UI** (Combat, Main Menu, Prologue End) via `strings.json` once T-28 lands.

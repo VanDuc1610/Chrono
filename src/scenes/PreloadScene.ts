@@ -245,6 +245,21 @@ export class PreloadScene extends Phaser.Scene {
       ['boss_convergent_praetor', 'assets/enemies/convergent_praetor.png', 48],
       ['boss_null_hour_herald', 'assets/enemies/null_hour_herald.png', 64],
       ['boss_sixfold_echo', 'assets/enemies/sixfold_echo.png', 48],
+      // Chapter 9 (owner approved 2026-11-15).
+      ['enemy_nexus_sentinel', 'assets/enemies/nexus_sentinel.png', 32],
+      ['enemy_entropy_specter', 'assets/enemies/entropy_specter.png', 32],
+      ['enemy_chronal_juggernaut', 'assets/enemies/chronal_juggernaut.png', 32],
+      ['enemy_paradox_weaver', 'assets/enemies/paradox_weaver.png', 32],
+      ['enemy_nexus_inquisitor', 'assets/enemies/nexus_inquisitor.png', 32],
+      ['boss_lieutenant_bran', 'assets/enemies/lieutenant_bran.png', 48],
+      ['boss_lieutenant_lyra', 'assets/enemies/lieutenant_lyra.png', 48],
+      ['boss_lieutenant_neris', 'assets/enemies/lieutenant_neris.png', 48],
+      ['boss_lieutenant_other_peter', 'assets/enemies/lieutenant_other_peter.png', 48],
+      ['boss_kuro_puppet_master', 'assets/enemies/kuro_puppet_master.png', 48],
+      ['boss_primeval_architect', 'assets/enemies/primeval_architect.png', 64],
+      ['boss_chronos_reborn', 'assets/enemies/chronos_combat.png', 64],
+      ['boss_sixfold_divinity', 'assets/enemies/sixfold_divinity.png', 64],
+      ['boss_void_singularity_core', 'assets/enemies/void_singularity_core.png', 64],
     ] as const) {
       this.load.spritesheet(key, file, { frameWidth: size, frameHeight: size });
     }
@@ -391,6 +406,20 @@ export class PreloadScene extends Phaser.Scene {
       ['boss_convergent_praetor_idle', 'boss_convergent_praetor', 3, 4],
       ['boss_null_hour_herald_idle', 'boss_null_hour_herald', 3, 3],
       ['boss_sixfold_echo_idle', 'boss_sixfold_echo', 5, 3],
+      ['enemy_nexus_sentinel_idle', 'enemy_nexus_sentinel', 3, 6],
+      ['enemy_entropy_specter_idle', 'enemy_entropy_specter', 3, 6],
+      ['enemy_chronal_juggernaut_idle', 'enemy_chronal_juggernaut', 3, 6],
+      ['enemy_paradox_weaver_idle', 'enemy_paradox_weaver', 3, 6],
+      ['enemy_nexus_inquisitor_idle', 'enemy_nexus_inquisitor', 3, 6],
+      ['boss_lieutenant_bran_idle', 'boss_lieutenant_bran', 3, 4],
+      ['boss_lieutenant_lyra_idle', 'boss_lieutenant_lyra', 3, 4],
+      ['boss_lieutenant_neris_idle', 'boss_lieutenant_neris', 3, 4],
+      ['boss_lieutenant_other_peter_idle', 'boss_lieutenant_other_peter', 3, 4],
+      ['boss_kuro_puppet_master_idle', 'boss_kuro_puppet_master', 3, 4],
+      ['boss_primeval_architect_idle', 'boss_primeval_architect', 3, 4],
+      ['boss_chronos_reborn_idle', 'boss_chronos_reborn', 3, 4],
+      ['boss_sixfold_divinity_idle', 'boss_sixfold_divinity', 3, 4],
+      ['boss_void_singularity_core_idle', 'boss_void_singularity_core', 3, 4],
     ] as const) {
       if (!this.anims.exists(key)) {
         this.anims.create({
