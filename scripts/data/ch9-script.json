@@ -1696,9 +1696,7 @@
   "ch9_endings_choice_all": {
     "id": "ch9_endings_choice_all",
     "speaker": "Bệ Vận Mệnh",
-    "lines": [
-      "Hãy lựa chọn tương lai cho thực tại:"
-    ],
+    "lines": ["Hãy lựa chọn tương lai cho thực tại:"],
     "responses": [
       {
         "text": "Trao Ấn cho Chronos [KẾT THÚC 1: TRẬT TỰ VĨNH CỬU]",
@@ -1714,9 +1712,7 @@
   "ch9_endings_choice_true_prompt": {
     "id": "ch9_endings_choice_true_prompt",
     "speaker": "Peter",
-    "lines": [
-      "Không... Tao sẽ chọn con đường thứ ba: [KẾT THÚC 3: CHÚA TỂ THỜI GIAN CUỐI CÙNG]!"
-    ],
+    "lines": ["Không... Tao sẽ chọn con đường thứ ba: [KẾT THÚC 3: CHÚA TỂ THỜI GIAN CUỐI CÙNG]!"],
     "responses": [
       {
         "text": "Khắc lời thề Chiếc Ghế Trống",
@@ -1728,9 +1724,7 @@
   "ch9_endings_choice_two": {
     "id": "ch9_endings_choice_two",
     "speaker": "Bệ Vận Mệnh",
-    "lines": [
-      "Hãy lựa chọn tương lai cho thực tại:"
-    ],
+    "lines": ["Hãy lựa chọn tương lai cho thực tại:"],
     "responses": [
       {
         "text": "Trao Ấn cho Chronos [KẾT THÚC 1: TRẬT TỰ VĨNH CỬU]",
@@ -1921,9 +1915,7 @@
   "ch9_c13_wrong": {
     "id": "ch9_c13_wrong",
     "speaker": "Mộ Tượng Thiên Nguyên",
-    "lines": [
-      "Trục giữa bị khóa chặt! Trận đồ bị mất cân bằng đối xứng."
-    ],
+    "lines": ["Trục giữa bị khóa chặt! Trận đồ bị mất cân bằng đối xứng."],
     "responses": [
       {
         "text": "Đặt lại trạng thái ban đầu.",

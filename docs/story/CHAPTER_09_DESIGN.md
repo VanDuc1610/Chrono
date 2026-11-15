@@ -817,3 +817,13 @@ Bản 2 đã sửa đủ các điểm của §18. Cả 11 ID manh mối ở §3.
   - Bóng Ma Nhiệt Dịch dùng `clonesAtHalf` (bóng giả, Đòn Thời Gian xóa);
   - Hộ Vệ Bánh Răng dùng `charge`: Đòn Thời Gian đúng lúc nó khựng thì nó ngã;
   - Kẻ Dệt Nghịch Lý dùng `reflect` (kén đóng phản 100%).
+- **Câu đố trong kịch bản T-81** được viết dạng chọn đáp án (lộ đáp án). Khi build, Claude giữ lời thoại (giới thiệu, gợi ý, sai, đúng) nhưng chuyển sang dial và dial check như các chương trước.
+- **Bản đồ vĩ thanh** (`map_ch9_epilogue_reborn`) gộp vào các chuỗi cảnh kết: mỗi kết thúc là một chuỗi thoại kết thúc bằng `endChapter: 9`, rồi thẻ kết của Codex hiện lên.
+- **Vương Miện:** ba bệ là Trật Tự, bệ thứ ba và Tự Do.
+  - Bệ thứ ba chỉ mở kết thật khi có `ch8_learned_torn_page` + `solved_final_inscription` + (`ch7_kuro_embraced` hoặc `kuro_heart_opened`);
+  - chưa đủ thì bệ chỉ hiện lời gợi ý.
+- **Nhánh B:**
+  - mỗi phó tướng thua để lại 2 ống Cam Lộ Thần Thánh (đánh liền 4 trận không có chỗ tiếp tế);
+  - Kuro Chúa Tể còn 2100 máu, tấn công 54;
+  - con hạc của Na ở kết 4 bỏ, vì không có cách rẽ nhánh theo cờ giữa chuỗi cảnh.
+- **Vật phẩm đố** (thỏi trọng số, tinh thể, dung dịch, khối đá) không cần nữa vì đã dùng dial.

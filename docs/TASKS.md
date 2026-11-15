@@ -20,22 +20,8 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
-Goal (owner, 2026-11-15): Chapters 5–7 are built and wait for the owner's playtest. Chapter 8 is built
-and verified too. Antigravity designs Chapter 9 (the finale) while Codex reviews the Chapter 8 code. The story ends at Chapter 9.
-
-### T-80 · Chapter 9 art, then engine and build — **Claude** · `IN PROGRESS`
-
-_Locks:_ `scripts/author-ch9-*.js`, `art-source/**/` for Chapter 9 sprites and the nexus tileset. Build locks will be added when the build starts.
-
-### T-81 · Chapter 9 dialogue script (`docs/story/CHAPTER_09_SCRIPT.md`) — **Antigravity** · `DONE`
-
-_Locks:_ `docs/story/CHAPTER_09_SCRIPT.md` (new).
-
-### T-82 · Chapter 9 engine: paired rings, companion-call effects, 4-card ending router — **Codex** · `DONE`
-
-Result: injected paired-ring timing/collision, shared once-only companion effects and flag gates, four Chapter 9 ending cards plus a neutral fallback; 19 new unit tests, all 198 tests passing, live Chromium rings/endings and combat/session regressions verified.
-
-_Locks:_ `src/systems/combat/CombatTypes.ts`, `src/systems/combat/CombatSystem.ts`, `src/scenes/CombatScene.ts`, `src/scenes/PrologueEndScene.ts`, `tests/chapter9-engine.test.ts` (new); new `ending.ch9.*` keys in `strings.json` only.
+Goal (owner, 2026-11-15): Chapters 5–7 are built and wait for the owner's playtest. Chapters 8 and 9
+are built and verified — the story is complete (4 endings). Next: the owner's playtest of Chapters 5–9. The story ends at Chapter 9.
 
 ## Backlog (scheduled after current locks are released)
 
@@ -46,8 +32,8 @@ _Locks:_ `src/systems/combat/CombatTypes.ts`, `src/systems/combat/CombatSystem.t
 
 ## Done (latest 5 — older entries in [TASKS_ARCHIVE.md](TASKS_ARCHIVE.md))
 
+- **T-80** Chapter 9 (the finale) playable: art (nexus tileset + 14 sprites, owner approved), 23 maps — six shared, route "Chiếc Ghế Trống" (Penrose, matrix, Architect, chimes, astrolabe, the Unwritten page, the Sixfold throne, the Crown) and route "Kẻ Giật Dây" (Chronos bound, four lieutenants, Kuro the Puppet Master), three hidden maps; 13 dial puzzles (solver-proved), Sentinel thrust / Inquisitor four-blow chain field foes, four endings through Codex's ending cards, level cap 30, chapter select 9. Verified: 198 unit tests, live CDP runs of both routes, every puzzle, every boss and all four endings — Claude
+- **T-82** Chapter 9 engine: paired gold/violet block rings, companion calls with heal/stun/flag gates, the four-card ending router — Codex
+- **T-81** Chapter 9 dialogue script (`docs/story/CHAPTER_09_SCRIPT.md`, 147 nodes for both routes) — Antigravity
 - **T-81** Chapter 9 dialogue script (`docs/story/CHAPTER_09_SCRIPT.md`, Vietnamese): full script across all 22 maps (both routes, crown, epilogue, 3 hidden maps) with arrival lines, NPCs (with past-flag variants), clues/secrets pickups, C01–C13 puzzles (intro/clue/wrong/right/done), boss confronts and victories, `ch9_kuro_crossroad` choice, and beat-by-beat dialogue for all 4 endings; lines ≤ 220 chars, Kuro "tao/mày", Lyra halberd, C10 slots shuffled — Antigravity
 - **T-79** Map lint errors in chapters 0–7 fixed (spawns moved off exits, blocked exits and the Chapter 5 seal path opened; zero lint errors left) and the Chapter 8 answer key (`docs/testing/DAP_AN_CHUONG_8.md`) — Codex
-- **T-78** Chapter 9 design v2 (`docs/story/CHAPTER_09_DESIGN.md`): Kuro puppet-master route with five clues on real past scenes, four lieutenants, four endings, Thiên Nguyên revealed through C10; Claude review §20, owner decisions §21 — Antigravity
-- **T-77** Code review of the Chapter 8 engine (`docs/reviews/T-74_CODEX_REVIEW.md`): every puzzle walked on the map grid; found the Herald could die before the 11:59 anchoring and that the barracks anchor drove every Phase Wraith; both fixed by Claude with regression tests — Codex
-- **T-74** Chapter 8 playable: 15 maps + 3 hidden on the convergence tileset, World Anchoring posts (anchored tile swaps), companions by act (Ivo → Lyra → Neris) walking beside Peter and Kuro, Assimilator / Doom Bell / Twin-Era Legionnaire / Phase Wraith, Second-Hand Warden, Convergent Praetor (mirror verdict, heal penalty), Herald of the Null Hour (25th-hour clock, companion calls, Kuro save, 11:59 finisher), Sixfold Echo (six seal phases), three defence waves, 13 puzzles (solver-checked), Chapter 7 → 8 → end card, level cap 29, chapter select 8, HUD titles for chapters 6–8. Verified: 162 unit tests, live CDP runs of every map, puzzle (right and wrong), boss and the end card — Claude

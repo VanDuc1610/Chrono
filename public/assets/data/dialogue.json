@@ -16001,7 +16001,16 @@
       "lines": [
         "Lá cờ... rốt cuộc đã hạ xuống... Cảm ơn cậu, Peter... Hãy giải thoát cho những người khác..."
       ],
-      "responses": []
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "divine_nectar_ampoule",
+            "quantity": 2
+          }
+        ],
+        "grantOnceFlag": "ch9_nectar_bran"
+      }
     },
     "ch9_lyra_boss_arrival": {
       "id": "ch9_lyra_boss_arrival",
@@ -16031,7 +16040,16 @@
       "lines": [
         "Chiếc khiên phán quyết đã nứt... Cậu nói đúng, Peter... Tự do không bao giờ nằm trong tay một kẻ giật dây..."
       ],
-      "responses": []
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "divine_nectar_ampoule",
+            "quantity": 2
+          }
+        ],
+        "grantOnceFlag": "ch9_nectar_lyra"
+      }
     },
     "ch9_neris_boss_arrival": {
       "id": "ch9_neris_boss_arrival",
@@ -16061,7 +16079,16 @@
       "lines": [
         "Dòng mực đen tan biến rồi... Tôi nhớ ra rồi, tên tôi là Neris... Người thủ thư của những linh hồn... Cảm ơn cậu, Peter..."
       ],
-      "responses": []
+      "responses": [],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "divine_nectar_ampoule",
+            "quantity": 2
+          }
+        ],
+        "grantOnceFlag": "ch9_nectar_neris"
+      }
     },
     "ch9_other_peter_arrival": {
       "id": "ch9_other_peter_arrival",
@@ -16095,7 +16122,16 @@
           "text": "Nhặt cuộn bí mật trên bệ gương.",
           "nextDialogueId": "ch9_secret_3_pickup"
         }
-      ]
+      ],
+      "effects": {
+        "grantItems": [
+          {
+            "itemId": "divine_nectar_ampoule",
+            "quantity": 2
+          }
+        ],
+        "grantOnceFlag": "ch9_nectar_other"
+      }
     },
     "ch9_secret_3_pickup": {
       "id": "ch9_secret_3_pickup",
@@ -16898,19 +16934,6 @@
         "setFlags": ["ch9_ending_returned_page", "ch9_game_completed"],
         "endChapter": 9
       }
-    },
-    "ch9_end_4_crane": {
-      "id": "ch9_end_4_crane",
-      "speaker": "Peter",
-      "lines": [
-        "Chỉ còn con hạc giấy ba màu của bé Na, chao liệng một mình trên mỏm đá hoàng hôn."
-      ],
-      "responses": [
-        {
-          "text": "…",
-          "nextDialogueId": "ch9_end_4_5"
-        }
-      ]
     },
     "ch9_pick_order": {
       "id": "ch9_pick_order",

@@ -81,6 +81,22 @@ const FX = {
     setFlags: ['solved_final_inscription'],
     refreshMap: true,
   },
+  ch9_bran_defeat: {
+    grantItems: [{ itemId: 'divine_nectar_ampoule', quantity: 2 }],
+    grantOnceFlag: 'ch9_nectar_bran',
+  },
+  ch9_lyra_boss_defeat: {
+    grantItems: [{ itemId: 'divine_nectar_ampoule', quantity: 2 }],
+    grantOnceFlag: 'ch9_nectar_lyra',
+  },
+  ch9_neris_boss_defeat: {
+    grantItems: [{ itemId: 'divine_nectar_ampoule', quantity: 2 }],
+    grantOnceFlag: 'ch9_nectar_neris',
+  },
+  ch9_other_peter_defeat: {
+    grantItems: [{ itemId: 'divine_nectar_ampoule', quantity: 2 }],
+    grantOnceFlag: 'ch9_nectar_other',
+  },
   ch9_chronos_trapped_talk: { setFlags: ['chronos_plea_heard'], refreshMap: true },
   ch9_secret_3_pickup: grant('world_secret_ch9_malfunction_record'),
   ch9_crown_arrival: { startQuest: 'quest_ch9_the_final_choice' },
@@ -327,16 +343,6 @@ chain(
   ],
   endFx('ch9_ending_returned_page'),
 );
-// Na's crane on the returned-page ending, if she folded it in Chapter 8.
-node(
-  'ch9_end_4_crane',
-  'Peter',
-  ['Chỉ còn con hạc giấy ba màu của bé Na, chao liệng một mình trên mỏm đá hoàng hôn.'],
-  {
-    responses: [{ text: '…', nextDialogueId: 'ch9_end_4_5' }],
-  },
-);
-D.ch9_end_4_4.responses = [{ text: '…', nextDialogueId: 'ch9_end_4_5' }];
 D.ch9_kuro_boss_finisher_prompt.responses = [
   { text: 'Trang Giấy Trở Về', nextDialogueId: 'ch9_end_4_1' },
 ];

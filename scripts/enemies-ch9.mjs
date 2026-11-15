@@ -318,7 +318,7 @@ const LIST = [
       },
     },
   }),
-  boss('boss_kuro_puppet_master', 'Chúa Tể Khả Năng Kuro', 30, 2400, 60, 32, 14, 2200, {
+  boss('boss_kuro_puppet_master', 'Chúa Tể Khả Năng Kuro', 30, 2100, 54, 32, 14, 2200, {
     timedBlock: ring({
       count: 2,
       decoyLeadMs: 300,
