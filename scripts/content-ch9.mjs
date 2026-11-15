@@ -81,7 +81,7 @@ const FX = {
     setFlags: ['solved_final_inscription'],
     refreshMap: true,
   },
-  ch9_chronos_trapped_talk: { setFlags: ['chronos_plea_heard'] },
+  ch9_chronos_trapped_talk: { setFlags: ['chronos_plea_heard'], refreshMap: true },
   ch9_secret_3_pickup: grant('world_secret_ch9_malfunction_record'),
   ch9_crown_arrival: { startQuest: 'quest_ch9_the_final_choice' },
   ch9_fb_04_trigger: { setFlags: ['seen_fb_04'] },
@@ -168,6 +168,7 @@ const node = (id, speaker, lines, extra = {}) => {
   D[id] = { id, speaker, lines, responses: [], ...extra };
 };
 const P = (id, lines, extra) => node(id, 'Peter', lines, extra);
+P('ch9_puzzle_done', ['Thử thách ở đây đã được giải.']);
 P('ch9_wrong_generic', ['Không đúng. Mọi thứ trở về như cũ. Đọc lại manh mối đã.']);
 P('ch9_exit_locked', ['Lối này còn đóng. Phải giải xong thử thách ở đây trước.']);
 P('ch9_route_locked', ['Cánh cổng này không thuộc về con đường mình đã chọn.']);

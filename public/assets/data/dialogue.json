@@ -15948,7 +15948,8 @@
         }
       ],
       "effects": {
-        "setFlags": ["chronos_plea_heard"]
+        "setFlags": ["chronos_plea_heard"],
+        "refreshMap": true
       }
     },
     "ch9_chronos_trapped_end": {
@@ -16541,6 +16542,12 @@
       "lines": [
         "Mọi bí mật của Kỷ Nguyên Đầu đã được sáng tỏ trọn vẹn. Lòng mình thanh thản hơn bao giờ hết."
       ],
+      "responses": []
+    },
+    "ch9_puzzle_done": {
+      "id": "ch9_puzzle_done",
+      "speaker": "Peter",
+      "lines": ["Thử thách ở đây đã được giải."],
       "responses": []
     },
     "ch9_wrong_generic": {

@@ -98,6 +98,11 @@ const GEAR7: [string, number][] = [
   ['unwritten_cradle_clasp', 1],
   ['kuro_mother_brooch', 1],
 ];
+const CH8 = ['ch8_chronos_returned', 'ch8_learned_torn_page', 'ch8_anchored_1159'];
+const GEAR8: [string, number][] = [
+  ['convergence_compass_blade', 1],
+  ['sixfold_hour_charm', 1],
+];
 const heals = (n: number): [string, number] => ['refined_chrono_shard', n];
 
 export const CHAPTER_STARTS: ChapterStart[] = [
@@ -180,6 +185,37 @@ export const CHAPTER_STARTS: ChapterStart[] = [
     flags: [...PROLOGUE, ...CH1, ...CH2, ...CH3, ...CH4, ...CH5, ...CH6, ...GLYPHS_KNOWN, ...CH7],
     items: [...GEAR1, ...GEAR2, ...GEAR3, ...GEAR4, ...GEAR5, ...GEAR6, ...GEAR7, heals(12)],
     equip: ['void_severance_blade', 'unwritten_cradle_clasp'],
+  },
+  {
+    chapter: 9,
+    title: 'Vị Thần Gãy Cánh',
+    mapId: 'map_ch9_apex_nexus',
+    spawnId: 'from_ch8',
+    level: 29,
+    flags: [
+      ...PROLOGUE,
+      ...CH1,
+      ...CH2,
+      ...CH3,
+      ...CH4,
+      ...CH5,
+      ...CH6,
+      ...GLYPHS_KNOWN,
+      ...CH7,
+      ...CH8,
+    ],
+    items: [
+      ...GEAR1,
+      ...GEAR2,
+      ...GEAR3,
+      ...GEAR4,
+      ...GEAR5,
+      ...GEAR6,
+      ...GEAR7,
+      ...GEAR8,
+      heals(14),
+    ],
+    equip: ['convergence_compass_blade', 'sixfold_hour_charm'],
   },
 ];
 

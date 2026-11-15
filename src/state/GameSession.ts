@@ -45,6 +45,7 @@ const CHAPTER_SEAL_FLAGS = [
   'origin_seal_cracked',
   'ch7_null_hour_begun',
   'ch8_chronos_returned',
+  'ch9_game_completed',
 ] as const;
 
 export interface MapPosition {

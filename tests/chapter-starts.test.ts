@@ -24,7 +24,7 @@ const itemIds = new Set((itemsJson as unknown as InventoryDatabase).items.map((i
 
 describe('Chapter select', () => {
   it('every chapter start points at a real map, spawn, items and first quest', () => {
-    expect(CHAPTER_STARTS.map((c) => c.chapter)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
+    expect(CHAPTER_STARTS.map((c) => c.chapter)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     for (const c of CHAPTER_STARTS) {
       expect(maps[c.mapId]?.spawns[c.spawnId], `${c.mapId}/${c.spawnId}`).toBeDefined();
       for (const [id] of c.items) expect(itemIds.has(id), id).toBe(true);

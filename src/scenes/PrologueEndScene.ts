@@ -12,6 +12,7 @@ const NEXT_START: Record<number, { mapId: string; spawnId: string }> = {
   5: { mapId: 'map_ch6_celestial_stairs', spawnId: 'from_ch5' },
   6: { mapId: 'map_ch7_ash_abyss_drop', spawnId: 'from_ch6' },
   7: { mapId: 'map_ch8_null_rift_landing', spawnId: 'from_ch7' },
+  8: { mapId: 'map_ch9_apex_nexus', spawnId: 'from_ch8' },
 };
 import { createPanel } from '../ui/Panel';
 import { getStrings } from '../ui/Strings';
