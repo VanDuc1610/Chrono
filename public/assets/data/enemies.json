@@ -1391,6 +1391,297 @@
           "drainMessage": "Sương xóa niệm phủ quanh Peter — mất 8 MP."
         }
       }
+    },
+    {
+      "id": "enemy_hollow_husk",
+      "name": "Vỏ Rỗng",
+      "level": 24,
+      "maxHp": 380,
+      "hp": 380,
+      "attack": 42,
+      "defense": 30,
+      "speed": 9,
+      "spriteKey": "enemy_hollow_husk",
+      "skills": [],
+      "expReward": 210,
+      "lootTable": [
+        {
+          "itemId": "refined_chrono_shard",
+          "chance": 0.2
+        }
+      ],
+      "field": {
+        "freezeWatch": {
+          "pullAfterMs": 2000,
+          "pullSpeed": 70,
+          "frozenMult": 2
+        }
+      }
+    },
+    {
+      "id": "enemy_name_eater",
+      "name": "Kẻ Ăn Tên",
+      "level": 24,
+      "maxHp": 340,
+      "hp": 340,
+      "attack": 44,
+      "defense": 26,
+      "speed": 9,
+      "spriteKey": "enemy_name_eater",
+      "skills": [],
+      "expReward": 220,
+      "lootTable": [
+        {
+          "itemId": "refined_chrono_shard",
+          "chance": 0.2
+        }
+      ],
+      "field": {
+        "inhale": {
+          "range": 120,
+          "tellMs": 900,
+          "windowMs": 260,
+          "cooldownMs": 3200,
+          "stunMs": 3000,
+          "chokeRadius": 110,
+          "chokePct": 0.25,
+          "mpDrain": 25,
+          "silenceMs": 3000
+        }
+      }
+    },
+    {
+      "id": "enemy_erasure_moths",
+      "name": "Đàn Bướm Xóa",
+      "level": 24,
+      "maxHp": 220,
+      "hp": 220,
+      "attack": 40,
+      "defense": 16,
+      "speed": 9,
+      "spriteKey": "enemy_erasure_moths",
+      "skills": [],
+      "expReward": 190,
+      "lootTable": [
+        {
+          "itemId": "refined_chrono_shard",
+          "chance": 0.2
+        }
+      ],
+      "field": {
+        "swarm": {
+          "range": 170,
+          "everyMs": 4200,
+          "gatherMs": 1100,
+          "windowMs": 300,
+          "healHp": 25,
+          "dotPerSec": 6,
+          "dotMs": 4000
+        }
+      }
+    },
+    {
+      "id": "enemy_ink_hound",
+      "name": "Chó Mực",
+      "level": 25,
+      "maxHp": 360,
+      "hp": 360,
+      "attack": 44,
+      "defense": 24,
+      "speed": 9,
+      "spriteKey": "enemy_ink_hound",
+      "skills": [],
+      "expReward": 230,
+      "lootTable": [
+        {
+          "itemId": "refined_chrono_shard",
+          "chance": 0.2
+        }
+      ],
+      "field": {
+        "hound": {
+          "runMs": 1600,
+          "pauseMs": 500,
+          "radius": 70,
+          "periodMs": 2400,
+          "biteMult": 1.3,
+          "skillMult": 3,
+          "mpGain": 10
+        },
+        "pool": {
+          "everyMs": 700,
+          "lifeMs": 3500,
+          "radius": 14,
+          "slowPct": 0.5,
+          "mpPerSec": 0
+        }
+      }
+    },
+    {
+      "id": "enemy_void_inquisitor",
+      "name": "Thẩm Phán Hư Không",
+      "level": 26,
+      "maxHp": 900,
+      "hp": 900,
+      "attack": 46,
+      "defense": 30,
+      "speed": 9,
+      "spriteKey": "enemy_void_inquisitor",
+      "skills": [],
+      "expReward": 520,
+      "lootTable": [
+        {
+          "itemId": "void_nectar_flask",
+          "chance": 1
+        }
+      ],
+      "field": {
+        "chainTrial": {
+          "range": 230,
+          "everyMs": 4200,
+          "warnMs": 900,
+          "radius": 70,
+          "offset": 45,
+          "damageMult": 1.6
+        }
+      }
+    },
+    {
+      "id": "boss_nameless_weeper",
+      "name": "Kẻ Khóc Không Tên",
+      "level": 25,
+      "maxHp": 1300,
+      "hp": 1300,
+      "attack": 46,
+      "defense": 30,
+      "speed": 10,
+      "spriteKey": "boss_nameless_weeper",
+      "spriteScale": 1.5,
+      "skills": [],
+      "expReward": 900,
+      "lootTable": [],
+      "timedBlock": {
+        "ringMs": 820,
+        "windowMs": 230,
+        "factor": 0.5
+      },
+      "mechanic": {
+        "damageReduction": 0,
+        "hpFloor": 0,
+        "recoverPct": 0,
+        "recoverMessage": "",
+        "unlockAfterTurns": 99,
+        "unlockMessage": "",
+        "startsUnshielded": true,
+        "actions": [],
+        "releasedFrame": 4,
+        "defeatMessage": "Ba khuôn mặt đá khép mắt lại. Bể nước mắt lặng dần.",
+        "tears": {
+          "max": 5,
+          "floodPct": 0.4,
+          "dropMessage": "Một giọt nước mắt tím rơi xuống bể ({n}/{max}).",
+          "wipeMessage": "Đỡ đúng nhịp — Peter gạt đi một giọt nước mắt ({n}/{max}).",
+          "floodMessage": "Bể nước mắt tràn bờ! Lũ nước mắt cuốn qua — Peter mất {damage} HP!"
+        }
+      }
+    },
+    {
+      "id": "boss_kuro_void",
+      "name": "Kuro (Hư Không)",
+      "level": 26,
+      "maxHp": 1600,
+      "hp": 1600,
+      "attack": 48,
+      "defense": 30,
+      "speed": 13,
+      "spriteKey": "boss_kuro_void",
+      "spriteScale": 1.5,
+      "skills": [],
+      "expReward": 1200,
+      "lootTable": [],
+      "timedBlock": {
+        "ringMs": 800,
+        "windowMs": 220,
+        "factor": 0.5,
+        "feintChance": 0.3
+      },
+      "script": {
+        "endAtEnemyPct": 0.1
+      },
+      "mechanic": {
+        "damageReduction": 0,
+        "hpFloor": 0,
+        "recoverPct": 0,
+        "recoverMessage": "",
+        "unlockAfterTurns": 99,
+        "unlockMessage": "",
+        "startsUnshielded": true,
+        "actions": [],
+        "releasedFrame": 4,
+        "defeatMessage": "Kuro khuỵu xuống. Mực trên người cậu rút dần như nước triều.",
+        "finisher": {
+          "itemId": "kuro_mother_brooch",
+          "flag": "ch7_mother_song_remembered",
+          "belowPct": 0.4,
+          "action": {
+            "id": "call_kuro",
+            "label": "GỌI TÊN THẬT CỦA KURO",
+            "message": "Peter giơ chiếc cài áo bông mai lên và gọi tên thật của Kuro, khẽ hát câu đầu \"Chiều Trên Bến Cũ\"...",
+            "setFlag": "ch7_kuro_embraced"
+          }
+        },
+        "memoryLock": {
+          "everyTurns": 3,
+          "lockTurns": 2,
+          "staggerBonus": 0.5,
+          "staggerMessage": "Đòn Thời Gian chém đứt xúc tu mực! Kuro chao đảo — đòn kế tiếp đánh trúng tận lõi!",
+          "releaseMessage": "Xúc tu mực tan ra. Tay Peter đã tự do.",
+          "options": [
+            {
+              "command": "attack",
+              "announce": "Xúc tu mực quấn chặt tay kiếm — [1] TẤN CÔNG bị khóa!",
+              "staggerBy": ["skill"]
+            },
+            {
+              "command": "item",
+              "announce": "Xúc tu mực quấn lấy túi đồ — [3] VẬT PHẨM bị khóa!",
+              "staggerBy": ["skill"]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "boss_primordial_shade",
+      "name": "Bóng Nguyên Sơ",
+      "level": 27,
+      "maxHp": 1500,
+      "hp": 1500,
+      "attack": 50,
+      "defense": 30,
+      "speed": 14,
+      "spriteKey": "boss_primordial_shade",
+      "spriteScale": 1.5,
+      "skills": [],
+      "expReward": 1100,
+      "lootTable": [],
+      "timedBlock": {
+        "ringMs": 950,
+        "windowMs": 210,
+        "factor": 0.4,
+        "decoyLeadMs": 320
+      },
+      "mechanic": {
+        "damageReduction": 0,
+        "hpFloor": 0,
+        "recoverPct": 0,
+        "recoverMessage": "",
+        "unlockAfterTurns": 99,
+        "unlockMessage": "",
+        "startsUnshielded": true,
+        "actions": [],
+        "defeatMessage": "Hai vòng sáng tắt cùng lúc. Bóng nguyên sơ tan vào tro thủy tinh."
+      }
     }
   ]
 }
