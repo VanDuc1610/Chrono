@@ -28,7 +28,7 @@ parallel on tooling and docs. The story ends at Chapter 9.
 
 _Locks:_ `public/assets/data/*.json`, `scripts/*ch8*`, `scripts/generate-ch1-maps.js`, `scripts/preview-ch1-maps.js`, `public/assets/maps/ch8_*`, `src/world/ActionCombat.ts`, `src/world/Chapter4Field.ts`, `src/world/MapTypes.ts`, `src/world/Chapter8Rules.ts` (new), `src/systems/combat/*`, `src/scenes/*`, `src/state/*`, `tests/chapter8-*.test.ts` (new), `tests/chapter-starts.test.ts`, `tests/content-data.test.ts`, `docs/story/CHAPTER_08_DESIGN.md`, `ASSET_REGISTRY.md`.
 
-### T-76 · Chapter 9 design (the finale) — **Antigravity** · `IN PROGRESS`
+### T-76 · Chapter 9 design (the finale) — **Antigravity** · `DONE`
 
 _Locks:_ `docs/story/CHAPTER_09_DESIGN.md` (new). Read-only: everything else.
 
@@ -45,8 +45,8 @@ _Locks:_ `docs/reviews/T-74_CODEX_REVIEW.md` (new). Read-only: everything else (
 
 ## Done (latest 5 — older entries in [TASKS_ARCHIVE.md](TASKS_ARCHIVE.md))
 
+- **T-76** Chapter 9 design (`docs/story/CHAPTER_09_DESIGN.md`, Vietnamese, the finale): "The Fractured Divinity / The Last Chronarch" structured §1–§17 (The Nexus of Eternity, 18 maps [15 main + 3 hidden], 150–180 min, ~60% puzzles & mysteries + 40% combat; central mechanic Reality Inscription & Tri-Partite Resonance; full resolution of OQ-01 to OQ-05 including the empty chair promise; 13 distinct deduction puzzles C01–C13 with airtight single-answer proofs and no timers; 5 World Secrets; full callbacks to Ch4–Ch8; 4 flashbacks; 4 new field foes with timing tell & counter, 1 elite, mid-boss Primeval Architect, finale boss The Sixfold Divinity [Chronos–Kuro–Peter 3-phase confrontation], hidden boss Void Singularity Core; Level cap 30; 10 quests; valid engine items; §13 art contract; 3 detailed endings [The Eternal Order, The Unbound Eternity, The Last Chronarch True Ending]; §17 ID contract) — Antigravity
 - **T-75** Map lint v2 (layer variants, swaps and timer bridges counted; 22 → fewer real errors, report in `docs/testing/MAP_LINT_REPORT.md`), Chapter 7 answer key (`docs/testing/DAP_AN_CHUONG_7.md`), chapter-select e2e for every chapter start in Chromium/Firefox/WebKit (`e2e/chapters.spec.ts`) — Codex
 - **T-73** Chapter 8 design (`docs/story/CHAPTER_08_DESIGN.md`, Vietnamese, owner decisions §17: Peter was a page of the Origin Book torn loose by a malfunction) and art (owner approved 2026-11-15): convergence tileset (64 tiles), Assimilator, Phase Wraith, Doom Bell, Twin-Era Legionnaire, Second-Hand Warden, Convergent Praetor, Herald of the Null Hour (64), Sixfold Echo, Chronos reborn — Claude
 - **T-72** Map lint (`src/world/MapLint.ts`): spawn near exit / blocked, unreachable targets, reveal without refresh, trigger covering a spawn, dangling refs; 22 errors + 93 warnings baselined in `tests/map-lint.test.ts`, report in `docs/testing/MAP_LINT_REPORT.md` — Codex
 - **T-71** Chapter 7 playable: 19 maps on the violet voidcore tileset (hidden mason's tomb, white bell crypt, glass ash core), name-restoring altars, fog lullaby maze, Vietnamese diacritics letter, three sails logic, valve balance (solver-checked), Hollow Husk / Name Eater / Erasure Moths / Ink Hound / Void Inquisitor, Nameless Weeper pool of tears, Kuro boss ending by calling his true name (mother's embrace) or a colder win, Primordial Shade decoy rings, cliffhanger into Chapter 8, level cap 27, chapter select 7. Verified: 138 unit tests, live CDP runs of every map, puzzle (right and wrong), boss and the end card — Claude
-- **T-70** Chapter 7 art, first set (owner approved 2026-11-15, violet void per owner): voidcore tileset (dungeon tinted ink-violet + 32 tiles), void-touched Kuro, Kuro's mother, nameless shade, The First Forgotten (48), Name Eater, Hollow Husk, Erasure Moths, Ink Hound — Claude
