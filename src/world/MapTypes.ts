@@ -115,6 +115,8 @@ export interface MapEncounterDefinition {
   hitbox?: number;
   /** Dialogue opened back on the map after winning (e.g. a released boss's last words). */
   victoryDialogueId?: string;
+  /** Rules picking the victory dialogue by what happened in the fight (e.g. a story flag set by a finisher). */
+  victoryDialogueRules?: DialogueRule[];
   /** Not placed on the map: started only by a trigger's `encounterId` (scripted battles). */
   hidden?: boolean;
   /** Spawned only when the condition holds on entering the map. */

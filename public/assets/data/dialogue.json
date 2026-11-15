@@ -11347,7 +11347,8 @@
       ],
       "responses": [],
       "effects": {
-        "setFlags": ["opened_erased_hamlet_gate"]
+        "setFlags": ["opened_erased_hamlet_gate"],
+        "refreshMap": true
       }
     },
     "ch7_c02_done": {
@@ -11454,7 +11455,8 @@
           }
         ],
         "grantOnceFlag": "took_kuro_mother_brooch",
-        "setFlags": ["restored_kuro_mother_name"]
+        "setFlags": ["restored_kuro_mother_name"],
+        "refreshMap": true
       }
     },
     "ch7_fb_mother": {
@@ -12158,7 +12160,8 @@
       ],
       "responses": [],
       "effects": {
-        "setFlags": ["solved_blank_archives"]
+        "setFlags": ["solved_blank_archives"],
+        "refreshMap": true
       }
     },
     "ch7_c07_done": {
@@ -12360,7 +12363,8 @@
       ],
       "responses": [],
       "effects": {
-        "setFlags": ["ch7_fog_4", "solved_fog_maze", "ch7_mother_song_remembered"]
+        "setFlags": ["ch7_fog_4", "solved_fog_maze", "ch7_mother_song_remembered"],
+        "refreshMap": true
       }
     },
     "ch7_fog_wrong": {
@@ -12602,7 +12606,27 @@
       "id": "ch7_kuro_fight_end",
       "speaker": "Peter",
       "lines": ["Mặt hồ rung lên. Mực trên người Kuro chảy ngược, rút về đáy hồ."],
-      "responses": [],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch7_kuro_cold"
+        }
+      ],
+      "effects": {
+        "setFlags": ["pacified_void_kuro"],
+        "clearFlags": ["kuro_left"]
+      }
+    },
+    "ch7_kuro_fight_end_embraced": {
+      "id": "ch7_kuro_fight_end_embraced",
+      "speaker": "Peter",
+      "lines": ["Bài ru vang lên giữa mặt hồ. Mực trên người Kuro chảy ngược, rút về đáy hồ."],
+      "responses": [
+        {
+          "text": "…",
+          "nextDialogueId": "ch7_kuro_embrace"
+        }
+      ],
       "effects": {
         "setFlags": ["pacified_void_kuro"],
         "clearFlags": ["kuro_left"]

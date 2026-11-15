@@ -20151,9 +20151,6 @@
           "radius": 28,
           "prompt": "[E] Đặt la bàn lên thuyền buồm nâu",
           "dialogueId": "ch7_compass_need",
-          "visibleWhen": {
-            "flag": "took_compass_shard_1"
-          },
           "dialogueRules": [
             {
               "ifFlag": "calibrated_blind_compass",
@@ -22552,7 +22549,13 @@
           },
           "defeatedFlag": "pacified_void_kuro",
           "hitbox": 30,
-          "victoryDialogueId": "ch7_kuro_fight_end"
+          "victoryDialogueId": "ch7_kuro_fight_end",
+          "victoryDialogueRules": [
+            {
+              "ifFlag": "ch7_kuro_embraced",
+              "dialogueId": "ch7_kuro_fight_end_embraced"
+            }
+          ]
         }
       ],
       "tileSwaps": [
@@ -22630,23 +22633,6 @@
           "onceFlag": "ch7_t_kuro_left_seen",
           "dialogueId": "ch7_kuro_confront_left",
           "unlessFlag": "ch6_kuro_ally"
-        },
-        {
-          "id": "ch7_t_kuro_embrace",
-          "on": "arrive",
-          "onceFlag": "ch7_t_kuro_embrace_seen",
-          "delayMs": 400,
-          "dialogueId": "ch7_kuro_embrace",
-          "requiresFlag": "ch7_kuro_embraced"
-        },
-        {
-          "id": "ch7_t_kuro_cold",
-          "on": "arrive",
-          "onceFlag": "ch7_t_kuro_cold_seen",
-          "delayMs": 400,
-          "dialogueId": "ch7_kuro_cold",
-          "requiresFlag": "pacified_void_kuro",
-          "unlessFlag": "ch7_kuro_embraced"
         }
       ]
     },

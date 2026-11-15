@@ -382,7 +382,7 @@ add('map_ch7_stranded_fleet', 'Bến Thuyền Mắc Cạn', (p) => ({
       'ch7_compass_need',
       {
         radius: 28,
-        visibleWhen: { flag: 'took_compass_shard_1' },
+
         dialogueRules: [
           { ifFlag: 'calibrated_blind_compass', dialogueId: 'ch7_compass_done' },
           { ifItems: COMPASS, dialogueId: 'ch7_compass_place' },
@@ -810,6 +810,9 @@ add('map_ch7_ink_lake_throne', 'Hồ Lặng Trái Tim Hư Không', (p) => ({
       defeatedFlag: 'pacified_void_kuro',
       hitbox: 30,
       victoryDialogueId: 'ch7_kuro_fight_end',
+      victoryDialogueRules: [
+        { ifFlag: 'ch7_kuro_embraced', dialogueId: 'ch7_kuro_fight_end_embraced' },
+      ],
     },
   ],
   tileSwaps: [swap('pacified_void_kuro', p.gate, Vc.RUNE)],
@@ -828,11 +831,6 @@ add('map_ch7_ink_lake_throne', 'Hồ Lặng Trái Tim Hư Không', (p) => ({
     }),
     zone('ch7_t_kuro_left', { x: 12, y: 11, w: 9, h: 2 }, 'ch7_kuro_confront_left', {
       unlessFlag: 'ch6_kuro_ally',
-    }),
-    arrive('ch7_t_kuro_embrace', 'ch7_kuro_embrace', { requiresFlag: 'ch7_kuro_embraced' }),
-    arrive('ch7_t_kuro_cold', 'ch7_kuro_cold', {
-      requiresFlag: 'pacified_void_kuro',
-      unlessFlag: 'ch7_kuro_embraced',
     }),
   ],
 }));

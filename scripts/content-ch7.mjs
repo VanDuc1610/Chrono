@@ -125,7 +125,7 @@ P(
     'Đèn lam cho ông, đèn vàng cho cha, đèn trắng cho đứa con.',
     'Căn nhà viền tím ấm lên như có người vừa nhóm bếp. Cánh cửa phía bắc kẽo kẹt mở.',
   ],
-  { effects: { setFlags: ['opened_erased_hamlet_gate'] } },
+  { effects: { setFlags: ['opened_erased_hamlet_gate'], refreshMap: true } },
 );
 P('ch7_c02_done', ['Ba ngọn đèn vẫn cháy đều.']);
 take(
@@ -175,6 +175,7 @@ N(
   {
     effects: grant('kuro_mother_brooch', 1, 'took_kuro_mother_brooch', {
       setFlags: ['restored_kuro_mother_name'],
+      refreshMap: true,
     }),
     responses: [to('…', 'ch7_fb_mother')],
   },
@@ -448,7 +449,7 @@ P(
     'Giấc mơ, mái nhà, đôi tay, rồi đấng sáng tạo. Bốn cuộn giấy hiện chữ vàng.',
     'Một trang mở ra thành lối đi về phía đông. Dưới ngăn cuối có một chiếc chìa khóa trắng.',
   ],
-  { effects: { setFlags: ['solved_blank_archives'] } },
+  { effects: { setFlags: ['solved_blank_archives'], refreshMap: true } },
 );
 P('ch7_c07_done', ['Bốn cuộn giấy đã có chữ.']);
 take('ch7_key_take', ['Chiếc chìa khóa trắng, khắc hình một quả chuông nhỏ.'], 'white_crypt_key');
@@ -527,7 +528,12 @@ P(
     'Ngọn đèn. "...rồi theo ngọn đèn đầu ghềnh mà về."',
     'Sương tan dần như có ai thổi. Mình hát trọn bài ru, giọng ai đó hát theo từ rất xa.',
   ],
-  { effects: { setFlags: ['ch7_fog_4', 'solved_fog_maze', 'ch7_mother_song_remembered'] } },
+  {
+    effects: {
+      setFlags: ['ch7_fog_4', 'solved_fog_maze', 'ch7_mother_song_remembered'],
+      refreshMap: true,
+    },
+  },
 );
 P('ch7_fog_wrong', ['Sương cuộn lại, đẩy mình về chỗ cũ. Không phải đường bài hát ru đi.'], {
   effects: {
@@ -642,12 +648,19 @@ FB('ch7_fb_kuro_ink', 'Ký Ức Của Kuro', [
   'Rơi khỏi trời, Kuro chìm xuống hồ mực. Hàng nghìn giọng nói gào lên: "Cứu chúng tôi... đừng để chúng tôi biến mất..."',
   'Kuro cắn chặt môi, mở lồng ngực đón hết dòng mực vào tim.',
 ]);
+const FIGHT_END = {
+  setFlags: ['pacified_void_kuro'],
+  clearFlags: ['kuro_left'],
+};
 P('ch7_kuro_fight_end', ['Mặt hồ rung lên. Mực trên người Kuro chảy ngược, rút về đáy hồ.'], {
-  effects: {
-    setFlags: ['pacified_void_kuro'],
-    clearFlags: ['kuro_left'],
-  },
+  effects: FIGHT_END,
+  responses: [to('…', 'ch7_kuro_cold')],
 });
+P(
+  'ch7_kuro_fight_end_embraced',
+  ['Bài ru vang lên giữa mặt hồ. Mực trên người Kuro chảy ngược, rút về đáy hồ.'],
+  { effects: FIGHT_END, responses: [to('…', 'ch7_kuro_embrace')] },
+);
 N(
   'ch7_kuro_embrace',
   MOTHER,

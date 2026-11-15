@@ -12,6 +12,8 @@ import { SoundSystem } from '../systems/audio/SoundSystem';
 import { GameSession, getSession } from '../state/GameSession';
 import { registerPeterAnimations } from '../systems/animation/PeterAnimationConfig';
 import { createPanel } from '../ui/Panel';
+import { pickDialogue } from '../world/MapRegistry';
+import type { DialogueRule } from '../world/MapTypes';
 import { getStrings, getStringTable, Translate } from '../ui/Strings';
 import type { ExplorationSceneData } from './ExplorationScene';
 
@@ -27,6 +29,8 @@ export interface CombatSceneData {
   revivePosition?: { x: number; y: number };
   /** Dialogue opened back in the overworld after a victory (e.g. the Sentinel's last words). */
   victoryDialogueId?: string;
+  /** Picks the victory dialogue by flags set during the fight. */
+  victoryDialogueRules?: DialogueRule[];
 }
 
 type PlayerCommand = 'attack' | 'skill' | 'item' | 'defend' | 'escape' | 'environment';
@@ -1140,7 +1144,14 @@ export class CombatScene extends Phaser.Scene {
     const data: ExplorationSceneData = {
       returnPosition: this.sceneData.returnPosition,
       notice,
-      openDialogueId: won ? this.sceneData.victoryDialogueId : undefined,
+      openDialogueId:
+        won && this.sceneData.victoryDialogueId
+          ? pickDialogue(this.sceneData.victoryDialogueId, this.sceneData.victoryDialogueRules, {
+              isQuestCompleted: (id) => this.session.quests.getQuestStage(id) === 'completed',
+              getFlag: (f) => this.session.getFlag(f),
+              hasItem: (id) => this.session.inventory.hasItem(id, 1),
+            })
+          : undefined,
     };
     this.time.delayedCall(delayMs, () => {
       this.cameras.main.fadeOut(300, 0, 0, 0);

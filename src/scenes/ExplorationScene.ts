@@ -763,6 +763,7 @@ export class ExplorationScene extends Phaser.Scene {
         returnPosition,
         revivePosition: revive,
         victoryDialogueId: def.victoryDialogueId,
+        victoryDialogueRules: def.victoryDialogueRules,
       };
       this.scene.start('CombatScene', data);
     });
