@@ -311,3 +311,12 @@ The following specifications have been drafted in compliance with [ASSET_POLICY.
 - `ENV_VOIDCORE_001` — `voidcore_tileset_v1` (128 × 384): dungeon tiles 0-15 tinted ink-violet + 16-47 (collide 16-43, walkable 44-47; collision GID 4-44).
 - Bosses (owner approved 2026-11-15): `BOSS_NAMELESS_WEEPER_001`, `BOSS_KURO_VOID_001` (48 × 48 × 5, 4 = spent / kneeling), `BOSS_PRIMORDIAL_SHADE_001` (48 × 48 × 4), `MOB_VOID_INQUISITOR_001` (32 × 32 × 4).
 - **Status:** `APPROVED` by the owner 2026-11-15 (violet void, owner request) — `generated/approved/`, deployed to `public/assets/{npcs,enemies,tilesets}/`.
+
+### Chapter 8 characters and tileset
+
+- **Generators:** `scripts/author-ch8-characters.js`, `scripts/author-ch8-tileset.js` (Pipeline B, deterministic, no image model). Design: `docs/story/CHAPTER_08_DESIGN.md` §13.1.
+- `MOB_ASSIMILATOR_001`, `MOB_PHASE_WRAITH_001` (frames 2-3 out of phase), `MOB_DOOM_BELL_001` (frame n = n tolls), `MOB_TWIN_ERA_LEGIONNAIRE_001` (frame 3 = shield turned, red), `MOB_SECOND_HAND_WARDEN_001` (32 × 32 × 4).
+- `BOSS_CONVERGENT_PRAETOR_001` (48 × 48 × 5, 4 = shield broken), `BOSS_NULL_HOUR_HERALD_001` (64 × 64 × 5, 4 = stopped at 11:59), `BOSS_SIXFOLD_ECHO_001` (48 × 48 × 6, one per seal).
+- `NPC_CHRONOS_REBORN_001` (48 × 48 × 4; silver-white hair, gold cloak fraying into chains, handless clock face).
+- `ENV_CONVERGENCE_001` — `convergence_tileset_v1` (128 × 512): dungeon tiles 0-15 tinted dusk slate + 16-63 (collide 16-47, walkable 48-63; collision GID 4-48).
+- **Status:** `APPROVED` by the owner 2026-11-15 — `generated/approved/`, deployed to `public/assets/{npcs,enemies,tilesets}/`.

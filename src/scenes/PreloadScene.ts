@@ -235,6 +235,16 @@ export class PreloadScene extends Phaser.Scene {
       ['boss_nameless_weeper', 'assets/enemies/nameless_weeper.png', 48],
       ['boss_kuro_void', 'assets/enemies/kuro_boss.png', 48],
       ['boss_primordial_shade', 'assets/enemies/primordial_shade.png', 48],
+      // Chapter 8 (owner approved 2026-11-15).
+      ['npc_chronos_reborn', 'assets/npcs/chronos_reborn_idle.png', 48],
+      ['enemy_assimilator', 'assets/enemies/assimilator.png', 32],
+      ['enemy_phase_wraith', 'assets/enemies/phase_wraith.png', 32],
+      ['enemy_doom_bell', 'assets/enemies/doom_bell.png', 32],
+      ['enemy_twin_era_legionnaire', 'assets/enemies/twin_era_legionnaire.png', 32],
+      ['enemy_second_hand_warden', 'assets/enemies/second_hand_warden.png', 32],
+      ['boss_convergent_praetor', 'assets/enemies/convergent_praetor.png', 48],
+      ['boss_null_hour_herald', 'assets/enemies/null_hour_herald.png', 64],
+      ['boss_sixfold_echo', 'assets/enemies/sixfold_echo.png', 48],
     ] as const) {
       this.load.spritesheet(key, file, { frameWidth: size, frameHeight: size });
     }
@@ -372,6 +382,15 @@ export class PreloadScene extends Phaser.Scene {
       ['boss_nameless_weeper_idle', 'boss_nameless_weeper', 3, 4],
       ['boss_kuro_void_idle', 'boss_kuro_void', 3, 4],
       ['boss_primordial_shade_idle', 'boss_primordial_shade', 3, 4],
+      ['npc_chronos_reborn_idle', 'npc_chronos_reborn', 3, 2],
+      ['enemy_assimilator_idle', 'enemy_assimilator', 3, 3],
+      ['enemy_phase_wraith_idle', 'enemy_phase_wraith', 3, 3],
+      ['enemy_doom_bell_idle', 'enemy_doom_bell', 3, 3],
+      ['enemy_twin_era_legionnaire_idle', 'enemy_twin_era_legionnaire', 2, 4],
+      ['enemy_second_hand_warden_idle', 'enemy_second_hand_warden', 3, 4],
+      ['boss_convergent_praetor_idle', 'boss_convergent_praetor', 3, 4],
+      ['boss_null_hour_herald_idle', 'boss_null_hour_herald', 3, 3],
+      ['boss_sixfold_echo_idle', 'boss_sixfold_echo', 5, 3],
     ] as const) {
       if (!this.anims.exists(key)) {
         this.anims.create({
