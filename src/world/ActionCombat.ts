@@ -45,6 +45,11 @@ import {
   wraithSolid,
   type PeterMove,
 } from './Chapter8Rules';
+import { chainState, thrustPhase, type Ch9FieldTraits } from './Chapter9Rules';
+
+/** Chapter 9 traits read from enemies.json (typed in Chapter9Rules until CombatTypes is free). */
+const f9 = (r: { enemy: IEnemyDefinition }): Ch9FieldTraits =>
+  (r.enemy.field ?? {}) as Ch9FieldTraits;
 
 /** What the exploration scene provides to the real-time combat layer. */
 export interface ActionHost {
@@ -146,6 +151,12 @@ interface Roamer {
   sweepStopUntil?: number;
   sweepHits?: number;
   sweepTouchAt?: number;
+  /** Nexus Sentinel: the thrust in progress (start, locked line) and its cooldown. */
+  thrust?: { at: number; from: Point; to: Point; hit: boolean } | null;
+  nextThrustAt?: number;
+  /** Nexus Inquisitor: when the current four-blow chain began and the last blow already struck. */
+  chainAt?: number | null;
+  chainBeat?: number;
 }
 
 const ELDER_FLAG = 'elder_joined';
@@ -644,6 +655,99 @@ export class ActionCombat {
     }
   }
 
+  // ------------------------------------------------------------------ Chapter 9 enemies
+
+  /** Nexus Sentinel: red line, lunge, blade stuck in the floor. True while it is busy. */
+  private updateThrust(r: Roamer, now: number): boolean {
+    const th = f9(r).thrust;
+    if (!th) return false;
+    if (!r.thrust) {
+      if (now < (r.nextThrustAt ?? 0) || distance(r.sprite, this.player) > th.range) return false;
+      const dx = this.player.x - r.sprite.x;
+      const dy = this.player.y - r.sprite.y;
+      const len = Math.hypot(dx, dy) || 1;
+      r.thrust = {
+        at: now,
+        from: { x: r.sprite.x, y: r.sprite.y },
+        to: { x: r.sprite.x + (dx / len) * th.range, y: r.sprite.y + (dy / len) * th.range },
+        hit: false,
+      };
+      r.sprite.anims.stop();
+      r.sprite.setFrame(3);
+    }
+    const t = r.thrust;
+    const phase = thrustPhase(now, t.at, th.warnMs, th.lungeMs, th.stuckMs);
+    if (phase === 'warn') {
+      r.sprite.setVelocity(0, 0);
+      this.aimLines.lineStyle(2, 0xff4a4a, 0.85).lineBetween(t.from.x, t.from.y, t.to.x, t.to.y);
+      return true;
+    }
+    if (phase === 'lunge') {
+      const k = Math.min(1, (now - t.at - th.warnMs) / th.lungeMs);
+      r.sprite.setPosition(t.from.x + (t.to.x - t.from.x) * k, t.from.y + (t.to.y - t.from.y) * k);
+      r.sprite.setVelocity(0, 0);
+      if (!t.hit && this.segmentDistance(this.player, t.from, r.sprite) < 16) {
+        t.hit = true;
+        this.hitPlayer(r, { mult: th.damageMult });
+      }
+      return true;
+    }
+    if (phase === 'stuck') {
+      r.sprite.setVelocity(0, 0);
+      r.sprite.setTint(0x9a9ab0);
+      return true;
+    }
+    r.thrust = null;
+    r.nextThrustAt = now + th.cooldownMs;
+    r.sprite.clearTint();
+    if (this.scene.anims.exists(r.def.anim ?? '')) r.sprite.play(r.def.anim ?? '');
+    return false;
+  }
+
+  /** A slash on a Sentinel: hard while its blade is stuck, weak against its guard. */
+  private thrustMult(r: Roamer, now: number): number {
+    const th = f9(r).thrust;
+    if (!th) return 1;
+    const stuck =
+      !!r.thrust && thrustPhase(now, r.thrust.at, th.warnMs, th.lungeMs, th.stuckMs) === 'stuck';
+    return stuck ? th.stuckMult : th.guardMult;
+  }
+
+  /** Nexus Inquisitor: four blows, then an open guard. True while a chain runs. */
+  private updateChain4(r: Roamer, now: number): boolean {
+    const ch = f9(r).chain4;
+    if (!ch) return false;
+    if (r.chainAt === null || r.chainAt === undefined) {
+      if (distance(r.sprite, this.player) > ch.range) return false;
+      r.chainAt = now;
+      r.chainBeat = 0;
+      r.sprite.anims.stop();
+    }
+    const st = chainState(now, r.chainAt, ch.beatMs, ch.windowMs);
+    r.sprite.setVelocity(0, 0);
+    if (st.beat > (r.chainBeat ?? 0)) {
+      r.chainBeat = st.beat;
+      r.sprite.setFrame((st.beat - 1) % 4);
+      this.aimLines.lineStyle(3, 0xe5c158, 0.9).strokeCircle(r.sprite.x, r.sprite.y, ch.reach);
+      if (distance(r.sprite, this.player) <= ch.reach) this.hitPlayer(r, { mult: ch.damageMult });
+    }
+    if (st.open) r.sprite.setTint(0x88edff);
+    if (st.done) {
+      r.chainAt = null;
+      r.sprite.clearTint();
+      return false;
+    }
+    return true;
+  }
+
+  /** The Inquisitor's guard: only open right after its fourth blow. */
+  private chainGuarded(r: Roamer, now: number): boolean {
+    const ch = f9(r).chain4;
+    if (!ch) return false;
+    if (r.chainAt === null || r.chainAt === undefined) return true;
+    return !chainState(now, r.chainAt, ch.beatMs, ch.windowMs).open;
+  }
+
   // ------------------------------------------------------------------ frame
 
   public update(delta: number): void {
@@ -698,6 +802,8 @@ export class ActionCombat {
       if (r.enemy.field?.hound && this.updateHound(r, now)) continue;
       if (r.enemy.field?.chainTrial && this.updateChains(r, now)) continue;
       if (r.enemy.field?.bell && this.updateBell(r, now)) continue;
+      if (f9(r).thrust && this.updateThrust(r, now)) continue;
+      if (f9(r).chain4 && this.updateChain4(r, now)) continue;
       if (r.enemy.field?.sweep) this.updateSweep(r, now);
       if (r.enemy.field?.allyTaunt) {
         const turned = this.shieldTurned(r, now);
@@ -863,7 +969,10 @@ export class ActionCombat {
       if (this.defended(r, hit.damage)) continue;
       const stunned = r.charge?.phase === 'stunned';
       const frozen = r.frozen ? (r.enemy.field?.freezeWatch?.frozenMult ?? 1) : 1;
-      const mult = (stunned ? (r.enemy.field?.charge?.stunnedDamageMult ?? 1) : 1) * frozen;
+      const mult =
+        (stunned ? (r.enemy.field?.charge?.stunnedDamageMult ?? 1) : 1) *
+        frozen *
+        this.thrustMult(r, now);
       const dealt = Math.floor(hit.damage * mult);
       this.damageRoamer(r, dealt, hit.critical || stunned);
       echoed.push({ r, damage: dealt });
@@ -946,6 +1055,12 @@ export class ActionCombat {
       if (!r.alive || distance(r.sprite, this.player) > this.tuning.skillRadius + 10) continue;
       if (this.houndRunning(r, now)) continue;
       if (this.mimicCounter(r, 'skill')) continue;
+      const chg = r.enemy.field?.charge;
+      if (chg && r.charge?.phase === 'stomp') {
+        r.charge = { ...r.charge, phase: 'stunned', until: now + chg.stunMs };
+        r.sprite.setTint(0xfff27a);
+        this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.stunned'), '#fff27a');
+      }
       const hd = r.enemy.field?.hound;
       const damage =
         Math.max(
@@ -1033,6 +1148,11 @@ export class ActionCombat {
         this.player.x - Math.cos(behind) * 26,
         this.player.y - Math.sin(behind) * 26,
       );
+      return true;
+    }
+    if (f9(r).chain4 && this.chainGuarded(r, now)) {
+      this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.offBeat'), '#e5c158');
+      this.sound.playSlash();
       return true;
     }
     const sw = field.sweep;

@@ -803,3 +803,17 @@ Bản 2 đã sửa đủ các điểm của §18. Cả 11 ID manh mối ở §3.
 1. Tên thật The First Forgotten: **Thiên Nguyên**, lộ ra qua C10 — **đồng ý**.
 2. Bốn kết thúc như §15 (kết thật cần `ch7_kuro_embraced` HOẶC `quest_ch9_kuro_heart`) — **duyệt**.
 3. Thứ tự làm: Claude vẽ toàn bộ hình chương 9 để owner duyệt một lần, làm engine song song, rồi build cả chương.
+
+## 22. Ghi Chú Build (Claude)
+
+- **C13 đổi luật** (solver cho thấy luật "đảo cột đối diện + trục giữa" luôn có đường tắt hai bước, nên trục giữa thừa):
+  - vòng 8 cột; bấm một cột thì cột đó **và hai cột kề** đều đảo trạng thái;
+  - ban đầu cột 3, 6, 7, 8 sáng;
+  - đáp án duy nhất là bấm **cột 2 và cột 4**, thứ tự nào cũng được; bấm lại một cột là hoàn tác;
+  - với 8 cột, hệ đảo này luôn có nghiệm duy nhất (`tests/chapter9-rules.test.ts`).
+- **C03:** câu 2 của tượng Chronos là một sự thật nhìn thấy trong phòng (bệ của ngài là bệ duy nhất không nứt). Solver xác nhận Chronos nửa thật, Kuro dối, Thiên Nguyên thật.
+- **Quái bản đồ:**
+  - Lính Canh dùng trait `thrust`, Đại Pháp Quan dùng `chain4` (mới, `src/world/Chapter9Rules.ts`);
+  - Bóng Ma Nhiệt Dịch dùng `clonesAtHalf` (bóng giả, Đòn Thời Gian xóa);
+  - Hộ Vệ Bánh Răng dùng `charge`: Đòn Thời Gian đúng lúc nó khựng thì nó ngã;
+  - Kẻ Dệt Nghịch Lý dùng `reflect` (kén đóng phản 100%).
