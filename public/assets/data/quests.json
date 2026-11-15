@@ -1521,7 +1521,8 @@
           "completed": false,
           "completeOnFlag": "witnessed_ch6_cliffhanger"
         }
-      ]
+      ],
+      "followUpQuestId": "quest_ch7_faded_shore"
     },
     {
       "id": "quest_ch6_solon_atonement",
@@ -1568,6 +1569,231 @@
           "description": "Giải bàn cờ thiên thể",
           "completed": false,
           "completeOnFlag": "aligned_celestial_chess"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch7_faded_shore",
+      "title": "Bờ Cát Phai Màu",
+      "kind": "main",
+      "chapter": 7,
+      "description": "Peter rơi xuống đáy hư không. Nửa Ấn Origin có thể gọi lại tên những người bị quên.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch7_keeper",
+          "description": "Gọi lại tên người gác cầu",
+          "completed": false,
+          "completeOnFlag": "restored_bridge_keeper"
+        },
+        {
+          "id": "obj_ch7_hamlet",
+          "description": "Đánh thức ngôi nhà giữa xóm chài",
+          "completed": false,
+          "completeOnFlag": "opened_erased_hamlet_gate"
+        }
+      ],
+      "followUpQuestId": "quest_ch7_erased_lullaby"
+    },
+    {
+      "id": "quest_ch7_erased_lullaby",
+      "title": "Khúc Ru Bị Xóa",
+      "kind": "main",
+      "chapter": 7,
+      "description": "Một người mẹ ngồi đưa chiếc nôi trống, quên cả tên mình lẫn tên con.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch7_mother",
+          "description": "Gọi lại tên người mẹ",
+          "completed": false,
+          "completeOnFlag": "restored_kuro_mother_name"
+        }
+      ],
+      "followUpQuestId": "quest_ch7_echoes_of_the_fleet"
+    },
+    {
+      "id": "quest_ch7_echoes_of_the_fleet",
+      "title": "Tiếng Vọng Đoàn Tàu Đắm",
+      "kind": "main",
+      "chapter": 7,
+      "description": "Đường đi tiếp nằm trên tấm hải đồ của một thuyền trưởng không ai nhớ mặt.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch7_well",
+          "description": "Làm giếng vọng lặng lại",
+          "completed": false,
+          "completeOnFlag": "balanced_echo_well"
+        },
+        {
+          "id": "obj_ch7_fleet",
+          "description": "Tìm thuyền trưởng giữ hải đồ",
+          "completed": false,
+          "completeOnFlag": "solved_stranded_fleet"
+        },
+        {
+          "id": "obj_ch7_clocks",
+          "description": "Chỉnh lại mặt đồng hồ đá",
+          "completed": false,
+          "completeOnFlag": "solved_clock_graveyard"
+        }
+      ],
+      "followUpQuestId": "quest_ch7_the_nameless_weeper"
+    },
+    {
+      "id": "quest_ch7_the_nameless_weeper",
+      "title": "Kẻ Khóc Không Tên",
+      "kind": "main",
+      "chapter": 7,
+      "description": "Một khối đá ba khuôn mặt khóc mãi không ngừng, chắn ngang hành lang.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch7_weeper",
+          "description": "Vượt qua Kẻ Khóc Không Tên",
+          "completed": false,
+          "completeOnFlag": "defeated_nameless_weeper"
+        }
+      ],
+      "followUpQuestId": "quest_ch7_promontory_promise"
+    },
+    {
+      "id": "quest_ch7_promontory_promise",
+      "title": "Lời Hẹn Dưới Gốc Bàng",
+      "kind": "main",
+      "chapter": 7,
+      "description": "Mỏm đá có cây bàng gãy, nơi hai đứa trẻ từng hứa với nhau.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch7_archives",
+          "description": "Xếp lại những cuộn giấy trắng",
+          "completed": false,
+          "completeOnFlag": "solved_blank_archives"
+        },
+        {
+          "id": "obj_ch7_box",
+          "description": "Mở chiếc hộp thiếc dưới gốc bàng",
+          "completed": false,
+          "completeOnFlag": "opened_childhood_pledge_box"
+        },
+        {
+          "id": "obj_ch7_maze",
+          "description": "Đi qua Mê Cung Sương",
+          "completed": false,
+          "completeOnFlag": "solved_fog_maze"
+        }
+      ],
+      "followUpQuestId": "quest_ch7_chains_of_chronos"
+    },
+    {
+      "id": "quest_ch7_chains_of_chronos",
+      "title": "Những Sợi Xích Vàng",
+      "kind": "main",
+      "chapter": 7,
+      "description": "Ở Thánh Đường Xích Vàng có một người đang quỳ, cổ tay bị xích.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch7_forgotten",
+          "description": "Nói chuyện với Kẻ Bị Quên Đầu Tiên",
+          "completed": false,
+          "completeOnFlag": "communed_first_forgotten"
+        }
+      ],
+      "followUpQuestId": "quest_ch7_redeeming_kuro"
+    },
+    {
+      "id": "quest_ch7_redeeming_kuro",
+      "title": "Kéo Kuro Trở Về",
+      "kind": "main",
+      "chapter": 7,
+      "description": "Kuro đang uống cạn hư không để cứu những kẻ bị quên.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch7_inquisitor",
+          "description": "Vượt qua Thẩm Phán Hư Không",
+          "completed": false,
+          "completeOnFlag": "defeated_void_inquisitor"
+        },
+        {
+          "id": "obj_ch7_kuro",
+          "description": "Kéo Kuro khỏi hồ mực",
+          "completed": false,
+          "completeOnFlag": "pacified_void_kuro"
+        }
+      ],
+      "followUpQuestId": "quest_ch7_null_hour_awakening"
+    },
+    {
+      "id": "quest_ch7_null_hour_awakening",
+      "title": "Thời Khắc Số Không Điểm Nhịp",
+      "kind": "main",
+      "chapter": 7,
+      "description": "Mắt xích cuối cùng của Chronos đang rạn.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch7_chain",
+          "description": "Gia cố mắt xích cuối cùng",
+          "completed": false,
+          "completeOnFlag": "stabilized_third_chain"
+        },
+        {
+          "id": "obj_ch7_threshold",
+          "description": "Tới Ngưỡng Cửa Giờ Số Không",
+          "completed": false,
+          "completeOnFlag": "witnessed_ch7_cliffhanger"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch7_first_mason",
+      "title": "Di Nguyện Thợ Khắc Đá",
+      "kind": "side",
+      "chapter": 7,
+      "description": "Người khắc bia đầu tiên muốn những phiến đá của mình có tên.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch7_mason",
+          "description": "Khắc tên lên bốn phiến đá",
+          "completed": false,
+          "completeOnFlag": "honored_first_mason"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch7_mother_hairpin",
+      "title": "Chiếc Kẹp Tóc Cài Lại",
+      "kind": "side",
+      "chapter": 7,
+      "description": "Lá thư của bà Mai bị hư không ăn mất dấu chữ. Trong thư còn kẹp một thứ.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch7_hairpin",
+          "description": "Mang chiếc kẹp tóc về cho bà Mai",
+          "completed": false,
+          "completeOnFlag": "returned_mother_hairpin"
+        }
+      ]
+    },
+    {
+      "id": "quest_ch7_lost_compass",
+      "title": "La Bàn Của Thủy Thủ Mù",
+      "kind": "side",
+      "chapter": 7,
+      "description": "Một thủy thủ mù làm mất la bàn, các mảnh văng khắp bến thuyền.",
+      "stage": "inactive",
+      "objectives": [
+        {
+          "id": "obj_ch7_compass",
+          "description": "Ghép lại la bàn",
+          "completed": false,
+          "completeOnFlag": "calibrated_blind_compass"
         }
       ]
     }

@@ -179,6 +179,10 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
           knownFlags.add(enc.defeatedFlag);
         }
       }
+      // A map elite (roamer) that stays down sets its flag too.
+      for (const r of map.roamers ?? []) {
+        if (r.defeatedFlag) knownFlags.add(r.defeatedFlag);
+      }
     }
 
     for (const quest of questDb.quests) {
@@ -441,9 +445,15 @@ describe('Prologue Content Data Integrity (dialogue.json, quests.json, maps.json
       'treaty_scrap_waters',
       'treaty_scrap_signatures',
     ]);
-    // Chapter 5 items that name Kuro (his ledger) are after his first appearance too.
+    // Later chapters' items that name Kuro (his ledger, his mother's things, the late-chapter
+    // secrets and Peter's childhood diary) come after his first appearance too.
+    const laterKuroItems = new Set(['peter_torn_diary_page']);
     const preCh4Items = itemDb.items.filter(
-      (i) => !ch4ItemIds.has(i.id) && !i.id.startsWith('kuro_'),
+      (i) =>
+        !ch4ItemIds.has(i.id) &&
+        !i.id.startsWith('kuro_') &&
+        !i.id.startsWith('world_secret_') &&
+        !laterKuroItems.has(i.id),
     );
     expect(JSON.stringify({ preCh4Dialogues, preCh4Quests, preCh4Items })).not.toMatch(/kuro/i);
 

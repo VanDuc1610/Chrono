@@ -71,6 +71,17 @@ const GEAR5: [string, number][] = [
   ['possibility_seal_shard', 1],
   ['kuro_ledger', 1],
 ];
+const CH6 = [
+  'origin_seal_cracked',
+  'ch6_kuro_ally',
+  'ch6_promise_remembered',
+  'ch6_chronicle_kept',
+];
+const GEAR6: [string, number][] = [
+  ['origin_astral_blade', 1],
+  ['seal_of_the_first_hour', 1],
+  ['origin_seal_half', 1],
+];
 const heals = (n: number): [string, number] => ['refined_chrono_shard', n];
 
 export const CHAPTER_STARTS: ChapterStart[] = [
@@ -133,6 +144,16 @@ export const CHAPTER_STARTS: ChapterStart[] = [
     flags: [...PROLOGUE, ...CH1, ...CH2, ...CH3, ...CH4, ...CH5],
     items: [...GEAR1, ...GEAR2, ...GEAR3, ...GEAR4, ...GEAR5, heals(8)],
     equip: ['blade_of_possibility', 'alpha_wedding_ring'],
+  },
+  {
+    chapter: 7,
+    title: 'Chiếc Nôi Của Những Kẻ Bị Quên',
+    mapId: 'map_ch7_ash_abyss_drop',
+    spawnId: 'from_ch6',
+    level: 24,
+    flags: [...PROLOGUE, ...CH1, ...CH2, ...CH3, ...CH4, ...CH5, ...CH6],
+    items: [...GEAR1, ...GEAR2, ...GEAR3, ...GEAR4, ...GEAR5, ...GEAR6, heals(10)],
+    equip: ['origin_astral_blade', 'seal_of_the_first_hour'],
   },
 ];
 

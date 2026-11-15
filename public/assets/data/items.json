@@ -1951,6 +1951,224 @@
         "maxHp": 20,
         "attack": 2
       }
+    },
+    {
+      "id": "bridge_toll_tag",
+      "name": "Thẻ Bài Thu Phí Gãy",
+      "type": "document",
+      "description": "Thẻ bài của người gác cầu, gãy đôi.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Mặt trước còn chữ cái đầu: một nguyên âm, chữ đầu tiên của bảng chữ cái.\nMặt sau chỉ còn chữ cái cuối: H."
+      ]
+    },
+    {
+      "id": "peter_torn_diary_page",
+      "name": "Trang Nhật Ký Tuổi Thơ",
+      "type": "document",
+      "description": "Trang nhật ký Peter viết hồi nhỏ.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Kuro rủ mình ra mỏm đá cây bàng vào ngày rằm tháng bảy âm lịch, mùa hoa bàng rụng trắng bờ cát. Năm đó tụi mình mười bốn tuổi."
+      ]
+    },
+    {
+      "id": "librarian_ghost_memo",
+      "name": "Ghi Chép Của Thủ Thư",
+      "type": "document",
+      "description": "Hướng dẫn xếp sách của thủ thư vô danh.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Sách của những kẻ bị xóa xếp theo độ nặng của ký ức: giấc mơ nhẹ nhất ở ngăn đầu, rồi mái nhà, rồi đôi tay lao động, nặng nhất là ký ức về các đấng sáng tạo."
+      ]
+    },
+    {
+      "id": "world_secret_torn_origin_scroll",
+      "name": "Bí Mật I: Trang Giấy Bị Xé",
+      "type": "document",
+      "description": "Một mảnh giấy trắng mép xé.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Một trang giấy không chữ, xé từ một cuốn sổ rất cũ. Hư không trượt đi trên nó như nước trên lá sen."
+      ]
+    },
+    {
+      "id": "world_secret_mother_letter",
+      "name": "Bí Mật II: Thư Của Người Mẹ",
+      "type": "document",
+      "description": "Thư bà Mai viết cho Kuro.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Kuro, con sống cho tử tế. Đừng để cái giận làm mờ mắt con. Mẹ không cần con cứu cả thế gian, mẹ chỉ cần con về ăn cơm."
+      ]
+    },
+    {
+      "id": "world_secret_twin_gods_pact",
+      "name": "Bí Mật III: Giao Ước Hai Vị Thần",
+      "type": "document",
+      "description": "Tấm da trong khoang tàu đắm.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Hai người cùng giữ Origin. Một người giữ ánh sáng đầu tiên, một người giữ bánh xe. Nếu vết nứt mở, một người sẽ ở lại làm nút chặn."
+      ]
+    },
+    {
+      "id": "world_secret_null_hour_blueprint",
+      "name": "Bí Mật IV: Bản Vẽ Đồng Hồ",
+      "type": "document",
+      "description": "Bản vẽ cơ khí bị xé nhiều chỗ.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": [
+        "Một chiếc đồng hồ nối với sáu ổ khóa. Ghi chú bên lề: \"Nếu sáu ổ cùng vỡ, kim sẽ chạy tới Giờ Thứ 25.\" Phần dưới bị xé mất."
+      ]
+    },
+    {
+      "id": "world_secret_childhood_carving",
+      "name": "Bí Mật V: Nét Khắc Dưới Gốc Bàng",
+      "type": "document",
+      "description": "Chép lại từ rễ cây bàng.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "pages": ["Peter và Kuro — dù cả thế giới có quên tụi mình."]
+    },
+    {
+      "id": "void_sea_chart",
+      "name": "Hải Đồ Biển Hư Không",
+      "type": "puzzle",
+      "description": "Tấm hải đồ thuyền trưởng trao cho Peter.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "white_crypt_key",
+      "name": "Chìa Khóa Trắng",
+      "type": "puzzle",
+      "description": "Chìa khóa khắc hình quả chuông nhỏ.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "childhood_pledge_shard",
+      "name": "Mảnh Thép Hẹn Ước",
+      "type": "puzzle",
+      "description": "Mảnh thép gỉ khắc chữ P và K.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "compass_shard_1",
+      "name": "Mảnh La Bàn (Kim)",
+      "type": "puzzle",
+      "description": "Mảnh la bàn có cây kim.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "compass_shard_2",
+      "name": "Mảnh La Bàn (Mặt)",
+      "type": "puzzle",
+      "description": "Mảnh mặt la bàn khắc hướng.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "compass_shard_3",
+      "name": "Mảnh La Bàn (Vỏ)",
+      "type": "puzzle",
+      "description": "Mảnh vỏ đồng của la bàn.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1
+    },
+    {
+      "id": "void_nectar_flask",
+      "name": "Bình Mật Hư Không",
+      "type": "consumable",
+      "description": "Mật được lọc khỏi hư không. Hồi 180 HP và 80 MP.",
+      "value": 0,
+      "stackable": true,
+      "maxStack": 20,
+      "effects": {
+        "healAmount": 180,
+        "mpAmount": 80
+      }
+    },
+    {
+      "id": "void_severance_blade",
+      "name": "Kiếm Cắt Hư Vô",
+      "type": "weapon",
+      "description": "Lưỡi kiếm đúc từ tro thủy tinh.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 20,
+        "reach": 45,
+        "swingMs": 310,
+        "echoPct": 0.15
+      }
+    },
+    {
+      "id": "kuro_mother_brooch",
+      "name": "Cài Áo Bông Mai Của Mẹ",
+      "type": "charm",
+      "description": "Kỷ vật bà Mai trao cho Peter.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 35,
+        "defense": 5
+      }
+    },
+    {
+      "id": "mother_golden_hairpin",
+      "name": "Kẹp Tóc Vàng Của Mẹ",
+      "type": "charm",
+      "description": "Chiếc kẹp tóc hình bông mai.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 40,
+        "defense": 6
+      }
+    },
+    {
+      "id": "unwritten_cradle_clasp",
+      "name": "Móc Khóa Chiếc Nôi",
+      "type": "charm",
+      "description": "Móc khóa nhỏ hình chiếc nôi.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 45,
+        "maxMp": 30,
+        "attack": 5,
+        "defense": 7,
+        "speed": 4
+      }
     }
   ]
 }
