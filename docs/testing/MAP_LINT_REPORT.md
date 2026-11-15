@@ -191,3 +191,13 @@ Reveal traversal follows all response branches, cycle-safe, with any refreshMap/
 No findings in the current snapshot (18 maps). New Chapter 8 errors fail the real-data test; none are added to KNOWN.
 
 Stable baseline: 55 findings (14 errors, 41 warnings).
+
+## T-75 verification and handoff
+
+- Chapter 7 answer key: DAP_AN_CHUONG_7.md (Vietnamese), all 13 puzzles, compass side quest, field elite, three bosses and both Kuro outcomes; data/design differences are listed there.
+- Real-data map test uses eager import.meta.glob for every public/assets/maps/*.json file. Chapter 8 maps are checked automatically and never added to KNOWN. Snapshot: 18 Chapter 8 maps, zero findings.
+- Typecheck and ESLint passed; npm test passed 161 tests across 24 files.
+- Full-repo Prettier check still fails on six T-74 data files: dialogue.json, enemies.json, items.json, maps.json, player.json, quests.json. They are outside T-75 locks and were not modified. T-75 files pass their scoped formatting check.
+- npm run e2e -- --workers=1 passed all six tests (chapter select and existing smoke on Chromium, Firefox, WebKit). Eight chapter starts checked against mapId, level and equipped weapon, with no console errors or failed asset requests. Chapter-select durations: Chromium 15.2 s, Firefox 21.3 s, WebKit 44.2 s.
+- Initial default six-worker run was resource-heavy; repeated full-page boots also timed out in WebKit. The final test preloads once and returns via Phaser scene lifecycle, then starts each fresh chapter with real menu/number keys. Timeout remains 60 seconds.
+- Pull --rebase was attempted before the first two parts but Git refused because T-74 had concurrent unstaged changes; no other-agent changes were stashed. A later pull before the final commit succeeded (branch up to date). No push.

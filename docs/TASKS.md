@@ -28,7 +28,7 @@ parallel on tooling and docs. The story ends at Chapter 9.
 
 _Locks:_ `public/assets/data/*.json`, `scripts/*ch8*`, `scripts/generate-ch1-maps.js`, `scripts/preview-ch1-maps.js`, `public/assets/maps/ch8_*`, `src/world/ActionCombat.ts`, `src/world/Chapter4Field.ts`, `src/world/MapTypes.ts`, `src/world/Chapter8Rules.ts` (new), `src/systems/combat/*`, `src/scenes/*`, `src/state/*`, `tests/chapter8-*.test.ts` (new), `tests/chapter-starts.test.ts`, `tests/content-data.test.ts`, `docs/story/CHAPTER_08_DESIGN.md`, `ASSET_REGISTRY.md`.
 
-### T-75 · Map lint v2, Chapter 7 answer key, chapter-select e2e — **Codex** · `IN PROGRESS`
+### T-75 · Map lint v2, Chapter 7 answer key, chapter-select e2e — **Codex** · `DONE`
 
 _Locks:_ `src/world/MapLint.ts`, `tests/map-lint.test.ts`, `docs/testing/MAP_LINT_REPORT.md`, `docs/testing/DAP_AN_CHUONG_7.md` (new), `e2e/chapters.spec.ts` (new).
 Read-only: everything locked by T-74 (data, scenes, combat). Do not fix game data — report it.
