@@ -6,11 +6,13 @@ On 2026-11-15, launched Vite on port 3000 and Chromium with Playwright. Selected
 
 ## Reachability changes
 
-Union base Walls with every layerVariants Walls layer, including Chapter 5 living/pruned branches. Also union every nonblocking walls tileSwap (GID = index + 1), including timer bridges regardless of flag state or timer duration. Reachable same-map dialogue warps/trigger teleports connect components; arbitrary unused spawns do not. Conditions remain optimistic. The old 12 unreachable findings become 3: eight disappear through variant routes, and the Chapter 5 seal is reachable through ch5_collision_escaped warp to core.
+Union base Walls with every layerVariants Walls layer, including Chapter 5 living/pruned branches. Also union every nonblocking walls tileSwap (GID = index + 1), including timer bridges regardless of flag state or timer duration. Reachable same-map dialogue warps/trigger teleports connect components; arbitrary unused spawns do not. Conditions remain optimistic. The old 12 unreachable findings become 4: eight disappear through variant routes. Same-map warp support does not suppress the Chapter 5 seal finding because its source trigger is not four-way reachable.
 
 ## Remaining errors: assessment
 
-The three unreachable exits are real static blockers: the entire row y=1 is GID 4, within collision 4..44, while the exit is at y=0. No relevant variant/swap or reachable warp crosses the row. For throne_to_shore, the victory swap opens (11,0) only, not (11,1). For fleet_to_well and maze_to_tree, (12,0) is already open but (12,1) stays blocked. Correct the generators owned by Claude.
+Three unreachable exits are real static blockers: the entire row y=1 is GID 4, within collision 4..44, while the exit is at y=0. No relevant variant/swap or reachable warp crosses the row. For throne_to_shore, the victory swap opens (11,0) only, not (11,1). For fleet_to_well and maze_to_tree, (12,0) is already open but (12,1) stays blocked. Correct the generators owned by Claude.
+
+The fourth finding is the Chapter 5 seal POI: the violet island path contains diagonal-only joins (e.g. (5,7) to (6,6)), with both orthogonal neighbors blocking. The completion zone at (24,7) therefore cannot be reached by four-way BFS, so its warp to core is not a valid reachable seed. This is a likely corridor/corner-clearance problem rather than a missing seal warp; confirm with actual movement/dash before changing data. Add orthogonal stepping tiles in ch5-layout.js if confirmed.
 
 The blocked arrival spawn has a base blocking tile, independent of story flags. The nine spawn-near-exit errors retain the original requested clearance policy: they are genuine distance violations, but proximity alone does not prove immediate travel (especially at distance 1). Review movement/body clearance in playtest before treating every one as an instant-exit bug.
 
@@ -127,7 +129,7 @@ Reveal traversal follows all response branches, cycle-safe, with any refreshMap/
 
 ## Chapter 5 / map_ch5_collision_shore
 
-- **error / unreachable** object poi_ch5_possibility_seal cannot be reached at (27, 4). Assessment / suggested fix: North exit is separated from the interior by the full blocking row y=1 (GID 4); no variant, swap or reachable warp opens it. Open the entrance tile at y=1 in the chapter layout generator.
+- **error / unreachable** object poi_ch5_possibility_seal cannot be reached at (27, 4). Assessment / suggested fix: Likely path/corner-clearance bug: diagonal-only violet islands disconnect the start from the completion trigger at (24,7). Its ch5_collision_escaped warp exists but cannot be seeded until that trigger is reachable. Verify movement/dash; connect islands orthogonally if confirmed.
 
 ## Chapter 6 / map_ch6_outer_courtyard
 

@@ -436,7 +436,7 @@ const KNOWN: { finding: LintFinding; reason: string }[] = [
       y: 4,
     },
     reason:
-      'North exit is separated from the interior by the full blocking row y=1 (GID 4); no variant, swap or reachable warp opens it. Open the entrance tile at y=1 in the chapter layout generator.',
+      'Diagonal-only violet islands prevent four-way access to the completion trigger that warps to core; verify movement/dash and connect stepping tiles if confirmed.',
   },
   {
     finding: {
