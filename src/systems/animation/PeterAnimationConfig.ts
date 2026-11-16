@@ -68,6 +68,21 @@ export const PETER_ANIMATION_SPECS: Record<string, IAnimationSpec> = {
     frameRate: 6,
     repeat: -1,
   },
+  // T-85 (owner approved 2026-11-16): dodge and ranged-weapon shot.
+  dash: {
+    keyPrefix: 'peter_dash',
+    textureKey: 'peter_dash',
+    framesPerDirection: 4,
+    frameRate: 18,
+    repeat: 0,
+  },
+  shoot: {
+    keyPrefix: 'peter_shoot',
+    textureKey: 'peter_shoot',
+    framesPerDirection: 4,
+    frameRate: 14,
+    repeat: 0,
+  },
 };
 
 const DIRECTIONS: CardinalDirection[] = ['down', 'up', 'left', 'right'];

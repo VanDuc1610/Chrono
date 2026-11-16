@@ -122,6 +122,12 @@ export class PreloadScene extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32,
     });
+    // T-85 (owner approved 2026-11-16): dodge and ranged-weapon shot, 4 frames x 4 directions.
+    for (const key of ['peter_dash', 'peter_shoot'])
+      this.load.spritesheet(key, `assets/characters/peter/${key}.png`, {
+        frameWidth: 32,
+        frameHeight: 32,
+      });
     this.load.spritesheet(
       'peter_temporal_sight',
       'assets/characters/peter/peter_temporal_sight.png',

@@ -1088,7 +1088,8 @@ export class ActionCombat {
     this.extension?.onAction?.('shot');
     const origin = { x: this.player.x, y: this.player.y };
     const aim = Math.atan2(worldY - origin.y, worldX - origin.x);
-    this.player.playAction('peter_attack', facingFromAngle(aim), 260);
+    const shotAnim = this.scene.anims.exists('peter_shoot_down') ? 'peter_shoot' : 'peter_attack';
+    this.player.playAction(shotAnim, facingFromAngle(aim), 290);
     this.sound.playSlash();
     this.shots.fire(origin, aim, ranged);
   }
@@ -1240,8 +1241,17 @@ export class ActionCombat {
       this.dotUntil = 0;
       this.floatText(this.player.x, this.player.y - 22, this.t('action.brushed'), '#e6dcff');
     }
-    this.player.sprite.setAlpha(0.55);
-    this.scene.time.delayedCall(this.tuning.dashMs + 40, () => this.player.sprite.setAlpha(1));
+    // Dash sheet (crouch, lunge, stretch with after-images, recover); a faint fade if it is missing.
+    if (this.scene.anims.exists('peter_dash_down')) {
+      this.player.playAction(
+        'peter_dash',
+        facingFromAngle(Math.atan2(y, x)),
+        this.tuning.dashMs + 90,
+      );
+    } else {
+      this.player.sprite.setAlpha(0.55);
+      this.scene.time.delayedCall(this.tuning.dashMs + 40, () => this.player.sprite.setAlpha(1));
+    }
     // An Assimilator that learned the dash lunges after Peter.
     for (const r of this.roamers) {
       const mi = r.enemy.field?.mimic;
