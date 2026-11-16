@@ -82,6 +82,14 @@ export class MapDecor {
     if (this.live.length > 24) this.live.shift();
   }
 
+  /**
+   * Creatures keep to a band near the top (just under the HUD panels) or the bottom (just above the
+   * controls line), never across the middle where Peter plays (owner request).
+   */
+  private edgeBand(v: Phaser.Geom.Rectangle): number {
+    return this.rng() < 0.5 ? v.y + 88 + this.rng() * 24 : v.bottom - 70 - this.rng() * 24;
+  }
+
   private get view(): Phaser.Geom.Rectangle {
     return this.scene.cameras.main.worldView;
   }
@@ -93,14 +101,14 @@ export class MapDecor {
     if (CROSSERS.has(kind)) {
       const ltr = this.rng() < 0.5;
       const speed = kind === 'bat' ? 115 : 72;
-      const y0 = v.y + 30 + this.rng() * (v.height * 0.5);
+      const y0 = this.edgeBand(v);
       const x0 = ltr ? v.x - 60 : v.right + 60;
       const ms = ((v.width + 120) / speed) * 1000;
       const at = (): Pt => {
         const t = (this.scene.time.now - now) / 1000;
         return {
           x: x0 + (ltr ? 1 : -1) * speed * t,
-          y: y0 + Math.sin(t * 2.2) * 10 - t * (kind === 'bird' ? 6 : 0),
+          y: y0 + Math.sin(t * 2.2) * 8,
         };
       };
       // The sprites face right: a right-to-left flight is mirrored.
@@ -108,17 +116,15 @@ export class MapDecor {
       this.later(ms + 6000 + this.rng() * 12000, () => this.spawnCritter(kind));
       return;
     }
-    const base = {
-      x: v.x + 60 + this.rng() * (v.width - 120),
-      y: v.y + 60 + this.rng() * (v.height - 120),
-    };
-    const drift = { x: (this.rng() - 0.5) * 40, y: (this.rng() - 0.5) * 30 };
+    const base = { x: v.x + 60 + this.rng() * (v.width - 120), y: this.edgeBand(v) };
+    // Drift sideways only, so a wanderer stays in its band.
+    const drift = { x: (this.rng() - 0.5) * 40, y: 0 };
     const ms = kind === 'wisp' ? 11000 : 8000;
     const at = (): Pt => {
       const t = (this.scene.time.now - now) / 1000;
       return {
         x: base.x + drift.x * t * 0.3 + Math.sin(t * 0.9) * 26,
-        y: base.y + drift.y * t * 0.3 + Math.cos(t * 1.3) * 14,
+        y: base.y + Math.cos(t * 1.3) * 8,
       };
     };
     this.track(this.pfx().play(kind, at, { seed: Math.floor(this.rng() * 999) }, ms));

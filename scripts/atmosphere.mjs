@@ -136,11 +136,7 @@ function decorFor(id, k, ch) {
     ch !== 9 &&
     !/battlefield|ridge|ash|trench|null/.test(id);
   if (outdoorLife) critters.push({ kind: 'bird', count: 1 });
-  if (
-    /village|town|garden|forest|greenhouse|harbor|courtyard|seed/.test(id) &&
-    !/uprooted|grey/.test(id)
-  )
-    critters.push({ kind: 'butterfly', count: 2 });
+  // Butterflies were tried and dropped: too large and in the way (owner, 2026-11-16).
   if (k === 'deep' && !/void|null|singularity|abyss/.test(id))
     critters.push({ kind: 'bat', count: 1 });
   if (
@@ -164,12 +160,7 @@ function decorFor(id, k, ch) {
 
 /** Decor for the three hand-tuned maps (their light stays as approved). */
 const KEEP_DECOR = {
-  map_coastal_town: {
-    critters: [
-      { kind: 'bird', count: 1 },
-      { kind: 'butterfly', count: 2 },
-    ],
-  },
+  map_coastal_town: { critters: [{ kind: 'bird', count: 1 }] },
   map_old_lighthouse: { critters: [{ kind: 'bird', count: 2 }] },
   map_ch1_bell_sanctum: { drips: true, critters: [{ kind: 'wisp', count: 1 }] },
 };

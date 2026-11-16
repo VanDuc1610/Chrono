@@ -53,10 +53,6 @@
           {
             "kind": "bird",
             "count": 1
-          },
-          {
-            "kind": "butterfly",
-            "count": 2
           }
         ]
       }
@@ -115,10 +111,6 @@
           {
             "kind": "bird",
             "count": 1
-          },
-          {
-            "kind": "butterfly",
-            "count": 2
           },
           {
             "kind": "wisp",
@@ -238,10 +230,6 @@
           {
             "kind": "bird",
             "count": 1
-          },
-          {
-            "kind": "butterfly",
-            "count": 2
           }
         ]
       }
@@ -1287,10 +1275,6 @@
           {
             "kind": "bird",
             "count": 1
-          },
-          {
-            "kind": "butterfly",
-            "count": 2
           }
         ],
         "fall": {
@@ -1328,10 +1312,6 @@
           {
             "kind": "bird",
             "count": 1
-          },
-          {
-            "kind": "butterfly",
-            "count": 2
           }
         ],
         "fall": {
@@ -1369,10 +1349,6 @@
           {
             "kind": "bird",
             "count": 1
-          },
-          {
-            "kind": "butterfly",
-            "count": 2
           }
         ]
       }
@@ -1406,10 +1382,6 @@
           {
             "kind": "bird",
             "count": 1
-          },
-          {
-            "kind": "butterfly",
-            "count": 2
           }
         ]
       }
@@ -1781,12 +1753,6 @@
         "up": true
       },
       "decor": {
-        "critters": [
-          {
-            "kind": "butterfly",
-            "count": 2
-          }
-        ],
         "fall": {
           "kind": "petal",
           "count": 16
@@ -1851,12 +1817,6 @@
         "up": true
       },
       "decor": {
-        "critters": [
-          {
-            "kind": "butterfly",
-            "count": 2
-          }
-        ],
         "fall": {
           "kind": "snow",
           "count": 26

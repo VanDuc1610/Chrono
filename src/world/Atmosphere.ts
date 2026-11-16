@@ -191,8 +191,9 @@ export class Atmosphere {
         .setScale((p.radius * 2) / 128)
         .setTint(hex(p.color))
         .setBlendMode(Phaser.BlendModes.ADD)
-        .setAlpha(Math.min(0.6, p.intensity * 0.45) * this.glowScale)
-        .setDepth(61);
+        .setAlpha(Math.min(0.5, p.intensity * 0.4) * this.glowScale)
+        // Under Peter: it lights the floor around him, never washes out his own sprite.
+        .setDepth(this.peter.depth - 0.5);
     }
     for (const l of d.lights ?? []) {
       const c = tileCenter(l.tile);
