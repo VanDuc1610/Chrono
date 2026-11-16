@@ -67,9 +67,34 @@ export interface BeamMove {
   mult: number;
 }
 
+/** Short keys of the pixelfx effects the game ships (src/vendor/pixelfx/effects.js). */
+export type BossFxKey =
+  | 'hitSpark'
+  | 'critHit'
+  | 'shieldBlock'
+  | 'groundSlam'
+  | 'splash'
+  | 'waveCrash'
+  | 'timeStop'
+  | 'blinkIn'
+  | 'blinkOut'
+  | 'smite'
+  | 'holyPillar'
+  | 'soulRise'
+  | 'poof'
+  | 'stunned'
+  | 'curse'
+  | 'frostNova';
+
 export type BossMove = (SlamMove | RingMove | ChargeMove | VolleyMove | BeamMove) & {
   /** Shouted above the boss as it begins. */
   label: string;
+  /** pixelfx effect where the move lands (slam), starts (ring) or ends (charge, beam). */
+  fx?: BossFxKey;
+  /** Palette for the effect (dark to bright hex colours). */
+  fxPalette?: string[];
+  /** The boss blinks to Peter's side before the move (Time Wraith). */
+  blink?: boolean;
 };
 
 export interface BossPhase {
@@ -95,7 +120,8 @@ export interface BossTarget {
   requires?: string[];
   /** Works only while the boss is stunned. */
   whileStunned?: boolean;
-  effect: 'stun' | 'breakArmor';
+  /** stun: stuns the boss; progress: only counts (a `stunMs` restarts the stun); breakArmor. */
+  effect: 'stun' | 'progress' | 'breakArmor';
   stunMs?: number;
   /** breakArmor: HP ratio the boss is set to (if lower than now). */
   setHpPct?: number;
@@ -123,6 +149,40 @@ export interface BossDefense {
   stunnedOnly?: boolean;
   /** Every `everyMs` it glows for `glowMs`: blows then hurt Peter for `pct` of the damage. */
   reflect?: { everyMs: number; glowMs: number; pct: number };
+  /** Imperial Verdict: sentences forbid moves for a while; defying them cracks the armor. */
+  sentences?: SentenceDefense;
+}
+
+/** What Peter does, as a sentence sees it. */
+export type SentenceAct = 'attack' | 'item' | 'idle';
+
+export interface Sentence {
+  id: string;
+  announce: string;
+  /** Doing one of these during the sentence brings the punishment. */
+  forbid: SentenceAct[];
+  /** endure: get through the window without a forbidden act; hit: land a blow before it ends. */
+  defy: 'endure' | 'hit';
+  /** Punishment: this share of Peter's max HP, through any dodge. */
+  punishPct: number;
+  punishMessage: string;
+  crackMessage: string;
+  /** Aura colour while it holds. */
+  color: string;
+  /** pixelfx effect on Peter when the sentence strikes him. */
+  fx?: BossFxKey;
+}
+
+export interface SentenceDefense {
+  cracksToBreak: number;
+  /** First sentence after this much fighting, then `gapMs` after each one ends. */
+  firstMs: number;
+  gapMs: number;
+  windowMs: number;
+  /** Standing still this long counts as `idle`. */
+  idleMs: number;
+  breakMessage: string;
+  list: Sentence[];
 }
 
 export interface BossProfile {
@@ -141,6 +201,19 @@ export interface BossProfile {
   moves: Record<string, BossMove>;
   defense: BossDefense;
   intro?: string;
+  /** Peter may fight with his fists here (before he has a blade): reach and damage factor. */
+  unarmed?: { reach: number; mult: number };
+  /**
+   * A fight Peter is not meant to win: at `belowHpPct` of his HP an ally steps in, the boss
+   * vanishes, and `dialogueId` opens (after `flashDialogueId`, if any).
+   */
+  rescue?: {
+    belowHpPct: number;
+    dialogueId: string;
+    flashDialogueId?: string;
+    allyTexture?: string;
+    allyAnim?: string;
+  };
 }
 
 export interface BossDatabase {

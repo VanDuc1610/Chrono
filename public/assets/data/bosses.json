@@ -1,6 +1,67 @@
 {
   "bosses": [
     {
+      "id": "boss_time_wraith",
+      "intro": "Thời gian ngừng trôi. Bóng Ma Thời Gian lao ra khỏi khe nứt — Peter chưa có vũ khí, chỉ còn đôi tay! [Chuột trái] Đấm · [Shift] Né",
+      "scale": 2.2,
+      "radius": 20,
+      "speed": 70,
+      "damageScale": 0.6,
+      "contactMult": 0.4,
+      "unarmed": {
+        "reach": 24,
+        "mult": 0.6
+      },
+      "rescue": {
+        "belowHpPct": 0.2,
+        "flashDialogueId": "battle_wraith_rescue_flash",
+        "dialogueId": "battle_elder_rescue",
+        "allyTexture": "npc_elder",
+        "allyAnim": "npc_elder_idle"
+      },
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["chrono_scratch", "temporal_flux", "rift_grasp"],
+          "pauseMs": 900
+        }
+      ],
+      "moves": {
+        "chrono_scratch": {
+          "type": "charge",
+          "label": "Vết Cào Thời Gian",
+          "blink": true,
+          "telegraphMs": 650,
+          "speed": 380,
+          "durationMs": 450,
+          "mult": 1.0
+        },
+        "temporal_flux": {
+          "type": "volley",
+          "label": "Dòng Chảy Thời Gian",
+          "telegraphMs": 600,
+          "shots": 5,
+          "spreadDeg": 60,
+          "speed": 160,
+          "waves": 2,
+          "intervalMs": 450,
+          "mult": 0.7
+        },
+        "rift_grasp": {
+          "type": "slam",
+          "label": "Móng Vuốt Khe Nứt",
+          "telegraphMs": 800,
+          "radius": 34,
+          "count": 2,
+          "scatter": 60,
+          "staggerMs": 300,
+          "mult": 1.1,
+          "fxPalette": ["#120a1f", "#2e1648", "#5b2a86", "#9a5ad0", "#d8b4ff", "#ffffff", "#ffffff"]
+        }
+      },
+      "defense": {}
+    },
+    {
       "id": "boss_drowned_sentinel",
       "intro": "Vệ Binh bước xuống từ bệ đá, nâng ngọn kích. Lớp giáp nước đọng quanh nó — chém thường gần như vô dụng.",
       "scale": 1.15,
@@ -29,7 +90,8 @@
           "label": "Nghiền Thủy Triều",
           "telegraphMs": 950,
           "radius": 42,
-          "mult": 1.3
+          "mult": 1.3,
+          "fx": "splash"
         },
         "tidal_crush_triple": {
           "type": "slam",
@@ -39,7 +101,8 @@
           "count": 3,
           "scatter": 90,
           "staggerMs": 260,
-          "mult": 1.3
+          "mult": 1.3,
+          "fx": "splash"
         },
         "stasis_wave": {
           "type": "ring",
@@ -49,7 +112,8 @@
           "thickness": 16,
           "gapDeg": 70,
           "mult": 0.8,
-          "slowMs": 1400
+          "slowMs": 1400,
+          "fx": "frostNova"
         },
         "stasis_wave_double": {
           "type": "ring",
@@ -61,7 +125,8 @@
           "intervalMs": 650,
           "gapDeg": 60,
           "mult": 0.8,
-          "slowMs": 1400
+          "slowMs": 1400,
+          "fx": "frostNova"
         },
         "halberd_charge": {
           "type": "charge",
@@ -119,6 +184,277 @@
             }
           }
         ]
+      }
+    },
+    {
+      "id": "boss_sunken_bellkeeper",
+      "intro": "Người Giữ Chuông nhấc quả chuông chìm lên. Mỗi tiếng ngân đẩy thời khắc lùi lại — đòn đánh thường gần như trượt qua nó.",
+      "scale": 1.15,
+      "radius": 22,
+      "speed": 40,
+      "damageScale": 0.55,
+      "contactMult": 0.5,
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["sunken_toll", "bell_drop", "undertow"],
+          "pauseMs": 1050
+        },
+        {
+          "fromHpPct": 1,
+          "afterArmorBroken": true,
+          "moves": ["sunken_toll_triple", "bell_drop_quad", "undertow_triple"],
+          "pauseMs": 650,
+          "speedMult": 1.3,
+          "banner": "Lớp giáp đảo ngược vỡ — tiếng chuông dồn dập, hỗn loạn!"
+        }
+      ],
+      "moves": {
+        "sunken_toll": {
+          "type": "ring",
+          "label": "Hồi Chuông Chìm",
+          "telegraphMs": 750,
+          "speed": 140,
+          "thickness": 16,
+          "rings": 2,
+          "intervalMs": 700,
+          "gapDeg": 70,
+          "mult": 0.8,
+          "slowMs": 1200,
+          "fx": "waveCrash"
+        },
+        "sunken_toll_triple": {
+          "type": "ring",
+          "label": "Hồi Chuông Chìm ×3",
+          "telegraphMs": 600,
+          "speed": 170,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 600,
+          "gapDeg": 60,
+          "mult": 0.8,
+          "slowMs": 1200,
+          "fx": "waveCrash"
+        },
+        "bell_drop": {
+          "type": "slam",
+          "label": "Chuông Rơi",
+          "telegraphMs": 900,
+          "radius": 40,
+          "count": 2,
+          "scatter": 70,
+          "staggerMs": 350,
+          "mult": 1.3,
+          "fx": "splash"
+        },
+        "bell_drop_quad": {
+          "type": "slam",
+          "label": "Chuông Rơi ×4",
+          "telegraphMs": 750,
+          "radius": 38,
+          "count": 4,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.3,
+          "fx": "splash"
+        },
+        "undertow": {
+          "type": "volley",
+          "label": "Sóng Ngầm",
+          "telegraphMs": 650,
+          "shots": 7,
+          "spreadDeg": 90,
+          "speed": 140,
+          "waves": 2,
+          "intervalMs": 600,
+          "mult": 0.6
+        },
+        "undertow_triple": {
+          "type": "volley",
+          "label": "Sóng Ngầm",
+          "telegraphMs": 500,
+          "shots": 7,
+          "spreadDeg": 100,
+          "speed": 165,
+          "waves": 3,
+          "intervalMs": 500,
+          "mult": 0.6
+        }
+      },
+      "defense": {
+        "armor": {
+          "damageReduction": 0.8,
+          "floorPct": 0.05,
+          "recoverPct": 0.65,
+          "recoverMessage": "Quả chuông rung giật lùi — thời khắc quay lại trước khi tiếng chuông kịp ngân, vết thương khép lại!"
+        },
+        "unlockAfterMs": 22000,
+        "unlockOnSkill": true,
+        "unlockMessage": "Nhãn Thời Gian: ba khóa cơ khí nối Quả Chuông với mặt nước — dây chuông, bánh răng thủy triều, nhịp hoàng hôn!",
+        "lockedMessage": "Ba khóa phải mở theo thứ tự — dây chuông, bánh răng, rồi nhịp cuối — trong lúc Người Giữ Chuông còn choáng.",
+        "targets": [
+          {
+            "id": "bell_cord",
+            "label": "DÂY CHUÔNG",
+            "tile": {
+              "x": 4,
+              "y": 8
+            },
+            "effect": "stun",
+            "stunMs": 6000,
+            "message": "Peter giữ chặt sợi dây chuông cũ — Người Giữ Chuông khựng lại, bị choáng!"
+          },
+          {
+            "id": "tide_gear",
+            "label": "BÁNH RĂNG",
+            "tile": {
+              "x": 16,
+              "y": 8
+            },
+            "requires": ["bell_cord"],
+            "whileStunned": true,
+            "effect": "progress",
+            "stunMs": 5000,
+            "message": "Bánh răng thủy triều quay thuận chiều — nhịp chuông bắt đầu đồng bộ với sóng. Nó vẫn còn choáng — nhanh lên!"
+          },
+          {
+            "id": "last_chime",
+            "label": "NHỊP CUỐI",
+            "tile": {
+              "x": 10,
+              "y": 12
+            },
+            "requires": ["tide_gear"],
+            "whileStunned": true,
+            "effect": "breakArmor",
+            "setHpPct": 0.45,
+            "message": "Tiếng chuông hoàng hôn cuối cùng ngân trọn — lớp giáp đảo ngược vỡ tan!"
+          }
+        ]
+      }
+    },
+    {
+      "id": "boss_imperial_verdict",
+      "intro": "Bản Án Đế Chế giương gươm trên đĩa cân. Lớp vỏ định mệnh che chở nó — chỉ cán cân vỡ mới để đòn của Peter chạm tới.",
+      "scale": 1.15,
+      "radius": 22,
+      "speed": 46,
+      "damageScale": 0.55,
+      "contactMult": 0.5,
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["verdict_blade", "falling_scales", "judgment_ray"],
+          "pauseMs": 1100
+        },
+        {
+          "fromHpPct": 1,
+          "afterArmorBroken": true,
+          "moves": ["verdict_blade_fast", "falling_scales_triple", "judgment_ray_sweep"],
+          "pauseMs": 650,
+          "speedMult": 1.3,
+          "banner": "Cán cân vỡ — Bản Án vung gươm điên cuồng!"
+        }
+      ],
+      "moves": {
+        "verdict_blade": {
+          "type": "charge",
+          "label": "Gươm Phán Quyết",
+          "telegraphMs": 800,
+          "speed": 340,
+          "durationMs": 900,
+          "mult": 1.2,
+          "stunOnWallMs": 1500
+        },
+        "verdict_blade_fast": {
+          "type": "charge",
+          "label": "Gươm Phán Quyết",
+          "telegraphMs": 600,
+          "speed": 400,
+          "durationMs": 900,
+          "mult": 1.2,
+          "stunOnWallMs": 1200
+        },
+        "falling_scales": {
+          "type": "slam",
+          "label": "Đĩa Cân Sụp",
+          "telegraphMs": 850,
+          "radius": 40,
+          "count": 2,
+          "scatter": 80,
+          "staggerMs": 300,
+          "mult": 1.3,
+          "fx": "smite"
+        },
+        "falling_scales_triple": {
+          "type": "slam",
+          "label": "Đĩa Cân Sụp ×3",
+          "telegraphMs": 750,
+          "radius": 38,
+          "count": 3,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.3,
+          "fx": "smite"
+        },
+        "judgment_ray": {
+          "type": "beam",
+          "label": "Tia Phán Xét",
+          "telegraphMs": 900,
+          "width": 18,
+          "durationMs": 600,
+          "sweepDeg": 0,
+          "mult": 1.1
+        },
+        "judgment_ray_sweep": {
+          "type": "beam",
+          "label": "Tia Phán Xét Quét",
+          "telegraphMs": 800,
+          "width": 18,
+          "durationMs": 900,
+          "sweepDeg": 70,
+          "mult": 1.1
+        }
+      },
+      "defense": {
+        "armor": {
+          "damageReduction": 0.8,
+          "floorPct": 0.05,
+          "recoverPct": 0.6,
+          "recoverMessage": "Cán cân nghiêng về phía Bản Án — kết quả được viết lại, vết thương của nó biến mất như chưa từng có!"
+        },
+        "sentences": {
+          "cracksToBreak": 3,
+          "firstMs": 5000,
+          "gapMs": 4500,
+          "windowMs": 6000,
+          "idleMs": 1500,
+          "breakMessage": "Cán cân vỡ toang! Lớp vỏ định mệnh của Bản Án nứt rời — giờ đòn đánh của Peter sẽ chạm tới nó!",
+          "list": [
+            {
+              "id": "blade",
+              "announce": "BẢN ÁN TUYÊN: \"Kẻ vung gươm sẽ phải đổ máu!\" — Không chém, không bắn, không dùng kỹ năng cho tới khi bản án tan. Chỉ né thôi!",
+              "forbid": ["attack"],
+              "defy": "endure",
+              "punishPct": 0.25,
+              "punishMessage": "Bản án ứng nghiệm — Peter đổ máu, mất {damage} HP!",
+              "crackMessage": "Peter không vung gươm — bản án mất nguyên nhân, cán cân nứt một vết!",
+              "color": "#ff5a5a",
+              "fx": "curse"
+            },
+            {
+              "id": "hesitate",
+              "announce": "BẢN ÁN TUYÊN: \"Kẻ chần chừ sẽ bị nghiền nát!\" — Phải đánh trúng Bản Án trước khi bản án tan. Đứng yên hay dùng đồ sẽ bị phạt.",
+              "forbid": ["idle", "item"],
+              "defy": "hit",
+              "punishPct": 0.25,
+              "punishMessage": "Bản án ứng nghiệm — sấm sét giáng xuống, Peter mất {damage} HP!",
+              "crackMessage": "Peter không chần chừ — bản án mất nguyên nhân, cán cân nứt một vết!",
+              "color": "#f0c860",
+              "fx": "smite"
+            }
+          ]
+        }
       }
     }
   ]

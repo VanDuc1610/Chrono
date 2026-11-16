@@ -1,4 +1,4 @@
-import type { BossDefense, BossPhase, BossProfile, BossTarget } from './BossTypes';
+import type { BossDefense, BossPhase, BossProfile, BossTarget, Sentence } from './BossTypes';
 
 type Pt = { x: number; y: number };
 
@@ -118,4 +118,18 @@ export function inBeam(from: Pt, angle: number, len: number, width: number, p: P
   if (along < 0 || along > len) return false;
   const across = Math.abs(-dx * Math.sin(angle) + dy * Math.cos(angle));
   return across <= width / 2;
+}
+
+/**
+ * Where a sentence stands: `crack` (defied: "hit" sentences the moment a blow lands, "endure"
+ * sentences once they run out unbroken), `lapse` (ran out with nothing earned) or `hold`.
+ */
+export function sentenceVerdict(
+  s: Pick<Sentence, 'defy'>,
+  landed: boolean,
+  expired: boolean,
+): 'hold' | 'crack' | 'lapse' {
+  if (s.defy === 'hit' && landed) return 'crack';
+  if (!expired) return 'hold';
+  return s.defy === 'endure' ? 'crack' : 'lapse';
 }

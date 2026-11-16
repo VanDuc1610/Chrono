@@ -67,6 +67,10 @@ export interface CombatExtension {
   ): boolean;
   onSkill(origin: Point, radius: number, attack: number): void;
   shotTargets(attack: number, mult: number): ShotTarget[];
+  /** Peter swung, shot or used Temporal Strike (hit or not). */
+  onAction?(kind: 'slash' | 'shot' | 'skill'): void;
+  /** Fists allowed in this fight (no blade yet): reach and damage factor. */
+  unarmed?(): { reach: number; mult: number } | null;
 }
 
 /** What the exploration scene provides to the real-time combat layer. */
@@ -209,6 +213,8 @@ export class ActionCombat {
   private nextShot = 0;
   /** T-84: the boss fight on this map, while it lasts. */
   public extension: CombatExtension | null = null;
+  /** HP Peter cannot drop below from boss blows (a scripted rescue fight). */
+  public bossHpFloor = 0;
   private readonly shots: ShotSystem;
   private nextDash = 0;
   private nextSkill = 0;
@@ -956,9 +962,11 @@ export class ActionCombat {
   /** Left click: slash toward the cursor (needs the blade). */
   public slash(worldX: number, worldY: number): void {
     const now = this.scene.time.now;
-    if (!this.canAct || !this.session.canSlash || now < this.nextSwing) return;
-    const weapon = this.session.weaponStats;
-    const reach = weapon?.reach ?? this.tuning.reach;
+    if (!this.canAct || now < this.nextSwing) return;
+    const fists = this.session.canSlash ? null : (this.extension?.unarmed?.() ?? null);
+    if (!this.session.canSlash && !fists) return;
+    const weapon = fists ? undefined : this.session.weaponStats;
+    const reach = fists?.reach ?? weapon?.reach ?? this.tuning.reach;
     this.nextSwing = now + (weapon?.swingMs ?? this.tuning.swingMs);
     const origin = { x: this.player.x, y: this.player.y };
     const aim = Math.atan2(worldY - origin.y, worldX - origin.x);
@@ -969,6 +977,8 @@ export class ActionCombat {
     const attack = this.session.getStats().attack;
     const shape = meleeShape(this.session.meleeClass);
     const critBonus = meleeCritBonus(this.session.meleeClass);
+    const fistMult = fists?.mult ?? 1;
+    this.extension?.onAction?.('slash');
     let landed = false;
     const echoed: { r: Roamer; damage: number }[] = [];
     this.scheduleEchoes(origin, aim, reach);
@@ -987,7 +997,7 @@ export class ActionCombat {
       this.extension?.onSlash(origin, aim, reach, {
         attack,
         arcDeg: shape.arcDeg,
-        mult: shape.damageMult,
+        mult: shape.damageMult * fistMult,
         critBonus,
         echoPct: weapon?.echoPct ?? 0,
       })
@@ -1065,6 +1075,7 @@ export class ActionCombat {
     this.session.mp -= cost;
     if (cost > 0) this.host.refreshHud();
     this.nextShot = now + ranged.fireMs;
+    this.extension?.onAction?.('shot');
     const origin = { x: this.player.x, y: this.player.y };
     const aim = Math.atan2(worldY - origin.y, worldX - origin.x);
     this.player.playAction('peter_attack', facingFromAngle(aim), 260);
@@ -1189,6 +1200,7 @@ export class ActionCombat {
       };
       r.sprite.clearTint();
     }
+    this.extension?.onAction?.('skill');
     this.extension?.onSkill(
       { x: this.player.x, y: this.player.y },
       this.tuning.skillRadius,
@@ -1364,7 +1376,7 @@ export class ActionCombat {
       mult,
     );
     const dealt = Math.max(1, Math.round(damage * scale));
-    this.session.hp = Math.max(0, this.session.hp - dealt);
+    this.session.hp = Math.max(this.bossHpFloor, this.session.hp - dealt);
     this.invulnUntil = now + this.tuning.hurtInvulnMs;
     const away = Math.atan2(this.player.y - from.y, this.player.x - from.x);
     const k = this.tuning.knockback;
@@ -1384,6 +1396,21 @@ export class ActionCombat {
       this.host.onPlayerDefeated();
     }
     return true;
+  }
+
+  /** A judgment that no dodge escapes (Imperial Verdict's sentences): `amount` HP, no knockback. */
+  public directHit(amount: number): void {
+    if (this.defeated) return;
+    this.session.hp = Math.max(this.bossHpFloor, this.session.hp - amount);
+    this.player.sprite.setTint(0xff5050);
+    this.scene.time.delayedCall(200, () => this.player.sprite.clearTint());
+    this.scene.cameras.main.shake(160, 0.005);
+    this.floatText(this.player.x, this.player.y - 20, `-${amount}`, '#ff6b6b');
+    this.host.refreshHud();
+    if (this.session.hp <= 0) {
+      this.defeated = true;
+      this.host.onPlayerDefeated();
+    }
   }
 
   /**

@@ -20,6 +20,7 @@ import { StatusHud } from '../ui/StatusHud';
 import { ActionCombat } from '../world/ActionCombat';
 import { BossFight, bossProfile } from '../world/BossFight';
 import type { BossProfile } from '../systems/boss/BossTypes';
+import { PixelFxLayer } from '../systems/fx/PixelFxLayer';
 import { getStrings, Translate } from '../ui/Strings';
 import {
   conditionHolds,
@@ -82,6 +83,8 @@ export class ExplorationScene extends Phaser.Scene {
   private encounterById = new Map<string, Phaser.Physics.Arcade.Sprite>();
   /** T-84: a boss fought here on the map, while the fight lasts. */
   private bossFight: BossFight | null = null;
+  /** pixelfx effects over the map (boss fights). */
+  private pfx: PixelFxLayer | null = null;
   private visionSprites: Phaser.GameObjects.Sprite[] = [];
   private npcSprites: Phaser.GameObjects.Sprite[] = [];
   private frozenVeil: Phaser.GameObjects.Rectangle | null = null;
@@ -143,6 +146,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.encounterSprites = [];
     this.encounterById = new Map();
     this.bossFight = null;
+    this.pfx = null;
     this.swapOriginals = new Map();
     this.visionSprites = [];
     this.npcSprites = [];
@@ -363,6 +367,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.session.tick(delta);
     this.action?.update(delta);
     this.bossFight?.update(delta);
+    this.pfx?.update(delta);
     this.field?.update();
     if (this.satchel.isOpen || this.isTransitioning) return;
 
@@ -797,6 +802,7 @@ export class ExplorationScene extends Phaser.Scene {
       this.encounterById.delete(def.id);
       idle.destroy();
     }
+    this.pfx ??= new PixelFxLayer(this);
     const fight = new BossFight(
       this,
       this.session,
@@ -808,7 +814,11 @@ export class ExplorationScene extends Phaser.Scene {
       from,
       {
         isPaused: () => this.isTransitioning || this.satchel.isOpen || this.dialogueBox.isOpen(),
-        notify: (title, subtitle) => this.showNotification(title, subtitle),
+        onRescue: (ids) => {
+          this.bossFight = null;
+          this.exitsArmed = false;
+          this.openDialogueChain(ids);
+        },
         onVictory: (beaten) => {
           this.session.setFlag(def.defeatedFlag);
           const rewards = this.session.claimEnemyRewards(beaten);
@@ -831,9 +841,24 @@ export class ExplorationScene extends Phaser.Scene {
         },
       },
       this.t,
+      this.pfx,
     );
     this.bossFight = fight;
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => fight.destroy());
+  }
+
+  /** Opens dialogues one after the other (a rescue: the flash, then the ally's words). */
+  private openDialogueChain(ids: string[]): void {
+    const [first, ...rest] = ids;
+    if (!first) return;
+    this.openDialogue(first);
+    if (rest.length === 0) return;
+    const onEnd = (event: { type: string }): void => {
+      if (event.type !== 'dialogue_ended') return;
+      this.dialogueSystem.removeEventListener(onEnd);
+      this.time.delayedCall(200, () => this.openDialogueChain(rest));
+    };
+    this.dialogueSystem.addEventListener(onEnd);
   }
 
   /** Freezes input for a fade-out (map change, battle, ending). */
@@ -1100,6 +1125,7 @@ export class ExplorationScene extends Phaser.Scene {
       return;
     }
     this.soundSystem.playHeal();
+    this.bossFight?.onItem();
     const gain = result.healed > 0 ? `+${result.healed} HP` : `+${result.restoredMp} MP`;
     this.action?.floatText(x, y - 22, gain, '#4ade80');
     this.statusHud.refresh();

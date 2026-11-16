@@ -2161,7 +2161,8 @@
             "h": 1
           },
           "onceFlag": "trig_bell_sanctum_meet",
-          "dialogueId": "ch1_bellkeeper_before"
+          "dialogueId": "ch1_bellkeeper_before",
+          "encounterId": "enc_sunken_bellkeeper"
         }
       ]
     },
@@ -3162,7 +3163,8 @@
             "h": 1
           },
           "onceFlag": "trig_verdict_meet",
-          "dialogueId": "ch2_verdict_boss_confront"
+          "dialogueId": "ch2_verdict_boss_confront",
+          "encounterId": "enc_imperial_verdict"
         }
       ],
       "roamers": []
