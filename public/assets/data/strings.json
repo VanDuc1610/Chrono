@@ -207,6 +207,9 @@
     "boss.tether": "DÂY LINH HỒN",
     "boss.feint": "Đòn giả!",
     "boss.perfect": "Né hoàn hảo!",
-    "boss.hour": "KIM GIỜ THỨ 25: {n}/{top}"
+    "boss.hour": "KIM GIỜ THỨ 25: {n}/{top}",
+    "atmosphere.title": "ÁNH SÁNG & HIỆU ỨNG",
+    "atmosphere.on": "Đã bật [L]",
+    "atmosphere.off": "Đã tắt [L]"
   }
 }

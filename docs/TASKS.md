@@ -23,6 +23,16 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 Goal (owner, 2026-11-15): Chapters 5–7 are built and wait for the owner's playtest. Chapters 8 and 9
 are built and verified — the story is complete (4 endings). Next: the owner's playtest of Chapters 5–9. The story ends at Chapter 9.
 
+### T-85 · Map atmosphere: lights, darkness, motes (free, code-drawn) — **Claude** · `IN PROGRESS`
+
+Owner, 2026-11-16: upgrade graphics with free tools only. First step, previewed on three maps (coastal
+town, old lighthouse, bell sanctum): a darkness layer with soft light holes (Peter, points of
+interest, fixed lights), coloured glows, vignette and floating motes — all drawn in code; L toggles.
+Phaser's Light2D was tried and dropped (light positions skew under Scale.FIT). Next, if approved:
+the remaining maps, then more animation frames.
+
+_Locks:_ `src/world/Atmosphere.ts` (new), `public/assets/data/atmosphere.json` (new).
+
 ### T-84 · Boss đánh trực tiếp (real-time) + đa dạng vũ khí/trang bị — **Claude** · `DONE`
 
 Owner, 2026-11-16: bosses leave turn-based — Peter fights them live in an arena, each boss with its

@@ -1,0 +1,61 @@
+{
+  "maps": {
+    "map_coastal_town": {
+      "shade": { "color": "#2a1a10", "alpha": 0.18 },
+      "peterLight": { "color": "#ffe6b0", "radius": 90, "intensity": 0.5, "glow": 0.12 },
+      "poiLight": { "color": "#ffd38a", "radius": 60, "intensity": 0.6, "glow": 0.3 },
+      "vignette": 0.35,
+      "motes": { "color": "#fff2d0", "count": 22, "drift": 10 }
+    },
+    "map_old_lighthouse": {
+      "shade": { "color": "#06101e", "alpha": 0.5 },
+      "peterLight": { "color": "#bfe6ff", "radius": 120, "intensity": 0.9, "glow": 0.18 },
+      "poiLight": { "color": "#ffe08a", "radius": 110, "intensity": 0.9, "glow": 0.45 },
+      "lights": [
+        {
+          "tile": { "x": 12, "y": 9 },
+          "color": "#7fd8ff",
+          "radius": 120,
+          "intensity": 0.8,
+          "glow": 0.35,
+          "flicker": true
+        }
+      ],
+      "vignette": 0.55,
+      "motes": { "color": "#cfefff", "count": 34, "drift": 18 }
+    },
+    "map_ch1_bell_sanctum": {
+      "shade": { "color": "#021412", "alpha": 0.58 },
+      "peterLight": { "color": "#bff0ff", "radius": 120, "intensity": 0.9, "glow": 0.18 },
+      "poiLight": { "color": "#7fffd8", "radius": 130, "intensity": 0.9, "glow": 0.5 },
+      "lights": [
+        {
+          "tile": { "x": 10, "y": 8 },
+          "color": "#4fd0c0",
+          "radius": 140,
+          "intensity": 0.7,
+          "glow": 0.3,
+          "flicker": true
+        },
+        {
+          "tile": { "x": 4, "y": 8 },
+          "color": "#7fd8ff",
+          "radius": 90,
+          "intensity": 0.75,
+          "glow": 0.4,
+          "flicker": true
+        },
+        {
+          "tile": { "x": 16, "y": 8 },
+          "color": "#7fd8ff",
+          "radius": 90,
+          "intensity": 0.75,
+          "glow": 0.4,
+          "flicker": true
+        }
+      ],
+      "vignette": 0.6,
+      "motes": { "color": "#9ff0e0", "count": 40, "drift": 8, "up": true }
+    }
+  }
+}

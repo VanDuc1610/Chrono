@@ -294,6 +294,8 @@ export class PreloadScene extends Phaser.Scene {
     this.load.json('data_enemies', 'assets/data/enemies.json');
     // T-84: real-time boss profiles (bosses without one stay turn-based).
     this.load.json('data_bosses', 'assets/data/bosses.json');
+    // Map lights, camera grade and motes (free Phaser features; L toggles them).
+    this.load.json('data_atmosphere', 'assets/data/atmosphere.json');
     this.load.json('data_items', 'assets/data/items.json');
     this.load.json('data_player', 'assets/data/player.json');
     this.load.json('data_strings', 'assets/data/strings.json');

@@ -21,6 +21,7 @@ import { ActionCombat } from '../world/ActionCombat';
 import { BossFight, bossProfile } from '../world/BossFight';
 import type { BossProfile } from '../systems/boss/BossTypes';
 import { PixelFxLayer } from '../systems/fx/PixelFxLayer';
+import { Atmosphere } from '../world/Atmosphere';
 import { getStrings, Translate } from '../ui/Strings';
 import {
   conditionHolds,
@@ -308,6 +309,12 @@ export class ExplorationScene extends Phaser.Scene {
       this.t,
     );
     this.field.registerDials(this.interactionSystem);
+    this.atmosphere = new Atmosphere(
+      this,
+      this.mapDef.id,
+      this.player.sprite,
+      (this.mapDef.interactables ?? []).map((i) => i.tile),
+    );
     this.field.setupBeams((x, y) => {
       const layer = this.wallLayer;
       if (x < 0 || y < 0 || x >= layer.layer.width || y >= layer.layer.height) return true;
@@ -368,6 +375,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.action?.update(delta);
     this.bossFight?.update(delta);
     this.pfx?.update(delta);
+    this.atmosphere?.update();
     this.field?.update();
     if (this.satchel.isOpen || this.isTransitioning) return;
 
@@ -938,6 +946,14 @@ export class ExplorationScene extends Phaser.Scene {
     on(K.E, () => this.satchel.isOpen && this.satchel.useSelected());
     on(K.SPACE, () => this.satchel.isOpen && this.satchel.useSelected());
     on(K.K, () => void this.quickSave());
+    on(K.L, () => {
+      if (this.dialogueBox.isOpen() || this.satchel.isOpen) return;
+      if (this.atmosphere?.toggle())
+        this.showNotification(
+          this.t('atmosphere.title'),
+          this.t(this.atmosphere.active ? 'atmosphere.on' : 'atmosphere.off'),
+        );
+    });
     on(K.Q, () => {
       if (this.questTracker.cycle()) this.soundSystem.playCursorBlip();
     });
@@ -1032,6 +1048,8 @@ export class ExplorationScene extends Phaser.Scene {
   /** Chapter 4 map mechanics (dials, scale, arrow volleys). */
   public field: Chapter4Field | null = null;
   private flashbackFx: Phaser.GameObjects.Rectangle | null = null;
+  /** Lights, camera grade and motes of this map (atmosphere.json); L toggles them. */
+  private atmosphere: Atmosphere | null = null;
 
   /** Hazy memory: the world greys out and the edges darken while a flashback node is shown. */
   private setFlashback(on: boolean): void {
