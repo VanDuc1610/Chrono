@@ -125,11 +125,60 @@ const LOOK = {
   deep: { alpha: 0.58, vignette: 0.6, peter: 0.9, peterR: 125, poiR: 120, glow: 0.48, motes: 34 },
 };
 
+/** Living details (MapDecor): creatures, drips, falling leaves / petals / snow. */
+function decorFor(id, k, ch) {
+  const d = {};
+  const critters = [];
+  const outdoorLife =
+    k === 'open' &&
+    ch !== 6 &&
+    ch !== 7 &&
+    ch !== 9 &&
+    !/battlefield|ridge|ash|trench|null/.test(id);
+  if (outdoorLife) critters.push({ kind: 'bird', count: 1 });
+  if (
+    /village|town|garden|forest|greenhouse|harbor|courtyard|seed/.test(id) &&
+    !/uprooted|grey/.test(id)
+  )
+    critters.push({ kind: 'butterfly', count: 2 });
+  if (k === 'deep' && !/void|null|singularity|abyss/.test(id))
+    critters.push({ kind: 'bat', count: 1 });
+  if (
+    /tomb|necropolis|crypt|graveyard|sepulcher|mausoleum|nook|forgotten|weeper|void|abyss|erased|echo/.test(
+      id,
+    ) ||
+    ch === 7
+  )
+    critters.push({ kind: 'wisp', count: 1 });
+  if (critters.length) d.critters = critters;
+  if (
+    /catacomb|cellar|corridors|depths|well|crypt|cell|vault/.test(id) &&
+    !/quantum|memory_matrix/.test(id)
+  )
+    d.drips = true;
+  if (/forest/.test(id)) d.fall = { kind: 'leaf', count: 18 };
+  else if (/garden|greenhouse|seed/.test(id) && ch === 5) d.fall = { kind: 'petal', count: 16 };
+  else if (/frozen|celestial_stairs|outer_courtyard/.test(id)) d.fall = { kind: 'snow', count: 26 };
+  return Object.keys(d).length ? d : undefined;
+}
+
+/** Decor for the three hand-tuned maps (their light stays as approved). */
+const KEEP_DECOR = {
+  map_coastal_town: {
+    critters: [
+      { kind: 'bird', count: 1 },
+      { kind: 'butterfly', count: 2 },
+    ],
+  },
+  map_old_lighthouse: { critters: [{ kind: 'bird', count: 2 }] },
+  map_ch1_bell_sanctum: { drips: true, critters: [{ kind: 'wisp', count: 1 }] },
+};
+
 const out = {};
 let made = 0;
 for (const [id, m] of Object.entries(maps)) {
   if (KEEP.has(id) && old[id]) {
-    out[id] = old[id];
+    out[id] = { ...old[id], decor: KEEP_DECOR[id] };
     continue;
   }
   const ch = Number((id.match(/^map_ch(\d)/) ?? [])[1] ?? 0);
@@ -152,6 +201,8 @@ for (const [id, m] of Object.entries(maps)) {
     ...(ch === 6 ? { glowScale: 0.35 } : {}),
     motes: { color: t.mote, count: L.motes, drift: k === 'open' ? 12 : 9, up: t.up },
   };
+  const decor = decorFor(id, k, ch);
+  if (decor) def.decor = decor;
   if (boss)
     def.lights = [
       { tile: boss.tile, color: t.boss, radius: 140, intensity: 0.75, glow: 0.35, flicker: true },

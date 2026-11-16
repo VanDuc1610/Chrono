@@ -6,7 +6,7 @@
     "chapter.1.title": "Hoàng Hôn Cuối Cùng",
     "hud.stats": "Cấp {level} | EXP {exp} | HP {hp}/{maxHp} | MP {mp}/{maxMp}",
     "hud.expMax": "TỐI ĐA",
-    "hud.controls": "[WASD/Mũi tên] Di chuyển | [E/Space] Tương tác | [I/B] Túi đồ | [Q] Nhiệm vụ | [K] Lưu | [ESC] Menu",
+    "hud.controls": "[WASD/Mũi tên] Di chuyển | [E/Space] Tương tác | [I/B] Túi đồ | [Q/J] Nhiệm vụ | [K] Lưu | [ESC] Menu",
     "quest.label": "NHIỆM VỤ HIỆN TẠI",
     "quest.labelMain": "NHIỆM VỤ CHÍNH",
     "quest.labelSide": "NHIỆM VỤ PHỤ",
@@ -106,7 +106,7 @@
     "ending.prompt": "[E / Space / Enter] Quay về màn hình chính",
     "ending.titleChapter": "HOÀN THÀNH CHƯƠNG {n}",
     "ending.promptContinue": "[E / Space / Enter] Tiếp tục sang Chương 1",
-    "hud.controlsArmed": "[Chuột trái] Chém | [F] Bắn | [Shift] Né | [Chuột phải] Kỹ năng | [E] Tương tác | [I] Túi | [Q] Nhiệm vụ | [K] Lưu",
+    "hud.controlsArmed": "[Chuột trái] Chém | [F] Bắn | [Shift] Né | [Chuột phải] Kỹ năng | [E] Tương tác | [I] Túi | [Q/J] Nhiệm vụ | [K] Lưu",
     "action.defeated": "{name} tan biến",
     "action.noMp": "Không đủ MP",
     "action.knockedOut": "Peter gục ngã...",
@@ -211,6 +211,7 @@
     "atmosphere.title": "ÁNH SÁNG & HIỆU ỨNG",
     "atmosphere.on": "Đã bật [L]",
     "atmosphere.off": "Đã tắt [L]",
-    "hud.levelUp": "LÊN CẤP {level}!"
+    "hud.levelUp": "LÊN CẤP {level}!",
+    "quest.tab": "[J] Nhiệm vụ ▸"
   }
 }

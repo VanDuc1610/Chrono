@@ -7,19 +7,38 @@ const WIDTH = 220;
 const HEIGHT = 76;
 const ROWS = 3;
 
-/** Top-right quest panel: the tracked active quest ([Q] cycles), else the last completed one. */
+/** Registry key: the player folded the quest panel away (J), kept across maps. */
+export const QUEST_TRACKER_HIDDEN = 'questTrackerHidden';
+
+/**
+ * Top-right quest panel: the tracked active quest ([Q] cycles), else the last completed one.
+ * [J] folds it into a small tab so it does not cover the map.
+ */
 export class QuestTracker {
   private readonly title: Phaser.GameObjects.Text;
   private readonly rows: Phaser.GameObjects.Text[] = [];
   private tracked = 0;
+  private readonly container: Phaser.GameObjects.Container;
+  private readonly tab: Phaser.GameObjects.Text;
 
   constructor(
-    scene: Phaser.Scene,
+    private readonly scene: Phaser.Scene,
     private readonly quests: QuestSystem,
     t: Translate,
   ) {
-    const container = scene.add
+    const container = (this.container = scene.add
       .container(scene.scale.width - WIDTH - 10, 10)
+      .setScrollFactor(0)
+      .setDepth(90));
+    this.tab = scene.add
+      .text(scene.scale.width - 10, 10, t('quest.tab'), {
+        fontFamily: 'monospace',
+        fontSize: '9px',
+        color: '#00d2ff',
+        backgroundColor: '#07080fcc',
+        padding: { left: 5, right: 5, top: 3, bottom: 3 },
+      })
+      .setOrigin(1, 0)
       .setScrollFactor(0)
       .setDepth(90);
     const bg = createPanel(scene, 0, 0, WIDTH, HEIGHT);
@@ -51,6 +70,23 @@ export class QuestTracker {
       container.add(row);
     }
     this.noneText = t('quest.none');
+    this.applyHidden();
+  }
+
+  public get hidden(): boolean {
+    return !!this.scene.registry.get(QUEST_TRACKER_HIDDEN);
+  }
+
+  /** J: fold the panel away or bring it back. Returns true when it is now shown. */
+  public toggle(): boolean {
+    this.scene.registry.set(QUEST_TRACKER_HIDDEN, !this.hidden);
+    this.applyHidden();
+    return !this.hidden;
+  }
+
+  private applyHidden(): void {
+    this.container.setVisible(!this.hidden);
+    this.tab.setVisible(this.hidden);
   }
 
   private readonly noneText: string;

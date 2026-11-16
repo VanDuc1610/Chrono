@@ -17,6 +17,18 @@ import * as stunned from "./fx/status/stunned.js";
 import * as curse from "./fx/shadow/curse.js";
 import * as frostNova from "./fx/ice/frost-nova.js";
 
+import * as bird from "./fx/critters/bird.js";
+import * as bat from "./fx/critters/bat.js";
+import * as butterfly from "./fx/critters/butterfly.js";
+import * as wisp from "./fx/critters/wisp.js";
+import * as fireflies from "./fx/weather/fireflies.js";
+import * as fallingLeaves from "./fx/weather/falling-leaves.js";
+import * as snow from "./fx/weather/snow.js";
+import * as godRays from "./fx/weather/god-rays.js";
+import * as cherryBlossoms from "./fx/weather/cherry-blossoms.js";
+import * as drip from "./fx/water/drip.js";
+import * as ripples from "./fx/water/ripples.js";
+
 export const EFFECTS = {
   hitSpark,
   critHit,
@@ -34,4 +46,16 @@ export const EFFECTS = {
   stunned,
   curse,
   frostNova,
+  // T-85 map decor
+  bird,
+  bat,
+  butterfly,
+  wisp,
+  fireflies,
+  fallingLeaves,
+  snow,
+  godRays,
+  cherryBlossoms,
+  drip,
+  ripples,
 };

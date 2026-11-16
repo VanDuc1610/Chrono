@@ -47,6 +47,18 @@
         "color": "#fff2d0",
         "count": 22,
         "drift": 10
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          },
+          {
+            "kind": "butterfly",
+            "count": 2
+          }
+        ]
       }
     },
     "map_shattered_antechamber": {
@@ -97,6 +109,26 @@
         "count": 22,
         "drift": 12,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          },
+          {
+            "kind": "butterfly",
+            "count": 2
+          },
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ],
+        "fall": {
+          "kind": "leaf",
+          "count": 18
+        }
       }
     },
     "map_old_lighthouse": {
@@ -134,6 +166,14 @@
         "color": "#cfefff",
         "count": 34,
         "drift": 18
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 2
+          }
+        ]
       }
     },
     "map_ch1_shore_gate": {
@@ -159,6 +199,14 @@
         "count": 22,
         "drift": 12,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch1_abandoned_village": {
@@ -184,6 +232,18 @@
         "count": 22,
         "drift": 12,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          },
+          {
+            "kind": "butterfly",
+            "count": 2
+          }
+        ]
       }
     },
     "map_ch1_sunset_beacon": {
@@ -234,6 +294,15 @@
         "count": 34,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          }
+        ],
+        "drips": true
       }
     },
     "map_ch1_bell_sanctum": {
@@ -294,6 +363,15 @@
         "count": 40,
         "drift": 8,
         "up": true
+      },
+      "decor": {
+        "drips": true,
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch2_imperial_outskirts": {
@@ -319,6 +397,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch2_sunken_catacombs": {
@@ -344,6 +430,15 @@
         "count": 34,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          }
+        ],
+        "drips": true
       }
     },
     "map_ch2_forum_plaza": {
@@ -369,6 +464,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch2_causality_archives": {
@@ -457,6 +560,18 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          },
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch3_silent_necropolis": {
@@ -482,6 +597,14 @@
         "count": 30,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch3_hall_of_echoes": {
@@ -507,6 +630,14 @@
         "count": 30,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch3_memory_vaults": {
@@ -532,6 +663,15 @@
         "count": 34,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          }
+        ],
+        "drips": true
       },
       "lights": [
         {
@@ -595,6 +735,14 @@
         "count": 30,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch3_choir_sanctum": {
@@ -658,6 +806,19 @@
         "count": 34,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          },
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ],
+        "drips": true
       }
     },
     "map_ch4_encampment_veridia": {
@@ -683,6 +844,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch4_trench_crossroads": {
@@ -733,6 +902,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch4_arrow_storm_valley": {
@@ -758,6 +935,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch4_red_ridge_battlefield": {
@@ -846,6 +1031,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch4_sentry_cellar": {
@@ -871,6 +1064,15 @@
         "count": 34,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          }
+        ],
+        "drips": true
       }
     },
     "map_ch4_ash_plains": {
@@ -921,6 +1123,18 @@
         "count": 34,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          },
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch4_monument_of_the_fallen": {
@@ -1034,6 +1248,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch5_seed_garden": {
@@ -1059,6 +1281,22 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          },
+          {
+            "kind": "butterfly",
+            "count": 2
+          }
+        ],
+        "fall": {
+          "kind": "petal",
+          "count": 16
+        }
       }
     },
     "map_ch5_glass_greenhouse": {
@@ -1084,6 +1322,22 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          },
+          {
+            "kind": "butterfly",
+            "count": 2
+          }
+        ],
+        "fall": {
+          "kind": "petal",
+          "count": 16
+        }
       }
     },
     "map_ch5_alpha_town": {
@@ -1109,6 +1363,18 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          },
+          {
+            "kind": "butterfly",
+            "count": 2
+          }
+        ]
       }
     },
     "map_ch5_alpha_harbor": {
@@ -1134,6 +1400,18 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          },
+          {
+            "kind": "butterfly",
+            "count": 2
+          }
+        ]
       }
     },
     "map_ch5_alpha_clockshop": {
@@ -1222,6 +1500,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch5_observatory_ruins": {
@@ -1423,6 +1709,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch5_uprooted_garden": {
@@ -1448,6 +1742,18 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          }
+        ],
+        "fall": {
+          "kind": "petal",
+          "count": 16
+        }
       }
     },
     "map_ch5_old_seeds": {
@@ -1473,6 +1779,18 @@
         "count": 30,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "butterfly",
+            "count": 2
+          }
+        ],
+        "fall": {
+          "kind": "petal",
+          "count": 16
+        }
       }
     },
     "map_ch6_celestial_stairs": {
@@ -1499,6 +1817,12 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "fall": {
+          "kind": "snow",
+          "count": 26
+        }
       }
     },
     "map_ch6_outer_courtyard": {
@@ -1525,6 +1849,18 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "butterfly",
+            "count": 2
+          }
+        ],
+        "fall": {
+          "kind": "snow",
+          "count": 26
+        }
       }
     },
     "map_ch6_hall_of_pillars": {
@@ -1668,6 +2004,12 @@
         "count": 30,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "fall": {
+          "kind": "snow",
+          "count": 26
+        }
       }
     },
     "map_ch6_archives_ruins": {
@@ -1720,6 +2062,15 @@
         "count": 34,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          }
+        ],
+        "drips": true
       }
     },
     "map_ch6_genesis_core": {
@@ -1954,6 +2305,14 @@
         "count": 34,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch6_first_forgotten_nook": {
@@ -1980,6 +2339,18 @@
         "count": 34,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          },
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       },
       "lights": [
         {
@@ -2018,6 +2389,14 @@
         "count": 34,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch7_faded_shore": {
@@ -2043,6 +2422,14 @@
         "count": 22,
         "drift": 12,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch7_erased_hamlet": {
@@ -2068,6 +2455,14 @@
         "count": 22,
         "drift": 12,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch7_cradle_sanctuary": {
@@ -2093,6 +2488,14 @@
         "count": 30,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch7_echo_well_depths": {
@@ -2118,6 +2521,19 @@
         "count": 34,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          },
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ],
+        "drips": true
       }
     },
     "map_ch7_stranded_fleet": {
@@ -2143,6 +2559,14 @@
         "count": 22,
         "drift": 12,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch7_clock_graveyard": {
@@ -2168,6 +2592,14 @@
         "count": 30,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch7_weeper_crossing": {
@@ -2193,6 +2625,14 @@
         "count": 30,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       },
       "lights": [
         {
@@ -2231,6 +2671,18 @@
         "count": 34,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          },
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch7_blank_archives": {
@@ -2256,6 +2708,14 @@
         "count": 30,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch7_bang_tree_promontory": {
@@ -2281,6 +2741,14 @@
         "count": 22,
         "drift": 12,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch7_fog_lullaby_maze": {
@@ -2306,6 +2774,14 @@
         "count": 30,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch7_white_bell_crypt": {
@@ -2331,6 +2807,19 @@
         "count": 34,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          },
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ],
+        "drips": true
       }
     },
     "map_ch7_chain_cathedral": {
@@ -2356,6 +2845,14 @@
         "count": 30,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch7_void_fissure_pass": {
@@ -2381,6 +2878,14 @@
         "count": 34,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch7_ink_lake_throne": {
@@ -2406,6 +2911,14 @@
         "count": 30,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       },
       "lights": [
         {
@@ -2444,6 +2957,14 @@
         "count": 30,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch7_glass_ash_core": {
@@ -2469,6 +2990,14 @@
         "count": 30,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       },
       "lights": [
         {
@@ -2507,6 +3036,14 @@
         "count": 34,
         "drift": 9,
         "up": false
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch8_null_rift_landing": {
@@ -2557,6 +3094,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch8_gear_market": {
@@ -2582,6 +3127,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch8_drowned_foundry": {
@@ -2632,6 +3185,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch8_twin_era_barracks": {
@@ -2745,6 +3306,14 @@
         "count": 34,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch8_torn_page_sanctum": {
@@ -2795,6 +3364,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bird",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch8_anchor_tower_base": {
@@ -2958,6 +3535,15 @@
         "count": 34,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          }
+        ],
+        "drips": true
       }
     },
     "map_ch8_sixfold_echo_hall": {
@@ -2983,6 +3569,14 @@
         "count": 30,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ]
       },
       "lights": [
         {
@@ -3196,6 +3790,14 @@
         "count": 34,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch9_architect_bastion": {
@@ -3612,6 +4214,19 @@
         "count": 34,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          },
+          {
+            "kind": "wisp",
+            "count": 1
+          }
+        ],
+        "drips": true
       }
     },
     "map_ch9_hidden_quantum_vault": {
@@ -3637,6 +4252,14 @@
         "count": 34,
         "drift": 9,
         "up": true
+      },
+      "decor": {
+        "critters": [
+          {
+            "kind": "bat",
+            "count": 1
+          }
+        ]
       }
     },
     "map_ch9_hidden_sanctum_of_the_first": {

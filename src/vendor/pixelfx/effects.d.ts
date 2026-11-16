@@ -45,7 +45,18 @@ export type EffectKey =
   | 'poof'
   | 'stunned'
   | 'curse'
-  | 'frostNova';
+  | 'frostNova'
+  | 'bird'
+  | 'bat'
+  | 'butterfly'
+  | 'wisp'
+  | 'fireflies'
+  | 'fallingLeaves'
+  | 'snow'
+  | 'godRays'
+  | 'cherryBlossoms'
+  | 'drip'
+  | 'ripples';
 
 export const EFFECTS: Record<EffectKey, PixelFxModule>;
 export function createFrame(w: number, h: number): PixelFrame;

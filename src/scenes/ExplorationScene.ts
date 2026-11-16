@@ -318,6 +318,7 @@ export class ExplorationScene extends Phaser.Scene {
       (this.mapDef.interactables ?? []).map((i) => i.tile),
       this.puzzleTiles(),
       (this.mapDef.npcs ?? []).map((n) => n.tile),
+      () => (this.pfx ??= new PixelFxLayer(this)),
     );
     this.field.setupBeams((x, y) => {
       const layer = this.wallLayer;
@@ -985,6 +986,11 @@ export class ExplorationScene extends Phaser.Scene {
           this.t('atmosphere.title'),
           this.t(this.atmosphere.active ? 'atmosphere.on' : 'atmosphere.off'),
         );
+    });
+    on(K.J, () => {
+      if (this.dialogueBox.isOpen() || this.satchel.isOpen) return;
+      this.questTracker.toggle();
+      this.soundSystem.playCursorBlip();
     });
     on(K.Q, () => {
       if (this.questTracker.cycle()) this.soundSystem.playCursorBlip();

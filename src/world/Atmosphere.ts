@@ -1,6 +1,8 @@
 import Phaser from 'phaser';
 import { tileCenter } from './MapRegistry';
 import type { TilePoint } from './MapTypes';
+import type { PixelFxLayer } from '../systems/fx/PixelFxLayer';
+import { MapDecor, type DecorDef } from './MapDecor';
 
 /** One map's look (public/assets/data/atmosphere.json). Every field may be left out. */
 export interface AtmosphereDef {
@@ -21,6 +23,8 @@ export interface AtmosphereDef {
   glowScale?: number;
   /** Floating motes (dust, sea spray, embers). */
   motes?: { color: string; count: number; drift: number; up?: boolean };
+  /** Creatures, drips and falling leaves / petals / snow (MapDecor). */
+  decor?: DecorDef;
 }
 
 interface LightDef {
@@ -72,6 +76,7 @@ export class Atmosphere {
   private lift: Phaser.GameObjects.Image | null = null;
   private motes: Phaser.GameObjects.Particles.ParticleEmitter | null = null;
   private lit: Lit[] = [];
+  private decor: MapDecor | null = null;
   private on = false;
 
   constructor(
@@ -81,6 +86,7 @@ export class Atmosphere {
     private readonly pois: TilePoint[],
     private readonly puzzles: TilePoint[] = [],
     private readonly npcs: TilePoint[] = [],
+    private readonly pfx?: () => PixelFxLayer,
   ) {
     const db = scene.cache.json.get('data_atmosphere') as AtmosphereDatabase | undefined;
     this.def = db?.maps[mapId] ?? null;
@@ -214,6 +220,10 @@ export class Atmosphere {
       add(d.npcLight ?? NPC_LIGHT, () => c);
     }
     if (d.motes) this.spawnMotes(d.motes);
+    if (d.decor && this.pfx) {
+      this.decor = new MapDecor(this.scene, d.decor, this.pfx);
+      this.decor.start();
+    }
     this.paintDarkness();
     this.update();
   }
@@ -232,6 +242,8 @@ export class Atmosphere {
     this.lift?.destroy();
     this.lift = null;
     this.motes?.destroy();
+    this.decor?.stop();
+    this.decor = null;
     this.dark = null;
     this.brush = null;
     this.vignette = null;
