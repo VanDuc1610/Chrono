@@ -4,7 +4,6 @@ import { PreloadScene } from './scenes/PreloadScene';
 import { MainMenuScene } from './scenes/MainMenuScene';
 import { ExplorationScene } from './scenes/ExplorationScene';
 import { CombatScene } from './scenes/CombatScene';
-import { BossArenaScene } from './scenes/BossArenaScene';
 import { PrologueEndScene } from './scenes/PrologueEndScene';
 
 export const GameConfig: Phaser.Types.Core.GameConfig = {
@@ -26,13 +25,5 @@ export const GameConfig: Phaser.Types.Core.GameConfig = {
     },
   },
   backgroundColor: '#0c0e17',
-  scene: [
-    BootScene,
-    PreloadScene,
-    MainMenuScene,
-    ExplorationScene,
-    CombatScene,
-    BossArenaScene,
-    PrologueEndScene,
-  ],
+  scene: [BootScene, PreloadScene, MainMenuScene, ExplorationScene, CombatScene, PrologueEndScene],
 };

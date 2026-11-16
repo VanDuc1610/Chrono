@@ -53,6 +53,22 @@ import { chainState, thrustPhase, type Ch9FieldTraits } from './Chapter9Rules';
 const f9 = (r: { enemy: IEnemyDefinition }): Ch9FieldTraits =>
   (r.enemy.field ?? {}) as Ch9FieldTraits;
 
+/**
+ * T-84: a boss fought on the map plugs into Peter's moves here (slash, Temporal Strike, shots);
+ * it hurts Peter through `bossHit`.
+ */
+export interface CombatExtension {
+  /** True when the slash touched something of the fight (boss or arena target). */
+  onSlash(
+    origin: Point,
+    aim: number,
+    reach: number,
+    blow: { attack: number; arcDeg: number; mult: number; critBonus: number; echoPct: number },
+  ): boolean;
+  onSkill(origin: Point, radius: number, attack: number): void;
+  shotTargets(attack: number, mult: number): ShotTarget[];
+}
+
 /** What the exploration scene provides to the real-time combat layer. */
 export interface ActionHost {
   /** Input and AI pause (dialogue, bag, map transition). */
@@ -191,6 +207,8 @@ export class ActionCombat {
   private readonly defs: MapRoamerDefinition[];
   private nextSwing = 0;
   private nextShot = 0;
+  /** T-84: the boss fight on this map, while it lasts. */
+  public extension: CombatExtension | null = null;
   private readonly shots: ShotSystem;
   private nextDash = 0;
   private nextSkill = 0;
@@ -965,6 +983,16 @@ export class ActionCombat {
       const dealt = this.strikeRoamer(r, attack, now, shape.damageMult, critBonus);
       if (dealt !== null) echoed.push({ r, damage: dealt });
     }
+    if (
+      this.extension?.onSlash(origin, aim, reach, {
+        attack,
+        arcDeg: shape.arcDeg,
+        mult: shape.damageMult,
+        critBonus,
+        echoPct: weapon?.echoPct ?? 0,
+      })
+    )
+      landed = true;
     if (!landed) this.blinkOnWhiff(origin, aim);
     this.teach('slash');
     // Blade of Possibility: the other branch's slash follows 0.2 s later.
@@ -1063,6 +1091,7 @@ export class ActionCombat {
           return true;
         },
       }));
+    if (this.extension) targets.push(...this.extension.shotTargets(attack, mult));
     this.shots.update(delta, targets, (x, y) => !!this.walls.getTileAtWorldXY(x, y)?.collides);
   }
 
@@ -1160,6 +1189,11 @@ export class ActionCombat {
       };
       r.sprite.clearTint();
     }
+    this.extension?.onSkill(
+      { x: this.player.x, y: this.player.y },
+      this.tuning.skillRadius,
+      attack,
+    );
     this.teach('skill');
   }
 
@@ -1313,6 +1347,43 @@ export class ActionCombat {
       this.defeated = true;
       this.host.onPlayerDefeated();
     }
+  }
+
+  /**
+   * T-84: a boss blow (`attack` × `mult`, then × `scale`) from `from`, through Peter's
+   * invulnerability (a dodge avoids it). `slowMs` slows him afterwards. False when it did not land.
+   */
+  public bossHit(attack: number, mult: number, from: Point, scale: number, slowMs = 0): boolean {
+    const now = this.scene.time.now;
+    if (now < this.invulnUntil || this.defeated) return false;
+    const { damage } = rollHit(
+      attack,
+      this.session.getStats().defense,
+      this.combat,
+      this.rng,
+      mult,
+    );
+    const dealt = Math.max(1, Math.round(damage * scale));
+    this.session.hp = Math.max(0, this.session.hp - dealt);
+    this.invulnUntil = now + this.tuning.hurtInvulnMs;
+    const away = Math.atan2(this.player.y - from.y, this.player.x - from.x);
+    const k = this.tuning.knockback;
+    this.player.forceVelocity(Math.cos(away) * k, Math.sin(away) * k, 130);
+    if (slowMs > 0) {
+      this.slowUntil = now + slowMs;
+      this.slowPct = 0.45;
+    }
+    this.player.playAction('peter_hurt', this.player.getMovementSystem().getLastFacing(), 260);
+    this.player.sprite.setTint(0xff5050);
+    this.scene.time.delayedCall(160, () => this.player.sprite.clearTint());
+    this.scene.cameras.main.shake(120, 0.004);
+    this.floatText(this.player.x, this.player.y - 20, `-${dealt}`, '#ff6b6b');
+    this.host.refreshHud();
+    if (this.session.hp <= 0) {
+      this.defeated = true;
+      this.host.onPlayerDefeated();
+    }
+    return true;
   }
 
   /**

@@ -18,6 +18,8 @@ import { QuestTracker } from '../ui/QuestTracker';
 import { SatchelPanel } from '../ui/SatchelPanel';
 import { StatusHud } from '../ui/StatusHud';
 import { ActionCombat } from '../world/ActionCombat';
+import { BossFight, bossProfile } from '../world/BossFight';
+import type { BossProfile } from '../systems/boss/BossTypes';
 import { getStrings, Translate } from '../ui/Strings';
 import {
   conditionHolds,
@@ -34,7 +36,6 @@ import type {
   MapTriggerDefinition,
 } from '../world/MapTypes';
 import type { CombatSceneData } from './CombatScene';
-import { bossProfile } from './BossArenaScene';
 
 export interface ExplorationSceneData {
   /** Map to load (id or alias). Defaults to the saved map, then maps.json `startMapId`. */
@@ -78,6 +79,9 @@ export class ExplorationScene extends Phaser.Scene {
 
   // Scene-local state (reset in init on every entry)
   private encounterSprites: Phaser.Physics.Arcade.Sprite[] = [];
+  private encounterById = new Map<string, Phaser.Physics.Arcade.Sprite>();
+  /** T-84: a boss fought here on the map, while the fight lasts. */
+  private bossFight: BossFight | null = null;
   private visionSprites: Phaser.GameObjects.Sprite[] = [];
   private npcSprites: Phaser.GameObjects.Sprite[] = [];
   private frozenVeil: Phaser.GameObjects.Rectangle | null = null;
@@ -137,6 +141,8 @@ export class ExplorationScene extends Phaser.Scene {
     this.lockedExitShown = null;
     this.exitsArmed = false;
     this.encounterSprites = [];
+    this.encounterById = new Map();
+    this.bossFight = null;
     this.swapOriginals = new Map();
     this.visionSprites = [];
     this.npcSprites = [];
@@ -356,6 +362,7 @@ export class ExplorationScene extends Phaser.Scene {
   public update(_time: number, delta: number): void {
     this.session.tick(delta);
     this.action?.update(delta);
+    this.bossFight?.update(delta);
     this.field?.update();
     if (this.satchel.isOpen || this.isTransitioning) return;
 
@@ -579,6 +586,7 @@ export class ExplorationScene extends Phaser.Scene {
       });
       this.physics.add.overlap(this.player.sprite, sprite, () => this.startEncounter(def));
       this.encounterSprites.push(sprite);
+      this.encounterById.set(def.id, sprite);
     }
   }
 
@@ -688,6 +696,8 @@ export class ExplorationScene extends Phaser.Scene {
     }
     // Arriving inside an exit area (e.g. a spawn placed on a doorway) must not bounce Peter back.
     if (!this.exitsArmed) return false;
+    // No running from a boss fight on the map.
+    if (this.bossFight?.active) return false;
     if (exit.requiresFlag && !this.session.getFlag(exit.requiresFlag)) {
       if (this.lockedExitShown !== exit.id && exit.lockedDialogueId) {
         this.lockedExitShown = exit.id;
@@ -748,7 +758,13 @@ export class ExplorationScene extends Phaser.Scene {
   }
 
   private startEncounter(def: MapEncounterDefinition): void {
-    if (this.isTransitioning) return;
+    if (this.isTransitioning || this.bossFight?.active) return;
+    // T-84: a boss with a real-time profile is fought right here; others stay turn-based.
+    const live = bossProfile(this, def.enemyId);
+    if (live) {
+      this.startBossFight(def, live);
+      return;
+    }
     this.beginSceneExit();
     this.cameras.main.flash(350, 0, 200, 255);
     this.cameras.main.fadeOut(350, 0, 0, 0);
@@ -766,10 +782,58 @@ export class ExplorationScene extends Phaser.Scene {
         victoryDialogueId: def.victoryDialogueId,
         victoryDialogueRules: def.victoryDialogueRules,
       };
-      // T-84: a boss with a real-time profile is fought live in the arena; others stay turn-based.
-      const live = bossProfile(this, def.enemyId);
-      this.scene.start(live ? 'BossArenaScene' : 'CombatScene', data);
+      this.scene.start('CombatScene', data);
     });
+  }
+
+  /** The boss leaves its post and fights Peter where they met (no battle scene, no fade). */
+  private startBossFight(def: MapEncounterDefinition, profile: BossProfile): void {
+    const enemy = this.session.getEnemyDefinition(def.enemyId);
+    if (!enemy || !this.action) return;
+    const idle = this.encounterById.get(def.id);
+    const from = idle ? { x: idle.x, y: idle.y } : tileCenter(def.tile);
+    if (idle) {
+      this.encounterSprites = this.encounterSprites.filter((s) => s !== idle);
+      this.encounterById.delete(def.id);
+      idle.destroy();
+    }
+    const fight = new BossFight(
+      this,
+      this.session,
+      this.action,
+      this.player.sprite,
+      this.wallLayer,
+      enemy,
+      profile,
+      from,
+      {
+        isPaused: () => this.isTransitioning || this.satchel.isOpen || this.dialogueBox.isOpen(),
+        notify: (title, subtitle) => this.showNotification(title, subtitle),
+        onVictory: (beaten) => {
+          this.session.setFlag(def.defeatedFlag);
+          const rewards = this.session.claimEnemyRewards(beaten);
+          const vars = { enemy: beaten.name, rewards: this.session.describeRewards(rewards) };
+          this.bossFight = null;
+          // Knocked onto an exit during the fight: he has to step off it before it takes him.
+          this.exitsArmed = false;
+          this.statusHud.refresh();
+          this.questTracker.refresh();
+          this.showNotification(
+            this.t('combat.victoryTitle'),
+            this.t('combat.victorySubtitle', vars),
+          );
+          const last = def.victoryDialogueId;
+          if (last)
+            this.time.delayedCall(900, () => {
+              if (this.isTransitioning) return;
+              this.openDialogue(pickDialogue(last, def.victoryDialogueRules, this.stateView()));
+            });
+        },
+      },
+      this.t,
+    );
+    this.bossFight = fight;
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => fight.destroy());
   }
 
   /** Freezes input for a fade-out (map change, battle, ending). */

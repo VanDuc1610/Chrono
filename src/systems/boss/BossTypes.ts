@@ -1,7 +1,7 @@
 /**
  * Real-time boss fights (T-84): each boss in public/assets/data/bosses.json gets its own attack
- * patterns (moves, grouped in phases) and its own defence. Bosses without a profile still use the
- * turn-based CombatScene.
+ * patterns (moves, grouped in phases) and its own defence, fought on the map where Peter meets it.
+ * Bosses without a profile still use the turn-based CombatScene.
  */
 
 /** Telegraphed circle(s) that burst after `telegraphMs`: at Peter, or scattered around him. */
@@ -89,9 +89,8 @@ export interface BossPhase {
 export interface BossTarget {
   id: string;
   label: string;
-  /** Arena coordinates (0-1 of the arena width / height). */
-  x: number;
-  y: number;
+  /** Map tile where it stands (the fight happens on the boss's own map). */
+  tile: { x: number; y: number };
   /** Earlier targets that must be struck first. */
   requires?: string[];
   /** Works only while the boss is stunned. */
@@ -128,8 +127,8 @@ export interface BossDefense {
 
 export interface BossProfile {
   id: string;
-  /** Arena colours and decoration. */
-  arena: { floor: string; floorAlt: string; edge: string; water?: boolean };
+  /** Sprite scale on the map (default 1). */
+  scale?: number;
   /** Body radius (px) for hits and contact. */
   radius: number;
   /** Walking speed (px/s). */

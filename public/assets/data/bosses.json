@@ -2,9 +2,9 @@
   "bosses": [
     {
       "id": "boss_drowned_sentinel",
-      "intro": "Vệ Binh Chìm Trong Sóng nâng ngọn kích. Lớp giáp nước đọng lại quanh nó — chém thường gần như vô dụng.",
-      "arena": { "floor": "#1b2b3a", "floorAlt": "#213447", "edge": "#4fa3c7", "water": true },
-      "radius": 26,
+      "intro": "Vệ Binh bước xuống từ bệ đá, nâng ngọn kích. Lớp giáp nước đọng quanh nó — chém thường gần như vô dụng.",
+      "scale": 1.15,
+      "radius": 22,
       "speed": 48,
       "damageScale": 0.55,
       "contactMult": 0.5,
@@ -91,28 +91,32 @@
         },
         "unlockAfterMs": 22000,
         "unlockOnSkill": true,
-        "unlockMessage": "Nhãn Thời Gian: luồng sóng đọng nuôi bộ giáp chảy về hai thấu kính của ngọn hải đăng!",
+        "unlockMessage": "Nhãn Thời Gian: luồng sóng đọng nuôi bộ giáp chảy về hai thấu kính hai bên gian đá!",
         "lockedMessage": "Thấu kính phải chưa phản ứng — làm Vệ Binh choáng bằng thấu kính trái trước.",
         "targets": [
           {
             "id": "lens_left",
             "label": "THẤU KÍNH TRÁI",
-            "x": 0.08,
-            "y": 0.5,
             "effect": "stun",
             "stunMs": 6500,
-            "message": "Thấu kính trái xoay — ánh sáng chói lòa làm rạn lớp giáp nước! Vệ Binh bị choáng."
+            "message": "Thấu kính trái xoay — ánh sáng chói lòa làm rạn lớp giáp nước! Vệ Binh bị choáng.",
+            "tile": {
+              "x": 6,
+              "y": 10
+            }
           },
           {
             "id": "lens_right",
             "label": "THẤU KÍNH PHẢI",
-            "x": 0.92,
-            "y": 0.5,
             "requires": ["lens_left"],
             "whileStunned": true,
             "effect": "breakArmor",
             "setHpPct": 0.45,
-            "message": "Luồng sáng vàng ấm xuyên qua lồng ngực Vệ Binh — lớp sóng giam hãm vỡ tan!"
+            "message": "Luồng sáng vàng ấm xuyên qua lồng ngực Vệ Binh — lớp sóng giam hãm vỡ tan!",
+            "tile": {
+              "x": 17,
+              "y": 10
+            }
           }
         ]
       }

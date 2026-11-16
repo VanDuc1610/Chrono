@@ -925,7 +925,8 @@
             "h": 1
           },
           "onceFlag": "met_drowned_sentinel",
-          "dialogueId": "boss_sentinel_encounter"
+          "dialogueId": "boss_sentinel_encounter",
+          "encounterId": "enc_drowned_sentinel"
         },
         {
           "id": "trig_time_restored",
