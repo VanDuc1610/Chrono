@@ -14,6 +14,8 @@ import ch4sanctumoffinalityTm from '../public/assets/maps/map_ch4_sanctum_of_fin
 import ch5prunertowerTm from '../public/assets/maps/map_ch5_pruner_tower.json';
 import ch5kuroasksTm from '../public/assets/maps/map_ch5_kuro_asks.json';
 import ch5unbornthroneTm from '../public/assets/maps/map_ch5_unborn_throne.json';
+import heraldTm from '../public/assets/maps/map_ch6_herald_roost.json';
+import nookTm from '../public/assets/maps/map_ch6_first_forgotten_nook.json';
 import { sentenceVerdict } from '../src/systems/boss/BossRules';
 import type { BossDatabase } from '../src/systems/boss/BossTypes';
 
@@ -65,6 +67,8 @@ const TILEMAPS: Record<string, Tilemap> = {
   map_old_lighthouse: lighthouseTm as unknown as Tilemap,
   map_ch1_bell_sanctum: bellTm as unknown as Tilemap,
   map_ch2_verdict_sanctum: verdictTm as unknown as Tilemap,
+  map_ch6_herald_roost: heraldTm as unknown as Tilemap,
+  map_ch6_first_forgotten_nook: nookTm as unknown as Tilemap,
   map_ch3_memory_vaults: ch3memoryvaultsTm as unknown as Tilemap,
   map_ch3_choir_sanctum: ch3choirsanctumTm as unknown as Tilemap,
   map_ch4_crimson_redoubt: ch4crimsonredoubtTm as unknown as Tilemap,
@@ -106,7 +110,15 @@ describe('T-84 bosses on their maps', () => {
       expect(enemies.some((e) => e.id === b.id)).toBe(true);
       const [mapId, map] = mapOf(b.id);
       const enc = map.encounters!.find((e) => e.enemyId === b.id)!;
-      expect((map.triggers ?? []).some((t) => t.encounterId === enc.id && t.dialogueId)).toBe(true);
+      // The meeting dialogue leads into the fight; a boss with no meeting is fought on touch.
+      const meeting = (map.triggers ?? []).some((t) => t.encounterId === enc.id && t.dialogueId);
+      const anyTrigger = (map.triggers ?? []).some(
+        (t) =>
+          !!(t as { area?: unknown }).area &&
+          !!t.dialogueId &&
+          /confront|arrival/.test(t.dialogueId),
+      );
+      expect(meeting || (!anyTrigger && !(enc as { hidden?: boolean }).hidden)).toBe(true);
       for (const t of b.defense.targets ?? []) {
         if (t.orbit) continue;
         expect(t.tile, `${t.id} needs a tile or an orbit`).toBeDefined();

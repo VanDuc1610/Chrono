@@ -205,6 +205,8 @@
     "boss.mirrored": "Lao theo!",
     "boss.risen": "Gượng dậy!",
     "boss.tether": "DÂY LINH HỒN",
-    "boss.feint": "Đòn giả!"
+    "boss.feint": "Đòn giả!",
+    "boss.perfect": "Né hoàn hảo!",
+    "boss.hour": "KIM GIỜ THỨ 25: {n}/{top}"
   }
 }

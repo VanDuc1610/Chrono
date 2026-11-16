@@ -1304,6 +1304,2202 @@
           }
         ]
       }
+    },
+    {
+      "id": "boss_broken_herald",
+      "intro": "Sứ Giả Gãy Cánh giương khiên chữ cổ. Khiên hiện ký tự nào, hãy khắc ký tự NGƯỢC LẠI — sáng phủ tối, tối rọi sáng. Khắc sai, khiên nuốt nét khắc và hồi máu cho nó.",
+      "scale": 1.4,
+      "radius": 22,
+      "speed": 56,
+      "damageScale": 0.4,
+      "contactMult": 0.45,
+      "ally": {
+        "flag": "ch6_kuro_ally",
+        "texture": "npc_kuro",
+        "anim": "npc_kuro_idle",
+        "everyMs": 6000,
+        "damagePct": 0.05,
+        "message": "Kuro chém gãy một chiếc lông kim loại — Sứ Giả mất {damage} HP!"
+      },
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["feather_storm", "broken_dive", "wing_ray"],
+          "pauseMs": 1000
+        },
+        {
+          "fromHpPct": 1,
+          "moves": ["feather_storm_wide", "broken_dive", "wing_ray_sweep"],
+          "pauseMs": 700,
+          "afterArmorBroken": true,
+          "speedMult": 1.3,
+          "banner": "Khiên chữ cổ vỡ tan! Sứ Giả loạng choạng, đôi cánh rỉ sét rơi lả tả."
+        }
+      ],
+      "moves": {
+        "feather_storm": {
+          "type": "volley",
+          "label": "Bão Lông Kim",
+          "telegraphMs": 650,
+          "shots": 7,
+          "spreadDeg": 80,
+          "speed": 190,
+          "waves": 2,
+          "intervalMs": 450,
+          "mult": 0.7
+        },
+        "feather_storm_wide": {
+          "type": "volley",
+          "label": "Bão Lông Kim",
+          "telegraphMs": 550,
+          "shots": 11,
+          "spreadDeg": 140,
+          "speed": 200,
+          "waves": 3,
+          "intervalMs": 450,
+          "mult": 0.7
+        },
+        "broken_dive": {
+          "type": "charge",
+          "label": "Lao Cánh Gãy",
+          "telegraphMs": 750,
+          "speed": 380,
+          "durationMs": 800,
+          "mult": 1.2,
+          "stunOnWallMs": 1400
+        },
+        "wing_ray": {
+          "type": "beam",
+          "label": "Tia Cánh Rỉ",
+          "telegraphMs": 850,
+          "width": 18,
+          "durationMs": 800,
+          "sweepDeg": 60,
+          "mult": 1.1
+        },
+        "wing_ray_sweep": {
+          "type": "beam",
+          "label": "Tia Cánh Rỉ",
+          "telegraphMs": 750,
+          "width": 20,
+          "durationMs": 1000,
+          "sweepDeg": 130,
+          "mult": 1.1
+        }
+      },
+      "defense": {
+        "armor": {
+          "damageReduction": 0.75,
+          "floorPct": 0.05,
+          "recoverPct": 0.35,
+          "recoverMessage": "Khiên chữ cổ rực lên — Sứ Giả hút ánh sáng của điện, liền lại vết thương!"
+        },
+        "songs": {
+          "cracksToBreak": 3,
+          "firstMs": 4000,
+          "gapMs": 3500,
+          "windowMs": 7000,
+          "wrongPct": 0,
+          "wrongMp": 0,
+          "wrongHealPct": 0.08,
+          "wrongMessage": "Khiên nuốt lấy nét khắc — Sứ Giả hồi {heal} HP!",
+          "breakMessage": "Khiên chữ cổ vỡ tan! Sứ Giả loạng choạng, đôi cánh rỉ sét rơi lả tả.",
+          "silentMessage": "Khiên chưa hiện ký tự",
+          "list": [
+            {
+              "id": "shield_light",
+              "targetId": "glyph_O",
+              "announce": "Khiên của Sứ Giả hiện ký tự [A], chói lòa như giữa trưa.",
+              "crackMessage": "Nét [O] phủ bóng lên khiên — ánh sáng tắt một mảng, khiên nứt!",
+              "color": "#fff2b8"
+            },
+            {
+              "id": "shield_dark",
+              "targetId": "glyph_A",
+              "announce": "Khiên của Sứ Giả hiện ký tự [O], đen như đáy giếng.",
+              "crackMessage": "Nét [A] rọi xuyên bóng tối — khiên nứt một mảng!",
+              "color": "#8a7ab8"
+            }
+          ]
+        },
+        "targets": [
+          {
+            "id": "glyph_A",
+            "label": "KHẮC [A]",
+            "tile": {
+              "x": 3,
+              "y": 11
+            },
+            "effect": "song",
+            "color": "#fff2b8",
+            "message": ""
+          },
+          {
+            "id": "glyph_O",
+            "label": "KHẮC [O]",
+            "tile": {
+              "x": 18,
+              "y": 11
+            },
+            "effect": "song",
+            "color": "#8a7ab8",
+            "message": ""
+          },
+          {
+            "id": "glyph_X",
+            "label": "KHẮC [X]",
+            "tile": {
+              "x": 11,
+              "y": 13
+            },
+            "effect": "song",
+            "color": "#ff8a6a",
+            "message": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "boss_remnant_deacon",
+      "intro": "Tàn Ảnh Chấp Sự nện búa theo nhịp ba. Đòn búa vàng bám theo cậu — đứng vững và LƯỚT NÉ đúng khoảnh khắc búa giáng; né trọn cả ba nhịp, cán búa sẽ gãy.",
+      "scale": 1.4,
+      "radius": 22,
+      "speed": 54,
+      "damageScale": 0.4,
+      "contactMult": 0.45,
+      "ally": {
+        "flag": "ch6_kuro_ally",
+        "texture": "npc_kuro",
+        "anim": "npc_kuro_idle",
+        "everyMs": 6000,
+        "damagePct": 0.05,
+        "message": "Kuro đánh lệch nhịp búa — Chấp Sự mất {damage} HP!"
+      },
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["hammer_cadence", "censer_ring", "deacon_charge"],
+          "pauseMs": 950
+        },
+        {
+          "fromHpPct": 0.5,
+          "moves": ["hammer_cadence", "censer_ring_double", "deacon_charge", "ash_volley"],
+          "pauseMs": 700,
+          "speedMult": 1.25,
+          "banner": "Chấp Sự gầm lên, nhịp búa dồn dập hơn!"
+        }
+      ],
+      "moves": {
+        "hammer_cadence": {
+          "type": "slam",
+          "label": "Nhịp Búa Ba",
+          "telegraphMs": 900,
+          "radius": 34,
+          "count": 3,
+          "scatter": 90,
+          "staggerMs": 850,
+          "mult": 1.3,
+          "fx": "groundSlam",
+          "cadence": {
+            "reward": "hpPct",
+            "pct": 0.3,
+            "message": "Đỡ trọn ba nhịp! Búa của Chấp Sự gãy cán — hắn mất 30% máu đang có!"
+          }
+        },
+        "censer_ring": {
+          "type": "ring",
+          "label": "Lư Hương Xoay",
+          "telegraphMs": 700,
+          "speed": 150,
+          "thickness": 16,
+          "rings": 2,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "censer_ring_double": {
+          "type": "ring",
+          "label": "Lư Hương Xoay",
+          "telegraphMs": 600,
+          "speed": 170,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "deacon_charge": {
+          "type": "charge",
+          "label": "Bước Tế Lễ",
+          "telegraphMs": 750,
+          "speed": 350,
+          "durationMs": 800,
+          "mult": 1.2,
+          "stunOnWallMs": 1400
+        },
+        "ash_volley": {
+          "type": "volley",
+          "label": "Tro Hương",
+          "telegraphMs": 600,
+          "shots": 6,
+          "spreadDeg": 70,
+          "speed": 180,
+          "waves": 2,
+          "intervalMs": 450,
+          "mult": 0.7
+        }
+      },
+      "defense": {}
+    },
+    {
+      "id": "boss_genesis_warden",
+      "intro": "Thực Thể Giám Hộ Khởi Nguyên thức giấc. Khi nó tụ GENESIS PURGE, hãy LƯỚT NÉ đúng lúc ánh sáng bùng nổ — hoặc, nếu đã đọc sổ tay thiên văn, vòng ra sau lưng và rút Chốt Khởi Nguyên.",
+      "scale": 1.15,
+      "radius": 26,
+      "speed": 40,
+      "damageScale": 0.38,
+      "contactMult": 0.5,
+      "ally": {
+        "flag": "ch6_kuro_ally",
+        "texture": "npc_kuro",
+        "anim": "npc_kuro_idle",
+        "everyMs": 6000,
+        "damagePct": 0.05,
+        "message": "Kuro bẻ cong không gian quanh chân nhân sư — Warden mất {damage} HP!"
+      },
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["sphinx_paw", "genesis_ring", "origin_ray"],
+          "pauseMs": 1050
+        },
+        {
+          "fromHpPct": 0.6,
+          "moves": [
+            "sphinx_paw_triple",
+            "genesis_ring_triple",
+            "origin_ray_sweep",
+            "sphinx_pounce"
+          ],
+          "pauseMs": 750,
+          "speedMult": 1.2,
+          "banner": "Mắt Thời Gian nhìn xuyên lớp vỏ — cái chốt điều áp sáng rực trên lưng Warden!"
+        }
+      ],
+      "moves": {
+        "sphinx_paw": {
+          "type": "slam",
+          "label": "Vuốt Nhân Sư",
+          "telegraphMs": 850,
+          "radius": 42,
+          "count": 2,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.3
+        },
+        "sphinx_paw_triple": {
+          "type": "slam",
+          "label": "Vuốt Nhân Sư",
+          "telegraphMs": 750,
+          "radius": 40,
+          "count": 3,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.3
+        },
+        "genesis_ring": {
+          "type": "ring",
+          "label": "Vòng Khởi Nguyên",
+          "telegraphMs": 700,
+          "speed": 150,
+          "thickness": 16,
+          "rings": 2,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8,
+          "fx": "frostNova",
+          "fxPalette": ["#2a1a05", "#6b4a12", "#b8862a", "#f0c860", "#fff2b8", "#ffffff", "#ffffff"]
+        },
+        "genesis_ring_triple": {
+          "type": "ring",
+          "label": "Vòng Khởi Nguyên",
+          "telegraphMs": 600,
+          "speed": 175,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "origin_ray": {
+          "type": "beam",
+          "label": "Tia Nguyên Thủy",
+          "telegraphMs": 850,
+          "width": 20,
+          "durationMs": 800,
+          "sweepDeg": 50,
+          "mult": 1.1
+        },
+        "origin_ray_sweep": {
+          "type": "beam",
+          "label": "Tia Nguyên Thủy",
+          "telegraphMs": 750,
+          "width": 22,
+          "durationMs": 1000,
+          "sweepDeg": 120,
+          "mult": 1.1
+        },
+        "sphinx_pounce": {
+          "type": "charge",
+          "label": "Nhân Sư Vồ",
+          "telegraphMs": 750,
+          "speed": 360,
+          "durationMs": 800,
+          "mult": 1.3,
+          "stunOnWallMs": 1500
+        }
+      },
+      "defense": {
+        "purge": {
+          "belowPct": 0.6,
+          "chargeMs": 5000,
+          "cooldownMs": 15000,
+          "damagePct": 0.6,
+          "pinFlag": "read_celestial_handbook",
+          "pinDamage": 380,
+          "pinSetFlag": "ch6_used_regulator_pin",
+          "pinLabel": "RÚT CHỐT KHỞI NGUYÊN",
+          "pinMessage": "Peter giật Chốt Khởi Nguyên khỏi lưng nhân sư! Năng lượng dội ngược vào chính nó!",
+          "chargeMessage": "Warden hút ánh sáng từ trần điện nứt — GENESIS PURGE đang tụ lực! Lướt né đúng lúc nó bùng nổ.",
+          "fireMessage": "GENESIS PURGE! Cả đại điện trắng xóa — Peter mất {damage} HP!",
+          "dodgedMessage": "Peter lướt qua làn sáng trắng đúng khoảnh khắc nó bùng nổ — không hề hấn gì!"
+        }
+      }
+    },
+    {
+      "id": "boss_echo_forgotten",
+      "intro": "Sương xóa niệm phủ kín hốc đá — Tiếng Vọng ẩn trong đó, bào mòn MP của cậu. Đánh vào lò sáng [A] để đẩy sương lùi lại.",
+      "scale": 1.4,
+      "radius": 22,
+      "speed": 52,
+      "damageScale": 0.4,
+      "contactMult": 0.45,
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["forgotten_hands", "echo_ring", "whisper_volley"],
+          "pauseMs": 1000
+        },
+        {
+          "fromHpPct": 0.5,
+          "moves": ["forgotten_hands_many", "echo_ring_triple", "whisper_volley", "echo_lunge"],
+          "pauseMs": 700,
+          "speedMult": 1.25,
+          "banner": "Tiếng Vọng gào thét tên của những người không ai còn nhớ!"
+        }
+      ],
+      "moves": {
+        "forgotten_hands": {
+          "type": "slam",
+          "label": "Bàn Tay Lãng Quên",
+          "telegraphMs": 850,
+          "radius": 38,
+          "count": 3,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.2,
+          "fx": "poof"
+        },
+        "forgotten_hands_many": {
+          "type": "slam",
+          "label": "Bàn Tay Lãng Quên",
+          "telegraphMs": 750,
+          "radius": 36,
+          "count": 5,
+          "scatter": 110,
+          "staggerMs": 260,
+          "mult": 1.2,
+          "fx": "poof"
+        },
+        "echo_ring": {
+          "type": "ring",
+          "label": "Tiếng Vọng",
+          "telegraphMs": 700,
+          "speed": 145,
+          "thickness": 16,
+          "rings": 2,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "echo_ring_triple": {
+          "type": "ring",
+          "label": "Tiếng Vọng",
+          "telegraphMs": 600,
+          "speed": 170,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "whisper_volley": {
+          "type": "volley",
+          "label": "Lời Thì Thầm",
+          "telegraphMs": 650,
+          "shots": 8,
+          "spreadDeg": 100,
+          "speed": 170,
+          "waves": 2,
+          "intervalMs": 450,
+          "mult": 0.7
+        },
+        "echo_lunge": {
+          "type": "charge",
+          "label": "Vọng Lại",
+          "telegraphMs": 700,
+          "speed": 370,
+          "durationMs": 800,
+          "mult": 1.2,
+          "blink": true
+        }
+      },
+      "defense": {
+        "mist": {
+          "mpPerSec": 4.0,
+          "clearMs": 8000,
+          "drainMessage": "Sương xóa niệm phủ quanh Peter — MP cạn dần.",
+          "clearMessage": "Peter khắc [A] giữa sương — sương xóa niệm lùi lại một lúc."
+        },
+        "targets": [
+          {
+            "id": "brazier_w",
+            "label": "LÒ SÁNG [A]",
+            "tile": {
+              "x": 3,
+              "y": 6
+            },
+            "effect": "clearMist",
+            "color": "#ffe08a",
+            "message": ""
+          },
+          {
+            "id": "brazier_e",
+            "label": "LÒ SÁNG [A]",
+            "tile": {
+              "x": 16,
+              "y": 6
+            },
+            "effect": "clearMist",
+            "color": "#ffe08a",
+            "message": ""
+          },
+          {
+            "id": "brazier_s",
+            "label": "LÒ SÁNG [A]",
+            "tile": {
+              "x": 10,
+              "y": 11
+            },
+            "effect": "clearMist",
+            "color": "#ffe08a",
+            "message": ""
+          }
+        ],
+        "unlockAfterMs": 0
+      }
+    },
+    {
+      "id": "boss_nameless_weeper",
+      "intro": "Kẻ Khóc Không Tên rơi lệ tím. Mỗi giọt nước mắt rơi gần cậu — chém vỡ nó trước khi chạm đất. Đủ năm giọt, bể nước mắt sẽ tràn.",
+      "scale": 1.4,
+      "radius": 22,
+      "speed": 48,
+      "damageScale": 0.4,
+      "contactMult": 0.45,
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["sorrow_ring", "lament_volley", "grief_fall"],
+          "pauseMs": 1000
+        },
+        {
+          "fromHpPct": 0.5,
+          "moves": ["sorrow_ring_triple", "lament_volley", "grief_fall_many", "weeper_drift"],
+          "pauseMs": 700,
+          "speedMult": 1.25,
+          "banner": "Tiếng khóc vỡ òa — nước mắt rơi như mưa!"
+        }
+      ],
+      "moves": {
+        "sorrow_ring": {
+          "type": "ring",
+          "label": "Vòng Sầu",
+          "telegraphMs": 700,
+          "speed": 145,
+          "thickness": 16,
+          "rings": 2,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8,
+          "fx": "waveCrash",
+          "fxPalette": ["#05030a", "#1a1030", "#3a2260", "#7a50c0", "#c8a0ff", "#ffffff", "#ffffff"]
+        },
+        "sorrow_ring_triple": {
+          "type": "ring",
+          "label": "Vòng Sầu",
+          "telegraphMs": 600,
+          "speed": 170,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "lament_volley": {
+          "type": "volley",
+          "label": "Lời Than",
+          "telegraphMs": 650,
+          "shots": 7,
+          "spreadDeg": 90,
+          "speed": 170,
+          "waves": 2,
+          "intervalMs": 450,
+          "mult": 0.7
+        },
+        "grief_fall": {
+          "type": "slam",
+          "label": "Nỗi Đau Rơi",
+          "telegraphMs": 850,
+          "radius": 38,
+          "count": 2,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.2,
+          "fx": "splash",
+          "fxPalette": ["#05030a", "#1a1030", "#3a2260", "#7a50c0", "#c8a0ff", "#ffffff", "#ffffff"]
+        },
+        "grief_fall_many": {
+          "type": "slam",
+          "label": "Nỗi Đau Rơi",
+          "telegraphMs": 750,
+          "radius": 36,
+          "count": 4,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.2,
+          "fx": "splash",
+          "fxPalette": ["#05030a", "#1a1030", "#3a2260", "#7a50c0", "#c8a0ff", "#ffffff", "#ffffff"]
+        },
+        "weeper_drift": {
+          "type": "charge",
+          "label": "Trôi Dạt",
+          "telegraphMs": 750,
+          "speed": 330,
+          "durationMs": 900,
+          "mult": 1.1,
+          "stunOnWallMs": 1300
+        }
+      },
+      "defense": {
+        "tears": {
+          "everyMs": 3200,
+          "fallMs": 2600,
+          "max": 5,
+          "floodPct": 0.4,
+          "dropMessage": "Một giọt nước mắt tím rơi xuống bể ({n}/{max}).",
+          "wipeMessage": "Gạt đi!",
+          "floodMessage": "Bể nước mắt tràn bờ! Lũ nước mắt cuốn qua — Peter mất {damage} HP!"
+        }
+      }
+    },
+    {
+      "id": "boss_kuro_void",
+      "intro": "Kuro chìm trong mực hư không. Xúc tu mực sẽ quấn tay kiếm hoặc túi đồ của cậu — chỉ Đòn Thời Gian chém đứt được chúng. Nếu cậu nhớ khúc hát của mẹ hắn…",
+      "scale": 1.4,
+      "radius": 20,
+      "speed": 64,
+      "damageScale": 0.4,
+      "contactMult": 0.45,
+      "endAtHpPct": 0.1,
+      "finisher": {
+        "itemId": "kuro_mother_brooch",
+        "flag": "ch7_mother_song_remembered",
+        "belowPct": 0.4,
+        "prompt": "Gọi tên thật của Kuro",
+        "message": "Peter giơ chiếc cài áo bông mai lên và gọi tên thật của Kuro, khẽ hát câu đầu \"Chiều Trên Bến Cũ\"...",
+        "setFlag": "ch7_kuro_embraced"
+      },
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["ink_tendrils", "void_shift", "ink_knives"],
+          "pauseMs": 900
+        },
+        {
+          "fromHpPct": 0.5,
+          "moves": ["ink_tendrils_many", "void_shift", "ink_knives_wide", "ink_ring"],
+          "pauseMs": 650,
+          "speedMult": 1.25,
+          "banner": "Mực hư không trào lên — Kuro không còn nghe thấy gì nữa!"
+        }
+      ],
+      "moves": {
+        "ink_tendrils": {
+          "type": "slam",
+          "label": "Xúc Tu Mực",
+          "telegraphMs": 800,
+          "radius": 36,
+          "count": 3,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.2,
+          "fxPalette": ["#05030a", "#1a1030", "#3a2260", "#7a50c0", "#c8a0ff", "#ffffff", "#ffffff"]
+        },
+        "ink_tendrils_many": {
+          "type": "slam",
+          "label": "Xúc Tu Mực",
+          "telegraphMs": 700,
+          "radius": 34,
+          "count": 5,
+          "scatter": 110,
+          "staggerMs": 260,
+          "mult": 1.2,
+          "fxPalette": ["#05030a", "#1a1030", "#3a2260", "#7a50c0", "#c8a0ff", "#ffffff", "#ffffff"]
+        },
+        "void_shift": {
+          "type": "charge",
+          "label": "Dịch Nhánh Hư Không",
+          "telegraphMs": 600,
+          "speed": 400,
+          "durationMs": 500,
+          "mult": 1.1,
+          "blink": true
+        },
+        "ink_knives": {
+          "type": "volley",
+          "label": "Dao Mực",
+          "telegraphMs": 550,
+          "shots": 5,
+          "spreadDeg": 50,
+          "speed": 220,
+          "waves": 3,
+          "intervalMs": 350,
+          "mult": 0.6
+        },
+        "ink_knives_wide": {
+          "type": "volley",
+          "label": "Dao Mực",
+          "telegraphMs": 500,
+          "shots": 8,
+          "spreadDeg": 90,
+          "speed": 230,
+          "waves": 3,
+          "intervalMs": 330,
+          "mult": 0.6
+        },
+        "ink_ring": {
+          "type": "ring",
+          "label": "Vòng Mực",
+          "telegraphMs": 600,
+          "speed": 170,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8,
+          "fx": "waveCrash",
+          "fxPalette": ["#05030a", "#1a1030", "#3a2260", "#7a50c0", "#c8a0ff", "#ffffff", "#ffffff"]
+        }
+      },
+      "defense": {
+        "memoryLock": {
+          "firstMs": 5000,
+          "everyMs": 8000,
+          "lockMs": 6000,
+          "staggerMs": 2000,
+          "staggerMult": 1.5,
+          "staggerMessage": "Đòn Thời Gian chém đứt xúc tu mực! Kuro chao đảo — đòn kế tiếp đánh trúng tận lõi!",
+          "lockedText": "Bị mực quấn!",
+          "options": [
+            {
+              "lock": "melee",
+              "announce": "Xúc tu mực quấn chặt tay kiếm — CHÉM bị khóa! Dùng [Chuột phải] Đòn Thời Gian để chém đứt.",
+              "staggerBy": ["skill"]
+            },
+            {
+              "lock": "item",
+              "announce": "Xúc tu mực quấn lấy túi đồ — VẬT PHẨM bị khóa! Dùng [Chuột phải] Đòn Thời Gian để chém đứt.",
+              "staggerBy": ["skill"]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "boss_primordial_shade",
+      "intro": "Bóng Nguyên Sơ có một cái bóng đối xứng bên kia hốc tro. Một vầng sáng bị đánh thì gần như vô hại — đánh trúng CẢ HAI vầng sáng gần như cùng lúc mới làm nó vỡ ra.",
+      "scale": 1.4,
+      "radius": 22,
+      "speed": 50,
+      "damageScale": 0.4,
+      "contactMult": 0.45,
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["ash_fall", "mirror_ring", "glass_shards"],
+          "pauseMs": 1000
+        },
+        {
+          "fromHpPct": 0.5,
+          "moves": ["ash_fall_many", "mirror_ring_triple", "glass_shards", "shade_rush"],
+          "pauseMs": 700,
+          "speedMult": 1.25,
+          "banner": "Hai vầng sáng xoay ngược chiều — tro thủy tinh cuộn lên!"
+        }
+      ],
+      "moves": {
+        "ash_fall": {
+          "type": "slam",
+          "label": "Tro Thủy Tinh",
+          "telegraphMs": 850,
+          "radius": 38,
+          "count": 3,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.2,
+          "feint": 0.3
+        },
+        "ash_fall_many": {
+          "type": "slam",
+          "label": "Tro Thủy Tinh",
+          "telegraphMs": 750,
+          "radius": 36,
+          "count": 4,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.2,
+          "feint": 0.35
+        },
+        "mirror_ring": {
+          "type": "ring",
+          "label": "Vòng Phản Chiếu",
+          "telegraphMs": 700,
+          "speed": 150,
+          "thickness": 16,
+          "rings": 2,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "mirror_ring_triple": {
+          "type": "ring",
+          "label": "Vòng Phản Chiếu",
+          "telegraphMs": 600,
+          "speed": 175,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "glass_shards": {
+          "type": "volley",
+          "label": "Mảnh Thủy Tinh",
+          "telegraphMs": 650,
+          "shots": 7,
+          "spreadDeg": 80,
+          "speed": 190,
+          "waves": 2,
+          "intervalMs": 450,
+          "mult": 0.7
+        },
+        "shade_rush": {
+          "type": "charge",
+          "label": "Bóng Lao",
+          "telegraphMs": 700,
+          "speed": 370,
+          "durationMs": 800,
+          "mult": 1.2,
+          "stunOnWallMs": 1300
+        }
+      },
+      "defense": {
+        "twin": {
+          "windowMs": 1600,
+          "soloPct": 0.25,
+          "burstPct": 0.12,
+          "burstMessage": "Hai vầng sáng cộng hưởng! Bóng Nguyên Sơ vỡ ra một mảng lớn!"
+        }
+      }
+    },
+    {
+      "id": "boss_convergent_praetor",
+      "intro": "Pháp Quan Hội Tụ đứng sau tấm khiên cẩm thạch. Khi nó tuyên Bản Án Ba Nhịp, đứng vững và lướt né đúng từng nhịp — né trọn ba nhịp, Lyra sẽ phá khiên. Dùng đồ hồi máu sẽ bị \"gặt quả\".",
+      "scale": 1.4,
+      "radius": 22,
+      "speed": 50,
+      "damageScale": 0.38,
+      "contactMult": 0.45,
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["triple_verdict", "marble_ring", "causal_ray", "praetor_advance"],
+          "pauseMs": 1000
+        },
+        {
+          "fromHpPct": 1,
+          "moves": ["triple_verdict", "marble_ring_triple", "causal_ray_sweep", "praetor_advance"],
+          "pauseMs": 700,
+          "afterArmorBroken": true,
+          "speedMult": 1.25,
+          "banner": "Khiên cẩm thạch vỡ — Pháp Quan đọc ngược mọi bản án!"
+        }
+      ],
+      "moves": {
+        "triple_verdict": {
+          "type": "slam",
+          "label": "Bản Án Ba Nhịp",
+          "telegraphMs": 900,
+          "radius": 34,
+          "count": 3,
+          "scatter": 90,
+          "staggerMs": 850,
+          "mult": 1.3,
+          "fx": "smite",
+          "cadence": {
+            "reward": "breakArmor",
+            "pct": 0.12,
+            "message": "Đỡ trọn ba nhịp! Lyra lao vào, ngọn kích phá vỡ tấm khiên cẩm thạch!"
+          }
+        },
+        "marble_ring": {
+          "type": "ring",
+          "label": "Vòng Cẩm Thạch",
+          "telegraphMs": 700,
+          "speed": 150,
+          "thickness": 16,
+          "rings": 2,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "marble_ring_triple": {
+          "type": "ring",
+          "label": "Vòng Cẩm Thạch",
+          "telegraphMs": 600,
+          "speed": 175,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "causal_ray": {
+          "type": "beam",
+          "label": "Tia Nhân Quả",
+          "telegraphMs": 850,
+          "width": 18,
+          "durationMs": 800,
+          "sweepDeg": 60,
+          "mult": 1.1
+        },
+        "causal_ray_sweep": {
+          "type": "beam",
+          "label": "Tia Nhân Quả",
+          "telegraphMs": 750,
+          "width": 20,
+          "durationMs": 1000,
+          "sweepDeg": 140,
+          "mult": 1.1
+        },
+        "praetor_advance": {
+          "type": "charge",
+          "label": "Pháp Quan Tiến",
+          "telegraphMs": 750,
+          "speed": 350,
+          "durationMs": 850,
+          "mult": 1.2,
+          "stunOnWallMs": 1400
+        }
+      },
+      "defense": {
+        "armor": {
+          "damageReduction": 0.8,
+          "floorPct": 0.05,
+          "recoverPct": 0.5,
+          "recoverMessage": "Tấm khiên cẩm thạch hấp thụ đòn — vết nứt khép lại!"
+        },
+        "healPenalty": {
+          "mult": 1.3,
+          "message": "Nhân Quả: \"Ngươi đã gieo nhân — giờ gặt quả!\" Đòn kế tiếp nặng hơn."
+        }
+      }
+    },
+    {
+      "id": "boss_null_hour_herald",
+      "intro": "Kim Giờ Thứ 25 bắt đầu nhích. Khi nó chạm vạch đỏ, Giờ Số Không sẽ xé toạc không gian — lướt né đúng lúc, hoặc gọi đồng đội [5][6][7] đẩy kim lùi lại.",
+      "scale": 1.15,
+      "radius": 24,
+      "speed": 44,
+      "damageScale": 0.38,
+      "contactMult": 0.45,
+      "finisher": {
+        "itemId": "origin_seal_half",
+        "belowPct": 0.15,
+        "prompt": "Neo kim ở 11:59",
+        "message": "Peter cắm nửa Ấn Origin vào giữa mặt đồng hồ. Kim giờ rung lên… rồi đứng lại, cách vạch đỏ đúng một phút.",
+        "setFlag": "ch8_anchored_1159",
+        "required": true
+      },
+      "calls": [
+        {
+          "id": "call_ivo",
+          "label": "GỌI IVO",
+          "message": "Ivo chèn cờ lê vào bánh răng của kim giờ!",
+          "clockBack": true
+        },
+        {
+          "id": "call_lyra",
+          "label": "GỌI LYRA",
+          "message": "Lyra dùng cán kích đẩy ngược kim giờ!",
+          "clockBack": true
+        },
+        {
+          "id": "call_neris",
+          "label": "GỌI NERIS",
+          "message": "Neris đọc to tên của từng giờ đã qua, kim giờ lùi lại!",
+          "clockBack": true
+        }
+      ],
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["gear_fall", "hour_ring", "minute_ray", "pendulum_charge"],
+          "pauseMs": 1000
+        },
+        {
+          "fromHpPct": 0.5,
+          "moves": ["gear_fall_many", "hour_ring_triple", "minute_ray_sweep", "pendulum_charge"],
+          "pauseMs": 700,
+          "speedMult": 1.2,
+          "faint": true,
+          "banner": "Mặt đồng hồ nứt ra. Có những nhịp Peter không còn nhìn thấy nữa."
+        }
+      ],
+      "moves": {
+        "gear_fall": {
+          "type": "slam",
+          "label": "Bánh Răng Rơi",
+          "telegraphMs": 850,
+          "radius": 40,
+          "count": 3,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.2
+        },
+        "gear_fall_many": {
+          "type": "slam",
+          "label": "Bánh Răng Rơi",
+          "telegraphMs": 750,
+          "radius": 38,
+          "count": 4,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.2
+        },
+        "hour_ring": {
+          "type": "ring",
+          "label": "Vòng Giờ",
+          "telegraphMs": 700,
+          "speed": 150,
+          "thickness": 16,
+          "rings": 2,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8,
+          "fx": "frostNova",
+          "fxPalette": ["#2a1a05", "#6b4a12", "#b8862a", "#f0c860", "#fff2b8", "#ffffff", "#ffffff"]
+        },
+        "hour_ring_triple": {
+          "type": "ring",
+          "label": "Vòng Giờ",
+          "telegraphMs": 600,
+          "speed": 175,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "minute_ray": {
+          "type": "beam",
+          "label": "Kim Phút",
+          "telegraphMs": 850,
+          "width": 18,
+          "durationMs": 800,
+          "sweepDeg": 90,
+          "mult": 1.1
+        },
+        "minute_ray_sweep": {
+          "type": "beam",
+          "label": "Kim Phút",
+          "telegraphMs": 750,
+          "width": 20,
+          "durationMs": 1100,
+          "sweepDeg": 180,
+          "mult": 1.1
+        },
+        "pendulum_charge": {
+          "type": "charge",
+          "label": "Quả Lắc",
+          "telegraphMs": 750,
+          "speed": 350,
+          "durationMs": 850,
+          "mult": 1.2,
+          "stunOnWallMs": 1400
+        }
+      },
+      "defense": {
+        "clock": {
+          "start": 18,
+          "top": 25,
+          "tickMs": 3500,
+          "strikePct": 0.4,
+          "pushBy": 2,
+          "strikeMessage": "GIỜ SỐ KHÔNG! Một nhịp chuông xé toạc không gian — Peter mất {damage} HP!",
+          "dodgedMessage": "Peter lướt qua nhịp chuông Giờ Số Không — kim giờ quay về vạch xuất phát!",
+          "holdMessage": "Kim sắp chạm vạch đỏ — Kuro nhảy lên, dùng Possibility giữ chặt nó lại một nhịp!",
+          "phase2Pct": 0.5,
+          "phase2Message": "Mặt đồng hồ nứt ra. Có những nhịp Peter không còn nhìn thấy nữa."
+        }
+      }
+    },
+    {
+      "id": "boss_sixfold_echo",
+      "intro": "Tàn Ảnh Sáu Ấn thức tỉnh. Mỗi khi mất một phần sáu sinh lực, một ấn mới bừng sáng và cộng thêm luật chơi — vòng giả, đòn ẩn, nhịp nhanh hơn.",
+      "scale": 1.4,
+      "radius": 22,
+      "speed": 50,
+      "damageScale": 0.38,
+      "contactMult": 0.45,
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["seal_ring_triple", "seal_fall", "seal_ray"],
+          "pauseMs": 1000,
+          "banner": "Ấn Continuum xanh biển: ba nhịp sóng nối nhau."
+        },
+        {
+          "fromHpPct": 0.8333,
+          "moves": ["seal_ring_triple", "seal_fall", "seal_ray"],
+          "pauseMs": 950,
+          "banner": "Ấn Causality vàng lên: một vòng vàng mồi tới trước — chỉ vòng tím là thật.",
+          "feint": 0.3
+        },
+        {
+          "fromHpPct": 0.6667,
+          "moves": ["seal_ring_triple", "seal_fall", "seal_ray", "seal_charge"],
+          "pauseMs": 900,
+          "banner": "Ấn Memory mờ đi: đòn đánh không còn thấy, chỉ còn gợn sóng.",
+          "feint": 0.3,
+          "faint": true
+        },
+        {
+          "fromHpPct": 0.5,
+          "moves": ["seal_ring_quick", "seal_fall", "seal_ray", "seal_charge"],
+          "pauseMs": 800,
+          "banner": "Ấn Finality đỏ rực: ba nhịp, mỗi nhịp hẹp hơn.",
+          "feint": 0.3,
+          "faint": true,
+          "speedMult": 1.2
+        },
+        {
+          "fromHpPct": 0.3333,
+          "moves": ["seal_ring_quick", "seal_fall_many", "seal_ray", "seal_charge"],
+          "pauseMs": 750,
+          "banner": "Ấn Possibility lóe tím: những vòng sáng giả lao tới rồi rút lại.",
+          "feint": 0.5,
+          "faint": true,
+          "speedMult": 1.25
+        },
+        {
+          "fromHpPct": 0.1667,
+          "moves": ["seal_ring_quad", "seal_fall_many", "seal_ray_sweep", "seal_charge"],
+          "pauseMs": 650,
+          "banner": "Ấn Origin bừng trắng: mọi nhịp cũ dồn về một lúc!",
+          "feint": 0.5,
+          "faint": true,
+          "speedMult": 1.35
+        }
+      ],
+      "moves": {
+        "seal_ring_triple": {
+          "type": "ring",
+          "label": "Sóng Continuum",
+          "telegraphMs": 700,
+          "speed": 150,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 550,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "seal_ring_quick": {
+          "type": "ring",
+          "label": "Sóng Finality",
+          "telegraphMs": 550,
+          "speed": 185,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 450,
+          "gapDeg": 45,
+          "mult": 0.8
+        },
+        "seal_ring_quad": {
+          "type": "ring",
+          "label": "Sóng Origin",
+          "telegraphMs": 500,
+          "speed": 190,
+          "thickness": 16,
+          "rings": 4,
+          "intervalMs": 420,
+          "gapDeg": 45,
+          "mult": 0.8
+        },
+        "seal_fall": {
+          "type": "slam",
+          "label": "Ấn Rơi",
+          "telegraphMs": 850,
+          "radius": 38,
+          "count": 3,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.2,
+          "fx": "smite"
+        },
+        "seal_fall_many": {
+          "type": "slam",
+          "label": "Ấn Rơi",
+          "telegraphMs": 700,
+          "radius": 36,
+          "count": 5,
+          "scatter": 110,
+          "staggerMs": 260,
+          "mult": 1.2,
+          "fx": "smite"
+        },
+        "seal_ray": {
+          "type": "beam",
+          "label": "Tia Sáu Ấn",
+          "telegraphMs": 800,
+          "width": 18,
+          "durationMs": 800,
+          "sweepDeg": 70,
+          "mult": 1.1
+        },
+        "seal_ray_sweep": {
+          "type": "beam",
+          "label": "Tia Sáu Ấn",
+          "telegraphMs": 700,
+          "width": 20,
+          "durationMs": 1100,
+          "sweepDeg": 170,
+          "mult": 1.1
+        },
+        "seal_charge": {
+          "type": "charge",
+          "label": "Ấn Xung",
+          "telegraphMs": 700,
+          "speed": 370,
+          "durationMs": 800,
+          "mult": 1.2,
+          "stunOnWallMs": 1300
+        }
+      },
+      "defense": {}
+    },
+    {
+      "id": "boss_primeval_architect",
+      "intro": "Kiến Trúc Sư Nguyên Thủy dựng tường đá quanh cậu và tung ba vòng sóng co hẹp dần. Khi nó yếu đi, Kuro sẽ giữ tay đá — bấm [5] để ngắt Bộ Điều Áp.",
+      "scale": 1.15,
+      "radius": 26,
+      "speed": 40,
+      "damageScale": 0.38,
+      "contactMult": 0.5,
+      "calls": [
+        {
+          "id": "cut_regulator",
+          "label": "NGẮT BỘ ĐIỀU ÁP CỔ",
+          "message": "Kuro giữ chặt hai cánh tay đá — Peter giật đứt Bộ Điều Áp Cổ! Kiến Trúc Sư đứng khựng hai lượt.",
+          "belowPct": 0.5,
+          "stunMs": 5000
+        }
+      ],
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["shrinking_rings", "pillar_drop", "blueprint_ray"],
+          "pauseMs": 1050
+        },
+        {
+          "fromHpPct": 0.5,
+          "moves": [
+            "shrinking_rings",
+            "pillar_drop_many",
+            "blueprint_ray_sweep",
+            "architect_stride"
+          ],
+          "pauseMs": 750,
+          "speedMult": 1.2,
+          "banner": "Kiến Trúc Sư đập nát bản vẽ — cả thành trì rung chuyển!"
+        }
+      ],
+      "moves": {
+        "shrinking_rings": {
+          "type": "ring",
+          "label": "Ba Vòng Co Hẹp",
+          "telegraphMs": 700,
+          "speed": 160,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 800,
+          "gapDeg": 45,
+          "mult": 0.8,
+          "cadence": {
+            "reward": "hpPct",
+            "pct": 0.1,
+            "message": "Lướt trọn ba vòng sóng — Kiến Trúc Sư mất thăng bằng!"
+          }
+        },
+        "pillar_drop": {
+          "type": "slam",
+          "label": "Cột Đá Giáng",
+          "telegraphMs": 850,
+          "radius": 42,
+          "count": 3,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.3
+        },
+        "pillar_drop_many": {
+          "type": "slam",
+          "label": "Cột Đá Giáng",
+          "telegraphMs": 750,
+          "radius": 40,
+          "count": 5,
+          "scatter": 110,
+          "staggerMs": 260,
+          "mult": 1.3
+        },
+        "blueprint_ray": {
+          "type": "beam",
+          "label": "Tia Bản Vẽ",
+          "telegraphMs": 850,
+          "width": 20,
+          "durationMs": 800,
+          "sweepDeg": 60,
+          "mult": 1.1
+        },
+        "blueprint_ray_sweep": {
+          "type": "beam",
+          "label": "Tia Bản Vẽ",
+          "telegraphMs": 750,
+          "width": 22,
+          "durationMs": 1100,
+          "sweepDeg": 150,
+          "mult": 1.1
+        },
+        "architect_stride": {
+          "type": "charge",
+          "label": "Bước Khổng Lồ",
+          "telegraphMs": 800,
+          "speed": 330,
+          "durationMs": 900,
+          "mult": 1.3,
+          "stunOnWallMs": 1500
+        }
+      },
+      "defense": {
+        "builder": {
+          "everyMs": 11000,
+          "blocks": 3,
+          "lifeMs": 8000,
+          "message": "Kiến Trúc Sư vẽ một nét — ba khối đá trồi lên quanh Peter!"
+        }
+      }
+    },
+    {
+      "id": "boss_sixfold_divinity",
+      "intro": "Thần Tính Lục Hợp giáng đòn Trật Tự (vàng) và Khả Năng (tím). Khi hai đòn trùng nhịp, lướt né đúng khoảnh khắc để chúng đập vào nhau. Khi nó suy yếu, đồng đội sẽ đáp lời [5]–[8].",
+      "scale": 1.15,
+      "radius": 26,
+      "speed": 42,
+      "damageScale": 0.36,
+      "contactMult": 0.5,
+      "ally": {
+        "belowPct": 0.6,
+        "texture": "npc_kuro",
+        "anim": "npc_kuro_idle",
+        "everyMs": 6000,
+        "damagePct": 0.03,
+        "message": "Kuro chém xuyên cánh Khả Năng — Thần Tính mất {damage} HP!"
+      },
+      "calls": [
+        {
+          "id": "call_ivo9",
+          "label": "GỌI IVO",
+          "message": "Ivo chèn cờ lê vào bánh răng ngai vàng — Thần Tính mất một lượt!",
+          "belowPct": 0.6,
+          "stunMs": 2500
+        },
+        {
+          "id": "call_neris9",
+          "label": "GỌI NERIS",
+          "message": "Neris đọc tên Peter thật to — vết thương khép lại!",
+          "belowPct": 0.6,
+          "healPct": 0.25
+        },
+        {
+          "id": "call_lyra9",
+          "label": "GỌI LYRA",
+          "message": "Lyra phóng kích xuyên cánh Trật Tự — Thần Tính chao đảo!",
+          "belowPct": 0.6,
+          "stunMs": 2500
+        },
+        {
+          "id": "call_na9",
+          "label": "HẠC GIẤY BÉ NA",
+          "message": "Con hạc giấy ba màu bay vòng quanh Peter — ánh sáng ấm áp tràn khắp người!",
+          "belowPct": 0.6,
+          "healPct": 0.3,
+          "requiresFlag": "gave_na_papers"
+        }
+      ],
+      "finisher": {
+        "itemId": "origin_seal_half",
+        "belowPct": 0.1,
+        "prompt": "Khắc trang cuối",
+        "message": "Peter khắc dòng cuối lên trang giấy của chính mình. Đồng hồ điểm 12:00.",
+        "setFlag": "ch9_last_page_carved",
+        "required": true
+      },
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["order_and_chance", "sixfold_ring", "throne_ray", "divine_descent"],
+          "pauseMs": 1000
+        },
+        {
+          "fromHpPct": 0.6,
+          "moves": [
+            "order_and_chance",
+            "sixfold_ring_quick",
+            "throne_ray_sweep",
+            "divine_descent",
+            "wing_storm"
+          ],
+          "pauseMs": 650,
+          "speedMult": 1.3,
+          "banner": "Chronos thức tỉnh Thần Tính Lục Hợp. Kuro bước sang đứng cạnh Peter!"
+        }
+      ],
+      "moves": {
+        "order_and_chance": {
+          "type": "slam",
+          "label": "Trật Tự & Khả Năng",
+          "telegraphMs": 900,
+          "radius": 36,
+          "count": 2,
+          "scatter": 90,
+          "staggerMs": 850,
+          "mult": 1.3,
+          "fx": "smite",
+          "fxPalette": [
+            "#2a1a05",
+            "#6b4a12",
+            "#b8862a",
+            "#f0c860",
+            "#fff2b8",
+            "#ffffff",
+            "#ffffff"
+          ],
+          "cadence": {
+            "reward": "hpPct",
+            "pct": 0.06,
+            "message": "Hai đòn vàng tím trùng nhịp — Peter đỡ đúng lúc, chúng đập vào nhau!"
+          }
+        },
+        "sixfold_ring": {
+          "type": "ring",
+          "label": "Vòng Lục Hợp",
+          "telegraphMs": 700,
+          "speed": 155,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 550,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "sixfold_ring_quick": {
+          "type": "ring",
+          "label": "Vòng Lục Hợp",
+          "telegraphMs": 550,
+          "speed": 185,
+          "thickness": 16,
+          "rings": 4,
+          "intervalMs": 450,
+          "gapDeg": 45,
+          "mult": 0.8
+        },
+        "throne_ray": {
+          "type": "beam",
+          "label": "Tia Ngai Vàng",
+          "telegraphMs": 850,
+          "width": 20,
+          "durationMs": 800,
+          "sweepDeg": 80,
+          "mult": 1.1
+        },
+        "throne_ray_sweep": {
+          "type": "beam",
+          "label": "Tia Ngai Vàng",
+          "telegraphMs": 700,
+          "width": 22,
+          "durationMs": 1100,
+          "sweepDeg": 180,
+          "mult": 1.1
+        },
+        "divine_descent": {
+          "type": "charge",
+          "label": "Thần Giáng",
+          "telegraphMs": 750,
+          "speed": 360,
+          "durationMs": 850,
+          "mult": 1.3,
+          "stunOnWallMs": 1500
+        },
+        "wing_storm": {
+          "type": "volley",
+          "label": "Bão Lông Vũ Sáu Màu",
+          "telegraphMs": 550,
+          "shots": 12,
+          "spreadDeg": 330,
+          "speed": 150,
+          "waves": 3,
+          "intervalMs": 500,
+          "mult": 0.6
+        }
+      },
+      "defense": {}
+    },
+    {
+      "id": "boss_lieutenant_bran",
+      "intro": "Bran Tái Sinh quăng xích phục thù trói lấy cậu — đi quá xa sẽ bị giật ngược lại. Hai vòng sóng co hẹp: lướt né trọn cả hai để bẻ gãy một mắt xích.",
+      "scale": 1.4,
+      "radius": 20,
+      "speed": 58,
+      "damageScale": 0.38,
+      "contactMult": 0.45,
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["twin_shrink", "spear_line", "vengeance_charge"],
+          "pauseMs": 950
+        },
+        {
+          "fromHpPct": 0.5,
+          "moves": ["twin_shrink", "spear_line_wide", "vengeance_charge", "chain_volley"],
+          "pauseMs": 700,
+          "speedMult": 1.25,
+          "banner": "\"Một nghìn bốn trăm hai mươi bảy!\" Bran gào lên con số của mình."
+        }
+      ],
+      "moves": {
+        "twin_shrink": {
+          "type": "ring",
+          "label": "Hai Vòng Phục Thù",
+          "telegraphMs": 700,
+          "speed": 170,
+          "thickness": 16,
+          "rings": 2,
+          "intervalMs": 800,
+          "gapDeg": 40,
+          "mult": 0.85,
+          "cadence": {
+            "reward": "hpPct",
+            "pct": 0.08,
+            "message": "Đỡ trọn hai nhịp — xích phục thù gãy một mắt!"
+          }
+        },
+        "spear_line": {
+          "type": "beam",
+          "label": "Giáo Xuyên",
+          "telegraphMs": 800,
+          "width": 16,
+          "durationMs": 600,
+          "sweepDeg": 0,
+          "mult": 1.2
+        },
+        "spear_line_wide": {
+          "type": "beam",
+          "label": "Giáo Xuyên",
+          "telegraphMs": 700,
+          "width": 18,
+          "durationMs": 800,
+          "sweepDeg": 90,
+          "mult": 1.2
+        },
+        "vengeance_charge": {
+          "type": "charge",
+          "label": "Xung Phong Phục Thù",
+          "telegraphMs": 700,
+          "speed": 380,
+          "durationMs": 800,
+          "mult": 1.2,
+          "stunOnWallMs": 1300
+        },
+        "chain_volley": {
+          "type": "volley",
+          "label": "Mắt Xích Bay",
+          "telegraphMs": 600,
+          "shots": 5,
+          "spreadDeg": 60,
+          "speed": 200,
+          "waves": 3,
+          "intervalMs": 380,
+          "mult": 0.7
+        }
+      },
+      "defense": {
+        "chain": {
+          "everyMs": 12000,
+          "holdMs": 6000,
+          "length": 170,
+          "mult": 0.6,
+          "message": "Xích phục thù quấn lấy cổ tay Peter — đừng chạy xa khỏi Bran!"
+        }
+      }
+    },
+    {
+      "id": "boss_lieutenant_lyra",
+      "intro": "Pháp Quan Lyra giương cán cân tím. Phán quyết của cô ngắn hơn và nghiêm khắc hơn — nghe cho rõ trước khi vung kiếm.",
+      "scale": 1.4,
+      "radius": 20,
+      "speed": 56,
+      "damageScale": 0.38,
+      "contactMult": 0.45,
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["halberd_sweep", "scale_fall", "tribunal_charge"],
+          "pauseMs": 950
+        },
+        {
+          "fromHpPct": 1,
+          "moves": ["halberd_sweep_wide", "scale_fall_many", "tribunal_charge"],
+          "pauseMs": 650,
+          "afterArmorBroken": true,
+          "speedMult": 1.3,
+          "banner": "Cán cân nhân quả đảo nghịch vỡ toang! Khiên phán xét của Lyra rơi xuống."
+        }
+      ],
+      "moves": {
+        "halberd_sweep": {
+          "type": "beam",
+          "label": "Kích Quét",
+          "telegraphMs": 750,
+          "width": 20,
+          "durationMs": 700,
+          "sweepDeg": 120,
+          "mult": 1.2
+        },
+        "halberd_sweep_wide": {
+          "type": "beam",
+          "label": "Kích Quét",
+          "telegraphMs": 650,
+          "width": 22,
+          "durationMs": 900,
+          "sweepDeg": 200,
+          "mult": 1.2
+        },
+        "scale_fall": {
+          "type": "slam",
+          "label": "Đĩa Cân Tím",
+          "telegraphMs": 800,
+          "radius": 38,
+          "count": 3,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.3,
+          "fx": "smite",
+          "fxPalette": ["#120a1f", "#2e1648", "#5b2a86", "#9a5ad0", "#d8b4ff", "#ffffff", "#ffffff"]
+        },
+        "scale_fall_many": {
+          "type": "slam",
+          "label": "Đĩa Cân Tím",
+          "telegraphMs": 700,
+          "radius": 36,
+          "count": 4,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.3,
+          "fx": "smite",
+          "fxPalette": ["#120a1f", "#2e1648", "#5b2a86", "#9a5ad0", "#d8b4ff", "#ffffff", "#ffffff"]
+        },
+        "tribunal_charge": {
+          "type": "charge",
+          "label": "Pháp Đình Xung",
+          "telegraphMs": 700,
+          "speed": 380,
+          "durationMs": 850,
+          "mult": 1.2,
+          "stunOnWallMs": 1300
+        }
+      },
+      "defense": {
+        "armor": {
+          "damageReduction": 0.8,
+          "floorPct": 0.05,
+          "recoverPct": 0.55,
+          "recoverMessage": "Cán cân tím nghiêng về phía Pháp Quan — vết thương của cô biến mất!"
+        },
+        "sentences": {
+          "cracksToBreak": 3,
+          "firstMs": 4500,
+          "gapMs": 4000,
+          "windowMs": 5000,
+          "idleMs": 1300,
+          "breakMessage": "Cán cân nhân quả đảo nghịch vỡ toang! Khiên phán xét của Lyra rơi xuống.",
+          "list": [
+            {
+              "id": "blade",
+              "announce": "PHÁN QUYẾT: \"Kẻ vung gươm sẽ đổ máu!\" — Không chém, không bắn, không kỹ năng cho tới khi phán quyết tan.",
+              "forbid": ["attack"],
+              "defy": "endure",
+              "punishPct": 0.22,
+              "punishMessage": "Phán quyết ứng nghiệm — Peter mất {damage} HP!",
+              "crackMessage": "Peter không vung gươm — cán cân nứt một vết!",
+              "color": "#c86aff",
+              "fx": "curse"
+            },
+            {
+              "id": "hesitate",
+              "announce": "PHÁN QUYẾT: \"Kẻ chần chừ sẽ bị nghiền nát!\" — Phải đánh trúng Lyra trước khi phán quyết tan; đứng yên hay dùng đồ sẽ bị phạt.",
+              "forbid": ["idle", "item"],
+              "defy": "hit",
+              "punishPct": 0.22,
+              "punishMessage": "Phán quyết ứng nghiệm — sấm tím giáng xuống, Peter mất {damage} HP!",
+              "crackMessage": "Peter không chần chừ — cán cân nứt một vết!",
+              "color": "#f0c860",
+              "fx": "smite"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "boss_lieutenant_neris",
+      "intro": "Neris thì thầm những câu thơ đứt đoạn. Ba trang sách trôi quanh phòng — câu thơ nói về trang nào, đánh trúng trang đó.",
+      "scale": 1.4,
+      "radius": 20,
+      "speed": 46,
+      "damageScale": 0.38,
+      "contactMult": 0.45,
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["ink_storm", "page_ring", "quill_volley"],
+          "pauseMs": 1000
+        },
+        {
+          "fromHpPct": 1,
+          "moves": ["ink_storm_many", "page_ring_triple", "quill_volley", "neris_drift"],
+          "pauseMs": 700,
+          "afterArmorBroken": true,
+          "speedMult": 1.25,
+          "banner": "Bão mực tan! Cuốn sách mở toang, Neris không còn gì che chắn."
+        }
+      ],
+      "moves": {
+        "ink_storm": {
+          "type": "slam",
+          "label": "Bão Mực",
+          "telegraphMs": 850,
+          "radius": 38,
+          "count": 3,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.2,
+          "fxPalette": ["#05030a", "#1a1030", "#3a2260", "#7a50c0", "#c8a0ff", "#ffffff", "#ffffff"]
+        },
+        "ink_storm_many": {
+          "type": "slam",
+          "label": "Bão Mực",
+          "telegraphMs": 750,
+          "radius": 36,
+          "count": 5,
+          "scatter": 110,
+          "staggerMs": 260,
+          "mult": 1.2,
+          "fxPalette": ["#05030a", "#1a1030", "#3a2260", "#7a50c0", "#c8a0ff", "#ffffff", "#ffffff"]
+        },
+        "page_ring": {
+          "type": "ring",
+          "label": "Trang Xoay",
+          "telegraphMs": 700,
+          "speed": 150,
+          "thickness": 16,
+          "rings": 2,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8,
+          "fx": "waveCrash",
+          "fxPalette": ["#05030a", "#1a1030", "#3a2260", "#7a50c0", "#c8a0ff", "#ffffff", "#ffffff"]
+        },
+        "page_ring_triple": {
+          "type": "ring",
+          "label": "Trang Xoay",
+          "telegraphMs": 600,
+          "speed": 175,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "quill_volley": {
+          "type": "volley",
+          "label": "Ngòi Bút",
+          "telegraphMs": 650,
+          "shots": 7,
+          "spreadDeg": 90,
+          "speed": 190,
+          "waves": 2,
+          "intervalMs": 450,
+          "mult": 0.7
+        },
+        "neris_drift": {
+          "type": "charge",
+          "label": "Trôi Theo Trang",
+          "telegraphMs": 750,
+          "speed": 330,
+          "durationMs": 900,
+          "mult": 1.1,
+          "blink": true
+        }
+      },
+      "defense": {
+        "armor": {
+          "damageReduction": 0.8,
+          "floorPct": 0.05,
+          "recoverPct": 0.55,
+          "recoverMessage": "Ba tầng mực xoay ngược — trang sách tự liền lại!"
+        },
+        "songs": {
+          "cracksToBreak": 3,
+          "firstMs": 4500,
+          "gapMs": 3500,
+          "windowMs": 7500,
+          "wrongPct": 0.15,
+          "wrongMp": 8,
+          "wrongMessage": "Sai trang! Mực câm dội ngược, Peter mất {damage} HP và 8 MP!",
+          "breakMessage": "Bão mực tan! Cuốn sách mở toang, Neris không còn gì che chắn.",
+          "silentMessage": "Trang sách im lặng",
+          "list": [
+            {
+              "id": "name",
+              "targetId": "page_name",
+              "announce": "Neris thì thầm: \"Ai sẽ gọi lại tên người bị quên…\"",
+              "crackMessage": "Trang Tên sáng lên — một tầng mực vỡ!",
+              "color": "#7fd8ff"
+            },
+            {
+              "id": "road",
+              "targetId": "page_road",
+              "announce": "Neris thì thầm: \"Lối nào dẫn về nhà khi bản đồ đã cháy…\"",
+              "crackMessage": "Trang Đường Đi sáng lên — một tầng mực vỡ!",
+              "color": "#7fe08a"
+            },
+            {
+              "id": "ash",
+              "targetId": "page_ash",
+              "announce": "Neris thì thầm: \"Những gì còn lại sau ngọn lửa cuối cùng…\"",
+              "crackMessage": "Trang Tro Tàn sáng lên — một tầng mực vỡ!",
+              "color": "#ff8a6a"
+            }
+          ]
+        },
+        "targets": [
+          {
+            "id": "page_name",
+            "label": "TRANG TÊN",
+            "orbit": {
+              "radius": 120,
+              "degPerSec": 18,
+              "startDeg": 0
+            },
+            "effect": "song",
+            "color": "#7fd8ff",
+            "message": ""
+          },
+          {
+            "id": "page_road",
+            "label": "TRANG ĐƯỜNG ĐI",
+            "orbit": {
+              "radius": 120,
+              "degPerSec": 18,
+              "startDeg": 120
+            },
+            "effect": "song",
+            "color": "#7fe08a",
+            "message": ""
+          },
+          {
+            "id": "page_ash",
+            "label": "TRANG TRO TÀN",
+            "orbit": {
+              "radius": 120,
+              "degPerSec": 18,
+              "startDeg": 240
+            },
+            "effect": "song",
+            "color": "#ff8a6a",
+            "message": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "boss_lieutenant_other_peter",
+      "intro": "Peter Thứ Hai — một nhánh khác của chính cậu. Hắn bắt chước mọi đòn, và khi hắn thủ thế (vòng đỏ), đòn của cậu sẽ dội ngược.",
+      "scale": 1.4,
+      "radius": 20,
+      "speed": 64,
+      "damageScale": 0.38,
+      "contactMult": 0.45,
+      "mirror": {
+        "skillMove": "mirror_cross",
+        "silenceMs": 4000,
+        "skillMessage": "Hắn học theo Đòn Thời Gian, chém một nhát nặng — Kỹ Năng bị khóa một lượt!",
+        "healPct": 0.08,
+        "healMessage": "Hắn cũng lấy ra một mảnh chrono, y hệt mình.",
+        "dashLunge": true
+      },
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["mirror_cut", "mirror_dash", "mirror_cross", "mirror_shards"],
+          "pauseMs": 900
+        },
+        {
+          "fromHpPct": 0.5,
+          "moves": ["mirror_cut_wide", "mirror_dash", "mirror_cross", "mirror_shards"],
+          "pauseMs": 650,
+          "speedMult": 1.3,
+          "banner": "\"Ta là cậu, nếu cậu đã chọn khác đi.\" Hắn tăng tốc."
+        }
+      ],
+      "moves": {
+        "mirror_cut": {
+          "type": "beam",
+          "label": "Nhát Chém Gương",
+          "telegraphMs": 700,
+          "width": 16,
+          "durationMs": 500,
+          "sweepDeg": 110,
+          "mult": 1.1
+        },
+        "mirror_cut_wide": {
+          "type": "beam",
+          "label": "Nhát Chém Gương",
+          "telegraphMs": 600,
+          "width": 18,
+          "durationMs": 650,
+          "sweepDeg": 170,
+          "mult": 1.1
+        },
+        "mirror_dash": {
+          "type": "charge",
+          "label": "Lướt Gương",
+          "telegraphMs": 600,
+          "speed": 400,
+          "durationMs": 600,
+          "mult": 1.1,
+          "stunOnWallMs": 1200
+        },
+        "mirror_cross": {
+          "type": "slam",
+          "label": "Đòn Thời Gian Phản Chiếu",
+          "telegraphMs": 550,
+          "radius": 40,
+          "count": 2,
+          "scatter": 40,
+          "staggerMs": 250,
+          "mult": 1.4
+        },
+        "mirror_shards": {
+          "type": "volley",
+          "label": "Mảnh Gương",
+          "telegraphMs": 600,
+          "shots": 5,
+          "spreadDeg": 60,
+          "speed": 190,
+          "waves": 2,
+          "intervalMs": 450,
+          "mult": 0.7
+        }
+      },
+      "defense": {
+        "reflect": {
+          "everyMs": 6000,
+          "glowMs": 1500,
+          "pct": 0.4
+        }
+      }
+    },
+    {
+      "id": "boss_kuro_puppet_master",
+      "intro": "Chúa Tể Khả Năng Kuro giật dây. Khi hắn suy yếu, bóng của bốn phó tướng sẽ thành con rối che chắn cho hắn — cắt đứt từng con rối.",
+      "scale": 1.4,
+      "radius": 20,
+      "speed": 60,
+      "damageScale": 0.38,
+      "contactMult": 0.45,
+      "finisher": {
+        "itemId": "origin_seal_half",
+        "belowPct": 0.12,
+        "prompt": "Trang giấy trở về",
+        "message": "Peter trở về là trang giấy trắng, bọc lấy Kuro.",
+        "setFlag": "ch9_page_returned",
+        "required": true
+      },
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["branch_rain", "possibility_shift", "string_volley", "branch_ring"],
+          "pauseMs": 900
+        },
+        {
+          "fromHpPct": 0.5,
+          "moves": ["branch_rain_many", "possibility_shift", "string_volley", "branch_ring_triple"],
+          "pauseMs": 650,
+          "speedMult": 1.25,
+          "feint": 0.4,
+          "banner": "Kuro giật dây — bóng của bốn phó tướng hiện lên sau lưng hắn!"
+        }
+      ],
+      "moves": {
+        "branch_rain": {
+          "type": "slam",
+          "label": "Mưa Nhánh",
+          "telegraphMs": 800,
+          "radius": 36,
+          "count": 3,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.2,
+          "fxPalette": ["#120a1f", "#2e1648", "#5b2a86", "#9a5ad0", "#d8b4ff", "#ffffff", "#ffffff"]
+        },
+        "branch_rain_many": {
+          "type": "slam",
+          "label": "Mưa Nhánh",
+          "telegraphMs": 700,
+          "radius": 34,
+          "count": 5,
+          "scatter": 110,
+          "staggerMs": 260,
+          "mult": 1.2,
+          "fxPalette": ["#120a1f", "#2e1648", "#5b2a86", "#9a5ad0", "#d8b4ff", "#ffffff", "#ffffff"]
+        },
+        "possibility_shift": {
+          "type": "charge",
+          "label": "Dịch Khả Năng",
+          "telegraphMs": 600,
+          "speed": 400,
+          "durationMs": 500,
+          "mult": 1.1,
+          "blink": true
+        },
+        "string_volley": {
+          "type": "volley",
+          "label": "Dây Rối",
+          "telegraphMs": 550,
+          "shots": 6,
+          "spreadDeg": 70,
+          "speed": 210,
+          "waves": 3,
+          "intervalMs": 380,
+          "mult": 0.6
+        },
+        "branch_ring": {
+          "type": "ring",
+          "label": "Vòng Nhánh",
+          "telegraphMs": 700,
+          "speed": 155,
+          "thickness": 16,
+          "rings": 2,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "branch_ring_triple": {
+          "type": "ring",
+          "label": "Vòng Nhánh",
+          "telegraphMs": 600,
+          "speed": 180,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8
+        }
+      },
+      "defense": {
+        "bloodWall": {
+          "belowPct": 0.5,
+          "tetherLabel": "CON RỐI",
+          "tetherColor": "#c86aff",
+          "firstMs": 0,
+          "everyMs": 15000,
+          "reducePct": 0.7,
+          "tethers": 4,
+          "minDist": 110,
+          "maxDist": 230,
+          "stunMs": 2500,
+          "raiseMessage": "Kuro giật dây — bốn con rối phó tướng đứng chắn quanh hắn! Cắt đứt cả bốn.",
+          "cutMessage": "Một sợi dây rối đứt!",
+          "breakMessage": "Những con rối đổ sụp — Kuro trơ trọi giữa ngai muôn nhánh!"
+        }
+      }
+    },
+    {
+      "id": "boss_void_singularity_core",
+      "intro": "Lõi Kỳ Dị Hư Vô hút mọi thứ về phía nó — đừng để bị kéo vào. Không gian xoắn ngược sẽ khóa đòn chém hoặc túi đồ; Đòn Thời Gian cắt xuyên được.",
+      "scale": 1.15,
+      "radius": 26,
+      "speed": 24,
+      "damageScale": 0.36,
+      "contactMult": 0.9,
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["void_ring", "singularity_fall", "event_ray"],
+          "pauseMs": 1000
+        },
+        {
+          "fromHpPct": 0.5,
+          "moves": ["void_ring_triple", "singularity_fall_many", "event_ray_sweep", "void_volley"],
+          "pauseMs": 700,
+          "speedMult": 1.2,
+          "banner": "Lõi co lại rồi phình ra — chân trời sự kiện tiến gần hơn!"
+        }
+      ],
+      "moves": {
+        "void_ring": {
+          "type": "ring",
+          "label": "Vòng Hư Vô",
+          "telegraphMs": 700,
+          "speed": 150,
+          "thickness": 16,
+          "rings": 2,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8,
+          "fx": "waveCrash",
+          "fxPalette": ["#05030a", "#1a1030", "#3a2260", "#7a50c0", "#c8a0ff", "#ffffff", "#ffffff"]
+        },
+        "void_ring_triple": {
+          "type": "ring",
+          "label": "Vòng Hư Vô",
+          "telegraphMs": 600,
+          "speed": 175,
+          "thickness": 16,
+          "rings": 3,
+          "intervalMs": 600,
+          "gapDeg": 55,
+          "mult": 0.8
+        },
+        "singularity_fall": {
+          "type": "slam",
+          "label": "Điểm Kỳ Dị",
+          "telegraphMs": 850,
+          "radius": 40,
+          "count": 3,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.3,
+          "fxPalette": ["#05030a", "#1a1030", "#3a2260", "#7a50c0", "#c8a0ff", "#ffffff", "#ffffff"]
+        },
+        "singularity_fall_many": {
+          "type": "slam",
+          "label": "Điểm Kỳ Dị",
+          "telegraphMs": 750,
+          "radius": 38,
+          "count": 5,
+          "scatter": 110,
+          "staggerMs": 260,
+          "mult": 1.3,
+          "fxPalette": ["#05030a", "#1a1030", "#3a2260", "#7a50c0", "#c8a0ff", "#ffffff", "#ffffff"]
+        },
+        "event_ray": {
+          "type": "beam",
+          "label": "Chân Trời Sự Kiện",
+          "telegraphMs": 850,
+          "width": 20,
+          "durationMs": 800,
+          "sweepDeg": 90,
+          "mult": 1.1
+        },
+        "event_ray_sweep": {
+          "type": "beam",
+          "label": "Chân Trời Sự Kiện",
+          "telegraphMs": 750,
+          "width": 22,
+          "durationMs": 1200,
+          "sweepDeg": 220,
+          "mult": 1.1
+        },
+        "void_volley": {
+          "type": "volley",
+          "label": "Mảnh Hư Không",
+          "telegraphMs": 600,
+          "shots": 12,
+          "spreadDeg": 330,
+          "speed": 140,
+          "waves": 3,
+          "intervalMs": 500,
+          "mult": 0.6
+        }
+      },
+      "defense": {
+        "gravity": {
+          "pull": 25,
+          "maxPull": 70,
+          "growPerSec": 0.5
+        },
+        "memoryLock": {
+          "firstMs": 6000,
+          "everyMs": 9000,
+          "lockMs": 6000,
+          "staggerMs": 2200,
+          "staggerMult": 1.5,
+          "staggerMessage": "Đòn Thời Gian cắt xuyên lõi — nó chao đảo, đòn kế tiếp đánh trúng tâm!",
+          "lockedText": "Không gian xoắn!",
+          "options": [
+            {
+              "lock": "melee",
+              "announce": "Không gian xoắn ngược — CHÉM bị khóa! Dùng [Chuột phải] Đòn Thời Gian để cắt xuyên.",
+              "staggerBy": ["skill"]
+            },
+            {
+              "lock": "item",
+              "announce": "Túi đồ bị hút vào lõi — VẬT PHẨM bị khóa! Dùng [Chuột phải] Đòn Thời Gian để cắt xuyên.",
+              "staggerBy": ["skill"]
+            }
+          ]
+        }
+      }
     }
   ]
 }

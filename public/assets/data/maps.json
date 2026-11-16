@@ -13773,7 +13773,8 @@
           },
           "onceFlag": "ch6_t_herald_seen",
           "dialogueId": "ch6_herald_confront",
-          "unlessFlag": "defeated_broken_herald"
+          "unlessFlag": "defeated_broken_herald",
+          "encounterId": "enc_broken_herald"
         }
       ]
     },
@@ -17993,7 +17994,8 @@
           },
           "onceFlag": "ch6_t_deacon_seen",
           "dialogueId": "ch6_deacon_confront",
-          "unlessFlag": "defeated_remnant_deacon"
+          "unlessFlag": "defeated_remnant_deacon",
+          "encounterId": "enc_remnant_deacon"
         }
       ]
     },
@@ -18237,7 +18239,8 @@
           },
           "onceFlag": "ch6_t_warden_seen",
           "dialogueId": "ch6_warden_confront",
-          "unlessFlag": "defeated_genesis_warden"
+          "unlessFlag": "defeated_genesis_warden",
+          "encounterId": "enc_genesis_warden"
         }
       ]
     },
@@ -18589,7 +18592,8 @@
           "onceFlag": "ch6_t_echo_seen",
           "dialogueId": "ch6_echo_confront",
           "requiresFlag": "ch6_echo_awake",
-          "unlessFlag": "defeated_echo_first_forgotten"
+          "unlessFlag": "defeated_echo_first_forgotten",
+          "encounterId": "enc_echo_forgotten"
         }
       ]
     },
@@ -20839,7 +20843,8 @@
           },
           "onceFlag": "ch7_t_weeper_confront_seen",
           "dialogueId": "ch7_weeper_confront",
-          "unlessFlag": "defeated_nameless_weeper"
+          "unlessFlag": "defeated_nameless_weeper",
+          "encounterId": "enc_nameless_weeper"
         }
       ]
     },
@@ -22628,7 +22633,8 @@
           "onceFlag": "ch7_t_kuro_ally_seen",
           "dialogueId": "ch7_kuro_confront_ally",
           "requiresFlag": "ch6_kuro_ally",
-          "unlessFlag": "pacified_void_kuro"
+          "unlessFlag": "pacified_void_kuro",
+          "encounterId": "enc_kuro_void"
         },
         {
           "id": "ch7_t_kuro_left",
@@ -22641,7 +22647,8 @@
           },
           "onceFlag": "ch7_t_kuro_left_seen",
           "dialogueId": "ch7_kuro_confront_left",
-          "unlessFlag": "ch6_kuro_ally"
+          "unlessFlag": "ch6_kuro_ally",
+          "encounterId": "enc_kuro_void"
         }
       ]
     },
@@ -23009,7 +23016,8 @@
           "onceFlag": "ch7_t_shade_seen",
           "dialogueId": "ch7_shade_confront",
           "requiresFlag": "ch7_shade_awake",
-          "unlessFlag": "defeated_primordial_shade"
+          "unlessFlag": "defeated_primordial_shade",
+          "encounterId": "enc_primordial_shade"
         }
       ]
     },
@@ -25297,7 +25305,8 @@
           },
           "onceFlag": "ch8_t_praetor_seen",
           "dialogueId": "ch8_praetor_confront",
-          "unlessFlag": "defeated_convergent_praetor"
+          "unlessFlag": "defeated_convergent_praetor",
+          "encounterId": "enc_convergent_praetor"
         }
       ]
     },
@@ -28069,7 +28078,8 @@
           },
           "onceFlag": "ch8_t_herald_seen",
           "dialogueId": "ch8_herald_confront",
-          "unlessFlag": "defeated_null_hour_herald"
+          "unlessFlag": "defeated_null_hour_herald",
+          "encounterId": "enc_null_hour_herald"
         }
       ]
     },
@@ -28883,7 +28893,8 @@
           "onceFlag": "ch8_t_echo_confront_seen",
           "dialogueId": "ch8_echo_confront",
           "requiresFlag": "solved_six_pillars",
-          "unlessFlag": "defeated_sixfold_echo"
+          "unlessFlag": "defeated_sixfold_echo",
+          "encounterId": "enc_sixfold_echo"
         }
       ]
     },
@@ -31156,7 +31167,8 @@
           },
           "onceFlag": "ch9_t_architect_seen",
           "dialogueId": "ch9_architect_arrival",
-          "unlessFlag": "defeated_primeval_architect"
+          "unlessFlag": "defeated_primeval_architect",
+          "encounterId": "enc_ch9_architect"
         }
       ]
     },
@@ -32052,7 +32064,8 @@
           },
           "onceFlag": "ch9_t_sixfold_confront_seen",
           "dialogueId": "ch9_sixfold_boss_intro",
-          "unlessFlag": "defeated_sixfold_divinity"
+          "unlessFlag": "defeated_sixfold_divinity",
+          "encounterId": "enc_ch9_sixfold"
         }
       ]
     },
@@ -32397,7 +32410,8 @@
           },
           "onceFlag": "ch9_t_bran_seen",
           "dialogueId": "ch9_bran_arrival",
-          "unlessFlag": "defeated_lieutenant_bran"
+          "unlessFlag": "defeated_lieutenant_bran",
+          "encounterId": "enc_ch9_bran"
         }
       ]
     },
@@ -32515,7 +32529,8 @@
           },
           "onceFlag": "ch9_t_lyra_seen",
           "dialogueId": "ch9_lyra_boss_arrival",
-          "unlessFlag": "defeated_lieutenant_lyra"
+          "unlessFlag": "defeated_lieutenant_lyra",
+          "encounterId": "enc_ch9_lyra"
         }
       ]
     },
@@ -32633,7 +32648,8 @@
           },
           "onceFlag": "ch9_t_neris_seen",
           "dialogueId": "ch9_neris_boss_arrival",
-          "unlessFlag": "defeated_lieutenant_neris"
+          "unlessFlag": "defeated_lieutenant_neris",
+          "encounterId": "enc_ch9_neris"
         }
       ]
     },
@@ -32751,7 +32767,8 @@
           },
           "onceFlag": "ch9_t_other_peter_seen",
           "dialogueId": "ch9_other_peter_arrival",
-          "unlessFlag": "defeated_lieutenant_other_peter"
+          "unlessFlag": "defeated_lieutenant_other_peter",
+          "encounterId": "enc_ch9_other_peter"
         }
       ]
     },
@@ -32837,7 +32854,8 @@
           },
           "onceFlag": "ch9_t_kuro_pm_seen",
           "dialogueId": "ch9_kuro_boss_arrival",
-          "unlessFlag": "defeated_kuro_puppet_master_fight"
+          "unlessFlag": "defeated_kuro_puppet_master_fight",
+          "encounterId": "enc_ch9_kuro_pm"
         }
       ]
     },

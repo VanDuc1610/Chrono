@@ -229,6 +229,10 @@ export class ActionCombat {
   private hudMp = -1;
   /** When Peter last started a dodge (perfect dodge against snipers). */
   private lastDashAt = -Infinity;
+  /** When Peter last dodged (boss fights read it for last-instant dodges). */
+  public get lastDash(): number {
+    return this.lastDashAt;
+  }
   /** Sniper aim lines, redrawn each frame. */
   private readonly aimLines: Phaser.GameObjects.Graphics;
   /** Health bars over Peter (HP + MP) and over every enemy, redrawn each frame. */
@@ -1407,6 +1411,12 @@ export class ActionCombat {
   }
 
   /** Temporal Strike is sealed for `ms` (Peter's other self copies it). */
+  /** Pulls Peter toward `to` for `ms` (Bran's chain), overriding his own steps. */
+  public yank(to: Point, speed: number, ms: number): void {
+    const ang = Math.atan2(to.y - this.player.y, to.x - this.player.x);
+    this.player.forceVelocity(Math.cos(ang) * speed, Math.sin(ang) * speed, ms);
+  }
+
   public silence(ms: number): void {
     this.silencedUntil = Math.max(this.silencedUntil, this.scene.time.now + ms);
   }

@@ -97,6 +97,11 @@ export type BossMove = (SlamMove | RingMove | ChargeMove | VolleyMove | BeamMove
   blink?: boolean;
   /** Slams only: chance the first circle is a decoy and the real blow lands on Peter late. */
   feint?: number;
+  /**
+   * Every blow of this move dodged at the last instant (a dash as it lands) earns a reward:
+   * a share of the boss's HP, or its armor (the turn-based "block every beat").
+   */
+  cadence?: { reward: 'hpPct' | 'breakArmor'; pct?: number; message: string };
 };
 
 export interface BossPhase {
@@ -110,6 +115,10 @@ export interface BossPhase {
   speedMult?: number;
   /** Banner when the phase starts. */
   banner?: string;
+  /** Feint chance for every slam of this phase (Sixfold Echo's seals). */
+  feint?: number;
+  /** Telegraphs drawn faint (Memory seal, Null Hour's second phase). */
+  faint?: boolean;
 }
 
 /** Something in the arena Peter strikes (slash or shot) to break the boss's defence. */
@@ -130,9 +139,10 @@ export interface BossTarget {
   whileStunned?: boolean;
   /**
    * stun: stuns the boss; progress: only counts (a `stunMs` restarts the stun); breakArmor;
-   * song: judged by the song in force (defense.songs); finality: the next blow ends the boss.
+   * song: judged by the song in force (defense.songs); finality: the next blow ends the boss;
+   * clearMist: pushes the forgetting mist back (defense.mist).
    */
-  effect: 'stun' | 'progress' | 'breakArmor' | 'song' | 'finality';
+  effect: 'stun' | 'progress' | 'breakArmor' | 'song' | 'finality' | 'clearMist';
   stunMs?: number;
   /** breakArmor: HP ratio the boss is set to (if lower than now). */
   setHpPct?: number;
@@ -172,10 +182,79 @@ export interface BossDefense {
   bloodWall?: BloodWallDefense;
   /** The Last War: it rises again once, and only the ritual (targets in order) ends it. */
   ritual?: RitualDefense;
+  /** Echo of the Forgotten: a mist hides it and drains MP until a brazier is struck. */
+  mist?: { mpPerSec: number; clearMs: number; drainMessage: string; clearMessage: string };
+  /** Nameless Weeper: tears fall near Peter; strike them before they land or the pool floods. */
+  tears?: {
+    everyMs: number;
+    fallMs: number;
+    max: number;
+    floodPct: number;
+    dropMessage: string;
+    wipeMessage: string;
+    floodMessage: string;
+  };
+  /** Genesis Warden: below `belowPct` it charges a purge; dash as it fires, or pull the pin. */
+  purge?: {
+    belowPct: number;
+    chargeMs: number;
+    cooldownMs: number;
+    damagePct: number;
+    pinFlag?: string;
+    pinDamage: number;
+    pinSetFlag?: string;
+    pinLabel: string;
+    pinMessage: string;
+    chargeMessage: string;
+    fireMessage: string;
+    dodgedMessage: string;
+  };
+  /** Primordial Shade: a mirrored twin; only both halos struck together hurt it fully. */
+  twin?: { windowMs: number; soloPct: number; burstPct: number; burstMessage: string };
+  /** Null Hour Herald: the 25th hour hand climbs; at the top it strikes everything. */
+  clock?: {
+    start: number;
+    top: number;
+    tickMs: number;
+    strikePct: number;
+    pushBy: number;
+    strikeMessage: string;
+    dodgedMessage: string;
+    /** Kuro holds the hand once, one step from the top, while this flag holds. */
+    holdFlag?: string;
+    holdMessage?: string;
+    phase2Pct: number;
+    phase2Message: string;
+  };
+  /** Bran: a chain binds Peter; straying too far yanks him back. */
+  chain?: { everyMs: number; holdMs: number; length: number; mult: number; message: string };
+  /** Primeval Architect: stone blocks rise around Peter for a while. */
+  builder?: { everyMs: number; blocks: number; lifeMs: number; message: string };
+  /** Void Core: it pulls Peter toward itself, harder as the fight goes on. */
+  gravity?: { pull: number; maxPull: number; growPerSec: number };
+  /** Convergent Praetor: an item makes the next blow on Peter heavier. */
+  healPenalty?: { mult: number; message: string };
 }
 
-/** Melee = slash; ranged = shots and Temporal Strike. */
-export type MoveKind = 'melee' | 'ranged';
+/** A companion Peter calls with keys 5-8 (once each). */
+export interface BossCall {
+  id: string;
+  label: string;
+  message: string;
+  /** Offered once the boss is at or below this HP ratio (default always). */
+  belowPct?: number;
+  requiresFlag?: string;
+  stunMs?: number;
+  /** Heals Peter by this share of his max HP. */
+  healPct?: number;
+  /** Pushes the hour hand back (Null Hour). */
+  clockBack?: boolean;
+  /** Deals this share of the boss's HP. */
+  damagePct?: number;
+}
+
+/** Melee = slash; ranged = shots and Temporal Strike; item = quick-slot items. */
+export type MoveKind = 'melee' | 'ranged' | 'item';
 
 export interface MemoryLockDefense {
   firstMs: number;
@@ -186,7 +265,8 @@ export interface MemoryLockDefense {
   staggerMult: number;
   staggerMessage: string;
   lockedText: string;
-  options: { lock: MoveKind; announce: string }[];
+  /** `staggerBy`: only these moves stagger (default: any move of another kind). */
+  options: { lock: MoveKind; announce: string; staggerBy?: ('slash' | 'shot' | 'skill')[] }[];
 }
 
 export interface SongDefense {
@@ -196,6 +276,8 @@ export interface SongDefense {
   windowMs: number;
   /** A wrong target: this share of Peter's max HP, and this much MP. */
   wrongPct: number;
+  /** A wrong target heals the boss by this share instead (Broken Herald). */
+  wrongHealPct?: number;
   wrongMp: number;
   wrongMessage: string;
   breakMessage: string;
@@ -205,6 +287,10 @@ export interface SongDefense {
 }
 
 export interface BloodWallDefense {
+  /** Raised only once the boss is at or below this HP ratio. */
+  belowPct?: number;
+  tetherLabel?: string;
+  tetherColor?: string;
   firstMs: number;
   everyMs: number;
   reducePct: number;
@@ -297,7 +383,9 @@ export interface BossProfile {
   startStun?: { flag: string; ms: number; message: string };
   /** An ally fights beside Peter while `flag` holds, striking every `everyMs`. */
   ally?: {
-    flag: string;
+    /** Joins while this flag holds (none: always), from this HP ratio down (default 1). */
+    flag?: string;
+    belowPct?: number;
     texture: string;
     anim?: string;
     everyMs: number;
@@ -322,7 +410,19 @@ export interface BossProfile {
     dashLunge: boolean;
   };
   /** An item ends the fight (E) once the boss is low enough (the letter to Na). */
-  finisher?: { itemId: string; belowPct: number; prompt: string; message: string };
+  finisher?: {
+    itemId: string;
+    /** Offered only while this flag holds. */
+    flag?: string;
+    belowPct: number;
+    prompt: string;
+    message: string;
+    /** Story flag set when it is used (Chapter 9 endings read these). */
+    setFlag?: string;
+    /** Only the finisher ends the fight: other damage leaves the boss at 1 HP. */
+    required?: boolean;
+  };
+  calls?: BossCall[];
 }
 
 export interface BossDatabase {

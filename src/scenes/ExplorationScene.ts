@@ -380,6 +380,11 @@ export class ExplorationScene extends Phaser.Scene {
     const { x, y } = this.player;
     if (this.checkTriggers(x, y) || this.checkExits(x, y)) return;
 
+    // During a boss fight E belongs to the fight (a finisher), not to the room's objects.
+    if (this.bossFight?.active) {
+      this.promptText.setVisible(false);
+      return;
+    }
     const closest = this.interactionSystem.getClosestInteractable(new Phaser.Math.Vector2(x, y));
     // Points gated by `requiresFlag` stay silent (no prompt, no dialogue) until the flag is set.
     const nearby = closest?.canInteract(this.player.sprite) ? closest : null;
@@ -1117,6 +1122,11 @@ export class ExplorationScene extends Phaser.Scene {
     if (this.isTransitioning) return;
     const id = this.session.quickSlots[index];
     if (!id) return;
+    const sealed = this.bossFight?.blocked('item');
+    if (sealed) {
+      this.action?.floatText(this.player.x, this.player.y - 22, sealed, '#9ad7ff');
+      return;
+    }
     const result = this.session.useConsumable(id);
     const { x, y } = this.player;
     if (!result.ok) {
