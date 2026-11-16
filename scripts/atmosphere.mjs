@@ -148,6 +148,8 @@ for (const [id, m] of Object.entries(maps)) {
     },
     poiLight: { color: t.poi, radius: L.poiR, intensity: 0.85, glow: L.glow },
     vignette: L.vignette,
+    // The celestial chapter is white on white: its glows would wash the tiles out.
+    ...(ch === 6 ? { glowScale: 0.35 } : {}),
     motes: { color: t.mote, count: L.motes, drift: k === 'open' ? 12 : 9, up: t.up },
   };
   if (boss)

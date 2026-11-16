@@ -12,8 +12,13 @@ export interface AtmosphereDef {
   lights?: (LightDef & { tile: TilePoint; flicker?: boolean })[];
   /** Every point of interest on the map gets this light. */
   poiLight?: LightDef;
+  /** Puzzle pieces on the floor (dials, mirrors, pillars, swapped tiles) and people. */
+  puzzleLight?: LightDef;
+  npcLight?: LightDef;
   /** Darkened screen edges (0-1). */
   vignette?: number;
+  /** Strength of every coloured glow (bright, white maps want less). Default 1. */
+  glowScale?: number;
   /** Floating motes (dust, sea spray, embers). */
   motes?: { color: string; count: number; drift: number; up?: boolean };
 }
@@ -40,6 +45,11 @@ interface Lit {
   pulse: number;
 }
 
+/** Puzzle pieces and people stay readable in the dark (owner request): defaults, and a cap. */
+const PUZZLE_LIGHT: LightDef = { color: '#fff4e0', radius: 64, intensity: 0.75, glow: 0 };
+const NPC_LIGHT: LightDef = { color: '#fff0d8', radius: 56, intensity: 0.6, glow: 0 };
+const MAX_PUZZLE_LIGHTS = 24;
+
 const SOFT = 'fx_atmo_soft';
 const MOTE = 'fx_atmo_mote';
 const VIGNETTE = 'fx_atmo_vignette';
@@ -58,6 +68,8 @@ export class Atmosphere {
   private dark: Phaser.GameObjects.RenderTexture | null = null;
   private brush: Phaser.GameObjects.Image | null = null;
   private vignette: Phaser.GameObjects.Image | null = null;
+  /** Peter's light, following him above the darkness. */
+  private lift: Phaser.GameObjects.Image | null = null;
   private motes: Phaser.GameObjects.Particles.ParticleEmitter | null = null;
   private lit: Lit[] = [];
   private on = false;
@@ -67,6 +79,8 @@ export class Atmosphere {
     mapId: string,
     private readonly peter: Phaser.GameObjects.Sprite,
     private readonly pois: TilePoint[],
+    private readonly puzzles: TilePoint[] = [],
+    private readonly npcs: TilePoint[] = [],
   ) {
     const db = scene.cache.json.get('data_atmosphere') as AtmosphereDatabase | undefined;
     this.def = db?.maps[mapId] ?? null;
@@ -89,20 +103,34 @@ export class Atmosphere {
     return true;
   }
 
-  /** Redraws the darkness with its holes; the glows follow their lights. */
+  /**
+   * Coloured glows add light on top of the map: on a bright map they would wash it out, so they
+   * scale with how dark the map is (full at 0.45 darkness and above) and with `glowScale` in the data.
+   */
+  private get glowScale(): number {
+    const a = this.def?.shade?.alpha ?? 0.5;
+    return Math.min(1, a / 0.45) * (this.def?.glowScale ?? 1);
+  }
+
+  /** The darkness is painted once; per frame only Peter's light and the flickering glows move. */
   public update(): void {
-    if (!this.on || !this.dark || !this.brush || !this.def) return;
-    const cam = this.scene.cameras.main;
-    const shade = this.def.shade ?? { color: '#000010', alpha: 0.5 };
+    if (!this.on) return;
+    this.lift?.setPosition(this.peter.x, this.peter.y);
+    for (const l of this.lit)
+      if (l.glow) l.glow.setAlpha((l.def.glow ?? 0.35) * l.pulse * this.glowScale);
+  }
+
+  /** Darkness over the whole map, with a soft hole at every fixed light (drawn once). */
+  private paintDarkness(): void {
+    const d = this.def;
+    if (!d || !this.dark || !this.brush) return;
+    const shade = d.shade ?? { color: '#000010', alpha: 0.5 };
     this.dark.clear();
     this.dark.fill(hex(shade.color), shade.alpha);
     for (const l of this.lit) {
       const p = l.at();
-      const r = l.def.radius * (0.9 + 0.1 * l.pulse);
-      // The brush is a soft disc 128 px wide: scale it to the light, erase that much darkness.
-      this.brush.setScale((r * 2) / 128).setAlpha(Math.min(1, l.def.intensity * l.pulse));
-      this.dark.erase(this.brush, p.x - cam.worldView.x, p.y - cam.worldView.y);
-      if (l.glow) l.glow.setPosition(p.x, p.y).setAlpha((l.def.glow ?? 0.35) * l.pulse);
+      this.brush.setScale((l.def.radius * 2) / 128).setAlpha(Math.min(1, l.def.intensity));
+      this.dark.erase(this.brush, p.x, p.y);
     }
   }
 
@@ -112,10 +140,11 @@ export class Atmosphere {
     this.on = true;
     const s = this.scene;
     const { width, height } = s.scale;
+    // World-sized: it scrolls with the map, so it never has to be repainted.
+    const b = s.physics.world.bounds;
     this.dark = s.add
-      .renderTexture(0, 0, width, height)
+      .renderTexture(0, 0, Math.max(width, b.width), Math.max(height, b.height))
       .setOrigin(0)
-      .setScrollFactor(0)
       .setDepth(60);
     this.brush = s.make.image({ key: SOFT, add: false });
     if (d.vignette)
@@ -135,6 +164,7 @@ export class Atmosphere {
               .setTint(hex(def.color))
               .setBlendMode(Phaser.BlendModes.ADD)
               .setDepth(59);
+      glow?.setPosition(at().x, at().y);
       const l: Lit = { def, at, glow, pulse: 1 };
       this.lit.push(l);
       if (flicker)
@@ -147,7 +177,17 @@ export class Atmosphere {
           ease: 'Sine.easeInOut',
         });
     };
-    if (d.peterLight) add(d.peterLight, () => ({ x: this.peter.x, y: this.peter.y }));
+    if (d.peterLight) {
+      // Peter moves: his light is an additive glow above the darkness, not a hole in it.
+      const p = d.peterLight;
+      this.lift = s.add
+        .image(this.peter.x, this.peter.y, SOFT)
+        .setScale((p.radius * 2) / 128)
+        .setTint(hex(p.color))
+        .setBlendMode(Phaser.BlendModes.ADD)
+        .setAlpha(Math.min(0.6, p.intensity * 0.45) * this.glowScale)
+        .setDepth(61);
+    }
     for (const l of d.lights ?? []) {
       const c = tileCenter(l.tile);
       add(l, () => c, l.flicker);
@@ -157,7 +197,24 @@ export class Atmosphere {
         const c = tileCenter(t);
         add(d.poiLight, () => c, true);
       }
+    // Lighter, smaller lights keep puzzle pieces and people readable where the map is dark.
+    const seen = new Set(this.pois.map((t) => `${t.x},${t.y}`));
+    const pieces = this.puzzles.filter((t) => {
+      const k = `${t.x},${t.y}`;
+      if (seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    });
+    for (const t of pieces.slice(0, MAX_PUZZLE_LIGHTS)) {
+      const c = tileCenter(t);
+      add(d.puzzleLight ?? PUZZLE_LIGHT, () => c);
+    }
+    for (const t of this.npcs) {
+      const c = tileCenter(t);
+      add(d.npcLight ?? NPC_LIGHT, () => c);
+    }
     if (d.motes) this.spawnMotes(d.motes);
+    this.paintDarkness();
     this.update();
   }
 
@@ -172,6 +229,8 @@ export class Atmosphere {
     this.dark?.destroy();
     this.brush?.destroy();
     this.vignette?.destroy();
+    this.lift?.destroy();
+    this.lift = null;
     this.motes?.destroy();
     this.dark = null;
     this.brush = null;

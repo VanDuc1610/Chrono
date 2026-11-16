@@ -36,6 +36,7 @@ import type {
   MapEncounterDefinition,
   MapExitDefinition,
   MapTriggerDefinition,
+  TilePoint,
 } from '../world/MapTypes';
 import type { CombatSceneData } from './CombatScene';
 
@@ -314,6 +315,8 @@ export class ExplorationScene extends Phaser.Scene {
       this.mapDef.id,
       this.player.sprite,
       (this.mapDef.interactables ?? []).map((i) => i.tile),
+      this.puzzleTiles(),
+      (this.mapDef.npcs ?? []).map((n) => n.tile),
     );
     this.field.setupBeams((x, y) => {
       const layer = this.wallLayer;
@@ -858,6 +861,26 @@ export class ExplorationScene extends Phaser.Scene {
     );
     this.bossFight = fight;
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => fight.destroy());
+  }
+
+  /** Floor pieces of the map's puzzles, lit so they stay readable in the dark (atmosphere). */
+  private puzzleTiles(): TilePoint[] {
+    const d = this.mapDef;
+    const out: TilePoint[] = [];
+    for (const dial of d.dials ?? []) out.push(dial.tile);
+    for (const s of d.strikeTargets ?? []) out.push(s.tile);
+    for (const b of d.beams ?? []) {
+      out.push(
+        b.start,
+        b.target,
+        ...b.mirrors.map((m) => m.tile),
+        ...(b.prisms ?? []),
+        ...(b.brass ?? []),
+      );
+    }
+    out.push(...(d.lightTiles ?? []));
+    for (const sw of d.tileSwaps ?? []) out.push(...(sw.tiles ?? []));
+    return out;
   }
 
   /** Opens dialogues one after the other (a rescue: the flash, then the ally's words). */
