@@ -64,7 +64,7 @@ describe('Equipment and quick slots', () => {
 
     s.applyDialogueEffects({ grantItems: [{ itemId: 'test_charm', quantity: 1 }] });
     expect(s.getStats().maxHp).toBe(base.maxHp + 10);
-    s.unequip('charm');
+    s.unequip('accessory');
     expect(s.getStats().maxHp).toBe(base.maxHp);
     expect(s.hp).toBeLessThanOrEqual(base.maxHp);
     s.unequip('weapon');

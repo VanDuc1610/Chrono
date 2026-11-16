@@ -34,6 +34,7 @@ import type {
   MapTriggerDefinition,
 } from '../world/MapTypes';
 import type { CombatSceneData } from './CombatScene';
+import { bossProfile } from './BossArenaScene';
 
 export interface ExplorationSceneData {
   /** Map to load (id or alias). Defaults to the saved map, then maps.json `startMapId`. */
@@ -765,7 +766,9 @@ export class ExplorationScene extends Phaser.Scene {
         victoryDialogueId: def.victoryDialogueId,
         victoryDialogueRules: def.victoryDialogueRules,
       };
-      this.scene.start('CombatScene', data);
+      // T-84: a boss with a real-time profile is fought live in the arena; others stay turn-based.
+      const live = bossProfile(this, def.enemyId);
+      this.scene.start(live ? 'BossArenaScene' : 'CombatScene', data);
     });
   }
 

@@ -54,6 +54,14 @@
         {
           "itemId": "sentinel_core_relic",
           "chance": 1
+        },
+        {
+          "itemId": "gear_sling",
+          "chance": 1
+        },
+        {
+          "itemId": "oilcloth_coat",
+          "chance": 1
         }
       ],
       "spriteScale": 1.6,
@@ -277,7 +285,12 @@
       "spriteScale": 1.6,
       "skills": [],
       "expReward": 150,
-      "lootTable": [],
+      "lootTable": [
+        {
+          "itemId": "tide_spring_crossbow",
+          "chance": 1
+        }
+      ],
       "mechanic": {
         "damageReduction": 0.8,
         "hpFloor": 1,
@@ -639,7 +652,12 @@
       "spriteScale": 1.5,
       "skills": [],
       "expReward": 280,
-      "lootTable": [],
+      "lootTable": [
+        {
+          "itemId": "pendulum_repeater",
+          "chance": 1
+        }
+      ],
       "timedBlock": {
         "ringMs": 900,
         "windowMs": 220,
@@ -916,7 +934,12 @@
       "spriteScale": 1.6,
       "skills": [],
       "expReward": 600,
-      "lootTable": [],
+      "lootTable": [
+        {
+          "itemId": "hourmark_flintlock",
+          "chance": 1
+        }
+      ],
       "timedBlock": {
         "ringMs": 900,
         "windowMs": 200,
@@ -1832,7 +1855,12 @@
       "spriteScale": 1.5,
       "skills": [],
       "expReward": 1300,
-      "lootTable": [],
+      "lootTable": [
+        {
+          "itemId": "astral_longbow",
+          "chance": 1
+        }
+      ],
       "timedBlock": {
         "ringMs": 850,
         "windowMs": 230,

@@ -23,6 +23,17 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 Goal (owner, 2026-11-15): Chapters 5–7 are built and wait for the owner's playtest. Chapters 8 and 9
 are built and verified — the story is complete (4 endings). Next: the owner's playtest of Chapters 5–9. The story ends at Chapter 9.
 
+### T-84 · Boss đánh trực tiếp (real-time) + đa dạng vũ khí/trang bị — **Claude** · `IN PROGRESS`
+
+Owner, 2026-11-16: bosses leave turn-based — Peter fights them live in an arena, each boss with its
+own attack and defence patterns; normal encounters stay as they are. Gear splits into four slots:
+melee weapon, ranged weapon, armor, accessory. Prototype on the Chapter 1 boss first for the owner's playtest.
+
+_Locks:_ `src/scenes/BossArenaScene.ts` (new), `src/systems/boss/*` (new), `public/assets/data/bosses.json` (new),
+`src/systems/inventory/InventoryTypes.ts`, `src/state/GameSession.ts`, `src/systems/save/SaveTypes.ts`,
+`src/ui/SatchelPanel.ts`, `src/world/ActionCombat.ts`, `src/scenes/ExplorationScene.ts`, `src/scenes/PreloadScene.ts`, `src/config.ts`,
+`public/assets/data/items.json`, `public/assets/data/enemies.json`, `public/assets/data/strings.json`, `scripts/arsenal.mjs` (new).
+
 ### T-83 · Chapter 9 answer key (`docs/testing/DAP_AN_CHUONG_9.md`) — **Codex** · `DONE`
 
 _Locks:_ `docs/testing/DAP_AN_CHUONG_9.md` (new). Read-only: everything else.

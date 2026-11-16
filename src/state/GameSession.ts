@@ -1,6 +1,12 @@
 import type Phaser from 'phaser';
 import { InventorySystem } from '../systems/inventory/InventorySystem';
-import type { EquipSlot, EquipStats, IItemStack } from '../systems/inventory/InventoryTypes';
+import {
+  EQUIP_SLOTS,
+  type EquipSlot,
+  type EquipStats,
+  type IItemStack,
+  type RangedProfile,
+} from '../systems/inventory/InventoryTypes';
 import { QuestSystem } from '../systems/quest/QuestSystem';
 import { CombatItemEffect, ICombatant, IEnemyDefinition } from '../systems/combat/CombatTypes';
 import { ISaveData } from '../systems/save/SaveTypes';
@@ -78,7 +84,12 @@ export class GameSession {
   public mp: number;
   public position: MapPosition | null = null;
   public playtimeMs = 0;
-  public equipment: Record<EquipSlot, string | null> = { weapon: null, charm: null };
+  public equipment: Record<EquipSlot, string | null> = {
+    weapon: null,
+    ranged: null,
+    armor: null,
+    accessory: null,
+  };
   public quickSlots: (string | null)[] = Array<string | null>(QUICK_SLOT_COUNT).fill(null);
 
   private constructor(private readonly db: GameDatabase) {
@@ -114,9 +125,12 @@ export class GameSession {
     session.inventory.loadFromState(save.inventory);
     session.quests.loadFromState(save.quests);
     if (save.equipment) {
-      for (const slot of ['weapon', 'charm'] as const) {
-        const id = save.equipment[slot];
-        if (id && session.inventory.hasItem(id, 1)) session.equipment[slot] = id;
+      const saved = save.equipment;
+      // Each id goes to the slot its item belongs to now (old `charm` → armor or accessory).
+      for (const id of [saved.weapon, saved.charm, saved.ranged, saved.armor, saved.accessory]) {
+        const slot = id ? session.slotOf(id) : null;
+        if (id && slot && !session.equipment[slot] && session.inventory.hasItem(id, 1))
+          session.equipment[slot] = id;
       }
     } else if (session.getFlag(FLAGS.hasBlade)) {
       // Saves before equipment (< 0.4): Peter already fights with the Broken Blade.
@@ -324,7 +338,7 @@ export class GameSession {
     for (const flag of effects.clearFlags ?? []) this.setFlag(flag, false);
     for (const stack of effects.takeItems ?? []) {
       this.inventory.removeItem(stack.itemId, stack.quantity);
-      for (const slot of ['weapon', 'charm'] as const) {
+      for (const slot of EQUIP_SLOTS) {
         if (this.equipment[slot] === stack.itemId && !this.inventory.hasItem(stack.itemId, 1)) {
           this.equipment[slot] = null;
         }
@@ -444,10 +458,13 @@ export class GameSession {
 
   private equipBonus(): EquipStats {
     const sum: EquipStats = {};
-    for (const id of Object.values(this.equipment)) {
+    for (const [slot, id] of Object.entries(this.equipment)) {
       const equip = id ? this.inventory.getItemDefinition(id)?.equip : undefined;
       for (const [k, v] of Object.entries(equip ?? {}) as [keyof EquipStats, number][]) {
         if (k === 'reach' || k === 'swingMs' || k === 'echoPct') continue;
+        // A ranged weapon's attack powers its shots only (see rangedProfile), not the slash.
+        if (slot === 'ranged' && k === 'attack') continue;
+        if (typeof v !== 'number') continue;
         sum[k] = (sum[k] ?? 0) + v;
       }
     }
@@ -463,18 +480,31 @@ export class GameSession {
   /** Peter can slash: a weapon is equipped (or, before any weapon item exists, he has the blade). */
   public get canSlash(): boolean {
     if (this.equipment.weapon) return true;
-    const ownsWeapon = this.inventory
-      .getAllItems()
-      .some((s) => this.inventory.getItemDefinition(s.itemId)?.type === 'weapon');
+    const ownsWeapon = this.inventory.getAllItems().some((s) => this.slotOf(s.itemId) === 'weapon');
     return !ownsWeapon && this.getFlag(FLAGS.hasBlade);
   }
 
-  public slotOf(itemId: string): EquipSlot | null {
-    const type = this.inventory.getItemDefinition(itemId)?.type;
-    return type === 'weapon' || type === 'charm' ? type : null;
+  /** The equipped ranged weapon's shot, if any. */
+  public get rangedProfile(): (RangedProfile & { attack: number }) | undefined {
+    const id = this.equipment.ranged;
+    const def = id ? this.inventory.getItemDefinition(id) : undefined;
+    return def?.ranged ? { ...def.ranged, attack: def.equip?.attack ?? 0 } : undefined;
   }
 
-  /** Equips an owned weapon / charm (replacing the previous one). Returns the slot, or null. */
+  /** Melee family of the equipped weapon (slash shape). */
+  public get meleeClass(): string {
+    const id = this.equipment.weapon;
+    return (id && this.inventory.getItemDefinition(id)?.melee) || 'sword';
+  }
+
+  public slotOf(itemId: string): EquipSlot | null {
+    const def = this.inventory.getItemDefinition(itemId);
+    if (def?.type === 'weapon') return def.ranged ? 'ranged' : 'weapon';
+    if (def?.type === 'charm') return def.slot ?? 'accessory';
+    return null;
+  }
+
+  /** Equips an owned item in its slot (replacing the previous one). Returns the slot, or null. */
   public equip(itemId: string): EquipSlot | null {
     const slot = this.slotOf(itemId);
     if (!slot || !this.inventory.hasItem(itemId, 1)) return null;

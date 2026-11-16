@@ -51,7 +51,8 @@
         "attack": 2,
         "reach": 28,
         "swingMs": 420
-      }
+      },
+      "melee": "sword"
     },
     {
       "id": "coastal_pancake",
@@ -203,7 +204,8 @@
         "attack": 5,
         "reach": 34,
         "swingMs": 360
-      }
+      },
+      "melee": "rapier"
     },
     {
       "id": "sea_glass_charm",
@@ -218,7 +220,8 @@
         "maxMp": 4,
         "defense": 1,
         "speed": 1
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "beacon_hour_hand",
@@ -232,7 +235,8 @@
         "attack": 7,
         "reach": 40,
         "swingMs": 480
-      }
+      },
+      "melee": "spear"
     },
     {
       "id": "singing_shell_charm",
@@ -245,7 +249,8 @@
       "equip": {
         "maxMp": 8,
         "defense": 2
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "praetor_diary_page",
@@ -311,7 +316,8 @@
         "attack": 8,
         "reach": 36,
         "swingMs": 340
-      }
+      },
+      "melee": "rapier"
     },
     {
       "id": "scales_of_truth_charm",
@@ -326,7 +332,8 @@
         "maxMp": 8,
         "defense": 2,
         "speed": 2
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "imperial_honey_bread",
@@ -603,7 +610,8 @@
         "attack": 11,
         "reach": 38,
         "swingMs": 330
-      }
+      },
+      "melee": "rapier"
     },
     {
       "id": "pure_crystal_soul_charm",
@@ -618,7 +626,8 @@
         "maxMp": 12,
         "defense": 3,
         "speed": 2
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "courier_journal_scrap",
@@ -894,7 +903,8 @@
         "attack": 14,
         "reach": 46,
         "swingMs": 400
-      }
+      },
+      "melee": "spear"
     },
     {
       "id": "vow_of_the_father_blade",
@@ -908,7 +918,8 @@
         "attack": 13,
         "reach": 38,
         "swingMs": 300
-      }
+      },
+      "melee": "sword"
     },
     {
       "id": "valiant_crest_cuirass",
@@ -921,7 +932,8 @@
       "equip": {
         "maxHp": 35,
         "defense": 6
-      }
+      },
+      "slot": "armor"
     },
     {
       "id": "ashes_of_peace_charm",
@@ -934,7 +946,8 @@
       "equip": {
         "maxHp": 34,
         "defense": 5
-      }
+      },
+      "slot": "armor"
     },
     {
       "id": "dreamless_rest_charm",
@@ -948,7 +961,8 @@
         "maxMp": 20,
         "defense": 2,
         "speed": 3
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "mothers_name_carving",
@@ -961,7 +975,8 @@
       "equip": {
         "attack": 3,
         "maxHp": 20
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "ember_quill_charm",
@@ -975,7 +990,8 @@
         "maxMp": 16,
         "attack": 2,
         "speed": 2
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "atonement_chronicle",
@@ -988,7 +1004,8 @@
       "equip": {
         "maxHp": 24,
         "defense": 4
-      }
+      },
+      "slot": "armor"
     },
     {
       "id": "interval_lens_charm",
@@ -1003,7 +1020,8 @@
         "maxMp": 14,
         "defense": 4,
         "speed": 2
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "last_light_charm",
@@ -1018,7 +1036,8 @@
         "maxMp": 16,
         "defense": 4,
         "speed": 3
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "phoenix_draught",
@@ -1294,7 +1313,8 @@
         "reach": 42,
         "swingMs": 340,
         "echoPct": 0.3
-      }
+      },
+      "melee": "sword"
     },
     {
       "id": "silver_pruning_shears",
@@ -1308,7 +1328,8 @@
         "attack": 15,
         "reach": 30,
         "swingMs": 240
-      }
+      },
+      "melee": "rapier"
     },
     {
       "id": "alpha_wedding_ring",
@@ -1321,7 +1342,8 @@
       "equip": {
         "maxHp": 36,
         "defense": 6
-      }
+      },
+      "slot": "armor"
     },
     {
       "id": "chosen_seed_aldric",
@@ -1334,7 +1356,8 @@
       "equip": {
         "maxHp": 40,
         "defense": 6
-      }
+      },
+      "slot": "armor"
     },
     {
       "id": "chosen_seed_bran",
@@ -1347,7 +1370,8 @@
       "equip": {
         "attack": 5,
         "maxHp": 20
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "chosen_seed_elion",
@@ -1361,7 +1385,8 @@
         "maxMp": 24,
         "defense": 3,
         "speed": 3
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "possibility_seal_shard",
@@ -1444,7 +1469,8 @@
       "equip": {
         "attack": 3,
         "maxMp": 18
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "na_origami_crane_scrap",
@@ -1487,7 +1513,8 @@
       "equip": {
         "maxHp": 30,
         "defense": 4
-      }
+      },
+      "slot": "armor"
     },
     {
       "id": "conscience_iron_key",
@@ -1564,7 +1591,8 @@
       "equip": {
         "maxMp": 22,
         "speed": 3
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "mira_tuning_notes",
@@ -1610,7 +1638,8 @@
       "equip": {
         "defense": 8,
         "maxHp": 10
-      }
+      },
+      "slot": "armor"
     },
     {
       "id": "black_box_recorder",
@@ -1658,7 +1687,8 @@
       "equip": {
         "maxMp": 15,
         "speed": 3
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "quartz_oil_drop",
@@ -1856,7 +1886,8 @@
         "attack": 18,
         "reach": 44,
         "swingMs": 320
-      }
+      },
+      "melee": "sword"
     },
     {
       "id": "broken_herald_feather",
@@ -1869,7 +1900,8 @@
       "equip": {
         "maxMp": 20,
         "speed": 3
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "celestial_amber_shard",
@@ -1882,7 +1914,8 @@
       "equip": {
         "maxMp": 20,
         "defense": 3
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "echoing_origin_bell",
@@ -1895,7 +1928,8 @@
       "equip": {
         "maxMp": 25,
         "defense": 5
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "solon_mercy_clasp",
@@ -1908,7 +1942,8 @@
       "equip": {
         "maxHp": 30,
         "defense": 5
-      }
+      },
+      "slot": "armor"
     },
     {
       "id": "seal_of_the_first_hour",
@@ -1921,7 +1956,8 @@
       "equip": {
         "maxHp": 35,
         "defense": 6
-      }
+      },
+      "slot": "armor"
     },
     {
       "id": "null_origin_insignia",
@@ -1937,7 +1973,8 @@
         "attack": 4,
         "defense": 6,
         "speed": 3
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "bran_count_token",
@@ -1950,7 +1987,8 @@
       "equip": {
         "maxHp": 20,
         "attack": 2
-      }
+      },
+      "slot": "armor"
     },
     {
       "id": "bridge_toll_tag",
@@ -2126,7 +2164,8 @@
         "reach": 45,
         "swingMs": 310,
         "echoPct": 0.15
-      }
+      },
+      "melee": "sword"
     },
     {
       "id": "kuro_mother_brooch",
@@ -2139,7 +2178,8 @@
       "equip": {
         "maxHp": 35,
         "defense": 5
-      }
+      },
+      "slot": "armor"
     },
     {
       "id": "mother_golden_hairpin",
@@ -2152,7 +2192,8 @@
       "equip": {
         "maxHp": 40,
         "defense": 6
-      }
+      },
+      "slot": "armor"
     },
     {
       "id": "unwritten_cradle_clasp",
@@ -2168,7 +2209,8 @@
         "attack": 5,
         "defense": 7,
         "speed": 4
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "torn_page_strip_a",
@@ -2317,7 +2359,8 @@
         "reach": 46,
         "swingMs": 300,
         "echoPct": 0.2
-      }
+      },
+      "melee": "sword"
     },
     {
       "id": "lyra_vanguard_halberd",
@@ -2332,7 +2375,8 @@
         "reach": 56,
         "swingMs": 380,
         "echoPct": 0
-      }
+      },
+      "melee": "heavy"
     },
     {
       "id": "sixfold_hour_charm",
@@ -2348,7 +2392,8 @@
         "attack": 7,
         "defense": 8,
         "speed": 4
-      }
+      },
+      "slot": "accessory"
     },
     {
       "id": "na_last_crane",
@@ -2361,7 +2406,8 @@
       "equip": {
         "maxHp": 50,
         "defense": 7
-      }
+      },
+      "slot": "armor"
     },
     {
       "id": "clue_ch9_interval_rift",
@@ -2498,7 +2544,8 @@
         "reach": 48,
         "swingMs": 280,
         "echoPct": 0.2
-      }
+      },
+      "melee": "sword"
     },
     {
       "id": "broken_divinity_edge",
@@ -2513,7 +2560,8 @@
         "defense": 5,
         "reach": 44,
         "swingMs": 300
-      }
+      },
+      "melee": "heavy"
     },
     {
       "id": "empty_chair_token",
@@ -2526,7 +2574,8 @@
       "equip": {
         "maxHp": 65,
         "defense": 4
-      }
+      },
+      "slot": "armor"
     },
     {
       "id": "sixfold_harmony_clasp",
@@ -2540,7 +2589,8 @@
         "maxHp": 70,
         "defense": 6,
         "speed": 6
-      }
+      },
+      "slot": "armor"
     },
     {
       "id": "divine_nectar_ampoule",
@@ -2553,6 +2603,121 @@
       "effects": {
         "healAmount": 180,
         "mpAmount": 40
+      }
+    },
+    {
+      "id": "gear_sling",
+      "name": "Ná Bánh Răng",
+      "type": "weapon",
+      "description": "Chiếc ná Peter ráp từ bánh răng và dây cót của Vệ Binh. Bắn viên bi đồng — yếu, nhưng chạm được thứ ở xa.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 3
+      },
+      "ranged": {
+        "class": "sling",
+        "fireMs": 520,
+        "speed": 340,
+        "range": 210,
+        "damageMult": 0.7
+      }
+    },
+    {
+      "id": "oilcloth_coat",
+      "name": "Áo Khoác Vải Dầu",
+      "type": "charm",
+      "description": "Áo vải dầu của người gác hải đăng, chống nước và chống đòn. Phủ lên áo khoác xanh than của Peter.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "maxHp": 10,
+        "defense": 2
+      },
+      "slot": "armor"
+    },
+    {
+      "id": "tide_spring_crossbow",
+      "name": "Nỏ Lò Xo Thủy Triều",
+      "type": "weapon",
+      "description": "Nỏ lên dây bằng lò xo đồng hồ. Mũi tên xuyên qua kẻ đầu tiên và trúng luôn kẻ phía sau.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 8
+      },
+      "ranged": {
+        "class": "crossbow",
+        "fireMs": 780,
+        "speed": 480,
+        "range": 280,
+        "pierce": 1,
+        "damageMult": 1
+      }
+    },
+    {
+      "id": "pendulum_repeater",
+      "name": "Nỏ Liên Hoàn Quả Lắc",
+      "type": "weapon",
+      "description": "Quả lắc nạp tên liên tục — mỗi lần bóp cò bắn ba mũi xòe hình quạt.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 12
+      },
+      "ranged": {
+        "class": "repeater",
+        "fireMs": 650,
+        "speed": 400,
+        "range": 230,
+        "shots": 3,
+        "spreadDeg": 24,
+        "damageMult": 0.55
+      }
+    },
+    {
+      "id": "hourmark_flintlock",
+      "name": "Súng Kíp Khắc Giờ",
+      "type": "weapon",
+      "description": "Mỗi phát nổ đốt một khắc thời gian (2 MP). Đạn xuyên hai kẻ địch, đau như búa tạ.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 20
+      },
+      "ranged": {
+        "class": "flintlock",
+        "fireMs": 1100,
+        "speed": 620,
+        "range": 320,
+        "pierce": 2,
+        "damageMult": 1.5,
+        "mpCost": 2
+      }
+    },
+    {
+      "id": "astral_longbow",
+      "name": "Cung Tinh Tú Khởi Nguyên",
+      "type": "weapon",
+      "description": "Dây cung bện từ ánh sao của Giờ Ban Sơ. Tên bay xa, xuyên một kẻ, nhịp bắn đều.",
+      "value": 0,
+      "stackable": false,
+      "maxStack": 1,
+      "equip": {
+        "attack": 27
+      },
+      "ranged": {
+        "class": "bow",
+        "fireMs": 600,
+        "speed": 560,
+        "range": 330,
+        "pierce": 1,
+        "damageMult": 1
       }
     }
   ]

@@ -1,0 +1,121 @@
+{
+  "bosses": [
+    {
+      "id": "boss_drowned_sentinel",
+      "intro": "Vệ Binh Chìm Trong Sóng nâng ngọn kích. Lớp giáp nước đọng lại quanh nó — chém thường gần như vô dụng.",
+      "arena": { "floor": "#1b2b3a", "floorAlt": "#213447", "edge": "#4fa3c7", "water": true },
+      "radius": 26,
+      "speed": 48,
+      "damageScale": 0.55,
+      "contactMult": 0.5,
+      "phases": [
+        {
+          "fromHpPct": 1,
+          "moves": ["tidal_crush", "stasis_wave", "halberd_charge"],
+          "pauseMs": 1100
+        },
+        {
+          "fromHpPct": 1,
+          "afterArmorBroken": true,
+          "moves": ["tidal_crush_triple", "stasis_wave_double", "halberd_charge_fast"],
+          "pauseMs": 650,
+          "speedMult": 1.35,
+          "banner": "Giáp nước vỡ — Vệ Binh vùng vẫy dữ dội!"
+        }
+      ],
+      "moves": {
+        "tidal_crush": {
+          "type": "slam",
+          "label": "Nghiền Thủy Triều",
+          "telegraphMs": 950,
+          "radius": 42,
+          "mult": 1.3
+        },
+        "tidal_crush_triple": {
+          "type": "slam",
+          "label": "Nghiền Thủy Triều ×3",
+          "telegraphMs": 800,
+          "radius": 38,
+          "count": 3,
+          "scatter": 90,
+          "staggerMs": 260,
+          "mult": 1.3
+        },
+        "stasis_wave": {
+          "type": "ring",
+          "label": "Sóng Đình Trệ",
+          "telegraphMs": 750,
+          "speed": 150,
+          "thickness": 16,
+          "gapDeg": 70,
+          "mult": 0.8,
+          "slowMs": 1400
+        },
+        "stasis_wave_double": {
+          "type": "ring",
+          "label": "Sóng Đình Trệ Kép",
+          "telegraphMs": 600,
+          "speed": 175,
+          "thickness": 16,
+          "rings": 2,
+          "intervalMs": 650,
+          "gapDeg": 60,
+          "mult": 0.8,
+          "slowMs": 1400
+        },
+        "halberd_charge": {
+          "type": "charge",
+          "label": "Lao Kích",
+          "telegraphMs": 850,
+          "speed": 330,
+          "durationMs": 900,
+          "mult": 1.2,
+          "stunOnWallMs": 1800
+        },
+        "halberd_charge_fast": {
+          "type": "charge",
+          "label": "Lao Kích",
+          "telegraphMs": 600,
+          "speed": 400,
+          "durationMs": 900,
+          "mult": 1.2,
+          "stunOnWallMs": 1300
+        }
+      },
+      "defense": {
+        "armor": {
+          "damageReduction": 0.8,
+          "floorPct": 0.05,
+          "recoverPct": 0.6,
+          "recoverMessage": "Thủy triều đóng băng tràn qua bộ giáp — Vệ Binh gượng dậy, vết thương khép lại!"
+        },
+        "unlockAfterMs": 22000,
+        "unlockOnSkill": true,
+        "unlockMessage": "Nhãn Thời Gian: luồng sóng đọng nuôi bộ giáp chảy về hai thấu kính của ngọn hải đăng!",
+        "lockedMessage": "Thấu kính phải chưa phản ứng — làm Vệ Binh choáng bằng thấu kính trái trước.",
+        "targets": [
+          {
+            "id": "lens_left",
+            "label": "THẤU KÍNH TRÁI",
+            "x": 0.08,
+            "y": 0.5,
+            "effect": "stun",
+            "stunMs": 6500,
+            "message": "Thấu kính trái xoay — ánh sáng chói lòa làm rạn lớp giáp nước! Vệ Binh bị choáng."
+          },
+          {
+            "id": "lens_right",
+            "label": "THẤU KÍNH PHẢI",
+            "x": 0.92,
+            "y": 0.5,
+            "requires": ["lens_left"],
+            "whileStunned": true,
+            "effect": "breakArmor",
+            "setHpPct": 0.45,
+            "message": "Luồng sáng vàng ấm xuyên qua lồng ngực Vệ Binh — lớp sóng giam hãm vỡ tan!"
+          }
+        ]
+      }
+    }
+  ]
+}

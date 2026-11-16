@@ -23,8 +23,14 @@ export interface ISaveData {
   inventory: IItemStack[];
   quests: IQuest[];
   flags: Record<string, boolean | number | string>;
-  /** 0.4.0+: equipped item ids. */
-  equipment?: { weapon: string | null; charm: string | null };
+  /** 0.4.0+: equipped item ids. 0.4 saves have `charm`; T-84 saves have ranged / armor / accessory. */
+  equipment?: {
+    weapon: string | null;
+    charm?: string | null;
+    ranged?: string | null;
+    armor?: string | null;
+    accessory?: string | null;
+  };
   /** 0.4.0+: item ids on the 1-4 quick keys. */
   quickSlots?: (string | null)[];
 }

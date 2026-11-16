@@ -17,14 +17,16 @@ const LIST_Y = 76;
 
 /** Bag tabs, in order; each shows the item types listed. */
 const TABS: { key: string; types: ItemCategory[] }[] = [
-  { key: 'gear', types: ['weapon', 'charm', 'equipment'] },
+  // T-84: weapons (melee + ranged) and gear (armor + accessory) are separate tabs.
+  { key: 'weapons', types: ['weapon'] },
+  { key: 'gear', types: ['charm', 'equipment'] },
   { key: 'items', types: ['consumable', 'material'] },
   { key: 'notes', types: ['document'] },
   { key: 'clues', types: ['key_item', 'puzzle'] },
 ];
 
 /**
- * Satchel overlay (I / B) in four tabs (Left / Right / Tab): Gear, Items, Notes, Clues.
+ * Satchel overlay (I / B) in five tabs (Left / Right / Tab): Weapons, Gear, Items, Notes, Clues.
  * Up / Down select; E / Space uses a consumable, equips / takes off gear, or opens a note to read;
  * 1-4 puts the selected consumable on a quick key; ESC closes the note, then the bag.
  */
@@ -307,11 +309,18 @@ export class SatchelPanel {
     const nameOf = (id: string | null): string =>
       id ? (inv.getItemDefinition(id)?.name ?? id) : this.t('satchel.none');
     const key = TABS[this.tab].key;
-    if (key === 'gear') {
+    if (key === 'weapons') {
+      this.info.setText(
+        this.t('satchel.weapons', {
+          weapon: nameOf(s.equipment.weapon),
+          ranged: nameOf(s.equipment.ranged),
+        }),
+      );
+    } else if (key === 'gear') {
       this.info.setText(
         this.t('satchel.gear', {
-          weapon: nameOf(s.equipment.weapon),
-          charm: nameOf(s.equipment.charm),
+          armor: nameOf(s.equipment.armor),
+          accessory: nameOf(s.equipment.accessory),
         }),
       );
     } else if (key === 'items') {
@@ -382,9 +391,10 @@ export class SatchelPanel {
               : null;
       const hint = hintKey ? `  ${this.t(hintKey)}` : '';
       const wornMark = worn ? ` ${this.t('satchel.worn')}` : '';
+      const slotTag = slot ? `[${this.t(`satchel.slot.${slot}`)}] ` : '';
       const qty = def.stackable ? `  x${stack.quantity}` : '';
       this.list.add([
-        this.text(0, y, `${isSel ? '▶ ' : '  '}${def.name}${qty}${wornMark}${hint}`, {
+        this.text(0, y, `${isSel ? '▶ ' : '  '}${slotTag}${def.name}${qty}${wornMark}${hint}`, {
           fontSize: '11px',
           color: isSel ? '#ffffff' : color,
           fontStyle: 'bold',

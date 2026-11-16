@@ -20,6 +20,8 @@ import {
   type RoamerBrain,
 } from '../systems/action/ActionRules';
 import { SoundSystem } from '../systems/audio/SoundSystem';
+import { ShotSystem, type ShotTarget } from '../systems/action/ShotSystem';
+import { meleeCritBonus, meleeShape, rangedAttack } from '../systems/action/WeaponRules';
 import type { CombatTuning, IEnemyDefinition } from '../systems/combat/CombatTypes';
 import type { Translate } from '../ui/Strings';
 import { conditionHolds, tileCenter } from './MapRegistry';
@@ -188,6 +190,8 @@ export class ActionCombat {
   private nextCompanionHit = 0;
   private readonly defs: MapRoamerDefinition[];
   private nextSwing = 0;
+  private nextShot = 0;
+  private readonly shots: ShotSystem;
   private nextDash = 0;
   private nextSkill = 0;
   private nextAllyHit = 0;
@@ -231,6 +235,7 @@ export class ActionCombat {
     this.group = scene.physics.add.group();
     this.bars = scene.add.graphics().setDepth(48);
     this.aimLines = scene.add.graphics().setDepth(47);
+    this.shots = new ShotSystem(scene);
     this.defs = defs;
     for (const def of defs) this.spawn(def);
     if (this.roamers.some((r) => r.def.hunter)) this.announceHunters();
@@ -248,9 +253,20 @@ export class ActionCombat {
     const shift = scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
     const onShift = (): void => this.dash();
     shift?.on('down', onShift);
+    // T-84: F fires the ranged weapon toward the cursor.
+    const fKey = scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+    const onFire = (): void => {
+      const p = scene.input.activePointer.positionToCamera(
+        scene.cameras.main,
+      ) as Phaser.Math.Vector2;
+      this.fire(p.x, p.y);
+    };
+    fKey?.on('down', onFire);
     scene.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       scene.input.off('pointerdown', onPointer);
       shift?.off('down', onShift);
+      fKey?.off('down', onFire);
+      this.shots.destroy();
     });
   }
 
@@ -764,6 +780,7 @@ export class ActionCombat {
       return;
     }
     const now = this.scene.time.now;
+    this.updateShots(delta, now);
     const maxMp = this.session.getStats().maxMp;
     this.session.mp = Math.min(maxMp, this.session.mp + (this.tuning.mpRegenPerSec * delta) / 1000);
     if (Math.floor(this.session.mp) !== this.hudMp) {
@@ -932,6 +949,8 @@ export class ActionCombat {
     this.drawSlash(origin, aim, reach);
     this.strikeTargets(origin, aim, reach, now);
     const attack = this.session.getStats().attack;
+    const shape = meleeShape(this.session.meleeClass);
+    const critBonus = meleeCritBonus(this.session.meleeClass);
     let landed = false;
     const echoed: { r: Roamer; damage: number }[] = [];
     this.scheduleEchoes(origin, aim, reach);
@@ -941,41 +960,10 @@ export class ActionCombat {
         if (this.slashTwin(r, origin, aim, reach, attack, now)) landed = true;
         continue;
       }
-      if (!inSlash(origin, aim, r.sprite, reach, this.tuning.slashArcDeg)) continue;
+      if (!inSlash(origin, aim, r.sprite, reach, shape.arcDeg)) continue;
       landed = true;
-      if (this.shutLaser(r, now)) continue;
-      if (this.chokeEater(r, now)) {
-        this.damageRoamer(
-          r,
-          rollHit(attack, r.enemy.defense, this.combat, this.rng).damage * 2,
-          true,
-        );
-        continue;
-      }
-      if (this.scatterSwarm(r, now)) continue;
-      if (this.mimicCounter(r, 'slash')) continue;
-      if (this.crackBell(r, now)) continue;
-      const parry = r.enemy.field?.parry;
-      if (parry && inParryWindow(r.brain.state, r.brain.timer, parry.flashMs)) {
-        // Parried: no damage, but the spear is knocked aside and the guard drops.
-        r.brain = { ...r.brain, state: 'recover', timer: parry.staggerMs };
-        r.sprite.setTint(0x8fb8ff);
-        this.scene.time.delayedCall(parry.staggerMs, () => r.alive && r.sprite.clearTint());
-        this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.parried'), '#cfe8ff');
-        this.sound.playSlash();
-        continue;
-      }
-      const hit = rollHit(attack, r.enemy.defense, this.combat, this.rng);
-      if (this.defended(r, hit.damage)) continue;
-      const stunned = r.charge?.phase === 'stunned';
-      const frozen = r.frozen ? (r.enemy.field?.freezeWatch?.frozenMult ?? 1) : 1;
-      const mult =
-        (stunned ? (r.enemy.field?.charge?.stunnedDamageMult ?? 1) : 1) *
-        frozen *
-        this.thrustMult(r, now);
-      const dealt = Math.floor(hit.damage * mult);
-      this.damageRoamer(r, dealt, hit.critical || stunned);
-      echoed.push({ r, damage: dealt });
+      const dealt = this.strikeRoamer(r, attack, now, shape.damageMult, critBonus);
+      if (dealt !== null) echoed.push({ r, damage: dealt });
     }
     if (!landed) this.blinkOnWhiff(origin, aim);
     this.teach('slash');
@@ -988,6 +976,94 @@ export class ActionCombat {
           if (r.alive) this.damageRoamer(r, Math.max(1, Math.floor(damage * echoPct)), false);
       });
     }
+  }
+
+  /**
+   * One blow (slash or shot) on one roamer through every defence. Returns the damage dealt, or
+   * null when it was turned aside (shield, parry, bell, mimic...).
+   */
+  private strikeRoamer(
+    r: Roamer,
+    attack: number,
+    now: number,
+    mult = 1,
+    critBonus = 0,
+  ): number | null {
+    if (this.shutLaser(r, now)) return null;
+    if (this.chokeEater(r, now)) {
+      const dmg = rollHit(attack, r.enemy.defense, this.combat, this.rng, mult).damage * 2;
+      this.damageRoamer(r, dmg, true);
+      return null;
+    }
+    if (this.scatterSwarm(r, now)) return null;
+    if (this.mimicCounter(r, 'slash')) return null;
+    if (this.crackBell(r, now)) return null;
+    const parry = r.enemy.field?.parry;
+    if (parry && inParryWindow(r.brain.state, r.brain.timer, parry.flashMs)) {
+      // Parried: no damage, but the spear is knocked aside and the guard drops.
+      r.brain = { ...r.brain, state: 'recover', timer: parry.staggerMs };
+      r.sprite.setTint(0x8fb8ff);
+      this.scene.time.delayedCall(parry.staggerMs, () => r.alive && r.sprite.clearTint());
+      this.floatText(r.sprite.x, r.sprite.y - 18, this.t('action.parried'), '#cfe8ff');
+      this.sound.playSlash();
+      return null;
+    }
+    const tuning = critBonus
+      ? { ...this.combat, critChance: this.combat.critChance + critBonus }
+      : this.combat;
+    const hit = rollHit(attack, r.enemy.defense, tuning, this.rng, mult);
+    if (this.defended(r, hit.damage)) return null;
+    const stunned = r.charge?.phase === 'stunned';
+    const frozen = r.frozen ? (r.enemy.field?.freezeWatch?.frozenMult ?? 1) : 1;
+    const m =
+      (stunned ? (r.enemy.field?.charge?.stunnedDamageMult ?? 1) : 1) *
+      frozen *
+      this.thrustMult(r, now);
+    const dealt = Math.floor(hit.damage * m);
+    this.damageRoamer(r, dealt, hit.critical || stunned);
+    return dealt;
+  }
+
+  /** F: shoot the ranged weapon toward the cursor (T-84). */
+  public fire(worldX: number, worldY: number): void {
+    const now = this.scene.time.now;
+    const ranged = this.session.rangedProfile;
+    if (!this.canAct || !ranged || now < this.nextShot) return;
+    const cost = ranged.mpCost ?? 0;
+    if (cost > 0 && this.session.mp < cost) {
+      this.floatText(this.player.x, this.player.y - 22, this.t('action.noMp'), '#8fb8ff');
+      return;
+    }
+    this.session.mp -= cost;
+    if (cost > 0) this.host.refreshHud();
+    this.nextShot = now + ranged.fireMs;
+    const origin = { x: this.player.x, y: this.player.y };
+    const aim = Math.atan2(worldY - origin.y, worldX - origin.x);
+    this.player.playAction('peter_attack', facingFromAngle(aim), 260);
+    this.sound.playSlash();
+    this.shots.fire(origin, aim, ranged);
+  }
+
+  private updateShots(delta: number, now: number): void {
+    const ranged = this.session.rangedProfile;
+    const meleeId = this.session.equipment.weapon;
+    const meleeAtk =
+      (meleeId && this.session.inventory.getItemDefinition(meleeId)?.equip?.attack) || 0;
+    const attack = rangedAttack(this.session.getStats().attack, meleeAtk, ranged?.attack ?? 0);
+    const mult = ranged?.damageMult ?? 0.7;
+    const targets: ShotTarget[] = this.roamers
+      .filter((r) => r.alive && !r.enemy.field?.twin && now >= (r.shiftedUntil ?? 0))
+      .map((r) => ({
+        x: r.sprite.x,
+        y: r.sprite.y,
+        radius: 12,
+        hit: () => {
+          if (!r.alive) return false;
+          this.strikeRoamer(r, attack, now, mult);
+          return true;
+        },
+      }));
+    this.shots.update(delta, targets, (x, y) => !!this.walls.getTileAtWorldXY(x, y)?.collides);
   }
 
   /** Memory Wraiths: a missed slash lets them blink behind Peter, then wind up (0.4 s to dodge). */
@@ -2146,8 +2222,9 @@ export class ActionCombat {
 
   private drawSlash(origin: Point, aim: number, reach: number): void {
     const g = this.scene.add.graphics().setDepth(42);
-    const half = (this.tuning.slashArcDeg * Math.PI) / 360;
-    g.lineStyle(3, 0xbfefff, 0.9);
+    const shape = meleeShape(this.session.meleeClass);
+    const half = (shape.arcDeg * Math.PI) / 360;
+    g.lineStyle(shape.arcDeg < 90 ? 4 : 3, shape.color, 0.9);
     g.beginPath();
     g.arc(origin.x, origin.y, reach - 4, aim - half, aim + half);
     g.strokePath();
