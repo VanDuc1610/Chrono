@@ -339,9 +339,10 @@ The following specifications have been drafted in compliance with [ASSET_POLICY.
 - **In engine:** Shift dodge plays `peter_dash_<dir>` (direction of travel); F plays `peter_shoot_<dir>` toward the cursor.
 - **Status:** `INTEGRATED` — owner approved 2026-11-16.
 
-### CHAR_PETER_008 — Peter hurt v2 (T-85 draft)
+### CHAR_PETER_008 — Peter hurt v2 — INTEGRATED
 
 - **Pipeline:** B (`scripts/author-peter-sprites.js --sheets=hurt_v2`), approved Peter parts and palette.
 - **Candidate files:** `art-source/characters/peter/generated/candidates/peter_hurt_v2_v1.png` (128 × 128, 4 frames × 4 dirs: white impact flash, knocked back 2px with eyes shut and a chronal crack, stagger with head dipped, steadying) · preview ×6 in `generated/candidates/previews/`. Would replace the 2-frame `peter_hurt` (CHAR_PETER_003).
 - **Validation:** `scripts/validate-candidate.js` passed.
-- **Status:** `CANDIDATE` — awaiting owner approval (2026-11-16).
+- **Approved file:** `generated/approved/peter_hurt_v2.png`; **runtime:** replaces `public/assets/characters/peter/peter_hurt.png` (4 frames × 4 dirs; the 2-frame v1 stays in `approved/` for history).
+- **Status:** `INTEGRATED` — owner approved 2026-11-16.

@@ -57,8 +57,9 @@ export const PETER_ANIMATION_SPECS: Record<string, IAnimationSpec> = {
   hurt: {
     keyPrefix: 'peter_hurt',
     textureKey: 'peter_hurt',
-    framesPerDirection: 2,
-    frameRate: 10,
+    // v2 (owner approved 2026-11-16): flash, knocked back, stagger, steady.
+    framesPerDirection: 4,
+    frameRate: 14,
     repeat: 0,
   },
   temporal_sight: {

@@ -99,6 +99,8 @@ interface Roamer {
   alive: boolean;
   /** Knockback in progress until this time (AI paused). */
   stunUntil: number;
+  /** Struck: the body flinches until then (T-85 motion). */
+  flinchUntil?: number;
   /** Path finding: next tile centre to walk to, and when to recompute it. */
   waypoint: Point | null;
   pathAt: number;
@@ -813,6 +815,7 @@ export class ActionCombat {
     }
     const now = this.scene.time.now;
     this.updateShots(delta, now);
+    this.animateRoamers(now);
     const maxMp = this.session.getStats().maxMp;
     this.session.mp = Math.min(maxMp, this.session.mp + (this.tuning.mpRegenPerSec * delta) / 1000);
     if (Math.floor(this.session.mp) !== this.hudMp) {
@@ -1487,6 +1490,7 @@ export class ActionCombat {
       Math.sin(away) * this.tuning.knockback,
     );
     r.stunUntil = now + 140;
+    r.flinchUntil = now + 120;
     r.sprite.setTintFill(0xffffff);
     this.scene.time.delayedCall(90, () => r.alive && r.sprite.clearTint());
     if (r.def.ambush) {
@@ -1509,6 +1513,38 @@ export class ActionCombat {
       for (let k = 0; k < split; k++) this.spawnClone(r, k);
     }
     if (r.hp <= 0) this.defeatRoamer(r);
+  }
+
+  /**
+   * Life in the approved enemy sprites without new art (T-85): a breath while they roam, a crouch
+   * that deepens through the wind-up, a stretch in a charge, a flinch when struck. Mechanics that
+   * scale a sprite themselves (a Name Eater's breath) run after this and take over.
+   */
+  private animateRoamers(now: number): void {
+    const windup = this.tuning.enemy.windupMs;
+    for (const r of this.roamers) {
+      if (!r.alive || r.pending || r.inhaleAt || now < (r.shiftedUntil ?? 0)) continue;
+      let sx = 1;
+      let sy = 1 + 0.03 * Math.sin(now / 340 + r.glowOffset);
+      if (r.brain.state === 'windup') {
+        const k = 1 - Math.min(1, Math.max(0, r.brain.timer) / windup);
+        sx = 1 + 0.12 * k;
+        sy = 1 - 0.12 * k;
+      } else if (r.charge?.phase === 'run') {
+        sx = 1.14;
+        sy = 0.9;
+      } else if (r.charge?.phase === 'stomp') {
+        sx = 1.1;
+        sy = 0.9;
+      } else if (r.brain.state === 'recover') {
+        sy *= 0.97;
+      }
+      if (now < (r.flinchUntil ?? 0)) {
+        sx *= 0.88;
+        sy *= 0.88;
+      }
+      r.sprite.setScale(sx, sy);
+    }
   }
 
   private defeatRoamer(r: Roamer): void {
