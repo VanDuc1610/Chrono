@@ -28,10 +28,9 @@ are built and verified — the story is complete (4 endings). Next: the owner's 
 Owner, 2026-11-16: upgrade graphics with free tools only. First step, previewed on three maps (coastal
 town, old lighthouse, bell sanctum): a darkness layer with soft light holes (Peter, points of
 interest, fixed lights), coloured glows, vignette and floating motes — all drawn in code; L toggles.
-Phaser's Light2D was tried and dropped (light positions skew under Scale.FIT). Next, if approved:
-the remaining maps, then more animation frames.
+Phaser's Light2D was tried and dropped (light positions skew under Scale.FIT). Owner approved the preview; every map now has one (`scripts/atmosphere.mjs`: a palette per chapter, darkness by kind of place, a breathing light where each boss stands; the three approved maps kept). Next: more animation frames (art, owner approval).
 
-_Locks:_ `src/world/Atmosphere.ts` (new), `public/assets/data/atmosphere.json` (new).
+_Locks:_ `src/world/Atmosphere.ts` (new), `public/assets/data/atmosphere.json` (new), `scripts/atmosphere.mjs` (new).
 
 ### T-84 · Boss đánh trực tiếp (real-time) + đa dạng vũ khí/trang bị — **Claude** · `DONE`
 
