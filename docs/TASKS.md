@@ -29,7 +29,7 @@ Owner, 2026-11-16: bosses leave turn-based — Peter fights them live in an aren
 own attack and defence patterns; normal encounters stay as they are. Gear splits into four slots:
 melee weapon, ranged weapon, armor, accessory. Prototype on the Chapter 1 boss first for the owner's playtest. Owner, same day: no separate arena — the boss fights Peter on its own map right after their meeting dialogue (exits closed until it falls). Owner approved the feel and pixelfx (MIT, vendored in `src/vendor/pixelfx`): Prologue–Chapter 2 bosses converted (Time Wraith with fists and the Elder's rescue, Drowned Sentinel, Sunken Bellkeeper's three locks, Imperial Verdict's sentences). Chapters 3–9 next.
 
-_Locks:_ `src/world/BossFight.ts` (new), `src/systems/boss/*` (new), `src/systems/fx/*` (new), `src/vendor/pixelfx/*` (new), `.prettierignore`, `eslint.config.js`, `public/assets/data/maps.json`, `public/assets/data/bosses.json` (new),
+_Locks:_ `src/world/BossFight.ts` (new), `src/ui/DialogueBox.ts`, `src/systems/dialogue/DialogueSystem.ts`, `src/systems/boss/*` (new), `src/systems/fx/*` (new), `src/vendor/pixelfx/*` (new), `.prettierignore`, `eslint.config.js`, `public/assets/data/maps.json`, `public/assets/data/bosses.json` (new),
 `src/systems/inventory/InventoryTypes.ts`, `src/state/GameSession.ts`, `src/systems/save/SaveTypes.ts`,
 `src/ui/SatchelPanel.ts`, `src/world/ActionCombat.ts`, `src/scenes/ExplorationScene.ts`, `src/scenes/PreloadScene.ts`, `src/config.ts`,
 `public/assets/data/items.json`, `public/assets/data/enemies.json`, `public/assets/data/strings.json`, `scripts/arsenal.mjs` (new).

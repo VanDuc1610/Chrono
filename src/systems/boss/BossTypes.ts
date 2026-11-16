@@ -193,6 +193,8 @@ export interface BossProfile {
   radius: number;
   /** Walking speed (px/s). */
   speed: number;
+  /** Boss HP in the live fight = enemies.json maxHp × this (default 1). */
+  hpScale?: number;
   /** Scales every hit on Peter (real time lands more blows than turns). */
   damageScale: number;
   /** Touching the boss hurts this much (× attack); 0 = harmless. */

@@ -339,7 +339,8 @@
       "scale": 1.15,
       "radius": 22,
       "speed": 46,
-      "damageScale": 0.55,
+      "hpScale": 1.5,
+      "damageScale": 0.75,
       "contactMult": 0.5,
       "phases": [
         {

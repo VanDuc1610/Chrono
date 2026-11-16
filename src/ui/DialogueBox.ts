@@ -1,13 +1,25 @@
 import Phaser from 'phaser';
-import type { DialogueSystem } from '../systems/dialogue/DialogueSystem';
+import { MAX_CHOICES, type DialogueSystem } from '../systems/dialogue/DialogueSystem';
 import { createPanel } from './Panel';
 import type { Translate } from './Strings';
 
 const TYPE_DELAY_MS = 18;
+const MIN_BOX_H = 84;
+const PAD_X = 16;
+/** Space above the box kept free for the top HUD panels. */
+const TOP_MARGIN = 74;
+
+const BODY_STYLE: Phaser.Types.GameObjects.Text.TextStyle = {
+  fontFamily: 'monospace',
+  fontSize: '12px',
+  color: '#e4ebf5',
+};
 
 /**
- * Dialogue box + flow: typewriter, E/Space to skip or advance, keys 1-2 / click for choices.
- * Node effects and endings are handled by the scene through DialogueSystem events.
+ * Dialogue box + flow: typewriter, E/Space to skip or advance, keys 1-4 / click for choices.
+ * The box grows upward to fit the whole line and its choices (one per row), so long lines and
+ * long choices never overlap. Node effects and endings are handled by the scene through
+ * DialogueSystem events.
  */
 export class DialogueBox {
   public readonly speakerText: Phaser.GameObjects.Text;
@@ -15,6 +27,11 @@ export class DialogueBox {
   private readonly hint: Phaser.GameObjects.Text;
   private readonly container: Phaser.GameObjects.Container;
   private readonly choices: Phaser.GameObjects.Text[] = [];
+  /** Off-screen copy of the body style, to measure a whole line before it is typed. */
+  private readonly measure: Phaser.GameObjects.Text;
+  private bg: Phaser.GameObjects.NineSlice;
+  private readonly boxX = 30;
+  private readonly boxW: number;
   private typing = false;
   private fullText = '';
   private timer: Phaser.Time.TimerEvent | null = null;
@@ -25,43 +42,40 @@ export class DialogueBox {
     private readonly t: Translate,
     private readonly onClosed: () => void,
   ) {
-    const { width, height } = scene.scale;
-    const boxW = width - 60;
-    const boxH = 84;
-    const boxX = 30;
-    const boxY = height - boxH - 16;
+    const { width } = scene.scale;
+    this.boxW = width - 60;
+    const wrap = { width: this.boxW - PAD_X * 2 };
 
     this.container = scene.add.container(0, 0).setScrollFactor(0).setDepth(200).setVisible(false);
-    const bg = createPanel(scene, boxX, boxY, boxW, boxH);
-    this.speakerText = scene.add.text(boxX + 16, boxY + 9, '', {
+    this.bg = createPanel(scene, this.boxX, 0, this.boxW, MIN_BOX_H);
+    this.speakerText = scene.add.text(this.boxX + PAD_X, 0, '', {
       fontFamily: 'monospace',
       fontSize: '12px',
       color: '#00e1ff',
       fontStyle: 'bold',
     });
-    this.bodyText = scene.add.text(boxX + 16, boxY + 28, '', {
-      fontFamily: 'monospace',
-      fontSize: '12px',
-      color: '#e4ebf5',
-      wordWrap: { width: boxW - 32 },
-    });
+    this.bodyText = scene.add.text(this.boxX + PAD_X, 0, '', { ...BODY_STYLE, wordWrap: wrap });
+    this.measure = scene.add
+      .text(-2000, -2000, '', { ...BODY_STYLE, wordWrap: wrap })
+      .setVisible(false);
     this.hint = scene.add
-      .text(boxX + boxW - 14, boxY + boxH - 12, '', {
+      .text(this.boxX + this.boxW - 14, 0, '', {
         fontFamily: 'monospace',
         fontSize: '10px',
         color: '#7f90b3',
       })
       .setOrigin(1, 1);
-    this.container.add([bg, this.speakerText, this.bodyText, this.hint]);
+    this.container.add([this.bg, this.speakerText, this.bodyText, this.hint]);
 
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < MAX_CHOICES; i++) {
       const btn = scene.add
-        .text(boxX + 24 + i * 220, boxY + 54, '', {
+        .text(this.boxX + PAD_X + 8, 0, '', {
           fontFamily: 'monospace',
           fontSize: '11px',
           color: '#ffd666',
           backgroundColor: '#161d30',
           padding: { left: 6, right: 6, top: 3, bottom: 3 },
+          wordWrap: { width: this.boxW - PAD_X * 2 - 28 },
         })
         .setInteractive({ useHandCursor: true })
         .setVisible(false);
@@ -71,6 +85,7 @@ export class DialogueBox {
       this.choices.push(btn);
       this.container.add(btn);
     }
+    this.layout('', 0);
   }
 
   public get isTyping(): boolean {
@@ -89,7 +104,7 @@ export class DialogueBox {
     return true;
   }
 
-  /** E / Space: finish the line, else advance (choices wait for 1 / 2). */
+  /** E / Space: finish the line, else advance (choices wait for 1-4). */
   public interact(): void {
     if (this.typing) {
       this.finishTyping();
@@ -101,7 +116,7 @@ export class DialogueBox {
     else this.close();
   }
 
-  /** Keys 1 / 2. */
+  /** Keys 1-4. */
   public choose(index: number): void {
     if (!this.dialogue.isActive() || this.typing || !this.dialogue.isLastLineOfNode()) return;
     this.select(index);
@@ -130,7 +145,35 @@ export class DialogueBox {
     if (!node || !line) return;
     this.speakerText.setText(node.speaker);
     this.choices.forEach((c) => c.setVisible(false));
+    // The box takes its final size before typing starts, so it does not jump while typing.
+    const responses = this.dialogue.isLastLineOfNode() ? this.dialogue.getAvailableResponses() : [];
+    responses.slice(0, MAX_CHOICES).forEach((resp, i) => {
+      this.choices[i].setText(`[${i + 1}] ${resp.text}`);
+    });
+    this.layout(line, Math.min(responses.length, MAX_CHOICES));
     this.startTyping(line);
+  }
+
+  /** Sizes the box to the whole line plus `choiceCount` choices and places everything in it. */
+  private layout(line: string, choiceCount: number): void {
+    const { height } = this.scene.scale;
+    this.measure.setText(line || ' ');
+    const bodyH = Math.max(15, this.measure.height);
+    const choiceHs = this.choices.slice(0, choiceCount).map((c) => c.height);
+    const choicesH = choiceHs.reduce((a, h) => a + h + 4, 0) + (choiceCount ? 6 : 0);
+    const boxH = Phaser.Math.Clamp(9 + 19 + bodyH + choicesH + 20, MIN_BOX_H, height - TOP_MARGIN);
+    const boxY = height - boxH - 16;
+
+    this.bg.setPosition(this.boxX, boxY).setSize(this.boxW, boxH);
+    this.speakerText.setPosition(this.boxX + PAD_X, boxY + 9);
+    this.bodyText.setPosition(this.boxX + PAD_X, boxY + 28);
+    let y = boxY + 28 + bodyH + 6;
+    this.choices.forEach((c, i) => {
+      if (i >= choiceCount) return;
+      c.setPosition(this.boxX + PAD_X + 8, y);
+      y += choiceHs[i] + 4;
+    });
+    this.hint.setPosition(this.boxX + this.boxW - 14, boxY + boxH - 6);
   }
 
   private startTyping(text: string): void {
@@ -164,9 +207,10 @@ export class DialogueBox {
   private onTyped(): void {
     this.updateHint();
     if (!this.dialogue.isLastLineOfNode()) return;
-    this.dialogue.getAvailableResponses().forEach((resp, i) => {
-      this.choices[i]?.setText(`[${i + 1}] ${resp.text}`).setVisible(true);
-    });
+    this.dialogue
+      .getAvailableResponses()
+      .slice(0, MAX_CHOICES)
+      .forEach((_, i) => this.choices[i].setVisible(true));
   }
 
   private updateHint(): void {
@@ -175,9 +219,11 @@ export class DialogueBox {
       return;
     }
     const last = this.dialogue.isLastLineOfNode();
-    const hasChoices = this.dialogue.getAvailableResponses().length > 0;
+    const count = this.dialogue.getAvailableResponses().length;
     this.hint.setText(
-      this.t(last ? (hasChoices ? 'dialogue.choose' : 'dialogue.close') : 'dialogue.continue'),
+      this.t(last ? (count > 0 ? 'dialogue.choose' : 'dialogue.close') : 'dialogue.continue', {
+        n: Math.min(count, MAX_CHOICES),
+      }),
     );
   }
 

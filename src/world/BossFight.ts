@@ -81,6 +81,8 @@ export class BossFight implements CombatExtension {
   private readonly colliders: Phaser.Physics.Arcade.Collider[] = [];
 
   private hp: number;
+  /** The boss's HP in this fight: enemies.json maxHp × the profile's hpScale. */
+  private readonly maxHp: number;
   private armorBroken = false;
   private phase = 0;
   private state: 'intro' | 'walk' | 'telegraph' | 'act' | 'stunned' | 'done' = 'intro';
@@ -134,7 +136,8 @@ export class BossFight implements CombatExtension {
     private readonly pfx: PixelFxLayer,
     private readonly rng: () => number = Math.random,
   ) {
-    this.hp = enemy.maxHp;
+    this.maxHp = Math.round(enemy.maxHp * (profile.hpScale ?? 1));
+    this.hp = this.maxHp;
     const key = enemy.spriteKey;
     this.boss = scene.physics.add.sprite(from.x, from.y, key, 0);
     this.boss.setScale(profile.scale ?? 1).setDepth(this.peter.depth);
@@ -191,7 +194,7 @@ export class BossFight implements CombatExtension {
   }
 
   private get hpPct(): number {
-    return this.hp / this.enemy.maxHp;
+    return this.hp / this.maxHp;
   }
 
   private get p(): Point {
@@ -667,7 +670,7 @@ export class BossFight implements CombatExtension {
       this.profile.defense,
       {
         hp: this.hp,
-        maxHp: this.enemy.maxHp,
+        maxHp: this.maxHp,
         armorBroken: this.armorBroken,
         stunned: this.state === 'stunned',
         facing: this.facing,
@@ -724,7 +727,7 @@ export class BossFight implements CombatExtension {
   private breakArmor(now: number, setHpPct?: number): void {
     this.armorBroken = true;
     this.sentence = null;
-    if (setHpPct !== undefined) this.hp = Math.min(this.hp, Math.ceil(this.enemy.maxHp * setHpPct));
+    if (setHpPct !== undefined) this.hp = Math.min(this.hp, Math.ceil(this.maxHp * setHpPct));
     this.play('holyPillar', { x: this.boss.x, y: this.boss.y + 20 }, {}, 1800);
     this.scene.cameras.main.flash(400, 255, 240, 180);
     for (const x of this.targets) x.obj.setAlpha(0.3);

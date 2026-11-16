@@ -9,6 +9,15 @@ export type DialogueEventListener = (event: {
   choices?: DialogueResponseOption[];
 }) => void;
 
+/** Number keys 1-4 pick a choice. */
+export const MAX_CHOICES = 4;
+
+/** "Xem các dòng khác" and the like: a link to a node that only lists more choices. */
+function isMoreLink(r: DialogueResponseOption, next: DialogueNode): boolean {
+  const plain = !next.effects && !(next as { flashback?: boolean }).flashback;
+  return /^Xem\s.*khác\s*$/i.test(r.text.trim()) && plain && (next.responses?.length ?? 0) > 0;
+}
+
 export class DialogueSystem implements IDialogueSystem {
   private database: DialogueDatabase = { dialogues: {} };
   private currentNode: DialogueNode | null = null;
@@ -127,11 +136,31 @@ export class DialogueSystem implements IDialogueSystem {
     return this.currentLineIndex >= this.currentNode.lines.length - 1;
   }
 
+  /**
+   * The current choices. A "see the others" link (`Xem ... khác` leading to a plain node that only
+   * offers more choices) is unfolded, so a pick-one-of-several puzzle shows every option at once,
+   * as long as they fit the number keys (MAX_CHOICES).
+   */
   public getAvailableResponses(): DialogueResponseOption[] {
     if (!this.currentNode || !this.currentNode.responses) {
       return [];
     }
-    return this.currentNode.responses;
+    const own = this.currentNode.responses;
+    const unfolded = this.unfold(own, new Set());
+    return unfolded.length <= MAX_CHOICES ? unfolded : own;
+  }
+
+  private unfold(list: DialogueResponseOption[], seen: Set<string>): DialogueResponseOption[] {
+    const out: DialogueResponseOption[] = [];
+    for (const r of list) {
+      const id = r.nextDialogueId;
+      const next = id ? this.database.dialogues[id] : undefined;
+      if (id && next && !seen.has(id) && isMoreLink(r, next)) {
+        seen.add(id);
+        out.push(...this.unfold(next.responses ?? [], seen));
+      } else out.push(r);
+    }
+    return out;
   }
 
   public isActive(): boolean {

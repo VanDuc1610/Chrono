@@ -20,7 +20,7 @@
     "dialogue.skip": "[E / Space: bỏ qua]",
     "dialogue.continue": "[E / Space: tiếp]",
     "dialogue.close": "[E / Space / ESC: đóng]",
-    "dialogue.choose": "[Chọn 1 hoặc 2]",
+    "dialogue.choose": "[Chọn 1–{n}]",
     "satchel.title": "TÚI ĐỒ CỦA PETER",
     "satchel.subtitle": "Sức chứa: 16 ô | Loại: Tất cả",
     "satchel.footer": "[←/→] Mục | [↑/↓] Chọn | [E] Dùng / Đọc | [1-4] Ô nhanh | [ESC] Đóng",
