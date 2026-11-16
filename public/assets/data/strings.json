@@ -210,6 +210,7 @@
     "boss.hour": "KIM GIỜ THỨ 25: {n}/{top}",
     "atmosphere.title": "ÁNH SÁNG & HIỆU ỨNG",
     "atmosphere.on": "Đã bật [L]",
-    "atmosphere.off": "Đã tắt [L]"
+    "atmosphere.off": "Đã tắt [L]",
+    "hud.levelUp": "LÊN CẤP {level}!"
   }
 }

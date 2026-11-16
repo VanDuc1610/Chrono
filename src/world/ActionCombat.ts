@@ -2406,23 +2406,52 @@ export class ActionCombat {
     this.scene.tweens.add({ targets: g, alpha: 0, duration: 160, onComplete: () => g.destroy() });
   }
 
+  /**
+   * A label rising off a sprite. Numbers pop (T-85 UI): they burst in large and settle; a critical
+   * ("123!") is bigger, golden-edged and shakes; heals ("+40") float up green.
+   */
   public floatText(x: number, y: number, text: string, color: string): void {
+    const numeric = /^[+-]?\d+!?( HP| MP)?$/.test(text.trim());
+    const crit = numeric && text.trim().endsWith('!');
     const label = this.scene.add
-      .text(x, y, text, {
+      .text(x + (numeric ? Phaser.Math.Between(-5, 5) : 0), y, text, {
         fontFamily: 'monospace',
-        fontSize: '11px',
+        fontSize: crit ? '14px' : numeric ? '12px' : '11px',
         fontStyle: 'bold',
         color,
-        stroke: '#000000',
-        strokeThickness: 3,
+        stroke: crit ? '#5a3000' : '#000000',
+        strokeThickness: crit ? 4 : 3,
       })
       .setOrigin(0.5)
-      .setDepth(60);
+      // Above the map's darkness and motes (atmosphere at depths 59-62).
+      .setDepth(63);
+    if (!numeric) {
+      this.scene.tweens.add({
+        targets: label,
+        y: y - 16,
+        alpha: 0,
+        duration: 650,
+        onComplete: () => label.destroy(),
+      });
+      return;
+    }
+    label.setScale(crit ? 2.1 : 1.6);
+    this.scene.tweens.add({ targets: label, scale: 1, duration: 180, ease: 'Back.easeOut' });
+    if (crit)
+      this.scene.tweens.add({
+        targets: label,
+        x: label.x + 2,
+        duration: 40,
+        yoyo: true,
+        repeat: 3,
+      });
     this.scene.tweens.add({
       targets: label,
-      y: y - 16,
+      y: y - (text.startsWith('+') ? 24 : 18),
       alpha: 0,
-      duration: 650,
+      delay: 260,
+      duration: 620,
+      ease: 'Sine.easeIn',
       onComplete: () => label.destroy(),
     });
   }

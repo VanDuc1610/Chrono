@@ -7,7 +7,7 @@ const TYPE_DELAY_MS = 18;
 const MIN_BOX_H = 84;
 const PAD_X = 16;
 /** Space above the box kept free for the top HUD panels. */
-const TOP_MARGIN = 74;
+const TOP_MARGIN = 84;
 
 const BODY_STYLE: Phaser.Types.GameObjects.Text.TextStyle = {
   fontFamily: 'monospace',

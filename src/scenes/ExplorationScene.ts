@@ -22,6 +22,7 @@ import { BossFight, bossProfile } from '../world/BossFight';
 import type { BossProfile } from '../systems/boss/BossTypes';
 import { PixelFxLayer } from '../systems/fx/PixelFxLayer';
 import { Atmosphere } from '../world/Atmosphere';
+import { ScreenTransition } from '../ui/ScreenTransition';
 import { getStrings, Translate } from '../ui/Strings';
 import {
   conditionHolds,
@@ -346,7 +347,7 @@ export class ExplorationScene extends Phaser.Scene {
       }
     }
 
-    this.cameras.main.fadeIn(400, 0, 0, 0);
+    ScreenTransition.in(this, 460);
     this.refreshFrozen();
     if (!this.isFrozen) this.soundSystem.startBgm(this.mapDef.bgm);
     // Map light (e.g. Chapter 1's endless sunset), under the HUD.
@@ -737,8 +738,7 @@ export class ExplorationScene extends Phaser.Scene {
     const target = resolveMap(db, exit.toMap);
     const spawnTile = target.spawns[exit.toSpawn] ?? target.spawns.default;
     this.session.position = { mapId: target.id, ...tileCenter(spawnTile) };
-    this.cameras.main.fadeOut(300, 0, 0, 0);
-    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+    ScreenTransition.out(this, 420, () => {
       const data: ExplorationSceneData = { mapId: target.id, spawnId: exit.toSpawn };
       this.scene.restart(data);
     });
@@ -752,8 +752,7 @@ export class ExplorationScene extends Phaser.Scene {
     const target = resolveMap(db, mapId);
     const tile = target.spawns[spawnId] ?? target.spawns.default;
     this.session.position = { mapId: target.id, ...tileCenter(tile) };
-    this.cameras.main.fadeOut(900, 0, 0, 0);
-    this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
+    ScreenTransition.out(this, 750, () => {
       const data: ExplorationSceneData = { mapId: target.id, spawnId };
       this.scene.restart(data);
     });
@@ -863,6 +862,15 @@ export class ExplorationScene extends Phaser.Scene {
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => fight.destroy());
   }
 
+  /** Level up: a pillar of light on Peter and a chime (the HUD shows the banner). */
+  private celebrateLevel(level: number): void {
+    this.pfx ??= new PixelFxLayer(this);
+    this.pfx.play('holyPillar', () => ({ x: this.player.x, y: this.player.y + 14 }), {}, 1800);
+    this.soundSystem.playSaveChime();
+    this.cameras.main.flash(260, 255, 230, 160);
+    void level;
+  }
+
   /** Floor pieces of the map's puzzles, lit so they stay readable in the dark (atmosphere). */
   private puzzleTiles(): TilePoint[] {
     const d = this.mapDef;
@@ -928,6 +936,7 @@ export class ExplorationScene extends Phaser.Scene {
       this.t,
       this.mapDef.name,
       this.mapDef.chapter,
+      (level) => this.celebrateLevel(level),
     );
     this.questTracker = new QuestTracker(this, this.questSystem, this.t);
     this.banner = new NotificationBanner(this);
