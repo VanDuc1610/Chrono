@@ -696,6 +696,48 @@ function shootFrames(view) {
   return [aim, release, recoil, compose(stand, v.upper)];
 }
 
+/**
+ * Hurt v2 (T-85 draft): 4 frames — white impact flash, knocked back 2px with eyes shut and a
+ * chronal crack spark, stagger (head and shoulders dipped), steadying back to rest.
+ */
+function hurtFramesV2(view) {
+  const v = VIEWS[view];
+  const legs = v.side ? sideLegs('stand') : frontLegs();
+  const arm = v.side ? [{ layer: sideArm }] : [];
+  const pained = v.upper.map((r) => r.replace(/E/g, 'h'));
+  // Knocked away from the blow: back (+x) in profile, up the screen facing the viewer.
+  const [kx, ky] = v.side ? [1, 0] : view === 'down' ? [0, -1] : [0, 1];
+  // In profile the torso leans away over planted feet; facing the viewer (or away) the whole body
+  // hops back, so torso and legs never come apart.
+  const body = (upper, k) =>
+    v.side
+      ? stamp(
+          stamp(blank(SIZE), legs),
+          compose(
+            blank(SIZE),
+            stamp(blank(SIZE), upper, kx * k, ky * k),
+            arm.map((a) => ({ ...a, dx: kx * k, dy: ky * k })),
+          ),
+        )
+      : stamp(blank(SIZE), compose(legs, upper, arm), kx * k, ky * k);
+  const rest = compose(legs, v.upper, arm);
+  const crack = v.side
+    ? [
+        [8, 12, 'W'],
+        [7, 11, 'w'],
+        [7, 13, 'w'],
+        [6, 12, 'g'],
+      ]
+    : [
+        [15, view === 'down' ? 9 : 22, 'W'],
+        [14, view === 'down' ? 8 : 21, 'w'],
+        [16, view === 'down' ? 8 : 21, 'w'],
+      ];
+  const knocked = under(body(pained, 2), crack);
+  const stagger = body(shiftDown(pained, 0, 14), 1);
+  return [flash(rest), knocked, stagger, body(v.upper, 1)];
+}
+
 /** Rows in PeterAnimationConfig order: down, up, left, right (right = mirrored left). */
 function buildGrid(framesFor) {
   const leftFrames = framesFor('left');
@@ -715,6 +757,7 @@ const SHEETS = {
   // T-85 drafts (owner review): dodge and ranged-weapon animations.
   dash: ['v1', dashFrames],
   shoot: ['v1', shootFrames],
+  hurt_v2: ['v1', hurtFramesV2],
   // Prologue v3: Peter before he receives the Broken Blade.
   idle_unarmed: ['v1', unarmed(idleFrames)],
   walk_unarmed: ['v1', unarmed(walkFrames)],

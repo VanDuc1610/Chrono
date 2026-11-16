@@ -111,6 +111,8 @@ export class BossFight implements CombatExtension {
   private lastMove: string | null = null;
   private facing = Math.PI / 2;
   private slowBossUntil = 0;
+  /** A blow just landed: the body flinches until then. */
+  private flinchUntil = 0;
   private charge: {
     dx: number;
     dy: number;
@@ -389,6 +391,7 @@ export class BossFight implements CombatExtension {
     this.updateBlocks(now);
     this.updateGravity(delta);
     this.updateCalls();
+    this.animateBody(now);
     this.draw(now);
   }
 
@@ -444,6 +447,34 @@ export class BossFight implements CombatExtension {
       this.boss.setVelocity(0, 0);
       if (this.state === 'act' && now >= this.stateUntil) this.toWalk(now);
     }
+  }
+
+  /**
+   * Life in the approved boss sprite without new art (T-85): it breathes while it walks, crouches
+   * into each wind-up, stretches into a charge, flinches when struck and sways while stunned.
+   */
+  private animateBody(now: number): void {
+    const base = this.profile.scale ?? 1;
+    let sx = 1;
+    let sy = 1 + 0.025 * Math.sin(now / 380);
+    let angle = 0;
+    if (this.state === 'telegraph') {
+      // Crouch deeper as the blow nears.
+      const left = Math.max(0, this.stateUntil - now);
+      const k = 1 - Math.min(1, left / 900);
+      sx = 1 + 0.09 * k;
+      sy = 1 - 0.09 * k;
+    } else if (this.charge) {
+      sx = 1.12;
+      sy = 0.92;
+    } else if (this.state === 'stunned') {
+      angle = 5 * Math.sin(now / 90);
+    }
+    if (now < this.flinchUntil) {
+      sx *= 0.93;
+      sy *= 0.93;
+    }
+    this.boss.setScale(base * sx, base * sy).setAngle(angle);
   }
 
   private face(angle: number): void {
@@ -982,6 +1013,7 @@ export class BossFight implements CombatExtension {
       this.stun(this.scene.time.now, d.memoryLock.staggerMs, this.t('action.stunned'));
     }
     this.boss.setTintFill(0xffffff);
+    this.flinchUntil = this.scene.time.now + 110;
     this.later(80, () => {
       if (this.state === 'stunned') this.boss.setTint(0xfff27a);
       else this.boss.clearTint();
