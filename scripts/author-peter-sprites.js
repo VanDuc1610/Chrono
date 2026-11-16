@@ -571,6 +571,131 @@ function temporalSightFrames(view) {
   });
 }
 
+/** A fading after-image: the frame's silhouette in chronal cyan on every `every`-th row. */
+function ghost(frame, color = 'd', every = 2) {
+  return frame.map((r, y) => (y % every ? EMPTY : r.replace(/[^.]/g, color)));
+}
+
+/** Layers `body` over after-images placed at the given offsets. */
+function withGhosts(body, ghosts) {
+  let f = blank(SIZE);
+  for (const g of ghosts) f = stamp(f, ghost(body, g.color, g.every), g.dx, g.dy);
+  return stamp(f, body);
+}
+
+/**
+ * Dash (T-85 draft): 4 frames — crouch, lunge with one after-image, full stretch with two,
+ * recover with a puff of dust. After-images trail behind the direction of travel.
+ */
+function dashFrames(view) {
+  const v = VIEWS[view];
+  const arm = v.side ? [{ layer: sideArm }] : [];
+  const stand = v.side ? sideLegs('stand') : frontLegs();
+  const stride = v.side ? sideLegs('stride') : frontLegs(1, 0);
+  const crouch = compose(
+    stand,
+    shiftDown(v.upper, 0, 24),
+    v.side ? [{ layer: sideArm, dy: 1 }] : [],
+  );
+  const run = compose(stride, v.upper, arm);
+  const rest = compose(stand, v.upper, arm);
+  // Travel: left view runs toward -x; facing the viewer runs toward +y; facing away toward -y.
+  const [tx, ty] = v.side ? [-1, 0] : view === 'down' ? [0, 1] : [0, -1];
+  const at = (f, k) => stamp(blank(SIZE), f, tx * k, ty * k);
+  const lunge = withGhosts(at(run, 2), [{ dx: -tx * 3, dy: -ty * 3, color: 'd', every: 2 }]);
+  const stretch = withGhosts(at(run, 3), [
+    { dx: -tx * 2, dy: -ty * 2, color: 'g', every: 2 },
+    { dx: -tx * 6, dy: -ty * 6, color: 'd', every: 3 },
+  ]);
+  const dust = v.side
+    ? [
+        [21, 30, 'd'],
+        [23, 29, 'd'],
+        [24, 31, 'd'],
+        [26, 30, 'd'],
+      ]
+    : [
+        [11, 30, 'd'],
+        [20, 30, 'd'],
+        [9, 29, 'd'],
+        [22, 29, 'd'],
+      ];
+  const recover = under(at(rest, 1), dust);
+  return [crouch, lunge, stretch, recover];
+}
+
+/** A small brass launcher in Peter's hand (sling cradle and spring), pointing along (dx, dy). */
+function launcherAt(hx, hy, dx, dy) {
+  return [
+    [hx + dx, hy + dy, 'm'],
+    [hx + dx * 2, hy + dy * 2, 'L'],
+    [hx + dx * 2 - dy, hy + dy * 2 - dx, 'L'],
+    [hx + dx * 2 + dy, hy + dy * 2 + dx, 'L'],
+  ].filter(([x, y]) => x >= 0 && y >= 0 && x < SIZE && y < SIZE);
+}
+
+/** A muzzle spark `k` px ahead of (hx, hy) along (dx, dy): bright, then fading. */
+function spark(hx, hy, dx, dy, k, bright = true) {
+  const x = hx + dx * k;
+  const y = hy + dy * k;
+  const c = bright ? 'W' : 'g';
+  const e = bright ? 'w' : 'd';
+  return [
+    [x, y, c],
+    [x + dx, y + dy, e],
+    [x - dy, y - dx, e],
+    [x + dy, y + dx, e],
+  ].filter(([px, py]) => px >= 0 && py >= 0 && px < SIZE && py < SIZE);
+}
+
+/**
+ * Shoot (T-85 draft): 4 frames — aim (arm out, launcher raised), release (spark), recoil (arm
+ * back 1px, spark fading), rest. The Broken Blade stays at his side for the shot.
+ */
+function shootFrames(view) {
+  const v = VIEWS[view];
+  const stand = v.side ? sideLegs('stand') : frontLegs();
+  if (v.side) {
+    const aimHand = [8, 14];
+    const aim = paint(
+      compose(stand, v.bare, [{ layer: armTo(...aimHand) }]),
+      launcherAt(...aimHand, -1, 0),
+    );
+    const release = paint(aim, spark(...aimHand, -1, 0, 4));
+    const backHand = [9, 14];
+    const recoil = paint(
+      paint(
+        compose(stand, v.bare, [{ layer: armTo(...backHand) }]),
+        launcherAt(...backHand, -1, 0),
+      ),
+      spark(...backHand, -1, 0, 6, false),
+    );
+    return [aim, release, recoil, compose(stand, v.upper, [{ layer: sideArm }])];
+  }
+  // Facing the viewer the launcher is held in front of the chest and fires toward the viewer;
+  // facing away it is raised over the shoulder and fires up the screen.
+  const block = (cx, cy) => [
+    [cx - 1, cy, 'L'],
+    [cx, cy, 'L'],
+    [cx + 1, cy, 'L'],
+    [cx, cy - 1, 'm'],
+    [cx - 1, cy + 1, 'm'],
+    [cx + 1, cy + 1, 'm'],
+  ];
+  const base = compose(stand, v.bare);
+  if (view === 'down') {
+    const aim = paint(base, block(15, 19));
+    const release = paint(aim, spark(15, 21, 0, 1, 3));
+    const recoil = paint(paint(base, block(15, 18)), spark(15, 21, 0, 1, 6, false));
+    return [aim, release, recoil, compose(stand, v.upper)];
+  }
+  const over = (f, cy) => paint(f, block(20, cy));
+  const aim = over(base, 9);
+  const release = paint(aim, spark(20, 8, 0, -1, 3));
+  const recoil = paint(over(base, 10), spark(20, 9, 0, -1, 6, false));
+  return [aim, release, recoil, compose(stand, v.upper)];
+}
+
 /** Rows in PeterAnimationConfig order: down, up, left, right (right = mirrored left). */
 function buildGrid(framesFor) {
   const leftFrames = framesFor('left');
@@ -587,6 +712,9 @@ const SHEETS = {
   attack: ['v1', attackFrames],
   hurt: ['v1', hurtFrames],
   temporal_sight: ['v1', temporalSightFrames],
+  // T-85 drafts (owner review): dodge and ranged-weapon animations.
+  dash: ['v1', dashFrames],
+  shoot: ['v1', shootFrames],
   // Prologue v3: Peter before he receives the Broken Blade.
   idle_unarmed: ['v1', unarmed(idleFrames)],
   walk_unarmed: ['v1', unarmed(walkFrames)],

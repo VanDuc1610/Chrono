@@ -329,3 +329,10 @@ The following specifications have been drafted in compliance with [ASSET_POLICY.
 - `BOSS_PRIMEVAL_ARCHITECT_001` (64 × 64 × 5, 4 = spent), `BOSS_CHRONOS_COMBAT_001` (64 × 64 × 4, key `boss_chronos_reborn`), `BOSS_SIXFOLD_DIVINITY_001` (64 × 64 × 6, 4 = phase 2, 5 = 12:00), `BOSS_VOID_SINGULARITY_CORE_001` (64 × 64 × 4).
 - `ENV_NEXUS_001` — `nexus_tileset_v1` (128 × 512): dungeon tiles 0-15 tinted nexus violet + 16-63 (collide 16-47, walkable 48-63; collision GID 4-48).
 - **Status:** `APPROVED` by the owner 2026-11-15 — `generated/approved/`, deployed to `public/assets/{enemies,tilesets}/`.
+
+### CHAR_PETER_007 — Peter dash and shoot (T-85 draft)
+
+- **Pipeline:** B (code-authored, `scripts/author-peter-sprites.js --sheets=dash,shoot`), palette and body parts of the approved Peter (CHAR_PETER_002); no image model, no external reference.
+- **Candidate files:** `art-source/characters/peter/generated/candidates/peter_dash_v1.png` (128 × 128, 4 frames × 4 dirs: crouch, lunge + 1 after-image, stretch + 2 after-images, recover + dust), `peter_shoot_v1.png` (128 × 128, 4 × 4: aim, release spark, recoil, rest) · previews ×6 in `generated/candidates/previews/`.
+- **Validation:** `scripts/validate-candidate.js` passed (RGBA, 128 × 128, transparency, centring, ground anchor).
+- **Status:** `CANDIDATE` — awaiting owner approval (2026-11-16). Not in `public/assets/`.
