@@ -67,11 +67,15 @@ export interface CombatExtension {
   ): boolean;
   onSkill(origin: Point, radius: number, attack: number): void;
   shotTargets(attack: number, mult: number): ShotTarget[];
-  /** Peter swung, shot or used Temporal Strike (hit or not). */
-  onAction?(kind: 'slash' | 'shot' | 'skill'): void;
+  /** Peter swung, shot, used Temporal Strike or dodged (hit or not). */
+  onAction?(kind: PeterAct): void;
+  /** A move the fight forbids right now (Faceless Keeper's memory lock): the message, else null. */
+  blocked?(kind: PeterAct): string | null;
   /** Fists allowed in this fight (no blade yet): reach and damage factor. */
   unarmed?(): { reach: number; mult: number } | null;
 }
+
+export type PeterAct = 'slash' | 'shot' | 'skill' | 'dash';
 
 /** What the exploration scene provides to the real-time combat layer. */
 export interface ActionHost {
@@ -963,6 +967,7 @@ export class ActionCombat {
   public slash(worldX: number, worldY: number): void {
     const now = this.scene.time.now;
     if (!this.canAct || now < this.nextSwing) return;
+    if (this.refused('slash')) return;
     const fists = this.session.canSlash ? null : (this.extension?.unarmed?.() ?? null);
     if (!this.session.canSlash && !fists) return;
     const weapon = fists ? undefined : this.session.weaponStats;
@@ -1067,6 +1072,7 @@ export class ActionCombat {
     const now = this.scene.time.now;
     const ranged = this.session.rangedProfile;
     if (!this.canAct || !ranged || now < this.nextShot) return;
+    if (this.refused('shot')) return;
     const cost = ranged.mpCost ?? 0;
     if (cost > 0 && this.session.mp < cost) {
       this.floatText(this.player.x, this.player.y - 22, this.t('action.noMp'), '#8fb8ff');
@@ -1133,6 +1139,7 @@ export class ActionCombat {
   public skill(): void {
     const now = this.scene.time.now;
     if (!this.canAct || !this.flag(FLAGS.temporalSight) || now < this.nextSkill) return;
+    if (this.refused('skill')) return;
     if (now < this.silencedUntil) {
       this.floatText(this.player.x, this.player.y - 22, this.t('action.silenced'), '#c8a0ff');
       return;
@@ -1244,6 +1251,7 @@ export class ActionCombat {
         this.floatText(r.sprite.x, r.sprite.y - 20, this.t('action.mimicked'), '#f0c860');
       });
     }
+    this.extension?.onAction?.('dash');
     this.teach('dash');
   }
 
@@ -1365,9 +1373,9 @@ export class ActionCombat {
    * T-84: a boss blow (`attack` × `mult`, then × `scale`) from `from`, through Peter's
    * invulnerability (a dodge avoids it). `slowMs` slows him afterwards. False when it did not land.
    */
-  public bossHit(attack: number, mult: number, from: Point, scale: number, slowMs = 0): boolean {
+  public bossHit(attack: number, mult: number, from: Point, scale: number, slowMs = 0): number {
     const now = this.scene.time.now;
-    if (now < this.invulnUntil || this.defeated) return false;
+    if (now < this.invulnUntil || this.defeated) return 0;
     const { damage } = rollHit(
       attack,
       this.session.getStats().defense,
@@ -1395,6 +1403,19 @@ export class ActionCombat {
       this.defeated = true;
       this.host.onPlayerDefeated();
     }
+    return dealt;
+  }
+
+  /** Temporal Strike is sealed for `ms` (Peter's other self copies it). */
+  public silence(ms: number): void {
+    this.silencedUntil = Math.max(this.silencedUntil, this.scene.time.now + ms);
+  }
+
+  /** The boss fight forbids this move now: say why and refuse it. */
+  private refused(kind: PeterAct): boolean {
+    const why = this.extension?.blocked?.(kind);
+    if (!why) return false;
+    this.floatText(this.player.x, this.player.y - 22, why, '#9ad7ff');
     return true;
   }
 

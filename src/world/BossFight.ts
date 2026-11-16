@@ -19,13 +19,15 @@ import type {
   BossMove,
   BossProfile,
   BossTarget,
+  MoveKind,
   Sentence,
   SentenceAct,
+  SongDefense,
 } from '../systems/boss/BossTypes';
 import type { IEnemyDefinition } from '../systems/combat/CombatTypes';
 import type { PixelFxLayer } from '../systems/fx/PixelFxLayer';
 import type { Translate } from '../ui/Strings';
-import type { ActionCombat, CombatExtension } from './ActionCombat';
+import type { ActionCombat, CombatExtension, PeterAct } from './ActionCombat';
 import { tileCenter } from './MapRegistry';
 
 /** Boss profiles from bosses.json (loaded by PreloadScene). */
@@ -64,6 +66,10 @@ interface Target {
 const WRAITH = ['#120a1f', '#2e1648', '#5b2a86', '#9a5ad0', '#d8b4ff', '#ffffff'];
 const GOLD = ['#2a1a05', '#6b4a12', '#b8862a', '#f0c860', '#fff2b8'];
 const WATER = ['#0b2233', '#1d4f6e', '#3f8fbf', '#7fd8ff', '#d8f6ff'];
+const BLOOD = ['#1a0505', '#4a0d0d', '#8a1a1a', '#d23a2a', '#ff8a6a', '#ffe0c8'];
+
+/** Slash is melee; shots and Temporal Strike are ranged (Faceless Keeper's memory lock). */
+const kindOf = (a: PeterAct): MoveKind => (a === 'slash' ? 'melee' : 'ranged');
 
 /**
  * T-84: a boss fought where Peter meets it, on the map itself (no separate battle scene). Peter's
@@ -122,12 +128,37 @@ export class BossFight implements CombatExtension {
   private stillSince = 0;
   private lastPeter: Point;
 
+  /** The boss's attack (the Faceless Keeper's mirror copies part of Peter's). */
+  private attack: number;
+  /** Faceless Keeper: the kind of move frozen, until when; a stagger armed by the other kind. */
+  private lock: { kind: MoveKind; until: number } | null = null;
+  private lockIdx = 0;
+  private nextLockAt = 0;
+  private staggerUntil = 0;
+  /** Nameless Choir, Unborn King: the song in force and the cracks it has cost the shield. */
+  private song: { def: SongDefense['list'][number]; until: number } | null = null;
+  private lastSong: string | null = null;
+  private nextSongAt = 0;
+  private songCracks = 0;
+  /** Crimson Standard: the blood wall stands while tethers remain. */
+  private wall: { tethers: Target[] } | null = null;
+  private nextWallAt = 0;
+  /** The Last War: risen once; the last pillar readies the finishing blow. */
+  private risen = false;
+  private finality = false;
+  /** Kuro beside Peter (Unborn King). */
+  private allySprite: Phaser.GameObjects.Sprite | null = null;
+  private nextAllyAt = 0;
+  /** Alpha Peter: "[E] read the letter" once he is low enough. */
+  private finisherText: Phaser.GameObjects.Text | null = null;
+  private finisherKey: Phaser.Input.Keyboard.Key | null = null;
+
   constructor(
     private readonly scene: Phaser.Scene,
     private readonly session: GameSession,
     private readonly action: ActionCombat,
     private readonly peter: Phaser.Physics.Arcade.Sprite,
-    walls: Phaser.Tilemaps.TilemapLayer,
+    private readonly walls: Phaser.Tilemaps.TilemapLayer,
     private readonly enemy: IEnemyDefinition,
     private readonly profile: BossProfile,
     from: Point,
@@ -183,6 +214,43 @@ export class BossFight implements CombatExtension {
 
     this.stateUntil = scene.time.now + 1400;
     this.nextSentenceAt = profile.defense.sentences?.firstMs ?? 0;
+    const d = profile.defense;
+    this.attack = enemy.attack;
+    if (profile.mirrorGearPct)
+      this.attack += Math.round(session.getStats().attack * profile.mirrorGearPct);
+    this.nextLockAt = d.memoryLock?.firstMs ?? 0;
+    this.nextSongAt = d.songs?.firstMs ?? 0;
+    this.nextWallAt = d.bloodWall?.firstMs ?? 0;
+    // Song targets (cores, crowns) are lit from the start; ritual pillars wait hidden.
+    if (d.songs) this.openTargets();
+    const ally = profile.ally;
+    if (ally && session.getFlag(ally.flag)) {
+      this.allySprite = scene.add.sprite(peter.x - 28, peter.y, ally.texture).setDepth(peter.depth);
+      if (ally.anim && scene.anims.exists(ally.anim)) this.allySprite.play(ally.anim);
+      this.nextAllyAt = ally.everyMs;
+    }
+    if (profile.finisher) {
+      this.finisherText = scene.add
+        .text(0, 0, `[E] ${profile.finisher.prompt}`, {
+          fontFamily: 'monospace',
+          fontSize: '10px',
+          fontStyle: 'bold',
+          color: '#fff2b8',
+          backgroundColor: '#1a1208d8',
+          padding: { left: 4, right: 4, top: 2, bottom: 2 },
+        })
+        .setOrigin(0.5, 1)
+        .setDepth(60)
+        .setVisible(false);
+      this.finisherKey = scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.E) ?? null;
+      this.finisherKey?.on('down', this.onFinisherKey);
+    }
+    const ss = profile.startStun;
+    if (ss && session.getFlag(ss.flag))
+      this.later(600, () => {
+        this.stun(this.scene.time.now, ss.ms, this.t('action.stunned'));
+        this.showBanner(ss.message, 3000);
+      });
     this.showBanner(profile.intro ?? enemy.name, 3200);
     scene.cameras.main.shake(200, 0.004);
     if (profile.rescue) action.bossHpFloor = 1;
@@ -225,6 +293,12 @@ export class BossFight implements CombatExtension {
     this.updateHazards(now);
     this.updateTargets();
     this.updateSentence(now);
+    this.updateLock();
+    this.updateSongs();
+    this.updateWall(now);
+    this.updateAlly();
+    this.updateOrbits();
+    this.updateFinisher();
     this.draw(now);
   }
 
@@ -243,8 +317,7 @@ export class BossFight implements CombatExtension {
         // A missed chance: the steps before the final one must be done again.
         if (!this.armorBroken)
           for (const t of this.targets)
-            if (t.def.effect !== 'breakArmor' && this.targetsDone.delete(t.def.id))
-              (t.obj.list[1] as Phaser.GameObjects.Arc).setFillStyle(0xffe08a);
+            if (t.def.effect !== 'breakArmor' && this.targetsDone.delete(t.def.id)) this.light(t);
         this.toWalk(now);
       }
       return;
@@ -323,8 +396,8 @@ export class BossFight implements CombatExtension {
     this.play('blinkIn', { x: this.boss.x, y: this.boss.y + 16 }, { palette: WRAITH });
   }
 
-  private beginMove(now: number): void {
-    const id = pickMove(this.profile.phases[this.phase], this.lastMove, this.rng);
+  private beginMove(now: number, forced?: string): void {
+    const id = forced ?? pickMove(this.profile.phases[this.phase], this.lastMove, this.rng);
     this.lastMove = id;
     const move = this.profile.moves[id];
     if (!move) return this.toWalk(now);
@@ -374,6 +447,7 @@ export class BossFight implements CombatExtension {
 
   /** Slam circles are shown at once, where they will land. */
   private slam(move: Extract<BossMove, { type: 'slam' }>, now: number): void {
+    if (move.feint && this.rng() < move.feint) return this.feintSlam(move, now);
     const count = move.count ?? 1;
     const stagger = move.staggerMs ?? 0;
     for (let i = 0; i < count; i++) {
@@ -519,18 +593,22 @@ export class BossFight implements CombatExtension {
 
   private updateHazards(now: number): void {
     const p = this.p;
-    const atk = this.enemy.attack;
+    const atk = this.attack;
     const scale = this.profile.damageScale;
     for (const h of this.hazards) {
       if (h.hit || now > h.until || !h.test(p)) continue;
-      if (this.action.bossHit(atk, h.mult, this.boss, scale, h.slowMs)) h.hit = true;
+      const dealt = this.action.bossHit(atk, h.mult, this.boss, scale, h.slowMs);
+      if (dealt) {
+        h.hit = true;
+        this.drain(dealt);
+      }
     }
     this.hazards = this.hazards.filter((h) => now <= h.until && !(h.once && h.hit));
     this.telegraphs = this.telegraphs.filter((t) => now <= t.until);
     const touching = Math.hypot(p.x - this.boss.x, p.y - this.boss.y) < this.profile.radius + 6;
     if (touching && this.state !== 'stunned') {
       const mult = this.charge ? this.charge.mult : this.profile.contactMult;
-      if (mult > 0) this.action.bossHit(atk, mult, this.boss, scale);
+      if (mult > 0) this.drain(this.action.bossHit(atk, mult, this.boss, scale));
     }
     this.checkRescue();
   }
@@ -560,10 +638,13 @@ export class BossFight implements CombatExtension {
       this.scene.events.once(Phaser.Scenes.Events.SHUTDOWN, () => ally.destroy());
     }
     this.scene.cameras.main.flash(400, 120, 200, 255);
-    this.scene.time.delayedCall(500, () => {
-      this.play('poof', { x: this.boss.x, y: this.boss.y + 16 }, { palette: WRAITH });
-      this.scene.tweens.add({ targets: this.boss, alpha: 0, duration: 400 });
-    });
+    if (rescue.vanish !== false)
+      this.scene.time.delayedCall(500, () => {
+        this.play('poof', { x: this.boss.x, y: this.boss.y + 16 }, { palette: WRAITH });
+        this.scene.tweens.add({ targets: this.boss, alpha: 0, duration: 400 });
+      });
+    else this.boss.anims.stop();
+    this.cleanupExtras();
     this.dispose([this.bar, this.title, this.banner, ...this.targets.map((t) => t.obj)]);
     for (const c of this.colliders.splice(0)) c.destroy();
     const ids = [rescue.flashDialogueId, rescue.dialogueId].filter((x): x is string => !!x);
@@ -576,13 +657,68 @@ export class BossFight implements CombatExtension {
     return this.ended ? null : (this.profile.unarmed ?? null);
   }
 
-  public onAction(): void {
-    this.sentenceAct('attack');
+  public onAction(kind: PeterAct): void {
+    if (this.ended) return;
+    if (kind !== 'dash') this.sentenceAct('attack');
+    const now = this.scene.time.now;
+    // Memory lock: a move of the kind the mirror did not freeze arms a stagger.
+    if (this.lock && kind !== 'dash' && kindOf(kind) !== this.lock.kind)
+      this.staggerUntil = now + 900;
+    const m = this.profile.mirror;
+    if (!m || this.state === 'stunned') return;
+    if (kind === 'skill') {
+      // Alpha Peter copies Temporal Strike: he answers with the shears and seals Peter's.
+      this.action.silence(m.silenceMs);
+      this.showBanner(m.skillMessage, 2400);
+      this.later(250, () => {
+        if (this.state === 'walk' || this.state === 'intro')
+          this.beginMove(this.scene.time.now, m.skillMove);
+      });
+    } else if (kind === 'dash' && m.dashLunge && this.state === 'walk') {
+      const ang = Math.atan2(this.p.y - this.boss.y, this.p.x - this.boss.x);
+      this.face(ang);
+      this.state = 'act';
+      this.stateUntil = now + 420;
+      this.charge = {
+        dx: Math.cos(ang),
+        dy: Math.sin(ang),
+        speed: 320,
+        from: now,
+        until: now + 380,
+        mult: 0.9,
+        stunMs: 0,
+      };
+      this.action.floatText(this.boss.x, this.boss.y - 46, this.t('boss.mirrored'), '#ff9a7a');
+    }
+  }
+
+  /** Faceless Keeper: a frozen kind of move is refused. */
+  public blocked(kind: PeterAct): string | null {
+    const ml = this.profile.defense.memoryLock;
+    if (this.ended || !ml || !this.lock || kind === 'dash') return null;
+    return kindOf(kind) === this.lock.kind ? ml.lockedText : null;
   }
 
   /** A quick-slot item was used during the fight. */
   public onItem(): void {
+    if (this.ended) return;
     this.sentenceAct('item');
+    const m = this.profile.mirror;
+    if (m && m.healPct > 0) {
+      const heal = Math.round(this.maxHp * m.healPct);
+      this.hp = Math.min(this.maxHp, this.hp + heal);
+      this.action.floatText(this.boss.x, this.boss.y - 34, `+${heal}`, '#7dffb0');
+      this.showBanner(m.healMessage, 2400);
+    }
+  }
+
+  /** After its armor breaks, the boss heals by part of what it deals (Unborn King). */
+  private drain(dealt: number): void {
+    const k = this.profile.drainAfterBreak;
+    if (!k || !this.armorBroken || dealt <= 0 || this.ended) return;
+    const heal = Math.ceil(dealt * k);
+    this.hp = Math.min(this.maxHp, this.hp + heal);
+    this.action.floatText(this.boss.x, this.boss.y - 34, `+${heal}`, '#ff8a8a');
   }
 
   public onSlash(
@@ -664,8 +800,14 @@ export class BossFight implements CombatExtension {
     ];
   }
 
-  private blowOnBoss(raw: number, critical: boolean, from: Point): void {
+  private blowOnBoss(rawIn: number, critical: boolean, from: Point): void {
     if (this.ended) return;
+    const d = this.profile.defense;
+    let raw = rawIn;
+    // The blood wall swallows most of a blow; a stagger (memory lock) lands harder.
+    if (this.wall && d.bloodWall) raw = Math.max(1, Math.round(raw * (1 - d.bloodWall.reducePct)));
+    const staggered = !!this.lock && this.scene.time.now < this.staggerUntil;
+    if (staggered && d.memoryLock) raw = Math.round(raw * d.memoryLock.staggerMult);
     const res = gateBlow(
       this.profile.defense,
       {
@@ -692,8 +834,25 @@ export class BossFight implements CombatExtension {
       this.action.floatText(this.p.x, this.p.y - 20, `-${res.back}`, '#ff6b6b');
       return;
     }
+    if (this.finality) {
+      // The ritual is complete: this blow ends the war.
+      this.hp = 0;
+      this.showBanner(d.ritual?.finishMessage ?? '', 2600);
+      this.play('holyPillar', { x: this.boss.x, y: this.boss.y + 20 }, {}, 1800);
+      this.victory();
+      return;
+    }
     this.hp = Math.max(0, this.hp - res.damage);
+    if (this.risen) this.hp = Math.max(1, this.hp);
     if (this.sentence) this.sentence.landed = true;
+    if (staggered && d.memoryLock) {
+      this.lock = null;
+      this.staggerUntil = 0;
+      this.nextLockAt = this.fightMs + d.memoryLock.everyMs;
+      this.showBanner(d.memoryLock.staggerMessage, 2600);
+      this.play('critHit', { x: this.boss.x, y: this.boss.y + 4 });
+      this.stun(this.scene.time.now, d.memoryLock.staggerMs, this.t('action.stunned'));
+    }
     this.boss.setTintFill(0xffffff);
     this.later(80, () => {
       if (this.state === 'stunned') this.boss.setTint(0xfff27a);
@@ -713,7 +872,30 @@ export class BossFight implements CombatExtension {
       );
     }
     this.checkPhase();
+    const endAt = this.profile.endAtHpPct;
+    if (endAt && this.hpPct <= endAt) {
+      this.victory();
+      return;
+    }
+    if (this.hp <= 0 && d.ritual && !this.risen) {
+      this.rise();
+      return;
+    }
     if (this.hp <= 0) this.victory();
+  }
+
+  /** The Last War will not die: it rises, and the ritual pillars appear. */
+  private rise(): void {
+    const r = this.profile.defense.ritual;
+    if (!r) return;
+    this.risen = true;
+    this.hp = Math.round(this.maxHp * r.revivePct);
+    this.showBanner(r.openMessage, 3600);
+    this.play('groundSlam', { x: this.boss.x, y: this.boss.y + 18 }, { reach: 90 }, 1400);
+    this.scene.cameras.main.shake(300, 0.008);
+    this.targetsOpen = true;
+    for (const t of this.targets) if (t.def.hidden) this.light(t, true);
+    this.stun(this.scene.time.now, 1200, this.t('boss.risen'));
   }
 
   private checkPhase(): void {
@@ -796,10 +978,21 @@ export class BossFight implements CombatExtension {
 
   private spawnTargets(): void {
     for (const def of this.profile.defense.targets ?? []) {
-      const pos = tileCenter(def.tile);
-      const base = this.scene.add.rectangle(0, 6, 22, 8, 0x3a4656);
-      const lens = this.scene.add.circle(0, -4, 8, 0x55606e).setStrokeStyle(2, 0x9aa7b8);
-      const label = this.scene.add
+      const pos = def.tile ? tileCenter(def.tile) : { x: this.boss.x, y: this.boss.y };
+      const t = this.makeTarget(def, pos, !!def.orbit);
+      if (def.hidden) t.obj.setVisible(false);
+      this.targets.push(t);
+    }
+    this.updateOrbits();
+  }
+
+  /** A strikable object: a pedestal and its gem (an orbiting crown has no pedestal). */
+  private makeTarget(def: BossTarget, pos: Point, floating = false): Target {
+    const parts: Phaser.GameObjects.GameObject[] = [];
+    if (!floating) parts.push(this.scene.add.rectangle(0, 6, 22, 8, 0x3a4656));
+    parts.push(this.scene.add.circle(0, -4, 8, 0x55606e).setStrokeStyle(2, 0x9aa7b8));
+    parts.push(
+      this.scene.add
         .text(0, -22, def.label, {
           fontFamily: 'monospace',
           fontSize: '8px',
@@ -807,10 +1000,236 @@ export class BossFight implements CombatExtension {
           stroke: '#000000',
           strokeThickness: 2,
         })
-        .setOrigin(0.5);
-      const obj = this.scene.add.container(pos.x, pos.y, [base, lens, label]).setDepth(4);
-      this.targets.push({ def, obj, pos });
+        .setOrigin(0.5),
+    );
+    const obj = this.scene.add.container(pos.x, pos.y, parts).setDepth(floating ? 45 : 4);
+    return { def, obj, pos: { ...pos } };
+  }
+
+  private gemOf(t: Target): Phaser.GameObjects.Arc {
+    return t.obj.list.find((o) => o instanceof Phaser.GameObjects.Arc) as Phaser.GameObjects.Arc;
+  }
+
+  private labelOf(t: Target): Phaser.GameObjects.Text {
+    return t.obj.list.find((o) => o instanceof Phaser.GameObjects.Text) as Phaser.GameObjects.Text;
+  }
+
+  /** Lights a target (its own colour, gold by default), pulsing. */
+  private light(t: Target, show = false): void {
+    if (show) t.obj.setVisible(true);
+    const hex = t.def.color ?? '#ffe08a';
+    const c = Phaser.Display.Color.HexStringToColor(hex).color;
+    const gem = this.gemOf(t);
+    gem.setFillStyle(c).setStrokeStyle(2, 0xffffff);
+    this.labelOf(t).setColor(hex);
+    this.scene.tweens.killTweensOf(gem);
+    gem.setAlpha(1);
+    this.scene.tweens.add({ targets: gem, alpha: 0.55, yoyo: true, repeat: -1, duration: 500 });
+  }
+
+  /** Crowns circle the Unborn King. */
+  private updateOrbits(): void {
+    for (const t of this.targets) {
+      const o = t.def.orbit;
+      if (!o) continue;
+      const ang = ((o.startDeg + (o.degPerSec * this.fightMs) / 1000) * Math.PI) / 180;
+      t.pos.x = this.boss.x + Math.cos(ang) * o.radius;
+      t.pos.y = this.boss.y + Math.sin(ang) * o.radius * 0.7;
+      t.obj.setPosition(t.pos.x, t.pos.y);
     }
+  }
+
+  // ------------------------------------------------------------------ memory lock (Faceless Keeper)
+
+  private updateLock(): void {
+    const ml = this.profile.defense.memoryLock;
+    if (!ml) return;
+    if (this.lock && this.fightMs >= this.lock.until) {
+      this.lock = null;
+      this.nextLockAt = this.fightMs + ml.everyMs;
+    } else if (!this.lock && this.fightMs >= this.nextLockAt && this.state !== 'stunned') {
+      const opt = ml.options[this.lockIdx++ % ml.options.length];
+      this.lock = { kind: opt.lock, until: this.fightMs + ml.lockMs };
+      this.showBanner(opt.announce, 3000);
+      this.play('shieldBlock', () => ({ x: this.p.x, y: this.p.y + 4 }), { palette: WATER });
+    }
+  }
+
+  // ------------------------------------------------------------------ songs (Choir, Unborn King)
+
+  private updateSongs(): void {
+    const sd = this.profile.defense.songs;
+    if (!sd || this.armorBroken) return;
+    if (this.song && this.fightMs >= this.song.until) {
+      this.song = null;
+      this.nextSongAt = this.fightMs + sd.gapMs;
+    } else if (!this.song && this.fightMs >= this.nextSongAt && this.state !== 'stunned') {
+      const pool = sd.list.filter((s) => s.id !== this.lastSong);
+      const pick = pool[Math.floor(this.rng() * pool.length)] ?? sd.list[0];
+      this.lastSong = pick.id;
+      this.song = { def: pick, until: this.fightMs + sd.windowMs };
+      this.showBanner(pick.announce, sd.windowMs);
+      this.sound.playSelect();
+    }
+  }
+
+  /** A song target struck: the right one cracks the shield, a wrong one strikes back. */
+  private songStrike(t: Target): void {
+    const sd = this.profile.defense.songs;
+    if (!sd || this.armorBroken) return;
+    const s = this.song;
+    if (!s) {
+      this.action.floatText(t.pos.x, t.pos.y - 26, sd.silentMessage, '#9aa7b8');
+      return;
+    }
+    this.song = null;
+    this.nextSongAt = this.fightMs + sd.gapMs;
+    if (s.def.targetId === t.def.id) {
+      this.songCracks++;
+      this.play('shieldBlock', { x: this.boss.x, y: this.boss.y + 4 }, { palette: GOLD });
+      this.beam(t.pos, 0xffe08a);
+      if (this.songCracks >= sd.cracksToBreak) {
+        this.showBanner(sd.breakMessage, 3200);
+        this.breakArmor(this.scene.time.now);
+      } else
+        this.showBanner(`${s.def.crackMessage} (${this.songCracks}/${sd.cracksToBreak})`, 2600);
+      return;
+    }
+    const amount = Math.max(1, Math.round(this.session.getStats().maxHp * sd.wrongPct));
+    this.session.mp = Math.max(0, this.session.mp - sd.wrongMp);
+    this.play('curse', () => ({ x: this.p.x, y: this.p.y + 14 }), {}, 1600);
+    this.showBanner(sd.wrongMessage.replace('{damage}', String(amount)), 2600);
+    this.action.directHit(amount);
+  }
+
+  private beam(from: Point, color: number): void {
+    const g = this.scene.add.graphics().setDepth(41);
+    g.lineStyle(4, color, 0.9);
+    g.lineBetween(from.x, from.y, this.boss.x, this.boss.y);
+    this.scene.tweens.add({ targets: g, alpha: 0, duration: 500, onComplete: () => g.destroy() });
+  }
+
+  // ------------------------------------------------------------------ blood wall (Crimson Standard)
+
+  private updateWall(now: number): void {
+    const bw = this.profile.defense.bloodWall;
+    if (!bw || this.wall || this.fightMs < this.nextWallAt || this.state === 'stunned') return;
+    this.wall = { tethers: [] };
+    for (let i = 0; i < bw.tethers; i++) {
+      const spot = this.openSpot(bw.minDist, bw.maxDist);
+      const def: BossTarget = {
+        id: `tether_${i}`,
+        label: this.t('boss.tether'),
+        effect: 'progress',
+        message: '',
+        color: '#ff5a4a',
+      };
+      const t = this.makeTarget(def, spot);
+      this.light(t);
+      this.wall.tethers.push(t);
+      this.targets.push(t);
+    }
+    this.showBanner(bw.raiseMessage, 3200);
+    this.play(
+      'groundSlam',
+      { x: this.boss.x, y: this.boss.y + 18 },
+      { reach: 70, palette: BLOOD },
+      1200,
+    );
+    void now;
+  }
+
+  /** A floor point `min`–`max` px from the boss (not in a wall, inside the map). */
+  private openSpot(min: number, max: number): Point {
+    const b = this.scene.physics.world.bounds;
+    for (let i = 0; i < 40; i++) {
+      const ang = this.rng() * Math.PI * 2;
+      const dist = min + this.rng() * (max - min);
+      const x = this.boss.x + Math.cos(ang) * dist;
+      const y = this.boss.y + Math.sin(ang) * dist;
+      if (x < 40 || y < 40 || x > b.width - 40 || y > b.height - 40) continue;
+      if (this.walls.getTileAtWorldXY(x, y)?.collides) continue;
+      return { x, y };
+    }
+    return { x: this.p.x, y: this.p.y };
+  }
+
+  private cutTether(t: Target): void {
+    const bw = this.profile.defense.bloodWall;
+    if (!this.wall || !bw) return;
+    this.wall.tethers = this.wall.tethers.filter((x) => x !== t);
+    this.targets = this.targets.filter((x) => x !== t);
+    this.play('hitSpark', { x: t.pos.x, y: t.pos.y }, { palette: BLOOD });
+    this.dispose([t.obj]);
+    this.action.floatText(t.pos.x, t.pos.y - 26, bw.cutMessage, '#ff8a6a');
+    if (this.wall.tethers.length > 0) return;
+    this.wall = null;
+    this.nextWallAt = this.fightMs + bw.everyMs;
+    this.showBanner(bw.breakMessage, 2800);
+    this.stun(this.scene.time.now, bw.stunMs, this.t('action.stunned'));
+  }
+
+  // ------------------------------------------------------------------ ally (Kuro at the Unborn throne)
+
+  private updateAlly(): void {
+    const a = this.profile.ally;
+    const s = this.allySprite;
+    if (!a || !s) return;
+    s.x += (this.p.x - 28 - s.x) * 0.08;
+    s.y += (this.p.y + 4 - s.y) * 0.08;
+    s.setFlipX(this.boss.x < s.x);
+    if (this.fightMs < this.nextAllyAt) return;
+    this.nextAllyAt += a.everyMs;
+    const dmg = Math.ceil(this.maxHp * a.damagePct);
+    this.hp = Math.max(this.armorBroken ? 0 : 1, this.hp - dmg);
+    this.play('hitSpark', { x: this.boss.x, y: this.boss.y }, { palette: WRAITH });
+    this.action.floatText(this.boss.x, this.boss.y - 34, `-${dmg}`, '#b09aff');
+    this.showBanner(a.message.replace('{damage}', String(dmg)), 2000);
+    this.checkPhase();
+    if (this.hp <= 0) this.victory();
+  }
+
+  // ------------------------------------------------------------------ feints (The Last War)
+
+  /** A decoy circle, then the real blow on where Peter stands, late. */
+  private feintSlam(move: Extract<BossMove, { type: 'slam' }>, now: number): void {
+    const ang = this.rng() * Math.PI * 2;
+    const decoy = { x: this.p.x + Math.cos(ang) * 80, y: this.p.y + Math.sin(ang) * 80 };
+    const lead = move.telegraphMs;
+    this.telegraphs.push({
+      until: now + lead,
+      draw: (g, t) => {
+        const k = 1 - Math.max(0, now + lead - t) / lead;
+        g.fillStyle(0xff3030, 0.12 + 0.25 * k);
+        g.fillCircle(decoy.x, decoy.y, move.radius);
+      },
+    });
+    this.later(lead, () => {
+      if (this.state !== 'telegraph') return;
+      this.action.floatText(this.boss.x, this.boss.y - 46, this.t('boss.feint'), '#ffb86b');
+      const spot = this.p;
+      const at = this.scene.time.now + 420;
+      this.telegraphs.push({
+        until: at,
+        draw: (g) => {
+          g.fillStyle(0xff3030, 0.4);
+          g.fillCircle(spot.x, spot.y, move.radius);
+        },
+      });
+      this.later(420, () => {
+        if (this.state === 'stunned') return;
+        this.play(move.fx ?? 'groundSlam', spot, { reach: Math.round(move.radius * 1.6) }, 1100);
+        this.hazards.push({
+          test: (p) => Math.hypot(p.x - spot.x, p.y - spot.y) <= move.radius,
+          mult: move.mult,
+          until: this.scene.time.now + 120,
+          hit: false,
+        });
+        this.boss.clearTint();
+        this.state = 'act';
+        this.stateUntil = this.scene.time.now + 300;
+      });
+    });
   }
 
   private updateTargets(): void {
@@ -824,19 +1243,28 @@ export class BossFight implements CombatExtension {
     this.targetsOpen = true;
     if (this.profile.defense.unlockMessage)
       this.showBanner(this.profile.defense.unlockMessage, 3600);
-    for (const t of this.targets) {
-      const lens = t.obj.list[1] as Phaser.GameObjects.Arc;
-      lens.setFillStyle(0xffe08a).setStrokeStyle(2, 0xffffff);
-      (t.obj.list[2] as Phaser.GameObjects.Text).setColor('#ffe08a');
-      this.scene.tweens.add({ targets: lens, alpha: 0.55, yoyo: true, repeat: -1, duration: 500 });
-    }
+    for (const t of this.targets) if (!t.def.hidden) this.light(t);
   }
 
   private strikeTarget(t: Target): void {
-    if (!this.targetsOpen || this.armorBroken || this.ended) return;
+    if (this.ended || !t.obj.visible) return;
+    if (this.wall?.tethers.includes(t)) return this.cutTether(t);
+    if (!this.targetsOpen || this.armorBroken || this.finality) return;
+    if (t.def.effect === 'song') return this.songStrike(t);
     const now = this.scene.time.now;
     const ready = targetReady(t.def, this.targetsDone, this.state === 'stunned');
     if (ready === 'done') return;
+    const wrong = this.profile.defense.wrongOrder;
+    if (ready === 'order' && wrong) {
+      // The chain restarts and Peter pays for it.
+      const amount = Math.max(1, Math.round(this.session.getStats().maxHp * wrong.pct));
+      this.targetsDone.clear();
+      for (const x of this.targets) if (x.obj.visible) this.light(x);
+      this.showBanner(wrong.message.replace('{damage}', String(amount)), 2600);
+      this.play('curse', () => ({ x: this.p.x, y: this.p.y + 14 }), {}, 1400);
+      this.action.directHit(amount);
+      return;
+    }
     if (ready !== 'ok') {
       this.action.floatText(t.pos.x, t.pos.y - 30, '✕', '#ff8080');
       if (this.profile.defense.lockedMessage)
@@ -852,8 +1280,13 @@ export class BossFight implements CombatExtension {
     g.lineBetween(t.pos.x, t.pos.y, this.boss.x, this.boss.y);
     this.scene.tweens.add({ targets: g, alpha: 0, duration: 500, onComplete: () => g.destroy() });
     // A struck target turns blue; it lights up gold again if the chance is missed.
-    (t.obj.list[1] as Phaser.GameObjects.Arc).setFillStyle(0x9ad7ff);
-    if (t.def.effect === 'stun') {
+    this.gemOf(t).setFillStyle(0x9ad7ff);
+    if (t.def.effect === 'finality') {
+      this.finality = true;
+      this.showBanner(this.profile.defense.ritual?.completeMessage ?? t.def.message, 3000);
+      this.play('holyPillar', { x: this.boss.x, y: this.boss.y + 20 }, {}, 1600);
+      this.stun(now, 3000, this.t('action.stunned'));
+    } else if (t.def.effect === 'stun') {
       this.stun(now, t.def.stunMs ?? 3000, this.t('action.stunned'));
     } else if (t.def.effect === 'progress') {
       if (t.def.stunMs) this.stun(now, t.def.stunMs, this.t('action.stunned'));
@@ -892,6 +1325,22 @@ export class BossFight implements CombatExtension {
       g.lineStyle(2, 0x7fd8ff, 0.35 + 0.15 * Math.sin(now / 200));
       g.strokeCircle(this.boss.x, this.boss.y, this.profile.radius + 2);
     }
+    if (this.wall) {
+      // The blood wall: a red aura and the tethers that feed it.
+      g.lineStyle(4, 0xd23a2a, 0.5 + 0.25 * Math.sin(now / 150));
+      g.strokeCircle(this.boss.x, this.boss.y, this.profile.radius + 10);
+      g.lineStyle(2, 0xff5a4a, 0.7);
+      for (const t of this.wall.tethers) g.lineBetween(this.boss.x, this.boss.y, t.pos.x, t.pos.y);
+    }
+    if (this.lock) {
+      g.lineStyle(2, 0x9ad7ff, 0.8);
+      g.strokeEllipse(this.p.x, this.p.y + 14, 30, 12);
+    }
+    if (this.song) {
+      const c = Phaser.Display.Color.HexStringToColor(this.song.def.color).color;
+      g.lineStyle(3, c, 0.55 + 0.3 * Math.sin(now / 110));
+      g.strokeCircle(this.boss.x, this.boss.y, this.profile.radius + 8);
+    }
     if (this.sentence) {
       // The sentence's aura around the boss, and a ring under Peter while it holds.
       const c = Phaser.Display.Color.HexStringToColor(this.sentence.def.color).color;
@@ -909,6 +1358,18 @@ export class BossFight implements CombatExtension {
     b.fillStyle(0x5a1a1a, 1).fillRect(bx, 268, bw, 7);
     b.fillStyle(this.armorBroken || !d.armor ? 0xe0504a : 0x4fa3c7, 1);
     b.fillRect(bx, 268, bw * this.hpPct, 7);
+    const songs = d.songs;
+    if (songs && !this.armorBroken) {
+      for (let i = 0; i < songs.cracksToBreak; i++) {
+        b.fillStyle(i < this.songCracks ? 0xf0c860 : 0x3a3020, 1);
+        b.fillRect(bx + bw + 8 + i * 10, 267, 7, 9);
+      }
+      if (this.song) {
+        const left = Math.max(0, (this.song.until - this.fightMs) / songs.windowMs);
+        const c = Phaser.Display.Color.HexStringToColor(this.song.def.color).color;
+        b.fillStyle(c, 0.9).fillRect(bx, 277, bw * left, 2);
+      }
+    }
     const sd = d.sentences;
     if (sd && !this.armorBroken) {
       // Cracks in the scale, and the time left on the sentence in force.
@@ -933,7 +1394,48 @@ export class BossFight implements CombatExtension {
 
   // ------------------------------------------------------------------ end
 
+  private readonly onFinisherKey = (): void => {
+    if (this.finisherReady()) {
+      this.showBanner(this.profile.finisher!.message, 3000);
+      this.victory();
+    }
+  };
+
+  private finisherReady(): boolean {
+    const f = this.profile.finisher;
+    if (!f || this.ended || this.host.isPaused()) return false;
+    return this.hpPct <= f.belowPct && this.session.inventory.hasItem(f.itemId, 1);
+  }
+
+  private updateFinisher(): void {
+    if (!this.finisherText) return;
+    const ready = this.finisherReady();
+    this.finisherText.setVisible(ready);
+    if (ready)
+      this.finisherText.setPosition(this.boss.x, this.boss.y - this.boss.displayHeight / 2 - 8);
+  }
+
+  /** Ally, finisher prompt and key: gone when the fight ends, whichever way. */
+  private cleanupExtras(): void {
+    this.finisherKey?.off('down', this.onFinisherKey);
+    this.finisherKey = null;
+    if (this.finisherText) this.dispose([this.finisherText]);
+    const ally = this.allySprite;
+    this.allySprite = null;
+    if (ally?.scene)
+      this.scene.tweens.add({
+        targets: ally,
+        alpha: 0,
+        delay: 1200,
+        duration: 500,
+        onComplete: () => ally.destroy(),
+      });
+    for (const t of this.wall?.tethers ?? []) this.dispose([t.obj]);
+    this.wall = null;
+  }
+
   private victory(): void {
+    this.cleanupExtras();
     this.ended = true;
     this.state = 'done';
     this.action.extension = null;
@@ -984,6 +1486,7 @@ export class BossFight implements CombatExtension {
 
   /** Map change or knock-out: drop everything without a result. */
   public destroy(): void {
+    this.cleanupExtras();
     this.ended = true;
     this.action.extension = null;
     this.action.bossHpFloor = 0;

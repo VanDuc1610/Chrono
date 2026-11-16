@@ -7,6 +7,13 @@ import townTm from '../public/assets/maps/map_coastal_town.json';
 import lighthouseTm from '../public/assets/maps/map_old_lighthouse.json';
 import bellTm from '../public/assets/maps/map_ch1_bell_sanctum.json';
 import verdictTm from '../public/assets/maps/map_ch2_verdict_sanctum.json';
+import ch3memoryvaultsTm from '../public/assets/maps/map_ch3_memory_vaults.json';
+import ch3choirsanctumTm from '../public/assets/maps/map_ch3_choir_sanctum.json';
+import ch4crimsonredoubtTm from '../public/assets/maps/map_ch4_crimson_redoubt.json';
+import ch4sanctumoffinalityTm from '../public/assets/maps/map_ch4_sanctum_of_finality.json';
+import ch5prunertowerTm from '../public/assets/maps/map_ch5_pruner_tower.json';
+import ch5kuroasksTm from '../public/assets/maps/map_ch5_kuro_asks.json';
+import ch5unbornthroneTm from '../public/assets/maps/map_ch5_unborn_throne.json';
 import { sentenceVerdict } from '../src/systems/boss/BossRules';
 import type { BossDatabase } from '../src/systems/boss/BossTypes';
 
@@ -58,6 +65,13 @@ const TILEMAPS: Record<string, Tilemap> = {
   map_old_lighthouse: lighthouseTm as unknown as Tilemap,
   map_ch1_bell_sanctum: bellTm as unknown as Tilemap,
   map_ch2_verdict_sanctum: verdictTm as unknown as Tilemap,
+  map_ch3_memory_vaults: ch3memoryvaultsTm as unknown as Tilemap,
+  map_ch3_choir_sanctum: ch3choirsanctumTm as unknown as Tilemap,
+  map_ch4_crimson_redoubt: ch4crimsonredoubtTm as unknown as Tilemap,
+  map_ch4_sanctum_of_finality: ch4sanctumoffinalityTm as unknown as Tilemap,
+  map_ch5_pruner_tower: ch5prunertowerTm as unknown as Tilemap,
+  map_ch5_kuro_asks: ch5kuroasksTm as unknown as Tilemap,
+  map_ch5_unborn_throne: ch5unbornthroneTm as unknown as Tilemap,
 };
 
 function solid(mapId: string, map: MapDef, x: number, y: number): boolean {
@@ -69,13 +83,20 @@ function solid(mapId: string, map: MapDef, x: number, y: number): boolean {
 }
 
 describe('T-84 bosses on their maps', () => {
-  it('covers the Prologue to Chapter 2 bosses', () => {
+  it('covers the Prologue to Chapter 5 bosses', () => {
     const ids = bosses.map((b) => b.id);
     for (const id of [
       'boss_time_wraith',
       'boss_drowned_sentinel',
       'boss_sunken_bellkeeper',
       'boss_imperial_verdict',
+      'boss_faceless_keeper',
+      'boss_nameless_choir',
+      'boss_crimson_standard',
+      'boss_the_last_war',
+      'boss_other_peter',
+      'boss_kuro_duel',
+      'boss_unborn_king',
     ])
       expect(ids).toContain(id);
   });
@@ -86,8 +107,11 @@ describe('T-84 bosses on their maps', () => {
       const [mapId, map] = mapOf(b.id);
       const enc = map.encounters!.find((e) => e.enemyId === b.id)!;
       expect((map.triggers ?? []).some((t) => t.encounterId === enc.id && t.dialogueId)).toBe(true);
-      for (const t of b.defense.targets ?? [])
-        expect(solid(mapId, map, t.tile.x, t.tile.y), `${t.id} on a wall`).toBe(false);
+      for (const t of b.defense.targets ?? []) {
+        if (t.orbit) continue;
+        expect(t.tile, `${t.id} needs a tile or an orbit`).toBeDefined();
+        expect(solid(mapId, map, t.tile!.x, t.tile!.y), `${t.id} on a wall`).toBe(false);
+      }
       for (const m of Object.values(b.moves)) if (m.fx) expect(FX).toContain(m.fx);
       for (const s of b.defense.sentences?.list ?? []) if (s.fx) expect(FX).toContain(s.fx);
       if (b.rescue) {
@@ -112,5 +136,23 @@ describe('T-84 bosses on their maps', () => {
     const s = bosses.find((b) => b.id === 'boss_imperial_verdict')!.defense.sentences!;
     expect(s.cracksToBreak).toBe(3);
     expect(s.list.map((x) => x.defy).sort()).toEqual(['endure', 'hit']);
+  });
+
+  it('songs name targets that exist; the ritual ends on its finality pillar', () => {
+    for (const b of bosses.filter((x) => x.defense.songs)) {
+      const ids = new Set((b.defense.targets ?? []).map((t) => t.id));
+      for (const s of b.defense.songs!.list) expect(ids.has(s.targetId)).toBe(true);
+    }
+    const war = bosses.find((b) => b.id === 'boss_the_last_war')!;
+    const pillars = war.defense.targets!;
+    expect(pillars.every((p) => p.hidden)).toBe(true);
+    expect(pillars.at(-1)!.effect).toBe('finality');
+    expect(war.defense.wrongOrder).toBeDefined();
+  });
+
+  it('Alpha Peter answers Temporal Strike with a move he has; the letter ends the fight', () => {
+    const a = bosses.find((b) => b.id === 'boss_other_peter')!;
+    expect(a.moves[a.mirror!.skillMove]).toBeDefined();
+    expect(a.finisher!.itemId).toBe('letter_to_daughter');
   });
 });

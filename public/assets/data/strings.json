@@ -201,6 +201,10 @@
     "boss.unstunned": "Vô hiệu",
     "boss.wallStun": "Đâm vào tường — choáng!",
     "boss.interrupted": "Bị ngắt!",
-    "boss.armorBroken": "Giáp vỡ!"
+    "boss.armorBroken": "Giáp vỡ!",
+    "boss.mirrored": "Lao theo!",
+    "boss.risen": "Gượng dậy!",
+    "boss.tether": "DÂY LINH HỒN",
+    "boss.feint": "Đòn giả!"
   }
 }

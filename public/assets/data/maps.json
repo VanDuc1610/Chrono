@@ -4176,7 +4176,8 @@
             "h": 9
           },
           "onceFlag": "trig_keeper_meet",
-          "dialogueId": "ch3_faceless_keeper_confront"
+          "dialogueId": "ch3_faceless_keeper_confront",
+          "encounterId": "enc_faceless_keeper"
         }
       ],
       "roamers": [],
@@ -4833,7 +4834,8 @@
             "h": 1
           },
           "onceFlag": "trig_choir_encounter",
-          "dialogueId": "ch3_choir_boss_confront"
+          "dialogueId": "ch3_choir_boss_confront",
+          "encounterId": "enc_nameless_choir"
         }
       ],
       "roamers": []
@@ -6371,7 +6373,8 @@
           },
           "onceFlag": "ch4_met_crimson_standard",
           "unlessFlag": "defeated_crimson_standard",
-          "dialogueId": "ch4_crimson_standard_confront"
+          "dialogueId": "ch4_crimson_standard_confront",
+          "encounterId": "enc_crimson_standard"
         }
       ]
     },
@@ -7643,7 +7646,8 @@
           },
           "onceFlag": "ch4_met_last_war",
           "unlessFlag": "defeated_the_last_war",
-          "dialogueId": "ch4_last_war_boss_confront"
+          "dialogueId": "ch4_last_war_boss_confront",
+          "encounterId": "enc_the_last_war"
         }
       ]
     },
@@ -9783,7 +9787,8 @@
           },
           "onceFlag": "ch5_t_other_peter_seen",
           "dialogueId": "ch5_other_peter_confront",
-          "unlessFlag": "defeated_other_peter"
+          "unlessFlag": "defeated_other_peter",
+          "encounterId": "enc_other_peter"
         },
         {
           "id": "ch5_t_react_spared",
@@ -12170,7 +12175,8 @@
           },
           "onceFlag": "ch5_t_king_seen",
           "dialogueId": "ch5_unborn_king_confront",
-          "unlessFlag": "defeated_unborn_king"
+          "unlessFlag": "defeated_unborn_king",
+          "encounterId": "enc_unborn_king"
         }
       ]
     },

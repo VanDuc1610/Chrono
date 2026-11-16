@@ -95,6 +95,8 @@ export type BossMove = (SlamMove | RingMove | ChargeMove | VolleyMove | BeamMove
   fxPalette?: string[];
   /** The boss blinks to Peter's side before the move (Time Wraith). */
   blink?: boolean;
+  /** Slams only: chance the first circle is a decoy and the real blow lands on Peter late. */
+  feint?: number;
 };
 
 export interface BossPhase {
@@ -115,13 +117,22 @@ export interface BossTarget {
   id: string;
   label: string;
   /** Map tile where it stands (the fight happens on the boss's own map). */
-  tile: { x: number; y: number };
+  tile?: { x: number; y: number };
+  /** Circles the boss instead of standing on a tile (Unborn King's crowns). */
+  orbit?: { radius: number; degPerSec: number; startDeg: number };
+  /** Out of sight until the ritual opens (The Last War's pillars). */
+  hidden?: boolean;
+  /** Colour of the target while lit (default gold). */
+  color?: string;
   /** Earlier targets that must be struck first. */
   requires?: string[];
   /** Works only while the boss is stunned. */
   whileStunned?: boolean;
-  /** stun: stuns the boss; progress: only counts (a `stunMs` restarts the stun); breakArmor. */
-  effect: 'stun' | 'progress' | 'breakArmor';
+  /**
+   * stun: stuns the boss; progress: only counts (a `stunMs` restarts the stun); breakArmor;
+   * song: judged by the song in force (defense.songs); finality: the next blow ends the boss.
+   */
+  effect: 'stun' | 'progress' | 'breakArmor' | 'song' | 'finality';
   stunMs?: number;
   /** breakArmor: HP ratio the boss is set to (if lower than now). */
   setHpPct?: number;
@@ -151,6 +162,68 @@ export interface BossDefense {
   reflect?: { everyMs: number; glowMs: number; pct: number };
   /** Imperial Verdict: sentences forbid moves for a while; defying them cracks the armor. */
   sentences?: SentenceDefense;
+  /** Struck targets out of order: Peter pays this share of his max HP and the chain restarts. */
+  wrongOrder?: { pct: number; message: string };
+  /** Faceless Keeper: its mirror freezes one kind of Peter's moves; the other kind staggers it. */
+  memoryLock?: MemoryLockDefense;
+  /** Nameless Choir, Unborn King: a song names one target; strike that one, not another. */
+  songs?: SongDefense;
+  /** Crimson Standard: the banner plants itself behind a wall tied to soul tethers. */
+  bloodWall?: BloodWallDefense;
+  /** The Last War: it rises again once, and only the ritual (targets in order) ends it. */
+  ritual?: RitualDefense;
+}
+
+/** Melee = slash; ranged = shots and Temporal Strike. */
+export type MoveKind = 'melee' | 'ranged';
+
+export interface MemoryLockDefense {
+  firstMs: number;
+  everyMs: number;
+  lockMs: number;
+  /** Stun and damage factor when the other kind of move lands during a lock. */
+  staggerMs: number;
+  staggerMult: number;
+  staggerMessage: string;
+  lockedText: string;
+  options: { lock: MoveKind; announce: string }[];
+}
+
+export interface SongDefense {
+  cracksToBreak: number;
+  firstMs: number;
+  gapMs: number;
+  windowMs: number;
+  /** A wrong target: this share of Peter's max HP, and this much MP. */
+  wrongPct: number;
+  wrongMp: number;
+  wrongMessage: string;
+  breakMessage: string;
+  /** Striking a song target while no song plays. */
+  silentMessage: string;
+  list: { id: string; targetId: string; announce: string; crackMessage: string; color: string }[];
+}
+
+export interface BloodWallDefense {
+  firstMs: number;
+  everyMs: number;
+  reducePct: number;
+  tethers: number;
+  /** Tethers stand this far from the boss (px). */
+  minDist: number;
+  maxDist: number;
+  stunMs: number;
+  raiseMessage: string;
+  cutMessage: string;
+  breakMessage: string;
+}
+
+export interface RitualDefense {
+  /** HP ratio it rises with. */
+  revivePct: number;
+  openMessage: string;
+  completeMessage: string;
+  finishMessage: string;
 }
 
 /** What Peter does, as a sentence sees it. */
@@ -215,7 +288,41 @@ export interface BossProfile {
     flashDialogueId?: string;
     allyTexture?: string;
     allyAnim?: string;
+    /** False: the boss stays (it only stops), e.g. Kuro sparing Peter. Default true. */
+    vanish?: boolean;
   };
+  /** A sparring match: won once the boss is down to this HP ratio (Kuro's duel). */
+  endAtHpPct?: number;
+  /** Stunned from the start while `flag` holds (Unborn King and the unity mindset). */
+  startStun?: { flag: string; ms: number; message: string };
+  /** An ally fights beside Peter while `flag` holds, striking every `everyMs`. */
+  ally?: {
+    flag: string;
+    texture: string;
+    anim?: string;
+    everyMs: number;
+    damagePct: number;
+    message: string;
+  };
+  /** Once its armor is broken, the boss heals by this share of the damage it deals. */
+  drainAfterBreak?: number;
+  /** At the start the boss copies this share of Peter's attack (Faceless Keeper's mirror). */
+  mirrorGearPct?: number;
+  mirrorGearMessage?: string;
+  /** Peter's other self answers his moves (Alpha Peter). */
+  mirror?: {
+    /** Move it answers Temporal Strike with, sealing Peter's own for `silenceMs`. */
+    skillMove: string;
+    silenceMs: number;
+    skillMessage: string;
+    /** It heals this share when Peter uses an item. */
+    healPct: number;
+    healMessage: string;
+    /** It lunges after a dodge. */
+    dashLunge: boolean;
+  };
+  /** An item ends the fight (E) once the boss is low enough (the letter to Na). */
+  finisher?: { itemId: string; belowPct: number; prompt: string; message: string };
 }
 
 export interface BossDatabase {
