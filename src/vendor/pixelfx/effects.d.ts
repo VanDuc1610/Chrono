@@ -50,11 +50,6 @@ export type EffectKey =
   | 'bat'
   | 'butterfly'
   | 'wisp'
-  | 'fireflies'
-  | 'fallingLeaves'
-  | 'snow'
-  | 'godRays'
-  | 'cherryBlossoms'
   | 'drip'
   | 'ripples';
 
