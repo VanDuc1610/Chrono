@@ -2,6 +2,7 @@
 
 Completed tasks moved out of [TASKS.md](TASKS.md) to keep the board short. Newest first. Read only when you need history.
 
+- **T-89** Vendored 25 pinned LPC PNGs with SHA-256 verification, source credits, manifest, generated CREDITS.md and attribution coverage tests; 259 tests passed; no public asset changes - Codex
 - **T-87** Ivo hands Peter his notebook and gear measurements in the first dialogue; the notebook reminder and Chapter 8 answer key agree; scoped generator update, 257 tests passed ? Codex
 - **T-90** LPC asset map (`docs/art/LPC_ASSET_MAP.md`): mapped all 131 maps across Chapters 0–9 to `RPG_Maker_MZ_LPC_Starter_Kit` sheets/props, missing Pipeline B/recolour items, chapter colour grades (`T-86` neon transition from Ch6), recurring NPC generator vs custom split (Peter locked custom), and top 5 priority maps (`Doanh Trại Veridia`, `Thị trấn ven biển`, `Làng Chài Hoàng Hôn`, `Quảng Trường Phán Quyết`, `Vườn Hạt Khả Năng`) — Antigravity
 

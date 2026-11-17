@@ -60,7 +60,7 @@ committed into `public/assets/` in this task.
 
 _Locks:_ `docs/audio/*` (new).
 
-### T-94 · Settings, pause menu and save slots — design — **Antigravity** · `TODO` (after T-93)
+### T-94 · Settings, pause menu and save slots — design — **Antigravity** · `DONE` (after T-93)
 
 A spec for the options (volumes, text speed, screen shake, flashes, key bindings), a pause menu and
 three save slots, written so it can be implemented without further questions.
@@ -158,8 +158,8 @@ _Locks:_ `docs/testing/DAP_AN_CHUONG_9.md` (new). Read-only: everything else.
 
 ## Done (latest 5 — older entries in [TASKS_ARCHIVE.md](TASKS_ARCHIVE.md))
 
+- **T-94** Settings, pause menu & save slots spec (`docs/design/SETTINGS_UX.md`): defined `chrono_settings_v1` schema/defaults, key rebinding with swap/conflict rules, `ESC` pause menu with dialogue/cutscene/boss gating, 3-slot save/load/delete/migration flows, `640x360` ASCII mock-ups, and 3 owner questions — Antigravity
 - **T-93** Audio plan (`docs/audio/AUDIO_PLAN.md`): mapped verified CC0/CC-BY/OGA-BY music (menu, Ch 0–9 exploration, normal/boss/final-boss, sad story, 4 endings) and 2 CC0 SFX packs (`RPG Sound Pack`, `512 Sound Effects`) to all `SoundSystem` and missing events, with attribution and OGG/loudness/crossfade integration spec — Antigravity
 - **T-91** UI overhaul: VT323 pixel font with Vietnamese for every text, compact HUD (place, level, HP/MP bars with values, EXP hairline), slimmer quest tracker, key list behind H, title screen with a turning clock and Peter — Claude
 - **T-95** Refreshed runtime/status docs from source (131 maps, four endings, LPC/neon, bosses, VT323, 260 tests); archived 11 historical screenshots; retained nonduplicate root document pointers/ledger - Codex
 - **T-92** Split Phaser vendor bundle, retained CI checks and Pages deploy, production Chromium smoke (nonblank frame, real keys and saves); 260 unit tests and smoke passed - Codex
-- **T-89** Vendored 25 pinned LPC PNGs with SHA-256 verification, source credits, manifest, generated CREDITS.md and attribution coverage tests; 259 tests passed; no public asset changes - Codex
