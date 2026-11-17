@@ -27,7 +27,7 @@ are built and verified — the story is complete (4 endings). Next: the owner's 
 
 Owner, 2026-11-17: the look moves to LPC 3/4 pixel art (CC-BY-SA 3.0, credits required); the Veridia
 mockup and Peter's LPC front were approved (keep him slender; 64x64 frames). Steps: Peter idle + walk in
-four directions (done as candidates, waiting on approval), then his other animation sets; then engine work
+four directions (owner approved), then his other eight sets (idle/walk unarmed, run, attack, hurt, Temporal Sight, dash, shoot: drawn as candidates, waiting on approval) and their integration; then engine work
 (contact shadows, y-sorted multi-tile props, chapter colour grade) and Veridia rebuilt in LPC tiles.
 
 _Locks:_ `scripts/author-peter-lpc.js` (new), `art-source/characters/peter/generated/candidates/peter_lpc_*` (new),

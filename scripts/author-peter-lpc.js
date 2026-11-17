@@ -50,6 +50,7 @@ const PALETTE = {
   q: hex('#e8dcc0'), // notebook pages (cream parchment)
   r: hex('#181c24'), // trousers
   b: hex('#2e2219'), // boots
+  d: hex('#008ab8'), // fading chronal trail (after-images, spent sparks)
 };
 
 /** Front view, 32 columns (x 16..47), from the top curl (y 15) to the soles (y 61). */
@@ -271,9 +272,93 @@ function sideRows() {
 const BOOT = ['OLLO', 'OblO', 'ObbO', 'ObbO', 'ObbO', 'ObbbO', 'OOOOO'];
 const BOOT_R = ['OLLO', 'OlbO', 'ObbO', 'ObbO', 'ObbO', 'ObbbO', 'OOOOO'];
 const SIDE_BOOT = ['OLLLLO', 'OblllO', 'ObbbbO', 'ObbbbO', 'ObbbbOO', 'ObbbbbbO', 'OOOOOOOO'];
+const FEET_Y = 61;
 
-/** The Broken Blade, point down, glowing along the break. (hx, hy) = the fist. */
-function blade(g, hx, hy, bright) {
+/** Rows 18..29 of the side view, columns 14..17 hold the near arm; this paints it out. */
+function armlessSide(rows) {
+  return rows.map((r, y) => {
+    if (y < 18 || y > 29) return r;
+    const fill = y === 29 ? 'llll' : y < 21 ? 'kccc' : 'cccc';
+    return r.slice(0, 14) + fill + r.slice(18);
+  });
+}
+
+/** Upper body rows (32 wide, 40 tall) for a view, with closed or kindled eyes if asked. */
+function upperRows(view, { armless = false, eyes = null }) {
+  let rows =
+    view === 'front'
+      ? details(FRONT).slice(0, 40)
+      : view === 'back'
+        ? backRows().slice(0, 40)
+        : sideRows();
+  if (view === 'side' && armless) rows = armlessSide(rows);
+  if (eyes && view !== 'back') {
+    rows = rows.map((r, y) => {
+      if (y !== 9) return r;
+      if (eyes === 'shut') return r.replace(/OE/g, 'hh').replace(/EO/g, 'hh');
+      return r.replace(/E/g, 'g'); // Temporal Sight: the gray-blue eyes kindle cerulean
+    });
+  }
+  return rows;
+}
+
+const grid = () => Array.from({ length: SIZE }, () => Array(SIZE).fill('.'));
+const inside = (x, y) => x >= 0 && y >= 0 && x < SIZE && y < SIZE;
+/** Paints `rows` into the frame with its last row on y = bottom. */
+function place(g, rows, x0, bottom) {
+  const top = bottom - rows.length + 1;
+  rows.forEach((row, y) =>
+    [...row].forEach((ch, x) => {
+      if (ch !== '.' && inside(x0 + x, top + y)) g[top + y][x0 + x] = ch;
+    }),
+  );
+}
+/** Paints only on transparent pixels (auras, arcs and after-images stay behind Peter). */
+const under = (g, x, y, ch) => {
+  if (inside(x, y) && g[y][x] === '.') g[y][x] = ch;
+};
+const over = (g, x, y, ch) => {
+  if (inside(x, y)) g[y][x] = ch;
+};
+/** Outlines a set of pixels on their transparent sides. */
+function outline(g, pts) {
+  for (const [x, y] of pts)
+    for (const [dx, dy] of [
+      [1, 0],
+      [-1, 0],
+      [0, 1],
+      [0, -1],
+    ])
+      under(g, x + dx, y + dy, 'O');
+}
+
+/**
+ * The body without effects: boots, then the upper body. `bob` lowers (+) or raises (-) the upper
+ * body; `lift` raises a boot; `stride` moves the side boots; `dx` leans the upper body forward.
+ * Returns the grid and the anchor points (fist, shoulder) for posing.
+ */
+function body(view, o = {}) {
+  const { bob = 0, lift = [0, 0], stride = [0, 0], dx = 0 } = o;
+  const g = grid();
+  if (view === 'side') {
+    place(g, SIDE_BOOT, 30 + stride[0], FEET_Y - lift[0]);
+    place(g, SIDE_BOOT, 30 + stride[1], FEET_Y - lift[1]);
+  } else {
+    place(g, BOOT, 28, FEET_Y - lift[0]);
+    place(g, BOOT_R, 32, FEET_Y - lift[1]);
+  }
+  const bottom = FEET_Y - BOOT.length + bob;
+  const x0 = 16 + dx;
+  place(g, upperRows(view, o), x0, bottom);
+  const top = bottom - 39;
+  const fist = { front: [x0 + 5, top + 28], back: [x0 + 26, top + 28], side: [x0 + 16, top + 28] }[
+    view
+  ];
+  return { g, top, x0, fist, shoulder: [x0 + 15, top + 18], offHand: [x0 + 26, top + 28] };
+}
+
+/** The Broken Blade resting point-down in the fist (as approved, v1). (hx, hy) = the fist. */
+function restBladeAt(g, hx, hy, bright) {
   const put = (x, y, ch) => {
     if (g[y]?.[x] !== undefined) g[y][x] = ch;
   };
@@ -299,46 +384,108 @@ function blade(g, hx, hy, bright) {
   put(hx - 2, hy + 6, 'g');
 }
 
-const FEET_Y = 61;
-/** Paints `rows` into the 64x64 frame with its last row on y = bottom. */
-function place(g, rows, x0, bottom) {
-  const top = bottom - rows.length + 1;
-  rows.forEach((row, y) =>
-    [...row].forEach((ch, x) => {
-      if (ch !== '.' && g[top + y]?.[x0 + x] !== undefined) g[top + y][x0 + x] = ch;
-    }),
-  );
+function restBlade(g, [hx, hy], bright) {
+  restBladeAt(g, hx, hy, bright);
 }
 
 /**
- * A frame: boots first (each may be lifted), then the upper body (-1 = up a pixel, +1 = settled a
- * pixel), then the blade in the fist.
+ * The Broken Blade from the fist (hx, hy) along a 45°-step direction (dx, dy): pommel behind the
+ * fist, crossguard, steel broken off after `len` px, cerulean glow along one edge, a white-hot
+ * jagged break at the tip.
  */
-function frame(view, { bob = 0, lift = [0, 0], stride = [0, 0], bright = false }) {
-  const g = Array.from({ length: SIZE }, () => Array(SIZE).fill('.'));
-  if (view === 'side') {
-    place(g, SIDE_BOOT, 30 + stride[0], FEET_Y - lift[0]); // far leg
-    place(g, SIDE_BOOT, 30 + stride[1], FEET_Y - lift[1]); // near leg
-  } else {
-    place(g, BOOT, 28, FEET_Y - lift[0]);
-    place(g, BOOT_R, 32, FEET_Y - lift[1]);
+function bladeAt(g, hx, hy, dx, dy, len, bright = false) {
+  const px = -dy;
+  const py = dx; // perpendicular, the glowing edge side
+  const pts = [];
+  const put = (x, y, ch) => {
+    over(g, x, y, ch);
+    pts.push([x, y]);
+  };
+  put(hx - dx, hy - dy, 'm'); // pommel
+  const cx = hx + dx;
+  const cy = hy + dy;
+  for (const k of [-2, -1, 0, 1, 2]) put(cx + px * k, cy + py * k, 'm'); // crossguard
+  for (let k = 2; k <= len + 1; k++) {
+    const x = hx + dx * k;
+    const y = hy + dy * k;
+    put(x, y, 'n');
+    put(x + px, y + py, (k + (bright ? 1 : 0)) % 2 ? 'w' : 'g');
+    if (dx !== 0 && dy !== 0) put(x - px, y, 'n'); // diagonals get a second steel pixel
   }
-  const upper =
-    view === 'front'
-      ? details(FRONT).slice(0, 40)
-      : view === 'back'
-        ? backRows().slice(0, 40)
-        : sideRows();
-  const upperBottom = FEET_Y - BOOT.length + bob;
-  place(g, upper, 16, upperBottom);
-  const fistY = upperBottom - 39 + 28;
-  blade(g, view === 'front' ? 21 : view === 'back' ? 42 : 32, fistY, bright);
-  return g.map((r) => r.join(''));
+  const tx = hx + dx * (len + 2);
+  const ty = hy + dy * (len + 2);
+  put(tx, ty, bright ? 'W' : 'w');
+  put(tx + px, ty + py, 'g');
+  outline(g, pts);
+  under(g, tx + dx, ty + dy, 'g'); // the fracture spits a spark
+  under(g, tx + dx * 2 - px, ty + dy * 2 - py, bright ? 'w' : 'g');
 }
 
-/** Breathing: settle a pixel and back; the blade's glow pulses with it. */
+/** Coat sleeve from the shoulder to the hand: outlined, purple turned cuff, bare hand. */
+function armTo(g, [sx, sy], [hx, hy]) {
+  const pts = [];
+  const steps = Math.max(Math.abs(hx - sx), Math.abs(hy - sy));
+  for (let i = 0; i <= steps; i++) {
+    const x = Math.round(sx + ((hx - sx) * i) / steps);
+    const y = Math.round(sy + ((hy - sy) * i) / steps);
+    const ch = i >= steps - 1 ? 's' : i === steps - 2 ? 'P' : 'c';
+    for (const [ax, ay] of [
+      [0, 0],
+      [1, 0],
+      [0, 1],
+      [1, 1],
+    ]) {
+      over(g, x + ax, y + ay, ch === 'c' && ay === 1 ? 'C' : ch);
+      pts.push([x + ax, y + ay]);
+    }
+  }
+  outline(g, pts);
+}
+
+/** A crescent slash trail around (cx, cy), angles in radians from the facing direction. */
+function slashArc(g, cx, cy, r, a0, a1, face, fading = false) {
+  for (let a = a0; a <= a1; a += 0.04) {
+    const t = (a - a0) / (a1 - a0); // thin at the start, full at the blade
+    const x = (k) => Math.round(cx + Math.cos(a + face) * (r + k));
+    const y = (k) => Math.round(cy + Math.sin(a + face) * (r + k) * 0.75);
+    if (fading) {
+      if (Math.round(a * 25) % 3 === 0) under(g, x(0), y(0), 'd');
+      continue;
+    }
+    under(g, x(0), y(0), 'W');
+    if (t > 0.3) under(g, x(1), y(1), 'w');
+    if (t > 0.6) under(g, x(2), y(2), 'g');
+  }
+}
+
+/** Whole-frame shift (knock-back, lunge). */
+function shift(g, dx, dy) {
+  const out = grid();
+  for (let y = 0; y < SIZE; y++)
+    for (let x = 0; x < SIZE; x++) if (g[y][x] !== '.') under(out, x + dx, y + dy, g[y][x]);
+  return out;
+}
+/** Hit flash: everything but the outline turns chronal white. */
+const flash = (g) => g.map((r) => r.map((c) => (c === '.' || c === 'O' ? c : 'W')));
+/** After-image of `src` at (dx, dy) in fading cyan, every other row, behind the body. */
+function ghost(g, src, dx, dy, color = 'd', every = 3) {
+  for (let y = 0; y < SIZE; y++)
+    for (let x = 0; x < SIZE; x++)
+      if (src[y][x] !== '.' && (y + dy) % every === 0 && (x + y) % 2 === 0)
+        under(g, x + dx, y + dy, color);
+}
+const done = (g) => g.map((r) => r.join(''));
+
+/** Facing angle (radians) of each view for arcs and rings. */
+const FACE = { front: Math.PI / 2, back: -Math.PI / 2, side: 0 };
+/** Unit step "forward" in each view. */
+const FWD = { front: [0, 1], back: [0, -1], side: [1, 0] };
+
+// ------------------------------------------------------------------ the sheets
+
+/** Idle: breathing, the blade's glow pulsing with it. */
 const IDLE = [{ bob: 0 }, { bob: 0, bright: true }, { bob: 1, bright: true }, { bob: 1 }];
-/** Front/back walk: each boot lifts in turn while the body rises a pixel. */
+/** Walk: each boot lifts in turn while the body rises a pixel (side: legs pass under the coat). */
 const WALK = [
   { bob: 0 },
   { bob: -1, lift: [2, 0] },
@@ -347,7 +494,6 @@ const WALK = [
   { bob: -1, lift: [0, 2] },
   { bob: 0, lift: [0, 1] },
 ];
-/** Side walk: the legs part and pass under the coat. */
 const SIDE_WALK = [
   { bob: 0, stride: [-4, 3] },
   { bob: -1, stride: [-2, 1], lift: [1, 0] },
@@ -356,34 +502,238 @@ const SIDE_WALK = [
   { bob: -1, stride: [1, -2], lift: [0, 1] },
   { bob: 0 },
 ];
+/** Run: longer strides, higher steps, a deeper bob and a forward lean. */
+const RUN = [
+  { bob: 0, lift: [0, 0] },
+  { bob: -2, lift: [3, 0] },
+  { bob: -1, lift: [2, 0], bright: true },
+  { bob: 0, lift: [0, 0], bright: true },
+  { bob: -2, lift: [0, 3] },
+  { bob: -1, lift: [0, 2] },
+];
+const SIDE_RUN = [
+  { bob: 0, dx: 1, stride: [-6, 5] },
+  { bob: -2, dx: 1, stride: [-3, 2], lift: [2, 0] },
+  { bob: -1, dx: 1, lift: [1, 0], bright: true },
+  { bob: 0, dx: 1, stride: [5, -6], bright: true },
+  { bob: -2, dx: 1, stride: [2, -3], lift: [0, 2] },
+  { bob: -1, dx: 1, lift: [0, 1] },
+];
+
+function locomotion(view, poses, armed = true) {
+  return poses.map((o) => {
+    const b = body(view, o);
+    if (armed) restBlade(b.g, b.fist, o.bright);
+    return done(b.g);
+  });
+}
+
+/** Attack: wind-up, raise, strike (+arc), follow-through (+fading arc), recover, rest. */
+function attack(view) {
+  const frames = [];
+  if (view === 'side') {
+    const poses = [
+      { o: { bob: 1 }, hand: [-4, 3], dir: [-1, 0], len: 7 },
+      { o: {}, hand: [-3, -5], dir: [-1, -1], len: 7 },
+      { o: { dx: 1 }, hand: [7, 3], dir: [1, 0], len: 9, arc: 'full' },
+      { o: { dx: 1 }, hand: [6, 8], dir: [1, 1], len: 8, arc: 'fade' },
+      { o: {}, hand: [3, 9], dir: [0, 1], len: 8 },
+    ];
+    for (const p of poses) {
+      const b = body('side', { ...p.o, armless: true });
+      const [sx, sy] = b.shoulder;
+      const hand = [sx + p.hand[0], sy + p.hand[1]];
+      if (p.arc) slashArc(b.g, sx + 2, sy + 4, 15, -1.9, 0.6, FACE.side, p.arc === 'fade');
+      bladeAt(b.g, hand[0], hand[1], p.dir[0], p.dir[1], p.len, p.arc === 'full');
+      armTo(b.g, [sx, sy], hand);
+      frames.push(done(b.g));
+    }
+  } else {
+    const s = view === 'front' ? 1 : -1; // the blade hand is viewer-left from the front
+    const poses = [
+      { o: { bob: 1 }, dir: [-s, -1], len: 7 },
+      { o: {}, dir: [0, -1], len: 8 },
+      { o: {}, dir: [s, view === 'front' ? 1 : -1], len: 9, arc: 'full' },
+      { o: {}, dir: [0, view === 'front' ? 1 : -1], len: 8, arc: 'fade' },
+      { o: {}, dir: [0, 1], len: 7 },
+    ];
+    for (const p of poses) {
+      const b = body(view, p.o);
+      if (p.arc) slashArc(b.g, 32, b.top + 30, 18, -1.3, 1.3, FACE[view], p.arc === 'fade');
+      bladeAt(b.g, b.fist[0], b.fist[1], p.dir[0], p.dir[1], p.len, p.arc === 'full');
+      frames.push(done(b.g));
+    }
+  }
+  const rest = body(view);
+  restBlade(rest.g, rest.fist);
+  frames.push(done(rest.g));
+  return frames;
+}
+
+/** Hurt: white impact flash, knocked back with eyes shut and a chronal crack, stagger, steady. */
+function hurt(view) {
+  const [fx, fy] = FWD[view];
+  const a = body(view);
+  restBlade(a.g, a.fist);
+  const b = body(view, { eyes: 'shut' });
+  restBlade(b.g, b.fist);
+  for (const [x, y, ch] of [
+    [0, 0, 'W'],
+    [1, -1, 'w'],
+    [-1, 1, 'g'],
+    [2, 1, 'g'],
+    [-2, -1, 'w'],
+  ])
+    over(b.g, 32 + x, b.top + 22 + y, ch);
+  const c = body(view, { bob: 2, eyes: 'shut' });
+  restBlade(c.g, c.fist);
+  const d = body(view, { bob: 1 });
+  restBlade(d.g, d.fist);
+  return [
+    done(flash(a.g)),
+    done(shift(b.g, -fx * 2, -fy * 2)),
+    done(shift(c.g, -fx, -fy)),
+    done(d.g),
+  ];
+}
+
+/** Temporal Sight: blade raised point-up, eyes kindled, a turning ring of chronal motes. */
+function temporalSight(view) {
+  return [0, 1, 2, 3].map((i) => {
+    const b = body(view, { eyes: 'glow', armless: view === 'side', bob: i === 2 ? -1 : 0 });
+    if (view === 'side') {
+      const [sx, sy] = b.shoulder;
+      const hand = [sx + 10, sy + 4]; // held out in front of his face
+      bladeAt(b.g, hand[0], hand[1], 0, -1, 9, i % 2 === 1);
+      armTo(b.g, [sx, sy], hand);
+    } else bladeAt(b.g, b.fist[0], b.fist[1], 0, -1, 9, i % 2 === 1);
+    for (let k = 0; k < 10; k++) {
+      const a = (k / 10) * Math.PI * 2 + (i * Math.PI) / 10;
+      const x = Math.round(32 + Math.cos(a) * 21);
+      const y = Math.round(b.top + 30 + Math.sin(a) * 7);
+      under(b.g, x, y, k % 3 === 0 ? 'W' : k % 3 === 1 ? 'w' : 'g');
+      if (k % 2 === 0) under(b.g, x + 1, y, 'd');
+    }
+    return done(b.g);
+  });
+}
+
+/** Dash: crouch, lunge with one after-image, full stretch with two, recover with dust. */
+function dash(view) {
+  const [fx, fy] = FWD[view];
+  const pose = (o) => {
+    const b = body(view, o);
+    restBlade(b.g, b.fist);
+    return b.g;
+  };
+  const crouch = pose({ bob: 2 });
+  const lungeBody = pose({ bob: 1, stride: view === 'side' ? [-3, 3] : [0, 0] });
+  const lunge = shift(lungeBody, fx * 3, fy * 3);
+  ghost(lunge, lungeBody, -fx * 1, -fy * 1);
+  const stretchBody = pose({
+    bob: 1,
+    dx: view === 'side' ? 1 : 0,
+    stride: view === 'side' ? [-5, 5] : [0, 0],
+  });
+  const stretch = shift(stretchBody, fx * 5, fy * 5);
+  ghost(stretch, stretchBody, fx * 1, fy * 1);
+  ghost(stretch, stretchBody, -fx * 3, -fy * 3, 'd', 4);
+  const recover = pose({ bob: 1 });
+  for (const [x, y] of [
+    [-6, 0],
+    [-8, -1],
+    [-9, 1],
+    [6, 0],
+    [8, -1],
+  ])
+    under(recover, 32 + x - fx * 4, FEET_Y + y - Math.max(0, fy) * 2, 'L');
+  return [done(crouch), done(lunge), done(stretch), done(recover)];
+}
+
+/** Shoot: aim (launcher raised in the left hand), release (spark), recoil, rest. The blade stays. */
+function shoot(view) {
+  const frames = [];
+  for (let i = 0; i < 4; i++) {
+    const b = body(view);
+    restBlade(b.g, b.fist);
+    if (i < 3) {
+      const recoil = i === 2 ? 1 : 0;
+      let hand;
+      let dir;
+      if (view === 'side') {
+        const [sx, sy] = b.shoulder;
+        hand = [sx + 9 - recoil, sy + 3];
+        dir = [1, 0];
+        armTo(b.g, [sx + 2, sy + 1], hand);
+      } else if (view === 'front') {
+        hand = [b.offHand[0], b.offHand[1] - recoil];
+        dir = [0, 1];
+      } else {
+        hand = [21, b.top + 28 + recoil]; // his left hand, viewer-left from behind
+        dir = [0, -1];
+      }
+      const [hx, hy] = hand;
+      const [dx, dy] = dir;
+      const pts = [
+        [hx + dx, hy + dy, 'm'],
+        [hx + dx * 2, hy + dy * 2, 'L'],
+        [hx + dx * 2 - dy, hy + dy * 2 - dx, 'L'],
+        [hx + dx * 2 + dy, hy + dy * 2 + dx, 'L'],
+        [hx + dx * 3, hy + dy * 3, 'm'],
+      ];
+      for (const [x, y, ch] of pts) over(b.g, x, y, ch);
+      outline(b.g, pts);
+      if (i > 0) {
+        const k = i === 1 ? 5 : 7;
+        const sxp = hx + dx * k;
+        const syp = hy + dy * k;
+        const c = i === 1 ? 'W' : 'g';
+        const e = i === 1 ? 'w' : 'd';
+        over(b.g, sxp, syp, c);
+        under(b.g, sxp + dx, syp + dy, e);
+        under(b.g, sxp - dy, syp - dx, e);
+        under(b.g, sxp + dy, syp + dx, e);
+      }
+    }
+    frames.push(done(b.g));
+  }
+  return frames;
+}
 
 const flip = (rows) => rows.map((r) => [...r].reverse().join(''));
 /** Rows: down, up, left, right (PeterAnimationConfig). Left mirrors right. */
-function sheet(frontBack, side) {
-  const right = side.map((f) => frame('side', f));
-  return [
-    frontBack.map((f) => frame('front', f)),
-    frontBack.map((f) => frame('back', f)),
-    right.map(flip),
-    right,
-  ];
+function sheet(make) {
+  const right = make('side');
+  return [make('front'), make('back'), right.map(flip), right];
 }
 
 checkRows(FRONT, 'front', 32);
 checkRows(SIDE, 'side', 32);
+const SHEETS = [
+  ['peter_lpc_idle', (v) => locomotion(v, IDLE)],
+  ['peter_lpc_walk', (v) => locomotion(v, v === 'side' ? SIDE_WALK : WALK)],
+  ['peter_lpc_idle_unarmed', (v) => locomotion(v, IDLE, false)],
+  ['peter_lpc_walk_unarmed', (v) => locomotion(v, v === 'side' ? SIDE_WALK : WALK, false)],
+  ['peter_lpc_run', (v) => locomotion(v, v === 'side' ? SIDE_RUN : RUN)],
+  ['peter_lpc_attack', attack],
+  ['peter_lpc_hurt', hurt],
+  ['peter_lpc_temporal_sight', temporalSight],
+  ['peter_lpc_dash', dash],
+  ['peter_lpc_shoot', shoot],
+];
 const outDir = process.argv[2] ?? 'art-source/characters/peter/generated/candidates';
 fs.mkdirSync(outDir, { recursive: true });
-for (const [name, grid] of [
-  ['peter_lpc_idle', sheet(IDLE, IDLE)],
-  ['peter_lpc_walk', sheet(WALK, SIDE_WALK)],
-]) {
-  grid.flat().forEach((f, i) => checkRows(f, `${name}[${i}]`, SIZE));
-  const sh = renderSheet(grid, PALETTE, SIZE);
+for (const [name, make] of SHEETS) {
+  const g = sheet(make);
+  g.flat().forEach((f, i) => checkRows(f, `${name}[${i}]`, SIZE));
+  const sh = renderSheet(g, PALETTE, SIZE);
   writeFile(path.join(outDir, `${name}.png`), encodePng(sh.w, sh.h, sh.buf));
   writeFile(path.join(outDir, `${name}_x4.png`), preview(sh, 4));
-  console.log(`${name}.png (${sh.w}x${sh.h}) -> ${outDir}`);
+  console.log(`${name}.png (${sh.w}x${sh.h})`);
 }
 // The approved v1 front still, kept for the record.
-const still = renderSheet([[frame('front', {})]], PALETTE, SIZE);
-writeFile(path.join(outDir, 'peter_lpc_v1_front.png'), encodePng(still.w, still.h, still.buf));
-writeFile(path.join(outDir, 'peter_lpc_v1_front_x8.png'), preview(still, 8));
+const still = body('front');
+restBlade(still.g, still.fist);
+const st = renderSheet([[done(still.g)]], PALETTE, SIZE);
+writeFile(path.join(outDir, 'peter_lpc_v1_front.png'), encodePng(st.w, st.h, st.buf));
+writeFile(path.join(outDir, 'peter_lpc_v1_front_x8.png'), preview(st, 8));
