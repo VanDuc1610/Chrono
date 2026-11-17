@@ -7,22 +7,37 @@ import type Phaser from 'phaser';
  * keeps its world size, so movement, collisions and hits are unchanged.
  */
 export const SMALL_SPRITE_SCALE = 1.5;
+/**
+ * People redrawn at the LPC scale (64 px frames, soles near y = 61, scripts/lpc/npcs.mjs) are
+ * drawn 1:1 with Peter's origin (14 px above the soles), so they stand where the 32 px ones stood.
+ */
+export const LPC_FRAME = 64;
+export const LPC_ORIGIN_Y = 47 / LPC_FRAME;
 
 /** Actors that should stay smaller than a grown person (children, swarms, small things). */
 const OVERRIDES: Record<string, number> = {
   npc_forgotten_child: 1.2,
   npc_kuro: 1.3,
+  npc_mira: 1.2,
   enemy_erasure_moths: 1.2,
   enemy_paradox_crystal: 1.3,
   enemy_unborn_cocoon: 1.3,
   enemy_twin_star: 1,
 };
 
+const frameWidth = (scene: Phaser.Scene, key: string): number =>
+  scene.textures.getFrame(key)?.width ?? 0;
+
+/** A person drawn at the LPC scale (an `npc_` sheet with 64 px frames). */
+export function isLpcActor(scene: Phaser.Scene, key: string): boolean {
+  return key.startsWith('npc_') && frameWidth(scene, key) === LPC_FRAME;
+}
+
 /** The display scale for an actor texture: 32 px people and monsters grow, the rest stay. */
 export function actorScale(scene: Phaser.Scene, key: string): number {
+  if (!/^(npc_|enemy_)/.test(key) || isLpcActor(scene, key)) return 1;
   if (key in OVERRIDES) return OVERRIDES[key];
-  if (!/^(npc_|enemy_)/.test(key)) return 1;
-  const w = scene.textures.getFrame(key)?.width ?? 0;
+  const w = frameWidth(scene, key);
   return w > 0 && w <= 32 ? SMALL_SPRITE_SCALE : 1;
 }
 
@@ -32,25 +47,31 @@ export function baseScale(sprite: Phaser.GameObjects.Sprite): number {
 }
 
 /**
- * Scales an actor sprite up around its feet. Call after its body size and offset are set: the
- * body is converted so its box stays the same in the world.
+ * Fits an actor sprite to Peter's height: 32 px sheets are scaled up around their feet, LPC-scale
+ * sheets take the LPC origin. Call after the body size and offset are set (offsets relative to the
+ * frame's centre): the body is converted so its box stays the same in the world. A body left at
+ * the full LPC frame becomes the 32 x 32 box the old sprite had.
  */
 export function enlargeActor(
   sprite: Phaser.GameObjects.Sprite,
   scale = actorScale(sprite.scene, sprite.texture.key),
 ): number {
   sprite.setData('baseScale', scale);
-  if (scale === 1) return 1;
+  const lpc = isLpcActor(sprite.scene, sprite.texture.key);
+  if (scale === 1 && !lpc) return 1;
   const body = sprite.body as Phaser.Physics.Arcade.Body | null;
   const box = body
-    ? {
-        w: body.sourceWidth,
-        h: body.sourceHeight,
-        dx: body.offset.x - sprite.displayOriginX,
-        dy: body.offset.y - sprite.displayOriginY,
-      }
+    ? lpc && body.sourceWidth === LPC_FRAME && body.sourceHeight === LPC_FRAME
+      ? { w: 32, h: 32, dx: -16, dy: -16 }
+      : {
+          w: body.sourceWidth,
+          h: body.sourceHeight,
+          dx: body.offset.x - sprite.displayOriginX,
+          dy: body.offset.y - sprite.displayOriginY,
+        }
     : null;
-  sprite.setOrigin(sprite.originX, 1 - (1 - sprite.originY) / scale).setScale(scale);
+  const originY = lpc ? LPC_ORIGIN_Y : 1 - (1 - sprite.originY) / scale;
+  sprite.setOrigin(sprite.originX, originY).setScale(scale);
   if (body && box) {
     body.setSize(box.w / scale, box.h / scale, false);
     body.setOffset(sprite.displayOriginX + box.dx / scale, sprite.displayOriginY + box.dy / scale);

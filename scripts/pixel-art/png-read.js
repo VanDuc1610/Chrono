@@ -1,5 +1,6 @@
 // Minimal PNG -> RGBA decoder (no deps), the counterpart of pixel.js's encoder.
-// Supports 8-bit greyscale, RGB, palette (with tRNS), grey+alpha and RGBA, non-interlaced.
+// Supports 8-bit greyscale, RGB, palette (with tRNS), grey+alpha and RGBA, non-interlaced;
+// palette images may also use 1, 2 or 4 bits per pixel (some LPC sheets do).
 import fs from 'fs';
 import zlib from 'zlib';
 
@@ -34,22 +35,25 @@ export function readPng(file) {
     else if (kind === 'IEND') break;
     pos += 12 + len;
   }
-  if (depth !== 8 || interlace !== 0)
+  const packed = type === 3 && [1, 2, 4].includes(depth);
+  if ((depth !== 8 && !packed) || interlace !== 0)
     throw new Error(
       `${file}: only 8-bit non-interlaced PNGs (depth ${depth}, interlace ${interlace})`,
     );
   const channels = { 0: 1, 2: 3, 3: 1, 4: 2, 6: 4 }[type];
   if (!channels) throw new Error(`${file}: colour type ${type} not supported`);
   const raw = zlib.inflateSync(Buffer.concat(idat));
-  const stride = w * channels;
+  // Packed palette rows are unfiltered byte by byte, then unpacked to one index per pixel.
+  const stride = packed ? Math.ceil((w * depth) / 8) : w * channels;
+  const unit = packed ? 1 : channels;
   const px = Buffer.alloc(stride * h);
   for (let y = 0; y < h; y++) {
     const filter = raw[y * (stride + 1)];
     const line = raw.subarray(y * (stride + 1) + 1, (y + 1) * (stride + 1));
     for (let x = 0; x < stride; x++) {
-      const a = x >= channels ? px[y * stride + x - channels] : 0;
+      const a = x >= unit ? px[y * stride + x - unit] : 0;
       const b = y > 0 ? px[(y - 1) * stride + x] : 0;
-      const c = x >= channels && y > 0 ? px[(y - 1) * stride + x - channels] : 0;
+      const c = x >= unit && y > 0 ? px[(y - 1) * stride + x - unit] : 0;
       let v = line[x];
       if (filter === 1) v += a;
       else if (filter === 2) v += b;
@@ -63,6 +67,15 @@ export function readPng(file) {
       }
       px[y * stride + x] = v & 255;
     }
+  }
+  const idx = packed ? Buffer.alloc(w * h) : px;
+  if (packed) {
+    const mask = (1 << depth) - 1;
+    for (let y = 0; y < h; y++)
+      for (let x = 0; x < w; x++) {
+        const bit = x * depth;
+        idx[y * w + x] = (px[y * stride + (bit >> 3)] >> (8 - depth - (bit & 7))) & mask;
+      }
   }
   const buf = Buffer.alloc(w * h * 4);
   for (let i = 0; i < w * h; i++) {
@@ -82,7 +95,7 @@ export function readPng(file) {
           ? 0
           : 255;
     } else if (type === 3) {
-      const k = px[s];
+      const k = idx[s];
       buf[o] = palette[k * 3];
       buf[o + 1] = palette[k * 3 + 1];
       buf[o + 2] = palette[k * 3 + 2];

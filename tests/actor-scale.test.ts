@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import type Phaser from 'phaser';
-import { actorScale, baseScale, enlargeActor, SMALL_SPRITE_SCALE } from '../src/world/ActorScale';
+import {
+  actorScale,
+  baseScale,
+  enlargeActor,
+  LPC_ORIGIN_Y,
+  SMALL_SPRITE_SCALE,
+} from '../src/world/ActorScale';
 
 /** A sprite stand-in with Arcade's box rule: left = x + scale * (offset - displayOrigin). */
 function fakeSprite(
@@ -95,5 +101,21 @@ describe('actor scale', () => {
     const v = fakeSprite('npc_elder', 32);
     enlargeActor(v as unknown as Phaser.GameObjects.Sprite);
     expect(v.scaleX).toBe(SMALL_SPRITE_SCALE);
+  });
+
+  it('stands LPC-scale people 1:1 on the old feet with the old 32 x 32 box', () => {
+    const s = fakeSprite('npc_elder', 64, { w: 64, h: 64, ox: 0, oy: 0 });
+    expect(enlargeActor(s as unknown as Phaser.GameObjects.Sprite)).toBe(1);
+    expect(s.scaleX).toBe(1);
+    expect(s.originY).toBe(LPC_ORIGIN_Y);
+    // Soles (row 61 of 64) 14 px below the position, as the 32 px sprites' were.
+    expect(s.y - s.displayOriginY + 61).toBeCloseTo(s.y + 14);
+    const b = box(s);
+    expect(b).toEqual({ left: s.x - 16, top: s.y - 16, w: 32, h: 32 });
+    // A box set by the caller (centred 18 x 18) stays where it was.
+    const r = fakeSprite('npc_mira', 64, { w: 18, h: 18, ox: 23, oy: 23 });
+    enlargeActor(r as unknown as Phaser.GameObjects.Sprite);
+    const rb = box(r);
+    expect([rb.left, rb.top, rb.w, rb.h]).toEqual([r.x - 9, r.y - 9, 18, 18]);
   });
 });

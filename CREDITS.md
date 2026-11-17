@@ -350,6 +350,293 @@ Credits CSV records weapon/polearm/spear/background/walk.png; pinned PNG uses tr
 
 Credits CSV records weapon/polearm/spear/foreground/walk.png; pinned PNG uses transposed walk/foreground.png. original by wulax, walk animations redone by pvigier, split into layers and tweaked for v3 character bases by bluecarrot16
 
+### character-body-bodies-female
+
+- File: art-source/lpc/raw/characters/body/bodies/female/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/body/bodies/female/walk.png
+- Authors: Benjamin K. Smith (BenCreating); bluecarrot16; TheraHedwig; Evert; MuffinElZangano; Durrani; Pierre Vigier (pvigier); ElizaWy; Matthew Krohn (makrohn); Johannes Sjölund (wulax); Stephen Challener (Redshrike)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+- https://opengameart.org/content/lpc-ladies
+- https://opengameart.org/content/lpc-7-womens-shirts
+- https://opengameart.org/content/lpc-jump-expanded
+- https://opengameart.org/content/lpc-be-seated
+- https://opengameart.org/content/lpc-revised-character-basics
+- https://gitlab.com/vagabondgame/lpc-characters
+- https://opengameart.org/content/lpc-male-jumping-animation-by-durrani
+- https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle
+
+see details at https://opengameart.org/content/lpc-character-bases
+
+### character-body-bodies-child
+
+- File: art-source/lpc/raw/characters/body/bodies/child/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/body/bodies/child/walk.png
+- Authors: bluecarrot16; Benjamin K. Smith (BenCreating); ElizaWy; MuffinElZangano; Durrani; Nila122; kheftel; Stephen Challener (Redshrike)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+- https://opengameart.org/content/lpc-child-standing-template
+- https://opengameart.org/content/lpc-children-walk-animation
+- https://opengameart.org/content/lpc-male-jumping-animation-by-durrani
+- https://opengameart.org/content/lpc-male-jumping-animation-by-durrani
+- https://opengameart.org/content/lpc-jump-expanded
+- https://opengameart.org/content/lpc-jump-expanded
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
+### character-head-heads-human-male-elderly
+
+- File: art-source/lpc/raw/characters/head/heads/human/male_elderly/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/head/heads/human/male_elderly/walk.png
+- Authors: Benjamin K. Smith (BenCreating); Eliza Wyatt (ElizaWy); Stephen Challener (Redshrike)
+- Licences: OGA-BY-3.0, CC-BY-3.0
+- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+- https://opengameart.org/content/lpc-revised-elders
+- https://opengameart.org/content/lpc-character-bases
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
+### character-head-heads-human-female
+
+- File: art-source/lpc/raw/characters/head/heads/human/female/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/head/heads/human/female/walk.png
+- Authors: bluecarrot16; Benjamin K. Smith (BenCreating); Stephen Challener (Redshrike)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/
+- https://opengameart.org/content/lpc-character-bases
+
+original head by Redshrike, tweaks by BenCreating, modular version by bluecarrot16
+
+### character-head-heads-human-child
+
+- File: art-source/lpc/raw/characters/head/heads/human/child/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/head/heads/human/child/walk.png
+- Authors: Stephen Challener (Redshrike); kheftel; bluecarrot16
+- Licences: OGA-BY-3.0, CC-BY-3.0, GPL-3.0
+- https://opengameart.org/content/
+- https://opengameart.org/content/lpc-child-standing-template
+- https://opengameart.org/content/lpc-character-bases
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
+### character-beards-beard-basic
+
+- File: art-source/lpc/raw/characters/beards/beard/basic/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/beards/beard/basic/walk.png
+- Authors: JaidynReiman; Carlo Enrico Victoria (Nemisys)
+- Licences: CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/lpc-white-beard
+
+Original by Nemisys, repositioning by JaidynReiman.
+
+### character-hair-plain-adult
+
+- File: art-source/lpc/raw/characters/hair/plain/adult/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/hair/plain/adult/walk.png
+- Authors: JaidynReiman; Manuel Riecke (MrBeast); Joe White
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+- https://opengameart.org/content/ponytail-and-plain-hairstyles
+- https://opengameart.org/content/lpc-expanded-hair
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
+### character-hair-bangs-bun-adult
+
+- File: art-source/lpc/raw/characters/hair/bangs_bun/adult/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/hair/bangs_bun/adult/walk.png
+- Authors: ElizaWy; bluecarrot16
+- Licences: CC0-1.0
+- https://opengameart.org/content/lpc-hair
+- https://github.com/ElizaWy/LPC/blob/main/Characters/Hair
+- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+
+Original by bluecarrot16, animated by ElizaWy.
+
+### character-hair-balding-adult
+
+- File: art-source/lpc/raw/characters/hair/balding/adult/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/hair/balding/adult/walk.png
+- Authors: ElizaWy
+- Licences: OGA-BY-3.0
+- https://opengameart.org/content/lpc-hair
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
+### character-hair-relm-short-child
+
+- File: art-source/lpc/raw/characters/hair/relm_short/child/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/hair/relm_short/child/walk.png
+- Authors: JaidynReiman
+- Licences: OGA-BY-3.0, CC-BY-3.0, GPL-3.0
+- https://opengameart.org/content/lpc-relm-hair-xlong-ponytail
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
+### character-torso-clothes-longsleeve-longsleeve-female
+
+- File: art-source/lpc/raw/characters/torso/clothes/longsleeve/longsleeve/female/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/torso/clothes/longsleeve/longsleeve/female/walk.png
+- Authors: bluecarrot16; ElizaWy; JaidynReiman; Stephen Challener (Redshrike)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+- https://opengameart.org/content/lpc-7-womens-shirts
+- http://opengameart.org/content/lpc-clothing-updates
+- https://opengameart.org/content/lpc-revised-character-basics
+- https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing
+- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+- https://opengameart.org/content/lpc-expanded-simple-shirts
+
+original by ElizaWy, edited to v3 bases by bluecarrot16; cleanup and climb/jump/run/sit/emote/revised combat adapted from LPC Revised by JaidynReiman
+
+### character-torso-clothes-shortsleeve-shortsleeve-male
+
+- File: art-source/lpc/raw/characters/torso/clothes/shortsleeve/shortsleeve/male/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/torso/clothes/shortsleeve/shortsleeve/male/walk.png
+- Authors: bluecarrot16; ElizaWy; JaidynReiman; Stephen Challener (Redshrike)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+- http://opengameart.org/content/lpc-revised-character-basics
+- http://opengameart.org/content/lpc-clothing-updates
+- https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing
+- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+- https://opengameart.org/content/lpc-expanded-simple-shirts
+
+original by ElizaWy walkcycle only; extended to all animations by adapting from longsleeve, edited to v3 bases by bluecarrot16; cleanup and climb/jump/run/sit/emote/revised combat adapted from LPC Revised by JaidynReiman
+
+### character-torso-clothes-shirt-child
+
+- File: art-source/lpc/raw/characters/torso/clothes/shirt/child/walk/white.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/torso/clothes/shirt/child/walk/white.png
+- Authors: Nila122
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/lpc-clothes-for-children
+
+Unmodified source PNG (white variant of walk.png); credits from pinned CREDITS.csv.
+
+### character-legs-skirts-plain-male
+
+- File: art-source/lpc/raw/characters/legs/skirts/plain/male/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/legs/skirts/plain/male/walk.png
+- Authors: bluecarrot16; Pierre Vigier (pvigier); Johannes Sjölund (wulax); Ahmad3366; JaidynReiman
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+
+original by wulax, edited for female base by pvigier, edited for v3 base by bluecarrot16, idle & sit by Ahmad3366, color reduced & female sit/emote by JaidynReiman
+
+### character-legs-pants-thin
+
+- File: art-source/lpc/raw/characters/legs/pants/thin/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/legs/pants/thin/walk.png
+- Authors: bluecarrot16; JaidynReiman; ElizaWy; Joe White; Matthew Krohn (makrohn); Johannes Sjölund (wulax); Stephen Challener (Redshrike)
+- Licences: OGA-BY-3.0, GPL-3.0, CC-BY-SA-3.0
+- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+- http://opengameart.org/content/lpc-clothing-updates
+- https://opengameart.org/content/lpc-expanded-pants
+
+original male pants by wulax, edited for female by Joe White, recolors and edits to v3 base by bluecarrot16, teen legs by ElizaWy derived from base, climb/jump/run/sit/emotes/revised combat by JaidynReiman based on ElizaWy's LPC Revised
+
+### character-legs-cuffed-male
+
+- File: art-source/lpc/raw/characters/legs/cuffed/male/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/legs/cuffed/male/walk.png
+- Authors: JaidynReiman; ElizaWy; Bluecarrot16; Johannes Sjölund (wulax); Stephen Challener (Redshrike)
+- Licences: OGA-BY-3.0, GPL-3.0
+- https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing
+- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+- https://opengameart.org/content/lpc-expanded-pants
+
+Original bases by Redshrike, thrust/shoot bases by Wulax, original overalls by ElizaWy, base animations adapted from v3 overalls by bluecarrot16, pants by JaidynReiman
+
+### character-legs-skirts-child
+
+- File: art-source/lpc/raw/characters/legs/skirts/child/walk/white.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/legs/skirts/child/walk/white.png
+- Authors: Nila122
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/lpc-clothes-for-children
+
+Unmodified source PNG (white variant of walk.png); credits from pinned CREDITS.csv.
+
+### character-feet-slippers-male
+
+- File: art-source/lpc/raw/characters/feet/slippers/male/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/feet/slippers/male/walk.png
+- Authors: bluecarrot16; JaidynReiman; Joe White; Luke Mehl
+- Licences: CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/thin-mage-clothing-set
+- http://opengameart.org/content/lpc-clothing-updates
+- https://opengameart.org/content/lpc-expanded-socks-shoes
+
+original by Luke Mehl, Joe White did thrust/shoot animations, edited for v3 bases and male sprites by bluecarrot16, Jump/Sit/Emote/Run/Revised Combat by JaidynReiman
+
+### character-feet-sandals-thin
+
+- File: art-source/lpc/raw/characters/feet/sandals/thin/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/feet/sandals/thin/walk.png
+- Authors: Nila122; JaidynReiman; Matthew Krohn (makrohn); Johannes Sjölund (wulax)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-2.0, GPL-3.0
+- https://opengameart.org/content/lpc-roman-armor
+- http://opengameart.org/content/lpc-clothing-updates
+- https://opengameart.org/content/lpc-expanded-socks-shoes
+
+edited for v3 bases by bluecarrot16, Jump/Sit/Emote/Run/Revised Combat by JaidynReiman
+
+### character-feet-sandals-male
+
+- File: art-source/lpc/raw/characters/feet/sandals/male/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/feet/sandals/male/walk.png
+- Authors: Nila122; JaidynReiman; Matthew Krohn (makrohn); Johannes Sjölund (wulax)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-2.0, GPL-3.0
+- https://opengameart.org/content/lpc-roman-armor
+- http://opengameart.org/content/lpc-clothing-updates
+- https://opengameart.org/content/lpc-expanded-socks-shoes
+
+edited for v3 bases by bluecarrot16, Jump/Sit/Emote/Run/Revised Combat by JaidynReiman
+
+### character-neck-scarf
+
+- File: art-source/lpc/raw/characters/neck/scarf/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/neck/scarf/walk.png
+- Authors: Nila122; JaidynReiman; Johannes Sjölund (wulax); Stephen Challener (Redshrike)
+- Licences: OGA-SA-3.0, CC-BY-SA-3.0, GPL-2.0, GPL-3.0
+- https://opengameart.org/content/more-lpc-clothes-and-hair
+
+Original by Nila122, climb/sit/emote/jump/run animations by JaidynReiman
+
+### character-hat-cloth-hood-adult
+
+- File: art-source/lpc/raw/characters/hat/cloth/hood/adult/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/hat/cloth/hood/adult/walk.png
+- Authors: Johannes Sjölund (wulax); JaidynReiman
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+- https://opengameart.org/content/lpc-expanded-hats-facial-helmets
+
+Brown hood by Wulax, original black/white recolors by ??, mapped to idle/run/jump/revised combat by JaidynReiman, along with additional recolors.
+
+### character-weapon-magic-gnarled-universal-foreground
+
+- File: art-source/lpc/raw/characters/weapon/magic/gnarled/universal/foreground/walk/brass.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/weapon/magic/gnarled/universal/foreground/walk/brass.png
+- Authors: bluecarrot16
+- Licences: OGA-BY-3.0, GPL-3.0, CC-BY-4.0
+- https://opengameart.org/content/lpc-more-weapons
+
+Unmodified source PNG (brass variant of walk.png); credits from pinned CREDITS.csv.
+
+### character-weapon-magic-gnarled-universal-background
+
+- File: art-source/lpc/raw/characters/weapon/magic/gnarled/universal/background/walk/brass.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/weapon/magic/gnarled/universal/background/walk/brass.png
+- Authors: bluecarrot16
+- Licences: OGA-BY-3.0, GPL-3.0, CC-BY-4.0
+- https://opengameart.org/content/lpc-more-weapons
+
+Unmodified source PNG (brass variant of walk.png); credits from pinned CREDITS.csv.
+
 ## Game assets derived from the sources above
 
 ### derived-coastal-tileset-caps
@@ -461,6 +748,46 @@ Props for map_coastal_town (stall, barrels, sacks, cart, crates, boat), tinted l
 - Licences: CC-BY-SA-3.0, GPL-3.0
 
 Props for map_forgotten_forest (evergreens over the hedges), tinted like its tileset.
+
+### derived-npc-elder
+
+- File: public/assets/lpc/npcs/elder_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-beards-beard-medium, character-body-bodies-male, character-cape-solid-bg, character-cape-solid-fg, character-feet-slippers-male, character-hat-cloth-hood-adult, character-head-heads-human-male-elderly, character-legs-skirts-plain-male, character-torso-clothes-longsleeve-longsleeve-male, character-weapon-magic-gnarled-universal-background, character-weapon-magic-gnarled-universal-foreground
+- Authors: ElizaWy; bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Joe White; Luke Mehl; Pierre Vigier (pvigier); Ahmad3366
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, CC-BY-4.0
+
+elder at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-npc-fisherman-sau
+
+- File: public/assets/lpc/npcs/fisherman_sau_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-beards-beard-basic, character-body-bodies-male, character-feet-sandals-male, character-hair-balding-adult, character-head-heads-human-male-elderly, character-legs-cuffed-male, character-torso-clothes-shortsleeve-shortsleeve-male
+- Authors: JaidynReiman; Carlo Enrico Victoria (Nemisys); bluecarrot16; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Matthew Krohn (makrohn); ElizaWy; Bluecarrot16
+- Licences: CC-BY-SA-3.0, GPL-3.0, OGA-BY-3.0, GPL-2.0, CC-BY-3.0
+
+fisherman_sau at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-npc-mira
+
+- File: public/assets/lpc/npcs/mira_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-child, character-hair-relm-short-child, character-head-heads-human-child, character-legs-skirts-child, character-torso-clothes-shirt-child
+- Authors: bluecarrot16; Benjamin K. Smith (BenCreating); ElizaWy; MuffinElZangano; Durrani; Nila122; kheftel; Stephen Challener (Redshrike); JaidynReiman
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0
+
+mira at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-npc-vendor-ba
+
+- File: public/assets/lpc/npcs/vendor_ba_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-female, character-feet-sandals-thin, character-hair-bangs-bun-adult, character-head-heads-human-female, character-legs-pants-thin, character-neck-scarf, character-torso-clothes-longsleeve-longsleeve-female
+- Authors: Benjamin K. Smith (BenCreating); bluecarrot16; TheraHedwig; Evert; MuffinElZangano; Durrani; Pierre Vigier (pvigier); ElizaWy; Matthew Krohn (makrohn); Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; JaidynReiman; Joe White
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0, CC0-1.0, OGA-SA-3.0
+
+vendor_ba at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
 
 ### derived-steel-tileset-caps
 

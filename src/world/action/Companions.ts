@@ -33,7 +33,8 @@ export function spawnElder(this: CompanionsContext): void {
   if (standing) return;
   this.elder = this.scene.physics.add.sprite(this.player.x - 26, this.player.y + 4, texture);
   this.elder.body?.setSize(14, 12);
-  this.elder.body?.setOffset(9, 18);
+  // Relative to the frame's centre (9, 18 on a 32 px frame), so LPC-scale sheets fit too.
+  this.elder.body?.setOffset(this.elder.width / 2 - 7, this.elder.height / 2 + 2);
   enlargeActor(this.elder);
   if (this.scene.anims.exists(`${texture}_idle`)) this.elder.play(`${texture}_idle`);
 }
@@ -47,7 +48,8 @@ export function spawnCompanion(this: CompanionsContext): void {
   if (standing) return;
   this.companion = this.scene.physics.add.sprite(this.player.x + 26, this.player.y + 4, texture);
   this.companion.body?.setSize(14, 12);
-  this.companion.body?.setOffset(9, 18);
+  // Relative to the frame's centre (9, 18 on a 32 px frame), so LPC-scale sheets fit too.
+  this.companion.body?.setOffset(this.companion.width / 2 - 7, this.companion.height / 2 + 2);
   enlargeActor(this.companion);
   if (this.scene.anims.exists(`${texture}_idle`)) this.companion.play(`${texture}_idle`);
 }

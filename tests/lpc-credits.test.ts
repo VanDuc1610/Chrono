@@ -6,6 +6,8 @@ import manifest from '../art-source/lpc/manifest.json';
 const allowed = new Set([
   'CC-BY-SA-3.0',
   'CC-BY-3.0',
+  'CC-BY-4.0',
+  'OGA-SA-3.0',
   'GPL-3.0',
   'GPL-2.0',
   'OGA-BY-3.0',

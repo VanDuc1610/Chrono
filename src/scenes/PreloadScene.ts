@@ -137,26 +137,27 @@ export class PreloadScene extends Phaser.Scene {
       'assets/characters/peter/peter_temporal_sight.png',
       { frameWidth: PETER_FRAME, frameHeight: 32 },
     );
-    // Elder Chronographer idle (NPC_ELDER_001, approved Pipeline B art): 4 frames, 32x32.
-    this.load.spritesheet('npc_elder', 'assets/npcs/elder_idle.png', {
-      frameWidth: 32,
-      frameHeight: 32,
+    // Elder Chronographer idle (NPC_ELDER_001): 4 frames, 64x64 at the LPC scale (T-88 step 2,
+    // scripts/lpc/npcs.mjs).
+    this.load.spritesheet('npc_elder', 'assets/lpc/npcs/elder_idle.png', {
+      frameWidth: 64,
+      frameHeight: 64,
     });
     // Temporal Shade float loop (MOB_SHADE_001, approved Pipeline B art): 4 frames, 32x32.
     this.load.spritesheet('enemy_fracture', 'assets/enemies/shade_float.png', {
       frameWidth: 32,
       frameHeight: 32,
     });
-    // Cô Ba (NPC_VENDOR_BA_001): 4-frame idle, 32x32.
-    this.load.spritesheet('npc_vendor_ba', 'assets/npcs/vendor_ba_idle.png', {
-      frameWidth: 32,
-      frameHeight: 32,
+    // Cô Ba (NPC_VENDOR_BA_001): 4-frame idle, 64x64 at the LPC scale.
+    this.load.spritesheet('npc_vendor_ba', 'assets/lpc/npcs/vendor_ba_idle.png', {
+      frameWidth: 64,
+      frameHeight: 64,
     });
     // Ông Sáu (NPC_FISHERMAN_SAU_001): 4-frame idle; the forgotten child (NPC_FORGOTTEN_CHILD_001):
     // 2-frame flicker, semi-transparent.
-    this.load.spritesheet('npc_fisherman_sau', 'assets/npcs/fisherman_sau_idle.png', {
-      frameWidth: 32,
-      frameHeight: 32,
+    this.load.spritesheet('npc_fisherman_sau', 'assets/lpc/npcs/fisherman_sau_idle.png', {
+      frameWidth: 64,
+      frameHeight: 64,
     });
     // Chapter 1: old lighthouse keeper (NPC_OLD_KEEPER_001), Drowned Drifter (MOB_DRIFTER_001),
     // The Sunken Bellkeeper (BOSS_BELLKEEPER_001, 64x64, frame 4 = released).
@@ -213,7 +214,7 @@ export class PreloadScene extends Phaser.Scene {
       ['boss_the_last_war', 'assets/enemies/the_last_war.png', 64],
       // Chapter 5 (owner approved 2026-11-14).
       ['npc_ivo', 'assets/npcs/ivo_idle.png', 32],
-      ['npc_mira', 'assets/npcs/mira_idle.png', 32],
+      ['npc_mira', 'assets/lpc/npcs/mira_idle.png', 64],
       ['enemy_branch_phantom', 'assets/enemies/branch_phantom.png', 32],
       ['enemy_unborn_cocoon', 'assets/enemies/unborn_cocoon.png', 32],
       ['enemy_unborn_horror', 'assets/enemies/unborn_horror.png', 32],

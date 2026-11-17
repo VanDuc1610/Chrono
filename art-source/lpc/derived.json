@@ -127,6 +127,72 @@
     "notes": "Props for map_forgotten_forest (evergreens over the hedges), tinted like its tileset."
   },
   {
+    "id": "derived-npc-elder",
+    "file": "public/assets/lpc/npcs/elder_idle.png",
+    "sha256": "7cf7aafee1c8d17f7fd45d935eda5b0af10cecf4e68e5a3a561eb845b6d4ff86",
+    "from": [
+      "character-beards-beard-medium",
+      "character-body-bodies-male",
+      "character-cape-solid-bg",
+      "character-cape-solid-fg",
+      "character-feet-slippers-male",
+      "character-hat-cloth-hood-adult",
+      "character-head-heads-human-male-elderly",
+      "character-legs-skirts-plain-male",
+      "character-torso-clothes-longsleeve-longsleeve-male",
+      "character-weapon-magic-gnarled-universal-background",
+      "character-weapon-magic-gnarled-universal-foreground"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "elder at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-npc-fisherman-sau",
+    "file": "public/assets/lpc/npcs/fisherman_sau_idle.png",
+    "sha256": "01472e16247ac09a702052465afaed2e957b26df1b8249d9a1fbc31313140ebb",
+    "from": [
+      "character-beards-beard-basic",
+      "character-body-bodies-male",
+      "character-feet-sandals-male",
+      "character-hair-balding-adult",
+      "character-head-heads-human-male-elderly",
+      "character-legs-cuffed-male",
+      "character-torso-clothes-shortsleeve-shortsleeve-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "fisherman_sau at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-npc-mira",
+    "file": "public/assets/lpc/npcs/mira_idle.png",
+    "sha256": "eba1881ce4216c6b984a7212f99355c9f7799c4b204642905f5500ffb1071fa0",
+    "from": [
+      "character-body-bodies-child",
+      "character-hair-relm-short-child",
+      "character-head-heads-human-child",
+      "character-legs-skirts-child",
+      "character-torso-clothes-shirt-child"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "mira at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-npc-vendor-ba",
+    "file": "public/assets/lpc/npcs/vendor_ba_idle.png",
+    "sha256": "9f9d3d414b6af539f53b88072e8a6d412aacecbcb69354c7164e922e6d8c7e31",
+    "from": [
+      "character-body-bodies-female",
+      "character-feet-sandals-thin",
+      "character-hair-bangs-bun-adult",
+      "character-head-heads-human-female",
+      "character-legs-pants-thin",
+      "character-neck-scarf",
+      "character-torso-clothes-longsleeve-longsleeve-female"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "vendor_ba at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
     "id": "derived-steel-tileset-caps",
     "file": "public/assets/lpc/steel_tileset_caps.png",
     "sha256": "7dc56e7a888e2cbf5ad478a49bccdfbaa967a30404f590207ac0631988950112",
