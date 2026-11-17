@@ -23,6 +23,30 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 Goal (owner, 2026-11-15): Chapters 5–7 are built and wait for the owner's playtest. Chapters 8 and 9
 are built and verified — the story is complete (4 endings). Next: the owner's playtest of Chapters 5–9. The story ends at Chapter 9.
 
+### T-88 · LPC world: Peter at the LPC scale, then the engine and Veridia — **Claude** · `IN PROGRESS`
+
+Owner, 2026-11-17: the look moves to LPC 3/4 pixel art (CC-BY-SA 3.0, credits required); the Veridia
+mockup and Peter's LPC front were approved (keep him slender; 64x64 frames). Steps: Peter idle + walk in
+four directions (done as candidates, waiting on approval), then his other animation sets; then engine work
+(contact shadows, y-sorted multi-tile props, chapter colour grade) and Veridia rebuilt in LPC tiles.
+
+_Locks:_ `scripts/author-peter-lpc.js` (new), `art-source/characters/peter/generated/candidates/peter_lpc_*` (new),
+`docs/art/PETER_DESIGN.md`.
+
+### T-89 · LPC asset vendoring + credits manifest — **Codex** · `TODO` (after T-87)
+
+A pinned, reproducible import of the LPC sheets we use, with a credits manifest and a test that fails when
+any LPC file lacks authors/licence. No art decisions; no file enters `public/assets/` in this task.
+
+_Locks:_ `scripts/lpc/*` (new), `art-source/lpc/*` (new), `CREDITS.md` (new), `tests/lpc-credits.test.ts` (new).
+
+### T-90 · LPC asset map per chapter and biome — **Antigravity** · `TODO`
+
+Design doc: for every chapter and kind of place, which LPC sheets/tiles/props fit, what is missing, and the
+palette shift each chapter needs. Read-only on code and assets.
+
+_Locks:_ `docs/art/LPC_ASSET_MAP.md` (new).
+
 ### T-87 · Chapter 8: Ivo hands over his notebook (gear puzzle clue) — **Codex** · `TODO`
 
 Owner, 2026-11-17: talking to Ivo in the Gear Market should give Peter the gear measurements directly

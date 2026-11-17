@@ -113,7 +113,20 @@ The concept images confirm:
 
 The approved concept sheet is an **illustrative design turnaround (~7 heads tall)** and is **NOT a directly usable in-game sprite**.
 
-### In-Game Top-Down Sprite Translation Rules:
+### LPC Scale (owner approved 2026-11-17 — supersedes rules 1–3 below once integrated)
+
+The world moves to LPC-style 3/4 tiles (32 px tiles, people ~1.5 tiles tall). Peter is redrawn
+at that scale by `scripts/author-peter-lpc.js` (Pipeline B, every pixel from this document):
+
+- **Canvas:** 64 × 64 px per frame; Peter ~47 px tall, head top at y ≈ 15, soles on y = 61
+  (the LPC frame metrics, so he stands as tall as LPC people). No LPC body is used as a base.
+- **Build:** slender-athletic, deliberately narrower than LPC bodies (owner: keep him slender).
+- **Proportion:** about 1:3 head-to-body, curls adding 1–2 px of height above the skull.
+- **Sheets:** rows down, up, left, right (left mirrors right); idle 4 frames, walk 6 frames
+  first, the other animation sets to follow at the same scale.
+- Silhouette features listed in rule 4 still apply.
+
+### In-Game Top-Down Sprite Translation Rules (32 px sprites, until the LPC set is integrated):
 
 1. **Resolution & Canvas:** $32 \times 32\text{ px}$ per animation frame.
 2. **Stylized Proportion:** 1:2.8 to 1:3 head-to-body ratio (chibi-stylized realism standard for 16-bit top-down RPGs).
