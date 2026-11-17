@@ -362,6 +362,16 @@ Credits CSV records weapon/polearm/spear/foreground/walk.png; pinned PNG uses tr
 
 Wall tops for coastal_tileset, drawn above walkable tiles north of walls.
 
+### derived-coastal-tileset-edges
+
+- File: public/assets/lpc/coastal_tileset_edges.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-outside-objects, tiles-sand, tiles-sharm-cement, tiles-sharm-dungeon, tiles-sharm-water, tiles-terrain-and-outside
+- Authors: Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
+
+Soft terrain edges for coastal_tileset (LPC border pieces).
+
 ### derived-coastal-tileset-lpc
 
 - File: public/assets/lpc/coastal_tileset_lpc.png
@@ -401,6 +411,16 @@ dungeon_tileset rebuilt slot for slot from LPC materials (tinted); story props k
 - Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
 
 Wall tops for interval_tileset, drawn above walkable tiles north of walls.
+
+### derived-interval-tileset-edges
+
+- File: public/assets/lpc/interval_tileset_edges.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-sharm-cement, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; William Thompsonj; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
+
+Soft terrain edges for interval_tileset (LPC border pieces).
 
 ### derived-interval-tileset-lpc
 
@@ -472,6 +492,16 @@ Tile atlas for Doanh Trại Veridia: tiles cut from the sources, sand desaturate
 
 Wall tops for warfield_tileset, drawn above walkable tiles north of walls.
 
+### derived-warfield-tileset-edges
+
+- File: public/assets/lpc/warfield_tileset_edges.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-adobe, tiles-hughspectrum-castlefloors, tiles-mountains, tiles-outside-objects, tiles-sharm-cement, tiles-terrain-and-outside
+- Authors: Lanea Zimmerman (AKA Sharm); Daniel Armstrong (AKA HughSpectrum); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-3.0, GPL-3.0, GPL-2.0, OGA-BY-3.0, CC-BY-SA-3.0
+
+Soft terrain edges for warfield_tileset (LPC border pieces).
+
 ### derived-warfield-tileset-lpc
 
 - File: public/assets/lpc/warfield_tileset_lpc.png
@@ -491,6 +521,16 @@ warfield_tileset rebuilt slot for slot from LPC materials (tinted); story props 
 - Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
 
 Wall tops for wilds_tileset, drawn above walkable tiles north of walls.
+
+### derived-wilds-tileset-edges
+
+- File: public/assets/lpc/wilds_tileset_edges.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-mountains, tiles-sharm-grass, tiles-sharm-water, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; William Thompsonj; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
+
+Soft terrain edges for wilds_tileset (LPC border pieces).
 
 ### derived-wilds-tileset-lpc
 

@@ -6,7 +6,11 @@ import type { TilePoint } from './MapTypes';
 export interface LpcData {
   tilesets: Record<
     string,
-    { caps?: { key: string; path: string; frames: Record<string, number> } }
+    {
+      caps?: { key: string; path: string; frames: Record<string, number> };
+      /** Soft terrain edges: ground kind (rank) by gid, `pieces` border frames per kind. */
+      edges?: { key: string; path: string; kindOf: Record<string, number>; pieces: number };
+    }
   >;
 }
 

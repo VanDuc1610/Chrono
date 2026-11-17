@@ -25,6 +25,7 @@ import { Atmosphere } from '../world/Atmosphere';
 import { NeonSkin } from '../world/NeonSkin';
 import { ActorShadows } from '../world/ActorShadows';
 import { WallCaps } from '../world/WallCaps';
+import { TerrainEdges } from '../world/TerrainEdges';
 import { ScreenTransition } from '../ui/ScreenTransition';
 import { getStrings, Translate } from '../ui/Strings';
 import {
@@ -162,6 +163,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.neon = null;
     this.actors = null;
     this.wallCaps = null;
+    this.terrainEdges = null;
     this.neonSwapKey = '';
     this.frozenVeil = null;
     this.isFrozen = false;
@@ -462,6 +464,9 @@ export class ExplorationScene extends Phaser.Scene {
     const ground = map.createLayer(variant?.ground ?? def.layers.ground, tileset, 0, 0);
     // LPC maps (T-88): sand edges, rugs and shadows over the ground; walls; then the tops of tents,
     // palisades and trees drawn above the actors so they can walk behind them.
+    // Soft edges between ground kinds (T-88), between the ground and everything on it.
+    if (ground)
+      this.terrainEdges = new TerrainEdges(this, def.tileset.name, ground, def.tileset.key);
     if (def.layers.overlay) map.createLayer(def.layers.overlay, tileset, 0, 0);
     const walls = map.createLayer(variant?.walls ?? def.layers.walls, tileset, 0, 0);
     if (def.layers.above) map.createLayer(def.layers.above, tileset, 0, 0)?.setDepth(ABOVE_DEPTH);
@@ -512,6 +517,7 @@ export class ExplorationScene extends Phaser.Scene {
       this.neonSwapKey = swapKey;
       this.neon?.refresh();
       this.wallCaps?.refresh();
+      this.terrainEdges?.refresh();
     }
     if (this.playerReady && this.isInsideWall()) {
       const fallback = this.mapDef.fallbackSpawn
@@ -1158,6 +1164,8 @@ export class ExplorationScene extends Phaser.Scene {
   private actors: ActorShadows | null = null;
   /** LPC wall tops drawn above the actors (T-88). */
   private wallCaps: WallCaps | null = null;
+  /** Soft edges between ground kinds on LPC maps (T-88). */
+  private terrainEdges: TerrainEdges | null = null;
 
   /** Tiles a wall top must never cover: people, points, dials, exits, triggers, puzzle tiles. */
   private capFreeTiles(): TilePoint[] {

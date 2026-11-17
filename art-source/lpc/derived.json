@@ -15,6 +15,21 @@
     "notes": "Wall tops for coastal_tileset, drawn above walkable tiles north of walls."
   },
   {
+    "id": "derived-coastal-tileset-edges",
+    "file": "public/assets/lpc/coastal_tileset_edges.png",
+    "sha256": "5ff5bb63e597d727f6dadcd8a89f6a5b625f71b4f82ffcc32554af27ac27a3a4",
+    "from": [
+      "tiles-outside-objects",
+      "tiles-sand",
+      "tiles-sharm-cement",
+      "tiles-sharm-dungeon",
+      "tiles-sharm-water",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Soft terrain edges for coastal_tileset (LPC border pieces)."
+  },
+  {
     "id": "derived-coastal-tileset-lpc",
     "file": "public/assets/lpc/coastal_tileset_lpc.png",
     "sha256": "dd0c95f2736d66fdd0645c4fba5b7024374ac060065da8ad58df622462f2bc65",
@@ -57,6 +72,19 @@
     ],
     "script": "scripts/lpc/reskin.mjs",
     "notes": "Wall tops for interval_tileset, drawn above walkable tiles north of walls."
+  },
+  {
+    "id": "derived-interval-tileset-edges",
+    "file": "public/assets/lpc/interval_tileset_edges.png",
+    "sha256": "dc0f6e30eaed729a8cc6dbe334e317ae28eff2c0c8ab1f2f89c8468b28aa8fe6",
+    "from": [
+      "tiles-hughspectrum-castlefloors",
+      "tiles-hughspectrum-castlewalls",
+      "tiles-sharm-cement",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Soft terrain edges for interval_tileset (LPC border pieces)."
   },
   {
     "id": "derived-interval-tileset-lpc",
@@ -141,6 +169,21 @@
     "notes": "Wall tops for warfield_tileset, drawn above walkable tiles north of walls."
   },
   {
+    "id": "derived-warfield-tileset-edges",
+    "file": "public/assets/lpc/warfield_tileset_edges.png",
+    "sha256": "3340f7d55cacd6d6ffdbbf46373e83d97264cc601f25dc1c3f45e452b916e94b",
+    "from": [
+      "tiles-adobe",
+      "tiles-hughspectrum-castlefloors",
+      "tiles-mountains",
+      "tiles-outside-objects",
+      "tiles-sharm-cement",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Soft terrain edges for warfield_tileset (LPC border pieces)."
+  },
+  {
     "id": "derived-warfield-tileset-lpc",
     "file": "public/assets/lpc/warfield_tileset_lpc.png",
     "sha256": "4f4551d71ca8eca910fec47451402dcd39fe1e55f65ac1cb90a03811730978c1",
@@ -168,6 +211,20 @@
     ],
     "script": "scripts/lpc/reskin.mjs",
     "notes": "Wall tops for wilds_tileset, drawn above walkable tiles north of walls."
+  },
+  {
+    "id": "derived-wilds-tileset-edges",
+    "file": "public/assets/lpc/wilds_tileset_edges.png",
+    "sha256": "6662e14c3bbbc13d517a87bdca92aaeebc73b0228d37135942618d02565cb13e",
+    "from": [
+      "tiles-hughspectrum-castlefloors",
+      "tiles-mountains",
+      "tiles-sharm-grass",
+      "tiles-sharm-water",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Soft terrain edges for wilds_tileset (LPC border pieces)."
   },
   {
     "id": "derived-wilds-tileset-lpc",

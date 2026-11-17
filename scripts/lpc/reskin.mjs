@@ -97,6 +97,59 @@ const D_FAMILY = {
   4: 'WALL_FACE_B',
   5: 'WALL_FACE',
 };
+/**
+ * Soft terrain edges (T-88): where two ground kinds meet, the higher kind's LPC border pieces are
+ * drawn over the lower kind (sand into water, grass into dirt...). Each kind: [sheet, tone, block
+ * column] of a standard LPC terrain block (border 3x3 at rows 2-4, inner corners at rows 0-1).
+ */
+const EDGE_KIND = {
+  SAND: ['SAND', SAND_TONE, 0],
+  DIRT: ['TER', null, 0],
+  DIRT_DARK: ['TER', null, 3],
+  FOREST_GRASS: ['GRASS', { sat: 0.7, bright: 0.6 }, 0],
+  WATER: ['WATER', null, 0],
+  CEMENT: ['CEMENT', null, 0],
+  ASH: ['CEMENT', { sat: 0.4, bright: 0.8 }, 0],
+};
+/** Border pieces, in frame order: TL T TR L R BL B BR, then inner corners for a missing SE SW NE NW. */
+const EDGE_PIECES = [
+  [0, 2],
+  [1, 2],
+  [2, 2],
+  [0, 3],
+  [2, 3],
+  [0, 4],
+  [1, 4],
+  [2, 4],
+  [1, 0],
+  [2, 0],
+  [1, 1],
+  [2, 1],
+  [0, 1],
+];
+/** Per tileset: ground kinds by gid, highest kind first (it is drawn over the ones after it). */
+const EDGES = {
+  coastal_tileset: [
+    ['WATER', [17]],
+    ['DIRT', [3, 15, 12]],
+    ['SAND', [1, 2, 4, 14]],
+  ],
+  wilds_tileset: [
+    ['WATER', [17]],
+    ['FOREST_GRASS', [2]],
+    ['DIRT', [3]],
+    ['DIRT_DARK', [1, 4, 5, 6, 7]],
+  ],
+  warfield_tileset: [
+    ['DIRT', [1, 2, 3, 4, 44, 46, 48]],
+    ['ASH', [47]],
+  ],
+  interval_tileset: [
+    ['DIRT', [22]],
+    ['CEMENT', [48]],
+  ],
+};
+
 const TILESETS = {
   coastal_tileset: {
     tint: ['#ffd8b0', 0.1],
@@ -316,6 +369,37 @@ for (const [name, ts] of Object.entries(TILESETS)) {
   lpcData.tilesets[name] = {
     caps: { key: `${name}_caps`, path: capsFile.replace('public/', ''), frames: caps },
   };
+  // Soft edges: 12 border pieces per ground kind, tinted like the tileset.
+  const edgeFiles = [];
+  if (EDGES[name]) {
+    const kinds = EDGES[name];
+    const n = kinds.length * EDGE_PIECES.length;
+    const ebuf = Buffer.alloc(n * T * T * 4);
+    const kindOf = {};
+    kinds.forEach(([kind, gids], k) => {
+      const [sheet, t, bx] = EDGE_KIND[kind];
+      used.add(sheet);
+      for (const g of gids) kindOf[g] = k;
+      EDGE_PIECES.forEach(([c, r], i) => {
+        const px = cut(sheets[sheet], bx + c, r);
+        if (t) tone(px, t);
+        tint(px, ts.tint[0], ts.tint[1]);
+        const f = k * EDGE_PIECES.length + i;
+        for (let y = 0; y < T; y++)
+          px.copy(ebuf, (y * n * T + f * T) * 4, y * T * 4, (y + 1) * T * 4);
+      });
+    });
+    const edgesFile = `public/assets/lpc/${name}_edges.png`;
+    const edgesPng = encodePng(n * T, T, ebuf);
+    fs.writeFileSync(edgesFile, edgesPng);
+    lpcData.tilesets[name].edges = {
+      key: `${name}_edges`,
+      path: edgesFile.replace('public/', ''),
+      kindOf,
+      pieces: EDGE_PIECES.length,
+    };
+    edgeFiles.push([edgesFile, edgesPng, `Soft terrain edges for ${name} (LPC border pieces).`]);
+  }
   // Point the chapter 0-5 maps at the new image (the tileset name inside the map stays).
   for (const def of Object.values(maps.maps)) {
     if ((def.chapter ?? 0) > 5 || def.tileset.name !== name) continue;
@@ -331,6 +415,7 @@ for (const [name, ts] of Object.entries(TILESETS)) {
       `${name} rebuilt slot for slot from LPC materials (tinted); story props kept.`,
     ],
     [capsFile, capsPng, `Wall tops for ${name}, drawn above walkable tiles north of walls.`],
+    ...edgeFiles,
   ]) {
     const id = `derived-${file.split('/').pop().replace('.png', '').replace(/_/g, '-')}`;
     derived = derived.filter((d) => d.id !== id);

@@ -286,8 +286,9 @@ export class PreloadScene extends Phaser.Scene {
     // T-88: LPC wall tops per tileset (scripts/lpc/reskin.mjs), drawn above walkable tiles.
     this.load.once('filecomplete-json-data_lpc', (_key: string, _type: string, data: unknown) => {
       for (const ts of Object.values((data as LpcData).tilesets))
-        if (ts.caps)
-          this.load.spritesheet(ts.caps.key, ts.caps.path, { frameWidth: 32, frameHeight: 32 });
+        for (const sheet of [ts.caps, ts.edges])
+          if (sheet)
+            this.load.spritesheet(sheet.key, sheet.path, { frameWidth: 32, frameHeight: 32 });
     });
     this.load.json('data_lpc', 'assets/data/lpc.json');
 
