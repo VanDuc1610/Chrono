@@ -36,7 +36,10 @@ every player), then sound, settings and saves, then combat and code health, then
 ### T-91 · UI overhaul: pixel font with Vietnamese, compact HUD, controls bar — **Claude** · `IN PROGRESS`
 
 VT323 (SIL OFL, full Vietnamese) for every UI text; a compact HUD that frees the screen; the controls
-bar no longer overflows; dialogue box and menus polished.
+bar no longer overflows; dialogue box and menus polished. Done so far: VT323 everywhere through
+`crispText` (sizes x1.4, no synthetic bold, the boot waits for the font), compact status panel (place,
+level, HP/MP bars with values, EXP hairline), slimmer quest tracker, the key list folded behind H.
+Next: dialogue box and main menu polish, uppercase captions with diacritics.
 
 _Locks:_ `src/ui/*`, `src/scenes/MainMenuScene.ts`, `src/scenes/BootScene.ts`, `index.html`,
 `public/assets/fonts/*` (new).

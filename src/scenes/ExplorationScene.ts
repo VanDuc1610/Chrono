@@ -1046,6 +1046,11 @@ export class ExplorationScene extends Phaser.Scene {
           this.t(this.neon.active ? 'neon.on' : 'neon.off'),
         );
     });
+    on(K.H, () => {
+      if (this.dialogueBox.isOpen() || this.satchel.isOpen) return;
+      this.statusHud.toggleControls();
+      this.soundSystem.playCursorBlip();
+    });
     on(K.J, () => {
       if (this.dialogueBox.isOpen() || this.satchel.isOpen) return;
       this.questTracker.toggle();

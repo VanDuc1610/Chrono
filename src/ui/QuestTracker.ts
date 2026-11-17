@@ -3,8 +3,8 @@ import type { QuestSystem } from '../systems/quest/QuestSystem';
 import { createPanel } from './Panel';
 import type { Translate } from './Strings';
 
-const WIDTH = 220;
-const HEIGHT = 76;
+const WIDTH = 206;
+const HEIGHT = 58;
 const ROWS = 3;
 
 /** Registry key: the player folded the quest panel away (J), kept across maps. */
@@ -33,7 +33,7 @@ export class QuestTracker {
     this.tab = scene.add
       .text(scene.scale.width - 10, 10, t('quest.tab'), {
         fontFamily: 'monospace',
-        fontSize: '9px',
+        fontSize: '8px',
         color: '#00d2ff',
         backgroundColor: '#07080fcc',
         padding: { left: 5, right: 5, top: 3, bottom: 3 },
@@ -47,23 +47,23 @@ export class QuestTracker {
       side: t('quest.labelSide'),
       done: t('quest.label'),
     };
-    const label = (this.label = scene.add.text(10, 8, this.labels.done, {
+    const label = (this.label = scene.add.text(10, 6, this.labels.done, {
       fontFamily: 'monospace',
-      fontSize: '9px',
+      fontSize: '7px',
       color: '#00d2ff',
       letterSpacing: 1,
     }));
-    this.title = scene.add.text(10, 20, '', {
+    this.title = scene.add.text(10, 16, '', {
       fontFamily: 'monospace',
-      fontSize: '11px',
+      fontSize: '9px',
       color: '#e4ebf5',
       fontStyle: 'bold',
     });
     container.add([bg, label, this.title]);
     for (let i = 0; i < ROWS; i++) {
-      const row = scene.add.text(10, 34 + i * 12, '', {
+      const row = scene.add.text(10, 28 + i * 9, '', {
         fontFamily: 'monospace',
-        fontSize: '10px',
+        fontSize: '8px',
         color: '#8b9bb4',
       });
       this.rows.push(row);
