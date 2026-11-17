@@ -86,6 +86,66 @@ Unmodified PNG. Credits: credits/tiles.txt; supplementary credits: credits/bluec
 
 Unmodified PNG. Credits: credits/tiles.txt; supplementary credits: credits/bluecarrot16.txt. Component-specific licence alternatives apply; sheet-level licences are CC-BY-SA 3.0 / GPL 3.0.
 
+### tiles-sharm-water
+
+- File: art-source/lpc/raw/tiles/Final Attributions/Individual Assets/Sharm/water.png
+- Source: https://github.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/blob/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Individual%20Assets/Sharm/water.png
+- Authors: Lanea Zimmerman (AKA Sharm)
+- Licences: CC-BY-3.0, GPL-3.0, GPL-2.0, OGA-BY-3.0
+- https://raw.githubusercontent.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Final%20Attribution.txt
+
+Unmodified PNG. Credits: credits/tiles.txt. Added for the Chapter 0-5 LPC reskin (T-88). Component-specific licence alternatives apply; sheet-level licences are CC-BY-SA 3.0 / GPL 3.0.
+
+### tiles-sharm-grass
+
+- File: art-source/lpc/raw/tiles/Final Attributions/Individual Assets/Sharm/grass.png
+- Source: https://github.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/blob/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Individual%20Assets/Sharm/grass.png
+- Authors: Lanea Zimmerman (AKA Sharm)
+- Licences: CC-BY-3.0, GPL-3.0, GPL-2.0, OGA-BY-3.0
+- https://raw.githubusercontent.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Final%20Attribution.txt
+
+Unmodified PNG. Credits: credits/tiles.txt. Added for the Chapter 0-5 LPC reskin (T-88). Component-specific licence alternatives apply; sheet-level licences are CC-BY-SA 3.0 / GPL 3.0.
+
+### tiles-sharm-cement
+
+- File: art-source/lpc/raw/tiles/Final Attributions/Individual Assets/Sharm/cement.png
+- Source: https://github.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/blob/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Individual%20Assets/Sharm/cement.png
+- Authors: Lanea Zimmerman (AKA Sharm)
+- Licences: CC-BY-3.0, GPL-3.0, GPL-2.0, OGA-BY-3.0
+- https://raw.githubusercontent.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Final%20Attribution.txt
+
+Unmodified PNG. Credits: credits/tiles.txt. Added for the Chapter 0-5 LPC reskin (T-88). Component-specific licence alternatives apply; sheet-level licences are CC-BY-SA 3.0 / GPL 3.0.
+
+### tiles-sharm-dungeon
+
+- File: art-source/lpc/raw/tiles/Final Attributions/Individual Assets/Sharm/dungeon.png
+- Source: https://github.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/blob/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Individual%20Assets/Sharm/dungeon.png
+- Authors: Lanea Zimmerman (AKA Sharm)
+- Licences: CC-BY-3.0, GPL-3.0, GPL-2.0, OGA-BY-3.0
+- https://raw.githubusercontent.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Final%20Attribution.txt
+
+Unmodified PNG. Credits: credits/tiles.txt. Added for the Chapter 0-5 LPC reskin (T-88). Component-specific licence alternatives apply; sheet-level licences are CC-BY-SA 3.0 / GPL 3.0.
+
+### tiles-hughspectrum-castlefloors
+
+- File: art-source/lpc/raw/tiles/Final Attributions/Individual Assets/Daniel Armstrong (Aka HughSpectrum)/castlefloors.png
+- Source: https://github.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/blob/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Individual%20Assets/Daniel%20Armstrong%20(Aka%20HughSpectrum)/castlefloors.png
+- Authors: Daniel Armstrong (AKA HughSpectrum)
+- Licences: CC-BY-SA-3.0, GPL-3.0
+- https://raw.githubusercontent.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Final%20Attribution.txt
+
+Unmodified PNG. Credits: credits/tiles.txt. Added for the Chapter 0-5 LPC reskin (T-88). Component-specific licence alternatives apply; sheet-level licences are CC-BY-SA 3.0 / GPL 3.0.
+
+### tiles-hughspectrum-castlewalls
+
+- File: art-source/lpc/raw/tiles/Final Attributions/Individual Assets/Daniel Armstrong (Aka HughSpectrum)/castlewalls.png
+- Source: https://github.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/blob/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Individual%20Assets/Daniel%20Armstrong%20(Aka%20HughSpectrum)/castlewalls.png
+- Authors: Daniel Armstrong (AKA HughSpectrum)
+- Licences: CC-BY-SA-3.0, GPL-3.0
+- https://raw.githubusercontent.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Final%20Attribution.txt
+
+Unmodified PNG. Credits: credits/tiles.txt. Added for the Chapter 0-5 LPC reskin (T-88). Component-specific licence alternatives apply; sheet-level licences are CC-BY-SA 3.0 / GPL 3.0.
+
 ## LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator
 
 ### character-body-bodies-male
@@ -292,6 +352,106 @@ Credits CSV records weapon/polearm/spear/foreground/walk.png; pinned PNG uses tr
 
 ## Game assets derived from the sources above
 
+### derived-coastal-tileset-caps
+
+- File: public/assets/lpc/coastal_tileset_caps.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-outside-objects, tiles-sand, tiles-sharm-cement, tiles-sharm-dungeon, tiles-sharm-water, tiles-terrain-and-outside
+- Authors: Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
+
+Wall tops for coastal_tileset, drawn above walkable tiles north of walls.
+
+### derived-coastal-tileset-lpc
+
+- File: public/assets/lpc/coastal_tileset_lpc.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-outside-objects, tiles-sand, tiles-sharm-cement, tiles-sharm-dungeon, tiles-sharm-water, tiles-terrain-and-outside
+- Authors: Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
+
+coastal_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.
+
+### derived-dungeon-tileset-caps
+
+- File: public/assets/lpc/dungeon_tileset_caps.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls
+- Authors: Daniel Armstrong (AKA HughSpectrum)
+- Licences: CC-BY-SA-3.0, GPL-3.0
+
+Wall tops for dungeon_tileset, drawn above walkable tiles north of walls.
+
+### derived-dungeon-tileset-lpc
+
+- File: public/assets/lpc/dungeon_tileset_lpc.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls
+- Authors: Daniel Armstrong (AKA HughSpectrum)
+- Licences: CC-BY-SA-3.0, GPL-3.0
+
+dungeon_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.
+
+### derived-interval-tileset-caps
+
+- File: public/assets/lpc/interval_tileset_caps.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-sharm-cement, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; William Thompsonj; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
+
+Wall tops for interval_tileset, drawn above walkable tiles north of walls.
+
+### derived-interval-tileset-lpc
+
+- File: public/assets/lpc/interval_tileset_lpc.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-sharm-cement, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; William Thompsonj; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
+
+interval_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.
+
+### derived-steel-tileset-caps
+
+- File: public/assets/lpc/steel_tileset_caps.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-outside-objects
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio
+- Licences: CC-BY-SA-3.0, GPL-3.0
+
+Wall tops for steel_tileset, drawn above walkable tiles north of walls.
+
+### derived-steel-tileset-lpc
+
+- File: public/assets/lpc/steel_tileset_lpc.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-outside-objects
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio
+- Licences: CC-BY-SA-3.0, GPL-3.0
+
+steel_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.
+
+### derived-sunken-tileset-caps
+
+- File: public/assets/lpc/sunken_tileset_caps.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls
+- Authors: Daniel Armstrong (AKA HughSpectrum)
+- Licences: CC-BY-SA-3.0, GPL-3.0
+
+Wall tops for sunken_tileset, drawn above walkable tiles north of walls.
+
+### derived-sunken-tileset-lpc
+
+- File: public/assets/lpc/sunken_tileset_lpc.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls
+- Authors: Daniel Armstrong (AKA HughSpectrum)
+- Licences: CC-BY-SA-3.0, GPL-3.0
+
+sunken_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.
+
 ### derived-veridia-tiles
 
 - File: public/assets/lpc/veridia_tiles.png
@@ -301,3 +461,43 @@ Credits CSV records weapon/polearm/spear/foreground/walk.png; pinned PNG uses tr
 - Licences: CC-BY-3.0, GPL-3.0, GPL-2.0, OGA-BY-3.0, CC-BY-SA-3.0
 
 Tile atlas for Doanh Trại Veridia: tiles cut from the sources, sand desaturated.
+
+### derived-warfield-tileset-caps
+
+- File: public/assets/lpc/warfield_tileset_caps.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-adobe, tiles-hughspectrum-castlefloors, tiles-mountains, tiles-outside-objects, tiles-sharm-cement, tiles-terrain-and-outside
+- Authors: Lanea Zimmerman (AKA Sharm); Daniel Armstrong (AKA HughSpectrum); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-3.0, GPL-3.0, GPL-2.0, OGA-BY-3.0, CC-BY-SA-3.0
+
+Wall tops for warfield_tileset, drawn above walkable tiles north of walls.
+
+### derived-warfield-tileset-lpc
+
+- File: public/assets/lpc/warfield_tileset_lpc.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-adobe, tiles-hughspectrum-castlefloors, tiles-mountains, tiles-outside-objects, tiles-sharm-cement, tiles-terrain-and-outside
+- Authors: Lanea Zimmerman (AKA Sharm); Daniel Armstrong (AKA HughSpectrum); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-3.0, GPL-3.0, GPL-2.0, OGA-BY-3.0, CC-BY-SA-3.0
+
+warfield_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.
+
+### derived-wilds-tileset-caps
+
+- File: public/assets/lpc/wilds_tileset_caps.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-mountains, tiles-sharm-grass, tiles-sharm-water, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; William Thompsonj; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
+
+Wall tops for wilds_tileset, drawn above walkable tiles north of walls.
+
+### derived-wilds-tileset-lpc
+
+- File: public/assets/lpc/wilds_tileset_lpc.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-mountains, tiles-sharm-grass, tiles-sharm-water, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; William Thompsonj; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
+
+wilds_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.

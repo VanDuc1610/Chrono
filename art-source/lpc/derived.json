@@ -1,5 +1,117 @@
 [
   {
+    "id": "derived-coastal-tileset-caps",
+    "file": "public/assets/lpc/coastal_tileset_caps.png",
+    "sha256": "f666698f05b08d8524a726130371ede6fe3582614fdef5ee373ef2d786319668",
+    "from": [
+      "tiles-outside-objects",
+      "tiles-sand",
+      "tiles-sharm-cement",
+      "tiles-sharm-dungeon",
+      "tiles-sharm-water",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Wall tops for coastal_tileset, drawn above walkable tiles north of walls."
+  },
+  {
+    "id": "derived-coastal-tileset-lpc",
+    "file": "public/assets/lpc/coastal_tileset_lpc.png",
+    "sha256": "dd0c95f2736d66fdd0645c4fba5b7024374ac060065da8ad58df622462f2bc65",
+    "from": [
+      "tiles-outside-objects",
+      "tiles-sand",
+      "tiles-sharm-cement",
+      "tiles-sharm-dungeon",
+      "tiles-sharm-water",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "coastal_tileset rebuilt slot for slot from LPC materials (tinted); story props kept."
+  },
+  {
+    "id": "derived-dungeon-tileset-caps",
+    "file": "public/assets/lpc/dungeon_tileset_caps.png",
+    "sha256": "c6ac54c9b364b9096880f6a99224d721eeb0b104d49851fdbdc0060487b6fa4f",
+    "from": ["tiles-hughspectrum-castlefloors", "tiles-hughspectrum-castlewalls"],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Wall tops for dungeon_tileset, drawn above walkable tiles north of walls."
+  },
+  {
+    "id": "derived-dungeon-tileset-lpc",
+    "file": "public/assets/lpc/dungeon_tileset_lpc.png",
+    "sha256": "35d5c315c71294acca07f7be64a6a41715fe7ec42f358b109f149b07d0f4e88a",
+    "from": ["tiles-hughspectrum-castlefloors", "tiles-hughspectrum-castlewalls"],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "dungeon_tileset rebuilt slot for slot from LPC materials (tinted); story props kept."
+  },
+  {
+    "id": "derived-interval-tileset-caps",
+    "file": "public/assets/lpc/interval_tileset_caps.png",
+    "sha256": "d6faa903823117d7d151d3cccdc4e528f15691e13f8ff701ac53dd7a28abe172",
+    "from": [
+      "tiles-hughspectrum-castlefloors",
+      "tiles-hughspectrum-castlewalls",
+      "tiles-sharm-cement",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Wall tops for interval_tileset, drawn above walkable tiles north of walls."
+  },
+  {
+    "id": "derived-interval-tileset-lpc",
+    "file": "public/assets/lpc/interval_tileset_lpc.png",
+    "sha256": "28ea59dcad6e60c8ac0dedab42ecf1187be80a6f6f30823bd33b7ead27f08c7b",
+    "from": [
+      "tiles-hughspectrum-castlefloors",
+      "tiles-hughspectrum-castlewalls",
+      "tiles-sharm-cement",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "interval_tileset rebuilt slot for slot from LPC materials (tinted); story props kept."
+  },
+  {
+    "id": "derived-steel-tileset-caps",
+    "file": "public/assets/lpc/steel_tileset_caps.png",
+    "sha256": "7dc56e7a888e2cbf5ad478a49bccdfbaa967a30404f590207ac0631988950112",
+    "from": [
+      "tiles-hughspectrum-castlefloors",
+      "tiles-hughspectrum-castlewalls",
+      "tiles-outside-objects"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Wall tops for steel_tileset, drawn above walkable tiles north of walls."
+  },
+  {
+    "id": "derived-steel-tileset-lpc",
+    "file": "public/assets/lpc/steel_tileset_lpc.png",
+    "sha256": "e27b074ca707de3814bdf350c104678be034fcf3621d347cfaa96d314bb9ebf2",
+    "from": [
+      "tiles-hughspectrum-castlefloors",
+      "tiles-hughspectrum-castlewalls",
+      "tiles-outside-objects"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "steel_tileset rebuilt slot for slot from LPC materials (tinted); story props kept."
+  },
+  {
+    "id": "derived-sunken-tileset-caps",
+    "file": "public/assets/lpc/sunken_tileset_caps.png",
+    "sha256": "1ab74e96a101f64b33cc0a4fbc6426646386905ec5210942812201acdfaf68b6",
+    "from": ["tiles-hughspectrum-castlefloors", "tiles-hughspectrum-castlewalls"],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Wall tops for sunken_tileset, drawn above walkable tiles north of walls."
+  },
+  {
+    "id": "derived-sunken-tileset-lpc",
+    "file": "public/assets/lpc/sunken_tileset_lpc.png",
+    "sha256": "5cfe2218819ed873f9a6c9d9768871041ac9c111dedd20b61d27fdf5f1c35af9",
+    "from": ["tiles-hughspectrum-castlefloors", "tiles-hughspectrum-castlewalls"],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "sunken_tileset rebuilt slot for slot from LPC materials (tinted); story props kept."
+  },
+  {
     "id": "derived-veridia-tiles",
     "file": "public/assets/lpc/veridia_tiles.png",
     "sha256": "cf12d13976b943320d7fdcc515152c70ef4b705d45be417425743daac8b7d48b",
@@ -12,5 +124,63 @@
     ],
     "script": "scripts/lpc/veridia.mjs",
     "notes": "Tile atlas for Doanh Trại Veridia: tiles cut from the sources, sand desaturated."
+  },
+  {
+    "id": "derived-warfield-tileset-caps",
+    "file": "public/assets/lpc/warfield_tileset_caps.png",
+    "sha256": "576acb096e7d4562b19f989b12aa2729c1d549fb00985660bbde9125cbc741bf",
+    "from": [
+      "tiles-adobe",
+      "tiles-hughspectrum-castlefloors",
+      "tiles-mountains",
+      "tiles-outside-objects",
+      "tiles-sharm-cement",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Wall tops for warfield_tileset, drawn above walkable tiles north of walls."
+  },
+  {
+    "id": "derived-warfield-tileset-lpc",
+    "file": "public/assets/lpc/warfield_tileset_lpc.png",
+    "sha256": "4f4551d71ca8eca910fec47451402dcd39fe1e55f65ac1cb90a03811730978c1",
+    "from": [
+      "tiles-adobe",
+      "tiles-hughspectrum-castlefloors",
+      "tiles-mountains",
+      "tiles-outside-objects",
+      "tiles-sharm-cement",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "warfield_tileset rebuilt slot for slot from LPC materials (tinted); story props kept."
+  },
+  {
+    "id": "derived-wilds-tileset-caps",
+    "file": "public/assets/lpc/wilds_tileset_caps.png",
+    "sha256": "18d982be0348f9343863ec901d669a24fe23fc76c2efd638ccb41f10e6af8855",
+    "from": [
+      "tiles-hughspectrum-castlefloors",
+      "tiles-mountains",
+      "tiles-sharm-grass",
+      "tiles-sharm-water",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Wall tops for wilds_tileset, drawn above walkable tiles north of walls."
+  },
+  {
+    "id": "derived-wilds-tileset-lpc",
+    "file": "public/assets/lpc/wilds_tileset_lpc.png",
+    "sha256": "7bb560458722c34a77803e2f555fcd61f022989b5b95a19e519a5eddf980edb2",
+    "from": [
+      "tiles-hughspectrum-castlefloors",
+      "tiles-mountains",
+      "tiles-sharm-grass",
+      "tiles-sharm-water",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "wilds_tileset rebuilt slot for slot from LPC materials (tinted); story props kept."
   }
 ]

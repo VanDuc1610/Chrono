@@ -174,11 +174,25 @@ const LPC_GRADE = {
   },
 };
 
+/** T-88: chapter colour grades for the LPC chapters (palettes from docs/art/LPC_ASSET_MAP.md). */
+const CHAPTER_GRADE = {
+  0: { tint: '#f2d8c0', alpha: 0.35, lift: { color: '#ffb070', alpha: 0.04 } }, // sepia dusk
+  1: { tint: '#ffd2a4', alpha: 0.4, lift: { color: '#ff9a5a', alpha: 0.05 } }, // amber sunset
+  2: { tint: '#f4dca8', alpha: 0.35, lift: { color: '#f0c860', alpha: 0.04 } }, // brass and ochre
+  3: { tint: '#c8ccf0', alpha: 0.4, lift: { color: '#b8b8ff', alpha: 0.04 } }, // cold crypt
+  4: { tint: '#ffd6b4', alpha: 0.4, lift: { color: '#ff8a5a', alpha: 0.05 } }, // embers
+  5: { tint: '#d4f0d8', alpha: 0.35, lift: { color: '#9fe8a0', alpha: 0.04 } }, // phosphor green
+};
+
 const out = {};
 let made = 0;
 for (const [id, m] of Object.entries(maps)) {
   if (KEEP.has(id) && old[id]) {
-    out[id] = { ...old[id], decor: KEEP_DECOR[id] };
+    const kept = { ...old[id], decor: KEEP_DECOR[id] };
+    const ch = Number((id.match(/^map_ch(\d)/) ?? [])[1] ?? 0);
+    if (CHAPTER_GRADE[ch]) kept.grade = CHAPTER_GRADE[ch];
+    else delete kept.grade;
+    out[id] = kept;
     continue;
   }
   const ch = Number((id.match(/^map_ch(\d)/) ?? [])[1] ?? 0);
@@ -207,8 +221,9 @@ for (const [id, m] of Object.entries(maps)) {
     def.lights = [
       { tile: boss.tile, color: t.boss, radius: 140, intensity: 0.75, glow: 0.35, flicker: true },
     ];
-  // T-88: maps rebuilt in LPC art get a colour grade over the world (owner-approved mockup look).
-  if (LPC_GRADE[id]) def.grade = LPC_GRADE[id];
+  // T-88: maps in LPC art (chapters 0-5) get a colour grade over the world.
+  const grade = LPC_GRADE[id] ?? CHAPTER_GRADE[ch];
+  if (grade) def.grade = grade;
   out[id] = def;
   made++;
 }

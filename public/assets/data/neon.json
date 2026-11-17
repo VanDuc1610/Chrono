@@ -3,125 +3,148 @@
     "map_peters_room": {
       "level": 0.25,
       "line": "#7fd8ff",
-      "accent": "#ffc46b"
+      "accent": "#ffc46b",
+      "accentsOnly": true
     },
     "map_coastal_town": {
       "level": 0.25,
       "line": "#7fd8ff",
-      "accent": "#ffc46b"
+      "accent": "#ffc46b",
+      "accentsOnly": true
     },
     "map_shattered_antechamber": {
       "level": 0.25,
       "line": "#7fd8ff",
-      "accent": "#ffc46b"
+      "accent": "#ffc46b",
+      "accentsOnly": true
     },
     "map_forgotten_forest": {
       "level": 0.25,
       "line": "#7fd8ff",
-      "accent": "#ffc46b"
+      "accent": "#ffc46b",
+      "accentsOnly": true
     },
     "map_old_lighthouse": {
       "level": 0.25,
       "line": "#7fd8ff",
-      "accent": "#ffc46b"
+      "accent": "#ffc46b",
+      "accentsOnly": true
     },
     "map_ch1_shore_gate": {
       "level": 0.3,
       "line": "#5ee7ff",
-      "accent": "#ffc46b"
+      "accent": "#ffc46b",
+      "accentsOnly": true
     },
     "map_ch1_abandoned_village": {
       "level": 0.3,
       "line": "#5ee7ff",
-      "accent": "#ffc46b"
+      "accent": "#ffc46b",
+      "accentsOnly": true
     },
     "map_ch1_sunset_beacon": {
       "level": 0.3,
       "line": "#5ee7ff",
-      "accent": "#ffc46b"
+      "accent": "#ffc46b",
+      "accentsOnly": true
     },
     "map_ch1_sunken_corridors": {
       "level": 0.3,
       "line": "#5ee7ff",
-      "accent": "#ffc46b"
+      "accent": "#ffc46b",
+      "accentsOnly": true
     },
     "map_ch1_bell_sanctum": {
       "level": 0.3,
       "line": "#5ee7ff",
-      "accent": "#ffc46b"
+      "accent": "#ffc46b",
+      "accentsOnly": true
     },
     "map_ch2_imperial_outskirts": {
       "level": 0.4,
       "line": "#7fb4ff",
-      "accent": "#ffb86b"
+      "accent": "#ffb86b",
+      "accentsOnly": true
     },
     "map_ch2_sunken_catacombs": {
       "level": 0.4,
       "line": "#7fb4ff",
-      "accent": "#ffb86b"
+      "accent": "#ffb86b",
+      "accentsOnly": true
     },
     "map_ch2_forum_plaza": {
       "level": 0.4,
       "line": "#7fb4ff",
-      "accent": "#ffb86b"
+      "accent": "#ffb86b",
+      "accentsOnly": true
     },
     "map_ch2_causality_archives": {
       "level": 0.4,
       "line": "#7fb4ff",
-      "accent": "#ffb86b"
+      "accent": "#ffb86b",
+      "accentsOnly": true
     },
     "map_ch2_verdict_sanctum": {
       "level": 0.4,
       "line": "#7fb4ff",
-      "accent": "#ffb86b"
+      "accent": "#ffb86b",
+      "accentsOnly": true
     },
     "map_ch3_sepulcher_gate": {
       "level": 0.5,
       "line": "#8affc8",
       "accent": "#ffd36b",
-      "void": "#040b0a"
+      "void": "#040b0a",
+      "accentsOnly": true
     },
     "map_ch3_silent_necropolis": {
       "level": 0.5,
       "line": "#8affc8",
       "accent": "#ffd36b",
-      "void": "#040b0a"
+      "void": "#040b0a",
+      "accentsOnly": true
     },
     "map_ch3_hall_of_echoes": {
       "level": 0.5,
       "line": "#8affc8",
       "accent": "#ffd36b",
-      "void": "#040b0a"
+      "void": "#040b0a",
+      "accentsOnly": true
     },
     "map_ch3_memory_vaults": {
       "level": 0.5,
       "line": "#8affc8",
       "accent": "#ffd36b",
-      "void": "#040b0a"
+      "void": "#040b0a",
+      "accentsOnly": true
     },
     "map_ch3_great_archive": {
       "level": 0.5,
       "line": "#8affc8",
       "accent": "#ffd36b",
-      "void": "#040b0a"
+      "void": "#040b0a",
+      "accentsOnly": true
     },
     "map_ch3_royal_mausoleum": {
       "level": 0.5,
       "line": "#8affc8",
       "accent": "#ffd36b",
-      "void": "#040b0a"
+      "void": "#040b0a",
+      "accentsOnly": true
     },
     "map_ch3_choir_sanctum": {
       "level": 0.5,
       "line": "#8affc8",
       "accent": "#ffd36b",
-      "void": "#040b0a"
+      "void": "#040b0a",
+      "accentsOnly": true
     },
     "map_ch3_forgotten_vault": {
       "level": 0.5,
       "line": "#8affc8",
       "accent": "#ffd36b",
-      "void": "#040b0a"
+      "void": "#040b0a",
+      "accentsOnly": true
     },
     "map_ch4_encampment_veridia": {
       "level": 0.6,
@@ -134,175 +157,204 @@
       "level": 0.6,
       "line": "#ff8a7a",
       "accent": "#ffd36b",
-      "void": "#0c0506"
+      "void": "#0c0506",
+      "accentsOnly": true
     },
     "map_ch4_encampment_solkaris": {
       "level": 0.6,
       "line": "#ff8a7a",
       "accent": "#ffd36b",
-      "void": "#0c0506"
+      "void": "#0c0506",
+      "accentsOnly": true
     },
     "map_ch4_arrow_storm_valley": {
       "level": 0.6,
       "line": "#ff8a7a",
       "accent": "#ffd36b",
-      "void": "#0c0506"
+      "void": "#0c0506",
+      "accentsOnly": true
     },
     "map_ch4_red_ridge_battlefield": {
       "level": 0.6,
       "line": "#ff8a7a",
       "accent": "#ffd36b",
-      "void": "#0c0506"
+      "void": "#0c0506",
+      "accentsOnly": true
     },
     "map_ch4_crimson_redoubt": {
       "level": 0.6,
       "line": "#ff8a7a",
       "accent": "#ffd36b",
-      "void": "#0c0506"
+      "void": "#0c0506",
+      "accentsOnly": true
     },
     "map_ch4_fallen_ramparts": {
       "level": 0.6,
       "line": "#ff8a7a",
       "accent": "#ffd36b",
-      "void": "#0c0506"
+      "void": "#0c0506",
+      "accentsOnly": true
     },
     "map_ch4_sentry_cellar": {
       "level": 0.6,
       "line": "#ff8a7a",
       "accent": "#ffd36b",
-      "void": "#0c0506"
+      "void": "#0c0506",
+      "accentsOnly": true
     },
     "map_ch4_ash_plains": {
       "level": 0.6,
       "line": "#ff8a7a",
       "accent": "#ffd36b",
-      "void": "#0c0506"
+      "void": "#0c0506",
+      "accentsOnly": true
     },
     "map_ch4_tomb_of_the_first_fallen": {
       "level": 0.6,
       "line": "#ff8a7a",
       "accent": "#ffd36b",
-      "void": "#0c0506"
+      "void": "#0c0506",
+      "accentsOnly": true
     },
     "map_ch4_monument_of_the_fallen": {
       "level": 0.6,
       "line": "#ff8a7a",
       "accent": "#ffd36b",
-      "void": "#0c0506"
+      "void": "#0c0506",
+      "accentsOnly": true
     },
     "map_ch4_sanctum_of_finality": {
       "level": 0.6,
       "line": "#ff8a7a",
       "accent": "#ffd36b",
-      "void": "#0c0506"
+      "void": "#0c0506",
+      "accentsOnly": true
     },
     "map_ch4_interval_sanctuary": {
       "level": 0.6,
       "line": "#ff8a7a",
       "accent": "#ffd36b",
-      "void": "#0c0506"
+      "void": "#0c0506",
+      "accentsOnly": true
     },
     "map_ch5_interval_shore": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_seed_garden": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_glass_greenhouse": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_alpha_town": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_alpha_harbor": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_alpha_clockshop": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_pruner_tower": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_beta_city": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_observatory_ruins": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_chronos_reactor": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_children_shelter": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_grey_prune": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_kuro_asks": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_unborn_throne": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_collision_shore": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_uprooted_garden": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch5_old_seeds": {
       "level": 0.7,
       "line": "#6bf0ff",
       "accent": "#ff9ad5",
-      "void": "#04080e"
+      "void": "#04080e",
+      "accentsOnly": true
     },
     "map_ch6_celestial_stairs": {
       "level": 1,

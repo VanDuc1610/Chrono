@@ -1,4 +1,5 @@
 import type { MapDatabase } from '../world/MapTypes';
+import type { LpcData } from '../world/WallCaps';
 import Phaser from 'phaser';
 import { PETER_FRAME } from '../systems/animation/PeterAnimationConfig';
 
@@ -282,6 +283,13 @@ export class PreloadScene extends Phaser.Scene {
       }
     });
     this.load.json('data_maps', 'assets/data/maps.json');
+    // T-88: LPC wall tops per tileset (scripts/lpc/reskin.mjs), drawn above walkable tiles.
+    this.load.once('filecomplete-json-data_lpc', (_key: string, _type: string, data: unknown) => {
+      for (const ts of Object.values((data as LpcData).tilesets))
+        if (ts.caps)
+          this.load.spritesheet(ts.caps.key, ts.caps.path, { frameWidth: 32, frameHeight: 32 });
+    });
+    this.load.json('data_lpc', 'assets/data/lpc.json');
 
     // 3. UI & FX
     // UI_SET_001 (approved Pipeline B art): 48x48 nine-slice frame (16 px corners),

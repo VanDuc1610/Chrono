@@ -24,6 +24,7 @@ import { PixelFxLayer } from '../systems/fx/PixelFxLayer';
 import { Atmosphere } from '../world/Atmosphere';
 import { NeonSkin } from '../world/NeonSkin';
 import { ActorShadows } from '../world/ActorShadows';
+import { WallCaps } from '../world/WallCaps';
 import { ScreenTransition } from '../ui/ScreenTransition';
 import { getStrings, Translate } from '../ui/Strings';
 import {
@@ -160,6 +161,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.npcSprites = [];
     this.neon = null;
     this.actors = null;
+    this.wallCaps = null;
     this.neonSwapKey = '';
     this.frozenVeil = null;
     this.isFrozen = false;
@@ -329,6 +331,14 @@ export class ExplorationScene extends Phaser.Scene {
       () => (this.pfx ??= new PixelFxLayer(this)),
     );
     this.actors = new ActorShadows(this);
+    this.wallCaps = new WallCaps(
+      this,
+      this.mapDef.tileset.name,
+      this.wallLayer,
+      (x, y) => this.wallLayer.getTileAt(x, y)?.collides ?? false,
+      () => this.capFreeTiles(),
+      ABOVE_DEPTH,
+    );
     this.neon = new NeonSkin(
       this,
       {
@@ -501,6 +511,7 @@ export class ExplorationScene extends Phaser.Scene {
     if (swapKey !== this.neonSwapKey) {
       this.neonSwapKey = swapKey;
       this.neon?.refresh();
+      this.wallCaps?.refresh();
     }
     if (this.playerReady && this.isInsideWall()) {
       const fallback = this.mapDef.fallbackSpawn
@@ -1140,6 +1151,28 @@ export class ExplorationScene extends Phaser.Scene {
   private neon: NeonSkin | null = null;
   /** Contact shadows and depth by the feet for everyone on the map (T-88). */
   private actors: ActorShadows | null = null;
+  /** LPC wall tops drawn above the actors (T-88). */
+  private wallCaps: WallCaps | null = null;
+
+  /** Tiles a wall top must never cover: people, points, dials, exits, triggers, puzzle tiles. */
+  private capFreeTiles(): TilePoint[] {
+    const d = this.mapDef;
+    const area = (r?: { x: number; y: number; w: number; h: number }): TilePoint[] => {
+      const out: TilePoint[] = [];
+      if (r)
+        for (let y = r.y; y < r.y + r.h; y++)
+          for (let x = r.x; x < r.x + r.w; x++) out.push({ x, y });
+      return out;
+    };
+    return [
+      ...Object.values(d.spawns),
+      ...(d.npcs ?? []).map((n) => n.tile),
+      ...(d.interactables ?? []).map((i) => i.tile),
+      ...(d.exits ?? []).flatMap((e) => area(e.area)),
+      ...(d.triggers ?? []).flatMap((t) => area(t.area)),
+      ...this.puzzleTiles(),
+    ];
+  }
 
   private actorSprites(): Phaser.GameObjects.Sprite[] {
     const out: Phaser.GameObjects.Sprite[] = [this.player.sprite, ...this.npcSprites];

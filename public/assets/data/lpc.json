@@ -1,0 +1,76 @@
+{
+  "tilesets": {
+    "coastal_tileset": {
+      "caps": {
+        "key": "coastal_tileset_caps",
+        "path": "assets/lpc/coastal_tileset_caps.png",
+        "frames": {
+          "18": 0,
+          "19": 1,
+          "21": 2,
+          "22": 3,
+          "23": 4
+        }
+      }
+    },
+    "dungeon_tileset": {
+      "caps": {
+        "key": "dungeon_tileset_caps",
+        "path": "assets/lpc/dungeon_tileset_caps.png",
+        "frames": {
+          "4": 0,
+          "5": 1
+        }
+      }
+    },
+    "sunken_tileset": {
+      "caps": {
+        "key": "sunken_tileset_caps",
+        "path": "assets/lpc/sunken_tileset_caps.png",
+        "frames": {
+          "4": 0,
+          "5": 1
+        }
+      }
+    },
+    "interval_tileset": {
+      "caps": {
+        "key": "interval_tileset_caps",
+        "path": "assets/lpc/interval_tileset_caps.png",
+        "frames": {
+          "4": 0,
+          "5": 1
+        }
+      }
+    },
+    "steel_tileset": {
+      "caps": {
+        "key": "steel_tileset_caps",
+        "path": "assets/lpc/steel_tileset_caps.png",
+        "frames": {
+          "4": 0,
+          "5": 1
+        }
+      }
+    },
+    "wilds_tileset": {
+      "caps": {
+        "key": "wilds_tileset_caps",
+        "path": "assets/lpc/wilds_tileset_caps.png",
+        "frames": {
+          "19": 0
+        }
+      }
+    },
+    "warfield_tileset": {
+      "caps": {
+        "key": "warfield_tileset_caps",
+        "path": "assets/lpc/warfield_tileset_caps.png",
+        "frames": {
+          "18": 0,
+          "50": 1
+        }
+      }
+    }
+  }
+}

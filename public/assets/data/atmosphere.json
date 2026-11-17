@@ -23,6 +23,14 @@
         "count": 30,
         "drift": 9,
         "up": false
+      },
+      "grade": {
+        "tint": "#f2d8c0",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#ffb070",
+          "alpha": 0.04
+        }
       }
     },
     "map_coastal_town": {
@@ -55,6 +63,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#f2d8c0",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#ffb070",
+          "alpha": 0.04
+        }
       }
     },
     "map_shattered_antechamber": {
@@ -80,6 +96,14 @@
         "count": 30,
         "drift": 9,
         "up": false
+      },
+      "grade": {
+        "tint": "#f2d8c0",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#ffb070",
+          "alpha": 0.04
+        }
       }
     },
     "map_forgotten_forest": {
@@ -120,6 +144,14 @@
         "fall": {
           "kind": "leaf",
           "count": 18
+        }
+      },
+      "grade": {
+        "tint": "#f2d8c0",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#ffb070",
+          "alpha": 0.04
         }
       }
     },
@@ -166,6 +198,14 @@
             "count": 2
           }
         ]
+      },
+      "grade": {
+        "tint": "#f2d8c0",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#ffb070",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch1_shore_gate": {
@@ -199,6 +239,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#ffd2a4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff9a5a",
+          "alpha": 0.05
+        }
       }
     },
     "map_ch1_abandoned_village": {
@@ -232,6 +280,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#ffd2a4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff9a5a",
+          "alpha": 0.05
+        }
       }
     },
     "map_ch1_sunset_beacon": {
@@ -257,6 +313,14 @@
         "count": 30,
         "drift": 9,
         "up": false
+      },
+      "grade": {
+        "tint": "#ffd2a4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff9a5a",
+          "alpha": 0.05
+        }
       }
     },
     "map_ch1_sunken_corridors": {
@@ -291,6 +355,14 @@
           }
         ],
         "drips": true
+      },
+      "grade": {
+        "tint": "#ffd2a4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff9a5a",
+          "alpha": 0.05
+        }
       }
     },
     "map_ch1_bell_sanctum": {
@@ -360,6 +432,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#ffd2a4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff9a5a",
+          "alpha": 0.05
+        }
       }
     },
     "map_ch2_imperial_outskirts": {
@@ -393,6 +473,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#f4dca8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#f0c860",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch2_sunken_catacombs": {
@@ -427,6 +515,14 @@
           }
         ],
         "drips": true
+      },
+      "grade": {
+        "tint": "#f4dca8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#f0c860",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch2_forum_plaza": {
@@ -460,6 +556,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#f4dca8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#f0c860",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch2_causality_archives": {
@@ -485,6 +589,14 @@
         "count": 30,
         "drift": 9,
         "up": true
+      },
+      "grade": {
+        "tint": "#f4dca8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#f0c860",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch2_verdict_sanctum": {
@@ -523,7 +635,15 @@
           "glow": 0.35,
           "flicker": true
         }
-      ]
+      ],
+      "grade": {
+        "tint": "#f4dca8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#f0c860",
+          "alpha": 0.04
+        }
+      }
     },
     "map_ch3_sepulcher_gate": {
       "shade": {
@@ -560,6 +680,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#c8ccf0",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#b8b8ff",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch3_silent_necropolis": {
@@ -593,6 +721,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#c8ccf0",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#b8b8ff",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch3_hall_of_echoes": {
@@ -626,6 +762,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#c8ccf0",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#b8b8ff",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch3_memory_vaults": {
@@ -673,7 +817,15 @@
           "glow": 0.35,
           "flicker": true
         }
-      ]
+      ],
+      "grade": {
+        "tint": "#c8ccf0",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#b8b8ff",
+          "alpha": 0.04
+        }
+      }
     },
     "map_ch3_great_archive": {
       "shade": {
@@ -698,6 +850,14 @@
         "count": 30,
         "drift": 9,
         "up": true
+      },
+      "grade": {
+        "tint": "#c8ccf0",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#b8b8ff",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch3_royal_mausoleum": {
@@ -731,6 +891,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#c8ccf0",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#b8b8ff",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch3_choir_sanctum": {
@@ -769,7 +937,15 @@
           "glow": 0.35,
           "flicker": true
         }
-      ]
+      ],
+      "grade": {
+        "tint": "#c8ccf0",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#b8b8ff",
+          "alpha": 0.04
+        }
+      }
     },
     "map_ch3_forgotten_vault": {
       "shade": {
@@ -807,6 +983,14 @@
           }
         ],
         "drips": true
+      },
+      "grade": {
+        "tint": "#c8ccf0",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#b8b8ff",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch4_encampment_veridia": {
@@ -873,6 +1057,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "grade": {
+        "tint": "#ffd6b4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff8a5a",
+          "alpha": 0.05
+        }
       }
     },
     "map_ch4_encampment_solkaris": {
@@ -906,6 +1098,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#ffd6b4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff8a5a",
+          "alpha": 0.05
+        }
       }
     },
     "map_ch4_arrow_storm_valley": {
@@ -939,6 +1139,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#ffd6b4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff8a5a",
+          "alpha": 0.05
+        }
       }
     },
     "map_ch4_red_ridge_battlefield": {
@@ -964,6 +1172,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "grade": {
+        "tint": "#ffd6b4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff8a5a",
+          "alpha": 0.05
+        }
       }
     },
     "map_ch4_crimson_redoubt": {
@@ -1002,7 +1218,15 @@
           "glow": 0.35,
           "flicker": true
         }
-      ]
+      ],
+      "grade": {
+        "tint": "#ffd6b4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff8a5a",
+          "alpha": 0.05
+        }
+      }
     },
     "map_ch4_fallen_ramparts": {
       "shade": {
@@ -1035,6 +1259,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#ffd6b4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff8a5a",
+          "alpha": 0.05
+        }
       }
     },
     "map_ch4_sentry_cellar": {
@@ -1069,6 +1301,14 @@
           }
         ],
         "drips": true
+      },
+      "grade": {
+        "tint": "#ffd6b4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff8a5a",
+          "alpha": 0.05
+        }
       }
     },
     "map_ch4_ash_plains": {
@@ -1094,6 +1334,14 @@
         "count": 22,
         "drift": 12,
         "up": true
+      },
+      "grade": {
+        "tint": "#ffd6b4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff8a5a",
+          "alpha": 0.05
+        }
       }
     },
     "map_ch4_tomb_of_the_first_fallen": {
@@ -1131,6 +1379,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#ffd6b4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff8a5a",
+          "alpha": 0.05
+        }
       }
     },
     "map_ch4_monument_of_the_fallen": {
@@ -1156,6 +1412,14 @@
         "count": 30,
         "drift": 9,
         "up": true
+      },
+      "grade": {
+        "tint": "#ffd6b4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff8a5a",
+          "alpha": 0.05
+        }
       }
     },
     "map_ch4_sanctum_of_finality": {
@@ -1194,7 +1458,15 @@
           "glow": 0.35,
           "flicker": true
         }
-      ]
+      ],
+      "grade": {
+        "tint": "#ffd6b4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff8a5a",
+          "alpha": 0.05
+        }
+      }
     },
     "map_ch4_interval_sanctuary": {
       "shade": {
@@ -1219,6 +1491,14 @@
         "count": 30,
         "drift": 9,
         "up": true
+      },
+      "grade": {
+        "tint": "#ffd6b4",
+        "alpha": 0.4,
+        "lift": {
+          "color": "#ff8a5a",
+          "alpha": 0.05
+        }
       }
     },
     "map_ch5_interval_shore": {
@@ -1252,6 +1532,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch5_seed_garden": {
@@ -1288,6 +1576,14 @@
         "fall": {
           "kind": "petal",
           "count": 16
+        }
+      },
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
         }
       }
     },
@@ -1326,6 +1622,14 @@
           "kind": "petal",
           "count": 16
         }
+      },
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch5_alpha_town": {
@@ -1359,6 +1663,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch5_alpha_harbor": {
@@ -1392,6 +1704,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch5_alpha_clockshop": {
@@ -1417,6 +1737,14 @@
         "count": 30,
         "drift": 9,
         "up": true
+      },
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch5_pruner_tower": {
@@ -1455,7 +1783,15 @@
           "glow": 0.35,
           "flicker": true
         }
-      ]
+      ],
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
+        }
+      }
     },
     "map_ch5_beta_city": {
       "shade": {
@@ -1488,6 +1824,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch5_observatory_ruins": {
@@ -1513,6 +1857,14 @@
         "count": 30,
         "drift": 9,
         "up": true
+      },
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch5_chronos_reactor": {
@@ -1538,6 +1890,14 @@
         "count": 30,
         "drift": 9,
         "up": true
+      },
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch5_children_shelter": {
@@ -1563,6 +1923,14 @@
         "count": 30,
         "drift": 9,
         "up": true
+      },
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch5_grey_prune": {
@@ -1588,6 +1956,14 @@
         "count": 30,
         "drift": 9,
         "up": true
+      },
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch5_kuro_asks": {
@@ -1626,7 +2002,15 @@
           "glow": 0.35,
           "flicker": true
         }
-      ]
+      ],
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
+        }
+      }
     },
     "map_ch5_unborn_throne": {
       "shade": {
@@ -1664,7 +2048,15 @@
           "glow": 0.35,
           "flicker": true
         }
-      ]
+      ],
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
+        }
+      }
     },
     "map_ch5_collision_shore": {
       "shade": {
@@ -1697,6 +2089,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch5_uprooted_garden": {
@@ -1734,6 +2134,14 @@
           "kind": "petal",
           "count": 16
         }
+      },
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
+        }
       }
     },
     "map_ch5_old_seeds": {
@@ -1764,6 +2172,14 @@
         "fall": {
           "kind": "petal",
           "count": 16
+        }
+      },
+      "grade": {
+        "tint": "#d4f0d8",
+        "alpha": 0.35,
+        "lift": {
+          "color": "#9fe8a0",
+          "alpha": 0.04
         }
       }
     },

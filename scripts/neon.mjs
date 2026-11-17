@@ -34,11 +34,13 @@ const LPC_MAPS = new Set(['map_ch4_encampment_veridia']);
 
 const out = {};
 for (const [id, m] of Object.entries(maps)) {
-  if (KEEP.has(id) && old[id]) {
+  // T-88: chapters 0-5 are drawn in LPC art: the skin adds only its accents there.
+  const lpc = LPC_MAPS.has(id) || (m.chapter ?? 0) <= 5;
+  if (KEEP.has(id) && old[id] && !lpc) {
     out[id] = old[id];
     continue;
   }
-  out[id] = { ...THEMES[m.chapter ?? 0], ...(LPC_MAPS.has(id) ? { accentsOnly: true } : {}) };
+  out[id] = { ...THEMES[m.chapter ?? 0], ...(lpc ? { accentsOnly: true } : {}) };
 }
 fs.writeFileSync(OUT, JSON.stringify({ maps: out }, null, 2) + '\n');
 console.log(`neon.json: ${Object.keys(out).length} maps`);

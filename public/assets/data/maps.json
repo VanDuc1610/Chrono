@@ -10,8 +10,8 @@
       },
       "tileset": {
         "name": "coastal_tileset",
-        "key": "coastal_tileset",
-        "path": "assets/tilesets/coastal_tileset.png"
+        "key": "coastal_tileset_lpc",
+        "path": "assets/lpc/coastal_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -177,8 +177,8 @@
       },
       "tileset": {
         "name": "coastal_tileset",
-        "key": "coastal_tileset",
-        "path": "assets/tilesets/coastal_tileset.png"
+        "key": "coastal_tileset_lpc",
+        "path": "assets/lpc/coastal_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -487,8 +487,8 @@
       },
       "tileset": {
         "name": "dungeon_tileset",
-        "key": "dungeon_tileset",
-        "path": "assets/tilesets/dungeon_tileset.png"
+        "key": "dungeon_tileset_lpc",
+        "path": "assets/lpc/dungeon_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -697,8 +697,8 @@
       },
       "tileset": {
         "name": "wilds_tileset",
-        "key": "wilds_tileset",
-        "path": "assets/tilesets/wilds_tileset.png"
+        "key": "wilds_tileset_lpc",
+        "path": "assets/lpc/wilds_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -846,8 +846,8 @@
       },
       "tileset": {
         "name": "wilds_tileset",
-        "key": "wilds_tileset",
-        "path": "assets/tilesets/wilds_tileset.png"
+        "key": "wilds_tileset_lpc",
+        "path": "assets/lpc/wilds_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -953,8 +953,8 @@
       },
       "tileset": {
         "name": "wilds_tileset",
-        "key": "wilds_tileset",
-        "path": "assets/tilesets/wilds_tileset.png"
+        "key": "wilds_tileset_lpc",
+        "path": "assets/lpc/wilds_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -1117,8 +1117,8 @@
       },
       "tileset": {
         "name": "coastal_tileset",
-        "key": "coastal_tileset",
-        "path": "assets/tilesets/coastal_tileset.png"
+        "key": "coastal_tileset_lpc",
+        "path": "assets/lpc/coastal_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -1432,8 +1432,8 @@
       },
       "tileset": {
         "name": "wilds_tileset",
-        "key": "wilds_tileset",
-        "path": "assets/tilesets/wilds_tileset.png"
+        "key": "wilds_tileset_lpc",
+        "path": "assets/lpc/wilds_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -1625,8 +1625,8 @@
       },
       "tileset": {
         "name": "sunken_tileset",
-        "key": "sunken_tileset",
-        "path": "assets/tilesets/sunken_tileset.png"
+        "key": "sunken_tileset_lpc",
+        "path": "assets/lpc/sunken_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -2055,8 +2055,8 @@
       },
       "tileset": {
         "name": "sunken_tileset",
-        "key": "sunken_tileset",
-        "path": "assets/tilesets/sunken_tileset.png"
+        "key": "sunken_tileset_lpc",
+        "path": "assets/lpc/sunken_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -2176,8 +2176,8 @@
       },
       "tileset": {
         "name": "wilds_tileset",
-        "key": "wilds_tileset",
-        "path": "assets/tilesets/wilds_tileset.png"
+        "key": "wilds_tileset_lpc",
+        "path": "assets/lpc/wilds_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -2310,8 +2310,8 @@
       },
       "tileset": {
         "name": "dungeon_tileset",
-        "key": "dungeon_tileset",
-        "path": "assets/tilesets/dungeon_tileset.png"
+        "key": "dungeon_tileset_lpc",
+        "path": "assets/lpc/dungeon_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -2632,8 +2632,8 @@
       },
       "tileset": {
         "name": "dungeon_tileset",
-        "key": "dungeon_tileset",
-        "path": "assets/tilesets/dungeon_tileset.png"
+        "key": "dungeon_tileset_lpc",
+        "path": "assets/lpc/dungeon_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -2852,8 +2852,8 @@
       },
       "tileset": {
         "name": "dungeon_tileset",
-        "key": "dungeon_tileset",
-        "path": "assets/tilesets/dungeon_tileset.png"
+        "key": "dungeon_tileset_lpc",
+        "path": "assets/lpc/dungeon_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -3070,8 +3070,8 @@
       },
       "tileset": {
         "name": "dungeon_tileset",
-        "key": "dungeon_tileset",
-        "path": "assets/tilesets/dungeon_tileset.png"
+        "key": "dungeon_tileset_lpc",
+        "path": "assets/lpc/dungeon_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -3179,8 +3179,8 @@
       },
       "tileset": {
         "name": "wilds_tileset",
-        "key": "wilds_tileset",
-        "path": "assets/tilesets/wilds_tileset.png"
+        "key": "wilds_tileset_lpc",
+        "path": "assets/lpc/wilds_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -3332,8 +3332,8 @@
       },
       "tileset": {
         "name": "dungeon_tileset",
-        "key": "dungeon_tileset",
-        "path": "assets/tilesets/dungeon_tileset.png"
+        "key": "dungeon_tileset_lpc",
+        "path": "assets/lpc/dungeon_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -3689,8 +3689,8 @@
       },
       "tileset": {
         "name": "dungeon_tileset",
-        "key": "dungeon_tileset",
-        "path": "assets/tilesets/dungeon_tileset.png"
+        "key": "dungeon_tileset_lpc",
+        "path": "assets/lpc/dungeon_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -3906,8 +3906,8 @@
       },
       "tileset": {
         "name": "sunken_tileset",
-        "key": "sunken_tileset",
-        "path": "assets/tilesets/sunken_tileset.png"
+        "key": "sunken_tileset_lpc",
+        "path": "assets/lpc/sunken_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -4243,8 +4243,8 @@
       },
       "tileset": {
         "name": "dungeon_tileset",
-        "key": "dungeon_tileset",
-        "path": "assets/tilesets/dungeon_tileset.png"
+        "key": "dungeon_tileset_lpc",
+        "path": "assets/lpc/dungeon_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -4503,8 +4503,8 @@
       },
       "tileset": {
         "name": "dungeon_tileset",
-        "key": "dungeon_tileset",
-        "path": "assets/tilesets/dungeon_tileset.png"
+        "key": "dungeon_tileset_lpc",
+        "path": "assets/lpc/dungeon_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -4741,8 +4741,8 @@
       },
       "tileset": {
         "name": "sunken_tileset",
-        "key": "sunken_tileset",
-        "path": "assets/tilesets/sunken_tileset.png"
+        "key": "sunken_tileset_lpc",
+        "path": "assets/lpc/sunken_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -4850,8 +4850,8 @@
       },
       "tileset": {
         "name": "dungeon_tileset",
-        "key": "dungeon_tileset",
-        "path": "assets/tilesets/dungeon_tileset.png"
+        "key": "dungeon_tileset_lpc",
+        "path": "assets/lpc/dungeon_tileset_lpc.png"
       },
       "layers": {
         "ground": "Ground",
@@ -5200,8 +5200,8 @@
       },
       "tileset": {
         "name": "warfield_tileset",
-        "key": "warfield_tileset",
-        "path": "assets/tilesets/warfield_tileset.png"
+        "key": "warfield_tileset_lpc",
+        "path": "assets/lpc/warfield_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 17,
@@ -5438,8 +5438,8 @@
       },
       "tileset": {
         "name": "warfield_tileset",
-        "key": "warfield_tileset",
-        "path": "assets/tilesets/warfield_tileset.png"
+        "key": "warfield_tileset_lpc",
+        "path": "assets/lpc/warfield_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 17,
@@ -5587,8 +5587,8 @@
       },
       "tileset": {
         "name": "warfield_tileset",
-        "key": "warfield_tileset",
-        "path": "assets/tilesets/warfield_tileset.png"
+        "key": "warfield_tileset_lpc",
+        "path": "assets/lpc/warfield_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 17,
@@ -5864,8 +5864,8 @@
       },
       "tileset": {
         "name": "warfield_tileset",
-        "key": "warfield_tileset",
-        "path": "assets/tilesets/warfield_tileset.png"
+        "key": "warfield_tileset_lpc",
+        "path": "assets/lpc/warfield_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 17,
@@ -6263,8 +6263,8 @@
       },
       "tileset": {
         "name": "warfield_tileset",
-        "key": "warfield_tileset",
-        "path": "assets/tilesets/warfield_tileset.png"
+        "key": "warfield_tileset_lpc",
+        "path": "assets/lpc/warfield_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 17,
@@ -6390,8 +6390,8 @@
       },
       "tileset": {
         "name": "warfield_tileset",
-        "key": "warfield_tileset",
-        "path": "assets/tilesets/warfield_tileset.png"
+        "key": "warfield_tileset_lpc",
+        "path": "assets/lpc/warfield_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 17,
@@ -6631,8 +6631,8 @@
       },
       "tileset": {
         "name": "dungeon_tileset",
-        "key": "dungeon_tileset",
-        "path": "assets/tilesets/dungeon_tileset.png"
+        "key": "dungeon_tileset_lpc",
+        "path": "assets/lpc/dungeon_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -6755,8 +6755,8 @@
       },
       "tileset": {
         "name": "warfield_tileset",
-        "key": "warfield_tileset",
-        "path": "assets/tilesets/warfield_tileset.png"
+        "key": "warfield_tileset_lpc",
+        "path": "assets/lpc/warfield_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 17,
@@ -6953,8 +6953,8 @@
       },
       "tileset": {
         "name": "dungeon_tileset",
-        "key": "dungeon_tileset",
-        "path": "assets/tilesets/dungeon_tileset.png"
+        "key": "dungeon_tileset_lpc",
+        "path": "assets/lpc/dungeon_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -7216,8 +7216,8 @@
       },
       "tileset": {
         "name": "warfield_tileset",
-        "key": "warfield_tileset",
-        "path": "assets/tilesets/warfield_tileset.png"
+        "key": "warfield_tileset_lpc",
+        "path": "assets/lpc/warfield_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 17,
@@ -7553,8 +7553,8 @@
       },
       "tileset": {
         "name": "warfield_tileset",
-        "key": "warfield_tileset",
-        "path": "assets/tilesets/warfield_tileset.png"
+        "key": "warfield_tileset_lpc",
+        "path": "assets/lpc/warfield_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 17,
@@ -7663,8 +7663,8 @@
       },
       "tileset": {
         "name": "dungeon_tileset",
-        "key": "dungeon_tileset",
-        "path": "assets/tilesets/dungeon_tileset.png"
+        "key": "dungeon_tileset_lpc",
+        "path": "assets/lpc/dungeon_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -7733,8 +7733,8 @@
       },
       "tileset": {
         "name": "interval_tileset",
-        "key": "interval_tileset",
-        "path": "assets/tilesets/interval_tileset.png"
+        "key": "interval_tileset_lpc",
+        "path": "assets/lpc/interval_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -7865,8 +7865,8 @@
       },
       "tileset": {
         "name": "interval_tileset",
-        "key": "interval_tileset",
-        "path": "assets/tilesets/interval_tileset.png"
+        "key": "interval_tileset_lpc",
+        "path": "assets/lpc/interval_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -8329,8 +8329,8 @@
       },
       "tileset": {
         "name": "interval_tileset",
-        "key": "interval_tileset",
-        "path": "assets/tilesets/interval_tileset.png"
+        "key": "interval_tileset_lpc",
+        "path": "assets/lpc/interval_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -8712,8 +8712,8 @@
       },
       "tileset": {
         "name": "coastal_tileset",
-        "key": "coastal_tileset",
-        "path": "assets/tilesets/coastal_tileset.png"
+        "key": "coastal_tileset_lpc",
+        "path": "assets/lpc/coastal_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 17,
@@ -8941,8 +8941,8 @@
       },
       "tileset": {
         "name": "coastal_tileset",
-        "key": "coastal_tileset",
-        "path": "assets/tilesets/coastal_tileset.png"
+        "key": "coastal_tileset_lpc",
+        "path": "assets/lpc/coastal_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 17,
@@ -9221,8 +9221,8 @@
       },
       "tileset": {
         "name": "steel_tileset",
-        "key": "steel_tileset",
-        "path": "assets/tilesets/steel_tileset.png"
+        "key": "steel_tileset_lpc",
+        "path": "assets/lpc/steel_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -9559,8 +9559,8 @@
       },
       "tileset": {
         "name": "interval_tileset",
-        "key": "interval_tileset",
-        "path": "assets/tilesets/interval_tileset.png"
+        "key": "interval_tileset_lpc",
+        "path": "assets/lpc/interval_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -9857,8 +9857,8 @@
       },
       "tileset": {
         "name": "steel_tileset",
-        "key": "steel_tileset",
-        "path": "assets/tilesets/steel_tileset.png"
+        "key": "steel_tileset_lpc",
+        "path": "assets/lpc/steel_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -10289,8 +10289,8 @@
       },
       "tileset": {
         "name": "steel_tileset",
-        "key": "steel_tileset",
-        "path": "assets/tilesets/steel_tileset.png"
+        "key": "steel_tileset_lpc",
+        "path": "assets/lpc/steel_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -10497,8 +10497,8 @@
       },
       "tileset": {
         "name": "steel_tileset",
-        "key": "steel_tileset",
-        "path": "assets/tilesets/steel_tileset.png"
+        "key": "steel_tileset_lpc",
+        "path": "assets/lpc/steel_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -10879,8 +10879,8 @@
       },
       "tileset": {
         "name": "steel_tileset",
-        "key": "steel_tileset",
-        "path": "assets/tilesets/steel_tileset.png"
+        "key": "steel_tileset_lpc",
+        "path": "assets/lpc/steel_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -11272,8 +11272,8 @@
       },
       "tileset": {
         "name": "interval_tileset",
-        "key": "interval_tileset",
-        "path": "assets/tilesets/interval_tileset.png"
+        "key": "interval_tileset_lpc",
+        "path": "assets/lpc/interval_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -11635,8 +11635,8 @@
       },
       "tileset": {
         "name": "interval_tileset",
-        "key": "interval_tileset",
-        "path": "assets/tilesets/interval_tileset.png"
+        "key": "interval_tileset_lpc",
+        "path": "assets/lpc/interval_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -11974,8 +11974,8 @@
       },
       "tileset": {
         "name": "interval_tileset",
-        "key": "interval_tileset",
-        "path": "assets/tilesets/interval_tileset.png"
+        "key": "interval_tileset_lpc",
+        "path": "assets/lpc/interval_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -12192,8 +12192,8 @@
       },
       "tileset": {
         "name": "interval_tileset",
-        "key": "interval_tileset",
-        "path": "assets/tilesets/interval_tileset.png"
+        "key": "interval_tileset_lpc",
+        "path": "assets/lpc/interval_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -12434,8 +12434,8 @@
       },
       "tileset": {
         "name": "interval_tileset",
-        "key": "interval_tileset",
-        "path": "assets/tilesets/interval_tileset.png"
+        "key": "interval_tileset_lpc",
+        "path": "assets/lpc/interval_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -12748,8 +12748,8 @@
       },
       "tileset": {
         "name": "interval_tileset",
-        "key": "interval_tileset",
-        "path": "assets/tilesets/interval_tileset.png"
+        "key": "interval_tileset_lpc",
+        "path": "assets/lpc/interval_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
