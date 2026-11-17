@@ -46,6 +46,7 @@ import type {
 } from '../world/MapTypes';
 import type { CombatSceneData } from './CombatScene';
 import { FINAL_BOSSES, music } from './sceneMusic';
+import { keyCode } from '../ui/keys';
 
 /** Map layer of tent tops, palisades and tree crowns: above the actors, below effects. */
 const ABOVE_DEPTH = 30;
@@ -1038,17 +1039,16 @@ export class ExplorationScene extends Phaser.Scene {
       } else if (this.dialogueBox.isOpen()) this.closeDialogue();
       else if (!this.isTransitioning) this.openPause();
     });
-    on(K.I, () => this.toggleInventory());
-    on(K.B, () => this.toggleInventory());
+    on(keyCode('satchel'), () => this.toggleInventory());
     on(K.LEFT, () => this.satchel.isOpen && this.satchel.left());
     on(K.RIGHT, () => this.satchel.isOpen && this.satchel.right());
     on(K.TAB, () => this.satchel.isOpen && this.satchel.right());
     on(K.UP, () => this.satchel.isOpen && this.satchel.navigate(-1));
     on(K.DOWN, () => this.satchel.isOpen && this.satchel.navigate(1));
-    on(K.E, () => this.satchel.isOpen && this.satchel.useSelected());
+    on(keyCode('interact'), () => this.satchel.isOpen && this.satchel.useSelected());
     on(K.SPACE, () => this.satchel.isOpen && this.satchel.useSelected());
-    on(K.K, () => void this.quickSave());
-    on(K.L, () => {
+    on(keyCode('quickSave'), () => void this.quickSave());
+    on(keyCode('lighting'), () => {
       if (this.dialogueBox.isOpen() || this.satchel.isOpen) return;
       if (this.atmosphere?.toggle())
         this.showNotification(
@@ -1056,7 +1056,7 @@ export class ExplorationScene extends Phaser.Scene {
           this.t(this.atmosphere.active ? 'atmosphere.on' : 'atmosphere.off'),
         );
     });
-    on(K.N, () => {
+    on(keyCode('neon'), () => {
       if (this.dialogueBox.isOpen() || this.satchel.isOpen) return;
       if (this.neon?.toggle())
         this.showNotification(
@@ -1064,17 +1064,17 @@ export class ExplorationScene extends Phaser.Scene {
           this.t(this.neon.active ? 'neon.on' : 'neon.off'),
         );
     });
-    on(K.H, () => {
+    on(keyCode('controls'), () => {
       if (this.dialogueBox.isOpen() || this.satchel.isOpen) return;
       this.statusHud.toggleControls();
       this.soundSystem.playCursorBlip();
     });
-    on(K.J, () => {
+    on(keyCode('questLog'), () => {
       if (this.dialogueBox.isOpen() || this.satchel.isOpen) return;
       this.questTracker.toggle();
       this.soundSystem.playCursorBlip();
     });
-    on(K.Q, () => {
+    on(keyCode('questCycle'), () => {
       if (this.questTracker.cycle()) this.soundSystem.playCursorBlip();
     });
     // 1-4: dialogue choice, else (bag open) put the selected item on that key, else use it.

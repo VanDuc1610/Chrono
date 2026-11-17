@@ -31,8 +31,7 @@ every player), then sound, settings and saves, then combat and code health, then
 1. T-91 UI overhaul (Claude) · 2. T-92 build, release, smoke tests (Codex) · 3. T-93 audio plan
    (Antigravity) · 4. T-94 settings, pause and save-slot design (Antigravity) · 5. T-95 docs refresh
    (Codex) · later: audio integration, settings implementation, one combat system (design first),
-   ActionCombat/BossFight split, gamepad and touch, LPC dressing per map, chapters 6-9 structure,
-   key rebinding (T-94 §1.1).
+   ActionCombat/BossFight split, gamepad and touch, LPC dressing per map, chapters 6-9 structure.
 
 ### T-91 · UI overhaul: pixel font with Vietnamese, compact HUD, controls bar — **Claude** · `DONE`
 
@@ -101,7 +100,7 @@ _Locks:_ `src/world/ActionCombat.ts`, `src/world/action/*` (new), `src/systems/a
 
 Built from Antigravity's T-94 spec (open questions answered with the defaults: "Tiếp tục" loads the newest
 slot and "Tải trò chơi" opens the picker; no autosave slot; leaving a boss fight only warns). Key rebinding
-is left for a later task.
+followed (T-94 §1.1): ten actions, system keys refused, a key in use swaps, R restores the defaults.
 
 _Locks (released):_ `src/state/Settings.ts`, `src/ui/OptionsPanel.ts`, `src/ui/SaveSlotsPanel.ts`,
 `src/ui/Comfort.ts`, `src/ui/controlList.ts`, `src/scenes/PauseScene.ts`, `src/scenes/MainMenuScene.ts`,

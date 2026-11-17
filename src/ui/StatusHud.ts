@@ -3,6 +3,7 @@ import { SoundSystem } from '../systems/audio/SoundSystem';
 import type { GameSession } from '../state/GameSession';
 import { createPanel } from './Panel';
 import type { Translate } from './Strings';
+import { controlList } from './controlList';
 
 // T-91 compact HUD: a small panel, slim bars with their numbers, a hairline of EXP.
 const PANEL = { x: 8, y: 8, w: 186, h: 48 };
@@ -121,9 +122,7 @@ export class StatusHud {
     const anyQuick = s.quickSlots.some((id) => id !== null);
     this.quick.setText(slots.join('  ')).setVisible(anyQuick);
     // The one-line key list becomes two columns.
-    const keys = this.t(s.getFlag('has_broken_blade') ? 'hud.controlsArmed' : 'hud.controls')
-      .split('|')
-      .map((k) => k.trim());
+    const keys = controlList(this.t, s.getFlag('has_broken_blade'));
     keys.push(this.t('hud.controlsClose'));
     const half = Math.ceil(keys.length / 2);
     const colW = Math.max(...keys.slice(0, half).map((k) => k.length)) + 4;

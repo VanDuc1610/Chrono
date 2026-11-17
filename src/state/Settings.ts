@@ -4,6 +4,123 @@
  */
 export type TextSpeed = 'instant' | 'fast' | 'normal';
 
+/** Rebindable actions (docs/design/SETTINGS_UX.md §1.1); the left click attacks, the right click casts. */
+export const KEY_ACTIONS = [
+  'interact',
+  'ranged',
+  'dodge',
+  'satchel',
+  'questLog',
+  'questCycle',
+  'quickSave',
+  'lighting',
+  'neon',
+  'controls',
+] as const;
+export type KeyAction = (typeof KEY_ACTIONS)[number];
+export type KeyBindings = Record<KeyAction, string>;
+
+export const DEFAULT_KEYS: Readonly<KeyBindings> = {
+  interact: 'E',
+  ranged: 'F',
+  dodge: 'SHIFT',
+  satchel: 'I',
+  questLog: 'J',
+  questCycle: 'Q',
+  quickSave: 'K',
+  lighting: 'L',
+  neon: 'N',
+  controls: 'H',
+};
+
+/** Keys that belong to the system (movement, pause, confirm, choices): never rebound. */
+export const FIXED_KEYS = new Set([
+  'W',
+  'A',
+  'S',
+  'D',
+  'UP',
+  'DOWN',
+  'LEFT',
+  'RIGHT',
+  'ESC',
+  'SPACE',
+  'ONE',
+  'TWO',
+  'THREE',
+  'FOUR',
+]);
+/** Keys a player may choose (Phaser KeyCodes names). */
+const CHOOSABLE = new Set([
+  ...'BCEFGHIJKLMNOPQRTUVXYZ'.split(''),
+  'FIVE',
+  'SIX',
+  'SEVEN',
+  'EIGHT',
+  'NINE',
+  'ZERO',
+  'SHIFT',
+  'CTRL',
+  'ALT',
+  'TAB',
+  'ENTER',
+]);
+
+/** Phaser key name for a DOM keyboard event ('KeyF' -> 'F', 'ShiftLeft' -> 'SHIFT'), or null. */
+export function keyNameOf(e: { code?: string; key?: string }): string | null {
+  const code = e.code ?? '';
+  const digits = ['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX', 'SEVEN', 'EIGHT', 'NINE'];
+  if (/^Key[A-Z]$/.test(code)) return code.slice(3);
+  if (/^Digit[0-9]$/.test(code)) return digits[Number(code.slice(5))];
+  const named: Record<string, string> = {
+    ShiftLeft: 'SHIFT',
+    ShiftRight: 'SHIFT',
+    ControlLeft: 'CTRL',
+    ControlRight: 'CTRL',
+    AltLeft: 'ALT',
+    AltRight: 'ALT',
+    Tab: 'TAB',
+    Enter: 'ENTER',
+    Space: 'SPACE',
+    Escape: 'ESC',
+    ArrowUp: 'UP',
+    ArrowDown: 'DOWN',
+    ArrowLeft: 'LEFT',
+    ArrowRight: 'RIGHT',
+  };
+  return named[code] ?? null;
+}
+
+/** Binds `key` to `action`: a system key is refused; a key in use elsewhere swaps with it. */
+export function rebind(
+  keys: KeyBindings,
+  action: KeyAction,
+  key: string,
+): { keys: KeyBindings; result: 'ok' | 'fixed' | 'invalid' | 'swapped'; other?: KeyAction } {
+  if (FIXED_KEYS.has(key)) return { keys, result: 'fixed' };
+  if (!CHOOSABLE.has(key)) return { keys, result: 'invalid' };
+  const other = KEY_ACTIONS.find((a) => a !== action && keys[a] === key);
+  const next = { ...keys, [action]: key };
+  if (other) {
+    next[other] = keys[action];
+    return { keys: next, result: 'swapped', other };
+  }
+  return { keys: next, result: 'ok' };
+}
+
+/** Bindings from untrusted data: unknown or duplicated keys fall back to the defaults. */
+export function parseKeys(raw: unknown): KeyBindings {
+  const out: KeyBindings = { ...DEFAULT_KEYS };
+  if (typeof raw !== 'object' || raw === null) return out;
+  const r = raw as Record<string, unknown>;
+  for (const a of KEY_ACTIONS) {
+    const k = r[a];
+    if (typeof k === 'string' && CHOOSABLE.has(k)) out[a] = k;
+  }
+  const used = KEY_ACTIONS.map((a) => out[a]);
+  return new Set(used).size === used.length ? out : { ...DEFAULT_KEYS };
+}
+
 export interface Settings {
   masterVolume: number;
   musicVolume: number;
@@ -15,6 +132,7 @@ export interface Settings {
   neonDefault: boolean;
   lightingDefault: boolean;
   language: 'vi';
+  keys: KeyBindings;
 }
 
 export const SETTINGS_KEY = 'chrono_settings_v1';
@@ -31,6 +149,7 @@ export const DEFAULT_SETTINGS: Readonly<Settings> = {
   neonDefault: true,
   lightingDefault: true,
   language: 'vi',
+  keys: DEFAULT_KEYS,
 };
 
 /** Milliseconds per typed character in dialogue. */
@@ -53,7 +172,7 @@ const flag = (v: unknown, fallback: boolean): boolean => (typeof v === 'boolean'
 /** Settings from untrusted stored data: every field checked, anything odd falls back to default. */
 export function parseSettings(raw: unknown): Settings {
   const d = DEFAULT_SETTINGS;
-  if (!isRecord(raw)) return { ...d };
+  if (!isRecord(raw)) return { ...d, keys: { ...DEFAULT_KEYS } };
   const speed = raw.textSpeed;
   return {
     masterVolume: volume(raw.masterVolume, d.masterVolume),
@@ -66,6 +185,7 @@ export function parseSettings(raw: unknown): Settings {
     neonDefault: flag(raw.neonDefault, d.neonDefault),
     lightingDefault: flag(raw.lightingDefault, d.lightingDefault),
     language: 'vi',
+    keys: parseKeys(raw.keys),
   };
 }
 
@@ -83,7 +203,7 @@ export function loadSettings(storage: SettingsStorage): Settings {
   const stored = readJson(storage, SETTINGS_KEY);
   if (stored) return parseSettings(stored);
   const legacy = readJson(storage, LEGACY_AUDIO_KEY);
-  if (!isRecord(legacy)) return { ...DEFAULT_SETTINGS };
+  if (!isRecord(legacy)) return parseSettings({});
   return parseSettings({
     masterVolume: legacy.masterVolume,
     musicVolume: legacy.bgmVolume,

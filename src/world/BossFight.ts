@@ -30,6 +30,7 @@ import type { PixelFxLayer } from '../systems/fx/PixelFxLayer';
 import type { Translate } from '../ui/Strings';
 import type { ActionCombat, CombatExtension, PeterAct } from './ActionCombat';
 import { tileCenter } from './MapRegistry';
+import { keyCode } from '../ui/keys';
 
 /** Boss profiles from bosses.json (loaded by PreloadScene). */
 export function bossProfile(scene: Phaser.Scene, enemyId: string): BossProfile | undefined {
@@ -326,7 +327,7 @@ export class BossFight implements CombatExtension {
         .setOrigin(0.5, 1)
         .setDepth(60)
         .setVisible(false);
-      this.finisherKey = scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.E) ?? null;
+      this.finisherKey = scene.input.keyboard?.addKey(keyCode('interact')) ?? null;
       this.finisherKey?.on('down', this.onFinisherKey);
     }
     const ss = profile.startStun;

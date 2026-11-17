@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
+  DEFAULT_KEYS,
   DEFAULT_SETTINGS,
+  keyNameOf,
+  parseKeys,
+  rebind,
   SETTINGS_KEY,
   loadSettings,
   parseSettings,
@@ -60,5 +64,32 @@ describe('settings', () => {
     });
     expect(parseSettings('garbage')).toEqual(DEFAULT_SETTINGS);
     expect(loadSettings(store({ [SETTINGS_KEY]: '{not json' }))).toEqual(DEFAULT_SETTINGS);
+  });
+});
+
+describe('key bindings', () => {
+  it('swaps with the action that held the key, refuses system keys', () => {
+    const r = rebind({ ...DEFAULT_KEYS }, 'ranged', 'I');
+    expect(r.result).toBe('swapped');
+    expect(r.other).toBe('satchel');
+    expect(r.keys).toMatchObject({ ranged: 'I', satchel: 'F' });
+    expect(rebind({ ...DEFAULT_KEYS }, 'dodge', 'SPACE').result).toBe('fixed');
+    expect(rebind({ ...DEFAULT_KEYS }, 'dodge', 'W').result).toBe('fixed');
+    expect(rebind({ ...DEFAULT_KEYS }, 'dodge', 'CTRL')).toMatchObject({ result: 'ok' });
+  });
+
+  it('reads Phaser key names from keyboard events', () => {
+    expect(keyNameOf({ code: 'KeyF' })).toBe('F');
+    expect(keyNameOf({ code: 'ShiftRight' })).toBe('SHIFT');
+    expect(keyNameOf({ code: 'Digit5' })).toBe('FIVE');
+    expect(keyNameOf({ code: 'Escape' })).toBe('ESC');
+    expect(keyNameOf({ code: 'F13' })).toBeNull();
+  });
+
+  it('falls back to the defaults on odd or duplicated stored keys', () => {
+    expect(parseKeys({ ranged: 'W' })).toEqual(DEFAULT_KEYS);
+    expect(parseKeys({ ranged: 'I' })).toEqual(DEFAULT_KEYS); // I already opens the bag
+    expect(parseKeys({ ranged: 'G' })).toMatchObject({ ranged: 'G' });
+    expect(parseSettings({ keys: { dodge: 'CTRL' } }).keys.dodge).toBe('CTRL');
   });
 });

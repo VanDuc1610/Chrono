@@ -44,6 +44,7 @@ import * as Hazards from './action/Hazards';
 import * as Roamers from './action/Roamers';
 import * as Shots from './action/Shots';
 import * as Visuals from './action/Visuals';
+import { keyCode } from '../ui/keys';
 export type { ActionHost, CombatExtension, PeterAct } from './action/ActionTypes';
 
 export class ActionCombat {
@@ -126,11 +127,11 @@ export class ActionCombat {
       else if (p.leftButtonDown()) this.slash(p.worldX, p.worldY);
     };
     scene.input.on('pointerdown', onPointer);
-    const shift = scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
+    const shift = scene.input.keyboard?.addKey(keyCode('dodge'));
     const onShift = (): void => this.dash();
     shift?.on('down', onShift);
     // T-84: F fires the ranged weapon toward the cursor.
-    const fKey = scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+    const fKey = scene.input.keyboard?.addKey(keyCode('ranged'));
     const onFire = (): void => {
       const p = scene.input.activePointer.positionToCamera(
         scene.cameras.main,

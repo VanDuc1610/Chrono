@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { IPlayerController, ControllerActions } from './IPlayerController';
 import { MovementDirection } from '../movement/IMovementSystem';
+import { keyCode } from '../../ui/keys';
 
 export class KeyboardPlayerController implements IPlayerController {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
@@ -24,7 +25,7 @@ export class KeyboardPlayerController implements IPlayerController {
     this.keyA = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     this.keyS = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     this.keyD = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-    this.keyE = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+    this.keyE = scene.input.keyboard.addKey(keyCode('interact')); // rebindable (T-96)
     this.keySpace = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.keyEscape = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
   }
