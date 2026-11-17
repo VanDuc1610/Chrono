@@ -36,7 +36,12 @@ const R = {
 
 // ------------------------------------------------------------------ shared figure parts
 /** An armoured giant: legs, torso, pauldrons, arms and a helm; returns key points. */
-function giant(c, y, ramp, { helm = ramp, visor = '#4ae0ff', belt = '#3a2a1a' } = {}) {
+function giant(
+  c,
+  y,
+  ramp,
+  { helm = ramp, visor = '#4ae0ff', belt = '#3a2a1a', rust = null, rustAmount = 0.16 } = {},
+) {
   const top = y;
   c.poly(
     [
@@ -98,6 +103,7 @@ function giant(c, y, ramp, { helm = ramp, visor = '#4ae0ff', belt = '#3a2a1a' } 
     ['#06060a'],
   );
   c.line(43, top + 13, 53, top + 13, visor);
+  armourDetail(c, top, ramp, rust, rustAmount);
   return {
     hands: [
       [25, top + 50],
@@ -105,6 +111,113 @@ function giant(c, y, ramp, { helm = ramp, visor = '#4ae0ff', belt = '#3a2a1a' } 
     ],
     chest: [48, top + 34],
   };
+}
+
+const hash = (x, y) => {
+  const v = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
+  return v - Math.floor(v);
+};
+/** Multiplies a pixel's colour (opaque pixels only). */
+function tone(c, x, y, k) {
+  if (!c.get(x, y)) return;
+  const i = (y * S + x) * 4;
+  for (let n = 0; n < 3; n++) c.px[i + n] = Math.max(0, Math.min(255, Math.round(c.px[i + n] * k)));
+}
+const colourAt = (c, x, y) => {
+  const i = (y * S + x) * 4;
+  return '#' + [0, 1, 2].map((n) => c.px[i + n].toString(16).padStart(2, '0')).join('');
+};
+
+/**
+ * Owner, 2026-11-18: the armoured giants get plate seams with a bevelled light edge, rivets,
+ * rust in patches (on the armour only) and cast shadows under the pauldrons and the helm.
+ */
+function armourDetail(c, top, ramp, rust, rustAmount) {
+  const armour = new Set(ramp.map((h) => h.toLowerCase()));
+  const dark = ramp[0];
+  const light = ramp[ramp.length - 1];
+  const seam = (x0, x1, y) => {
+    for (let x = x0; x <= x1; x++) {
+      if (!armour.has(colourAt(c, x, y))) continue;
+      c.set(x, y, dark);
+      if (armour.has(colourAt(c, x, y + 1))) c.set(x, y + 1, light);
+    }
+  };
+  // abdomen plates, the centre ridge, elbows, knees and the pauldron rims
+  for (const yy of [top + 31, top + 38, top + 45]) seam(33, 63, yy);
+  for (let yy = top + 24; yy < top + 50; yy++) {
+    if (armour.has(colourAt(c, 48, yy))) c.set(48, yy, dark);
+    if (armour.has(colourAt(c, 47, yy))) c.set(47, yy, light);
+  }
+  seam(23, 31, top + 38);
+  seam(65, 73, top + 38);
+  const knee = Math.round((top + 52 + GROUND) / 2);
+  seam(34, 45, knee);
+  seam(51, 62, knee);
+  seam(34, 45, knee + 2);
+  seam(51, 62, knee + 2);
+  for (const [px, py] of [
+    [22, top + 28],
+    [36, top + 28],
+    [60, top + 28],
+    [74, top + 28],
+  ])
+    seam(px - 6, px + 6, py);
+  // rivets
+  for (const [rx, ry] of [
+    [35, top + 25],
+    [61, top + 25],
+    [35, top + 47],
+    [61, top + 47],
+    [26, top + 24],
+    [70, top + 24],
+    [40, knee - 6],
+    [56, knee - 6],
+  ]) {
+    if (!armour.has(colourAt(c, rx, ry))) continue;
+    c.set(rx, ry, light);
+    c.set(rx + 1, ry + 1, dark);
+  }
+  // cast shadows: under the pauldrons onto the arms and chest, under the helm onto the gorget
+  for (const [x0, x1] of [
+    [21, 37],
+    [59, 75],
+  ])
+    for (let x = x0; x <= x1; x++) {
+      tone(c, x, top + 31, 0.7);
+      tone(c, x, top + 32, 0.82);
+    }
+  for (let x = 40; x <= 56; x++) {
+    tone(c, x, top + 23, 0.66);
+    tone(c, x, top + 24, 0.8);
+  }
+  // rust in patches: coarse cells decide where, fine noise breaks it up
+  if (rust)
+    for (let yy = 0; yy < S; yy++)
+      for (let x = 0; x < S; x++) {
+        if (!armour.has(colourAt(c, x, yy))) continue;
+        if (hash(Math.floor(x / 4), Math.floor(yy / 4)) > rustAmount) continue;
+        const f = hash(x, yy);
+        if (f < 0.3) continue;
+        c.set(x, yy, f > 0.75 ? rust[1] : rust[0]);
+      }
+}
+
+/**
+ * Deeper shading after the outline: the right and lower edge of every shape falls into shadow,
+ * the upper-left edge catches the light.
+ */
+function deepShade(c) {
+  const out = OUTLINE.toLowerCase();
+  const empty = (x, y) => !c.get(x, y) || colourAt(c, x, y) === out;
+  const marks = [];
+  for (let y = 0; y < S; y++)
+    for (let x = 0; x < S; x++) {
+      if (empty(x, y)) continue;
+      if (empty(x + 1, y) || empty(x, y + 1)) marks.push([x, y, 0.74]);
+      else if (empty(x - 1, y) || empty(x, y - 1)) marks.push([x, y, 1.16]);
+    }
+  for (const [x, y, k] of marks) tone(c, x, y, k);
 }
 
 /** Sinks the figure to its knees (released): rows below the waist fold, colours dim. */
@@ -146,7 +259,11 @@ function sentinel(k) {
     R.stone,
     false,
   );
-  const p = giant(c, y, R.verdigris, { visor: pulse(k) ? '#a6f0ff' : '#4ae0ff' });
+  const p = giant(c, y, R.verdigris, {
+    visor: pulse(k) ? '#a6f0ff' : '#4ae0ff',
+    rust: ['#5a4a2a', '#8a6a3a'],
+    rustAmount: 0.18,
+  });
   // barnacles and a sea-green plume
   for (const [bx, by] of [
     [38, y + 30],
@@ -167,6 +284,7 @@ function sentinel(k) {
   );
   c.ellipse(p.chest[0], p.chest[1], 3, 2, ['#c8a060', '#ece4cc']);
   c.outline(OUTLINE);
+  deepShade(c);
   // the water ring around him
   for (let a = 0; a < 40; a++) {
     const t = (a / 40) * Math.PI * 2 + k * 0.12;
@@ -192,7 +310,13 @@ function bellkeeper(k) {
     R.bronze,
     false,
   );
-  const p = giant(c, y + 4, R.bronze, { helm: R.bronze, visor: '#ffe08a', belt: '#2a1a0e' });
+  const p = giant(c, y + 4, R.bronze, {
+    helm: R.bronze,
+    visor: '#ffe08a',
+    belt: '#2a1a0e',
+    rust: ['#7a3412', '#b05a22'],
+    rustAmount: 0.2,
+  });
   c.ellipse(p.chest[0], p.chest[1], 9, 9, R.diverGreen);
   c.ellipse(
     p.chest[0],
@@ -211,6 +335,7 @@ function bellkeeper(k) {
     c.set(rx, ry, '#c8a060');
   for (let i = 0; i < 9; i++) c.set(71 + (i % 2), y + 54 + i * 2, '#8c96a8');
   c.outline(OUTLINE);
+  deepShade(c);
   return c;
 }
 
@@ -231,7 +356,11 @@ function imperialVerdict(k) {
   );
   for (let yy = 18; yy < 62; yy += 4)
     c.set(78 + ((yy + k) % 2), yy, pulse(k) ? '#ffd27a' : '#ff9a3a');
-  const p = giant(c, y, R.blackSteel, { visor: '#c8963a' });
+  const p = giant(c, y, R.blackSteel, {
+    visor: '#c8963a',
+    rust: ['#3a2418', '#5a3420'],
+    rustAmount: 0.06,
+  });
   c.poly(
     [
       [39, y + 11],
@@ -264,6 +393,7 @@ function imperialVerdict(k) {
     );
   }
   c.outline(OUTLINE);
+  deepShade(c);
   return c;
 }
 
@@ -406,6 +536,8 @@ function theLastWar(k) {
   }
   const p = giant(c, y, ['#26282e', '#3e424a', '#5a5e68', '#7e828c', '#a4a8b0'], {
     visor: pulse(k) ? '#ffb43a' : '#e07a1a',
+    rust: ['#6a3414', '#9a5222'],
+    rustAmount: 0.15,
   });
   for (const [sx, sy] of [
     [41, y + 30],
@@ -418,6 +550,7 @@ function theLastWar(k) {
   }
   c.ellipse(p.chest[0], p.chest[1] - 2, 3, 3, R.gold);
   c.outline(OUTLINE);
+  deepShade(c);
   return c;
 }
 
