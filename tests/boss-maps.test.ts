@@ -87,6 +87,15 @@ function solid(mapId: string, map: MapDef, x: number, y: number): boolean {
 }
 
 describe('T-84 bosses on their maps', () => {
+  it('every map encounter is fought in real time (there is no battle scene)', () => {
+    const live = new Set(bosses.map((b) => b.id));
+    const maps = (mapsJson as unknown as { maps: Record<string, MapDef> }).maps;
+    const missing = Object.entries(maps).flatMap(([id, m]) =>
+      (m.encounters ?? []).filter((e) => !live.has(e.enemyId)).map((e) => `${id}: ${e.enemyId}`),
+    );
+    expect(missing).toEqual([]);
+  });
+
   it('covers the Prologue to Chapter 5 bosses', () => {
     const ids = bosses.map((b) => b.id);
     for (const id of [

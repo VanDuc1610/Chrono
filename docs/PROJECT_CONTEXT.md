@@ -12,12 +12,12 @@
 
 ## 1. Project Vision & Core Identity
 
-**CHRONO – THE FRACTURED DIVINITY** is an original, single-player browser-based 2D RPG crafted with classic 16-bit pixel art aesthetic, deliberate top-down exploration, turn-based normal encounters and real-time boss combat. The game takes place in the melancholy, celestial aftermath of the Cataclysm of the Divided Hour—a cosmic rupture that shattered the flow of continuous time into localized distortions, recursive loops, and crystalline chronal anomalies.
+**CHRONO – THE FRACTURED DIVINITY** is an original, single-player browser-based 2D RPG crafted with classic 16-bit pixel art aesthetic, deliberate top-down exploration and real-time action combat on the maps (no battle scene). The game takes place in the melancholy, celestial aftermath of the Cataclysm of the Divided Hour—a cosmic rupture that shattered the flow of continuous time into localized distortions, recursive loops, and crystalline chronal anomalies.
 
 ### Current milestone
 
 - **Scope:** Story complete: Prologue + Chapters 1-9, four endings, 131 maps (including hidden maps).
-- **Delivery:** Browser RPG with exploration, dialogue, puzzles, quests, equipment, saves, turn-based normal encounters and real-time bosses on their own maps. Chapter selection covers all chapters.
+- **Delivery:** Browser RPG with exploration, dialogue, puzzles, quests, equipment, saves, real-time field enemies and real-time bosses on their own maps. Chapter selection covers all chapters.
 - **Presentation:** LPC environments for chapters 0-5, approved 64x64 Peter animations, full neon void for chapters 6-9, per-map atmosphere/colour grade and VT323 UI. Owner playtesting and presentation upgrades continue; see `docs/TASKS.md`.
 
 ---
@@ -33,7 +33,7 @@
 | **Camera**                  | 2D Top-Down Orthographic (3/4 pitch, 640×360 native canvas scaled via `FIT`)                                            | **CONFIRMED**              |
 | **Art Style**               | Authentic 16-bit Pixel Art with stylized proportions                                                                    | **CONFIRMED**              |
 | **Atmosphere**              | Cosmic Dark Fantasy + Ethereal                                                                                          | **CONFIRMED**              |
-| **Combat**                  | Turn-based normal encounters; real-time bosses on exploration maps                                                      | **CONFIRMED**              |
+| **Combat**                  | Real time on the map: field enemies and bosses (the turn-based scene was removed 2026-11-18)                            | **CONFIRMED**              |
 | **Control Scheme**          | Keyboard (WASD / Arrows to move, Space/E to interact, 1-2 for choices, I/B for satchel, K for quick-save, ESC for menu) | **CONFIRMED**              |
 | **Gamepad / Touch**         | Virtual touch controls and Gamepad API support                                                                          | _PROPOSED (Post-Prologue)_ |
 
@@ -49,7 +49,7 @@ flowchart TD
         BootScene --> PreloadScene
         PreloadScene --> MainMenuScene
         MainMenuScene --> ExplorationScene
-        ExplorationScene <--> CombatScene
+        ExplorationScene --> PrologueEndScene
     end
 
     subgraph Systems ["Modular Decoupled Systems (src/systems/)"]
@@ -58,7 +58,7 @@ flowchart TD
         Interaction["InteractionSystem"]
         Dialogue["DialogueSystem"]
         Quest["QuestSystem"]
-        Combat["CombatSystem"]
+        Combat["ActionCombat + BossFight (src/world/)"]
         Inventory["InventorySystem"]
         Save["SaveSystem (localStorage)"]
         Audio["SoundSystem (Web Audio Synthesis)"]
@@ -81,8 +81,7 @@ flowchart TD
     ExplorationScene --> Inventory
     ExplorationScene --> Save
     ExplorationScene --> Audio
-    CombatScene --> Combat
-    CombatScene --> Audio
+    ExplorationScene --> Combat
 
     Dialogue --> D_Dialogue
     Quest --> D_Quests
@@ -94,10 +93,10 @@ flowchart TD
 ### Key Architectural Standards:
 
 1. **Strict TypeScript Typing:** `tsconfig.json` enforces `strict: true`, `noUnusedLocals: true`, and zero implicit `any`.
-2. **Decoupled System Boundaries:** All gameplay systems implement explicit interfaces (`IMovementSystem`, `IPlayerController`, `IInteractionSystem`, `IDialogueSystem`, `IQuestSystem`, `ICombatSystem`, `IInventorySystem`, `ISaveSystem`).
+2. **Decoupled System Boundaries:** All gameplay systems implement explicit interfaces (`IMovementSystem`, `IPlayerController`, `IInteractionSystem`, `IDialogueSystem`, `IQuestSystem`, `IInventorySystem`, `ISaveSystem`).
 3. **Data-Driven Logic:** Scene files do not hardcode quest objectives, enemy or player stats, items, rewards, or dialogue scripts. All data is read from external JSON files in `public/assets/data/` (`player.json` holds Peter's base stats, per-level growth, EXP thresholds, starting items and combat formula tuning).
 4. **Game State Lives in `GameSession` (`src/state/GameSession.ts`):** Inventory, quest progress, story flags, level/EXP/HP and playtime belong to one session object stored in the Phaser registry — never in scene fields, because Phaser reuses scene instances on every `scene.start()`. New Game creates a fresh session; Continue hydrates one from the save; scenes only read/write it. Scene listeners on long-lived systems (e.g. `QuestSystem`) must be removed on `SHUTDOWN`.
-5. **Phaser Lifecycle Hygiene:** `ExplorationScene.init()` and `CombatScene.init()` reset all scene-local transient state (UI arrays, timers, turn locks) on every entry. Never stub the global `Math.random` in tests — Phaser uses it for texture UUIDs; use `CombatSystem.setRandomSource()` instead.
+5. **Phaser Lifecycle Hygiene:** `ExplorationScene.init()` resets all scene-local transient state (UI arrays, timers) on every entry. Never stub the global `Math.random` in tests — Phaser uses it for texture UUIDs; inject an RNG instead.
 6. **Procedural Web Audio Synthesis:** Sound effects are generated in `SoundSystem.ts` using the browser's native Web Audio API (`AudioContext`), avoiding copyrighted audio files.
 
 ---
@@ -107,7 +106,7 @@ flowchart TD
 ### 4.1 Completed runtime features (source-confirmed)
 
 - **Story/world:** Prologue through Chapter 9, 131 entries in `maps.json`; four ending cards (`order`, `unbound`, `true`, `returned_page`) routed by `chapter9EndingKeys` in `PrologueEndScene.ts`.
-- **Combat:** `CombatScene` and pure combat rules handle normal encounters. `BossFight` and `src/systems/boss/` handle real-time fights on exploration maps. Equipment has melee, ranged, armour and accessory slots.
+- **Combat:** all real time on the maps: `ActionCombat` (field enemies) and `BossFight` with `src/systems/boss/` (bosses, profiles in `bosses.json`). Equipment has melee, ranged, armour and accessory slots.
 - **Exploration/state:** branching dialogue, puzzle fields, quests, inventory, progression, chapter selection and save/load through GameSession. Scene state is reset and listeners cleaned up on shutdown.
 - **Peter:** approved 64x64 LPC-scale animation sheets (`PeterAnimationConfig.ts`); Player preserves the 18x14 foot collider with a frame-specific origin/offset. Character identity remains governed by `docs/art/PETER_DESIGN.md`.
 - **LPC environments:** `scripts/lpc/veridia.mjs` builds Veridia; `reskin.mjs` rebuilds chapter 0-5 tilesets slot for slot while retaining collision, puzzle swaps and story props. Pinned sources and derived atlases are attributed in the LPC manifests and root CREDITS.md.
@@ -295,9 +294,6 @@ npm run preview
 # 6. Execute live engine gameplay test (CDP automated test)
 node scripts/test-gameplay.js
 
-# 7. Execute turn-based combat test (CDP automated test)
-node scripts/test-combat.js
-
 # 8. Execute inventory & save persistence test (CDP automated test)
 node scripts/test-inventory-save.js
 
@@ -317,7 +313,7 @@ node scripts/validate-candidate.js <path-to-png>
 | **Peter True Origin**       | **UNRESOLVED (Intentional)** | Unwritten; delivered via environmental discovery.                                                                                |
 | **Kuro, the Forgotten One** | **CONFIRMED**                | Established as main opposing character. Visual design: _UNRESOLVED_.                                                             |
 | **Six Divine Authorities**  | **CONFIRMED**                | Origin, Continuum, Causality, Memory, Possibility, Finality established.                                                         |
-| **Combat Mechanics**        | **CONFIRMED**                | Normal encounters retain turn-based rules; bosses now fight in real time on exploration maps.                                    |
+| **Combat Mechanics**        | **CONFIRMED**                | Everything is fought in real time on the maps; the turn-based scene was removed (owner, 2026-11-18).                             |
 | **EXP & Levelling**         | **CONFIRMED**                | In scope for the prologue (owner decision 2026-11-10). Curve/growth tunable in `player.json`.                                    |
 | **Audio Architecture**      | **CONFIRMED**                | Procedural Web Audio synthesis (`SoundSystem.ts`). No copyrighted audio.                                                         |
 | **Party System**            | _PROPOSED (TBD)_             | Peter is controlled directly; chapter companions and companion calls exist. General party switching remains a separate proposal. |

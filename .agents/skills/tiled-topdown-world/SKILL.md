@@ -21,7 +21,7 @@ Per map (`maps[id]`):
 | `revive`              | where Peter wakes after a defeat on this map                                     |
 | `npcs`                | sprite, prompt, `dialogueId`, `dialogueRules` (state-based), `completeObjective` |
 | `interactables`       | points of interest → dialogue; optional `requiresFlag`, `completeObjective`      |
-| `encounters`          | overworld enemy → `CombatScene`; `defeatedFlag` hides it after victory           |
+| `encounters`          | boss fought in real time where it stands (needs a profile in `bosses.json`); `defeatedFlag` hides it after victory           |
 | `exits`               | tile area → `toMap` + `toSpawn`; `requiresFlag` + `lockedDialogueId` to gate     |
 | `triggers`            | `arrive` or `zone`; fire once (`onceFlag`); `effects` and/or `dialogueId`        |
 

@@ -18,9 +18,7 @@ description: Use when writing or running tests (Vitest or the CDP browser suites
 1. Start the server: `npx vite --port 3000 --strictPort` (background).
 2. Run what the change touches:
    - `node scripts/test-gameplay.js` — movement, collision, dialogue with real key presses
-   - `node scripts/test-combat.js` — battle flow, victory, return to exploration
    - `node scripts/test-inventory-save.js` — satchel, save, Continue
-   - `node scripts/test-session-regression.js` — bugs B1–B6
 3. Output is compact by default; add `--verbose` for full logs and browser console.
 4. Stop the server afterwards (it holds port 3000).
 

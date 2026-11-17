@@ -44,7 +44,6 @@ import type {
   MapTriggerDefinition,
   TilePoint,
 } from '../world/MapTypes';
-import type { CombatSceneData } from './CombatScene';
 import { FINAL_BOSSES, music } from './sceneMusic';
 import { keyCode } from '../ui/keys';
 import { enlargeActor } from '../world/ActorScale';
@@ -859,31 +858,11 @@ export class ExplorationScene extends Phaser.Scene {
 
   private startEncounter(def: MapEncounterDefinition): void {
     if (this.isTransitioning || this.bossFight?.active) return;
-    // T-84: a boss with a real-time profile is fought right here; others stay turn-based.
+    // Every fight is real time, on the map (owner, 2026-11-18: the turn-based scene is gone).
+    // An encounter's enemy must have a profile in bosses.json (checked by tests/boss-maps).
     const live = bossProfile(this, def.enemyId);
-    if (live) {
-      this.startBossFight(def, live);
-      return;
-    }
-    this.beginSceneExit();
-    this.cameras.main.flash(350, 0, 200, 255);
-    this.cameras.main.fadeOut(350, 0, 0, 0);
-
-    const returnPosition = { x: this.player.x - 24, y: this.player.y };
-    this.session.position = { mapId: this.mapDef.id, ...returnPosition };
-    const revive = tileCenter(this.mapDef.revive ?? this.mapDef.spawns.default);
-
-    this.time.delayedCall(350, () => {
-      const data: CombatSceneData = {
-        enemyId: def.enemyId,
-        victoryFlag: def.defeatedFlag,
-        returnPosition,
-        revivePosition: revive,
-        victoryDialogueId: def.victoryDialogueId,
-        victoryDialogueRules: def.victoryDialogueRules,
-      };
-      this.scene.start('CombatScene', data);
-    });
+    if (live) this.startBossFight(def, live);
+    else console.warn(`No real-time profile for encounter ${def.id} (${def.enemyId})`);
   }
 
   /** The boss leaves its post and fights Peter where they met (no battle scene, no fade). */

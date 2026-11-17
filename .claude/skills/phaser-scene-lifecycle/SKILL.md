@@ -5,15 +5,15 @@ description: Use when creating or changing a Phaser scene in src/scenes/, passin
 
 # Scene lifecycle (CHRONO)
 
-Scenes: `PreloadScene` → `MainMenuScene` → `ExplorationScene` ⇄ `CombatScene` → `PrologueEndScene`
+Scenes: `PreloadScene` → `MainMenuScene` → `ExplorationScene` → `PrologueEndScene` (every fight is real time on the map; there is no battle scene)
 (registered in `src/config.ts`). Playthrough state lives in `GameSession` (`src/state/`), read with
 `getSession(this)`; scenes never own progress.
 
 ## Rules
 
 1. **Scene instances are reused.** Reset every transient field in `init(data)` (flags, arrays of
-   buttons, nullable refs). See `CombatScene.init()`.
-2. **Typed scene data.** Export an interface (`CombatSceneData`, `ExplorationSceneData`) and use it
+   buttons, nullable refs). See `ExplorationScene.init()`.
+2. **Typed scene data.** Export an interface (e.g. `ExplorationSceneData`) and use it
    in both `init()` and `scene.start()`.
 3. **Clean up listeners.** Anything on `this.events`, `this.game.events`, a system emitter (e.g.
    `QuestSystem`) or the registry must be removed in
@@ -33,5 +33,4 @@ Scenes: `PreloadScene` → `MainMenuScene` → `ExplorationScene` ⇄ `CombatSce
 ## Verify
 
 `npm run typecheck` · `npm test` · the CDP suite that covers the scene (see
-`game-testing-perf-audit`). A scene change that re-enters (combat → exploration) must pass
-`node scripts/test-session-regression.js`.
+`game-testing-perf-audit`).

@@ -255,7 +255,7 @@ export class SoundSystem {
   /**
    * Starts or crossfades to the specified procedural BGM loop.
    * - 'ambient': Slow, dark, ethereal ruin theme for MainMenuScene & ExplorationScene.
-   * - 'battle': Faster, tense tactical theme for CombatScene.
+   * - 'battle': Faster, tense tactical theme (boss fights).
    */
   public startBgm(theme: 'ambient' | 'battle', crossfadeMs = 450): void {
     const ctx = this.initContext();

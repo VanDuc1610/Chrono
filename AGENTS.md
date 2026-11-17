@@ -11,7 +11,7 @@
 
 ## 2. Directory Boundaries
 
-- `src/scenes/`: Phaser scenes (`PreloadScene`, `MainMenuScene`, `ExplorationScene`, `CombatScene`, `PrologueEndScene`). Orchestration and rendering only.
+- `src/scenes/`: Phaser scenes (`PreloadScene`, `MainMenuScene`, `ExplorationScene`, `PrologueEndScene`). Orchestration and rendering only.
 - `src/state/`: `GameSession` – playthrough state (stats, inventory, quests, flags, save shape). No Phaser runtime imports.
 - `src/systems/`: `combat/`, `dialogue/`, `quest/`, `inventory/`, `save/` are pure TypeScript (no Phaser import); `movement/`, `interaction/`, `input/`, `audio/`, `animation/` integrate with Phaser.
 - `src/entities/`: Sprite wrappers (`Player.ts`, `NPC.ts`). `src/ui/`: UI modules + `Strings.ts`. `src/world/`: map types and validation (no Phaser).

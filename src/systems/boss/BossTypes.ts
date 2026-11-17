@@ -1,7 +1,6 @@
 /**
  * Real-time boss fights (T-84): each boss in public/assets/data/bosses.json gets its own attack
  * patterns (moves, grouped in phases) and its own defence, fought on the map where Peter meets it.
- * Bosses without a profile still use the turn-based CombatScene.
  */
 
 /** Telegraphed circle(s) that burst after `telegraphMs`: at Peter, or scattered around him. */
