@@ -10,7 +10,7 @@
  * preview with the old sprite beside the new one. `--install` copies approved ones to
  * public/assets/lpc/npcs/ and records them in art-source/lpc/derived.json for the credits.
  *
- * Usage: node scripts/lpc/npcs.mjs [--install name,name]
+ * Usage: node scripts/lpc/npcs.mjs [--install name,name] [--preview name,name]
  */
 import fs from 'fs';
 import { createHash } from 'crypto';
@@ -45,6 +45,20 @@ const R = {
   fisherTrouser: ['#22180f', '#3e2c1c', '#5c432c', '#7a5c40'],
   shelterShirt: ['#3a3640', '#5e5866', '#8a8496', '#b6b0c2'],
   shelterSkirt: ['#2c2a24', '#4a463c', '#6e685a', '#948c7a'],
+  skinLight: ['#6e4a36', '#b07e60', '#dcae8c', '#f0caa8'],
+  leatherBrass: ['#24160e', '#4e3220', '#7a5236', '#a87c4a', '#d0a456'],
+  scarfRed: ['#3c0e0e', '#7a1c1c', '#b03030', '#d85a4a'],
+  trouserDark: ['#121016', '#221e28', '#36303c', '#4a4452'],
+  bootBrown: ['#1a120c', '#36261a', '#56402c', '#725a40'],
+  ashTunic: ['#2a2c32', '#4e525c', '#7e838e', '#b4b9c4'],
+  beltLeather: ['#24170e', '#4a3220', '#70503a'],
+  steelBlue: ['#121a2a', '#2a3a58', '#48638e', '#7d97bd', '#b8c8de'],
+  capeBlue: ['#0c1430', '#1c2a5a', '#2e4486', '#4a62a8'],
+  lightBrownHair: ['#3a2614', '#6a4a2a', '#9a7246', '#c49a64'],
+  bandageWhite: ['#7c7a72', '#bcbab0', '#e8e6dc'],
+  creamSleeves: ['#6e6858', '#aca492', '#ded6c4'],
+  oliveTunic: ['#22261a', '#3a4228', '#58623e', '#7a8656'],
+  soldierTrouser: ['#1c1812', '#322c22', '#4a4232'],
 };
 
 /** Layers bottom to top: [manifest id, ramp or null to keep the colours]. */
@@ -100,6 +114,69 @@ const NPCS = {
       ['character-hair-relm-short-child', R.brownHair],
     ],
   },
+  // Chapter 2: resistance vanguard, ~24; black chin-length hair, brass-trimmed leather armour,
+  // red scarf, the halberd (lyra_vanguard_halberd).
+  lyra: {
+    old: 'public/assets/npcs/lyra_idle.png',
+    layers: [
+      ['character-body-bodies-female', R.skinLight],
+      ['character-feet-boots-basic-thin', R.bootBrown],
+      ['character-legs-pants-thin', R.trouserDark],
+      ['character-torso-armour-leather-female', R.leatherBrass],
+      ['character-neck-scarf', R.scarfRed],
+      ['character-head-heads-human-female', R.skinLight],
+      ['character-hair-bob-adult', R.blackHair],
+      ['custom:halberd', null],
+    ],
+  },
+  // Chapter 3: young archivist, ~22; ash-grey tunic, leather satchel strap, braid over the shoulder.
+  neris: {
+    old: 'public/assets/npcs/neris_idle.png',
+    layers: [
+      ['character-hair-braid-adult-bg', R.brownHair],
+      ['character-body-bodies-female', R.skinPale],
+      ['character-feet-boots-basic-thin', R.bootBrown],
+      ['character-legs-pants-thin', R.trouserDark],
+      ['character-torso-clothes-tunic-female', R.ashTunic],
+      ['character-torso-waist-belt-leather-female', R.beltLeather],
+      ['custom:satchel', null],
+      ['character-head-heads-human-female', R.skinPale],
+      ['character-hair-braid-adult-fg', R.brownHair],
+    ],
+  },
+  // Chapter 4: the old marshal of Veridia; silver hair and beard, cracked steel-blue plate, blue
+  // cape, the great sword.
+  aldric: {
+    old: 'public/assets/npcs/aldric_idle.png',
+    layers: [
+      ['character-cape-solid-bg', R.capeBlue],
+      ['character-body-bodies-male', R.skinParchment],
+      ['character-feet-boots-basic-male', R.bootBrown],
+      ['character-legs-pants-male', R.trouserDark],
+      ['character-torso-armour-plate-male', R.steelBlue],
+      ['character-cape-solid-fg', R.capeBlue],
+      ['character-head-heads-human-male-elderly', R.skinParchment],
+      ['character-hair-plain-adult', R.silver],
+      ['character-beards-beard-medium', R.silver],
+      ['custom:greatsword', null],
+    ],
+  },
+  // Chapter 4: Private Bran, 19, who has died 1,427 times; bandaged brow, olive tunic over
+  // cream sleeves, the tally-marked wooden spear.
+  soldier_bran: {
+    old: 'public/assets/npcs/soldier_bran_idle.png',
+    layers: [
+      ['character-body-bodies-male', R.skinLight],
+      ['character-feet-boots-basic-male', R.bootBrown],
+      ['character-legs-pants-male', R.soldierTrouser],
+      ['character-torso-clothes-longsleeve-longsleeve-male', R.creamSleeves],
+      ['character-torso-clothes-sleeveless-sleeveless-male', R.oliveTunic],
+      ['character-head-heads-human-male', R.skinLight],
+      ['character-hair-plain-adult', R.lightBrownHair],
+      ['character-hat-headband-thick-adult', R.bandageWhite],
+      ['custom:tally-spear', null],
+    ],
+  },
 };
 
 const manifest = JSON.parse(fs.readFileSync('art-source/lpc/manifest.json', 'utf8'));
@@ -141,16 +218,151 @@ function conicalHat(top) {
   return px;
 }
 
+const steel = ['#1e222a', '#8c96a8', '#c8d0dc', '#eef2f8'].map(hex);
+const wood = ['#2e1c10', '#5a3c22', '#8a6038'].map(hex);
+const gold = ['#3e2c12', '#b8862e', '#e8c070'].map(hex);
+const blank = () => Buffer.alloc(F * F * 4);
+const plot = (px, x, y, c) => {
+  if (x >= 0 && y >= 0 && x < F && y < F) px.set([...c, 255], (y * F + x) * 4);
+};
+
+/** The viewer-right hand: rightmost opaque column of the body at hand height. */
+function handX(body) {
+  for (let x = F - 1; x >= 0; x--) if (body[(47 * F + x) * 4 + 3] > 0) return x;
+  return 44;
+}
+
+/** An upright pole in the right hand, 2 px wide, outlined, from `top` to the ground. */
+function pole(px, x, top, colours) {
+  for (let y = top; y <= 61; y++) {
+    plot(px, x - 1, y, colours[0]);
+    plot(px, x, y, colours[2]);
+    plot(px, x + 1, y, colours[1]);
+    plot(px, x + 2, y, colours[0]);
+  }
+}
+
+/** Lyra's halberd, held upright: steel spike, crescent axe blade outward, back hook. */
+function halberd(body) {
+  const px = blank();
+  const x = handX(body);
+  pole(px, x, 12, wood);
+  for (let y = 2; y <= 12; y++) {
+    const w = y < 5 ? 0 : 1;
+    for (let k = -w; k <= w + 1; k++)
+      plot(px, x + k, y, k === -w || k === w + 1 ? steel[0] : steel[2]);
+  }
+  plot(px, x, 1, steel[0]);
+  // Axe blade to the right, a crescent from y 8 to 18.
+  for (let y = 8; y <= 18; y++) {
+    const reach = Math.round(6 - Math.abs(y - 13) * 0.6);
+    for (let k = 3; k <= 2 + reach; k++)
+      plot(
+        px,
+        x + k,
+        y,
+        k === 2 + reach || y === 8 || y === 18
+          ? steel[0]
+          : k === 2 + reach - 1
+            ? steel[3]
+            : steel[1],
+      );
+  }
+  // Back hook to the left.
+  for (let k = 1; k <= 3; k++) plot(px, x - 1 - k, 11 + (k === 3 ? 1 : 0), steel[k === 3 ? 0 : 1]);
+  plot(px, x - 2, 10, steel[0]);
+  return px;
+}
+
+/** Bran's wooden spear, upright, its shaft cut with tally marks; leaf-shaped steel tip. */
+function tallySpear(body) {
+  const px = blank();
+  const x = handX(body);
+  pole(px, x, 10, ['#3a2614', '#7a5434', '#a8804e'].map(hex));
+  for (let y = 18; y <= 58; y += 3) plot(px, x, y, wood[0]);
+  for (let y = 2; y <= 10; y++) {
+    const w = y <= 3 || y >= 9 ? 0 : 1;
+    for (let k = -w; k <= w + 1; k++)
+      plot(px, x + k, y, k === -w || k === w + 1 ? steel[0] : k === 0 ? steel[3] : steel[2]);
+  }
+  plot(px, x, 1, steel[0]);
+  for (let k = -2; k <= 3; k++) plot(px, x + k, 10, steel[0]);
+  return px;
+}
+
+/** Aldric's great sword, planted point-down in front of him: gold pommel and guard. */
+function greatsword() {
+  const px = blank();
+  const c = 31;
+  for (let y = 40; y <= 62; y++) {
+    const tip = y >= 60;
+    plot(px, c - 1, y, steel[0]);
+    plot(px, c, y, tip ? steel[1] : steel[3]);
+    plot(px, c + 1, y, tip && y === 62 ? steel[0] : steel[2]);
+    plot(px, c + 2, y, steel[0]);
+  }
+  for (let x = c - 5; x <= c + 6; x++) {
+    plot(px, x, 38, gold[0]);
+    plot(px, x, 39, x === c - 5 || x === c + 6 ? gold[0] : gold[2]);
+    plot(px, x, 40, gold[0]);
+  }
+  for (let y = 32; y <= 37; y++) {
+    plot(px, c - 1, y, gold[0]);
+    plot(px, c, y, y % 2 ? wood[1] : wood[2]);
+    plot(px, c + 1, y, wood[1]);
+    plot(px, c + 2, y, gold[0]);
+  }
+  for (let x = c - 1; x <= c + 2; x++) {
+    plot(px, x, 29, gold[0]);
+    plot(px, x, 30, x === c - 1 || x === c + 2 ? gold[0] : gold[2]);
+    plot(px, x, 31, x === c - 1 || x === c + 2 ? gold[0] : gold[1]);
+  }
+  return px;
+}
+
+/** Neris's leather satchel for her lenses: strap from the left shoulder to a bag on the right hip. */
+function satchel(body) {
+  const px = blank();
+  const hx = handX(body);
+  const strap = ['#2a1a10', '#6a4a30'].map(hex);
+  for (let t = 0; t <= 16; t++) {
+    const x = 24 + t;
+    const y = 33 + Math.round(t * 0.75);
+    plot(px, x, y, strap[1]);
+    plot(px, x, y + 1, strap[0]);
+  }
+  const x0 = hx - 8;
+  const y0 = 45;
+  const bag = ['#24160c', '#6e4a2c', '#94683e', '#b48654'].map(hex);
+  for (let y = 0; y <= 7; y++)
+    for (let x = 0; x <= 7; x++) {
+      const edge = x === 0 || x === 7 || y === 0 || y === 7;
+      plot(px, x0 + x, y0 + y, edge ? bag[0] : y <= 2 ? bag[3] : y === 3 ? bag[0] : bag[2]);
+    }
+  plot(px, x0 + 4, y0 + 3, gold[2]);
+  plot(px, x0 + 4, y0 + 4, gold[1]);
+  return px;
+}
+
 /** Highest opaque row of a layer. */
 function topRow(px) {
   for (let y = 0; y < F; y++) for (let x = 0; x < F; x++) if (px[(y * F + x) * 4 + 3] > 0) return y;
   return 0;
 }
 
+/** Layers drawn here rather than taken from a sheet; `body` is the character's body layer. */
+const CUSTOM = {
+  'custom:conical-hat': () =>
+    conicalHat(topRow(layerFrame('character-head-heads-human-male-elderly', null))),
+  'custom:halberd': halberd,
+  'custom:tally-spear': tallySpear,
+  'custom:greatsword': greatsword,
+  'custom:satchel': satchel,
+};
+
 /** The standing down-facing frame of one layer, recoloured along its ramp. */
-function layerFrame(id, ramp) {
-  if (id === 'custom:conical-hat')
-    return conicalHat(topRow(layerFrame('character-head-heads-human-male-elderly', null)));
+function layerFrame(id, ramp, body) {
+  if (CUSTOM[id]) return CUSTOM[id](body);
   const e = byId.get(id);
   if (!e) throw new Error(`Unknown LPC layer: ${id}`);
   const img = readPng(e.file);
@@ -259,7 +471,9 @@ const shown = [];
 let derived = readDerived();
 for (const [name, spec] of Object.entries(NPCS)) {
   const base = Buffer.alloc(F * F * 4);
-  for (const [id, ramp] of spec.layers) over(base, layerFrame(id, ramp));
+  const bodyId = spec.layers.find(([l]) => l.startsWith('character-body-'))[0];
+  const body = layerFrame(bodyId, null);
+  for (const [id, ramp] of spec.layers) over(base, layerFrame(id, ramp, body));
   const sheet = idleSheet(base);
   const png = encodePng(4 * F, F, sheet);
   fs.writeFileSync(`${OUT}/${name}_idle.png`, png);
@@ -284,7 +498,11 @@ for (const [name, spec] of Object.entries(NPCS)) {
     console.log(`  installed ${file}`);
   }
 }
-const cmp = comparison(shown);
+const only = (process.argv.find((a, i) => process.argv[i - 1] === '--preview') ?? '')
+  .split(',')
+  .filter(Boolean);
+const names = Object.keys(NPCS);
+const cmp = comparison(only.length ? shown.filter((_, i) => only.includes(names[i])) : shown);
 fs.writeFileSync(`${OUT}/preview.png`, encodePng(cmp.w, cmp.h, cmp.buf));
 if (install.length) {
   derived.sort((a, b) => a.id.localeCompare(b.id));

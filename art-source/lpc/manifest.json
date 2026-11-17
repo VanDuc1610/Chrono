@@ -925,5 +925,221 @@
     "urls": ["https://opengameart.org/content/lpc-more-weapons"],
     "notes": "Unmodified source PNG (brass variant of walk.png); credits from pinned CREDITS.csv.",
     "sha256": "2a7f6f5c23cd9c4b48f0bcd911fae1855976b01e26cc0c65054580ca93fcd758"
+  },
+  {
+    "id": "character-hair-bob-adult",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hair/bob/adult/walk.png",
+    "file": "art-source/lpc/raw/characters/hair/bob/adult/walk.png",
+    "authors": ["ElizaWy", "bluecarrot16"],
+    "licenses": ["CC0-1.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-hair",
+      "https://github.com/ElizaWy/LPC/blob/main/Characters/Hair",
+      "https://opengameart.org/content/lpc-expanded-sit-run-jump-more"
+    ],
+    "notes": "Original by bluecarrot16. Edited and animated by ElizaWy.",
+    "sha256": "40f1d1420f3bdbe2646654995cd2906b9a0edf4252c73060b34d5fcc27be0bcf"
+  },
+  {
+    "id": "character-hair-braid-adult-fg",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hair/braid/adult/fg/walk.png",
+    "file": "art-source/lpc/raw/characters/hair/braid/adult/fg/walk.png",
+    "authors": ["Nila122", "ElizaWy"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0", "GPL-2.0"],
+    "urls": [
+      "https://opengameart.org/content/3-hairs-for-lpc",
+      "https://opengameart.org/content/lpc-hair"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv.",
+    "sha256": "9400841162f27b4564c98e16f9659c7f01036e27a14be570f0e0b801e13ba364"
+  },
+  {
+    "id": "character-hair-braid-adult-bg",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hair/braid/adult/bg/walk.png",
+    "file": "art-source/lpc/raw/characters/hair/braid/adult/bg/walk.png",
+    "authors": ["Nila122", "ElizaWy"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0", "GPL-2.0"],
+    "urls": [
+      "https://opengameart.org/content/3-hairs-for-lpc",
+      "https://opengameart.org/content/lpc-hair"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv.",
+    "sha256": "dae1d04f9821a2efe5476402edf683dd8df9c4d7bd5ca85dc8ceba9cfad58295"
+  },
+  {
+    "id": "character-torso-armour-leather-female",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/torso/armour/leather/female/walk.png",
+    "file": "art-source/lpc/raw/characters/torso/armour/leather/female/walk.png",
+    "authors": [
+      "Michael Whitlock (bigbeargames)",
+      "Matthew Krohn (makrohn)",
+      "Johannes Sjölund (wulax)",
+      "bluecarrot16",
+      "JaidynReiman"
+    ],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+      "https://opengameart.org/content/lpc-combat-armor-for-women",
+      "https://opengameart.org/content/lpc-clothing-updates",
+      "https://opengameart.org/content/lpc-expanded-armor"
+    ],
+    "notes": "recolor of torso/armour/leather/female/brown.png, adapted to v3 bases by bluecarrot16, reduced colors and climb/emote/jump by JaidynReiman",
+    "sha256": "7e6d6f5fceb9cc4dde163b1827bc056c2777960ce5d72a9795d067ddb070567a"
+  },
+  {
+    "id": "character-hat-headband-thick-adult",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hat/headband/thick/adult/walk.png",
+    "file": "art-source/lpc/raw/characters/hat/headband/thick/adult/walk.png",
+    "authors": ["JaidynReiman"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-relm-hair-xlong-ponytail",
+      "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv.",
+    "sha256": "b15bdefca309062fd1c7575b41bd761b21dac47740869ef9813a6b43c4bbdf11"
+  },
+  {
+    "id": "character-feet-boots-basic-thin",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/feet/boots/basic/thin/walk.png",
+    "file": "art-source/lpc/raw/characters/feet/boots/basic/thin/walk.png",
+    "authors": ["JaidynReiman", "bluecarrot16", "Nila122"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-2.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-clothes-and-hair",
+      "https://opengameart.org/content/lpc-expanded-socks-shoes"
+    ],
+    "notes": "original by Nila122, edited for v3 bases by bluecarrot16, Jump/Sit/Emote/Run/Revised Combat by JaidynReiman",
+    "sha256": "50eb7e0a6b3cb1c939ee1a68bd0ac42736f6dbf55f2e5aa4ecef7d2ff858a1d7"
+  },
+  {
+    "id": "character-torso-waist-belt-leather-female",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/torso/waist/belt_leather/female/walk.png",
+    "file": "art-source/lpc/raw/characters/torso/waist/belt_leather/female/walk.png",
+    "authors": ["bluecarrot16", "Johannes Sjölund (wulax)", "Matthew Krohn (makrohn)"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-combat-armor-for-women",
+      "https://opengameart.org/content/lpc-pirates"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv.",
+    "sha256": "d74562ffd62ccfa6466d7033b044df1c41cc2e994b2950f9859f1b3a1fcf2d7e"
+  },
+  {
+    "id": "character-torso-clothes-tunic-female",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/torso/clothes/tunic/female/walk/gray.png",
+    "file": "art-source/lpc/raw/characters/torso/clothes/tunic/female/walk/gray.png",
+    "authors": [
+      "bluecarrot16",
+      "JaidynReiman",
+      "Matthew Krohn (makrohn)",
+      "Marcel van de Steeg (MadMarcel)",
+      "Stephen Challener (Redshrike)",
+      "Johannes Sjölund (wulax)"
+    ],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-female-orcogregoblintroll-base-walkcycle",
+      "https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more",
+      "http://opengameart.org/content/lpc-clothing-updates"
+    ],
+    "notes": "**pirate shirt** by MadMarcel, edited to all poses by makrohn, edited from tube-top/tanktop to sleeveless then to tunic by JaidynReiman, edits for v3 bases and further cleanup by bluecarrot16",
+    "sha256": "78347d6cea77bc49f5cea1d62c528b27650def7099d4c5dea015c4f1925be45d"
+  },
+  {
+    "id": "character-torso-clothes-sleeveless-sleeveless-male",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/torso/clothes/sleeveless/sleeveless/male/walk/white.png",
+    "file": "art-source/lpc/raw/characters/torso/clothes/sleeveless/sleeveless/male/walk/white.png",
+    "authors": [
+      "bluecarrot16",
+      "Matthew Krohn (makrohn)",
+      "JaidynReiman",
+      "Marcel van de Steeg (MadMarcel)",
+      "Nila122",
+      "Johannes Sjölund (wulax)",
+      "Stephen Challener (Redshrike)"
+    ],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-female-orcogregoblintroll-base-walkcycle",
+      "https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more",
+      "https://opengameart.org/content/more-lpc-clothes-and-hair",
+      "https://opengameart.org/content/lpc-pirates"
+    ],
+    "notes": "Unmodified source PNG (variant of torso/clothes/sleeveless/sleeveless/male/walk.png); credits from pinned CREDITS.csv.",
+    "sha256": "f19c5dea45b54942f8617e320d582d8c4b6d35784449e41bfa47914a201e186d"
+  },
+  {
+    "id": "character-weapon-polearm-halberd",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/weapon/polearm/halberd/walk/halberd.png",
+    "file": "art-source/lpc/raw/characters/weapon/polearm/halberd/walk/halberd.png",
+    "authors": ["Benjamin K. Smith (BenCreating)", "bluecarrot16", "Sander Frenken (castelonia)"],
+    "licenses": ["CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": ["https://opengameart.org/content/lpc-medieval-weapons"],
+    "notes": "Unmodified source PNG (variant of weapon/polearm/halberd/walk.png); credits from pinned CREDITS.csv.",
+    "sha256": "6de1afa48883ceef0c0ac04dab21753d225c0cb76d85a3e412b33bbdb18e2fae"
+  },
+  {
+    "id": "character-weapon-polearm-halberd-behind",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/weapon/polearm/halberd/behind/walk/halberd.png",
+    "file": "art-source/lpc/raw/characters/weapon/polearm/halberd/behind/walk/halberd.png",
+    "authors": ["Benjamin K. Smith (BenCreating)", "bluecarrot16", "Sander Frenken (castelonia)"],
+    "licenses": ["CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": ["https://opengameart.org/content/lpc-medieval-weapons"],
+    "notes": "Unmodified source PNG (variant of weapon/polearm/halberd/behind/walk.png); credits from pinned CREDITS.csv.",
+    "sha256": "fa421b5b6ad653b1c6bf8c61bf52fa76fa014f6005ede3fe19da130fa4c46854"
+  },
+  {
+    "id": "character-weapon-sword-longsword",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/weapon/sword/longsword/walk/longsword.png",
+    "file": "art-source/lpc/raw/characters/weapon/sword/longsword/walk/longsword.png",
+    "authors": ["Johannes Sjölund (wulax)", "bluecarrot16"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+      "https://opengameart.org/content/lpc-extended-weapon-animations"
+    ],
+    "notes": "Unmodified source PNG (variant of weapon/sword/longsword/walk.png); credits from pinned CREDITS.csv.",
+    "sha256": "1acf3b8c0566b07e03e538d920722e916f2221846f69f5e4c585dfb07102ce4f"
+  },
+  {
+    "id": "character-weapon-sword-longsword-universal-behind",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/weapon/sword/longsword/universal_behind/walk/longsword.png",
+    "file": "art-source/lpc/raw/characters/weapon/sword/longsword/universal_behind/walk/longsword.png",
+    "authors": ["Johannes Sjölund (wulax)", "bluecarrot16"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+      "https://opengameart.org/content/lpc-extended-weapon-animations"
+    ],
+    "notes": "Unmodified source PNG (variant of weapon/sword/longsword/universal_behind/walk.png); credits from pinned CREDITS.csv.",
+    "sha256": "33a2c1ce3751c7fb83b61352ac3d93f2a31e5b36c802ec515304bd6837f31fce"
   }
 ]

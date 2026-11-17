@@ -127,6 +127,24 @@
     "notes": "Props for map_forgotten_forest (evergreens over the hedges), tinted like its tileset."
   },
   {
+    "id": "derived-npc-aldric",
+    "file": "public/assets/lpc/npcs/aldric_idle.png",
+    "sha256": "8f138f04047693c3d52a188549ac4cca6abb5f91fbfdba1d0bd6a27d7729a2a1",
+    "from": [
+      "character-beards-beard-medium",
+      "character-body-bodies-male",
+      "character-cape-solid-bg",
+      "character-cape-solid-fg",
+      "character-feet-boots-basic-male",
+      "character-hair-plain-adult",
+      "character-head-heads-human-male-elderly",
+      "character-legs-pants-male",
+      "character-torso-armour-plate-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "aldric at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
     "id": "derived-npc-elder",
     "file": "public/assets/lpc/npcs/elder_idle.png",
     "sha256": "7cf7aafee1c8d17f7fd45d935eda5b0af10cecf4e68e5a3a561eb845b6d4ff86",
@@ -163,6 +181,22 @@
     "notes": "fisherman_sau at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
   },
   {
+    "id": "derived-npc-lyra",
+    "file": "public/assets/lpc/npcs/lyra_idle.png",
+    "sha256": "8ece416acf2121d52c03621f7d68012434988133ffef7aea42733f2c2c56bb3e",
+    "from": [
+      "character-body-bodies-female",
+      "character-feet-boots-basic-thin",
+      "character-hair-bob-adult",
+      "character-head-heads-human-female",
+      "character-legs-pants-thin",
+      "character-neck-scarf",
+      "character-torso-armour-leather-female"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "lyra at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
     "id": "derived-npc-mira",
     "file": "public/assets/lpc/npcs/mira_idle.png",
     "sha256": "eba1881ce4216c6b984a7212f99355c9f7799c4b204642905f5500ffb1071fa0",
@@ -175,6 +209,40 @@
     ],
     "script": "scripts/lpc/npcs.mjs",
     "notes": "mira at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-npc-neris",
+    "file": "public/assets/lpc/npcs/neris_idle.png",
+    "sha256": "7d19e4708c6ba3da8a57aa32c94e5e31229925184977429f3499e7d60d140cd1",
+    "from": [
+      "character-body-bodies-female",
+      "character-feet-boots-basic-thin",
+      "character-hair-braid-adult-bg",
+      "character-hair-braid-adult-fg",
+      "character-head-heads-human-female",
+      "character-legs-pants-thin",
+      "character-torso-clothes-tunic-female",
+      "character-torso-waist-belt-leather-female"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "neris at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-npc-soldier-bran",
+    "file": "public/assets/lpc/npcs/soldier_bran_idle.png",
+    "sha256": "46cd2f57cf1eff1f41133f92ed2dab8d05dde96bb39b0a7c22ba6250502a2e3d",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hair-plain-adult",
+      "character-hat-headband-thick-adult",
+      "character-head-heads-human-male",
+      "character-legs-pants-male",
+      "character-torso-clothes-longsleeve-longsleeve-male",
+      "character-torso-clothes-sleeveless-sleeveless-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "soldier_bran at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
   },
   {
     "id": "derived-npc-vendor-ba",

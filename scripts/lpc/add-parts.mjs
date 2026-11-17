@@ -4,6 +4,8 @@
  * `node scripts/lpc/fetch-lpc.mjs --pin` to download, verify and pin them.
  *
  * Usage: node scripts/lpc/add-parts.mjs body/bodies/female/walk.png hair/plain/adult/walk.png ...
+ *   A sheet stored under another name in the repo (a colour variant) is given as
+ *   `<CREDITS.csv path>=<repo path>`, e.g. `legs/skirts/child/walk.png=legs/skirts/child/walk/white.png`.
  */
 import fs from 'fs';
 
@@ -47,7 +49,8 @@ const rows = new Map(
     }),
 );
 const entries = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-for (const p of process.argv.slice(2)) {
+for (const arg of process.argv.slice(2)) {
+  const [p, repoPath = p] = arg.split('=');
   const row = rows.get(p);
   if (!row) throw new Error(`Not in CREDITS.csv: ${p}`);
   const [, notes, authors, licenses, urls] = row;
@@ -55,18 +58,22 @@ for (const p of process.argv.slice(2)) {
     .replace(/\/walk\.png$/, '')
     .replace(/\.png$/, '')
     .replace(/[/_]/g, '-')}`;
-  if (entries.some((e) => e.id === id || e.path === `spritesheets/${p}`)) continue;
+  if (entries.some((e) => e.id === id || e.path === `spritesheets/${repoPath}`)) continue;
   if (!authors || !licenses) throw new Error(`No authors or licence: ${p}`);
   entries.push({
     id,
     repo: REPO,
     sha: SHA,
-    path: `spritesheets/${p}`,
-    file: `art-source/lpc/raw/characters/${p}`,
+    path: `spritesheets/${repoPath}`,
+    file: `art-source/lpc/raw/characters/${repoPath}`,
     authors: list(authors),
     licenses: [...new Set(list(licenses).map(licenceId))],
     urls: list(urls),
-    notes: notes || 'Unmodified source PNG; credits from pinned CREDITS.csv.',
+    notes:
+      notes ||
+      (repoPath === p
+        ? 'Unmodified source PNG; credits from pinned CREDITS.csv.'
+        : `Unmodified source PNG (variant of ${p}); credits from pinned CREDITS.csv.`),
   });
   console.log(`added ${id}`);
 }

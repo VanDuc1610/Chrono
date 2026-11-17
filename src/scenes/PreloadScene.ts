@@ -186,13 +186,13 @@ export class PreloadScene extends Phaser.Scene {
     // Chapter 2 (T-53, owner approved 2026-11-13): Lyra, the Exiled Praetor, Imperial Automaton,
     // Causality Enforcer (32x32 x4) and The Imperial Verdict (64x64, frame 4 = released).
     for (const [key, file, size] of [
-      ['npc_lyra', 'assets/npcs/lyra_idle.png', 32],
+      ['npc_lyra', 'assets/lpc/npcs/lyra_idle.png', 64],
       ['npc_exiled_praetor', 'assets/npcs/exiled_praetor_idle.png', 32],
       ['enemy_imperial_automaton', 'assets/enemies/imperial_automaton.png', 32],
       ['enemy_causality_enforcer', 'assets/enemies/causality_enforcer.png', 32],
       ['boss_imperial_verdict', 'assets/enemies/imperial_verdict.png', 64],
       // Chapter 3 (T-58, owner approved 2026-11-13).
-      ['npc_neris', 'assets/npcs/neris_idle.png', 32],
+      ['npc_neris', 'assets/lpc/npcs/neris_idle.png', 64],
       ['npc_amnesiac_king', 'assets/npcs/amnesiac_king_idle.png', 32],
       ['enemy_memory_wraith', 'assets/enemies/memory_wraith.png', 32],
       ['enemy_thought_eater', 'assets/enemies/thought_eater.png', 32],
@@ -200,9 +200,9 @@ export class PreloadScene extends Phaser.Scene {
       ['boss_faceless_keeper', 'assets/enemies/faceless_keeper.png', 48],
       ['boss_nameless_choir', 'assets/enemies/nameless_choir.png', 64],
       // Chapter 4 (T-64; owner delegated Chapter 4 to Claude 2026-11-14, reviews in playtest).
-      ['npc_aldric', 'assets/npcs/aldric_idle.png', 32],
+      ['npc_aldric', 'assets/lpc/npcs/aldric_idle.png', 64],
       ['npc_kaelen', 'assets/npcs/kaelen_idle.png', 32],
-      ['npc_soldier_bran', 'assets/npcs/soldier_bran_idle.png', 32],
+      ['npc_soldier_bran', 'assets/lpc/npcs/soldier_bran_idle.png', 64],
       ['npc_chronicler_elion', 'assets/npcs/chronicler_elion_idle.png', 32],
       ['npc_renard', 'assets/npcs/renard_idle.png', 32],
       ['npc_kuro', 'assets/npcs/kuro_idle.png', 32],
