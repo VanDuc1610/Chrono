@@ -161,9 +161,9 @@ export class PreloadScene extends Phaser.Scene {
     });
     // Chapter 1: old lighthouse keeper (NPC_OLD_KEEPER_001), Drowned Drifter (MOB_DRIFTER_001),
     // The Sunken Bellkeeper (BOSS_BELLKEEPER_001, 64x64, frame 4 = released).
-    this.load.spritesheet('npc_old_keeper', 'assets/npcs/old_keeper_idle.png', {
-      frameWidth: 32,
-      frameHeight: 32,
+    this.load.spritesheet('npc_old_keeper', 'assets/lpc/npcs/old_keeper_idle.png', {
+      frameWidth: 64,
+      frameHeight: 64,
     });
     this.load.spritesheet('enemy_drifter', 'assets/enemies/drifter_float.png', {
       frameWidth: 32,
@@ -173,9 +173,9 @@ export class PreloadScene extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 64,
     });
-    this.load.spritesheet('npc_forgotten_child', 'assets/npcs/forgotten_child_idle.png', {
-      frameWidth: 32,
-      frameHeight: 32,
+    this.load.spritesheet('npc_forgotten_child', 'assets/lpc/npcs/forgotten_child_idle.png', {
+      frameWidth: 64,
+      frameHeight: 64,
     });
     // The Drowned Sentinel (BOSS_SENTINEL_001): frames 0-3 idle, 4 released (kneeling), 64x64.
     this.load.spritesheet('boss_sentinel', 'assets/enemies/sentinel.png', {
@@ -187,13 +187,13 @@ export class PreloadScene extends Phaser.Scene {
     // Causality Enforcer (32x32 x4) and The Imperial Verdict (64x64, frame 4 = released).
     for (const [key, file, size] of [
       ['npc_lyra', 'assets/lpc/npcs/lyra_idle.png', 64],
-      ['npc_exiled_praetor', 'assets/npcs/exiled_praetor_idle.png', 32],
+      ['npc_exiled_praetor', 'assets/lpc/npcs/exiled_praetor_idle.png', 64],
       ['enemy_imperial_automaton', 'assets/enemies/imperial_automaton.png', 32],
       ['enemy_causality_enforcer', 'assets/enemies/causality_enforcer.png', 32],
       ['boss_imperial_verdict', 'assets/enemies/imperial_verdict.png', 64],
       // Chapter 3 (T-58, owner approved 2026-11-13).
       ['npc_neris', 'assets/lpc/npcs/neris_idle.png', 64],
-      ['npc_amnesiac_king', 'assets/npcs/amnesiac_king_idle.png', 32],
+      ['npc_amnesiac_king', 'assets/lpc/npcs/amnesiac_king_idle.png', 64],
       ['enemy_memory_wraith', 'assets/enemies/memory_wraith.png', 32],
       ['enemy_thought_eater', 'assets/enemies/thought_eater.png', 32],
       ['enemy_hollow_archivist', 'assets/enemies/hollow_archivist.png', 32],
@@ -201,11 +201,11 @@ export class PreloadScene extends Phaser.Scene {
       ['boss_nameless_choir', 'assets/enemies/nameless_choir.png', 64],
       // Chapter 4 (T-64; owner delegated Chapter 4 to Claude 2026-11-14, reviews in playtest).
       ['npc_aldric', 'assets/lpc/npcs/aldric_idle.png', 64],
-      ['npc_kaelen', 'assets/npcs/kaelen_idle.png', 32],
+      ['npc_kaelen', 'assets/lpc/npcs/kaelen_idle.png', 64],
       ['npc_soldier_bran', 'assets/lpc/npcs/soldier_bran_idle.png', 64],
-      ['npc_chronicler_elion', 'assets/npcs/chronicler_elion_idle.png', 32],
-      ['npc_renard', 'assets/npcs/renard_idle.png', 32],
-      ['npc_kuro', 'assets/npcs/kuro_idle.png', 32],
+      ['npc_chronicler_elion', 'assets/lpc/npcs/chronicler_elion_idle.png', 64],
+      ['npc_renard', 'assets/lpc/npcs/renard_idle.png', 64],
+      ['npc_kuro', 'assets/lpc/npcs/kuro_idle.png', 64],
       ['enemy_ghost_sniper', 'assets/enemies/ghost_sniper.png', 32],
       ['enemy_endless_phalanx', 'assets/enemies/endless_phalanx.png', 32],
       ['enemy_banner_carrier', 'assets/enemies/banner_carrier.png', 32],
@@ -213,7 +213,7 @@ export class PreloadScene extends Phaser.Scene {
       ['boss_crimson_standard', 'assets/enemies/crimson_standard.png', 48],
       ['boss_the_last_war', 'assets/enemies/the_last_war.png', 64],
       // Chapter 5 (owner approved 2026-11-14).
-      ['npc_ivo', 'assets/npcs/ivo_idle.png', 32],
+      ['npc_ivo', 'assets/lpc/npcs/ivo_idle.png', 64],
       ['npc_mira', 'assets/lpc/npcs/mira_idle.png', 64],
       ['enemy_branch_phantom', 'assets/enemies/branch_phantom.png', 32],
       ['enemy_unborn_cocoon', 'assets/enemies/unborn_cocoon.png', 32],
@@ -223,8 +223,8 @@ export class PreloadScene extends Phaser.Scene {
       ['boss_other_peter', 'assets/enemies/other_peter.png', 48],
       ['boss_unborn_king', 'assets/enemies/unborn_king.png', 64],
       // Chapter 6 (owner approved 2026-11-14).
-      ['npc_chronos_remnant', 'assets/npcs/chronos_remnant_idle.png', 32],
-      ['npc_solon', 'assets/npcs/solon_idle.png', 32],
+      ['npc_chronos_remnant', 'assets/lpc/npcs/chronos_remnant_idle.png', 64],
+      ['npc_solon', 'assets/lpc/npcs/solon_idle.png', 64],
       ['enemy_heel_shadow', 'assets/enemies/heel_shadow.png', 32],
       ['enemy_origin_nullifier', 'assets/enemies/origin_nullifier.png', 32],
       ['enemy_archon_construct', 'assets/enemies/archon_construct.png', 32],
@@ -234,10 +234,10 @@ export class PreloadScene extends Phaser.Scene {
       ['boss_echo_forgotten', 'assets/enemies/echo_forgotten.png', 48],
       ['boss_genesis_warden', 'assets/enemies/genesis_warden.png', 64],
       // Chapter 7 (owner approved 2026-11-15).
-      ['npc_kuro_void', 'assets/npcs/kuro_void_idle.png', 32],
-      ['npc_kuro_mother', 'assets/npcs/kuro_mother_idle.png', 32],
-      ['npc_nameless_shade', 'assets/npcs/nameless_shade_idle.png', 32],
-      ['npc_first_forgotten', 'assets/npcs/first_forgotten_idle.png', 48],
+      ['npc_kuro_void', 'assets/lpc/npcs/kuro_void_idle.png', 64],
+      ['npc_kuro_mother', 'assets/lpc/npcs/kuro_mother_idle.png', 64],
+      ['npc_nameless_shade', 'assets/lpc/npcs/nameless_shade_idle.png', 64],
+      ['npc_first_forgotten', 'assets/lpc/npcs/first_forgotten_idle.png', 96],
       ['enemy_name_eater', 'assets/enemies/name_eater.png', 32],
       ['enemy_hollow_husk', 'assets/enemies/hollow_husk.png', 32],
       ['enemy_erasure_moths', 'assets/enemies/erasure_moths.png', 32],
@@ -247,7 +247,7 @@ export class PreloadScene extends Phaser.Scene {
       ['boss_kuro_void', 'assets/enemies/kuro_boss.png', 48],
       ['boss_primordial_shade', 'assets/enemies/primordial_shade.png', 48],
       // Chapter 8 (owner approved 2026-11-15).
-      ['npc_chronos_reborn', 'assets/npcs/chronos_reborn_idle.png', 48],
+      ['npc_chronos_reborn', 'assets/lpc/npcs/chronos_reborn_idle.png', 96],
       ['enemy_assimilator', 'assets/enemies/assimilator.png', 32],
       ['enemy_phase_wraith', 'assets/enemies/phase_wraith.png', 32],
       ['enemy_doom_bell', 'assets/enemies/doom_bell.png', 32],

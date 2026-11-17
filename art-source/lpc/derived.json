@@ -145,6 +145,64 @@
     "notes": "aldric at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
   },
   {
+    "id": "derived-npc-amnesiac-king",
+    "file": "public/assets/lpc/npcs/amnesiac_king_idle.png",
+    "sha256": "6ed5272181d6dfa17c925ed7cf38737f7307ad125c94830645650264f03e965f",
+    "from": [
+      "character-beards-beard-medium-sit",
+      "character-body-bodies-male-sit",
+      "character-feet-slippers-male-sit",
+      "character-hair-plain-adult-sit",
+      "character-hat-formal-crown-adult-sit",
+      "character-head-heads-human-male-elderly-sit",
+      "character-legs-skirts-plain-male-sit",
+      "character-torso-clothes-longsleeve-longsleeve-male-sit"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "amnesiac_king at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-npc-chronicler-elion",
+    "file": "public/assets/lpc/npcs/chronicler_elion_idle.png",
+    "sha256": "61f616a92a6d442b337db9ced7c7c09fcc0bc193f1fe2370876be28b9cf818a4",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-slippers-male",
+      "character-head-heads-human-male-elderly",
+      "character-legs-skirts-plain-male",
+      "character-torso-clothes-longsleeve-longsleeve-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "chronicler_elion at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-npc-chronos-reborn",
+    "file": "public/assets/lpc/npcs/chronos_reborn_idle.png",
+    "sha256": "5a5ad37985f99a3042e6331eac1e9437a89884c99494cfa349caf2686fcbd60a",
+    "from": [
+      "character-body-bodies-female",
+      "character-hair-long-straight-adult",
+      "character-head-heads-human-female",
+      "character-torso-clothes-robe-female"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "chronos_reborn at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-npc-chronos-remnant",
+    "file": "public/assets/lpc/npcs/chronos_remnant_idle.png",
+    "sha256": "9b6664da14a58b568e60c8b85238c0b69cf6e90f50159d425f54191d81b4f540",
+    "from": [
+      "character-body-bodies-female",
+      "character-hair-long-straight-adult",
+      "character-hat-formal-crown-adult",
+      "character-head-heads-human-female",
+      "character-torso-clothes-robe-female"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "chronos_remnant at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
     "id": "derived-npc-elder",
     "file": "public/assets/lpc/npcs/elder_idle.png",
     "sha256": "7cf7aafee1c8d17f7fd45d935eda5b0af10cecf4e68e5a3a561eb845b6d4ff86",
@@ -165,6 +223,35 @@
     "notes": "elder at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
   },
   {
+    "id": "derived-npc-exiled-praetor",
+    "file": "public/assets/lpc/npcs/exiled_praetor_idle.png",
+    "sha256": "e179957bb13e1d493a2a2b6a9eae6745b6a94aa9d5f0c3564bf7d822b3e7252c",
+    "from": [
+      "character-beards-beard-medium",
+      "character-body-bodies-male",
+      "character-feet-slippers-male",
+      "character-hair-plain-adult",
+      "character-head-heads-human-male-elderly",
+      "character-legs-skirts-plain-male",
+      "character-torso-clothes-longsleeve-longsleeve-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "exiled_praetor at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-npc-first-forgotten",
+    "file": "public/assets/lpc/npcs/first_forgotten_idle.png",
+    "sha256": "95dfdababb37fa7437b53da58010bbebd5216be3f7b9973c149dc11607791da8",
+    "from": [
+      "character-body-bodies-female",
+      "character-hat-cloth-hood-sack-adult",
+      "character-head-heads-human-female",
+      "character-torso-clothes-robe-female"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "first_forgotten at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
     "id": "derived-npc-fisherman-sau",
     "file": "public/assets/lpc/npcs/fisherman_sau_idle.png",
     "sha256": "01472e16247ac09a702052465afaed2e957b26df1b8249d9a1fbc31313140ebb",
@@ -179,6 +266,101 @@
     ],
     "script": "scripts/lpc/npcs.mjs",
     "notes": "fisherman_sau at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-npc-forgotten-child",
+    "file": "public/assets/lpc/npcs/forgotten_child_idle.png",
+    "sha256": "77fddc3971c3b4fd3da741cf5ffab8cc9fe77ef3c0503ce85e224871cd2fc08d",
+    "from": [
+      "character-body-bodies-child",
+      "character-hair-relm-short-child",
+      "character-head-heads-human-child",
+      "character-legs-skirts-child",
+      "character-torso-clothes-shirt-child"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "forgotten_child at the LPC scale: generator layers recoloured to the character's design, 2-frame idle."
+  },
+  {
+    "id": "derived-npc-ivo",
+    "file": "public/assets/lpc/npcs/ivo_idle.png",
+    "sha256": "c1e91ef7ca9839c4a02074f1a53e4b8dc05ff940900ca455c8a2ed3e77e23605",
+    "from": [
+      "character-beards-beard-medium",
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hair-plain-adult",
+      "character-head-heads-human-male-elderly",
+      "character-legs-pants-male",
+      "character-torso-clothes-longsleeve-longsleeve-male",
+      "character-torso-clothes-vest-male",
+      "character-weapon-polearm-cane-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "ivo at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-npc-kaelen",
+    "file": "public/assets/lpc/npcs/kaelen_idle.png",
+    "sha256": "04760c3554dc15a1c4fc43526c4c6863fe78bb9a1af232b0b4784f96b684a6fd",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hair-messy1-adult",
+      "character-head-heads-human-male",
+      "character-legs-pants-male",
+      "character-torso-armour-plate-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "kaelen at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-npc-kuro",
+    "file": "public/assets/lpc/npcs/kuro_idle.png",
+    "sha256": "84d20338f7fddc74d8b0b603a38c0c71bde1952cd94ac2d86e4155ef1e38e84d",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hair-messy1-adult",
+      "character-head-heads-human-male",
+      "character-legs-pants-male",
+      "character-torso-clothes-longsleeve-longsleeve-male",
+      "character-torso-jacket-trench-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "kuro at the LPC scale: generator layers recoloured to the character's design, 5-frame idle."
+  },
+  {
+    "id": "derived-npc-kuro-mother",
+    "file": "public/assets/lpc/npcs/kuro_mother_idle.png",
+    "sha256": "7c2c5626a2610cd33dbefac3d62d0de5b52580e8a3a9e7c9ae9ff49cded3c0b8",
+    "from": [
+      "character-body-bodies-female",
+      "character-feet-slippers-male",
+      "character-hair-long-tied-adult-bg",
+      "character-hair-long-tied-adult-fg",
+      "character-head-heads-human-female",
+      "character-legs-skirts-straight-thin",
+      "character-torso-clothes-blouse-longsleeve-female"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "kuro_mother at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-npc-kuro-void",
+    "file": "public/assets/lpc/npcs/kuro_void_idle.png",
+    "sha256": "83ccce760cb914c526d1e445257a57f59b57ac35d7345b7227bf564c479bc4d4",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hair-messy1-adult",
+      "character-head-heads-human-male",
+      "character-legs-pants-male",
+      "character-torso-clothes-longsleeve-longsleeve-male",
+      "character-torso-jacket-trench-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "kuro_void at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
   },
   {
     "id": "derived-npc-lyra",
@@ -211,6 +393,19 @@
     "notes": "mira at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
   },
   {
+    "id": "derived-npc-nameless-shade",
+    "file": "public/assets/lpc/npcs/nameless_shade_idle.png",
+    "sha256": "1eb1d4b400750acb69c1dd4fc93431bf6e6ce0e25fc799cff85de276fe0c779e",
+    "from": [
+      "character-body-bodies-female",
+      "character-hat-cloth-hood-adult",
+      "character-head-heads-human-female",
+      "character-torso-clothes-robe-female"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "nameless_shade at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
     "id": "derived-npc-neris",
     "file": "public/assets/lpc/npcs/neris_idle.png",
     "sha256": "7d19e4708c6ba3da8a57aa32c94e5e31229925184977429f3499e7d60d140cd1",
@@ -228,6 +423,39 @@
     "notes": "neris at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
   },
   {
+    "id": "derived-npc-old-keeper",
+    "file": "public/assets/lpc/npcs/old_keeper_idle.png",
+    "sha256": "038f80a6e1db773a0b70df9db1b0191452e8e4bba99f0730895eb7a9e8441597",
+    "from": [
+      "character-beards-beard-trimmed",
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hat-cloth-hood-adult",
+      "character-head-heads-human-male-elderly",
+      "character-legs-skirts-plain-male",
+      "character-torso-clothes-longsleeve-longsleeve-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "old_keeper at the LPC scale: generator layers recoloured to the character's design, 5-frame idle."
+  },
+  {
+    "id": "derived-npc-renard",
+    "file": "public/assets/lpc/npcs/renard_idle.png",
+    "sha256": "8d1738e0a0823d31a402b1b4a1a9379756ec3f1b645e047f8f7d8dd3a9613cba",
+    "from": [
+      "character-beards-beard-trimmed",
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hair-plain-adult",
+      "character-hat-helmet-kettle-adult",
+      "character-head-heads-human-male",
+      "character-legs-pants-male",
+      "character-torso-clothes-longsleeve-longsleeve-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "renard at the LPC scale: generator layers recoloured to the character's design, 7-frame idle."
+  },
+  {
     "id": "derived-npc-soldier-bran",
     "file": "public/assets/lpc/npcs/soldier_bran_idle.png",
     "sha256": "46cd2f57cf1eff1f41133f92ed2dab8d05dde96bb39b0a7c22ba6250502a2e3d",
@@ -243,6 +471,21 @@
     ],
     "script": "scripts/lpc/npcs.mjs",
     "notes": "soldier_bran at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-npc-solon",
+    "file": "public/assets/lpc/npcs/solon_idle.png",
+    "sha256": "bd9b776836dac2161d713c3b3fbe61a30cb035b81e888e08283ecdcf149d7c85",
+    "from": [
+      "character-body-bodies-female",
+      "character-cape-solid-bg",
+      "character-cape-solid-fg",
+      "character-hat-cloth-hood-adult",
+      "character-head-heads-human-female",
+      "character-torso-clothes-robe-female"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "solon at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
   },
   {
     "id": "derived-npc-vendor-ba",

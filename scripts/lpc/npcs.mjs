@@ -59,10 +59,33 @@ const R = {
   creamSleeves: ['#6e6858', '#aca492', '#ded6c4'],
   oliveTunic: ['#22261a', '#3a4228', '#58623e', '#7a8656'],
   soldierTrouser: ['#1c1812', '#322c22', '#4a4232'],
+  royalRed: ['#22060a', '#4e1018', '#7e2028', '#ac3a40'],
+  greyRobe: ['#1c1e20', '#383b3e', '#5c6064', '#868a8e'],
+  whiteRobe: ['#5e584c', '#9c9484', '#ccc4b2', '#eee8da'],
+  orangeVest: ['#3a1a08', '#7a3c12', '#b8641e', '#e09040'],
+  shirtCream: ['#5e5848', '#9a927e', '#d0c8b2'],
+  blackPlate: ['#08080c', '#18181f', '#2a2a34', '#42424e', '#5c5c6a'],
+  trenchGrey: ['#1a1c20', '#363a42', '#5a5e68', '#868a94'],
+  shirtBlack: ['#08080a', '#141418', '#24242a'],
+  voidCoat: ['#100c18', '#241c34', '#3a2e52', '#584872'],
+  paleBlue: ['#3a4858', '#6a809a', '#a2b6cc', '#d0dcea'],
+  skirtSlate: ['#141820', '#262c38', '#3a4252', '#525c6e'],
+  greyingHair: ['#141218', '#2c2830', '#4a4650', '#7a7680'],
+  raincoat: ['#121e18', '#263c30', '#3e5c4a', '#5e8268'],
+  rust: ['#341608', '#622c14', '#944820', '#bc6a34'],
+  navyTunic: ['#121a2c', '#223254', '#38507e', '#5672a4'],
+  helmetSteel: ['#1e2228', '#4a525e', '#7a8492', '#aeb8c4'],
+  ghost: ['#464a56', '#868c9c', '#c0c6d2', '#ecf0f6'],
+  lavenderShade: ['#342a4a', '#6e6290', '#a89cc4', '#d8d0ec'],
+  snowRobe: ['#5e6a80', '#9eaec8', '#ccd8ec', '#f2f6ff'],
+  lightGold: ['#7a5a18', '#c09a36', '#ecd080', '#fff2c8'],
+  goldRobe: ['#4a320c', '#96681e', '#d0a040', '#f2d488'],
+  whiteHair: ['#7a7e8a', '#b4b8c4', '#dfe2ea', '#f8f9fc'],
+  voidViolet: ['#0a0612', '#181026', '#2a1e40', '#40305c'],
 };
 
 /** Layers bottom to top: [manifest id, ramp or null to keep the colours]. */
-const NPCS = {
+const npcSpecs = () => ({
   elder: {
     old: 'public/assets/npcs/elder_idle.png',
     layers: [
@@ -177,7 +200,255 @@ const NPCS = {
       ['custom:tally-spear', null],
     ],
   },
-};
+  // Chapter 2: the king who forgot his name; crown, red robe with a gold band, silver beard.
+  // Seated on his throne (owner, 2026-11-17): the LPC sit pose, column 2 (on a chair).
+  amnesiac_king: {
+    old: 'public/assets/npcs/amnesiac_king_idle.png',
+    col: 2,
+    layers: [
+      [throneBack, null],
+      ['character-body-bodies-male-sit', R.skinParchment],
+      ['character-head-heads-human-male-elderly-sit', R.skinParchment],
+      ['character-feet-slippers-male-sit', R.slipper],
+      ['character-legs-skirts-plain-male-sit', R.royalRed],
+      ['character-torso-clothes-longsleeve-longsleeve-male-sit', R.royalRed],
+      [stripe(31, 36, 52, '#e0b450', '#6a4a14'), null],
+      ['character-hair-plain-adult-sit', R.silver],
+      ['character-beards-beard-medium-sit', R.silver],
+      ['character-hat-formal-crown-adult-sit', null],
+      [throneArms, null],
+    ],
+  },
+  // Chapter 4: Elion, the tearless chronicler; shaven head, grey robe, the chronicle in his hands.
+  chronicler_elion: {
+    old: 'public/assets/npcs/chronicler_elion_idle.png',
+    layers: [
+      ['character-body-bodies-male', R.skinParchment],
+      ['character-head-heads-human-male-elderly', R.skinParchment],
+      ['character-feet-slippers-male', R.slipper],
+      ['character-legs-skirts-plain-male', R.greyRobe],
+      ['character-torso-clothes-longsleeve-longsleeve-male', R.greyRobe],
+      [
+        panel(25, 40, 14, 8, '#5a3a22', '#24160c', [
+          [1, 1, '#e8dcc0'],
+          [12, 1, '#e8dcc0'],
+          [4, 3, '#a87c4a'],
+          [9, 3, '#a87c4a'],
+          [6, 4, '#a87c4a'],
+          [7, 4, '#a87c4a'],
+        ]),
+        null,
+      ],
+    ],
+  },
+  // Chapter 2: the exiled praetor; white robe, violet sash of office, gold circlet, white beard.
+  exiled_praetor: {
+    old: 'public/assets/npcs/exiled_praetor_idle.png',
+    layers: [
+      ['character-body-bodies-male', R.skinParchment],
+      ['character-head-heads-human-male-elderly', R.skinParchment],
+      ['character-feet-slippers-male', R.slipper],
+      ['character-legs-skirts-plain-male', R.whiteRobe],
+      ['character-torso-clothes-longsleeve-longsleeve-male', R.whiteRobe],
+      [strap('#3a1a52', '#7a4aa0'), null],
+      ['character-hair-plain-adult', R.whiteHair],
+      ['character-beards-beard-medium', R.whiteHair],
+      [circlet(19, '#e0b450', '#6a4a14'), null],
+    ],
+  },
+  // Chapter 5: Ivo the tinkerer; orange vest over a cream shirt, goggles up, white beard, cane.
+  ivo: {
+    old: 'public/assets/npcs/ivo_idle.png',
+    layers: [
+      ['character-body-bodies-male', R.skinWarm],
+      ['character-head-heads-human-male-elderly', R.skinWarm],
+      ['character-feet-boots-basic-male', R.bootBrown],
+      ['character-legs-pants-male', R.fisherTrouser],
+      ['character-torso-clothes-longsleeve-longsleeve-male', R.shirtCream],
+      ['character-torso-clothes-vest-male', R.orangeVest],
+      ['character-hair-plain-adult', R.greyHair],
+      ['character-beards-beard-medium', R.whiteHair],
+      [goggles, null],
+      ['character-weapon-polearm-cane-male', null],
+    ],
+  },
+  // Chapter 4: Kaelen; black plate with the gold star, scarred cheek, dark hair, halberd.
+  kaelen: {
+    old: 'public/assets/npcs/kaelen_idle.png',
+    layers: [
+      ['character-body-bodies-male', R.skinLight],
+      ['character-head-heads-human-male', R.skinLight],
+      ['character-feet-boots-basic-male', R.bootBrown],
+      ['character-legs-pants-male', R.trouserDark],
+      ['character-torso-armour-plate-male', R.blackPlate],
+      [star(32, 40, '#f0c24a', '#7a5414'), null],
+      [panel(22, 48, 20, 2, '#8c2028', '#3a0c10'), null],
+      [scar, null],
+      ['character-hair-messy1-adult', R.brownHair],
+      ['custom:halberd', null],
+    ],
+  },
+  // Kuro: black hair, grey coat over black, Possibility-violet eyes; frame 4 is the Interval flicker.
+  kuro: {
+    old: 'public/assets/npcs/kuro_idle.png',
+    frames: 5,
+    glitch: 4,
+    layers: [
+      ['character-body-bodies-male', R.skinWarm],
+      ['character-head-heads-human-male', R.skinWarm],
+      ['character-feet-boots-basic-male', R.bootBrown],
+      ['character-legs-pants-male', R.trouserDark],
+      ['character-torso-clothes-longsleeve-longsleeve-male', R.shirtBlack],
+      ['character-torso-jacket-trench-male', R.trenchGrey],
+      [irises('#a070ff'), null],
+      ['character-hair-messy1-adult', R.blackHair],
+    ],
+  },
+  // Kuro eroded by the void (chapters 7-9): the coat gone violet-dark, sparks at his feet.
+  kuro_void: {
+    old: 'public/assets/npcs/kuro_void_idle.png',
+    layers: [
+      ['character-body-bodies-male', R.skinWarm],
+      ['character-head-heads-human-male', R.skinWarm],
+      ['character-feet-boots-basic-male', R.voidViolet],
+      ['character-legs-pants-male', R.voidViolet],
+      ['character-torso-clothes-longsleeve-longsleeve-male', R.shirtBlack],
+      ['character-torso-jacket-trench-male', R.voidCoat],
+      [irises('#c8a0ff'), null],
+      ['character-hair-messy1-adult', R.blackHair],
+      [voidSparks, null],
+    ],
+  },
+  // Bà Mai, Kuro's mother; pale blue blouse, long slate skirt, greying hair tied back.
+  kuro_mother: {
+    old: 'public/assets/npcs/kuro_mother_idle.png',
+    layers: [
+      ['character-hair-long-tied-adult-bg', R.greyingHair],
+      ['character-body-bodies-female', R.skinWarm],
+      ['character-head-heads-human-female', R.skinWarm],
+      ['character-feet-slippers-male', R.slipper],
+      ['character-legs-skirts-straight-thin', R.skirtSlate],
+      ['character-torso-clothes-blouse-longsleeve-female', R.paleBlue],
+      ['character-hair-long-tied-adult-fg', R.greyingHair],
+    ],
+  },
+  // Chapter 1: the old lighthouse keeper; green oilskin hood and coat, grey beard, storm lantern.
+  old_keeper: {
+    old: 'public/assets/npcs/old_keeper_idle.png',
+    frames: 5,
+    layers: [
+      ['character-body-bodies-male', R.skinTan],
+      ['character-head-heads-human-male-elderly', R.skinTan],
+      ['character-feet-boots-basic-male', R.bootBrown],
+      ['character-legs-skirts-plain-male', R.raincoat],
+      ['character-torso-clothes-longsleeve-longsleeve-male', R.raincoat],
+      ['character-hat-cloth-hood-adult', R.raincoat],
+      ['character-beards-beard-trimmed', R.greyHair],
+      [lantern, null],
+    ],
+  },
+  // Chapter 4: Renard; kettle helmet, rust beard, navy tunic with a sword belt, short sword.
+  renard: {
+    old: 'public/assets/npcs/renard_idle.png',
+    frames: 7,
+    layers: [
+      ['character-body-bodies-male', R.skinLight],
+      ['character-head-heads-human-male', R.skinLight],
+      ['character-feet-boots-basic-male', R.bootBrown],
+      ['character-legs-pants-male', R.trouserDark],
+      ['character-torso-clothes-longsleeve-longsleeve-male', R.navyTunic],
+      [strap('#24160c', '#6a4a30'), null],
+      ['character-hair-plain-adult', R.rust],
+      ['character-beards-beard-trimmed', R.rust],
+      ['character-hat-helmet-kettle-adult', R.helmetSteel],
+      [shortSword, null],
+    ],
+  },
+  // Chapter 0-1: the forgotten child, a pale flickering ghost (2 frames, the second fainter).
+  forgotten_child: {
+    old: 'public/assets/npcs/forgotten_child_idle.png',
+    frames: 2,
+    flicker: true,
+    alpha: 0.85,
+    layers: [
+      ['character-body-bodies-child', R.ghost],
+      ['character-head-heads-human-child', R.ghost],
+      ['character-legs-skirts-child', R.ghost],
+      ['character-torso-clothes-shirt-child', R.ghost],
+      ['character-hair-relm-short-child', R.ghost],
+    ],
+  },
+  // Chapter 7-9: a nameless shade; faceless, lavender, robed and hooded, a little transparent.
+  nameless_shade: {
+    old: 'public/assets/npcs/nameless_shade_idle.png',
+    alpha: 0.88,
+    layers: [
+      ['character-body-bodies-female', R.lavenderShade],
+      ['character-head-heads-human-female', R.lavenderShade],
+      [face('#a89cc4'), null],
+      ['character-torso-clothes-robe-female', R.lavenderShade],
+      ['character-hat-cloth-hood-adult', R.lavenderShade],
+    ],
+  },
+  // Solon: faceless, white hooded robe and mantle, the gold plate of office on the chest.
+  solon: {
+    old: 'public/assets/npcs/solon_idle.png',
+    layers: [
+      ['character-cape-solid-bg', R.snowRobe],
+      ['character-body-bodies-female', R.snowRobe],
+      ['character-head-heads-human-female', R.snowRobe],
+      [face('#ccd8ec'), null],
+      ['character-torso-clothes-robe-female', R.snowRobe],
+      ['character-cape-solid-fg', R.snowRobe],
+      ['character-hat-cloth-hood-adult', R.snowRobe],
+      [panel(29, 39, 7, 6, '#e0b450', '#6a4a14', [[3, 2, '#fff0b8']]), null],
+    ],
+  },
+  // Chronos's remnant: a figure of gold light under a crown, no face.
+  chronos_remnant: {
+    old: 'public/assets/npcs/chronos_remnant_idle.png',
+    alpha: 0.9,
+    layers: [
+      ['character-body-bodies-female', R.lightGold],
+      ['character-head-heads-human-female', R.lightGold],
+      [face('#fff2c8'), null],
+      ['character-torso-clothes-robe-female', R.lightGold],
+      ['character-hair-long-straight-adult', R.lightGold],
+      ['character-hat-formal-crown-adult', null],
+    ],
+  },
+  // Chronos reborn: silver-white hair, gold robe, amber eyes, a halo behind.
+  // 96 px frame, floating 6 px up, great halo, gold train and motes (owner: stands apart).
+  chronos_reborn: {
+    old: 'public/assets/npcs/chronos_reborn_idle.png',
+    size: 96,
+    lift: 6,
+    under: [bigHalo],
+    over: [robeTrain, motes],
+    layers: [
+      ['character-body-bodies-female', R.skinPale],
+      ['character-head-heads-human-female', R.skinPale],
+      [irises('#e0a020'), null],
+      ['character-torso-clothes-robe-female', R.goldRobe],
+      ['character-hair-long-straight-adult', R.whiteHair],
+    ],
+  },
+  // The First Forgotten: an erased violet silhouette, white glowing eyes, broken chains, beads.
+  // 96 px frame: the bell cloak swallows the body; chains overhead, staffs either side.
+  first_forgotten: {
+    old: 'public/assets/npcs/first_forgotten_idle.png',
+    size: 96,
+    under: [bigChains, staffs],
+    over: [bellCloak],
+    layers: [
+      ['character-body-bodies-female', R.voidViolet],
+      ['character-head-heads-human-female', R.voidViolet],
+      ['character-torso-clothes-robe-female', R.voidViolet],
+      ['character-hat-cloth-hood-sack-adult', R.voidViolet],
+      [face('#181026', '#f4f0ff'), null],
+    ],
+  },
+});
 
 const manifest = JSON.parse(fs.readFileSync('art-source/lpc/manifest.json', 'utf8'));
 const byId = new Map(manifest.map((e) => [e.id, e]));
@@ -344,6 +615,356 @@ function satchel(body) {
   return px;
 }
 
+/** A diagonal strap from the left shoulder to the right hip. */
+const strap = (dark, light) => () => {
+  const px = blank();
+  for (let t = 0; t <= 16; t++) {
+    const x = 24 + t;
+    const y = 33 + Math.round(t * 0.95);
+    plot(px, x, y, hex(light));
+    plot(px, x, y + 1, hex(dark));
+  }
+  return px;
+};
+
+/** Paints over the eyes (faceless spirits); `eyes` adds glowing pupils in that colour. */
+const face = (skin, eyes) => () => {
+  const px = blank();
+  for (let y = 29; y <= 31; y++)
+    for (const x0 of [26, 34]) for (let x = x0; x <= x0 + 3; x++) plot(px, x, y, hex(skin));
+  if (eyes) for (const x of [27, 28, 35, 36]) plot(px, x, 30, hex(eyes));
+  return px;
+};
+
+/** Coloured irises (Kuro's Possibility violet, Chronos's amber). */
+const irises = (c) => () => {
+  const px = blank();
+  for (const [x, y] of [
+    [27, 29],
+    [28, 29],
+    [27, 30],
+    [35, 29],
+    [36, 29],
+    [36, 30],
+  ])
+    plot(px, x, y, hex(c));
+  return px;
+};
+
+/** A filled rectangle with an outline: emblems, plates, books, belts. */
+const panel = (x0, y0, w, h, fill, edge, mark) => () => {
+  const px = blank();
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < w; x++)
+      plot(
+        px,
+        x0 + x,
+        y0 + y,
+        x === 0 || y === 0 || x === w - 1 || y === h - 1 ? hex(edge) : hex(fill),
+      );
+  if (mark) for (const [x, y, c] of mark) plot(px, x0 + x, y0 + y, hex(c));
+  return px;
+};
+
+/** A vertical robe stripe down the front. */
+const stripe = (x0, y0, y1, c, edge) => () => {
+  const px = blank();
+  for (let y = y0; y <= y1; y++) {
+    plot(px, x0 - 1, y, hex(edge));
+    plot(px, x0, y, hex(c));
+    plot(px, x0 + 1, y, hex(c));
+    plot(px, x0 + 2, y, hex(edge));
+  }
+  return px;
+};
+
+/** A four-pointed star emblem (Kaelen's breastplate). */
+const star = (cx, cy, c, edge) => () => {
+  const px = blank();
+  for (let k = -4; k <= 4; k++) {
+    plot(px, cx + k, cy, hex(Math.abs(k) === 4 ? edge : c));
+    plot(px, cx, cy + k, hex(Math.abs(k) === 4 ? edge : c));
+  }
+  for (const [dx, dy] of [
+    [-1, -1],
+    [1, -1],
+    [-1, 1],
+    [1, 1],
+  ])
+    plot(px, cx + dx, cy + dy, hex(c));
+  return px;
+};
+
+/** A thin scar across the left cheek. */
+const scar = () => {
+  const px = blank();
+  for (const [x, y] of [
+    [25, 26],
+    [26, 27],
+    [27, 28],
+    [28, 31],
+    [29, 32],
+  ])
+    plot(px, x, y, hex('#a0484a'));
+  return px;
+};
+
+/** A gold circlet around the brow. */
+const circlet = (y, c, edge) => () => {
+  const px = blank();
+  for (let x = 23; x <= 40; x++) {
+    plot(px, x, y, hex(edge));
+    plot(px, x, y + 1, hex(c));
+  }
+  plot(px, 31, y - 1, hex(c));
+  plot(px, 32, y - 1, hex(c));
+  return px;
+};
+
+/** Brass goggles pushed up on the forehead (Ivo). */
+const goggles = () => {
+  const px = blank();
+  for (let x = 23; x <= 40; x++) plot(px, x, 22, hex('#3a2a1a'));
+  for (const x0 of [25, 33])
+    for (let y = 20; y <= 24; y++)
+      for (let x = x0; x <= x0 + 5; x++) {
+        const edge = y === 20 || y === 24 || x === x0 || x === x0 + 5;
+        plot(px, x, y, hex(edge ? '#6a4a1e' : y === 21 && x < x0 + 3 ? '#d8f4ff' : '#58b4d0'));
+      }
+  return px;
+};
+
+/** A lit storm lantern hanging from the right hand. */
+const lantern = (body) => {
+  const px = blank();
+  const x0 = handX(body) - 2;
+  const y0 = 47;
+  plot(px, x0 + 2, y0, hex('#2a2a2e'));
+  plot(px, x0 + 3, y0, hex('#2a2a2e'));
+  for (let y = 1; y <= 9; y++)
+    for (let x = 0; x <= 5; x++) {
+      const frame = x === 0 || x === 5 || y === 1 || y === 9 || y === 2;
+      plot(px, x0 + x, y0 + y, hex(frame ? '#2a2a2e' : y < 5 ? '#fff4b8' : '#ffc84a'));
+    }
+  return px;
+};
+
+/** A short sword held point-down in the right hand (Renard). */
+const shortSword = (body) => {
+  const px = blank();
+  const x = handX(body);
+  for (let y = 44; y <= 47; y++) {
+    plot(px, x - 1, y, wood[0]);
+    plot(px, x, y, wood[2]);
+    plot(px, x + 1, y, wood[0]);
+  }
+  for (let k = -2; k <= 2; k++) plot(px, x + k, 48, gold[1]);
+  for (let y = 49; y <= 60; y++) {
+    plot(px, x - 1, y, steel[0]);
+    plot(px, x, y, y > 58 ? steel[1] : steel[3]);
+    plot(px, x + 1, y, steel[0]);
+  }
+  return px;
+};
+
+/** Small violet void sparks around the feet (Kuro, eroded). */
+const voidSparks = () => {
+  const px = blank();
+  for (const [x, y] of [
+    [20, 58],
+    [22, 55],
+    [41, 57],
+    [44, 53],
+    [18, 50],
+    [46, 49],
+    [26, 61],
+    [39, 61],
+  ])
+    plot(px, x, y, hex(y % 2 ? '#b48cff' : '#7a4ae0'));
+  return px;
+};
+
+/** Plots into an S x S canvas. */
+const plotS = (px, S, x, y, c) => {
+  if (x >= 0 && y >= 0 && x < S && y < S) px.set([...c, 255], (y * S + x) * 4);
+};
+
+/** The amnesiac king's throne: a tall carved back behind him (dark violet wood, gold trim). */
+const throneBack = () => {
+  const px = blank();
+  const [O, D, M, L] = ['#120c1a', '#2e2040', '#4a3664', '#6a5088'].map(hex);
+  const cushion = ['#3a0c18', '#6a1a2c'].map(hex);
+  for (let y = 6; y <= 60; y++)
+    for (let x = 15; x <= 48; x++) {
+      const top = y < 12 && Math.abs(x - 31.5) > 4 + (y - 6) * 2.5;
+      if (top) continue;
+      const edge =
+        x === 15 || x === 48 || y === 60 || (y < 12 && Math.abs(x - 31.5) > 2.5 + (y - 6) * 2.5);
+      const trim = x === 16 || x === 47 || y === 13;
+      const inner = x >= 20 && x <= 43 && y >= 15 && y <= 50;
+      plot(
+        px,
+        x,
+        y,
+        edge
+          ? O
+          : trim
+            ? gold[2]
+            : inner
+              ? cushion[(x + y) % 7 === 0 ? 1 : 0]
+              : x < 20
+                ? L
+                : x > 43
+                  ? D
+                  : M,
+      );
+    }
+  for (const [x, y] of [
+    [31, 4],
+    [32, 4],
+    [31, 5],
+    [32, 5],
+  ])
+    plot(px, x, y, gold[2]);
+  return px;
+};
+
+/** The throne's arms and front posts, in front of the king's hands. */
+const throneArms = () => {
+  const px = blank();
+  const [O, M, L] = ['#120c1a', '#4a3664', '#6a5088'].map(hex);
+  for (const x0 of [12, 45])
+    for (let y = 42; y <= 60; y++)
+      for (let x = x0; x <= x0 + 6; x++) {
+        const edge = x === x0 || x === x0 + 6 || y === 60;
+        plot(px, x, y, edge ? O : y <= 43 ? gold[2] : x === x0 + 1 ? L : M);
+      }
+  return px;
+};
+
+/** Chronos reborn: a great halo behind the head. */
+const bigHalo = ({ S, ox, oy }) => {
+  const px = Buffer.alloc(S * S * 4);
+  const cx = ox + 32;
+  const cy = oy + 23;
+  for (let y = 0; y < S; y++)
+    for (let x = 0; x < S; x++) {
+      const d = Math.hypot(x - cx, y - cy);
+      if (d > 30.5 || d < 25.5) continue;
+      plotS(px, S, x, y, hex(d > 29.6 || d < 26.4 ? '#7a6a3a' : d > 28 ? '#f4ecd0' : '#fff8e4'));
+    }
+  for (let a = 0; a < 12; a++) {
+    const t = (a / 12) * Math.PI * 2;
+    const x = Math.round(cx + Math.cos(t) * 28);
+    const y = Math.round(cy + Math.sin(t) * 28);
+    plotS(px, S, x, y, hex('#ffd666'));
+    plotS(px, S, x + 1, y, hex('#ffd666'));
+  }
+  return px;
+};
+
+/** Chronos reborn: the long gold train flaring to the ground, white panel down the middle. */
+const robeTrain = ({ S, ox, oy }) => {
+  const px = Buffer.alloc(S * S * 4);
+  const top = oy + 45;
+  const bottom = S - 2;
+  const ramp = ['#4a320c', '#96681e', '#d0a040', '#f2d488'].map(hex);
+  for (let y = top; y <= bottom; y++) {
+    const half = Math.round(9 + Math.pow((y - top) / (bottom - top), 1.5) * 15);
+    for (let x = ox + 32 - half; x <= ox + 32 + half; x++) {
+      const k = (x - (ox + 32 - half)) / (2 * half);
+      const edge = x === ox + 32 - half || x === ox + 32 + half || y === bottom;
+      const fringe = y >= bottom - 2 && x % 2 === 0;
+      const band = (y - top) % 9 === 8;
+      const inner = Math.abs(x - (ox + 32)) <= 3;
+      plotS(
+        px,
+        S,
+        x,
+        y,
+        edge || fringe
+          ? ramp[0]
+          : inner
+            ? hex('#f6f0e2')
+            : band
+              ? ramp[1]
+              : ramp[k < 0.3 ? 3 : k < 0.7 ? 2 : 1],
+      );
+    }
+  }
+  return px;
+};
+
+/** Gold motes drifting around a divine figure. */
+const motes = ({ S }) => {
+  const px = Buffer.alloc(S * S * 4);
+  for (const [x, y] of [
+    [10, 30],
+    [84, 22],
+    [16, 60],
+    [80, 54],
+    [6, 78],
+    [88, 80],
+    [24, 12],
+    [70, 8],
+  ])
+    plotS(px, S, x, y, hex(y % 3 ? '#ffe9a0' : '#fff8e0'));
+  return px;
+};
+
+/** The First Forgotten: a huge bell-shaped cloak of erased violet, banded, a row of gold beads. */
+const bellCloak = ({ S, ox, oy }) => {
+  const px = Buffer.alloc(S * S * 4);
+  const top = oy + 34;
+  const bottom = S - 2;
+  const ramp = ['#06030c', '#140c22', '#241a38', '#362a50'].map(hex);
+  for (let y = top; y <= bottom; y++) {
+    const t = (y - top) / (bottom - top);
+    const half = Math.round(12 + Math.pow(t, 2.2) * 26 + (t > 0.92 ? -(t - 0.92) * 20 : 0));
+    for (let x = ox + 32 - half; x <= ox + 32 + half; x++) {
+      const k = (x - (ox + 32 - half)) / (2 * half);
+      const edge = x === ox + 32 - half || x === ox + 32 + half || y === bottom;
+      const band = (y - top) % 8 === 7;
+      plotS(px, S, x, y, edge ? ramp[0] : band ? ramp[1] : ramp[k < 0.3 ? 3 : k < 0.75 ? 2 : 1]);
+    }
+    if (y - top === 28)
+      for (let x = ox + 32 - half + 3; x <= ox + 32 + half - 3; x += 4)
+        plotS(px, S, x, y, hex('#d8a83a'));
+  }
+  return px;
+};
+
+/** The First Forgotten: broken chains arching high over the head. */
+const bigChains = ({ S, ox, oy }) => {
+  const px = Buffer.alloc(S * S * 4);
+  for (const side of [-1, 1])
+    for (let k = 0; k <= 22; k++) {
+      if (k === 9 || k === 10) continue; // the break
+      const t = (k / 22) * Math.PI * 0.8;
+      const x = Math.round(ox + 32 + side * (9 + Math.sin(t) * 16));
+      const y = Math.round(oy + 22 - Math.cos(t) * 24);
+      plotS(px, S, x, y, hex(k % 2 ? '#e6e2f0' : '#8a7cb0'));
+      plotS(px, S, x, y + 1, hex(k % 2 ? '#8a7cb0' : '#2a2238'));
+    }
+  return px;
+};
+
+/** The First Forgotten: two gold processional staffs planted either side. */
+const staffs = ({ S }) => {
+  const px = Buffer.alloc(S * S * 4);
+  for (const x of [12, S - 15]) {
+    for (let y = 36; y <= S - 2; y++) {
+      plotS(px, S, x, y, gold[0]);
+      plotS(px, S, x + 1, y, y % 4 ? gold[1] : gold[2]);
+      plotS(px, S, x + 2, y, gold[0]);
+    }
+    for (let k = -3; k <= 5; k++) plotS(px, S, x + k, 42, gold[k === -3 || k === 5 ? 0 : 2]);
+    for (let y = 30; y <= 36; y++) plotS(px, S, x + 1, y, gold[2]);
+    plotS(px, S, x + 1, 29, hex('#fff4c8'));
+  }
+  return px;
+};
+
 /** Highest opaque row of a layer. */
 function topRow(px) {
   for (let y = 0; y < F; y++) for (let x = 0; x < F; x++) if (px[(y * F + x) * 4 + 3] > 0) return y;
@@ -361,7 +982,8 @@ const CUSTOM = {
 };
 
 /** The standing down-facing frame of one layer, recoloured along its ramp. */
-function layerFrame(id, ramp, body) {
+function layerFrame(id, ramp, body, col = 0) {
+  if (typeof id === 'function') return id(body);
   if (CUSTOM[id]) return CUSTOM[id](body);
   const e = byId.get(id);
   if (!e) throw new Error(`Unknown LPC layer: ${id}`);
@@ -371,8 +993,8 @@ function layerFrame(id, ramp, body) {
     img.buf.copy(
       px,
       y * F * 4,
-      (DOWN_ROW * F + y) * img.w * 4,
-      ((DOWN_ROW * F + y) * img.w + F) * 4,
+      ((DOWN_ROW * F + y) * img.w + col * F) * 4,
+      ((DOWN_ROW * F + y) * img.w + col * F + F) * 4,
     );
   if (!ramp) return px;
   let lo = Infinity;
@@ -408,30 +1030,86 @@ function over(a, b) {
 }
 
 /** Lowest opaque row: where the soles are. */
-function soles(px) {
-  for (let y = F - 1; y >= 0; y--)
-    for (let x = 0; x < F; x++) if (px[(y * F + x) * 4 + 3] > 0) return y;
-  return F - 1;
+function soles(px, S = F) {
+  for (let y = S - 1; y >= 0; y--)
+    for (let x = 0; x < S; x++) if (px[(y * S + x) * 4 + 3] > 0) return y;
+  return S - 1;
 }
 
-/** 4 frames: still, still, breath (upper body 1 px down), breath. */
-function idleSheet(base) {
-  const breathFrom = soles(base) - 18;
-  const breath = Buffer.alloc(base.length);
-  for (let y = 0; y < F; y++) {
-    const src = y < breathFrom && y > 0 ? y - 1 : y;
-    base.copy(breath, y * F * 4, src * F * 4, (src + 1) * F * 4);
+/** Every pixel's alpha times k. */
+function fade(px, k) {
+  const out = Buffer.from(px);
+  for (let i = 3; i < out.length; i += 4) out[i] = Math.round(out[i] * k);
+  return out;
+}
+
+/** Kuro's Interval flicker: bands slip sideways and take a violet cast. */
+function glitch(px, S = F) {
+  const out = Buffer.alloc(px.length);
+  for (let y = 0; y < S; y++) {
+    const shift = [0, 2, -2, 1, -1][Math.floor(y / 5) % 5];
+    for (let x = 0; x < S; x++) {
+      const sx = x - shift;
+      if (sx < 0 || sx >= S) continue;
+      const si = (y * S + sx) * 4;
+      const di = (y * S + x) * 4;
+      px.copy(out, di, si, si + 4);
+      if (out[di + 3] && shift) {
+        out[di] = Math.min(255, out[di] * 0.7 + 60);
+        out[di + 2] = Math.min(255, out[di + 2] * 0.7 + 110);
+      }
+    }
   }
-  const sheet = Buffer.alloc(4 * F * F * 4);
-  [base, base, breath, breath].forEach((fr, k) => {
-    for (let y = 0; y < F; y++) fr.copy(sheet, (y * 4 * F + k * F) * 4, y * F * 4, (y + 1) * F * 4);
-  });
+  return out;
+}
+
+/**
+ * The idle sheet: still, still, breath (upper body 1 px down), breath, repeated to `frames`
+ * (the old animations' frame numbers). `glitch` marks Kuro's flicker frame, `flicker` makes odd
+ * frames fainter (the forgotten child), `alpha` fades a spirit as a whole.
+ */
+function idleSheet(base, spec, S = F) {
+  const n = spec.frames ?? 4;
+  const breathFrom = soles(base, S) - 18;
+  const breath = Buffer.alloc(base.length);
+  for (let y = 0; y < S; y++) {
+    const src = y < breathFrom && y > 0 ? y - 1 : y;
+    base.copy(breath, y * S * 4, src * S * 4, (src + 1) * S * 4);
+  }
+  const sheet = Buffer.alloc(n * S * S * 4);
+  for (let k = 0; k < n; k++) {
+    let fr = k % 4 < 2 ? base : breath;
+    if (spec.flicker) fr = k % 2 ? fade(base, 0.55) : base;
+    if (k === spec.glitch) fr = glitch(fr, S);
+    if (spec.alpha) fr = fade(fr, spec.alpha);
+    for (let y = 0; y < S; y++) fr.copy(sheet, (y * n * S + k * S) * 4, y * S * 4, (y + 1) * S * 4);
+  }
   return sheet;
+}
+
+/**
+ * A larger canvas (owner, 2026-11-17: Chronos reborn and the First Forgotten should stand apart):
+ * the 64 px figure keeps its pixel size and is set into an S x S frame, `lift` px off the ground,
+ * with drawn layers under and over it (halo, train, bell cloak, chains, staffs).
+ */
+function bigFrame(base, spec) {
+  const S = spec.size;
+  const ox = (S - F) / 2;
+  const oy = S - F - (spec.lift ?? 0);
+  const ctx = { S, ox, oy };
+  const out = Buffer.alloc(S * S * 4);
+  for (const fn of spec.under ?? []) over(out, fn(ctx));
+  const placed = Buffer.alloc(S * S * 4);
+  for (let y = 0; y < F; y++)
+    base.copy(placed, ((oy + y) * S + ox) * 4, y * F * 4, (y + 1) * F * 4);
+  over(out, placed);
+  for (const fn of spec.over ?? []) over(out, fn(ctx));
+  return out;
 }
 
 /** Old (32 px, shown 2x) beside new (64 px, 1x), both at `zoom`, on a ground colour. */
 function comparison(entries, zoom = 4) {
-  const cell = F * zoom;
+  const cell = 96 * zoom;
   const W = entries.length * cell * 2;
   const H = cell;
   const out = Buffer.alloc(W * H * 4);
@@ -447,22 +1125,26 @@ function comparison(entries, zoom = 4) {
               src.buf.copy(out, ((oy + y * scale + dy) * W + ox + x * scale + dx) * 4, si, si + 4);
         }
     };
-    // Both stand on the same line: the old 32 px sprite is drawn at the size it has in game (1.5x).
-    const oldScale = zoom * 1.5;
+    // Both stand on the same line: the old sprite at the size it has in game (32 px ones at 1.5x).
+    const size = oldImg.h;
+    const oldScale = Math.round(zoom * (size <= 32 ? 1.5 : 1));
     const ox = k * cell * 2;
     draw(
       oldImg,
-      32,
+      size,
       0,
-      Math.round(oldScale),
-      ox + (cell - 32 * Math.round(oldScale)) / 2,
-      H - 32 * Math.round(oldScale) - 2 * zoom,
+      oldScale,
+      ox + (cell - size * oldScale) / 2,
+      H - size * oldScale - 2 * zoom,
     );
-    draw({ w: F, buf: frame }, F, 0, zoom, ox + cell, 0);
+    const S = Math.round(Math.sqrt(frame.length / 4));
+    draw({ w: S, buf: frame }, S, 0, zoom, ox + cell + (cell - S * zoom) / 2, H - S * zoom);
   });
   return { w: W, h: H, buf: out };
 }
 
+// Built here, once the drawn layers above exist.
+const NPCS = npcSpecs();
 const install = (process.argv.find((a, i) => process.argv[i - 1] === '--install') ?? '')
   .split(',')
   .filter(Boolean);
@@ -471,14 +1153,18 @@ const shown = [];
 let derived = readDerived();
 for (const [name, spec] of Object.entries(NPCS)) {
   const base = Buffer.alloc(F * F * 4);
-  const bodyId = spec.layers.find(([l]) => l.startsWith('character-body-'))[0];
-  const body = layerFrame(bodyId, null);
-  for (const [id, ramp] of spec.layers) over(base, layerFrame(id, ramp, body));
-  const sheet = idleSheet(base);
-  const png = encodePng(4 * F, F, sheet);
+  const bodyId = spec.layers.find(
+    ([l]) => typeof l === 'string' && l.startsWith('character-body-'),
+  )[0];
+  const body = layerFrame(bodyId, null, null, spec.col ?? 0);
+  for (const [id, ramp] of spec.layers) over(base, layerFrame(id, ramp, body, spec.col ?? 0));
+  const S = spec.size ?? F;
+  const frame = spec.size ? bigFrame(base, spec) : base;
+  const sheet = idleSheet(frame, spec, S);
+  const png = encodePng((spec.frames ?? 4) * S, S, sheet);
   fs.writeFileSync(`${OUT}/${name}_idle.png`, png);
-  shown.push([readPng(spec.old), base]);
-  console.log(`${name}: soles at y=${soles(base)}`);
+  shown.push([readPng(spec.old), frame]);
+  console.log(`${name}: ${S}px, soles at y=${soles(frame, S)}`);
   if (install.includes(name)) {
     const file = `public/assets/lpc/npcs/${name}_idle.png`;
     fs.mkdirSync('public/assets/lpc/npcs', { recursive: true });
@@ -490,10 +1176,14 @@ for (const [name, spec] of Object.entries(NPCS)) {
       file,
       sha256: createHash('sha256').update(png).digest('hex'),
       from: [
-        ...new Set(spec.layers.map(([l]) => l).filter((l) => !l.startsWith('custom:'))),
+        ...new Set(
+          spec.layers
+            .map(([l]) => l)
+            .filter((l) => typeof l === 'string' && !l.startsWith('custom:')),
+        ),
       ].sort(),
       script: 'scripts/lpc/npcs.mjs',
-      notes: `${name} at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.`,
+      notes: `${name} at the LPC scale: generator layers recoloured to the character's design, ${spec.frames ?? 4}-frame idle.`,
     });
     console.log(`  installed ${file}`);
   }

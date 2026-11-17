@@ -8,11 +8,15 @@ import type Phaser from 'phaser';
  */
 export const SMALL_SPRITE_SCALE = 1.5;
 /**
- * People redrawn at the LPC scale (64 px frames, soles near y = 61, scripts/lpc/npcs.mjs) are
- * drawn 1:1 with Peter's origin (14 px above the soles), so they stand where the 32 px ones stood.
+ * People redrawn at the LPC scale (scripts/lpc/npcs.mjs) are drawn 1:1 with Peter's origin, 14 px
+ * above the soles, so they stand where the 32 px ones stood. Their frames are 64 px, or 96 px for
+ * the figures that should stand apart (Chronos reborn, the First Forgotten); either way the soles
+ * sit 3 px above the frame's bottom edge.
  */
 export const LPC_FRAME = 64;
 export const LPC_ORIGIN_Y = 47 / LPC_FRAME;
+/** The origin that puts the soles (3 px above the bottom) 14 px below the position. */
+export const lpcOriginY = (frameHeight: number): number => (frameHeight - 17) / frameHeight;
 
 /** Actors that should stay smaller than a grown person (children, swarms, small things). */
 const OVERRIDES: Record<string, number> = {
@@ -28,9 +32,9 @@ const OVERRIDES: Record<string, number> = {
 const frameWidth = (scene: Phaser.Scene, key: string): number =>
   scene.textures.getFrame(key)?.width ?? 0;
 
-/** A person drawn at the LPC scale (an `npc_` sheet with 64 px frames). */
+/** A person drawn at the LPC scale (an `npc_` sheet with 64 px or larger frames). */
 export function isLpcActor(scene: Phaser.Scene, key: string): boolean {
-  return key.startsWith('npc_') && frameWidth(scene, key) === LPC_FRAME;
+  return key.startsWith('npc_') && frameWidth(scene, key) >= LPC_FRAME;
 }
 
 /** The display scale for an actor texture: 32 px people and monsters grow, the rest stay. */
@@ -50,7 +54,7 @@ export function baseScale(sprite: Phaser.GameObjects.Sprite): number {
  * Fits an actor sprite to Peter's height: 32 px sheets are scaled up around their feet, LPC-scale
  * sheets take the LPC origin. Call after the body size and offset are set (offsets relative to the
  * frame's centre): the body is converted so its box stays the same in the world. A body left at
- * the full LPC frame becomes the 32 x 32 box the old sprite had.
+ * the full LPC frame becomes the 32 x 32 box the old sprite had, centred on the position.
  */
 export function enlargeActor(
   sprite: Phaser.GameObjects.Sprite,
@@ -59,9 +63,10 @@ export function enlargeActor(
   sprite.setData('baseScale', scale);
   const lpc = isLpcActor(sprite.scene, sprite.texture.key);
   if (scale === 1 && !lpc) return 1;
+  const frame = frameWidth(sprite.scene, sprite.texture.key);
   const body = sprite.body as Phaser.Physics.Arcade.Body | null;
   const box = body
-    ? lpc && body.sourceWidth === LPC_FRAME && body.sourceHeight === LPC_FRAME
+    ? lpc && body.sourceWidth === frame && body.sourceHeight === frame
       ? { w: 32, h: 32, dx: -16, dy: -16 }
       : {
           w: body.sourceWidth,
@@ -70,7 +75,7 @@ export function enlargeActor(
           dy: body.offset.y - sprite.displayOriginY,
         }
     : null;
-  const originY = lpc ? LPC_ORIGIN_Y : 1 - (1 - sprite.originY) / scale;
+  const originY = lpc ? lpcOriginY(frame) : 1 - (1 - sprite.originY) / scale;
   sprite.setOrigin(sprite.originX, originY).setScale(scale);
   if (body && box) {
     body.setSize(box.w / scale, box.h / scale, false);

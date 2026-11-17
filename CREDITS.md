@@ -784,6 +784,252 @@ Unmodified source PNG (variant of weapon/sword/longsword/walk.png); credits from
 
 Unmodified source PNG (variant of weapon/sword/longsword/universal_behind/walk.png); credits from pinned CREDITS.csv.
 
+### character-hair-messy1-adult
+
+- File: art-source/lpc/raw/characters/hair/messy1/adult/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/hair/messy1/adult/walk.png
+- Authors: JaidynReiman; Manuel Riecke (MrBeast)
+- Licences: CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+- https://opengameart.org/content/lpc-expanded-hair
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
+### character-hair-long-tied-adult-fg
+
+- File: art-source/lpc/raw/characters/hair/long_tied/adult/fg/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/hair/long_tied/adult/fg/walk.png
+- Authors: JaidynReiman; thecilekli; bluecarrot16
+- Licences: CC0-1.0
+- https://opengameart.org/content/lpc-long-tied-hair-with-12-colors
+- https://opengameart.org/content/lpc-hair
+- https://opengameart.org/content/lpc-expanded-hair
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
+### character-hair-long-tied-adult-bg
+
+- File: art-source/lpc/raw/characters/hair/long_tied/adult/bg/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/hair/long_tied/adult/bg/walk.png
+- Authors: JaidynReiman; thecilekli; bluecarrot16
+- Licences: CC0-1.0
+- https://opengameart.org/content/lpc-long-tied-hair-with-12-colors
+- https://opengameart.org/content/lpc-hair
+- https://opengameart.org/content/lpc-expanded-hair
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
+### character-hair-long-straight-adult
+
+- File: art-source/lpc/raw/characters/hair/long_straight/adult/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/hair/long_straight/adult/walk.png
+- Authors: JaidynReiman; thecilekli; bluecarrot16
+- Licences: CC0-1.0
+- https://opengameart.org/content/lpc-long-straight-hair-with-12-colors
+- https://opengameart.org/content/lpc-hair
+- https://opengameart.org/content/lpc-expanded-hair
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
+### character-hat-cloth-hood-sack-adult
+
+- File: art-source/lpc/raw/characters/hat/cloth/hood_sack/adult/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/hat/cloth/hood_sack/adult/walk.png
+- Authors: Nila122; JaidynReiman
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/lpc-lizard-headgear
+- https://opengameart.org/content/lpc-expanded-hats-facial-helmets
+
+original by Nila122, adapted to human heads by JaidynReiman
+
+### character-hat-formal-crown-adult
+
+- File: art-source/lpc/raw/characters/hat/formal/crown/adult/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/hat/formal/crown/adult/walk.png
+- Authors: DarkwallLKE; Charles Sanchez (CharlesGabriel)
+- Licences: CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+- https://opengameart.org/content/lpc-crown
+- https://opengameart.org/content/lpc-expanded-hats-facial-helmets
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
+### character-facial-glasses-round-adult
+
+- File: art-source/lpc/raw/characters/facial/glasses/round/adult/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/facial/glasses/round/adult/walk.png
+- Authors: bluecarrot16; Thane Brimhall (pennomi); laetissima
+- Licences: CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/clothing-facial-features-and-ui-elements
+- https://opengameart.org/content/lpc-gentleman
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
+### character-legs-skirts-straight-thin
+
+- File: art-source/lpc/raw/characters/legs/skirts/straight/thin/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/legs/skirts/straight/thin/walk.png
+- Authors: bluecarrot16; ElizaWy
+- Licences: OGA-BY-3.0, GPL-3.0
+- http://opengameart.org/content/lpc-clothing-updates
+
+original skirt by ElizaWy, extended to all animation frames and edited for v3 bases by bluecarrot16
+
+### character-torso-clothes-blouse-longsleeve-female
+
+- File: art-source/lpc/raw/characters/torso/clothes/blouse_longsleeve/female/walk/white.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/torso/clothes/blouse_longsleeve/female/walk/white.png
+- Authors: bluecarrot16; ElizaWy; Lanea Zimmerman (Sharm)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+- https://opengameart.org/content/lpc-7-womens-shirts
+
+original princess.xcf by Sharm, edited to blouse by ElizaWy; blouse + longsleeve adapted to v3 bases by bluecarrot16
+
+### character-torso-clothes-robe-female
+
+- File: art-source/lpc/raw/characters/torso/clothes/robe/female/walk/white.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/torso/clothes/robe/female/walk/white.png
+- Authors: Luke Mehl
+- Licences: CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/female-mage-clothing-set
+
+Unmodified source PNG (variant of torso/clothes/robe/female/walk.png); credits from pinned CREDITS.csv.
+
+### character-torso-jacket-trench-male
+
+- File: art-source/lpc/raw/characters/torso/jacket/trench/male/walk/gray.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/torso/jacket/trench/male/walk/gray.png
+- Authors: bluecarrot16
+- Licences: CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/lpc-gentleman
+
+Unmodified source PNG (variant of torso/jacket/trench/male/walk.png); credits from pinned CREDITS.csv.
+
+### character-torso-clothes-vest-male
+
+- File: art-source/lpc/raw/characters/torso/clothes/vest/male/walk/white.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/torso/clothes/vest/male/walk/white.png
+- Authors: bluecarrot16; Thane Brimhall (pennomi); laetissima; Stephen Challener (Redshrike); Johannes Sjölund (wulax)
+- Licences: CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/lpc-2-characters
+- https://opengameart.org/content/lpc-gentleman
+- https://opengameart.org/content/lpc-pirates
+
+Unmodified source PNG (variant of torso/clothes/vest/male/walk.png); credits from pinned CREDITS.csv.
+
+### character-weapon-polearm-cane-male
+
+- File: art-source/lpc/raw/characters/weapon/polearm/cane/male/walk/cane.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/weapon/polearm/cane/male/walk/cane.png
+- Authors: bluecarrot16
+- Licences: CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/lpc-gentleman
+
+Unmodified source PNG (variant of weapon/polearm/cane/male/walk.png); credits from pinned CREDITS.csv.
+
+### character-body-bodies-male-sit
+
+- File: art-source/lpc/raw/characters/body/bodies/male/sit.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/body/bodies/male/sit.png
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+- https://opengameart.org/content/lpc-male-jumping-animation-by-durrani
+- https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle
+- https://opengameart.org/content/lpc-revised-character-basics
+- https://opengameart.org/content/lpc-be-seated
+- https://opengameart.org/content/lpc-runcycle-for-male-muscular-and-pregnant-character-bases-with-modular-heads
+- https://opengameart.org/content/lpc-jump-expanded
+- https://opengameart.org/content/lpc-character-bases
+
+see details at https://opengameart.org/content/lpc-character-bases; 'Thick' Male Revised Run/Climb by JaidynReiman (based on ElizaWy's LPC Revised)
+
+### character-head-heads-human-male-elderly-sit
+
+- File: art-source/lpc/raw/characters/head/heads/human/male_elderly/sit.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/head/heads/human/male_elderly/sit.png
+- Authors: Benjamin K. Smith (BenCreating); Eliza Wyatt (ElizaWy); Stephen Challener (Redshrike)
+- Licences: OGA-BY-3.0, CC-BY-3.0
+- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+- https://opengameart.org/content/lpc-revised-elders
+- https://opengameart.org/content/lpc-character-bases
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
+### character-torso-clothes-longsleeve-longsleeve-male-sit
+
+- File: art-source/lpc/raw/characters/torso/clothes/longsleeve/longsleeve/male/sit.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/torso/clothes/longsleeve/longsleeve/male/sit.png
+- Authors: JaidynReiman; Johannes Sjölund (wulax)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+- http://opengameart.org/content/lpc-clothing-updates
+- https://opengameart.org/content/lpc-revised-character-basics
+- https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing
+- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+- https://opengameart.org/content/lpc-expanded-simple-shirts
+
+original by wulax; tweaks and further recolors by bluecarrot16; cleanup and climb/jump/run/sit/emote/revised combat adapted from LPC Revised by JaidynReiman
+
+### character-legs-skirts-plain-male-sit
+
+- File: art-source/lpc/raw/characters/legs/skirts/plain/male/sit.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/legs/skirts/plain/male/sit.png
+- Authors: bluecarrot16; Pierre Vigier (pvigier); Johannes Sjölund (wulax); Ahmad3366; JaidynReiman
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+
+original by wulax, edited for female base by pvigier, edited for v3 base by bluecarrot16, idle & sit by Ahmad3366, color reduced & female sit/emote by JaidynReiman
+
+### character-feet-slippers-male-sit
+
+- File: art-source/lpc/raw/characters/feet/slippers/male/sit.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/feet/slippers/male/sit.png
+- Authors: bluecarrot16; JaidynReiman; Joe White; Luke Mehl
+- Licences: CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/thin-mage-clothing-set
+- http://opengameart.org/content/lpc-clothing-updates
+- https://opengameart.org/content/lpc-expanded-socks-shoes
+
+original by Luke Mehl, Joe White did thrust/shoot animations, edited for v3 bases and male sprites by bluecarrot16, Jump/Sit/Emote/Run/Revised Combat by JaidynReiman
+
+### character-hair-plain-adult-sit
+
+- File: art-source/lpc/raw/characters/hair/plain/adult/sit.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/hair/plain/adult/sit.png
+- Authors: JaidynReiman; Manuel Riecke (MrBeast); Joe White
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+- https://opengameart.org/content/ponytail-and-plain-hairstyles
+- https://opengameart.org/content/lpc-expanded-hair
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
+### character-beards-beard-medium-sit
+
+- File: art-source/lpc/raw/characters/beards/beard/medium/sit.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/beards/beard/medium/sit.png
+- Authors: ElizaWy
+- Licences: OGA-BY-3.0
+- https://github.com/ElizaWy/LPC/tree/main/Characters/Hair
+- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
+### character-hat-formal-crown-adult-sit
+
+- File: art-source/lpc/raw/characters/hat/formal/crown/adult/sit.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/hat/formal/crown/adult/sit.png
+- Authors: DarkwallLKE; Charles Sanchez (CharlesGabriel)
+- Licences: CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+- https://opengameart.org/content/lpc-crown
+- https://opengameart.org/content/lpc-expanded-hats-facial-helmets
+
+Unmodified source PNG; credits from pinned CREDITS.csv.
+
 ## Game assets derived from the sources above
 
 ### derived-coastal-tileset-caps
@@ -906,6 +1152,46 @@ Props for map_forgotten_forest (evergreens over the hedges), tinted like its til
 
 aldric at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
 
+### derived-npc-amnesiac-king
+
+- File: public/assets/lpc/npcs/amnesiac_king_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-beards-beard-medium-sit, character-body-bodies-male-sit, character-feet-slippers-male-sit, character-hair-plain-adult-sit, character-hat-formal-crown-adult-sit, character-head-heads-human-male-elderly-sit, character-legs-skirts-plain-male-sit, character-torso-clothes-longsleeve-longsleeve-male-sit
+- Authors: ElizaWy; bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Joe White; Luke Mehl; Manuel Riecke (MrBeast); DarkwallLKE; Charles Sanchez (CharlesGabriel); Pierre Vigier (pvigier); Ahmad3366
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0
+
+amnesiac_king at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-npc-chronicler-elion
+
+- File: public/assets/lpc/npcs/chronicler_elion_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-feet-slippers-male, character-head-heads-human-male-elderly, character-legs-skirts-plain-male, character-torso-clothes-longsleeve-longsleeve-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Joe White; Luke Mehl; Pierre Vigier (pvigier); Ahmad3366
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0
+
+chronicler_elion at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-npc-chronos-reborn
+
+- File: public/assets/lpc/npcs/chronos_reborn_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-female, character-hair-long-straight-adult, character-head-heads-human-female, character-torso-clothes-robe-female
+- Authors: Benjamin K. Smith (BenCreating); bluecarrot16; TheraHedwig; Evert; MuffinElZangano; Durrani; Pierre Vigier (pvigier); ElizaWy; Matthew Krohn (makrohn); Johannes Sjölund (wulax); Stephen Challener (Redshrike); JaidynReiman; thecilekli; Luke Mehl
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, CC0-1.0
+
+chronos_reborn at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-npc-chronos-remnant
+
+- File: public/assets/lpc/npcs/chronos_remnant_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-female, character-hair-long-straight-adult, character-hat-formal-crown-adult, character-head-heads-human-female, character-torso-clothes-robe-female
+- Authors: Benjamin K. Smith (BenCreating); bluecarrot16; TheraHedwig; Evert; MuffinElZangano; Durrani; Pierre Vigier (pvigier); ElizaWy; Matthew Krohn (makrohn); Johannes Sjölund (wulax); Stephen Challener (Redshrike); JaidynReiman; thecilekli; DarkwallLKE; Charles Sanchez (CharlesGabriel); Luke Mehl
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, CC0-1.0
+
+chronos_remnant at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
 ### derived-npc-elder
 
 - File: public/assets/lpc/npcs/elder_idle.png
@@ -916,6 +1202,26 @@ aldric at the LPC scale: generator layers recoloured to the character's design, 
 
 elder at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
 
+### derived-npc-exiled-praetor
+
+- File: public/assets/lpc/npcs/exiled_praetor_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-beards-beard-medium, character-body-bodies-male, character-feet-slippers-male, character-hair-plain-adult, character-head-heads-human-male-elderly, character-legs-skirts-plain-male, character-torso-clothes-longsleeve-longsleeve-male
+- Authors: ElizaWy; bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Joe White; Luke Mehl; Manuel Riecke (MrBeast); Pierre Vigier (pvigier); Ahmad3366
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0
+
+exiled_praetor at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-npc-first-forgotten
+
+- File: public/assets/lpc/npcs/first_forgotten_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-female, character-hat-cloth-hood-sack-adult, character-head-heads-human-female, character-torso-clothes-robe-female
+- Authors: Benjamin K. Smith (BenCreating); bluecarrot16; TheraHedwig; Evert; MuffinElZangano; Durrani; Pierre Vigier (pvigier); ElizaWy; Matthew Krohn (makrohn); Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; JaidynReiman; Luke Mehl
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+
+first_forgotten at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
 ### derived-npc-fisherman-sau
 
 - File: public/assets/lpc/npcs/fisherman_sau_idle.png
@@ -925,6 +1231,66 @@ elder at the LPC scale: generator layers recoloured to the character's design, 4
 - Licences: CC-BY-SA-3.0, GPL-3.0, OGA-BY-3.0, GPL-2.0, CC-BY-3.0
 
 fisherman_sau at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-npc-forgotten-child
+
+- File: public/assets/lpc/npcs/forgotten_child_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-child, character-hair-relm-short-child, character-head-heads-human-child, character-legs-skirts-child, character-torso-clothes-shirt-child
+- Authors: bluecarrot16; Benjamin K. Smith (BenCreating); ElizaWy; MuffinElZangano; Durrani; Nila122; kheftel; Stephen Challener (Redshrike); JaidynReiman
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0
+
+forgotten_child at the LPC scale: generator layers recoloured to the character's design, 2-frame idle.
+
+### derived-npc-ivo
+
+- File: public/assets/lpc/npcs/ivo_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-beards-beard-medium, character-body-bodies-male, character-feet-boots-basic-male, character-hair-plain-adult, character-head-heads-human-male-elderly, character-legs-pants-male, character-torso-clothes-longsleeve-longsleeve-male, character-torso-clothes-vest-male, character-weapon-polearm-cane-male
+- Authors: ElizaWy; bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Manuel Riecke (MrBeast); Joe White; Matthew Krohn (makrohn); Thane Brimhall (pennomi); laetissima
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0, CC-BY-3.0
+
+ivo at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-npc-kaelen
+
+- File: public/assets/lpc/npcs/kaelen_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-feet-boots-basic-male, character-hair-messy1-adult, character-head-heads-human-male, character-legs-pants-male, character-torso-armour-plate-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Manuel Riecke (MrBeast); ElizaWy; Matthew Krohn (makrohn); Napsio (Vitruvian Studio); Michael Whitlock (bigbeargames)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0
+
+kaelen at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-npc-kuro
+
+- File: public/assets/lpc/npcs/kuro_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-feet-boots-basic-male, character-hair-messy1-adult, character-head-heads-human-male, character-legs-pants-male, character-torso-clothes-longsleeve-longsleeve-male, character-torso-jacket-trench-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Manuel Riecke (MrBeast); ElizaWy; Matthew Krohn (makrohn)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0
+
+kuro at the LPC scale: generator layers recoloured to the character's design, 5-frame idle.
+
+### derived-npc-kuro-mother
+
+- File: public/assets/lpc/npcs/kuro_mother_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-female, character-feet-slippers-male, character-hair-long-tied-adult-bg, character-hair-long-tied-adult-fg, character-head-heads-human-female, character-legs-skirts-straight-thin, character-torso-clothes-blouse-longsleeve-female
+- Authors: Benjamin K. Smith (BenCreating); bluecarrot16; TheraHedwig; Evert; MuffinElZangano; Durrani; Pierre Vigier (pvigier); ElizaWy; Matthew Krohn (makrohn); Johannes Sjölund (wulax); Stephen Challener (Redshrike); JaidynReiman; Joe White; Luke Mehl; thecilekli; Lanea Zimmerman (Sharm)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, CC0-1.0
+
+kuro_mother at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-npc-kuro-void
+
+- File: public/assets/lpc/npcs/kuro_void_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-feet-boots-basic-male, character-hair-messy1-adult, character-head-heads-human-male, character-legs-pants-male, character-torso-clothes-longsleeve-longsleeve-male, character-torso-jacket-trench-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Manuel Riecke (MrBeast); ElizaWy; Matthew Krohn (makrohn)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0
+
+kuro_void at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
 
 ### derived-npc-lyra
 
@@ -946,6 +1312,16 @@ lyra at the LPC scale: generator layers recoloured to the character's design, 4-
 
 mira at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
 
+### derived-npc-nameless-shade
+
+- File: public/assets/lpc/npcs/nameless_shade_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-female, character-hat-cloth-hood-adult, character-head-heads-human-female, character-torso-clothes-robe-female
+- Authors: Benjamin K. Smith (BenCreating); bluecarrot16; TheraHedwig; Evert; MuffinElZangano; Durrani; Pierre Vigier (pvigier); ElizaWy; Matthew Krohn (makrohn); Johannes Sjölund (wulax); Stephen Challener (Redshrike); JaidynReiman; Luke Mehl
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+
+nameless_shade at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
 ### derived-npc-neris
 
 - File: public/assets/lpc/npcs/neris_idle.png
@@ -956,6 +1332,26 @@ mira at the LPC scale: generator layers recoloured to the character's design, 4-
 
 neris at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
 
+### derived-npc-old-keeper
+
+- File: public/assets/lpc/npcs/old_keeper_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-beards-beard-trimmed, character-body-bodies-male, character-feet-boots-basic-male, character-hat-cloth-hood-adult, character-head-heads-human-male-elderly, character-legs-skirts-plain-male, character-torso-clothes-longsleeve-longsleeve-male
+- Authors: ElizaWy; bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Pierre Vigier (pvigier); Ahmad3366
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0, CC-BY-3.0
+
+old_keeper at the LPC scale: generator layers recoloured to the character's design, 5-frame idle.
+
+### derived-npc-renard
+
+- File: public/assets/lpc/npcs/renard_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-beards-beard-trimmed, character-body-bodies-male, character-feet-boots-basic-male, character-hair-plain-adult, character-hat-helmet-kettle-adult, character-head-heads-human-male, character-legs-pants-male, character-torso-clothes-longsleeve-longsleeve-male
+- Authors: ElizaWy; bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Manuel Riecke (MrBeast); Joe White; Napsio (Vitruvian Studio); Matthew Krohn (makrohn)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0
+
+renard at the LPC scale: generator layers recoloured to the character's design, 7-frame idle.
+
 ### derived-npc-soldier-bran
 
 - File: public/assets/lpc/npcs/soldier_bran_idle.png
@@ -965,6 +1361,16 @@ neris at the LPC scale: generator layers recoloured to the character's design, 4
 - Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0, CC-BY-3.0
 
 soldier_bran at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-npc-solon
+
+- File: public/assets/lpc/npcs/solon_idle.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-female, character-cape-solid-bg, character-cape-solid-fg, character-hat-cloth-hood-adult, character-head-heads-human-female, character-torso-clothes-robe-female
+- Authors: Benjamin K. Smith (BenCreating); bluecarrot16; TheraHedwig; Evert; MuffinElZangano; Durrani; Pierre Vigier (pvigier); ElizaWy; Matthew Krohn (makrohn); Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; JaidynReiman; Luke Mehl
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+
+solon at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
 
 ### derived-npc-vendor-ba
 

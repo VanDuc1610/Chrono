@@ -1141,5 +1141,352 @@
     ],
     "notes": "Unmodified source PNG (variant of weapon/sword/longsword/universal_behind/walk.png); credits from pinned CREDITS.csv.",
     "sha256": "33a2c1ce3751c7fb83b61352ac3d93f2a31e5b36c802ec515304bd6837f31fce"
+  },
+  {
+    "id": "character-hair-messy1-adult",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hair/messy1/adult/walk.png",
+    "file": "art-source/lpc/raw/characters/hair/messy1/adult/walk.png",
+    "authors": ["JaidynReiman", "Manuel Riecke (MrBeast)"],
+    "licenses": ["CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+      "https://opengameart.org/content/lpc-expanded-hair"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv.",
+    "sha256": "a3f389578b71cabf457a8f1e617e232ce8104c2f1371f44fafe947d5070d7fca"
+  },
+  {
+    "id": "character-hair-long-tied-adult-fg",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hair/long_tied/adult/fg/walk.png",
+    "file": "art-source/lpc/raw/characters/hair/long_tied/adult/fg/walk.png",
+    "authors": ["JaidynReiman", "thecilekli", "bluecarrot16"],
+    "licenses": ["CC0-1.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-long-tied-hair-with-12-colors",
+      "https://opengameart.org/content/lpc-hair",
+      "https://opengameart.org/content/lpc-expanded-hair"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv.",
+    "sha256": "c91a4973e0c9b9b817bc1c1d9b0cbca7249bd6b79cfd7bb17e3016e5d62808e2"
+  },
+  {
+    "id": "character-hair-long-tied-adult-bg",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hair/long_tied/adult/bg/walk.png",
+    "file": "art-source/lpc/raw/characters/hair/long_tied/adult/bg/walk.png",
+    "authors": ["JaidynReiman", "thecilekli", "bluecarrot16"],
+    "licenses": ["CC0-1.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-long-tied-hair-with-12-colors",
+      "https://opengameart.org/content/lpc-hair",
+      "https://opengameart.org/content/lpc-expanded-hair"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv.",
+    "sha256": "a58a657617acc6823091217c0e51e59217a843379a2a9d5904fd20c3fbffbfc0"
+  },
+  {
+    "id": "character-hair-long-straight-adult",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hair/long_straight/adult/walk.png",
+    "file": "art-source/lpc/raw/characters/hair/long_straight/adult/walk.png",
+    "authors": ["JaidynReiman", "thecilekli", "bluecarrot16"],
+    "licenses": ["CC0-1.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-long-straight-hair-with-12-colors",
+      "https://opengameart.org/content/lpc-hair",
+      "https://opengameart.org/content/lpc-expanded-hair"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv.",
+    "sha256": "44f89b96fd7fb08e13a3d449ba0f10f879c8bd261c4f09880e829463afa497ef"
+  },
+  {
+    "id": "character-hat-cloth-hood-sack-adult",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hat/cloth/hood_sack/adult/walk.png",
+    "file": "art-source/lpc/raw/characters/hat/cloth/hood_sack/adult/walk.png",
+    "authors": ["Nila122", "JaidynReiman"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-lizard-headgear",
+      "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+    ],
+    "notes": "original by Nila122, adapted to human heads by JaidynReiman",
+    "sha256": "a202d9567e7c965229ae8cbea9531129855d44f4ccd94784a820736d637ee165"
+  },
+  {
+    "id": "character-hat-formal-crown-adult",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hat/formal/crown/adult/walk.png",
+    "file": "art-source/lpc/raw/characters/hat/formal/crown/adult/walk.png",
+    "authors": ["DarkwallLKE", "Charles Sanchez (CharlesGabriel)"],
+    "licenses": ["CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+      "https://opengameart.org/content/lpc-crown",
+      "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv.",
+    "sha256": "12017c5494e1344f94e4f75f0e7aae8310c3ad8a2add3af9cbbe6e4b5b63d51e"
+  },
+  {
+    "id": "character-facial-glasses-round-adult",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/facial/glasses/round/adult/walk.png",
+    "file": "art-source/lpc/raw/characters/facial/glasses/round/adult/walk.png",
+    "authors": ["bluecarrot16", "Thane Brimhall (pennomi)", "laetissima"],
+    "licenses": ["CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/clothing-facial-features-and-ui-elements",
+      "https://opengameart.org/content/lpc-gentleman"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv.",
+    "sha256": "b7feff84cf5f1db801b1b54921bef07ce7bcd9a80c5eab28c4dd3d3e1360b11f"
+  },
+  {
+    "id": "character-legs-skirts-straight-thin",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/legs/skirts/straight/thin/walk.png",
+    "file": "art-source/lpc/raw/characters/legs/skirts/straight/thin/walk.png",
+    "authors": ["bluecarrot16", "ElizaWy"],
+    "licenses": ["OGA-BY-3.0", "GPL-3.0"],
+    "urls": ["http://opengameart.org/content/lpc-clothing-updates"],
+    "notes": "original skirt by ElizaWy, extended to all animation frames and edited for v3 bases by bluecarrot16",
+    "sha256": "886e8fa458c929ed4d4ca1b8f5ea88ffd87c5292ce96c31e7c42c7fff1d18129"
+  },
+  {
+    "id": "character-torso-clothes-blouse-longsleeve-female",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/torso/clothes/blouse_longsleeve/female/walk/white.png",
+    "file": "art-source/lpc/raw/characters/torso/clothes/blouse_longsleeve/female/walk/white.png",
+    "authors": ["bluecarrot16", "ElizaWy", "Lanea Zimmerman (Sharm)"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+      "https://opengameart.org/content/lpc-7-womens-shirts"
+    ],
+    "notes": "original princess.xcf by Sharm, edited to blouse by ElizaWy; blouse + longsleeve adapted to v3 bases by bluecarrot16",
+    "sha256": "1567f5ae3c4624e9f70c657faea0a196c7e5dcf88a36c969ff6d07550d81b9af"
+  },
+  {
+    "id": "character-torso-clothes-robe-female",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/torso/clothes/robe/female/walk/white.png",
+    "file": "art-source/lpc/raw/characters/torso/clothes/robe/female/walk/white.png",
+    "authors": ["Luke Mehl"],
+    "licenses": ["CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": ["https://opengameart.org/content/female-mage-clothing-set"],
+    "notes": "Unmodified source PNG (variant of torso/clothes/robe/female/walk.png); credits from pinned CREDITS.csv.",
+    "sha256": "2a6bd326b211d0515d133569ef502882b9ae25f26557a3483c86898225b9d0b4"
+  },
+  {
+    "id": "character-torso-jacket-trench-male",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/torso/jacket/trench/male/walk/gray.png",
+    "file": "art-source/lpc/raw/characters/torso/jacket/trench/male/walk/gray.png",
+    "authors": ["bluecarrot16"],
+    "licenses": ["CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": ["https://opengameart.org/content/lpc-gentleman"],
+    "notes": "Unmodified source PNG (variant of torso/jacket/trench/male/walk.png); credits from pinned CREDITS.csv.",
+    "sha256": "52a1cd64c7d9cbe344e7b9bf5a160124ca1dcaaa357f63315f933a8defee061a"
+  },
+  {
+    "id": "character-torso-clothes-vest-male",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/torso/clothes/vest/male/walk/white.png",
+    "file": "art-source/lpc/raw/characters/torso/clothes/vest/male/walk/white.png",
+    "authors": [
+      "bluecarrot16",
+      "Thane Brimhall (pennomi)",
+      "laetissima",
+      "Stephen Challener (Redshrike)",
+      "Johannes Sjölund (wulax)"
+    ],
+    "licenses": ["CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-2-characters",
+      "https://opengameart.org/content/lpc-gentleman",
+      "https://opengameart.org/content/lpc-pirates"
+    ],
+    "notes": "Unmodified source PNG (variant of torso/clothes/vest/male/walk.png); credits from pinned CREDITS.csv.",
+    "sha256": "ddbf318968a8ea3ff1d1c7aec9cd3edc74ce1037d4afa0d16985c77b45596444"
+  },
+  {
+    "id": "character-weapon-polearm-cane-male",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/weapon/polearm/cane/male/walk/cane.png",
+    "file": "art-source/lpc/raw/characters/weapon/polearm/cane/male/walk/cane.png",
+    "authors": ["bluecarrot16"],
+    "licenses": ["CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": ["https://opengameart.org/content/lpc-gentleman"],
+    "notes": "Unmodified source PNG (variant of weapon/polearm/cane/male/walk.png); credits from pinned CREDITS.csv.",
+    "sha256": "9e3787f87a7aa3b04aa6fddda8b6637e3ac729cf2da076011b9b6c9dcdb294e8"
+  },
+  {
+    "id": "character-body-bodies-male-sit",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/body/bodies/male/sit.png",
+    "file": "art-source/lpc/raw/characters/body/bodies/male/sit.png",
+    "authors": [
+      "bluecarrot16",
+      "JaidynReiman",
+      "Benjamin K. Smith (BenCreating)",
+      "Evert",
+      "Eliza Wyatt (ElizaWy)",
+      "TheraHedwig",
+      "MuffinElZangano",
+      "Durrani",
+      "Johannes Sjölund (wulax)",
+      "Stephen Challener (Redshrike)"
+    ],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+      "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+      "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
+      "https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle",
+      "https://opengameart.org/content/lpc-revised-character-basics",
+      "https://opengameart.org/content/lpc-be-seated",
+      "https://opengameart.org/content/lpc-runcycle-for-male-muscular-and-pregnant-character-bases-with-modular-heads",
+      "https://opengameart.org/content/lpc-jump-expanded",
+      "https://opengameart.org/content/lpc-character-bases"
+    ],
+    "notes": "see details at https://opengameart.org/content/lpc-character-bases; 'Thick' Male Revised Run/Climb by JaidynReiman (based on ElizaWy's LPC Revised)",
+    "sha256": "ff339e6b3e34894d32db67c61d6a396e2d4286764aa26be79f0660f439317d0c"
+  },
+  {
+    "id": "character-head-heads-human-male-elderly-sit",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/head/heads/human/male_elderly/sit.png",
+    "file": "art-source/lpc/raw/characters/head/heads/human/male_elderly/sit.png",
+    "authors": [
+      "Benjamin K. Smith (BenCreating)",
+      "Eliza Wyatt (ElizaWy)",
+      "Stephen Challener (Redshrike)"
+    ],
+    "licenses": ["OGA-BY-3.0", "CC-BY-3.0"],
+    "urls": [
+      "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+      "https://opengameart.org/content/lpc-revised-elders",
+      "https://opengameart.org/content/lpc-character-bases"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv.",
+    "sha256": "eb43bf64f13c04a0e8468963a57b137418545e203cd3dfadde792e3127aea334"
+  },
+  {
+    "id": "character-torso-clothes-longsleeve-longsleeve-male-sit",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/torso/clothes/longsleeve/longsleeve/male/sit.png",
+    "file": "art-source/lpc/raw/characters/torso/clothes/longsleeve/longsleeve/male/sit.png",
+    "authors": ["JaidynReiman", "Johannes Sjölund (wulax)"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+      "http://opengameart.org/content/lpc-clothing-updates",
+      "https://opengameart.org/content/lpc-revised-character-basics",
+      "https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing",
+      "https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+      "https://opengameart.org/content/lpc-expanded-simple-shirts"
+    ],
+    "notes": "original by wulax; tweaks and further recolors by bluecarrot16; cleanup and climb/jump/run/sit/emote/revised combat adapted from LPC Revised by JaidynReiman",
+    "sha256": "151c715412c988c4d3de1dac42c06b1c9eb468f93971fa5f03a8ea8dfb17d9b7"
+  },
+  {
+    "id": "character-legs-skirts-plain-male-sit",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/legs/skirts/plain/male/sit.png",
+    "file": "art-source/lpc/raw/characters/legs/skirts/plain/male/sit.png",
+    "authors": [
+      "bluecarrot16",
+      "Pierre Vigier (pvigier)",
+      "Johannes Sjölund (wulax)",
+      "Ahmad3366",
+      "JaidynReiman"
+    ],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": ["https://opengameart.org/content/lpc-medieval-fantasy-character-sprites"],
+    "notes": "original by wulax, edited for female base by pvigier, edited for v3 base by bluecarrot16, idle & sit by Ahmad3366, color reduced & female sit/emote by JaidynReiman",
+    "sha256": "c65d145a90ab51cf85219c54229d157693e24f10c2f43c4e45902b065f98dfff"
+  },
+  {
+    "id": "character-feet-slippers-male-sit",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/feet/slippers/male/sit.png",
+    "file": "art-source/lpc/raw/characters/feet/slippers/male/sit.png",
+    "authors": ["bluecarrot16", "JaidynReiman", "Joe White", "Luke Mehl"],
+    "licenses": ["CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/thin-mage-clothing-set",
+      "http://opengameart.org/content/lpc-clothing-updates",
+      "https://opengameart.org/content/lpc-expanded-socks-shoes"
+    ],
+    "notes": "original by Luke Mehl, Joe White did thrust/shoot animations, edited for v3 bases and male sprites by bluecarrot16, Jump/Sit/Emote/Run/Revised Combat by JaidynReiman",
+    "sha256": "d8381a7edbdc4acd15333e8865c48673fba7425b0a2f3fd9dcf09d01ddb8c7f7"
+  },
+  {
+    "id": "character-hair-plain-adult-sit",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hair/plain/adult/sit.png",
+    "file": "art-source/lpc/raw/characters/hair/plain/adult/sit.png",
+    "authors": ["JaidynReiman", "Manuel Riecke (MrBeast)", "Joe White"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+      "https://opengameart.org/content/ponytail-and-plain-hairstyles",
+      "https://opengameart.org/content/lpc-expanded-hair"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv.",
+    "sha256": "053cdd196f34f1d2ceb8de1bccaf3ab8a28dbf677a624788eab22a23a099ea0d"
+  },
+  {
+    "id": "character-beards-beard-medium-sit",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/beards/beard/medium/sit.png",
+    "file": "art-source/lpc/raw/characters/beards/beard/medium/sit.png",
+    "authors": ["ElizaWy"],
+    "licenses": ["OGA-BY-3.0"],
+    "urls": [
+      "https://github.com/ElizaWy/LPC/tree/main/Characters/Hair",
+      "https://opengameart.org/content/lpc-expanded-sit-run-jump-more"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv.",
+    "sha256": "7d2ba0d1331c7c93b4378eb7b9991a76ea12872a0bce08daa33ac2071d2b6f7d"
+  },
+  {
+    "id": "character-hat-formal-crown-adult-sit",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hat/formal/crown/adult/sit.png",
+    "file": "art-source/lpc/raw/characters/hat/formal/crown/adult/sit.png",
+    "authors": ["DarkwallLKE", "Charles Sanchez (CharlesGabriel)"],
+    "licenses": ["CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+      "https://opengameart.org/content/lpc-crown",
+      "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv.",
+    "sha256": "778181a5eec8a952e45d0aff138d1285b5dfc6812ef7872800815f9bdfd938b8"
   }
 ]

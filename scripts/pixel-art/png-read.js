@@ -102,7 +102,8 @@ export function readPng(file) {
       buf[o + 3] = trns && k < trns.length ? trns[k] : 255;
     } else if (type === 0) {
       buf[o] = buf[o + 1] = buf[o + 2] = px[s];
-      buf[o + 3] = 255;
+      // A tRNS chunk on a greyscale image names the one grey level that is transparent.
+      buf[o + 3] = trns && trns.length >= 2 && px[s] === trns[1] ? 0 : 255;
     } else {
       buf[o] = buf[o + 1] = buf[o + 2] = px[s];
       buf[o + 3] = px[s + 1];

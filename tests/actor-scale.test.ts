@@ -118,4 +118,12 @@ describe('actor scale', () => {
     const rb = box(r);
     expect([rb.left, rb.top, rb.w, rb.h]).toEqual([r.x - 9, r.y - 9, 18, 18]);
   });
+
+  it('stands a 96 px figure on the same feet with the same box', () => {
+    const s = fakeSprite('npc_chronos_reborn', 96, { w: 96, h: 96, ox: 0, oy: 0 });
+    expect(enlargeActor(s as unknown as Phaser.GameObjects.Sprite)).toBe(1);
+    // Soles (row 93 of 96) 14 px below the position.
+    expect(s.y - s.displayOriginY + 93).toBeCloseTo(s.y + 14);
+    expect(box(s)).toEqual({ left: s.x - 16, top: s.y - 16, w: 32, h: 32 });
+  });
 });
