@@ -13140,7 +13140,11 @@
       "speaker": "Ivo",
       "lines": [
         "Peter? Đúng là cậu rồi. Cửa xưởng kẹt, ba cái bánh răng thì mất hai.",
-        "Sổ tay của tôi ghi hết số đo. Cậu xem rồi lắp giúp, tay tôi run quá."
+        "Sổ tay của tôi ghi hết số đo. Đây, cậu cầm lấy mà xem rồi lắp giúp, tay tôi run quá.",
+        "(Ivo đưa cuốn sổ tay. Peter lật đến trang có vết dầu máy.)",
+        "Sổ tay Ivo: \"Bánh vào 12 răng, quay thuận. Trục 1 cách trục 2 đúng 28 răng (tổng răng hai bánh kề nhau).\"",
+        "\"Trục 2 cách trục 3 đúng 40 răng. Cửa chỉ mở nếu bánh ra quay chậm bằng một nửa bánh vào.\"",
+        "Quên số đo thì cứ nói chuyện lại với tôi."
       ],
       "responses": []
     },

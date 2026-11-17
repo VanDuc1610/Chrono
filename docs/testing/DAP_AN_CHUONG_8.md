@@ -32,7 +32,7 @@ Nguồn đối chiếu là `maps.json`, `dialogue.json`, `enemies.json`, cùng v
 
 **Đáp án:** **bánh giữa 16 răng · bánh ra 24 răng**.
 
-- Đọc sổ tay Ivo ở (9,9): bánh vào có 12 răng; tổng răng hai bánh kề lần lượt là 28 và 40; bánh ra phải quay chậm bằng nửa bánh vào.
+- Nói chuyện với Ivo để nhận sổ tay và số đo: bánh vào có 12 răng; tổng răng hai bánh kề lần lượt là 28 và 40; bánh ra phải quay chậm bằng nửa bánh vào. Sổ tay ở (9,9) nhắc lại các số đo này.
 - **Vì sao:** 28 − 12 = 16, rồi 40 − 16 = 24. Tỉ số 12/24 = 1/2. Ba bánh nối tiếp làm bánh ra quay cùng chiều bánh vào.
 - Xoay `ch8_gear_mid` tới 16, `ch8_gear_out` tới 24. Bộ đúng tự mở thoại, đặt `solved_ivo_gears`; Ivo gia nhập.
 - Đi tiếp phần thoại về két để nhận **Món Nợ Của Ivo**.

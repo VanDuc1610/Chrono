@@ -3,13 +3,15 @@
  * owner decisions and §18 build notes): dialogue nodes, quests and items. Written by Claude.
  * Idempotent: re-running replaces every ch8_ node / quest / item it defines.
  *
- * Usage: node scripts/content-ch8.mjs
+ * Usage: node scripts/content-ch8.mjs [--ivo-only]
  */
 import fs from 'fs';
 
 const read = (f) => JSON.parse(fs.readFileSync(f, 'utf8'));
 const write = (f, d) => fs.writeFileSync(f, JSON.stringify(d, null, 2) + '\n');
 const dlg = read('public/assets/data/dialogue.json');
+const originalDialogue = fs.readFileSync('public/assets/data/dialogue.json', 'utf8');
+const ivoOnly = process.argv.includes('--ivo-only');
 const quests = read('public/assets/data/quests.json');
 const items = read('public/assets/data/items.json');
 const D = dlg.dialogues;
@@ -155,7 +157,11 @@ P('ch8_market_arrival', [
 ]);
 N('ch8_ivo', 'Ivo', [
   'Peter? Đúng là cậu rồi. Cửa xưởng kẹt, ba cái bánh răng thì mất hai.',
-  'Sổ tay của tôi ghi hết số đo. Cậu xem rồi lắp giúp, tay tôi run quá.',
+  'Sổ tay của tôi ghi hết số đo. Đây, cậu cầm lấy mà xem rồi lắp giúp, tay tôi run quá.',
+  '(Ivo đưa cuốn sổ tay. Peter lật đến trang có vết dầu máy.)',
+  'Sổ tay Ivo: "Bánh vào 12 răng, quay thuận. Trục 1 cách trục 2 đúng 28 răng (tổng răng hai bánh kề nhau)."',
+  '"Trục 2 cách trục 3 đúng 40 răng. Cửa chỉ mở nếu bánh ra quay chậm bằng một nửa bánh vào."',
+  'Quên số đo thì cứ nói chuyện lại với tôi.',
 ]);
 P('ch8_notebook', [
   'Sổ tay Ivo: "Bánh vào 12 răng, quay thuận. Trục 1 cách trục 2 đúng 28 răng (tổng răng hai bánh kề nhau)."',
@@ -1085,15 +1091,32 @@ const CH8_ITEMS = [
 const ids = new Set(CH8_ITEMS.map((i) => i.id));
 items.items = items.items.filter((i) => !ids.has(i.id)).concat(CH8_ITEMS);
 
-write('public/assets/data/dialogue.json', dlg);
-write('public/assets/data/quests.json', quests);
-write('public/assets/data/items.json', items);
-console.log(
-  'ch8 content:',
-  Object.keys(D).filter((k) => k.startsWith('ch8_')).length,
-  'nodes,',
-  CH8_QUESTS.length,
-  'quests,',
-  CH8_ITEMS.length,
-  'items',
-);
+if (ivoOnly) {
+  const notebook = D.ch8_notebook.lines;
+  if (!notebook.every((line, index) => line === D.ch8_ivo.lines[index + 3])) {
+    throw new Error('Ivo and notebook measurements disagree');
+  }
+  const pattern =
+    /("ch8_ivo": \{\s*"id": "ch8_ivo",\s*"speaker": "Ivo",\s*"lines": \[\n)[\s\S]*?(\n      \],)/g;
+  const matches = [...originalDialogue.matchAll(pattern)];
+  if (matches.length !== 1) throw new Error('Expected exactly one Ivo dialogue node');
+  const lines = D.ch8_ivo.lines.map((line) => `        ${JSON.stringify(line)}`).join(',\n');
+  fs.writeFileSync(
+    'public/assets/data/dialogue.json',
+    originalDialogue.replace(pattern, (_match, before, after) => before + lines + after),
+  );
+  console.log('ch8 content: updated Ivo dialogue only');
+} else {
+  write('public/assets/data/dialogue.json', dlg);
+  write('public/assets/data/quests.json', quests);
+  write('public/assets/data/items.json', items);
+  console.log(
+    'ch8 content:',
+    Object.keys(D).filter((k) => k.startsWith('ch8_')).length,
+    'nodes,',
+    CH8_QUESTS.length,
+    'quests,',
+    CH8_ITEMS.length,
+    'items',
+  );
+}
