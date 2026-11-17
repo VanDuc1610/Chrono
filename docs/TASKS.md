@@ -77,6 +77,24 @@ root docs into `docs/archive/`.
 _Locks:_ `docs/context/*`, `docs/PROJECT_CONTEXT.md`, `docs/archive/*` (new), root `*.png`,
 root duplicate docs (`ART_GUIDE.md`, `PETER_DESIGN.md`, `ASSET_REGISTRY.md` only if duplicated).
 
+### T-97 · Audio integration — **Codex** · `BLOCKED` (owner approval of docs/audio/AUDIO_PLAN.md)
+
+Vendor the approved tracks and sound effects with credits (pinned, hashed, like `scripts/lpc/*`), a music
+player per chapter/battle/boss with crossfades that follows `src/state/Settings.ts`, and the missing sound
+effects; procedural sound stays as the fallback. API only: Claude wires the scenes.
+
+_Locks:_ `src/systems/audio/*`, `scripts/audio/*` (new), `art-source/audio/*` (new),
+`public/assets/audio/*`, `tests/audio*.test.ts` (new), `CREDITS.md` (audio section only).
+
+### T-98 · Split ActionCombat.ts into modules (no behaviour change) — **Codex** · `TODO`
+
+`src/world/ActionCombat.ts` is 2,458 lines. Split it into focused modules under `src/world/action/`
+(roamers, field foes, shots, hazards, HUD bars...) keeping its public API, so `ExplorationScene` and
+`BossFight` need no change; move pure rules to `src/systems/action/` with unit tests.
+
+_Locks:_ `src/world/ActionCombat.ts`, `src/world/action/*` (new), `src/systems/action/*`,
+`tests/action*.test.ts`.
+
 ### T-96 · Settings, pause menu and three save slots — **Claude** · `DONE`
 
 Built from Antigravity's T-94 spec (open questions answered with the defaults: "Tiếp tục" loads the newest
