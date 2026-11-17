@@ -78,6 +78,8 @@ export class Atmosphere {
   private lit: Lit[] = [];
   private decor: MapDecor | null = null;
   private on = false;
+  /** Scales the darkness (a full neon skin brings its own void). */
+  private shadeScale = 1;
 
   constructor(
     private readonly scene: Phaser.Scene,
@@ -118,6 +120,12 @@ export class Atmosphere {
     return Math.min(1, a / 0.45) * (this.def?.glowScale ?? 1);
   }
 
+  /** Scales the darkness layer (1 = as the data says); kept across L toggles. */
+  public dimDarkness(scale: number): void {
+    this.shadeScale = scale;
+    this.dark?.setAlpha(scale);
+  }
+
   /** The darkness is painted once; per frame only Peter's light and the flickering glows move. */
   public update(): void {
     if (!this.on) return;
@@ -151,7 +159,8 @@ export class Atmosphere {
     this.dark = s.add
       .renderTexture(0, 0, Math.max(width, b.width), Math.max(height, b.height))
       .setOrigin(0)
-      .setDepth(60);
+      .setDepth(60)
+      .setAlpha(this.shadeScale);
     this.brush = s.make.image({ key: SOFT, add: false });
     if (d.vignette)
       this.vignette = s.add

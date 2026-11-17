@@ -22,6 +22,7 @@ import { BossFight, bossProfile } from '../world/BossFight';
 import type { BossProfile } from '../systems/boss/BossTypes';
 import { PixelFxLayer } from '../systems/fx/PixelFxLayer';
 import { Atmosphere } from '../world/Atmosphere';
+import { NeonSkin } from '../world/NeonSkin';
 import { ScreenTransition } from '../ui/ScreenTransition';
 import { getStrings, Translate } from '../ui/Strings';
 import {
@@ -153,6 +154,8 @@ export class ExplorationScene extends Phaser.Scene {
     this.swapOriginals = new Map();
     this.visionSprites = [];
     this.npcSprites = [];
+    this.neon = null;
+    this.neonSwapKey = '';
     this.frozenVeil = null;
     this.isFrozen = false;
     this.pendingEncounter = null;
@@ -320,6 +323,26 @@ export class ExplorationScene extends Phaser.Scene {
       (this.mapDef.npcs ?? []).map((n) => n.tile),
       () => (this.pfx ??= new PixelFxLayer(this)),
     );
+    this.neon = new NeonSkin(
+      this,
+      {
+        id: this.mapDef.id,
+        ground: this.groundLayer,
+        walls: this.wallLayer,
+        solid: (x, y) => {
+          const i = this.wallLayer.getTileAt(x, y)?.index ?? -1;
+          return i >= this.mapDef.collision.fromGid && i <= this.mapDef.collision.toGid;
+        },
+        pois: (this.mapDef.interactables ?? []).map((i) => i.tile),
+        reveal: (this.mapDef.tileSwaps ?? [])
+          .filter((sw) => sw.layer === 'ground')
+          .flatMap((sw) => sw.tiles),
+        marks: this.puzzleTiles(),
+        exits: (this.mapDef.exits ?? []).map((e) => e.area),
+        actors: () => [this.player.sprite, ...this.npcSprites],
+      },
+      (full) => this.atmosphere?.dimDarkness(full ? 0.3 : 1),
+    );
     this.field.setupBeams((x, y) => {
       const layer = this.wallLayer;
       if (x < 0 || y < 0 || x >= layer.layer.width || y >= layer.layer.height) return true;
@@ -461,6 +484,12 @@ export class ExplorationScene extends Phaser.Scene {
     for (const swap of swaps) {
       if (!conditionHolds(swap.when, this.flagOn)) continue;
       for (const t of swap.tiles) layerOf(swap.layer).putTileAt(swap.index + 1, t.x, t.y);
+    }
+    // The neon outline is traced from the walls: retrace it only when the set of swaps changed.
+    const swapKey = swaps.map((sw) => (conditionHolds(sw.when, this.flagOn) ? 1 : 0)).join('');
+    if (swapKey !== this.neonSwapKey) {
+      this.neonSwapKey = swapKey;
+      this.neon?.refresh();
     }
     if (this.playerReady && this.isInsideWall()) {
       const fallback = this.mapDef.fallbackSpawn
@@ -987,6 +1016,14 @@ export class ExplorationScene extends Phaser.Scene {
           this.t(this.atmosphere.active ? 'atmosphere.on' : 'atmosphere.off'),
         );
     });
+    on(K.N, () => {
+      if (this.dialogueBox.isOpen() || this.satchel.isOpen) return;
+      if (this.neon?.toggle())
+        this.showNotification(
+          this.t('neon.title'),
+          this.t(this.neon.active ? 'neon.on' : 'neon.off'),
+        );
+    });
     on(K.J, () => {
       if (this.dialogueBox.isOpen() || this.satchel.isOpen) return;
       this.questTracker.toggle();
@@ -1088,6 +1125,9 @@ export class ExplorationScene extends Phaser.Scene {
   private flashbackFx: Phaser.GameObjects.Rectangle | null = null;
   /** Lights, camera grade and motes of this map (atmosphere.json); L toggles them. */
   private atmosphere: Atmosphere | null = null;
+  /** Neon line-art skin (preview maps in neon.json); N toggles it. */
+  private neon: NeonSkin | null = null;
+  private neonSwapKey = '';
 
   /** Hazy memory: the world greys out and the edges darken while a flashback node is shown. */
   private setFlashback(on: boolean): void {

@@ -302,6 +302,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.json('data_bosses', 'assets/data/bosses.json');
     // Map lights, camera grade and motes (free Phaser features; L toggles them).
     this.load.json('data_atmosphere', 'assets/data/atmosphere.json');
+    this.load.json('data_neon', 'assets/data/neon.json');
     this.load.json('data_items', 'assets/data/items.json');
     this.load.json('data_player', 'assets/data/player.json');
     this.load.json('data_strings', 'assets/data/strings.json');

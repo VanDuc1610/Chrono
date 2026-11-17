@@ -23,6 +23,19 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 Goal (owner, 2026-11-15): Chapters 5–7 are built and wait for the owner's playtest. Chapters 8 and 9
 are built and verified — the story is complete (4 endings). Next: the owner's playtest of Chapters 5–9. The story ends at Chapter 9.
 
+### T-86 · Neon line-art skin — preview on two maps — **Claude** · `IN PROGRESS`
+
+Owner, 2026-11-17: try the "cosmic neon" style. The world is redrawn as glowing line art in code, over the
+same map data: wall outlines traced from the collision grid, floor-region lines, a drafting grid, stars and
+constellations, clock medallions on wall masses and floor sigils, gold frames on exits and puzzle pieces, rings
+on points of interest, a soft rim of light on Peter and the people (sprites keep their pixel art). `level` per
+map: 1 = full void (Chapter 9 apex), 0.3 = outlines over the tiles (Chapter 1 shore). N toggles. Waiting on
+the owner's verdict before any wider rollout.
+
+_Locks:_ `src/world/NeonSkin.ts` (new), `src/world/NeonTrace.ts` (new), `public/assets/data/neon.json` (new),
+`tests/neon.test.ts` (new), `src/world/Atmosphere.ts`, `src/scenes/ExplorationScene.ts`, `src/scenes/PreloadScene.ts`,
+`public/assets/data/strings.json`.
+
 ### T-85 · Map atmosphere: lights, darkness, motes (free, code-drawn) — **Claude** · `IN PROGRESS`
 
 Owner, 2026-11-16: upgrade graphics with free tools only. First step, previewed on three maps (coastal

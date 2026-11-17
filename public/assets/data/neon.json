@@ -1,0 +1,16 @@
+{
+  "maps": {
+    "map_ch1_shore_gate": {
+      "level": 0.3,
+      "line": "#5ee7ff",
+      "accent": "#ffc46b"
+    },
+    "map_ch9_apex_nexus": {
+      "level": 1,
+      "line": "#b98cff",
+      "accent": "#ffd36b",
+      "void": "#06030f",
+      "ghost": 0.08
+    }
+  }
+}

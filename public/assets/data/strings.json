@@ -211,6 +211,9 @@
     "atmosphere.title": "ÁNH SÁNG & HIỆU ỨNG",
     "atmosphere.on": "Đã bật [L]",
     "atmosphere.off": "Đã tắt [L]",
+    "neon.title": "PHONG CÁCH NEON (BẢN THỬ)",
+    "neon.on": "Đã bật [N]",
+    "neon.off": "Đã tắt [N]",
     "hud.levelUp": "LÊN CẤP {level}!",
     "quest.tab": "[J] Nhiệm vụ ▸"
   }
