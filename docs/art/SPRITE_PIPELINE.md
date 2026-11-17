@@ -103,7 +103,7 @@ Before any candidate sprite is promoted from `candidates/` to `approved/` and de
    - Overall silhouette must be rounded, compact, and slightly elevated, with curls growing upward and outward rather than hanging down.
    - Complete visible curly coverage across the entire head, including sides and back.
    - Strictly verify **NO** straight messy hair, wavy hair, loose flowing curls, long curly fringe, drooping bangs, shaggy/layered hair, undercut, or shaved sides.
-2. **Color Consistency Audit:** Sample pixel colors against the official palette in [PETER_DESIGN.md](PETER_DESIGN.md) (Charcoal-blue `#263248`, curly dark-brown `#3b291d`, cerulean glow `#00c8ff`, restrained purple accents `#281e36`).
+2. **Color Consistency Audit:** Sample pixel colors against the official palette in [PETER_DESIGN.md](PETER_DESIGN.md) (Charcoal-blue `#263248`, curly black `#25222c`, cerulean glow `#00c8ff`, restrained purple accents `#281e36`).
 3. **Accessories Audit:** Verify diagonal leather strap from left shoulder to right hip, right hip notebook, right-hand Broken Blade, and waist stopped watch.
 4. **Frame Alignment Audit:** Verify anchor position does not drift between animation frames.
 5. **Engine Verification:** Test in Phaser with Arcade physics collider and 4-way movement.

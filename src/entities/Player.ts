@@ -3,7 +3,12 @@ import { Entity } from './Entity';
 import { IMovementSystem } from '../systems/movement/IMovementSystem';
 import { TopDownMovementSystem } from '../systems/movement/TopDownMovementSystem';
 import { IPlayerController } from '../systems/input/IPlayerController';
-import { registerPeterAnimations } from '../systems/animation/PeterAnimationConfig';
+import {
+  PETER_BODY,
+  PETER_FRAME,
+  PETER_ORIGIN_Y,
+  registerPeterAnimations,
+} from '../systems/animation/PeterAnimationConfig';
 
 export interface PlayerConfig {
   speed?: number;
@@ -39,12 +44,15 @@ export class Player extends Entity {
     this.movementSystem = movementSystem ?? new TopDownMovementSystem();
     this.speed = config?.speed ?? 120;
 
-    // Configure collision physics body
-    // Footprint-based 18x14 collision box centered at (7, 16)
+    // Footprint collider (18x14) at his feet. The LPC-scale sheets (64x64) stand on an origin 14 px
+    // above the soles, so the sprite position and the collider sit where they did at 32x32.
     this.sprite.setCollideWorldBounds(true);
+    const lpc = initialTexture.startsWith('peter_') && this.sprite.frame.width >= PETER_FRAME;
+    if (lpc) this.sprite.setOrigin(0.5, PETER_ORIGIN_Y);
     if (this.sprite.body) {
-      this.sprite.body.setSize(18, 14);
-      this.sprite.body.setOffset(7, 16);
+      this.sprite.body.setSize(PETER_BODY.width, PETER_BODY.height);
+      if (lpc) this.sprite.body.setOffset(PETER_BODY.offsetX, PETER_BODY.offsetY);
+      else this.sprite.body.setOffset(7, 16);
     }
 
     if (scene.textures.exists('peter_idle') && scene.textures.exists('peter_walk')) {

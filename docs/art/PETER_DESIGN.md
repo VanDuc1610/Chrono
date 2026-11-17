@@ -31,7 +31,7 @@ The concept images confirm:
 
 - **Age & Build:** Adult male, approximately 26 years old. Slender-athletic, practical explorer physique. Mature masculine facial proportions.
 - **Hairstyle (Permanent Identity Lock):**
-  - Short, compact, naturally curly men's haircut (`#3b291d`, `#22160f`, `#594132`).
+  - Short, compact, naturally curly men's haircut, **black** (`#25222c`, `#141219`, `#423e4d`; owner changed the colour from dark brown on 2026-11-17 — the style is unchanged).
   - Consists of clearly distinguishable, tightly coiled, springy curls.
   - Overall hair silhouette must remain rounded, compact, and slightly elevated.
   - Curls must grow upward and outward rather than hanging down.
@@ -91,9 +91,9 @@ The concept images confirm:
 
 | Swatch Name                  | Hex Code  | Role in Asset Production                         |
 | ---------------------------- | --------- | ------------------------------------------------ |
-| **Curly Hair Shadow**        | `#22160f` | Deep recesses between curls                      |
-| **Curly Hair Base**          | `#3b291d` | Dominant compact curl color                      |
-| **Curly Hair Highlight**     | `#594132` | Top curl highlight                               |
+| **Curly Hair Shadow**        | `#141219` | Deep recesses between curls                      |
+| **Curly Hair Base**          | `#25222c` | Dominant compact curl color                      |
+| **Curly Hair Highlight**     | `#423e4d` | Top curl highlight                               |
 | **Eye Gray-Blue**            | `#607d9c` | Muted iris color                                 |
 | **Skin Base**                | `#dab9a0` | Face and hand mid-tones                          |
 | **Skin Shadow**              | `#b28e76` | Jawline, neck shadow, and stubble                |

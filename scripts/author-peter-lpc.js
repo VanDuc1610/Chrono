@@ -28,9 +28,9 @@ const SIZE = 64;
 /** PETER_DESIGN.md §3-4 swatches, plus outline, notebook pages and leather highlight. */
 const PALETTE = {
   O: hex('#120f17'), // outline (near-black violet)
-  h: hex('#22160f'), // curly hair shadow
-  H: hex('#3b291d'), // curly hair base
-  j: hex('#594132'), // curly hair highlight
+  h: hex('#141219'), // curly hair shadow (black, owner 2026-11-17)
+  H: hex('#25222c'), // curly hair base (black)
+  j: hex('#423e4d'), // curly hair highlight (cool sheen on black curls)
   s: hex('#dab9a0'), // skin
   S: hex('#b28e76'), // skin shadow / stubble
   E: hex('#607d9c'), // gray-blue eyes

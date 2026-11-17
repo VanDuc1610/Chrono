@@ -1,5 +1,6 @@
 import type { MapDatabase } from '../world/MapTypes';
 import Phaser from 'phaser';
+import { PETER_FRAME } from '../systems/animation/PeterAnimationConfig';
 
 export class PreloadScene extends Phaser.Scene {
   private progressBar!: Phaser.GameObjects.Graphics;
@@ -93,45 +94,46 @@ export class PreloadScene extends Phaser.Scene {
 
     // 1. Character & Entities
     this.load.image('player_placeholder', 'assets/characters/player_placeholder.png');
+    // T-88 (owner approved 2026-11-17): Peter at the LPC scale, 64x64 frames, black curls.
     this.load.spritesheet('peter_idle', 'assets/characters/peter/peter_idle.png', {
-      frameWidth: 32,
-      frameHeight: 32,
+      frameWidth: PETER_FRAME,
+      frameHeight: PETER_FRAME,
     });
     this.load.spritesheet('peter_walk', 'assets/characters/peter/peter_walk.png', {
-      frameWidth: 32,
-      frameHeight: 32,
+      frameWidth: PETER_FRAME,
+      frameHeight: PETER_FRAME,
     });
     // CHAR_PETER_004: empty-handed idle/walk (Prologue v3, before the Broken Blade).
     this.load.spritesheet('peter_idle_unarmed', 'assets/characters/peter/peter_idle_unarmed.png', {
-      frameWidth: 32,
-      frameHeight: 32,
+      frameWidth: PETER_FRAME,
+      frameHeight: PETER_FRAME,
     });
     this.load.spritesheet('peter_walk_unarmed', 'assets/characters/peter/peter_walk_unarmed.png', {
-      frameWidth: 32,
-      frameHeight: 32,
+      frameWidth: PETER_FRAME,
+      frameHeight: PETER_FRAME,
     });
     this.load.spritesheet('peter_run', 'assets/characters/peter/peter_run.png', {
-      frameWidth: 32,
-      frameHeight: 32,
+      frameWidth: PETER_FRAME,
+      frameHeight: PETER_FRAME,
     });
     this.load.spritesheet('peter_attack', 'assets/characters/peter/peter_attack.png', {
-      frameWidth: 32,
-      frameHeight: 32,
+      frameWidth: PETER_FRAME,
+      frameHeight: PETER_FRAME,
     });
     this.load.spritesheet('peter_hurt', 'assets/characters/peter/peter_hurt.png', {
-      frameWidth: 32,
-      frameHeight: 32,
+      frameWidth: PETER_FRAME,
+      frameHeight: PETER_FRAME,
     });
     // T-85 (owner approved 2026-11-16): dodge and ranged-weapon shot, 4 frames x 4 directions.
     for (const key of ['peter_dash', 'peter_shoot'])
       this.load.spritesheet(key, `assets/characters/peter/${key}.png`, {
-        frameWidth: 32,
-        frameHeight: 32,
+        frameWidth: PETER_FRAME,
+        frameHeight: PETER_FRAME,
       });
     this.load.spritesheet(
       'peter_temporal_sight',
       'assets/characters/peter/peter_temporal_sight.png',
-      { frameWidth: 32, frameHeight: 32 },
+      { frameWidth: PETER_FRAME, frameHeight: 32 },
     );
     // Elder Chronographer idle (NPC_ELDER_001, approved Pipeline B art): 4 frames, 32x32.
     this.load.spritesheet('npc_elder', 'assets/npcs/elder_idle.png', {

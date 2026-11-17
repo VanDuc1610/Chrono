@@ -232,7 +232,11 @@ export class CombatScene extends Phaser.Scene {
 
     // Peter stands in profile facing the enemy (CHAR_PETER_002/003 sheets, row "right").
     registerPeterAnimations(this);
-    this.playerSprite = this.add.sprite(playerX, playerY, this.player.spriteKey, 0).setScale(2.0);
+    // 32 px sheets were shown at 2x; the LPC-scale sheets (64 px, ~47 px tall) at 1.25x.
+    const peterFrame = this.textures.getFrame(this.player.spriteKey, 0)?.width ?? 32;
+    this.playerSprite = this.add
+      .sprite(playerX, playerY, this.player.spriteKey, 0)
+      .setScale(peterFrame >= 64 ? 1.25 : 2.0);
     this.playPeterAnim('idle');
     // Subtle breathing animation
     this.tweens.add({

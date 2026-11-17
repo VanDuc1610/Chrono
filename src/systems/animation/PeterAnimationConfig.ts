@@ -2,6 +2,16 @@ import Phaser from 'phaser';
 
 export type CardinalDirection = 'down' | 'up' | 'left' | 'right';
 
+/** T-88 (owner approved 2026-11-17): Peter is drawn at the LPC scale, 64x64 frames. */
+export const PETER_FRAME = 64;
+/**
+ * The frame row that sits on the sprite's position: 14 px above the soles (y = 61), as with the
+ * old 32 px sprites, so positions, collisions and distances in gameplay do not move.
+ */
+export const PETER_ORIGIN_Y = 47 / PETER_FRAME;
+/** The 18x14 footprint collider at his feet (offsets from the frame's top-left). */
+export const PETER_BODY = { width: 18, height: 14, offsetX: 23, offsetY: 47 } as const;
+
 export interface IAnimationSpec {
   keyPrefix: string;
   textureKey: string;
