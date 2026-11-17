@@ -33,13 +33,13 @@ every player), then sound, settings and saves, then combat and code health, then
    (Codex) · later: audio integration, settings implementation, one combat system (design first),
    ActionCombat/BossFight split, gamepad and touch, LPC dressing per map, chapters 6-9 structure.
 
-### T-91 · UI overhaul: pixel font with Vietnamese, compact HUD, controls bar — **Claude** · `IN PROGRESS`
+### T-91 · UI overhaul: pixel font with Vietnamese, compact HUD, controls bar — **Claude** · `DONE`
 
 VT323 (SIL OFL, full Vietnamese) for every UI text; a compact HUD that frees the screen; the controls
 bar no longer overflows; dialogue box and menus polished. Done so far: VT323 everywhere through
 `crispText` (sizes x1.4, no synthetic bold, the boot waits for the font), compact status panel (place,
 level, HP/MP bars with values, EXP hairline), slimmer quest tracker, the key list folded behind H.
-Next: dialogue box and main menu polish, uppercase captions with diacritics.
+Title screen: a slow clock of light behind the title, Peter (LPC idle) at its edge, the tagline now "Thần Tính Rạn Vỡ" in mixed case so its diacritics read.
 
 _Locks:_ `src/ui/*`, `src/scenes/MainMenuScene.ts`, `src/scenes/BootScene.ts`, `index.html`,
 `public/assets/fonts/*` (new).
@@ -67,7 +67,7 @@ three save slots, written so it can be implemented without further questions.
 
 _Locks:_ `docs/design/SETTINGS_UX.md` (new).
 
-### T-95 · Docs refresh — **Codex** · `TODO` (after T-92)
+### T-95 · Docs refresh — **Codex** · `DONE`
 
 Bring `docs/context/PROJECT_MAP.md`, `docs/PROJECT_CONTEXT.md` status sections and `README.md` up to
 date (story complete, LPC look, neon skin, real-time bosses); move stale root screenshots and duplicate
@@ -158,8 +158,8 @@ _Locks:_ `docs/testing/DAP_AN_CHUONG_9.md` (new). Read-only: everything else.
 
 ## Done (latest 5 — older entries in [TASKS_ARCHIVE.md](TASKS_ARCHIVE.md))
 
+- **T-91** UI overhaul: VT323 pixel font with Vietnamese for every text, compact HUD (place, level, HP/MP bars with values, EXP hairline), slimmer quest tracker, key list behind H, title screen with a turning clock and Peter — Claude
+- **T-95** Refreshed runtime/status docs from source (131 maps, four endings, LPC/neon, bosses, VT323, 260 tests); archived 11 historical screenshots; retained nonduplicate root document pointers/ledger - Codex
 - **T-92** Split Phaser vendor bundle, retained CI checks and Pages deploy, production Chromium smoke (nonblank frame, real keys and saves); 260 unit tests and smoke passed - Codex
 - **T-89** Vendored 25 pinned LPC PNGs with SHA-256 verification, source credits, manifest, generated CREDITS.md and attribution coverage tests; 259 tests passed; no public asset changes - Codex
 - **T-87** Ivo hands Peter his notebook and gear measurements in the first dialogue; the notebook reminder and Chapter 8 answer key agree; scoped generator update, 257 tests passed ? Codex
-- **T-90** LPC asset map (`docs/art/LPC_ASSET_MAP.md`): mapped all 131 maps across Chapters 0–9 to `RPG_Maker_MZ_LPC_Starter_Kit` sheets/props, missing Pipeline B/recolour items, chapter colour grades (`T-86` neon transition from Ch6), recurring NPC generator vs custom split (Peter locked custom), and top 5 priority maps (`Doanh Trại Veridia`, `Thị trấn ven biển`, `Làng Chài Hoàng Hôn`, `Quảng Trường Phán Quyết`, `Vườn Hạt Khả Năng`) — Antigravity
-- **T-80** Chapter 9 (the finale) playable: art (nexus tileset + 14 sprites, owner approved), 23 maps — six shared, route "Chiếc Ghế Trống" (Penrose, matrix, Architect, chimes, astrolabe, the Unwritten page, the Sixfold throne, the Crown) and route "Kẻ Giật Dây" (Chronos bound, four lieutenants, Kuro the Puppet Master), three hidden maps; 13 dial puzzles (solver-proved), Sentinel thrust / Inquisitor four-blow chain field foes, four endings through Codex's ending cards, level cap 30, chapter select 9. Verified: 198 unit tests, live CDP runs of both routes, every puzzle, every boss and all four endings — Claude

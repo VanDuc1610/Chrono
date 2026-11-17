@@ -2,21 +2,23 @@
 
 ## Master Project Context & Architectural Source of Truth
 
-**Document Version:** 1.0.0  
+**Document Version:** 1.1.0
+
 **Project Lead:** Lead Technical Architect & Project Documentation Engineer  
 **Canonical Status:** Authoritative Master Document for Antigravity & Claude Code  
-**Date of Audit:** November 10, 2026
+**Date of Audit:** November 17, 2026 (runtime/status refresh; historical lore sections retained)
 
 ---
 
 ## 1. Project Vision & Core Identity
 
-**CHRONO – THE FRACTURED DIVINITY** is an original, single-player browser-based 2D RPG crafted with classic 16-bit pixel art aesthetic, deliberate top-down exploration, and tactical turn-based combat. The game takes place in the melancholy, celestial aftermath of the Cataclysm of the Divided Hour—a cosmic rupture that shattered the flow of continuous time into localized distortions, recursive loops, and crystalline chronal anomalies.
+**CHRONO – THE FRACTURED DIVINITY** is an original, single-player browser-based 2D RPG crafted with classic 16-bit pixel art aesthetic, deliberate top-down exploration, turn-based normal encounters and real-time boss combat. The game takes place in the melancholy, celestial aftermath of the Cataclysm of the Divided Hour—a cosmic rupture that shattered the flow of continuous time into localized distortions, recursive loops, and crystalline chronal anomalies.
 
-### Target Milestone:
+### Current milestone
 
-- **Scope:** Playable **Prologue Vertical Slice** (estimated 10–15 minutes of gameplay).
-- **Deliverable:** Fully functional browser experience demonstrating the complete gameplay loop: booting, title navigation, top-down exploration of an ancient sanctuary ruins, externalized dialogue with branching choices, quest tracking, satchel inventory management, persistent multi-slot save/load, and turn-based battle against a temporal anomaly with seamless overworld return.
+- **Scope:** Story complete: Prologue + Chapters 1-9, four endings, 131 maps (including hidden maps).
+- **Delivery:** Browser RPG with exploration, dialogue, puzzles, quests, equipment, saves, turn-based normal encounters and real-time bosses on their own maps. Chapter selection covers all chapters.
+- **Presentation:** LPC environments for chapters 0-5, approved 64x64 Peter animations, full neon void for chapters 6-9, per-map atmosphere/colour grade and VT323 UI. Owner playtesting and presentation upgrades continue; see `docs/TASKS.md`.
 
 ---
 
@@ -31,7 +33,7 @@
 | **Camera**                  | 2D Top-Down Orthographic (3/4 pitch, 640×360 native canvas scaled via `FIT`)                                            | **CONFIRMED**              |
 | **Art Style**               | Authentic 16-bit Pixel Art with stylized proportions                                                                    | **CONFIRMED**              |
 | **Atmosphere**              | Cosmic Dark Fantasy + Ethereal                                                                                          | **CONFIRMED**              |
-| **Combat**                  | Turn-based tactical battle arena with speed-based initiative queue                                                      | **CONFIRMED**              |
+| **Combat**                  | Turn-based normal encounters; real-time bosses on exploration maps                                                      | **CONFIRMED**              |
 | **Control Scheme**          | Keyboard (WASD / Arrows to move, Space/E to interact, 1-2 for choices, I/B for satchel, K for quick-save, ESC for menu) | **CONFIRMED**              |
 | **Gamepad / Touch**         | Virtual touch controls and Gamepad API support                                                                          | _PROPOSED (Post-Prologue)_ |
 
@@ -68,7 +70,7 @@ flowchart TD
         D_Enemies["enemies.json"]
         D_Items["items.json"]
         D_Player["player.json (stats, level curve, combat tuning)"]
-        D_Map["prologue_map.json (Tiled JSON)"]
+        D_Map["maps.json + Tiled maps (131 world entries)"]
     end
 
     ExplorationScene --> Movement
@@ -102,37 +104,29 @@ flowchart TD
 
 ## 4. Current Implementation Status (Audited Findings)
 
-### 4.1 Completed Features (Verified on Live Engine)
+### 4.1 Completed runtime features (source-confirmed)
 
-- [x] **Project Foundation:** Phaser 3.88.2 + TypeScript 5.8 + Vite 6 build system (`npm run build` succeeds in <1s).
-- [x] **Scene Lifecycle:** `BootScene` $\rightarrow$ `PreloadScene` $\rightarrow$ `MainMenuScene` $\rightarrow$ `ExplorationScene` $\rightarrow$ `CombatScene`.
-- [x] **Exploration Mechanics:** 4-direction movement, Arcade Physics wall collision boundaries, smooth camera following with world constraints.
-- [x] **Collision Footprint:** $18 \times 14\text{ px}$ foot collider at center-bottom `(7, 16)` enabling natural 2.5D depth sorting against vertical wall tiles.
-- [x] **Dialogue Engine:** Typewriter text rendering, fast-forward skip on interact key, multi-choice branching (`dialogue.json`).
-- [x] **Quest State Machine:** Objective tracking, banner notifications, top-right HUD tracker (`quests.json`).
-- [x] **Turn-Based Combat:** Speed-ordered initiative queue, Temporal Strike costs MP (refilled each battle) (the faster combatant acts first each round), player command menu (Attack, Skill, Item, Defend, Escape), Defend lasts until the defender's next action, Item consumes a Chrono Shard from the satchel, Escape succeeds with probability `0.5 + 0.05 × (speed difference)` clamped to 10–90% (a failed escape costs the turn), floating damage numbers, victory/defeat resolution, EXP + loot-table rewards, dissolve tween, and overworld return.
-- [x] **Environmental Storytelling (T-21/22/23):** 7 points of interest (Stele of the Six Authorities, Defaced Pillar, Torn Journal Leaf, Frozen Astrolabe, Cracked Reliquary, Sealed Threshold Gates, Residual Rift Echo) with optional quest "Remnants of the Divided Hour" (+40 EXP, Ancient Gear); estimated prologue playtime 11–16 min (`docs/narrative/PROLOGUE_CONTENT_PROPOSAL.md`). Behaviour is data-driven: `interactables.json` + dialogue node `effects`.
-- [x] **Prologue Arc & Ending:** "Echoes in the Fracture" → follow-up "Silence the Fracture" (defeat the Temporal Shade) → Elder farewell → `PrologueEndScene` closing card → title. Defeat revives Peter at the Altar of Moments with full HP (GDD §9 checkpoint revival).
-- [x] **Peter Runtime Sprites:** idle + walk (`CHAR_PETER_002`) and attack / hurt / temporal_sight (`CHAR_PETER_003`) are approved code-authored art. Combat shows Peter in profile with slash, Temporal Sight and hurt animations plus tinted hit sparks (`UI_SET_001`). Only the run sheet is still a placeholder (no run mechanic yet).
-- [x] **Progression:** EXP from enemies (`expReward`) and quest rewards; level thresholds and per-level stat growth in `player.json` (level cap 3 in the prologue, GDD §9); a level-up fully restores HP. HP persists between battles.
-- [x] **Inventory System:** `InventorySystem` backing, signature starter items (Broken Chronometer, 2x Minor Chrono Shards), in-game Satchel overlay (`I`/`B`), consumable item usage in combat (not yet usable from the satchel in exploration).
-- [x] **Save/Load Persistence:** Multi-slot `localStorage` persistence with in-memory fallback, Quick-Save (`K`), dynamic "CONTINUE" enablement on MainMenuScene, and 100% accurate coordinate/state restoration.
-- [x] **Audio Synthesis:** `SoundSystem` providing 16-bit cursor blips, selection chimes, blade slash bursts, heal chords, save chimes, and volume/mute toggle options.
-- [x] **Automated CDP Test Suites:** Three end-to-end headless browser test suites (`scripts/test-gameplay.js`, `scripts/test-combat.js`, `scripts/test-inventory-save.js`) and asset validation tool (`scripts/validate-candidate.js`).
+- **Story/world:** Prologue through Chapter 9, 131 entries in `maps.json`; four ending cards (`order`, `unbound`, `true`, `returned_page`) routed by `chapter9EndingKeys` in `PrologueEndScene.ts`.
+- **Combat:** `CombatScene` and pure combat rules handle normal encounters. `BossFight` and `src/systems/boss/` handle real-time fights on exploration maps. Equipment has melee, ranged, armour and accessory slots.
+- **Exploration/state:** branching dialogue, puzzle fields, quests, inventory, progression, chapter selection and save/load through GameSession. Scene state is reset and listeners cleaned up on shutdown.
+- **Peter:** approved 64x64 LPC-scale animation sheets (`PeterAnimationConfig.ts`); Player preserves the 18x14 foot collider with a frame-specific origin/offset. Character identity remains governed by `docs/art/PETER_DESIGN.md`.
+- **LPC environments:** `scripts/lpc/veridia.mjs` builds Veridia; `reskin.mjs` rebuilds chapter 0-5 tilesets slot for slot while retaining collision, puzzle swaps and story props. Pinned sources and derived atlases are attributed in the LPC manifests and root CREDITS.md.
+- **Depth/presentation:** ActorShadows adds contact shadows and foot sorting; overlay/above layers support tall props; WallCaps draws LPC wall tops above actors. Atmosphere applies lights, motes, darkness and per-map multiply/screen grade.
+- **Neon:** NeonSkin/NeonTrace read `neon.json`; LPC chapters 0-5 use accents, chapters 6-9 full void. Owner art review and map dressing remain ongoing.
+- **UI:** VT323 (SIL OFL, Vietnamese) through `crispText.ts`; BootScene waits for font loading. Compact HUD, quest tracker, dialogue and menus are under active T-91 polish.
+- **Audio:** SoundSystem uses procedural Web Audio; new music/SFX and settings designs are tracked separately on the task board.
 
-### 4.2 Partially Implemented / Staged for Asset Replacement
+### 4.2 Verification and release (2026-11-17)
 
-- [ ] **UI Art Integration:** the approved panel frame (nine-slice) and menu cursor (`UI_SET_001`) are loaded, but panels and the menu cursor are still drawn with Graphics/Text (T-26).
-- [x] **NPC Sprites:** Elder Chronographer uses approved code-authored art (`NPC_ELDER_001`, 4-frame breathing idle).
-- [x] **Enemy Sprites:** Temporal Shade uses approved code-authored art (`MOB_SHADE_001`, 4-frame float loop).
-- [x] **Tileset Art:** Shattered Antechamber uses the approved code-authored tileset (`ENV_SANCTUARY_001`), incl. floor variants and fracture tiles.
+- `npm test`: **260 tests in 33 files passed**.
+- Typecheck, production build and repository-wide Prettier check passed. Lint: no errors, one existing assertion-style warning in `tests/arsenal-boss.test.ts`.
+- Production Chromium smoke passed in 10 seconds: menu boot, Enter/new game, nonblank rendered canvas, real-key movement, quick-save/reload, no page/console errors.
+- Vite uses relative base `./`; game bundle is about 460 kB, Phaser vendor about 1,482 kB before gzip. Font path is resolved at runtime from `assets/fonts/`.
+- `.github/workflows/ci.yml` retains all checks, builds once, tests the build and deploys its artifact with GitHub Pages actions. Play URL: https://vanduc1610.github.io/Chrono/ (requires Pages source set to GitHub Actions and a successful deployment).
 
-### 4.3 Proposed / Not Implemented in Prologue
+### 4.3 Remaining work
 
-- Full world overworld map (_Proposed for Chapter 1_).
-- Multi-character party switching (_Proposed for Chapter 1_).
-- Complex skill trees and job/class progression (_Proposed for Chapter 2_).
-- Equipment crafting and gear socketing (_Proposed for Chapter 2_).
+Owner playtests, UI polish, audio, settings/pause/save UX and further per-map LPC dressing are tracked in `docs/TASKS.md`. Gamepad/touch, crafting and skill-tree proposals are not completion claims.
 
 ---
 
@@ -216,9 +210,9 @@ Peter's hairstyle is a permanent character identity feature and **CANNOT** be mo
 ## 7. Approved Art Direction & Technical Standards
 
 - **Perspective:** 2D Top-Down Orthographic (3/4 pitch, viewing angle $45^\circ\dots 60^\circ$).
-- **Resolution:** $32 \times 32\text{ px}$ per animation frame cell.
-- **Footprint Hitbox:** $18 \times 14\text{ px}$ centered at $(X=7, Y=16)$ inside the $32 \times 32\text{ px}$ bounding box.
-- **Ground Anchor:** Feet anchored on rows $Y = 28\dots 30$.
+- **Resolution:** Peter uses approved 64x64 LPC-scale frames; world tiles remain 32x32. Other sheets follow their individual preload/frame definitions.
+- **Footprint Hitbox:** Peter retains an 18x14 foot collider; `PeterAnimationConfig.ts` and `Player.ts` define the current 64x64 origin and body offsets.
+- **Ground Anchor:** Peter uses the LPC frame origin above the soles; consult the animation config rather than the historical 32x32 row convention.
 - **Transparency:** Pure 8-bit RGBA transparency ($A = 0$ for background). No soft feathering, halos, or background color matte bleed.
 - **Palette:** The 32-color Chronal Spectrum (The Abyss dark tones, Divine Fracture cerulean/cyan, Eternal Order brass/gold, Temporal Corruption violet/carmine). See `docs/art/ART_GUIDE.md`.
 
@@ -317,24 +311,20 @@ node scripts/validate-candidate.js <path-to-png>
 
 ### Confirmed Decisions vs. Unresolved Decisions Ledger:
 
-| Feature                     | Status                       | Notes                                                                                                            |
-| :-------------------------- | :--------------------------- | :--------------------------------------------------------------------------------------------------------------- |
-| **Peter Character Design**  | **CONFIRMED**                | Master concept approved in `peter_master_v1.png`. Hairstyle locked.                                              |
-| **Peter True Origin**       | **UNRESOLVED (Intentional)** | Unwritten; delivered via environmental discovery.                                                                |
-| **Kuro, the Forgotten One** | **CONFIRMED**                | Established as main opposing character. Visual design: _UNRESOLVED_.                                             |
-| **Six Divine Authorities**  | **CONFIRMED**                | Origin, Continuum, Causality, Memory, Possibility, Finality established.                                         |
-| **Combat Mechanics**        | **CONFIRMED**                | Turn-based loop, speed initiative, 5 commands, probabilistic escape, victory/defeat (owner decision 2026-11-10). |
-| **EXP & Levelling**         | **CONFIRMED**                | In scope for the prologue (owner decision 2026-11-10). Curve/growth tunable in `player.json`.                    |
-| **Audio Architecture**      | **CONFIRMED**                | Procedural Web Audio synthesis (`SoundSystem.ts`). No copyrighted audio.                                         |
-| **Party System**            | _PROPOSED (TBD)_             | Solo protagonist in Prologue. Multi-party deferred to Chapter 1.                                                 |
-| **Git Repository**          | **RESOLVED & CONNECTED**     | Remote `origin` linked to `https://github.com/VanDuc1610/Chrono.git` on branch `main` at baseline `ffb72c3`.     |
+| Feature                     | Status                       | Notes                                                                                                                            |
+| :-------------------------- | :--------------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+| **Peter Character Design**  | **CONFIRMED**                | Master concept approved in `peter_master_v1.png`. Hairstyle locked.                                                              |
+| **Peter True Origin**       | **UNRESOLVED (Intentional)** | Unwritten; delivered via environmental discovery.                                                                                |
+| **Kuro, the Forgotten One** | **CONFIRMED**                | Established as main opposing character. Visual design: _UNRESOLVED_.                                                             |
+| **Six Divine Authorities**  | **CONFIRMED**                | Origin, Continuum, Causality, Memory, Possibility, Finality established.                                                         |
+| **Combat Mechanics**        | **CONFIRMED**                | Normal encounters retain turn-based rules; bosses now fight in real time on exploration maps.                                    |
+| **EXP & Levelling**         | **CONFIRMED**                | In scope for the prologue (owner decision 2026-11-10). Curve/growth tunable in `player.json`.                                    |
+| **Audio Architecture**      | **CONFIRMED**                | Procedural Web Audio synthesis (`SoundSystem.ts`). No copyrighted audio.                                                         |
+| **Party System**            | _PROPOSED (TBD)_             | Peter is controlled directly; chapter companions and companion calls exist. General party switching remains a separate proposal. |
+| **Git Repository**          | **RESOLVED & CONNECTED**     | Remote `origin` linked to `https://github.com/VanDuc1610/Chrono.git` on branch `main` at baseline `ffb72c3`.                     |
 
 ---
 
-## 12. Next Recommended Implementation Tasks
+## 12. Next implementation work
 
-1. **Git Repository Remote:** Connected to `https://github.com/VanDuc1610/Chrono.git` on branch `main`. Stage and push new art guides and handoff docs.
-2. **VS Code Workspace Migration:** Complete the handoff checklist to open the exact project folder in Visual Studio Code.
-3. **Manual AI Sprite Generation for Peter:** User generates 4-direction idle and walk candidate sheets in AUTOMATIC1111 WebUI using `peter_idle.txt` and `peter_walk.txt`.
-4. **NPC Elder & Enemy Sprite Production:** User generates candidate art for Elder Chronographer and Temporal Shade using authored prompt templates.
-5. **Tilemap Art Polish:** Replace procedural placeholder dungeon tiles with the approved dark slate sanctuary tileset.
+Use `docs/TASKS.md` for assignments and file locks. Current priorities are owner review, UI polish, audio/settings design and per-map LPC dressing. No AI image generation or asset promotion without owner approval. Historical root screenshots now live in `docs/archive/screenshots/`; they do not represent the current presentation.

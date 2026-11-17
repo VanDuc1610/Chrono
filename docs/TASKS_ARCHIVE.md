@@ -2,6 +2,9 @@
 
 Completed tasks moved out of [TASKS.md](TASKS.md) to keep the board short. Newest first. Read only when you need history.
 
+- **T-90** LPC asset map (`docs/art/LPC_ASSET_MAP.md`): mapped all 131 maps across Chapters 0–9 to `RPG_Maker_MZ_LPC_Starter_Kit` sheets/props, missing Pipeline B/recolour items, chapter colour grades (`T-86` neon transition from Ch6), recurring NPC generator vs custom split (Peter locked custom), and top 5 priority maps (`Doanh Trại Veridia`, `Thị trấn ven biển`, `Làng Chài Hoàng Hôn`, `Quảng Trường Phán Quyết`, `Vườn Hạt Khả Năng`) — Antigravity
+
+- **T-80** Chapter 9 (the finale) playable: art (nexus tileset + 14 sprites, owner approved), 23 maps — six shared, route "Chiếc Ghế Trống" (Penrose, matrix, Architect, chimes, astrolabe, the Unwritten page, the Sixfold throne, the Crown) and route "Kẻ Giật Dây" (Chronos bound, four lieutenants, Kuro the Puppet Master), three hidden maps; 13 dial puzzles (solver-proved), Sentinel thrust / Inquisitor four-blow chain field foes, four endings through Codex's ending cards, level cap 30, chapter select 9. Verified: 198 unit tests, live CDP runs of both routes, every puzzle, every boss and all four endings — Claude
 - **T-82** Chapter 9 engine: paired gold/violet block rings, companion calls with heal/stun/flag gates, the four-card ending router — Codex
 - **T-81** Chapter 9 dialogue script (`docs/story/CHAPTER_09_SCRIPT.md`, 147 nodes for both routes) — Antigravity
 - **T-81** Chapter 9 dialogue script (`docs/story/CHAPTER_09_SCRIPT.md`, Vietnamese): full script across all 22 maps (both routes, crown, epilogue, 3 hidden maps) with arrival lines, NPCs (with past-flag variants), clues/secrets pickups, C01–C13 puzzles (intro/clue/wrong/right/done), boss confronts and victories, `ch9_kuro_crossroad` choice, and beat-by-beat dialogue for all 4 endings; lines ≤ 220 chars, Kuro "tao/mày", Lyra halberd, C10 slots shuffled — Antigravity
