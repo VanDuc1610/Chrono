@@ -127,10 +127,10 @@ export class PreloadScene extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 64,
     });
-    // Temporal Shade float loop (MOB_SHADE_001, approved Pipeline B art): 4 frames, 32x32.
-    this.load.spritesheet('enemy_fracture', 'assets/enemies/shade_float.png', {
-      frameWidth: 32,
-      frameHeight: 32,
+    // Temporal Shade float loop (MOB_SHADE_001): 4 frames, 64x64 at the LPC scale (scripts/author-monsters.js).
+    this.load.spritesheet('enemy_fracture', 'assets/enemies/v2/shade_float.png', {
+      frameWidth: 64,
+      frameHeight: 64,
     });
     // Cô Ba (NPC_VENDOR_BA_001): 4-frame idle, 64x64 at the LPC scale.
     this.load.spritesheet('npc_vendor_ba', 'assets/lpc/npcs/vendor_ba_idle.png', {
@@ -149,9 +149,9 @@ export class PreloadScene extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 64,
     });
-    this.load.spritesheet('enemy_drifter', 'assets/enemies/drifter_float.png', {
-      frameWidth: 32,
-      frameHeight: 32,
+    this.load.spritesheet('enemy_drifter', 'assets/enemies/v2/drifter_float.png', {
+      frameWidth: 64,
+      frameHeight: 64,
     });
     this.load.spritesheet('boss_bellkeeper', 'assets/enemies/bellkeeper.png', {
       frameWidth: 64,
@@ -178,8 +178,8 @@ export class PreloadScene extends Phaser.Scene {
       // Chapter 3 (T-58, owner approved 2026-11-13).
       ['npc_neris', 'assets/lpc/npcs/neris_idle.png', 64],
       ['npc_amnesiac_king', 'assets/lpc/npcs/amnesiac_king_idle.png', 64],
-      ['enemy_memory_wraith', 'assets/enemies/memory_wraith.png', 32],
-      ['enemy_thought_eater', 'assets/enemies/thought_eater.png', 32],
+      ['enemy_memory_wraith', 'assets/enemies/v2/memory_wraith.png', 64],
+      ['enemy_thought_eater', 'assets/enemies/v2/thought_eater.png', 64],
       ['enemy_hollow_archivist', 'assets/lpc/enemies/hollow_archivist.png', 64],
       ['boss_faceless_keeper', 'assets/enemies/faceless_keeper.png', 48],
       ['boss_nameless_choir', 'assets/enemies/nameless_choir.png', 64],
@@ -199,10 +199,10 @@ export class PreloadScene extends Phaser.Scene {
       // Chapter 5 (owner approved 2026-11-14).
       ['npc_ivo', 'assets/lpc/npcs/ivo_idle.png', 64],
       ['npc_mira', 'assets/lpc/npcs/mira_idle.png', 64],
-      ['enemy_branch_phantom', 'assets/enemies/branch_phantom.png', 32],
+      ['enemy_branch_phantom', 'assets/enemies/v2/branch_phantom.png', 64],
       ['enemy_unborn_cocoon', 'assets/enemies/unborn_cocoon.png', 32],
       ['enemy_unborn_horror', 'assets/enemies/unborn_horror.png', 32],
-      ['enemy_paradox_crystal', 'assets/enemies/paradox_crystal.png', 32],
+      ['enemy_paradox_crystal', 'assets/enemies/v2/paradox_crystal.png', 64],
       ['enemy_chronos_gardener', 'assets/enemies/chronos_gardener.png', 32],
       ['boss_other_peter', 'assets/enemies/other_peter.png', 48],
       ['boss_unborn_king', 'assets/enemies/unborn_king.png', 64],

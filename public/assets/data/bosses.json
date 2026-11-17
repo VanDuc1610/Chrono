@@ -3,7 +3,7 @@
     {
       "id": "boss_time_wraith",
       "intro": "Thời gian ngừng trôi. Bóng Ma Thời Gian lao ra khỏi khe nứt — Peter chưa có vũ khí, chỉ còn đôi tay! [Chuột trái] Đấm · [Shift] Né",
-      "scale": 2.2,
+      "scale": 1.35,
       "radius": 20,
       "speed": 70,
       "damageScale": 0.6,
@@ -1034,7 +1034,7 @@
     {
       "id": "boss_kuro_duel",
       "intro": "Kuro rút kiếm: \"Cho tao thấy mày đủ sức dừng tao.\" Khi hắn thủ thế (vòng đỏ), đòn của cậu sẽ bị phản lại — đợi hắn hở ra.",
-      "scale": 1.6,
+      "scale": 1.1,
       "radius": 16,
       "speed": 70,
       "damageScale": 0.42,
