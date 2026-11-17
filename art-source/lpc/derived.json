@@ -17,7 +17,7 @@
   {
     "id": "derived-coastal-tileset-edges",
     "file": "public/assets/lpc/coastal_tileset_edges.png",
-    "sha256": "5ff5bb63e597d727f6dadcd8a89f6a5b625f71b4f82ffcc32554af27ac27a3a4",
+    "sha256": "942a7f495d1f4da869eeeac1dc4040746d259602296bf6f1d729103afc4725ef",
     "from": [
       "tiles-outside-objects",
       "tiles-sand",
@@ -67,6 +67,7 @@
     "from": [
       "tiles-hughspectrum-castlefloors",
       "tiles-hughspectrum-castlewalls",
+      "tiles-outside-objects",
       "tiles-sharm-cement",
       "tiles-terrain-and-outside"
     ],
@@ -76,10 +77,11 @@
   {
     "id": "derived-interval-tileset-edges",
     "file": "public/assets/lpc/interval_tileset_edges.png",
-    "sha256": "dc0f6e30eaed729a8cc6dbe334e317ae28eff2c0c8ab1f2f89c8468b28aa8fe6",
+    "sha256": "63f7a8ad6de5918dda558f87bc49f2c9139c0914127c086756c71a66d934c2cc",
     "from": [
       "tiles-hughspectrum-castlefloors",
       "tiles-hughspectrum-castlewalls",
+      "tiles-outside-objects",
       "tiles-sharm-cement",
       "tiles-terrain-and-outside"
     ],
@@ -93,6 +95,7 @@
     "from": [
       "tiles-hughspectrum-castlefloors",
       "tiles-hughspectrum-castlewalls",
+      "tiles-outside-objects",
       "tiles-sharm-cement",
       "tiles-terrain-and-outside"
     ],
@@ -171,7 +174,7 @@
   {
     "id": "derived-warfield-tileset-edges",
     "file": "public/assets/lpc/warfield_tileset_edges.png",
-    "sha256": "3340f7d55cacd6d6ffdbbf46373e83d97264cc601f25dc1c3f45e452b916e94b",
+    "sha256": "14cf28022c546fc16c9bef94e04ecd2502893644561531a227456885f9f5ff1d",
     "from": [
       "tiles-adobe",
       "tiles-hughspectrum-castlefloors",
@@ -205,6 +208,7 @@
     "from": [
       "tiles-hughspectrum-castlefloors",
       "tiles-mountains",
+      "tiles-outside-objects",
       "tiles-sharm-grass",
       "tiles-sharm-water",
       "tiles-terrain-and-outside"
@@ -215,10 +219,11 @@
   {
     "id": "derived-wilds-tileset-edges",
     "file": "public/assets/lpc/wilds_tileset_edges.png",
-    "sha256": "6662e14c3bbbc13d517a87bdca92aaeebc73b0228d37135942618d02565cb13e",
+    "sha256": "e12f9c5bda11da213a94e85dedd53f8edbca713a3d35d49a59e2a26d75dfc10b",
     "from": [
       "tiles-hughspectrum-castlefloors",
       "tiles-mountains",
+      "tiles-outside-objects",
       "tiles-sharm-grass",
       "tiles-sharm-water",
       "tiles-terrain-and-outside"
@@ -233,6 +238,7 @@
     "from": [
       "tiles-hughspectrum-castlefloors",
       "tiles-mountains",
+      "tiles-outside-objects",
       "tiles-sharm-grass",
       "tiles-sharm-water",
       "tiles-terrain-and-outside"

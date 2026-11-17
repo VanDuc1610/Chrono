@@ -83,6 +83,8 @@ Vendor the approved tracks and sound effects with credits (pinned, hashed, like 
 player per chapter/battle/boss with crossfades that follows `src/state/Settings.ts`, and the missing sound
 effects; procedural sound stays as the fallback. API only: Claude wires the scenes.
 
+Implementation prepared locally: four pinned music excerpts, music/SFX API, queueAudio helper and tests. Owner chose to retain the T-88 credits-generator lock; Claude must merge the audio fragment using `art-source/audio/README.md` before T-97 can be DONE/committed. Other planned downloads timed out and remain explicitly dropped with procedural fallback.
+
 _Locks:_ `src/systems/audio/*`, `scripts/audio/*` (new), `art-source/audio/*` (new),
 `public/assets/audio/*`, `tests/audio*.test.ts` (new), `CREDITS.md` (audio section only).
 

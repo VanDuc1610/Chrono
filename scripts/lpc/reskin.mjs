@@ -102,6 +102,40 @@ const D_FAMILY = {
  * drawn over the lower kind (sand into water, grass into dirt...). Each kind: [sheet, tone, block
  * column] of a standard LPC terrain block (border 3x3 at rows 2-4, inner corners at rows 0-1).
  */
+/** Flat ground decor per kind (T-88): single LPC tiles laid on a few cells, never blocking. */
+const PEBBLES_GREY = [
+  ['TER', 30, 16],
+  ['TER', 31, 16],
+  ['TER', 30, 20],
+  ['TER', 30, 21],
+];
+const PEBBLES_SAND = [
+  ['TER', 30, 19],
+  ['TER', 31, 19],
+  ['TER', 30, 22],
+];
+const LEAVES_DRY = [
+  ['OBJ', 12, 12],
+  ['OBJ', 14, 12],
+  ['OBJ', 15, 12],
+];
+const GREENS = [
+  ['OBJ', 16, 8],
+  ['OBJ', 18, 8],
+  ['OBJ', 28, 2],
+  ['OBJ', 29, 2],
+  ['OBJ', 31, 2],
+  ['OBJ', 20, 8],
+];
+const DECOR_FOR = {
+  SAND: PEBBLES_SAND,
+  DIRT: [...PEBBLES_GREY, ...LEAVES_DRY.slice(0, 1)],
+  DIRT_DARK: [...PEBBLES_GREY, ...LEAVES_DRY],
+  FOREST_GRASS: GREENS,
+  ASH: PEBBLES_GREY,
+  CEMENT: PEBBLES_GREY.slice(0, 2),
+};
+
 const EDGE_KIND = {
   SAND: ['SAND', SAND_TONE, 0],
   DIRT: ['TER', null, 0],
@@ -373,9 +407,16 @@ for (const [name, ts] of Object.entries(TILESETS)) {
   const edgeFiles = [];
   if (EDGES[name]) {
     const kinds = EDGES[name];
-    const n = kinds.length * EDGE_PIECES.length;
+    const decorCount = kinds.reduce((sum, [kind]) => sum + (DECOR_FOR[kind]?.length ?? 0), 0);
+    const n = kinds.length * EDGE_PIECES.length + decorCount;
     const ebuf = Buffer.alloc(n * T * T * 4);
     const kindOf = {};
+    const decor = {};
+    let next = kinds.length * EDGE_PIECES.length;
+    const putFrame = (px, f) => {
+      for (let y = 0; y < T; y++)
+        px.copy(ebuf, (y * n * T + f * T) * 4, y * T * 4, (y + 1) * T * 4);
+    };
     kinds.forEach(([kind, gids], k) => {
       const [sheet, t, bx] = EDGE_KIND[kind];
       used.add(sheet);
@@ -384,9 +425,15 @@ for (const [name, ts] of Object.entries(TILESETS)) {
         const px = cut(sheets[sheet], bx + c, r);
         if (t) tone(px, t);
         tint(px, ts.tint[0], ts.tint[1]);
-        const f = k * EDGE_PIECES.length + i;
-        for (let y = 0; y < T; y++)
-          px.copy(ebuf, (y * n * T + f * T) * 4, y * T * 4, (y + 1) * T * 4);
+        putFrame(px, k * EDGE_PIECES.length + i);
+      });
+      // Decor frames for this kind follow all the border pieces.
+      decor[k] = (DECOR_FOR[kind] ?? []).map(([dsheet, c, r]) => {
+        used.add(dsheet);
+        const px = cut(sheets[dsheet], c, r);
+        tint(px, ts.tint[0], ts.tint[1]);
+        putFrame(px, next);
+        return next++;
       });
     });
     const edgesFile = `public/assets/lpc/${name}_edges.png`;
@@ -397,6 +444,7 @@ for (const [name, ts] of Object.entries(TILESETS)) {
       path: edgesFile.replace('public/', ''),
       kindOf,
       pieces: EDGE_PIECES.length,
+      decor,
     };
     edgeFiles.push([edgesFile, edgesPng, `Soft terrain edges for ${name} (LPC border pieces).`]);
   }

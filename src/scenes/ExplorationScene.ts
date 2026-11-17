@@ -467,7 +467,14 @@ export class ExplorationScene extends Phaser.Scene {
     // palisades and trees drawn above the actors so they can walk behind them.
     // Soft edges between ground kinds (T-88), between the ground and everything on it.
     if (ground)
-      this.terrainEdges = new TerrainEdges(this, def.tileset.name, ground, def.tileset.key);
+      this.terrainEdges = new TerrainEdges(
+        this,
+        def.tileset.name,
+        ground,
+        def.tileset.key,
+        def.id,
+        () => this.capFreeTiles(),
+      );
     if (def.layers.overlay) map.createLayer(def.layers.overlay, tileset, 0, 0);
     const walls = map.createLayer(variant?.walls ?? def.layers.walls, tileset, 0, 0);
     if (def.layers.above) map.createLayer(def.layers.above, tileset, 0, 0)?.setDepth(ABOVE_DEPTH);

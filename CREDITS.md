@@ -406,8 +406,8 @@ dungeon_tileset rebuilt slot for slot from LPC materials (tinted); story props k
 
 - File: public/assets/lpc/interval_tileset_caps.png
 - Made by: scripts/lpc/reskin.mjs
-- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-sharm-cement, tiles-terrain-and-outside
-- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; William Thompsonj; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-outside-objects, tiles-sharm-cement, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
 - Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
 
 Wall tops for interval_tileset, drawn above walkable tiles north of walls.
@@ -416,8 +416,8 @@ Wall tops for interval_tileset, drawn above walkable tiles north of walls.
 
 - File: public/assets/lpc/interval_tileset_edges.png
 - Made by: scripts/lpc/reskin.mjs
-- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-sharm-cement, tiles-terrain-and-outside
-- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; William Thompsonj; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-outside-objects, tiles-sharm-cement, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
 - Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
 
 Soft terrain edges for interval_tileset (LPC border pieces).
@@ -426,8 +426,8 @@ Soft terrain edges for interval_tileset (LPC border pieces).
 
 - File: public/assets/lpc/interval_tileset_lpc.png
 - Made by: scripts/lpc/reskin.mjs
-- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-sharm-cement, tiles-terrain-and-outside
-- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; William Thompsonj; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-outside-objects, tiles-sharm-cement, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
 - Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
 
 interval_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.
@@ -516,8 +516,8 @@ warfield_tileset rebuilt slot for slot from LPC materials (tinted); story props 
 
 - File: public/assets/lpc/wilds_tileset_caps.png
 - Made by: scripts/lpc/reskin.mjs
-- From: tiles-hughspectrum-castlefloors, tiles-mountains, tiles-sharm-grass, tiles-sharm-water, tiles-terrain-and-outside
-- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; William Thompsonj; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- From: tiles-hughspectrum-castlefloors, tiles-mountains, tiles-outside-objects, tiles-sharm-grass, tiles-sharm-water, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
 - Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
 
 Wall tops for wilds_tileset, drawn above walkable tiles north of walls.
@@ -526,8 +526,8 @@ Wall tops for wilds_tileset, drawn above walkable tiles north of walls.
 
 - File: public/assets/lpc/wilds_tileset_edges.png
 - Made by: scripts/lpc/reskin.mjs
-- From: tiles-hughspectrum-castlefloors, tiles-mountains, tiles-sharm-grass, tiles-sharm-water, tiles-terrain-and-outside
-- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; William Thompsonj; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- From: tiles-hughspectrum-castlefloors, tiles-mountains, tiles-outside-objects, tiles-sharm-grass, tiles-sharm-water, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
 - Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
 
 Soft terrain edges for wilds_tileset (LPC border pieces).
@@ -536,8 +536,8 @@ Soft terrain edges for wilds_tileset (LPC border pieces).
 
 - File: public/assets/lpc/wilds_tileset_lpc.png
 - Made by: scripts/lpc/reskin.mjs
-- From: tiles-hughspectrum-castlefloors, tiles-mountains, tiles-sharm-grass, tiles-sharm-water, tiles-terrain-and-outside
-- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; William Thompsonj; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- From: tiles-hughspectrum-castlefloors, tiles-mountains, tiles-outside-objects, tiles-sharm-grass, tiles-sharm-water, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
 - Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
 
 wilds_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.

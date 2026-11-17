@@ -2,6 +2,16 @@ import Phaser from 'phaser';
 import { TILE_SIZE } from './MapRegistry';
 import { edgePieceAt, PLAIN_GROUND } from './EdgeRules';
 import type { LpcData } from './WallCaps';
+import type { TilePoint } from './MapTypes';
+
+/** Share of a kind's inner cells that get a piece of flat decor. */
+const DECOR_DENSITY = 0.08;
+/** A stable pseudo-random number in [0, 1) for a cell of a map. */
+const cellNoise = (x: number, y: number, seed: number, salt: number): number => {
+  let h = (x * 374761393 + y * 668265263 + seed * 1442695041 + salt * 2654435761) | 0;
+  h = Math.imul(h ^ (h >>> 13), 1274126177);
+  return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+};
 
 /**
  * T-88: soft terrain edges on LPC maps (rules in EdgeRules). Drawn once into a render texture that
@@ -17,6 +27,10 @@ export class TerrainEdges {
     private readonly ground: Phaser.Tilemaps.TilemapLayer,
     /** Texture of the ground tileset (its tiles are drawn under the border pieces). */
     private readonly groundKey: string,
+    /** Map id: the decor is scattered the same way on every visit. */
+    private readonly mapId = '',
+    /** Cells that stay bare (people, points, exits, puzzle tiles). */
+    private readonly keepClear: () => TilePoint[] = () => [],
   ) {
     const data = scene.cache.json.get('data_lpc') as LpcData | undefined;
     const edges = data?.tilesets[tilesetName]?.edges;
@@ -65,6 +79,19 @@ export class TerrainEdges {
         if (under < 0) continue;
         this.rt.drawFrame(this.groundKey, `g${under}`, x * TILE_SIZE, y * TILE_SIZE);
         this.rt.drawFrame(e.key, kind(x, y) * e.pieces + p.piece, x * TILE_SIZE, y * TILE_SIZE);
+      }
+    // Flat decor on a few inner cells of each kind (never on a border, never on a kept cell).
+    if (!e.decor) return;
+    let seed = 0;
+    for (let i = 0; i < this.mapId.length; i++) seed = (seed * 31 + this.mapId.charCodeAt(i)) | 0;
+    const clear = new Set(this.keepClear().map((c) => `${c.x},${c.y}`));
+    for (let y = 0; y < h; y++)
+      for (let x = 0; x < w; x++) {
+        const frames = e.decor[String(kind(x, y))];
+        if (!frames?.length || clear.has(`${x},${y}`)) continue;
+        if (cellNoise(x, y, seed, 1) >= DECOR_DENSITY || edgePieceAt(x, y, kind)) continue;
+        const frame = frames[Math.floor(cellNoise(x, y, seed, 2) * frames.length)];
+        this.rt.drawFrame(e.key, frame, x * TILE_SIZE, y * TILE_SIZE);
       }
   }
 }

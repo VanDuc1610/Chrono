@@ -9,7 +9,14 @@ export interface LpcData {
     {
       caps?: { key: string; path: string; frames: Record<string, number> };
       /** Soft terrain edges: ground kind (rank) by gid, `pieces` border frames per kind. */
-      edges?: { key: string; path: string; kindOf: Record<string, number>; pieces: number };
+      edges?: {
+        key: string;
+        path: string;
+        kindOf: Record<string, number>;
+        pieces: number;
+        /** Flat decor frames (pebbles, leaves, sprouts) per ground kind. */
+        decor?: Record<string, number[]>;
+      };
     }
   >;
 }
