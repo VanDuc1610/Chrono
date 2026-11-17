@@ -23,6 +23,14 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 Goal (owner, 2026-11-15): Chapters 5–7 are built and wait for the owner's playtest. Chapters 8 and 9
 are built and verified — the story is complete (4 endings). Next: the owner's playtest of Chapters 5–9. The story ends at Chapter 9.
 
+### T-87 · Chapter 8: Ivo hands over his notebook (gear puzzle clue) — **Codex** · `TODO`
+
+Owner, 2026-11-17: talking to Ivo in the Gear Market should give Peter the gear measurements directly
+(players missed the notebook point at (9,9)). Ivo hands the notebook over in his first dialogue; the
+notebook point stays as a reminder. Update the Chapter 8 answer key to match.
+
+_Locks:_ `scripts/content-ch8.mjs`, `public/assets/data/dialogue.json`, `docs/testing/DAP_AN_CHUONG_8.md`.
+
 ### T-86 · Neon line-art skin across the whole game — **Claude** · `IN PROGRESS`
 
 Owner, 2026-11-17: try the "cosmic neon" style. The world is redrawn as glowing line art in code, over the
