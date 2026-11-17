@@ -1,8 +1,9 @@
+import { getSettings } from '../../state/Settings';
 /**
  * Procedural Web Audio Sound System for CHRONO.
  * Generates 16-bit retro style sound effects and looping background music dynamically
  * using Web Audio API synthesis.
- * Zero external asset dependencies, 100% original synthesis.
+ * Original synthesis remains available when the optional vendored audio adapter has no file.
  */
 
 export type BgmTheme = 'none' | 'ambient' | 'battle';
@@ -22,6 +23,79 @@ interface ActiveBgmChannel {
 export class SoundSystem {
   private static instance: SoundSystem | null = null;
   private ctx: AudioContext | null = null;
+  private fileSfx: ((id: string, rate: number) => boolean) | null = null;
+  private blipIndex = 0;
+  /** Scene adapter returns false for unavailable files, preserving procedural fallback. */
+  public setFileSfxPlayer(player: ((id: string, rate: number) => boolean) | null): () => void {
+    this.fileSfx = player;
+    return () => {
+      if (this.fileSfx === player) this.fileSfx = null;
+    };
+  }
+  private tryFileSfx(id: string, rate = 1): boolean {
+    this.applySettings(getSettings());
+    if (!this.fileSfx) return false;
+    try {
+      return this.fileSfx(id, rate);
+    } catch {
+      return false;
+    }
+  }
+  private playEvent(id: string, frequency: number, duration = 0.08, rate = 1): void {
+    if (this.tryFileSfx(id, rate)) return;
+    const ctx = this.initContext();
+    if (!ctx || this.isMuted) return;
+    const oscillator = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const at = ctx.currentTime;
+    oscillator.type = 'triangle';
+    oscillator.frequency.setValueAtTime(frequency * rate, at);
+    oscillator.frequency.exponentialRampToValueAtTime(Math.max(40, frequency / 2), at + duration);
+    gain.gain.setValueAtTime(Math.max(0.0001, this.getEffectiveVolume() * 0.25), at);
+    gain.gain.exponentialRampToValueAtTime(0.0001, at + duration);
+    oscillator.connect(gain);
+    gain.connect(ctx.destination);
+    oscillator.onended = () => {
+      oscillator.disconnect();
+      gain.disconnect();
+    };
+    oscillator.start(at);
+    oscillator.stop(at + duration);
+  }
+  public playHit(): void {
+    this.playEvent('sfx_hit', 160);
+  }
+  public playShot(): void {
+    this.playEvent('sfx_shot', 880);
+  }
+  public playDodge(): void {
+    this.playEvent('sfx_dodge', 320);
+  }
+  public playHurt(): void {
+    this.playEvent('sfx_hurt', 100);
+  }
+  public playPickup(): void {
+    this.playEvent('sfx_pickup', 740, 0.14);
+  }
+  public playLevelUp(): void {
+    this.playEvent('sfx_level_up', 1046, 0.3);
+  }
+  public playPuzzleSolved(): void {
+    this.playEvent('sfx_puzzle_solved', 660, 0.3);
+  }
+  public playFootstep(): void {
+    this.playEvent('sfx_footstep', 70, 0.04);
+  }
+  public playDoor(): void {
+    this.playEvent('sfx_door', 110, 0.2);
+  }
+  public playMenuCancel(): void {
+    this.playEvent('sfx_menu_cancel', 220);
+  }
+  public playDialogueBlip(): void {
+    this.playEvent('sfx_dialogue_blip', 440, 0.025, 0.95 + (this.blipIndex++ % 3) * 0.05);
+  }
+
   private sfxVolume = 0.6;
   private bgmVolume = 0.42;
   private masterVolume = 0.8;
@@ -99,7 +173,7 @@ export class SoundSystem {
   }
 
   public getEffectiveBgmVolume(): number {
-    return this.isMuted ? 0 : this.masterVolume * this.bgmVolume * (this.sfxVolume / 0.6);
+    return this.isMuted ? 0 : this.masterVolume * this.bgmVolume;
   }
 
   public setSfxVolume(vol: number): void {
@@ -242,7 +316,7 @@ export class SoundSystem {
    * Stops and disconnects all BGM oscillators, timers, and audio nodes immediately or after a short fade.
    * Safe to call on scene shutdown to prevent leaked audio nodes across scene transitions.
    */
-  public stopBgm(immediate = true): void {
+  public stopBgm(immediate = true, fadeMs = 180): void {
     for (const ch of Array.from(this.fadingBgmChannels)) {
       this.disposeBgmChannel(ch);
     }
@@ -254,7 +328,7 @@ export class SoundSystem {
     if (immediate) {
       this.disposeBgmChannel(current);
     } else {
-      this.fadeOutAndDisposeChannel(current, 180);
+      this.fadeOutAndDisposeChannel(current, fadeMs);
     }
   }
 
@@ -489,6 +563,7 @@ export class SoundSystem {
    * UI Navigation Cursor Blip: Crisp 8-bit blip (800Hz -> 1200Hz, 35ms)
    */
   public playCursorBlip(): void {
+    if (this.tryFileSfx('sfx_menu_move')) return;
     const ctx = this.initContext();
     if (!ctx || this.isMuted) return;
 
@@ -514,6 +589,7 @@ export class SoundSystem {
    * Confirmation / Selection Chime: Rising two-tone interval (523Hz -> 659Hz, 90ms)
    */
   public playSelect(): void {
+    if (this.tryFileSfx('sfx_menu_select')) return;
     const ctx = this.initContext();
     if (!ctx || this.isMuted) return;
 
@@ -550,6 +626,7 @@ export class SoundSystem {
    * Blade Attack Slash: White noise burst with lowpass filter sweep
    */
   public playSlash(): void {
+    if (this.tryFileSfx('sfx_slash')) return;
     const ctx = this.initContext();
     if (!ctx || this.isMuted) return;
 
@@ -588,6 +665,7 @@ export class SoundSystem {
    * Healing / Chrono Shard restoration: Harmonic ascending triad (E4 -> G#4 -> B4)
    */
   public playHeal(): void {
+    if (this.tryFileSfx('sfx_heal')) return;
     const ctx = this.initContext();
     if (!ctx || this.isMuted) return;
 
@@ -618,6 +696,7 @@ export class SoundSystem {
    * Chrono Save Chime: Shimmering 4-note temporal chord
    */
   public playSaveChime(): void {
+    if (this.tryFileSfx('sfx_save')) return;
     const ctx = this.initContext();
     if (!ctx || this.isMuted) return;
 

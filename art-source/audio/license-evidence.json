@@ -1,0 +1,146 @@
+[
+  {
+    "id": "bgm_menu",
+    "pageUrl": "https://opengameart.org/content/title-theme",
+    "author": "Jonathan So",
+    "license": "CC0-1.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "88d176e0a1d6b653f14c0ba29d3f48b0960e4516092ffdb05a330a8d2057cf56"
+  },
+  {
+    "id": "bgm_ch0_prologue",
+    "pageUrl": "https://opengameart.org/content/town-theme-rpg",
+    "author": "cynicmusic",
+    "license": "CC0-1.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "993fb02db850cce277892e9188749b7f27f6f1390d74ab99d9026039c3b11644"
+  },
+  {
+    "id": "bgm_ch1_sunset",
+    "pageUrl": "https://opengameart.org/content/path-to-lake-land",
+    "author": "Alexandr Zhelanov",
+    "license": "CC-BY-3.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "698d47dc35f7497ea90eec61610f7c2bf87649e02b6167c3db78c589a7f1c6bf"
+  },
+  {
+    "id": "bgm_ch2_empire",
+    "pageUrl": "https://opengameart.org/content/for-the-king",
+    "author": "Alexandr Zhelanov",
+    "license": "CC-BY-4.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "3dd50c82a76fce09732774e2991a8b899cb6dfdf6272ad05965fa94d28ff878a"
+  },
+  {
+    "id": "bgm_ch3_crypt",
+    "pageUrl": "https://opengameart.org/content/crystal-cave-song18",
+    "author": "cynicmusic",
+    "license": "CC0-1.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "06156b9972722f34aa392886b32770b820a1c8cd5b2482e21cf296119f3e22cd"
+  },
+  {
+    "id": "bgm_ch4_war",
+    "pageUrl": "https://opengameart.org/content/dark-ambient",
+    "author": "Extra_super_special",
+    "license": "CC-BY-3.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "e1184411a4f2ec8adb6d6b1a8bc99b9fffe3643b4713b4fa908c2df98651b64a"
+  },
+  {
+    "id": "bgm_ch5_garden",
+    "pageUrl": "https://opengameart.org/content/the-field-of-dreams",
+    "author": "pauliuw",
+    "license": "CC0-1.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "5fba439cae36508f25e08395fb44bdfbd2ffb96103052577b64ddbfdba5a8d8c"
+  },
+  {
+    "id": "bgm_ch6_gods",
+    "pageUrl": "https://opengameart.org/content/behind-the-universe",
+    "author": "Alexandr Zhelanov",
+    "license": "CC-BY-3.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "daa4d3ca6009dd8fbe6386e89f7c006be682f66e4744b82f374045165edb75ee"
+  },
+  {
+    "id": "bgm_ch7_cradle",
+    "pageUrl": "https://opengameart.org/content/emerald-tower",
+    "author": "Kistol",
+    "license": "CC0-1.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "aed75f3093aa5ca31d46998b8af64daf80a253c97ef219022ce70a4ea506020f"
+  },
+  {
+    "id": "bgm_ch8_null",
+    "pageUrl": "https://opengameart.org/content/cave-theme",
+    "author": "Brandon75689",
+    "license": "OGA-BY-3.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "7bb015954047a0da90440ac32e57269a6602b6a5a4422842d048ac03040a6506"
+  },
+  {
+    "id": "bgm_ch9_crown",
+    "pageUrl": "https://opengameart.org/content/a-start-to-space",
+    "author": "Centurion_of_war",
+    "license": "CC0-1.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "c6194ef1d847bccf5817c3ea9eb23c58880a8251e33b507b4a1ced0698731481"
+  },
+  {
+    "id": "bgm_battle",
+    "pageUrl": "https://opengameart.org/content/battle-theme-a",
+    "author": "cynicmusic",
+    "license": "CC0-1.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "fd4d5aa5f4d9a231c745ea783929c1f4a58c8c03dffd88369c3be8155c9ab344"
+  },
+  {
+    "id": "bgm_boss",
+    "pageUrl": "https://opengameart.org/content/boss-battle-theme",
+    "author": "CleytonKauffman",
+    "license": "CC0-1.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "e8bac868a4e079763e9d95de5ec53d0a5112492061c71db15e0fbbc14254f975"
+  },
+  {
+    "id": "bgm_final",
+    "pageUrl": "https://opengameart.org/content/heroic-demise-updated-version",
+    "author": "Matthew Pablo",
+    "license": "CC-BY-3.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "df0230522f8cf1f0fbba229e4c765a1e50388849d1f1dd01245dd8ce23471f6a"
+  },
+  {
+    "id": "bgm_sad_soliloquy",
+    "pageUrl": "https://opengameart.org/content/soliloquy",
+    "author": "Matthew Pablo",
+    "license": "CC-BY-3.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "f2a5835532415c371499edc7a7b9e92b63128e1b11c36ef20cd076fd3fd07e02"
+  },
+  {
+    "id": "bgm_ending_unbound",
+    "pageUrl": "https://opengameart.org/content/enchanted-festival",
+    "author": "Matthew Pablo",
+    "license": "CC-BY-3.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "777134935968281a2a6d13d74ce30d4a672cac00d6623d41173ee713ea265156"
+  },
+  {
+    "id": "sfx_pack_rpg",
+    "pageUrl": "https://opengameart.org/content/rpg-sound-pack",
+    "author": "artisticdude",
+    "license": "CC0-1.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "4c04258bb6de8fb16c15109ef90ea17aa104a1cd5c39fcb617eec6094d9251da"
+  },
+  {
+    "id": "sfx_pack_retro",
+    "pageUrl": "https://opengameart.org/content/512-sound-effects-8-bit-style",
+    "author": "SubspaceAudio / Juhani Junkala",
+    "license": "CC0-1.0",
+    "checkedAt": "2026-11-17",
+    "pageSha256": "5500548e0de3637f439ff7e5a2dd7852f5cf6a7b22dabc64d46aa30c9242e1be"
+  }
+]

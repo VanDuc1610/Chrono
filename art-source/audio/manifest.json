@@ -1,0 +1,326 @@
+[
+  {
+    "id": "bgm_menu",
+    "pageUrl": "https://opengameart.org/content/title-theme",
+    "directUrl": "https://opengameart.org/sites/default/files/Title%20Theme_0.mp3",
+    "license": "CC0-1.0",
+    "author": "Jonathan So",
+    "attribution": "title-theme by Jonathan So (CC0-1.0), https://opengameart.org/content/title-theme",
+    "file": "public/assets/audio/bgm/bgm_menu.mp3",
+    "sha256": "90523a9298f68ec30473fa2ff5622919c3e01d1c10ceff9aa269728c10f924cb",
+    "notes": "Licence verified from archived source page. ffmpeg unavailable; original format retained. Trimmed on complete codec frame/page boundaries to at most 60 seconds / 2.4 MB; runtime music player crossfades the loop seam.",
+    "status": "kept",
+    "kind": "music",
+    "sourceSha256": "6e238fc961931fe8e45e4927f2a382b97965f04520eb343bc08b2a8bfbb93828",
+    "processing": {
+      "duration": 43.0759183673474,
+      "format": "mp3",
+      "method": "Node frame/page trim; runtime crossfade loop"
+    }
+  },
+  {
+    "id": "bgm_ch0_prologue",
+    "pageUrl": "https://opengameart.org/content/town-theme-rpg",
+    "directUrl": "https://opengameart.org/sites/default/files/TownTheme.mp3",
+    "license": "CC0-1.0",
+    "author": "cynicmusic",
+    "attribution": "town-theme-rpg by cynicmusic (CC0-1.0), https://opengameart.org/content/town-theme-rpg",
+    "file": "public/assets/audio/bgm/bgm_ch0_prologue.mp3",
+    "sha256": "342920cd740cb34207d69a6e406297eb8526e31f71bb65723d7ea9939bb070c8",
+    "notes": "Licence verified from archived source page. ffmpeg unavailable; original format retained. Trimmed on complete codec frame/page boundaries to at most 60 seconds / 2.4 MB; runtime music player crossfades the loop seam.",
+    "status": "kept",
+    "kind": "music",
+    "sourceSha256": "2657861d5107d4a3c01ef81cb6a4d61ddd5e7a054b6da57e658373d79d0c3466",
+    "processing": {
+      "duration": 59.97714285714352,
+      "format": "mp3",
+      "method": "Node frame/page trim; runtime crossfade loop"
+    }
+  },
+  {
+    "id": "bgm_ch1_sunset",
+    "pageUrl": "https://opengameart.org/content/path-to-lake-land",
+    "directUrl": "https://opengameart.org/sites/default/files/Path%20to%20Lake%20Land.ogg",
+    "license": "CC-BY-3.0",
+    "author": "Alexandr Zhelanov",
+    "attribution": "path-to-lake-land by Alexandr Zhelanov (CC-BY-3.0), https://opengameart.org/content/path-to-lake-land",
+    "file": "public/assets/audio/bgm/bgm_ch1_sunset.ogg",
+    "sha256": "06d73d872107ac1b54d3f9fc3abe95059e083919e07522b88450ed832c4b8a42",
+    "notes": "Licence verified from archived source page. ffmpeg unavailable; original format retained. Trimmed on complete codec frame/page boundaries to at most 60 seconds / 2.4 MB; runtime music player crossfades the loop seam.",
+    "status": "kept",
+    "kind": "music",
+    "sourceSha256": "e6e0bab96463b2fad4386e87d2e84cd3a7237f0297af5c65e9e6328a794accb3",
+    "processing": {
+      "duration": 59.93795918367347,
+      "format": "ogg",
+      "method": "Node frame/page trim; runtime crossfade loop"
+    }
+  },
+  {
+    "id": "bgm_ch2_empire",
+    "pageUrl": "https://opengameart.org/content/for-the-king",
+    "directUrl": "https://opengameart.org/sites/default/files/For%20the%20king.ogg",
+    "license": "CC-BY-4.0",
+    "author": "Alexandr Zhelanov",
+    "attribution": "for-the-king by Alexandr Zhelanov (CC-BY-4.0), https://opengameart.org/content/for-the-king",
+    "file": "public/assets/audio/bgm/bgm_ch2_empire.ogg",
+    "sha256": "649c36671ed9e2f657324a2a13b874f59a52d6f8708bb2f2f09bd683222b2e50",
+    "notes": "Licence confirmed on source page; download retried successfully by Claude on 2026-11-17 (the earlier timeouts were transient). Trimmed by prepare-audio.mjs like the others.",
+    "status": "kept",
+    "kind": "music",
+    "sourceSha256": "a764dc198283edd5d5d8a0cbdd03309a2a4bab06fbc96f94513ce87c2320a65c",
+    "processing": {
+      "duration": 43.23866666666667,
+      "format": "ogg",
+      "method": "Node frame/page trim; runtime crossfade loop"
+    }
+  },
+  {
+    "id": "bgm_ch3_crypt",
+    "pageUrl": "https://opengameart.org/content/crystal-cave-song18",
+    "directUrl": "https://opengameart.org/sites/default/files/song18_0.mp3",
+    "license": "CC0-1.0",
+    "author": "cynicmusic",
+    "attribution": "crystal-cave-song18 by cynicmusic (CC0-1.0), https://opengameart.org/content/crystal-cave-song18",
+    "file": "public/assets/audio/bgm/bgm_ch3_crypt.mp3",
+    "sha256": "42349d7c615fe947866100a90289d61a1e64620e11f2d041b37166eaaa4e5840",
+    "notes": "Licence verified from archived source page. ffmpeg unavailable; original format retained. Trimmed on complete codec frame/page boundaries to at most 60 seconds / 2.4 MB; runtime music player crossfades the loop seam.",
+    "status": "kept",
+    "kind": "music",
+    "sourceSha256": "42349d7c615fe947866100a90289d61a1e64620e11f2d041b37166eaaa4e5840",
+    "processing": {
+      "duration": 49.64400000000114,
+      "format": "mp3",
+      "method": "Node frame/page trim; runtime crossfade loop"
+    }
+  },
+  {
+    "id": "bgm_ch4_war",
+    "pageUrl": "https://opengameart.org/content/dark-ambient",
+    "directUrl": "https://opengameart.org/sites/default/files/fr4s%20-%208bit2.mp3",
+    "license": "CC-BY-3.0",
+    "author": "Extra_super_special",
+    "attribution": "dark-ambient by Extra_super_special (CC-BY-3.0), https://opengameart.org/content/dark-ambient",
+    "file": "public/assets/audio/bgm/bgm_ch4_war.mp3",
+    "sha256": "27c9a4fa1c23e8be225d9aa9ab3da997599d41ca13f5f5c1d0ecd153c83f0a23",
+    "notes": "Licence confirmed on source page; download retried successfully by Claude on 2026-11-17 (the earlier timeouts were transient). Trimmed by prepare-audio.mjs like the others.",
+    "status": "kept",
+    "kind": "music",
+    "sourceSha256": "3f943b25ca08473017eea3e028a50fee9c9b1102498eef9f9556e2f6458c7b84",
+    "processing": {
+      "duration": 59.97714285714352,
+      "format": "mp3",
+      "method": "Node frame/page trim; runtime crossfade loop"
+    }
+  },
+  {
+    "id": "bgm_ch5_garden",
+    "pageUrl": "https://opengameart.org/content/the-field-of-dreams",
+    "directUrl": "https://opengameart.org/sites/default/files/the_field_of_dreams.mp3",
+    "license": "CC0-1.0",
+    "author": "pauliuw",
+    "attribution": "the-field-of-dreams by pauliuw (CC0-1.0), https://opengameart.org/content/the-field-of-dreams",
+    "file": "public/assets/audio/bgm/bgm_ch5_garden.mp3",
+    "sha256": "bf3e47f4dad123d7454de4cdf3262b4782216f5948b242bace6e67fcd396d863",
+    "notes": "Licence confirmed on source page; download retried successfully by Claude on 2026-11-17 (the earlier timeouts were transient). Trimmed by prepare-audio.mjs like the others.",
+    "status": "kept",
+    "kind": "music",
+    "sourceSha256": "103a7032a49be7e8399c5cb771f7759eac9ac1a0d2bf227f41fff42ad8d78194",
+    "processing": {
+      "duration": 59.97714285714352,
+      "format": "mp3",
+      "method": "Node frame/page trim; runtime crossfade loop"
+    }
+  },
+  {
+    "id": "bgm_ch6_gods",
+    "pageUrl": "https://opengameart.org/content/behind-the-universe",
+    "directUrl": "https://opengameart.org/sites/default/files/Behind%20the%20Universe.mp3.ogg",
+    "license": "CC-BY-3.0",
+    "author": "Alexandr Zhelanov",
+    "attribution": "behind-the-universe by Alexandr Zhelanov (CC-BY-3.0), https://opengameart.org/content/behind-the-universe",
+    "file": "public/assets/audio/bgm/bgm_ch6_gods.ogg",
+    "sha256": "76c4336cbcacb3c5200a3863c3d2cabe454f52af3182aa0f7c6a53f0b8b47d9c",
+    "notes": "Licence confirmed on source page; download retried successfully by Claude on 2026-11-17 (the earlier timeouts were transient). Trimmed by prepare-audio.mjs like the others.",
+    "status": "kept",
+    "kind": "music",
+    "sourceSha256": "864ed84dbe31d40b13a95706e693328ed5799688c95c02395a8bd585f5687a9f",
+    "processing": {
+      "duration": 53.510666666666665,
+      "format": "ogg",
+      "method": "Node frame/page trim; runtime crossfade loop"
+    }
+  },
+  {
+    "id": "bgm_ch7_cradle",
+    "pageUrl": "https://opengameart.org/content/emerald-tower",
+    "directUrl": "https://opengameart.org/sites/default/files/Emerald%20Tower_0.ogg",
+    "license": "CC0-1.0",
+    "author": "Kistol",
+    "attribution": "emerald-tower by Kistol (CC0-1.0), https://opengameart.org/content/emerald-tower",
+    "file": "public/assets/audio/bgm/bgm_ch7_cradle.ogg",
+    "sha256": "e2aa55c7dd4ba1e94359dfce3be4762a788c64f1c0936f3571f7879f2dfe0f41",
+    "notes": "Licence confirmed on source page; download retried successfully by Claude on 2026-11-17 (the earlier timeouts were transient). Trimmed by prepare-audio.mjs like the others.",
+    "status": "kept",
+    "kind": "music",
+    "sourceSha256": "58c75cca0804ad6304a51259a4bba5f3f263e09b3be90a721f5b9ae8cacdc774",
+    "processing": {
+      "duration": 59.77832199546485,
+      "format": "ogg",
+      "method": "Node frame/page trim; runtime crossfade loop"
+    }
+  },
+  {
+    "id": "bgm_ch8_null",
+    "pageUrl": "https://opengameart.org/content/cave-theme",
+    "directUrl": "https://opengameart.org/sites/default/files/cave%20themeb4.ogg",
+    "license": "OGA-BY-3.0",
+    "author": "Brandon75689",
+    "attribution": "cave-theme by Brandon75689 (OGA-BY-3.0), https://opengameart.org/content/cave-theme",
+    "file": "public/assets/audio/bgm/bgm_ch8_null.ogg",
+    "sha256": "72696c8489f78400c7dd430258e5ddac5ab0e05a20c126494fde4bf6f2a85450",
+    "notes": "Licence confirmed on source page; download retried successfully by Claude on 2026-11-17 (the earlier timeouts were transient). Trimmed by prepare-audio.mjs like the others.",
+    "status": "kept",
+    "kind": "music",
+    "sourceSha256": "1ddf7a0845c808136edfda7ea829e48fa2b7c57793e008d706dadbb5917dff9c",
+    "processing": {
+      "duration": 59.67092970521542,
+      "format": "ogg",
+      "method": "Node frame/page trim; runtime crossfade loop"
+    }
+  },
+  {
+    "id": "bgm_ch9_crown",
+    "pageUrl": "https://opengameart.org/content/a-start-to-space",
+    "directUrl": "https://opengameart.org/sites/default/files/a_start_to_spacev3.24_0.ogg",
+    "license": "CC0-1.0",
+    "author": "Centurion_of_war",
+    "attribution": "a-start-to-space by Centurion_of_war (CC0-1.0), https://opengameart.org/content/a-start-to-space",
+    "file": "public/assets/audio/bgm/bgm_ch9_crown.ogg",
+    "sha256": "25b02e5154f07f3ea9a8c79fdd98f9d0084eb2e208c5040710e99c0433210a09",
+    "notes": "Licence confirmed on source page; download retried successfully by Claude on 2026-11-17 (the earlier timeouts were transient). Trimmed by prepare-audio.mjs like the others.",
+    "status": "kept",
+    "kind": "music",
+    "sourceSha256": "82f86678db06e8675456427179d66af3b5c20289a38412e99df4e5c5c22ae90e",
+    "processing": {
+      "duration": 59.96698412698413,
+      "format": "ogg",
+      "method": "Node frame/page trim; runtime crossfade loop"
+    }
+  },
+  {
+    "id": "bgm_battle",
+    "pageUrl": "https://opengameart.org/content/battle-theme-a",
+    "directUrl": "https://opengameart.org/sites/default/files/battleThemeA.mp3",
+    "license": "CC0-1.0",
+    "author": "cynicmusic",
+    "attribution": "battle-theme-a by cynicmusic (CC0-1.0), https://opengameart.org/content/battle-theme-a",
+    "file": "public/assets/audio/bgm/bgm_battle.mp3",
+    "sha256": "40fa4b48260b18587167303fa4d83e9a9da94edee29975d1ceb20060cc8c1568",
+    "notes": "Licence confirmed on source page; download retried successfully by Claude on 2026-11-17 (the earlier timeouts were transient). Trimmed by prepare-audio.mjs like the others.",
+    "status": "kept",
+    "kind": "music",
+    "sourceSha256": "6042399782e581d753d616bc703e66483d5eccb5fb687a20c9a552d68c49e620",
+    "processing": {
+      "duration": 59.97714285714352,
+      "format": "mp3",
+      "method": "Node frame/page trim; runtime crossfade loop"
+    }
+  },
+  {
+    "id": "bgm_boss",
+    "pageUrl": "https://opengameart.org/content/boss-battle-theme",
+    "directUrl": "https://opengameart.org/sites/default/files/CleytonRX%20-%20Battle%20RPG%20Theme%20Var_0.ogg",
+    "license": "CC0-1.0",
+    "author": "CleytonKauffman",
+    "attribution": "boss-battle-theme by CleytonKauffman (CC0-1.0), https://opengameart.org/content/boss-battle-theme",
+    "file": "public/assets/audio/bgm/bgm_boss.ogg",
+    "sha256": "55ea87b25b17172d1fddbe789bed7fd78adff28b0e99bdd4cc8faae87d8d279a",
+    "notes": "Licence confirmed on source page; download retried successfully by Claude on 2026-11-17 (the earlier timeouts were transient). Trimmed by prepare-audio.mjs like the others.",
+    "status": "kept",
+    "kind": "music",
+    "sourceSha256": "9a63f74305f5cbce8374a72a027a645c07c97663255aba0b817bc1f70c432ed5",
+    "processing": {
+      "duration": 59.18621315192744,
+      "format": "ogg",
+      "method": "Node frame/page trim; runtime crossfade loop"
+    }
+  },
+  {
+    "id": "bgm_final",
+    "pageUrl": "https://opengameart.org/content/heroic-demise-updated-version",
+    "directUrl": "https://opengameart.org/sites/default/files/Heroic%20Demise%20%28New%29_0.mp3",
+    "license": "CC-BY-3.0",
+    "author": "Matthew Pablo",
+    "attribution": "heroic-demise-updated-version by Matthew Pablo (CC-BY-3.0), https://opengameart.org/content/heroic-demise-updated-version",
+    "file": "public/assets/audio/bgm/bgm_final.mp3",
+    "sha256": "fab0b1d494e4c5b6e9c199322036d99cbf2f67294f0bcd03adec9037615050d9",
+    "notes": "Licence confirmed on source page; download retried successfully by Claude on 2026-11-17 (the earlier timeouts were transient). Trimmed by prepare-audio.mjs like the others.",
+    "status": "kept",
+    "kind": "music",
+    "sourceSha256": "f6551bed406c25acc8877ce51fd6fff0b70df3cb7636d9186eb220541b9d158e",
+    "processing": {
+      "duration": 59.97714285714352,
+      "format": "mp3",
+      "method": "Node frame/page trim; runtime crossfade loop"
+    }
+  },
+  {
+    "id": "bgm_sad_soliloquy",
+    "pageUrl": "https://opengameart.org/content/soliloquy",
+    "directUrl": "https://opengameart.org/sites/default/files/Soliloquy_1.mp3",
+    "license": "CC-BY-3.0",
+    "author": "Matthew Pablo",
+    "attribution": "soliloquy by Matthew Pablo (CC-BY-3.0), https://opengameart.org/content/soliloquy",
+    "file": "public/assets/audio/bgm/bgm_sad_soliloquy.mp3",
+    "sha256": "d023859948feb96166a94acb394ba8814b989b2aa722991c5cf7d9da32f66453",
+    "notes": "Licence confirmed on source page; download retried successfully by Claude on 2026-11-17 (the earlier timeouts were transient). Trimmed by prepare-audio.mjs like the others.",
+    "status": "kept",
+    "kind": "music",
+    "sourceSha256": "480aa2ae1211e217cf7506704a73d223747942ed1dfaa4e296f2c2ef592830a4",
+    "processing": {
+      "duration": 59.97714285714352,
+      "format": "mp3",
+      "method": "Node frame/page trim; runtime crossfade loop"
+    }
+  },
+  {
+    "id": "bgm_ending_unbound",
+    "pageUrl": "https://opengameart.org/content/enchanted-festival",
+    "directUrl": "https://opengameart.org/sites/default/files/Enchanted%20Festival.zip",
+    "license": "CC-BY-3.0",
+    "author": "Matthew Pablo",
+    "attribution": "enchanted-festival by Matthew Pablo (CC-BY-3.0), https://opengameart.org/content/enchanted-festival",
+    "file": "public/assets/audio/bgm/bgm_ending_unbound.zip",
+    "sha256": "",
+    "notes": "Licence confirmed; the source is a ZIP archive and archives are never extracted automatically. Ending E2 reuses an approved track until a member is prepared by hand.",
+    "status": "dropped",
+    "kind": "music"
+  },
+  {
+    "id": "sfx_pack_rpg",
+    "kind": "sfx",
+    "pageUrl": "https://opengameart.org/content/rpg-sound-pack",
+    "directUrl": "https://opengameart.org/sites/default/files/rpg_sound_pack.zip",
+    "license": "CC0-1.0",
+    "author": "artisticdude",
+    "attribution": "rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-sound-pack",
+    "file": "",
+    "sha256": "",
+    "status": "dropped",
+    "notes": "Source licence confirmed, archive download repeatedly timed out. No archive members shipped. All corresponding SFX remain procedural."
+  },
+  {
+    "id": "sfx_pack_retro",
+    "kind": "sfx",
+    "pageUrl": "https://opengameart.org/content/512-sound-effects-8-bit-style",
+    "directUrl": "https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip",
+    "license": "CC0-1.0",
+    "author": "SubspaceAudio / Juhani Junkala",
+    "attribution": "512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style",
+    "file": "",
+    "sha256": "",
+    "status": "dropped",
+    "notes": "Source licence confirmed, archive download repeatedly timed out. No archive members shipped. All corresponding SFX remain procedural."
+  }
+]
