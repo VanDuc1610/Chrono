@@ -238,71 +238,113 @@ function backRows() {
   return g.map((r) => r.join(''));
 }
 
-/** Side view facing right, upper 40 rows: curls behind, face to the right, near arm over the tunic. */
-const SIDE = [
-  '.............O.OO.OO.O',
-  '...........OOjOjHOjHOjO',
-  '..........OjHhjHhjHhjHhO',
-  '.........OjHhjHhjHhjHhjHO',
-  '.........OHhjHhjHhjHhjHhO',
-  '.........OjHhjHhjHhjHhjHhO',
-  '.........OHhjHhjHhjHhjhHhO', // the curls stop at the brow
-  '.........OjHhjHhjHhjhssssO',
-  '.........OHhjHhjHhjhsssssO',
-  '.........OjHhjHhjHhsshhssO', // brow
-  '.........OHhjHhjHhjssOEssO', // gray-blue eye (row 10)
-  '.........OhHhjHhjhSsssssssO', // nose
-  '.........OHhjHhjHhSssssssO',
-  '..........OhHhjHhSsssssSO', // mouth
-  '..........OHhjHSsSsssssO', // stubbled jaw
-  '...........OhhSSSSSSSO',
-  '............OOSSSSO', // neck
-  '..........OQQQQQQQQO', // the scarf's wrap (row 17)
-  '.......OQQOQQQQQQQQO', // its tail streams back
-  '......OQQOOkkcccccUOO', // collar, cerulean band at the front
-  '.....OQQO.OkkccccccccO',
-  '.....OQO..OkcccOkkcCcO', // near arm (columns 15-18)
-  '..........OccccOkccCcmO', // knot buttons down the front edge
-  '..........OccccOkccCccO',
-  '..........OCcccOkccCcmO',
-  '..........OCcccOkccCccO',
-  '..........OCcccOcccCcmO',
-  '..........OCcccOcccCccO',
-  '..........OCCccOcccCccO',
-  '..........OCCccOcCCCccO',
-  '..........OCCccOuuOCccO', // cerulean cuff
-  '..........OCCccOssOCccO', // hand (row 31)
-  '..........OlllyOsSOlllO', // tool belt
-  '..........OCcccccCCcccO',
-  '.........OxUccccccCCccO', // back slit: lining and trousers
-  '.........OxUccccccCCccO',
-  '.........OxUcccccccCcccO',
-  '.........OxUcccccccCcccO',
-  '.........OxUkkkkkkkkkkkO', // hem highlight
-  '.........OxOOOOOOOOOOOOO', // hem
-].map((r) => r.padEnd(ART_W, '.'));
+/**
+ * Side view facing right, upper 40 rows. v4.1 (owner, 2026-11-18: the side view was too thin):
+ * an LPC-sized round head (18-20 px), a torso 16-17 px deep with the chest forward and the skirt
+ * flaring, a 6 px near arm, the scarf's tail streaming back. Head rows are drawn; the body is
+ * built from its back and front edges per row so it stays consistent.
+ */
+const SIDE_HEAD = [
+  '............O.OO.OO.O', // curl bumps
+  '..........OOjOjHOjHOjOO',
+  '.........OjHhjHhjHhjHhjO',
+  '........OjHhjHhjHhjHhjHhO',
+  '........OHhjHhjHhjHhjHhjHO',
+  '........OjHhjHhjHhjHhjHhjO',
+  '........OHhjHhjHhjHhjhHhjHO', // the curls stop at the brow
+  '........OjHhjHhjHhjHhjhsssO',
+  '........OHhjHhjHhjHhjsssssO',
+  '........OjHhjHhjHhjHsshhssO', // brow
+  '........OHhjHhjHhjHhssOEsssO', // gray-blue eye (row 10)
+  '........OhHhjHhjHhjSssssssssO', // nose
+  '........OHhjHhjHhjHSssssssO',
+  '.........OhHhjHhjHSsssssSO', // mouth
+  '.........OHhjHhjSsSsssssO', // stubbled jaw
+  '..........OhHhjSSSSSSSSO',
+  '...........OhhhOSSSSO', // nape curls, neck
+];
 
-function sideRows() {
-  const g = SIDE.map((r, y) => [...r].map((ch, x) => (ch === 'Q' ? check(x, y) : ch)));
-  stampIn(g, 21, 7, ['OyO', 'yWy', 'OyO']); // the loupe at his temple
+/** Back and front edge (inclusive) of the torso on body rows 19..39 (index from row 19). */
+const SIDE_EDGES = [
+  [12, 23], // collar
+  [10, 25],
+  [10, 25],
+  ...Array(11).fill([10, 26]), // chest forward (rows 22-32)
+  ...Array(3).fill([10, 26]),
+  ...Array(4).fill([9, 26]), // the skirt flares (rows 36-39)
+];
+
+function sideRows(armless = false) {
+  const g = Array.from({ length: 40 }, (_, y) => [...(SIDE_HEAD[y] ?? '').padEnd(ART_W, '.')]);
+  // Torso, shaded from the back (shadow) to the front edge (light).
+  SIDE_EDGES.forEach(([xb, xf], i) => {
+    const y = 19 + i;
+    putIn(g, xb - 1, y, 'O');
+    putIn(g, xf + 1, y, 'O');
+    for (let x = xb; x <= xf; x++) putIn(g, x, y, x <= xb + 1 ? 'C' : x === xf ? 'k' : 'c');
+  });
+  // Collar band in cerulean at the front of the neck, the hem below.
+  for (const x of [21, 22, 23]) putIn(g, x, 19, 'U');
+  for (let x = 9; x <= 26; x++) putIn(g, x, 38, 'k');
+  for (let x = 8; x <= 27; x++) putIn(g, x, 39, 'O');
+  // Knot buttons down the front edge, the tool belt with a brass tool.
+  for (let y = 21; y <= 30; y += 2) putIn(g, 26, y, 'm');
+  for (let x = 10; x <= 26; x++) putIn(g, x, 32, x === 23 ? 'y' : 'l');
+  // The back slit: cream trouser and cerulean lining under the skirt's back edge.
+  for (let y = 34; y <= 38; y++) {
+    putIn(g, 9, y, 'x');
+    putIn(g, 10, y, 'U');
+  }
+  // Khăn rằn: wrap over the neck, the tail streaming back from the nape.
+  for (let y = 17; y <= 18; y++) {
+    putIn(g, 10, y, 'O');
+    putIn(g, 23, y, 'O');
+    for (let x = 11; x <= 22; x++) putIn(g, x, y, check(x, y));
+  }
+  for (const [x, y] of [
+    [9, 18],
+    [8, 19],
+    [7, 19],
+    [7, 20],
+    [6, 20],
+    [6, 21],
+    [5, 21],
+    [5, 22],
+  ]) {
+    putIn(g, x, y, check(x, y));
+    behindIn(g, x, y - 1, 'O');
+    behindIn(g, x - 1, y + 1, 'O');
+  }
+  // The near arm (columns 14-19), unless the pose draws its own.
+  if (!armless) {
+    for (let y = 20; y <= 31; y++) {
+      putIn(g, 14, y, 'O');
+      putIn(g, 19, y, 'O');
+      const fill = y === 30 ? 'uuuu' : y === 31 ? 'ssss' : y < 22 ? 'kkcc' : 'kccC';
+      [...fill].forEach((ch, k) => putIn(g, 15 + k, y, ch));
+    }
+    for (let x = 14; x <= 19; x++) putIn(g, x, 19, 'O');
+    putIn(g, 15, 31, 'S');
+  }
+  stampIn(g, 20, 7, ['OyO', 'yWy', 'OyO']); // the loupe at his temple
   if (STAGE >= 2) {
-    stampIn(g, 9, B + 1, [' OyOyO', 'OYYyyO', 'OYyyyO', ' OOOO ']); // far-shoulder pauldron
-    for (let y = B + 3; y <= B + 19; y++) {
-      behindIn(g, 9, y, y > B + 17 ? 'u' : 'C');
-      behindIn(g, 8, y, 'O');
+    stampIn(g, 9, 18, [' OyOyO', 'OYYyyO', 'OYyuyO', ' OOOO ']); // far-shoulder pauldron
+    for (let y = 21; y <= 37; y++) {
+      behindIn(g, 8, y, y > 35 ? 'u' : 'C');
+      behindIn(g, 7, y, 'O');
     }
   }
-  if (STAGE >= 3)
+  if (STAGE >= 3 && !armless)
     for (const [x, y] of [
       [16, 21],
       [17, 22],
       [16, 23],
       [17, 24],
-      [17, 25],
-      [16, 26],
-      [17, 27],
-      [16, 28],
-      [17, 29],
+      [18, 25],
+      [17, 26],
+      [16, 27],
+      [17, 28],
+      [16, 29],
     ])
       putIn(g, x, y, y % 2 ? 'g' : 'w');
   return g.map((r) => r.join(''));
@@ -311,21 +353,20 @@ function sideRows() {
 /** One boot with the trouser above it, front/back (left; the right one mirrors) and side. */
 const BOOT = ['.OxxxXO', '.OxxxXO', '.ObBbbO', '.ObBbbO', '.ObbbbO', 'ObbbbbO', 'OOOOOOO'];
 const BOOT_R = BOOT.map((r) => [...r].reverse().join(''));
-const SIDE_BOOT = ['OxxxXO', 'OxxxXO', 'ObBbbO', 'ObBbbO', 'ObbbbbOO', 'ObbbbbbbO', 'OOOOOOOOO'];
+const SIDE_BOOT = [
+  'OxxxxXO',
+  'OxxxxXO',
+  'ObBbbbO',
+  'ObBbbbO',
+  'ObbbbbbOO',
+  'ObbbbbbbbO',
+  'OOOOOOOOOO',
+];
 const FEET_Y = 61;
-
-/** Side view rows 21..31: the near arm (columns 15-18) painted out for posed arms. */
-function armlessSide(rows) {
-  return rows.map((r, y) => {
-    if (y < 21 || y > 31) return r;
-    return r.slice(0, 15) + (y < 23 ? 'kccc' : 'cccc') + r.slice(19);
-  });
-}
 
 /** Upper body rows (36 wide, 40 tall) for a view, with shut or kindled eyes if asked. */
 function upperRows(view, { armless = false, eyes = null }) {
-  let rows = view === 'front' ? frontRows() : view === 'back' ? backRows() : sideRows();
-  if (view === 'side' && armless) rows = armlessSide(rows);
+  let rows = view === 'front' ? frontRows() : view === 'back' ? backRows() : sideRows(armless);
   if (eyes && view !== 'back') {
     rows = rows.map((r, y) => {
       if (y !== 10) return r;
@@ -745,7 +786,7 @@ function sheet(make) {
 }
 
 checkRows(mirror(FRONT_HALF), 'front', ART_W);
-checkRows(SIDE, 'side', ART_W);
+checkRows(sideRows(), 'side', ART_W);
 const SHEETS = [
   ['idle', (v) => locomotion(v, IDLE)],
   ['walk', (v) => locomotion(v, v === 'side' ? SIDE_WALK : WALK)],
