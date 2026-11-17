@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { SoundSystem } from '../systems/audio/SoundSystem';
 import { createPanel } from './Panel';
 import type { Translate } from './Strings';
 import type { ISaveMetadata } from '../systems/save/SaveTypes';
@@ -205,6 +206,7 @@ export class SaveSlotsPanel {
   }
 
   public close(): void {
+    SoundSystem.getInstance().playMenuCancel();
     this.closeConfirm();
     this.scene.input.keyboard?.off('keydown', this.onKey);
     this.root.destroy();

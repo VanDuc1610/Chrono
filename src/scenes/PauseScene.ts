@@ -192,6 +192,7 @@ export class PauseScene extends Phaser.Scene {
   }
 
   private resume(): void {
+    SoundSystem.getInstance().playMenuCancel();
     this.scene.resume('ExplorationScene');
     this.scene.stop();
   }

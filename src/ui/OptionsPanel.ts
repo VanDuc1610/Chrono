@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { SoundSystem } from '../systems/audio/SoundSystem';
 import { createPanel } from './Panel';
 import type { Translate } from './Strings';
 import { getSettings, updateSettings, type Settings, type TextSpeed } from '../state/Settings';
@@ -188,6 +189,7 @@ export class OptionsPanel {
   }
 
   public close(): void {
+    SoundSystem.getInstance().playMenuCancel();
     this.scene.input.keyboard?.off('keydown', this.onKey);
     this.root.destroy();
     this.onClose();

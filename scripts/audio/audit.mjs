@@ -4,9 +4,11 @@ import { renderAudioCredits } from './credits.mjs';
 
 export async function auditAudio() {
   const entries = JSON.parse(fs.readFileSync('art-source/audio/manifest.json', 'utf8'));
-  const files = fs.existsSync('public/assets/audio/bgm')
-    ? fs.readdirSync('public/assets/audio/bgm').map((f) => 'public/assets/audio/bgm/' + f)
-    : [];
+  // Music and sound effects (T-97); the old placeholder at the folder root is not shipped audio.
+  const files = ['bgm', 'sfx'].flatMap((dir) => {
+    const d = `public/assets/audio/${dir}`;
+    return fs.existsSync(d) ? fs.readdirSync(d).map((f) => `${d}/${f}`) : [];
+  });
   return {
     entries,
     files,

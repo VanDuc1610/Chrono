@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { SoundSystem } from '../systems/audio/SoundSystem';
 import { MAX_CHOICES, type DialogueSystem } from '../systems/dialogue/DialogueSystem';
 import { createPanel } from './Panel';
 import type { Translate } from './Strings';
@@ -197,6 +198,9 @@ export class DialogueBox {
       callback: () => {
         shown++;
         this.bodyText.setText(text.substring(0, shown));
+        // T-97: a soft blip every few letters while the line types.
+        if (shown % 3 === 1 && text[shown - 1] !== ' ')
+          SoundSystem.getInstance().playDialogueBlip();
         if (shown >= text.length) {
           this.typing = false;
           this.onTyped();

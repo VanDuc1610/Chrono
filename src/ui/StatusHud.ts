@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { SoundSystem } from '../systems/audio/SoundSystem';
 import type { GameSession } from '../state/GameSession';
 import { createPanel } from './Panel';
 import type { Translate } from './Strings';
@@ -181,6 +182,7 @@ export class StatusHud {
 
   /** "LÊN CẤP" bursts in under the header, bounces and fades. */
   private levelUp(level: number): void {
+    SoundSystem.getInstance().playLevelUp();
     const { width } = this.scene.scale;
     const label = this.scene.add
       .text(width / 2, 92, this.t('hud.levelUp', { level }), {

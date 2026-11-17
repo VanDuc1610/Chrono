@@ -748,9 +748,11 @@ enchanted-festival by Matthew Pablo (CC-BY-3.0), https://opengameart.org/content
 - Source page: https://opengameart.org/content/enchanted-festival
 - Direct file: https://opengameart.org/sites/default/files/Enchanted%20Festival.zip
 - Licence: CC-BY-3.0
-- Status: dropped
+- Status: kept
+- Game file: public/assets/audio/bgm/bgm_ending_unbound.mp3
+- SHA-256: 5f32e74ade9c63240968476a7fc17c28774e08ab308d9bf3e01fab1478c6129a
 
-Licence confirmed; the source is a ZIP archive and archives are never extracted automatically. Ending E2 reuses an approved track until a member is prepared by hand.
+Licence confirmed. Read by name out of the source ZIP (the MP3 member) and trimmed like the other tracks.
 
 ### sfx_pack_rpg
 
@@ -759,9 +761,9 @@ rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-so
 - Source page: https://opengameart.org/content/rpg-sound-pack
 - Direct file: https://opengameart.org/sites/default/files/rpg_sound_pack.zip
 - Licence: CC0-1.0
-- Status: dropped
+- Status: archive
 
-Source licence confirmed, archive download repeatedly timed out. No archive members shipped. All corresponding SFX remain procedural.
+Archive pack (licence confirmed on its page): only the members listed as sfx_* entries ship, read out by name; the pack itself is never extracted.
 
 ### sfx_pack_retro
 
@@ -770,6 +772,214 @@ Source licence confirmed, archive download repeatedly timed out. No archive memb
 - Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
 - Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
 - Licence: CC0-1.0
-- Status: dropped
+- Status: archive
 
-Source licence confirmed, archive download repeatedly timed out. No archive members shipped. All corresponding SFX remain procedural.
+Archive pack (licence confirmed on its page): only the members listed as sfx_* entries ship, read out by name; the pack itself is never extracted.
+
+### sfx_slash
+
+rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-sound-pack
+
+- Source page: https://opengameart.org/content/rpg-sound-pack
+- Direct file: https://opengameart.org/sites/default/files/rpg_sound_pack.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_slash.wav
+- SHA-256: c7d50b9cb20ccda5aee6c023f4450915594061e36f3f9e78af241ca9fde0f817
+
+Read by name out of sfx_pack_rpg; shipped unmodified.
+
+### sfx_door
+
+rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-sound-pack
+
+- Source page: https://opengameart.org/content/rpg-sound-pack
+- Direct file: https://opengameart.org/sites/default/files/rpg_sound_pack.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_door.wav
+- SHA-256: a49cc72a835c1cbdb60877f8b926400e06d544a8d44f5eea2a7686a5f120a32d
+
+Read by name out of sfx_pack_rpg; shipped unmodified.
+
+### sfx_pickup
+
+rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-sound-pack
+
+- Source page: https://opengameart.org/content/rpg-sound-pack
+- Direct file: https://opengameart.org/sites/default/files/rpg_sound_pack.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_pickup.wav
+- SHA-256: d829b5ed7a47086771c639495713498e44ce28814f4ea6ddf30cb1f18c085c3f
+
+Read by name out of sfx_pack_rpg; shipped unmodified.
+
+### sfx_heal
+
+rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-sound-pack
+
+- Source page: https://opengameart.org/content/rpg-sound-pack
+- Direct file: https://opengameart.org/sites/default/files/rpg_sound_pack.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_heal.wav
+- SHA-256: c5f15d81e2b169784b737d31876ef67eb6957232f3e9c8186dde12c2370c822e
+
+Read by name out of sfx_pack_rpg; shipped unmodified.
+
+### sfx_hit
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_hit.wav
+- SHA-256: 0f1d900e94f406e90c2cc6f95d0efd289f134fed3e50073c247dbff1f63a5ac0
+
+Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_hurt
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_hurt.wav
+- SHA-256: 3a485537ac7232e2a097744562bdd4779aa88e9f4e836165e7986db3687aad67
+
+Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_shot
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_shot.wav
+- SHA-256: 86e8ed072a950830a0b5f4c2feb9e64a900ea9d61b0e821c586193ae4259dee0
+
+Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_dodge
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_dodge.wav
+- SHA-256: 99ff174713ca233a06d3fdb723a9d767681f03b48a6e16e9be546ae42efbd806
+
+Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_level_up
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_level_up.wav
+- SHA-256: f66509a79af67f2cc3efd3c524d54809c2be2235bf27562e5d6fd0542c2fcad3
+
+Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_puzzle_solved
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_puzzle_solved.wav
+- SHA-256: 14e1dff8518ff2e9de8e03c7971a98d30812b012ae54cd24456bb1f682b04708
+
+Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_save
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_save.wav
+- SHA-256: ded83f9452006571efa231e3be8a0a0cc9c48d4b316df204417e02c0e54c538b
+
+Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_footstep
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_footstep.wav
+- SHA-256: 1f07453c2f40c745be27f8b4ddb363987fa0757e6e8bdc7fa77f2130dee2c0e2
+
+Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_menu_move
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_menu_move.wav
+- SHA-256: 3b65d806195db0dd80fc36e03f950864d91302bc2d477981e9686d6b1b826131
+
+Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_menu_select
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_menu_select.wav
+- SHA-256: a739f6c39b90ba2551d5fd81d8bc2b1cd9b72b3cc1e35d76fc7e2ef6f7e6f392
+
+Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_menu_cancel
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_menu_cancel.wav
+- SHA-256: 746cdb20f6e85e42743a97f861f3321361f0969f3a15fd619b503752f7a193a5
+
+Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_dialogue_blip
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_dialogue_blip.wav
+- SHA-256: f56e3501e21c86a36841e978edcf339bfbc9b16b183f4ec693018619fcf40c31
+
+Read by name out of sfx_pack_retro; shipped unmodified.

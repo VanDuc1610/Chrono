@@ -799,6 +799,7 @@ export class ExplorationScene extends Phaser.Scene {
   }
 
   private travel(exit: MapExitDefinition): void {
+    this.soundSystem.playDoor();
     this.beginSceneExit();
     const db = this.cache.json.get('data_maps') as MapDatabase;
     const target = resolveMap(db, exit.toMap);
@@ -1253,6 +1254,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.action?.syncSpawns();
     this.player.setArmed(this.session.getFlag(FLAGS.hasBlade));
     if (granted.length > 0) {
+      this.soundSystem.playPickup();
       const names = granted
         .map((s) => {
           const name = this.inventorySystem.getItemDefinition(s.itemId)?.name ?? s.itemId;
