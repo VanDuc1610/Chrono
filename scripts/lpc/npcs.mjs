@@ -1724,6 +1724,18 @@ function comparison(entries, zoom = 4) {
         }
     };
     // Both stand on the same line: the old sprite at the size it has in game (32 px ones at 1.5x).
+    if (!oldImg) {
+      const Sz = Math.round(Math.sqrt(frame.length / 4));
+      draw(
+        { w: Sz, buf: frame },
+        Sz,
+        0,
+        zoom,
+        k * cell * 2 + cell + (cell - Sz * zoom) / 2,
+        H - Sz * zoom,
+      );
+      return;
+    }
     const size = oldImg.h;
     const oldScale = Math.round(zoom * (size <= 32 ? 1.5 : 1));
     const ox = k * cell * 2;
@@ -1761,7 +1773,8 @@ for (const [name, spec] of Object.entries(NPCS)) {
   const sheet = idleSheet(frame, spec, S);
   const png = encodePng((spec.frames ?? 4) * S, S, sheet);
   fs.writeFileSync(`${OUT}/${name}_idle.png`, png);
-  shown.push([readPng(spec.old), frame]);
+  // The old sprite, for the comparison sheet, while it still exists (old files were removed).
+  shown.push([spec.old && fs.existsSync(spec.old) ? readPng(spec.old) : null, frame]);
   console.log(`${name}: ${S}px, soles at y=${soles(frame, S)}`);
   if (install.includes(name)) {
     const enemy = spec.kind === 'enemy' || spec.kind === 'boss';

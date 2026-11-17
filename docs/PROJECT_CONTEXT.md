@@ -221,7 +221,7 @@ Peter's hairstyle is a permanent character identity feature and **CANNOT** be mo
 
 In accordance with `AGENTS.md` §5 and `.agents/rules/chrono-art.md`, art is produced through one of two pipelines that share the same approval gate:
 
-- **Pipeline B – Code-Authored Pixel Art** (owner-approved 2026-11-11): the agent hand-places pixels in a committed script (e.g. `scripts/author-peter-sprites.js`, palette from `docs/art/PETER_DESIGN.md`), writes to `generated/candidates/` (+ `previews/`), validates, and the owner approves before integration. No image models or APIs.
+- **Pipeline B – Code-Authored Pixel Art** (owner-approved 2026-11-11): the agent hand-places pixels in a committed script (e.g. `scripts/author-peter-lpc.js`, `scripts/author-monsters.js`, `scripts/author-bosses.js`), writes to `generated/candidates/` (+ `previews/`), validates, and the owner approves before integration. No image models or APIs.
 - **Pipeline A – Manual AUTOMATIC1111** (below): the owner generates images manually from agent-authored text prompts.
 
 ```mermaid
