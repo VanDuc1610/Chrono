@@ -15,6 +15,7 @@ import fs from 'fs';
 import path from 'path';
 import { encodePng, preview } from './pixel-art/pixel.js';
 import { Canvas, OUTLINE } from './pixel-art/canvas.js';
+import { readPng } from './pixel-art/png-read.js';
 
 const S = 96;
 const GROUND = 92;
@@ -917,6 +918,62 @@ function voidSingularity(k) {
   return c;
 }
 
+/**
+ * Peter's two dark mirrors (chapters 5 and 8) are his own v4 sprite recoloured, so they move and
+ * stand exactly as he does: frames 0-3 of his front idle, set on the 96 px ground line.
+ */
+function peterVariant(map) {
+  const img = readPng('public/assets/characters/peter/peter_idle.png');
+  const swap = new Map(Object.entries(map).map(([from, to]) => [from.toLowerCase(), hexRgb(to)]));
+  return (k) => {
+    const c = new Canvas(S);
+    for (let y = 0; y < 64; y++)
+      for (let x = 0; x < 64; x++) {
+        const i = (y * img.w + k * 64 + x) * 4;
+        if (!img.buf[i + 3]) continue;
+        const key =
+          '#' + [0, 1, 2].map((n) => img.buf[i + n].toString(16).padStart(2, '0')).join('');
+        const rgb = swap.get(key) ?? [img.buf[i], img.buf[i + 1], img.buf[i + 2]];
+        c.px.set([...rgb, img.buf[i + 3]], ((y + GROUND - 61) * S + x + 16) * 4);
+      }
+    return c;
+  };
+}
+const hexRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+const PETER = {
+  coat: '#263248',
+  coatShadow: '#161e2e',
+  coatLight: '#3d4f70',
+  lining: '#2f9ccc',
+  liningShadow: '#1d6688',
+  curlShadow: '#141219',
+  curl: '#25222c',
+  curlSheen: '#423e4d',
+  glow: '#00c8ff',
+  glowLight: '#a6f0ff',
+};
+/** Alpha Peter (chapter 5): the Peter who chose order; a white coat, violet lining, brown curls. */
+const otherPeter = peterVariant({
+  [PETER.coat]: '#d4d8e2',
+  [PETER.coatShadow]: '#9ea2b0',
+  [PETER.coatLight]: '#f2f4f8',
+  [PETER.lining]: '#8a5ad8',
+  [PETER.liningShadow]: '#5a3aa0',
+  [PETER.curlShadow]: '#2a1a10',
+  [PETER.curl]: '#4a3020',
+  [PETER.curlSheen]: '#6a4a30',
+});
+/** The other Peter as a lieutenant (chapter 8): violet coat, the blade burning violet. */
+const lieutenantOtherPeter = peterVariant({
+  [PETER.coat]: '#3e2a6a',
+  [PETER.coatShadow]: '#26184a',
+  [PETER.coatLight]: '#5a42a0',
+  [PETER.lining]: '#b48cff',
+  [PETER.liningShadow]: '#7a4ae0',
+  [PETER.glow]: '#b48cff',
+  [PETER.glowLight]: '#e0d0ff',
+});
+
 export const BOSSES = {
   sentinel: { frames: 5, released: 4, draw: sentinel },
   bellkeeper: { frames: 5, released: 4, draw: bellkeeper },
@@ -938,6 +995,8 @@ export const BOSSES = {
   primeval_architect: { frames: 5, released: 4, draw: primevalArchitect },
   sixfold_divinity: { frames: 6, released: 5, draw: sixfoldDivinity },
   void_singularity_core: { frames: 4, draw: voidSingularity },
+  other_peter: { frames: 5, released: 4, draw: otherPeter },
+  lieutenant_other_peter: { frames: 5, released: 4, draw: lieutenantOtherPeter },
 };
 
 // ------------------------------------------------------------------ output

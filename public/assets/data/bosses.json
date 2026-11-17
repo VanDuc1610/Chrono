@@ -944,7 +944,7 @@
     {
       "id": "boss_other_peter",
       "intro": "Peter nhánh Alpha nâng chiếc kéo tỉa. Anh ta làm theo mọi thứ cậu làm — né thì anh ta lao theo, dùng Kỹ năng thì anh ta cắt trả và khóa nó lại.",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 20,
       "speed": 62,
       "damageScale": 0.42,
@@ -1916,7 +1916,7 @@
     {
       "id": "boss_kuro_void",
       "intro": "Kuro chìm trong mực hư không. Xúc tu mực sẽ quấn tay kiếm hoặc túi đồ của cậu — chỉ Đòn Thời Gian chém đứt được chúng. Nếu cậu nhớ khúc hát của mẹ hắn…",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 20,
       "speed": 64,
       "damageScale": 0.4,
@@ -2796,7 +2796,7 @@
     {
       "id": "boss_lieutenant_bran",
       "intro": "Bran Tái Sinh quăng xích phục thù trói lấy cậu — đi quá xa sẽ bị giật ngược lại. Hai vòng sóng co hẹp: lướt né trọn cả hai để bẻ gãy một mắt xích.",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 20,
       "speed": 58,
       "damageScale": 0.38,
@@ -2884,7 +2884,7 @@
     {
       "id": "boss_lieutenant_lyra",
       "intro": "Pháp Quan Lyra giương cán cân tím. Phán quyết của cô ngắn hơn và nghiêm khắc hơn — nghe cho rõ trước khi vung kiếm.",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 20,
       "speed": 56,
       "damageScale": 0.38,
@@ -3001,7 +3001,7 @@
     {
       "id": "boss_lieutenant_neris",
       "intro": "Neris thì thầm những câu thơ đứt đoạn. Ba trang sách trôi quanh phòng — câu thơ nói về trang nào, đánh trúng trang đó.",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 20,
       "speed": 46,
       "damageScale": 0.38,
@@ -3173,7 +3173,7 @@
     {
       "id": "boss_lieutenant_other_peter",
       "intro": "Peter Thứ Hai — một nhánh khác của chính cậu. Hắn bắt chước mọi đòn, và khi hắn thủ thế (vòng đỏ), đòn của cậu sẽ dội ngược.",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 20,
       "speed": 64,
       "damageScale": 0.38,
@@ -3261,7 +3261,7 @@
     {
       "id": "boss_kuro_puppet_master",
       "intro": "Chúa Tể Khả Năng Kuro giật dây. Khi hắn suy yếu, bóng của bốn phó tướng sẽ thành con rối che chắn cho hắn — cắt đứt từng con rối.",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 20,
       "speed": 60,
       "damageScale": 0.38,

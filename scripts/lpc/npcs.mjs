@@ -644,6 +644,109 @@ const npcSpecs = () => ({
       [staff('#c8964a', '#ffd666'), null],
     ],
   },
+  // ---- Humanoid bosses (owner, 2026-11-18): the people they were, in 96 px frames with the
+  // void's marks; frame 4 is the released (kneeling) frame.
+  boss_kuro_void: {
+    kind: 'boss',
+    file: 'kuro_boss',
+    old: 'public/assets/enemies/kuro_boss.png',
+    size: 96,
+    frames: 5,
+    released: 4,
+    under: [wings],
+    over: [voidBlade, voidMotes],
+    layers: [
+      ['character-body-bodies-male', R.skinWarm],
+      ['character-head-heads-human-male', R.skinWarm],
+      ['character-feet-boots-basic-male', R.voidViolet],
+      ['character-legs-pants-male', R.voidViolet],
+      ['character-torso-clothes-longsleeve-longsleeve-male', R.shirtBlack],
+      ['character-torso-jacket-trench-male', R.voidCoat],
+      [irises('#c8a0ff'), null],
+      ['character-hair-messy1-adult', R.blackHair],
+    ],
+  },
+  boss_kuro_puppet_master: {
+    kind: 'boss',
+    file: 'kuro_puppet_master',
+    old: 'public/assets/enemies/kuro_puppet_master.png',
+    size: 96,
+    frames: 5,
+    released: 4,
+    over: [spikeCrown, puppetStrings, voidMotes],
+    layers: [
+      ['character-body-bodies-male', R.skinWarm],
+      ['character-head-heads-human-male', R.skinWarm],
+      ['character-feet-boots-basic-male', R.darkSteel],
+      ['character-legs-pants-male', R.trouserDark],
+      ['character-torso-clothes-longsleeve-longsleeve-male', R.shirtBlack],
+      ['character-torso-jacket-trench-male', R.trenchGrey],
+      [irises('#c8a0ff'), null],
+      ['character-hair-messy1-adult', R.blackHair],
+    ],
+  },
+  boss_lieutenant_bran: {
+    kind: 'boss',
+    file: 'lieutenant_bran',
+    old: 'public/assets/enemies/lieutenant_bran.png',
+    size: 96,
+    frames: 5,
+    released: 4,
+    over: [voidMotes],
+    layers: [
+      ['character-body-bodies-male', R.skinLight],
+      ['character-feet-boots-basic-male', R.bootBrown],
+      ['character-legs-pants-male', R.soldierTrouser],
+      ['character-torso-clothes-longsleeve-longsleeve-male', R.creamSleeves],
+      ['character-torso-clothes-sleeveless-sleeveless-male', R.oliveTunic],
+      ['character-head-heads-human-male', R.skinLight],
+      [irises('#b48cff'), null],
+      ['character-hair-plain-adult', R.lightBrownHair],
+      ['character-hat-headband-thick-adult', R.bandageWhite],
+      ['custom:tally-spear', null],
+    ],
+  },
+  boss_lieutenant_lyra: {
+    kind: 'boss',
+    file: 'lieutenant_lyra',
+    old: 'public/assets/enemies/lieutenant_lyra.png',
+    size: 96,
+    frames: 5,
+    released: 4,
+    over: [voidMotes],
+    layers: [
+      ['character-body-bodies-female', R.skinLight],
+      ['character-feet-boots-basic-thin', R.bootBrown],
+      ['character-legs-pants-thin', R.trouserDark],
+      ['character-torso-armour-leather-female', R.leatherBrass],
+      ['character-neck-scarf', R.scarfRed],
+      ['character-head-heads-human-female', R.skinLight],
+      [irises('#b48cff'), null],
+      ['character-hair-bob-adult', R.blackHair],
+      ['custom:halberd', null],
+    ],
+  },
+  boss_lieutenant_neris: {
+    kind: 'boss',
+    file: 'lieutenant_neris',
+    old: 'public/assets/enemies/lieutenant_neris.png',
+    size: 96,
+    frames: 5,
+    released: 4,
+    over: [voidMotes],
+    layers: [
+      ['character-hair-braid-adult-bg', R.brownHair],
+      ['character-body-bodies-female', R.skinPale],
+      ['character-feet-boots-basic-thin', R.bootBrown],
+      ['character-legs-pants-thin', R.trouserDark],
+      ['character-torso-clothes-tunic-female', R.ashTunic],
+      ['character-torso-waist-belt-leather-female', R.beltLeather],
+      ['custom:satchel', null],
+      ['character-head-heads-human-female', R.skinPale],
+      [irises('#b48cff'), null],
+      ['character-hair-braid-adult-fg', R.brownHair],
+    ],
+  },
   // 96 px frame: the bell cloak swallows the body; chains overhead, staffs either side.
   first_forgotten: {
     old: 'public/assets/npcs/first_forgotten_idle.png',
@@ -1364,6 +1467,79 @@ const chestHole = () => {
   return px;
 };
 
+/** Kuro, given to the void: torn black wings spread behind his shoulders. */
+const wings = ({ S, ox, oy }) => {
+  const px = Buffer.alloc(S * S * 4);
+  for (const side of [-1, 1])
+    for (let i = 0; i < 7; i++) {
+      const x0 = ox + 32 + side * 8;
+      const y0 = oy + 34;
+      const len = 26 - i * 2;
+      const a = -0.9 + i * 0.22;
+      for (let t = 0; t <= len; t++) {
+        const x = Math.round(x0 + side * Math.cos(a) * t);
+        const y = Math.round(y0 + Math.sin(a) * t * 0.9 + (t > len - 4 ? 1 : 0));
+        plotS(px, S, x, y, hex(i % 2 ? '#1a1424' : '#0a0610'));
+        plotS(px, S, x, y + 1, hex('#2a2238'));
+      }
+    }
+  return px;
+};
+
+/** A violet Possibility blade held point-down in the viewer-right hand. */
+const voidBlade = ({ S, ox, oy }) => {
+  const px = Buffer.alloc(S * S * 4);
+  const x = ox + 45;
+  for (let y = oy + 44; y <= oy + 62; y++) {
+    plotS(px, S, x - 1, y, hex('#120a20'));
+    plotS(px, S, x, y, hex(y > oy + 58 ? '#e0d0ff' : '#b48cff'));
+    plotS(px, S, x + 1, y, hex('#7a4ae0'));
+    plotS(px, S, x + 2, y, hex('#120a20'));
+  }
+  for (let k = -2; k <= 3; k++) plotS(px, S, x + k, oy + 44, hex('#4a2aa0'));
+  return px;
+};
+
+/** Violet motes drifting round a figure the void has taken. */
+const voidMotes = ({ S, ox, oy }) => {
+  const px = Buffer.alloc(S * S * 4);
+  for (const [dx, dy] of [
+    [-4, 20],
+    [68, 26],
+    [-8, 44],
+    [70, 48],
+    [2, 58],
+    [62, 60],
+    [10, 10],
+    [56, 8],
+  ])
+    plotS(px, S, ox + dx, oy + dy, hex(dy % 2 ? '#b48cff' : '#7a4ae0'));
+  return px;
+};
+
+/** The puppet master's crown of violet spikes. */
+const spikeCrown = ({ S, ox, oy }) => {
+  const px = Buffer.alloc(S * S * 4);
+  for (let i = 0; i < 6; i++) {
+    const x = ox + 23 + i * 3.5;
+    const h = 5 + (i % 2) * 3;
+    for (let t = 0; t < h; t++) {
+      plotS(px, S, Math.round(x), oy + 15 - t, hex(t > h - 2 ? '#e0d0ff' : '#7a4ae0'));
+      plotS(px, S, Math.round(x) + 1, oy + 15 - t, hex('#120a20'));
+    }
+  }
+  return px;
+};
+
+/** Puppet strings falling from his fingers to the floor, beaded with light. */
+const puppetStrings = ({ S, ox, oy }) => {
+  const px = Buffer.alloc(S * S * 4);
+  for (const hx of [ox + 18, ox + 21, ox + 43, ox + 46])
+    for (let y = oy + 50; y <= S - 3; y += 2)
+      plotS(px, S, hx, y, hex(y % 6 ? '#b48cff' : '#e0d0ff'));
+  return px;
+};
+
 /** Highest opaque row of a layer. */
 function topRow(px) {
   for (let y = 0; y < F; y++) for (let x = 0; x < F; x++) if (px[(y * F + x) * 4 + 3] > 0) return y;
@@ -1481,9 +1657,32 @@ function idleSheet(base, spec, S = F) {
     if (spec.flicker) fr = k % 2 ? fade(base, 0.55) : base;
     if (k === spec.glitch) fr = glitch(fr, S);
     if (spec.alpha) fr = fade(fr, spec.alpha);
+    if (k === spec.released) fr = kneel(base, S);
     for (let y = 0; y < S; y++) fr.copy(sheet, (y * n * S + k * S) * 4, y * S * 4, (y + 1) * S * 4);
   }
   return sheet;
+}
+
+/** A boss's released frame: sunk to its knees where it fell, dimmed (as author-bosses.js). */
+function kneel(src, S) {
+  const out = Buffer.alloc(src.length);
+  let top = S;
+  for (let y = 0; y < S && top === S; y++)
+    for (let x = 0; x < S; x++) if (src[(y * S + x) * 4 + 3]) top = y;
+  const ground = soles(src, S);
+  const waist = Math.round(top + (ground - top) * 0.58);
+  const drop = Math.round((ground - waist) * 0.5);
+  for (let y = 0; y < S; y++)
+    for (let x = 0; x < S; x++) {
+      const i = (y * S + x) * 4;
+      if (!src[i + 3]) continue;
+      const ny = y < waist ? y + drop : waist + drop + Math.round((y - waist) * 0.5);
+      if (ny >= S) continue;
+      const o = (ny * S + x) * 4;
+      src.copy(out, o, i, i + 4);
+      for (let k = 0; k < 3; k++) out[o + k] = Math.round(out[o + k] * 0.72);
+    }
+  return out;
 }
 
 /**
@@ -1565,9 +1764,11 @@ for (const [name, spec] of Object.entries(NPCS)) {
   shown.push([readPng(spec.old), frame]);
   console.log(`${name}: ${S}px, soles at y=${soles(frame, S)}`);
   if (install.includes(name)) {
-    const enemy = spec.kind === 'enemy';
+    const enemy = spec.kind === 'enemy' || spec.kind === 'boss';
     const dir = enemy ? 'public/assets/lpc/enemies' : 'public/assets/lpc/npcs';
-    const file = enemy ? `${dir}/${name.replace(/^enemy_/, '')}.png` : `${dir}/${name}_idle.png`;
+    const file = enemy
+      ? `${dir}/${spec.file ?? name.replace(/^(enemy|boss)_/, '')}.png`
+      : `${dir}/${name}_idle.png`;
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(file, png);
     const id = enemy

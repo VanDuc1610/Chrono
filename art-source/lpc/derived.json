@@ -1,5 +1,87 @@
 [
   {
+    "id": "derived-boss-kuro-puppet-master",
+    "file": "public/assets/lpc/enemies/kuro_puppet_master.png",
+    "sha256": "d18f49a438f4a3aa62dd2c219399fc281faf92a4e164c286966d80bd0244a052",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hair-messy1-adult",
+      "character-head-heads-human-male",
+      "character-legs-pants-male",
+      "character-torso-clothes-longsleeve-longsleeve-male",
+      "character-torso-jacket-trench-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "boss_kuro_puppet_master at the LPC scale: generator layers recoloured to the character's design, 5-frame idle."
+  },
+  {
+    "id": "derived-boss-kuro-void",
+    "file": "public/assets/lpc/enemies/kuro_boss.png",
+    "sha256": "909da72c213936b04ba9f5df44604bbbeb4755c8dc40cf6d89f750cb1724f705",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hair-messy1-adult",
+      "character-head-heads-human-male",
+      "character-legs-pants-male",
+      "character-torso-clothes-longsleeve-longsleeve-male",
+      "character-torso-jacket-trench-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "boss_kuro_void at the LPC scale: generator layers recoloured to the character's design, 5-frame idle."
+  },
+  {
+    "id": "derived-boss-lieutenant-bran",
+    "file": "public/assets/lpc/enemies/lieutenant_bran.png",
+    "sha256": "d24c7389dc21e845d5f44d9d52e260b5d48fe63dc261bc0b4bcba74c9b8e6257",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hair-plain-adult",
+      "character-hat-headband-thick-adult",
+      "character-head-heads-human-male",
+      "character-legs-pants-male",
+      "character-torso-clothes-longsleeve-longsleeve-male",
+      "character-torso-clothes-sleeveless-sleeveless-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "boss_lieutenant_bran at the LPC scale: generator layers recoloured to the character's design, 5-frame idle."
+  },
+  {
+    "id": "derived-boss-lieutenant-lyra",
+    "file": "public/assets/lpc/enemies/lieutenant_lyra.png",
+    "sha256": "0ad6b3b7fc2bea36488e1463eacacadea067043f5de18200ecedcaf783d5dd58",
+    "from": [
+      "character-body-bodies-female",
+      "character-feet-boots-basic-thin",
+      "character-hair-bob-adult",
+      "character-head-heads-human-female",
+      "character-legs-pants-thin",
+      "character-neck-scarf",
+      "character-torso-armour-leather-female"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "boss_lieutenant_lyra at the LPC scale: generator layers recoloured to the character's design, 5-frame idle."
+  },
+  {
+    "id": "derived-boss-lieutenant-neris",
+    "file": "public/assets/lpc/enemies/lieutenant_neris.png",
+    "sha256": "44c2dc11714c7a7d8aba9f8009769b1e75042fb9b1852f93142693bbe82f716a",
+    "from": [
+      "character-body-bodies-female",
+      "character-feet-boots-basic-thin",
+      "character-hair-braid-adult-bg",
+      "character-hair-braid-adult-fg",
+      "character-head-heads-human-female",
+      "character-legs-pants-thin",
+      "character-torso-clothes-tunic-female",
+      "character-torso-waist-belt-leather-female"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "boss_lieutenant_neris at the LPC scale: generator layers recoloured to the character's design, 5-frame idle."
+  },
+  {
     "id": "derived-coastal-tileset-caps",
     "file": "public/assets/lpc/coastal_tileset_caps.png",
     "sha256": "f666698f05b08d8524a726130371ede6fe3582614fdef5ee373ef2d786319668",

@@ -1052,6 +1052,56 @@ reduced to 7 colors an adapted to v3 bases by bluecarrot16, climb/jump/sit/emote
 
 ## Game assets derived from the sources above
 
+### derived-boss-kuro-puppet-master
+
+- File: public/assets/lpc/enemies/kuro_puppet_master.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-feet-boots-basic-male, character-hair-messy1-adult, character-head-heads-human-male, character-legs-pants-male, character-torso-clothes-longsleeve-longsleeve-male, character-torso-jacket-trench-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Manuel Riecke (MrBeast); ElizaWy; Matthew Krohn (makrohn)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0
+
+boss_kuro_puppet_master at the LPC scale: generator layers recoloured to the character's design, 5-frame idle.
+
+### derived-boss-kuro-void
+
+- File: public/assets/lpc/enemies/kuro_boss.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-feet-boots-basic-male, character-hair-messy1-adult, character-head-heads-human-male, character-legs-pants-male, character-torso-clothes-longsleeve-longsleeve-male, character-torso-jacket-trench-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Manuel Riecke (MrBeast); ElizaWy; Matthew Krohn (makrohn)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0
+
+boss_kuro_void at the LPC scale: generator layers recoloured to the character's design, 5-frame idle.
+
+### derived-boss-lieutenant-bran
+
+- File: public/assets/lpc/enemies/lieutenant_bran.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-feet-boots-basic-male, character-hair-plain-adult, character-hat-headband-thick-adult, character-head-heads-human-male, character-legs-pants-male, character-torso-clothes-longsleeve-longsleeve-male, character-torso-clothes-sleeveless-sleeveless-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Manuel Riecke (MrBeast); Joe White; ElizaWy; Matthew Krohn (makrohn); Marcel van de Steeg (MadMarcel)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0, CC-BY-3.0
+
+boss_lieutenant_bran at the LPC scale: generator layers recoloured to the character's design, 5-frame idle.
+
+### derived-boss-lieutenant-lyra
+
+- File: public/assets/lpc/enemies/lieutenant_lyra.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-female, character-feet-boots-basic-thin, character-hair-bob-adult, character-head-heads-human-female, character-legs-pants-thin, character-neck-scarf, character-torso-armour-leather-female
+- Authors: Benjamin K. Smith (BenCreating); bluecarrot16; TheraHedwig; Evert; MuffinElZangano; Durrani; Pierre Vigier (pvigier); ElizaWy; Matthew Krohn (makrohn); Johannes Sjölund (wulax); Stephen Challener (Redshrike); JaidynReiman; Nila122; Joe White; Michael Whitlock (bigbeargames)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0, CC0-1.0, OGA-SA-3.0
+
+boss_lieutenant_lyra at the LPC scale: generator layers recoloured to the character's design, 5-frame idle.
+
+### derived-boss-lieutenant-neris
+
+- File: public/assets/lpc/enemies/lieutenant_neris.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-female, character-feet-boots-basic-thin, character-hair-braid-adult-bg, character-hair-braid-adult-fg, character-head-heads-human-female, character-legs-pants-thin, character-torso-clothes-tunic-female, character-torso-waist-belt-leather-female
+- Authors: Benjamin K. Smith (BenCreating); bluecarrot16; TheraHedwig; Evert; MuffinElZangano; Durrani; Pierre Vigier (pvigier); ElizaWy; Matthew Krohn (makrohn); Johannes Sjölund (wulax); Stephen Challener (Redshrike); JaidynReiman; Nila122; Joe White; Marcel van de Steeg (MadMarcel)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0
+
+boss_lieutenant_neris at the LPC scale: generator layers recoloured to the character's design, 5-frame idle.
+
 ### derived-coastal-tileset-caps
 
 - File: public/assets/lpc/coastal_tileset_caps.png
