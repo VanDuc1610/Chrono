@@ -4,6 +4,7 @@ import { distance, rollHit, type ActionTuning, type Point } from '../../systems/
 import type { CombatTuning } from '../../systems/combat/CombatTypes';
 import type { Translate } from '../../ui/Strings';
 import { KURO_SHIFT_MS, Roamer } from './ActionTypes';
+import { enlargeActor } from '../ActorScale';
 export interface CompanionsContext {
   allyTexture: string | null;
   scene: Phaser.Scene;
@@ -33,6 +34,7 @@ export function spawnElder(this: CompanionsContext): void {
   this.elder = this.scene.physics.add.sprite(this.player.x - 26, this.player.y + 4, texture);
   this.elder.body?.setSize(14, 12);
   this.elder.body?.setOffset(9, 18);
+  enlargeActor(this.elder);
   if (this.scene.anims.exists(`${texture}_idle`)) this.elder.play(`${texture}_idle`);
 }
 
@@ -46,6 +48,7 @@ export function spawnCompanion(this: CompanionsContext): void {
   this.companion = this.scene.physics.add.sprite(this.player.x + 26, this.player.y + 4, texture);
   this.companion.body?.setSize(14, 12);
   this.companion.body?.setOffset(9, 18);
+  enlargeActor(this.companion);
   if (this.scene.anims.exists(`${texture}_idle`)) this.companion.play(`${texture}_idle`);
 }
 

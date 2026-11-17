@@ -16,6 +16,7 @@ import { wraithSolid } from '../Chapter8Rules';
 import { conditionHolds, tileCenter } from '../MapRegistry';
 import type { MapRoamerDefinition } from '../MapTypes';
 import { ActionHost, Roamer } from './ActionTypes';
+import { baseScale, enlargeActor } from '../ActorScale';
 export interface RoamersContext {
   defs: MapRoamerDefinition[];
   roamers: Roamer[];
@@ -94,6 +95,7 @@ export function spawn(this: RoamersContext, def: MapRoamerDefinition): void {
   const sprite = this.group.create(pos.x, pos.y, def.texture) as Phaser.Physics.Arcade.Sprite;
   if (def.anim && this.scene.anims.exists(def.anim)) sprite.play(def.anim);
   sprite.body?.setSize(18, 18);
+  enlargeActor(sprite);
   const e = this.tuning.enemy;
   this.roamers.push({
     def,
@@ -130,6 +132,7 @@ export function spawnClone(this: RoamersContext, src: Roamer, k: number): void {
   const sprite = this.group.create(x, y, src.def.texture) as Phaser.Physics.Arcade.Sprite;
   if (src.def.anim && this.scene.anims.exists(src.def.anim)) sprite.play(src.def.anim);
   sprite.body?.setSize(18, 18);
+  enlargeActor(sprite);
   sprite.setAlpha(0.88);
   this.roamers.push({
     ...src,
@@ -237,7 +240,8 @@ export function animateRoamers(this: RoamersContext, now: number): void {
       sx *= 0.88;
       sy *= 0.88;
     }
-    r.sprite.setScale(sx, sy);
+    const base = baseScale(r.sprite);
+    r.sprite.setScale(sx * base, sy * base);
   }
 }
 
@@ -271,7 +275,7 @@ export function finalDefeat(this: RoamersContext, r: Roamer): void {
   this.scene.tweens.add({
     targets: r.sprite,
     alpha: 0,
-    scale: 0.4,
+    scale: 0.4 * baseScale(r.sprite),
     duration: 380,
     onComplete: () => r.sprite.destroy(),
   });
@@ -466,7 +470,7 @@ export function updateChants(this: RoamersContext, now: number): void {
       o.brain = { ...o.brain, state: 'chase' };
       if (o.sprite.body) (o.sprite.body as Phaser.Physics.Arcade.Body).enable = true;
       this.scene.tweens.killTweensOf(o.sprite);
-      o.sprite.setAlpha(1).setScale(1);
+      o.sprite.setAlpha(1).setScale(baseScale(o.sprite));
       this.floatText(o.sprite.x, o.sprite.y - 18, this.t('action.risen'), '#ff8080');
     }
   }

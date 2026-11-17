@@ -31,6 +31,7 @@ import type { Translate } from '../ui/Strings';
 import type { ActionCombat, CombatExtension, PeterAct } from './ActionCombat';
 import { tileCenter } from './MapRegistry';
 import { keyCode } from '../ui/keys';
+import { enlargeActor } from './ActorScale';
 
 /** Boss profiles from bosses.json (loaded by PreloadScene). */
 export function bossProfile(scene: Phaser.Scene, enemyId: string): BossProfile | undefined {
@@ -785,6 +786,7 @@ export class BossFight implements CombatExtension {
       const ally = this.scene.add
         .sprite(mid.x, mid.y, rescue.allyTexture)
         .setDepth(this.peter.depth);
+      enlargeActor(ally);
       if (rescue.allyAnim && this.scene.anims.exists(rescue.allyAnim)) ally.play(rescue.allyAnim);
       this.scene.events.once(Phaser.Scenes.Events.SHUTDOWN, () => ally.destroy());
     }
@@ -1356,6 +1358,7 @@ export class BossFight implements CombatExtension {
       this.allySprite = this.scene.add
         .sprite(this.p.x - 28, this.p.y, a.texture)
         .setDepth(this.peter.depth);
+      enlargeActor(this.allySprite);
       if (a.anim && this.scene.anims.exists(a.anim)) this.allySprite.play(a.anim);
       this.play('blinkIn', { x: this.p.x - 28, y: this.p.y + 16 });
       this.nextAllyAt = this.fightMs + a.everyMs;

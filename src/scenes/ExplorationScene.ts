@@ -47,6 +47,7 @@ import type {
 import type { CombatSceneData } from './CombatScene';
 import { FINAL_BOSSES, music } from './sceneMusic';
 import { keyCode } from '../ui/keys';
+import { enlargeActor } from '../world/ActorScale';
 
 /** Map layer of tent tops, palisades and tree crowns: above the actors, below effects. */
 const ABOVE_DEPTH = 30;
@@ -605,6 +606,7 @@ export class ExplorationScene extends Phaser.Scene {
       if (def.anim && this.anims.exists(def.anim)) npc.sprite.play(def.anim);
       if (def.tint) npc.sprite.setTint(Number.parseInt(def.tint.slice(1), 16));
       if (def.alpha !== undefined) npc.sprite.setAlpha(def.alpha);
+      enlargeActor(npc.sprite);
       if (!def.resistsFreeze) this.npcSprites.push(npc.sprite);
       this.physics.add.collider(this.player.sprite, npc.sprite);
       this.interactionSystem.register(npc);
@@ -617,6 +619,7 @@ export class ExplorationScene extends Phaser.Scene {
       if (def.dialogueId !== dialogueId) continue;
       const pos = tileCenter(def.tile);
       const sprite = this.add.sprite(pos.x, pos.y, def.texture, 0).setAlpha(0).setDepth(5);
+      enlargeActor(sprite);
       if (def.anim && this.anims.exists(def.anim)) sprite.play(def.anim);
       this.tweens.add({ targets: sprite, alpha: 1, duration: 900, ease: 'Sine.easeOut' });
       this.visionSprites.push(sprite);
@@ -670,6 +673,7 @@ export class ExplorationScene extends Phaser.Scene {
       if (def.anim && this.anims.exists(def.anim)) sprite.play(def.anim);
       const size = def.hitbox ?? 22;
       sprite.body?.setSize(size, size);
+      enlargeActor(sprite);
       this.tweens.add({
         targets: sprite,
         y: sprite.y - 6,

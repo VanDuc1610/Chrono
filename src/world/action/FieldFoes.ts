@@ -33,6 +33,7 @@ import {
 } from '../Chapter8Rules';
 import { chainState, thrustPhase } from '../Chapter9Rules';
 import { ActionHost, Roamer, f9 } from './ActionTypes';
+import { baseScale } from '../ActorScale';
 export interface FieldFoesContext {
   roamers: Roamer[];
   player: Player;
@@ -532,7 +533,7 @@ export function updateInhale(this: FieldFoesContext, r: Roamer, now: number): bo
   r.sprite.setVelocity(0, 0);
   const st = tellStage(now, r.inhaleAt, ih.tellMs, ih.windowMs);
   if (st.stage === 'tell') {
-    r.sprite.setScale(1 + ((now - r.inhaleAt) / ih.tellMs) * 0.3);
+    r.sprite.setScale(baseScale(r.sprite) * (1 + ((now - r.inhaleAt) / ih.tellMs) * 0.3));
     if (st.window) r.sprite.setTint(0xc8a0ff);
     this.aimLines.lineStyle(1, 0xb48cff, 0.35).strokeCircle(r.sprite.x, r.sprite.y, ih.range);
     return true;
@@ -552,7 +553,7 @@ export function endInhale(this: FieldFoesContext, r: Roamer, now: number): void 
   const ih = r.enemy.field?.inhale;
   r.inhaleAt = null;
   r.nextInhaleAt = now + (ih?.cooldownMs ?? 3000);
-  r.sprite.setScale(1);
+  r.sprite.setScale(baseScale(r.sprite));
   r.sprite.clearTint();
 }
 
