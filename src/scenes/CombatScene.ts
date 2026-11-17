@@ -10,7 +10,11 @@ import {
 import type { DialogueDatabase } from '../systems/dialogue/DialogueTypes';
 import { FLAGS } from '../state/GameSession';
 import { GameSession, getSession } from '../state/GameSession';
-import { registerPeterAnimations } from '../systems/animation/PeterAnimationConfig';
+import {
+  peterStageFor,
+  peterStageKey,
+  registerPeterAnimations,
+} from '../systems/animation/PeterAnimationConfig';
 import { createPanel } from '../ui/Panel';
 import { pickDialogue } from '../world/MapRegistry';
 import { echoRhythm } from '../world/Chapter8Rules';
@@ -925,7 +929,11 @@ export class CombatScene extends Phaser.Scene {
       anim === 'idle' &&
       !this.session.getFlag(FLAGS.hasBlade) &&
       this.anims.exists('peter_idle_unarmed_right');
-    const key = unarmed ? 'peter_idle_unarmed_right' : `peter_${anim}_right`;
+    const stage = peterStageFor(this.session.lastFinishedChapter + 1);
+    const key = peterStageKey(
+      unarmed ? 'peter_idle_unarmed_right' : `peter_${anim}_right`,
+      this.anims.exists(peterStageKey('peter_idle_right', stage)) ? stage : 1,
+    );
     if (!this.anims.exists(key)) return;
     if (anim === 'idle') {
       // Idle lives on its own texture; switch back explicitly.

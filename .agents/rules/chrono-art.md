@@ -41,12 +41,11 @@ Peter must retain:
     - Drooping bangs.
     - Shaggy or layered hair.
     - Undercut, shaved sides, or ponytail.
-- Mature masculine facial proportions.
-- Muted gray-blue eyes.
-- Asymmetrical charcoal-blue coat.
-- Diagonal brown leather shoulder strap.
-- Silver details and restrained purple accents.
-- Signature objects: Broken Blade (cerulean glow), Stopped Watch on chain, and Torn Notebook on hip.
+- Hair colour: black.
+- Mature masculine facial proportions; muted gray-blue eyes.
+- Costume (v4, owner 2026-11-17, see docs/art/PETER_DESIGN.md §0): the owner fixed only the
+  black curls and left the rest free; the current costume is the áo tấc cách tân in three chapter
+  stages. Change it only with the owner's approval.
 
 This hairstyle is a permanent character identity feature and cannot be changed without explicit approval from the project owner.
 

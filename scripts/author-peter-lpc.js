@@ -1,301 +1,335 @@
 /**
- * CHRONO – Peter redrawn at the LPC scale (Pipeline B, code-authored, AGENTS.md §5).
+ * CHRONO – Peter at the LPC scale (Pipeline B, code-authored, AGENTS.md §5).
  *
- * Owner, 2026-11-17: the world moves to LPC-style 3/4 tiles (32px tiles, characters ~1.5 tiles
- * tall in 64x64 frames). Peter is redrawn at that scale from docs/art/PETER_DESIGN.md only: every
- * pixel below is placed by hand from the written spec and its palette swatches. Only the LPC
- * frame metrics are matched (64x64 cell, ~47 px tall, feet on y = 61) so he stands at the same
- * height as LPC people; no LPC body or any external character art is used as a base.
+ * v4 (owner, 2026-11-17): a sturdier build that stands level with the LPC people (shoulders 28 px,
+ * head 20 px, 36 px wide frame art), and a new costume. Owner's only fixed point: short, compact,
+ * tightly coiled black curls. Freestyle otherwise; chosen design "áo tấc cách tân + thợ đồng hồ":
+ * charcoal-navy áo tấc with a standing collar and a diagonal closure to the wearer's right, side
+ * slits lined in cerulean over cream straight trousers, a black-and-cream khăn rằn with a tail,
+ * a tool belt with brass tools and a pocket watch, a watchmaker's loupe at the temple, the Broken
+ * Blade with its cerulean glow. Three chapter stages: 1 (chapters 0-1) as above; 2 (chapters 2-5)
+ * adds a brass gear pauldron on his left shoulder and a half cape; 3 (chapters 6-9) adds cerulean
+ * fracture lines along the blade arm. The light trousers, scarf and cerulean lining keep him
+ * readable on the dark chapter 6-9 maps.
  *
- * Identity lock kept: short, compact, tightly coiled curls growing up and out (rounded, slightly
- * elevated, covering the sides); gray-blue eyes; stubble; high collar; charcoal-blue duster with
- * four silver clasp pairs; diagonal leather strap (left shoulder to right hip) with silver buckle;
- * belt with silver buckle; purple lining and turned cuffs; Torn Notebook on the right hip; Stopped
- * Watch on a chain; the Broken Blade in the right hand with its cerulean glow.
+ * Every pixel is placed here; no LPC body or external character art is used. Frame metrics as
+ * before (64x64, feet on y = 61), so positions and the collider are unchanged.
  *
- * Output: art-source/characters/peter/generated/candidates/ ONLY (owner approval before use).
- * Usage: node scripts/author-peter-lpc.js [outDir]
- *
- * v1 front still approved by the owner (2026-11-17, keep him slender). v2: idle (4 frames) and
- * walk (6 frames) in four directions; rows down, up, left, right as in PeterAnimationConfig.
+ * Output: art-source/characters/peter/generated/candidates/ (stage 1 `peter_lpc_*`, stages 2-3
+ * `peter_lpc_s2_*`, `peter_lpc_s3_*`). Usage: node scripts/author-peter-lpc.js [outDir]
  */
 import fs from 'fs';
 import path from 'path';
 import { hex, checkRows, renderSheet, preview, encodePng, writeFile } from './pixel-art/pixel.js';
 
 const SIZE = 64;
+/** Width of the hand-drawn body art (columns x0 .. x0 + 35). */
+const ART_W = 36;
 
-/** PETER_DESIGN.md §3-4 swatches, plus outline, notebook pages and leather highlight. */
 const PALETTE = {
   O: hex('#120f17'), // outline (near-black violet)
-  h: hex('#141219'), // curly hair shadow (black, owner 2026-11-17)
-  H: hex('#25222c'), // curly hair base (black)
-  j: hex('#423e4d'), // curly hair highlight (cool sheen on black curls)
+  h: hex('#141219'), // curls, shadow (black)
+  H: hex('#25222c'), // curls, base
+  j: hex('#423e4d'), // curls, cool sheen
   s: hex('#dab9a0'), // skin
   S: hex('#b28e76'), // skin shadow / stubble
   E: hex('#607d9c'), // gray-blue eyes
-  c: hex('#263248'), // coat charcoal-blue
-  C: hex('#161e2e'), // coat shadow
-  k: hex('#3d4f70'), // coat highlight
-  p: hex('#281e36'), // purple lining
-  P: hex('#3a2a4f'), // purple trim
-  t: hex('#12151d'), // ribbed tunic
-  l: hex('#453123'), // leather strap / belt / notebook cover
-  L: hex('#5e4532'), // leather highlight (derived)
-  m: hex('#8c96a8'), // aged silver
+  c: hex('#263248'), // áo tấc, charcoal-navy
+  C: hex('#161e2e'), // áo tấc, shadow
+  k: hex('#3d4f70'), // áo tấc, highlight
+  u: hex('#2f9ccc'), // cerulean lining, cuffs, collar band
+  U: hex('#1d6688'), // cerulean lining, shadow
+  x: hex('#c4b9a0'), // cream trousers
+  X: hex('#8f856e'), // cream trousers, shadow
+  y: hex('#c8964a'), // brass (tools, loupe, pauldron)
+  Y: hex('#ecc878'), // brass, light
+  K: hex('#1c1c22'), // khăn rằn, dark check
+  Z: hex('#e6e0d0'), // khăn rằn, light check
+  t: hex('#12151d'), // inner shadow
+  l: hex('#453123'), // leather (belt, grip)
+  L: hex('#5e4532'), // leather highlight, dust
+  m: hex('#8c96a8'), // silver (knot buttons, crossguard, watch case)
   n: hex('#8c96a5'), // Broken Blade steel
-  g: hex('#00c8ff'), // chronal fracture glow
+  g: hex('#00c8ff'), // chronal glow
   w: hex('#a6f0ff'), // chronal glow, light
   W: hex('#e6f9ff'), // chronal apex white / watch face
-  q: hex('#e8dcc0'), // notebook pages (cream parchment)
-  r: hex('#181c24'), // trousers
   b: hex('#2e2219'), // boots
+  B: hex('#4a3626'), // boot highlight
   d: hex('#008ab8'), // fading chronal trail (after-images, spent sparks)
 };
 
-/** Front view, 32 columns (x 16..47), from the top curl (y 15) to the soles (y 61). */
-const FRONT = [
-  '..........O.OO.OO.OO.O..........', // curls, bumpy crown
-  '.........OjOjHOjHOjHOjO.........',
-  '........OjHhjHhjHhjHhjHO........', // tight coils: light top, dark underside
-  '........OHhjHhjHhjHhjHhO........',
-  '........OjHhjHhjHhjHhjHO........',
-  '........OHhjhHhjhHhjhHhO........', // curls stop at the brow, no fringe
-  '........OHjssssssssssjHO........',
-  '........OhHssssssssssHhO........',
-  '........OHhshhsssshhshHO........', // brows
-  '.........OhsOEssssEOshO.........', // gray-blue eyes; curls cover the ears
-  '.........OSssssSSssssSO.........', // nose
-  '.........OSssssssssssSO.........',
-  '..........OSsssSSsssSO..........', // mouth
-  '..........OSSsSssSsSSO..........', // faint stubble on the jaw
-  '...........OSSSSSSSSO...........',
-  '.........OkcCOSSSSOCckO.........', // high collar round the neck
-  '........OkccCOttttOCcckO........', // ribbed tunic at the throat
-  '.....OOOkkccCCOttOCCcckkOOO.....', // shoulders
-  '....OkkcOcccccCmmCcccccOckkO....', // clasp pair 1
-  '....OkccOccccCCttCCccccOcckO....',
-  '....OkccOcccccCmmCcccccOcckO....', // clasp pair 2
-  '....OccCOccccCCttCCccccOCccO....',
-  '....OccCOcccccCmmCcccccOCccO....', // clasp pair 3
-  '....OccCOcccccCCCCcccccOCccO....',
-  '....OcCCOcccccCmmCcccccOCCcO....', // clasp pair 4
-  '....OcCCOccccccCCccccccOCCcO....',
-  '....OCCOOccccccCCccccccOOCCO....',
-  '....OPPO.OcccccCCcccccO.OPPO....', // turned purple cuffs
-  '....OssO.OcccccCCcccccO.OssO....', // hands
-  '....OSsO.OllllmmmmllllO.OsSO....', // belt, silver buckle
-  '.....OO..OccccCppCccccO..OO.....', // coat opens on its lining
-  '.........OcccCOrrOCcccO.........',
-  '.........OcccCprrpCcccO.........',
-  '.........OcccCprrpCcccO.........',
-  '.......OcccCprrOOrrpCcccO.......', // duster flares, legs part
-  '.......OcccCprrOOrrpCcccO.......',
-  '.......OcccCprrOOrrpCcccO.......',
-  '.......OccCCprrOOrrpCCccO.......',
-  '.......OkcCCprrOOrrpCCckO.......', // hem highlight
-  '........OOOOPrrOOrrPOOOO........', // mid-calf hem, purple trim
-  '............OLLOOLLO............', // boot turnover cuffs
-  '............OblOOlbO............',
-  '............ObbOObbO............',
-  '............ObbOObbO............',
-  '............ObbOObbO............',
-  '...........ObbbOObbbO...........',
-  '...........OOOOOOOOOO...........', // soles
+/** Chapter stage being drawn (1-3); set by the sheet loop below. */
+let STAGE = 1;
+
+/** Mirrors 18-column left halves into 36-column rows. */
+const mirror = (half) =>
+  half.map((h) => {
+    if (h.length !== 18) throw new Error(`half row ${h.length}: ${h}`);
+    return h + [...h].reverse().join('');
+  });
+
+/** Front view, upper 40 rows (y 15..54): head, áo tấc, the slits down to the front-panel hem. */
+const FRONT_HALF = [
+  '...........O.OO.OO', // curls, bumpy crown
+  '.........OOjOjHOjH',
+  '........OjHhjHhjHh', // tight coils: light tops, dark undersides
+  '.......OjHhjHhjHhj',
+  '.......OHhjHhjHhjH',
+  '.......OjHhjHhjHhj',
+  '.......OHhjhHhjhHh', // the curls stop at the brow
+  '.......OHjssssssss',
+  '.......OhHssssssss',
+  '.......OHhshhhssss', // brows
+  '.......OhssOEEssss', // gray-blue eyes (row 10)
+  '........Osssssssss',
+  '........OssssssssS', // nose
+  '.........OsssssssS', // mouth
+  '.........OSsSsssss', // faint stubble at the jaw
+  '..........OSsssssS',
+  '.............OSSSS', // neck
+  '...........Okkcccc', // standing collar (row 17)
+  '.........OkkcccCcc',
+  '....OOOOkkkccccccc', // shoulders, 28 wide
+  '...OkkkcOccccccccc',
+  '...OkkccOccccccccc',
+  '...OkcccOccccccccc',
+  '...OkcccOccccccccc',
+  '...OccCcOccccccccc',
+  '...OccCcOccccccccc',
+  '...OcCCcOccccccccc',
+  '...OcCCcOccccccccc',
+  '...OCCCOOccccccccc',
+  '...OuuuO.Occcccccc', // cerulean cuffs
+  '...OsssO.Occcccccc', // hands (row 30)
+  '...OSssO.Olllllyll', // tool belt
+  '....OOO..Occcccccc',
+  '.........OxxUccccc', // side slits: trousers and lining either side of the front panel
+  '.........OxxUccccc',
+  '.........OxXuccccc',
+  '........OxxXuccccc',
+  '........OxxXuccccc',
+  '........OxxXukkkkk', // hem highlight
+  '........OxxXOOOOOO', // front-panel hem (row 39)
 ];
 
-/** Peter's own left is the viewer's right: the strap runs from there down to his right hip. */
-function details(rows) {
-  const g = rows.map((r) => [...r]);
-  const put = (x, y, ch) => {
-    if (g[y]?.[x] !== undefined) g[y][x] = ch;
-  };
-  // Diagonal strap: viewer-right shoulder (col 21, row 18) to viewer-left hip (col 9, row 29).
-  for (let i = 0; i <= 11; i++) {
-    const x = 21 - i;
-    const y = 18 + i;
-    if (g[y][x] === 'm' || g[y][x] === 't') continue; // clasps and tunic stay on top
-    put(x, y, 'l');
-    if (g[y][x + 1] !== 'O' && g[y][x + 1] !== 'm') put(x + 1, y, i % 3 === 0 ? 'L' : 'l');
+/** Back view head: curls over the whole back of the head down to the nape. */
+const BACK_HEAD_HALF = [
+  '...........O.OO.OO',
+  '.........OOjOjHOjH',
+  '........OjHhjHhjHh',
+  '.......OjHhjHhjHhj',
+  '.......OHhjHhjHhjH',
+  '.......OjHhjHhjHhj',
+  '.......OHhjHhjHhjH',
+  '.......OjHhjHhjHhj',
+  '.......OHhjHhjHhjH',
+  '.......OjHhjHhjHhj',
+  '.......OhHhjHhjHhj',
+  '........OHhjHhjHhj',
+  '........OhHhjHhjHh',
+  '.........OHhjHhjHh',
+  '.........OShHhhHhh', // ears under the curls
+  '..........OhhhhhhS', // nape curls
+  '.............OSSSS',
+];
+
+const B = 17; // body row 0 (the collar)
+const check = (x, y) => ((Math.floor(x / 2) + Math.floor(y / 2)) % 2 ? 'K' : 'Z');
+const putIn = (g, x, y, ch) => {
+  if (g[y]?.[x] !== undefined) g[y][x] = ch;
+};
+const stampIn = (g, x0, y0, rows) =>
+  rows.forEach((r, dy) => [...r].forEach((ch, dx) => ch !== ' ' && putIn(g, x0 + dx, y0 + dy, ch)));
+/** Stamps only where the art is empty (things that hang behind him). */
+const behindIn = (g, x, y, ch) => {
+  if (g[y]?.[x] === '.') g[y][x] = ch;
+};
+const flipStamp = (rows) => rows.map((r) => [...r].reverse().join(''));
+
+/** The khăn rằn wrap: three checked rows round the neck. */
+function scarfWrap(g) {
+  for (let y = B - 1; y <= B + 1; y++)
+    for (let x = 11; x <= 24; x++) putIn(g, x, y, x === 11 || x === 24 ? 'O' : check(x, y));
+  for (let x = 12; x <= 23; x++) putIn(g, x, B + 2, 'O');
+}
+
+const PAULDRON = [
+  '  O O O O  ',
+  ' OYOYOyOyO ',
+  'OYYYYyyyyyO',
+  'OYYyOOOyyyO',
+  'OYyyOuOyyyO',
+  'OyyyOOOyyCO',
+  'OyyyyyyyCCO',
+  ' OOOOOOOOO ',
+];
+
+function frontRows() {
+  const g = mirror(FRONT_HALF).map((r) => [...r]);
+  // Diagonal closure toward the wearer's right (viewer's left) with silver knot buttons.
+  for (let i = 0; i <= 6; i++) putIn(g, 17 - i, B + 1 + i, i % 2 === 0 ? 'm' : 'C');
+  for (let x = 12; x <= 23; x++) putIn(g, x, B, x === 12 || x === 23 ? 'O' : 'U');
+  scarfWrap(g);
+  // The scarf's tail over the viewer-right chest, fringed.
+  for (let y = B + 2; y <= B + 10; y++) {
+    putIn(g, 20, y, 'O');
+    for (let x = 21; x <= 24; x++) putIn(g, x, y, check(x, y));
+    putIn(g, 25, y, 'O');
   }
-  put(17, 22, 'm'); // square strap buckle on the chest
-  put(18, 22, 'm');
-  // Torn Notebook on the right hip (viewer's left), cream pages between leather covers.
-  for (const [x, y, ch] of [
-    [8, 30, 'O'],
-    [9, 30, 'O'],
-    [10, 30, 'O'],
-    [11, 30, 'O'],
-    [8, 31, 'O'],
-    [9, 31, 'l'],
-    [10, 31, 'L'],
-    [11, 31, 'O'],
-    [8, 32, 'O'],
-    [9, 32, 'q'],
-    [10, 32, 'q'],
-    [11, 32, 'O'],
-    [8, 33, 'O'],
-    [9, 33, 'l'],
-    [10, 33, 'l'],
-    [11, 33, 'O'],
-    [8, 34, 'O'],
-    [9, 34, 'O'],
-    [10, 34, 'O'],
-    [11, 34, 'O'],
-  ])
-    put(x, y, ch);
-  // Stopped Watch on its chain, hanging from the belt on his left.
-  put(19, 30, 'm');
-  put(20, 31, 'm');
-  put(20, 32, 'O');
-  put(21, 32, 'O');
-  put(20, 33, 'W');
-  put(21, 33, 'm');
-  put(20, 34, 'O');
-  put(21, 34, 'O');
+  stampIn(g, 20, B + 11, ['OZKZKO', ' Z K Z']);
+  // Tool belt: a screwdriver, tweezers, a small brass gear; the pocket watch on its chain.
+  stampIn(g, 12, B + 14, ['y']);
+  stampIn(g, 14, B + 14, ['Y']);
+  stampIn(g, 24, B + 13, [' Y ', 'YyY', ' Y ']);
+  stampIn(g, 27, B + 15, ['m ', ' m', 'OO', 'Wm', 'OO']);
+  // The watchmaker's loupe at the viewer-right temple.
+  stampIn(g, 25, 8, ['OyyO', 'yWwy', 'ywWy', 'OyyO']);
+  if (STAGE >= 2) {
+    stampIn(g, 24, B, PAULDRON);
+    for (let y = B + 2; y <= B + 15; y++) {
+      behindIn(g, 32, y, y > B + 13 ? 'u' : 'C');
+      behindIn(g, 33, y, 'O');
+    }
+  }
+  if (STAGE >= 3) crackArm(g, 4);
   return g.map((r) => r.join(''));
 }
 
-/**
- * Back view: curls cover the whole back of the head down to the nape; seamed coat back, no
- * clasps; the strap runs from his left shoulder (viewer's left) to his right hip.
- */
-const BACK_HEAD = [
-  '..O.OO.OO.OO.O..',
-  '.OjOjHOjHOjHOjO.',
-  'OjHhjHhjHhjHhjHO',
-  'OHhjHhjHhjHhjHhO',
-  'OjHhjHhjHhjHhjHO',
-  'OHhjHhjHhjHhjHhO',
-  'OhHhjHhjHhjHhHhO',
-  'OHhjHhjHhjHhjHhO',
-  'OhHhHhjHhjHhHhhO',
-  '.OhHhjHhHhjHhhO.',
-  '.OHhhHhjhHhhHhO.', // curls down to the nape
-  '.OhHhjHhjHhjHhO.',
-  '..OHhhHhhHhhHO..',
-  '...OhhhhhhhhO...', // nape curls
-  '.....OSSSSO.....', // a narrow neck under the collar
-].map((r) => '........' + r + '........');
+/** Stage 3: cerulean fracture lines up the blade arm (its outer column x0), and one on the jaw. */
+function crackArm(g, x0, mirrorX = false) {
+  const pts = [
+    [1, 13],
+    [1, 12],
+    [2, 11],
+    [2, 10],
+    [1, 9],
+    [2, 8],
+    [3, 7],
+    [2, 6],
+    [1, 5],
+    [2, 4],
+    [3, 3],
+    [0, 13],
+    [2, 13],
+  ];
+  for (const [dx, dy] of pts) {
+    const x = mirrorX ? x0 - dx : x0 + dx;
+    const y = B + dy;
+    if (!'.O'.includes(g[y]?.[x] ?? '.')) putIn(g, x, y, dy % 2 ? 'g' : 'w');
+  }
+}
 
 function backRows() {
-  const body = FRONT.slice(15).map((r, i) => {
-    let row = r.replace(/m/g, 'C').replace(/t/g, 'C');
-    if (i === 14) row = row.replace('llllCCCCllll', 'llllllllllll'); // belt; the buckle is in front
-    if (i >= 15) row = row.replace(/p/g, 'c').replace(/r/g, 'c'); // the coat back hides the legs
-    return row;
-  });
-  const g = [...BACK_HEAD, ...body].map((r) => [...r]);
-  const put = (x, y, ch) => {
-    if (g[y]?.[x] !== undefined && g[y][x] !== '.' && g[y][x] !== 'O') g[y][x] = ch;
-  };
-  for (let i = 0; i <= 11; i++) {
-    put(10 + i, 18 + i, 'l');
-    put(11 + i, 18 + i, i % 3 === 0 ? 'L' : 'l');
+  const head = mirror(BACK_HEAD_HALF);
+  const body = mirror(FRONT_HALF).slice(head.length);
+  const g = [...head, ...body].map((r) => [...r]);
+  scarfWrap(g);
+  stampIn(g, 16, B + 2, ['OKZO', 'OZKO', ' OO ']); // the knot at the back of the neck
+  if (STAGE >= 2) {
+    // Pauldron on his left shoulder (viewer-left from behind); the half cape over that side.
+    stampIn(g, 1, B, flipStamp(PAULDRON));
+    for (let y = B + 3; y <= B + 17; y++) {
+      for (let x = 9; x <= 16; x++)
+        if (!'.'.includes(g[y][x])) putIn(g, x, y, y >= B + 16 ? 'u' : x === 9 ? 'k' : 'C');
+      putIn(g, 17, y, 'O');
+    }
   }
-  // Torn Notebook on his right hip (viewer's right from behind).
-  for (const [x, y, ch] of [
-    [20, 31, 'l'],
-    [21, 31, 'L'],
-    [20, 32, 'q'],
-    [21, 32, 'q'],
-    [20, 33, 'l'],
-    [21, 33, 'l'],
-  ])
-    put(x, y, ch);
+  if (STAGE >= 3) crackArm(g, ART_W - 1 - 4, true);
   return g.map((r) => r.join(''));
 }
 
-/** Side view, facing right: hair mass behind, face and nose to the right, near arm over the coat. */
+/** Side view facing right, upper 40 rows: curls behind, face to the right, near arm over the tunic. */
 const SIDE = [
-  '...........O.OO.OO.O............',
-  '..........OjOjHOjHOjO...........',
-  '.........OjHhjHhjHhjHO..........',
-  '.........OHhjHhjHhjHhjO.........',
-  '.........OjHhjHhjHhjHhO.........',
-  '.........OHhjHhjHhjHhHhO........', // curls stop at the brow
-  '.........OhHhjHhjHhssssO........',
-  '.........OHhjHhjHhhssssO........',
-  '.........OhHhjHhjHshhssO........', // brow
-  '.........OHhjHhjHhssOEsO........', // gray-blue eye
-  '.........OhHhjHhjhSsssssO.......', // nose
-  '.........OHhjHhjHhSssssO........',
-  '..........OhHhjhSsssSSO.........', // mouth
-  '..........OHhhSsSsSsO...........', // stubbled jaw
-  '...........OhhSSSSO.............', // nape curls over the neck
-  '..........OkcCCOSSO.............', // high collar
-  '..........OkccCCOtO.............',
-  '.........OkkccccCCCO............',
-  '.........OkcccOkkcCCO...........', // near arm
-  '.........OccccOkccCCmO..........', // clasps at the front edge
-  '.........OccccOkccCCcO..........',
-  '.........OCcccOkccCCmO..........',
-  '.........OCcccOkccCCcO..........',
-  '.........OCcccOcccCCmO..........',
-  '.........OCcccOcccCCcO..........',
-  '.........OCCccOcccCCmO..........',
-  '.........OCCccOcCCCCcO..........',
-  '.........OCCccOPPOCCcO..........', // turned cuff
-  '.........OCCccOssOCCcO..........', // hand
-  '.........OllllOsSOlllO..........', // belt
-  '.........OCcccccCCcpO...........',
-  '.........OCcccccCCcprO..........', // the coat opens at the front
-  '.........OCcccccCCcprO..........',
-  '.........OCcccccCCcprO..........',
-  '........OCccccccCCcprO..........',
-  '........OCccccccCCcprO..........',
-  '........OCccccccCCcprO..........',
-  '........OCcccccCCCcprO..........',
-  '........OkcccccCCCcprO..........',
-  '........OOOOOOOPPPPrrO..........', // hem
-];
+  '.............O.OO.OO.O',
+  '...........OOjOjHOjHOjO',
+  '..........OjHhjHhjHhjHhO',
+  '.........OjHhjHhjHhjHhjHO',
+  '.........OHhjHhjHhjHhjHhO',
+  '.........OjHhjHhjHhjHhjHhO',
+  '.........OHhjHhjHhjHhjhHhO', // the curls stop at the brow
+  '.........OjHhjHhjHhjhssssO',
+  '.........OHhjHhjHhjhsssssO',
+  '.........OjHhjHhjHhsshhssO', // brow
+  '.........OHhjHhjHhjssOEssO', // gray-blue eye (row 10)
+  '.........OhHhjHhjhSsssssssO', // nose
+  '.........OHhjHhjHhSssssssO',
+  '..........OhHhjHhSsssssSO', // mouth
+  '..........OHhjHSsSsssssO', // stubbled jaw
+  '...........OhhSSSSSSSO',
+  '............OOSSSSO', // neck
+  '..........OQQQQQQQQO', // the scarf's wrap (row 17)
+  '.......OQQOQQQQQQQQO', // its tail streams back
+  '......OQQOOkkcccccUOO', // collar, cerulean band at the front
+  '.....OQQO.OkkccccccccO',
+  '.....OQO..OkcccOkkcCcO', // near arm (columns 15-18)
+  '..........OccccOkccCcmO', // knot buttons down the front edge
+  '..........OccccOkccCccO',
+  '..........OCcccOkccCcmO',
+  '..........OCcccOkccCccO',
+  '..........OCcccOcccCcmO',
+  '..........OCcccOcccCccO',
+  '..........OCCccOcccCccO',
+  '..........OCCccOcCCCccO',
+  '..........OCCccOuuOCccO', // cerulean cuff
+  '..........OCCccOssOCccO', // hand (row 31)
+  '..........OlllyOsSOlllO', // tool belt
+  '..........OCcccccCCcccO',
+  '.........OxUccccccCCccO', // back slit: lining and trousers
+  '.........OxUccccccCCccO',
+  '.........OxUcccccccCcccO',
+  '.........OxUcccccccCcccO',
+  '.........OxUkkkkkkkkkkkO', // hem highlight
+  '.........OxOOOOOOOOOOOOO', // hem
+].map((r) => r.padEnd(ART_W, '.'));
 
 function sideRows() {
-  const g = SIDE.map((r) => [...r]);
-  const put = (x, y, ch) => {
-    if ('cCk'.includes(g[y]?.[x] ?? '.')) g[y][x] = ch;
-  };
-  for (let i = 0; i <= 10; i++) if (10 + i < 14 || 10 + i > 17) put(10 + i, 18 + i, 'l');
-  for (const [x, y, ch] of [
-    [11, 30, 'l'],
-    [12, 30, 'L'],
-    [11, 31, 'q'],
-    [12, 31, 'q'],
-    [11, 32, 'l'],
-    [12, 32, 'l'],
-  ])
-    put(x, y, ch);
+  const g = SIDE.map((r, y) => [...r].map((ch, x) => (ch === 'Q' ? check(x, y) : ch)));
+  stampIn(g, 21, 7, ['OyO', 'yWy', 'OyO']); // the loupe at his temple
+  if (STAGE >= 2) {
+    stampIn(g, 9, B + 1, [' OyOyO', 'OYYyyO', 'OYyyyO', ' OOOO ']); // far-shoulder pauldron
+    for (let y = B + 3; y <= B + 19; y++) {
+      behindIn(g, 9, y, y > B + 17 ? 'u' : 'C');
+      behindIn(g, 8, y, 'O');
+    }
+  }
+  if (STAGE >= 3)
+    for (const [x, y] of [
+      [16, 21],
+      [17, 22],
+      [16, 23],
+      [17, 24],
+      [17, 25],
+      [16, 26],
+      [17, 27],
+      [16, 28],
+      [17, 29],
+    ])
+      putIn(g, x, y, y % 2 ? 'g' : 'w');
   return g.map((r) => r.join(''));
 }
 
-/** One boot from the front or back (left and right), and from the side (toe to the right). */
-const BOOT = ['OLLO', 'OblO', 'ObbO', 'ObbO', 'ObbO', 'ObbbO', 'OOOOO'];
-const BOOT_R = ['OLLO', 'OlbO', 'ObbO', 'ObbO', 'ObbO', 'ObbbO', 'OOOOO'];
-const SIDE_BOOT = ['OLLLLO', 'OblllO', 'ObbbbO', 'ObbbbO', 'ObbbbOO', 'ObbbbbbO', 'OOOOOOOO'];
+/** One boot with the trouser above it, front/back (left; the right one mirrors) and side. */
+const BOOT = ['.OxxxXO', '.OxxxXO', '.ObBbbO', '.ObBbbO', '.ObbbbO', 'ObbbbbO', 'OOOOOOO'];
+const BOOT_R = BOOT.map((r) => [...r].reverse().join(''));
+const SIDE_BOOT = ['OxxxXO', 'OxxxXO', 'ObBbbO', 'ObBbbO', 'ObbbbbOO', 'ObbbbbbbO', 'OOOOOOOOO'];
 const FEET_Y = 61;
 
-/** Rows 18..29 of the side view, columns 14..17 hold the near arm; this paints it out. */
+/** Side view rows 21..31: the near arm (columns 15-18) painted out for posed arms. */
 function armlessSide(rows) {
   return rows.map((r, y) => {
-    if (y < 18 || y > 29) return r;
-    const fill = y === 29 ? 'llll' : y < 21 ? 'kccc' : 'cccc';
-    return r.slice(0, 14) + fill + r.slice(18);
+    if (y < 21 || y > 31) return r;
+    return r.slice(0, 15) + (y < 23 ? 'kccc' : 'cccc') + r.slice(19);
   });
 }
 
-/** Upper body rows (32 wide, 40 tall) for a view, with closed or kindled eyes if asked. */
+/** Upper body rows (36 wide, 40 tall) for a view, with shut or kindled eyes if asked. */
 function upperRows(view, { armless = false, eyes = null }) {
-  let rows =
-    view === 'front'
-      ? details(FRONT).slice(0, 40)
-      : view === 'back'
-        ? backRows().slice(0, 40)
-        : sideRows();
+  let rows = view === 'front' ? frontRows() : view === 'back' ? backRows() : sideRows();
   if (view === 'side' && armless) rows = armlessSide(rows);
   if (eyes && view !== 'back') {
     rows = rows.map((r, y) => {
-      if (y !== 9) return r;
-      if (eyes === 'shut') return r.replace(/OE/g, 'hh').replace(/EO/g, 'hh');
+      if (y !== 10) return r;
+      if (eyes === 'shut') return r.replace(/E/g, 'h');
       return r.replace(/E/g, 'g'); // Temporal Sight: the gray-blue eyes kindle cerulean
     });
   }
@@ -341,20 +375,22 @@ function body(view, o = {}) {
   const { bob = 0, lift = [0, 0], stride = [0, 0], dx = 0 } = o;
   const g = grid();
   if (view === 'side') {
-    place(g, SIDE_BOOT, 30 + stride[0], FEET_Y - lift[0]);
-    place(g, SIDE_BOOT, 30 + stride[1], FEET_Y - lift[1]);
+    place(g, SIDE_BOOT, 26 + stride[0], FEET_Y - lift[0]);
+    place(g, SIDE_BOOT, 26 + stride[1], FEET_Y - lift[1]);
   } else {
-    place(g, BOOT, 28, FEET_Y - lift[0]);
-    place(g, BOOT_R, 32, FEET_Y - lift[1]);
+    place(g, BOOT, 23, FEET_Y - lift[0]);
+    place(g, BOOT_R, 34, FEET_Y - lift[1]);
   }
   const bottom = FEET_Y - BOOT.length + bob;
-  const x0 = 16 + dx;
+  const x0 = 14 + dx;
   place(g, upperRows(view, o), x0, bottom);
   const top = bottom - 39;
-  const fist = { front: [x0 + 5, top + 28], back: [x0 + 26, top + 28], side: [x0 + 16, top + 28] }[
-    view
-  ];
-  return { g, top, x0, fist, shoulder: [x0 + 15, top + 18], offHand: [x0 + 26, top + 28] };
+  const fist = {
+    front: [x0 + 5, top + 30],
+    back: [x0 + 30, top + 30],
+    side: [x0 + 16, top + 31],
+  }[view];
+  return { g, top, x0, fist, shoulder: [x0 + 16, top + 21], offHand: [x0 + 30, top + 30] };
 }
 
 /** The Broken Blade resting point-down in the fist (as approved, v1). (hx, hy) = the fist. */
@@ -421,14 +457,15 @@ function bladeAt(g, hx, hy, dx, dy, len, bright = false) {
   under(g, tx + dx * 2 - px, ty + dy * 2 - py, bright ? 'w' : 'g');
 }
 
-/** Coat sleeve from the shoulder to the hand: outlined, purple turned cuff, bare hand. */
+/** Sleeve from the shoulder to the hand: outlined, cerulean cuff, bare hand (stage 3: cracked). */
 function armTo(g, [sx, sy], [hx, hy]) {
   const pts = [];
   const steps = Math.max(Math.abs(hx - sx), Math.abs(hy - sy));
   for (let i = 0; i <= steps; i++) {
     const x = Math.round(sx + ((hx - sx) * i) / steps);
     const y = Math.round(sy + ((hy - sy) * i) / steps);
-    const ch = i >= steps - 1 ? 's' : i === steps - 2 ? 'P' : 'c';
+    const crack = STAGE >= 3 && i % 3 === 1 && i < steps - 2;
+    const ch = i >= steps - 1 ? 's' : i === steps - 2 ? 'u' : crack ? 'g' : 'c';
     for (const [ax, ay] of [
       [0, 0],
       [1, 0],
@@ -669,7 +706,7 @@ function shoot(view) {
         hand = [b.offHand[0], b.offHand[1] - recoil];
         dir = [0, 1];
       } else {
-        hand = [21, b.top + 28 + recoil]; // his left hand, viewer-left from behind
+        hand = [b.x0 + 5, b.top + 30 + recoil]; // his left hand, viewer-left from behind
         dir = [0, -1];
       }
       const [hx, hy] = hand;
@@ -707,33 +744,37 @@ function sheet(make) {
   return [make('front'), make('back'), right.map(flip), right];
 }
 
-checkRows(FRONT, 'front', 32);
-checkRows(SIDE, 'side', 32);
+checkRows(mirror(FRONT_HALF), 'front', ART_W);
+checkRows(SIDE, 'side', ART_W);
 const SHEETS = [
-  ['peter_lpc_idle', (v) => locomotion(v, IDLE)],
-  ['peter_lpc_walk', (v) => locomotion(v, v === 'side' ? SIDE_WALK : WALK)],
-  ['peter_lpc_idle_unarmed', (v) => locomotion(v, IDLE, false)],
-  ['peter_lpc_walk_unarmed', (v) => locomotion(v, v === 'side' ? SIDE_WALK : WALK, false)],
-  ['peter_lpc_run', (v) => locomotion(v, v === 'side' ? SIDE_RUN : RUN)],
-  ['peter_lpc_attack', attack],
-  ['peter_lpc_hurt', hurt],
-  ['peter_lpc_temporal_sight', temporalSight],
-  ['peter_lpc_dash', dash],
-  ['peter_lpc_shoot', shoot],
+  ['idle', (v) => locomotion(v, IDLE)],
+  ['walk', (v) => locomotion(v, v === 'side' ? SIDE_WALK : WALK)],
+  ['idle_unarmed', (v) => locomotion(v, IDLE, false)],
+  ['walk_unarmed', (v) => locomotion(v, v === 'side' ? SIDE_WALK : WALK, false)],
+  ['run', (v) => locomotion(v, v === 'side' ? SIDE_RUN : RUN)],
+  ['attack', attack],
+  ['hurt', hurt],
+  ['temporal_sight', temporalSight],
+  ['dash', dash],
+  ['shoot', shoot],
 ];
 const outDir = process.argv[2] ?? 'art-source/characters/peter/generated/candidates';
 fs.mkdirSync(outDir, { recursive: true });
-for (const [name, make] of SHEETS) {
-  const g = sheet(make);
-  g.flat().forEach((f, i) => checkRows(f, `${name}[${i}]`, SIZE));
-  const sh = renderSheet(g, PALETTE, SIZE);
-  writeFile(path.join(outDir, `${name}.png`), encodePng(sh.w, sh.h, sh.buf));
-  writeFile(path.join(outDir, `${name}_x4.png`), preview(sh, 4));
-  console.log(`${name}.png (${sh.w}x${sh.h})`);
+for (const stage of [1, 2, 3]) {
+  STAGE = stage;
+  const prefix = stage === 1 ? 'peter_lpc_' : `peter_lpc_s${stage}_`;
+  for (const [name, make] of SHEETS) {
+    const g = sheet(make);
+    g.flat().forEach((f, i) => checkRows(f, `${prefix}${name}[${i}]`, SIZE));
+    const sh = renderSheet(g, PALETTE, SIZE);
+    writeFile(path.join(outDir, `${prefix}${name}.png`), encodePng(sh.w, sh.h, sh.buf));
+    writeFile(path.join(outDir, `${prefix}${name}_x4.png`), preview(sh, 4));
+    console.log(`${prefix}${name}.png (${sh.w}x${sh.h})`);
+  }
+  // A front still of each stage, for the record.
+  const still = body('front');
+  restBlade(still.g, still.fist);
+  const st = renderSheet([[done(still.g)]], PALETTE, SIZE);
+  writeFile(path.join(outDir, `peter_v4_stage${stage}_front.png`), encodePng(st.w, st.h, st.buf));
+  writeFile(path.join(outDir, `peter_v4_stage${stage}_front_x8.png`), preview(st, 8));
 }
-// The approved v1 front still, kept for the record.
-const still = body('front');
-restBlade(still.g, still.fist);
-const st = renderSheet([[done(still.g)]], PALETTE, SIZE);
-writeFile(path.join(outDir, 'peter_lpc_v1_front.png'), encodePng(st.w, st.h, st.buf));
-writeFile(path.join(outDir, 'peter_lpc_v1_front_x8.png'), preview(st, 8));

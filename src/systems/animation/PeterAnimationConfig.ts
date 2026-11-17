@@ -99,6 +99,27 @@ export const PETER_ANIMATION_SPECS: Record<string, IAnimationSpec> = {
 const DIRECTIONS: CardinalDirection[] = ['down', 'up', 'left', 'right'];
 
 /**
+ * v4 costume stages (owner, 2026-11-17): 1 in chapters 0-1 (áo tấc), 2 in chapters 2-5 (gear
+ * pauldron, half cape), 3 in chapters 6-9 (cerulean fractures on the blade arm). Stage n > 1 uses
+ * textures and animations named `peter_s<n>_*` beside the stage-1 `peter_*` ones.
+ */
+export type PeterStage = 1 | 2 | 3;
+export const PETER_STAGES: PeterStage[] = [1, 2, 3];
+
+/** The costume stage for the chapter being played (0 = Prologue). */
+export function peterStageFor(chapter: number): PeterStage {
+  if (chapter <= 1) return 1;
+  return chapter <= 5 ? 2 : 3;
+}
+
+/** `peter_attack` (or `peter_attack_down`) in the given stage: `peter_s2_attack`, ... */
+export function peterStageKey(key: string, stage: PeterStage): string {
+  return stage === 1 || !key.startsWith('peter_')
+    ? key
+    : key.replace(/^peter_/, `peter_s${stage}_`);
+}
+
+/**
  * Registers all user-approved Peter animations in Phaser AnimationManager.
  * Ensures strict frame alignment:
  * - Row 0: down
@@ -107,24 +128,32 @@ const DIRECTIONS: CardinalDirection[] = ['down', 'up', 'left', 'right'];
  * - Row 3: right
  */
 export function registerPeterAnimations(scene: Phaser.Scene): void {
-  for (const spec of Object.values(PETER_ANIMATION_SPECS)) {
-    if (!scene.textures.exists(spec.textureKey)) {
-      continue;
+  for (const stage of PETER_STAGES)
+    for (const spec of Object.values(PETER_ANIMATION_SPECS)) {
+      const textureKey = peterStageKey(spec.textureKey, stage);
+      if (!scene.textures.exists(textureKey)) continue;
+      registerSpec(scene, spec, textureKey, peterStageKey(spec.keyPrefix, stage));
     }
+}
 
-    DIRECTIONS.forEach((dir, rowIndex) => {
-      const animKey = `${spec.keyPrefix}_${dir}`;
-      if (!scene.anims.exists(animKey)) {
-        scene.anims.create({
-          key: animKey,
-          frames: scene.anims.generateFrameNumbers(spec.textureKey, {
-            start: rowIndex * spec.framesPerDirection,
-            end: rowIndex * spec.framesPerDirection + spec.framesPerDirection - 1,
-          }),
-          frameRate: spec.frameRate,
-          repeat: spec.repeat,
-        });
-      }
-    });
-  }
+function registerSpec(
+  scene: Phaser.Scene,
+  spec: IAnimationSpec,
+  textureKey: string,
+  keyPrefix: string,
+): void {
+  DIRECTIONS.forEach((dir, rowIndex) => {
+    const animKey = `${keyPrefix}_${dir}`;
+    if (!scene.anims.exists(animKey)) {
+      scene.anims.create({
+        key: animKey,
+        frames: scene.anims.generateFrameNumbers(textureKey, {
+          start: rowIndex * spec.framesPerDirection,
+          end: rowIndex * spec.framesPerDirection + spec.framesPerDirection - 1,
+        }),
+        frameRate: spec.frameRate,
+        repeat: spec.repeat,
+      });
+    }
+  });
 }

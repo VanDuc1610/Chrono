@@ -9,6 +9,30 @@
 
 ---
 
+## 0. Current design: v4 "áo tấc cách tân" (owner, 2026-11-17) — supersedes the costume below
+
+The owner fixed one thing only: **short, compact, tightly coiled black curls** (§2 hair rules
+still apply). Everything else was left free. Sections 1-6 below are the v1 record and no longer
+describe his clothes.
+
+- **Build:** sturdier, level with the LPC people: shoulders 28 px, head 20 px wide, 36 px wide
+  frame art in 64x64 frames, soles on y = 61 (positions and the collider unchanged).
+- **Stage 1 (chapters 0-1), the travelling watchmaker:** charcoal-navy áo tấc (`#263248`, shadow
+  `#161e2e`, light `#3d4f70`) with a standing collar banded in cerulean and a diagonal closure to
+  the wearer's right with silver knot buttons; side slits lined in cerulean (`#2f9ccc` /
+  `#1d6688`) over cream straight trousers (`#c4b9a0` / `#8f856e`); a black-and-cream khăn rằn
+  (2x2 checks, `#1c1c22` / `#e6e0d0`) wrapped three times with a fringed tail over the right
+  chest; a tool belt with brass tools (`#c8964a` / `#ecc878`) and a pocket watch; a watchmaker's
+  loupe at the temple; brown boots; the Broken Blade with its cerulean glow.
+- **Stage 2 (chapters 2-5):** adds a brass gear pauldron with a cerulean core on his left
+  shoulder and a half cape on that side, lined in cerulean.
+- **Stage 3 (chapters 6-9):** adds glowing cerulean fracture lines along the blade arm and one
+  reaching the jaw.
+- **Why:** the old all-navy look disappeared on the dark chapter 6-9 maps; the cream trousers, the
+  scarf and the cerulean accents keep his silhouette readable everywhere.
+- **Source:** `scripts/author-peter-lpc.js` (every pixel placed in code), sheets `peter_*`,
+  `peter_s2_*`, `peter_s3_*`; the stage follows the chapter (`peterStageFor`).
+
 ## 1. Approved Concept Image Verification
 
 The canonical baseline visual reference for Peter is established exclusively by:

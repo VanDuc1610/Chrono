@@ -48,6 +48,7 @@ import type { CombatSceneData } from './CombatScene';
 import { FINAL_BOSSES, music } from './sceneMusic';
 import { keyCode } from '../ui/keys';
 import { enlargeActor } from '../world/ActorScale';
+import { peterStageFor } from '../systems/animation/PeterAnimationConfig';
 
 /** Map layer of tent tops, palisades and tree crowns: above the actors, below effects. */
 const ABOVE_DEPTH = 30;
@@ -270,6 +271,8 @@ export class ExplorationScene extends Phaser.Scene {
     );
     // Prologue v3: empty-handed until the Elder throws Peter the Broken Blade.
     this.player.setArmed(this.session.getFlag(FLAGS.hasBlade));
+    // v4 costume by chapter stage (áo tấc; gear pauldron from chapter 2; fractures from chapter 6).
+    this.player.setStage(peterStageFor(this.session.lastFinishedChapter + 1));
     this.physics.add.collider(this.player.sprite, this.wallLayer);
     this.playerReady = true;
     this.freePlayer();

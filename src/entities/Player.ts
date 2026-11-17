@@ -7,7 +7,9 @@ import {
   PETER_BODY,
   PETER_FRAME,
   PETER_ORIGIN_Y,
+  peterStageKey,
   registerPeterAnimations,
+  type PeterStage,
 } from '../systems/animation/PeterAnimationConfig';
 
 export interface PlayerConfig {
@@ -21,6 +23,8 @@ export class Player extends Entity {
   private speed: number;
   private hasAnimations = false;
   private animSuffix = '';
+  /** Costume stage (chapters 0-1, 2-5, 6-9): picks the `peter_s<n>_*` animations. */
+  private stage: PeterStage = 1;
   /** Dash / knockback: velocity forced until `forcedUntil` (scene time, ms). */
   private forcedVelocity = { x: 0, y: 0 };
   private forcedUntil = 0;
@@ -62,6 +66,19 @@ export class Player extends Entity {
     }
   }
 
+  /** Puts Peter in the costume of a chapter stage (see peterStageFor). */
+  public setStage(stage: PeterStage): void {
+    this.stage = this.sprite.scene.anims.exists(peterStageKey('peter_idle_down', stage))
+      ? stage
+      : 1;
+    if (this.hasAnimations) this.sprite.play(this.key(`peter_idle${this.animSuffix}_down`), true);
+  }
+
+  /** An animation key in the current stage. */
+  private key(k: string): string {
+    return peterStageKey(k, this.stage);
+  }
+
   public getController(): IPlayerController {
     return this.controller;
   }
@@ -85,7 +102,7 @@ export class Player extends Entity {
   public setArmed(armed: boolean): void {
     const unarmedReady = this.sprite.scene.anims.exists('peter_idle_unarmed_down');
     this.animSuffix = armed || !unarmedReady ? '' : '_unarmed';
-    if (this.hasAnimations) this.sprite.play(`peter_idle${this.animSuffix}_down`, true);
+    if (this.hasAnimations) this.sprite.play(this.key(`peter_idle${this.animSuffix}_down`), true);
   }
 
   /** Forces a velocity for `ms` (dodge dash, knockback); input movement resumes after. */
@@ -102,7 +119,7 @@ export class Player extends Entity {
   public playAction(prefix: string, facing: 'up' | 'down' | 'left' | 'right', ms: number): void {
     this.movementSystem.setLastFacing(facing);
     this.actionAnimUntil = this.sprite.scene.time.now + ms;
-    const key = `${prefix}_${facing}`;
+    const key = this.key(`${prefix}_${facing}`);
     if (this.hasAnimations && this.sprite.scene.anims.exists(key)) this.sprite.play(key, true);
   }
 
@@ -121,12 +138,12 @@ export class Player extends Entity {
       const activeFacing = facing !== 'idle' ? facing : this.movementSystem.getLastFacing();
 
       if (isMoving) {
-        const walkAnim = `peter_walk${this.animSuffix}_${activeFacing}`;
+        const walkAnim = this.key(`peter_walk${this.animSuffix}_${activeFacing}`);
         if (this.sprite.anims.currentAnim?.key !== walkAnim) {
           this.sprite.play(walkAnim, true);
         }
       } else {
-        const idleAnim = `peter_idle${this.animSuffix}_${activeFacing}`;
+        const idleAnim = this.key(`peter_idle${this.animSuffix}_${activeFacing}`);
         if (this.sprite.anims.currentAnim?.key !== idleAnim) {
           this.sprite.play(idleAnim, true);
         }

@@ -1,7 +1,11 @@
 import type { MapDatabase } from '../world/MapTypes';
 import type { LpcData } from '../world/WallCaps';
 import Phaser from 'phaser';
-import { PETER_FRAME } from '../systems/animation/PeterAnimationConfig';
+import {
+  PETER_FRAME,
+  PETER_STAGES,
+  peterStageKey,
+} from '../systems/animation/PeterAnimationConfig';
 import { queueAudio } from '../systems/audio/AudioAssets';
 
 export class PreloadScene extends Phaser.Scene {
@@ -96,47 +100,27 @@ export class PreloadScene extends Phaser.Scene {
 
     // 1. Character & Entities
     this.load.image('player_placeholder', 'assets/characters/player_placeholder.png');
-    // T-88 (owner approved 2026-11-17): Peter at the LPC scale, 64x64 frames, black curls.
-    this.load.spritesheet('peter_idle', 'assets/characters/peter/peter_idle.png', {
-      frameWidth: PETER_FRAME,
-      frameHeight: PETER_FRAME,
-    });
-    this.load.spritesheet('peter_walk', 'assets/characters/peter/peter_walk.png', {
-      frameWidth: PETER_FRAME,
-      frameHeight: PETER_FRAME,
-    });
-    // CHAR_PETER_004: empty-handed idle/walk (Prologue v3, before the Broken Blade).
-    this.load.spritesheet('peter_idle_unarmed', 'assets/characters/peter/peter_idle_unarmed.png', {
-      frameWidth: PETER_FRAME,
-      frameHeight: PETER_FRAME,
-    });
-    this.load.spritesheet('peter_walk_unarmed', 'assets/characters/peter/peter_walk_unarmed.png', {
-      frameWidth: PETER_FRAME,
-      frameHeight: PETER_FRAME,
-    });
-    this.load.spritesheet('peter_run', 'assets/characters/peter/peter_run.png', {
-      frameWidth: PETER_FRAME,
-      frameHeight: PETER_FRAME,
-    });
-    this.load.spritesheet('peter_attack', 'assets/characters/peter/peter_attack.png', {
-      frameWidth: PETER_FRAME,
-      frameHeight: PETER_FRAME,
-    });
-    this.load.spritesheet('peter_hurt', 'assets/characters/peter/peter_hurt.png', {
-      frameWidth: PETER_FRAME,
-      frameHeight: PETER_FRAME,
-    });
-    // T-85 (owner approved 2026-11-16): dodge and ranged-weapon shot, 4 frames x 4 directions.
-    for (const key of ['peter_dash', 'peter_shoot'])
-      this.load.spritesheet(key, `assets/characters/peter/${key}.png`, {
-        frameWidth: PETER_FRAME,
-        frameHeight: PETER_FRAME,
-      });
-    this.load.spritesheet(
-      'peter_temporal_sight',
-      'assets/characters/peter/peter_temporal_sight.png',
-      { frameWidth: PETER_FRAME, frameHeight: 32 },
-    );
+    // T-88 v4 (owner, 2026-11-17): Peter in the áo tấc, 64x64 frames, three costume stages
+    // (`peter_*`, `peter_s2_*`, `peter_s3_*`; scripts/author-peter-lpc.js, PeterAnimationConfig).
+    for (const stage of PETER_STAGES)
+      for (const base of [
+        'peter_idle',
+        'peter_walk',
+        'peter_idle_unarmed',
+        'peter_walk_unarmed',
+        'peter_run',
+        'peter_attack',
+        'peter_hurt',
+        'peter_temporal_sight',
+        'peter_dash',
+        'peter_shoot',
+      ]) {
+        const key = peterStageKey(base, stage);
+        this.load.spritesheet(key, `assets/characters/peter/${key}.png`, {
+          frameWidth: PETER_FRAME,
+          frameHeight: PETER_FRAME,
+        });
+      }
     // Elder Chronographer idle (NPC_ELDER_001): 4 frames, 64x64 at the LPC scale (T-88 step 2,
     // scripts/lpc/npcs.mjs).
     this.load.spritesheet('npc_elder', 'assets/lpc/npcs/elder_idle.png', {
