@@ -195,7 +195,7 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_banner_carrier', 'assets/lpc/enemies/banner_carrier.png', 64],
       ['enemy_undying_knight', 'assets/lpc/enemies/undying_knight.png', 64],
       ['boss_crimson_standard', 'assets/enemies/v2/crimson_standard.png', 96],
-      ['boss_the_last_war', 'assets/enemies/the_last_war.png', 64],
+      ['boss_the_last_war', 'assets/enemies/v2/the_last_war.png', 96],
       // Chapter 5 (owner approved 2026-11-14).
       ['npc_ivo', 'assets/lpc/npcs/ivo_idle.png', 64],
       ['npc_mira', 'assets/lpc/npcs/mira_idle.png', 64],
@@ -205,7 +205,7 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_paradox_crystal', 'assets/enemies/v2/paradox_crystal.png', 64],
       ['enemy_chronos_gardener', 'assets/enemies/v2/chronos_gardener.png', 64],
       ['boss_other_peter', 'assets/enemies/other_peter.png', 48],
-      ['boss_unborn_king', 'assets/enemies/unborn_king.png', 64],
+      ['boss_unborn_king', 'assets/enemies/v2/unborn_king.png', 96],
       // Chapter 6 (owner approved 2026-11-14).
       ['npc_chronos_remnant', 'assets/lpc/npcs/chronos_remnant_idle.png', 64],
       ['npc_solon', 'assets/lpc/npcs/solon_idle.png', 64],
@@ -213,10 +213,10 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_origin_nullifier', 'assets/enemies/v2/origin_nullifier.png', 64],
       ['enemy_archon_construct', 'assets/enemies/v2/archon_construct.png', 64],
       ['enemy_twin_star', 'assets/enemies/twin_star.png', 16],
-      ['boss_broken_herald', 'assets/enemies/broken_herald.png', 48],
-      ['boss_remnant_deacon', 'assets/enemies/remnant_deacon.png', 48],
-      ['boss_echo_forgotten', 'assets/enemies/echo_forgotten.png', 48],
-      ['boss_genesis_warden', 'assets/enemies/genesis_warden.png', 64],
+      ['boss_broken_herald', 'assets/enemies/v2/broken_herald.png', 96],
+      ['boss_remnant_deacon', 'assets/enemies/v2/remnant_deacon.png', 96],
+      ['boss_echo_forgotten', 'assets/enemies/v2/echo_forgotten.png', 96],
+      ['boss_genesis_warden', 'assets/enemies/v2/genesis_warden.png', 96],
       // Chapter 7 (owner approved 2026-11-15).
       ['npc_kuro_void', 'assets/lpc/npcs/kuro_void_idle.png', 64],
       ['npc_kuro_mother', 'assets/lpc/npcs/kuro_mother_idle.png', 64],
@@ -227,7 +227,7 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_erasure_moths', 'assets/enemies/v2/erasure_moths.png', 64],
       ['enemy_ink_hound', 'assets/enemies/v2/ink_hound.png', 64],
       ['enemy_void_inquisitor', 'assets/lpc/enemies/void_inquisitor.png', 64],
-      ['boss_nameless_weeper', 'assets/enemies/nameless_weeper.png', 48],
+      ['boss_nameless_weeper', 'assets/enemies/v2/nameless_weeper.png', 96],
       ['boss_kuro_void', 'assets/enemies/kuro_boss.png', 48],
       ['boss_primordial_shade', 'assets/enemies/primordial_shade.png', 48],
       // Chapter 8 (owner approved 2026-11-15).

@@ -388,6 +388,251 @@ function crimsonStandard(k) {
   return c;
 }
 
+/** The Last War (chapter 4): a grey colossus bristling with the blades of every fallen army. */
+function theLastWar(k) {
+  const c = new Canvas(S);
+  const y = 16 + (k >= 2 ? 1 : 0);
+  // the fan of swords behind him
+  for (let i = 0; i < 9; i++) {
+    const t = -Math.PI / 2 + (i - 4) * 0.28 + (k % 2 ? 0.02 : 0);
+    const x0 = 48 + Math.cos(t) * 10;
+    const y0 = y + 26 + Math.sin(t) * 10;
+    const x1 = 48 + Math.cos(t) * 40;
+    const y1 = y + 26 + Math.sin(t) * 34;
+    c.line(x0, y0, x1, y1, '#a4a8b0');
+    c.line(x0 + 1, y0, x1 + 1, y1, '#5a5e68');
+    c.set(x1, y1, '#e6e8ee');
+  }
+  const p = giant(c, y, ['#26282e', '#3e424a', '#5a5e68', '#7e828c', '#a4a8b0'], {
+    visor: pulse(k) ? '#ffb43a' : '#e07a1a',
+  });
+  for (const [sx, sy] of [
+    [41, y + 30],
+    [55, y + 30],
+    [48, y + 42],
+  ]) {
+    c.ellipse(sx, sy, 3, 3, ['#c8bc9c', '#ece4cc']);
+    c.set(sx - 1, sy, '#120f17');
+    c.set(sx + 1, sy, '#120f17');
+  }
+  c.ellipse(p.chest[0], p.chest[1] - 2, 3, 3, R.gold);
+  c.outline(OUTLINE);
+  return c;
+}
+
+/** The Unborn King (chapter 5): a vast robed king who never lived; white beard, cold crown. */
+function unbornKing(k) {
+  const c = new Canvas(S);
+  const y = 8 + (k >= 2 ? 1 : 0);
+  const robe = ['#8a94a6', '#b4bccc', '#d8dee8', '#f2f4f8'];
+  c.poly(
+    [
+      [48, y + 18],
+      [80, GROUND],
+      [16, GROUND],
+    ],
+    robe,
+  );
+  for (let i = 0; i < 5; i++) {
+    const yy = y + 34 + i * 11;
+    c.line(48 - (yy - y - 18) * 0.5, yy, 48 + (yy - y - 18) * 0.5, yy - 6, '#8ab0d8');
+  }
+  c.ellipse(48, y + 62, 8, 5, ['#c8a060', '#e8c88a']);
+  c.ellipse(48, y + 16, 9, 10, ['#c8a88a', '#e2c4a6', '#f2dcc2']); // face
+  c.poly(
+    [
+      [39, y + 18],
+      [57, y + 18],
+      [52, y + 36],
+      [44, y + 36],
+    ],
+    ['#b4b8c4', '#e6e8ee', '#ffffff'],
+  ); // beard
+  c.set(44, y + 14, '#3a4a6a');
+  c.set(52, y + 14, '#3a4a6a');
+  for (let i = 0; i < 5; i++)
+    c.poly(
+      [
+        [38 + i * 5, y + 7],
+        [40 + i * 5, y - 1],
+        [42 + i * 5, y + 7],
+      ],
+      R.gold,
+    );
+  c.line(38, y + 7, 58, y + 7, '#8c6420');
+  c.outline(OUTLINE);
+  for (const [mx, my] of [
+    [20, y + 10],
+    [76, y + 20],
+    [14, y + 40],
+  ])
+    c.set(mx, my + (k % 2), '#e6f0ff');
+  return c;
+}
+
+/** The Broken Herald (chapter 6): a navy-robed herald, white masked helm, splintered antler-wings. */
+function brokenHerald(k) {
+  const c = new Canvas(S);
+  const y = 14 + BOB[k];
+  for (const s of [-1, 1])
+    for (let i = 0; i < 4; i++) {
+      const x0 = 48 + s * 8;
+      const yy = y + 24 + i * 3;
+      c.line(x0, yy, x0 + s * (16 + i * 4), yy - 10 + i * 2, '#6a4a2c');
+      c.line(x0 + s * (10 + i * 3), yy - 6 + i, x0 + s * (12 + i * 3), yy - 12 + i, '#8c6a44');
+    }
+  c.poly(
+    [
+      [48, y + 18],
+      [66, GROUND - 2],
+      [30, GROUND - 2],
+    ],
+    ['#0c1020', '#161e36', '#22305a', '#30406e'],
+  );
+  for (let yy = y + 40; yy < GROUND - 2; yy += 6)
+    c.line(36 + (GROUND - yy) / 6, yy, 60 - (GROUND - yy) / 6, yy, '#0c1020');
+  c.line(36, y + 38, 60, y + 38, '#c8963a');
+  c.ellipse(48, y + 14, 8, 9, ['#a4a8b0', '#d8dce6', '#f6f8fc']);
+  c.line(43, y + 14, 53, y + 14, pulse(k) ? '#a6f0ff' : '#4ae0ff');
+  c.outline(OUTLINE);
+  return c;
+}
+
+/** The Remnant Deacon (chapter 6): a tall silver-robed deacon, a pale mask, a great square hammer. */
+function remnantDeacon(k) {
+  const c = new Canvas(S);
+  const y = 12 + BOB[k];
+  c.line(70, y + 8, 70, GROUND - 4, '#5a4024');
+  c.line(71, y + 8, 71, GROUND - 4, '#3a2a1a');
+  c.poly(
+    [
+      [62, y],
+      [80, y],
+      [80, y + 12],
+      [62, y + 12],
+    ],
+    R.stone,
+  );
+  c.poly(
+    [
+      [48, y + 12],
+      [64, GROUND - 2],
+      [32, GROUND - 2],
+    ],
+    R.stone,
+  );
+  for (let yy = y + 30; yy < GROUND - 2; yy += 6)
+    c.line(36 + (GROUND - yy) / 5, yy, 60 - (GROUND - yy) / 5, yy, '#7e828c');
+  c.line(48, y + 22, 48, GROUND - 2, '#c8963a');
+  c.ellipse(48, y + 10, 7, 8, ['#c8c0e0', '#e6e0f4', '#f6f2fc']);
+  c.set(45, y + 9, '#4a3a6a');
+  c.set(51, y + 9, '#4a3a6a');
+  c.ellipse(66, y + 40, 3, 3, R.stone); // the hand on the haft
+  c.outline(OUTLINE);
+  return c;
+}
+
+/** The Genesis Warden (chapter 6): a pale lion-sphinx crowned in gold, a gold orb under its paw. */
+function genesisWarden(k) {
+  const c = new Canvas(S);
+  const pale = ['#7e828c', '#a8acb6', '#d0d4dc', '#eef0f4'];
+  const breath = k >= 2 ? 1 : 0;
+  c.ellipse(52, GROUND - 14, 30, 13 + breath, pale); // the body, lying
+  c.poly(
+    [
+      [24, GROUND - 6],
+      [36, GROUND - 6],
+      [36, GROUND],
+      [22, GROUND],
+    ],
+    pale,
+  ); // forepaws
+  c.ellipse(30, GROUND - 30, 11, 12, pale); // head and mane
+  c.ellipse(30, GROUND - 28, 7, 8, ['#c8b8a0', '#e6d8c2']);
+  c.poly(
+    [
+      [22, GROUND - 40],
+      [24, GROUND - 48],
+      [27, GROUND - 41],
+      [30, GROUND - 50],
+      [33, GROUND - 41],
+      [36, GROUND - 48],
+      [38, GROUND - 40],
+    ],
+    R.gold,
+  );
+  for (const x of [27, 33]) c.set(x, GROUND - 30, pulse(k) ? '#ffe08a' : '#c8963a');
+  c.ellipse(18, GROUND - 5, 5, 5, pulse(k) ? ['#c8963a', '#fff0b0'] : R.gold); // the orb
+  c.poly(
+    [
+      [80, GROUND - 22],
+      [88, GROUND - 32 + (k % 2)],
+      [84, GROUND - 20],
+    ],
+    pale,
+  ); // tail
+  c.outline(OUTLINE);
+  return c;
+}
+
+/** The Echo of the First Forgotten (chapter 6): a tiered shroud of violet mist bound by gold chains. */
+function echoForgotten(k) {
+  const c = new Canvas(S);
+  const y = 14 + BOB[k];
+  const mist = ['#0c0818', '#1a1230', '#2a2050', '#3c3070'];
+  for (let i = 0; i < 5; i++) {
+    const w = 9 + i * 5;
+    c.poly(
+      [
+        [48 - w, y + 14 + i * 13],
+        [48 + w, y + 14 + i * 13],
+        [48 + w + 3, y + 28 + i * 13],
+        [48 - w - 3, y + 28 + i * 13],
+      ],
+      mist,
+    );
+  }
+  c.ellipse(48, y + 10, 9, 9, mist);
+  c.set(45, y + 10, '#e8e0ff');
+  c.set(51, y + 10, '#e8e0ff');
+  for (let i = 0; i < 4; i++) {
+    const yy = y + 26 + i * 13;
+    const w = 12 + i * 5;
+    for (let x = 48 - w; x <= 48 + w; x += 3)
+      c.set(x, yy + Math.round(Math.sin(x / 3 + k) * 1), '#d8a83a');
+  }
+  c.outline(OUTLINE);
+  for (const [mx, my] of [
+    [24, y + 30],
+    [72, y + 40],
+    [20, y + 60],
+    [76, y + 66],
+    [30, y + 72],
+  ])
+    c.set(mx, my + ((k + mx) % 3) - 1, '#b48cff');
+  return c;
+}
+
+/** The Nameless Weeper (chapter 7): a heavy violet mass with three faces, all weeping. */
+function namelessWeeper(k) {
+  const c = new Canvas(S);
+  const y = GROUND - 30 + (k >= 2 ? 1 : 0);
+  c.ellipse(48, y, 32, 26, ['#160e28', '#2a1e46', '#3e2e66', '#56428a']);
+  for (const [fx, fy] of [
+    [36, y - 6],
+    [58, y - 8],
+    [47, y + 8],
+  ]) {
+    c.ellipse(fx, fy, 7, 8, ['#5a4a7e', '#7a6aa0', '#9a8ac0']);
+    c.set(fx - 3, fy - 1, '#120a20');
+    c.set(fx + 3, fy - 1, '#120a20');
+    c.line(fx - 2, fy + 4, fx + 2, fy + 4, '#120a20');
+    for (let t = 0; t < 4 + ((k + fx) % 3); t++) c.set(fx - 3, fy + 1 + t, '#a6d8ff');
+  }
+  c.outline(OUTLINE);
+  return c;
+}
+
 export const BOSSES = {
   sentinel: { frames: 5, released: 4, draw: sentinel },
   bellkeeper: { frames: 5, released: 4, draw: bellkeeper },
@@ -395,6 +640,13 @@ export const BOSSES = {
   faceless_keeper: { frames: 5, released: 4, draw: facelessKeeper },
   nameless_choir: { frames: 5, released: 4, draw: namelessChoir },
   crimson_standard: { frames: 5, draw: crimsonStandard },
+  the_last_war: { frames: 5, released: 4, draw: theLastWar },
+  unborn_king: { frames: 5, released: 4, draw: unbornKing },
+  broken_herald: { frames: 5, released: 4, draw: brokenHerald },
+  remnant_deacon: { frames: 4, draw: remnantDeacon },
+  genesis_warden: { frames: 5, released: 4, draw: genesisWarden },
+  echo_forgotten: { frames: 4, draw: echoForgotten },
+  nameless_weeper: { frames: 5, released: 4, draw: namelessWeeper },
 };
 
 // ------------------------------------------------------------------ output

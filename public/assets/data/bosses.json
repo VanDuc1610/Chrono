@@ -836,7 +836,7 @@
     {
       "id": "boss_the_last_war",
       "intro": "Chiến Tranh Vĩnh Cửu rút ngàn vạn lưỡi gươm. Coi chừng những vùng đỏ giả — đòn thật rơi xuống chỗ cậu đang đứng.",
-      "scale": 1.15,
+      "scale": 1,
       "radius": 24,
       "speed": 44,
       "damageScale": 0.5,
@@ -1096,7 +1096,7 @@
     {
       "id": "boss_unborn_king",
       "intro": "Ba vương miện xoay quanh Vua Chưa Sinh. Khi một vương miện cất lời, hãy đánh trúng ĐÚNG vương miện đó — nó đang chuyển động, vũ khí bắn xa sẽ giúp ích.",
-      "scale": 1.15,
+      "scale": 1,
       "radius": 24,
       "speed": 40,
       "damageScale": 0.45,
@@ -1308,7 +1308,7 @@
     {
       "id": "boss_broken_herald",
       "intro": "Sứ Giả Gãy Cánh giương khiên chữ cổ. Khiên hiện ký tự nào, hãy khắc ký tự NGƯỢC LẠI — sáng phủ tối, tối rọi sáng. Khắc sai, khiên nuốt nét khắc và hồi máu cho nó.",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 22,
       "speed": 56,
       "damageScale": 0.4,
@@ -1462,7 +1462,7 @@
     {
       "id": "boss_remnant_deacon",
       "intro": "Tàn Ảnh Chấp Sự nện búa theo nhịp ba. Đòn búa vàng bám theo cậu — đứng vững và LƯỚT NÉ đúng khoảnh khắc búa giáng; né trọn cả ba nhịp, cán búa sẽ gãy.",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 22,
       "speed": 54,
       "damageScale": 0.4,
@@ -1554,7 +1554,7 @@
     {
       "id": "boss_genesis_warden",
       "intro": "Thực Thể Giám Hộ Khởi Nguyên thức giấc. Khi nó tụ GENESIS PURGE, hãy LƯỚT NÉ đúng lúc ánh sáng bùng nổ — hoặc, nếu đã đọc sổ tay thiên văn, vòng ra sau lưng và rút Chốt Khởi Nguyên.",
-      "scale": 1.15,
+      "scale": 1,
       "radius": 26,
       "speed": 40,
       "damageScale": 0.38,
@@ -1679,7 +1679,7 @@
     {
       "id": "boss_echo_forgotten",
       "intro": "Sương xóa niệm phủ kín hốc đá — Tiếng Vọng ẩn trong đó, bào mòn MP của cậu. Đánh vào lò sáng [A] để đẩy sương lùi lại.",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 22,
       "speed": 52,
       "damageScale": 0.4,
@@ -1812,7 +1812,7 @@
     {
       "id": "boss_nameless_weeper",
       "intro": "Kẻ Khóc Không Tên rơi lệ tím. Mỗi giọt nước mắt rơi gần cậu — chém vỡ nó trước khi chạm đất. Đủ năm giọt, bể nước mắt sẽ tràn.",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 22,
       "speed": 48,
       "damageScale": 0.4,
