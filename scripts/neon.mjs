@@ -34,8 +34,9 @@ const LPC_MAPS = new Set(['map_ch4_encampment_veridia']);
 
 const out = {};
 for (const [id, m] of Object.entries(maps)) {
-  // T-88: chapters 0-5 are drawn in LPC art: the skin adds only its accents there.
-  const lpc = LPC_MAPS.has(id) || (m.chapter ?? 0) <= 5;
+  // T-88: every chapter is drawn in LPC art now (chapters 6-9 since 2026-11-18, owner): the skin
+  // adds only its accents; the chapter's colour grade carries the mood.
+  const lpc = LPC_MAPS.has(id) || (m.chapter ?? 0) <= 9;
   if (KEEP.has(id) && old[id] && !lpc) {
     out[id] = old[id];
     continue;

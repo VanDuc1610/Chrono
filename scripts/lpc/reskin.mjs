@@ -80,6 +80,14 @@ const MAT = {
   DIRT_EMBER: [['TER', 1, 5, { sat: 1.25, bright: 0.85 }]],
   PALISADE: [['ADOBE', 6, 6]],
   PALISADE_TOP: [['ADOBE', 6, 5]],
+  // Chapters 6-9 (owner, 2026-11-18): temple marble, void ash, foundry steel, nexus inlay.
+  ORNATE_PALE: [['CFLOOR', 7, 2, { sat: 0.15, bright: 1.3 }]],
+  ORNATE_DARK: [['CFLOOR', 2, 2, { sat: 0.8, bright: 0.6 }]],
+  ORNATE_MID: [['CFLOOR', 2, 2, { sat: 0.7, bright: 0.9 }]],
+  VOID_COBBLE: [['CFLOOR', 5, 5, { sat: 0.5, bright: 0.55 }]],
+  ASH_STONE: [['CEMENT', 1, 5, { sat: 0.3, bright: 0.72 }]],
+  ASH_SAND: [['SAND', 1, 3, { sat: 0.25, bright: 0.85 }]],
+  STEEL: [['CEMENT', 1, 3, { sat: 0.2, bright: 0.78 }]],
 };
 
 /**
@@ -182,6 +190,17 @@ const EDGES = {
     ['DIRT', [22]],
     ['CEMENT', [48]],
   ],
+  // Chapters 6-9: maps mix a main ground with scattered cells of its pair; soft edges turn the
+  // scattered sand and dark earth into patches instead of a chequerboard.
+  voidcore_tileset: [
+    ['SAND', [48]],
+    ['ASH', [45]],
+  ],
+  convergence_tileset: [
+    ['SAND', [49]],
+    ['DIRT_DARK', [52]],
+    ['CEMENT', [50, 51, 53, 54]],
+  ],
 };
 
 const TILESETS = {
@@ -250,6 +269,52 @@ const TILESETS = {
       20: 'HEDGE',
     },
     caps: { 19: 'CLIFF_TOP' },
+  },
+  // Chapters 6-9 share the dungeon layout for gids 1-15 (floors, walls, doors) and add their own
+  // grounds; starfields, gold rings and story props keep their art.
+  celestial_tileset: {
+    late: true,
+    tint: ['#fff0d0', 0.15],
+    // 47, the void's stepping stones, tiles whole floors: a dark cobbled path instead of ovals.
+    map: { ...D_FAMILY, 48: 'ORNATE_PALE', 47: 'VOID_COBBLE' },
+    caps: { 4: 'WALL_TOP', 5: 'WALL_TOP' },
+  },
+  voidcore_tileset: {
+    late: true,
+    tint: ['#8a70c0', 0.35],
+    map: { ...D_FAMILY, 45: 'ASH_STONE', 48: 'ASH_SAND' },
+    caps: { 4: 'WALL_TOP', 5: 'WALL_TOP' },
+  },
+  convergence_tileset: {
+    late: true,
+    tint: ['#d89860', 0.22],
+    map: {
+      ...D_FAMILY,
+      49: 'SAND_M',
+      50: 'STEEL',
+      51: 'PLASTER',
+      52: 'DIRT_DARK',
+      53: 'PAVE_B',
+      54: 'CEMENT_M',
+    },
+    caps: { 4: 'WALL_TOP', 5: 'WALL_TOP' },
+  },
+  nexus_tileset: {
+    late: true,
+    tint: ['#a080e0', 0.22],
+    map: {
+      ...D_FAMILY,
+      // One family of violet inlay for the whole chapter; the starfield cells sprinkled through
+      // every floor become dark inlay with their stars (and cracks) kept: stars, not holes.
+      49: 'ORNATE_DARK',
+      50: ['ORNATE_DARK', 49],
+      52: 'ORNATE_MID',
+      60: 'ORNATE_MID',
+      54: ['ORNATE_DARK', 1],
+      58: ['ORNATE_DARK', 1],
+      59: ['ORNATE_DARK', 1],
+    },
+    caps: { 4: 'WALL_TOP', 5: 'WALL_TOP' },
   },
   warfield_tileset: {
     tint: ['#c89070', 0.18],
@@ -450,7 +515,7 @@ for (const [name, ts] of Object.entries(TILESETS)) {
   }
   // Point the chapter 0-5 maps at the new image (the tileset name inside the map stays).
   for (const def of Object.values(maps.maps)) {
-    if ((def.chapter ?? 0) > 5 || def.tileset.name !== name) continue;
+    if (((def.chapter ?? 0) > 5 && !ts.late) || def.tileset.name !== name) continue;
     def.tileset = { name, key: `${name}_lpc`, path: atlasFile.replace('public/', '') };
     touched++;
   }

@@ -116,6 +116,77 @@
         }
       }
     },
+    "celestial_tileset": {
+      "caps": {
+        "key": "celestial_tileset_caps",
+        "path": "assets/lpc/celestial_tileset_caps.png",
+        "frames": {
+          "4": 0,
+          "5": 1
+        }
+      }
+    },
+    "voidcore_tileset": {
+      "caps": {
+        "key": "voidcore_tileset_caps",
+        "path": "assets/lpc/voidcore_tileset_caps.png",
+        "frames": {
+          "4": 0,
+          "5": 1
+        }
+      },
+      "edges": {
+        "key": "voidcore_tileset_edges",
+        "path": "assets/lpc/voidcore_tileset_edges.png",
+        "kindOf": {
+          "45": 1,
+          "48": 0
+        },
+        "pieces": 13,
+        "decor": {
+          "0": [26, 27, 28],
+          "1": [29, 30, 31, 32]
+        }
+      }
+    },
+    "convergence_tileset": {
+      "caps": {
+        "key": "convergence_tileset_caps",
+        "path": "assets/lpc/convergence_tileset_caps.png",
+        "frames": {
+          "4": 0,
+          "5": 1
+        }
+      },
+      "edges": {
+        "key": "convergence_tileset_edges",
+        "path": "assets/lpc/convergence_tileset_edges.png",
+        "kindOf": {
+          "49": 0,
+          "50": 2,
+          "51": 2,
+          "52": 1,
+          "53": 2,
+          "54": 2
+        },
+        "pieces": 13,
+        "decor": {
+          "0": [39, 40, 41],
+          "1": [42, 43, 44, 45, 46, 47, 48],
+          "2": [49, 50]
+        }
+      }
+    },
+    "nexus_tileset": {
+      "caps": {
+        "key": "nexus_tileset_caps",
+        "path": "assets/lpc/nexus_tileset_caps.png",
+        "frames": {
+          "4": 0,
+          "5": 1
+        }
+      }
+    },
     "warfield_tileset": {
       "caps": {
         "key": "warfield_tileset_caps",

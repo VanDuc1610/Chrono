@@ -12900,8 +12900,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -13002,8 +13002,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -13266,8 +13266,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -13656,8 +13656,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -13811,8 +13811,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -14171,8 +14171,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -14552,8 +14552,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -15120,8 +15120,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -15536,8 +15536,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -15699,8 +15699,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -15974,8 +15974,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -16405,8 +16405,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -16749,8 +16749,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -17071,8 +17071,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -17869,8 +17869,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -18032,8 +18032,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -18277,8 +18277,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -18341,8 +18341,8 @@
       },
       "tileset": {
         "name": "celestial_tileset",
-        "key": "celestial_tileset",
-        "path": "assets/tilesets/celestial_tileset.png"
+        "key": "celestial_tileset_lpc",
+        "path": "assets/lpc/celestial_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -18630,8 +18630,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -18720,8 +18720,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -19042,8 +19042,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -19372,8 +19372,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -19664,8 +19664,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -19971,8 +19971,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -20325,8 +20325,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -20734,8 +20734,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -20881,8 +20881,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -21174,8 +21174,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -21540,8 +21540,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -21834,8 +21834,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -22057,8 +22057,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -22253,8 +22253,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -22374,8 +22374,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -22505,8 +22505,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -22685,8 +22685,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -22861,8 +22861,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -23054,8 +23054,8 @@
       },
       "tileset": {
         "name": "voidcore_tileset",
-        "key": "voidcore_tileset",
-        "path": "assets/tilesets/voidcore_tileset.png"
+        "key": "voidcore_tileset_lpc",
+        "path": "assets/lpc/voidcore_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -23118,8 +23118,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -23412,8 +23412,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -23878,8 +23878,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -24179,8 +24179,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -24326,8 +24326,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -24659,8 +24659,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -25173,8 +25173,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -25343,8 +25343,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -25864,8 +25864,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -26176,8 +26176,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -26469,8 +26469,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -27066,8 +27066,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -27629,8 +27629,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -27990,8 +27990,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -28116,8 +28116,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -28203,8 +28203,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -28472,8 +28472,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -28604,8 +28604,8 @@
       },
       "tileset": {
         "name": "convergence_tileset",
-        "key": "convergence_tileset",
-        "path": "assets/tilesets/convergence_tileset.png"
+        "key": "convergence_tileset_lpc",
+        "path": "assets/lpc/convergence_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -28931,8 +28931,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -29194,8 +29194,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -29322,8 +29322,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -29574,8 +29574,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -29855,8 +29855,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -30176,8 +30176,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -30489,8 +30489,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -30840,8 +30840,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -31086,8 +31086,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -31205,8 +31205,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -31474,8 +31474,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -31695,8 +31695,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -31976,8 +31976,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -32102,8 +32102,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -32232,8 +32232,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -32329,8 +32329,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -32448,8 +32448,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -32567,8 +32567,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -32686,8 +32686,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -32805,8 +32805,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -32892,8 +32892,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -33123,8 +33123,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,
@@ -33319,8 +33319,8 @@
       },
       "tileset": {
         "name": "nexus_tileset",
-        "key": "nexus_tileset",
-        "path": "assets/tilesets/nexus_tileset.png"
+        "key": "nexus_tileset_lpc",
+        "path": "assets/lpc/nexus_tileset_lpc.png"
       },
       "collision": {
         "fromGid": 4,

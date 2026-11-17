@@ -82,6 +82,22 @@
     "notes": "boss_lieutenant_neris at the LPC scale: generator layers recoloured to the character's design, 5-frame idle."
   },
   {
+    "id": "derived-celestial-tileset-caps",
+    "file": "public/assets/lpc/celestial_tileset_caps.png",
+    "sha256": "b6d6ee20b3f7094c71faa7cfb61f1451ecd677df8ec6c3b8a8687dca9dc2d303",
+    "from": ["tiles-hughspectrum-castlefloors", "tiles-hughspectrum-castlewalls"],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Wall tops for celestial_tileset, drawn above walkable tiles north of walls."
+  },
+  {
+    "id": "derived-celestial-tileset-lpc",
+    "file": "public/assets/lpc/celestial_tileset_lpc.png",
+    "sha256": "9dc081fa149d4705254696f682a8ec146aea5e82c7b37608a8fc0ee6d789cea2",
+    "from": ["tiles-hughspectrum-castlefloors", "tiles-hughspectrum-castlewalls"],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "celestial_tileset rebuilt slot for slot from LPC materials (tinted); story props kept."
+  },
+  {
     "id": "derived-coastal-tileset-caps",
     "file": "public/assets/lpc/coastal_tileset_caps.png",
     "sha256": "f666698f05b08d8524a726130371ede6fe3582614fdef5ee373ef2d786319668",
@@ -125,6 +141,51 @@
     ],
     "script": "scripts/lpc/reskin.mjs",
     "notes": "coastal_tileset rebuilt slot for slot from LPC materials (tinted); story props kept."
+  },
+  {
+    "id": "derived-convergence-tileset-caps",
+    "file": "public/assets/lpc/convergence_tileset_caps.png",
+    "sha256": "5f24165a96fc4251c110ee8b6f936cefd6922cf3cd75a7953ab25a25800c94ea",
+    "from": [
+      "tiles-hughspectrum-castlefloors",
+      "tiles-hughspectrum-castlewalls",
+      "tiles-outside-objects",
+      "tiles-sand",
+      "tiles-sharm-cement",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Wall tops for convergence_tileset, drawn above walkable tiles north of walls."
+  },
+  {
+    "id": "derived-convergence-tileset-edges",
+    "file": "public/assets/lpc/convergence_tileset_edges.png",
+    "sha256": "475e547b60a6c5f96b30fd94c1aa79093fc63adff13e725990b1b94aa24eceef",
+    "from": [
+      "tiles-hughspectrum-castlefloors",
+      "tiles-hughspectrum-castlewalls",
+      "tiles-outside-objects",
+      "tiles-sand",
+      "tiles-sharm-cement",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Soft terrain edges for convergence_tileset (LPC border pieces)."
+  },
+  {
+    "id": "derived-convergence-tileset-lpc",
+    "file": "public/assets/lpc/convergence_tileset_lpc.png",
+    "sha256": "75de102c1c0618e812d3b5d3230410a637e66b9932d65f564f076c87bb5cf73b",
+    "from": [
+      "tiles-hughspectrum-castlefloors",
+      "tiles-hughspectrum-castlewalls",
+      "tiles-outside-objects",
+      "tiles-sand",
+      "tiles-sharm-cement",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "convergence_tileset rebuilt slot for slot from LPC materials (tinted); story props kept."
   },
   {
     "id": "derived-dungeon-tileset-caps",
@@ -408,6 +469,22 @@
     "from": ["tiles-outside-objects"],
     "script": "scripts/lpc/dress.mjs",
     "notes": "Props for map_forgotten_forest (evergreens over the hedges), tinted like its tileset."
+  },
+  {
+    "id": "derived-nexus-tileset-caps",
+    "file": "public/assets/lpc/nexus_tileset_caps.png",
+    "sha256": "41ec1b68808b21ea562d7598c440da0b1c4a32ce1ab57ac99e0e5d1c3af78bb2",
+    "from": ["tiles-hughspectrum-castlefloors", "tiles-hughspectrum-castlewalls"],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Wall tops for nexus_tileset, drawn above walkable tiles north of walls."
+  },
+  {
+    "id": "derived-nexus-tileset-lpc",
+    "file": "public/assets/lpc/nexus_tileset_lpc.png",
+    "sha256": "43706693041422a178e2f2497415a5a432dec781b32ff4bf21b57b10a120414f",
+    "from": ["tiles-hughspectrum-castlefloors", "tiles-hughspectrum-castlewalls"],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "nexus_tileset rebuilt slot for slot from LPC materials (tinted); story props kept."
   },
   {
     "id": "derived-npc-aldric",
@@ -839,6 +916,48 @@
     ],
     "script": "scripts/lpc/veridia.mjs",
     "notes": "Tile atlas for Doanh Trại Veridia: tiles cut from the sources, sand desaturated."
+  },
+  {
+    "id": "derived-voidcore-tileset-caps",
+    "file": "public/assets/lpc/voidcore_tileset_caps.png",
+    "sha256": "f9b1b031add1ed93e6bb366470482d82f66234a8943f7ad7dcfa21d9e14db5d2",
+    "from": [
+      "tiles-hughspectrum-castlefloors",
+      "tiles-hughspectrum-castlewalls",
+      "tiles-sand",
+      "tiles-sharm-cement",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Wall tops for voidcore_tileset, drawn above walkable tiles north of walls."
+  },
+  {
+    "id": "derived-voidcore-tileset-edges",
+    "file": "public/assets/lpc/voidcore_tileset_edges.png",
+    "sha256": "3073c3f23032eb90cd2687a7e9ce321eb9e878092faf9f4809d2fb70a918d657",
+    "from": [
+      "tiles-hughspectrum-castlefloors",
+      "tiles-hughspectrum-castlewalls",
+      "tiles-sand",
+      "tiles-sharm-cement",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "Soft terrain edges for voidcore_tileset (LPC border pieces)."
+  },
+  {
+    "id": "derived-voidcore-tileset-lpc",
+    "file": "public/assets/lpc/voidcore_tileset_lpc.png",
+    "sha256": "d13374fc9e2f39055caa61067376ac271cf4c1173a742d3319971081042f9add",
+    "from": [
+      "tiles-hughspectrum-castlefloors",
+      "tiles-hughspectrum-castlewalls",
+      "tiles-sand",
+      "tiles-sharm-cement",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/reskin.mjs",
+    "notes": "voidcore_tileset rebuilt slot for slot from LPC materials (tinted); story props kept."
   },
   {
     "id": "derived-warfield-tileset-caps",

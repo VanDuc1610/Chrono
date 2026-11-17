@@ -1102,6 +1102,26 @@ boss_lieutenant_lyra at the LPC scale: generator layers recoloured to the charac
 
 boss_lieutenant_neris at the LPC scale: generator layers recoloured to the character's design, 5-frame idle.
 
+### derived-celestial-tileset-caps
+
+- File: public/assets/lpc/celestial_tileset_caps.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls
+- Authors: Daniel Armstrong (AKA HughSpectrum)
+- Licences: CC-BY-SA-3.0, GPL-3.0
+
+Wall tops for celestial_tileset, drawn above walkable tiles north of walls.
+
+### derived-celestial-tileset-lpc
+
+- File: public/assets/lpc/celestial_tileset_lpc.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls
+- Authors: Daniel Armstrong (AKA HughSpectrum)
+- Licences: CC-BY-SA-3.0, GPL-3.0
+
+celestial_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.
+
 ### derived-coastal-tileset-caps
 
 - File: public/assets/lpc/coastal_tileset_caps.png
@@ -1131,6 +1151,36 @@ Soft terrain edges for coastal_tileset (LPC border pieces).
 - Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
 
 coastal_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.
+
+### derived-convergence-tileset-caps
+
+- File: public/assets/lpc/convergence_tileset_caps.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-outside-objects, tiles-sand, tiles-sharm-cement, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
+
+Wall tops for convergence_tileset, drawn above walkable tiles north of walls.
+
+### derived-convergence-tileset-edges
+
+- File: public/assets/lpc/convergence_tileset_edges.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-outside-objects, tiles-sand, tiles-sharm-cement, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
+
+Soft terrain edges for convergence_tileset (LPC border pieces).
+
+### derived-convergence-tileset-lpc
+
+- File: public/assets/lpc/convergence_tileset_lpc.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-outside-objects, tiles-sand, tiles-sharm-cement, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
+
+convergence_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.
 
 ### derived-dungeon-tileset-caps
 
@@ -1351,6 +1401,26 @@ Props for map_coastal_town (stall, barrels, sacks, cart, crates, boat), tinted l
 - Licences: CC-BY-SA-3.0, GPL-3.0
 
 Props for map_forgotten_forest (evergreens over the hedges), tinted like its tileset.
+
+### derived-nexus-tileset-caps
+
+- File: public/assets/lpc/nexus_tileset_caps.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls
+- Authors: Daniel Armstrong (AKA HughSpectrum)
+- Licences: CC-BY-SA-3.0, GPL-3.0
+
+Wall tops for nexus_tileset, drawn above walkable tiles north of walls.
+
+### derived-nexus-tileset-lpc
+
+- File: public/assets/lpc/nexus_tileset_lpc.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls
+- Authors: Daniel Armstrong (AKA HughSpectrum)
+- Licences: CC-BY-SA-3.0, GPL-3.0
+
+nexus_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.
 
 ### derived-npc-aldric
 
@@ -1641,6 +1711,36 @@ sunken_tileset rebuilt slot for slot from LPC materials (tinted); story props ke
 - Licences: CC-BY-3.0, GPL-3.0, GPL-2.0, OGA-BY-3.0, CC-BY-SA-3.0
 
 Tile atlas for Doanh Trại Veridia: tiles cut from the sources, sand desaturated.
+
+### derived-voidcore-tileset-caps
+
+- File: public/assets/lpc/voidcore_tileset_caps.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-sand, tiles-sharm-cement, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Daniel Eddeland; Lanea Zimmerman (AKA Sharm); William Thompsonj; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
+
+Wall tops for voidcore_tileset, drawn above walkable tiles north of walls.
+
+### derived-voidcore-tileset-edges
+
+- File: public/assets/lpc/voidcore_tileset_edges.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-sand, tiles-sharm-cement, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Daniel Eddeland; Lanea Zimmerman (AKA Sharm); William Thompsonj; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
+
+Soft terrain edges for voidcore_tileset (LPC border pieces).
+
+### derived-voidcore-tileset-lpc
+
+- File: public/assets/lpc/voidcore_tileset_lpc.png
+- Made by: scripts/lpc/reskin.mjs
+- From: tiles-hughspectrum-castlefloors, tiles-hughspectrum-castlewalls, tiles-sand, tiles-sharm-cement, tiles-terrain-and-outside
+- Authors: Daniel Armstrong (AKA HughSpectrum); Daniel Eddeland; Lanea Zimmerman (AKA Sharm); William Thompsonj; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0, CC-BY-3.0, GPL-2.0, OGA-BY-3.0
+
+voidcore_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.
 
 ### derived-warfield-tileset-caps
 

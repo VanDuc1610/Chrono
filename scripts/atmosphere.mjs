@@ -182,6 +182,10 @@ const CHAPTER_GRADE = {
   3: { tint: '#c8ccf0', alpha: 0.4, lift: { color: '#b8b8ff', alpha: 0.04 } }, // cold crypt
   4: { tint: '#ffd6b4', alpha: 0.4, lift: { color: '#ff8a5a', alpha: 0.05 } }, // embers
   5: { tint: '#d4f0d8', alpha: 0.35, lift: { color: '#9fe8a0', alpha: 0.04 } }, // phosphor green
+  6: { tint: '#dce8ff', alpha: 0.35, lift: { color: '#ffe8b0', alpha: 0.05 } }, // astral blue, white-gold
+  7: { tint: '#c4acf0', alpha: 0.45, lift: { color: '#c8a0ff', alpha: 0.06 } }, // abyssal violet
+  8: { tint: '#f0c8a0', alpha: 0.4, lift: { color: '#f0a860', alpha: 0.05 } }, // furnace bronze and ash
+  9: { tint: '#e4d0ff', alpha: 0.38, lift: { color: '#ffd38a', alpha: 0.05 } }, // prismatic gold and violet
 };
 
 const out = {};
@@ -221,7 +225,7 @@ for (const [id, m] of Object.entries(maps)) {
     def.lights = [
       { tile: boss.tile, color: t.boss, radius: 140, intensity: 0.75, glow: 0.35, flicker: true },
     ];
-  // T-88: maps in LPC art (chapters 0-5) get a colour grade over the world.
+  // T-88: every map is in LPC art now and gets its chapter colour grade over the world.
   const grade = LPC_GRADE[id] ?? CHAPTER_GRADE[ch];
   if (grade) def.grade = grade;
   out[id] = def;
