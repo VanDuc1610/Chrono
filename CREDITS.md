@@ -1030,6 +1030,26 @@ Unmodified source PNG; credits from pinned CREDITS.csv.
 
 Unmodified source PNG; credits from pinned CREDITS.csv.
 
+### character-torso-armour-legion-male
+
+- File: art-source/lpc/raw/characters/torso/armour/legion/male/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/torso/armour/legion/male/walk.png
+- Authors: Napsio (Vitruvian Studio); JaidynReiman; bluecarrot16; Nila122
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-2.0, GPL-3.0
+- https://opengameart.org/content/lpc-roman-armor
+
+adapted to v3 bases by bluecarrot16, jump/run/sit/combat and teen by JaidynReiman, color reduction to 6 colors inspired by Napsio (Vitruvian Studio)
+
+### character-legs-armour-plate-male
+
+- File: art-source/lpc/raw/characters/legs/armour/plate/male/walk.png
+- Source: https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator/blob/04140673ec02906f8233523639733c83690df750/spritesheets/legs/armour/plate/male/walk.png
+- Authors: bluecarrot16; JaidynReiman; Michael Whitlock (bigbeargames); Matthew Krohn (makrohn); Johannes Sjölund (wulax)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+
+reduced to 7 colors an adapted to v3 bases by bluecarrot16, climb/jump/sit/emote/run by JaidynReiman
+
 ## Game assets derived from the sources above
 
 ### derived-coastal-tileset-caps
@@ -1081,6 +1101,146 @@ Wall tops for dungeon_tileset, drawn above walkable tiles north of walls.
 - Licences: CC-BY-SA-3.0, GPL-3.0
 
 dungeon_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.
+
+### derived-enemy-banner-carrier
+
+- File: public/assets/lpc/enemies/banner_carrier.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-feet-boots-basic-male, character-hair-plain-adult, character-head-heads-human-male, character-legs-pants-male, character-torso-armour-leather-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Manuel Riecke (MrBeast); Joe White; ElizaWy; Matthew Krohn (makrohn)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0
+
+enemy_banner_carrier at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-enemy-causality-enforcer
+
+- File: public/assets/lpc/enemies/causality_enforcer.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-feet-boots-basic-male, character-hat-cloth-bandana-adult, character-head-heads-human-male, character-legs-pants-male, character-torso-clothes-longsleeve-longsleeve-male, character-torso-jacket-trench-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Matthew Krohn (makrohn); Marcel van de Steeg (MadMarcel); ElizaWy
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0
+
+enemy_causality_enforcer at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-enemy-endless-phalanx
+
+- File: public/assets/lpc/enemies/endless_phalanx.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-feet-boots-basic-male, character-hat-helmet-nasal-adult, character-head-heads-human-male, character-legs-armour-plate-male, character-torso-armour-plate-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Michael Whitlock (bigbeargames); Matthew Krohn (makrohn); Napsio (Vitruvian Studio)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0, CC-BY-3.0
+
+enemy_endless_phalanx at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-enemy-ghost-sniper
+
+- File: public/assets/lpc/enemies/ghost_sniper.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-feet-boots-basic-male, character-hat-cloth-hood-adult, character-head-heads-human-male, character-legs-skirts-plain-male, character-torso-clothes-longsleeve-longsleeve-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Pierre Vigier (pvigier); Ahmad3366
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0
+
+enemy_ghost_sniper at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-enemy-heel-shadow
+
+- File: public/assets/lpc/enemies/heel_shadow.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-hair-messy1-adult, character-head-heads-human-male, character-legs-pants-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Manuel Riecke (MrBeast); ElizaWy; Matthew Krohn (makrohn)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+
+enemy_heel_shadow at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-enemy-hollow-archivist
+
+- File: public/assets/lpc/enemies/hollow_archivist.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-female, character-hat-cloth-hood-adult, character-head-heads-human-female, character-torso-clothes-robe-female
+- Authors: Benjamin K. Smith (BenCreating); bluecarrot16; TheraHedwig; Evert; MuffinElZangano; Durrani; Pierre Vigier (pvigier); ElizaWy; Matthew Krohn (makrohn); Johannes Sjölund (wulax); Stephen Challener (Redshrike); JaidynReiman; Luke Mehl
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+
+enemy_hollow_archivist at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-enemy-hollow-husk
+
+- File: public/assets/lpc/enemies/hollow_husk.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-head-heads-human-male, character-legs-pants-male, character-torso-clothes-longsleeve-longsleeve-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); ElizaWy; Matthew Krohn (makrohn)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+
+enemy_hollow_husk at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-enemy-imperial-automaton
+
+- File: public/assets/lpc/enemies/imperial_automaton.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-feet-boots-basic-male, character-hat-helmet-norman-adult, character-head-heads-human-male, character-legs-armour-plate-male, character-torso-armour-plate-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; ElizaWy; Sander Frenken (castelonia); Michael Whitlock (bigbeargames); Matthew Krohn (makrohn); Napsio (Vitruvian Studio)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0
+
+enemy_imperial_automaton at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-enemy-nexus-inquisitor
+
+- File: public/assets/lpc/enemies/nexus_inquisitor.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-female, character-cape-solid-fg, character-hat-cloth-hood-adult, character-head-heads-human-female, character-torso-clothes-robe-female
+- Authors: Benjamin K. Smith (BenCreating); bluecarrot16; TheraHedwig; Evert; MuffinElZangano; Durrani; Pierre Vigier (pvigier); ElizaWy; Matthew Krohn (makrohn); Johannes Sjölund (wulax); Stephen Challener (Redshrike); JaidynReiman; Luke Mehl
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+
+enemy_nexus_inquisitor at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-enemy-nexus-sentinel
+
+- File: public/assets/lpc/enemies/nexus_sentinel.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-head-heads-human-male, character-legs-armour-plate-male, character-torso-armour-plate-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Michael Whitlock (bigbeargames); Matthew Krohn (makrohn); Napsio (Vitruvian Studio)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+
+enemy_nexus_sentinel at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-enemy-second-hand-warden
+
+- File: public/assets/lpc/enemies/second_hand_warden.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-feet-boots-basic-male, character-hat-helmet-kettle-adult, character-head-heads-human-male, character-legs-armour-plate-male, character-torso-armour-plate-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Napsio (Vitruvian Studio); Michael Whitlock (bigbeargames); Matthew Krohn (makrohn)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0
+
+enemy_second_hand_warden at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-enemy-twin-era-legionnaire
+
+- File: public/assets/lpc/enemies/twin_era_legionnaire.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-feet-boots-basic-male, character-hat-helmet-kettle-adult, character-head-heads-human-male, character-legs-pants-male, character-neck-scarf, character-torso-armour-legion-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; Napsio (Vitruvian Studio); ElizaWy; Matthew Krohn (makrohn)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0, OGA-SA-3.0
+
+enemy_twin_era_legionnaire at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
+
+### derived-enemy-undying-knight
+
+- File: public/assets/lpc/enemies/undying_knight.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-male, character-feet-boots-basic-male, character-hat-helmet-norman-adult, character-head-heads-human-male, character-legs-armour-plate-male, character-torso-armour-plate-male
+- Authors: bluecarrot16; JaidynReiman; Benjamin K. Smith (BenCreating); Evert; Eliza Wyatt (ElizaWy); TheraHedwig; MuffinElZangano; Durrani; Johannes Sjölund (wulax); Stephen Challener (Redshrike); Nila122; ElizaWy; Sander Frenken (castelonia); Michael Whitlock (bigbeargames); Matthew Krohn (makrohn); Napsio (Vitruvian Studio)
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0, GPL-2.0
+
+enemy_undying_knight at the LPC scale: generator layers recoloured to the character's design, 5-frame idle.
+
+### derived-enemy-void-inquisitor
+
+- File: public/assets/lpc/enemies/void_inquisitor.png
+- Made by: scripts/lpc/npcs.mjs
+- From: character-body-bodies-female, character-hat-cloth-hood-adult, character-head-heads-human-female, character-torso-clothes-robe-female
+- Authors: Benjamin K. Smith (BenCreating); bluecarrot16; TheraHedwig; Evert; MuffinElZangano; Durrani; Pierre Vigier (pvigier); ElizaWy; Matthew Krohn (makrohn); Johannes Sjölund (wulax); Stephen Challener (Redshrike); JaidynReiman; Luke Mehl
+- Licences: OGA-BY-3.0, CC-BY-SA-3.0, GPL-3.0
+
+enemy_void_inquisitor at the LPC scale: generator layers recoloured to the character's design, 4-frame idle.
 
 ### derived-interval-tileset-caps
 

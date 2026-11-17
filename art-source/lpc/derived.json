@@ -61,6 +61,207 @@
     "notes": "dungeon_tileset rebuilt slot for slot from LPC materials (tinted); story props kept."
   },
   {
+    "id": "derived-enemy-banner-carrier",
+    "file": "public/assets/lpc/enemies/banner_carrier.png",
+    "sha256": "de601dc425d8f6911e96012590d648380f7385e9e3e4cdf8f5a87292ebf4e2d0",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hair-plain-adult",
+      "character-head-heads-human-male",
+      "character-legs-pants-male",
+      "character-torso-armour-leather-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "enemy_banner_carrier at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-enemy-causality-enforcer",
+    "file": "public/assets/lpc/enemies/causality_enforcer.png",
+    "sha256": "15badf00e65b2a547f768c08ce64bafb295aa2a9ceb0686642ad2aae38aa4a06",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hat-cloth-bandana-adult",
+      "character-head-heads-human-male",
+      "character-legs-pants-male",
+      "character-torso-clothes-longsleeve-longsleeve-male",
+      "character-torso-jacket-trench-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "enemy_causality_enforcer at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-enemy-endless-phalanx",
+    "file": "public/assets/lpc/enemies/endless_phalanx.png",
+    "sha256": "ea2e8a90fb6fa02851cf28f46093e8f68fde4afea386665f2d1def4167f218ac",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hat-helmet-nasal-adult",
+      "character-head-heads-human-male",
+      "character-legs-armour-plate-male",
+      "character-torso-armour-plate-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "enemy_endless_phalanx at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-enemy-ghost-sniper",
+    "file": "public/assets/lpc/enemies/ghost_sniper.png",
+    "sha256": "7c83968137230027752a273409d2f2f0bd83064748dd80ac62857244f7f070d1",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hat-cloth-hood-adult",
+      "character-head-heads-human-male",
+      "character-legs-skirts-plain-male",
+      "character-torso-clothes-longsleeve-longsleeve-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "enemy_ghost_sniper at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-enemy-heel-shadow",
+    "file": "public/assets/lpc/enemies/heel_shadow.png",
+    "sha256": "0b5b50ef77e79eecbb15374994c541eaee2b07a7f8c3013726e17fa2008183c3",
+    "from": [
+      "character-body-bodies-male",
+      "character-hair-messy1-adult",
+      "character-head-heads-human-male",
+      "character-legs-pants-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "enemy_heel_shadow at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-enemy-hollow-archivist",
+    "file": "public/assets/lpc/enemies/hollow_archivist.png",
+    "sha256": "6226f01818b6a2739e85e90828e53556897b752ca4b6b57ae7f2aa97836e7ec7",
+    "from": [
+      "character-body-bodies-female",
+      "character-hat-cloth-hood-adult",
+      "character-head-heads-human-female",
+      "character-torso-clothes-robe-female"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "enemy_hollow_archivist at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-enemy-hollow-husk",
+    "file": "public/assets/lpc/enemies/hollow_husk.png",
+    "sha256": "043317d3560f8026c2735061d19059f600be0823107008e1f9bf23c8c77dee0b",
+    "from": [
+      "character-body-bodies-male",
+      "character-head-heads-human-male",
+      "character-legs-pants-male",
+      "character-torso-clothes-longsleeve-longsleeve-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "enemy_hollow_husk at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-enemy-imperial-automaton",
+    "file": "public/assets/lpc/enemies/imperial_automaton.png",
+    "sha256": "5c7f5a7a18a14b4d5a7457c3523f206454f65da1a0100ea8f8aac4972fd24c5e",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hat-helmet-norman-adult",
+      "character-head-heads-human-male",
+      "character-legs-armour-plate-male",
+      "character-torso-armour-plate-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "enemy_imperial_automaton at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-enemy-nexus-inquisitor",
+    "file": "public/assets/lpc/enemies/nexus_inquisitor.png",
+    "sha256": "90cf9fa672c18f26e5ca66f8c75ad1f7ce9f7a375208543a38c8fa475fce1355",
+    "from": [
+      "character-body-bodies-female",
+      "character-cape-solid-fg",
+      "character-hat-cloth-hood-adult",
+      "character-head-heads-human-female",
+      "character-torso-clothes-robe-female"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "enemy_nexus_inquisitor at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-enemy-nexus-sentinel",
+    "file": "public/assets/lpc/enemies/nexus_sentinel.png",
+    "sha256": "e4df4882773a9d688ce6fd11540cecee0aeb4995592704d0cdd237f248bdaa00",
+    "from": [
+      "character-body-bodies-male",
+      "character-head-heads-human-male",
+      "character-legs-armour-plate-male",
+      "character-torso-armour-plate-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "enemy_nexus_sentinel at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-enemy-second-hand-warden",
+    "file": "public/assets/lpc/enemies/second_hand_warden.png",
+    "sha256": "2df2715073aca9f406cd48adc33c6894be3e95d9eea777ae3fb8bc333fdb2308",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hat-helmet-kettle-adult",
+      "character-head-heads-human-male",
+      "character-legs-armour-plate-male",
+      "character-torso-armour-plate-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "enemy_second_hand_warden at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-enemy-twin-era-legionnaire",
+    "file": "public/assets/lpc/enemies/twin_era_legionnaire.png",
+    "sha256": "ce80dba7e933a412485b43c9a6da19108b00f5477f230bae0866c3d9b810d996",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hat-helmet-kettle-adult",
+      "character-head-heads-human-male",
+      "character-legs-pants-male",
+      "character-neck-scarf",
+      "character-torso-armour-legion-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "enemy_twin_era_legionnaire at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
+    "id": "derived-enemy-undying-knight",
+    "file": "public/assets/lpc/enemies/undying_knight.png",
+    "sha256": "7ce1025de8542cca16cf04114b81f5fc2763360af24a7aaf11afab3072551d4b",
+    "from": [
+      "character-body-bodies-male",
+      "character-feet-boots-basic-male",
+      "character-hat-helmet-norman-adult",
+      "character-head-heads-human-male",
+      "character-legs-armour-plate-male",
+      "character-torso-armour-plate-male"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "enemy_undying_knight at the LPC scale: generator layers recoloured to the character's design, 5-frame idle."
+  },
+  {
+    "id": "derived-enemy-void-inquisitor",
+    "file": "public/assets/lpc/enemies/void_inquisitor.png",
+    "sha256": "845b66dec637580a19db50b093b0d478043b55a5d2a1668e7c98a5038971c464",
+    "from": [
+      "character-body-bodies-female",
+      "character-hat-cloth-hood-adult",
+      "character-head-heads-human-female",
+      "character-torso-clothes-robe-female"
+    ],
+    "script": "scripts/lpc/npcs.mjs",
+    "notes": "enemy_void_inquisitor at the LPC scale: generator layers recoloured to the character's design, 4-frame idle."
+  },
+  {
     "id": "derived-interval-tileset-caps",
     "file": "public/assets/lpc/interval_tileset_caps.png",
     "sha256": "d6faa903823117d7d151d3cccdc4e528f15691e13f8ff701ac53dd7a28abe172",

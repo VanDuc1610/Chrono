@@ -82,6 +82,20 @@ const R = {
   goldRobe: ['#4a320c', '#96681e', '#d0a040', '#f2d488'],
   whiteHair: ['#7a7e8a', '#b4b8c4', '#dfe2ea', '#f8f9fc'],
   voidViolet: ['#0a0612', '#181026', '#2a1e40', '#40305c'],
+  brass: ['#3a2410', '#7a5222', '#b88432', '#e0b456', '#f4d888'],
+  steel: ['#1a1e26', '#3a4250', '#646e80', '#98a2b4', '#d0d6e0'],
+  darkSteel: ['#0c0e14', '#1e222c', '#343a48', '#525a6c'],
+  greySkin: ['#3a3c44', '#6a6c76', '#9a9ca6', '#c4c6ce'],
+  enforcerCoat: ['#1a1028', '#34204e', '#503478', '#70509e'],
+  capRed: ['#3a0a0e', '#7a1820', '#b02c34'],
+  cloakGrey: ['#1e2026', '#3c3f48', '#5e626c', '#868a94'],
+  inquisitorPurple: ['#120a22', '#281846', '#3e2a6a', '#5a4290'],
+  olive: ['#1e2214', '#363d24', '#525c36', '#727e4c'],
+  bloodRed: ['#2e0608', '#5e1016', '#8e1c24', '#b8343a'],
+  leatherBrown: ['#24160e', '#46301e', '#6a4a2e', '#8e6a44'],
+  shadow: ['#060408', '#120c1a', '#20172e', '#2e2240'],
+  husk: ['#2e3038', '#565a64', '#80848e', '#a8acb4'],
+  sentinel: ['#08060e', '#16122a', '#262044', '#3a3260'],
 };
 
 /** Layers bottom to top: [manifest id, ramp or null to keep the colours]. */
@@ -434,6 +448,202 @@ const npcSpecs = () => ({
     ],
   },
   // The First Forgotten: an erased violet silhouette, white glowing eyes, broken chains, beads.
+  // ---- Field enemies, humanoid (owner, 2026-11-18): built like the people, the old frame counts.
+  enemy_imperial_automaton: {
+    kind: 'enemy',
+    old: 'public/assets/enemies/imperial_automaton.png',
+    layers: [
+      ['character-body-bodies-male', R.brass],
+      ['character-head-heads-human-male', R.brass],
+      ['character-feet-boots-basic-male', R.darkSteel],
+      ['character-legs-armour-plate-male', R.brass],
+      ['character-torso-armour-plate-male', R.brass],
+      ['character-hat-helmet-norman-adult', R.brass],
+      [face('#7a5222', '#ff5a3a'), null],
+      [towerShield('#8e1c24', '#c8964a', '#ecc878'), null],
+    ],
+  },
+  enemy_causality_enforcer: {
+    kind: 'enemy',
+    old: 'public/assets/enemies/causality_enforcer.png',
+    layers: [
+      ['character-body-bodies-male', R.greySkin],
+      ['character-head-heads-human-male', R.greySkin],
+      ['character-feet-boots-basic-male', R.darkSteel],
+      ['character-legs-pants-male', R.trouserDark],
+      ['character-torso-clothes-longsleeve-longsleeve-male', R.shirtBlack],
+      ['character-torso-jacket-trench-male', R.enforcerCoat],
+      [irises('#d8d8e0'), null],
+      ['character-hat-cloth-bandana-adult', R.capRed],
+      [shortSword, null],
+    ],
+  },
+  enemy_ghost_sniper: {
+    kind: 'enemy',
+    old: 'public/assets/enemies/ghost_sniper.png',
+    layers: [
+      ['character-body-bodies-male', R.cloakGrey],
+      ['character-head-heads-human-male', R.shadow],
+      [face('#120c1a', '#ff3a3a'), null],
+      ['character-feet-boots-basic-male', R.darkSteel],
+      ['character-legs-skirts-plain-male', R.cloakGrey],
+      ['character-torso-clothes-longsleeve-longsleeve-male', R.cloakGrey],
+      ['character-hat-cloth-hood-adult', R.cloakGrey],
+      [crossbow, null],
+    ],
+  },
+  enemy_endless_phalanx: {
+    kind: 'enemy',
+    old: 'public/assets/enemies/endless_phalanx.png',
+    layers: [
+      ['character-body-bodies-male', R.skinLight],
+      ['character-head-heads-human-male', R.skinLight],
+      ['character-feet-boots-basic-male', R.darkSteel],
+      ['character-legs-armour-plate-male', R.steel],
+      ['character-torso-armour-plate-male', R.steel],
+      ['character-hat-helmet-nasal-adult', R.steel],
+      [towerShield('#5e5040', '#8c96a8', '#c8c0b0'), null],
+      [spear, null],
+    ],
+  },
+  enemy_banner_carrier: {
+    kind: 'enemy',
+    old: 'public/assets/enemies/banner_carrier.png',
+    layers: [
+      ['character-body-bodies-male', R.skinWarm],
+      ['character-head-heads-human-male', R.skinWarm],
+      ['character-feet-boots-basic-male', R.bootBrown],
+      ['character-legs-pants-male', R.leatherBrown],
+      ['character-torso-armour-leather-male', R.leatherBrown],
+      ['character-hair-plain-adult', R.brownHair],
+      [banner('#a02028', '#e0b450'), null],
+    ],
+  },
+  enemy_undying_knight: {
+    kind: 'enemy',
+    old: 'public/assets/enemies/undying_knight.png',
+    frames: 5,
+    layers: [
+      [
+        panel(40, 33, 9, 24, '#8e1c24', '#2e0608', [
+          [1, 1, '#b8343a'],
+          [1, 2, '#b8343a'],
+        ]),
+        null,
+      ],
+      ['character-body-bodies-male', R.darkSteel],
+      ['character-head-heads-human-male', R.darkSteel],
+      ['character-feet-boots-basic-male', R.darkSteel],
+      ['character-legs-armour-plate-male', R.darkSteel],
+      ['character-torso-armour-plate-male', R.darkSteel],
+      ['character-hat-helmet-norman-adult', R.darkSteel],
+      [face('#1e222c', '#4ae0ff'), null],
+      [horns, null],
+      ['custom:halberd', null],
+    ],
+  },
+  enemy_void_inquisitor: {
+    kind: 'enemy',
+    old: 'public/assets/enemies/void_inquisitor.png',
+    layers: [
+      ['character-body-bodies-female', R.shadow],
+      ['character-head-heads-human-female', R.shadow],
+      [face('#120c1a', '#e8e0ff'), null],
+      ['character-torso-clothes-robe-female', R.inquisitorPurple],
+      ['character-hat-cloth-hood-adult', R.inquisitorPurple],
+      [staff('#c8964a', '#b48cff'), null],
+    ],
+  },
+  enemy_twin_era_legionnaire: {
+    kind: 'enemy',
+    old: 'public/assets/enemies/twin_era_legionnaire.png',
+    layers: [
+      ['character-body-bodies-male', R.skinLight],
+      ['character-head-heads-human-male', R.skinLight],
+      ['character-feet-boots-basic-male', R.bootBrown],
+      ['character-legs-pants-male', R.olive],
+      ['character-torso-armour-legion-male', R.olive],
+      ['character-neck-scarf', R.bloodRed],
+      ['character-hat-helmet-kettle-adult', R.steel],
+      [towerShield('#e6dcc4', '#8c96a8', '#c8964a'), null],
+    ],
+  },
+  enemy_second_hand_warden: {
+    kind: 'enemy',
+    old: 'public/assets/enemies/second_hand_warden.png',
+    layers: [
+      ['character-body-bodies-male', R.darkSteel],
+      ['character-head-heads-human-male', R.darkSteel],
+      ['character-feet-boots-basic-male', R.darkSteel],
+      ['character-legs-armour-plate-male', R.steel],
+      ['character-torso-armour-plate-male', R.steel],
+      ['character-hat-helmet-kettle-adult', R.darkSteel],
+      [face('#1e222c', '#f4d888'), null],
+      [clockFace, null],
+      [shortSword, null],
+    ],
+  },
+  enemy_nexus_sentinel: {
+    kind: 'enemy',
+    old: 'public/assets/enemies/nexus_sentinel.png',
+    layers: [
+      ['character-body-bodies-male', R.sentinel],
+      ['character-head-heads-human-male', R.sentinel],
+      [face('#16122a', '#4ae0ff'), null],
+      ['character-legs-armour-plate-male', R.sentinel],
+      ['character-torso-armour-plate-male', R.sentinel],
+      [bladeArms, null],
+    ],
+  },
+  enemy_nexus_inquisitor: {
+    kind: 'enemy',
+    old: 'public/assets/enemies/nexus_inquisitor.png',
+    layers: [
+      ['character-body-bodies-female', R.shadow],
+      ['character-head-heads-human-female', R.shadow],
+      [face('#120c1a', '#e8e0ff'), null],
+      ['character-torso-clothes-robe-female', R.inquisitorPurple],
+      ['character-cape-solid-fg', R.inquisitorPurple],
+      ['character-hat-cloth-hood-adult', R.inquisitorPurple],
+      [hammer, null],
+    ],
+  },
+  enemy_heel_shadow: {
+    kind: 'enemy',
+    old: 'public/assets/enemies/heel_shadow.png',
+    alpha: 0.9,
+    layers: [
+      ['character-body-bodies-male', R.shadow],
+      ['character-head-heads-human-male', R.shadow],
+      [face('#20172e', '#b48cff'), null],
+      ['character-legs-pants-male', R.shadow],
+      ['character-hair-messy1-adult', R.shadow],
+    ],
+  },
+  enemy_hollow_husk: {
+    kind: 'enemy',
+    old: 'public/assets/enemies/hollow_husk.png',
+    layers: [
+      ['character-body-bodies-male', R.husk],
+      ['character-head-heads-human-male', R.husk],
+      [face('#565a64', '#121214'), null],
+      ['character-legs-pants-male', R.husk],
+      ['character-torso-clothes-longsleeve-longsleeve-male', R.husk],
+      [chestHole, null],
+    ],
+  },
+  enemy_hollow_archivist: {
+    kind: 'enemy',
+    old: 'public/assets/enemies/hollow_archivist.png',
+    layers: [
+      ['character-body-bodies-female', R.shadow],
+      ['character-head-heads-human-female', R.shadow],
+      [face('#120c1a'), null],
+      ['character-torso-clothes-robe-female', R.cloakGrey],
+      ['character-hat-cloth-hood-adult', R.cloakGrey],
+      [staff('#c8964a', '#ffd666'), null],
+    ],
+  },
   // 96 px frame: the bell cloak swallows the body; chains overhead, staffs either side.
   first_forgotten: {
     old: 'public/assets/npcs/first_forgotten_idle.png',
@@ -965,6 +1175,195 @@ const staffs = ({ S }) => {
   return px;
 };
 
+/** A tall shield held in front by the viewer-left hand, with an emblem. */
+const towerShield = (face, rim, emblem) => () => {
+  const px = blank();
+  for (let y = 33; y <= 55; y++)
+    for (let x = 13; x <= 27; x++) {
+      const corner = (y === 33 || y === 55) && (x === 13 || x === 27);
+      if (corner) continue;
+      const edge = x === 13 || x === 27 || y === 33 || y === 55;
+      const bevel = x === 14 || x === 26 || y === 34 || y === 54;
+      plot(px, x, y, hex(edge ? '#120f17' : bevel ? rim : face));
+    }
+  for (const [dx, dy] of [
+    [0, -3],
+    [0, -2],
+    [-1, -1],
+    [0, -1],
+    [1, -1],
+    [-3, 0],
+    [-2, 0],
+    [-1, 0],
+    [0, 0],
+    [1, 0],
+    [2, 0],
+    [3, 0],
+    [-1, 1],
+    [0, 1],
+    [1, 1],
+    [0, 2],
+    [0, 3],
+  ])
+    plot(px, 20 + dx, 44 + dy, hex(emblem));
+  return px;
+};
+
+/** A plain spear upright in the viewer-right hand. */
+const spear = (body) => {
+  const px = blank();
+  const x = handX(body);
+  pole(px, x, 8, wood);
+  for (let y = 1; y <= 8; y++) {
+    const w = y <= 2 || y >= 7 ? 0 : 1;
+    for (let k = -w; k <= w + 1; k++)
+      plot(px, x + k, y, k === -w || k === w + 1 ? steel[0] : k === 0 ? steel[3] : steel[2]);
+  }
+  return px;
+};
+
+/** A war banner on a pole in the viewer-right hand, the cloth flying out to the right. */
+const banner = (cloth, trim) => (body) => {
+  const px = blank();
+  const x = handX(body);
+  pole(px, x, 4, wood);
+  plot(px, x, 2, gold[2]);
+  plot(px, x + 1, 2, gold[2]);
+  plot(px, x, 3, gold[1]);
+  for (let y = 5; y <= 17; y++) {
+    const reach = 11 + (y % 4 < 2 ? 0 : 1);
+    for (let k = 2; k <= reach; k++) {
+      const edge = y === 5 || y === 17 || k === reach;
+      plot(px, x + k, y, hex(edge ? trim : (k + y) % 9 === 0 ? trim : cloth));
+    }
+  }
+  return px;
+};
+
+/** Curved bone horns on either side of the helmet. */
+const horns = () => {
+  const px = blank();
+  for (const side of [-1, 1])
+    for (const [dx, dy] of [
+      [10, 4],
+      [11, 3],
+      [12, 2],
+      [12, 1],
+      [13, 0],
+      [13, -1],
+      [13, -2],
+      [12, -3],
+    ]) {
+      plot(px, 32 + side * dx - (side < 0 ? 1 : 0), 20 + dy, hex(dy < -1 ? '#f0e8d4' : '#c8bc9e'));
+      plot(px, 32 + side * (dx + 1) - (side < 0 ? 1 : 0), 20 + dy, hex('#120f17'));
+    }
+  return px;
+};
+
+/** A crossbow levelled across the chest, pointing to the viewer's left. */
+const crossbow = () => {
+  const px = blank();
+  for (let x = 14; x <= 36; x++) {
+    plot(px, x, 43, hex('#120f17'));
+    plot(px, x, 44, hex(x < 18 ? '#8c96a8' : '#5a3c22'));
+    plot(px, x, 45, hex('#120f17'));
+  }
+  for (let y = 36; y <= 52; y++) {
+    plot(px, 18, y, hex('#120f17'));
+    plot(px, 19, y, hex('#3a2a1e'));
+  }
+  for (let y = 37; y <= 51; y++) plot(px, 21 + Math.round(Math.abs(y - 44) / 3), y, hex('#c8c0b0'));
+  plot(px, 13, 44, hex('#d0d6e0'));
+  return px;
+};
+
+/** A staff upright in the viewer-right hand, with a glowing head of the given colours. */
+const staff = (head, glow) => (body) => {
+  const px = blank();
+  const x = handX(body);
+  pole(px, x, 10, wood);
+  for (const [dx, dy, c] of [
+    [0, 9, head],
+    [1, 9, head],
+    [-1, 8, head],
+    [0, 8, glow],
+    [1, 8, glow],
+    [2, 8, head],
+    [-1, 7, head],
+    [0, 7, glow],
+    [1, 7, glow],
+    [2, 7, head],
+    [0, 6, head],
+    [1, 6, head],
+  ])
+    plot(px, x + dx, dy, hex(c));
+  return px;
+};
+
+/** A heavy gold-headed hammer upright in the viewer-right hand. */
+const hammer = (body) => {
+  const px = blank();
+  const x = handX(body);
+  pole(px, x, 14, wood);
+  for (let y = 5; y <= 13; y++)
+    for (let k = -4; k <= 5; k++) {
+      const edge = y === 5 || y === 13 || k === -4 || k === 5;
+      plot(px, x + k, y, edge ? gold[0] : y < 8 ? gold[2] : gold[1]);
+    }
+  return px;
+};
+
+/** A clock face set in the chest (the second-hand warden). */
+const clockFace = () => {
+  const px = blank();
+  for (let y = 35; y <= 47; y++)
+    for (let x = 26; x <= 38; x++) {
+      const d = Math.hypot(x - 32, y - 41);
+      if (d > 6.4) continue;
+      plot(px, x, y, hex(d > 5.4 ? '#3e2c12' : d > 4.6 ? '#c8964a' : '#f2ecdc'));
+    }
+  for (const [x, y] of [
+    [32, 38],
+    [32, 39],
+    [32, 40],
+    [32, 41],
+    [33, 41],
+    [34, 41],
+    [35, 42],
+  ])
+    plot(px, x, y, hex('#120f17'));
+  return px;
+};
+
+/** Cerulean blades growing from both hands (the nexus sentinel). */
+const bladeArms = (body) => {
+  const px = blank();
+  const right = handX(body);
+  for (const [hx, dir] of [
+    [F - 1 - right, -1],
+    [right, 1],
+  ])
+    for (let k = 0; k <= 12; k++) {
+      const x = hx + Math.round(k * 0.45) * dir;
+      const y = 48 + k;
+      plot(px, x, y, hex(k > 9 ? '#e6f9ff' : '#00c8ff'));
+      plot(px, x + dir, y, hex('#008ab8'));
+    }
+  return px;
+};
+
+/** A hole torn through the chest, the dark showing through (the hollow husk). */
+const chestHole = () => {
+  const px = blank();
+  for (let y = 36; y <= 46; y++)
+    for (let x = 27; x <= 37; x++) {
+      const d = Math.hypot((x - 32) / 1.1, y - 41);
+      if (d > 4.6) continue;
+      plot(px, x, y, hex(d > 3.6 ? '#2e3038' : '#0a0a0e'));
+    }
+  return px;
+};
+
 /** Highest opaque row of a layer. */
 function topRow(px) {
   for (let y = 0; y < F; y++) for (let x = 0; x < F; x++) if (px[(y * F + x) * 4 + 3] > 0) return y;
@@ -1166,10 +1565,14 @@ for (const [name, spec] of Object.entries(NPCS)) {
   shown.push([readPng(spec.old), frame]);
   console.log(`${name}: ${S}px, soles at y=${soles(frame, S)}`);
   if (install.includes(name)) {
-    const file = `public/assets/lpc/npcs/${name}_idle.png`;
-    fs.mkdirSync('public/assets/lpc/npcs', { recursive: true });
+    const enemy = spec.kind === 'enemy';
+    const dir = enemy ? 'public/assets/lpc/enemies' : 'public/assets/lpc/npcs';
+    const file = enemy ? `${dir}/${name.replace(/^enemy_/, '')}.png` : `${dir}/${name}_idle.png`;
+    fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(file, png);
-    const id = `derived-npc-${name.replace(/_/g, '-')}`;
+    const id = enemy
+      ? `derived-${name.replace(/_/g, '-')}`
+      : `derived-npc-${name.replace(/_/g, '-')}`;
     derived = derived.filter((d) => d.id !== id);
     derived.push({
       id,

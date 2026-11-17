@@ -254,7 +254,7 @@ export class CombatScene extends Phaser.Scene {
 
     this.enemySprite = this.add
       .sprite(enemyX, enemyY, this.enemy.spriteKey, 0)
-      .setScale(this.enemyTemplate.spriteScale ?? 2.2);
+      .setScale(this.enemyScale());
     const enemyIdle = `${this.enemy.spriteKey}_idle`;
     if (this.anims.exists(enemyIdle)) this.enemySprite.play(enemyIdle);
     // Floating hover animation
@@ -921,6 +921,16 @@ export class CombatScene extends Phaser.Scene {
       }
       done();
     });
+  }
+
+  /**
+   * The enemy's display scale: `spriteScale` (default 2.2) was tuned for 32 px sheets; the
+   * LPC-scale 64 px sheets get the same ratio Peter's did (2.0 -> 1.25).
+   */
+  private enemyScale(): number {
+    const base = this.enemyTemplate.spriteScale ?? 2.2;
+    const frame = this.textures.getFrame(this.enemy.spriteKey, 0)?.width ?? 32;
+    return frame >= 64 ? base * 0.625 : base;
   }
 
   private playPeterAnim(anim: PeterCombatAnim): void {

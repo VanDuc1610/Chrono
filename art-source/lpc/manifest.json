@@ -1488,5 +1488,35 @@
     ],
     "notes": "Unmodified source PNG; credits from pinned CREDITS.csv.",
     "sha256": "778181a5eec8a952e45d0aff138d1285b5dfc6812ef7872800815f9bdfd938b8"
+  },
+  {
+    "id": "character-torso-armour-legion-male",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/torso/armour/legion/male/walk.png",
+    "file": "art-source/lpc/raw/characters/torso/armour/legion/male/walk.png",
+    "authors": ["Napsio (Vitruvian Studio)", "JaidynReiman", "bluecarrot16", "Nila122"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-2.0", "GPL-3.0"],
+    "urls": ["https://opengameart.org/content/lpc-roman-armor"],
+    "notes": "adapted to v3 bases by bluecarrot16, jump/run/sit/combat and teen by JaidynReiman, color reduction to 6 colors inspired by Napsio (Vitruvian Studio)",
+    "sha256": "0c0384fd6dbfac23e3f9a116ee6af1a462259979fec3d9b1767d00a12a6974f8"
+  },
+  {
+    "id": "character-legs-armour-plate-male",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/legs/armour/plate/male/walk.png",
+    "file": "art-source/lpc/raw/characters/legs/armour/plate/male/walk.png",
+    "authors": [
+      "bluecarrot16",
+      "JaidynReiman",
+      "Michael Whitlock (bigbeargames)",
+      "Matthew Krohn (makrohn)",
+      "Johannes Sjölund (wulax)"
+    ],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": ["https://opengameart.org/content/lpc-medieval-fantasy-character-sprites"],
+    "notes": "reduced to 7 colors an adapted to v3 bases by bluecarrot16, climb/jump/sit/emote/run by JaidynReiman",
+    "sha256": "4bc6b60aa84d52eb258cd0083843d566f8b89b30e2b31e8ea00401e95faa7f0a"
   }
 ]

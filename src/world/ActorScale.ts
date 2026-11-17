@@ -32,9 +32,9 @@ const OVERRIDES: Record<string, number> = {
 const frameWidth = (scene: Phaser.Scene, key: string): number =>
   scene.textures.getFrame(key)?.width ?? 0;
 
-/** A person drawn at the LPC scale (an `npc_` sheet with 64 px or larger frames). */
+/** A person or field enemy drawn at the LPC scale (`npc_`/`enemy_` sheet, 64 px+ frames). */
 export function isLpcActor(scene: Phaser.Scene, key: string): boolean {
-  return key.startsWith('npc_') && frameWidth(scene, key) >= LPC_FRAME;
+  return /^(npc_|enemy_)/.test(key) && frameWidth(scene, key) >= LPC_FRAME;
 }
 
 /** The display scale for an actor texture: 32 px people and monsters grow, the rest stay. */
