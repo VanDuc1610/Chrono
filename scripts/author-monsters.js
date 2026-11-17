@@ -15,7 +15,7 @@
 import fs from 'fs';
 import path from 'path';
 import { encodePng, preview } from './pixel-art/pixel.js';
-import { Canvas, OUTLINE } from './pixel-art/canvas.js';
+import { Canvas } from './pixel-art/canvas.js';
 
 const F = 64;
 
