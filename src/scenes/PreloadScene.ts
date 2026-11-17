@@ -153,18 +153,18 @@ export class PreloadScene extends Phaser.Scene {
       frameWidth: 64,
       frameHeight: 64,
     });
-    this.load.spritesheet('boss_bellkeeper', 'assets/enemies/bellkeeper.png', {
-      frameWidth: 64,
-      frameHeight: 64,
+    this.load.spritesheet('boss_bellkeeper', 'assets/enemies/v2/bellkeeper.png', {
+      frameWidth: 96,
+      frameHeight: 96,
     });
     this.load.spritesheet('npc_forgotten_child', 'assets/lpc/npcs/forgotten_child_idle.png', {
       frameWidth: 64,
       frameHeight: 64,
     });
     // The Drowned Sentinel (BOSS_SENTINEL_001): frames 0-3 idle, 4 released (kneeling), 64x64.
-    this.load.spritesheet('boss_sentinel', 'assets/enemies/sentinel.png', {
-      frameWidth: 64,
-      frameHeight: 64,
+    this.load.spritesheet('boss_sentinel', 'assets/enemies/v2/sentinel.png', {
+      frameWidth: 96,
+      frameHeight: 96,
     });
 
     // Chapter 2 (T-53, owner approved 2026-11-13): Lyra, the Exiled Praetor, Imperial Automaton,
@@ -174,15 +174,15 @@ export class PreloadScene extends Phaser.Scene {
       ['npc_exiled_praetor', 'assets/lpc/npcs/exiled_praetor_idle.png', 64],
       ['enemy_imperial_automaton', 'assets/lpc/enemies/imperial_automaton.png', 64],
       ['enemy_causality_enforcer', 'assets/lpc/enemies/causality_enforcer.png', 64],
-      ['boss_imperial_verdict', 'assets/enemies/imperial_verdict.png', 64],
+      ['boss_imperial_verdict', 'assets/enemies/v2/imperial_verdict.png', 96],
       // Chapter 3 (T-58, owner approved 2026-11-13).
       ['npc_neris', 'assets/lpc/npcs/neris_idle.png', 64],
       ['npc_amnesiac_king', 'assets/lpc/npcs/amnesiac_king_idle.png', 64],
       ['enemy_memory_wraith', 'assets/enemies/v2/memory_wraith.png', 64],
       ['enemy_thought_eater', 'assets/enemies/v2/thought_eater.png', 64],
       ['enemy_hollow_archivist', 'assets/lpc/enemies/hollow_archivist.png', 64],
-      ['boss_faceless_keeper', 'assets/enemies/faceless_keeper.png', 48],
-      ['boss_nameless_choir', 'assets/enemies/nameless_choir.png', 64],
+      ['boss_faceless_keeper', 'assets/enemies/v2/faceless_keeper.png', 96],
+      ['boss_nameless_choir', 'assets/enemies/v2/nameless_choir.png', 96],
       // Chapter 4 (T-64; owner delegated Chapter 4 to Claude 2026-11-14, reviews in playtest).
       ['npc_aldric', 'assets/lpc/npcs/aldric_idle.png', 64],
       ['npc_kaelen', 'assets/lpc/npcs/kaelen_idle.png', 64],
@@ -194,7 +194,7 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_endless_phalanx', 'assets/lpc/enemies/endless_phalanx.png', 64],
       ['enemy_banner_carrier', 'assets/lpc/enemies/banner_carrier.png', 64],
       ['enemy_undying_knight', 'assets/lpc/enemies/undying_knight.png', 64],
-      ['boss_crimson_standard', 'assets/enemies/crimson_standard.png', 48],
+      ['boss_crimson_standard', 'assets/enemies/v2/crimson_standard.png', 96],
       ['boss_the_last_war', 'assets/enemies/the_last_war.png', 64],
       // Chapter 5 (owner approved 2026-11-14).
       ['npc_ivo', 'assets/lpc/npcs/ivo_idle.png', 64],

@@ -64,7 +64,7 @@
     {
       "id": "boss_drowned_sentinel",
       "intro": "Vệ Binh bước xuống từ bệ đá, nâng ngọn kích. Lớp giáp nước đọng quanh nó — chém thường gần như vô dụng.",
-      "scale": 1.15,
+      "scale": 1,
       "radius": 22,
       "speed": 48,
       "damageScale": 0.55,
@@ -189,7 +189,7 @@
     {
       "id": "boss_sunken_bellkeeper",
       "intro": "Người Giữ Chuông nhấc quả chuông chìm lên. Mỗi tiếng ngân đẩy thời khắc lùi lại — đòn đánh thường gần như trượt qua nó.",
-      "scale": 1.15,
+      "scale": 1,
       "radius": 22,
       "speed": 40,
       "damageScale": 0.55,
@@ -336,7 +336,7 @@
     {
       "id": "boss_imperial_verdict",
       "intro": "Bản Án Đế Chế giương gươm trên đĩa cân. Lớp vỏ định mệnh che chở nó — chỉ cán cân vỡ mới để đòn của Peter chạm tới.",
-      "scale": 1.15,
+      "scale": 1,
       "radius": 22,
       "speed": 46,
       "hpScale": 1.5,
@@ -461,7 +461,7 @@
     {
       "id": "boss_faceless_keeper",
       "intro": "Kẻ Canh Ngục Không Mặt nâng tấm gương — trong đó là Peter. Nó học lấy một phần sức mạnh của cậu, và tấm gương sẽ đóng băng từng kiểu đòn của cậu.",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 22,
       "speed": 52,
       "hpScale": 1.2,
@@ -564,7 +564,7 @@
     {
       "id": "boss_nameless_choir",
       "intro": "Hàng vạn giọng hát cất lên. Mỗi khúc ca là một ký ức — đánh đúng lõi ký ức đang được hát, đánh sai sẽ bị dội ngược.",
-      "scale": 1.15,
+      "scale": 1,
       "radius": 24,
       "speed": 34,
       "damageScale": 0.5,
@@ -735,7 +735,7 @@
     {
       "id": "boss_crimson_standard",
       "intro": "Lá Cờ Huyết Sắc tung bay. Khi nó cắm xuống sàn, Tường Khí Máu dựng lên — tìm và chém đứt những sợi dây linh hồn nuôi bức tường.",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 22,
       "speed": 48,
       "damageScale": 0.5,
