@@ -1,7 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import neonJson from '../public/assets/data/neon.json';
 import mapsJson from '../public/assets/data/maps.json';
-import { seededRng, solidBlocks, traceEdges, traceRegions } from '../src/world/NeonTrace';
+import {
+  propTiles,
+  seededRng,
+  solidBlocks,
+  traceEdges,
+  traceRegions,
+} from '../src/world/NeonTrace';
 
 /** Builds a solid-at lookup from rows of '#' (solid) and '.' (open). */
 const grid = (rows: string[]) => ({
@@ -82,5 +88,14 @@ describe('neon floor regions', () => {
     const rows = ['#1', '#3'];
     const kind = (x: number, y: number) => (rows[y][x] === '#' ? -1 : Number(rows[y][x]));
     expect(traceRegions(2, 2, kind, 1)).toEqual([{ x1: 1, y1: 1, x2: 2, y2: 1 }]);
+  });
+});
+
+describe('neon props', () => {
+  it('keeps lone pillars and small clusters as props, never the walls', () => {
+    const g = grid(['#######', '#.....#', '#.#.##.', '#.....#', '#..####', '#######']);
+    const props = [...propTiles(g.w, g.h, g.solid, 3)].sort((a, b) => a - b);
+    // The pillar at (2,2) and the pair at (4,2)-(5,2); the bottom block touches the wall.
+    expect(props).toEqual([2 * 7 + 2, 2 * 7 + 4, 2 * 7 + 5]);
   });
 });

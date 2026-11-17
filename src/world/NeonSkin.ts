@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { TILE_SIZE, tileCenter } from './MapRegistry';
 import type { TilePoint, TileRect } from './MapTypes';
 import {
+  propTiles,
   seededRng,
   solidBlocks,
   traceEdges,
@@ -75,6 +76,8 @@ export class NeonSkin {
   private props: Phaser.GameObjects.Image[] = [];
   private hidden: Phaser.Tilemaps.Tile[] = [];
   private rims: { sprite: Phaser.GameObjects.Sprite; fx: Phaser.FX.Glow }[] = [];
+  /** Wall masses (solid tiles that are not props): these become line art. */
+  private wall: (x: number, y: number) => boolean = () => false;
 
   constructor(
     private readonly scene: Phaser.Scene,
@@ -126,7 +129,10 @@ export class NeonSkin {
     const accent = hex(d.accent);
     const voidColor = hex(d.void ?? '#05040c');
     const rng = seededRng(this.map.id);
-    const edges = traceEdges(w, h, this.map.solid);
+    // Pillars, statues and crates keep their pixel art; only the wall masses turn into lines.
+    const props = propTiles(w, h, this.map.solid, 4);
+    this.wall = (x, y) => this.map.solid(x, y) && !props.has(y * w + x);
+    const edges = traceEdges(w, h, this.wall);
     // Floor regions (a path, a carpet, shallows) by ground tile; walls draw no region line.
     const regions = traceRegions(
       w,
@@ -138,15 +144,18 @@ export class NeonSkin {
     // Ground under the void, the void, then the walls layer (its decor and doors stay visible).
     ground.setDepth(-3);
     walls.setDepth(-1);
-    if (this.full) {
+    // From half strength on, the floor dims and the stars come out; at full, the void takes over.
+    if (d.level >= 0.5) {
       this.base = s.add
         .renderTexture(0, 0, w * TILE_SIZE, h * TILE_SIZE)
         .setOrigin(0)
         .setDepth(-2);
       this.paintBase(w, h, line, voidColor, rng);
-      // Solid wall tiles become line art; decor and doors on the walls layer keep their pixels.
+    }
+    if (this.full) {
+      // Wall masses become line art; props, decor and doors on the walls layer keep their pixels.
       walls.forEachTile((t) => {
-        if (t.index >= 0 && t.visible && this.map.solid(t.x, t.y)) {
+        if (t.index >= 0 && t.visible && this.wall(t.x, t.y)) {
           t.setVisible(false);
           this.hidden.push(t);
         }
@@ -163,6 +172,8 @@ export class NeonSkin {
     if (this.full) this.placeMedallions(w, h, line);
     if (this.full) this.placeSigils(w, h, accent);
     for (const t of this.map.pois) this.addRing(t, accent);
+    this.outlineProps(props, w, line);
+    this.markPuzzles(accent);
     if (this.full) this.rimActors(line);
     if (notify) this.onChange?.(this.full);
   }
@@ -195,7 +206,10 @@ export class NeonSkin {
     if (!base || !d) return;
     const T = TILE_SIZE;
     const g = this.scene.make.graphics({}, false);
-    g.fillStyle(voidColor, 1 - (d.ghost ?? 0.1));
+    const full = this.full;
+    // Below full strength the void only dims the floor; stars and grid fade with it.
+    const fade = full ? 1 : 0.6;
+    g.fillStyle(voidColor, full ? 1 - (d.ghost ?? 0.1) : (d.level - 0.4) * 0.6);
     g.fillRect(0, 0, w * T, h * T);
     const wallFill = mix(voidColor, line, 0.07);
     const stars: { x: number; y: number }[] = [];
@@ -203,7 +217,8 @@ export class NeonSkin {
       for (let x = 0; x < w; x++) {
         const px = x * T;
         const py = y * T;
-        if (this.map.solid(x, y)) {
+        if (this.map.solid(x, y) && !(full && this.wall(x, y))) continue;
+        if (full && this.wall(x, y)) {
           g.fillStyle(wallFill, 0.9);
           g.fillRect(px, py, T, T);
           g.lineStyle(1, line, 0.07);
@@ -217,13 +232,13 @@ export class NeonSkin {
           continue;
         }
         // A faint drafting grid with brighter corners keeps the floor readable.
-        g.lineStyle(1, line, 0.05);
+        g.lineStyle(1, line, 0.05 * fade);
         g.lineBetween(px, py + 0.5, px + T, py + 0.5);
         g.lineBetween(px + 0.5, py, px + 0.5, py + T);
-        g.fillStyle(line, 0.3);
+        g.fillStyle(line, 0.3 * fade);
         g.fillRect(px, py, 1, 1);
-        if (rng() < 0.4) {
-          g.fillStyle(0xffffff, 0.15 + rng() * 0.5);
+        if (rng() < 0.4 * fade) {
+          g.fillStyle(0xffffff, (0.15 + rng() * 0.5) * fade);
           g.fillRect(px + Math.floor(rng() * T), py + Math.floor(rng() * T), 1, 1);
         }
         if (rng() < 0.05) {
@@ -346,7 +361,7 @@ export class NeonSkin {
 
   /** Slowly turning clock medallions and gears on the larger wall masses. */
   private placeMedallions(w: number, h: number, line: number): void {
-    const blocks = solidBlocks(w, h, this.map.solid, 3, MAX_MEDALLIONS);
+    const blocks = solidBlocks(w, h, this.wall, 3, MAX_MEDALLIONS);
     blocks.forEach((b, i) => {
       const c = { x: (b.x + b.size / 2) * TILE_SIZE, y: (b.y + b.size / 2) * TILE_SIZE };
       const img = this.scene.add
@@ -387,6 +402,80 @@ export class NeonSkin {
       });
       this.props.push(img);
     });
+  }
+
+  /** Props keep their pixels and get a neon contour that follows their own silhouette. */
+  private outlineProps(props: Set<number>, w: number, line: number): void {
+    const webgl = this.scene.game.renderer.type === Phaser.WEBGL;
+    const core = mix(line, 0xffffff, 0.5);
+    for (const i of props) {
+      const t = this.map.walls.getTileAt(i % w, Math.floor(i / w));
+      const key = t ? this.silhouette(t) : null;
+      if (!t || !key) continue;
+      const img = this.scene.add
+        .image(t.pixelX + TILE_SIZE / 2, t.pixelY + TILE_SIZE / 2, key)
+        .setTint(core)
+        .setBlendMode(Phaser.BlendModes.ADD)
+        .setDepth(-0.45);
+      if (webgl) img.preFX?.addGlow(line, 2, 0, false, 0.1, 6);
+      this.props.push(img);
+    }
+  }
+
+  /** A 1px ring of light just outside the tile's opaque pixels, built once per tile kind. */
+  private silhouette(t: Phaser.Tilemaps.Tile): string | null {
+    const ts = t.tileset;
+    if (!ts?.image || t.index < 0) return null;
+    const key = `fx_neon_sil_${ts.name}_${t.index}`;
+    const textures = this.scene.textures;
+    if (textures.exists(key)) return key;
+    const at = ts.getTileTextureCoordinates(t.index) as { x: number; y: number } | null;
+    if (!at) return null;
+    const tw = ts.tileWidth;
+    const th = ts.tileHeight;
+    const W = tw + 2;
+    const H = th + 2;
+    const tex = textures.createCanvas(key, W, H);
+    if (!tex) return null;
+    const ctx = tex.getContext();
+    const src = ts.image.getSourceImage() as CanvasImageSource;
+    ctx.drawImage(src, at.x, at.y, tw, th, 1, 1, tw, th);
+    const img = ctx.getImageData(0, 0, W, H);
+    const a = (x: number, y: number): number =>
+      x < 0 || y < 0 || x >= W || y >= H ? 0 : img.data[(y * W + x) * 4 + 3];
+    const out = ctx.createImageData(W, H);
+    for (let y = 0; y < H; y++)
+      for (let x = 0; x < W; x++) {
+        const edge =
+          a(x, y) <= 16 &&
+          (a(x + 1, y) > 16 || a(x - 1, y) > 16 || a(x, y + 1) > 16 || a(x, y - 1) > 16);
+        if (!edge) continue;
+        const o = (y * W + x) * 4;
+        out.data[o] = out.data[o + 1] = out.data[o + 2] = out.data[o + 3] = 255;
+      }
+    ctx.putImageData(out, 0, 0);
+    tex.refresh();
+    return key;
+  }
+
+  /** Puzzle spots with nothing drawn on them (dials are only a prompt) get a small clock face. */
+  private markPuzzles(accent: number): void {
+    const swapped = new Set(this.map.reveal.map((t) => `${t.x},${t.y}`));
+    const seen = new Set<string>();
+    for (const t of this.map.marks) {
+      const k = `${t.x},${t.y}`;
+      if (swapped.has(k) || seen.has(k)) continue;
+      seen.add(k);
+      if ((this.map.walls.getTileAt(t.x, t.y)?.index ?? -1) >= 0) continue;
+      const c = tileCenter(t);
+      const img = this.scene.add
+        .image(c.x, c.y, this.shape('medallion', 22))
+        .setTint(accent)
+        .setAlpha(0.7)
+        .setBlendMode(Phaser.BlendModes.ADD)
+        .setDepth(-0.4);
+      this.props.push(img);
+    }
   }
 
   /** A turning, breathing ring under each point of interest. */

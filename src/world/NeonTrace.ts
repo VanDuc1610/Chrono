@@ -233,3 +233,42 @@ export function traceRegions(
   }
   return lines;
 }
+
+/**
+ * Props: small clusters of solid tiles (a pillar, a statue, a crate) that do not touch the map
+ * border. They keep their pixel art under the neon skin instead of becoming line-art boxes.
+ * Returns their tile indices (y * w + x).
+ */
+export function propTiles(w: number, h: number, solid: SolidAt, maxSize: number): Set<number> {
+  const seen = new Uint8Array(w * h);
+  const props = new Set<number>();
+  for (let i = 0; i < w * h; i++) {
+    if (seen[i] || !solid(i % w, Math.floor(i / w))) continue;
+    const cells: number[] = [];
+    let border = false;
+    const stack = [i];
+    seen[i] = 1;
+    while (stack.length > 0) {
+      const c = stack.pop()!;
+      cells.push(c);
+      const x = c % w;
+      const y = Math.floor(c / w);
+      if (x === 0 || y === 0 || x === w - 1 || y === h - 1) border = true;
+      for (const [nx, ny] of [
+        [x + 1, y],
+        [x - 1, y],
+        [x, y + 1],
+        [x, y - 1],
+      ]) {
+        if (nx < 0 || ny < 0 || nx >= w || ny >= h) continue;
+        const n = ny * w + nx;
+        if (!seen[n] && solid(nx, ny)) {
+          seen[n] = 1;
+          stack.push(n);
+        }
+      }
+    }
+    if (!border && cells.length <= maxSize) for (const c of cells) props.add(c);
+  }
+  return props;
+}

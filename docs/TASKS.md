@@ -23,16 +23,15 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 Goal (owner, 2026-11-15): Chapters 5–7 are built and wait for the owner's playtest. Chapters 8 and 9
 are built and verified — the story is complete (4 endings). Next: the owner's playtest of Chapters 5–9. The story ends at Chapter 9.
 
-### T-86 · Neon line-art skin — preview on two maps — **Claude** · `IN PROGRESS`
+### T-86 · Neon line-art skin across the whole game — **Claude** · `IN PROGRESS`
 
 Owner, 2026-11-17: try the "cosmic neon" style. The world is redrawn as glowing line art in code, over the
 same map data: wall outlines traced from the collision grid, floor-region lines, a drafting grid, stars and
 constellations, clock medallions on wall masses and floor sigils, gold frames on exits and puzzle pieces, rings
 on points of interest, a soft rim of light on Peter and the people (sprites keep their pixel art). `level` per
-map: 1 = full void (Chapter 9 apex), 0.3 = outlines over the tiles (Chapter 1 shore). N toggles. Waiting on
-the owner's verdict before any wider rollout.
+map: 1 = full void, below 1 = outlines over the tiles. N toggles. Owner approved the preview; rolled out to all 131 maps (`scripts/neon.mjs`): the skin rises by chapter — Prologue 25%, Ch1 30%, Ch2 40%, Ch3 50%, Ch4 60%, Ch5 70% (from 50% the floor dims and stars come out), Ch6–9 full void. Props (solid clusters of up to 4 tiles away from the border: pillars, statues, crates) keep their pixel art with a contour traced from their own pixels; empty dial spots get a small clock face. Verified on all 131 maps in the browser (no errors, retrace under 20 ms).
 
-_Locks:_ `src/world/NeonSkin.ts` (new), `src/world/NeonTrace.ts` (new), `public/assets/data/neon.json` (new),
+_Locks:_ `src/world/NeonSkin.ts` (new), `src/world/NeonTrace.ts` (new), `public/assets/data/neon.json` (new), `scripts/neon.mjs` (new),
 `tests/neon.test.ts` (new), `src/world/Atmosphere.ts`, `src/scenes/ExplorationScene.ts`, `src/scenes/PreloadScene.ts`,
 `public/assets/data/strings.json`.
 
