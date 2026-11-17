@@ -103,6 +103,30 @@
     "notes": "interval_tileset rebuilt slot for slot from LPC materials (tinted); story props kept."
   },
   {
+    "id": "derived-map-ch3-sepulcher-gate-props",
+    "file": "public/assets/lpc/map_ch3_sepulcher_gate_props.png",
+    "sha256": "a39d4c8a59ba21c3d4bdf3c8b2f048bd5246e8a0aa43cb98964be9cb9fefaee7",
+    "from": ["tiles-outside-objects"],
+    "script": "scripts/lpc/dress.mjs",
+    "notes": "Props for map_ch3_sepulcher_gate (gravestones), tinted like its tileset."
+  },
+  {
+    "id": "derived-map-coastal-town-props",
+    "file": "public/assets/lpc/map_coastal_town_props.png",
+    "sha256": "0a9c6935169ed1a8a9ec43366e49613f84b4626bb3e6a00bad56d15d09d28344",
+    "from": ["tiles-outside-objects", "tiles-terrain-and-outside"],
+    "script": "scripts/lpc/dress.mjs",
+    "notes": "Props for map_coastal_town (stall, barrels, sacks, cart, crates, boat), tinted like its tileset."
+  },
+  {
+    "id": "derived-map-forgotten-forest-props",
+    "file": "public/assets/lpc/map_forgotten_forest_props.png",
+    "sha256": "4836bd4112175873e84baa43756e33a7629d8507d4de3383523d3bdd1d0d6be3",
+    "from": ["tiles-outside-objects"],
+    "script": "scripts/lpc/dress.mjs",
+    "notes": "Props for map_forgotten_forest (evergreens over the hedges), tinted like its tileset."
+  },
+  {
     "id": "derived-steel-tileset-caps",
     "file": "public/assets/lpc/steel_tileset_caps.png",
     "sha256": "7dc56e7a888e2cbf5ad478a49bccdfbaa967a30404f590207ac0631988950112",

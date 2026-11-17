@@ -432,6 +432,36 @@ Soft terrain edges for interval_tileset (LPC border pieces).
 
 interval_tileset rebuilt slot for slot from LPC materials (tinted); story props kept.
 
+### derived-map-ch3-sepulcher-gate-props
+
+- File: public/assets/lpc/map_ch3_sepulcher_gate_props.png
+- Made by: scripts/lpc/dress.mjs
+- From: tiles-outside-objects
+- Authors: Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio
+- Licences: CC-BY-SA-3.0, GPL-3.0
+
+Props for map_ch3_sepulcher_gate (gravestones), tinted like its tileset.
+
+### derived-map-coastal-town-props
+
+- File: public/assets/lpc/map_coastal_town_props.png
+- Made by: scripts/lpc/dress.mjs
+- From: tiles-outside-objects, tiles-terrain-and-outside
+- Authors: Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0
+
+Props for map_coastal_town (stall, barrels, sacks, cart, crates, boat), tinted like its tileset.
+
+### derived-map-forgotten-forest-props
+
+- File: public/assets/lpc/map_forgotten_forest_props.png
+- Made by: scripts/lpc/dress.mjs
+- From: tiles-outside-objects
+- Authors: Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio
+- Licences: CC-BY-SA-3.0, GPL-3.0
+
+Props for map_forgotten_forest (evergreens over the hedges), tinted like its tileset.
+
 ### derived-steel-tileset-caps
 
 - File: public/assets/lpc/steel_tileset_caps.png

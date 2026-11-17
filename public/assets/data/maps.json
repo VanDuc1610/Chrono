@@ -172,8 +172,8 @@
       "id": "map_coastal_town",
       "name": "Thị trấn ven biển",
       "tilemap": {
-        "key": "map_coastal_town",
-        "path": "assets/maps/map_coastal_town.json"
+        "key": "map_coastal_town_lpc",
+        "path": "assets/maps/map_coastal_town_lpc.json"
       },
       "tileset": {
         "name": "coastal_tileset",
@@ -182,11 +182,13 @@
       },
       "layers": {
         "ground": "Ground",
-        "walls": "Walls"
+        "walls": "Walls",
+        "overlay": "Overlay",
+        "above": "Above"
       },
       "collision": {
         "fromGid": 17,
-        "toGid": 44
+        "toGid": 88
       },
       "bgm": "ambient",
       "spawns": {
@@ -475,7 +477,12 @@
             "unlessFlag": "time_restored"
           }
         }
-      ]
+      ],
+      "propTileset": {
+        "name": "lpc_props_map_coastal_town",
+        "key": "lpc_props_map_coastal_town",
+        "path": "assets/lpc/map_coastal_town_props.png"
+      }
     },
     "map_shattered_antechamber": {
       "id": "map_shattered_antechamber",
@@ -692,8 +699,8 @@
       "id": "map_forgotten_forest",
       "name": "Rừng Quên Lãng",
       "tilemap": {
-        "key": "map_forgotten_forest",
-        "path": "assets/maps/map_forgotten_forest.json"
+        "key": "map_forgotten_forest_lpc",
+        "path": "assets/maps/map_forgotten_forest_lpc.json"
       },
       "tileset": {
         "name": "wilds_tileset",
@@ -702,11 +709,13 @@
       },
       "layers": {
         "ground": "Ground",
-        "walls": "Walls"
+        "walls": "Walls",
+        "overlay": "Overlay",
+        "above": "Above"
       },
       "collision": {
         "fromGid": 17,
-        "toGid": 43
+        "toGid": 72
       },
       "bgm": "ambient",
       "spawns": {
@@ -835,7 +844,12 @@
           "hunter": true,
           "speed": 78
         }
-      ]
+      ],
+      "propTileset": {
+        "name": "lpc_props_map_forgotten_forest",
+        "key": "lpc_props_map_forgotten_forest",
+        "path": "assets/lpc/map_forgotten_forest_props.png"
+      }
     },
     "map_old_lighthouse": {
       "id": "map_old_lighthouse",
@@ -3174,8 +3188,8 @@
       "name": "Tiền Đình Lăng Mộ",
       "chapter": 3,
       "tilemap": {
-        "key": "map_ch3_sepulcher_gate",
-        "path": "assets/maps/map_ch3_sepulcher_gate.json"
+        "key": "map_ch3_sepulcher_gate_lpc",
+        "path": "assets/maps/map_ch3_sepulcher_gate_lpc.json"
       },
       "tileset": {
         "name": "wilds_tileset",
@@ -3184,12 +3198,14 @@
       },
       "layers": {
         "ground": "Ground",
-        "walls": "Walls"
+        "walls": "Walls",
+        "overlay": "Overlay",
+        "above": "Above"
       },
       "bgm": "ambient",
       "collision": {
         "fromGid": 17,
-        "toGid": 43
+        "toGid": 64
       },
       "ambient": {
         "color": "#6a5ad8",
@@ -3320,7 +3336,12 @@
           ],
           "index": 11
         }
-      ]
+      ],
+      "propTileset": {
+        "name": "lpc_props_map_ch3_sepulcher_gate",
+        "key": "lpc_props_map_ch3_sepulcher_gate",
+        "path": "assets/lpc/map_ch3_sepulcher_gate_props.png"
+      }
     },
     "map_ch3_silent_necropolis": {
       "id": "map_ch3_silent_necropolis",

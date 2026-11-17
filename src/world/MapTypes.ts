@@ -212,6 +212,8 @@ export interface MapDefinition {
   aliases?: string[];
   tilemap: { key: string; path: string };
   tileset: { name: string; key: string; path: string };
+  /** Optional (LPC dressing, T-88): a second atlas of props, after the main tileset's gids. */
+  propTileset?: { name: string; key: string; path: string };
   /** Tile layers: `ground` is drawn first, `walls` collides on GIDs [fromGid, toGid]. */
   layers: {
     ground: string;

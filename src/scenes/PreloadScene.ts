@@ -280,6 +280,8 @@ export class PreloadScene extends Phaser.Scene {
         if (!this.textures.exists(map.tileset.key)) {
           this.load.image(map.tileset.key, map.tileset.path);
         }
+        if (map.propTileset && !this.textures.exists(map.propTileset.key))
+          this.load.image(map.propTileset.key, map.propTileset.path);
         this.load.tilemapTiledJSON(map.tilemap.key, map.tilemap.path);
       }
     });

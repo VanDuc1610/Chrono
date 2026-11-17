@@ -457,7 +457,12 @@ export class ExplorationScene extends Phaser.Scene {
   private buildMap(): void {
     const def = this.mapDef;
     const map = this.make.tilemap({ key: def.tilemap.key });
-    const tileset = map.addTilesetImage(def.tileset.name, def.tileset.key);
+    const mainTileset = map.addTilesetImage(def.tileset.name, def.tileset.key);
+    // LPC dressing (T-88): props come from a second atlas; every layer may use both.
+    const props = def.propTileset
+      ? map.addTilesetImage(def.propTileset.name, def.propTileset.key)
+      : null;
+    const tileset = mainTileset && props ? [mainTileset, props] : mainTileset;
     if (!tileset) throw new Error(`[${def.id}] tileset "${def.tileset.name}" failed to load.`);
     // A layer variant (e.g. low tide) may replace the default layers while its condition holds.
     const variant = (def.layerVariants ?? []).find((v) =>
