@@ -77,7 +77,7 @@ root docs into `docs/archive/`.
 _Locks:_ `docs/context/*`, `docs/PROJECT_CONTEXT.md`, `docs/archive/*` (new), root `*.png`,
 root duplicate docs (`ART_GUIDE.md`, `PETER_DESIGN.md`, `ASSET_REGISTRY.md` only if duplicated).
 
-### T-97 · Audio integration — **Codex** · `BLOCKED` (owner approval of docs/audio/AUDIO_PLAN.md)
+### T-97 · Audio integration — **Codex** · `IN PROGRESS`
 
 Vendor the approved tracks and sound effects with credits (pinned, hashed, like `scripts/lpc/*`), a music
 player per chapter/battle/boss with crossfades that follows `src/state/Settings.ts`, and the missing sound
@@ -86,7 +86,7 @@ effects; procedural sound stays as the fallback. API only: Claude wires the scen
 _Locks:_ `src/systems/audio/*`, `scripts/audio/*` (new), `art-source/audio/*` (new),
 `public/assets/audio/*`, `tests/audio*.test.ts` (new), `CREDITS.md` (audio section only).
 
-### T-98 · Split ActionCombat.ts into modules (no behaviour change) — **Codex** · `TODO`
+### T-98 · Split ActionCombat.ts into modules (no behaviour change) — **Codex** · `DONE`
 
 `src/world/ActionCombat.ts` is 2,458 lines. Split it into focused modules under `src/world/action/`
 (roamers, field foes, shots, hazards, HUD bars...) keeping its public API, so `ExplorationScene` and
@@ -188,8 +188,8 @@ _Locks:_ `docs/testing/DAP_AN_CHUONG_9.md` (new). Read-only: everything else.
 
 ## Done (latest 5 — older entries in [TASKS_ARCHIVE.md](TASKS_ARCHIVE.md))
 
+- **T-98** Split ActionCombat into six typed-context modules; preserved extracted bodies and scene API, pure geometry rules tested; 271 unit tests, production smoke and CDP combat passed - Codex
 - **T-96** Settings (volumes, text speed, shake, fewer flashes, neon/lighting defaults; stored, legacy audio migrated, tested), options panel, pause menu on ESC (map frozen; save/load closed in boss fights), three save slots with overwrite/delete confirmations; checked end to end in the browser and by the production smoke test - Claude
 - **T-94** Settings, pause menu & save slots spec (`docs/design/SETTINGS_UX.md`): defined `chrono_settings_v1` schema/defaults, key rebinding with swap/conflict rules, `ESC` pause menu with dialogue/cutscene/boss gating, 3-slot save/load/delete/migration flows, `640x360` ASCII mock-ups, and 3 owner questions — Antigravity
 - **T-93** Audio plan (`docs/audio/AUDIO_PLAN.md`): mapped verified CC0/CC-BY/OGA-BY music (menu, Ch 0–9 exploration, normal/boss/final-boss, sad story, 4 endings) and 2 CC0 SFX packs (`RPG Sound Pack`, `512 Sound Effects`) to all `SoundSystem` and missing events, with attribution and OGG/loudness/crossfade integration spec — Antigravity
 - **T-91** UI overhaul: VT323 pixel font with Vietnamese for every text, compact HUD (place, level, HP/MP bars with values, EXP hairline), slimmer quest tracker, key list behind H, title screen with a turning clock and Peter — Claude
-- **T-95** Refreshed runtime/status docs from source (131 maps, four endings, LPC/neon, bosses, VT323, 260 tests); archived 11 historical screenshots; retained nonduplicate root document pointers/ledger - Codex

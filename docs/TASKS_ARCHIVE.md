@@ -2,6 +2,7 @@
 
 Completed tasks moved out of [TASKS.md](TASKS.md) to keep the board short. Newest first. Read only when you need history.
 
+- **T-95** Refreshed runtime/status docs from source (131 maps, four endings, LPC/neon, bosses, VT323, 260 tests); archived 11 historical screenshots; retained nonduplicate root document pointers/ledger - Codex
 - **T-92** Split Phaser vendor bundle, retained CI checks and Pages deploy, production Chromium smoke (nonblank frame, real keys and saves); 260 unit tests and smoke passed - Codex
 
 - **T-89** Vendored 25 pinned LPC PNGs with SHA-256 verification, source credits, manifest, generated CREDITS.md and attribution coverage tests; 259 tests passed; no public asset changes - Codex
