@@ -16,6 +16,7 @@ const NEXT_START: Record<number, { mapId: string; spawnId: string }> = {
 };
 import { createPanel } from '../ui/Panel';
 import { getStrings } from '../ui/Strings';
+import { music } from './sceneMusic';
 
 /** Ending flags are exclusive in story data. If several are present, the first listed wins. */
 export function chapter9EndingKeys(hasFlag: (flag: string) => boolean): {
@@ -183,8 +184,12 @@ export class PrologueEndScene extends Phaser.Scene {
       delay: this.tweens.stagger(300, {}),
     });
 
-    this.soundSystem.startBgm('ambient');
-    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.soundSystem.stopBgm(true));
+    // T-97: an ending's own theme on the Chapter 9 card, the quiet story theme on the others.
+    const endingIndex = ['order', 'unbound', 'true', 'returned_page'].findIndex((id) =>
+      session.getFlag(`ch9_ending_${id}`),
+    );
+    if (this.chapter === 9 && endingIndex >= 0) music(this).playEnding(endingIndex + 1);
+    else music(this).playStory();
 
     // Accept input only after the card has faded in, so a held key can't skip it.
     this.time.delayedCall(1800, () => {

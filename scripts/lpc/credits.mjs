@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { format } from 'prettier';
+import { renderAudioCredits } from '../audio/credits.mjs';
 
 export async function renderCredits(entries, derived = []) {
   let text =
@@ -26,6 +27,8 @@ export async function renderCredits(entries, derived = []) {
       text += `### ${d.id}\n\n- File: ${d.file}\n- Made by: ${d.script}\n- From: ${d.from.join(', ')}\n- Authors: ${authors.join('; ')}\n- Licences: ${licences.join(', ')}\n\n${d.notes}\n\n`;
     }
   }
+  // T-97: the audio section (OpenGameArt music), generated from art-source/audio/manifest.json.
+  if (fs.existsSync('art-source/audio/manifest.json')) text += '\n' + (await renderAudioCredits());
   return format(text, { parser: 'markdown' });
 }
 

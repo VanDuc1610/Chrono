@@ -2,6 +2,8 @@
 
 Completed tasks moved out of [TASKS.md](TASKS.md) to keep the board short. Newest first. Read only when you need history.
 
+- **T-91** UI overhaul: VT323 pixel font with Vietnamese for every text, compact HUD (place, level, HP/MP bars with values, EXP hairline), slimmer quest tracker, key list behind H, title screen with a turning clock and Peter — Claude
+
 - **T-95** Refreshed runtime/status docs from source (131 maps, four endings, LPC/neon, bosses, VT323, 260 tests); archived 11 historical screenshots; retained nonduplicate root document pointers/ledger - Codex
 - **T-92** Split Phaser vendor bundle, retained CI checks and Pages deploy, production Chromium smoke (nonblank frame, real keys and saves); 260 unit tests and smoke passed - Codex
 

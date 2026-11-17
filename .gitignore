@@ -26,3 +26,7 @@ Thumbs.db
 # Playwright
 test-results/
 playwright-report/
+
+# Audio import caches (T-97): archived licence pages and raw downloads, never committed
+art-source/audio/pages/
+art-source/audio/raw/

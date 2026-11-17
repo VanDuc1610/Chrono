@@ -50,7 +50,7 @@ export function fire(this: ShotsContext, worldX: number, worldY: number): void {
   const aim = Math.atan2(worldY - origin.y, worldX - origin.x);
   const shotAnim = this.scene.anims.exists('peter_shoot_down') ? 'peter_shoot' : 'peter_attack';
   this.player.playAction(shotAnim, facingFromAngle(aim), 290);
-  this.sound.playSlash();
+  this.sound.playShot();
   this.shots.fire(origin, aim, ranged);
 }
 

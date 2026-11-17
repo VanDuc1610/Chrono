@@ -45,6 +45,7 @@ import type {
   TilePoint,
 } from '../world/MapTypes';
 import type { CombatSceneData } from './CombatScene';
+import { FINAL_BOSSES, music } from './sceneMusic';
 
 /** Map layer of tent tops, palisades and tree crowns: above the actors, below effects. */
 const ABOVE_DEPTH = 30;
@@ -392,7 +393,7 @@ export class ExplorationScene extends Phaser.Scene {
 
     ScreenTransition.in(this, 460);
     this.refreshFrozen();
-    if (!this.isFrozen) this.soundSystem.startBgm(this.mapDef.bgm);
+    if (!this.isFrozen) this.playMapMusic();
     // Map light (e.g. Chapter 1's endless sunset), under the HUD.
     if (this.mapDef.ambient) {
       const { width, height } = this.scale;
@@ -404,7 +405,6 @@ export class ExplorationScene extends Phaser.Scene {
         .setDepth(79);
     }
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
-      this.soundSystem.stopBgm(true);
       // Sacks left on a scale go back to the satchel.
       this.field?.destroy();
       this.field = null;
@@ -755,11 +755,11 @@ export class ExplorationScene extends Phaser.Scene {
         .setOrigin(0)
         .setScrollFactor(0)
         .setDepth(80);
-      this.soundSystem.stopBgm(true);
+      music(this).stop();
     } else {
       this.frozenVeil?.destroy();
       this.frozenVeil = null;
-      this.soundSystem.startBgm(this.mapDef.bgm);
+      this.playMapMusic();
     }
   }
 
@@ -897,11 +897,13 @@ export class ExplorationScene extends Phaser.Scene {
         isPaused: () => this.isTransitioning || this.satchel.isOpen || this.dialogueBox.isOpen(),
         onRescue: (ids) => {
           this.bossFight = null;
+          this.playMapMusic();
           this.exitsArmed = false;
           this.openDialogueChain(ids);
         },
         onVictory: (beaten) => {
           this.session.setFlag(def.defeatedFlag);
+          this.playMapMusic();
           const rewards = this.session.claimEnemyRewards(beaten);
           const vars = { enemy: beaten.name, rewards: this.session.describeRewards(rewards) };
           this.bossFight = null;
@@ -925,6 +927,7 @@ export class ExplorationScene extends Phaser.Scene {
       this.pfx,
     );
     this.bossFight = fight;
+    music(this).playBoss(FINAL_BOSSES.has(def.enemyId));
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => fight.destroy());
   }
 
@@ -1351,6 +1354,11 @@ export class ExplorationScene extends Phaser.Scene {
     this.player.sprite.setVelocity(0, 0);
     this.scene.launch('PauseScene');
     this.scene.pause();
+  }
+
+  /** T-97: the chapter's track (the same track carries on from map to map). */
+  private playMapMusic(): void {
+    music(this).playForMap(this.mapDef.id, this.mapDef.chapter ?? 0);
   }
 
   /** Saving and loading wait until a boss fight is over. */

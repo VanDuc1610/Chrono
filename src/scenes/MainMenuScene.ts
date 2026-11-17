@@ -9,6 +9,7 @@ import { registerPeterAnimations } from '../systems/animation/PeterAnimationConf
 import { OptionsPanel } from '../ui/OptionsPanel';
 import { ACTIVE_SLOT, SaveSlotsPanel } from '../ui/SaveSlotsPanel';
 import { controlList } from '../ui/controlList';
+import { music } from './sceneMusic';
 
 type MenuItemId = 'newGame' | 'continue' | 'load' | 'chapters' | 'options';
 
@@ -200,10 +201,8 @@ export class MainMenuScene extends Phaser.Scene {
     this.createChaptersModal(width, height);
 
     // Start procedural ambient ruin BGM and clean up on shutdown
-    this.soundSystem.startBgm('ambient');
-    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
-      this.soundSystem.stopBgm(true);
-    });
+    // T-97: the title theme; it cross-fades into the next scene's track instead of stopping.
+    music(this).playMenu();
   }
 
   /** T-96: the options panel (sound, display and text, controls), shared with the pause menu. */

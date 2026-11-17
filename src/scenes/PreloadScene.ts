@@ -2,6 +2,7 @@ import type { MapDatabase } from '../world/MapTypes';
 import type { LpcData } from '../world/WallCaps';
 import Phaser from 'phaser';
 import { PETER_FRAME } from '../systems/animation/PeterAnimationConfig';
+import { queueAudio } from '../systems/audio/AudioAssets';
 
 export class PreloadScene extends Phaser.Scene {
   private progressBar!: Phaser.GameObjects.Graphics;
@@ -283,6 +284,8 @@ export class PreloadScene extends Phaser.Scene {
       }
     });
     this.load.json('data_maps', 'assets/data/maps.json');
+    // T-97: music files (art-source/audio/manifest.json); missing ones stay procedural.
+    queueAudio(this.load);
     // T-88: LPC wall tops per tileset (scripts/lpc/reskin.mjs), drawn above walkable tiles.
     this.load.once('filecomplete-json-data_lpc', (_key: string, _type: string, data: unknown) => {
       for (const ts of Object.values((data as LpcData).tilesets))

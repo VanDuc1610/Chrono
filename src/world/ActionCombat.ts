@@ -672,6 +672,7 @@ export class ActionCombat {
       this.dotUntil = 0;
       this.floatText(this.player.x, this.player.y - 22, this.t('action.brushed'), '#e6dcff');
     }
+    this.sound.playDodge();
     // Dash sheet (crouch, lunge, stretch with after-images, recover); a faint fade if it is missing.
     if (this.scene.anims.exists('peter_dash_down')) {
       this.player.playAction(
@@ -798,6 +799,7 @@ export class ActionCombat {
       this.scene.time.delayedCall(130, () => this.player.forceVelocity(0, 0, stun));
     }
     this.player.playAction('peter_hurt', this.player.getMovementSystem().getLastFacing(), 260);
+    this.sound.playHurt();
     this.player.sprite.setTint(0xff5050);
     this.scene.time.delayedCall(160, () => this.player.sprite.clearTint());
     this.scene.cameras.main.shake(120, 0.004);
@@ -839,6 +841,7 @@ export class ActionCombat {
       this.slowPct = 0.45;
     }
     this.player.playAction('peter_hurt', this.player.getMovementSystem().getLastFacing(), 260);
+    this.sound.playHurt();
     this.player.sprite.setTint(0xff5050);
     this.scene.time.delayedCall(160, () => this.player.sprite.clearTint());
     this.scene.cameras.main.shake(120, 0.004);
@@ -896,6 +899,7 @@ export class ActionCombat {
     this.session.hp = Math.max(0, this.session.hp - dealt);
     this.invulnUntil = now + this.tuning.hurtInvulnMs;
     this.player.playAction('peter_hurt', this.player.getMovementSystem().getLastFacing(), 260);
+    this.sound.playHurt();
     this.player.sprite.setTint(0xff5050);
     this.scene.time.delayedCall(160, () => this.player.sprite.clearTint());
     this.scene.cameras.main.shake(100, 0.003);

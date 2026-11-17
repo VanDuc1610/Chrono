@@ -9,7 +9,6 @@ import {
 } from '../systems/combat/CombatTypes';
 import type { DialogueDatabase } from '../systems/dialogue/DialogueTypes';
 import { FLAGS } from '../state/GameSession';
-import { SoundSystem } from '../systems/audio/SoundSystem';
 import { GameSession, getSession } from '../state/GameSession';
 import { registerPeterAnimations } from '../systems/animation/PeterAnimationConfig';
 import { createPanel } from '../ui/Panel';
@@ -18,6 +17,7 @@ import { echoRhythm } from '../world/Chapter8Rules';
 import type { DialogueRule } from '../world/MapTypes';
 import { getStrings, getStringTable, Translate } from '../ui/Strings';
 import type { ExplorationSceneData } from './ExplorationScene';
+import { music } from './sceneMusic';
 
 export interface CombatSceneData {
   enemyId: string;
@@ -52,7 +52,6 @@ type PeterCombatAnim = 'idle' | 'attack' | 'hurt' | 'temporal_sight';
 export class CombatScene extends Phaser.Scene {
   public combatSystem!: CombatSystem;
   public session!: GameSession;
-  private soundSystem = SoundSystem.getInstance();
 
   // Visual representations
   private playerSprite!: Phaser.GameObjects.Sprite;
@@ -174,11 +173,8 @@ export class CombatScene extends Phaser.Scene {
     // Fade in
     this.cameras.main.fadeIn(400, 0, 0, 0);
 
-    // Start procedural battle BGM and stop all audio nodes on shutdown
-    this.soundSystem.startBgm('battle');
-    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
-      this.soundSystem.stopBgm(true);
-    });
+    // T-97: the battle theme; the map's track comes back when the battle ends.
+    music(this).playBattle();
 
     this.setBattleLog(this.t('combat.intro', { enemy: this.enemy.name }));
 
