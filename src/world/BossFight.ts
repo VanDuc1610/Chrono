@@ -345,6 +345,11 @@ export class BossFight implements CombatExtension {
     return !this.ended;
   }
 
+  /** The boss on the map (for shadows and depth by the feet). */
+  public get sprite(): Phaser.Physics.Arcade.Sprite {
+    return this.boss;
+  }
+
   private get hpPct(): number {
     return this.hp / this.maxHp;
   }

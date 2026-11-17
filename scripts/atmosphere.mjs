@@ -165,6 +165,15 @@ const KEEP_DECOR = {
   map_ch1_bell_sanctum: { drips: true, critters: [{ kind: 'wisp', count: 1 }] },
 };
 
+/** T-88: colour grade for maps rebuilt in LPC art (warm late afternoon for the Veridia camp). */
+const LPC_GRADE = {
+  map_ch4_encampment_veridia: {
+    tint: '#ffd9b0',
+    alpha: 0.45,
+    lift: { color: '#ff9a4a', alpha: 0.06 },
+  },
+};
+
 const out = {};
 let made = 0;
 for (const [id, m] of Object.entries(maps)) {
@@ -198,6 +207,8 @@ for (const [id, m] of Object.entries(maps)) {
     def.lights = [
       { tile: boss.tile, color: t.boss, radius: 140, intensity: 0.75, glow: 0.35, flicker: true },
     ];
+  // T-88: maps rebuilt in LPC art get a colour grade over the world (owner-approved mockup look).
+  if (LPC_GRADE[id]) def.grade = LPC_GRADE[id];
   out[id] = def;
   made++;
 }

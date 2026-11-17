@@ -127,7 +127,8 @@
       "level": 0.6,
       "line": "#ff8a7a",
       "accent": "#ffd36b",
-      "void": "#0c0506"
+      "void": "#0c0506",
+      "accentsOnly": true
     },
     "map_ch4_trench_crossroads": {
       "level": 0.6,

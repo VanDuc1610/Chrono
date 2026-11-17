@@ -16,7 +16,10 @@ describe('vendored LPC attribution', () => {
     const audit = await auditCredits();
     expect(new Set(manifest.map((entry) => entry.id)).size).toBe(manifest.length);
     expect(new Set(manifest.map((entry) => entry.file)).size).toBe(manifest.length);
-    const files = new Set(manifest.map((entry) => entry.file));
+    const files = new Set([
+      ...manifest.map((entry) => entry.file),
+      ...audit.derived.map((entry: { file: string }) => entry.file),
+    ]);
     for (const file of audit.pngs) {
       expect(files.has(file), `Missing manifest entry: ${file}`).toBe(true);
     }
@@ -31,6 +34,18 @@ describe('vendored LPC attribution', () => {
       const asset = audit.assets.find((asset: { file: string }) => asset.file === entry.file);
       expect(asset.signature).toEqual([137, 80, 78, 71, 13, 10, 26, 10]);
       expect(asset.hash).toBe(entry.sha256);
+    }
+  });
+
+  it('traces every derived game asset (T-88) to vendored sources, with an intact hash', async () => {
+    const audit = await auditCredits();
+    const ids = new Set(manifest.map((entry) => entry.id));
+    type Derived = { id: string; file: string; from: string[]; sha256: string; hash: string };
+    for (const d of audit.derived as Derived[]) {
+      expect(d.file.startsWith('public/assets/lpc/'), d.id).toBe(true);
+      expect(d.from.length, d.id).toBeGreaterThan(0);
+      for (const id of d.from) expect(ids.has(id), `${d.id} <- ${id}`).toBe(true);
+      expect(d.hash, d.id).toBe(d.sha256);
     }
   });
 

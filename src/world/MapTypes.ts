@@ -213,7 +213,14 @@ export interface MapDefinition {
   tilemap: { key: string; path: string };
   tileset: { name: string; key: string; path: string };
   /** Tile layers: `ground` is drawn first, `walls` collides on GIDs [fromGid, toGid]. */
-  layers: { ground: string; walls: string };
+  layers: {
+    ground: string;
+    walls: string;
+    /** Optional (LPC maps): drawn over the ground, under the walls; never collides. */
+    overlay?: string;
+    /** Optional (LPC maps): drawn above the actors (tent tops, palisades); never collides. */
+    above?: string;
+  };
   collision: { fromGid: number; toGid: number };
   bgm: 'ambient' | 'battle';
   spawns: Record<string, TilePoint> & { default: TilePoint };

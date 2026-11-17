@@ -840,6 +840,14 @@
             "count": 1
           }
         ]
+      },
+      "grade": {
+        "tint": "#ffd9b0",
+        "alpha": 0.45,
+        "lift": {
+          "color": "#ff9a4a",
+          "alpha": 0.06
+        }
       }
     },
     "map_ch4_trench_crossroads": {

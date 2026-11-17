@@ -4939,21 +4939,23 @@
       "name": "Doanh Trại Veridia",
       "chapter": 4,
       "tilemap": {
-        "key": "map_ch4_encampment_veridia",
-        "path": "assets/maps/map_ch4_encampment_veridia.json"
+        "key": "map_ch4_encampment_veridia_lpc",
+        "path": "assets/maps/map_ch4_encampment_veridia_lpc.json"
       },
       "tileset": {
-        "name": "warfield_tileset",
-        "key": "warfield_tileset",
-        "path": "assets/tilesets/warfield_tileset.png"
+        "name": "lpc_veridia",
+        "key": "lpc_veridia",
+        "path": "assets/lpc/veridia_tiles.png"
       },
       "collision": {
-        "fromGid": 17,
-        "toGid": 64
+        "fromGid": 1,
+        "toGid": 69
       },
       "layers": {
         "ground": "Ground",
-        "walls": "Walls"
+        "walls": "Walls",
+        "overlay": "Overlay",
+        "above": "Above"
       },
       "bgm": "ambient",
       "spawns": {

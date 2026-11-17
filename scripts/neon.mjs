@@ -29,13 +29,16 @@ const THEMES = {
   9: { level: 1, line: '#b98cff', accent: '#ffd36b', void: '#06030f', ghost: 0.08 },
 };
 
+/** T-88: maps rebuilt in LPC art keep their art; the skin adds only its accents there. */
+const LPC_MAPS = new Set(['map_ch4_encampment_veridia']);
+
 const out = {};
 for (const [id, m] of Object.entries(maps)) {
   if (KEEP.has(id) && old[id]) {
     out[id] = old[id];
     continue;
   }
-  out[id] = { ...THEMES[m.chapter ?? 0] };
+  out[id] = { ...THEMES[m.chapter ?? 0], ...(LPC_MAPS.has(id) ? { accentsOnly: true } : {}) };
 }
 fs.writeFileSync(OUT, JSON.stringify({ maps: out }, null, 2) + '\n');
 console.log(`neon.json: ${Object.keys(out).length} maps`);

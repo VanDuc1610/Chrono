@@ -27,12 +27,15 @@ are built and verified — the story is complete (4 endings). Next: the owner's 
 
 Owner, 2026-11-17: the look moves to LPC 3/4 pixel art (CC-BY-SA 3.0, credits required); the Veridia
 mockup and Peter's LPC front were approved (keep him slender; 64x64 frames). Steps: Peter idle + walk in
-four directions (owner approved), then his other eight sets (idle/walk unarmed, run, attack, hurt, Temporal Sight, dash, shoot). Owner approved all ten with black curls (2026-11-17); integrated: 64x64 sheets, origin 14 px above the soles so positions and the 18x14 collider are unchanged, turn-based combat at 1.25x. Next: then engine work
+four directions (owner approved), then his other eight sets (idle/walk unarmed, run, attack, hurt, Temporal Sight, dash, shoot). Owner approved all ten with black curls (2026-11-17); integrated: 64x64 sheets, origin 14 px above the soles so positions and the 18x14 collider are unchanged, turn-based combat at 1.25x. Engine pass done: contact shadows and depth by the feet for Peter, people, roamers and the boss (`ActorShadows`); optional `overlay`/`above` map layers (walk behind tents); colour grade per map (`atmosphere.json` `grade`); neon `accentsOnly` for LPC maps. Veridia rebuilt in LPC (`scripts/lpc/veridia.mjs`: atlas from the pinned sheets, same collision for every old blocker, tents at LPC size, camp clutter; derived atlas credited via `art-source/lpc/derived.json`). Swept all 131 maps in the browser: no errors. Next: the other Chapter 0-5 maps, one by one with the owner. then engine work
 (contact shadows, y-sorted multi-tile props, chapter colour grade) and Veridia rebuilt in LPC tiles.
 
 _Locks:_ `scripts/author-peter-lpc.js` (new), `art-source/characters/peter/generated/candidates/peter_lpc_*` (new),
 `docs/art/PETER_DESIGN.md`, `docs/art/SPRITE_PIPELINE.md`, `public/assets/characters/peter/*`, `src/entities/Player.ts`,
-`src/systems/animation/PeterAnimationConfig.ts`, `src/scenes/PreloadScene.ts`, `src/scenes/CombatScene.ts`.
+`src/systems/animation/PeterAnimationConfig.ts`, `src/scenes/PreloadScene.ts`, `src/scenes/CombatScene.ts`, `src/scenes/ExplorationScene.ts`,
+`src/world/ActorShadows.ts` (new), `src/world/Atmosphere.ts`, `src/world/NeonSkin.ts`, `src/world/MapTypes.ts`, `src/world/BossFight.ts`,
+`scripts/lpc/*`, `scripts/pixel-art/png-read.js` (new), `art-source/lpc/derived.json` (new), `public/assets/lpc/*` (new), `CREDITS.md`,
+`tests/lpc-credits.test.ts`, `public/assets/maps/map_ch4_encampment_veridia_lpc.json` (new), `scripts/atmosphere.mjs`, `scripts/neon.mjs`.
 
 ### T-89 · LPC asset vendoring + credits manifest — **Codex** · `DONE`
 

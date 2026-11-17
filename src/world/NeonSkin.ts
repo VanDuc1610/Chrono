@@ -25,6 +25,11 @@ export interface NeonDef {
   void?: string;
   /** How much of the old ground still shows through the void (0-1, default 0.1). */
   ghost?: number;
+  /**
+   * LPC maps (T-88): keep the art as drawn and add only the accents — rings on points of
+   * interest, frames on exits and puzzle pieces. No outlines, no void, no rim lights.
+   */
+  accentsOnly?: boolean;
 }
 
 interface NeonDatabase {
@@ -78,6 +83,8 @@ export class NeonSkin {
   private rims: { sprite: Phaser.GameObjects.Sprite; fx: Phaser.FX.Glow }[] = [];
   /** Wall masses (solid tiles that are not props): these become line art. */
   private wall: (x: number, y: number) => boolean = () => false;
+  /** Depth added to the glow, rings and marks (accents-only maps draw them over the tiles). */
+  private lift = 0;
 
   constructor(
     private readonly scene: Phaser.Scene,
@@ -132,20 +139,27 @@ export class NeonSkin {
     // Pillars, statues and crates keep their pixel art; only the wall masses turn into lines.
     const props = propTiles(w, h, this.map.solid, 4);
     this.wall = (x, y) => this.map.solid(x, y) && !props.has(y * w + x);
-    const edges = traceEdges(w, h, this.wall);
+    // LPC maps keep their art: accents only, lifted above the tile layers instead of under them.
+    const acc = !!d.accentsOnly;
+    this.lift = acc ? 2 : 0;
+    const edges = acc ? [] : traceEdges(w, h, this.wall);
     // Floor regions (a path, a carpet, shallows) by ground tile; walls draw no region line.
-    const regions = traceRegions(
-      w,
-      h,
-      (x, y) => (this.map.solid(x, y) ? -1 : (ground.getTileAt(x, y)?.index ?? -1)),
-      4,
-    );
+    const regions = acc
+      ? []
+      : traceRegions(
+          w,
+          h,
+          (x, y) => (this.map.solid(x, y) ? -1 : (ground.getTileAt(x, y)?.index ?? -1)),
+          4,
+        );
 
     // Ground under the void, the void, then the walls layer (its decor and doors stay visible).
-    ground.setDepth(-3);
-    walls.setDepth(-1);
+    if (!acc) {
+      ground.setDepth(-3);
+      walls.setDepth(-1);
+    }
     // From half strength on, the floor dims and the stars come out; at full, the void takes over.
-    if (d.level >= 0.5) {
+    if (!acc && d.level >= 0.5) {
       this.base = s.add
         .renderTexture(0, 0, w * TILE_SIZE, h * TILE_SIZE)
         .setOrigin(0)
@@ -164,7 +178,7 @@ export class NeonSkin {
     this.glow = s.add
       .renderTexture(0, 0, w * TILE_SIZE, h * TILE_SIZE)
       .setOrigin(0)
-      .setDepth(-0.5)
+      .setDepth(-0.5 + this.lift)
       .setBlendMode(Phaser.BlendModes.ADD)
       .setAlpha(this.full ? 1 : 0.6 + 0.4 * d.level);
     this.paintGlow(edges, regions, line, accent);
@@ -172,7 +186,7 @@ export class NeonSkin {
     if (this.full) this.placeMedallions(w, h, line);
     if (this.full) this.placeSigils(w, h, accent);
     for (const t of this.map.pois) this.addRing(t, accent);
-    this.outlineProps(props, w, line);
+    if (!acc) this.outlineProps(props, w, line);
     this.markPuzzles(accent);
     if (this.full) this.rimActors(line);
     if (notify) this.onChange?.(this.full);
@@ -473,7 +487,7 @@ export class NeonSkin {
         .setTint(accent)
         .setAlpha(0.7)
         .setBlendMode(Phaser.BlendModes.ADD)
-        .setDepth(-0.4);
+        .setDepth(-0.4 + this.lift);
       this.props.push(img);
     }
   }
@@ -485,7 +499,7 @@ export class NeonSkin {
       .image(c.x, c.y, RING)
       .setTint(accent)
       .setBlendMode(Phaser.BlendModes.ADD)
-      .setDepth(-0.4);
+      .setDepth(-0.4 + this.lift);
     this.scene.tweens.add({ targets: img, angle: 360, duration: 6000, repeat: -1 });
     this.scene.tweens.add({
       targets: img,

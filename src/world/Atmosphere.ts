@@ -25,6 +25,11 @@ export interface AtmosphereDef {
   motes?: { color: string; count: number; drift: number; up?: boolean };
   /** Creatures, drips and falling leaves / petals / snow (MapDecor). */
   decor?: DecorDef;
+  /**
+   * Colour grade over the world, under the HUD (T-88): `tint` multiplies the picture (a warm
+   * afternoon, a cold crypt); `lift` adds a soft light of its own on top.
+   */
+  grade?: { tint: string; alpha: number; lift?: { color: string; alpha: number } };
 }
 
 interface LightDef {
@@ -72,6 +77,7 @@ export class Atmosphere {
   private dark: Phaser.GameObjects.RenderTexture | null = null;
   private brush: Phaser.GameObjects.Image | null = null;
   private vignette: Phaser.GameObjects.Image | null = null;
+  private grade: Phaser.GameObjects.Rectangle[] = [];
   /** Peter's light, following him above the darkness. */
   private lift: Phaser.GameObjects.Image | null = null;
   private motes: Phaser.GameObjects.Particles.ParticleEmitter | null = null;
@@ -162,6 +168,18 @@ export class Atmosphere {
       .setDepth(60)
       .setAlpha(this.shadeScale);
     this.brush = s.make.image({ key: SOFT, add: false });
+    if (d.grade) {
+      const mk = (color: string, alpha: number, mode: Phaser.BlendModes) =>
+        s.add
+          .rectangle(0, 0, width, height, hex(color), alpha)
+          .setOrigin(0)
+          .setScrollFactor(0)
+          .setDepth(58)
+          .setBlendMode(mode);
+      this.grade.push(mk(d.grade.tint, d.grade.alpha, Phaser.BlendModes.MULTIPLY));
+      if (d.grade.lift)
+        this.grade.push(mk(d.grade.lift.color, d.grade.lift.alpha, Phaser.BlendModes.SCREEN));
+    }
     if (d.vignette)
       this.vignette = s.add
         .image(width / 2, height / 2, VIGNETTE)
@@ -249,6 +267,8 @@ export class Atmosphere {
     this.dark?.destroy();
     this.brush?.destroy();
     this.vignette?.destroy();
+    for (const r of this.grade) r.destroy();
+    this.grade = [];
     this.lift?.destroy();
     this.lift = null;
     this.motes?.destroy();

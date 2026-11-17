@@ -23,6 +23,7 @@ import type { BossProfile } from '../systems/boss/BossTypes';
 import { PixelFxLayer } from '../systems/fx/PixelFxLayer';
 import { Atmosphere } from '../world/Atmosphere';
 import { NeonSkin } from '../world/NeonSkin';
+import { ActorShadows } from '../world/ActorShadows';
 import { ScreenTransition } from '../ui/ScreenTransition';
 import { getStrings, Translate } from '../ui/Strings';
 import {
@@ -41,6 +42,9 @@ import type {
   TilePoint,
 } from '../world/MapTypes';
 import type { CombatSceneData } from './CombatScene';
+
+/** Map layer of tent tops, palisades and tree crowns: above the actors, below effects. */
+const ABOVE_DEPTH = 30;
 
 export interface ExplorationSceneData {
   /** Map to load (id or alias). Defaults to the saved map, then maps.json `startMapId`. */
@@ -155,6 +159,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.visionSprites = [];
     this.npcSprites = [];
     this.neon = null;
+    this.actors = null;
     this.neonSwapKey = '';
     this.frozenVeil = null;
     this.isFrozen = false;
@@ -323,6 +328,7 @@ export class ExplorationScene extends Phaser.Scene {
       (this.mapDef.npcs ?? []).map((n) => n.tile),
       () => (this.pfx ??= new PixelFxLayer(this)),
     );
+    this.actors = new ActorShadows(this);
     this.neon = new NeonSkin(
       this,
       {
@@ -404,6 +410,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.bossFight?.update(delta);
     this.pfx?.update(delta);
     this.atmosphere?.update();
+    this.actors?.sync(this.actorSprites());
     this.field?.update();
     if (this.satchel.isOpen || this.isTransitioning) return;
 
@@ -443,7 +450,11 @@ export class ExplorationScene extends Phaser.Scene {
       conditionHolds(v.when, (flag) => this.session.getFlag(flag)),
     );
     const ground = map.createLayer(variant?.ground ?? def.layers.ground, tileset, 0, 0);
+    // LPC maps (T-88): sand edges, rugs and shadows over the ground; walls; then the tops of tents,
+    // palisades and trees drawn above the actors so they can walk behind them.
+    if (def.layers.overlay) map.createLayer(def.layers.overlay, tileset, 0, 0);
     const walls = map.createLayer(variant?.walls ?? def.layers.walls, tileset, 0, 0);
+    if (def.layers.above) map.createLayer(def.layers.above, tileset, 0, 0)?.setDepth(ABOVE_DEPTH);
     if (!ground || !walls) {
       throw new Error(
         `[${def.id}] tilemap layers missing or reused: ground="${variant?.ground ?? def.layers.ground}", walls="${variant?.walls ?? def.layers.walls}".`,
@@ -1127,6 +1138,16 @@ export class ExplorationScene extends Phaser.Scene {
   private atmosphere: Atmosphere | null = null;
   /** Neon line-art skin (preview maps in neon.json); N toggles it. */
   private neon: NeonSkin | null = null;
+  /** Contact shadows and depth by the feet for everyone on the map (T-88). */
+  private actors: ActorShadows | null = null;
+
+  private actorSprites(): Phaser.GameObjects.Sprite[] {
+    const out: Phaser.GameObjects.Sprite[] = [this.player.sprite, ...this.npcSprites];
+    for (const r of this.action?.roamers ?? []) out.push(r.sprite);
+    const boss = this.bossFight?.active ? this.bossFight.sprite : null;
+    if (boss) out.push(boss);
+    return out;
+  }
   private neonSwapKey = '';
 
   /** Hazy memory: the world greys out and the edges darken while a flashback node is shown. */

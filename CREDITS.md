@@ -1,6 +1,6 @@
 # LPC art credits
 
-Vendored source art; no assets are promoted to the game by this import.
+Vendored source art, and the game assets derived from it (listed last).
 
 LPC sources offer CC-BY-SA 3.0 / GPL 3.0 and, for some components, CC-BY 3.0 / OGA-BY 3.0 or the other licences listed below. These are component-specific alternatives, not blanket permission to relicense a combined sheet. Modified sprites remain under the applicable source licence, including its attribution and share-alike requirements. See each source credit record for details.
 
@@ -289,3 +289,15 @@ Credits CSV records weapon/polearm/spear/background/walk.png; pinned PNG uses tr
 - https://opengameart.org/content/lpc-spear-and-shovel-reworked
 
 Credits CSV records weapon/polearm/spear/foreground/walk.png; pinned PNG uses transposed walk/foreground.png. original by wulax, walk animations redone by pvigier, split into layers and tweaked for v3 character bases by bluecarrot16
+
+## Game assets derived from the sources above
+
+### derived-veridia-tiles
+
+- File: public/assets/lpc/veridia_tiles.png
+- Made by: scripts/lpc/veridia.mjs
+- From: tiles-adobe, tiles-castle_lightsources, tiles-outside-objects, tiles-sand, tiles-terrain-and-outside
+- Authors: Lanea Zimmerman (AKA Sharm); Daniel Armstrong (AKA HughSpectrum); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-3.0, GPL-3.0, GPL-2.0, OGA-BY-3.0, CC-BY-SA-3.0
+
+Tile atlas for Doanh Trại Veridia: tiles cut from the sources, sand desaturated.

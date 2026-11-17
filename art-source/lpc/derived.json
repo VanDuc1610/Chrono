@@ -1,0 +1,16 @@
+[
+  {
+    "id": "derived-veridia-tiles",
+    "file": "public/assets/lpc/veridia_tiles.png",
+    "sha256": "cf12d13976b943320d7fdcc515152c70ef4b705d45be417425743daac8b7d48b",
+    "from": [
+      "tiles-adobe",
+      "tiles-castle_lightsources",
+      "tiles-outside-objects",
+      "tiles-sand",
+      "tiles-terrain-and-outside"
+    ],
+    "script": "scripts/lpc/veridia.mjs",
+    "notes": "Tile atlas for Doanh Trại Veridia: tiles cut from the sources, sand desaturated."
+  }
+]
