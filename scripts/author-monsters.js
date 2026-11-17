@@ -339,6 +339,492 @@ function paradoxCrystal(k) {
   return c;
 }
 
+/** Unborn Cocoon (chapter 5): an upright fleshy pod on root-legs, an embryo glowing inside. */
+function unbornCocoon(k) {
+  const c = new Canvas();
+  const flesh = ['#5a3a46', '#86566a', '#b07c90', '#d8a8b8', '#f0d0dc'];
+  for (const [x, dx] of [
+    [26, -4],
+    [32, 0],
+    [38, 4],
+  ])
+    c.line(x, 52, x + dx, 61, '#5a3a46');
+  c.ellipse(32, 36, 12, 18, flesh);
+  c.ellipse(32, 38, 5, 7, pulse(k) ? ['#ff6a9a', '#ffb4cc'] : ['#c83a6a', '#ff6a9a']);
+  for (const [x0, y0, x1, y1] of [
+    [24, 26, 28, 48],
+    [40, 24, 36, 50],
+    [30, 20, 26, 34],
+  ])
+    c.line(x0, y0, x1, y1, '#86566a');
+  c.outline('#2a1420');
+  return c;
+}
+
+/** Unborn Horror (chapter 5): a pale, too-new crawler on four thin limbs, all eyes. */
+function unbornHorror(k) {
+  const c = new Canvas();
+  const skin = ['#6a4a56', '#9a7280', '#c8a2ae', '#ecccd4'];
+  const step = k % 2;
+  for (const [x, dir, s] of [
+    [22, -1, 0],
+    [27, -1, 1],
+    [37, 1, 0],
+    [42, 1, 1],
+  ]) {
+    const lift = s === step ? 1 : 0;
+    c.line(x, 48, x + dir * 4, 54 - lift, '#6a4a56');
+    c.line(x + dir * 4, 54 - lift, x + dir * 5, 61 - lift, '#6a4a56');
+  }
+  c.ellipse(32, 42, 14, 11, skin);
+  for (const [x, y, r] of [
+    [27, 40, 2.5],
+    [36, 39, 3],
+    [32, 46, 1.6],
+    [41, 44, 1.6],
+  ]) {
+    c.ellipse(x, y, r, r, ['#f6f0f2']);
+    c.set(x, y, '#2a0a14');
+  }
+  c.outline('#2a1420');
+  return c;
+}
+
+/** Chronos's Gardener (chapter 5): a tall bandaged pruner holding open shears. */
+function chronosGardener(k) {
+  const c = new Canvas();
+  const wrap = ['#8a8478', '#b4ae9e', '#d8d2c2', '#f2ecdc'];
+  c.poly(
+    [
+      [24, 24],
+      [40, 24],
+      [42, 56],
+      [22, 56],
+    ],
+    wrap,
+  );
+  for (let y = 26; y < 56; y += 4) c.line(23, y, 41, y + 1, '#8a8478');
+  c.ellipse(32, 18, 7, 8, wrap);
+  for (let y = 13; y < 25; y += 3) c.line(25, y, 39, y + 1, '#8a8478');
+  c.set(34, 17, pulse(k) ? '#d0a8ff' : '#9a6ae0');
+  c.set(35, 17, pulse(k) ? '#d0a8ff' : '#9a6ae0');
+  c.line(26, 56, 26, 61, '#5a564c');
+  c.line(37, 56, 37, 61, '#5a564c');
+  // the shears, held out to the viewer's left
+  const open = k % 2 ? 2 : 0;
+  c.line(24, 34, 14, 30 - open, '#c8d0dc');
+  c.line(24, 35, 14, 38 + open, '#c8d0dc');
+  c.line(25, 34, 19, 32, '#646e80');
+  c.outline();
+  return c;
+}
+
+/** Origin Nullifier (chapter 6): a floating eye in a spiked steel ring. */
+function originNullifier(k) {
+  const c = new Canvas();
+  const y = 32 + BOB[k];
+  for (let a = 0; a < 8; a++) {
+    const t = (a / 8) * Math.PI * 2 + k * 0.1;
+    c.poly(
+      [
+        [32 + Math.cos(t - 0.15) * 15, y + Math.sin(t - 0.15) * 15],
+        [32 + Math.cos(t) * 20, y + Math.sin(t) * 20],
+        [32 + Math.cos(t + 0.15) * 15, y + Math.sin(t + 0.15) * 15],
+      ],
+      ['#4a5262', '#8a94a6'],
+    );
+  }
+  c.ellipse(32, y, 15, 15, ['#3a4250', '#646e80', '#98a2b4', '#c8d0dc']);
+  c.ellipse(32, y, 11, 11, ['#d8dce6', '#f6f8fc']);
+  c.ellipse(
+    32,
+    y,
+    6,
+    6,
+    pulse(k) ? ['#7a4ae0', '#b48cff', '#e0d0ff'] : ['#4a2aa0', '#7a4ae0', '#b48cff'],
+  );
+  c.ellipse(32, y, 2, 2, ['#0a0612']);
+  c.set(29, y - 3, '#ffffff');
+  c.outline();
+  return c;
+}
+
+/** Archon Construct (chapter 6): a cream stone golem with a molten visor and heavy arms. */
+function archonConstruct(k) {
+  const c = new Canvas();
+  const stone = ['#7a7060', '#a89c86', '#d0c6ae', '#eee6d2'];
+  c.poly(
+    [
+      [22, 26],
+      [42, 26],
+      [44, 50],
+      [20, 50],
+    ],
+    stone,
+  );
+  c.poly(
+    [
+      [26, 12],
+      [38, 12],
+      [39, 26],
+      [25, 26],
+    ],
+    stone,
+  );
+  c.poly(
+    [
+      [27, 17],
+      [37, 17],
+      [37, 20],
+      [27, 20],
+    ],
+    pulse(k) ? ['#ff9a3a', '#ffe08a'] : ['#e05a1a', '#ff9a3a'],
+  );
+  for (const x of [13, 45])
+    c.poly(
+      [
+        [x, 26],
+        [x + 7, 26],
+        [x + 7, 48],
+        [x, 48],
+      ],
+      stone,
+    );
+  c.poly(
+    [
+      [23, 50],
+      [30, 50],
+      [30, 61],
+      [23, 61],
+    ],
+    stone,
+  );
+  c.poly(
+    [
+      [34, 50],
+      [41, 50],
+      [41, 61],
+      [34, 61],
+    ],
+    stone,
+  );
+  c.poly(
+    [
+      [29, 32],
+      [35, 32],
+      [35, 38],
+      [29, 38],
+    ],
+    ['#c8964a', '#ecc878'],
+  );
+  c.outline();
+  return c;
+}
+
+/** Name Eater (chapter 7): a dark spiked orb that is mostly mouth. */
+function nameEater(k) {
+  const c = new Canvas();
+  const y = 34 + BOB[k];
+  for (let a = 0; a < 12; a++) {
+    const t = (a / 12) * Math.PI * 2;
+    c.poly(
+      [
+        [32 + Math.cos(t - 0.2) * 15, y + Math.sin(t - 0.2) * 15],
+        [32 + Math.cos(t) * 19, y + Math.sin(t) * 19],
+        [32 + Math.cos(t + 0.2) * 15, y + Math.sin(t + 0.2) * 15],
+      ],
+      ['#1e1230', '#34204e'],
+    );
+  }
+  c.ellipse(32, y, 16, 16, ['#120a20', '#24163a', '#3a2858', '#56407e']);
+  const gape = pulse(k) ? 5 : 3;
+  c.ellipse(32, y + 3, 11, gape, ['#05020a']);
+  for (let x = 22; x <= 42; x += 3) {
+    c.set(x, y + 3 - gape + 1, '#f2ecdc');
+    c.set(x + 1, y + 3 + gape - 1, '#f2ecdc');
+  }
+  c.set(27, y - 7, '#b48cff');
+  c.set(37, y - 7, '#b48cff');
+  c.outline();
+  return c;
+}
+
+/** Erasure Moths (chapter 7): a small swarm of pale moths, each beat a different place. */
+function erasureMoths(k) {
+  const c = new Canvas();
+  const spots = [
+    [22, 28],
+    [38, 24],
+    [30, 36],
+    [44, 38],
+    [18, 44],
+    [34, 48],
+  ];
+  spots.forEach(([x, y], i) => {
+    const dx = Math.round(Math.sin(k * 1.6 + i) * 2);
+    const dy = Math.round(Math.cos(k * 1.3 + i * 2) * 2);
+    const open = (k + i) % 2;
+    const px = x + dx;
+    const py = y + dy;
+    for (const s of [-1, 1]) {
+      c.ellipse(px + s * (2 + open), py - 1, 2 + open, 2, ['#c8c4d8', '#f2f0fa'], { flat: true });
+      c.set(px + s * (2 + open), py - 1, '#9a8ac0');
+    }
+    c.line(px, py - 2, px, py + 1, '#3a3050');
+  });
+  c.outline('#3a3050');
+  return c;
+}
+
+/** Ink Hound (chapter 7): a black hound of spilled ink, violet eyes, drips under it. */
+function inkHound(k) {
+  const c = new Canvas();
+  const ink = ['#06040a', '#120c1a', '#1e162c', '#2e2442'];
+  const stride = k % 2 ? 2 : -2;
+  for (const [x, s] of [
+    [21, 1],
+    [26, -1],
+    [38, 1],
+    [43, -1],
+  ])
+    c.poly(
+      [
+        [x - 2, 46],
+        [x + 2, 46],
+        [x + 1 + s * stride * 0.5, 61],
+        [x - 1 + s * stride * 0.5, 61],
+      ],
+      ink,
+    );
+  c.ellipse(32, 42, 15, 7, ink);
+  c.ellipse(17, 36, 7, 6, ink); // head
+  c.poly(
+    [
+      [12, 38],
+      [6, 41],
+      [12, 42],
+    ],
+    ink,
+  ); // snout
+  c.poly(
+    [
+      [15, 30],
+      [17, 25],
+      [20, 31],
+    ],
+    ink,
+  ); // ear
+  c.poly(
+    [
+      [46, 40],
+      [54, 34 + (k % 2)],
+      [48, 43],
+    ],
+    ink,
+  ); // tail
+  c.set(15, 35, pulse(k) ? '#e0c8ff' : '#b48cff');
+  c.set(16, 35, '#b48cff');
+  for (const x of [24, 33, 40]) c.set(x, 50 + ((k + x) % 3), '#2e2442');
+  c.outline('#3a2a5a');
+  return c;
+}
+
+/** Assimilator (chapter 8): a grey fuzzy mimic; the sign over it shows the move it learned. */
+function assimilator(k) {
+  const c = new Canvas();
+  const fur = ['#4a4c56', '#74767e', '#9ea0a8', '#c8cad0'];
+  c.ellipse(32, 46, 14, 12, fur);
+  for (let a = 0; a < 16; a++) {
+    const t = (a / 16) * Math.PI * 2;
+    c.set(32 + Math.cos(t) * 15, 46 + Math.sin(t) * 13, '#9ea0a8');
+  }
+  for (const x of [27, 36]) {
+    c.ellipse(x, 44, 2.4, 3, ['#ffffff']);
+    c.set(x, 45, '#120f17');
+  }
+  c.line(45, 46, 52, 38, '#74767e');
+  c.line(26, 57, 26, 61, '#4a4c56');
+  c.line(38, 57, 38, 61, '#4a4c56');
+  c.outline();
+  // the learned move: 0 and 3 the blade, 1 the dash arrow, 2 the skill spark
+  const g = ['#b8862e', '#ecc878'];
+  if (k === 1) {
+    c.line(24, 26, 38, 26, g[1]);
+    c.line(35, 23, 38, 26, g[1]);
+    c.line(35, 29, 38, 26, g[1]);
+  } else if (k === 2) {
+    c.line(31, 18, 31, 32, g[1]);
+    c.line(24, 25, 38, 25, g[1]);
+    c.line(27, 21, 35, 29, g[0]);
+    c.line(35, 21, 27, 29, g[0]);
+  } else {
+    c.line(26, 32, 37, 21, '#d0d6e0');
+    c.line(25, 29, 29, 33, g[1]);
+  }
+  return c;
+}
+
+/** Phase Wraith (chapter 8): a robed spirit split down the middle between two moments. */
+function phaseWraith(k) {
+  const c = new Canvas();
+  const y0 = 12 + BOB[k];
+  c.poly(
+    [
+      [32, y0],
+      [32, y0 + 46],
+      [18, y0 + 46],
+      [24, y0 + 12],
+    ],
+    ['#3a6a9a', '#5a92c4', '#86bce6'],
+  );
+  c.poly(
+    [
+      [32, y0],
+      [40, y0 + 12],
+      [46, y0 + 46],
+      [32, y0 + 46],
+    ],
+    ['#4a4c56', '#74767e', '#9ea0a8'],
+  );
+  c.ellipse(32, y0 + 10, 5, 5, ['#0c0a12']);
+  c.set(30, y0 + 10, '#ffe08a');
+  c.set(34, y0 + 10, '#ffe08a');
+  for (let y = y0 + 16; y < y0 + 46; y += 5)
+    c.line(19 + (y - y0) / 8, y, 45 - (y - y0) / 8, y, '#2a3a5a');
+  c.outline();
+  if (k % 2) c.fade(0.85);
+  return c;
+}
+
+/** Doom Bell (chapter 8): a bronze bell with a sleeping face; frames 0-3 show the tolls rung. */
+function doomBell(k) {
+  const c = new Canvas();
+  const bronze = ['#5a3412', '#8c5a22', '#c48a3a', '#e8b866', '#f8dc9a'];
+  c.poly(
+    [
+      [20, 12],
+      [44, 12],
+      [44, 15],
+      [20, 15],
+    ],
+    ['#2a1a0a', '#4a3018'],
+  );
+  c.line(32, 15, 32, 19, '#4a3018');
+  c.poly(
+    [
+      [32, 19],
+      [42, 26],
+      [46, 52],
+      [50, 56],
+      [14, 56],
+      [18, 52],
+      [22, 26],
+    ],
+    bronze,
+    false,
+  );
+  for (const y of [32, 44]) c.line(20, y, 44, y, '#8c5a22');
+  c.line(28, 40, 29, 40, '#2a1a0a');
+  c.line(35, 40, 36, 40, '#2a1a0a');
+  c.line(30, 48, 34, 48, '#2a1a0a');
+  c.ellipse(32, 59, 3, 2, bronze); // clapper
+  c.outline();
+  for (let t = 0; t < k; t++)
+    for (const s of [-1, 1])
+      for (let y = 30; y <= 50; y++)
+        c.set(
+          32 + s * (20 + t * 3) + Math.round(Math.abs(y - 40) / 4) * -s,
+          y,
+          t === k - 1 ? '#fff4c8' : '#e8b866',
+        );
+  return c;
+}
+
+/** Entropy Specter (chapter 9): a stacked violet shroud around a cerulean core, sparks shedding. */
+function entropySpecter(k) {
+  const c = new Canvas();
+  const y0 = 14 + BOB[k];
+  const shroud = ['#1e1638', '#34285a', '#4e3e82', '#6e5aa8'];
+  for (let i = 0; i < 4; i++) {
+    const w = 8 + i * 3;
+    c.poly(
+      [
+        [32 - w, y0 + 10 + i * 9],
+        [32 + w, y0 + 10 + i * 9],
+        [32 + w + 2, y0 + 20 + i * 9],
+        [32 - w - 2, y0 + 20 + i * 9],
+      ],
+      shroud,
+    );
+  }
+  c.ellipse(32, y0 + 7, 7, 7, shroud);
+  c.set(30, y0 + 7, '#e8e0ff');
+  c.set(34, y0 + 7, '#e8e0ff');
+  c.ellipse(32, y0 + 27, 4, 4, pulse(k) ? ['#4ae0ff', '#e6f9ff'] : ['#00a8d8', '#4ae0ff']);
+  c.outline();
+  for (const [x, y] of [
+    [16, 30],
+    [48, 26],
+    [14, 46],
+    [50, 44],
+    [22, 54],
+    [42, 56],
+  ])
+    c.set(x, y + ((k + x) % 3), (x + k) % 2 ? '#4ae0ff' : '#b48cff');
+  return c;
+}
+
+/** Chronal Juggernaut (chapter 9): a great rolling gear-wheel with a violet eye at its hub. */
+function chronalJuggernaut(k) {
+  const c = new Canvas();
+  const y = 40;
+  const rot = (k * Math.PI) / 16;
+  for (let a = 0; a < 12; a++) {
+    const t = (a / 12) * Math.PI * 2 + rot;
+    const [cx, cy] = [32 + Math.cos(t) * 19, y + Math.sin(t) * 19];
+    c.ellipse(cx, cy, 3, 3, ['#7a5222', '#b88432']);
+  }
+  c.ellipse(32, y, 19, 19, ['#5a3a14', '#8c6428', '#c8964a', '#ecc878']);
+  c.ellipse(32, y, 12, 12, ['#3a2410', '#5a3a14']);
+  for (let a = 0; a < 6; a++) {
+    const t = (a / 6) * Math.PI * 2 + rot;
+    c.line(32, y, 32 + Math.cos(t) * 11, y + Math.sin(t) * 11, '#8c6428');
+  }
+  c.ellipse(32, y, 5, 5, pulse(k) ? ['#7a4ae0', '#e0d0ff'] : ['#4a2aa0', '#b48cff']);
+  c.set(32, y, '#0a0612');
+  c.outline();
+  return c;
+}
+
+/** Paradox Weaver (chapter 9): a four-armed star of violet threads around a crystal heart. */
+function paradoxWeaver(k) {
+  const c = new Canvas();
+  const y = 34 + BOB[k];
+  const thread = ['#2a1a5a', '#4a32a0', '#7a5ae0', '#b49aff'];
+  for (let a = 0; a < 4; a++) {
+    const t = (a / 4) * Math.PI * 2 + Math.PI / 4 + (k % 2 ? 0.08 : 0);
+    c.poly(
+      [
+        [32 + Math.cos(t - 0.5) * 6, y + Math.sin(t - 0.5) * 6],
+        [32 + Math.cos(t) * 21, y + Math.sin(t) * 21],
+        [32 + Math.cos(t + 0.5) * 6, y + Math.sin(t + 0.5) * 6],
+      ],
+      thread,
+    );
+  }
+  c.poly(
+    [
+      [32, y - 7],
+      [38, y],
+      [32, y + 7],
+      [26, y],
+    ],
+    pulse(k) ? ['#c8d8ff', '#ffffff'] : ['#8aa8ff', '#c8d8ff'],
+  );
+  c.outline('#120a2a');
+  return c;
+}
+
 export const MONSTERS = {
   shade_float: { frames: 4, draw: shade },
   drifter_float: { frames: 4, draw: drifter },
@@ -346,6 +832,20 @@ export const MONSTERS = {
   thought_eater: { frames: 4, draw: thoughtEater },
   branch_phantom: { frames: 4, draw: branchPhantom },
   paradox_crystal: { frames: 4, draw: paradoxCrystal },
+  unborn_cocoon: { frames: 4, draw: unbornCocoon },
+  unborn_horror: { frames: 4, draw: unbornHorror },
+  chronos_gardener: { frames: 4, draw: chronosGardener },
+  origin_nullifier: { frames: 4, draw: originNullifier },
+  archon_construct: { frames: 4, draw: archonConstruct },
+  name_eater: { frames: 4, draw: nameEater },
+  erasure_moths: { frames: 4, draw: erasureMoths },
+  ink_hound: { frames: 4, draw: inkHound },
+  assimilator: { frames: 4, draw: assimilator },
+  phase_wraith: { frames: 4, draw: phaseWraith },
+  doom_bell: { frames: 4, draw: doomBell },
+  entropy_specter: { frames: 4, draw: entropySpecter },
+  chronal_juggernaut: { frames: 4, draw: chronalJuggernaut },
+  paradox_weaver: { frames: 4, draw: paradoxWeaver },
 };
 
 // ------------------------------------------------------------------ output
