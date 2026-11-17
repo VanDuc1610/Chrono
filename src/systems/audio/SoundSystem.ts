@@ -114,6 +114,20 @@ export class SoundSystem {
     this.updateActiveBgmVolume();
   }
 
+  /** T-96: the player's settings (src/state/Settings.ts) are the source of truth for volumes. */
+  public applySettings(s: {
+    masterVolume: number;
+    musicVolume: number;
+    sfxVolume: number;
+    muted: boolean;
+  }): void {
+    this.masterVolume = Math.max(0, Math.min(1, s.masterVolume));
+    this.bgmVolume = Math.max(0, Math.min(1, s.musicVolume));
+    this.sfxVolume = Math.max(0, Math.min(1, s.sfxVolume));
+    this.isMuted = s.muted;
+    this.updateActiveBgmVolume();
+  }
+
   public toggleMute(): boolean {
     this.isMuted = !this.isMuted;
     this.saveSettings();

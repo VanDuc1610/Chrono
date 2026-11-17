@@ -31,7 +31,8 @@ every player), then sound, settings and saves, then combat and code health, then
 1. T-91 UI overhaul (Claude) · 2. T-92 build, release, smoke tests (Codex) · 3. T-93 audio plan
    (Antigravity) · 4. T-94 settings, pause and save-slot design (Antigravity) · 5. T-95 docs refresh
    (Codex) · later: audio integration, settings implementation, one combat system (design first),
-   ActionCombat/BossFight split, gamepad and touch, LPC dressing per map, chapters 6-9 structure.
+   ActionCombat/BossFight split, gamepad and touch, LPC dressing per map, chapters 6-9 structure,
+   key rebinding (T-94 §1.1).
 
 ### T-91 · UI overhaul: pixel font with Vietnamese, compact HUD, controls bar — **Claude** · `DONE`
 
@@ -75,6 +76,16 @@ root docs into `docs/archive/`.
 
 _Locks:_ `docs/context/*`, `docs/PROJECT_CONTEXT.md`, `docs/archive/*` (new), root `*.png`,
 root duplicate docs (`ART_GUIDE.md`, `PETER_DESIGN.md`, `ASSET_REGISTRY.md` only if duplicated).
+
+### T-96 · Settings, pause menu and three save slots — **Claude** · `DONE`
+
+Built from Antigravity's T-94 spec (open questions answered with the defaults: "Tiếp tục" loads the newest
+slot and "Tải trò chơi" opens the picker; no autosave slot; leaving a boss fight only warns). Key rebinding
+is left for a later task.
+
+_Locks (released):_ `src/state/Settings.ts`, `src/ui/OptionsPanel.ts`, `src/ui/SaveSlotsPanel.ts`,
+`src/ui/Comfort.ts`, `src/ui/controlList.ts`, `src/scenes/PauseScene.ts`, `src/scenes/MainMenuScene.ts`,
+`src/ui/DialogueBox.ts`, `src/systems/audio/SoundSystem.ts`, `src/config.ts`, `src/main.ts`.
 
 ### T-88 · LPC world: Peter at the LPC scale, then the engine and Veridia — **Claude** · `IN PROGRESS`
 
@@ -159,8 +170,8 @@ _Locks:_ `docs/testing/DAP_AN_CHUONG_9.md` (new). Read-only: everything else.
 
 ## Done (latest 5 — older entries in [TASKS_ARCHIVE.md](TASKS_ARCHIVE.md))
 
+- **T-96** Settings (volumes, text speed, shake, fewer flashes, neon/lighting defaults; stored, legacy audio migrated, tested), options panel, pause menu on ESC (map frozen; save/load closed in boss fights), three save slots with overwrite/delete confirmations; checked end to end in the browser and by the production smoke test - Claude
 - **T-94** Settings, pause menu & save slots spec (`docs/design/SETTINGS_UX.md`): defined `chrono_settings_v1` schema/defaults, key rebinding with swap/conflict rules, `ESC` pause menu with dialogue/cutscene/boss gating, 3-slot save/load/delete/migration flows, `640x360` ASCII mock-ups, and 3 owner questions — Antigravity
 - **T-93** Audio plan (`docs/audio/AUDIO_PLAN.md`): mapped verified CC0/CC-BY/OGA-BY music (menu, Ch 0–9 exploration, normal/boss/final-boss, sad story, 4 endings) and 2 CC0 SFX packs (`RPG Sound Pack`, `512 Sound Effects`) to all `SoundSystem` and missing events, with attribution and OGG/loudness/crossfade integration spec — Antigravity
 - **T-91** UI overhaul: VT323 pixel font with Vietnamese for every text, compact HUD (place, level, HP/MP bars with values, EXP hairline), slimmer quest tracker, key list behind H, title screen with a turning clock and Peter — Claude
 - **T-95** Refreshed runtime/status docs from source (131 maps, four endings, LPC/neon, bosses, VT323, 260 tests); archived 11 historical screenshots; retained nonduplicate root document pointers/ledger - Codex
-- **T-92** Split Phaser vendor bundle, retained CI checks and Pages deploy, production Chromium smoke (nonblank frame, real keys and saves); 260 unit tests and smoke passed - Codex

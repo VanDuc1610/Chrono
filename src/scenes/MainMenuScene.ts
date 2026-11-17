@@ -6,8 +6,11 @@ import { applyChapterStart, CHAPTER_STARTS, type ChapterStart } from '../state/C
 import { createPanel } from '../ui/Panel';
 import { getStrings, type Translate } from '../ui/Strings';
 import { registerPeterAnimations } from '../systems/animation/PeterAnimationConfig';
+import { OptionsPanel } from '../ui/OptionsPanel';
+import { ACTIVE_SLOT, SaveSlotsPanel } from '../ui/SaveSlotsPanel';
+import { controlList } from '../ui/controlList';
 
-type MenuItemId = 'newGame' | 'continue' | 'chapters' | 'options';
+type MenuItemId = 'newGame' | 'continue' | 'load' | 'chapters' | 'options';
 
 interface MenuItem {
   id: MenuItemId;
@@ -24,11 +27,10 @@ export class MainMenuScene extends Phaser.Scene {
   private saveSystem = new SaveSystem();
   private soundSystem = SoundSystem.getInstance();
 
-  private optionsContainer!: Phaser.GameObjects.Container;
+  private options: OptionsPanel | null = null;
   private isOptionsOpen = false;
   private chaptersContainer!: Phaser.GameObjects.Container;
   private isChaptersOpen = false;
-  private soundStatusText!: Phaser.GameObjects.Text;
   private t!: Translate;
 
   constructor() {
@@ -83,7 +85,7 @@ export class MainMenuScene extends Phaser.Scene {
       })
       .setOrigin(0.5);
 
-    const hasSavedGame = this.saveSystem.hasSave(1);
+    const hasSavedGame = [1, 2, 3].some((n) => this.saveSystem.hasSave(n));
 
     // Menu Options
     this.menuItems = [
@@ -98,6 +100,12 @@ export class MainMenuScene extends Phaser.Scene {
         text: hasSavedGame ? this.t('menu.continue') : this.t('menu.continueNoSave'),
         enabled: hasSavedGame,
         action: () => this.continueGame(),
+      },
+      {
+        id: 'load',
+        text: this.t('menu.load'),
+        enabled: hasSavedGame,
+        action: () => this.openSlots(),
       },
       {
         id: 'chapters',
@@ -159,10 +167,8 @@ export class MainMenuScene extends Phaser.Scene {
       this.input.keyboard.on('keydown-S', () => this.navigate(1));
       this.input.keyboard.on('keydown-ENTER', () => this.selectOption());
       this.input.keyboard.on('keydown-SPACE', () => this.selectOption());
+      // The options and slot panels close themselves on ESC.
       this.input.keyboard.on('keydown-ESC', () => {
-        if (this.isOptionsOpen) {
-          this.toggleOptionsModal();
-        }
         if (this.isChaptersOpen) this.toggleChapters();
       });
       const digits = ['ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX', 'SEVEN', 'EIGHT', 'NINE'];
@@ -191,8 +197,6 @@ export class MainMenuScene extends Phaser.Scene {
       })
       .setOrigin(1, 0);
 
-    // Create Options Modal
-    this.createOptionsModal(width, height);
     this.createChaptersModal(width, height);
 
     // Start procedural ambient ruin BGM and clean up on shutdown
@@ -202,78 +206,50 @@ export class MainMenuScene extends Phaser.Scene {
     });
   }
 
-  private formatSoundStatus(muted: boolean): string {
-    return this.t('menu.soundStatus', {
-      state: muted ? this.t('menu.soundMuted') : this.t('menu.soundEnabled'),
-    });
-  }
-
-  private createOptionsModal(width: number, height: number): void {
-    const modalWidth = 320;
-    const modalHeight = 160;
-    const modalX = width / 2 - modalWidth / 2;
-    const modalY = height / 2 - modalHeight / 2;
-
-    this.optionsContainer = this.add.container(modalX, modalY).setDepth(200).setVisible(false);
-
-    const bg = createPanel(this, 0, 0, modalWidth, modalHeight);
-
-    const header = this.add
-      .text(modalWidth / 2, 22, this.t('menu.optionsTitle'), {
-        fontFamily: 'monospace',
-        fontSize: '12px',
-        color: '#00e1ff',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5);
-
-    const isMuted = this.soundSystem.isSoundMuted();
-    this.soundStatusText = this.add
-      .text(modalWidth / 2, 60, this.formatSoundStatus(isMuted), {
-        fontFamily: 'monospace',
-        fontSize: '12px',
-        color: isMuted ? '#f87171' : '#4ade80',
-        backgroundColor: '#161f36',
-        padding: { left: 8, right: 8, top: 4, bottom: 4 },
-      })
-      .setOrigin(0.5)
-      .setInteractive({ useHandCursor: true });
-
-    this.soundStatusText.on('pointerdown', () => {
-      const nowMuted = this.soundSystem.toggleMute();
-      this.soundStatusText.setText(this.formatSoundStatus(nowMuted));
-      this.soundStatusText.setColor(nowMuted ? '#f87171' : '#4ade80');
-      if (!nowMuted) {
-        this.soundSystem.playSelect();
-      }
-    });
-
-    const soundHint = this.add
-      .text(modalWidth / 2, 86, this.t('menu.soundHint'), {
-        fontFamily: 'monospace',
-        fontSize: '10px',
-        color: '#657499',
-      })
-      .setOrigin(0.5);
-
-    const closeBtn = this.add
-      .text(modalWidth / 2, 122, this.t('menu.optionsClose'), {
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        color: '#94a3b8',
-      })
-      .setOrigin(0.5)
-      .setInteractive({ useHandCursor: true });
-
-    closeBtn.on('pointerdown', () => this.toggleOptionsModal());
-
-    this.optionsContainer.add([bg, header, this.soundStatusText, soundHint, closeBtn]);
-  }
-
+  /** T-96: the options panel (sound, display and text, controls), shared with the pause menu. */
   public toggleOptionsModal(): void {
-    this.isOptionsOpen = !this.isOptionsOpen;
-    this.optionsContainer.setVisible(this.isOptionsOpen);
+    if (this.options) {
+      this.options.close();
+      return;
+    }
+    this.isOptionsOpen = true;
     this.soundSystem.playSelect();
+    this.options = new OptionsPanel(this, this.t, controlList(this.t), () => {
+      this.options = null;
+      this.isOptionsOpen = false;
+    });
+  }
+
+  /** T-96: the three save slots, to load one. */
+  private openSlots(): void {
+    this.isOptionsOpen = true;
+    new SaveSlotsPanel(
+      this,
+      this.t,
+      'load',
+      () => Promise.all([1, 2, 3].map((n) => this.saveSystem.getMetadata(n))),
+      (slot) => this.loadSlot(slot),
+      async (slot) => {
+        await this.saveSystem.delete(slot);
+      },
+      () => {
+        this.isOptionsOpen = false;
+        this.refreshContinue();
+      },
+    );
+  }
+
+  /** Enables "Tiếp tục" / "Tải trò chơi" when any slot holds a save. */
+  private refreshContinue(): void {
+    const any = [1, 2, 3].some((n) => this.saveSystem.hasSave(n));
+    for (const item of this.menuItems)
+      if (item.id === 'continue' || item.id === 'load') {
+        item.enabled = any;
+        if (item.id === 'continue')
+          item.gameObject?.setText(any ? this.t('menu.continue') : this.t('menu.continueNoSave'));
+        item.gameObject?.setColor(any ? '#e0e8ff' : '#454e66');
+      }
+    this.updateMenuVisuals();
   }
 
   /** Chapter select: each chapter starts with the level, gear and story of the ones before it. */
@@ -397,6 +373,7 @@ export class MainMenuScene extends Phaser.Scene {
   private startNewGame(): void {
     // A fresh session discards every trace of a previous playthrough (B3).
     startNewSession(this);
+    this.registry.set(ACTIVE_SLOT, 1);
     this.cameras.main.fadeOut(300, 0, 0, 0);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
       // Always pass data: Phaser reuses the scene's previous start data when none is given, so a
@@ -405,9 +382,19 @@ export class MainMenuScene extends Phaser.Scene {
     });
   }
 
+  /** "Tiếp tục": the newest of the three slots (T-96). */
   private async continueGame(): Promise<void> {
-    const saveData = await this.saveSystem.load(1);
+    const metas = await Promise.all([1, 2, 3].map((n) => this.saveSystem.getMetadata(n)));
+    const newest = metas
+      .filter((m): m is NonNullable<typeof m> => !!m)
+      .sort((a, b) => b.timestamp - a.timestamp)[0];
+    if (newest) await this.loadSlot(newest.slot);
+  }
+
+  private async loadSlot(slot: number): Promise<void> {
+    const saveData = await this.saveSystem.load(slot);
     if (!saveData) return;
+    this.registry.set(ACTIVE_SLOT, slot);
 
     startSessionFromSave(this, saveData);
     this.cameras.main.fadeOut(300, 0, 0, 0);

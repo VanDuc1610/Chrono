@@ -26,6 +26,7 @@ import { NeonSkin } from '../world/NeonSkin';
 import { ActorShadows } from '../world/ActorShadows';
 import { WallCaps } from '../world/WallCaps';
 import { TerrainEdges } from '../world/TerrainEdges';
+import { ACTIVE_SLOT } from '../ui/SaveSlotsPanel';
 import { ScreenTransition } from '../ui/ScreenTransition';
 import { getStrings, Translate } from '../ui/Strings';
 import {
@@ -1024,7 +1025,7 @@ export class ExplorationScene extends Phaser.Scene {
       if (this.satchel.isOpen) {
         if (!this.satchel.back()) this.toggleInventory();
       } else if (this.dialogueBox.isOpen()) this.closeDialogue();
-      else this.returnToMenu();
+      else if (!this.isTransitioning) this.openPause();
     });
     on(K.I, () => this.toggleInventory());
     on(K.B, () => this.toggleInventory());
@@ -1320,7 +1321,14 @@ export class ExplorationScene extends Phaser.Scene {
     this.satchel.useSelected();
   }
 
+  /** K: saves to the slot this playthrough uses (T-96: three slots). */
   public async quickSave(): Promise<void> {
+    const slot = Number(this.registry.get(ACTIVE_SLOT) ?? 1);
+    if (await this.saveToSlot(slot))
+      this.showNotification(this.t('notify.saved'), this.t('notify.savedSlot', { n: slot }));
+  }
+
+  public async saveToSlot(slot: number): Promise<boolean> {
     // Sacks on a scale are not saved: they go back to the satchel first.
     this.field?.reset();
     const saveData = this.session.toSaveData({
@@ -1328,9 +1336,23 @@ export class ExplorationScene extends Phaser.Scene {
       x: Math.round(this.player.x),
       y: Math.round(this.player.y),
     });
-    if (await this.saveSystem.save(1, saveData)) {
-      this.showNotification(this.t('notify.saved'), this.t('notify.savedDetail'));
-    }
+    return this.saveSystem.save(slot, saveData);
+  }
+
+  /** T-96 pause menu: freezes the map (physics, tweens, timers) under PauseScene. */
+  private openPause(): void {
+    this.player.sprite.setVelocity(0, 0);
+    this.scene.launch('PauseScene');
+    this.scene.pause();
+  }
+
+  /** Saving and loading wait until a boss fight is over. */
+  public get inBossFight(): boolean {
+    return !!this.bossFight?.active;
+  }
+
+  public quitToTitle(): void {
+    this.returnToMenu();
   }
 
   /**

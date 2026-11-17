@@ -3,7 +3,7 @@ import { MAX_CHOICES, type DialogueSystem } from '../systems/dialogue/DialogueSy
 import { createPanel } from './Panel';
 import type { Translate } from './Strings';
 
-const TYPE_DELAY_MS = 18;
+import { getSettings, TEXT_DELAY_MS } from '../state/Settings';
 const MIN_BOX_H = 84;
 const PAD_X = 16;
 /** Space above the box kept free for the top HUD panels. */
@@ -182,9 +182,17 @@ export class DialogueBox {
     this.typing = true;
     this.bodyText.setText('');
     this.updateHint();
+    // T-96: text speed from the settings; "instant" shows the whole line at once.
+    const delay = TEXT_DELAY_MS[getSettings().textSpeed];
+    if (delay === 0 || text.length === 0) {
+      this.bodyText.setText(text);
+      this.typing = false;
+      this.onTyped();
+      return;
+    }
     let shown = 0;
     this.timer = this.scene.time.addEvent({
-      delay: TYPE_DELAY_MS,
+      delay,
       repeat: text.length - 1,
       callback: () => {
         shown++;
