@@ -633,6 +633,290 @@ function namelessWeeper(k) {
   return c;
 }
 
+/** The Primordial Shade (chapter 7): a vast hood whose cloak is the night before the first hour. */
+function primordialShade(k) {
+  const c = new Canvas(S);
+  const y = 10 + BOB[k];
+  c.poly(
+    [
+      [48, y],
+      [66, y + 20],
+      [78, GROUND - 2],
+      [18, GROUND - 2],
+      [30, y + 20],
+    ],
+    ['#04020a', '#0c0818', '#16102a', '#221a3e'],
+  );
+  c.ellipse(48, y + 16, 9, 9, ['#020106']);
+  c.set(45, y + 16, '#f4f0ff');
+  c.set(51, y + 16, '#f4f0ff');
+  c.outline(OUTLINE);
+  // stars inside the cloak, turning slowly
+  for (let i = 0; i < 18; i++) {
+    const sx = 30 + ((i * 37 + k * 3) % 36);
+    const sy = y + 30 + ((i * 23) % 52);
+    if (c.get(sx, sy) && sx > 28 && sx < 68) c.set(sx, sy, i % 3 ? '#b48cff' : '#ffffff');
+  }
+  return c;
+}
+
+/** The Convergent Praetor (chapter 7): one judge in two eras, the robe split cream and crimson. */
+function convergentPraetor(k) {
+  const c = new Canvas(S);
+  const y = 12 + (k >= 2 ? 1 : 0);
+  c.poly(
+    [
+      [48, y + 20],
+      [48, GROUND],
+      [26, GROUND],
+      [34, y + 24],
+    ],
+    ['#8a8070', '#c8bea8', '#ece4d0'],
+  );
+  c.poly(
+    [
+      [48, y + 20],
+      [62, y + 24],
+      [70, GROUND],
+      [48, GROUND],
+    ],
+    R.blood,
+  );
+  c.line(48, y + 22, 48, GROUND, '#c8963a');
+  c.ellipse(48, y + 14, 8, 9, ['#a87454', '#d8a07a', '#f0c49e']);
+  c.set(45, y + 13, '#2a1a10');
+  c.set(51, y + 13, '#2a1a10');
+  for (let i = 0; i < 4; i++)
+    c.poly(
+      [
+        [41 + i * 4, y + 6],
+        [43 + i * 4, y],
+        [45 + i * 4, y + 6],
+      ],
+      R.gold,
+    );
+  // the scepter (viewer left) and the white shield (viewer right)
+  c.line(24, y + 22, 24, y + 64, '#8c6420');
+  c.ellipse(24, y + 20, 4, 4, R.gold);
+  c.line(20, y + 28, 28, y + 28, '#ecc870');
+  c.poly(
+    [
+      [64, y + 34],
+      [80, y + 34],
+      [80, y + 58],
+      [72, y + 64],
+      [64, y + 58],
+    ],
+    ['#b4bccc', '#e6e8ee', '#ffffff'],
+  );
+  c.line(72, y + 38, 72, y + 58, '#c8963a');
+  c.line(67, y + 46, 77, y + 46, '#c8963a');
+  c.outline(OUTLINE);
+  return c;
+}
+
+/** The Null-Hour Herald (chapter 8): a black clock-tower of a body, its face stopped near midnight. */
+function nullHourHerald(k) {
+  const c = new Canvas(S);
+  const y = 6 + (k >= 2 ? 1 : 0);
+  c.poly(
+    [
+      [48, y + 4],
+      [86, GROUND],
+      [10, GROUND],
+    ],
+    ['#08060e', '#14101e', '#201a30', '#2e2644'],
+  );
+  c.ellipse(48, y + 10, 7, 7, ['#08060e', '#14101e']);
+  c.set(46, y + 10, '#e8e0ff');
+  c.set(50, y + 10, '#e8e0ff');
+  c.ellipse(48, y + 52, 21, 21, R.gold);
+  c.ellipse(48, y + 52, 18, 18, ['#d8d0bc', '#f2ecdc']);
+  for (let h = 0; h < 12; h++) {
+    const t = (h / 12) * Math.PI * 2;
+    c.set(48 + Math.cos(t) * 15, y + 52 + Math.sin(t) * 15, h % 3 ? '#8c6420' : '#c03038');
+  }
+  const minute = -Math.PI / 2 - 0.08 + (k % 2 ? 0.04 : 0);
+  c.line(48, y + 52, 48 + Math.cos(minute) * 15, y + 52 + Math.sin(minute) * 15, '#120f17');
+  c.line(
+    48,
+    y + 52,
+    48 + Math.cos(-Math.PI / 2 - 0.3) * 9,
+    y + 52 + Math.sin(-Math.PI / 2 - 0.3) * 9,
+    '#120f17',
+  );
+  c.ellipse(48, y + 52, 1.5, 1.5, ['#c8963a']);
+  for (const [bx, by] of [
+    [16, GROUND - 4],
+    [80, GROUND - 4],
+    [30, y + 30],
+    [66, y + 30],
+  ])
+    c.ellipse(bx, by, 3, 3, R.gold);
+  c.outline(OUTLINE);
+  return c;
+}
+
+/** The Sixfold Echo (chapter 8): a striped robe of six echoes, gems of each, two lights circling. */
+function sixfoldEcho(k) {
+  const c = new Canvas(S);
+  const y = 14 + BOB[k % 4];
+  c.poly(
+    [
+      [48, y + 14],
+      [70, GROUND - 2],
+      [26, GROUND - 2],
+    ],
+    ['#141c34', '#1e2a4e', '#2a3a6a'],
+  );
+  for (let yy = y + 26; yy < GROUND - 2; yy += 5)
+    c.line(48 - (yy - y - 14) * 0.48, yy, 48 + (yy - y - 14) * 0.48, yy, '#4ab0e0');
+  c.ellipse(48, y + 10, 8, 8, ['#0c1020', '#1a2240', '#2a3460']);
+  c.set(45, y + 10, '#e6f0ff');
+  c.set(51, y + 10, '#e6f0ff');
+  ['#ff4a5a', '#4ae0a0', '#ffe08a', '#b48cff', '#4ae0ff', '#ffffff'].forEach((g, i) =>
+    c.ellipse(38 + (i % 3) * 10, y + 50 + Math.floor(i / 3) * 14, 2, 2, [g]),
+  );
+  c.outline(OUTLINE);
+  for (const [s, col] of [
+    [1, ['#e6e8ee', '#ffffff']],
+    [-1, ['#2a8ad8', '#4ae0ff']],
+  ]) {
+    const t = k * 0.6 + (s > 0 ? 0 : Math.PI);
+    const o = new Canvas(S);
+    o.ellipse(48 + Math.cos(t) * 32, y + 30 + Math.sin(t) * 10, 4, 4, col);
+    o.outline(OUTLINE);
+    c.over(o);
+  }
+  return c;
+}
+
+/** The Primeval Architect (chapter 9): a violet construct with a cyan visor, four gold gears in orbit. */
+function primevalArchitect(k) {
+  const c = new Canvas(S);
+  const y = 12 + (k >= 2 ? 1 : 0);
+  const body = ['#1e1638', '#322658', '#4a3a7e', '#6650a4'];
+  c.poly(
+    [
+      [34, y + 54],
+      [44, y + 54],
+      [44, GROUND],
+      [34, GROUND],
+    ],
+    body,
+  );
+  c.poly(
+    [
+      [52, y + 54],
+      [62, y + 54],
+      [62, GROUND],
+      [52, GROUND],
+    ],
+    body,
+  );
+  c.poly(
+    [
+      [30, y + 20],
+      [66, y + 20],
+      [66, y + 56],
+      [30, y + 56],
+    ],
+    body,
+  );
+  c.poly(
+    [
+      [38, y],
+      [58, y],
+      [58, y + 18],
+      [38, y + 18],
+    ],
+    body,
+  );
+  c.poly(
+    [
+      [42, y + 6],
+      [54, y + 6],
+      [54, y + 10],
+      [42, y + 10],
+    ],
+    pulse(k) ? ['#a6f0ff', '#e6f9ff'] : ['#4ae0ff', '#a6f0ff'],
+  );
+  c.poly(
+    [
+      [42, y + 30],
+      [54, y + 30],
+      [54, y + 42],
+      [42, y + 42],
+    ],
+    ['#00a8d8', '#4ae0ff'],
+  );
+  c.outline(OUTLINE);
+  for (let i = 0; i < 4; i++) {
+    const t = (i / 4) * Math.PI * 2 + Math.PI / 4 + k * 0.1;
+    const gx = 48 + Math.cos(t) * 36;
+    const gy = y + 40 + Math.sin(t) * 30;
+    const g = new Canvas(S);
+    for (let a = 0; a < 8; a++) {
+      const u = (a / 8) * Math.PI * 2 + k * 0.3;
+      g.ellipse(gx + Math.cos(u) * 7, gy + Math.sin(u) * 7, 1.6, 1.6, ['#c8963a']);
+    }
+    g.ellipse(gx, gy, 6, 6, R.gold);
+    g.ellipse(gx, gy, 2, 2, ['#5a3a14']);
+    g.outline(OUTLINE);
+    c.over(g);
+  }
+  return c;
+}
+
+/** The Sixfold Divinity (chapter 9): a tall dark spire of a god, six coloured rays for arms. */
+function sixfoldDivinity(k) {
+  const c = new Canvas(S);
+  const y = 8 + BOB[k % 4];
+  const rays = ['#4ae0ff', '#ff5a5a', '#ffe08a', '#b48cff', '#ffffff', '#4ae0a0'];
+  rays.forEach((col, i) => {
+    const s = i % 2 ? 1 : -1;
+    const yy = y + 22 + Math.floor(i / 2) * 10;
+    const len = 26 + (pulse(k) ? 3 : 0);
+    c.line(48 + s * 6, yy, 48 + s * len, yy - 8 + Math.floor(i / 2) * 3, col);
+    c.line(48 + s * 6, yy + 1, 48 + s * len, yy - 7 + Math.floor(i / 2) * 3, col);
+  });
+  c.poly(
+    [
+      [48, y + 10],
+      [64, GROUND - 2],
+      [32, GROUND - 2],
+    ],
+    ['#0c1430', '#18244e', '#26386e', '#36508e'],
+  );
+  for (let yy = y + 30; yy < GROUND - 2; yy += 8)
+    c.line(48 - (yy - y - 10) * 0.37, yy, 48 + (yy - y - 10) * 0.37, yy, '#4a62a8');
+  c.ellipse(48, y + 8, 7, 8, ['#0c1430', '#26386e']);
+  c.set(46, y + 8, '#e6f9ff');
+  c.set(50, y + 8, '#e6f9ff');
+  c.ellipse(48, y + 34, 4, 4, pulse(k) ? ['#4ae0ff', '#ffffff'] : ['#00a8d8', '#4ae0ff']);
+  c.outline(OUTLINE);
+  return c;
+}
+
+/** The Void Singularity Core (chapter 9): a black sphere with a violet heart, arms of light swirling in. */
+function voidSingularity(k) {
+  const c = new Canvas(S);
+  const cy = 50;
+  for (let arm = 0; arm < 4; arm++)
+    for (let i = 0; i < 40; i++) {
+      const t = i / 40;
+      const a = arm * (Math.PI / 2) + t * 4 + k * 0.25;
+      const r = 14 + t * 30;
+      const x = 48 + Math.cos(a) * r;
+      const y = cy + Math.sin(a) * r * 0.85;
+      if (i % 2) c.set(x, y, t > 0.6 ? '#4ab0e0' : '#4ae0ff');
+    }
+  c.ellipse(48, cy, 16, 16, ['#020106', '#0a0614', '#140c26']);
+  c.ellipse(48, cy, 6, 6, pulse(k) ? ['#7a4ae0', '#e0d0ff'] : ['#4a2aa0', '#b48cff']);
+  c.outline(OUTLINE);
+  return c;
+}
+
 export const BOSSES = {
   sentinel: { frames: 5, released: 4, draw: sentinel },
   bellkeeper: { frames: 5, released: 4, draw: bellkeeper },
@@ -647,6 +931,13 @@ export const BOSSES = {
   genesis_warden: { frames: 5, released: 4, draw: genesisWarden },
   echo_forgotten: { frames: 4, draw: echoForgotten },
   nameless_weeper: { frames: 5, released: 4, draw: namelessWeeper },
+  primordial_shade: { frames: 4, draw: primordialShade },
+  convergent_praetor: { frames: 5, released: 4, draw: convergentPraetor },
+  null_hour_herald: { frames: 5, released: 4, draw: nullHourHerald },
+  sixfold_echo: { frames: 6, draw: sixfoldEcho },
+  primeval_architect: { frames: 5, released: 4, draw: primevalArchitect },
+  sixfold_divinity: { frames: 6, released: 5, draw: sixfoldDivinity },
+  void_singularity_core: { frames: 4, draw: voidSingularity },
 };
 
 // ------------------------------------------------------------------ output

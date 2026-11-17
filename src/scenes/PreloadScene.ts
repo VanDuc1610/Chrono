@@ -229,7 +229,7 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_void_inquisitor', 'assets/lpc/enemies/void_inquisitor.png', 64],
       ['boss_nameless_weeper', 'assets/enemies/v2/nameless_weeper.png', 96],
       ['boss_kuro_void', 'assets/enemies/kuro_boss.png', 48],
-      ['boss_primordial_shade', 'assets/enemies/primordial_shade.png', 48],
+      ['boss_primordial_shade', 'assets/enemies/v2/primordial_shade.png', 96],
       // Chapter 8 (owner approved 2026-11-15).
       ['npc_chronos_reborn', 'assets/lpc/npcs/chronos_reborn_idle.png', 96],
       ['enemy_assimilator', 'assets/enemies/v2/assimilator.png', 64],
@@ -237,9 +237,9 @@ export class PreloadScene extends Phaser.Scene {
       ['enemy_doom_bell', 'assets/enemies/v2/doom_bell.png', 64],
       ['enemy_twin_era_legionnaire', 'assets/lpc/enemies/twin_era_legionnaire.png', 64],
       ['enemy_second_hand_warden', 'assets/lpc/enemies/second_hand_warden.png', 64],
-      ['boss_convergent_praetor', 'assets/enemies/convergent_praetor.png', 48],
-      ['boss_null_hour_herald', 'assets/enemies/null_hour_herald.png', 64],
-      ['boss_sixfold_echo', 'assets/enemies/sixfold_echo.png', 48],
+      ['boss_convergent_praetor', 'assets/enemies/v2/convergent_praetor.png', 96],
+      ['boss_null_hour_herald', 'assets/enemies/v2/null_hour_herald.png', 96],
+      ['boss_sixfold_echo', 'assets/enemies/v2/sixfold_echo.png', 96],
       // Chapter 9 (owner approved 2026-11-15).
       ['enemy_nexus_sentinel', 'assets/lpc/enemies/nexus_sentinel.png', 64],
       ['enemy_entropy_specter', 'assets/enemies/v2/entropy_specter.png', 64],
@@ -251,10 +251,10 @@ export class PreloadScene extends Phaser.Scene {
       ['boss_lieutenant_neris', 'assets/enemies/lieutenant_neris.png', 48],
       ['boss_lieutenant_other_peter', 'assets/enemies/lieutenant_other_peter.png', 48],
       ['boss_kuro_puppet_master', 'assets/enemies/kuro_puppet_master.png', 48],
-      ['boss_primeval_architect', 'assets/enemies/primeval_architect.png', 64],
+      ['boss_primeval_architect', 'assets/enemies/v2/primeval_architect.png', 96],
       ['boss_chronos_reborn', 'assets/enemies/chronos_combat.png', 64],
-      ['boss_sixfold_divinity', 'assets/enemies/sixfold_divinity.png', 64],
-      ['boss_void_singularity_core', 'assets/enemies/void_singularity_core.png', 64],
+      ['boss_sixfold_divinity', 'assets/enemies/v2/sixfold_divinity.png', 96],
+      ['boss_void_singularity_core', 'assets/enemies/v2/void_singularity_core.png', 96],
     ] as const) {
       this.load.spritesheet(key, file, { frameWidth: size, frameHeight: size });
     }

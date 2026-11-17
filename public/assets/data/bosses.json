@@ -2039,7 +2039,7 @@
     {
       "id": "boss_primordial_shade",
       "intro": "Bóng Nguyên Sơ có một cái bóng đối xứng bên kia hốc tro. Một vầng sáng bị đánh thì gần như vô hại — đánh trúng CẢ HAI vầng sáng gần như cùng lúc mới làm nó vỡ ra.",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 22,
       "speed": 50,
       "damageScale": 0.4,
@@ -2136,7 +2136,7 @@
     {
       "id": "boss_convergent_praetor",
       "intro": "Pháp Quan Hội Tụ đứng sau tấm khiên cẩm thạch. Khi nó tuyên Bản Án Ba Nhịp, đứng vững và lướt né đúng từng nhịp — né trọn ba nhịp, Lyra sẽ phá khiên. Dùng đồ hồi máu sẽ bị \"gặt quả\".",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 22,
       "speed": 50,
       "damageScale": 0.38,
@@ -2239,7 +2239,7 @@
     {
       "id": "boss_null_hour_herald",
       "intro": "Kim Giờ Thứ 25 bắt đầu nhích. Khi nó chạm vạch đỏ, Giờ Số Không sẽ xé toạc không gian — lướt né đúng lúc, hoặc gọi đồng đội [5][6][7] đẩy kim lùi lại.",
-      "scale": 1.15,
+      "scale": 1,
       "radius": 24,
       "speed": 44,
       "damageScale": 0.38,
@@ -2378,7 +2378,7 @@
     {
       "id": "boss_sixfold_echo",
       "intro": "Tàn Ảnh Sáu Ấn thức tỉnh. Mỗi khi mất một phần sáu sinh lực, một ấn mới bừng sáng và cộng thêm luật chơi — vòng giả, đòn ẩn, nhịp nhanh hơn.",
-      "scale": 1.4,
+      "scale": 1,
       "radius": 22,
       "speed": 50,
       "damageScale": 0.38,
@@ -2522,7 +2522,7 @@
     {
       "id": "boss_primeval_architect",
       "intro": "Kiến Trúc Sư Nguyên Thủy dựng tường đá quanh cậu và tung ba vòng sóng co hẹp dần. Khi nó yếu đi, Kuro sẽ giữ tay đá — bấm [5] để ngắt Bộ Điều Áp.",
-      "scale": 1.15,
+      "scale": 1,
       "radius": 26,
       "speed": 40,
       "damageScale": 0.38,
@@ -2632,7 +2632,7 @@
     {
       "id": "boss_sixfold_divinity",
       "intro": "Thần Tính Lục Hợp giáng đòn Trật Tự (vàng) và Khả Năng (tím). Khi hai đòn trùng nhịp, lướt né đúng khoảnh khắc để chúng đập vào nhau. Khi nó suy yếu, đồng đội sẽ đáp lời [5]–[8].",
-      "scale": 1.15,
+      "scale": 1,
       "radius": 26,
       "speed": 42,
       "damageScale": 0.36,
@@ -3376,7 +3376,7 @@
     {
       "id": "boss_void_singularity_core",
       "intro": "Lõi Kỳ Dị Hư Vô hút mọi thứ về phía nó — đừng để bị kéo vào. Không gian xoắn ngược sẽ khóa đòn chém hoặc túi đồ; Đòn Thời Gian cắt xuyên được.",
-      "scale": 1.15,
+      "scale": 1,
       "radius": 26,
       "speed": 24,
       "damageScale": 0.36,
