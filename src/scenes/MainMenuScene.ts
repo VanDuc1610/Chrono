@@ -5,6 +5,7 @@ import { startNewSession, startSessionFromSave } from '../state/GameSession';
 import { applyChapterStart, CHAPTER_STARTS, type ChapterStart } from '../state/ChapterStarts';
 import { createPanel } from '../ui/Panel';
 import { getStrings, type Translate } from '../ui/Strings';
+import { registerPeterAnimations } from '../systems/animation/PeterAnimationConfig';
 
 type MenuItemId = 'newGame' | 'continue' | 'chapters' | 'options';
 
@@ -48,6 +49,10 @@ export class MainMenuScene extends Phaser.Scene {
     // Atmospheric Dark Sky background with starry gradient
     this.createBackground(width, height);
 
+    // T-91: a great clock turning slowly behind the title, and Peter waiting at the edge of it.
+    this.createClockSigil(width / 2, height * 0.27);
+    this.createPeter(width * 0.16, height * 0.86);
+
     // Title Section
     this.add
       .text(width / 2, height * 0.22, 'CHRONO', {
@@ -73,8 +78,8 @@ export class MainMenuScene extends Phaser.Scene {
       .text(width / 2, height * 0.39, this.t('menu.tagline'), {
         fontFamily: 'monospace',
         fontSize: '10px',
-        color: '#657499',
-        letterSpacing: 3,
+        color: '#8a9cc8',
+        letterSpacing: 1,
       })
       .setOrigin(0.5);
 
@@ -409,6 +414,58 @@ export class MainMenuScene extends Phaser.Scene {
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
       this.scene.start('ExplorationScene', {});
     });
+  }
+
+  /** A clock face of light (rings, hour marks, a hexagram, stopped hands) turning very slowly. */
+  private createClockSigil(x: number, y: number): void {
+    const key = 'menu_clock_sigil';
+    if (!this.textures.exists(key)) {
+      const S = 220;
+      const c = S / 2;
+      const R = c - 2;
+      const g = this.make.graphics({}, false);
+      const at = (a: number, r: number) => ({ x: c + Math.cos(a) * r, y: c + Math.sin(a) * r });
+      g.lineStyle(1, 0xffffff, 1);
+      g.strokeCircle(c, c, R);
+      g.strokeCircle(c, c, R * 0.88);
+      for (let i = 0; i < 60; i++) {
+        const a = (i / 60) * Math.PI * 2;
+        const p = at(a, R * (i % 5 === 0 ? 0.8 : 0.93));
+        const q = at(a, R);
+        g.lineBetween(p.x, p.y, q.x, q.y);
+      }
+      for (const turn of [0, Math.PI])
+        g.strokePoints(
+          [0, 1, 2].map((k) => at(turn - Math.PI / 2 + (k * Math.PI * 2) / 3, R * 0.66)),
+          true,
+        );
+      g.strokeCircle(c, c, R * 0.3);
+      g.lineStyle(2, 0xffffff, 1);
+      const h1 = at(-Math.PI / 2, R * 0.55);
+      const h2 = at(-Math.PI / 2 + 2.6, R * 0.38);
+      g.lineBetween(c, c, h1.x, h1.y);
+      g.lineBetween(c, c, h2.x, h2.y);
+      g.generateTexture(key, S, S);
+      g.destroy();
+    }
+    const sigil = this.add
+      .image(x, y, key)
+      .setTint(0x3b7fd6)
+      .setAlpha(0.16)
+      .setBlendMode(Phaser.BlendModes.ADD);
+    this.tweens.add({ targets: sigil, angle: 360, duration: 180000, repeat: -1 });
+  }
+
+  /** Peter (LPC-scale idle) at the edge of the title screen, if his sheets are loaded. */
+  private createPeter(x: number, y: number): void {
+    if (!this.textures.exists('peter_idle')) return;
+    registerPeterAnimations(this);
+    const peter = this.add.sprite(x, y, 'peter_idle', 0).setOrigin(0.5, 1).setScale(2);
+    if (this.anims.exists('peter_idle_right')) peter.play('peter_idle_right');
+    const glow = this.add
+      .ellipse(x, y - 4, 70, 14, 0x00c8ff, 0.12)
+      .setBlendMode(Phaser.BlendModes.ADD);
+    this.tweens.add({ targets: glow, alpha: 0.05, duration: 1600, yoyo: true, repeat: -1 });
   }
 
   private createBackground(width: number, height: number): void {
