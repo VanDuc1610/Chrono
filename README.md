@@ -11,6 +11,14 @@ A browser-based single-player 2D retro RPG initialized with **Phaser 3**, **Type
 
 ## 1. Project Overview
 
+### Play / Build / Release
+
+- Play: https://vanduc1610.github.io/Chrono/ (Pages pattern: `https://<owner>.github.io/<repository>/`).
+- Build with Node.js 24: `npm ci`, then `npm run build`; preview with `npm run preview`.
+- Run the production Chromium smoke test: `npx playwright install chromium`, then `npm run e2e`.
+- Pushes to `main` run the existing CI checks, build once, smoke-test that build and deploy `dist/` using GitHub Pages artifacts. Select **GitHub Actions** as the repository's Pages source.
+- `base: './'` keeps game assets and the UI font relative to the deployed repository path.
+
 **CHRONO – The Fractured Divinity** is a top-down single-player RPG set in an ethereal cosmic fantasy world where the celestial mechanisms of time have shattered.
 
 ### Scope: Prologue Vertical Slice

@@ -1,13 +1,14 @@
 import { expect, test, type Page } from '@playwright/test';
 
 /**
- * Smoke test of the production build in every browser: the game boots without errors, a new
+ * Chromium smoke test of the production build: the game boots without errors, a new
  * game starts in Peter's attic, real key presses drive the dialogue and movement, and a
  * quick-save survives a page reload (CONTINUE becomes available).
  */
 
 interface GameWindow {
   __GAME__?: {
+    events: { once(event: string, callback: () => void): void };
     scene: {
       isActive(key: string): boolean;
       getScene(key: string): unknown;
@@ -52,6 +53,27 @@ test('boots, starts a new game, plays with real keys and saves', async ({ page }
   await expect.poll(() => isActive(page, 'ExplorationScene')).toBe(true);
   await expect.poll(() => explore(page, 'map')).toBe('map_peters_room');
   await expect.poll(() => explore(page, 'dialogue')).toBe(true);
+
+  // Sample the rendered frame before WebGL discards its drawing buffer.
+  const colors = await page.evaluate(
+    () =>
+      new Promise<number>((resolve) => {
+        (window as GameWindow).__GAME__?.events.once('postrender', () => {
+          const canvas = document.querySelector('canvas');
+          if (!canvas) return resolve(0);
+          const gl = canvas.getContext('webgl2') ?? canvas.getContext('webgl');
+          if (!gl) return resolve(0);
+          const pixels = new Uint8Array(canvas.width * canvas.height * 4);
+          gl.readPixels(0, 0, canvas.width, canvas.height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+          const unique = new Set<number>();
+          for (let i = 0; i < pixels.length; i += 4) {
+            unique.add((pixels[i] << 16) | (pixels[i + 1] << 8) | pixels[i + 2]);
+          }
+          resolve(unique.size);
+        });
+      }),
+  );
+  expect(colors).toBeGreaterThan(16);
 
   // Real keys: Space finishes the typewriter, ESC closes the dialogue.
   await page.keyboard.press('Space');

@@ -2,6 +2,7 @@
 
 Completed tasks moved out of [TASKS.md](TASKS.md) to keep the board short. Newest first. Read only when you need history.
 
+- **T-82** Chapter 9 engine: paired gold/violet block rings, companion calls with heal/stun/flag gates, the four-card ending router — Codex
 - **T-81** Chapter 9 dialogue script (`docs/story/CHAPTER_09_SCRIPT.md`, 147 nodes for both routes) — Antigravity
 - **T-81** Chapter 9 dialogue script (`docs/story/CHAPTER_09_SCRIPT.md`, Vietnamese): full script across all 22 maps (both routes, crown, epilogue, 3 hidden maps) with arrival lines, NPCs (with past-flag variants), clues/secrets pickups, C01–C13 puzzles (intro/clue/wrong/right/done), boss confronts and victories, `ch9_kuro_crossroad` choice, and beat-by-beat dialogue for all 4 endings; lines ≤ 220 chars, Kuro "tao/mày", Lyra halberd, C10 slots shuffled — Antigravity
 - **T-79** Map lint errors in chapters 0–7 fixed (spawns moved off exits, blocked exits and the Chapter 5 seal path opened; zero lint errors left) and the Chapter 8 answer key (`docs/testing/DAP_AN_CHUONG_8.md`) — Codex
