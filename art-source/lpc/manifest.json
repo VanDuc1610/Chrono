@@ -1,0 +1,430 @@
+[
+  {
+    "id": "tiles-terrain-and-outside",
+    "repo": "LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit",
+    "sha": "c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a",
+    "path": "LPC/img/tilesets/LPC/Terrain and Outside.png",
+    "file": "art-source/lpc/raw/tiles/Terrain and Outside.png",
+    "sha256": "9cb93d8065b816cba46b7e054e5e5027234772d32d826f396927bdb17426812a",
+    "authors": [
+      "Lanea Zimmerman (AKA Sharm)",
+      "Daniel Eddeland",
+      "William Thompsonj",
+      "Matthew Krohn (Makrohn)",
+      "Matthew Nash",
+      "Nushio",
+      "Casper Nilson"
+    ],
+    "licenses": ["CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://raw.githubusercontent.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Final%20Attribution.txt"
+    ],
+    "notes": "Unmodified PNG. Credits: credits/tiles.txt; supplementary credits: credits/bluecarrot16.txt. Component-specific licence alternatives apply; sheet-level licences are CC-BY-SA 3.0 / GPL 3.0. WARNING: upstream explicitly lists MISSING attributions for this sheet. All named contributors are recorded, but attribution is incomplete. Resolve upstream gaps before promotion."
+  },
+  {
+    "id": "tiles-outside-objects",
+    "repo": "LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit",
+    "sha": "c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a",
+    "path": "LPC/img/tilesets/LPC/Outside Objects.png",
+    "file": "art-source/lpc/raw/tiles/Outside Objects.png",
+    "sha256": "73274e00269aa98d1672da05cdb55eb04fb2b9348db51c3a173ba1087a7b9488",
+    "authors": [
+      "Lanea Zimmerman (AKA Sharm)",
+      "Daniel Eddeland",
+      "Caeless",
+      "William Thompsonj",
+      "Casper Nilsson",
+      "Barbara Rivera",
+      "C Phillips",
+      "Skorpio"
+    ],
+    "licenses": ["CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://raw.githubusercontent.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Final%20Attribution.txt"
+    ],
+    "notes": "Unmodified PNG. Credits: credits/tiles.txt; supplementary credits: credits/bluecarrot16.txt. Component-specific licence alternatives apply; sheet-level licences are CC-BY-SA 3.0 / GPL 3.0. WARNING: upstream explicitly lists MISSING attributions for this sheet. All named contributors are recorded, but attribution is incomplete. Resolve upstream gaps before promotion."
+  },
+  {
+    "id": "tiles-sand",
+    "repo": "LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit",
+    "sha": "c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a",
+    "path": "LPC/img/tilesets/LPC/Final Attributions/Individual Assets/Daniel Eddeland (Daneeklu)/sand.png",
+    "file": "art-source/lpc/raw/tiles/Final Attributions/Individual Assets/Daniel Eddeland (Daneeklu)/sand.png",
+    "sha256": "584fd8060e5bc83965765c348e876dd96788b4adadebc1586e9ff752c2479b97",
+    "authors": ["Daniel Eddeland"],
+    "licenses": ["CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://raw.githubusercontent.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Final%20Attribution.txt"
+    ],
+    "notes": "Unmodified PNG. Credits: credits/tiles.txt; supplementary credits: credits/bluecarrot16.txt. Component-specific licence alternatives apply; sheet-level licences are CC-BY-SA 3.0 / GPL 3.0."
+  },
+  {
+    "id": "tiles-mountains",
+    "repo": "LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit",
+    "sha": "c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a",
+    "path": "LPC/img/tilesets/LPC/Final Attributions/Individual Assets/Sharm/mountains.png",
+    "file": "art-source/lpc/raw/tiles/Final Attributions/Individual Assets/Sharm/mountains.png",
+    "sha256": "08a7d605762d549dd18f9cb948accdaf4521c32299c0dbfe38299fe59ecb7959",
+    "authors": ["Lanea Zimmerman (AKA Sharm)"],
+    "licenses": ["CC-BY-3.0", "GPL-3.0", "GPL-2.0", "OGA-BY-3.0"],
+    "urls": [
+      "https://raw.githubusercontent.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Final%20Attribution.txt"
+    ],
+    "notes": "Unmodified PNG. Credits: credits/tiles.txt; supplementary credits: credits/bluecarrot16.txt. Component-specific licence alternatives apply; sheet-level licences are CC-BY-SA 3.0 / GPL 3.0."
+  },
+  {
+    "id": "tiles-adobe",
+    "repo": "LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit",
+    "sha": "c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a",
+    "path": "LPC/img/tilesets/LPC/Final Attributions/Individual Assets/Sharm/adobe.png",
+    "file": "art-source/lpc/raw/tiles/Final Attributions/Individual Assets/Sharm/adobe.png",
+    "sha256": "e3f533d868d4d14795cf2ebc3f4092708c2dde05604aa8746c34008e97600a39",
+    "authors": ["Lanea Zimmerman (AKA Sharm)"],
+    "licenses": ["CC-BY-3.0", "GPL-3.0", "GPL-2.0", "OGA-BY-3.0"],
+    "urls": [
+      "https://raw.githubusercontent.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Final%20Attribution.txt"
+    ],
+    "notes": "Unmodified PNG. Credits: credits/tiles.txt; supplementary credits: credits/bluecarrot16.txt. Component-specific licence alternatives apply; sheet-level licences are CC-BY-SA 3.0 / GPL 3.0."
+  },
+  {
+    "id": "tiles-arabic",
+    "repo": "LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit",
+    "sha": "c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a",
+    "path": "LPC/img/tilesets/LPC/Final Attributions/Individual Assets/Sharm/arabic.png",
+    "file": "art-source/lpc/raw/tiles/Final Attributions/Individual Assets/Sharm/arabic.png",
+    "sha256": "56912f300e867fb060dd698531f5582547bc292f2cb7af8cdf9cbb9286263106",
+    "authors": ["Lanea Zimmerman (AKA Sharm)"],
+    "licenses": ["CC-BY-3.0", "GPL-3.0", "GPL-2.0", "OGA-BY-3.0"],
+    "urls": [
+      "https://raw.githubusercontent.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Final%20Attribution.txt"
+    ],
+    "notes": "Unmodified PNG. Credits: credits/tiles.txt; supplementary credits: credits/bluecarrot16.txt. Component-specific licence alternatives apply; sheet-level licences are CC-BY-SA 3.0 / GPL 3.0."
+  },
+  {
+    "id": "tiles-castle_lightsources",
+    "repo": "LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit",
+    "sha": "c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a",
+    "path": "LPC/img/tilesets/LPC/Final Attributions/Individual Assets/Daniel Armstrong (Aka HughSpectrum)/castle_lightsources.png",
+    "file": "art-source/lpc/raw/tiles/Final Attributions/Individual Assets/Daniel Armstrong (Aka HughSpectrum)/castle_lightsources.png",
+    "sha256": "08d8be5c1391c075106b142b73f8fb1aca23ae550c212443112843a762ad3436",
+    "authors": ["Daniel Armstrong (AKA HughSpectrum)"],
+    "licenses": ["CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://raw.githubusercontent.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Final%20Attribution.txt"
+    ],
+    "notes": "Unmodified PNG. Credits: credits/tiles.txt; supplementary credits: credits/bluecarrot16.txt. Component-specific licence alternatives apply; sheet-level licences are CC-BY-SA 3.0 / GPL 3.0."
+  },
+  {
+    "id": "tiles-items1",
+    "repo": "LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit",
+    "sha": "c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a",
+    "path": "LPC/img/tilesets/LPC/Final Attributions/Individual Assets/Tuomo Untinen/items1.png",
+    "file": "art-source/lpc/raw/tiles/Final Attributions/Individual Assets/Tuomo Untinen/items1.png",
+    "sha256": "e3a3a9ddf6b761548476df3546b47855efc1cf9db6a71c882678baa94579b030",
+    "authors": ["Tuomo Untinen"],
+    "licenses": ["CC-BY-3.0"],
+    "urls": [
+      "https://raw.githubusercontent.com/LiberatedPixelCup/RPG_Maker_MZ_LPC_Starter_Kit/c4b2dafe697b6fc7f53aa35d8727afe7542d6e2a/LPC/img/tilesets/LPC/Final%20Attributions/Final%20Attribution.txt"
+    ],
+    "notes": "Unmodified PNG. Credits: credits/tiles.txt; supplementary credits: credits/bluecarrot16.txt. Component-specific licence alternatives apply; sheet-level licences are CC-BY-SA 3.0 / GPL 3.0."
+  },
+  {
+    "id": "character-body-bodies-male",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/body/bodies/male/walk.png",
+    "file": "art-source/lpc/raw/characters/body/bodies/male/walk.png",
+    "sha256": "1e0e8f0c11ba5f4f7b3d4439fc416802b4227da2fe146c13de3de254d9f87f77",
+    "authors": [
+      "bluecarrot16",
+      "JaidynReiman",
+      "Benjamin K. Smith (BenCreating)",
+      "Evert",
+      "Eliza Wyatt (ElizaWy)",
+      "TheraHedwig",
+      "MuffinElZangano",
+      "Durrani",
+      "Johannes Sjölund (wulax)",
+      "Stephen Challener (Redshrike)"
+    ],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+      "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+      "https://opengameart.org/content/lpc-male-jumping-animation-by-durrani",
+      "https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle",
+      "https://opengameart.org/content/lpc-revised-character-basics",
+      "https://opengameart.org/content/lpc-be-seated",
+      "https://opengameart.org/content/lpc-runcycle-for-male-muscular-and-pregnant-character-bases-with-modular-heads",
+      "https://opengameart.org/content/lpc-jump-expanded",
+      "https://opengameart.org/content/lpc-character-bases"
+    ],
+    "notes": "see details at https://opengameart.org/content/lpc-character-bases; 'Thick' Male Revised Run/Climb by JaidynReiman (based on ElizaWy's LPC Revised)"
+  },
+  {
+    "id": "character-head-heads-human-male",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/head/heads/human/male/walk.png",
+    "file": "art-source/lpc/raw/characters/head/heads/human/male/walk.png",
+    "sha256": "7e863954dc8c3c748d0727415c39888106bdd3779beb2e3b18011a3a9ef3e53c",
+    "authors": ["bluecarrot16", "Benjamin K. Smith (BenCreating)", "Stephen Challener (Redshrike)"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+      "https://opengameart.org/content/lpc-character-bases"
+    ],
+    "notes": "original head by Redshrike, tweaks by BenCreating, modular version by bluecarrot16"
+  },
+  {
+    "id": "character-legs-pants-male",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/legs/pants/male/walk.png",
+    "file": "art-source/lpc/raw/characters/legs/pants/male/walk.png",
+    "sha256": "2de5a3247743ffa37febdf3464cc0a83e79f64d1028aed410832ee29bea850b6",
+    "authors": [
+      "bluecarrot16",
+      "JaidynReiman",
+      "ElizaWy",
+      "Matthew Krohn (makrohn)",
+      "Johannes Sjölund (wulax)",
+      "Stephen Challener (Redshrike)"
+    ],
+    "licenses": ["OGA-BY-3.0", "GPL-3.0", "CC-BY-SA-3.0"],
+    "urls": [
+      "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles",
+      "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+      "https://opengameart.org/content/lpc-expanded-pants"
+    ],
+    "notes": "original male pants by wulax, recolors and edits to v3 base by bluecarrot16, climb/jump/run/sit/emotes/revised combat by JaidynReiman based on ElizaWy's LPC Revised"
+  },
+  {
+    "id": "character-feet-boots-basic-male",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/feet/boots/basic/male/walk.png",
+    "file": "art-source/lpc/raw/characters/feet/boots/basic/male/walk.png",
+    "sha256": "13521e96fe8c6033c54622a8137cc1a05964a9db3bd1f5a115028951e5cecf18",
+    "authors": ["JaidynReiman", "bluecarrot16", "Nila122"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-2.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-clothes-and-hair",
+      "https://opengameart.org/content/lpc-expanded-socks-shoes"
+    ],
+    "notes": "original by Nila122, edited for male and v3 bases by bluecarrot16, Jump/Sit/Emote/Run/Revised Combat by JaidynReiman"
+  },
+  {
+    "id": "character-torso-armour-leather-male",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/torso/armour/leather/male/walk.png",
+    "file": "art-source/lpc/raw/characters/torso/armour/leather/male/walk.png",
+    "sha256": "160490073860adb9bc702716f5df0f8e01e2fb8f3a6a2b2aaa0343d131c7477c",
+    "authors": ["Johannes Sjölund (wulax)", "bluecarrot16", "JaidynReiman"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+      "https://opengameart.org/content/lpc-clothing-updates",
+      "https://opengameart.org/content/lpc-expanded-armor"
+    ],
+    "notes": "adapted to v3 bases by bluecarrot16, reduced colors and climb/emote/jump by JaidynReiman"
+  },
+  {
+    "id": "character-torso-armour-plate-male",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/torso/armour/plate/male/walk.png",
+    "file": "art-source/lpc/raw/characters/torso/armour/plate/male/walk.png",
+    "sha256": "4ef811417e7c1163b8da47aa48afd80b398302b18d4ee90c6fbb79667b9cc046",
+    "authors": [
+      "Napsio (Vitruvian Studio)",
+      "JaidynReiman",
+      "bluecarrot16",
+      "Michael Whitlock (bigbeargames)",
+      "Johannes Sjölund (wulax)"
+    ],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+      "https://opengameart.org/content/lpc-combat-armor-for-women"
+    ],
+    "notes": "original by wulax, recolor by bigbeargames, color reduced to 7 colors and adapted to v3 bases by bluecarrot16, run/jump/sit/climb/revised combat by JaidynReiman, reduced colors to 6 (based on Napsio's Vitruvian)"
+  },
+  {
+    "id": "character-torso-clothes-longsleeve-longsleeve-male",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/torso/clothes/longsleeve/longsleeve/male/walk.png",
+    "file": "art-source/lpc/raw/characters/torso/clothes/longsleeve/longsleeve/male/walk.png",
+    "sha256": "8b1c79d535d7a233371c9398ca51b196aa8fdf06117bd0eafd7fbcbf438d711b",
+    "authors": ["JaidynReiman", "Johannes Sjölund (wulax)"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+      "http://opengameart.org/content/lpc-clothing-updates",
+      "https://opengameart.org/content/lpc-revised-character-basics",
+      "https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing",
+      "https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+      "https://opengameart.org/content/lpc-expanded-simple-shirts"
+    ],
+    "notes": "original by wulax; tweaks and further recolors by bluecarrot16; cleanup and climb/jump/run/sit/emote/revised combat adapted from LPC Revised by JaidynReiman"
+  },
+  {
+    "id": "character-hat-helmet-kettle-adult",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hat/helmet/kettle/adult/walk.png",
+    "file": "art-source/lpc/raw/characters/hat/helmet/kettle/adult/walk.png",
+    "sha256": "26705f79e5d234f4f8c6b4c5d828f0fd579b819b1355ebc117908e625831eec4",
+    "authors": ["Johannes Sjölund (wulax)", "JaidynReiman", "Napsio (Vitruvian Studio)"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+      "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+    ],
+    "notes": "previously referred to as chain-hat, color reduction by Napsio (Vitruvian Studio)"
+  },
+  {
+    "id": "character-hat-helmet-nasal-adult",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hat/helmet/nasal/adult/walk.png",
+    "file": "art-source/lpc/raw/characters/hat/helmet/nasal/adult/walk.png",
+    "sha256": "a1010f3b9a2f224c59e1e8ff333a5692285341e54de449a7d8163b8de8b301b3",
+    "authors": ["bluecarrot16"],
+    "licenses": ["CC-BY-3.0", "OGA-BY-3.0", "GPL-2.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-helmets",
+      "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv. Upstream also offers CC-BY-4.0; this manifest selects only the listed supported alternatives."
+  },
+  {
+    "id": "character-hat-helmet-norman-adult",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hat/helmet/norman/adult/walk.png",
+    "file": "art-source/lpc/raw/characters/hat/helmet/norman/adult/walk.png",
+    "sha256": "242c40c385a8e8e89a80de58cd4bd88f80eb591df5aa1d27f2a1f41cba0637e7",
+    "authors": ["ElizaWy", "Sander Frenken (castelonia)"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-realistic-helmet-pack",
+      "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv. Upstream also offers CC-BY-SA-4.0; this manifest selects only the listed supported alternatives."
+  },
+  {
+    "id": "character-hat-cloth-bandana-adult",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/hat/cloth/bandana/adult/walk.png",
+    "file": "art-source/lpc/raw/characters/hat/cloth/bandana/adult/walk.png",
+    "sha256": "3bad5f1f9f8a8c2bf4c6f793647165c9f9b4a977e1a14f12cc1abe3985ee844b",
+    "authors": [
+      "Matthew Krohn (makrohn)",
+      "JaidynReiman",
+      "Marcel van de Steeg (MadMarcel)",
+      "JaidynReiman"
+    ],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-female-orcogregoblintroll-base-walkcycle",
+      "https://github.com/makrohn/Universal-LPC-spritesheet/commit/f50007cb47c235d8896cafae7a613f0b6a9a09a8?short_path=02b86d4#diff-02b86d45789a3e3e8e79519c7d17d15c9e6ecc9b4ddecb1bcd8dfbbaef430b75",
+      "https://opengameart.org/content/lpc-expanded-hats-facial-helmets"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv."
+  },
+  {
+    "id": "character-beards-beard-trimmed",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/beards/beard/trimmed/walk.png",
+    "file": "art-source/lpc/raw/characters/beards/beard/trimmed/walk.png",
+    "sha256": "f7477aca2a172358f56d4f8109af0c788938c1fc8e392af48f29b65085fd6d0e",
+    "authors": ["ElizaWy"],
+    "licenses": ["OGA-BY-3.0"],
+    "urls": [
+      "https://github.com/ElizaWy/LPC/tree/main/Characters/Hair",
+      "https://opengameart.org/content/lpc-expanded-sit-run-jump-more"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv."
+  },
+  {
+    "id": "character-beards-beard-medium",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/beards/beard/medium/walk.png",
+    "file": "art-source/lpc/raw/characters/beards/beard/medium/walk.png",
+    "sha256": "ade90fb79421f5ae1b4e38618f938cbd7a30ea8c95be1e77aecdf720e1f491ef",
+    "authors": ["ElizaWy"],
+    "licenses": ["OGA-BY-3.0"],
+    "urls": [
+      "https://github.com/ElizaWy/LPC/tree/main/Characters/Hair",
+      "https://opengameart.org/content/lpc-expanded-sit-run-jump-more"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv."
+  },
+  {
+    "id": "character-cape-solid-bg",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/cape/solid/bg/walk.png",
+    "file": "art-source/lpc/raw/characters/cape/solid/bg/walk.png",
+    "sha256": "27b02ac756f4a3d19f46fa0f113b42f40387e8f6d8c98a6487f1fc1a525fe059",
+    "authors": ["Nila122", "JaidynReiman"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more",
+      "https://opengameart.org/content/lpc-roman-armor"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv."
+  },
+  {
+    "id": "character-cape-solid-fg",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/cape/solid/fg/walk.png",
+    "file": "art-source/lpc/raw/characters/cape/solid/fg/walk.png",
+    "sha256": "1aa730ea5691a376b91fa44db7c8fa369127b9e0347c3a31d6654fa3a932b472",
+    "authors": ["bluecarrot16", "JaidynReiman"],
+    "licenses": ["OGA-BY-3.0", "CC-BY-SA-3.0", "GPL-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-curly-hair-elven-ears-white-cape-with-blue-trim-and-more",
+      "https://opengameart.org/content/lpc-roman-armor",
+      "http://opengameart.org/content/lpc-clothing-updates"
+    ],
+    "notes": "Unmodified source PNG; credits from pinned CREDITS.csv."
+  },
+  {
+    "id": "character-weapon-polearm-spear-background",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/weapon/polearm/spear/walk/background.png",
+    "file": "art-source/lpc/raw/characters/weapon/polearm/spear/walk/background.png",
+    "sha256": "9dbe0826fa895678d7d7896ba3a7907e7e835f20f0be8ca30d92633d04651d22",
+    "authors": ["Pierre Vigier (pvigier)", "Johannes Sjölund (wulax)", "Inboxninja"],
+    "licenses": ["CC-BY-SA-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+      "https://opengameart.org/content/lpc-spear-and-shovel-reworked"
+    ],
+    "notes": "Credits CSV records weapon/polearm/spear/background/walk.png; pinned PNG uses transposed walk/background.png. original by wulax, walk animations redone by pvigier, split into layers and tweaked for v3 character bases by bluecarrot16"
+  },
+  {
+    "id": "character-weapon-polearm-spear-foreground",
+    "repo": "LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator",
+    "sha": "04140673ec02906f8233523639733c83690df750",
+    "path": "spritesheets/weapon/polearm/spear/walk/foreground.png",
+    "file": "art-source/lpc/raw/characters/weapon/polearm/spear/walk/foreground.png",
+    "sha256": "09cdd1d93ca15041919afb9a6ae1715841f7e68957e3d534cecfc28c61db8a90",
+    "authors": ["Pierre Vigier (pvigier)", "Johannes Sjölund (wulax)", "Inboxninja"],
+    "licenses": ["CC-BY-SA-3.0"],
+    "urls": [
+      "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites",
+      "https://opengameart.org/content/lpc-spear-and-shovel-reworked"
+    ],
+    "notes": "Credits CSV records weapon/polearm/spear/foreground/walk.png; pinned PNG uses transposed walk/foreground.png. original by wulax, walk animations redone by pvigier, split into layers and tweaked for v3 character bases by bluecarrot16"
+  }
+]
