@@ -23,6 +23,56 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 Goal (owner, 2026-11-15): Chapters 5–7 are built and wait for the owner's playtest. Chapters 8 and 9
 are built and verified — the story is complete (4 endings). Next: the owner's playtest of Chapters 5–9. The story ends at Chapter 9.
 
+### Roadmap — comprehensive upgrade (owner, 2026-11-17: "upgrade everything")
+
+Run in parallel, each agent inside its own locks. Order of what follows: UI and release first (seen by
+every player), then sound, settings and saves, then combat and code health, then per-map LPC dressing.
+
+1. T-91 UI overhaul (Claude) · 2. T-92 build, release, smoke tests (Codex) · 3. T-93 audio plan
+   (Antigravity) · 4. T-94 settings, pause and save-slot design (Antigravity) · 5. T-95 docs refresh
+   (Codex) · later: audio integration, settings implementation, one combat system (design first),
+   ActionCombat/BossFight split, gamepad and touch, LPC dressing per map, chapters 6-9 structure.
+
+### T-91 · UI overhaul: pixel font with Vietnamese, compact HUD, controls bar — **Claude** · `IN PROGRESS`
+
+VT323 (SIL OFL, full Vietnamese) for every UI text; a compact HUD that frees the screen; the controls
+bar no longer overflows; dialogue box and menus polished.
+
+_Locks:_ `src/ui/*`, `src/scenes/MainMenuScene.ts`, `src/scenes/BootScene.ts`, `index.html`,
+`public/assets/fonts/*` (new).
+
+### T-92 · Build, release and smoke tests — **Codex** · `TODO`
+
+Split the Phaser vendor chunk, deploy the build to GitHub Pages from CI, and a Playwright smoke test of
+the built game (boot, menu, new game, first map, no console errors). No change under `src/`.
+
+_Locks:_ `vite.config.ts`, `.github/workflows/*`, `playwright.config.ts`, `e2e/*`, `package.json`
+(scripts only), `README.md`.
+
+### T-93 · Audio plan: music and sound effects — **Antigravity** · `TODO`
+
+Free music per chapter (menu, exploration, battle, boss, ending) and the sound effects mapped to the
+game's events, with exact sources and licences, ready for the owner to approve. Nothing downloaded or
+committed into `public/assets/` in this task.
+
+_Locks:_ `docs/audio/*` (new).
+
+### T-94 · Settings, pause menu and save slots — design — **Antigravity** · `TODO` (after T-93)
+
+A spec for the options (volumes, text speed, screen shake, flashes, key bindings), a pause menu and
+three save slots, written so it can be implemented without further questions.
+
+_Locks:_ `docs/design/SETTINGS_UX.md` (new).
+
+### T-95 · Docs refresh — **Codex** · `TODO` (after T-92)
+
+Bring `docs/context/PROJECT_MAP.md`, `docs/PROJECT_CONTEXT.md` status sections and `README.md` up to
+date (story complete, LPC look, neon skin, real-time bosses); move stale root screenshots and duplicate
+root docs into `docs/archive/`.
+
+_Locks:_ `docs/context/*`, `docs/PROJECT_CONTEXT.md`, `docs/archive/*` (new), root `*.png`,
+root duplicate docs (`ART_GUIDE.md`, `PETER_DESIGN.md`, `ASSET_REGISTRY.md` only if duplicated).
+
 ### T-88 · LPC world: Peter at the LPC scale, then the engine and Veridia — **Claude** · `IN PROGRESS`
 
 Owner, 2026-11-17: the look moves to LPC 3/4 pixel art (CC-BY-SA 3.0, credits required); the Veridia
