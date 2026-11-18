@@ -21,12 +21,12 @@ export class BootScene extends Phaser.Scene {
     const s = getSettings();
     this.registry.set(NEON_OFF, !s.neonDefault);
     this.registry.set(ATMOSPHERE_OFF, !s.lightingDefault);
-    // T-91: canvas text only uses a web font once it has loaded; wait for VT323 (Vietnamese glyphs
+    // Canvas text only uses a web font once it has loaded; wait for Be Vietnam Pro (both weights,
     // included), but never longer than 2 s — the fallback monospace still works.
     const ready = document.fonts
       ? Promise.all([
-          document.fonts.load('16px "VT323"'),
-          document.fonts.load('16px "VT323"', 'Tiếng Việt ắằẳẵặ'),
+          document.fonts.load('16px "Be Vietnam Pro"', 'Tiếng Việt ắằẳẵặ'),
+          document.fonts.load('bold 16px "Be Vietnam Pro"', 'Tiếng Việt ắằẳẵặ'),
         ])
       : Promise.resolve();
     const timeout = new Promise((resolve) => setTimeout(resolve, 2000));

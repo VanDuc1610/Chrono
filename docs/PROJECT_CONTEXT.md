@@ -18,7 +18,7 @@
 
 - **Scope:** Story complete: Prologue + Chapters 1-9, four endings, 131 maps (including hidden maps).
 - **Delivery:** Browser RPG with exploration, dialogue, puzzles, quests, equipment, saves, real-time field enemies and real-time bosses on their own maps. Chapter selection covers all chapters.
-- **Presentation:** LPC environments for chapters 0-5, approved 64x64 Peter animations, full neon void for chapters 6-9, per-map atmosphere/colour grade and VT323 UI. Owner playtesting and presentation upgrades continue; see `docs/TASKS.md`.
+- **Presentation:** LPC environments for chapters 0-5, approved 64x64 Peter animations, full neon void for chapters 6-9, per-map atmosphere/colour grade and a Be Vietnam Pro UI at 768×432. Owner playtesting and presentation upgrades continue; see `docs/TASKS.md`.
 
 ---
 
@@ -112,7 +112,7 @@ flowchart TD
 - **LPC environments:** `scripts/lpc/veridia.mjs` builds Veridia; `reskin.mjs` rebuilds chapter 0-5 tilesets slot for slot while retaining collision, puzzle swaps and story props. Pinned sources and derived atlases are attributed in the LPC manifests and root CREDITS.md.
 - **Depth/presentation:** ActorShadows adds contact shadows and foot sorting; overlay/above layers support tall props; WallCaps draws LPC wall tops above actors. Atmosphere applies lights, motes, darkness and per-map multiply/screen grade.
 - **Neon:** `NeonSkin` reads `neon.json` (an accent colour per map) and adds accents only: rings on points of interest, frames on exits and puzzle pieces. Every chapter is in LPC art; the full line-art void was retired (2026-11-18).
-- **UI:** VT323 (SIL OFL, Vietnamese) through `crispText.ts`; BootScene waits for font loading. Compact HUD, quest tracker, dialogue and menus are under active T-91 polish.
+- **UI:** Be Vietnam Pro (SIL OFL, made for Vietnamese; replaced VT323 on 2026-11-18 for readability) through `crispText.ts` (scale 1.15, min 10 px); BootScene waits for font loading. The game draws at 768×432; maps smaller than the view are surrounded by their border tile (`MapSurround`). Compact HUD, quest tracker, dialogue and menus are under active T-91 polish.
 - **Audio:** SoundSystem uses procedural Web Audio; new music/SFX and settings designs are tracked separately on the task board.
 
 ### 4.2 Verification and release (2026-11-17)

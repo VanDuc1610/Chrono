@@ -44,6 +44,10 @@ const KEY_ROWS: KeyAction[] = [
   'controls',
 ];
 const W = 440;
+/** Where values start, and the volume bars. */
+const VALUE_X = 210;
+const BAR_X = 210;
+const BAR_W = 140;
 const H = 306;
 const TOP = 54;
 const ROW_H = 14;
@@ -60,6 +64,8 @@ export class OptionsPanel {
   private readonly root: Phaser.GameObjects.Container;
   private readonly tabs: Phaser.GameObjects.Text[] = [];
   private readonly lines: Phaser.GameObjects.Text[] = [];
+  /** The value column (a proportional font: columns are positions, not padding). */
+  private readonly values: Phaser.GameObjects.Text[] = [];
   private readonly bars: Phaser.GameObjects.Graphics;
   private readonly hint: Phaser.GameObjects.Text;
   private readonly status: Phaser.GameObjects.Text;
@@ -102,11 +108,17 @@ export class OptionsPanel {
     this.root.add(this.bars);
     for (let i = 0; i < LINES; i++) {
       const line = scene.add
-        .text(24, TOP + i * ROW_H, '', { fontSize: '9px', color: '#c8d4ec' })
+        // Fixed width: the whole row (value and bar included) takes the click.
+        .text(24, TOP + i * ROW_H, '', { fontSize: '9px', color: '#c8d4ec', fixedWidth: W - 48 })
         .setInteractive({ useHandCursor: true })
         .on('pointerdown', (p: Phaser.Input.Pointer) => this.click(i, p));
       this.lines.push(line);
-      this.root.add(line);
+      const value = scene.add.text(VALUE_X, TOP + i * ROW_H, '', {
+        fontSize: '9px',
+        color: '#c8d4ec',
+      });
+      this.values.push(value);
+      this.root.add([line, value]);
     }
     this.status = scene.add
       .text(W / 2, H - 30, '', { fontSize: '8px', color: '#ffe08a' })
@@ -230,9 +242,8 @@ export class OptionsPanel {
     this.row = i;
     const r = this.rows[i];
     if (r.kind === 'volume') {
-      // The bar spans x 200..340 inside the panel.
-      const local = p.x - this.root.x - 200;
-      this.adjust(0, Math.round(Phaser.Math.Clamp(local / 140, 0, 1) * 10) / 10);
+      const local = p.x - this.root.x - BAR_X;
+      this.adjust(0, Math.round(Phaser.Math.Clamp(local / BAR_W, 0, 1) * 10) / 10);
     } else this.adjust(1);
     this.draw();
   }
@@ -254,23 +265,32 @@ export class OptionsPanel {
     this.bars.clear();
     this.lines.forEach((line, i) => {
       const r = rows[i];
+      const value = this.values[i];
+      value.setText('');
       if (!r) return void line.setText('');
       const sel = i === this.row && r.kind !== 'info';
       const label = `${sel ? '▶ ' : '  '}${r.label}`;
       const waiting = sel && this.capturing;
-      line.setText(
-        r.kind === 'info' && this.tab === 2
-          ? r.label
-          : `${label.padEnd(30)}${waiting ? this.t('keys.press') : this.value(r, s)}`,
-      );
-      line.setColor(
-        waiting ? '#ffe08a' : sel ? '#ffffff' : r.kind === 'info' ? '#8b97b8' : '#c8d4ec',
-      );
+      const color = waiting
+        ? '#ffe08a'
+        : sel
+          ? '#ffffff'
+          : r.kind === 'info'
+            ? '#8b97b8'
+            : '#c8d4ec';
+      if (r.kind === 'info' && this.tab === 2) line.setText(r.label);
+      else {
+        line.setText(label);
+        value
+          .setText(waiting ? this.t('keys.press') : this.value(r, s))
+          .setX(r.kind === 'volume' ? BAR_X + BAR_W + 10 : VALUE_X)
+          .setColor(color);
+      }
+      line.setColor(color);
       if (r.kind === 'volume') {
-        const y = TOP + i * ROW_H + 5;
-        this.bars.fillStyle(0x05060c, 1).fillRect(199, y - 1, 142, 7);
-        this.bars.fillStyle(sel ? 0x00d2ff : 0x4a7fb0, 1).fillRect(200, y, 140 * s[r.key], 5);
-        line.setText(`${label.padEnd(52)}${this.value(r, s)}`);
+        const y = TOP + i * ROW_H + ROW_H / 2 - 3;
+        this.bars.fillStyle(0x05060c, 1).fillRect(BAR_X - 1, y - 1, BAR_W + 2, 7);
+        this.bars.fillStyle(sel ? 0x00d2ff : 0x4a7fb0, 1).fillRect(BAR_X, y, BAR_W * s[r.key], 5);
       }
     });
   }

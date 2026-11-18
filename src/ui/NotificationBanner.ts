@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
 import { createPanel } from './Panel';
 
-const WIDTH = 320;
-const HEIGHT = 44;
+const WIDTH = 280;
+const HEIGHT = 50;
 const HIDDEN_Y = -54;
 
 /**
@@ -33,7 +33,7 @@ export class NotificationBanner {
       })
       .setOrigin(0.5, 0);
     this.subtitle = scene.add
-      .text(WIDTH / 2, 23, '', { fontFamily: 'monospace', fontSize: '10px', color: '#cdd7eb' })
+      .text(WIDTH / 2, 27, '', { fontFamily: 'monospace', fontSize: '10px', color: '#cdd7eb' })
       .setOrigin(0.5, 0);
     this.container.add([bg, this.title, this.subtitle]);
   }

@@ -6,12 +6,13 @@ import type { Translate } from './Strings';
 import { controlList } from './controlList';
 
 // T-91 compact HUD: a small panel, slim bars with their numbers, a hairline of EXP.
-const PANEL = { x: 8, y: 8, w: 186, h: 48 };
-const BAR_X = 36;
-const BAR_W = 108;
-const HP_Y = 28;
-const MP_Y = 38;
-const EXP_Y = 49;
+// Sized for the readable UI font (2026-11-18): the numbers sit right of the bars, never on them.
+const PANEL = { x: 8, y: 8, w: 214, h: 60 };
+const BAR_X = 38;
+const BAR_W = 116;
+const HP_Y = 33;
+const MP_Y = 46;
+const EXP_Y = 61;
 
 /**
  * Top-left status: place and level, HP and MP bars with their values, an EXP hairline; the key
@@ -22,7 +23,11 @@ export class StatusHud {
   private readonly hpText: Phaser.GameObjects.Text;
   private readonly mpText: Phaser.GameObjects.Text;
   private readonly levelText: Phaser.GameObjects.Text;
-  private readonly controls: Phaser.GameObjects.Text;
+  /** The key list (H): a backdrop, two columns and a footer (a proportional font: no padding). */
+  private readonly controls: Phaser.GameObjects.Container;
+  private readonly controlsBg: Phaser.GameObjects.Rectangle;
+  private readonly controlsCols: [Phaser.GameObjects.Text, Phaser.GameObjects.Text];
+  private readonly controlsFoot: Phaser.GameObjects.Text;
   private readonly controlsHint: Phaser.GameObjects.Text;
   private readonly quick: Phaser.GameObjects.Text;
   private readonly bars: Phaser.GameObjects.Graphics;
@@ -48,10 +53,10 @@ export class StatusHud {
     const right = PANEL.x + PANEL.w - 8;
     text(16, 12, locationName, '9px', '#65d5ff');
     this.levelText = text(right, 12, '', '9px', '#ffe08a').setOrigin(1, 0);
-    text(16, HP_Y - 5, 'HP', '8px', '#8b97b8');
-    text(16, MP_Y - 5, 'MP', '8px', '#8b97b8');
-    this.hpText = text(right, HP_Y - 5, '', '8px', '#e4ebf5').setOrigin(1, 0);
-    this.mpText = text(right, MP_Y - 5, '', '8px', '#b8d8ff').setOrigin(1, 0);
+    text(16, HP_Y + 2, 'HP', '8px', '#8b97b8').setOrigin(0, 0.5);
+    text(16, MP_Y + 1, 'MP', '8px', '#8b97b8').setOrigin(0, 0.5);
+    this.hpText = text(right, HP_Y + 2, '', '8px', '#e4ebf5').setOrigin(1, 0.5);
+    this.mpText = text(right, MP_Y + 1, '', '8px', '#b8d8ff').setOrigin(1, 0.5);
     this.bars = scene.add.graphics().setScrollFactor(0).setDepth(95);
 
     // The full key list stays out of the way: a hint, and H opens it.
@@ -66,16 +71,12 @@ export class StatusHud {
       })
       .setScrollFactor(0)
       .setDepth(90);
+    const colStyle = { fontFamily: 'monospace', fontSize: '9px', color: '#c8d4ec', lineSpacing: 3 };
+    this.controlsBg = scene.add.rectangle(0, 0, 10, 10, 0x07080f, 0.9).setOrigin(0, 0);
+    this.controlsCols = [scene.add.text(0, 0, '', colStyle), scene.add.text(0, 0, '', colStyle)];
+    this.controlsFoot = scene.add.text(0, 0, '', { ...colStyle, color: '#8b97b8' });
     this.controls = scene.add
-      .text(width / 2, height - 24, '', {
-        fontFamily: 'monospace',
-        fontSize: '9px',
-        color: '#c8d4ec',
-        backgroundColor: '#07080fe6',
-        padding: { left: 10, right: 10, top: 6, bottom: 6 },
-        lineSpacing: 3,
-      })
-      .setOrigin(0.5, 1)
+      .container(0, 0, [this.controlsBg, ...this.controlsCols, this.controlsFoot])
       .setScrollFactor(0)
       .setDepth(96)
       .setVisible(false);
@@ -123,12 +124,25 @@ export class StatusHud {
     this.quick.setText(slots.join('  ')).setVisible(anyQuick);
     // The one-line key list becomes two columns.
     const keys = controlList(this.t, s.getFlag('has_broken_blade'));
-    keys.push(this.t('hud.controlsClose'));
+    // The last entry is the fixed system keys: it runs along the bottom with the close hint.
+    const system = keys.pop() ?? '';
     const half = Math.ceil(keys.length / 2);
-    const colW = Math.max(...keys.slice(0, half).map((k) => k.length)) + 4;
-    const lines: string[] = [];
-    for (let i = 0; i < half; i++) lines.push(keys[i].padEnd(colW) + (keys[i + half] ?? ''));
-    this.controls.setText(lines.join('\n'));
+    const [left, right] = this.controlsCols;
+    left.setText(keys.slice(0, half).join('\n'));
+    right.setText(keys.slice(half).join('\n'));
+    this.controlsFoot.setText(`${system}   ${this.t('hud.controlsClose')}`);
+    const pad = 10;
+    const gap = 28;
+    const colsW = left.width + gap + right.width;
+    const w = Math.max(colsW, this.controlsFoot.width) + pad * 2;
+    const h = Math.max(left.height, right.height) + this.controlsFoot.height + pad * 2 + 6;
+    const { width, height } = this.scene.scale;
+    const x0 = Math.round(width / 2 - w / 2);
+    const y0 = Math.round(height - 24 - h);
+    this.controlsBg.setPosition(x0, y0).setSize(w, h);
+    left.setPosition(x0 + pad, y0 + pad);
+    right.setPosition(x0 + pad + left.width + gap, y0 + pad);
+    this.controlsFoot.setPosition(x0 + pad, y0 + h - pad - this.controlsFoot.height);
     this.glideBars(s.hp / max.maxHp, s.mp / max.maxMp);
     if (s.level > this.lastLevel) this.levelUp(s.level);
     this.lastLevel = s.level;

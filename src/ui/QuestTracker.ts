@@ -3,8 +3,8 @@ import type { QuestSystem } from '../systems/quest/QuestSystem';
 import { createPanel } from './Panel';
 import type { Translate } from './Strings';
 
-const WIDTH = 206;
-const HEIGHT = 58;
+const WIDTH = 236;
+const HEIGHT = 74;
 const ROWS = 3;
 
 /** Registry key: the player folded the quest panel away (J), kept across maps. */
@@ -53,7 +53,7 @@ export class QuestTracker {
       color: '#00d2ff',
       letterSpacing: 1,
     }));
-    this.title = scene.add.text(10, 16, '', {
+    this.title = scene.add.text(10, 19, '', {
       fontFamily: 'monospace',
       fontSize: '9px',
       color: '#e4ebf5',
@@ -61,7 +61,7 @@ export class QuestTracker {
     });
     container.add([bg, label, this.title]);
     for (let i = 0; i < ROWS; i++) {
-      const row = scene.add.text(10, 28 + i * 9, '', {
+      const row = scene.add.text(10, 35 + i * 12, '', {
         fontFamily: 'monospace',
         fontSize: '8px',
         color: '#8b9bb4',

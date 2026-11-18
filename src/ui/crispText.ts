@@ -8,20 +8,24 @@ import Phaser from 'phaser';
 export const TEXT_RESOLUTION = 4;
 
 /**
- * T-91 (owner, 2026-11-17): every UI text uses VT323, a pixel font (SIL OFL) with the full
- * Vietnamese set, instead of the system monospace (which differs per machine and blurs diacritics).
+ * Every UI text uses Be Vietnam Pro (SIL OFL), a clear sans made for Vietnamese (owner, 2026-11-18:
+ * easy to read, need not be pixel; it replaced the VT323 pixel font of T-91).
  */
-export const UI_FONT = '"VT323", monospace';
-/** VT323 draws smaller than a system monospace of the same size: sizes are scaled to keep layouts. */
-export const UI_FONT_SCALE = 1.4;
+// Arrows and symbols the font lacks come from the system's symbol fonts.
+export const UI_FONT = '"Be Vietnam Pro", "Segoe UI Symbol", "Segoe UI", sans-serif';
+/** Sizes in the code were set for a system monospace at 640×360: scaled up for the 768×432 view. */
+export const UI_FONT_SCALE = 1.15;
+/** No UI text smaller than this (small labels stay readable). */
+export const UI_FONT_MIN = 10;
 
 let installed = false;
 
-/** Font size scaled for VT323 ("10px" -> "14px", 10 -> 14). */
+/** Font size scaled for the UI font ("10px" -> "12px", 10 -> 12). */
 export function uiFontSize(size: string | number): string | number {
-  if (typeof size === 'number') return Math.round(size * UI_FONT_SCALE);
+  const scaled = (n: number): number => Math.max(UI_FONT_MIN, Math.round(n * UI_FONT_SCALE));
+  if (typeof size === 'number') return scaled(size);
   const px = /^(\d+(?:\.\d+)?)px$/.exec(size.trim());
-  return px ? `${Math.round(Number(px[1]) * UI_FONT_SCALE)}px` : size;
+  return px ? `${scaled(Number(px[1]))}px` : size;
 }
 
 /** A Text style moved onto the UI font (styles that name another font are left alone). */
@@ -30,9 +34,6 @@ export function uiStyle<T extends Phaser.Types.GameObjects.Text.TextStyle | unde
 ): T {
   if (style && style.fontFamily && !/monospace/i.test(style.fontFamily)) return style;
   const out: Phaser.Types.GameObjects.Text.TextStyle = { ...(style ?? {}), fontFamily: UI_FONT };
-  // VT323 has no bold face: a synthetic bold smears its pixels, so emphasis comes from colour.
-  if (out.fontStyle && /bold/.test(out.fontStyle))
-    out.fontStyle = out.fontStyle.replace('bold', '').trim() || 'normal';
   out.fontSize = uiFontSize(style?.fontSize ?? '10px');
   return out as T;
 }
