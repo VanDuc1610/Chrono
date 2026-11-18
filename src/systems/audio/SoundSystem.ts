@@ -92,6 +92,38 @@ export class SoundSystem {
   public playMenuCancel(): void {
     this.playEvent('sfx_menu_cancel', 220);
   }
+  /**
+   * An Authority skill (owner, 2026-11-18: each skill its own sound). Continuum's swing plays slow
+   * and deep like a breaking wave; the synth fallback gives each Authority its own pitch.
+   */
+  public playSkill(authority: string): void {
+    const tone: Record<string, [number, number, number]> = {
+      continuum: [180, 0.3, 0.7],
+      causality: [1320, 0.12, 1],
+      memory: [520, 0.35, 1],
+      finality: [140, 0.3, 1],
+      possibility: [880, 0.2, 1],
+      origin: [1046, 0.4, 1],
+    };
+    const [freq, dur, rate] = tone[authority] ?? [440, 0.15, 1];
+    this.playEvent(`sfx_skill_${authority}`, freq, dur, rate);
+  }
+
+  public playCrit(): void {
+    this.playEvent('sfx_crit', 1200, 0.06);
+  }
+
+  /** Gear put on: a blade drawn for weapons, armour and cloth for the rest. */
+  public playEquip(weapon: boolean): void {
+    if (weapon) this.playEvent('sfx_equip_weapon', 600, 0.12);
+    else this.playEvent('sfx_equip_gear', 300, 0.12);
+  }
+
+  /** A gear set bonus was just reached. */
+  public playSetBonus(): void {
+    this.playEvent('sfx_set_bonus', 1318, 0.3);
+  }
+
   public playDialogueBlip(): void {
     this.playEvent('sfx_dialogue_blip', 440, 0.025, 0.95 + (this.blipIndex++ % 3) * 0.05);
   }

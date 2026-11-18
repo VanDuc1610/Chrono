@@ -494,6 +494,11 @@ export class GameSession {
     return gearProfile(this.db.gear, worn);
   }
 
+  /** Set bonuses reached by the worn gear (a new one plays a chime). */
+  public get setBonusCount(): number {
+    return this.gear.sets.reduce((n, s) => n + s.active.length, 0);
+  }
+
   /** Gear data (rarity, sets) for the menus. */
   public get gearDb(): GameDatabase['gear'] {
     return this.db.gear;

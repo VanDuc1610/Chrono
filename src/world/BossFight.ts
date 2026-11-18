@@ -905,6 +905,7 @@ export class BossFight implements CombatExtension {
         : combat;
       const hit = rollHit(blow.attack, this.enemy.defense, tuning, this.rng, blow.mult);
       this.blowOnBoss(hit.damage, hit.critical, origin);
+      if (hit.critical) SoundSystem.getInstance().playCrit();
       this.gearHit(hit.damage, origin);
       if (blow.echoPct > 0)
         this.later(200, () =>

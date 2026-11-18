@@ -131,14 +131,21 @@ export class EquipmentPanel {
     const choice = this.picking.choices[this.picking.index];
     if (!choice) return;
     const s = this.session;
+    const sets = s.setBonusCount;
     if (row.kind === 'gear') {
-      if (choice.id) s.equip(choice.id);
-      else s.unequip(row.slot);
+      if (choice.id) {
+        s.equip(choice.id);
+        this.sound.playEquip(row.slot === 'weapon' || row.slot === 'ranged');
+      } else {
+        s.unequip(row.slot);
+        this.sound.playSelect();
+      }
+      if (s.setBonusCount > sets) this.sound.playSetBonus();
     } else {
       s.setSkillSlot(row.index, choice.id);
+      this.sound.playSelect();
     }
     this.picking = null;
-    this.sound.playSelect();
     this.onChanged();
     this.refresh();
   }

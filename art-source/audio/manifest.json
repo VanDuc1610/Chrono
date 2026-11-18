@@ -650,5 +650,205 @@
       "format": "wav",
       "method": "Archive member shipped unmodified"
     }
+  },
+  {
+    "id": "sfx_skill_continuum",
+    "kind": "sfx",
+    "pageUrl": "https://opengameart.org/content/rpg-sound-pack",
+    "directUrl": "https://opengameart.org/sites/default/files/rpg_sound_pack.zip",
+    "license": "CC0-1.0",
+    "author": "artisticdude",
+    "attribution": "rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-sound-pack",
+    "file": "public/assets/audio/sfx/sfx_skill_continuum.wav",
+    "sha256": "d725421956c9958de6d7a17c4fca299abe583a1800c59eaec358ec2e82d79bae",
+    "status": "kept",
+    "archiveId": "sfx_pack_rpg",
+    "member": "RPG Sound Pack/battle/swing3.wav",
+    "notes": "Continuum tide: a swing played slow (rate 0.7) like a breaking wave. Read by name out of sfx_pack_rpg; shipped unmodified.",
+    "sourceSha256": "f80754a9c04854e30c9da89d0186540ad097309d98b41387b6e83029e2601421",
+    "processing": {
+      "format": "wav",
+      "method": "Archive member shipped unmodified"
+    }
+  },
+  {
+    "id": "sfx_skill_causality",
+    "kind": "sfx",
+    "pageUrl": "https://opengameart.org/content/512-sound-effects-8-bit-style",
+    "directUrl": "https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip",
+    "license": "CC0-1.0",
+    "author": "SubspaceAudio / Juhani Junkala",
+    "attribution": "512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style",
+    "file": "public/assets/audio/sfx/sfx_skill_causality.wav",
+    "sha256": "c418c24e53e36600e56938473d429303e2109ce63938702460ef772ebc96bd2c",
+    "status": "kept",
+    "archiveId": "sfx_pack_retro",
+    "member": "The Essential Retro Video Game Sound Effects Collection [512 sounds] By Juhani Junkala/Weapons/Lasers/sfx_wpn_laser6.wav",
+    "notes": "Causality chain: an electric zap. Read by name out of sfx_pack_retro; shipped unmodified.",
+    "sourceSha256": "6d4519229c6e2c9e09502cd4967940052f68664140549a467615b56bdfd1d031",
+    "processing": {
+      "format": "wav",
+      "method": "Archive member shipped unmodified"
+    }
+  },
+  {
+    "id": "sfx_skill_memory",
+    "kind": "sfx",
+    "pageUrl": "https://opengameart.org/content/rpg-sound-pack",
+    "directUrl": "https://opengameart.org/sites/default/files/rpg_sound_pack.zip",
+    "license": "CC0-1.0",
+    "author": "artisticdude",
+    "attribution": "rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-sound-pack",
+    "file": "public/assets/audio/sfx/sfx_skill_memory.wav",
+    "sha256": "61d79416a7cbb04e1f46618ded72386f82bb6bd9dc170170480d271f4efb3958",
+    "status": "kept",
+    "archiveId": "sfx_pack_rpg",
+    "member": "RPG Sound Pack/battle/spell.wav",
+    "notes": "Memory echo: a spell shimmer. Read by name out of sfx_pack_rpg; shipped unmodified.",
+    "sourceSha256": "f80754a9c04854e30c9da89d0186540ad097309d98b41387b6e83029e2601421",
+    "processing": {
+      "format": "wav",
+      "method": "Archive member shipped unmodified"
+    }
+  },
+  {
+    "id": "sfx_skill_finality",
+    "kind": "sfx",
+    "pageUrl": "https://opengameart.org/content/512-sound-effects-8-bit-style",
+    "directUrl": "https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip",
+    "license": "CC0-1.0",
+    "author": "SubspaceAudio / Juhani Junkala",
+    "attribution": "512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style",
+    "file": "public/assets/audio/sfx/sfx_skill_finality.wav",
+    "sha256": "4e124cf68637514fa7cbda3239ec1038aff7567e8f881cf26be4500e2c869da6",
+    "status": "kept",
+    "archiveId": "sfx_pack_retro",
+    "member": "The Essential Retro Video Game Sound Effects Collection [512 sounds] By Juhani Junkala/Explosions/Medium Length/sfx_exp_medium3.wav",
+    "notes": "Finality cleave: a fiery burst. Read by name out of sfx_pack_retro; shipped unmodified.",
+    "sourceSha256": "6d4519229c6e2c9e09502cd4967940052f68664140549a467615b56bdfd1d031",
+    "processing": {
+      "format": "wav",
+      "method": "Archive member shipped unmodified"
+    }
+  },
+  {
+    "id": "sfx_skill_possibility",
+    "kind": "sfx",
+    "pageUrl": "https://opengameart.org/content/512-sound-effects-8-bit-style",
+    "directUrl": "https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip",
+    "license": "CC0-1.0",
+    "author": "SubspaceAudio / Juhani Junkala",
+    "attribution": "512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style",
+    "file": "public/assets/audio/sfx/sfx_skill_possibility.wav",
+    "sha256": "5e4660af8f759ebab9ad09cdb8a4670e4898560bd782523e45ea64f5959e3e1b",
+    "status": "kept",
+    "archiveId": "sfx_pack_retro",
+    "member": "The Essential Retro Video Game Sound Effects Collection [512 sounds] By Juhani Junkala/General Sounds/Weird Sounds/sfx_sound_vaporizing.wav",
+    "notes": "Possibility branch: vanish and reappear. Read by name out of sfx_pack_retro; shipped unmodified.",
+    "sourceSha256": "6d4519229c6e2c9e09502cd4967940052f68664140549a467615b56bdfd1d031",
+    "processing": {
+      "format": "wav",
+      "method": "Archive member shipped unmodified"
+    }
+  },
+  {
+    "id": "sfx_skill_origin",
+    "kind": "sfx",
+    "pageUrl": "https://opengameart.org/content/rpg-sound-pack",
+    "directUrl": "https://opengameart.org/sites/default/files/rpg_sound_pack.zip",
+    "license": "CC0-1.0",
+    "author": "artisticdude",
+    "attribution": "rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-sound-pack",
+    "file": "public/assets/audio/sfx/sfx_skill_origin.wav",
+    "sha256": "cadea162f3fe91c27666ab2a0516fa3bf156997d92d4f8145919126bca7b1e8a",
+    "status": "kept",
+    "archiveId": "sfx_pack_rpg",
+    "member": "RPG Sound Pack/battle/magic1.wav",
+    "notes": "Origin dawn: a bright magic swell. Read by name out of sfx_pack_rpg; shipped unmodified.",
+    "sourceSha256": "f80754a9c04854e30c9da89d0186540ad097309d98b41387b6e83029e2601421",
+    "processing": {
+      "format": "wav",
+      "method": "Archive member shipped unmodified"
+    }
+  },
+  {
+    "id": "sfx_crit",
+    "kind": "sfx",
+    "pageUrl": "https://opengameart.org/content/512-sound-effects-8-bit-style",
+    "directUrl": "https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip",
+    "license": "CC0-1.0",
+    "author": "SubspaceAudio / Juhani Junkala",
+    "attribution": "512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style",
+    "file": "public/assets/audio/sfx/sfx_crit.wav",
+    "sha256": "9368e312b277f88d762988197be83c315b6a2425f25fb6bd0ab4345225907d7b",
+    "status": "kept",
+    "archiveId": "sfx_pack_retro",
+    "member": "The Essential Retro Video Game Sound Effects Collection [512 sounds] By Juhani Junkala/General Sounds/Impacts/sfx_sounds_impact7.wav",
+    "notes": "Critical hit. Read by name out of sfx_pack_retro; shipped unmodified.",
+    "sourceSha256": "6d4519229c6e2c9e09502cd4967940052f68664140549a467615b56bdfd1d031",
+    "processing": {
+      "format": "wav",
+      "method": "Archive member shipped unmodified"
+    }
+  },
+  {
+    "id": "sfx_equip_weapon",
+    "kind": "sfx",
+    "pageUrl": "https://opengameart.org/content/rpg-sound-pack",
+    "directUrl": "https://opengameart.org/sites/default/files/rpg_sound_pack.zip",
+    "license": "CC0-1.0",
+    "author": "artisticdude",
+    "attribution": "rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-sound-pack",
+    "file": "public/assets/audio/sfx/sfx_equip_weapon.wav",
+    "sha256": "2cc0518b65d3a11b4f7cf22a5be6700d36fa1e681491dfb71b87ae5bce2296f6",
+    "status": "kept",
+    "archiveId": "sfx_pack_rpg",
+    "member": "RPG Sound Pack/battle/sword-unsheathe.wav",
+    "notes": "Weapon equipped. Read by name out of sfx_pack_rpg; shipped unmodified.",
+    "sourceSha256": "f80754a9c04854e30c9da89d0186540ad097309d98b41387b6e83029e2601421",
+    "processing": {
+      "format": "wav",
+      "method": "Archive member shipped unmodified"
+    }
+  },
+  {
+    "id": "sfx_equip_gear",
+    "kind": "sfx",
+    "pageUrl": "https://opengameart.org/content/rpg-sound-pack",
+    "directUrl": "https://opengameart.org/sites/default/files/rpg_sound_pack.zip",
+    "license": "CC0-1.0",
+    "author": "artisticdude",
+    "attribution": "rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-sound-pack",
+    "file": "public/assets/audio/sfx/sfx_equip_gear.wav",
+    "sha256": "1600329c7607eede7a441f66152f0626dd84e4b13f84ccd07887d020ba1c6b9e",
+    "status": "kept",
+    "archiveId": "sfx_pack_rpg",
+    "member": "RPG Sound Pack/inventory/armor-light.wav",
+    "notes": "Armour or charm equipped. Read by name out of sfx_pack_rpg; shipped unmodified.",
+    "sourceSha256": "f80754a9c04854e30c9da89d0186540ad097309d98b41387b6e83029e2601421",
+    "processing": {
+      "format": "wav",
+      "method": "Archive member shipped unmodified"
+    }
+  },
+  {
+    "id": "sfx_set_bonus",
+    "kind": "sfx",
+    "pageUrl": "https://opengameart.org/content/512-sound-effects-8-bit-style",
+    "directUrl": "https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip",
+    "license": "CC0-1.0",
+    "author": "SubspaceAudio / Juhani Junkala",
+    "attribution": "512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style",
+    "file": "public/assets/audio/sfx/sfx_set_bonus.wav",
+    "sha256": "cf432ac95f5b9381226f7466c88006f4b88b0ea3e92622078d81520a84dccf8b",
+    "status": "kept",
+    "archiveId": "sfx_pack_retro",
+    "member": "The Essential Retro Video Game Sound Effects Collection [512 sounds] By Juhani Junkala/General Sounds/Weird Sounds/sfx_sound_bling.wav",
+    "notes": "A gear set bonus reached. Read by name out of sfx_pack_retro; shipped unmodified.",
+    "sourceSha256": "6d4519229c6e2c9e09502cd4967940052f68664140549a467615b56bdfd1d031",
+    "processing": {
+      "format": "wav",
+      "method": "Archive member shipped unmodified"
+    }
   }
 ]

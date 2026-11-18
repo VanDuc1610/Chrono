@@ -197,14 +197,17 @@ export class SatchelPanel {
     }
     const slot = s.slotOf(stack.itemId);
     if (slot) {
+      const sets = s.setBonusCount;
       if (s.equipment[slot] === stack.itemId) {
         s.unequip(slot);
         this.notify(this.t('satchel.unequippedTitle'), name);
+        this.sound.playSelect();
       } else {
         s.equip(stack.itemId);
         this.notify(this.t('satchel.equippedTitle'), name);
+        this.sound.playEquip(slot === 'weapon' || slot === 'ranged');
       }
-      this.sound.playSelect();
+      if (s.setBonusCount > sets) this.sound.playSetBonus();
       this.onChanged();
       this.refresh();
       return;

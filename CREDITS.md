@@ -2263,3 +2263,133 @@ Read by name out of sfx_pack_retro; shipped unmodified.
 - SHA-256: f56e3501e21c86a36841e978edcf339bfbc9b16b183f4ec693018619fcf40c31
 
 Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_skill_continuum
+
+rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-sound-pack
+
+- Source page: https://opengameart.org/content/rpg-sound-pack
+- Direct file: https://opengameart.org/sites/default/files/rpg_sound_pack.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_skill_continuum.wav
+- SHA-256: d725421956c9958de6d7a17c4fca299abe583a1800c59eaec358ec2e82d79bae
+
+Continuum tide: a swing played slow (rate 0.7) like a breaking wave. Read by name out of sfx_pack_rpg; shipped unmodified.
+
+### sfx_skill_causality
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_skill_causality.wav
+- SHA-256: c418c24e53e36600e56938473d429303e2109ce63938702460ef772ebc96bd2c
+
+Causality chain: an electric zap. Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_skill_memory
+
+rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-sound-pack
+
+- Source page: https://opengameart.org/content/rpg-sound-pack
+- Direct file: https://opengameart.org/sites/default/files/rpg_sound_pack.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_skill_memory.wav
+- SHA-256: 61d79416a7cbb04e1f46618ded72386f82bb6bd9dc170170480d271f4efb3958
+
+Memory echo: a spell shimmer. Read by name out of sfx_pack_rpg; shipped unmodified.
+
+### sfx_skill_finality
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_skill_finality.wav
+- SHA-256: 4e124cf68637514fa7cbda3239ec1038aff7567e8f881cf26be4500e2c869da6
+
+Finality cleave: a fiery burst. Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_skill_possibility
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_skill_possibility.wav
+- SHA-256: 5e4660af8f759ebab9ad09cdb8a4670e4898560bd782523e45ea64f5959e3e1b
+
+Possibility branch: vanish and reappear. Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_skill_origin
+
+rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-sound-pack
+
+- Source page: https://opengameart.org/content/rpg-sound-pack
+- Direct file: https://opengameart.org/sites/default/files/rpg_sound_pack.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_skill_origin.wav
+- SHA-256: cadea162f3fe91c27666ab2a0516fa3bf156997d92d4f8145919126bca7b1e8a
+
+Origin dawn: a bright magic swell. Read by name out of sfx_pack_rpg; shipped unmodified.
+
+### sfx_crit
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_crit.wav
+- SHA-256: 9368e312b277f88d762988197be83c315b6a2425f25fb6bd0ab4345225907d7b
+
+Critical hit. Read by name out of sfx_pack_retro; shipped unmodified.
+
+### sfx_equip_weapon
+
+rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-sound-pack
+
+- Source page: https://opengameart.org/content/rpg-sound-pack
+- Direct file: https://opengameart.org/sites/default/files/rpg_sound_pack.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_equip_weapon.wav
+- SHA-256: 2cc0518b65d3a11b4f7cf22a5be6700d36fa1e681491dfb71b87ae5bce2296f6
+
+Weapon equipped. Read by name out of sfx_pack_rpg; shipped unmodified.
+
+### sfx_equip_gear
+
+rpg-sound-pack by artisticdude (CC0-1.0), https://opengameart.org/content/rpg-sound-pack
+
+- Source page: https://opengameart.org/content/rpg-sound-pack
+- Direct file: https://opengameart.org/sites/default/files/rpg_sound_pack.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_equip_gear.wav
+- SHA-256: 1600329c7607eede7a441f66152f0626dd84e4b13f84ccd07887d020ba1c6b9e
+
+Armour or charm equipped. Read by name out of sfx_pack_rpg; shipped unmodified.
+
+### sfx_set_bonus
+
+512-sound-effects-8-bit-style by SubspaceAudio / Juhani Junkala (CC0-1.0), https://opengameart.org/content/512-sound-effects-8-bit-style
+
+- Source page: https://opengameart.org/content/512-sound-effects-8-bit-style
+- Direct file: https://opengameart.org/sites/default/files/The%20Essential%20Retro%20Video%20Game%20Sound%20Effects%20Collection%20%5B512%20sounds%5D.zip
+- Licence: CC0-1.0
+- Status: kept
+- Game file: public/assets/audio/sfx/sfx_set_bonus.wav
+- SHA-256: cf432ac95f5b9381226f7466c88006f4b88b0ea3e92622078d81520a84dccf8b
+
+A gear set bonus reached. Read by name out of sfx_pack_retro; shipped unmodified.

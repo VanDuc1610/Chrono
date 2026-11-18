@@ -237,7 +237,7 @@ export class ActionCombat {
           ? 'peter_dash'
           : 'peter_attack';
     this.player.playAction(anim, facingFromAngle(aim), 380);
-    this.sound.playSlash();
+    this.sound.playSkill(def.authority);
     this.powers.cast(def, aim);
     this.extension?.onAction?.('skill');
     this.host.refreshHud();
@@ -661,6 +661,7 @@ export class ActionCombat {
     this.damageRoamer(r, dealt, hit.critical || stunned);
     if (fx === 'ranged') this.fx.shotHit(r.sprite, this.rarityIn('ranged'));
     else if (fx === 'melee') this.fx.impact(r.sprite, hit.critical, this.rarityIn('weapon'));
+    if (hit.critical && fx !== 'none') this.sound.playCrit();
     this.gearOnHit(dealt, r);
     return dealt;
   }
