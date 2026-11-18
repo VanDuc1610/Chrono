@@ -375,6 +375,10 @@ export interface BossProfile {
     allyAnim?: string;
     /** False: the boss stays (it only stops), e.g. Kuro sparing Peter. Default true. */
     vanish?: boolean;
+    /** Each of Peter's blows deals exactly this (the boss is out of his league). */
+    peterDamage?: number;
+    /** Each of the boss's blows takes this share of Peter's max HP, whatever his defence. */
+    blowPct?: number;
   };
   /** A sparring match: won once the boss is down to this HP ratio (Kuro's duel). */
   endAtHpPct?: number;

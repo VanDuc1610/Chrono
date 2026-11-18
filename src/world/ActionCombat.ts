@@ -1,3 +1,6 @@
+import { CombatFx } from './action/CombatFx';
+import { rarityOf, type Rarity } from '../systems/inventory/GearRules';
+import type { MeleeClass } from '../systems/inventory/InventoryTypes';
 import { burnTick, lifestealHeal, thornsDamage } from '../systems/inventory/GearRules';
 import { segmentDistance } from '../systems/action/GeometryRules';
 import Phaser from 'phaser';
@@ -67,6 +70,8 @@ export class ActionCombat {
   public extension: CombatExtension | null = null;
   /** HP Peter cannot drop below from boss blows (a scripted rescue fight). */
   public bossHpFloor = 0;
+  /** A scripted boss whose blows take this share of Peter's max HP (0: normal damage). */
+  public bossBlowPct = 0;
   private readonly shots: ShotSystem;
   private nextDash = 0;
   private nextSkill = 0;
@@ -146,6 +151,7 @@ export class ActionCombat {
     };
     fKey?.on('down', onFire);
     // Authority skills: Z / X / C (rebindable), aimed at the cursor like the slash.
+    this.fx = new CombatFx(scene, () => host.pfx?.() ?? null);
     this.skillDb = (scene.cache.json.get('data_skills') as SkillDatabase | undefined) ?? null;
     this.powers = new AuthorityPowers({
       scene,
@@ -160,6 +166,7 @@ export class ActionCombat {
           this.scene.time.now,
           mult,
           critBonus + (this.session.gear.totals.crit ?? 0),
+          'none',
         ),
       wound: (r, damage) => this.damageRoamer(r, damage, false),
       slay: (r) => {
@@ -176,6 +183,7 @@ export class ActionCombat {
         this.invulnUntil = Math.max(this.invulnUntil, this.scene.time.now + ms);
       },
       refreshHud: () => this.host.refreshHud(),
+      fx: this.fx,
     });
     const skillKeys = (['skill1', 'skill2', 'skill3'] as const).map((action, i) => {
       const key = scene.input.keyboard?.addKey(keyCode(action));
@@ -617,6 +625,7 @@ export class ActionCombat {
     now: number,
     mult = 1,
     critBonus = 0,
+    fx: 'melee' | 'ranged' | 'none' = 'melee',
   ): number | null {
     if (this.shutLaser(r, now)) return null;
     if (this.chokeEater(r, now)) {
@@ -650,11 +659,15 @@ export class ActionCombat {
       this.thrustMult(r, now);
     const dealt = Math.floor(hit.damage * m);
     this.damageRoamer(r, dealt, hit.critical || stunned);
+    if (fx === 'ranged') this.fx.shotHit(r.sprite, this.rarityIn('ranged'));
+    else if (fx === 'melee') this.fx.impact(r.sprite, hit.critical, this.rarityIn('weapon'));
     this.gearOnHit(dealt, r);
     return dealt;
   }
 
   private nextRegen = 0;
+  /** Slash trails, hit sparks and skill bursts. */
+  public readonly fx: CombatFx;
 
   /**
    * Gear on a landed blow (equipment.json): lifesteal heals, mpOnHit refills MP, and on a roamer
@@ -668,6 +681,7 @@ export class ActionCombat {
     if (heal > 0 && this.session.hp < stats.maxHp) {
       this.session.hp = Math.min(stats.maxHp, this.session.hp + heal);
       this.floatText(this.player.x + 8, this.player.y - 26, `+${heal}`, '#7dff9a');
+      this.fx.motes({ x: this.player.x, y: this.player.y - 8 }, '#7dff9a', 3);
     }
     const mp = gear.totals.mpOnHit ?? 0;
     if (mp > 0) this.session.mp = Math.min(stats.maxMp, this.session.mp + mp);
@@ -695,7 +709,14 @@ export class ActionCombat {
     if (regen <= 0 || this.defeated || this.session.hp >= max || this.session.hp <= 0) return;
     this.session.hp = Math.min(max, this.session.hp + regen);
     this.floatText(this.player.x, this.player.y - 26, `+${regen}`, '#7dff9a');
+    this.fx.motes({ x: this.player.x, y: this.player.y - 8 }, '#7dff9a');
     this.host.refreshHud();
+  }
+
+  /** Rarity of what is worn in a slot (for the hit colours). */
+  private rarityIn(slot: 'weapon' | 'ranged'): Rarity {
+    const id = this.session.equipment[slot];
+    return id ? rarityOf(this.session.gearDb, id) : 'common';
   }
 
   /** F: shoot the ranged weapon toward the cursor (T-84). */
@@ -974,7 +995,11 @@ export class ActionCombat {
       this.rng,
       mult,
     );
-    const dealt = this.powers.absorb(Math.max(1, Math.round(damage * scale)));
+    const raw =
+      this.bossBlowPct > 0
+        ? Math.round(this.session.getStats().maxHp * this.bossBlowPct)
+        : Math.round(damage * scale);
+    const dealt = this.powers.absorb(Math.max(1, raw));
     this.session.hp = Math.max(this.bossHpFloor, this.session.hp - dealt);
     this.invulnUntil = now + this.tuning.hurtInvulnMs;
     const away = Math.atan2(this.player.y - from.y, this.player.x - from.x);
@@ -1251,7 +1276,8 @@ export class ActionCombat {
   // ------------------------------------------------------------------ effects
 
   private drawSlash(origin: Point, aim: number, reach: number): void {
-    return Visuals.drawSlash.call(this.getVisualsContext(), origin, aim, reach);
+    const cls = this.session.meleeClass as MeleeClass;
+    this.fx.slash(origin, aim, reach, meleeShape(cls).arcDeg, cls, this.rarityIn('weapon'));
   }
 
   /**

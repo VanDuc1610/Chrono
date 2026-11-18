@@ -1,8 +1,6 @@
 import Phaser from 'phaser';
 import type { Player } from '../../entities/Player';
 import { type GameSession } from '../../state/GameSession';
-import { type Point } from '../../systems/action/ActionRules';
-import { meleeShape } from '../../systems/action/WeaponRules';
 import { Roamer } from './ActionTypes';
 export interface VisualsContext {
   bars: Phaser.GameObjects.Graphics;
@@ -36,17 +34,6 @@ export function drawBars(this: VisualsContext): void {
   const hp = this.session.hp / stats.maxHp;
   bar(p.x, top, 26, 3, hp, hpColor(hp));
   bar(p.x, top + 5, 26, 2, this.session.mp / stats.maxMp, 0x38bdf8);
-}
-
-export function drawSlash(this: VisualsContext, origin: Point, aim: number, reach: number): void {
-  const g = this.scene.add.graphics().setDepth(42);
-  const shape = meleeShape(this.session.meleeClass);
-  const half = (shape.arcDeg * Math.PI) / 360;
-  g.lineStyle(shape.arcDeg < 90 ? 4 : 3, shape.color, 0.9);
-  g.beginPath();
-  g.arc(origin.x, origin.y, reach - 4, aim - half, aim + half);
-  g.strokePath();
-  this.scene.tweens.add({ targets: g, alpha: 0, duration: 160, onComplete: () => g.destroy() });
 }
 
 export function floatText(

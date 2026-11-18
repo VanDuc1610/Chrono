@@ -1,3 +1,4 @@
+import type { PixelFxLayer } from '../../systems/fx/PixelFxLayer';
 import Phaser from 'phaser';
 import { type Point, type RoamerBrain } from '../../systems/action/ActionRules';
 import { type ShotTarget } from '../../systems/action/ShotSystem';
@@ -52,6 +53,8 @@ export interface ActionHost {
   refreshHud(): void;
   /** Quest harassers appeared (once per batch). */
   onHunted?(): void;
+  /** The scene's shared pixelfx layer (combat animation). */
+  pfx?(): PixelFxLayer;
 }
 
 export interface Roamer {

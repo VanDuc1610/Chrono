@@ -306,6 +306,7 @@ export class ExplorationScene extends Phaser.Scene {
       {
         isPaused: () => this.isTransitioning || this.menuOpen || this.dialogueBox.isOpen(),
         onPlayerDefeated: () => this.knockedOut(),
+        pfx: () => (this.pfx ??= new PixelFxLayer(this)),
         onAmbushRescue: (id) => {
           this.action?.dismissAmbushers();
           this.openDialogue(id);

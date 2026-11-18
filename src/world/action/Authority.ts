@@ -13,6 +13,7 @@ import {
 import { cutCooldown, skillPowerFor } from '../../systems/inventory/GearRules';
 import type { Translate } from '../../ui/Strings';
 import type { CombatExtension, Roamer } from './ActionTypes';
+import type { CombatFx } from './CombatFx';
 
 /** What the powers need from the action combat (kept narrow on purpose). */
 export interface AuthorityHost {
@@ -34,6 +35,8 @@ export interface AuthorityHost {
   /** Peter cannot be hurt for `ms`. */
   shelter(ms: number): void;
   refreshHud(): void;
+  /** Combat animation (pixelfx bursts). */
+  fx: CombatFx;
 }
 
 const hex = (c: string): number => Phaser.Display.Color.HexStringToColor(c).color;
@@ -132,6 +135,12 @@ export class AuthorityPowers {
     if (this.echo) {
       const e = this.echo;
       if (now >= e.until) {
+        this.h.fx.burst(
+          'blinkOut',
+          { x: e.sprite.x, y: e.sprite.y + 10 },
+          this.h.fx.authority('memory'),
+          900,
+        );
         this.h.scene.tweens.add({
           targets: e.sprite,
           alpha: 0,
@@ -154,7 +163,13 @@ export class AuthorityPowers {
         r.burn.left -= 1;
         r.burn.next = now + r.burn.every;
         this.h.wound(r, r.burn.damage);
-        this.h.floatText(r.sprite.x, r.sprite.y - 26, '🔥', '#ff8a4a');
+        this.h.fx.burst(
+          'hitSpark',
+          { x: r.sprite.x, y: r.sprite.y - 8 },
+          this.h.fx.authority('finality'),
+          400,
+          { height: 10 },
+        );
         if (r.burn.left <= 0) r.burn = undefined;
       }
       if (r.slowUntil && now >= r.slowUntil) {
@@ -172,10 +187,20 @@ export class AuthorityPowers {
     const range = def.range ?? 110;
     const arc = def.arcDeg ?? 100;
     this.drawArc(o, aim, range, arc, hex(def.color), 0.55);
+    const pal = this.h.fx.authority('continuum');
+    for (const k of [0.45, 0.85])
+      this.h.fx.burst(
+        'waveCrash',
+        { x: o.x + Math.cos(aim) * range * k, y: o.y + Math.sin(aim) * range * k + 10 },
+        pal,
+        1100,
+        { flip: Math.cos(aim) < 0 },
+      );
     const now = this.h.scene.time.now;
     for (const r of this.h.roamers()) {
       if (!r.alive || !inSlash(o, aim, r.sprite, range, arc)) continue;
       this.h.strike(r, def.mult);
+      this.h.fx.burst('hitSpark', { x: r.sprite.x, y: r.sprite.y - 6 }, pal, 450);
       if (!r.alive) continue;
       const away = Math.atan2(r.sprite.y - o.y, r.sprite.x - o.x);
       const k = def.knockback ?? 240;
@@ -207,6 +232,9 @@ export class AuthorityPowers {
     order.forEach((idx, hop) => {
       const to = points[idx];
       this.bolt(g, from, to, hex(def.color));
+      this.h.scene.time.delayedCall(hop * 60, () =>
+        this.h.fx.burst('critHit', { x: to.x, y: to.y - 6 }, this.h.fx.authority('causality'), 650),
+      );
       if (idx < roamers.length)
         this.h.strike(roamers[idx], chainMult(def.mult, def.falloff ?? 0.15, hop));
       else
@@ -227,6 +255,7 @@ export class AuthorityPowers {
       .setAlpha(0)
       .setDepth(p.sprite.depth - 0.001);
     this.h.scene.tweens.add({ targets: s, alpha: 0.6, duration: 260 });
+    this.h.fx.burst('blinkIn', { x: s.x, y: s.y + 10 }, this.h.fx.authority('memory'), 900);
     const now = this.h.scene.time.now;
     this.echo = { sprite: s, until: now + (def.durationMs ?? 6000), next: now + 300, def };
   }
@@ -249,6 +278,12 @@ export class AuthorityPowers {
       const aim = Math.atan2(best.sprite.y - at.y, best.sprite.x - at.x);
       this.drawArc(at, aim, 34, 90, hex(def.color), 0.5);
       this.h.strike(best, def.mult);
+      this.h.fx.burst(
+        'hitSpark',
+        { x: best.sprite.x, y: best.sprite.y - 6 },
+        this.h.fx.authority('memory'),
+        450,
+      );
     }
     ext?.onArea?.(at, range, this.attack(), def.mult);
   }
@@ -259,10 +294,19 @@ export class AuthorityPowers {
     const range = def.range ?? 58;
     const arc = def.arcDeg ?? 150;
     this.drawArc(o, aim, range, arc, hex(def.color), 0.8);
+    const fire = this.h.fx.authority('finality');
+    this.h.fx.burst(
+      'groundSlam',
+      { x: o.x + Math.cos(aim) * range * 0.6, y: o.y + Math.sin(aim) * range * 0.6 + 10 },
+      fire,
+      1000,
+      { reach: Math.round(range * 1.1) },
+    );
     const now = this.h.scene.time.now;
     for (const r of this.h.roamers()) {
       if (!r.alive || !inSlash(o, aim, r.sprite, range, arc)) continue;
       if (!r.clone && executes(r.hp, r.enemy.maxHp, def.executePct ?? 0.2, false)) {
+        this.h.fx.burst('soulRise', { x: r.sprite.x, y: r.sprite.y + 10 }, fire, 1400);
         this.h.floatText(r.sprite.x, r.sprite.y - 30, this.h.t('skill.executed'), '#ff8a4a');
         this.h.slay(r);
         continue;
@@ -295,6 +339,9 @@ export class AuthorityPowers {
       .setTint(hex(def.color))
       .setAlpha(0.7)
       .setDepth(p.sprite.depth);
+    const green = this.h.fx.authority('possibility');
+    this.h.fx.burst('blinkOut', { x: o.x, y: o.y + 10 }, green, 800);
+    this.h.fx.burst('blinkIn', { x: o.x + dx * d, y: o.y + dy * d + 10 }, green, 800);
     p.sprite.setPosition(o.x + dx * d, o.y + dy * d);
     (p.sprite.body as Phaser.Physics.Arcade.Body | null)?.reset(o.x + dx * d, o.y + dy * d);
     this.h.shelter(260);
@@ -315,6 +362,7 @@ export class AuthorityPowers {
         onComplete: () => ring.destroy(),
       });
       decoy.destroy();
+      this.h.fx.burst('frostNova', { x: at.x, y: at.y + 8 }, green, 1300, { reach: radius });
       for (const r of this.h.roamers())
         if (r.alive && distance(at, r.sprite) <= radius) this.h.strike(r, def.mult);
       this.h.extension()?.onArea?.(at, radius, this.attack(), def.mult);
@@ -339,6 +387,10 @@ export class AuthorityPowers {
     const o = this.origin();
     const radius = def.radius ?? 72;
     this.drawArc(o, 0, radius, 360, hex(def.color), 0.45);
+    const gold = this.h.fx.authority('origin');
+    this.h.fx.burst('holyPillar', () => ({ x: p.x, y: p.y + 12 }), gold, 1500);
+    this.h.fx.burst('frostNova', { x: o.x, y: o.y + 8 }, gold, 1300, { reach: radius });
+    this.h.fx.motes({ x: p.x, y: p.y - 6 }, '#fff08a', 8);
     for (const r of this.h.roamers()) {
       if (!r.alive || distance(o, r.sprite) > radius) continue;
       this.h.strike(r, def.mult);

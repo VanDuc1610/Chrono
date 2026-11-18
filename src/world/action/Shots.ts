@@ -27,6 +27,7 @@ export interface ShotsContext {
     now: number,
     mult?: number,
     critBonus?: number,
+    fx?: 'melee' | 'ranged' | 'none',
   ) => number | null;
   walls: Phaser.Tilemaps.TilemapLayer;
   faceX: (r: Roamer, dx: number) => void;
@@ -69,7 +70,7 @@ export function updateShots(this: ShotsContext, delta: number, now: number): voi
       radius: 12,
       hit: () => {
         if (!r.alive) return false;
-        this.strikeRoamer(r, attack, now, mult);
+        this.strikeRoamer(r, attack, now, mult, 0, 'ranged');
         return true;
       },
     }));

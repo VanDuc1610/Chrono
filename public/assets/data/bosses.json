@@ -17,7 +17,9 @@
         "flashDialogueId": "battle_wraith_rescue_flash",
         "dialogueId": "battle_elder_rescue",
         "allyTexture": "npc_elder",
-        "allyAnim": "npc_elder_idle"
+        "allyAnim": "npc_elder_idle",
+        "peterDamage": 1,
+        "blowPct": 0.4
       },
       "phases": [
         {

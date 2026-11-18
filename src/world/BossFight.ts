@@ -341,6 +341,7 @@ export class BossFight implements CombatExtension {
     this.showBanner(profile.intro ?? enemy.name, 3200);
     scene.cameras.main.shake(200, 0.004);
     if (profile.rescue) action.bossHpFloor = 1;
+    action.bossBlowPct = profile.rescue?.blowPct ?? 0;
     action.extension = this;
   }
 
@@ -776,6 +777,7 @@ export class BossFight implements CombatExtension {
     this.state = 'done';
     this.action.extension = null;
     this.action.bossHpFloor = 0;
+    this.action.bossBlowPct = 0;
     this.hazards = [];
     this.telegraphs = [];
     this.boss.setVelocity(0, 0);
@@ -1051,8 +1053,11 @@ export class BossFight implements CombatExtension {
       this.victory();
       return;
     }
-    this.hp = Math.max(0, this.hp - res.damage);
-    if (this.risen) this.hp = Math.max(1, this.hp);
+    // A fight Peter cannot win: his blows land for a fixed amount and the boss never falls.
+    const fixed = this.profile.rescue?.peterDamage;
+    const damage = fixed ?? res.damage;
+    this.hp = Math.max(0, this.hp - damage);
+    if (this.risen || this.profile.rescue) this.hp = Math.max(1, this.hp);
     this.floorHp();
     if (this.sentence) this.sentence.landed = true;
     if (staggered && d.memoryLock) {
@@ -1078,8 +1083,8 @@ export class BossFight implements CombatExtension {
       this.action.floatText(
         this.boss.x,
         this.boss.y - 34,
-        `${res.damage}${critical ? '!' : ''}`,
-        armored ? '#8fb8ff' : critical ? '#ffd166' : '#ffffff',
+        `${damage}${critical && !fixed ? '!' : ''}`,
+        armored ? '#8fb8ff' : critical && !fixed ? '#ffd166' : '#ffffff',
       );
     }
     this.checkPhase();
@@ -2189,6 +2194,7 @@ export class BossFight implements CombatExtension {
     this.cleanupExtras();
     this.ended = true;
     this.action.extension = null;
+    this.action.bossBlowPct = 0;
     this.action.bossHpFloor = 0;
     this.dispose([this.fx, this.bar, this.title, this.banner, ...this.targets.map((t) => t.obj)]);
     for (const c of this.colliders.splice(0)) c.destroy();
