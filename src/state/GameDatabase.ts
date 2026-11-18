@@ -3,6 +3,7 @@ import type { ActionTuningInput } from '../systems/action/ActionRules';
 import { CombatTuning, EnemyDatabase } from '../systems/combat/CombatTypes';
 import { InventoryDatabase, IItemStack } from '../systems/inventory/InventoryTypes';
 import { QuestDatabase } from '../systems/quest/QuestTypes';
+import type { EquipmentDatabase } from '../systems/inventory/GearRules';
 
 export interface PlayerStats {
   maxHp: number;
@@ -52,6 +53,8 @@ export interface GameDatabase {
   quests: QuestDatabase;
   enemies: EnemyDatabase;
   player: PlayerDatabase;
+  /** Gear rarity, effects and sets (equipment.json); optional so test fixtures can skip it. */
+  gear?: EquipmentDatabase;
 }
 
 const CACHE_KEYS = {
@@ -77,5 +80,6 @@ export function readGameDatabase(scene: Phaser.Scene): GameDatabase {
     quests: readJson<QuestDatabase>(scene, CACHE_KEYS.quests),
     enemies: readJson<EnemyDatabase>(scene, CACHE_KEYS.enemies),
     player: readJson<PlayerDatabase>(scene, CACHE_KEYS.player),
+    gear: scene.cache.json.get('data_equipment') as EquipmentDatabase | undefined,
   };
 }

@@ -1,3 +1,4 @@
+import { burnTick, lifestealHeal, thornsDamage } from '../systems/inventory/GearRules';
 import { segmentDistance } from '../systems/action/GeometryRules';
 import Phaser from 'phaser';
 import type { Player } from '../entities/Player';
@@ -153,7 +154,13 @@ export class ActionCombat {
       t,
       roamers: () => this.roamers,
       strike: (r, mult, critBonus = 0) =>
-        this.strikeRoamer(r, this.session.getStats().attack, this.scene.time.now, mult, critBonus),
+        this.strikeRoamer(
+          r,
+          this.session.getStats().attack,
+          this.scene.time.now,
+          mult,
+          critBonus + (this.session.gear.totals.crit ?? 0),
+        ),
       wound: (r, damage) => this.damageRoamer(r, damage, false),
       slay: (r) => {
         r.hp = 0;
@@ -405,6 +412,7 @@ export class ActionCombat {
     this.updateShots(delta, now);
     this.animateRoamers(now);
     this.powers.update(now);
+    this.gearRegen(now);
     const maxMp = this.session.getStats().maxMp;
     this.session.mp = Math.min(maxMp, this.session.mp + (this.tuning.mpRegenPerSec * delta) / 1000);
     if (Math.floor(this.session.mp) !== this.hudMp) {
@@ -556,7 +564,10 @@ export class ActionCombat {
     this.strikeTargets(origin, aim, reach, now);
     const attack = this.session.getStats().attack;
     const shape = meleeShape(this.session.meleeClass);
-    const critBonus = meleeCritBonus(this.session.meleeClass) + this.powers.takeCrit();
+    const critBonus =
+      meleeCritBonus(this.session.meleeClass) +
+      this.powers.takeCrit() +
+      (this.session.gear.totals.crit ?? 0);
     const fistMult = fists?.mult ?? 1;
     this.extension?.onAction?.('slash');
     let landed = false;
@@ -639,7 +650,52 @@ export class ActionCombat {
       this.thrustMult(r, now);
     const dealt = Math.floor(hit.damage * m);
     this.damageRoamer(r, dealt, hit.critical || stunned);
+    this.gearOnHit(dealt, r);
     return dealt;
+  }
+
+  private nextRegen = 0;
+
+  /**
+   * Gear on a landed blow (equipment.json): lifesteal heals, mpOnHit refills MP, and on a roamer
+   * slowOnHit slows it for 1.5 s and burnOnHit sets 3 burn ticks. Boss fights call this too.
+   */
+  public gearOnHit(dealt: number, r?: Roamer): void {
+    if (dealt <= 0 || this.defeated) return;
+    const gear = this.session.gear;
+    const stats = this.session.getStats();
+    const heal = lifestealHeal(dealt, gear);
+    if (heal > 0 && this.session.hp < stats.maxHp) {
+      this.session.hp = Math.min(stats.maxHp, this.session.hp + heal);
+      this.floatText(this.player.x + 8, this.player.y - 26, `+${heal}`, '#7dff9a');
+    }
+    const mp = gear.totals.mpOnHit ?? 0;
+    if (mp > 0) this.session.mp = Math.min(stats.maxMp, this.session.mp + mp);
+    if (heal > 0 || mp > 0) this.host.refreshHud();
+    if (!r || !r.alive) return;
+    const now = this.scene.time.now;
+    const slow = gear.totals.slowOnHit ?? 0;
+    if (slow > 0) {
+      const still = r.slowUntil !== undefined && r.slowUntil > now ? (r.slowPct ?? 0) : 0;
+      r.slowUntil = now + 1500;
+      r.slowPct = Math.max(still, slow);
+      r.sprite.setTint(0x8fd0ff);
+    }
+    const tick = burnTick(dealt, gear);
+    if (tick > 0 && (!r.burn || r.burn.damage <= tick))
+      r.burn = { left: 3, every: 1000, next: now + 1000, damage: tick };
+  }
+
+  /** Gear regen: `regen` HP every 5 s on the map. */
+  private gearRegen(now: number): void {
+    if (now < this.nextRegen) return;
+    this.nextRegen = now + 5000;
+    const regen = this.session.gear.totals.regen ?? 0;
+    const max = this.session.getStats().maxHp;
+    if (regen <= 0 || this.defeated || this.session.hp >= max || this.session.hp <= 0) return;
+    this.session.hp = Math.min(max, this.session.hp + regen);
+    this.floatText(this.player.x, this.player.y - 26, `+${regen}`, '#7dff9a');
+    this.host.refreshHud();
   }
 
   /** F: shoot the ranged weapon toward the cursor (T-84). */
@@ -752,7 +808,8 @@ export class ActionCombat {
     this.player.forceVelocity((x / len) * s, (y / len) * s, this.tuning.dashMs);
     this.invulnUntil = Math.max(this.invulnUntil, now + this.tuning.dashMs + 80);
     this.lastDashAt = now;
-    this.nextDash = now + this.tuning.dashCooldownMs;
+    this.nextDash =
+      now + Math.max(200, this.tuning.dashCooldownMs - (this.session.gear.totals.dashCut ?? 0));
     if (now < this.dotUntil) {
       this.dotUntil = 0;
       this.floatText(this.player.x, this.player.y - 22, this.t('action.brushed'), '#e6dcff');
@@ -890,6 +947,8 @@ export class ActionCombat {
     this.scene.cameras.main.shake(120, 0.004);
     this.floatText(this.player.x, this.player.y - 20, `-${damage}`, '#ff6b6b');
     this.host.refreshHud();
+    const thorns = thornsDamage(damage, this.session.gear);
+    if (thorns > 0 && r.alive) this.damageRoamer(r, thorns, false);
 
     if (r.def.ambush && this.session.hp <= 1 && !this.ambushFired) {
       this.ambushFired = true;
@@ -932,6 +991,8 @@ export class ActionCombat {
     this.scene.cameras.main.shake(120, 0.004);
     this.floatText(this.player.x, this.player.y - 20, `-${dealt}`, '#ff6b6b');
     this.host.refreshHud();
+    const thorns = thornsDamage(dealt, this.session.gear);
+    if (thorns > 0) this.extension?.onThorns?.(thorns);
     if (this.session.hp <= 0) {
       this.defeated = true;
       this.host.onPlayerDefeated();

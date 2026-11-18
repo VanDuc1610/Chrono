@@ -18,6 +18,8 @@ export interface CombatExtension {
     blow: { attack: number; arcDeg: number; mult: number; critBonus: number; echoPct: number },
   ): boolean;
   onSkill(origin: Point, radius: number, attack: number): void;
+  /** Gear thorns: Peter's armour hurts the boss back by `damage`. */
+  onThorns?(damage: number): void;
   /**
    * An Authority skill's blow over an area (2026-11-18): the boss takes `attack` × `mult` (less its
    * defence) when it stands within `radius`; `slowMs` slows it. True when it was hit.

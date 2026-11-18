@@ -1,3 +1,4 @@
+import { burnTick } from '../systems/inventory/GearRules';
 import Phaser from 'phaser';
 import type { GameSession } from '../state/GameSession';
 import { inSlash, rollHit, type Point } from '../systems/action/ActionRules';
@@ -902,6 +903,7 @@ export class BossFight implements CombatExtension {
         : combat;
       const hit = rollHit(blow.attack, this.enemy.defense, tuning, this.rng, blow.mult);
       this.blowOnBoss(hit.damage, hit.critical, origin);
+      this.gearHit(hit.damage, origin);
       if (blow.echoPct > 0)
         this.later(200, () =>
           this.blowOnBoss(Math.max(1, Math.floor(hit.damage * blow.echoPct)), false, origin),
@@ -934,6 +936,27 @@ export class BossFight implements CombatExtension {
     if (this.profile.defense.unlockOnSkill) this.openTargets();
   }
 
+  /**
+   * Gear on a weapon blow that hit the boss: lifesteal / MP through the action combat, a burn of
+   * 3 ticks, and slowOnHit as a chance (a boss is never kept slowed for good).
+   */
+  private gearHit(damage: number, from: Point): void {
+    if (this.ended) return;
+    const gear = this.session.gear;
+    this.action.gearOnHit(damage);
+    const slow = gear.totals.slowOnHit ?? 0;
+    if (slow > 0 && this.rng() < slow)
+      this.slowBossUntil = Math.max(this.slowBossUntil, this.scene.time.now + 1500);
+    const tick = burnTick(damage, gear);
+    for (let i = 1; tick > 0 && i <= 3; i++)
+      this.later(i * 1000, () => this.blowOnBoss(tick, false, from));
+  }
+
+  /** Gear thorns: the boss takes part of its own blow back. */
+  public onThorns(damage: number): void {
+    if (!this.ended) this.blowOnBoss(damage, false, { x: this.boss.x, y: this.boss.y });
+  }
+
   /** An Authority skill over an area: hits the boss when it stands inside, maybe slows it. */
   public onArea(
     origin: Point,
@@ -964,6 +987,7 @@ export class BossFight implements CombatExtension {
         hit: ({ from }) => {
           const hit = rollHit(attack, this.enemy.defense, combat, this.rng, mult);
           this.blowOnBoss(hit.damage, hit.critical, from);
+          this.gearHit(hit.damage, from);
           return true;
         },
       },

@@ -10,6 +10,7 @@ import {
   executes,
   type SkillDef,
 } from '../../systems/action/AuthorityRules';
+import { cutCooldown, skillPowerFor } from '../../systems/inventory/GearRules';
 import type { Translate } from '../../ui/Strings';
 import type { CombatExtension, Roamer } from './ActionTypes';
 
@@ -44,6 +45,8 @@ const hex = (c: string): number => Phaser.Display.Color.HexStringToColor(c).colo
  */
 export class AuthorityPowers {
   private readonly cooldownUntil = new Map<string, number>();
+  /** Each skill's last cooldown after gear's cut (for the skill bar's shade). */
+  private readonly cooldownSpan = new Map<string, number>();
   private shield = 0;
   private shieldUntil = 0;
   private shieldRing: Phaser.GameObjects.Arc | null = null;
@@ -65,7 +68,7 @@ export class AuthorityPowers {
   /** 0 when ready, else the share of the cooldown still to run (for the skill bar). */
   public cooldownLeft(def: SkillDef, now: number): number {
     const until = this.cooldownUntil.get(def.id) ?? 0;
-    return until <= now ? 0 : (until - now) / def.cooldownMs;
+    return until <= now ? 0 : (until - now) / (this.cooldownSpan.get(def.id) ?? def.cooldownMs);
   }
 
   public ready(def: SkillDef, now: number): boolean {
@@ -91,8 +94,18 @@ export class AuthorityPowers {
   }
 
   /** Casts `def` toward `aim` (radians). Costs and cooldown are the caller's. */
-  public cast(def: SkillDef, aim: number): void {
-    this.cooldownUntil.set(def.id, this.h.scene.time.now + def.cooldownMs);
+  public cast(base: SkillDef, aim: number): void {
+    // Gear: skillPower raises the blow (and burn), cooldownCut shortens the wait.
+    const gear = this.h.session.gear;
+    const power = skillPowerFor(gear, base.authority);
+    const def: SkillDef = {
+      ...base,
+      mult: base.mult * power,
+      burnMult: base.burnMult === undefined ? undefined : base.burnMult * power,
+    };
+    const span = cutCooldown(base.cooldownMs, gear);
+    this.cooldownSpan.set(base.id, span);
+    this.cooldownUntil.set(base.id, this.h.scene.time.now + span);
     switch (def.authority) {
       case 'continuum':
         return this.tide(def, aim);

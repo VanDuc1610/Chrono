@@ -18,6 +18,7 @@ import {
   unlockedSkills,
   type SkillDatabase,
 } from '../systems/action/AuthorityRules';
+import { gearProfile, type GearProfile } from '../systems/inventory/GearRules';
 
 // Pure logic: only Phaser *types* are imported so this module stays unit-testable outside a browser.
 const clamp = (value: number, min: number, max: number): number =>
@@ -481,7 +482,21 @@ export class GameSession {
         sum[k] = (sum[k] ?? 0) + v;
       }
     }
+    for (const [k, v] of Object.entries(this.gear.stats) as [keyof EquipStats, number][]) {
+      sum[k] = (sum[k] ?? 0) + v;
+    }
     return sum;
+  }
+
+  /** Effects and set bonuses of the worn gear (equipment.json). */
+  public get gear(): GearProfile {
+    const worn = EQUIP_SLOTS.map((s) => this.equipment[s]).filter((id): id is string => !!id);
+    return gearProfile(this.db.gear, worn);
+  }
+
+  /** Gear data (rarity, sets) for the menus. */
+  public get gearDb(): GameDatabase['gear'] {
+    return this.db.gear;
   }
 
   /** The equipped weapon's `equip` block (reach, swing speed), if any. */
@@ -636,6 +651,24 @@ export class GameSession {
   /** Puts a known skill (or nothing) in slot 0-2; a skill already slotted elsewhere swaps. */
   public setSkillSlot(index: number, id: string | null): void {
     this.skillSlots = assignSlot(this.skillSlots, index, id);
+  }
+
+  /** Stats as they would be with `itemId` (or nothing) in `slot`: the gear screen's comparison. */
+  public previewStats(slot: EquipSlot, itemId: string | null): PlayerStats {
+    const was = this.equipment[slot];
+    this.equipment[slot] = itemId;
+    const stats = this.getStats();
+    this.equipment[slot] = was;
+    return stats;
+  }
+
+  /** Gear effects as they would be with `itemId` (or nothing) in `slot`. */
+  public previewGear(slot: EquipSlot, itemId: string | null): GearProfile {
+    const was = this.equipment[slot];
+    this.equipment[slot] = itemId;
+    const gear = this.gear;
+    this.equipment[slot] = was;
+    return gear;
   }
 }
 

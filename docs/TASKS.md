@@ -33,19 +33,26 @@ every player), then sound, settings and saves, then combat and code health, then
    (Codex) · later: audio integration, settings implementation, one combat system (design first),
    ActionCombat/BossFight split, gamepad and touch, LPC dressing per map, chapters 6-9 structure.
 
-### T-99 · Peter's Authority skills and an equipment upgrade — **Claude** · `IN PROGRESS`
+### T-99 · Peter's Authority skills and an equipment upgrade — **Claude** · `DONE`
 
 Owner, 2026-11-18: more ways to fight than Temporal Strike, and a real equipment system. Choices:
 six skills themed on the six Authorities (one unlocked per chapter 1-6), three slots on Z / X / C
 beside Temporal Strike; equipment with special effects and rarity, its own screen, and sets.
 Phase 1 done: `skills.json`, `AuthorityRules` (tested), `world/action/Authority.ts` (Continuum tide,
 Causality chain, Memory echo, Finality cleave and burn, Possibility blink and decoy, Origin heal and
-shield), boss hook `onArea`, `SkillBar`, slots saved, keys rebindable. Phase 2: equipment.
+shield), boss hook `onArea`, `SkillBar`, slots saved, keys rebindable.
+Phase 2 done: `equipment.json` (rarity, per-item effects, 8 sets with 2-4 piece bonuses), pure
+`GearRules` (tested): lifesteal, burn, slow, MP on hit, crit, skill power, cooldown cut, dash cut,
+thorns, regen, with caps. `GameSession.gear` / `previewStats`; effects applied in `ActionCombat`,
+`BossFight` (`gearHit`, `onThorns`) and `Authority` (skill power, cooldown cut). `EquipmentPanel` on U
+(rebindable): portrait, stats with change preview, gear and Authority slots, item details, sets.
 
 _Locks:_ `src/systems/action/AuthorityRules.ts` (new), `src/world/action/Authority.ts` (new),
 `src/ui/SkillBar.ts` (new), `public/assets/data/skills.json` (new), `src/world/ActionCombat.ts`,
 `src/world/BossFight.ts`, `src/state/GameSession.ts`, `src/state/Settings.ts`, `src/ui/OptionsPanel.ts`,
-`src/ui/controlList.ts`, `public/assets/data/items.json`, `src/ui/SatchelPanel.ts`, `tests/authority.test.ts` (new).
+`src/ui/controlList.ts`, `public/assets/data/items.json`, `src/ui/SatchelPanel.ts`, `tests/authority.test.ts` (new),
+`public/assets/data/equipment.json` (new), `src/systems/inventory/GearRules.ts` (new),
+`src/ui/EquipmentPanel.ts` (new), `tests/gear.test.ts` (new). Released now that the task is done.
 
 ### T-91 · UI overhaul: pixel font with Vietnamese, compact HUD, controls bar — **Claude** · `DONE`
 

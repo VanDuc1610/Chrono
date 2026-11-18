@@ -1,0 +1,347 @@
+{
+  "rarity": {
+    "common": { "color": "#c8d4ec" },
+    "rare": { "color": "#5ab4ff" },
+    "epic": { "color": "#c08cff" },
+    "legendary": { "color": "#ffb84a" }
+  },
+  "items": {
+    "broken_blade": { "rarity": "rare", "effects": [{ "kind": "mpOnHit", "value": 1 }] },
+    "tide_brass_blade": { "rarity": "common", "effects": [] },
+    "beacon_hour_hand": { "rarity": "rare", "effects": [{ "kind": "slowOnHit", "value": 0.2 }] },
+    "praetor_iron_rapier": { "rarity": "rare", "effects": [{ "kind": "crit", "value": 0.06 }] },
+    "memory_needle_rapier": { "rarity": "rare", "effects": [{ "kind": "mpOnHit", "value": 2 }] },
+    "vow_of_the_father_blade": {
+      "rarity": "epic",
+      "effects": [
+        { "kind": "lifesteal", "value": 0.06 },
+        { "kind": "crit", "value": 0.04 }
+      ]
+    },
+    "spear_of_finality": { "rarity": "epic", "effects": [{ "kind": "burnOnHit", "value": 0.3 }] },
+    "silver_pruning_shears": {
+      "rarity": "epic",
+      "effects": [
+        { "kind": "slowOnHit", "value": 0.3 },
+        { "kind": "mpOnHit", "value": 1 }
+      ]
+    },
+    "blade_of_possibility": {
+      "rarity": "legendary",
+      "effects": [
+        { "kind": "crit", "value": 0.08 },
+        { "kind": "skillPower", "value": 0.25, "authority": "possibility" }
+      ]
+    },
+    "origin_astral_blade": {
+      "rarity": "legendary",
+      "effects": [
+        { "kind": "lifesteal", "value": 0.05 },
+        { "kind": "skillPower", "value": 0.3, "authority": "origin" }
+      ]
+    },
+    "void_severance_blade": {
+      "rarity": "legendary",
+      "effects": [
+        { "kind": "burnOnHit", "value": 0.35 },
+        { "kind": "crit", "value": 0.06 }
+      ]
+    },
+    "convergence_compass_blade": {
+      "rarity": "epic",
+      "effects": [
+        { "kind": "cooldownCut", "value": 0.1 },
+        { "kind": "mpOnHit", "value": 1 }
+      ]
+    },
+    "lyra_vanguard_halberd": {
+      "rarity": "epic",
+      "effects": [
+        { "kind": "slowOnHit", "value": 0.25 },
+        { "kind": "crit", "value": 0.05 }
+      ]
+    },
+    "last_chronarch_blade": {
+      "rarity": "legendary",
+      "effects": [
+        { "kind": "skillPower", "value": 0.2 },
+        { "kind": "lifesteal", "value": 0.04 }
+      ]
+    },
+    "broken_divinity_edge": {
+      "rarity": "legendary",
+      "effects": [
+        { "kind": "crit", "value": 0.1 },
+        { "kind": "burnOnHit", "value": 0.25 }
+      ]
+    },
+    "gear_sling": { "rarity": "common", "effects": [] },
+    "tide_spring_crossbow": {
+      "rarity": "rare",
+      "effects": [{ "kind": "slowOnHit", "value": 0.25 }]
+    },
+    "pendulum_repeater": { "rarity": "rare", "effects": [{ "kind": "mpOnHit", "value": 1 }] },
+    "hourmark_flintlock": { "rarity": "epic", "effects": [{ "kind": "crit", "value": 0.1 }] },
+    "astral_longbow": {
+      "rarity": "legendary",
+      "effects": [
+        { "kind": "burnOnHit", "value": 0.3 },
+        { "kind": "crit", "value": 0.06 }
+      ]
+    },
+    "oilcloth_coat": { "rarity": "common", "effects": [] },
+    "atonement_chronicle": { "rarity": "rare", "effects": [{ "kind": "regen", "value": 4 }] },
+    "valiant_crest_cuirass": { "rarity": "rare", "effects": [{ "kind": "thorns", "value": 0.15 }] },
+    "ashes_of_peace_charm": { "rarity": "rare", "effects": [{ "kind": "regen", "value": 5 }] },
+    "alpha_wedding_ring": {
+      "rarity": "epic",
+      "effects": [
+        { "kind": "regen", "value": 6 },
+        { "kind": "lifesteal", "value": 0.03 }
+      ]
+    },
+    "chosen_seed_aldric": { "rarity": "epic", "effects": [{ "kind": "thorns", "value": 0.2 }] },
+    "na_braided_ribbon": {
+      "rarity": "epic",
+      "effects": [
+        { "kind": "regen", "value": 6 },
+        { "kind": "dashCut", "value": 150 }
+      ]
+    },
+    "singularity_sand_charm": {
+      "rarity": "epic",
+      "effects": [{ "kind": "thorns", "value": 0.25 }]
+    },
+    "solon_mercy_clasp": { "rarity": "epic", "effects": [{ "kind": "regen", "value": 7 }] },
+    "seal_of_the_first_hour": {
+      "rarity": "legendary",
+      "effects": [
+        { "kind": "regen", "value": 8 },
+        { "kind": "cooldownCut", "value": 0.1 }
+      ]
+    },
+    "bran_count_token": {
+      "rarity": "rare",
+      "effects": [
+        { "kind": "thorns", "value": 0.1 },
+        { "kind": "dashCut", "value": 100 }
+      ]
+    },
+    "kuro_mother_brooch": {
+      "rarity": "epic",
+      "effects": [
+        { "kind": "regen", "value": 6 },
+        { "kind": "skillPower", "value": 0.2, "authority": "memory" }
+      ]
+    },
+    "mother_golden_hairpin": {
+      "rarity": "epic",
+      "effects": [{ "kind": "cooldownCut", "value": 0.12 }]
+    },
+    "na_last_crane": {
+      "rarity": "legendary",
+      "effects": [
+        { "kind": "regen", "value": 8 },
+        { "kind": "dashCut", "value": 200 }
+      ]
+    },
+    "empty_chair_token": {
+      "rarity": "legendary",
+      "effects": [
+        { "kind": "cooldownCut", "value": 0.15 },
+        { "kind": "regen", "value": 6 }
+      ]
+    },
+    "sixfold_harmony_clasp": {
+      "rarity": "legendary",
+      "effects": [
+        { "kind": "skillPower", "value": 0.15 },
+        { "kind": "thorns", "value": 0.15 }
+      ]
+    },
+    "sea_glass_charm": { "rarity": "common", "effects": [] },
+    "singing_shell_charm": {
+      "rarity": "rare",
+      "effects": [{ "kind": "skillPower", "value": 0.2, "authority": "continuum" }]
+    },
+    "scales_of_truth_charm": {
+      "rarity": "rare",
+      "effects": [{ "kind": "skillPower", "value": 0.2, "authority": "causality" }]
+    },
+    "ember_quill_charm": { "rarity": "rare", "effects": [{ "kind": "burnOnHit", "value": 0.15 }] },
+    "pure_crystal_soul_charm": {
+      "rarity": "rare",
+      "effects": [{ "kind": "skillPower", "value": 0.2, "authority": "memory" }]
+    },
+    "dreamless_rest_charm": {
+      "rarity": "rare",
+      "effects": [{ "kind": "cooldownCut", "value": 0.08 }]
+    },
+    "mothers_name_carving": {
+      "rarity": "rare",
+      "effects": [{ "kind": "lifesteal", "value": 0.03 }]
+    },
+    "last_light_charm": {
+      "rarity": "epic",
+      "effects": [
+        { "kind": "skillPower", "value": 0.2, "authority": "origin" },
+        { "kind": "regen", "value": 4 }
+      ]
+    },
+    "interval_lens_charm": {
+      "rarity": "epic",
+      "effects": [
+        { "kind": "skillPower", "value": 0.2, "authority": "possibility" },
+        { "kind": "crit", "value": 0.04 }
+      ]
+    },
+    "chosen_seed_bran": {
+      "rarity": "epic",
+      "effects": [
+        { "kind": "crit", "value": 0.06 },
+        { "kind": "thorns", "value": 0.1 }
+      ]
+    },
+    "chosen_seed_elion": {
+      "rarity": "epic",
+      "effects": [
+        { "kind": "cooldownCut", "value": 0.1 },
+        { "kind": "mpOnHit", "value": 1 }
+      ]
+    },
+    "pruner_compassion_gem": {
+      "rarity": "epic",
+      "effects": [{ "kind": "lifesteal", "value": 0.04 }]
+    },
+    "quantum_astrolabe_charm": {
+      "rarity": "epic",
+      "effects": [{ "kind": "cooldownCut", "value": 0.12 }]
+    },
+    "ivo_precision_lens": { "rarity": "epic", "effects": [{ "kind": "crit", "value": 0.08 }] },
+    "broken_herald_feather": {
+      "rarity": "epic",
+      "effects": [
+        { "kind": "dashCut", "value": 150 },
+        { "kind": "skillPower", "value": 0.15, "authority": "causality" }
+      ]
+    },
+    "celestial_amber_shard": {
+      "rarity": "epic",
+      "effects": [
+        { "kind": "regen", "value": 5 },
+        { "kind": "skillPower", "value": 0.15, "authority": "continuum" }
+      ]
+    },
+    "echoing_origin_bell": {
+      "rarity": "epic",
+      "effects": [{ "kind": "skillPower", "value": 0.2, "authority": "finality" }]
+    },
+    "null_origin_insignia": {
+      "rarity": "legendary",
+      "effects": [
+        { "kind": "skillPower", "value": 0.15 },
+        { "kind": "cooldownCut", "value": 0.1 }
+      ]
+    },
+    "unwritten_cradle_clasp": {
+      "rarity": "legendary",
+      "effects": [
+        { "kind": "regen", "value": 7 },
+        { "kind": "lifesteal", "value": 0.04 }
+      ]
+    },
+    "sixfold_hour_charm": {
+      "rarity": "legendary",
+      "effects": [{ "kind": "skillPower", "value": 0.2 }]
+    }
+  },
+  "sets": {
+    "lighthouse": {
+      "pieces": ["beacon_hour_hand", "oilcloth_coat", "singing_shell_charm"],
+      "bonuses": [
+        { "count": 2, "stats": { "maxHp": 20 } },
+        {
+          "count": 3,
+          "effects": [
+            { "kind": "slowOnHit", "value": 0.15 },
+            { "kind": "skillPower", "value": 0.2, "authority": "continuum" }
+          ]
+        }
+      ]
+    },
+    "praetor": {
+      "pieces": ["praetor_iron_rapier", "atonement_chronicle", "scales_of_truth_charm"],
+      "bonuses": [
+        { "count": 2, "effects": [{ "kind": "crit", "value": 0.05 }] },
+        {
+          "count": 3,
+          "effects": [{ "kind": "skillPower", "value": 0.3, "authority": "causality" }]
+        }
+      ]
+    },
+    "memory": {
+      "pieces": ["memory_needle_rapier", "pure_crystal_soul_charm"],
+      "bonuses": [
+        {
+          "count": 2,
+          "effects": [
+            { "kind": "mpOnHit", "value": 1 },
+            { "kind": "skillPower", "value": 0.25, "authority": "memory" }
+          ]
+        }
+      ]
+    },
+    "veridia": {
+      "pieces": ["vow_of_the_father_blade", "valiant_crest_cuirass", "chosen_seed_bran"],
+      "bonuses": [
+        { "count": 2, "stats": { "defense": 4 } },
+        {
+          "count": 3,
+          "effects": [
+            { "kind": "thorns", "value": 0.15 },
+            { "kind": "lifesteal", "value": 0.03 }
+          ]
+        }
+      ]
+    },
+    "finality": {
+      "pieces": ["spear_of_finality", "ashes_of_peace_charm", "ember_quill_charm"],
+      "bonuses": [
+        { "count": 2, "effects": [{ "kind": "burnOnHit", "value": 0.15 }] },
+        { "count": 3, "effects": [{ "kind": "skillPower", "value": 0.3, "authority": "finality" }] }
+      ]
+    },
+    "mother": {
+      "pieces": ["kuro_mother_brooch", "mothers_name_carving"],
+      "bonuses": [
+        { "count": 2, "stats": { "maxHp": 30 }, "effects": [{ "kind": "regen", "value": 5 }] }
+      ]
+    },
+    "origin": {
+      "pieces": [
+        "origin_astral_blade",
+        "astral_longbow",
+        "seal_of_the_first_hour",
+        "last_light_charm"
+      ],
+      "bonuses": [
+        { "count": 2, "stats": { "maxMp": 20 } },
+        { "count": 3, "effects": [{ "kind": "lifesteal", "value": 0.03 }] },
+        {
+          "count": 4,
+          "effects": [
+            { "kind": "skillPower", "value": 0.3, "authority": "origin" },
+            { "kind": "cooldownCut", "value": 0.1 }
+          ]
+        }
+      ]
+    },
+    "sixfold": {
+      "pieces": ["last_chronarch_blade", "sixfold_harmony_clasp", "sixfold_hour_charm"],
+      "bonuses": [
+        { "count": 2, "effects": [{ "kind": "skillPower", "value": 0.1 }] },
+        { "count": 3, "effects": [{ "kind": "cooldownCut", "value": 0.15 }] }
+      ]
+    }
+  }
+}

@@ -6,6 +6,7 @@ import type { KeyAction } from '../state/Settings';
 export const LISTED_ACTIONS: KeyAction[] = [
   'interact',
   'satchel',
+  'equipment',
   'questLog',
   'questCycle',
   'quickSave',

@@ -35,6 +35,7 @@ const KEY_ROWS: KeyAction[] = [
   'skill3',
   'interact',
   'satchel',
+  'equipment',
   'questLog',
   'questCycle',
   'quickSave',
@@ -43,10 +44,10 @@ const KEY_ROWS: KeyAction[] = [
   'controls',
 ];
 const W = 440;
-const H = 292;
+const H = 306;
 const TOP = 54;
 const ROW_H = 14;
-const LINES = 14;
+const LINES = 15;
 
 /**
  * T-96 options (docs/design/SETTINGS_UX.md §2), shared by the title screen and the pause menu:

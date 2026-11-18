@@ -16,6 +16,7 @@ import { DialogueBox } from '../ui/DialogueBox';
 import { NotificationBanner } from '../ui/NotificationBanner';
 import { QuestTracker } from '../ui/QuestTracker';
 import { SatchelPanel } from '../ui/SatchelPanel';
+import { EquipmentPanel } from '../ui/EquipmentPanel';
 import { StatusHud } from '../ui/StatusHud';
 import { ActionCombat } from '../world/ActionCombat';
 import { BossFight, bossProfile } from '../world/BossFight';
@@ -91,6 +92,12 @@ export class ExplorationScene extends Phaser.Scene {
   private banner!: NotificationBanner;
   private questTracker!: QuestTracker;
   private satchel!: SatchelPanel;
+  private gearPanel!: EquipmentPanel;
+
+  /** The bag or the gear screen is open (the field waits). */
+  private get menuOpen(): boolean {
+    return this.satchel.isOpen || this.gearPanel.isOpen;
+  }
   private statusHud!: StatusHud;
   private promptText!: Phaser.GameObjects.Text;
 
@@ -297,7 +304,7 @@ export class ExplorationScene extends Phaser.Scene {
       this.wallLayer,
       this.mapDef.roamers ?? [],
       {
-        isPaused: () => this.isTransitioning || this.satchel.isOpen || this.dialogueBox.isOpen(),
+        isPaused: () => this.isTransitioning || this.menuOpen || this.dialogueBox.isOpen(),
         onPlayerDefeated: () => this.knockedOut(),
         onAmbushRescue: (id) => {
           this.action?.dismissAmbushers();
@@ -338,7 +345,7 @@ export class ExplorationScene extends Phaser.Scene {
         hurt: (damage) => this.action?.hazardHit(damage) ?? false,
         onDialTurned: () => this.applyTileSwaps(),
         refreshHud: () => this.statusHud.refresh(),
-        isPaused: () => this.isTransitioning || this.satchel.isOpen || this.dialogueBox.isOpen(),
+        isPaused: () => this.isTransitioning || this.menuOpen || this.dialogueBox.isOpen(),
       },
       this.t,
     );
@@ -434,7 +441,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.atmosphere?.update();
     this.actors?.sync(this.actorSprites());
     this.field?.update();
-    if (this.satchel.isOpen || this.isTransitioning) return;
+    if (this.menuOpen || this.isTransitioning) return;
 
     if (this.dialogueBox.isOpen()) {
       if (this.controller.getActions().interact) this.dialogueBox.interact();
@@ -892,7 +899,7 @@ export class ExplorationScene extends Phaser.Scene {
       profile,
       from,
       {
-        isPaused: () => this.isTransitioning || this.satchel.isOpen || this.dialogueBox.isOpen(),
+        isPaused: () => this.isTransitioning || this.menuOpen || this.dialogueBox.isOpen(),
         onRescue: (ids) => {
           this.bossFight = null;
           this.playMapMusic();
@@ -1019,6 +1026,14 @@ export class ExplorationScene extends Phaser.Scene {
       (title, subtitle) => this.showNotification(title, subtitle),
       () => this.statusHud.refresh(),
     );
+    this.gearPanel = new EquipmentPanel(
+      this,
+      this.session,
+      this.soundSystem,
+      this.t,
+      () => this.statusHud.refresh(),
+      () => ({ key: this.player.sprite.texture.key, frame: this.player.sprite.frame.name }),
+    );
   }
 
   private setupKeys(): void {
@@ -1030,7 +1045,9 @@ export class ExplorationScene extends Phaser.Scene {
     };
 
     on(K.ESC, () => {
-      if (this.satchel.isOpen) {
+      if (this.gearPanel.isOpen) {
+        if (!this.gearPanel.back()) this.toggleEquipment();
+      } else if (this.satchel.isOpen) {
         if (!this.satchel.back()) this.toggleInventory();
       } else if (this.dialogueBox.isOpen()) this.closeDialogue();
       else if (!this.isTransitioning) this.openPause();
@@ -1039,13 +1056,24 @@ export class ExplorationScene extends Phaser.Scene {
     on(K.LEFT, () => this.satchel.isOpen && this.satchel.left());
     on(K.RIGHT, () => this.satchel.isOpen && this.satchel.right());
     on(K.TAB, () => this.satchel.isOpen && this.satchel.right());
-    on(K.UP, () => this.satchel.isOpen && this.satchel.navigate(-1));
-    on(K.DOWN, () => this.satchel.isOpen && this.satchel.navigate(1));
-    on(keyCode('interact'), () => this.satchel.isOpen && this.satchel.useSelected());
-    on(K.SPACE, () => this.satchel.isOpen && this.satchel.useSelected());
+    on(K.UP, () => {
+      if (this.gearPanel.isOpen) this.gearPanel.navigate(-1);
+      else if (this.satchel.isOpen) this.satchel.navigate(-1);
+    });
+    on(K.DOWN, () => {
+      if (this.gearPanel.isOpen) this.gearPanel.navigate(1);
+      else if (this.satchel.isOpen) this.satchel.navigate(1);
+    });
+    const confirm = (): void => {
+      if (this.gearPanel.isOpen) this.gearPanel.confirm();
+      else if (this.satchel.isOpen) this.satchel.useSelected();
+    };
+    on(keyCode('interact'), confirm);
+    on(K.SPACE, confirm);
+    on(keyCode('equipment'), () => this.toggleEquipment());
     on(keyCode('quickSave'), () => void this.quickSave());
     on(keyCode('lighting'), () => {
-      if (this.dialogueBox.isOpen() || this.satchel.isOpen) return;
+      if (this.dialogueBox.isOpen() || this.menuOpen) return;
       if (this.atmosphere?.toggle())
         this.showNotification(
           this.t('atmosphere.title'),
@@ -1053,7 +1081,7 @@ export class ExplorationScene extends Phaser.Scene {
         );
     });
     on(keyCode('neon'), () => {
-      if (this.dialogueBox.isOpen() || this.satchel.isOpen) return;
+      if (this.dialogueBox.isOpen() || this.menuOpen) return;
       if (this.neon?.toggle())
         this.showNotification(
           this.t('neon.title'),
@@ -1061,12 +1089,12 @@ export class ExplorationScene extends Phaser.Scene {
         );
     });
     on(keyCode('controls'), () => {
-      if (this.dialogueBox.isOpen() || this.satchel.isOpen) return;
+      if (this.dialogueBox.isOpen() || this.menuOpen) return;
       this.statusHud.toggleControls();
       this.soundSystem.playCursorBlip();
     });
     on(keyCode('questLog'), () => {
-      if (this.dialogueBox.isOpen() || this.satchel.isOpen) return;
+      if (this.dialogueBox.isOpen() || this.menuOpen) return;
       this.questTracker.toggle();
       this.soundSystem.playCursorBlip();
     });
@@ -1078,6 +1106,7 @@ export class ExplorationScene extends Phaser.Scene {
       on(code, () => {
         if (this.dialogueBox.isOpen()) this.dialogueBox.choose(i);
         else if (this.satchel.isOpen) this.satchel.assignQuick(i);
+        else if (this.gearPanel.isOpen) return;
         else this.useQuickSlot(i);
       }),
     );
@@ -1315,7 +1344,16 @@ export class ExplorationScene extends Phaser.Scene {
     this.statusHud.refresh();
   }
 
+  /** U: Peter's gear screen (gear slots, Authority slots, sets). */
+  public toggleEquipment(): void {
+    if (this.satchel.isOpen || this.dialogueBox.isOpen() || this.isTransitioning) return;
+    this.gearPanel.toggle();
+    this.soundSystem.playCursorBlip();
+    if (this.gearPanel.isOpen) this.player.sprite.setVelocity(0, 0);
+  }
+
   public toggleInventory(): void {
+    if (this.gearPanel.isOpen) return;
     this.satchel.toggle();
     if (this.satchel.isOpen && this.mapDef.id === 'map_ch5_kuro_asks') {
       this.session.setFlag('ch5_opened_ledger_quiz');
