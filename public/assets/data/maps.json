@@ -29925,18 +29925,7 @@
               "ifFlag": "solved_escapement",
               "dialogueId": "ch9_puzzle_done"
             },
-            {
-              "ifFlag": "ch9_c04_1_none",
-              "dialogueId": "ch9_c04_intro"
-            },
-            {
-              "ifFlag": "ch9_c04_2_none",
-              "dialogueId": "ch9_c04_intro"
-            },
-            {
-              "ifFlag": "ch9_c04_3_none",
-              "dialogueId": "ch9_c04_intro"
-            }
+            { "unlessFlag": "ch9_c04_intro_read", "dialogueId": "ch9_c04_intro" }
           ]
         },
         {
@@ -31318,18 +31307,7 @@
               "ifFlag": "solved_broken_chime",
               "dialogueId": "ch9_puzzle_done"
             },
-            {
-              "ifFlag": "ch9_c08_1_none",
-              "dialogueId": "ch9_c08_intro"
-            },
-            {
-              "ifFlag": "ch9_c08_2_none",
-              "dialogueId": "ch9_c08_intro"
-            },
-            {
-              "ifFlag": "ch9_c08_3_none",
-              "dialogueId": "ch9_c08_intro"
-            }
+            { "unlessFlag": "ch9_c08_intro_read", "dialogueId": "ch9_c08_intro" }
           ]
         }
       ],
@@ -33179,18 +33157,7 @@
               "ifFlag": "solved_quantum_gears",
               "dialogueId": "ch9_puzzle_done"
             },
-            {
-              "ifFlag": "ch9_c12_1_none",
-              "dialogueId": "ch9_c12_intro"
-            },
-            {
-              "ifFlag": "ch9_c12_2_none",
-              "dialogueId": "ch9_c12_intro"
-            },
-            {
-              "ifFlag": "ch9_c12_3_none",
-              "dialogueId": "ch9_c12_intro"
-            }
+            { "unlessFlag": "ch9_c12_intro_read", "dialogueId": "ch9_c12_intro" }
           ]
         }
       ],

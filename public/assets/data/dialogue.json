@@ -15154,6 +15154,7 @@
         "Bộ Hồi Thoát Thần Thánh do Chronos chế tạo để đếm nhịp Giờ 25. Con lắc đang bị lệch nhịp nghiêm trọng.",
         "Có ba quả gia trọng A, B, C trượt trên thanh nấc từ 1 đến 9. Cần điều chỉnh vị trí để đưa dao động về trạng thái cộng hưởng tĩnh."
       ],
+      "effects": { "setFlags": ["ch9_c04_intro_read"] },
       "responses": [
         {
           "text": "Đọc cuộn giấy quy luật con lắc",
@@ -15657,6 +15658,7 @@
         "Bốn chiếc chuông mang các nốt nhạc: Chuông 1 (Đô - 0 nửa cung, cố định), Chuông 2 (Rê - 2 nửa cung), Chuông 3 (Fa - 5 nửa cung), Chuông 4 (La - 9 nửa cung).",
         "Cần chỉnh các chuông thành Hợp Âm Trưởng hoàn hảo: Gốc (0), Ba Trưởng (Mi: 4 nửa cung), Năm Đúng (Sol: 7 nửa cung), Bát Độ (Đô cao: 12 nửa cung)."
       ],
+      "effects": { "setFlags": ["ch9_c08_intro_read"] },
       "responses": []
     },
     "ch9_c08_wrong": {
@@ -16418,6 +16420,7 @@
         "Ba bánh răng có nấc xoay từ 1 đến 5.",
         "Bánh răng Một là nấc số lẻ nguyên tố nhỏ nhất. Bánh răng Hai hơn Bánh răng Một đúng 1 nấc. Bánh răng Ba là cạnh huyền cân bằng bình phương của hai bánh trước."
       ],
+      "effects": { "setFlags": ["ch9_c12_intro_read"] },
       "responses": []
     },
     "ch9_c12_wrong": {
