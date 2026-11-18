@@ -74,6 +74,8 @@ const hex = (c: string): number => Phaser.Display.Color.HexStringToColor(c).colo
  */
 export class Atmosphere {
   private readonly def: AtmosphereDef | null;
+  /** World position of the darkness texture's corner (negative around a small map). */
+  private darkAt = { x: 0, y: 0 };
   private dark: Phaser.GameObjects.RenderTexture | null = null;
   private brush: Phaser.GameObjects.Image | null = null;
   private vignette: Phaser.GameObjects.Image | null = null;
@@ -144,7 +146,7 @@ export class Atmosphere {
     for (const l of this.lit) {
       const p = l.at();
       this.brush.setScale((l.def.radius * 2) / 128).setAlpha(Math.min(1, l.def.intensity));
-      this.dark.erase(this.brush, p.x, p.y);
+      this.dark.erase(this.brush, p.x - this.darkAt.x, p.y - this.darkAt.y);
     }
   }
 
@@ -154,10 +156,18 @@ export class Atmosphere {
     this.on = true;
     const s = this.scene;
     const { width, height } = s.scale;
-    // World-sized: it scrolls with the map, so it never has to be repainted.
+    // World-sized: it scrolls with the map, so it never has to be repainted. It covers the camera
+    // bounds too, which reach past a map smaller than the view (MapSurround fills that margin).
     const b = s.physics.world.bounds;
+    const cam = s.cameras.main.getBounds();
+    this.darkAt = { x: Math.min(0, cam.x), y: Math.min(0, cam.y) };
     this.dark = s.add
-      .renderTexture(0, 0, Math.max(width, b.width), Math.max(height, b.height))
+      .renderTexture(
+        this.darkAt.x,
+        this.darkAt.y,
+        Math.max(width, b.width, cam.width),
+        Math.max(height, b.height, cam.height),
+      )
       .setOrigin(0)
       .setDepth(60)
       .setAlpha(this.shadeScale);

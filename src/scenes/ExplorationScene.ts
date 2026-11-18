@@ -17,6 +17,7 @@ import { NotificationBanner } from '../ui/NotificationBanner';
 import { QuestTracker } from '../ui/QuestTracker';
 import { SatchelPanel } from '../ui/SatchelPanel';
 import { EquipmentPanel } from '../ui/EquipmentPanel';
+import { fillSurround } from '../world/MapSurround';
 import { StatusHud } from '../ui/StatusHud';
 import { ActionCombat } from '../world/ActionCombat';
 import { BossFight, bossProfile } from '../world/BossFight';
@@ -292,6 +293,13 @@ export class ExplorationScene extends Phaser.Scene {
     const boundW = Math.max(mapW, this.scale.width);
     const boundH = Math.max(mapH, this.scale.height);
     this.cameras.main.setBounds((mapW - boundW) / 2, (mapH - boundH) / 2, boundW, boundH);
+    // The view is larger than some rooms: the map's border tile fills the space around them.
+    fillSurround(this, this.wallLayer, this.groundLayer, {
+      x: (mapW - boundW) / 2,
+      y: (mapH - boundH) / 2,
+      width: boundW,
+      height: boundH,
+    });
 
     this.createUI();
     this.spawnNpcs();

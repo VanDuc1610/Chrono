@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 /**
- * The game draws at 720×405 and is scaled up 2-3× with nearest-neighbour filtering, which smears
+ * The game draws at 768×432 and is scaled up 2-3× with nearest-neighbour filtering, which smears
  * small text (Vietnamese diacritics especially). Every Text object is therefore rendered at a
  * higher resolution and sampled smoothly, so it stays sharp at the final screen size.
  */
