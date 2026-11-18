@@ -1,3 +1,4 @@
+import { loadActionSheets, registerActionAnims } from '../world/action/ActorActions';
 import type { MapDatabase } from '../world/MapTypes';
 import type { LpcData } from '../world/WallCaps';
 import Phaser from 'phaser';
@@ -299,6 +300,8 @@ export class PreloadScene extends Phaser.Scene {
     this.load.json('data_quests', 'assets/data/quests.json');
     this.load.json('data_enemies', 'assets/data/enemies.json');
     this.load.json('data_skills', 'assets/data/skills.json');
+    // Action frames (attack, hurt, death) for every monster, boss and Peter (owner, 2026-11-18).
+    loadActionSheets(this.load);
     this.load.json('data_equipment', 'assets/data/equipment.json');
     // T-84: real-time boss profiles (bosses without one stay turn-based).
     this.load.json('data_bosses', 'assets/data/bosses.json');
@@ -311,6 +314,7 @@ export class PreloadScene extends Phaser.Scene {
   }
 
   public create(): void {
+    registerActionAnims(this);
     // Global looping idle animations, keyed `<textureKey>_idle` (scenes play them if present).
     if (!this.anims.exists('enemy_fracture_idle')) {
       this.anims.create({

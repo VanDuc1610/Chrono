@@ -177,14 +177,14 @@ _Locks:_ `src/world/NeonSkin.ts` (new), `src/world/NeonTrace.ts` (new), `public/
 `tests/neon.test.ts` (new), `src/world/Atmosphere.ts`, `src/scenes/ExplorationScene.ts`, `src/scenes/PreloadScene.ts`,
 `public/assets/data/strings.json`.
 
-### T-85 · Map atmosphere: lights, darkness, motes (free, code-drawn) — **Claude** · `IN PROGRESS`
+### T-85 · Map atmosphere: lights, darkness, motes (free, code-drawn) — **Claude** · `DONE`
 
 Owner, 2026-11-16: upgrade graphics with free tools only. First step, previewed on three maps (coastal
 town, old lighthouse, bell sanctum): a darkness layer with soft light holes (Peter, points of
 interest, fixed lights), coloured glows, vignette and floating motes — all drawn in code; L toggles.
-Phaser's Light2D was tried and dropped (light positions skew under Scale.FIT). Owner approved the preview; every map now has one (`scripts/atmosphere.mjs`: a palette per chapter, darkness by kind of place, a breathing light where each boss stands; the three approved maps kept). Next: more animation frames (art, owner approval).
+Phaser's Light2D was tried and dropped (light positions skew under Scale.FIT). Owner approved the preview; every map now has one (`scripts/atmosphere.mjs`: a palette per chapter, darkness by kind of place, a breathing light where each boss stands; the three approved maps kept). Animation frames done (owner approved the preview 2026-11-18): `scripts/pixel-art/action-frames.mjs` derives attack (4), hurt (2) and death (6) frames from each approved idle frame for every monster and boss sheet read from PreloadScene, plus Peter's fall in three stages (`public/assets/actions/`, `actionSheets.generated.ts`); `world/action/ActorActions.ts` plays them (wind-up pose with the red telegraph, strike, recoil, kneel-and-dissolve; released bosses still kneel). Rerun the script after a sprite changes.
 
-_Locks:_ `src/world/Atmosphere.ts` (new), `public/assets/data/atmosphere.json` (new), `scripts/atmosphere.mjs` (new).
+_Locks:_ `src/world/Atmosphere.ts` (new), `public/assets/data/atmosphere.json` (new), `scripts/atmosphere.mjs` (new), `scripts/pixel-art/action-frames.mjs` (new), `src/world/action/ActorActions.ts` (new), `public/assets/actions/*` (new). Released now that the task is done.
 
 ### T-84 · Boss đánh trực tiếp (real-time) + đa dạng vũ khí/trang bị — **Claude** · `DONE`
 

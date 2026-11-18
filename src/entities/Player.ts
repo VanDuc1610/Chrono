@@ -74,6 +74,14 @@ export class Player extends Entity {
     if (this.hasAnimations) this.sprite.play(this.key(`peter_idle${this.animSuffix}_down`), true);
   }
 
+  /** Knocked out: Peter falls to his knees (action frames of his costume stage), if loaded. */
+  public playFall(): void {
+    const key = `${this.stage === 1 ? 'peter' : `peter_s${this.stage}`}_act_die`;
+    if (!this.sprite.scene.anims.exists(key)) return;
+    this.sprite.setFlipX(false);
+    this.sprite.play(key);
+  }
+
   /** An animation key in the current stage. */
   private key(k: string): string {
     return peterStageKey(k, this.stage);

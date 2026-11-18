@@ -1,3 +1,4 @@
+import { DIE_MS, backToIdle, playAction } from './action/ActorActions';
 import { burnTick } from '../systems/inventory/GearRules';
 import Phaser from 'phaser';
 import type { GameSession } from '../state/GameSession';
@@ -115,6 +116,8 @@ export class BossFight implements CombatExtension {
   private facing = Math.PI / 2;
   private slowBossUntil = 0;
   /** A blow just landed: the body flinches until then. */
+  /** The state the action frames last followed (wind-up -> strike). */
+  private posedState = '';
   private flinchUntil = 0;
   private charge: {
     dx: number;
@@ -383,6 +386,12 @@ export class BossFight implements CombatExtension {
     }
     this.fightMs += delta;
     this.updateBoss(now);
+    // Action frames follow the state: the wind-up turns into the strike, or is called off.
+    if (this.posedState === 'telegraph' && this.state !== 'telegraph') {
+      if (this.state === 'act') playAction(this.boss, 'strike');
+      else backToIdle(this.boss);
+    }
+    this.posedState = this.state;
     this.updateHazards(now);
     this.updateTargets();
     this.updateSentence(now);
@@ -536,6 +545,7 @@ export class BossFight implements CombatExtension {
     this.stateUntil = now + move.telegraphMs;
     this.action.floatText(this.boss.x, this.boss.y - 46, move.label, '#ff9a7a');
     this.boss.setTint(0xff8a8a);
+    playAction(this.boss, 'windup');
     const go = (fn: () => void): void =>
       this.later(move.telegraphMs, () => {
         if (this.state !== 'telegraph') return; // stunned or interrupted meanwhile
@@ -1071,6 +1081,7 @@ export class BossFight implements CombatExtension {
     }
     this.boss.setTintFill(0xffffff);
     this.flinchUntil = this.scene.time.now + 110;
+    if (this.state !== 'telegraph' && this.state !== 'act') playAction(this.boss, 'hurt');
     this.later(80, () => {
       if (this.state === 'stunned') this.boss.setTint(0xfff27a);
       else this.boss.clearTint();
@@ -2153,8 +2164,12 @@ export class BossFight implements CombatExtension {
     this.fx.clear();
     this.dispose([this.bar, this.title, ...this.targets.map((t) => t.obj)]);
     for (const c of this.colliders.splice(0)) c.destroy();
+    this.boss.off(Phaser.Animations.Events.ANIMATION_COMPLETE);
     this.boss.anims.stop();
     this.boss.clearTint();
+    // Back on its own sheet (the released frame lives there).
+    const baseTex = this.boss.getData('baseTex') as string | undefined;
+    if (baseTex) this.boss.setTexture(baseTex, 0);
     const released = this.enemy.mechanic?.releasedFrame;
     if (released !== undefined) {
       // A released boss kneels where it fell; what bound it rises away.
@@ -2164,13 +2179,23 @@ export class BossFight implements CombatExtension {
       this.play('soulRise', { x: this.boss.x, y: this.boss.y + 20 });
     } else {
       this.play('poof', { x: this.boss.x, y: this.boss.y + 16 });
-      this.scene.tweens.add({
-        targets: this.boss,
-        alpha: 0,
-        scale: 0.1,
-        duration: 800,
-        onComplete: () => this.boss.destroy(),
-      });
+      // It kneels and dissolves (action frames), else it shrinks away as before.
+      if (playAction(this.boss, 'die'))
+        this.scene.tweens.add({
+          targets: this.boss,
+          alpha: 0,
+          delay: DIE_MS,
+          duration: 300,
+          onComplete: () => this.boss.destroy(),
+        });
+      else
+        this.scene.tweens.add({
+          targets: this.boss,
+          alpha: 0,
+          scale: 0.1,
+          duration: 800,
+          onComplete: () => this.boss.destroy(),
+        });
     }
     const msg = this.enemy.mechanic?.defeatMessage;
     if (msg) this.showBanner(msg, 2200);

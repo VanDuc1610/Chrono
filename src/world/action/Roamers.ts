@@ -1,3 +1,4 @@
+import { DIE_MS, inAction, playAction } from './ActorActions';
 import Phaser from 'phaser';
 import type { Player } from '../../entities/Player';
 import { type GameSession } from '../../state/GameSession';
@@ -195,6 +196,8 @@ export function damageRoamer(
   r.flinchUntil = now + 120;
   r.sprite.setTintFill(0xffffff);
   this.scene.time.delayedCall(90, () => r.alive && r.sprite.clearTint());
+  // The recoil clip, unless it is winding up a blow (the telegraph must stay readable).
+  if (r.brain.state !== 'windup') playAction(r.sprite, 'hurt');
   if (r.def.ambush) {
     this.floatText(r.sprite.x, r.sprite.y - 18, '…', '#c8c8d8');
     return;
@@ -223,10 +226,12 @@ export function animateRoamers(this: RoamersContext, now: number): void {
     if (!r.alive || r.pending || r.inhaleAt || now < (r.shiftedUntil ?? 0)) continue;
     let sx = 1;
     let sy = 1 + 0.03 * Math.sin(now / 340 + r.glowOffset);
+    const posed = inAction(r.sprite);
     if (r.brain.state === 'windup') {
+      // With action frames the wind-back pose does the work; a light squash adds to it.
       const k = 1 - Math.min(1, Math.max(0, r.brain.timer) / windup);
-      sx = 1 + 0.12 * k;
-      sy = 1 - 0.12 * k;
+      sx = 1 + (posed ? 0.04 : 0.12) * k;
+      sy = 1 - (posed ? 0.04 : 0.12) * k;
     } else if (r.charge?.phase === 'run') {
       sx = 1.14;
       sy = 0.9;
@@ -236,7 +241,7 @@ export function animateRoamers(this: RoamersContext, now: number): void {
     } else if (r.brain.state === 'recover') {
       sy *= 0.97;
     }
-    if (now < (r.flinchUntil ?? 0)) {
+    if (now < (r.flinchUntil ?? 0) && !posed) {
       sx *= 0.88;
       sy *= 0.88;
     }
@@ -272,13 +277,24 @@ export function finalDefeat(this: RoamersContext, r: Roamer): void {
   if (this.scene.anims.exists('hit_spark_burst')) {
     this.scene.add.sprite(r.sprite.x, r.sprite.y, 'hit_spark').setDepth(45).play('hit_spark_burst');
   }
-  this.scene.tweens.add({
-    targets: r.sprite,
-    alpha: 0,
-    scale: 0.4 * baseScale(r.sprite),
-    duration: 380,
-    onComplete: () => r.sprite.destroy(),
-  });
+  // The death clip (kneel, then dissolve into motes), else the old shrink and fade.
+  r.sprite.clearTint();
+  if (playAction(r.sprite, 'die'))
+    this.scene.tweens.add({
+      targets: r.sprite,
+      alpha: 0,
+      delay: DIE_MS - 150,
+      duration: 250,
+      onComplete: () => r.sprite.destroy(),
+    });
+  else
+    this.scene.tweens.add({
+      targets: r.sprite,
+      alpha: 0,
+      scale: 0.4 * baseScale(r.sprite),
+      duration: 380,
+      onComplete: () => r.sprite.destroy(),
+    });
   if (r.clone) return;
   const rewards = this.session.claimEnemyRewards(r.enemy, this.rng);
   this.host.notify(

@@ -866,7 +866,9 @@ export class ExplorationScene extends Phaser.Scene {
     this.session.hp = this.session.getStats().maxHp;
     this.session.mp = this.session.getStats().maxMp;
     this.session.position = { mapId: this.mapDef.id, ...revive };
-    this.cameras.main.fadeOut(900, 40, 0, 0);
+    this.player.sprite.setVelocity(0, 0);
+    this.player.playFall();
+    this.cameras.main.fadeOut(1100, 40, 0, 0);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
       const data: ExplorationSceneData = {
         mapId: this.mapDef.id,

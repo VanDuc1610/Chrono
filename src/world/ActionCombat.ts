@@ -1,3 +1,4 @@
+import { backToIdle, playAction } from './action/ActorActions';
 import { CombatFx } from './action/CombatFx';
 import { rarityOf, type Rarity } from '../systems/inventory/GearRules';
 import type { MeleeClass } from '../systems/inventory/InventoryTypes';
@@ -507,8 +508,16 @@ export class ActionCombat {
       if (r.brain.state === 'windup' && Math.abs(target.x - r.sprite.x) > 2) {
         this.faceX(r, target.x - r.sprite.x);
       }
-      if (r.brain.state === 'windup' && before !== 'windup') r.sprite.setTint(0xff7070);
-      if (r.brain.state !== 'windup' && before === 'windup') r.sprite.clearTint();
+      if (r.brain.state === 'windup' && before !== 'windup') {
+        r.sprite.setTint(0xff7070);
+        playAction(r.sprite, 'windup');
+      }
+      if (r.brain.state !== 'windup' && before === 'windup') {
+        r.sprite.clearTint();
+        // The blow (action frames: lunge and strike), or back to idle if it was called off.
+        if (out.strike) playAction(r.sprite, 'strike');
+        else backToIdle(r.sprite);
+      }
       const parry = r.enemy.field?.parry;
       if (parry && inParryWindow(r.brain.state, r.brain.timer, parry.flashMs)) {
         r.sprite.setTintFill(0xf4f8ff);
