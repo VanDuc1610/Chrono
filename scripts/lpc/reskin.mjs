@@ -307,7 +307,7 @@ const TILESETS = {
       // One family of violet inlay for the whole chapter; the starfield cells sprinkled through
       // every floor become dark inlay with their stars (and cracks) kept: stars, not holes.
       49: 'ORNATE_DARK',
-      50: ['ORNATE_DARK', 49],
+      50: ['ORNATE_DARK', 'studs'],
       52: 'ORNATE_MID',
       60: 'ORNATE_MID',
       54: ['ORNATE_DARK', 1],
@@ -421,6 +421,29 @@ function detail(oldTile, plain) {
   return px;
 }
 
+/**
+ * Gold studs at the four corners (owner, 2026-11-18: the nexus floor's gold edge made a stripe on
+ * every row): quarter studs that meet at the tile corners, so a floor reads as gold-pinned inlay.
+ */
+function studs(px) {
+  const gold = ['#5a3a14', '#c8963a', '#f4d888'].map(hexRgb);
+  const put = (x, y, c) => px.set([...c, 255], (y * T + x) * 4);
+  for (const [cx, cy] of [
+    [0, 0],
+    [T - 1, 0],
+    [0, T - 1],
+    [T - 1, T - 1],
+  ])
+    for (let dy = -2; dy <= 2; dy++)
+      for (let dx = -2; dx <= 2; dx++) {
+        const d = Math.abs(dx) + Math.abs(dy);
+        const x = cx + dx;
+        const y = cy + dy;
+        if (d > 2 || x < 0 || y < 0 || x >= T || y >= T) continue;
+        put(x, y, d === 2 ? gold[0] : d === 1 ? gold[1] : gold[2]);
+      }
+}
+
 // ---------------------------------------------------------------- build
 fs.mkdirSync('public/assets/lpc', { recursive: true });
 const maps = JSON.parse(fs.readFileSync('public/assets/data/maps.json', 'utf8'));
@@ -442,7 +465,8 @@ for (const [name, ts] of Object.entries(TILESETS)) {
     const [mat, from] = Array.isArray(spec) ? spec : [spec, null];
     const px = material(mat);
     tint(px, ts.tint[0], ts.tint[1]);
-    if (from) over(px, detail(oldTile(gid), oldTile(from)));
+    if (from === 'studs') studs(px);
+    else if (from) over(px, detail(oldTile(gid), oldTile(from)));
     const ox = ((gid - 1) % cols) * T;
     const oy = Math.floor((gid - 1) / cols) * T;
     for (let y = 0; y < T; y++)

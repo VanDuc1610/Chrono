@@ -481,7 +481,7 @@
   {
     "id": "derived-nexus-tileset-lpc",
     "file": "public/assets/lpc/nexus_tileset_lpc.png",
-    "sha256": "43706693041422a178e2f2497415a5a432dec781b32ff4bf21b57b10a120414f",
+    "sha256": "f659e888bfd6cd34fd8509c6e3e342e78e579d0019f20376007e8da6da7a497a",
     "from": ["tiles-hughspectrum-castlefloors", "tiles-hughspectrum-castlewalls"],
     "script": "scripts/lpc/reskin.mjs",
     "notes": "nexus_tileset rebuilt slot for slot from LPC materials (tinted); story props kept."

@@ -126,12 +126,6 @@ export class Atmosphere {
     return Math.min(1, a / 0.45) * (this.def?.glowScale ?? 1);
   }
 
-  /** Scales the darkness layer (1 = as the data says); kept across L toggles. */
-  public dimDarkness(scale: number): void {
-    this.shadeScale = scale;
-    this.dark?.setAlpha(scale);
-  }
-
   /** The darkness is painted once; per frame only Peter's light and the flickering glows move. */
   public update(): void {
     if (!this.on) return;

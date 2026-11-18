@@ -347,26 +347,16 @@ export class ExplorationScene extends Phaser.Scene {
       () => this.capFreeTiles(),
       ABOVE_DEPTH,
     );
-    this.neon = new NeonSkin(
-      this,
-      {
-        id: this.mapDef.id,
-        ground: this.groundLayer,
-        walls: this.wallLayer,
-        solid: (x, y) => {
-          const i = this.wallLayer.getTileAt(x, y)?.index ?? -1;
-          return i >= this.mapDef.collision.fromGid && i <= this.mapDef.collision.toGid;
-        },
-        pois: (this.mapDef.interactables ?? []).map((i) => i.tile),
-        reveal: (this.mapDef.tileSwaps ?? [])
-          .filter((sw) => sw.layer === 'ground')
-          .flatMap((sw) => sw.tiles),
-        marks: this.puzzleTiles(),
-        exits: (this.mapDef.exits ?? []).map((e) => e.area),
-        actors: () => [this.player.sprite, ...this.npcSprites],
-      },
-      (full) => this.atmosphere?.dimDarkness(full ? 0.3 : 1),
-    );
+    this.neon = new NeonSkin(this, {
+      id: this.mapDef.id,
+      walls: this.wallLayer,
+      pois: (this.mapDef.interactables ?? []).map((i) => i.tile),
+      reveal: (this.mapDef.tileSwaps ?? [])
+        .filter((sw) => sw.layer === 'ground')
+        .flatMap((sw) => sw.tiles),
+      marks: this.puzzleTiles(),
+      exits: (this.mapDef.exits ?? []).map((e) => e.area),
+    });
     this.field.setupBeams((x, y) => {
       const layer = this.wallLayer;
       if (x < 0 || y < 0 || x >= layer.layer.width || y >= layer.layer.height) return true;
@@ -528,7 +518,7 @@ export class ExplorationScene extends Phaser.Scene {
       if (!conditionHolds(swap.when, this.flagOn)) continue;
       for (const t of swap.tiles) layerOf(swap.layer).putTileAt(swap.index + 1, t.x, t.y);
     }
-    // The neon outline is traced from the walls: retrace it only when the set of swaps changed.
+    // The neon marks follow the puzzle tiles: redraw them only when the set of swaps changed.
     const swapKey = swaps.map((sw) => (conditionHolds(sw.when, this.flagOn) ? 1 : 0)).join('');
     if (swapKey !== this.neonSwapKey) {
       this.neonSwapKey = swapKey;
@@ -1161,7 +1151,7 @@ export class ExplorationScene extends Phaser.Scene {
   private flashbackFx: Phaser.GameObjects.Rectangle | null = null;
   /** Lights, camera grade and motes of this map (atmosphere.json); L toggles them. */
   private atmosphere: Atmosphere | null = null;
-  /** Neon line-art skin (preview maps in neon.json); N toggles it. */
+  /** Neon accents (rings, exit and puzzle frames; neon.json); N toggles them. */
   private neon: NeonSkin | null = null;
   /** Contact shadows and depth by the feet for everyone on the map (T-88). */
   private actors: ActorShadows | null = null;

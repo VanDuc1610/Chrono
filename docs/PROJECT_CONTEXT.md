@@ -111,7 +111,7 @@ flowchart TD
 - **Peter:** approved 64x64 LPC-scale animation sheets (`PeterAnimationConfig.ts`); Player preserves the 18x14 foot collider with a frame-specific origin/offset. Character identity remains governed by `docs/art/PETER_DESIGN.md`.
 - **LPC environments:** `scripts/lpc/veridia.mjs` builds Veridia; `reskin.mjs` rebuilds chapter 0-5 tilesets slot for slot while retaining collision, puzzle swaps and story props. Pinned sources and derived atlases are attributed in the LPC manifests and root CREDITS.md.
 - **Depth/presentation:** ActorShadows adds contact shadows and foot sorting; overlay/above layers support tall props; WallCaps draws LPC wall tops above actors. Atmosphere applies lights, motes, darkness and per-map multiply/screen grade.
-- **Neon:** NeonSkin/NeonTrace read `neon.json`; LPC chapters 0-5 use accents, chapters 6-9 full void. Owner art review and map dressing remain ongoing.
+- **Neon:** `NeonSkin` reads `neon.json` (an accent colour per map) and adds accents only: rings on points of interest, frames on exits and puzzle pieces. Every chapter is in LPC art; the full line-art void was retired (2026-11-18).
 - **UI:** VT323 (SIL OFL, Vietnamese) through `crispText.ts`; BootScene waits for font loading. Compact HUD, quest tracker, dialogue and menus are under active T-91 polish.
 - **Audio:** SoundSystem uses procedural Web Audio; new music/SFX and settings designs are tracked separately on the task board.
 
