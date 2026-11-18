@@ -17,6 +17,8 @@ import {
   type Point,
 } from '../systems/action/ActionRules';
 import { ShotSystem } from '../systems/action/ShotSystem';
+import type { SkillDatabase, SkillDef } from '../systems/action/AuthorityRules';
+import { AuthorityPowers } from './action/Authority';
 import { meleeCritBonus, meleeShape } from '../systems/action/WeaponRules';
 import { SoundSystem } from '../systems/audio/SoundSystem';
 import type { CombatTuning } from '../systems/combat/CombatTypes';
@@ -68,6 +70,9 @@ export class ActionCombat {
   private nextDash = 0;
   private nextSkill = 0;
   private nextAllyHit = 0;
+  /** Peter's Authority skills on Z / X / C (2026-11-18). */
+  public readonly powers: AuthorityPowers;
+  public readonly skillDb: SkillDatabase | null;
   private invulnUntil = 0;
   private defeated = false;
   private ambushFired = false;
@@ -139,12 +144,89 @@ export class ActionCombat {
       this.fire(p.x, p.y);
     };
     fKey?.on('down', onFire);
+    // Authority skills: Z / X / C (rebindable), aimed at the cursor like the slash.
+    this.skillDb = (scene.cache.json.get('data_skills') as SkillDatabase | undefined) ?? null;
+    this.powers = new AuthorityPowers({
+      scene,
+      player,
+      session,
+      t,
+      roamers: () => this.roamers,
+      strike: (r, mult, critBonus = 0) =>
+        this.strikeRoamer(r, this.session.getStats().attack, this.scene.time.now, mult, critBonus),
+      wound: (r, damage) => this.damageRoamer(r, damage, false),
+      slay: (r) => {
+        r.hp = 0;
+        this.defeatRoamer(r);
+      },
+      floatText: (x, y, text, color) => this.floatText(x, y, text, color),
+      extension: () => this.extension,
+      blocked: (x, y) => {
+        const tile = this.walls.getTileAtWorldXY(x, y, true);
+        return !tile || tile.collides;
+      },
+      shelter: (ms) => {
+        this.invulnUntil = Math.max(this.invulnUntil, this.scene.time.now + ms);
+      },
+      refreshHud: () => this.host.refreshHud(),
+    });
+    const skillKeys = (['skill1', 'skill2', 'skill3'] as const).map((action, i) => {
+      const key = scene.input.keyboard?.addKey(keyCode(action));
+      const cast = (): void => {
+        this.castAuthority(i);
+      };
+      key?.on('down', cast);
+      return { key, cast };
+    });
     scene.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       scene.input.off('pointerdown', onPointer);
       shift?.off('down', onShift);
       fKey?.off('down', onFire);
+      for (const k of skillKeys) k.key?.off('down', k.cast);
       this.shots.destroy();
     });
+  }
+
+  /** The skill in slot 0-2, if Peter knows one there. */
+  public skillIn(slot: number): SkillDef | null {
+    const id = this.session.skillSlots[slot];
+    return (id && this.skillDb?.skills.find((s) => s.id === id)) || null;
+  }
+
+  /**
+   * Z / X / C: cast the Authority skill in that slot toward the cursor (needs MP, off cooldown;
+   * a Name Eater's silence stops it as it stops Temporal Strike). True when it was cast.
+   */
+  public castAuthority(slot: number): boolean {
+    const now = this.scene.time.now;
+    if (!this.canAct) return false;
+    const def = this.skillIn(slot);
+    const say = (key: string, color: string): false => {
+      this.floatText(this.player.x, this.player.y - 22, this.t(key), color);
+      return false;
+    };
+    if (!def) return say('skill.empty', '#8b97b8');
+    if (this.refused('skill')) return false;
+    if (now < this.silencedUntil) return say('action.silenced', '#c8a0ff');
+    if (!this.powers.ready(def, now)) return say('skill.cooldown', '#8b97b8');
+    if (this.session.mp < def.mpCost) return say('action.noMp', '#8fb8ff');
+    this.session.mp -= def.mpCost;
+    const p = this.scene.input.activePointer.positionToCamera(
+      this.scene.cameras.main,
+    ) as Phaser.Math.Vector2;
+    const aim = Math.atan2(p.y - this.player.y, p.x - this.player.x);
+    const anim =
+      def.authority === 'memory' || def.authority === 'origin'
+        ? 'peter_temporal_sight'
+        : def.authority === 'possibility'
+          ? 'peter_dash'
+          : 'peter_attack';
+    this.player.playAction(anim, facingFromAngle(aim), 380);
+    this.sound.playSlash();
+    this.powers.cast(def, aim);
+    this.extension?.onAction?.('skill');
+    this.host.refreshHud();
+    return true;
   }
 
   // ------------------------------------------------------------------ pools
@@ -322,6 +404,7 @@ export class ActionCombat {
     const now = this.scene.time.now;
     this.updateShots(delta, now);
     this.animateRoamers(now);
+    this.powers.update(now);
     const maxMp = this.session.getStats().maxMp;
     this.session.mp = Math.min(maxMp, this.session.mp + (this.tuning.mpRegenPerSec * delta) / 1000);
     if (Math.floor(this.session.mp) !== this.hudMp) {
@@ -398,7 +481,8 @@ export class ActionCombat {
         const dx = goal.x - r.sprite.x;
         const dy = goal.y - r.sprite.y;
         const len = Math.hypot(dx, dy) || 1;
-        const v = r.speed * out.pace;
+        const slowed = r.slowUntil && now < r.slowUntil ? 1 - (r.slowPct ?? 0) : 1;
+        const v = r.speed * out.pace * slowed;
         r.sprite.setVelocity((dx / len) * v, (dy / len) * v);
         if (Math.abs(dx) > 2) this.faceX(r, dx);
       } else {
@@ -472,7 +556,7 @@ export class ActionCombat {
     this.strikeTargets(origin, aim, reach, now);
     const attack = this.session.getStats().attack;
     const shape = meleeShape(this.session.meleeClass);
-    const critBonus = meleeCritBonus(this.session.meleeClass);
+    const critBonus = meleeCritBonus(this.session.meleeClass) + this.powers.takeCrit();
     const fistMult = fists?.mult ?? 1;
     this.extension?.onAction?.('slash');
     let landed = false;
@@ -790,7 +874,7 @@ export class ActionCombat {
       opts.mult ?? 1,
     );
     const floor = r.def.ambush ? 1 : 0;
-    this.session.hp = Math.max(floor, this.session.hp - damage);
+    this.session.hp = Math.max(floor, this.session.hp - this.powers.absorb(damage));
     this.invulnUntil = now + this.tuning.hurtInvulnMs;
     const away = Math.atan2(this.player.y - r.sprite.y, this.player.x - r.sprite.x);
     const k = this.tuning.knockback;
@@ -831,7 +915,7 @@ export class ActionCombat {
       this.rng,
       mult,
     );
-    const dealt = Math.max(1, Math.round(damage * scale));
+    const dealt = this.powers.absorb(Math.max(1, Math.round(damage * scale)));
     this.session.hp = Math.max(this.bossHpFloor, this.session.hp - dealt);
     this.invulnUntil = now + this.tuning.hurtInvulnMs;
     const away = Math.atan2(this.player.y - from.y, this.player.x - from.x);
@@ -877,7 +961,7 @@ export class ActionCombat {
   /** A judgment that no dodge escapes (Imperial Verdict's sentences): `amount` HP, no knockback. */
   public directHit(amount: number): void {
     if (this.defeated) return;
-    this.session.hp = Math.max(this.bossHpFloor, this.session.hp - amount);
+    this.session.hp = Math.max(this.bossHpFloor, this.session.hp - this.powers.absorb(amount));
     this.player.sprite.setTint(0xff5050);
     this.scene.time.delayedCall(200, () => this.player.sprite.clearTint());
     this.scene.cameras.main.shake(160, 0.005);
@@ -896,7 +980,9 @@ export class ActionCombat {
   public hazardHit(damage: number): boolean {
     const now = this.scene.time.now;
     if (now < this.invulnUntil || this.defeated) return false;
-    const dealt = Math.max(1, damage - Math.floor(this.session.getStats().defense / 2));
+    const dealt = this.powers.absorb(
+      Math.max(1, damage - Math.floor(this.session.getStats().defense / 2)),
+    );
     this.session.hp = Math.max(0, this.session.hp - dealt);
     this.invulnUntil = now + this.tuning.hurtInvulnMs;
     this.player.playAction('peter_hurt', this.player.getMovementSystem().getLastFacing(), 260);

@@ -20,6 +20,14 @@ export const LISTED_ACTIONS: KeyAction[] = [
  */
 export function controlList(t: Translate, armed = true): string[] {
   const line = (a: KeyAction): string => `[${keyLabel(a)}] ${t(`keys.${a}`)}`;
-  const combat = armed ? [t('keys.attack'), line('ranged'), line('dodge'), t('keys.skill')] : [];
+  const combat = armed
+    ? [
+        t('keys.attack'),
+        line('ranged'),
+        line('dodge'),
+        t('keys.skill'),
+        `[${keyLabel('skill1')}/${keyLabel('skill2')}/${keyLabel('skill3')}] ${t('keys.authority')}`,
+      ]
+    : [];
   return [...combat, ...LISTED_ACTIONS.map(line), t('controls.system')];
 }

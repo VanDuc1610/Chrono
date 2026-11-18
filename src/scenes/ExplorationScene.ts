@@ -48,6 +48,8 @@ import { FINAL_BOSSES, music } from './sceneMusic';
 import { keyCode } from '../ui/keys';
 import { enlargeActor } from '../world/ActorScale';
 import { peterStageFor } from '../systems/animation/PeterAnimationConfig';
+import { SkillBar } from '../ui/SkillBar';
+import type { SkillDatabase } from '../systems/action/AuthorityRules';
 
 /** Map layer of tent tops, palisades and tree crowns: above the actors, below effects. */
 const ABOVE_DEPTH = 30;
@@ -165,6 +167,7 @@ export class ExplorationScene extends Phaser.Scene {
     this.visionSprites = [];
     this.npcSprites = [];
     this.neon = null;
+    this.skillBar = null;
     this.actors = null;
     this.wallCaps = null;
     this.terrainEdges = null;
@@ -307,6 +310,17 @@ export class ExplorationScene extends Phaser.Scene {
       },
       this.t,
     );
+    // Authority skills (2026-11-18): new ones fill empty Z / X / C slots and are announced once.
+    const skillDb = this.cache.json.get('data_skills') as SkillDatabase | undefined;
+    if (skillDb)
+      for (const id of this.session.syncSkills(skillDb))
+        this.showNotification(this.t('skill.unlockedTitle'), this.t(`skill.${id}.name`));
+    this.skillBar = new SkillBar(
+      this,
+      this.session,
+      (slot) => this.action?.skillIn(slot) ?? null,
+      () => this.action?.powers ?? null,
+    );
     this.action.setStrikeTargets(this.mapDef.strikeTargets ?? [], (def) => {
       this.applyTileSwaps();
       this.action?.syncSpawns();
@@ -414,6 +428,7 @@ export class ExplorationScene extends Phaser.Scene {
   public update(_time: number, delta: number): void {
     this.session.tick(delta);
     this.action?.update(delta);
+    this.skillBar?.update(this.time.now);
     this.bossFight?.update(delta);
     this.pfx?.update(delta);
     this.atmosphere?.update();
@@ -1151,6 +1166,8 @@ export class ExplorationScene extends Phaser.Scene {
   private flashbackFx: Phaser.GameObjects.Rectangle | null = null;
   /** Lights, camera grade and motes of this map (atmosphere.json); L toggles them. */
   private atmosphere: Atmosphere | null = null;
+  /** Authority skill slots (Z / X / C) at the bottom centre. */
+  private skillBar: SkillBar | null = null;
   /** Neon accents (rings, exit and puzzle frames; neon.json); N toggles them. */
   private neon: NeonSkin | null = null;
   /** Contact shadows and depth by the feet for everyone on the map (T-88). */

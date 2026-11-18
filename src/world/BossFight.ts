@@ -934,6 +934,25 @@ export class BossFight implements CombatExtension {
     if (this.profile.defense.unlockOnSkill) this.openTargets();
   }
 
+  /** An Authority skill over an area: hits the boss when it stands inside, maybe slows it. */
+  public onArea(
+    origin: Point,
+    radius: number,
+    attack: number,
+    mult: number,
+    opts: { slowMs?: number } = {},
+  ): boolean {
+    if (this.ended) return false;
+    const d = Math.hypot(origin.x - this.boss.x, origin.y - this.boss.y);
+    if (d > radius + this.profile.radius) return false;
+    const combat = this.session.database.player.combat;
+    const dmg = Math.max(combat.skillMinDamage, Math.floor(attack * mult - this.enemy.defense));
+    this.blowOnBoss(dmg, false, origin);
+    if (opts.slowMs)
+      this.slowBossUntil = Math.max(this.slowBossUntil, this.scene.time.now + opts.slowMs);
+    return true;
+  }
+
   public shotTargets(attack: number, mult: number): ShotTarget[] {
     if (this.ended) return [];
     const combat = this.session.database.player.combat;

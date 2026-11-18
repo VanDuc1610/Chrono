@@ -1,0 +1,85 @@
+{
+  "slots": 3,
+  "skills": [
+    {
+      "id": "continuum_tide",
+      "authority": "continuum",
+      "chapter": 1,
+      "color": "#4ab0e0",
+      "mpCost": 6,
+      "cooldownMs": 5000,
+      "mult": 1.2,
+      "range": 112,
+      "arcDeg": 100,
+      "knockback": 260,
+      "slowPct": 0.45,
+      "slowMs": 2500
+    },
+    {
+      "id": "causality_chain",
+      "authority": "causality",
+      "chapter": 2,
+      "color": "#ffd36b",
+      "mpCost": 8,
+      "cooldownMs": 6000,
+      "mult": 1.4,
+      "range": 190,
+      "hopRange": 120,
+      "hops": 4,
+      "falloff": 0.15
+    },
+    {
+      "id": "memory_echo",
+      "authority": "memory",
+      "chapter": 3,
+      "color": "#b48cff",
+      "mpCost": 10,
+      "cooldownMs": 14000,
+      "mult": 0.6,
+      "range": 70,
+      "durationMs": 6000,
+      "everyMs": 800
+    },
+    {
+      "id": "finality_cleave",
+      "authority": "finality",
+      "chapter": 4,
+      "color": "#ff6a3a",
+      "mpCost": 9,
+      "cooldownMs": 7000,
+      "mult": 2.2,
+      "range": 58,
+      "arcDeg": 150,
+      "executePct": 0.2,
+      "burnMult": 0.2,
+      "burnTicks": 3,
+      "burnEveryMs": 1000
+    },
+    {
+      "id": "possibility_branch",
+      "authority": "possibility",
+      "chapter": 5,
+      "color": "#4ae08a",
+      "mpCost": 7,
+      "cooldownMs": 8000,
+      "mult": 1.0,
+      "range": 112,
+      "radius": 52,
+      "fuseMs": 900,
+      "critWindowMs": 3000
+    },
+    {
+      "id": "origin_dawn",
+      "authority": "origin",
+      "chapter": 6,
+      "color": "#fff0b0",
+      "mpCost": 14,
+      "cooldownMs": 20000,
+      "mult": 0.6,
+      "radius": 72,
+      "healPct": 0.25,
+      "shieldPct": 0.2,
+      "durationMs": 8000
+    }
+  ]
+}

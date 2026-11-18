@@ -18,6 +18,17 @@ export interface CombatExtension {
     blow: { attack: number; arcDeg: number; mult: number; critBonus: number; echoPct: number },
   ): boolean;
   onSkill(origin: Point, radius: number, attack: number): void;
+  /**
+   * An Authority skill's blow over an area (2026-11-18): the boss takes `attack` × `mult` (less its
+   * defence) when it stands within `radius`; `slowMs` slows it. True when it was hit.
+   */
+  onArea?(
+    origin: Point,
+    radius: number,
+    attack: number,
+    mult: number,
+    opts?: { slowMs?: number },
+  ): boolean;
   shotTargets(attack: number, mult: number): ShotTarget[];
   /** Peter swung, shot, used Temporal Strike or dodged (hit or not). */
   onAction?(kind: PeterAct): void;
@@ -50,6 +61,11 @@ export interface Roamer {
   alive: boolean;
   /** Knockback in progress until this time (AI paused). */
   stunUntil: number;
+  /** Continuum's tide: moves at (1 - slowPct) of its speed until then. */
+  slowUntil?: number;
+  slowPct?: number;
+  /** Finality's burn: `left` ticks of `damage`, one every `every` ms. */
+  burn?: { left: number; every: number; next: number; damage: number };
   /** Struck: the body flinches until then (T-85 motion). */
   flinchUntil?: number;
   /** Path finding: next tile centre to walk to, and when to recompute it. */

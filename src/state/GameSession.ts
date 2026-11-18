@@ -12,6 +12,12 @@ import { CombatItemEffect, ICombatant, IEnemyDefinition } from '../systems/comba
 import { ISaveData } from '../systems/save/SaveTypes';
 import type { DialogueEffects } from '../systems/dialogue/DialogueTypes';
 import { GameDatabase, PlayerStats, readGameDatabase } from './GameDatabase';
+import {
+  assignSlot,
+  fillSlots,
+  unlockedSkills,
+  type SkillDatabase,
+} from '../systems/action/AuthorityRules';
 
 // Pure logic: only Phaser *types* are imported so this module stays unit-testable outside a browser.
 const clamp = (value: number, min: number, max: number): number =>
@@ -91,6 +97,10 @@ export class GameSession {
     accessory: null,
   };
   public quickSlots: (string | null)[] = Array<string | null>(QUICK_SLOT_COUNT).fill(null);
+  /** Authority skills on Z / X / C (ids from skills.json). */
+  public skillSlots: (string | null)[] = [null, null, null];
+  /** Authority skills already announced (each gets its banner once). */
+  public seenSkills: string[] = [];
 
   private constructor(private readonly db: GameDatabase) {
     this.inventory.loadDatabase(db.items);
@@ -139,6 +149,9 @@ export class GameSession {
     (save.quickSlots ?? []).slice(0, QUICK_SLOT_COUNT).forEach((id, i) => {
       session.quickSlots[i] = id ?? null;
     });
+    session.skillSlots = (save.skillSlots ?? []).slice(0, 3).map((id) => id ?? null);
+    while (session.skillSlots.length < 3) session.skillSlots.push(null);
+    session.seenSkills = [...(save.seenSkills ?? [])];
     session.hp = clamp(session.hp, 1, session.getStats().maxHp);
     // Saves made before quests were closed per chapter still list finished chapters' quests.
     session.closeFinishedChapters();
@@ -596,7 +609,33 @@ export class GameSession {
       flags: { ...this.flags },
       equipment: { ...this.equipment },
       quickSlots: [...this.quickSlots],
+      skillSlots: [...this.skillSlots],
+      seenSkills: [...this.seenSkills],
     };
+  }
+
+  // ------------------------------------------------------------ Authority skills
+
+  /** The Authority skills Peter knows now (one per Authority mended). */
+  public knownSkills(db: SkillDatabase): string[] {
+    return unlockedSkills(db, this.lastFinishedChapter).map((s) => s.id);
+  }
+
+  /**
+   * Fits the slots to what Peter knows (new skills fill empty slots) and returns the skills he has
+   * gained since the last call, so the scene can announce them once.
+   */
+  public syncSkills(db: SkillDatabase): string[] {
+    const known = this.knownSkills(db);
+    this.skillSlots = fillSlots(this.skillSlots, known, db.slots);
+    const fresh = known.filter((id) => !this.seenSkills.includes(id));
+    this.seenSkills.push(...fresh);
+    return fresh;
+  }
+
+  /** Puts a known skill (or nothing) in slot 0-2; a skill already slotted elsewhere swaps. */
+  public setSkillSlot(index: number, id: string | null): void {
+    this.skillSlots = assignSlot(this.skillSlots, index, id);
   }
 }
 

@@ -30,6 +30,9 @@ const SPEEDS: TextSpeed[] = ['instant', 'fast', 'normal'];
 const KEY_ROWS: KeyAction[] = [
   'ranged',
   'dodge',
+  'skill1',
+  'skill2',
+  'skill3',
   'interact',
   'satchel',
   'questLog',
@@ -40,10 +43,10 @@ const KEY_ROWS: KeyAction[] = [
   'controls',
 ];
 const W = 440;
-const H = 262;
+const H = 292;
 const TOP = 54;
-const ROW_H = 16;
-const LINES = 11;
+const ROW_H = 14;
+const LINES = 14;
 
 /**
  * T-96 options (docs/design/SETTINGS_UX.md §2), shared by the title screen and the pause menu:

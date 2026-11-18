@@ -33,6 +33,9 @@ export interface ISaveData {
   };
   /** 0.4.0+: item ids on the 1-4 quick keys. */
   quickSlots?: (string | null)[];
+  /** Authority skills on Z / X / C, and those already announced (2026-11-18). */
+  skillSlots?: (string | null)[];
+  seenSkills?: string[];
 }
 
 export interface ISaveMetadata {
