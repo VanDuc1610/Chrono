@@ -16,6 +16,8 @@ interface Live {
   at: { x: number; y: number } | (() => { x: number; y: number });
   /** Ends early (ms of scene time), e.g. a long slam cut short. */
   until?: number;
+  /** Playback speed (2 = twice as fast). */
+  speed: number;
 }
 
 /**
@@ -57,9 +59,10 @@ export class PixelFxLayer {
     at: Live['at'],
     options: Record<string, unknown> = {},
     maxMs?: number,
+    speed = 1,
   ): PixelFx {
     const fx = createFx(EFFECTS[key], options);
-    this.live.push({ fx, at, until: maxMs ? this.scene.time.now + maxMs : undefined });
+    this.live.push({ fx, at, until: maxMs ? this.scene.time.now + maxMs : undefined, speed });
     return fx;
   }
 
@@ -78,7 +81,7 @@ export class PixelFxLayer {
     const dt = Math.min(deltaMs, 50) / 1000;
     clearFrame(this.frame);
     for (const l of this.live) {
-      l.fx.update(dt);
+      l.fx.update(dt * l.speed);
       const p = typeof l.at === 'function' ? l.at() : l.at;
       // Screen pixels: the camera has no zoom on the map.
       l.fx.options.x = Math.round(p.x - cam.worldView.x);

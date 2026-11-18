@@ -9,8 +9,9 @@ import { PauseScene } from './scenes/PauseScene';
 export const GameConfig: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
   parent: 'game-container',
-  width: 640,
-  height: 360,
+  // 720×405 (was 640×360): a little more of the map in view (owner, 2026-11-18).
+  width: 720,
+  height: 405,
   pixelArt: true,
   roundPixels: true,
   scale: {

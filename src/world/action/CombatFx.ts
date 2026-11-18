@@ -44,9 +44,10 @@ export class CombatFx {
     palette?: string[],
     maxMs?: number,
     extra: Record<string, unknown> = {},
+    speed = 1,
   ): void {
     const opts = palette ? { ...extra, palette } : extra;
-    this.layer()?.play(key, at, opts, maxMs);
+    this.layer()?.play(key, at, opts, maxMs, speed);
   }
 
   public authority(a: Authority): string[] {

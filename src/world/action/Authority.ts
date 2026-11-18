@@ -388,7 +388,8 @@ export class AuthorityPowers {
     const radius = def.radius ?? 72;
     this.drawArc(o, 0, radius, 360, hex(def.color), 0.45);
     const gold = this.h.fx.authority('origin');
-    this.h.fx.burst('holyPillar', () => ({ x: p.x, y: p.y + 12 }), gold, 1500);
+    // Twice as fast, so the light reaches Peter's feet at once instead of a sun opening far above.
+    this.h.fx.burst('holyPillar', () => ({ x: p.x, y: p.y + 14 }), gold, undefined, {}, 2.2);
     this.h.fx.burst('frostNova', { x: o.x, y: o.y + 8 }, gold, 1300, { reach: radius });
     this.h.fx.motes({ x: p.x, y: p.y - 6 }, '#fff08a', 8);
     for (const r of this.h.roamers()) {

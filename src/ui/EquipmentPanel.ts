@@ -15,12 +15,12 @@ import { keyLabel } from './keys';
 import { createPanel } from './Panel';
 import type { Translate } from './Strings';
 
-const W = 580;
+const W = 660;
 const H = 316;
 const ROW_H = 20;
 const ROWS_X = 150;
-const ROWS_W = 210;
-const DETAIL_X = 372;
+const ROWS_W = 250;
+const DETAIL_X = 412;
 const LIST_ROWS = 9;
 const STAT_KEYS: (keyof PlayerStats)[] = ['maxHp', 'maxMp', 'attack', 'defense', 'speed'];
 
