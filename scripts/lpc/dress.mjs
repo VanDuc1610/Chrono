@@ -42,6 +42,14 @@ const PIECE = {
   stoneCross: ['OBJ', 27, 17, 1, 1],
   crossTall: ['OBJ', 27, 18, 1, 2],
   stoneDouble: ['OBJ', 30, 18, 2, 2],
+  pillarA: ['OBJ', 9, 28, 1, 2],
+  pillarB: ['OBJ', 10, 28, 1, 2],
+  stubA: ['OBJ', 7, 29, 1, 1],
+  stubB: ['OBJ', 8, 29, 1, 1],
+  slab: ['OBJ', 4, 30, 3, 1],
+  produceA: ['OBJ', 20, 23, 1, 2],
+  produceB: ['OBJ', 22, 23, 1, 2],
+  produceC: ['OBJ', 24, 23, 1, 2],
 };
 
 /**
@@ -96,6 +104,43 @@ const MAPS = {
       ['stoneDouble', 13, 10, 'stand'],
       ['crossTall', 16, 10, 'stand'],
       ['stoneRip', 19, 11, 'stand'],
+    ],
+  },
+  // Chapter 6 (owner, 2026-11-18): broken pillars and slabs adrift in the starfield either side of
+  // the path (they float over void cells that already block; the path stays clear).
+  map_ch6_first_void_abyss: {
+    tint: ['#8a9ac8', 0.25],
+    notes: 'broken pillars and slabs adrift in the void',
+    props: [
+      ['pillarA', 4, 6, 'float'],
+      ['stubA', 7, 5, 'float'],
+      ['pillarB', 10, 6, 'float'],
+      ['slab', 13, 4, 'float'],
+      ['pillarA', 18, 6, 'float'],
+      ['stubB', 21, 6, 'float'],
+      ['pillarB', 6, 11, 'float'],
+      ['slab', 9, 13, 'float'],
+      ['stubA', 14, 11, 'float'],
+      ['pillarA', 16, 11, 'float'],
+      ['stubB', 20, 12, 'float'],
+      ['pillarB', 22, 11, 'float'],
+    ],
+  },
+  // Chapter 8 (owner, 2026-11-18): the gear market gets its stalls, produce, crates and carts.
+  map_ch8_gear_market: {
+    tint: ['#d89860', 0.18],
+    notes: 'market stalls, produce, crates, a handcart, barrels',
+    props: [
+      ['stall', 2, 11, 'stand'],
+      ['stall', 16, 13, 'stand'],
+      ['produceA', 7, 12, 'stand'],
+      ['produceB', 8, 12, 'stand'],
+      ['produceC', 15, 4, 'stand'],
+      ['barrels', 24, 16, 'stand'],
+      ['handcart', 9, 16, 'stand'],
+      ['crate', 12, 12, 'stand'],
+      ['crate', 19, 6, 'stand'],
+      ['crate', 6, 7, 'stand'],
     ],
   },
 };

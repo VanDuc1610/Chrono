@@ -1382,6 +1382,26 @@ interval_tileset rebuilt slot for slot from LPC materials (tinted); story props 
 
 Props for map_ch3_sepulcher_gate (gravestones), tinted like its tileset.
 
+### derived-map-ch6-first-void-abyss-props
+
+- File: public/assets/lpc/map_ch6_first_void_abyss_props.png
+- Made by: scripts/lpc/dress.mjs
+- From: tiles-outside-objects
+- Authors: Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio
+- Licences: CC-BY-SA-3.0, GPL-3.0
+
+Props for map_ch6_first_void_abyss (broken pillars and slabs adrift in the void), tinted like its tileset.
+
+### derived-map-ch8-gear-market-props
+
+- File: public/assets/lpc/map_ch8_gear_market_props.png
+- Made by: scripts/lpc/dress.mjs
+- From: tiles-outside-objects, tiles-terrain-and-outside
+- Authors: Lanea Zimmerman (AKA Sharm); Daniel Eddeland; Caeless; William Thompsonj; Casper Nilsson; Barbara Rivera; C Phillips; Skorpio; Matthew Krohn (Makrohn); Matthew Nash; Nushio; Casper Nilson
+- Licences: CC-BY-SA-3.0, GPL-3.0
+
+Props for map_ch8_gear_market (market stalls, produce, crates, a handcart, barrels), tinted like its tileset.
+
 ### derived-map-coastal-town-props
 
 - File: public/assets/lpc/map_coastal_town_props.png

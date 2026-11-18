@@ -18272,8 +18272,8 @@
       "name": "Vực Thẳm Hư Không",
       "chapter": 6,
       "tilemap": {
-        "key": "map_ch6_first_void_abyss",
-        "path": "assets/maps/map_ch6_first_void_abyss.json"
+        "key": "map_ch6_first_void_abyss_lpc",
+        "path": "assets/maps/map_ch6_first_void_abyss_lpc.json"
       },
       "tileset": {
         "name": "celestial_tileset",
@@ -18282,11 +18282,13 @@
       },
       "collision": {
         "fromGid": 4,
-        "toGid": 44
+        "toGid": 64
       },
       "layers": {
         "ground": "Ground",
-        "walls": "Walls"
+        "walls": "Walls",
+        "overlay": "Overlay",
+        "above": "Above"
       },
       "bgm": "ambient",
       "spawns": {
@@ -18329,7 +18331,12 @@
           "onceFlag": "ch6_t_cliff_seen",
           "dialogueId": "ch6_cliff_1"
         }
-      ]
+      ],
+      "propTileset": {
+        "name": "lpc_props_map_ch6_first_void_abyss",
+        "key": "lpc_props_map_ch6_first_void_abyss",
+        "path": "assets/lpc/map_ch6_first_void_abyss_props.png"
+      }
     },
     "map_ch6_first_forgotten_nook": {
       "id": "map_ch6_first_forgotten_nook",
@@ -23873,8 +23880,8 @@
       "name": "Chợ Bánh Răng",
       "chapter": 8,
       "tilemap": {
-        "key": "map_ch8_gear_market",
-        "path": "assets/maps/map_ch8_gear_market.json"
+        "key": "map_ch8_gear_market_lpc",
+        "path": "assets/maps/map_ch8_gear_market_lpc.json"
       },
       "tileset": {
         "name": "convergence_tileset",
@@ -23883,11 +23890,13 @@
       },
       "collision": {
         "fromGid": 4,
-        "toGid": 48
+        "toGid": 96
       },
       "layers": {
         "ground": "Ground",
-        "walls": "Walls"
+        "walls": "Walls",
+        "overlay": "Overlay",
+        "above": "Above"
       },
       "bgm": "ambient",
       "spawns": {
@@ -24167,7 +24176,12 @@
           "delayMs": 400,
           "dialogueId": "ch8_market_arrival"
         }
-      ]
+      ],
+      "propTileset": {
+        "name": "lpc_props_map_ch8_gear_market",
+        "key": "lpc_props_map_ch8_gear_market",
+        "path": "assets/lpc/map_ch8_gear_market_props.png"
+      }
     },
     "map_ch8_drowned_foundry": {
       "id": "map_ch8_drowned_foundry",

@@ -455,6 +455,22 @@
     "notes": "Props for map_ch3_sepulcher_gate (gravestones), tinted like its tileset."
   },
   {
+    "id": "derived-map-ch6-first-void-abyss-props",
+    "file": "public/assets/lpc/map_ch6_first_void_abyss_props.png",
+    "sha256": "a34aba6aeadd9bafc0202e18e4063f17b79cd6cad31fd8f0d503427ad6c61e6e",
+    "from": ["tiles-outside-objects"],
+    "script": "scripts/lpc/dress.mjs",
+    "notes": "Props for map_ch6_first_void_abyss (broken pillars and slabs adrift in the void), tinted like its tileset."
+  },
+  {
+    "id": "derived-map-ch8-gear-market-props",
+    "file": "public/assets/lpc/map_ch8_gear_market_props.png",
+    "sha256": "e613aef3104e8a83880d002715a088d20f3757214105b50d513d50820fd11daa",
+    "from": ["tiles-outside-objects", "tiles-terrain-and-outside"],
+    "script": "scripts/lpc/dress.mjs",
+    "notes": "Props for map_ch8_gear_market (market stalls, produce, crates, a handcart, barrels), tinted like its tileset."
+  },
+  {
     "id": "derived-map-coastal-town-props",
     "file": "public/assets/lpc/map_coastal_town_props.png",
     "sha256": "0a9c6935169ed1a8a9ec43366e49613f84b4626bb3e6a00bad56d15d09d28344",
