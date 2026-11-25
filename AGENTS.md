@@ -4,6 +4,7 @@
 
 - **Genre:** 2D Top-down Pixel Art Turn-based RPG (Dark/Cosmic Fantasy).
 - **Core Stack:** Phaser 3, TypeScript (Strict Mode), Vite, Vitest.
+- **Official Target vs. Experimental Branches:** `main` (`index.html` → `src/main.ts`, Phaser 2D) is the sole official game. Local branch `exp/hd2d-prototype` is an isolated experimental HD-2D sandbox only; other agents must develop exclusively on the official Phaser 2D codebase on `main` unless the owner explicitly switches branches.
 - **Agents:** Claude Code (coordinator: assigns tasks, writes prompts for the other agents, reviews, decides pushes), Google Antigravity (designer/implementer) and OpenAI Codex (coding agent, works only on tasks Claude assigns). Active work and file locks: `docs/TASKS.md`. Never edit a file locked by another agent.
 - **Language:** reply to the owner in Vietnamese; code, comments, commits and docs in English; in-game text in Vietnamese.
 - **Art & Identity Lock:** full rules in `.agents/rules/chrono-art.md`. Never alter Peter's design (`docs/art/PETER_DESIGN.md` – adult male, ~26, short compact curly hair). No AI image models, no external references. Owner approval required before any asset enters `public/assets/`.
