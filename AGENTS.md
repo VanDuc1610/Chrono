@@ -1,5 +1,9 @@
 # CHRONO – The Fractured Divinity | Agent Root Rules
 
+> **Archived 2026-11-25 (tag `v1-phaser-final`).** Development moved to a new Godot 4 HD-2D game in its
+> own repository (`chrono-hd2d`); see `docs/design/DQ_HD2D_DIRECTION.md`. The rules below apply only to
+> maintenance of this Phaser version.
+
 ## 1. Project Context & Boundaries
 
 - **Genre:** 2D Top-down Pixel Art Turn-based RPG (Dark/Cosmic Fantasy).

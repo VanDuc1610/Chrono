@@ -20,6 +20,11 @@ Status values: `TODO` · `IN PROGRESS` · `BLOCKED` · `DONE`
 
 ## Active
 
+> **2026-11-25 — this Phaser game is archived (tag `v1-phaser-final`).** The owner gave Claude full
+> authority and chose a new game: a Godot 4 HD-2D remake in a new repository (`chrono-hd2d`), see
+> [docs/design/DQ_HD2D_DIRECTION.md](design/DQ_HD2D_DIRECTION.md). No new tasks start here. Codex may
+> still finish T-97 inside its locks; everything else below is frozen.
+
 Goal (owner, 2026-11-15): Chapters 5–7 are built and wait for the owner's playtest. Chapters 8 and 9
 are built and verified — the story is complete (4 endings). Next: the owner's playtest of Chapters 5–9. The story ends at Chapter 9.
 
